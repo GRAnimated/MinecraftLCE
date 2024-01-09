@@ -1,0 +1,9 @@
+[submodule "lib/nnheaders"]
+	path = lib/nnheaders
+	url = https://github.com/open-ead/nnheaders
+[submodule "tools/common"]
+	path = tools/common
+	url = https://github.com/open-ead/nx-decomp-tools
+[submodule "toolchain/musl"]
+	path = toolchain/musl
+	url = https://github.com/open-ead/botw-lib-musl
