@@ -1,0 +1,50 @@
+# Python
+__pycache__/
+*.pyc
+*.egg-info/
+*.dist-info/
+.mypy_cache/
+.benchmarks/
+.python-version
+
+# Binaries
+*.so
+*.dll
+*.elf
+*.nso
+dist/
+build/
+bin/
+
+# IDEs
+.idea/
+.vscode/
+.DS_Store
+.cache/
+
+# IDA
+*.id0
+*.id1
+*.id2
+*.idb
+*.i64
+*.nam
+*.til
+
+# Ghidra
+*.gpr
+*.rep/
+*.lock
+
+# Debugging
+perf.data
+perf.data.old
+.gdb_history
+
+# Tooling
+/toolchain/clang-*
+tools/check
+tools/listsym
+tools/decompme
+
+docs/build
