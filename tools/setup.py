@@ -13,12 +13,6 @@ from common import setup_common as setup
 TARGET_PATH = setup.get_target_path()
 TARGET_ELF_PATH = setup.get_target_elf_path()
 
-
-def _download_v160_to_v150_patch(dest: Path):
-    print(">>>> downloading patch...")
-    urllib.request.urlretrieve("https://s.botw.link/v150_downgrade/v160_to_v150.patch", dest)
-
-
 def prepare_executable(original_nso: Optional[Path]):
     COMPRESSED_HASH = "63b7d29503400853c2cdb87a65d963cb9b5b934aea9d3d88b55764d33b13a722"
     UNCOMPRESSED_HASH = "f408dbfb901ab191fbcb7b5994580ed91812bafa90ae164796ae8a254e4dcef8"
@@ -73,14 +67,14 @@ def create_build_dir():
 
 def main():
     parser = argparse.ArgumentParser(
-        "setup.py", description="Set up the Breath of the Wild decompilation project")
+        "setup.py", description="Set up the decompilation project")
     parser.add_argument("original_nso", type=Path,
                         help="Path to the original NSO, compressed or not)", nargs="?")
     args = parser.parse_args()
 
     setup.install_viking()
     prepare_executable(args.original_nso)
-    setup.set_up_compiler("4.0.1")
+    setup.set_up_compiler("5.0.1")
     create_build_dir()
 
 
