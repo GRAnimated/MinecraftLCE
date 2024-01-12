@@ -1,6 +1,6 @@
 [submodule "lib/nnheaders"]
 	path = lib/nnheaders
-	url = https://github.com/open-ead/nnheaders
+	url = https://github.com/open-ead/nnheaders.git
 [submodule "tools/common"]
 	path = tools/common
 	url = https://github.com/open-ead/nx-decomp-tools
