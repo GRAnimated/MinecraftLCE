@@ -14,7 +14,7 @@ This project requires a `main` dumped from the latest *Minecraft: Nintendo Switc
 
 For porting symbols, its strongly recommended to get the `Minecraft.Client.rpx` from *Minecraft: Wii U Edition* Patch 35 (v560). Only basing things off of the base/latest update will hurt you in the long run.
 
-Though 4J/Mojang/Microsoft has never taken action on dumps of their games uploaded online, these executables will never be provided on the repo directly.
+Though 4J/Mojang/Microsoft has never taken action on dumps of their games uploaded online, these executables will never be provided on the repo directly. They have taken down projects that have not been clean-room in their research, though. This includes the official Minecraft: Java Edition mappings, which are licensed by Microsoft, and cannot be used within the scope of this project.
 
 ## Why Nintendo Switch Edition?
 
