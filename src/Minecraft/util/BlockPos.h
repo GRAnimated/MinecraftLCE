@@ -1,15 +1,19 @@
 #pragma once
 
+#include <memory>
 #include "Minecraft/util/math/Vec3i.h"
 
 class Direction;
+class Entity;
 class Vec3;
 
 class BlockPos {
 public:
     BlockPos(int x, int y, int z);
-    BlockPos() = default;
+    BlockPos();
+    BlockPos(std::shared_ptr<Entity> const&);
     BlockPos(Vec3*);
+    BlockPos(Vec3i const&);
     static BlockPos* relative(Direction const*, int);
     static BlockPos* create(int x, int y, int z);
 
@@ -26,5 +30,5 @@ public:
     static BlockPos* east();
     static BlockPos* east(int);
 
-    Vec3i mArr = Vec3i(0, 0 ,0);
+    Vec3i mArr;
 };
