@@ -13,7 +13,6 @@ Vec3i::Vec3i(double x, double y, double z) {
     this->z = Mth::floor(z);
 }
 
-
 int Vec3i::getX() const {
     return x;
 }

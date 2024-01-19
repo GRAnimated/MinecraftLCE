@@ -18,14 +18,14 @@ public:
     double getMaxX();
     double getMinZ();
     double getMaxZ();
-    void isWithinBounds(AABB *);
+    void isWithinBounds(AABB*);
     double getDistanceToBorder(std::shared_ptr<Entity>);
     double getDistanceToBorder(double, double);
-    BorderStatus *getStatus();
+    BorderStatus* getStatus();
     double getSize();
     virtual double getCenterX();
     virtual double getCenterZ();
-    void *getListeners();
+    void* getListeners();
     void setSize(double);
     double getDamageSafeZone();
     double getDamagePerBlock();

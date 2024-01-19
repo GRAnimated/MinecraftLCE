@@ -1,0 +1,146 @@
+#pragma once
+
+#include <memory>
+
+#define HANDLE(handlerName, packetType)                                                            \
+    virtual void handle##handlerName(std::shared_ptr<class packetType>)
+
+class DisconnectPacket {
+public:
+    enum eDisconnectReason {};
+};
+
+class PacketListener {
+public:
+    PacketListener();
+    virtual void onUnhandledPacket(std::shared_ptr<class Packet>);
+    virtual void onDisconnect(DisconnectPacket::eDisconnectReason, void*);
+    virtual void canHandleAsyncPackets();
+
+    HANDLE(AcceptedLogin, ClientboundLoginPacket);
+    HANDLE(GetInfo, GetInfoPacket);
+    HANDLE(AddEntity, ClientboundAddEntityPacket);
+    HANDLE(AddExperienceOrb, ClientboundAddExperienceOrbPacket);
+    HANDLE(AddGlobalEntity, ClientboundAddGlobalEntityPacket);
+    HANDLE(AddMob, ClientboundAddMobPacket);
+    HANDLE(AddPainting, ClientboundAddPaintingPacket);
+    HANDLE(AddPlayer, ClientboundAddPlayerPacket);
+    HANDLE(Animate, ClientboundAnimatePacket);
+    HANDLE(Animate, ServerboundSwingPacket);
+    HANDLE(AwardStat, ClientboundAwardStatPacket);
+    HANDLE(BlockDestruction, ClientboundBlockDestructionPacket);
+    HANDLE(BlockCollectionDestruction, ClientboundBlockCollectionDestructionPacket);
+    HANDLE(OpenSignEditor, ClientboundOpenSignEditorPacket);
+    HANDLE(BlockEntityData, ClientboundBlockEntityDataPacket);
+    HANDLE(BlockEvent, ClientboundBlockEventPacket);
+    HANDLE(BlockUpdate, ClientboundBlockUpdatePacket);
+    HANDLE(BlockRegionUpdate, BlockRegionUpdatePacket);
+    HANDLE(Chat, ClientboundChatPacket);
+    HANDLE(Chat, ServerboundChatPacket);
+    HANDLE(ChatAutoComplete, ClientboundChatAutoCompletePacket);
+    HANDLE(ChatAutoComplete, ServerboundChatAutoCompletePacket);
+    HANDLE(ChunkBlocksUpdate, ClientboundChunkBlocksUpdatePacket);
+    HANDLE(ChunkVisibility, ChunkVisibilityPacket);
+    HANDLE(ChunkVisibilityArea, ChunkVisibilityAreaPacket);
+    HANDLE(MapItemData, ClientboundMapItemDataPacket);
+    HANDLE(ContainerAck, ClientboundContainerAckPacket);
+    HANDLE(ContainerAck, ServerboundContainerAckPacket);
+    HANDLE(ContainerClose, ClientboundContainerClosePacket);
+    HANDLE(ContainerClose, ServerboundContainerClosePacket);
+    HANDLE(ContainerContent, ClientboundContainerSetContentPacket);
+    HANDLE(ContainerOpen, ClientboundContainerOpenPacket);
+    HANDLE(ContainerSetData, ClientboundContainerSetDataPacket);
+    HANDLE(ContainerSetSlot, ClientboundContainerSetSlotPacket);
+    HANDLE(CustomPayload, ClientboundCustomPayloadPacket);
+    HANDLE(CustomPayload, ServerboundCustomPayloadPacket);
+    HANDLE(Disconnect, DisconnectPacket);
+    HANDLE(EntityActionAtPosition, ClientboundPlayerSleepPacket);
+    HANDLE(EntityEvent, ClientboundEntityEventPacket);
+    HANDLE(EntityLinkPacket, ClientboundSetEntityLinkPacket);
+    HANDLE(SetEntityPassengersPacket, ClientboundSetPassengersPacket);
+    HANDLE(Explosion, ClientboundExplodePacket);
+    HANDLE(GameEvent, ClientboundGameEventPacket);
+    HANDLE(KeepAlive, ClientboundKeepAlivePacket);
+    HANDLE(KeepAlive, ServerboundKeepAlivePacket);
+    HANDLE(LevelEvent, ClientboundLevelEventPacket);
+    HANDLE(Login, ClientboundLoginPacket);
+    HANDLE(MoveEntity, ClientboundMoveEntityPacket);
+    HANDLE(MoveEntitySmall, MoveEntityPacketSmall);
+    HANDLE(MovePlayer, ClientboundPlayerPositionPacket);
+    HANDLE(MovePlayer, ServerboundMovePlayerPacket);
+    HANDLE(ParticleEvent, ClientboundLevelParticlesPacket);
+    HANDLE(PlayerAbilities, ClientboundPlayerAbilitiesPacket);
+    HANDLE(PlayerAbilities, ServerboundPlayerAbilitiesPacket);
+    HANDLE(PlayerInfo, PlayerInfoPacket);
+    HANDLE(PreLogin, ClientboundPreLoginPacket);
+    HANDLE(PreLogin, ServerboundPreLoginPacket);
+    HANDLE(RemoveEntity, ClientboundRemoveEntitiesPacket);
+    HANDLE(RemoveMobEffect, ClientboundRemoveMobEffectPacket);
+    HANDLE(Respawn, ClientboundRespawnPacket);
+    HANDLE(RotateMob, ClientboundRotateHeadPacket);
+    HANDLE(SetCarriedItem, ClientboundSetCarriedItemPacket);
+    HANDLE(SetCarriedItem, ServerboundSetCarriedItemPacket);
+    HANDLE(SetEntityData, ClientboundSetEntityDataPacket);
+    HANDLE(SetEntityMotion, ClientboundSetEntityMotionPacket);
+    HANDLE(SetEquippedItem, ClientboundSetEquippedItemPacket);
+    HANDLE(SetExperience, ClientboundSetExperiencePacket);
+    HANDLE(SetHealth, ClientboundSetHealthPacket);
+    HANDLE(SetPlayerTeamPacket, ClientboundSetPlayerTeamPacket);
+    HANDLE(SetSpawn, ClientboundSetSpawnPositionPacket);
+    HANDLE(SetTime, ClientboundSetTimePacket);
+    HANDLE(SoundEvent, ClientboundSoundPacket);
+    HANDLE(TakeItemEntity, ClientboundTakeItemEntityPacket);
+    HANDLE(TeleportEntity, ClientboundTeleportEntityPacket);
+    HANDLE(UpdateAttributes, ClientboundUpdateAttributesPacket);
+    HANDLE(UpdateMobEffect, ClientboundUpdateMobEffectPacket);
+    HANDLE(PlayerCombat, ClientboundPlayerCombatPacket);
+    HANDLE(ChangeDifficulty, ClientboundChangeDifficultyPacket);
+    HANDLE(SetCamera, ClientboundSetCameraPacket);
+    HANDLE(SetBorder, ClientboundSetBorderPacket);
+    HANDLE(SetTitles, ClientboundSetTitlesPacket);
+    HANDLE(TabListCustomisation, ClientboundTabListPacket);
+    HANDLE(ResourcePack, ClientboundResourcePackPacket);
+    HANDLE(BossUpdate, ClientboundBossEventPacket);
+    HANDLE(ItemCooldown, ClientboundCooldownPacket);
+    HANDLE(MoveVehicle, ClientboundMoveVehiclePacket);
+    HANDLE(MoveVehicle, ServerboundMoveVehiclePacket);
+    HANDLE(ServerSettingsChanged, ServerSettingsChangedPacket);
+    HANDLE(Texture, TexturePacket);
+    HANDLE(TextureAndGeometry, TextureAndGeometryPacket);
+    HANDLE(UpdateProgress, UpdateProgressPacket);
+    HANDLE(TextureChange, TextureChangePacket);
+    HANDLE(TextureAndGeometryChange, TextureAndGeometryChangePacket);
+    HANDLE(UpdateGameRuleProgressPacket, UpdateGameRuleProgressPacket);
+    HANDLE(XZ, XZPacket);
+    HANDLE(ScoreboardPacket, ScoreboardPacket);
+    HANDLE(GameMode, GameModePacket);
+    HANDLE(MapSelectInfo, MapSelectInfoPacket);
+    HANDLE(PlayerReady, PlayerReadyPacket);
+    HANDLE(Powerup, ClientboundPowerupPacket);
+    HANDLE(DamageIndicator, ClientboundDamageIndicatorPacket);
+    HANDLE(MiniGamePlayerSettingsUpdatePacket, ClientboundMGPlayerSettingsUpdatePacket);
+    HANDLE(ClientCommand, ServerboundClientCommandPacket);
+    HANDLE(ClientInformation, ServerboundClientInformationPacket);
+    HANDLE(ContainerButtonClick, ServerboundContainerButtonClickPacket);
+    HANDLE(ContainerClick, ServerboundContainerClickPacket);
+    HANDLE(Interact, ServerboundInteractPacket);
+    HANDLE(PlayerAction, ServerboundPlayerActionPacket);
+    HANDLE(PlayerCommand, ServerboundPlayerCommandPacket);
+    HANDLE(PlayerInput, ServerboundPlayerInputPacket);
+    HANDLE(SetCreativeModeSlot, ServerboundSetCreativeModeSlotPacket);
+    HANDLE(SignUpdate, ServerboundSignUpdatePacket);
+    HANDLE(UseItemOn, ServerboundUseItemOnPacket);
+    HANDLE(UseItem, ServerboundUseItemPacket);
+    HANDLE(TeleportToEntityPacket, ServerboundTeleportToEntityPacket);
+    HANDLE(ResourcePackResponse, ServerboundResourcePackPacket);
+    HANDLE(PaddleBoat, ServerboundPaddleBoatPacket);
+    HANDLE(AcceptTeleportPacket, ServerboundAcceptTeleportationPacket);
+    HANDLE(CraftItem, CraftItemPacket);
+    HANDLE(TradeItem, TradeItemPacket);
+    HANDLE(DebugOptions, DebugOptionsPacket);
+    HANDLE(KickPlayer, KickPlayerPacket);
+    HANDLE(GameCommand, GameCommandPacket);
+    HANDLE(Vote, VotePacket);
+    HANDLE(ClientboundSetPlayerTeamPacket, ClientboundSetPlayerTeamPacket);
+    virtual bool isServerPacketListener();
+};

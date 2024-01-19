@@ -1,5 +1,5 @@
 #include "BlockPos.h"
-#include "Minecraft/util/math/Vec3.h"
+#include "Minecraft.System/util/math/Vec3.h"
 
 BlockPos::BlockPos(int x, int y, int z) : mArr(Vec3i(x, y, z)) {}
 

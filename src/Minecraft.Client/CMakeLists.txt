@@ -1,5 +1,3 @@
-add_subdirectory(entity)
-
 target_sources(mcswitch PRIVATE
 
 )

@@ -1,6 +1,6 @@
 #pragma once
 
 class SharedConstants {
-    public:
+public:
     static void staticCtor();
 };

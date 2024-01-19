@@ -1,6 +1,6 @@
 #include "WorldBorder.h"
+#include "Minecraft.System/System.h"
 #include "Minecraft/entity/BorderStatus.h"
-#include "Minecraft/system/System.h"
 
 // TODO: I think this requires mListeners to have a stubbed out class instead of void *.
 // mListeners would have taken Level* in but its unused

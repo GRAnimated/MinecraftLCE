@@ -1,7 +1,7 @@
 #pragma once
 
 #include <memory>
-#include "Minecraft/util/math/Vec3i.h"
+#include "Minecraft.System/util/math/Vec3i.h"
 
 class Direction;
 class Entity;
