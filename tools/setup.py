@@ -54,6 +54,9 @@ def prepare_executable(original_nso: Optional[Path]):
         setup.fail("internal error while preparing executable (missing ELF); please report")
 
 
+def get_build_dir():
+    return setup.ROOT / "build"
+
 def create_build_dir():
     build_dir = setup.ROOT / "build"
     if build_dir.is_dir():

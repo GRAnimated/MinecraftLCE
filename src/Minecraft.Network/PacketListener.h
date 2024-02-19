@@ -2,8 +2,7 @@
 
 #include <memory>
 
-#define HANDLE(handlerName, packetType)                                                            \
-    virtual void handle##handlerName(std::shared_ptr<class packetType>)
+#define HANDLE(handlerName, packetType) virtual void handle##handlerName(std::shared_ptr<class packetType>)
 
 class DisconnectPacket {
 public:

@@ -27,8 +27,7 @@ public:
     virtual void GetTMSGlobalFileListRead();
     virtual void GetTMSDLCInfoRead();
     virtual void GetTMSXUIDsFileRead();
-    virtual void GetFileFromTPD(eTPDFileType, unsigned char*, unsigned int, unsigned char**,
-                                unsigned int*);
+    virtual void GetFileFromTPD(eTPDFileType, unsigned char*, unsigned int, unsigned char**, unsigned int*);
 };
 
 class CConsoleMinecraftApp : public CMinecraftApp {
