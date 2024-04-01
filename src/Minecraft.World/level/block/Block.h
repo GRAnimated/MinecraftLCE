@@ -2,9 +2,10 @@
 
 #include <memory>
 #include <string>
+#include <vector>
 #include "types.h"
 
-typedef char uchar;
+typedef unsigned char uchar;
 
 class AABB;
 class BlockEntity;

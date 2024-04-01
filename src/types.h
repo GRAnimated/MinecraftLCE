@@ -1,5 +1,6 @@
 #pragma once
 
+#include <memory>
 #include "nn/types.h"
 
 #ifdef SAFETY_CHECKS
@@ -10,3 +11,9 @@
 
 template <typename T>
 class not_null_ptr {};
+
+typedef unsigned char uchar;
+typedef unsigned int uint;
+
+class Entity;
+typedef std::shared_ptr<Entity> SharedEntity;

@@ -26,4 +26,13 @@ public:
     void getList(std::wstring const&, int);
     void fjSafeGetListTag(std::wstring const&, int);
     void contains(std::wstring const&, int);
+
+    void put(const std::wstring&, Tag*);
+    void putInt(const std::wstring&, int);
+
+    void* field_8;
+    void* field_10;
+    void* field_18;
+    void* field_20;
+    float field_28 = 1.0f;
 };
