@@ -3,7 +3,27 @@ import ida_name
 import ida_kernwin
 
 rename_these = [
-
+    "IslandLayer",
+    "FuzzyZoomLayer",
+    "AddIslandLayer",
+    "ZoomLayer",
+    "RemoveTooMuchOceanLayer",
+    "AddSnowLayer",
+    "AddEdgeLayer",
+    "AddMushroomIslandLayer",
+    "AddDeepOceanLayer",
+    "RiverInitLayer",
+    "BiomeInitLayer",
+    "BiomeEdgeLayer",
+    "RegionHillsLayer",
+    "RiverLayer",
+    "SmoothLayer",
+    "RareBiomeSpotLayer",
+    "GrowMushroomIslandLayer",
+    "ShoreLayer",
+    "RiverMixerLayer",
+    "BiomeCacheLayer",
+    "VoronoiZoom"
 ]
 
 def find_vtable(symbol):
@@ -79,46 +99,46 @@ def replace_derived_names(new_names, addresses):
         index += 1
 
 
-#def main():
-#    # Get the symbol inputs
-#    #base_symbol = ida_kernwin.ask_str("Block", 0, "Enter the base symbol:")
-#    #derived_symbol = ida_kernwin.ask_str("AnvilBlock", 0, "Enter the derived symbol:")
-#
-#    base_symbol = "Block"
-#
-#    for derived_symbol in rename_these:
-#        # Find vtables for both symbols
-#        base_vtable = find_vtable(base_symbol)
-#        derived_vtable = find_vtable(derived_symbol)
-#
-#        # Print functions in both vtables
-#        if base_vtable and derived_vtable:
-#            base_vtable_names = fill_vtable_arrays(base_vtable, False)
-#            derived_vtable_addresses = fill_vtable_arrays(derived_vtable, True)
-#
-#            #print(rename_base_vtable_class(base_vtable_names, derived_symbol))
-#            #print(derived_vtable_addresses)
-#
-#            replace_derived_names(rename_base_vtable_class(base_vtable_names, derived_symbol), derived_vtable_addresses)
-
 def main():
     # Get the symbol inputs
-    base_symbol = ida_kernwin.ask_str("Block", 0, "Enter the base symbol:")
-    derived_symbol = ida_kernwin.ask_str("AnvilBlock", 0, "Enter the derived symbol:")
+    #base_symbol = ida_kernwin.ask_str("Block", 0, "Enter the base symbol:")
+    #derived_symbol = ida_kernwin.ask_str("AnvilBlock", 0, "Enter the derived symbol:")
 
-    # Find vtables for both symbols
-    base_vtable = find_vtable(base_symbol)
-    derived_vtable = find_vtable(derived_symbol)
+    base_symbol = "Layer"
 
-    # Print functions in both vtables
-    if base_vtable and derived_vtable:
-        base_vtable_names = fill_vtable_arrays(base_vtable, False)
-        derived_vtable_addresses = fill_vtable_arrays(derived_vtable, True)
+    for derived_symbol in rename_these:
+        # Find vtables for both symbols
+        base_vtable = find_vtable(base_symbol)
+        derived_vtable = find_vtable(derived_symbol)
 
-        #print(rename_base_vtable_class(base_vtable_names, derived_symbol))
-        #print(derived_vtable_addresses)
-        
-        replace_derived_names(rename_base_vtable_class(base_vtable_names, derived_symbol), derived_vtable_addresses)
+        # Print functions in both vtables
+        if base_vtable and derived_vtable:
+            base_vtable_names = fill_vtable_arrays(base_vtable, False)
+            derived_vtable_addresses = fill_vtable_arrays(derived_vtable, True)
+
+            #print(rename_base_vtable_class(base_vtable_names, derived_symbol))
+            #print(derived_vtable_addresses)
+
+            replace_derived_names(rename_base_vtable_class(base_vtable_names, derived_symbol), derived_vtable_addresses)
+
+#def main():
+#    # Get the symbol inputs
+#    base_symbol = ida_kernwin.ask_str("Block", 0, "Enter the base symbol:")
+#    derived_symbol = ida_kernwin.ask_str("AnvilBlock", 0, "Enter the derived symbol:")
+#
+#    # Find vtables for both symbols
+#    base_vtable = find_vtable(base_symbol)
+#    derived_vtable = find_vtable(derived_symbol)
+#
+#    # Print functions in both vtables
+#    if base_vtable and derived_vtable:
+#        base_vtable_names = fill_vtable_arrays(base_vtable, False)
+#        derived_vtable_addresses = fill_vtable_arrays(derived_vtable, True)
+#
+#        #print(rename_base_vtable_class(base_vtable_names, derived_symbol))
+#        #print(derived_vtable_addresses)
+#        
+#        replace_derived_names(rename_base_vtable_class(base_vtable_names, derived_symbol), derived_vtable_addresses)
 
 if __name__ == "__main__":
     main()

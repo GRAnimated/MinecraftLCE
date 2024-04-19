@@ -18,7 +18,6 @@ public:
     BlockPos(Vec3*);
     BlockPos(Vec3i const&);
     static BlockPos* relative(Direction const*, int);
-    static BlockPos* create(int x, int y, int z);
 
     static BlockPos* above();
     static BlockPos* above(int);

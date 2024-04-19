@@ -171,6 +171,8 @@ public:
     virtual void appendHoverText(not_null_ptr<ItemInstance>, std::shared_ptr<Player>, std::vector<HtmlString>*, bool);
     virtual void isLiquidBlock(void);
 
+    BlockState const* defaultBlockState();
+
     int field_8;
     bool field_C;
     std::wstring mItemName;
