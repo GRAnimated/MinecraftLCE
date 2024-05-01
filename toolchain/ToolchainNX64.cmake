@@ -1,4 +1,4 @@
-set(CLANG "${CMAKE_CURRENT_LIST_DIR}/clang-5.0.1")
+set(CLANG "${CMAKE_CURRENT_LIST_DIR}/clang-4.0.1")
 
 set(NX64_OPT_FLAGS "-O3 -g")
 set(NX64_TRIPLE aarch64-linux-elf)
