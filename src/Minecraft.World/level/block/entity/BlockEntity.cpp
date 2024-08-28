@@ -4,8 +4,8 @@ BlockEntity::BlockEntity() {
     mLevel = nullptr;
     mIsRemoved = false;
     mPos = BlockPos::zero;
-    mData = -1;
     mBlock = nullptr;
+    mData = -1;
 }
 
 void BlockEntity::setLevel(Level* level) {

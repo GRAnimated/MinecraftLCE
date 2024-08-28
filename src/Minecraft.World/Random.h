@@ -3,15 +3,15 @@
 class Random {
 public:
     Random();
-    void random();
+    static double random();
     int nextInt(int);
     float nextFloat();
     double nextDouble();
     int nextInt();
-    void setSeed(long long);
+    void setSeed(long long seed);
     long nextLong();
 
     long val;
-    long seed2;
+    bool field_8;
     long seed3;
 };
