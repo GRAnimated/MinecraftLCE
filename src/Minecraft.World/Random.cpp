@@ -3,7 +3,7 @@
 #include "windows.h"
 
 // TODO: Move this
-static Random* gRandomInstance = new Random();
+Random gRandomInstance = Random();
 
 Random::Random() {
     long long seed;
@@ -15,7 +15,7 @@ Random::Random() {
 }
 
 double Random::random() {
-    return gRandomInstance->nextDouble();
+    return gRandomInstance.nextDouble();
 }
 
 void Random::setSeed(long long seed) {
