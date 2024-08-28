@@ -28,7 +28,9 @@ public:
     void contains(std::wstring const&, int);
 
     void put(const std::wstring&, Tag*);
+    void putBoolean(const std::wstring&, bool);
     void putInt(const std::wstring&, int);
+    void putFloat(const std::wstring&, float);
 
     void* field_8;
     void* field_10;
