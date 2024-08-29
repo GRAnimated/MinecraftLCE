@@ -51,7 +51,7 @@ target_compile_options(mcswitch PRIVATE -Wall -Wextra -Wdeprecated)
 target_compile_options(mcswitch PRIVATE -Wno-unused-parameter -Wno-unused-private-field)
 target_compile_options(mcswitch PRIVATE -Wno-invalid-offsetof)
 target_compile_options(mcswitch PRIVATE -Wextra-semi)
-target_compile_options(mcswitch PRIVATE -fno-inline)
+target_compile_options(mcswitch PRIVATE -fno-inline -fno-inline-functions)
 target_compile_options(mcswitch PRIVATE -fno-builtin)
 
 add_definitions(-D SAFETY_CHECKS)
