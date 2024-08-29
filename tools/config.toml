@@ -2,5 +2,5 @@ functions_csv = "data/mcswitch_functions.csv"
 build_target = "mcswitch"
 
 [decomp_me]
-compiler_name = "clang-5.0.1"
+compiler_name = "clang-4.0.1"
 default_compile_flags = "-x c++ -O3 -g2 -std=c++1z -fno-rtti -fno-exceptions -Wall -Wextra -fno-strict-aliasing"
