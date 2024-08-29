@@ -30,6 +30,6 @@ add_compile_options(-fstandalone-debug)
 
 add_definitions(-D SWITCH)
 
-add_link_options(-stdlib=libc++ -nostdlib)
+add_link_options(-nostdlib)
 add_link_options(-fPIC -Wl,-Bsymbolic-functions -shared)
 add_link_options(-fuse-ld=lld)

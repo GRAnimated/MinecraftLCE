@@ -17,20 +17,27 @@ public:
     BlockPos(std::shared_ptr<Entity> const&);
     BlockPos(Vec3*);
     BlockPos(Vec3i const&);
-    static BlockPos* relative(Direction const*, int);
 
-    static BlockPos* above();
-    static BlockPos* above(int);
-    static BlockPos* below();
-    static BlockPos* below(int);
-    static BlockPos* north();
-    static BlockPos* north(int);
-    static BlockPos* south();
-    static BlockPos* south(int);
-    static BlockPos* west();
-    static BlockPos* west(int);
-    static BlockPos* east();
-    static BlockPos* east(int);
+    bool equals(BlockPos const& pos) const;
+    bool equals(BlockPos const* pos) const;
+
+    BlockPos offset(int x, int y, int z) const;
+
+    BlockPos relative(Direction const*) const;
+    BlockPos relative(Direction const*, int) const;
+
+    BlockPos above() const;
+    BlockPos above(int) const;
+    BlockPos below() const;
+    BlockPos below(int) const;
+    BlockPos north() const;
+    BlockPos north(int) const;
+    BlockPos south() const;
+    BlockPos south(int) const;
+    BlockPos west() const;
+    BlockPos west(int) const;
+    BlockPos east() const;
+    BlockPos east(int) const;
 
     Vec3i mArr;
 };

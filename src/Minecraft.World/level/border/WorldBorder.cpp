@@ -4,7 +4,7 @@
 // TODO
 WorldBorder::WorldBorder(Level* level) {}
 
-__attribute__((noinline)) double WorldBorder::getMinX() {
+double WorldBorder::getMinX() {
     double max = getCenterX() + getSize() * -0.5;
 
     if (max < (double)-mWorldSize)
@@ -12,7 +12,7 @@ __attribute__((noinline)) double WorldBorder::getMinX() {
     return max;
 }
 
-__attribute__((noinline)) double WorldBorder::getMaxX() {
+double WorldBorder::getMaxX() {
     double max = getCenterX() + getSize() * 0.5;
 
     if (max > (double)mWorldSize)
@@ -20,7 +20,7 @@ __attribute__((noinline)) double WorldBorder::getMaxX() {
     return max;
 }
 
-__attribute__((noinline)) double WorldBorder::getMinZ() {
+double WorldBorder::getMinZ() {
     double max = getCenterZ() + getSize() * -0.5;
 
     if (max < (double)-mWorldSize)
@@ -28,7 +28,7 @@ __attribute__((noinline)) double WorldBorder::getMinZ() {
     return max;
 }
 
-__attribute__((noinline)) double WorldBorder::getMaxZ() {
+double WorldBorder::getMaxZ() {
     double max = getCenterZ() + getSize() * 0.5;
 
     if (max > (double)mWorldSize)
@@ -36,7 +36,7 @@ __attribute__((noinline)) double WorldBorder::getMaxZ() {
     return max;
 }
 
-__attribute__((noinline)) BorderStatus* WorldBorder::getStatus() {
+BorderStatus* WorldBorder::getStatus() {
     if (mNextSize < mCurrentSize)
         return gBorderStatusShrinking;
 
@@ -47,7 +47,7 @@ __attribute__((noinline)) BorderStatus* WorldBorder::getStatus() {
 }
 
 // TODO: remove early return for match?
-__attribute__((noinline)) double WorldBorder::getSize() {
+double WorldBorder::getSize() {
     if (getStatus() != gBorderStatusStationary) {
         double time = (float)(System::processTimeInMilliSecs() - mTime2) / (float)(mTime1 - mTime2);
 
