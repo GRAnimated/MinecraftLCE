@@ -50,12 +50,6 @@ void GuiComponent::drawString(Font* font, const std::wstring& str, int a4, int a
     font->drawShadow(str, a4, a5, a6);
 }
 
-// NON_MATCHING: something wrong with the fontWidth <= 0
 void GuiComponent::drawCenteredString(Font* font, const std::wstring& str, int a4, int a5, int a6) {
-    int fontWidth = font->width(str);
-
-    if (fontWidth <= 0)
-        fontWidth += 1;
-
-    font->drawShadow(str, a4 - (fontWidth >> 1), a5, a6);
+    font->drawShadow(str, a4 - font->width(str) / 2, a5, a6);
 }
