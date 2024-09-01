@@ -80,10 +80,10 @@ bool Slot::isActive() {
 
 bool Slot::mayCombine(not_null_ptr<ItemInstance> item) {
     not_null_ptr<ItemInstance> thisItem = getItem();
+
     if (thisItem->isEmpty() || item->isEmpty() || thisItem->isEmpty() || item->isEmpty()) {
         return false;
     }
-
     if (thisItem->getItem()->getId() != item->getItem()->getId()) {
         return false;
     }
@@ -99,6 +99,7 @@ bool Slot::mayCombine(not_null_ptr<ItemInstance> item) {
     if (thisItem->isEnchanted() || item->isEnchanted()) {
         return false;
     }
+
     return true;
 }
 

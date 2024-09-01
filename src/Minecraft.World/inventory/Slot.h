@@ -34,9 +34,9 @@ public:
     virtual void combine(not_null_ptr<ItemInstance> item);
 
 private:
-    int mSlot;
-    std::shared_ptr<Container> mContainer;
+    int mSlot = 0;
+    std::shared_ptr<Container> mContainer = nullptr;
     int mIndex = 0;
-    int mX;
-    int mY;
+    int mX = 0;
+    int mY = 0;
 };
