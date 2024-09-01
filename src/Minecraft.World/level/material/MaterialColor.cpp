@@ -1,6 +1,6 @@
 #include "Minecraft.World/level/material/MaterialColor.h"
 
-__attribute__((noinline)) MaterialColor::MaterialColor(int id, eMinecraftColour color) : mColor(color), mID(id) {
+MaterialColor::MaterialColor(int id, eMinecraftColour color) : mColor(color), mID(id) {
     MATERIAL_COLORS[id] = this;
 }
 
@@ -74,8 +74,6 @@ int MaterialColor::calculateRGBColor(int colorIntensity) const {
     if (colorIntensity == 0) {
         rgbIntensity = 180;
     }
-    int red = ((this->mColor & 0xFF) >> 0) * rgbIntensity / 255;
-    int green = ((this->mColor & 0xFF00) >> 8) * rgbIntensity / 255;
-    int blue = ((this->mColor & 0xFF0000) >> 16) * rgbIntensity / 255;
-    return 0xFF000000 | blue << 16 | green << 8 | red;
+
+    return 0xFF000000 | (((mColor & 0xFF0000) >> 16) * rgbIntensity / 255) << 16 | (((mColor & 0xFF00) >> 8) * rgbIntensity / 255) << 8 | (mColor & 0xFF) * rgbIntensity / 255;
 }

@@ -4,7 +4,7 @@
 #include "Minecraft.World/level/material/PortalMaterial.h"
 #include "Minecraft.World/level/material/WebMaterial.h"
 
-__attribute__((noinline)) Material::Material(MaterialColor const* color) : mColor(color) {
+Material::Material(MaterialColor const* color) : mColor(color) {
     mIsFlammable = false;
     mIsReplaceable = false;
     mIsNeverBuildable = false;
@@ -74,17 +74,17 @@ bool Material::blocksMotion() {
     return true;
 }
 
-__attribute__((noinline)) Material* Material::neverBuildable() {
+Material* Material::neverBuildable() {
     mIsNeverBuildable = true;
     return this;
 }
 
-__attribute__((noinline)) Material* Material::notAlwaysDestroyable() {
+Material* Material::notAlwaysDestroyable() {
     mIsAlwaysDestroyable = false;
     return this;
 }
 
-__attribute__((noinline)) Material* Material::flammable() {
+Material* Material::flammable() {
     mIsFlammable = true;
     return this;
 }
@@ -93,7 +93,7 @@ bool Material::isFlammable() {
     return mIsFlammable;
 }
 
-__attribute__((noinline)) Material* Material::replaceable() {
+Material* Material::replaceable() {
     mIsReplaceable = true;
     return this;
 }
@@ -120,17 +120,17 @@ bool Material::isDestroyedByHand() {
     return mIsDestroyedByHand;
 }
 
-__attribute__((noinline)) Material* Material::notPushable() {
+Material* Material::notPushable() {
     mPushReaction = BLOCK;
     return this;
 }
 
-__attribute__((noinline)) Material* Material::destroyOnPush() {
+Material* Material::destroyOnPush() {
     mPushReaction = DESTROY;
     return this;
 }
 
-__attribute__((noinline)) Material* Material::makeDestroyedByHand() {
+Material* Material::makeDestroyedByHand() {
     mIsDestroyedByHand = true;
     return this;
 }

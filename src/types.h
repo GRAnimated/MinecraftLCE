@@ -10,7 +10,7 @@
 #endif
 
 template <typename T>
-class not_null_ptr {};
+class not_null_ptr : public std::shared_ptr<T> {};
 
 typedef unsigned char uchar;
 typedef unsigned int uint;

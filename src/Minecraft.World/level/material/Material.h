@@ -72,12 +72,12 @@ public:
     Material* notPushable();
     Material* destroyOnPush();
     Material* makeDestroyedByHand();
-    MaterialColor const* getColor() const;
+    const MaterialColor* getColor() const;
 
     bool mIsFlammable;
     bool mIsReplaceable;
     bool mIsNeverBuildable;
-    MaterialColor const* mColor;
+    const MaterialColor* mColor;
     bool mIsAlwaysDestroyable;
     PushReaction mPushReaction;
     bool mIsDestroyedByHand;

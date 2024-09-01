@@ -40,6 +40,10 @@ class Block {
 public:
     Block(Material* material);
     Block(Material* material, const MaterialColor* materialColor);
+
+    const BlockState* defaultBlockState();
+    void registerDefaultState(const BlockState* blockState);
+
     void init(Material* material, const MaterialColor* materialColor);
 
     virtual bool isTopSolidBlocking(const BlockState* blockState);
@@ -165,7 +169,7 @@ public:
     virtual void getTexture(const Direction* direction, const BlockState* blockState);
     virtual void getTexture(const Direction* direction);
     virtual void getInventoryRenderState(const BlockState* blockState);
-    virtual void createBlockStateDefinition();
+    virtual BlockStateDefinition* createBlockStateDefinition();
     virtual void getBlockStateDefinition();
     virtual void getOffsetType();
     virtual void getOffset(const BlockState* blockState, LevelSource*, const BlockPos& pos);
@@ -173,8 +177,6 @@ public:
     virtual void toString();
     virtual void appendHoverText(not_null_ptr<ItemInstance>, std::shared_ptr<Player>, std::vector<HtmlString>*, bool);
     virtual bool isLiquidBlock();
-
-    const BlockState* defaultBlockState();
 
     int field_8;
     bool field_C;
@@ -203,7 +205,7 @@ public:
     const MaterialColor* mMapColor;
     float mFriction;
     BlockStateDefinition* mBlockStateDefinition;
-    BlockState* mBlockState;
+    const BlockState* mBlockState;
     int mDescriptionId;
     int mUseDescriptionId;
     Texture* mTexture;

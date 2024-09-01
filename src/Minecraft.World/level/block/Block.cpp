@@ -1,5 +1,6 @@
 #include "Block.h"
 
+#include "Minecraft.World/level/block/state/BlockStateDefinition.h"
 #include "Minecraft.World/level/block/SoundType.h"
 #include "Minecraft.World/level/material/Material.h"
 
@@ -11,6 +12,14 @@ Block::Block(Material* material) {
 // NON_MATCHING: init shouldn't inline
 Block::Block(Material* material, const MaterialColor* color) {
     init(material, color);
+}
+
+const BlockState* Block::defaultBlockState() {
+    return mBlockState;
+}
+
+void Block::registerDefaultState(const BlockState* blockState) {
+    mBlockState = blockState;
 }
 
 void Block::init(Material* material, const MaterialColor* color) {
@@ -43,4 +52,13 @@ void Block::init(Material* material, const MaterialColor* color) {
     isInited = false;
     field_8 = 0;
     field_C = false;
+}
+
+void Block::DerivedInit() {
+    isInited = true;
+
+    mBlockStateDefinition = createBlockStateDefinition();
+    registerDefaultState(mBlockStateDefinition->any());
+
+    field_28 = defaultBlockState();
 }
