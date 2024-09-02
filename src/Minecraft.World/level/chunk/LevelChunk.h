@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Minecraft.World/ArrayWithLength.h"
+#include "Minecraft.World/level/LightLayer.h"
 
 template <typename T>
 class Predicate;
@@ -11,10 +12,6 @@ class BlockEntity;
 class Level;
 class AABB;
 class BiomeSource;
-class LightLayer {
-public:
-    enum variety {};
-};
 class Entity;
 
 class LevelChunk {
@@ -43,7 +40,7 @@ public:
     virtual void lightLava();
     virtual void getBlockLightBlock(BlockPos const&);
     virtual void getBlock(BlockPos const&);
-    virtual void getBlockState(BlockPos const&);
+    virtual const BlockState* getBlockState(BlockPos const&);
     virtual void getData(BlockPos const&);
     virtual void setData(int, int, int, int, int, bool*);
     virtual void setBlock(BlockPos const&, BlockState const*);

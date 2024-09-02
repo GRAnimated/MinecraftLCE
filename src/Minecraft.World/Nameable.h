@@ -2,8 +2,10 @@
 
 class Nameable {
 public:
-    virtual void pure_virtual1() = 0;
-    virtual void pure_virtual2() = 0;
-    virtual void pure_virtual3() = 0;
-    virtual void pure_virtual4() = 0;
+    Nameable();
+
+    virtual void getName() = 0;
+    virtual void hasCustomName() = 0;
+    virtual void getDisplayName() = 0;
+    virtual void getCustomName() = 0;
 };

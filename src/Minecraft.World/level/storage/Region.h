@@ -15,15 +15,15 @@ public:
     virtual void getBrightness(LightLayer::variety, BlockPos const&) override;
     virtual void getBrightness(BlockPos const&, int) override;
     virtual void getBrightness(BlockPos const&) override;
-    virtual void getBlockState(BlockPos const&) override;
+    virtual const BlockState* getBlockState(BlockPos const&) override;
     virtual void getBlockId(int, int, int) override;
     virtual void getBlockData(int, int, int) override;
     virtual void getBlock(BlockPos const&) override;
-    virtual void isEmptyBlock(BlockPos const&) override;
+    virtual bool isEmptyBlock(BlockPos const&) override;
     virtual void getBiome(BlockPos const&) override;
     virtual void getBiomeSource() override;
     virtual void getMaxBuildHeight() override;
-    virtual void isAllEmpty() override;
+    virtual bool isAllEmpty() override;
     virtual void getDirectSignal(BlockPos const&, Direction const*) override;
     virtual void getGeneratorType() override;
     virtual ~Region();

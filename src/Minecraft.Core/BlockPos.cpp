@@ -2,16 +2,16 @@
 #include "Minecraft.Core/Direction.h"
 #include "Minecraft.World/phys/Vec3.h"
 
-BlockPos::BlockPos(int x, int y, int z) : mArr(Vec3i(x, y, z)) {}
+BlockPos::BlockPos(int x, int y, int z) : Vec3i(x, y, z) {}
 
-BlockPos::BlockPos() : mArr(Vec3i(0, 0, 0)) {}
+BlockPos::BlockPos() : Vec3i(0, 0, 0) {}
 
-BlockPos::BlockPos(Vec3* vec) : mArr(Vec3i(vec->x, vec->y, vec->z)) {}
+BlockPos::BlockPos(Vec3* vec) : Vec3i(vec->x, vec->y, vec->z) {}
 
-BlockPos::BlockPos(Vec3i const& vec) : mArr(Vec3i(vec.getX(), vec.getY(), vec.getZ())) {}
+BlockPos::BlockPos(Vec3i const& vec) : Vec3i(vec.getX(), vec.getY(), vec.getZ()) {}
 
 bool BlockPos::equals(BlockPos const& pos) const {
-    return mArr.getX() == pos.mArr.getX() && mArr.getY() == pos.mArr.getY() && mArr.getZ() == pos.mArr.getZ();
+    return getX() == pos.getX() && getY() == pos.getY() && getZ() == pos.getZ();
 }
 
 bool BlockPos::equals(BlockPos const* pos) const {
@@ -19,7 +19,7 @@ bool BlockPos::equals(BlockPos const* pos) const {
 }
 
 BlockPos BlockPos::offset(int x, int y, int z) const {
-    return BlockPos(mArr.getX() + x, mArr.getY() + y, mArr.getZ() + z);
+    return BlockPos(getX() + x, getY() + y, getZ() + z);
 }
 
 BlockPos BlockPos::relative(Direction const* direction) const {
@@ -27,7 +27,7 @@ BlockPos BlockPos::relative(Direction const* direction) const {
 }
 
 BlockPos BlockPos::relative(Direction const* direction, int amount) const {
-    return BlockPos(mArr.getX() + direction->getX() * amount, mArr.getY() + direction->getY() * amount, mArr.getZ() + direction->getZ() * amount);
+    return BlockPos(getX() + direction->getX() * amount, getY() + direction->getY() * amount, getZ() + direction->getZ() * amount);
 }
 
 BlockPos BlockPos::above() const {

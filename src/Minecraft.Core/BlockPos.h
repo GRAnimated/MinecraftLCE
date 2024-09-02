@@ -8,7 +8,7 @@ class Direction;
 class Entity;
 class Vec3;
 
-class BlockPos {
+class BlockPos : public Vec3i {
 public:
     static BlockPos zero;
 
@@ -38,8 +38,6 @@ public:
     BlockPos west(int) const;
     BlockPos east() const;
     BlockPos east(int) const;
-
-    Vec3i mArr;
 };
 
 ASSERT_SIZEOF(BlockPos, 0xC)

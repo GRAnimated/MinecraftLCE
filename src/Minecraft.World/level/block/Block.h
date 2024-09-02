@@ -27,6 +27,7 @@ class Level;
 class LevelSource;
 class LivingEntity;
 class Material;
+class GasMaterial;
 class MaterialColor;
 class Mirror;
 class Player;
@@ -177,6 +178,8 @@ public:
     virtual void toString();
     virtual void appendHoverText(not_null_ptr<ItemInstance>, std::shared_ptr<Player>, std::vector<HtmlString>*, bool);
     virtual bool isLiquidBlock();
+
+    Material* getMaterial();
 
     int field_8;
     bool field_C;

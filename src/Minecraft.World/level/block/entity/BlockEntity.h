@@ -45,6 +45,7 @@ public:
     void saveMetadata(CompoundTag*);
 
     bool mIsRemoved;
+    bool field_19;
     Level* mLevel;
     BlockPos mPos;
     int mData;
