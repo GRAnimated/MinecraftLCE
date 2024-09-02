@@ -1,0 +1,45 @@
+name: Update Progress
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  update-progress:
+    if: github.repository == 'GRAnimated/MinecraftLCE'
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+
+      - name: Install dependencies
+        run: pip install gitpython
+        
+      - name: Generate progress CSV
+        run: python tools/common/progress.py -c >> progress.csv
+
+      - name: Checkout progress repository
+        uses: actions/checkout@v3
+        with:
+          repository: GRAnimated/MinecraftLCE-docs
+          token: ${{ secrets.PROGRESS_REPO_TOKEN }}
+          path: MinecraftLCE-docs
+
+      - name: Copy CSV to progress repository
+        run: cp progress.csv MinecraftLCE-docs/
+
+      - name: Commit and push changes
+        run: |
+          cd MinecraftLCE-docs
+          git config --global user.name "Update progress workflow"
+          git config --global user.email "actions@github.com"
+          git add progress.csv
+          git commit -m "Update progress on commit ${{ github.sha }}"
+          git push origin main
