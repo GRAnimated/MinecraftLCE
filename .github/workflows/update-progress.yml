@@ -22,7 +22,7 @@ jobs:
           python-version: '3.x'
 
       - name: Install dependencies
-        run: pip install colorama gitpython
+        run: pip install capstone colorama cxxfilt pyelftools ansiwrap watchdog python-Levenshtein toml gitpython
         
       - name: Generate progress CSV
         run: python tools/common/progress.py -c >> progress.csv
