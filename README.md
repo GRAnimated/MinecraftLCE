@@ -1,4 +1,6 @@
-# Legacy Console Edition Decomp
+# Minecraft: LCE Decompilation Project
+
+![Progress](https://github.com/GRAnimated/MinecraftLCE-docs/blob/main/img/progress.png?raw=true)
 
 [![Discord Channel][discord-badge]][discord]
 
