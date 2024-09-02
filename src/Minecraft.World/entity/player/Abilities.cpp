@@ -25,7 +25,6 @@ bool Abilities::operator==(const Abilities& abilities) const {
     return false;
 }
 
-// NON_MATCHING: Linker issues
 void Abilities::addSaveData(CompoundTag* compoundTag) {
     CompoundTag* localTag = new CompoundTag();
     localTag->putBoolean(L"invulnerable", isInvulnerable);
