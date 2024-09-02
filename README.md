@@ -98,4 +98,8 @@ For another point of reference, you could also look at [the Minecraft: Pocket Ed
 
 ##
 
-This repository is based on the BOTW decomp ([zeldaret/botw](https://github.com/zeldaret/botw)), with building instructions based on the Super Mario Odyssey decomp ([MonsterDruide1/OdysseyDecomp](https://github.com/MonsterDruide1/OdysseyDecomp)).
+Minecraft LCE Decompilation logo by [@break-core](https://github.com/break-core?tab=repositories)
+
+This repository is based on the BOTW decomp ([zeldaret/botw](https://github.com/zeldaret/botw))
+
+Building instructions based on the Super Mario Odyssey decomp ([MonsterDruide1/OdysseyDecomp](https://github.com/MonsterDruide1/OdysseyDecomp)).
