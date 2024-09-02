@@ -19,7 +19,6 @@ bool BlockEntity::hasLevel() {
     return false;
 }
 
-// NON_MATCHING: std::wstring issue
 void BlockEntity::load(CompoundTag* tag) {
     mPos = BlockPos(tag->getInt(L"x"), tag->getInt(L"y"), tag->getInt(L"z"));
 }

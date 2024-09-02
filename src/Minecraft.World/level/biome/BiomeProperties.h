@@ -8,7 +8,7 @@ public:
     void depth(float);
     void downfall(float);
     void dry(void);
-    void mutated(std::wstring const&);
+    BiomeProperties* mutated(std::wstring const&);
     void scale(float);
     void snow(void);
     void temperature(float);

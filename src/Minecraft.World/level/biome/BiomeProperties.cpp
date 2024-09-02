@@ -14,9 +14,9 @@ void BiomeProperties::dry() {
     mIsNotDry = false;
 }
 
-// NON_MATCHING: std::wstring inlined
-void BiomeProperties::mutated(const std::wstring& mutatedName) {
+BiomeProperties* BiomeProperties::mutated(const std::wstring& mutatedName) {
     mMutatedBiomeName = mutatedName;
+    return this;
 }
 
 void BiomeProperties::scale(float scale) {

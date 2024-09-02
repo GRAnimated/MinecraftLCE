@@ -57,9 +57,8 @@ int Slot::getMaxStackSize(not_null_ptr<ItemInstance> item) {
     return getMaxStackSize();
 }
 
-// NON_MATCHING: std::wstring::_init gets inlined
 std::wstring Slot::getNoItemIcon() {
-    return L"";
+    return nullptr;
 }
 
 std::shared_ptr<ItemInstance> Slot::remove(int count) {

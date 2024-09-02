@@ -8,7 +8,7 @@ import tempfile
 import urllib.request
 from typing import Optional
 from common import setup_common as setup
-
+import shutil
 
 TARGET_PATH = setup.get_target_path()
 TARGET_ELF_PATH = setup.get_target_elf_path()
@@ -67,6 +67,11 @@ def create_build_dir():
         "cmake -GNinja -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCMAKE_TOOLCHAIN_FILE=toolchain/ToolchainNX64.cmake -DCMAKE_CXX_COMPILER_LAUNCHER=ccache -B build/".split(" "))
     print(">>> created build directory")
 
+def patch_clang():
+    patch_file = setup.ROOT / "toolchain/patches/string"
+    target_file = setup.ROOT / "toolchain/clang-4.0.1/include/c++/v1/string"
+    shutil.copyfile(patch_file, target_file)
+    print(">>> Clang patched successfully")
 
 def main():
     parser = argparse.ArgumentParser(
@@ -79,6 +84,7 @@ def main():
     prepare_executable(args.original_nso)
     setup.set_up_compiler("4.0.1")
     create_build_dir()
+    patch_clang()
 
 
 if __name__ == "__main__":
