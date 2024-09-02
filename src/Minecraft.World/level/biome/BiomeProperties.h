@@ -15,7 +15,7 @@ public:
     void waterColor(int);
 
 private:
-    std::wstring mBiomeName = L"";
+    std::wstring mBiomeName = nullptr;
     float mDepth = 0.1f;
     float mScale = 0.2f;
     float mTemperature = 0.5f;
@@ -23,5 +23,5 @@ private:
     int mWaterColor = 0xFFFFFF;
     bool mIsSnow = false;
     bool mIsNotDry = true;
-    std::wstring mMutatedBiomeName = L"";
+    std::wstring mMutatedBiomeName = nullptr;
 };

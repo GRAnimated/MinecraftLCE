@@ -46,12 +46,11 @@ BorderStatus* WorldBorder::getStatus() {
     return gBorderStatusStationary;
 }
 
-// TODO: remove early return for match?
 double WorldBorder::getSize() {
     if (getStatus() != gBorderStatusStationary) {
         double time = (float)(System::processTimeInMilliSecs() - mTime2) / (float)(mTime1 - mTime2);
 
-        if (time < 1.0)
+        if (!(time >= 1.0f))
             return mCurrentSize + (time * (mNextSize - mCurrentSize));
 
         setSize(mNextSize);

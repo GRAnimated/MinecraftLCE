@@ -183,7 +183,7 @@ public:
 
     int field_8;
     bool field_C;
-    std::wstring mItemName = nullptr;
+    std::wstring mItemName;
     int field_24;
     bool field_28;
     int lightEmission;

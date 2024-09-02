@@ -255,4 +255,5 @@ void Blocks::staticInit() {
     CONCRETE = get(L"concrete");
     CONCRETE_POWDER = get(L"concrete_powder");
     STRUCTURE_BLOCK = get(L"structure_block");
+    FireBlock::staticCtor();
 }
