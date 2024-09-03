@@ -3,7 +3,8 @@
 #include <memory>
 #include <string>
 #include <vector>
-#include "Minecraft.Core/Vec3i.h"
+#include "Minecraft.Core/BlockPos.h"
+#include "Minecraft.World/level/GameRules.h"
 
 class CompoundTag;
 class BlockPos;
@@ -110,12 +111,14 @@ public:
     long mSeed;
     LevelType* mLevelType;
     SuperflatConfig* mGeneratorOptions;
-    Vec3i mSpawnPos;
+    int mSpawnPosX;
+    int mSpawnPosY;
+    int mSpawnPosZ;
     long mGameTime;
     long mDayTime;
     long mLastPlayed;
     long mSizeOnDisk;
-    long qword_50;
+    int qword_50;
     std::wstring mLevelName;
     int mVersion;
     int mClearWeatherTime;
@@ -130,12 +133,7 @@ public:
     bool mInited;
     const Difficulty* mDifficulty;
     bool mIsDifficultyLocked;
-    CompoundTag* mDimensionData;
-    void* qword_b0;
-    void* qword_b8;
-    void* qword_c0;
-    float float_c8;
-    int field_CC;
+    std::unordered_map<const DimensionType*, CompoundTag*> mDimensionData;
     int mCloudHeight;
     bool mUseNewSeaLevel;
     bool mHasBeenInCreativeMode;
@@ -158,5 +156,5 @@ public:
     bool mIsBiggerBiomes;
     int mBiomeCenterXChunk;
     int mBiomeCenterZChunk;
-    int mGameRules;
+    GameRules mGameRules;
 };

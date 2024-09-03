@@ -1,7 +1,58 @@
 #include "Minecraft.World/level/storage/LevelData.h"
+
 #include "Minecraft.Core/BlockPos.h"
 #include "Minecraft.Nbt/CompoundTag.h"
 #include "Minecraft.World/level/LevelType.h"
+
+LevelData::LevelData(LevelData* other) {
+    mSeed = other->mSeed;
+    mLevelType = other->mLevelType;
+    mGeneratorOptions = other->mGeneratorOptions;
+    mGameType = other->mGameType;
+    mIsGenerateMapFeatures = other->mIsGenerateMapFeatures;
+    mIsSpawnBonusChest = other->mIsSpawnBonusChest;
+    mSpawnPosX = other->mSpawnPosX;
+    mSpawnPosY = other->mSpawnPosY;
+    mSpawnPosZ = other->mSpawnPosZ;
+    mGameTime = other->mGameTime;
+    mDayTime = other->mDayTime;
+    mLastPlayed = other->mLastPlayed;
+    mSizeOnDisk = other->mSizeOnDisk;
+    qword_50 = other->qword_50;
+    mLevelName = other->mLevelName;
+    mVersion = other->mVersion;
+    mClearWeatherTime = other->mClearWeatherTime;
+    mRainTime = other->mRainTime;
+    mIsRaining = other->mIsRaining;
+    mThunderTime = other->mThunderTime;
+    mIsThundering = other->mIsThundering;
+    mIsHardcore = other->mIsHardcore;
+    mAllowCommands = other->mAllowCommands;
+    mInited = other->mInited;
+    mCloudHeight = other->mCloudHeight;
+    mUseNewSeaLevel = other->mUseNewSeaLevel;
+    mHasBeenInCreativeMode = other->mHasBeenInCreativeMode;
+    mDifficulty = other->mDifficulty;
+    mIsDifficultyLocked = other->mIsDifficultyLocked;
+    mHasStronghold = other->mHasStronghold;
+    mStrongholdPosX = other->mStrongholdPosX;
+    mStrongholdPosY = other->mStrongholdPosY;
+    mStrongholdPosZ = other->mStrongholdPosZ;
+    mStrongholdEndPortalX = other->mStrongholdEndPortalX;
+    mStrongholdEndPortalZ = other->mStrongholdEndPortalZ;
+    mHasStrongholdEndPortal = other->mHasStrongholdEndPortal;
+    mXZSize = other->mXZSize;
+    mHellScale = other->mHellScale;
+    mIsModernEnd = other->mIsModernEnd;
+    mIsClassicMoat = other->mIsClassicMoat;
+    mIsSmallMoat = other->mIsSmallMoat;
+    mIsMediumMoat = other->mIsMediumMoat;
+    mCurrentXZSize = other->mCurrentXZSize;
+    mCurrentHellScale = other->mCurrentHellScale;
+    mIsBiggerBiomes = other->mIsBiggerBiomes;
+    mBiomeCenterXChunk = other->mBiomeCenterXChunk;
+    mBiomeCenterZChunk = other->mBiomeCenterZChunk;
+}
 
 CompoundTag* LevelData::createTag() {
     CompoundTag* tag = new CompoundTag();
@@ -17,13 +68,13 @@ long LevelData::getSeed() {
     return mSeed;
 }
 int LevelData::getXSpawn() {
-    return mSpawnPos.x;
+    return mSpawnPosX;
 }
 int LevelData::getYSpawn() {
-    return mSpawnPos.y;
+    return mSpawnPosY;
 }
 int LevelData::getZSpawn() {
-    return mSpawnPos.z;
+    return mSpawnPosZ;
 }
 int LevelData::getXStronghold() {
     return mStrongholdPosX;
@@ -53,13 +104,13 @@ void LevelData::setSeed(long long seed) {
     mSeed = seed;
 }
 void LevelData::setXSpawn(int x) {
-    mSpawnPos.x = x;
+    mSpawnPosX = x;
 }
 void LevelData::setYSpawn(int y) {
-    mSpawnPos.y = y;
+    mSpawnPosY = y;
 }
 void LevelData::setZSpawn(int z) {
-    mSpawnPos.z = z;
+    mSpawnPosZ = z;
 }
 void LevelData::setHasStronghold() {
     mHasStronghold = true;
@@ -96,9 +147,9 @@ void LevelData::setSizeOnDisk(long long sizeOnDisk) {
 }
 void LevelData::setLoadedPlayerTag(CompoundTag*) {}
 void LevelData::setSpawn(BlockPos const& pos) {
-    mSpawnPos.x = pos.getX();  // TODO: Make operator= for this
-    mSpawnPos.y = pos.getY();
-    mSpawnPos.z = pos.getZ();
+    mSpawnPosX = pos.getX();
+    mSpawnPosY = pos.getY();
+    mSpawnPosZ = pos.getZ();
 }
 std::wstring LevelData::getLevelName() {
     return mLevelName;
