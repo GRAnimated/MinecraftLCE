@@ -21,33 +21,24 @@ bool LightGemFeature::place(Level* level, Random& random, const BlockPos& pos) {
     level->setBlock(pos, Blocks::GLOWSTONE->defaultBlockState(), 2, false);
 
     for (int i = 0; i < 1500; i++) {
-        int random1 = random.nextInt(8) - random.nextInt(8);
-        int random2 = -random.nextInt(12);
-        int random3 = random.nextInt(8) - random.nextInt(8);
+        BlockPos randomPos = pos.offset(random.nextInt(8) - random.nextInt(8), -random.nextInt(12), random.nextInt(8) - random.nextInt(8));
 
-        BlockPos randomPos = pos.offset(random1, random2, random3);
-
-        if (!(level->getBlockState(randomPos)->getMaterial() == (Material*)Material::AIR))
-            continue;
-
-        Direction* directions = Direction::DIRECTIONS[0];
-        if (directions != Direction::END) {
+        if (level->getBlockState(randomPos)->getMaterial() == (Material*)Material::AIR) {
             int glowstoneCount = 0;
-            while (true) {
-                Direction* test = directions++;
-                if (level->getBlockState(randomPos.relative(test))->getBlock() == Blocks::GLOWSTONE) {
-                    glowstoneCount++;
-                }
 
+            for (Direction* direction : Direction::VALUES) {
+                BlockPos randomPos2 = randomPos.relative(direction);
+                if (level->getBlockState(randomPos2)->getBlock() != Blocks::GLOWSTONE)
+                    continue;
+
+                glowstoneCount++;
                 if (glowstoneCount > 1) {
                     break;
                 }
+            }
 
-                if (test == Direction::END) {
-                    if (glowstoneCount == 1) {
-                        level->setBlock(randomPos, Blocks::GLOWSTONE->defaultBlockState(), 2, false);
-                    }
-                }
+            if (glowstoneCount == 1) {
+                level->setBlock(randomPos, Blocks::GLOWSTONE->defaultBlockState(), 2, false);
             }
         }
     }

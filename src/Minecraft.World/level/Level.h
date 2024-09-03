@@ -18,6 +18,9 @@ public:
     enum ESoundSource {};
 };
 class LevelChunk;
+class LevelStorage;
+class LevelData;
+class Dimension;
 class BoundingBox;
 class CompoundTag;
 class Packet;
@@ -25,6 +28,8 @@ class Random;
 
 class Level : public LevelSource {
 public:
+    Level(std::shared_ptr<LevelStorage>, LevelData*, Dimension*, bool);
+
     virtual void getBlockEntity(BlockPos const&) override;
     virtual void getLightColor(BlockPos const&, int, int) override;
     virtual void getBrightness(LightLayer::variety, BlockPos const&) override;
