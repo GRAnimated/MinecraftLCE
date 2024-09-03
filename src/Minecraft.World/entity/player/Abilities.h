@@ -18,7 +18,6 @@ public:
     void write(DataOutputStream* dataOutputStream);
     void read(DataInputStream* dataInputStream);
 
-private:
     bool isInvulnerable = false;
     bool isFlying = false;
     bool isEnableFly = false;
