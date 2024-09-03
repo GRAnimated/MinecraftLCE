@@ -25,7 +25,7 @@ jobs:
         run: pip install capstone colorama cxxfilt pyelftools ansiwrap watchdog python-Levenshtein toml gitpython
         
       - name: Generate progress CSV
-        run: python tools/common/progress.py -c >> progress.csv
+        run: python tools/common/progress.py -c > progress.csv
 
       - name: Checkout progress repository
         uses: actions/checkout@v3
@@ -45,3 +45,19 @@ jobs:
           git add progress.csv
           git commit -m "Update progress on commit ${{ github.sha }}"
           git push origin main
+
+      - name: Install GitHub CLI
+        run: sudo apt-get install gh -y
+
+      - name: Update repository description
+        run: |
+          IFS=',' read -r version timestamp git_hash num_total code_size_total matching_count matching_code_size equivalent_count equivalent_code_size non_matching_count non_matching_code_size < progress.csv
+          
+          total_count=$((matching_count + equivalent_count + non_matching_count))
+          progress_percentage=$(awk "BEGIN {printf \"%.3f\", ($total_count / $num_total) * 100}")
+
+          description="Decompilation of Minecraft: Nintendo Switch Edition v1.0.17 - Progress: ${progress_percentage}%"
+
+          gh repo edit GRAnimated/MinecraftLCE --description "$description"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
