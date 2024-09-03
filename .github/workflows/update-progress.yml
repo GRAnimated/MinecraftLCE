@@ -37,18 +37,6 @@ jobs:
       - name: Copy CSV to progress repository
         run: cp progress.csv MinecraftLCE-docs/
 
-      - name: Commit and push changes
-        run: |
-          cd MinecraftLCE-docs
-          git config --global user.name "Update progress workflow"
-          git config --global user.email "actions@github.com"
-          git add progress.csv
-          git commit -m "Update progress on commit ${{ github.sha }}"
-          git push origin main
-
-      - name: Install GitHub CLI
-        run: sudo apt-get install gh -y
-
       - name: Update repository description
         run: |
           IFS=',' read -r version timestamp git_hash num_total code_size_total matching_count matching_code_size equivalent_count equivalent_code_size non_matching_count non_matching_code_size < progress.csv
@@ -60,4 +48,13 @@ jobs:
 
           gh repo edit GRAnimated/MinecraftLCE --description "$description"
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+
+      - name: Commit and push changes
+        run: |
+          cd MinecraftLCE-docs
+          git config --global user.name "Update progress workflow"
+          git config --global user.email "actions@github.com"
+          git add progress.csv
+          git commit -m "Update progress on commit ${{ github.sha }}"
+          git push origin main
