@@ -44,7 +44,7 @@ jobs:
           total_count=$((matching_count + equivalent_count + non_matching_count))
           progress_percentage=$(awk "BEGIN {printf \"%.3f\", ($total_count / $num_total) * 100}")
 
-          description="Decompilation of Minecraft: Nintendo Switch Edition v1.0.17 - Progress: ${progress_percentage}%"
+          description="${progress_percentage}% - Decompilation of Minecraft: Legacy Console Edition"
 
           gh repo edit GRAnimated/MinecraftLCE --description "$description"
         env:
