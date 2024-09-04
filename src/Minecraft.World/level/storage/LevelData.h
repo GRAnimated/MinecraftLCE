@@ -2,6 +2,7 @@
 
 #include <memory>
 #include <string>
+#include <unordered_map>
 #include <vector>
 #include "Minecraft.Core/BlockPos.h"
 #include "Minecraft.World/level/GameRules.h"
