@@ -38,6 +38,9 @@ public:
     BlockPos west(int) const;
     BlockPos east() const;
     BlockPos east(int) const;
+
+    long long compressBlockPos() const;
+    void decompressBlockPos(long long);
 };
 
 ASSERT_SIZEOF(BlockPos, 0xC)

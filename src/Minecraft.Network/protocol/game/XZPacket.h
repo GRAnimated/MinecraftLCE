@@ -1,9 +1,10 @@
 #pragma once
 
+#include <memory>
 #include "Minecraft.Network/protocol/Packet.h"
 #include "types.h"
 
-class XZPacket : Packet {
+class XZPacket : public Packet, public std::enable_shared_from_this<XZPacket> {
 public:
     XZPacket();
     XZPacket(char field_28, int x, int z);
@@ -13,8 +14,7 @@ public:
     void write(DataOutputStream*) override;
     int getEstimatedSize() override;
 
-    void* field_18 = nullptr;
-    void* field_20 = nullptr;
+private:
     char field_28 = 0;
     int x = 0;
     int z = 0;
