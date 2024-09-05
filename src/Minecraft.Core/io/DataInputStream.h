@@ -8,7 +8,7 @@ class BlockPos;
 class DataInputStream {
 public:
     virtual ~DataInputStream();
-    virtual void read();
+    virtual unsigned int read();
     virtual void read(arrayWithLength<unsigned char>);
     virtual void read(arrayWithLength<unsigned char>, unsigned int, unsigned int);
     virtual void close();
