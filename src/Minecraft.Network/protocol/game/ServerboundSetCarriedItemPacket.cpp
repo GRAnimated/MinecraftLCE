@@ -10,18 +10,26 @@ std::shared_ptr<Packet> ServerboundSetCarriedItemPacket::create() {
 
 ServerboundSetCarriedItemPacket::ServerboundSetCarriedItemPacket() : Packet() {}
 
-void ServerboundSetCarriedItemPacket::handle(PacketListener* listener) {
-    listener->handleSetCarriedItem(this->shared_from_this());
-}
-
-void ServerboundSetCarriedItemPacket::read(DataInputStream* input) {
-    field_28 = input->readShort();
-}
-
-void ServerboundSetCarriedItemPacket::write(DataOutputStream* output) {
-    output->writeShort(field_28);
+ServerboundSetCarriedItemPacket::ServerboundSetCarriedItemPacket(int carriedItem) : Packet() {
+    mCarriedItem = carriedItem;
 }
 
 EPacketType ServerboundSetCarriedItemPacket::getPacketId() {
     return EPacketType::_ServerboundSetCarriedItemPacket;
+}
+
+void ServerboundSetCarriedItemPacket::read(DataInputStream* input) {
+    mCarriedItem = input->readShort();
+}
+
+void ServerboundSetCarriedItemPacket::write(DataOutputStream* output) {
+    output->writeShort(mCarriedItem);
+}
+
+void ServerboundSetCarriedItemPacket::handle(PacketListener* listener) {
+    listener->handleSetCarriedItem(this->shared_from_this());
+}
+
+int ServerboundSetCarriedItemPacket::getCarriedItem() {
+    return mCarriedItem;
 }

@@ -10,8 +10,8 @@ std::shared_ptr<Packet> VotePacket::create() {
     return std::shared_ptr<Packet>(new VotePacket());
 }
 
-void VotePacket::handle(PacketListener* listener) {
-    listener->handleVote(this->shared_from_this());
+EPacketType VotePacket::getPacketId() {
+    return EPacketType::_VotePacket;
 }
 
 void VotePacket::read(DataInputStream* input) {
@@ -28,10 +28,10 @@ void VotePacket::write(DataOutputStream* output) {
     output->writeInt(field_34);
 }
 
-int VotePacket::getEstimatedSize() {
-    return 6;
+void VotePacket::handle(PacketListener* listener) {
+    listener->handleVote(this->shared_from_this());
 }
 
-EPacketType VotePacket::getPacketId() {
-    return EPacketType::_VotePacket;
+int VotePacket::getEstimatedSize() {
+    return 6;
 }

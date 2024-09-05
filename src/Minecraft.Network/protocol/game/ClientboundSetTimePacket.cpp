@@ -8,22 +8,39 @@ std::shared_ptr<Packet> ClientboundSetTimePacket::create() {
 }
 
 ClientboundSetTimePacket::ClientboundSetTimePacket() : Packet() {
-    field_28 = 0;
-    field_30 = 0;
+    mGameTime = 0;
+    mDayTime = 0;
+}
+
+ClientboundSetTimePacket::ClientboundSetTimePacket(long long gameTime, long long dayTime, bool b) : Packet() {
+    mGameTime = gameTime;
+    mDayTime = dayTime;
+}
+
+EPacketType ClientboundSetTimePacket::getPacketId() {
+    return EPacketType::_ClientboundSetTimePacket;
+}
+
+void ClientboundSetTimePacket::read(DataInputStream* input) {
+    mGameTime = input->readLong();
+    mDayTime = input->readLong();
+}
+
+void ClientboundSetTimePacket::write(DataOutputStream* output) {
+    output->writeLong(mGameTime);
+    output->writeLong(mDayTime);
 }
 
 void ClientboundSetTimePacket::handle(PacketListener* listener) {
     listener->handleSetTime(this->shared_from_this());
 }
 
-void ClientboundSetTimePacket::read(DataInputStream* input) {
-    field_28 = input->readLong();
-    field_30 = input->readLong();
+long long ClientboundSetTimePacket::getGameTime() {
+    return mGameTime;
 }
 
-void ClientboundSetTimePacket::write(DataOutputStream* output) {
-    output->writeLong(field_28);
-    output->writeLong(field_30);
+long long ClientboundSetTimePacket::getDayTime() {
+    return mDayTime;
 }
 
 int ClientboundSetTimePacket::getEstimatedSize() {

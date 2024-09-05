@@ -26,6 +26,6 @@ bool Packet::isAync() {
     return false;
 }
 
-bool Packet::tryReplaceDuplicatePacket(std::deque<std::shared_ptr<Packet>>* packet) {
+bool Packet::tryReplaceDuplicatePacket(std::deque<std::shared_ptr<Packet>>* duplicatePacket) {
     return false;
 }

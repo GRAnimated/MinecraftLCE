@@ -9,24 +9,38 @@ std::shared_ptr<Packet> ClientboundPlayerSleepPacket::create() {
 }
 
 ClientboundPlayerSleepPacket::ClientboundPlayerSleepPacket() : Packet() {
-    field_28 = 0;
+    mPlayerId = 0;
     mPos = BlockPos();
+}
+
+// NON_MATCHING: Requires Player header
+ClientboundPlayerSleepPacket::ClientboundPlayerSleepPacket(std::shared_ptr<Player> player, BlockPos const& pos) : Packet() {
+    // field_28 = sub_7100151064();
+    mPos = pos;
+}
+
+EPacketType ClientboundPlayerSleepPacket::getPacketId() {
+    return EPacketType::_ClientboundPlayerSleepPacket;
+}
+
+void ClientboundPlayerSleepPacket::read(DataInputStream* input) {
+    mPlayerId = input->readVarInt();
+    mPos = input->readBlockPos();
+}
+
+void ClientboundPlayerSleepPacket::write(DataOutputStream* output) {
+    output->writeVarInt(mPlayerId);
+    output->writeBlockPos(mPos);
 }
 
 void ClientboundPlayerSleepPacket::handle(PacketListener* listener) {
     listener->handleEntityActionAtPosition(this->shared_from_this());
 }
 
-void ClientboundPlayerSleepPacket::read(DataInputStream* input) {
-    field_28 = input->readVarInt();
-    mPos = input->readBlockPos();
+int ClientboundPlayerSleepPacket::getPlayerId() {
+    return mPlayerId;
 }
 
-void ClientboundPlayerSleepPacket::write(DataOutputStream* output) {
-    output->writeVarInt(field_28);
-    output->writeBlockPos(mPos);
-}
-
-EPacketType ClientboundPlayerSleepPacket::getPacketId() {
-    return EPacketType::_ClientboundPlayerSleepPacket;
+BlockPos ClientboundPlayerSleepPacket::getPos() {
+    return mPos;
 }

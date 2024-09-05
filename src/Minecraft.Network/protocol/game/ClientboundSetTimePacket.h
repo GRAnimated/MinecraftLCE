@@ -7,15 +7,21 @@ public:
     static std::shared_ptr<Packet> create();
 
     ClientboundSetTimePacket();
-    void handle(PacketListener*) override;
-    void read(DataInputStream*) override;
-    void write(DataOutputStream*) override;
+    ClientboundSetTimePacket(long long, long long, bool);
+
+    EPacketType getPacketId() override;
+    void read(DataInputStream* input) override;
+    void write(DataOutputStream* output) override;
+    void handle(PacketListener* listener) override;
+
+    long long getGameTime();
+    long long getDayTime();
+
     int getEstimatedSize() override;
     bool isInvalidatedBy(std::shared_ptr<Packet>) override;
     bool isAync() override;
-    EPacketType getPacketId() override;
 
 private:
-    long field_28;
-    long field_30;
+    long long mGameTime;
+    long long mDayTime;
 };

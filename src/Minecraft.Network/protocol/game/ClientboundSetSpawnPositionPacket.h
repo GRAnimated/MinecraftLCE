@@ -8,14 +8,18 @@ public:
     static std::shared_ptr<Packet> create();
 
     ClientboundSetSpawnPositionPacket();
-    void handle(PacketListener*) override;
-    void read(DataInputStream*) override;
-    void write(DataOutputStream*) override;
+    ClientboundSetSpawnPositionPacket(int, int, int);
+    ClientboundSetSpawnPositionPacket(BlockPos const&);
+
+    EPacketType getPacketId() override;
+    void read(DataInputStream* input) override;
+    void write(DataOutputStream* output) override;
+    void handle(PacketListener* listener) override;
+
     int getEstimatedSize() override;
     bool canBeInvalidated() override;
     bool isInvalidatedBy(std::shared_ptr<Packet>) override;
     bool isAync() override;
-    EPacketType getPacketId() override;
 
 private:
     BlockPos mPos;

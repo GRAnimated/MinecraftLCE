@@ -5,17 +5,24 @@
 #include "Minecraft.Network/PacketType.h"
 #include "Minecraft.Network/protocol/Packet.h"
 
+class Player;
+
 class ClientboundPlayerSleepPacket : public Packet, public std::enable_shared_from_this<ClientboundPlayerSleepPacket> {
 public:
     static std::shared_ptr<Packet> create();
 
     ClientboundPlayerSleepPacket();
-    void handle(PacketListener*) override;
-    void read(DataInputStream*) override;
-    void write(DataOutputStream*) override;
+    ClientboundPlayerSleepPacket(std::shared_ptr<Player>, BlockPos const&);
+
     EPacketType getPacketId() override;
+    void read(DataInputStream* input) override;
+    void write(DataOutputStream* output) override;
+    void handle(PacketListener* listener) override;
+
+    int getPlayerId();
+    BlockPos getPos();
 
 private:
-    int field_28;
+    int mPlayerId;
     BlockPos mPos;
 };

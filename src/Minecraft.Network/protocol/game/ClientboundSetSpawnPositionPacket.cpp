@@ -12,8 +12,16 @@ ClientboundSetSpawnPositionPacket::ClientboundSetSpawnPositionPacket() : Packet(
     mPos = BlockPos();
 }
 
-void ClientboundSetSpawnPositionPacket::handle(PacketListener* listener) {
-    listener->handleSetSpawn(this->shared_from_this());
+ClientboundSetSpawnPositionPacket::ClientboundSetSpawnPositionPacket(int x, int y, int z) : Packet() {
+    mPos = BlockPos(x, y, z);
+}
+
+ClientboundSetSpawnPositionPacket::ClientboundSetSpawnPositionPacket(BlockPos const& pos) : Packet() {
+    mPos = pos;
+}
+
+EPacketType ClientboundSetSpawnPositionPacket::getPacketId() {
+    return EPacketType::_ClientboundSetSpawnPositionPacket;
 }
 
 void ClientboundSetSpawnPositionPacket::read(DataInputStream* input) {
@@ -22,6 +30,10 @@ void ClientboundSetSpawnPositionPacket::read(DataInputStream* input) {
 
 void ClientboundSetSpawnPositionPacket::write(DataOutputStream* output) {
     output->writeBlockPos(mPos);
+}
+
+void ClientboundSetSpawnPositionPacket::handle(PacketListener* listener) {
+    listener->handleSetSpawn(this->shared_from_this());
 }
 
 int ClientboundSetSpawnPositionPacket::getEstimatedSize() {
@@ -38,8 +50,4 @@ bool ClientboundSetSpawnPositionPacket::isInvalidatedBy(std::shared_ptr<Packet> 
 
 bool ClientboundSetSpawnPositionPacket::isAync() {
     return false;
-}
-
-EPacketType ClientboundSetSpawnPositionPacket::getPacketId() {
-    return EPacketType::_ClientboundSetSpawnPositionPacket;
 }

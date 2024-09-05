@@ -9,22 +9,30 @@ std::shared_ptr<Packet> ServerboundSwingPacket::create() {
 }
 
 ServerboundSwingPacket::ServerboundSwingPacket() : Packet() {
-    field_28 = 0;
+    mInteractionHand = (InteractionHand::EInteractionHand)0;
+}
+
+ServerboundSwingPacket::ServerboundSwingPacket(InteractionHand::EInteractionHand interactionHand) : Packet() {
+    mInteractionHand = interactionHand;
+}
+
+EPacketType ServerboundSwingPacket::getPacketId() {
+    return EPacketType::_ServerboundSwingPacket;
+}
+
+void ServerboundSwingPacket::read(DataInputStream* input) {
+    mInteractionHand = (InteractionHand::EInteractionHand)input->read();
+}
+
+// NON_MATCHING: game uses LDRB while decomp uses LDR
+void ServerboundSwingPacket::write(DataOutputStream* output) {
+    output->write(mInteractionHand);
 }
 
 void ServerboundSwingPacket::handle(PacketListener* listener) {
     listener->handleAnimate(this->shared_from_this());
 }
 
-void ServerboundSwingPacket::read(DataInputStream* input) {
-    field_28 = input->read();
-}
-
-// NON_MATCHING: game uses LDRB while decomp uses LDR
-void ServerboundSwingPacket::write(DataOutputStream* output) {
-    output->write(field_28);
-}
-
-EPacketType ServerboundSwingPacket::getPacketId() {
-    return EPacketType::_ServerboundSwingPacket;
+InteractionHand::EInteractionHand ServerboundSwingPacket::getHand() {
+    return mInteractionHand;
 }
