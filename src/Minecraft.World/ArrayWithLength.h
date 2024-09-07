@@ -19,17 +19,16 @@ public:
 };
 
 template <typename T>
-class array2DWithLength : public std::vector<T> {
+class array2DWithLength {
 public:
     array2DWithLength() : lengthX(0), lengthY(0) {}
     array2DWithLength(unsigned int lenX, unsigned int lenY);
 
-    T& get(int index) { return (*data)[index]; }
+    T& get(unsigned int index) { return (*data)[index]; }
 
     explicit operator bool() const { return !data->empty(); }
 
-private:
     std::vector<T>* data = nullptr;
-    unsigned int lengthX;
-    unsigned int lengthY;
+    unsigned int lengthX = 0;
+    unsigned int lengthY = 0;
 };

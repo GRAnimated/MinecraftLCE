@@ -112,5 +112,7 @@ public:
     bool isOutsideBuildHeight(BlockPos const&);
     LevelChunk* getChunkAt(BlockPos const&);
 
+    LevelData* getLevelData();
+
     void instaTick(BlockPos const&, BlockState const*, Random&);
 };
