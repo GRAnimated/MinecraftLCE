@@ -3,6 +3,7 @@
 class Random {
 public:
     Random();
+    Random(long long seed);
     static double random();
     int nextInt(int);
     float nextFloat();

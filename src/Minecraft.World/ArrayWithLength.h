@@ -7,6 +7,7 @@ class arrayWithLength {
 public:
     arrayWithLength() {}
     arrayWithLength(std::vector<T> initialData, int length);
+    arrayWithLength(T* initialData, int length);
     arrayWithLength(int size, bool a2);
 
     // NON_MATCHING

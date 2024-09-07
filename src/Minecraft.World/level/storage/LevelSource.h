@@ -5,6 +5,7 @@
 class BlockState;
 class BlockPos;
 class Direction;
+class Biome;
 
 class LevelSource {
 public:
@@ -18,7 +19,7 @@ public:
     virtual void getBlockData(int, int, int) = 0;
     virtual void getBlock(BlockPos const&) = 0;
     virtual bool isEmptyBlock(BlockPos const&) = 0;
-    virtual void getBiome(BlockPos const&) = 0;
+    virtual Biome* getBiome(BlockPos const&) = 0;
     virtual void getBiomeSource() = 0;
     virtual void getMaxBuildHeight() = 0;
     virtual bool isAllEmpty() = 0;

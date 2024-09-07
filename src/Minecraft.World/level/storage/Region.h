@@ -20,7 +20,7 @@ public:
     virtual void getBlockData(int, int, int) override;
     virtual void getBlock(BlockPos const&) override;
     virtual bool isEmptyBlock(BlockPos const&) override;
-    virtual void getBiome(BlockPos const&) override;
+    virtual Biome* getBiome(BlockPos const&) override;
     virtual void getBiomeSource() override;
     virtual void getMaxBuildHeight() override;
     virtual bool isAllEmpty() override;

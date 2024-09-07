@@ -13,10 +13,14 @@ class Level;
 class AABB;
 class BiomeSource;
 class Entity;
+class ChunkPrimer;
 
 class LevelChunk {
 public:
+    LevelChunk(Level*, ChunkPrimer*, int, int);
+
     enum EntityCreationType {};
+
     virtual void setBlockData(arrayWithLength<unsigned char>);
     virtual void getBlockData(arrayWithLength<unsigned char>);
     virtual void getBlockDataRange(arrayWithLength<unsigned char>, int, int);
@@ -75,4 +79,6 @@ public:
     virtual void compressBlocks();
     virtual void compressData();
     virtual void getReorderedBlocksAndData(int, int, int, int, int&, int);
+
+    char unk[0x2D0];
 };

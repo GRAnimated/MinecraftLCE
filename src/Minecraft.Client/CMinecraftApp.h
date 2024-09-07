@@ -4,6 +4,7 @@ enum eTMSAction {};
 enum eFileExtensionType {};
 enum eTMSFileType {};
 enum eTPDFileType {};
+class LevelChunk;
 
 class CMinecraftApp {
 public:
@@ -28,10 +29,14 @@ public:
     virtual void GetTMSDLCInfoRead();
     virtual void GetTMSXUIDsFileRead();
     virtual void GetFileFromTPD(eTPDFileType, unsigned char*, unsigned int, unsigned char**, unsigned int*);
+
+    void processSchematics(LevelChunk*);
 };
 
 class CConsoleMinecraftApp : public CMinecraftApp {
 public:
+    static CConsoleMinecraftApp* instance;
+
     CConsoleMinecraftApp();
     virtual ~CConsoleMinecraftApp();
     void SetRichPresenceContext(int, int) override;
