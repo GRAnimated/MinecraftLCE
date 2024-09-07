@@ -44,6 +44,7 @@ public:
 
     const BlockState* defaultBlockState();
     void registerDefaultState(const BlockState* blockState);
+    static const BlockState* getStateByIdAndData(int, unsigned char);
 
     void init(Material* material, const MaterialColor* materialColor);
 
