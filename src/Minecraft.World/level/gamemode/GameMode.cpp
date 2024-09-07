@@ -12,3 +12,59 @@ GameMode::~GameMode() {}
 bool GameMode::CanRecordStatsAndAchievements() {
     return mGameType != GameType::CREATIVE && !isSpectator();
 }
+
+void GameMode::RecordDamage(std::shared_ptr<Entity>, CombatEntry*, std::shared_ptr<ClientboundChatPacket>) {}
+
+void GameMode::RecordDeath(std::shared_ptr<Entity>) {}
+
+void GameMode::RecordItem(not_null_ptr<ItemInstance>) {}
+
+void GameMode::RecordContainer(int, int, int, int) {}
+
+void GameMode::RecordWalk(int, bool, bool) {}
+
+void GameMode::RecordSwim(int, bool) {}
+
+void GameMode::RecordClimb(int) {}
+
+void GameMode::RecordUseItem(not_null_ptr<ItemInstance>) {}
+
+void GameMode::RecordJump() {}
+
+void GameMode::RecordGainPoints(int) {}
+
+void GameMode::ResetTempPoints() {}
+
+bool GameMode::RecordSecondaryTargetReached(std::wstring const&, int, GlideRingGenerator::eGlideRingSize) {
+    return false;
+}
+
+bool GameMode::RecordLastCheckpoint(int, int, bool, bool, bool) {
+    return false;
+}
+
+bool GameMode::RecordLapCompleted() {
+    return false;
+}
+
+void GameMode::RecordThermalEntered() {}
+
+bool GameMode::RecordProgress(double, double, double, double) {
+    return false;
+}
+
+void GameMode::RecordSpawnedAtCheckpoint(int) {}
+
+void GameMode::RecordBlockPlaced(BlockPos const&, int) {}
+
+void GameMode::RecordBlockDestroyed(BlockPos const&, int) {}
+
+void GameMode::RecordBlockPresent(BlockPos const&, int) {}
+
+void GameMode::RecordLayerTime() {}
+
+void GameMode::RecordSnowballHit() {}
+
+void GameMode::RecordHitBySnowball() {}
+
+void GameMode::RecordLanding(BlockPos const&) {}

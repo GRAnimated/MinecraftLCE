@@ -51,11 +51,11 @@ public:
     virtual void RecordJump();
     virtual void RecordGainPoints(int);
     virtual void ResetTempPoints();
-    virtual void* RecordSecondaryTargetReached(std::wstring const&, int, GlideRingGenerator::eGlideRingSize);
-    virtual void RecordLastCheckpoint(int, int, bool, bool, bool);
-    virtual void RecordLapCompleted();
+    virtual bool RecordSecondaryTargetReached(std::wstring const&, int, GlideRingGenerator::eGlideRingSize);
+    virtual bool RecordLastCheckpoint(int, int, bool, bool, bool);
+    virtual bool RecordLapCompleted();
     virtual void RecordThermalEntered();
-    virtual void RecordProgress(double, double, double, double);
+    virtual bool RecordProgress(double, double, double, double);
     virtual void RecordSpawnedAtCheckpoint(int);
     virtual void RecordBlockPlaced(BlockPos const&, int);
     virtual void RecordBlockDestroyed(BlockPos const&, int);
