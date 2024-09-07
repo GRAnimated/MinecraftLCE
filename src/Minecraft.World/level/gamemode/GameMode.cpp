@@ -7,6 +7,7 @@ GameMode::GameMode() {
     mGameType = nullptr;
     mMinecraft = Minecraft::GetInstance();
 }
+
 GameMode::~GameMode() {}
 
 bool GameMode::CanRecordStatsAndAchievements() {
@@ -68,3 +69,9 @@ void GameMode::RecordSnowballHit() {}
 void GameMode::RecordHitBySnowball() {}
 
 void GameMode::RecordLanding(BlockPos const&) {}
+
+void GameMode::OnMouseDown() {}
+
+bool GameMode::isSpectator() {
+    return mGameType == GameType::SPECTATOR;
+}
