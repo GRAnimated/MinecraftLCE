@@ -28,7 +28,7 @@ bool ClayFeature::place(Level* level, Random& random, const BlockPos& pos) {
                     Block* block = level->getBlockState(pos)->getBlock();
 
                     if (block == Blocks::DIRT || block == Blocks::CLAY)
-                        level->setBlock(result, mBlock->defaultBlockState(), 2, 0);
+                        level->setBlock(result, mBlock->defaultBlockState(), 2, false);
                 }
             }
         }

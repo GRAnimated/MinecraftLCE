@@ -117,8 +117,8 @@ public:
     virtual void clip(const BlockPos& pos, Vec3*, Vec3*, AABB const*);
     virtual void wasExploded(Level*, const BlockPos& pos, Explosion*);
     virtual void getRenderLayer();
-    virtual void mayPlace(Level*, const BlockPos& pos, const Direction* direction);
-    virtual void mayPlace(Level*, const BlockPos& pos);
+    virtual bool mayPlace(Level*, const BlockPos& pos, const Direction* direction);
+    virtual bool mayPlace(Level*, const BlockPos& pos);
     virtual void TestUse();
     virtual void TestUse(Level*, const BlockPos& pos, const BlockState* blockState, std::shared_ptr<Player>);
     virtual void use(Level*, const BlockPos& pos, const BlockState* blockState, std::shared_ptr<Player>, InteractionHand::EInteractionHand, const Direction* direction, float, float, float, bool);

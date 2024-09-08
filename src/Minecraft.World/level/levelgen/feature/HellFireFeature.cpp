@@ -8,7 +8,7 @@
 HellFireFeature::HellFireFeature() : Feature(false) {}
 
 bool HellFireFeature::place(Level* level, Random& random, const BlockPos& pos) {
-    for (int i = 0; i < 64; ++i) {
+    for (int i = 0; i < 64; i++) {
         BlockPos pos2 = pos.offset(random.nextInt(8) - random.nextInt(8), random.nextInt(4) - random.nextInt(4), random.nextInt(8) - random.nextInt(8));
         if (!level->isEmptyBlock(pos2) || level->getBlockState(pos2.below())->getBlock() != Blocks::NETHERRACK)
             continue;
