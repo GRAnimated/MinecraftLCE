@@ -1,7 +1,6 @@
 #include "Minecraft.World/level/border/WorldBorder.h"
 #include "Minecraft.Core/System.h"
 
-// TODO
 WorldBorder::WorldBorder(Level* level) {}
 
 double WorldBorder::getMinX() {

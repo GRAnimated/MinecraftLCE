@@ -1,9 +1,9 @@
 #pragma once
 
 #include "Minecraft.World/ArrayWithLength.h"
-#include "Minecraft.World/level/levelgen/synth/ImprovedNoise.h"
 #include "Minecraft.World/level/levelgen/synth/Synth.h"
 
+class ImprovedNoise;
 class Random;
 
 class PerlinNoise : public Synth {

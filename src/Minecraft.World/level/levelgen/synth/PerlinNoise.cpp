@@ -1,45 +1,93 @@
-#include "PerlinNoise.h"
+#include "Minecraft.World/level/levelgen/synth/PerlinNoise.h"
+
 #include "Minecraft.Util/Mth.h"
+#include "Minecraft.World/level/levelgen/synth/ImprovedNoise.h"
 
-/*
-arrayWithLength<double> PerlinNoise::getRegion(arrayWithLength<double> array, int a3, int octaveMultiplier, int a5, int frequency, int amplitude, int a8, double persistence, double frequencyFactor,
-                                               double amplitudeFactor) {
-    {
-        int a12 = 1;
+#include "windows.h"
 
-        if (array) {
-            if (a3) {
-                for (int i = 0; i < a3; ++i) {
-                    array.get(i) = 0;
-                }
-            }
-        } else {
-            arrayWithLength<double> tempArray(a8 * frequency * a12, true);
-            array = tempArray;
+PerlinNoise::PerlinNoise(Random* random, int maxOctaves) {
+    init(random, maxOctaves);
+}
+
+// NON_MATCHING
+PerlinNoise::~PerlinNoise() {
+    if (mMaxOctaves > 0) {
+        for (int i = 0; i < mMaxOctaves; i++) {
+            delete mNoiseLevels[i];
         }
-
-        if (mMaxOctaves < 1)
-            return array;
-
-        double scale = 1.0;
-
-        for (int i = 0; i < mMaxOctaves; ++i) {
-            double octaveFrequency = Mth::lfloor(octaveMultiplier * scale * frequencyFactor);
-            double octaveAmplitude = Mth::lfloor(frequency * scale * amplitudeFactor);
-            long long octaveFreqMask = octaveFrequency + 16777215;
-            if (octaveFrequency >= 0)
-                octaveFreqMask = octaveFrequency;
-            long long octaveAmplMask = octaveAmplitude + 16777215;
-            if (octaveAmplitude >= 0)
-                octaveAmplMask = octaveAmplitude;
-            double octaveSize = scale * frequencyFactor;
-            mNoiseLevels[i]->add(array, a3, a5, a8, octaveMultiplier * scale * frequencyFactor - octaveFrequency + (octaveFrequency - (octaveFreqMask & 0xFFFFFFFFFF000000LL)),
-                                 amplitude * scale * amplitudeFactor, octaveFrequency - octaveAmplMask + (octaveAmplMask - (octaveAmplMask & 0xFFFFFFFFFF000000LL)), scale * frequencyFactor,
-                                 scale * amplitudeFactor, octaveSize, scale);
-            scale *= 0.5;
-        }
-
-        return array;
+    }
+    if (mNoiseLevels) {
+        delete[] mNoiseLevels;
     }
 }
-*/
+
+double PerlinNoise::getValue(double d1, double d2) {
+    if (mMaxOctaves < 1)
+        return 0.0;
+
+    double value = 0.0;
+    double currentSize = 1.0;
+
+    for (int i = 0; i < mMaxOctaves; i++) {
+        ImprovedNoise* noise = mNoiseLevels[i];
+        value += noise->getValue(d1 * currentSize, d2 * currentSize) / currentSize;
+        currentSize *= 0.5;
+    }
+
+    return value;
+}
+
+void PerlinNoise::init(Random* random, int maxOctaves) {
+    MemSect(2);
+
+    mMaxOctaves = maxOctaves;
+    mNoiseLevels = new ImprovedNoise*[maxOctaves];
+
+    if (maxOctaves >= 1) {
+        for (int i = 0; i < maxOctaves; i++) {
+            mNoiseLevels[i] = new ImprovedNoise(random);
+        }
+    }
+
+    MemSect(0);
+}
+
+// NON_MATCHING: the octaves for loop is mismatching
+arrayWithLength<double> PerlinNoise::getRegion(arrayWithLength<double> array, int i3, int i4, int i5, int i6, int i7, int i8, double d9, double d10, double d11) {
+    if (array.data) {
+        if (array.length) {
+            for (unsigned int v20 = 0; v20 < array.length; v20++) {
+                array.get(v20) = 0;
+            }
+        }
+    } else {
+        array = arrayWithLength<double>(i7 * i6 * i8, true);
+    }
+
+    if (mMaxOctaves < 1)
+        return array;
+
+    double currentSize = 1.0;
+
+    for (int i = 0; i < mMaxOctaves; i++) {
+        double test = i5 * currentSize * d10;  // maybe this should be d11?
+        double test2 = i3 * currentSize * d9;
+
+        long long v24 = Mth::lfloor(test2);
+        long long v26 = Mth::lfloor(test);
+
+        double a1 = (i3 * currentSize * d9) - v24 % 0x1000000;
+        double a2 = i4 * currentSize * d10;
+        double a3 = (i5 * currentSize * d11) - v26 % 0x1000000;
+
+        mNoiseLevels[i]->add(array, a1, a2, a3, i6, i7, i8, currentSize * d9, currentSize * d10, currentSize * d11, currentSize);
+
+        currentSize *= 0.5;
+    }
+
+    return array;
+}
+
+arrayWithLength<double> PerlinNoise::getRegion(arrayWithLength<double> array, int i3, int i4, int i5, int i6, double d7, double d8, double d9) {
+    return getRegion(array, i3, 10, i4, i5, 1, i6, d7, 1.0, d8);
+}

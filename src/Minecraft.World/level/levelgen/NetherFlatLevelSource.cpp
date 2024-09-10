@@ -29,13 +29,13 @@ NetherFlatLevelSource::~NetherFlatLevelSource() {
 }
 
 void NetherFlatLevelSource::prepareHeights(int x, int z, ChunkPrimer* primer) {
-    for (int i = 0; i < 16; i++) {
-        for (int j = 0; j < 16; j++) {
-            for (int k = 0; k < 16; k++) {
+    for (int cX = 0; cX < 16; cX++) {
+        for (int cZ = 0; cZ < 16; cZ++) {
+            for (int cY = 0; cY < 16; cY++) {
                 const BlockState* block = Blocks::AIR->defaultBlockState();
-                if (k <= 6)
+                if (cY <= 6)
                     block = Blocks::NETHERRACK->defaultBlockState();
-                primer->setState((i << 11) | (j << 7) | k, block);
+                primer->setState((cX << 11) | (cZ << 7) | cY, block);
             }
         }
     }

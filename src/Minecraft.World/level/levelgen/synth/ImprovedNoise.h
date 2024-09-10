@@ -7,7 +7,7 @@ class Random;
 
 class ImprovedNoise : public Synth {
 public:
-    ImprovedNoise(void);
+    ImprovedNoise(Random*);
     virtual ~ImprovedNoise();
     virtual double getValue(double, double) override;
     void init(Random*);
