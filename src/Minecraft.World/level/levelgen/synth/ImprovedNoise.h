@@ -13,8 +13,7 @@ public:
     void init(Random*);
     void add(arrayWithLength<double>, double, double, double, int, int, int, double, double, double, double);
 
-    arrayWithLength<double>* mByteArray;
-    void* field_10;
+    arrayWithLength<double> mByteArray;
     double mX;
     double mY;
     double mZ;
