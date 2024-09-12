@@ -1,0 +1,76 @@
+#pragma once
+
+class KeyMapping;
+class Minecraft;
+class File;
+
+class Options {
+public:
+    Options(Minecraft* minecraft, File file);
+    void init();
+
+    float float_0;
+    float float_4;
+    float float_8;
+    bool byte_c;
+    int dword_10;
+    short word_14;
+    char byte_16;
+    bool gap_17;
+    int dword_18;
+    short word_1c;
+    char byte_1e;
+    char byte_1f;
+    void* qword_20;
+    void* qword_28;
+    void* qword_30;
+    KeyMapping* mKeyForward;
+    KeyMapping* mKeyLeft;
+    KeyMapping* mKeyBack;
+    KeyMapping* mKeyRight;
+    KeyMapping* mKeyJump;
+    KeyMapping* mKeyInventory;
+    KeyMapping* mKeyDrop;
+    KeyMapping* mKeyChat;
+    KeyMapping* mKeySneak;
+    KeyMapping* mKeyAttack;
+    KeyMapping* mKeyUse;
+    KeyMapping* mKeyPlayerlist;
+    KeyMapping* mKeyPickItem;
+    KeyMapping* mKeyFog;
+    void* qword_a8;
+    void* qword_b0;
+    void* qword_b8;
+    void* qword_c0;
+    void* qword_c8;
+    void* qword_d0;
+    void* qword_d8;
+    void* qword_e0;
+    void* qword_e8;
+    void* qword_f0;
+    void* qword_f8;
+    void* qword_100;
+    void* qword_108;
+    void* qword_110;
+    Minecraft* mMinecraft;
+    void* qword_120;
+    void* field_128;
+    void* field_130;
+    int dword_138;
+    char byte_13c;
+    void* qword_140;
+    char byte_148;
+    int dword_14c;
+    void* qword_150;
+    void* qword_158;
+    void* qword_160;
+    short word_168;
+    char byte_16a;
+    bool gap_16B;
+    int dword_16c;
+    int dword_170;
+    int mMaxScreenScale;
+    void* qword_178;
+    int dword_180;
+    char byte_184;
+};
