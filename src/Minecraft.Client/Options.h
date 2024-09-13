@@ -1,5 +1,8 @@
 #pragma once
 
+#include <string>
+#include "Minecraft.Core/io/File.h"
+
 class KeyMapping;
 class Minecraft;
 class File;
@@ -9,21 +12,21 @@ public:
     Options(Minecraft* minecraft, File file);
     void init();
 
-    float float_0;
-    float float_4;
-    float float_8;
-    bool byte_c;
+    float mMusicVolume;
+    float mSoundVolume;
+    float mSensitivity;
+    bool mInvertYMouse;
     int dword_10;
-    short word_14;
-    char byte_16;
+    bool byte_14;
+    bool byte_15;
+    bool byte_16;
     bool gap_17;
     int dword_18;
-    short word_1c;
-    char byte_1e;
-    char byte_1f;
-    void* qword_20;
-    void* qword_28;
-    void* qword_30;
+    bool byte_1c;
+    bool byte_1d;
+    bool byte_1e;
+    bool byte_1f;
+    std::wstring field_20;
     KeyMapping* mKeyForward;
     KeyMapping* mKeyLeft;
     KeyMapping* mKeyBack;
@@ -35,42 +38,26 @@ public:
     KeyMapping* mKeySneak;
     KeyMapping* mKeyAttack;
     KeyMapping* mKeyUse;
-    KeyMapping* mKeyPlayerlist;
+    KeyMapping* mKeyPlayerList;
     KeyMapping* mKeyPickItem;
     KeyMapping* mKeyFog;
-    void* qword_a8;
-    void* qword_b0;
-    void* qword_b8;
-    void* qword_c0;
-    void* qword_c8;
-    void* qword_d0;
-    void* qword_d8;
-    void* qword_e0;
-    void* qword_e8;
-    void* qword_f0;
-    void* qword_f8;
-    void* qword_100;
-    void* qword_108;
-    void* qword_110;
+    KeyMapping* mKeyMappings[14];
     Minecraft* mMinecraft;
-    void* qword_120;
-    void* field_128;
-    void* field_130;
+    File mOptionsFile;
     int dword_138;
-    char byte_13c;
+    bool byte_13c;
     void* qword_140;
-    char byte_148;
+    bool byte_148;
     int dword_14c;
-    void* qword_150;
-    void* qword_158;
-    void* qword_160;
-    short word_168;
-    char byte_16a;
+    std::wstring field_150;
+    bool byte_168;
+    bool byte_169;
+    bool byte_16a;
     bool gap_16B;
-    int dword_16c;
-    int dword_170;
+    float dword_16c;
+    float dword_170;
     int mMaxScreenScale;
     void* qword_178;
     int dword_180;
-    char byte_184;
+    bool byte_184;
 };

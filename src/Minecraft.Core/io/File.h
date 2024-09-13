@@ -15,6 +15,8 @@ public:
     File(const File& other, const std::wstring& path);
     ~File();
 
+    File& operator=(const File& other);
+
     std::wstring getPath() const;
     void _delete();
     bool mkdir() const;
@@ -30,6 +32,8 @@ public:
 
     static size_t hash_fnct(const File& file);
     static bool eq_test(const File& file1, const File& file2);
+
+    void* filler[3];
 };
 
 std::wstring wstringtofilename(const std::wstring&, char (&)[256]);
