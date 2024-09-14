@@ -1,11 +1,12 @@
 #pragma once
 
+#include "Minecraft.Core/io/DataInput.h"
+#include "Minecraft.Core/io/InputStream.h"
 #include "Minecraft.World/ArrayWithLength.h"
 
 class BlockPos;
 
-// TODO: This class inherits some others
-class DataInputStream {
+class DataInputStream : public InputStream, public DataInput {
 public:
     virtual ~DataInputStream();
     virtual unsigned int read();

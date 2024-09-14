@@ -21,7 +21,7 @@ void ScreenSizeCalculator::init(Options* options, int width, int height, int sca
         scale = 1;
         mScale = 1;
 
-        int maxScreenScale = options->mMaxScreenScale;
+        int maxScreenScale = options->mGuiScale;
         if (maxScreenScale == 0)
             maxScreenScale = 1000;
 

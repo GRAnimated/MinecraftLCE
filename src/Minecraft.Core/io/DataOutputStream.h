@@ -1,13 +1,15 @@
 #pragma once
 
+#include "Minecraft.Core/io/DataOutput.h"
+#include "Minecraft.Core/io/OutputStream.h"
 #include "Minecraft.World/ArrayWithLength.h"
 
 class BlockPos;
-class PlayerUID;
 
-// TODO: This class inherits some others
-class DataOutputStream {
+class DataOutputStream : public OutputStream, public DataOutput {
 public:
+    DataOutputStream(OutputStream*);
+
     virtual ~DataOutputStream();
     virtual void write(unsigned int);
     virtual void write(arrayWithLength<unsigned char>);
@@ -30,4 +32,7 @@ public:
 
     void writeVarInt(int);
     void writeBlockPos(const BlockPos&) const;
+
+    OutputStream* mOutputStream;
+    int dword_18;
 };

@@ -1,5 +1,19 @@
 #include "Minecraft.Client/Options.h"
+
 #include "Minecraft.Client/KeyMapping.h"
+#include "Minecraft.Client/resources/language/Language.h"
+#include "Minecraft.Core/io/DataOutputStream.h"
+#include "Minecraft.Core/io/FileOutputStream.h"
+
+Options::Option::Option(const std::wstring& a2, bool isProgress, bool a4) : mIsProgress(isProgress), field_1(a4), mOptionName(a2) {}
+
+bool Options::Option::isProgress() const {
+    return mIsProgress;
+}
+
+std::wstring Options::Option::getCaptionId() const {
+    return mOptionName;
+}
 
 Options::Options(Minecraft* minecraft, File file) {
     init();
@@ -10,17 +24,17 @@ Options::Options(Minecraft* minecraft, File file) {
 void Options::init() {
     mMusicVolume = 1.0;
     mSoundVolume = 1.0;
-    mSensitivity = 0.5;
+    mMouseSensitivity = 0.5;
     mInvertYMouse = false;
-    dword_10 = false;
-    byte_14 = true;
-    byte_15 = false;
-    byte_16 = false;
-    dword_18 = 2;
-    byte_1c = true;
-    byte_1d = true;
-    byte_1e = true;
-    field_20 = L"Default";
+    mViewDistance = false;
+    mIsBobView = true;
+    mIsAnaglyph3d = false;
+    mIsAdvancedOpengl = false;
+    mFpsLimit = 2;
+    mIsFancyGraphics = true;
+    mIsEnableAo = true;
+    mIsEnableClouds = true;
+    mSkin = L"Default";
 
     mKeyForward = new KeyMapping(L"key.forward", 22);
     mKeyLeft = new KeyMapping(L"key.left", 0);
@@ -53,20 +67,79 @@ void Options::init() {
     mKeyMappings[13] = mKeyFog;
 
     mMinecraft = nullptr;
-    dword_138 = 2;
+    mDifficulty = 2;
     byte_13c = false;
     qword_140 = nullptr;
     byte_148 = false;
     dword_14c = 0;
-    field_150 = L"";
+    mLastServer = L"";
     byte_168 = false;
     byte_169 = false;
     byte_16a = false;
     dword_16c = 1.0;
     dword_170 = 1.0;
-    mMaxScreenScale = 0;
-    qword_178 = nullptr;
-    dword_180 = 0;
+    mGuiScale = 0;
+    mParticles = 0;
+    mFov = 0;
+    mGamma = 0;
     byte_184 = true;
     byte_1f = true;
+}
+
+void Options::save() {
+    FileOutputStream output = FileOutputStream(mOptionsFile);
+    DataOutputStream dataOutput = DataOutputStream(&output);
+
+    dataOutput.writeChars(L"music:" + std::to_wstring(mMusicVolume) + L"\n");
+    dataOutput.writeChars(L"sound:" + std::to_wstring(mSoundVolume) + L"\n");
+    dataOutput.writeChars(L"invertYMouse:" + std::wstring(mInvertYMouse ? L"true" : L"false") + L"\n");
+    dataOutput.writeChars(L"mouseSensitivity:" + std::to_wstring(mMouseSensitivity));
+    dataOutput.writeChars(L"fov:" + std::to_wstring(mFov));
+    dataOutput.writeChars(L"gamma:" + std::to_wstring(mGamma));
+    dataOutput.writeChars(L"viewDistance:" + std::to_wstring(mViewDistance));
+    dataOutput.writeChars(L"guiScale:" + std::to_wstring(mGuiScale));
+    dataOutput.writeChars(L"particles:" + std::to_wstring(mParticles));
+    dataOutput.writeChars(L"bobView:" + std::wstring(mIsBobView ? L"true" : L"false"));
+    dataOutput.writeChars(L"anaglyph3d:" + std::wstring(mIsAnaglyph3d ? L"true" : L"false"));
+    dataOutput.writeChars(L"advancedOpengl:" + std::wstring(mIsAdvancedOpengl ? L"true" : L"false"));
+    dataOutput.writeChars(L"fpsLimit:" + std::to_wstring(mFpsLimit));
+    dataOutput.writeChars(L"difficulty:" + std::to_wstring(mDifficulty));
+    dataOutput.writeChars(L"fancyGraphics:" + std::wstring(mIsFancyGraphics ? L"true" : L"false"));
+    dataOutput.writeChars(L"ao:" + std::wstring(mIsEnableAo ? L"true" : L"false"));
+    dataOutput.writeChars(L"clouds:" + std::wstring(std::to_wstring(mIsEnableClouds)));
+    dataOutput.writeChars(L"skin:" + mSkin);
+    dataOutput.writeChars(L"lastServer:" + mLastServer);
+    for (int i = 0; i < 14; i++) {
+        dataOutput.writeChars(L"key_" + mKeyMappings[i]->mKeyDescription + L":" + std::to_wstring(mKeyMappings[i]->mKeyCode));
+    }
+
+    dataOutput.close();
+}
+
+// NON_MATCHING: Unfinished
+void Options::getMessage(Option const* option) {
+    Language* language = Language::getInstance();
+    std::wstring captionId = option->getCaptionId();
+    std::wstring element = language->getElement(captionId).append(L": ");
+
+    /*
+    if (option->isProgress()) {
+        float progressValue = getProgressValue(option);
+        if (Option::off_7101122768 != option) {
+            if (Option::off_71011227B8 != option) {
+                if (Option::off_71011227C0 == option) {
+                    const wchar_t* v11;
+                    if (progressValue == 0.0) {
+                        v11 = L"options.gamma.min";
+                    } else {
+                        if (progressValue == 1.0) {
+
+                        }
+                        v11 = L"options.gamma.max";
+                    }
+                }
+            }
+        }
+    }
+    */
 }
