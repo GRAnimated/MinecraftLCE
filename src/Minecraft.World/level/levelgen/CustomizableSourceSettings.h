@@ -1,8 +1,15 @@
 #pragma once
 
+class SuperflatConfig;
+
 class CustomizableSourceSettings {
 public:
     struct Builder {
+        Builder();
+        void setDefaults();
+        static Builder* fromString(SuperflatConfig* config);
+        CustomizableSourceSettings* build();
+
         float coordinateScale;
         float heightScale;
         float lowerLimitScale;
@@ -81,7 +88,10 @@ public:
         int lapisSize;
         int lapisCount;
         int lapisCenterHeight;
-        short lapisSpread;
-        short dword_11E;
+        int lapisSpread;
     };
+
+    CustomizableSourceSettings(CustomizableSourceSettings::Builder* builder);
+
+    Builder mBuilder;
 };
