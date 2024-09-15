@@ -9,6 +9,7 @@ class ChunkPrimer {
 public:
     ChunkPrimer(bool, arrayWithLength<uchar>, arrayWithLength<uchar>);
     ~ChunkPrimer();
+    const BlockState* getState(int);
     const BlockState* getState(int, int, int);
     void setState(int, BlockState const*);
     void setState(int, int, int, BlockState const*);
