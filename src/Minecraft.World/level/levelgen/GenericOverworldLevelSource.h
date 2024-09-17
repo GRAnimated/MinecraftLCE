@@ -1,3 +1,6 @@
 #pragma once
 
-class GenericOverworldLevelSource {};
+class GenericOverworldLevelSource {
+public:
+    virtual ~GenericOverworldLevelSource();
+};
