@@ -6,6 +6,7 @@
 template <typename T>
 class Predicate;
 
+class Block;
 class BlockPos;
 class BlockState;
 class BlockEntity;
@@ -43,7 +44,7 @@ public:
     virtual void recalcHeightmap();
     virtual void lightLava();
     virtual void getBlockLightBlock(BlockPos const&);
-    virtual void getBlock(BlockPos const&);
+    virtual Block* getBlock(BlockPos const&);
     virtual const BlockState* getBlockState(BlockPos const&);
     virtual void getData(BlockPos const&);
     virtual void setData(int, int, int, int, int, bool*);

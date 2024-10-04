@@ -25,6 +25,7 @@ class BoundingBox;
 class CompoundTag;
 class Packet;
 class Random;
+class WorldBorder;
 
 class Level : public LevelSource {
 public:
@@ -38,10 +39,10 @@ public:
     virtual const BlockState* getBlockState(BlockPos const&) override;
     virtual void getBlockId(int, int, int) override;
     virtual void getBlockData(int, int, int) override;
-    virtual void getBlock(BlockPos const&) override;
+    virtual Block* getBlock(BlockPos const&) override;
     virtual bool isEmptyBlock(BlockPos const&) override;
     virtual Biome* getBiome(BlockPos const&) override;
-    virtual void getBiomeSource() override;
+    virtual BiomeSource* getBiomeSource() override;
     virtual void getMaxBuildHeight() override;
     virtual bool isAllEmpty() override;
     virtual void getDirectSignal(BlockPos const&, Direction const*) override;
@@ -113,9 +114,17 @@ public:
     LevelChunk* getChunkAt(BlockPos const&);
     LevelChunk* getChunk(int, int);
 
+    BlockPos getTopSolidBlockPos(BlockPos const&);
+    BlockPos getTopRainBlockPos(BlockPos const&);
+    BlockPos getHeightmapPos(BlockPos const&);
+
     LevelData* getLevelData();
+    WorldBorder* getWorldBorder();
 
     long long getSeed();
+    int getSeaLevel();
+    void setSeaLevel(int);
 
     void instaTick(BlockPos const&, BlockState const*, Random&);
+    static void setInstaTick(bool);
 };

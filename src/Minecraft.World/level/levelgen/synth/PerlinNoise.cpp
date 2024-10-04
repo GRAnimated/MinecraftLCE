@@ -53,39 +53,39 @@ void PerlinNoise::init(Random* random, int maxOctaves) {
 }
 
 // NON_MATCHING: the octaves for loop is mismatching
-arrayWithLength<double> PerlinNoise::getRegion(arrayWithLength<double> array, int i3, int i4, int i5, int i6, int i7, int i8, double d9, double d10, double d11) {
-    if (array.data) {
-        if (array.length) {
-            for (unsigned int v20 = 0; v20 < array.length; v20++) {
-                array.get(v20) = 0;
+arrayWithLength<double> PerlinNoise::getRegion(arrayWithLength<double> noise, int posX, int posY, int posZ, int width, int depth, int length, double scaleX, double scaleY, double scaleZ) {
+    if (noise.data) {
+        if (noise.length) {
+            for (unsigned int i = 0; i < noise.length; i++) {
+                noise.get(i) = 0;
             }
         }
     } else {
-        array = arrayWithLength<double>(i7 * i6 * i8, true);
+        noise = arrayWithLength<double>(depth * width * length, true);
     }
 
     if (mMaxOctaves < 1)
-        return array;
+        return noise;
 
     double currentSize = 1.0;
 
     for (int i = 0; i < mMaxOctaves; i++) {
-        double test = i5 * currentSize * d10;  // maybe this should be d11?
-        double test2 = i3 * currentSize * d9;
+        double scaledZ = posZ * currentSize * scaleZ;
+        double scaledX = posX * currentSize * scaleX;
 
-        long long v24 = Mth::lfloor(test2);
-        long long v26 = Mth::lfloor(test);
+        long long floorX = Mth::lfloor(scaledX);
+        long long floorZ = Mth::lfloor(scaledZ);
 
-        double a1 = (i3 * currentSize * d9) - v24 % 0x1000000;
-        double a2 = i4 * currentSize * d10;
-        double a3 = (i5 * currentSize * d11) - v26 % 0x1000000;
+        double fracX = (posX * currentSize * scaleX) - floorX % 0x1000000;
+        double fracY = posY * currentSize * scaleY;
+        double fracZ = (posZ * currentSize * scaleZ) - floorZ % 0x1000000;
 
-        mNoiseLevels[i]->add(array, a1, a2, a3, i6, i7, i8, currentSize * d9, currentSize * d10, currentSize * d11, currentSize);
+        mNoiseLevels[i]->add(noise, fracX, fracY, fracZ, width, depth, length, currentSize * scaleX, currentSize * scaleY, currentSize * scaleZ, currentSize);
 
         currentSize *= 0.5;
     }
 
-    return array;
+    return noise;
 }
 
 arrayWithLength<double> PerlinNoise::getRegion(arrayWithLength<double> array, int i3, int i4, int i5, int i6, double d7, double d8, double d9) {

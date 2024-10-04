@@ -93,5 +93,5 @@ public:
 
     CustomizableSourceSettings(CustomizableSourceSettings::Builder* builder);
 
-    Builder mBuilder;
+    Builder* mBuilder;
 };

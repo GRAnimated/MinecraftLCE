@@ -91,9 +91,92 @@ CustomizableSourceSettings::Builder* CustomizableSourceSettings::Builder::fromSt
     return new Builder();
 }
 
+// NON_MATCHING
 CustomizableSourceSettings* CustomizableSourceSettings::Builder::build() {
     return new CustomizableSourceSettings(this);
 }
 
-// NON_MATCHING: Shouldn't inline
-CustomizableSourceSettings::CustomizableSourceSettings(CustomizableSourceSettings::Builder* builder) : mBuilder(*builder) {}
+// NON_MATCHING: thisBld is in wrong register
+CustomizableSourceSettings::CustomizableSourceSettings(CustomizableSourceSettings::Builder* builder) {
+    CustomizableSourceSettings::Builder* thisBld = mBuilder;
+
+    thisBld->coordinateScale = builder->coordinateScale;
+    thisBld->heightScale = builder->heightScale;
+    thisBld->lowerLimitScale = builder->lowerLimitScale;
+    thisBld->upperLimitScale = builder->upperLimitScale;
+    thisBld->depthNoiseScaleX = builder->depthNoiseScaleX;
+    thisBld->depthNoiseScaleZ = builder->depthNoiseScaleZ;
+    thisBld->depthNoiseScaleExponent = builder->depthNoiseScaleExponent;
+    thisBld->mainNoiseScaleX = builder->mainNoiseScaleX;
+    thisBld->mainNoiseScaleY = builder->mainNoiseScaleY;
+    thisBld->mainNoiseScaleZ = builder->mainNoiseScaleZ;
+    thisBld->baseSize = builder->baseSize;
+    thisBld->stretchY = builder->stretchY;
+    thisBld->biomeDepthWeight = builder->biomeDepthWeight;
+    thisBld->biomeDepthOffset = builder->biomeDepthOffset;
+    thisBld->biomeScaleWeight = builder->biomeScaleWeight;
+    thisBld->biomeScaleOffset = builder->biomeScaleOffset;
+    thisBld->seaLevel = builder->seaLevel;
+    thisBld->useCaves = builder->useCaves;
+    thisBld->useDungeons = builder->useDungeons;
+    thisBld->dungeonChance = builder->dungeonChance;
+    thisBld->byte_4C = builder->byte_4C;
+    thisBld->byte_4D = builder->byte_4D;
+    thisBld->byte_4E = builder->byte_4E;
+    thisBld->byte_4F = builder->byte_4F;
+    thisBld->byte_50 = builder->byte_50;
+    thisBld->byte_51 = builder->byte_51;
+    thisBld->byte_52 = builder->byte_52;
+    thisBld->useWaterLakes = builder->useWaterLakes;
+    thisBld->waterLakeChance = builder->waterLakeChance;
+    thisBld->useLavaLakes = builder->useLavaLakes;
+    thisBld->lavaLakeChance = builder->lavaLakeChance;
+    thisBld->useLavaOceans = builder->useLavaOceans;
+    thisBld->fixedBiome = builder->fixedBiome;
+    thisBld->biomeSize = builder->biomeSize;
+    thisBld->riverSize = builder->riverSize;
+    thisBld->dirtSize = builder->dirtSize;
+    thisBld->dirtCount = builder->dirtCount;
+    thisBld->dirtMinHeight = builder->dirtMinHeight;
+    thisBld->dirtMaxHeight = builder->dirtMaxHeight;
+    thisBld->gravelSize = builder->gravelSize;
+    thisBld->gravelCount = builder->gravelCount;
+    thisBld->gravelMinHeight = builder->gravelMinHeight;
+    thisBld->gravelMaxHeight = builder->gravelMaxHeight;
+    thisBld->graniteSize = builder->graniteSize;
+    thisBld->graniteCount = builder->graniteCount;
+    thisBld->graniteMinHeight = builder->graniteMinHeight;
+    thisBld->graniteMaxHeight = builder->graniteMaxHeight;
+    thisBld->dioriteSize = builder->dioriteSize;
+    thisBld->dioriteCount = builder->dioriteCount;
+    thisBld->dioriteMinHeight = builder->dioriteMinHeight;
+    thisBld->dioriteMaxHeight = builder->dioriteMaxHeight;
+    thisBld->andesiteSize = builder->andesiteSize;
+    thisBld->andesiteCount = builder->andesiteCount;
+    thisBld->andesiteMinHeight = builder->andesiteMinHeight;
+    thisBld->andesiteMaxHeight = builder->andesiteMaxHeight;
+    thisBld->coalSize = builder->coalSize;
+    thisBld->coalCount = builder->coalCount;
+    thisBld->coalMinHeight = builder->coalMinHeight;
+    thisBld->coalMaxHeight = builder->coalMaxHeight;
+    thisBld->ironSize = builder->ironSize;
+    thisBld->ironCount = builder->ironCount;
+    thisBld->ironMinHeight = builder->ironMinHeight;
+    thisBld->ironMaxHeight = builder->ironMaxHeight;
+    thisBld->goldSize = builder->goldSize;
+    thisBld->goldCount = builder->goldCount;
+    thisBld->goldMinHeight = builder->goldMinHeight;
+    thisBld->goldMaxHeight = builder->goldMaxHeight;
+    thisBld->redstoneSize = builder->redstoneSize;
+    thisBld->redstoneCount = builder->redstoneCount;
+    thisBld->redstoneMinHeight = builder->redstoneMinHeight;
+    thisBld->redstoneMaxHeight = builder->redstoneMaxHeight;
+    thisBld->diamondSize = builder->diamondSize;
+    thisBld->diamondCount = builder->diamondCount;
+    thisBld->diamondMinHeight = builder->diamondMinHeight;
+    thisBld->diamondMaxHeight = builder->diamondMaxHeight;
+    thisBld->lapisSize = builder->lapisSize;
+    thisBld->lapisCount = builder->lapisCount;
+    thisBld->lapisCenterHeight = builder->lapisCenterHeight;
+    thisBld->lapisSpread = builder->lapisSpread;
+}

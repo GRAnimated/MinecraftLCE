@@ -10,12 +10,13 @@ public:
     arrayWithLength(T* initialData, int length);
     arrayWithLength(int size, bool a2);
 
-    // NON_MATCHING
-    T& get(unsigned int index) { return (*data)[index]; }
+    T& get(unsigned int index) { return static_cast<T*>(data)[index]; }
 
-    explicit operator bool() const { return !data->empty(); }
+    T& operator[](unsigned int index) { return get(index); }
 
-    std::vector<T>* data = nullptr;
+    explicit operator bool() const { return !static_cast<std::vector<T>*>(data)->empty(); }
+
+    void* data = nullptr;
     unsigned int length = 0;
 };
 
@@ -25,11 +26,11 @@ public:
     array2DWithLength() : lengthX(0), lengthY(0) {}
     array2DWithLength(unsigned int lenX, unsigned int lenY);
 
-    T& get(unsigned int index) { return (*data)[index]; }
+    T& get(unsigned int index) { return static_cast<T*>(data)[index]; }
 
-    explicit operator bool() const { return !data->empty(); }
+    explicit operator bool() const { return !static_cast<std::vector<T>*>(data)->empty(); }
 
-    std::vector<T>* data = nullptr;
+    void* data = nullptr;
     unsigned int lengthX = 0;
     unsigned int lengthY = 0;
 };

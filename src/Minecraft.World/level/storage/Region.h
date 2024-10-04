@@ -18,10 +18,10 @@ public:
     virtual const BlockState* getBlockState(BlockPos const&) override;
     virtual void getBlockId(int, int, int) override;
     virtual void getBlockData(int, int, int) override;
-    virtual void getBlock(BlockPos const&) override;
+    virtual Block* getBlock(BlockPos const&) override;
     virtual bool isEmptyBlock(BlockPos const&) override;
     virtual Biome* getBiome(BlockPos const&) override;
-    virtual void getBiomeSource() override;
+    virtual BiomeSource* getBiomeSource() override;
     virtual void getMaxBuildHeight() override;
     virtual bool isAllEmpty() override;
     virtual void getDirectSignal(BlockPos const&, Direction const*) override;

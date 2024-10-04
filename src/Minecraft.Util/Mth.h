@@ -6,4 +6,6 @@ public:
     static int floor(double value);
     static long lfloor(double value);
     static int fastFloor(double value);
+
+    static int hsvToRgb(float, float, float);
 };
