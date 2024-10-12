@@ -9,6 +9,8 @@ public:
     }
     Vec3() = default;
 
+    static Vec3 newTemp(double x, double y, double z);
+
     Vec3 operator=(Vec3 o);
 
     Vec3 operator+(Vec3 o) { return Vec3(x + o.x, y + o.y, z + o.z); }

@@ -4,14 +4,17 @@
 #include <vector>
 
 #include "Minecraft.World/level/material/MaterialColor.h"
+#include "Minecraft.World/phys/Vec3.h"
 
 class Random;
+class Block;
 class BlockPos;
 class Level;
 class ChunkPrimer;
 class MobCategory;
 class BiomeDecorator;
 class Feature;
+class PerlinSimplexNoise;
 
 // TODO: Move this
 class WeightedRandomItem {
@@ -83,9 +86,12 @@ public:
     static Biome* MODIFIED_WOODED_BADLANDS_PLATEAU;
     static Biome* MODIFIED_BADLANDS_PLATEAU;
 
-    enum EBiomeIDs : int {
+    static PerlinSimplexNoise* TEMPERATURE_NOISE;
 
+    enum EBiomeIDs : unsigned int {
+        LIMIT = 256,
     };
+
     enum BaseClass {
         _BEACH = 0,
         _DESERT = 1,
@@ -137,34 +143,36 @@ public:
     };
 
     Biome(Biome::EBiomeIDs, Biome::BiomeProperties*);
-    // static Biome* getBiomes();
+    static Biome** getBiomes();
     static Biome* getBiome(int);
     static Biome* getBiome(int, Biome*);
 
     virtual ~Biome();
     virtual Feature* getTreeFeature(Random&);
     virtual void getGrassFeature(Random&);
-    virtual void getRandomFlower(Random&, BlockPos const*);
+    virtual Block* getRandomFlower(Random&, const BlockPos*);
     virtual unsigned int getSkyColor(float);
-    virtual void hasSnow();
-    virtual void hasRain();
-    virtual void isHumid();
-    virtual void getCreatureProbability();
-    virtual void getTemperature(BlockPos const*);
-    virtual void decorate(Level*, Random&, BlockPos const*);
-    virtual unsigned int getGrassColor(BlockPos const*);
-    virtual unsigned int getFoliageColor(BlockPos const*);
-    virtual void setGrassColor(BlockPos const*, unsigned int);
-    virtual void setFoliageColor(BlockPos const*, unsigned int);
+    virtual bool hasSnow();
+    virtual bool hasRain();
+    virtual bool isHumid();
+    virtual float getCreatureProbability();
+    virtual float getTemperature(const BlockPos*);
+    virtual void decorate(Level*, Random&, const BlockPos*);
+    virtual unsigned int getGrassColor(const BlockPos*);
+    virtual unsigned int getFoliageColor(const BlockPos*);
+    virtual void setGrassColor(const BlockPos*, unsigned int);
+    virtual void setFoliageColor(const BlockPos*, unsigned int);
     virtual void buildSurfaceAt(Level*, Random&, ChunkPrimer*, int, int, double);
     virtual void buildSurfaceAtDefault(Level*, Random&, ChunkPrimer*, int, int, double);
     virtual int getBaseClass() = 0;
-    virtual void getTemperatureCategory();
-    virtual void isAlwaysValidSpawn();
+    virtual int getTemperatureCategory();
+    virtual bool isAlwaysValidSpawn();
     virtual void getWaterColor();
-    virtual void getFogColor(float, float) const;
-    virtual void isFoggy();
-    virtual void isNatural();
+    virtual Vec3 getFogColor(float, float) const;
+    virtual bool isFoggy();
+    virtual bool isNatural();
+
+    bool isSnowCovered();
 
     void setNameAndDescription(int, int);
     void setPreviewColor(eMinecraftColour);
@@ -174,6 +182,9 @@ public:
 
     std::wstring getName(bool);
     std::wstring getDescription();
+
+    float getTemperature();
+    float getDownfall();
 
     int mNameId;
     int mDescriptionId;
@@ -202,7 +213,7 @@ public:
     std::vector<void*> field_f0;
     std::vector<void*> field_108;
     std::vector<void*> field_120;
-    int mWaterColor;
-    int mSkyColor;
-    int mPreviewColor;
+    eMinecraftColour mWaterColor;
+    eMinecraftColour mSkyColor;
+    eMinecraftColour mPreviewColor;
 };

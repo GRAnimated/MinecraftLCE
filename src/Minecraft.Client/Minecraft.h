@@ -30,6 +30,7 @@ class ClientMasterGameMode;
 class GhostController;
 class Textures;
 class Font;
+class ColourTable;
 
 class Minecraft {
 public:
@@ -44,6 +45,10 @@ public:
     static void startAndConnectTo(const std::wstring& arg1, const std::wstring& arg2, const std::wstring& arg3);
 
     std::shared_ptr<Entity> getCameraEntity();
+
+    ColourTable* getColourTable();
+
+    bool isUsingDefaultSkin();
 
     DataFixerUpper* mFixerUpper;
     MultiPlayerGameMode* mMultiPlayerGameMode;
