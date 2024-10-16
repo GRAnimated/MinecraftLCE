@@ -3,13 +3,19 @@
 #include <memory>
 #include "Minecraft.Network/protocol/game/DisconnectPacket.h"
 
+class Packet;
+
 #define HANDLE(handlerName, packetType) virtual void handle##handlerName(std::shared_ptr<class packetType>)
+#define HANDLE_IMPL(handlerName, packetType)                                                                                                                                                           \
+    void PacketListener::handle##handlerName(std::shared_ptr<packetType> packet) {                                                                                                                     \
+        onUnhandledPacket(std::static_pointer_cast<Packet>(packet));                                                                                                                                   \
+    }
 
 class PacketListener {
 public:
     PacketListener();
     virtual ~PacketListener();
-    virtual void onUnhandledPacket(std::shared_ptr<class Packet>);
+    virtual void onUnhandledPacket(std::shared_ptr<Packet>);
     virtual void onDisconnect(DisconnectPacket::eDisconnectReason, void*);
     virtual void canHandleAsyncPackets();
 
@@ -138,5 +144,6 @@ public:
     HANDLE(GameCommand, GameCommandPacket);
     HANDLE(Vote, VotePacket);
     HANDLE(ClientboundSetPlayerTeamPacket, ClientboundSetPlayerTeamPacket);
+
     virtual bool isServerPacketListener();
 };
