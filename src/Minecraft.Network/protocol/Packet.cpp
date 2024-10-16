@@ -3,7 +3,7 @@
 
 Packet::Packet() {
     mCreatedTime = System::processTimeInMilliSecs();
-    field_10 = 0;
+    mShouldDelay = false;
 }
 
 void Packet::handle(PacketListener* listener) {

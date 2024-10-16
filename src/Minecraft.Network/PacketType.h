@@ -1,6 +1,6 @@
 #pragma once
 
-enum EPacketType {
+enum EPacketType : int {
     _ClientboundKeepAlivePacket = 0,
     _ClientboundLoginPacket = 1,
     _ClientboundPreLoginPacket = 2,

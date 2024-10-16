@@ -11,6 +11,8 @@ class PacketListener;
 
 class Packet {
 public:
+    static std::shared_ptr<Packet> readPacket(DataInputStream*, bool, unsigned int&, bool&);
+
     Packet();
     virtual ~Packet();
     virtual EPacketType getPacketId() = 0;
@@ -24,7 +26,7 @@ public:
     virtual bool tryReplaceDuplicatePacket(std::deque<std::shared_ptr<Packet>>* duplicatePacket);
 
     long mCreatedTime;
-    bool field_10;
+    bool mShouldDelay;
 };
 
 ASSERT_SIZEOF(Packet, 0x18)

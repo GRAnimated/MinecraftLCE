@@ -16,3 +16,6 @@ void XMemSet128(void*, int, unsigned int);
 void XPhysicalFree(void*);
 
 void MemSect(int);
+
+void PIXBeginNamedEvent(float, char const*, ...);
+void PIXEndNamedEvent();

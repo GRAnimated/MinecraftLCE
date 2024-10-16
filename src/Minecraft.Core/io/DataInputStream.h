@@ -8,6 +8,7 @@ class BlockPos;
 
 class DataInputStream : public InputStream, public DataInput {
 public:
+    DataInputStream(InputStream*);
     virtual ~DataInputStream();
     virtual unsigned int read();
     virtual void read(arrayWithLength<unsigned char>);
@@ -34,4 +35,6 @@ public:
 
     int readVarInt();
     BlockPos readBlockPos();
+
+    InputStream* mInputStream;
 };

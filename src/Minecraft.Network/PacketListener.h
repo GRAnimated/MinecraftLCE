@@ -1,13 +1,9 @@
 #pragma once
 
 #include <memory>
+#include "Minecraft.Network/protocol/game/DisconnectPacket.h"
 
 #define HANDLE(handlerName, packetType) virtual void handle##handlerName(std::shared_ptr<class packetType>)
-
-class DisconnectPacket {
-public:
-    enum eDisconnectReason {};
-};
 
 class PacketListener {
 public:

@@ -36,7 +36,7 @@ public:
     void* filler[3];
 };
 
-std::wstring wstringtofilename(const std::wstring&, char (&)[256]);
+const char* wstringtofilename(const std::wstring&, char (&)[256]);
 bool CreateDirectoryA(const char*, void*);
 bool GetFileAttributesA(char const*);
 bool MoveFileA(char const*, char const*);

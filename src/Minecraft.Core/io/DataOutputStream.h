@@ -33,6 +33,10 @@ public:
     void writeVarInt(int);
     void writeBlockPos(const BlockPos&) const;
 
+    void deleteChildStream();
+
+    int getSize() const { return mSize; }
+
     OutputStream* mOutputStream;
-    int dword_18;
+    int mSize;
 };
