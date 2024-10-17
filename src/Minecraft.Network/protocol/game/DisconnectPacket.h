@@ -8,9 +8,10 @@ public:
 
     enum eDisconnectReason {
         _0 = 0,
-        _2 = 2,
-        _10 = 10,
-        _11 = 11,
+        Closed = 2,
+        Kicked = 8,
+        Timeout = 10,
+        Overflow = 11,
         _29 = 29,
     };
 

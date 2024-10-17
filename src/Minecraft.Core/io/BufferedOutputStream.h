@@ -5,6 +5,7 @@
 class BufferedOutputStream : public OutputStream {
 public:
     BufferedOutputStream(OutputStream* outputStream, int bufferSize);
+
     virtual ~BufferedOutputStream() override;
     virtual void write(unsigned int) override;
     virtual void write(arrayWithLength<unsigned char>) override;

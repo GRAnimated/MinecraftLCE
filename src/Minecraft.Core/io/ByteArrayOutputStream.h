@@ -14,6 +14,9 @@ public:
     virtual void flush() override;
     virtual void toByteArray();
 
+    unsigned int size();
+    void clear();
+
     arrayWithLength<unsigned char> mBuffer;
     unsigned int mSize;
 };

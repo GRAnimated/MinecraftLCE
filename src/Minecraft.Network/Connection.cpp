@@ -102,8 +102,8 @@ Connection::Connection(Socket* socket, std::wstring const& type, PacketListener*
 
     mDataInputStream = new DataInputStream(socket->getInputStream(packetListener->isServerPacketListener()));
 
-    mBufferedOutputStream = (BufferedOutputStream*)socket->getOutputStream(packetListener->isServerPacketListener());
-    mDataOutputStream = new DataOutputStream(new BufferedOutputStream(mBufferedOutputStream, 0x1400));
+    mSocketOutputStream = socket->getOutputStream(packetListener->isServerPacketListener());
+    mDataOutputStream = new DataOutputStream(new BufferedOutputStream(mSocketOutputStream, 0x1400));
 
     mByteArrayOutputStream = new ByteArrayOutputStream(0x1400);
     mDataOutputStream2 = new DataOutputStream(mByteArrayOutputStream);
@@ -236,14 +236,56 @@ void Connection::queueSend(std::shared_ptr<Packet> packet) {
     }
 }
 
-// TODO: Implement Connection::writeTick
-/*
+// NON_MATCHING: Shared pointer stuff
 bool Connection::writeTick() {
     if (!mDataOutputStream || !mDataOutputStream2)
         return false;
-    ...
+
+    bool returnValue;
+    if (!mOutgoingQueue.empty() && (!mFakeLag || (System::processTimeInMilliSecs() - mOutgoingQueue.front()->mCreatedTime >= mFakeLag))) {
+        nn::os::LockMutex(&mMutexType4);
+        std::shared_ptr<Packet> packet = mOutgoingQueue.front();
+        mOutgoingQueue.pop_front();
+
+        mEstimatedSize += ~packet->getEstimatedSize();
+        nn::os::UnlockMutex(&mMutexType4);
+
+        Packet::writePacket(packet, mDataOutputStream, mPacketListener->isServerPacketListener(), field_164);
+
+        dword_71017869A0[packet->getPacketId()] += packet->getEstimatedSize() + 1;
+
+        returnValue = true;
+    } else {
+        returnValue = false;
+    }
+
+    if (mDelay-- > 0 || mSlowOutgoingQueue.empty() || (mFakeLag && System::processTimeInMilliSecs() - mSlowOutgoingQueue.front()->mCreatedTime < mFakeLag)) {
+        return returnValue;
+    }
+
+    nn::os::LockMutex(&mMutexType4);
+    std::shared_ptr<Packet> packet = mSlowOutgoingQueue.front();
+    mSlowOutgoingQueue.pop_front();
+
+    mEstimatedSize += ~packet->getEstimatedSize();
+    nn::os::UnlockMutex(&mMutexType4);
+
+    if (packet->mShouldDelay) {
+        Packet::writePacket(packet, mDataOutputStream2, mPacketListener->isServerPacketListener(), field_164);
+
+        if (mDataOutputStream)
+            mDataOutputStream->flush();
+        mSocketOutputStream->writeWithFlags(mByteArrayOutputStream->mBuffer, 0, mByteArrayOutputStream->size(), 1);
+        mByteArrayOutputStream->clear();
+    } else {
+        Packet::writePacket(packet, mDataOutputStream, mPacketListener->isServerPacketListener(), field_164);
+    }
+
+    dword_71017869A0[packet->getPacketId()] += packet->getEstimatedSize() + 1;
+
+    mDelay = 0;
+    return true;
 }
-*/
 
 void Connection::flush() {
     mC4JEventImpl1->Set();
@@ -305,8 +347,8 @@ void Connection::close(DisconnectPacket::eDisconnectReason reason) {
 void Connection::tick() {
     if (field_119)
         close(DisconnectPacket::eDisconnectReason::_29);
-    if (mEstimatedSize > 0x100000)
-        close(DisconnectPacket::eDisconnectReason::_11);
+    if (mEstimatedSize > 0x100000)  // 1MB
+        close(DisconnectPacket::eDisconnectReason::Overflow);
     nn::os::LockMutex(&mMutexType2);
     long test = (reinterpret_cast<long*>(&mIncomingQueue)[5]);
     nn::os::UnlockMutex(&mMutexType2);
@@ -315,7 +357,7 @@ void Connection::tick() {
     else {
         field_158++;
         if (field_158 == 1200)
-            close(DisconnectPacket::eDisconnectReason::_10);
+            close(DisconnectPacket::eDisconnectReason::Timeout);
     }
     if (System::processTimeInNanoSecs() - mTimeInMs > 1000) {
         if (mPacketListener->isServerPacketListener()) {
@@ -367,7 +409,7 @@ void Connection::tick() {
     flush();
 
     if (mSocket && mSocket->sub_71000EA668())
-        close(DisconnectPacket::eDisconnectReason::_2);
+        close(DisconnectPacket::eDisconnectReason::Closed);
     if (byte_148) {
         nn::os::LockMutex(&mMutexType2);
         long test = (reinterpret_cast<long*>(&mIncomingQueue)[5]);
@@ -382,6 +424,6 @@ void Connection::sendAndQuit() {
     if (!mIsDisconnecting) {
         flush();
         mIsDisconnecting = true;
-        close(DisconnectPacket::eDisconnectReason::_2);
+        close(DisconnectPacket::eDisconnectReason::Closed);
     }
 }

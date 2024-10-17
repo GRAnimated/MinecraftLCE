@@ -1,16 +1,55 @@
 #pragma once
 
+#include "Minecraft.Core/io/OutputStream.h"
+#include "Minecraft.World/ArrayWithLength.h"
+
 class InputStream;
-class OutputStream;
 
 class Socket {
 public:
+    class SocketOutputStream : public OutputStream {
+    public:
+        SocketOutputStream();
+        virtual void writeWithFlags(arrayWithLength<unsigned char>, unsigned int, unsigned int, int);
+    };
+
+    class SocketOutputStreamLocal : public OutputStream {
+    public:
+        SocketOutputStreamLocal(int);
+        virtual ~SocketOutputStreamLocal() override;
+        virtual void write(unsigned int) override;
+        virtual void write(arrayWithLength<unsigned char>) override;
+        virtual void write(arrayWithLength<unsigned char>, unsigned int, unsigned int) override;
+        virtual void close() override;
+        virtual void flush() override;
+        virtual void writeWithFlags(arrayWithLength<unsigned char>, unsigned int, unsigned int, int);
+
+        int field_8;
+        int field_C;
+    };
+
+    class SocketOutputStreamNetwork : public OutputStream {
+    public:
+        SocketOutputStreamNetwork(Socket*, int);
+        virtual ~SocketOutputStreamNetwork() override;
+        virtual void write(unsigned int) override;
+        virtual void write(arrayWithLength<unsigned char>) override;
+        virtual void write(arrayWithLength<unsigned char>, unsigned int, unsigned int) override;
+        virtual void close() override;
+        virtual void flush() override;
+        virtual void writeWithFlags(arrayWithLength<unsigned char>, unsigned int, unsigned int, int);
+
+        int field_8;
+        int field_C;
+        Socket* mSocket;
+    };
+
     long getRemoteSocketAddress();
 
     void setSoTimeout(int);
     void setTrafficClass(int);
     InputStream* getInputStream(bool);
-    OutputStream* getOutputStream(bool);
+    SocketOutputStream* getOutputStream(bool);
 
     void close(bool);
 

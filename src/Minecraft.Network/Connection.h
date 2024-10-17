@@ -1,14 +1,15 @@
 #pragma once
 
 #include <deque>
+#include "Minecraft.Network/Socket.h"
 #include "Minecraft.Network/protocol/game/DisconnectPacket.h"
 #include "nn/os/os_MutexTypes.h"
 
 class Socket;
 class DataInputStream;
 class DataOutputStream;
+class OutputStream;
 class ByteArrayOutputStream;
-class BufferedOutputStream;
 class PacketListener;
 class C4JThreadImpl;
 class C4JEventImpl;
@@ -20,6 +21,7 @@ public:
     static int dword_710178659C;  // runWrite
 
     static int dword_71017865A0[256];  // read
+    static int dword_71017869A0[256];  // write
 
     bool getAndSetRunning(bool);
     void _init();
@@ -44,7 +46,7 @@ public:
     DataOutputStream* mDataOutputStream;
     DataOutputStream* mDataOutputStream2;
     ByteArrayOutputStream* mByteArrayOutputStream;
-    BufferedOutputStream* mBufferedOutputStream;
+    Socket::SocketOutputStream* mSocketOutputStream;
     bool mIsRunning;
     nn::os::MutexType mMutexType;
     std::deque<std::shared_ptr<Packet>> mIncomingQueue;
@@ -65,7 +67,7 @@ public:
     int field_158;
     int mEstimatedSize;
     unsigned int field_160;
-    int field_164;
+    unsigned int field_164;
     int mFakeLag;
     int dword_16C;
     nn::os::MutexType mMutexType3;

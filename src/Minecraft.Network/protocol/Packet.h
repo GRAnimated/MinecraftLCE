@@ -12,6 +12,7 @@ class PacketListener;
 class Packet {
 public:
     static std::shared_ptr<Packet> readPacket(DataInputStream*, bool, unsigned int&, bool&);
+    static void writePacket(std::shared_ptr<Packet>, DataOutputStream*, bool, unsigned int&);
 
     Packet();
     virtual ~Packet();
