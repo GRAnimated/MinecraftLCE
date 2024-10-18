@@ -17,15 +17,16 @@ public:
     void stripEmptyChildren() override;
     bool isEmpty() const override;
 
+    CompoundTag* getCompound(std::wstring const&);
     bool getBoolean(std::wstring const&);
-    void contains(std::wstring const&);
+    bool contains(std::wstring const&);
     std::wstring getString(std::wstring const&);
     int getInt(std::wstring const&);
     short getShort(std::wstring const&);
     float getFloat(std::wstring const&);
     void getList(std::wstring const&, int);
     void fjSafeGetListTag(std::wstring const&, int);
-    void contains(std::wstring const&, int);
+    bool contains(std::wstring const&, int);
 
     void put(const std::wstring&, Tag*);
     void putBoolean(const std::wstring&, bool);

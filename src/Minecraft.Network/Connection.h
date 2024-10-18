@@ -48,9 +48,9 @@ public:
     ByteArrayOutputStream* mByteArrayOutputStream;
     Socket::SocketOutputStream* mSocketOutputStream;
     bool mIsRunning;
-    nn::os::MutexType mMutexType;
+    nn::os::MutexType mIsRunningMutex;
     std::deque<std::shared_ptr<Packet>> mIncomingQueue;
-    nn::os::MutexType mMutexType2;
+    nn::os::MutexType mIncomingMutex;
     std::deque<std::shared_ptr<Packet>> mOutgoingQueue;
     std::deque<std::shared_ptr<Packet>> mSlowOutgoingQueue;
     PacketListener* mPacketListener;
@@ -70,8 +70,8 @@ public:
     unsigned int field_164;
     int mFakeLag;
     int dword_16C;
-    nn::os::MutexType mMutexType3;
-    nn::os::MutexType mMutexType4;
+    nn::os::MutexType mCountMutex;
+    nn::os::MutexType mOutgoingMutex;
     int mDelay;
     int dword_1b4;
     long mTimeInMs;

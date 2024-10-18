@@ -7,13 +7,13 @@
 #include "Minecraft.Client/CGameNetworkManager.h"
 #include "Minecraft.Client/Compression.h"
 #include "Minecraft.Client/ShutdownManager.h"
+#include "Minecraft.Client/multiplayer/PacketListener.h"
 #include "Minecraft.Core/System.h"
 #include "Minecraft.Core/io/BufferedOutputStream.h"
 #include "Minecraft.Core/io/ByteArrayOutputStream.h"
 #include "Minecraft.Core/io/DataInputStream.h"
 #include "Minecraft.Core/io/DataOutputStream.h"
 #include "Minecraft.Core/io/File.h"
-#include "Minecraft.Network/PacketListener.h"
 #include "Minecraft.Network/PacketType.h"
 #include "Minecraft.Network/Socket.h"
 #include "Minecraft.Network/protocol/game/ClientboundKeepAlivePacket.h"
@@ -23,19 +23,19 @@
 #include "windows.h"
 
 bool Connection::getAndSetRunning(bool running) {
-    nn::os::LockMutex(&mMutexType);
+    nn::os::LockMutex(&mIsRunningMutex);
     bool prevIsRunning = mIsRunning;
     mIsRunning = running;
-    nn::os::UnlockMutex(&mMutexType);
+    nn::os::UnlockMutex(&mIsRunningMutex);
     return prevIsRunning;
 }
 
 void Connection::_init() {
-    InitializeCriticalSection(&mMutexType4);
-    InitializeCriticalSection(&mMutexType3);
-    InitializeCriticalSection(&mMutexType2);
+    InitializeCriticalSection(&mOutgoingMutex);
+    InitializeCriticalSection(&mCountMutex);
+    InitializeCriticalSection(&mIncomingMutex);
     mIsRunning = true;
-    InitializeCriticalSection(&mMutexType);
+    InitializeCriticalSection(&mIsRunningMutex);
     mIsDisconnecting = false;
     field_119 = false;
     byte_148 = false;
@@ -52,16 +52,16 @@ void Connection::_init() {
 Connection::~Connection() {
     mIsRunning = false;
 
-    nn::os::FinalizeMutex(&mMutexType);
+    nn::os::FinalizeMutex(&mIsRunningMutex);
 
     if (mDataInputStream)
         mDataInputStream->close();
     mRunReadThread->WaitForCompletion(0xFFFFFFFF);
     mRunWriteThread->WaitForCompletion(0xFFFFFFFF);
 
-    nn::os::FinalizeMutex(&mMutexType4);
-    nn::os::FinalizeMutex(&mMutexType3);
-    nn::os::FinalizeMutex(&mMutexType2);
+    nn::os::FinalizeMutex(&mOutgoingMutex);
+    nn::os::FinalizeMutex(&mCountMutex);
+    nn::os::FinalizeMutex(&mIncomingMutex);
 
     delete mC4JEventImpl1;
     delete mC4JEventImpl2;
@@ -134,9 +134,9 @@ int Connection::runRead(void* conn) {
     ShutdownManager::HasStarted(ShutdownManager::EThreadId::_8);
     if (connection) {
         Compression::CreateNewThreadStorage();
-        nn::os::LockMutex(&connection->mMutexType3);
+        nn::os::LockMutex(&connection->mCountMutex);
         ++dword_7101786598;
-        nn::os::UnlockMutex(&connection->mMutexType3);
+        nn::os::UnlockMutex(&connection->mCountMutex);
         MemSect(19);
         while (connection->mIsRunning) {
             if (connection->mIsDisconnecting || !ShutdownManager::ShouldRun(ShutdownManager::EThreadId::_8))
@@ -160,9 +160,9 @@ int Connection::runWrite(void* conn) {
     if (connection) {
         Compression::CreateNewThreadStorage();
 
-        nn::os::LockMutex(&connection->mMutexType3);
+        nn::os::LockMutex(&connection->mCountMutex);
         ++dword_710178659C;
-        nn::os::UnlockMutex(&connection->mMutexType3);
+        nn::os::UnlockMutex(&connection->mCountMutex);
 
         if (connection->mIsRunning) {
             int writeStatus;
@@ -187,9 +187,9 @@ int Connection::runWrite(void* conn) {
             }
         }
 
-        nn::os::LockMutex(&connection->mMutexType3);
+        nn::os::LockMutex(&connection->mCountMutex);
         --dword_710178659C;
-        nn::os::UnlockMutex(&connection->mMutexType3);
+        nn::os::UnlockMutex(&connection->mCountMutex);
 
         Compression::ReleaseThreadStorage();
     }
@@ -206,7 +206,7 @@ void Connection::send(std::shared_ptr<Packet> packet) {
     if (!mIsDisconnecting) {
         mTimeInMs = System::processTimeInMilliSecs();
         MemSect(15);
-        nn::os::LockMutex(&mMutexType4);
+        nn::os::LockMutex(&mOutgoingMutex);
         mEstimatedSize += packet->getEstimatedSize() + 1;
         if (packet->mShouldDelay) {
             packet->mShouldDelay = false;
@@ -215,24 +215,24 @@ void Connection::send(std::shared_ptr<Packet> packet) {
             if (packet->getPacketId() == _ClientboundMapItemDataPacket)
                 if (packet->tryReplaceDuplicatePacket(&mOutgoingQueue)) {
                     // TODO: Remove early return
-                    nn::os::UnlockMutex(&mMutexType4);
+                    nn::os::UnlockMutex(&mOutgoingMutex);
                     MemSect(0);
                     return;
                 }
 
             mOutgoingQueue.push_back(packet);
         }
-        nn::os::UnlockMutex(&mMutexType4);
+        nn::os::UnlockMutex(&mOutgoingMutex);
         MemSect(0);
     }
 }
 
 void Connection::queueSend(std::shared_ptr<Packet> packet) {
     if (!mIsDisconnecting) {
-        nn::os::LockMutex(&mMutexType4);
+        nn::os::LockMutex(&mOutgoingMutex);
         mEstimatedSize += packet->getEstimatedSize() + 1;
         mSlowOutgoingQueue.push_back(packet);
-        nn::os::UnlockMutex(&mMutexType4);
+        nn::os::UnlockMutex(&mOutgoingMutex);
     }
 }
 
@@ -243,12 +243,12 @@ bool Connection::writeTick() {
 
     bool returnValue;
     if (!mOutgoingQueue.empty() && (!mFakeLag || (System::processTimeInMilliSecs() - mOutgoingQueue.front()->mCreatedTime >= mFakeLag))) {
-        nn::os::LockMutex(&mMutexType4);
+        nn::os::LockMutex(&mOutgoingMutex);
         std::shared_ptr<Packet> packet = mOutgoingQueue.front();
         mOutgoingQueue.pop_front();
 
         mEstimatedSize += ~packet->getEstimatedSize();
-        nn::os::UnlockMutex(&mMutexType4);
+        nn::os::UnlockMutex(&mOutgoingMutex);
 
         Packet::writePacket(packet, mDataOutputStream, mPacketListener->isServerPacketListener(), field_164);
 
@@ -263,12 +263,12 @@ bool Connection::writeTick() {
         return returnValue;
     }
 
-    nn::os::LockMutex(&mMutexType4);
+    nn::os::LockMutex(&mOutgoingMutex);
     std::shared_ptr<Packet> packet = mSlowOutgoingQueue.front();
     mSlowOutgoingQueue.pop_front();
 
     mEstimatedSize += ~packet->getEstimatedSize();
-    nn::os::UnlockMutex(&mMutexType4);
+    nn::os::UnlockMutex(&mOutgoingMutex);
 
     if (packet->mShouldDelay) {
         Packet::writePacket(packet, mDataOutputStream2, mPacketListener->isServerPacketListener(), field_164);
@@ -297,10 +297,10 @@ bool Connection::readTick() {
         std::shared_ptr<Packet> packet = Packet::readPacket(mDataInputStream, mPacketListener->isServerPacketListener(), field_160, field_119);
         if (packet) {
             dword_71017865A0[packet->getPacketId()] += packet->getEstimatedSize() + 1;
-            nn::os::LockMutex(&mMutexType2);
+            nn::os::LockMutex(&mIncomingMutex);
             if (!mIsDisconnecting)
                 mIncomingQueue.push_back(packet);
-            nn::os::UnlockMutex(&mMutexType2);
+            nn::os::UnlockMutex(&mIncomingMutex);
             return true;
         }
         return false;
@@ -349,9 +349,9 @@ void Connection::tick() {
         close(DisconnectPacket::eDisconnectReason::_29);
     if (mEstimatedSize > 0x100000)  // 1MB
         close(DisconnectPacket::eDisconnectReason::Overflow);
-    nn::os::LockMutex(&mMutexType2);
+    nn::os::LockMutex(&mIncomingMutex);
     long test = (reinterpret_cast<long*>(&mIncomingQueue)[5]);
-    nn::os::UnlockMutex(&mMutexType2);
+    nn::os::UnlockMutex(&mIncomingMutex);
     if (test)
         field_158 = 0;
     else {
@@ -368,7 +368,7 @@ void Connection::tick() {
             send(std::shared_ptr<Packet>(packet));
         }
     }
-    nn::os::LockMutex(&mMutexType2);
+    nn::os::LockMutex(&mIncomingMutex);
     std::deque<std::shared_ptr<Packet>> queue;
     int maxIterations = 1000;
     CGameNetworkManager* inst = CGameNetworkManager::sInstance;
@@ -397,7 +397,7 @@ void Connection::tick() {
         }
         mIncomingQueue.pop_front();
     }
-    nn::os::UnlockMutex(&mMutexType2);
+    nn::os::UnlockMutex(&mIncomingMutex);
 
     for (auto it = queue.begin(); it != queue.end(); ++it) {
         std::shared_ptr<Packet> packet = *it;
@@ -411,9 +411,9 @@ void Connection::tick() {
     if (mSocket && mSocket->sub_71000EA668())
         close(DisconnectPacket::eDisconnectReason::Closed);
     if (byte_148) {
-        nn::os::LockMutex(&mMutexType2);
+        nn::os::LockMutex(&mIncomingMutex);
         long test = (reinterpret_cast<long*>(&mIncomingQueue)[5]);
-        nn::os::UnlockMutex(&mMutexType2);
+        nn::os::UnlockMutex(&mIncomingMutex);
         if (!test)
             mPacketListener->onDisconnect((DisconnectPacket::eDisconnectReason)dword_14c, qword_150);
         byte_148 = false;

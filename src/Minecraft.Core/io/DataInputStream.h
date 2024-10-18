@@ -15,7 +15,7 @@ public:
     virtual void read(arrayWithLength<unsigned char>, unsigned int, unsigned int);
     virtual void close();
     virtual void skip(long long);
-    virtual void readBoolean();
+    virtual bool readBoolean();
     virtual unsigned char readByte();
     virtual void readUnsignedByte();
     virtual void readUnsignedShort();

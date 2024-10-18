@@ -38,32 +38,32 @@ bool GameType::isBlockPlacingRestricted() const {
 // NON_MATCHING: aaaaahahahaha this is so fucked
 void GameType::updatePlayerAbilities(Abilities* abilities) const {
     if (CREATIVE == this) {
-        abilities->isEnableFly = true;
-        abilities->isInstabuild = true;
-        abilities->isInvulnerable = true;
+        abilities->mIsEnableFly = true;
+        abilities->mIsInstabuild = true;
+        abilities->mIsInvulnerable = true;
     } else {
         bool test;
         if (SPECTATOR == this) {
             test = true;
-            abilities->isEnableFly = true;
-            abilities->isInstabuild = false;
-            abilities->isInvulnerable = true;
+            abilities->mIsEnableFly = true;
+            abilities->mIsInstabuild = false;
+            abilities->mIsInvulnerable = true;
         } else {
             GameType* lobbyType = LOBBY;
-            abilities->isEnableFly = false;
-            abilities->isInstabuild = false;
+            abilities->mIsEnableFly = false;
+            abilities->mIsInstabuild = false;
             if (lobbyType == this) {
                 test = false;
-                abilities->isInvulnerable = true;
+                abilities->mIsInvulnerable = true;
             } else {
                 test = false;
-                abilities->isFlying = false;
-                abilities->isInvulnerable = false;
+                abilities->mIsFlying = false;
+                abilities->mIsInvulnerable = false;
             }
-            abilities->isFlying = test;
+            abilities->mIsFlying = test;
         }
     }
-    abilities->isEnableBuild = !this->isBlockPlacingRestricted();
+    abilities->mIsEnableBuild = !this->isBlockPlacingRestricted();
 }
 
 bool GameType::isCreative() const {

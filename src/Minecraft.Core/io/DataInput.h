@@ -5,7 +5,7 @@
 class DataInput {
 public:
     virtual ~DataInput();
-    virtual void readBoolean() = 0;
+    virtual bool readBoolean() = 0;
     virtual unsigned char readByte() = 0;
     virtual void readUnsignedByte() = 0;
     virtual void readUnsignedShort() = 0;

@@ -11,18 +11,18 @@ public:
 
     void addSaveData(CompoundTag* compoundTag);
     void loadSaveData(CompoundTag* compoundTag);
-    void getFlyingSpeed();
+    float getFlyingSpeed();
     void setFlyingSpeed(float flyingSpeed);
-    void getWalkingSpeed();
+    float getWalkingSpeed();
     void setWalkingSpeed(float walkingSpeed);
     void write(DataOutputStream* dataOutputStream);
     void read(DataInputStream* dataInputStream);
 
-    bool isInvulnerable = false;
-    bool isFlying = false;
-    bool isEnableFly = false;
-    bool isInstabuild = false;
-    bool isEnableBuild = true;
-    float flySpeed = 0.05f;
-    float walkSpeed = 0.1f;
+    bool mIsInvulnerable = false;
+    bool mIsFlying = false;
+    bool mIsEnableFly = false;
+    bool mIsInstabuild = false;
+    bool mIsEnableBuild = true;
+    float mFlySpeed = 0.05f;
+    float mWalkSpeed = 0.1f;
 };
