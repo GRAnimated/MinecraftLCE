@@ -66,7 +66,7 @@ void ClientboundPlayerAbilitiesPacket::write(DataOutputStream* output) {
 }
 
 void ClientboundPlayerAbilitiesPacket::handle(PacketListener* listener) {
-    listener->handlePlayerAbilities(this->shared_from_this());
+    listener->handlePlayerAbilities(shared_from_this());
 }
 
 int ClientboundPlayerAbilitiesPacket::getEstimatedSize() {

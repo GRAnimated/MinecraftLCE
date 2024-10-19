@@ -27,7 +27,7 @@ void ServerboundSetCarriedItemPacket::write(DataOutputStream* output) {
 }
 
 void ServerboundSetCarriedItemPacket::handle(PacketListener* listener) {
-    listener->handleSetCarriedItem(this->shared_from_this());
+    listener->handleSetCarriedItem(shared_from_this());
 }
 
 int ServerboundSetCarriedItemPacket::getCarriedItem() {

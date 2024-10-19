@@ -14,7 +14,7 @@ bool ClayFeature::place(Level* level, Random& random, const BlockPos& pos) {
         return false;
     }
 
-    int radius = random.nextInt(this->field_18 - 2) + 2;
+    int radius = random.nextInt(field_18 - 2) + 2;
     for (int x = pos.getX() - radius; x <= pos.getX() + radius; ++x) {
         for (int z = pos.getZ() - radius; z <= pos.getZ() + radius; ++z) {
             int deltaX = x - pos.getX();

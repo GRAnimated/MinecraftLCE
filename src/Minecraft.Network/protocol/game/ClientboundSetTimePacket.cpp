@@ -33,7 +33,7 @@ void ClientboundSetTimePacket::write(DataOutputStream* output) {
 }
 
 void ClientboundSetTimePacket::handle(PacketListener* listener) {
-    listener->handleSetTime(this->shared_from_this());
+    listener->handleSetTime(shared_from_this());
 }
 
 long long ClientboundSetTimePacket::getGameTime() {

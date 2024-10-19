@@ -33,7 +33,7 @@ void ClientboundSetSpawnPositionPacket::write(DataOutputStream* output) {
 }
 
 void ClientboundSetSpawnPositionPacket::handle(PacketListener* listener) {
-    listener->handleSetSpawn(this->shared_from_this());
+    listener->handleSetSpawn(shared_from_this());
 }
 
 int ClientboundSetSpawnPositionPacket::getEstimatedSize() {

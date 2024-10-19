@@ -13,7 +13,7 @@ ClientboundKeepAlivePacket::ClientboundKeepAlivePacket() : Packet() {
 }
 
 void ClientboundKeepAlivePacket::handle(PacketListener* listener) {
-    listener->handleKeepAlive(this->shared_from_this());
+    listener->handleKeepAlive(shared_from_this());
 }
 
 void ClientboundKeepAlivePacket::read(DataInputStream* input) {

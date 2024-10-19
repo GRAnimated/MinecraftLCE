@@ -15,8 +15,8 @@ GameType::GameType(int id, const std::wstring& label, const std::wstring& slider
     mId = id;
     mLabel = label;
     mSliderLabel = sliderLabel;
-    this->field_38 = field_38;
-    this->field_3C = field_3C;
+    field_38 = field_38;
+    field_3C = field_3C;
 }
 
 int GameType::getId() const {
@@ -63,7 +63,7 @@ void GameType::updatePlayerAbilities(Abilities* abilities) const {
             abilities->mIsFlying = test;
         }
     }
-    abilities->mIsEnableBuild = !this->isBlockPlacingRestricted();
+    abilities->mIsEnableBuild = !isBlockPlacingRestricted();
 }
 
 bool GameType::isCreative() const {

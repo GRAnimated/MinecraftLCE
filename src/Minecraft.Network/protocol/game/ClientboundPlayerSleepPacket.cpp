@@ -34,7 +34,7 @@ void ClientboundPlayerSleepPacket::write(DataOutputStream* output) {
 }
 
 void ClientboundPlayerSleepPacket::handle(PacketListener* listener) {
-    listener->handleEntityActionAtPosition(this->shared_from_this());
+    listener->handleEntityActionAtPosition(shared_from_this());
 }
 
 int ClientboundPlayerSleepPacket::getPlayerId() {

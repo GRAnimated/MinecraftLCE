@@ -13,7 +13,7 @@ DisconnectPacket::DisconnectPacket() : Packet() {
 }
 
 void DisconnectPacket::handle(PacketListener* listener) {
-    listener->handleDisconnect(this->shared_from_this());
+    listener->handleDisconnect(shared_from_this());
 }
 
 void DisconnectPacket::read(DataInputStream* input) {

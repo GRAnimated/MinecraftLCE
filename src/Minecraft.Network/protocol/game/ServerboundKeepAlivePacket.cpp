@@ -13,7 +13,7 @@ ServerboundKeepAlivePacket::ServerboundKeepAlivePacket() : Packet() {
 }
 
 void ServerboundKeepAlivePacket::handle(PacketListener* listener) {
-    listener->handleKeepAlive(this->shared_from_this());
+    listener->handleKeepAlive(shared_from_this());
 }
 
 void ServerboundKeepAlivePacket::read(DataInputStream* input) {

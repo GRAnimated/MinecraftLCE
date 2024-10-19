@@ -30,7 +30,7 @@ void ServerboundSwingPacket::write(DataOutputStream* output) {
 }
 
 void ServerboundSwingPacket::handle(PacketListener* listener) {
-    listener->handleAnimate(this->shared_from_this());
+    listener->handleAnimate(shared_from_this());
 }
 
 InteractionHand::EInteractionHand ServerboundSwingPacket::getHand() {

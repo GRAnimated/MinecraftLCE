@@ -23,7 +23,7 @@ void ServerboundUseItemPacket::write(DataOutputStream* output) {
 }
 
 void ServerboundUseItemPacket::handle(PacketListener* listener) {
-    listener->handleUseItem(this->shared_from_this());
+    listener->handleUseItem(shared_from_this());
 }
 
 int ServerboundUseItemPacket::getEstimatedSize() {

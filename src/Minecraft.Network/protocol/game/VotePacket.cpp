@@ -29,7 +29,7 @@ void VotePacket::write(DataOutputStream* output) {
 }
 
 void VotePacket::handle(PacketListener* listener) {
-    listener->handleVote(this->shared_from_this());
+    listener->handleVote(shared_from_this());
 }
 
 int VotePacket::getEstimatedSize() {

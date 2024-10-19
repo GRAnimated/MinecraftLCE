@@ -29,7 +29,7 @@ void XZPacket::write(DataOutputStream* output) {
 }
 
 void XZPacket::handle(PacketListener* listener) {
-    listener->handleXZ(this->shared_from_this());
+    listener->handleXZ(shared_from_this());
 }
 
 int XZPacket::getEstimatedSize() {
