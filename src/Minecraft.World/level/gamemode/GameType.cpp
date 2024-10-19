@@ -11,12 +11,12 @@ void GameType::staticCtor() {
     LOBBY = new GameType(4, L"lobby", L"l", -1, -1);
 }
 
-GameType::GameType(int id, const std::wstring& label, const std::wstring& sliderLabel, int field_38, int field_3C) {
+GameType::GameType(int id, const std::wstring& label, const std::wstring& sliderLabel, int a5, int a6) {
     mId = id;
     mLabel = label;
     mSliderLabel = sliderLabel;
-    field_38 = field_38;
-    field_3C = field_3C;
+    field_38 = a5;
+    field_3C = a6;
 }
 
 int GameType::getId() const {
