@@ -5,6 +5,7 @@
 #include "Minecraft.Network/protocol/game/ClientboundSetSpawnPositionPacket.h"
 #include "Minecraft.Network/protocol/game/ClientboundSetTimePacket.h"
 #include "Minecraft.Network/protocol/game/DisconnectPacket.h"
+#include "Minecraft.Network/protocol/game/GetInfoPacket.h"
 #include "Minecraft.Network/protocol/game/ServerboundKeepAlivePacket.h"
 #include "Minecraft.Network/protocol/game/ServerboundPlayerActionPacket.h"
 #include "Minecraft.Network/protocol/game/ServerboundSetCarriedItemPacket.h"
@@ -12,7 +13,7 @@
 #include "Minecraft.Network/protocol/game/XZPacket.h"
 
 // HANDLE_IMPL(AcceptedLogin, ClientboundLoginPacket)
-// HANDLE_IMPL(GetInfo, GetInfoPacket)
+HANDLE_IMPL(GetInfo, GetInfoPacket)
 // HANDLE_IMPL(AddEntity, ClientboundAddEntityPacket)
 // HANDLE_IMPL(AddExperienceOrb, ClientboundAddExperienceOrbPacket)
 // HANDLE_IMPL(AddGlobalEntity, ClientboundAddGlobalEntityPacket)
