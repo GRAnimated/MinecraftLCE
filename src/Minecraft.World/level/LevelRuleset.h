@@ -4,5 +4,5 @@
 
 class LevelRuleset{
 public:
-    void getNamedAreas(int, std::vector<AABB>*);
+    void getNamedAreas(int type, std::vector<AABB>* vector);
 };
