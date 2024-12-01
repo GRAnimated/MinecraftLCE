@@ -46,6 +46,8 @@ public:
     void registerDefaultState(const BlockState* blockState);
     static const BlockState* getStateByIdAndData(int, unsigned char);
 
+    static void registerBlock(int id, std::wstring const& name, Block* block);
+
     void init(Material* material, const MaterialColor* materialColor);
 
     virtual bool isTopSolidBlocking(const BlockState* blockState);
@@ -181,6 +183,8 @@ public:
     virtual bool isLiquidBlock();
 
     Material* getMaterial();
+    int getId();
+    static Block* byId(int id);
 
     int field_8;
     bool field_C;
