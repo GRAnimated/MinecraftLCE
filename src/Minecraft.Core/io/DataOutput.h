@@ -9,8 +9,8 @@ public:
     DataOutput();
 
     virtual ~DataOutput();
-    virtual void close();
-    virtual void flush();
+    virtual void close() = 0;
+    virtual void flush() = 0;
     virtual void writeBytes(arrayWithLength<unsigned char>) = 0;
     virtual void writeByte(unsigned char) = 0;
     virtual void writeDouble(double) = 0;

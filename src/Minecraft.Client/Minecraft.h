@@ -1,5 +1,6 @@
 #pragma once
 
+#include <memory>
 #include <string>
 
 class DataFixerUpper;
@@ -9,6 +10,7 @@ class LocalPlayer;
 class ParticleEngine;
 class ProgressRenderer;
 class GameRenderer;
+class Entity;
 class EntityRenderDispatcher;
 class ItemInHandRenderer;
 class BlockColors;
@@ -28,6 +30,7 @@ class ClientMasterGameMode;
 class GhostController;
 class Textures;
 class Font;
+class Screen;
 
 class Minecraft {
 public:
@@ -40,6 +43,10 @@ public:
     static inline void currentTimeMillis();
     static void start(const std::wstring& str1, const std::wstring& str2);
     static void startAndConnectTo(const std::wstring& arg1, const std::wstring& arg2, const std::wstring& arg3);
+
+    void setScreen(Screen*);
+
+    std::shared_ptr<Entity> getCameraEntity();
 
     DataFixerUpper* mFixerUpper;
     MultiPlayerGameMode* mMultiPlayerGameMode;

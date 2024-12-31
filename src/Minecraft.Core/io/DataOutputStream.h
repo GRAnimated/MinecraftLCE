@@ -34,5 +34,5 @@ public:
     void writeBlockPos(const BlockPos&) const;
 
     OutputStream* mOutputStream;
-    int dword_18;
+    unsigned int mSize;
 };

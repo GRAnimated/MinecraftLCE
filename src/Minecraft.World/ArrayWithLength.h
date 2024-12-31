@@ -6,16 +6,26 @@ template <typename T>
 class arrayWithLength {
 public:
     arrayWithLength() {}
+    //~arrayWithLength() { delete data; }
     arrayWithLength(std::vector<T> initialData, int length);
     arrayWithLength(T* initialData, int length);
     arrayWithLength(int size, bool a2);
 
-    // NON_MATCHING
-    T& get(unsigned int index) { return (*data)[index]; }
+    //// NON_MATCHING
+    // T& get(unsigned int index) { return (*data)[index]; }
+    //
+    // T& operator[](unsigned int index) { return get(index); }
+    //
+    // explicit operator bool() const { return !data->empty(); }
 
-    explicit operator bool() const { return !data->empty(); }
+    T& get(unsigned int index) { return static_cast<T*>(data)[index]; }
 
-    std::vector<T>* data = nullptr;
+    T& operator[](unsigned int index) { return get(index); }
+
+    // explicit operator bool() const { return !data->empty(); }
+
+    // std::vector<T>* data = nullptr;
+    void* data = nullptr;
     unsigned int length = 0;
 };
 

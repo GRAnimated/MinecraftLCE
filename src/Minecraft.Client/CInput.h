@@ -64,6 +64,8 @@ public:
 
 class CInput : public C_4JInput {
 public:
+    static CInput* sInstance;
+
     void Initialise(int, uchar, uchar);
     void Tick(void);
     void SetDeadzoneAndMovementRange(uint, uint, uint);

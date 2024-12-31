@@ -1,7 +1,7 @@
 #pragma once
 
 class Item {
-    public:
+public:
     int getId();
     bool canBeDepleted();
 };
