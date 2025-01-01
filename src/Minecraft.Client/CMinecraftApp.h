@@ -1,4 +1,5 @@
 #pragma once
+#include "Minecraft.World/level/levelgen/LevelGenerationOptions.h"
 
 enum eTMSAction {};
 enum eFileExtensionType {};
@@ -31,6 +32,7 @@ public:
     virtual void GetFileFromTPD(eTPDFileType, unsigned char*, unsigned int, unsigned char**, unsigned int*);
 
     void processSchematics(LevelChunk*);
+    LevelGenerationOptions* getLevelGenerationOptions();
 };
 
 class CConsoleMinecraftApp : public CMinecraftApp {
