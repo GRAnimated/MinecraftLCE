@@ -6,8 +6,8 @@ const ItemPropertyFunction* lefthandedFunction = nullptr;
 const ItemPropertyFunction* cooldownFunction = nullptr;
 
 Item::Item() {
-    // Those probably should be moved to Item header but idk
-        this->maxStackSize = 64; // this derefing and one below is needeed to match and to initalize shit after it
+    // Some of those should probably be moved to header def but idk which ones
+        this->maxStackSize = 64;
         this->maxDamage = 0;
         this->handEquipped = false;
         this->somebool = 0;
