@@ -1,7 +1,9 @@
 #pragma once
 #include <cstdint>
 #include <memory>
+#include <string>
 #include "Minecraft.World/InteractionHand.h"
+#include "Minecraft.World/SimpleRegistry.h"
 
 class ResourceLocation;
 class ItemPropertyFunction;
@@ -30,11 +32,11 @@ class Item {
     virtual void getDefaultInstance(const std::shared_ptr<ItemInstance>&);
     virtual void verifyTagAfterLoad(CompoundTag*);
     virtual int GetUseTooltip(const ItemToolTipDataHolder&);
-    virtual ~Item();;
+    virtual ~Item();
     virtual int useOn(const std::shared_ptr<Player>&, Level*, const BlockPos&, InteractionHand::EInteractionHand, uint32_t, float, float, float, bool);
     virtual float getDestroySpeed(const std::shared_ptr<ItemInstance>&, BlockState*);
     virtual void TestUse(Level*, const std::shared_ptr<Player>&, InteractionHand::EInteractionHand);
-    virtual uintptr_t use(uintptr_t unk, Level*, const std::shared_ptr<Player>&, InteractionHand::EInteractionHand);
+    virtual uintptr_t use(uintptr_t unk, Level*, const std::shared_ptr<Player>&, InteractionHand::EInteractionHand); // for whatever reason I can't decide if that's correct and what does it return
     virtual void finishUsingItem(const std::shared_ptr<ItemInstance>&, Level*, const std::shared_ptr<LivingEntity>&);
     virtual void getMaxStackSize();
     virtual void getLevelDataForAuxValue(int);
@@ -77,20 +79,19 @@ class Item {
     virtual void GetOverrideCountColour();
     virtual void GetOverrideCountIcon(const std::shared_ptr<ItemInstance>&);
 
-    char gap8[8];
-    uintptr_t qword10;
-    uintptr_t qword18;
-    uintptr_t qword20;
-    uintptr_t qword28;
-    uint16_t word30;
-    char gap32[6];
-    uintptr_t qword38;
-    uintptr_t qword40;
-    uintptr_t qword48;
-    uintptr_t qword50;
-    char gap58[8];
-    uintptr_t qword60;
-    uintptr_t qword68;
-    uintptr_t qword70;
+    void* qword8;
+    SimpleRegistry<ResourceLocation, const ItemPropertyFunction*>* simpleRegistry;
+    int maxStackSize;
+    int maxDamage;
+    uintptr_t icon;
+    int baseItemType;
+    int material;
+    bool handEquipped;
+    char gap32[7];
+    void* craftingRemainingItem;
+    std::wstring wstring_1;
+    int descriptionId;
+    int useDescriptionId;
+    std::wstring iconName;
     char byte78;
 };
