@@ -4,6 +4,7 @@
 #include <string>
 #include <vector>
 #include "types.h"
+#include "Minecraft.World/InteractionHand.h"
 
 typedef unsigned char uchar;
 
@@ -18,10 +19,6 @@ class Entity;
 class Explosion;
 class HtmlString;
 class IconRegister;
-class InteractionHand {
-public:
-    enum EInteractionHand {};
-};
 class ItemInstance;
 class Level;
 class LevelSource;

@@ -5,4 +5,5 @@
 class LevelRuleset{
 public:
     void getNamedAreas(int type, std::vector<AABB>* vector);
+    void getActiveChunkAreas(std::vector<AABB>* vector);
 };

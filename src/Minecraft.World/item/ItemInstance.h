@@ -1,6 +1,7 @@
 #pragma once
 
 #include "types.h"
+#include "Minecraft.World/InteractionHand.h"
 
 #include <memory>
 #include <string>
@@ -20,10 +21,6 @@ class LivingEntity;
 class Player;
 class Random;
 class Tag;
-
-namespace InteractionHand {
-enum EInteractionHand {};
-}
 
 class ItemInstance {
 public:
