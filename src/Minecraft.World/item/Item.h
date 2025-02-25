@@ -83,15 +83,16 @@ class Item {
     SimpleRegistry<ResourceLocation, const ItemPropertyFunction*>* simpleRegistry;
     int maxStackSize;
     int maxDamage;
-    uintptr_t icon;
+    void* icon; // I assume it's pointer to something, idk what though
     int baseItemType;
     int material;
     bool handEquipped;
-    char gap32[7];
+    bool somebool;
+    char gap32[6];
     void* craftingRemainingItem;
     std::wstring wstring_1;
     int descriptionId;
     int useDescriptionId;
     std::wstring iconName;
-    char byte78;
+    char byte78; // probably bool but idk
 };
