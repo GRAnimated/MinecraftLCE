@@ -89,7 +89,7 @@ class Item {
     int baseItemType;
     int material;
     bool handEquipped;
-    bool someCheck;
+    bool stackedByData;
     char gap32[6];
     void* craftingRemainingItem;
     std::wstring wstring_1;

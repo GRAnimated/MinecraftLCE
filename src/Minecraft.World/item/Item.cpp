@@ -8,12 +8,12 @@
 const ItemPropertyFunction* lefthandedFunction = nullptr;
 const ItemPropertyFunction* cooldownFunction = nullptr;
 
-Item::Item() {
+Item::Item(){
     // Some of those should probably be moved to header def but idk which ones
         this->maxStackSize = 64;
         this->maxDamage = 0;
         this->handEquipped = false;
-        this->someCheck = 0;
+        this->stackedByData = 0;
         this->craftingRemainingItem = nullptr;
         this->wstring_1 = L"";
         this->baseItemType = 0;
@@ -31,11 +31,7 @@ Item::Item() {
 }
 
 bool Item::canBeDepleted(){
-    if ( this->maxDamage < 1 )
-        return false;
-     if ( this->someCheck )
-        return this->maxStackSize == 1;
-    return true;
+    return this->maxDamage > 0 && (!this->stackedByData || this->maxStackSize == 1);
 }
 
 bool Item::verifyTagAfterLoad(CompoundTag*){
@@ -148,10 +144,7 @@ bool Item::isFoil(not_null_ptr<ItemInstance> itemInstance){
 }
 
 bool Item::isEnchantable(const std::shared_ptr<ItemInstance>& a1){
-    if ( this->getMaxStackSize() == 1 )
-        return this->canBeDepleted();
-    else
-        return false;
+    return this->getMaxStackSize() == 1 && this->canBeDepleted();
 }
 
 int Item::getEnchantmentValue(){
