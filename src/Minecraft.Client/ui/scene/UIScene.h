@@ -3,12 +3,9 @@
 #include <string>
 #include <unordered_map>
 #include <vector>
+#include "Minecraft.Client/renderer/C4JRender.h"
 
-class C4JRender {
-public:
-    enum eViewportType {};
-};
-class EUIMessage;
+enum EUIMessage{};
 class fuiFile;
 class fuiRect;
 class UILayer;
@@ -22,33 +19,37 @@ public:
 
     UIScene(int, UILayer*);
 
+    void setSafeZone(double, double, double, double);
+    void tickTimers();
+    //void handleFocusChange(int, int);
+
     virtual void reloadMovie(bool);
-    virtual void needsReloaded();
-    virtual void hasMovie();
+    virtual bool needsReloaded();
+    virtual bool hasMovie();
     virtual void updateSafeZone();
     virtual void updateViewportTouchOffset();
-    virtual void getSafeZoneHalfHeight();
-    virtual void getSafeZoneHalfWidth();
+    virtual double getSafeZoneHalfHeight();
+    virtual double getSafeZoneHalfWidth();
     virtual void getMoviePath() = 0;
-    virtual void mapElementsAndNames();
+    virtual bool mapElementsAndNames();
     virtual ~UIScene();
     virtual void getSceneType() = 0;
-    virtual void getSubSceneType() const;
+    virtual int getSubSceneType() const;
     virtual void tick();
     virtual void SetFocusToElement(int);
     virtual void handleTimerComplete(int);
-    virtual void stealsFocus();
-    virtual void hasFocus(int);
+    virtual bool stealsFocus();
+    virtual bool hasFocus(int);
     virtual void updateTooltips();
     virtual void updateComponents();
     virtual void handleGainFocus(bool);
     virtual void handleLoseFocus();
-    virtual void hidesLowerScenes();
-    virtual void blocksInput();
-    virtual void GetMainPanel();
+    virtual bool hidesLowerScenes();
+    virtual bool blocksInput();
+    virtual void* GetMainPanel();
     virtual void render(int, int, C4JRender::eViewportType);
     virtual void customDraw(char const*, fuiRect*);
-    virtual void allowRepeat(int);
+    virtual bool allowRepeat(int);
     virtual void handleInput(int, int, bool, bool, bool, bool const);
     virtual void handleDestroy();
     virtual void handlePreUnloadForReload();
