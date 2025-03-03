@@ -9,6 +9,7 @@ enum EUIMessage{};
 class fuiFile;
 class fuiRect;
 class UILayer;
+class UIControl;
 
 class UIScene {
 public:
@@ -100,7 +101,7 @@ private:
     int mStageHeight;
     int mStageWidth2;
     int mStageHeight2;
-    std::vector<UIScene::_CachedSlotDrawData*> mCachedSlotDrawData;
+    std::vector<UIControl*> mUIControls;
     UILayer* mUILayer;
     bool mFocusRelated;
     int mPadID;
@@ -109,5 +110,5 @@ private:
     bool byte_ea;
     bool byte_eb;
     int dwordF8;
-    std::wstring wstring_100;
+    std::vector<UIScene::_CachedSlotDrawData*> mCachedSlotDrawData;
 };

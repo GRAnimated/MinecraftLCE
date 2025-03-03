@@ -1,6 +1,7 @@
 #include "Minecraft.Client/ui/scene/UIScene.h"
 #include "Minecraft.Client/ui/ConsoleUIController.h"
 #include "Minecraft.Client/ui/scene/UILayer.h"
+#include "Minecraft.Client/ui/control/UIControl.h"
 #include <string>
 
 // It's matching but... some of those variable inits should be moved to header
@@ -101,16 +102,17 @@ int UIScene::getSubSceneType() const{
     return 0;
 }
 
-// NON-MATCHING: needs adding VTable call for every cachedSlotDrawData but that requires dumping VTable to know what class is that
+// NON-MATCHING: may be wrong but I think it's beacuse for loop generating wrongly
 void UIScene::tick(){
     if(!this->mHidden){
         if(this->mHideLowerScenes)
             this->byte_96 = 1;
+
         this->tickTimers();
-        for(UIScene::_CachedSlotDrawData* cachedSlotDrawData : this->mCachedSlotDrawData){
-            //can't dump VTable for this as of now
-            //cachedSlotDrawData->
-        }
+
+        for(UIControl* uiControl : this->mUIControls)
+            uiControl->tick();
+        
         this->mHideLowerScenes = true;
     }
 }

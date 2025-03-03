@@ -18,17 +18,21 @@ public:
     virtual void preRender() = 0;
     virtual void render(fuiRect*, fuiMatrix*) = 0;
     virtual void handleAddedToStage();
-    virtual void findNode(char const*);
-    virtual void getNodeFromPath(char const*);
+    virtual fuiRenderNode* findNode(char const*);
+    virtual fuiRenderNode* getNodeFromPath(char const*);
     virtual void setVisibility(bool);
     virtual void setX(float);
     virtual void setY(float);
     virtual void setWidth(float);
     virtual void setHeight(float);
-    virtual void getWidth();
-    virtual void getHeight();
+    virtual float getWidth();
+    virtual float getHeight();
     virtual void getParentSpaceBounds(fuiRect*);
     virtual void generateGlobalMatrix();
+
+    float getX();
+    float getY();
+    void setAlpha(float);
 
     fuiRenderNode* getStage() { return mStage; }
 

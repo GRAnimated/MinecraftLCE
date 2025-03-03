@@ -20,6 +20,7 @@ public:
     void getResolution();
     void tick();
     void preRender(fuiFile*);
+    void render(fuiFile *,float,float,float,float);
     void dispatchKeyboardEvent(fuiFile*, bool, int);
     void dispatchMouseMoveEvent(fuiFile*, float, float);
     void dispatchEnterFrameEvent();
