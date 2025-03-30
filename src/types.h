@@ -1,5 +1,6 @@
 #pragma once
 
+#include <cstdint>
 #include <memory>
 #include "nn/types.h"
 
@@ -14,6 +15,7 @@ class not_null_ptr : public std::shared_ptr<T> {};
 
 typedef unsigned char uchar;
 typedef unsigned int uint;
+typedef uint8_t byte;
 
 class Entity;
 typedef std::shared_ptr<Entity> SharedEntity;

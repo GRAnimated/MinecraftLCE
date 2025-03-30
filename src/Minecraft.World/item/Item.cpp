@@ -2,9 +2,13 @@
 #include <memory>
 #include "Minecraft.Client/resources/ResourceLocation.h"
 #include "Minecraft.World/item/ItemInstance.h"
+#include "Minecraft.World/entity/player/Player.h"
 #include "types.h"
 
+#include "Minecraft.Core/MappedRegistry.h"
+
 // should be replaced with proper ones later on
+// even though those are unused
 const ItemPropertyFunction* lefthandedFunction = nullptr;
 const ItemPropertyFunction* cooldownFunction = nullptr;
 
@@ -22,7 +26,6 @@ Item::Item(){
         this->icon = nullptr;
         this->byte78 = 0;
     //
-
     this->simpleRegistry = new SimpleRegistry<ResourceLocation, const ItemPropertyFunction*>();
 
     this->addProperty(ResourceLocation(L"lefthanded"), lefthandedFunction);
@@ -54,9 +57,12 @@ bool Item::TestUse(Level*, const std::shared_ptr<Player>&, InteractionHand::EInt
     return false;
 }
 
-// NON-MATCHING: because of not correct function call as it expects to call not_null_ptr<ItemInstance>::not_null_ptr(not_null_ptr<ItemInstance>&&), needs fixing args
-not_null_ptr<ItemInstance> Item::finishUsingItem(not_null_ptr<ItemInstance> a2, Level*, const std::shared_ptr<LivingEntity>&){
-    return not_null_ptr<ItemInstance>(a2);
+InteractionResultHolder Item::use(Level*, const std::shared_ptr<Player>& player, InteractionHand::EInteractionHand hand){
+    return InteractionResultHolder(InteractionResult::PASS, player->getItemInHand(hand));
+}
+
+not_null_ptr<ItemInstance> Item::finishUsingItem(not_null_ptr<ItemInstance> item, Level*, const std::shared_ptr<LivingEntity>&){
+    return item;
 }
 
 int Item::getMaxStackSize(){

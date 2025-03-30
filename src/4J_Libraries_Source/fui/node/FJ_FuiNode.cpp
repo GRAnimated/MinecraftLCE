@@ -4,9 +4,9 @@
 #include "4J_Libraries_Source/fui/fuiRenderNode.h"
 #include "4J_Libraries_Source/fui/node/FJ_FuiNodeStage.h"
 
-// NON_MATCHING
-FJ_FuiNode::FJ_FuiNode(fuiRenderNode* renderNode) : mRenderNode(renderNode) {
+FJ_FuiNode::FJ_FuiNode(fuiRenderNode* renderNode) {
     mTabIndex = -1;
+    this->mRenderNode = renderNode;
     mCallbackScene = nullptr;
 }
 

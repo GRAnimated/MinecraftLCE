@@ -3,7 +3,8 @@
 #include <memory>
 #include <string>
 #include "Minecraft.World/InteractionHand.h"
-#include "Minecraft.World/SimpleRegistry.h"
+#include "Minecraft.Core/SimpleRegistry.h"
+#include "Minecraft.World/Item/InteractionResultHolder.h"
 #include "types.h"
 
 class ResourceLocation;
@@ -28,17 +29,20 @@ class Item {
     void addProperty(ResourceLocation, ItemPropertyFunction const*);
     int getId();
     bool canBeDepleted();
+
     static Item* byId(int id);
     static void registerBlock(Block* block);
+    static Item* byBlock(Block* block);
+    static Item* byString(const std::wstring& string);
 
-    virtual const std::__shared_weak_count* getDefaultInstance(const std::shared_ptr<ItemInstance>&);
+    virtual const std::shared_ptr<ItemInstance>& getDefaultInstance(const std::shared_ptr<ItemInstance>&);
     virtual bool verifyTagAfterLoad(CompoundTag*);
     virtual int GetUseTooltip(const ItemToolTipDataHolder&);
     virtual ~Item();
     virtual bool useOn(const std::shared_ptr<Player>&, Level*, const BlockPos&, InteractionHand::EInteractionHand, const Direction*, float, float, float, bool);
     virtual float getDestroySpeed(const std::shared_ptr<ItemInstance>&, BlockState*);
     virtual bool TestUse(Level*, const std::shared_ptr<Player>&, InteractionHand::EInteractionHand);
-    virtual void use(uintptr_t unk, Level*, const std::shared_ptr<Player>&, InteractionHand::EInteractionHand); // this def need complete overhaul as it's...
+    virtual InteractionResultHolder use(Level*, const std::shared_ptr<Player>&, InteractionHand::EInteractionHand); // this def need complete overhaul as it's...
     virtual not_null_ptr<ItemInstance> finishUsingItem(not_null_ptr<ItemInstance>, Level*, const std::shared_ptr<LivingEntity>&);
     virtual int getMaxStackSize();
     virtual int getLevelDataForAuxValue(int);

@@ -2,7 +2,9 @@
 
 #include <memory>
 #include <set>
+#include <string>
 #include "Minecraft.World/entity/CommandSender.h"
+#include "Minecraft.World/InteractionHand.h"
 
 #include "types.h"
 
@@ -19,9 +21,6 @@ class Item;
 class CompoundTag;
 class ItemInstance;
 class Direction;
-namespace InteractionHand {
-enum EInteractionHand {};
-}
 class LightningBolt;
 class Team;
 class EntityTooltipDataHolder;
@@ -39,10 +38,10 @@ class Vec3;
 class Entity : public std::enable_shared_from_this<Entity>, public CommandSender {
 public:
     virtual ~Entity();
-    virtual void vtbl_71010534A0_func_12() = 0;
-    virtual void vtbl_71010534A0_func_13();
+    virtual void GetType() = 0;
+    virtual void fjDerivedCtorCalls();
     virtual void kill();
-    virtual void vtbl_71010534A0_func_15() = 0;
+    virtual void defineSynchedData() = 0;
     virtual void resetPos();
     virtual void remove();
     virtual void setDropContainerContent(bool);
@@ -101,8 +100,8 @@ public:
     virtual void save(CompoundTag*);
     virtual void load(CompoundTag*);
     virtual void repositionEntityAfterLoad();
-    virtual void __cxa_pure_virtual_unk1() = 0;
-    virtual void __cxa_pure_virtual_unk2() = 0;
+    virtual void readAdditionalSaveData(CompoundTag *) = 0;
+    virtual void addAdditonalSaveData(CompoundTag *) = 0;
     virtual void readAdditionContructionTag_4(CompoundTag*);
     virtual void getAdditionContructionTag();
     virtual void spawnAtLocation(Item*, int);
@@ -195,7 +194,7 @@ public:
     virtual void isPushedByWater();
     virtual void getViewScale();
     virtual void setViewScale(double);
-    virtual void getDisplayName();
+    virtual std::wstring getDisplayName();
     virtual void setCustomName(std::wstring const&, std::wstring const&, bool);
     virtual void getCustomName();
     virtual void hasCustomName();

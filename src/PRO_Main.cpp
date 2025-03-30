@@ -7,15 +7,27 @@
 #include "nn/nifm.h"
 #include "nn/oe.h"
 #include "nn/os.h"
+#include "nn/os/os_MutexTypes.h"
 #include "nn/time.h"
 
 static nn::oe::PerformanceMode PERFORMANCE_MODE;
 static nn::os::MessageQueueType* MESSAGE_QUEUE;
 static u64* MESSAGE_QUEUE_BUFFER;
+static nn::os::MutexType* MAIN_MUTEX;
+
+void InitializeCriticalSection(nn::os::MutexType* mutex){
+    nn::os::InitializeMutex(mutex, 1LL, 0LL);
+    nn::os::LockMutex(mutex);
+    nn::os::UnlockMutex(mutex);
+}
+
+void sub_7100607FBC(nn::os::MutexType* mutex){
+    InitializeCriticalSection(mutex);
+}
 
 // NON_MATCHING: Incomplete
 extern "C" void nnMain() {
-    // sub_7100607FBC();
+    sub_7100607FBC(MAIN_MUTEX);
     nn::oe::SetPerformanceConfiguration(nn::oe::PerformanceMode_Normal, 0x20004);
     PERFORMANCE_MODE = nn::oe::GetPerformanceMode();
     nn::oe::SetPerformanceModeChangedNotificationEnabled(true);
@@ -34,6 +46,7 @@ extern "C" void nnMain() {
 
     // v9 = InitializeCriticalSection(&stru_71017C1830);
     // sub_71007E0F98(v9);
+    
 
     Compression::CreateNewThreadStorage();
     Renderer::sInstance->Initialise();

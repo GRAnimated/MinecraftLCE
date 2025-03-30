@@ -1,6 +1,8 @@
 #pragma once
 
 #include "Minecraft.Nbt/Tag.h"
+#include "nn/types.h"
+#include "types.h"
 
 class CompoundTag : public Tag {
 public:
@@ -13,13 +15,13 @@ public:
     void print(const std::wstring&, char*, std::wostream&) override;
     ~CompoundTag();
     void equals(Tag*) override;
-    void copy() override;
+    CompoundTag* copy() override;
     void stripEmptyChildren() override;
     bool isEmpty() const override;
 
     CompoundTag* getCompound(std::wstring const&);
     bool getBoolean(std::wstring const&);
-    bool contains(std::wstring const&);
+    byte getByte(std::wstring const&);
     std::wstring getString(std::wstring const&);
     int getInt(std::wstring const&);
     short getShort(std::wstring const&);

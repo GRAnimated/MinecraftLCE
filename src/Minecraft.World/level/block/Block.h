@@ -54,7 +54,7 @@ public:
     virtual void GetHitTooltip(const BlockTooltipDataHolder& blockTooltipDataHolder);
     virtual void getMapColor(const BlockState* blockState, LevelSource*, const BlockPos& pos);
     virtual const BlockState* getBlockState(int);
-    virtual void convertBlockStateToLegacyData(const BlockState* blockState);
+    virtual int convertBlockStateToLegacyData(const BlockState* blockState);
     virtual void fillVirtualBlockStateProperties(const BlockState* blockState, LevelSource*, const BlockPos& pos);
     virtual void rotate(const BlockState* blockState, Rotation*);
     virtual void mirror(const BlockState* blockState, Mirror*);

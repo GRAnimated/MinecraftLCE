@@ -17,7 +17,7 @@ public:
     virtual void print(const std::wstring&, char*, std::wostream&);
     virtual ~Tag();
     virtual void equals(Tag*);
-    virtual void copy() = 0;
+    virtual Tag* copy() = 0;
     virtual void stripEmptyChildren();
     virtual bool isEmpty() const;
     virtual void getAsString();
