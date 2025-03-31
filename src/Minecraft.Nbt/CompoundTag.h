@@ -27,6 +27,7 @@ public:
     short getShort(std::wstring const&);
     float getFloat(std::wstring const&);
     void getList(std::wstring const&, int);
+    CompoundTag* get(std::wstring const&);
     void fjSafeGetListTag(std::wstring const&, int);
     bool contains(std::wstring const&, int);
 

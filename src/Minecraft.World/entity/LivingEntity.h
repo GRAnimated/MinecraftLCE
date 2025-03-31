@@ -1,3 +1,4 @@
+#pragma once
 #include "Minecraft.World/entity/Entity.h"
 #include "Minecraft.World/item/ItemInstance.h"
 #include "types.h"
@@ -20,7 +21,7 @@ public:
     virtual void getLightColor() override;
     virtual void markHurt() override;
     virtual void hurt(DamageSource *,float) override;
-    virtual void getViewVector(float) override;
+    virtual Vec3* getViewVector(float) override;
     virtual void isPickable() override;
     virtual void isPushable() override;
     virtual void readAdditionalSaveData(CompoundTag *) override;
@@ -154,7 +155,7 @@ public:
     virtual void startUsingItem(InteractionHand::EInteractionHand);
     virtual void spawnItemUseParticles(not_null_ptr<ItemInstance>,int);
     virtual void completeUsingItem();
-    virtual void getTicksUsingItem();
+    virtual int getTicksUsingItem();
     virtual void releaseUsingItem();
     virtual void releaseUsingItem(int);
     virtual void stopUsingItem();

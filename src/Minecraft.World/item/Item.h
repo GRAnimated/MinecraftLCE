@@ -29,11 +29,13 @@ class Item {
     void addProperty(ResourceLocation, ItemPropertyFunction const*);
     int getId();
     bool canBeDepleted();
+    void setIconName(std::wstring const&);
 
     static Item* byId(int id);
     static void registerBlock(Block* block);
     static Item* byBlock(Block* block);
     static Item* byString(const std::wstring& string);
+    static void registerItem(int id, const std::wstring& name, Item* item);
 
     virtual const std::shared_ptr<ItemInstance>& getDefaultInstance(const std::shared_ptr<ItemInstance>&);
     virtual bool verifyTagAfterLoad(CompoundTag*);

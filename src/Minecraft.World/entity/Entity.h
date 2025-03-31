@@ -90,7 +90,7 @@ public:
     virtual void push(double, double, double);
     virtual void markHurt();
     virtual void hurt(DamageSource*, float);
-    virtual void getViewVector(float);
+    virtual Vec3* getViewVector(float);
     virtual void isPickable();
     virtual void isPushable();
     virtual void awardKillScore(std::shared_ptr<Entity>, int, DamageSource*);
@@ -234,7 +234,7 @@ public:
     virtual void getVehicle();
     virtual void getPistonPushReaction();
     virtual void getSoundSource();
-    virtual void isCreative();
+    virtual bool isCreative();
     virtual void isDespawnProtected();
     virtual void setDespawnProtected();
     virtual void couldWander();
@@ -252,4 +252,5 @@ public:
     virtual void getFireImmuneTicks();
 
     Vec3 getPos(float);
+    bool isType(int);
 };

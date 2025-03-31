@@ -49,10 +49,10 @@ public:
     void TestUse(Level*, std::shared_ptr<Player>, InteractionHand::EInteractionHand);
     void use(Level*, std::shared_ptr<Player>, InteractionHand::EInteractionHand);
     void finishUsingItem(Level*, std::shared_ptr<Player>);
-    void save(CompoundTag*);
+    CompoundTag* save(CompoundTag*);
     void getMaxStackSize();
-    void hasTag();
-    void getTag();
+    bool hasTag();
+    CompoundTag* getTag();
     bool isDamageableItem();
     bool isDamaged();
     bool isStackable();

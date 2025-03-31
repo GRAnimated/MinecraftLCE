@@ -31,6 +31,7 @@ class GhostController;
 class Textures;
 class Font;
 class ColourTable;
+class MultiplayerLocalPlayer;
 
 class Minecraft {
 public:
@@ -68,7 +69,7 @@ public:
     void* qword_60;
     void* qword_68;
     void* qword_70;
-    char gap_78[64];
+    std::shared_ptr<MultiplayerLocalPlayer> mLocalPlayers[4];
     void* qword_b8;
     void* qword_c0;
     void* qword_c8;

@@ -1,6 +1,6 @@
 #pragma once
 #include <memory>
-#include "Item.h"
+#include "Minecraft.World/item/Item.h"
 
 class Player;
 class ItemInstance;
