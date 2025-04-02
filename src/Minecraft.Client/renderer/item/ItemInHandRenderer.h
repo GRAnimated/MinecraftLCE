@@ -1,14 +1,11 @@
 #pragma once
 #include <memory>
 #include "types.h"
+#include "Minecraft.World/InteractionHand.h"
 
 class Minecraft;
 class Tesselator;
 class LocalPlayer;
-class InteractionHand{
-public:
-enum EInteractionHand{};
-};
 class ItemInstance;
 class LivingEntity;
 
