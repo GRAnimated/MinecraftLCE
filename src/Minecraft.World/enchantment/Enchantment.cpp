@@ -2,8 +2,14 @@
 #include "Minecraft.World/enchantment/EnchantmentCategory.h"
 #include "Minecraft.World/item/ItemInstance.h"
 
+Enchantment::Enchantment(const Rarity* rarity, const EnchantmentCategory* category, arrayWithLength<EquipmentSlot> array) : mEnchantmentCategory(category){
+    this->mRarity = rarity;
+    this->mSlots.data = array.data;
+    this->mSlots.length = array.length;
+}
+
 const Rarity* Enchantment::getRarity() {
-    return this->rarity;
+    return this->mRarity;
 }
 
 void Enchantment::getSlotItems(const std::shared_ptr<LivingEntity>&) {}
@@ -37,15 +43,15 @@ bool Enchantment::checkCompatibility(Enchantment const* a2) {
 }
 
 void Enchantment::setDescriptionId(int a2) {
-    this->descriptionId = a2;
+    this->mDescriptionId = a2;
 }
 
 int Enchantment::getDescriptionId() {
-    return this->descriptionId;
+    return this->mDescriptionId;
 }
 
 bool Enchantment::canEnchant(const std::shared_ptr<ItemInstance>& item){
-    return enchantmentCategory->canEnchant(item->getItem());
+    return this->mEnchantmentCategory->canEnchant(item->getItem());
 }
 
 void Enchantment::doPostAttack(const std::shared_ptr<LivingEntity>&, const std::shared_ptr<Entity>&, int) {}

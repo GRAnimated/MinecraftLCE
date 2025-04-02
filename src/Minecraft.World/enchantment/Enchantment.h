@@ -13,12 +13,7 @@ class Rarity;
 
 class Enchantment {
     public:
-        Enchantment(const Rarity* rarity, const EnchantmentCategory* category, arrayWithLength<EquipmentSlot>* array) {
-            this->enchantmentCategory = category;
-            this->rarity = rarity;
-            this->slots.data = array->data;
-            this->slots.length = array->length;
-        }
+        Enchantment(const Rarity* rarity, const EnchantmentCategory* category, arrayWithLength<EquipmentSlot> array);
     
         virtual const Rarity* getRarity();
         virtual void getSlotItems(const std::shared_ptr<LivingEntity>&);
@@ -39,8 +34,8 @@ class Enchantment {
         virtual bool isCurse();
         virtual ~Enchantment();
     
-        const EnchantmentCategory* enchantmentCategory;
-        int descriptionId;
-        arrayWithLength<EquipmentSlot> slots;
-        const Rarity* rarity;
+        const EnchantmentCategory* mEnchantmentCategory;
+        int mDescriptionId;
+        arrayWithLength<EquipmentSlot> mSlots;
+        const Rarity* mRarity;
     };
