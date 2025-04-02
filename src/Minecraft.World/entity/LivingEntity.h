@@ -9,6 +9,8 @@ class MobEffectInstance;
 
 class LivingEntity : public Entity{
 public:
+    int getUseItemRemainingTicks();
+
     virtual void GetType() override;
     virtual void fjDerivedCtorCalls() override;
     virtual void kill() override;
@@ -149,7 +151,7 @@ public:
     virtual void onLeaveCombat();
     virtual void updateEffectVisibility();
     virtual void pure_virtual_1();
-    virtual void isUsingItem();
+    virtual bool isUsingItem();
     virtual void getUsedItemHand();
     virtual void updatingUsingItem();
     virtual void startUsingItem(InteractionHand::EInteractionHand);

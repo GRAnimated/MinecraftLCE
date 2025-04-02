@@ -82,7 +82,7 @@ public:
     void toString();
     void inventoryTick(Level*, std::shared_ptr<Entity>, int, bool);
     void onCraftedBy(Level*, std::shared_ptr<Player>, int);
-    void getUseDuration();
+    int getUseDuration();
     void getUseAnimation() const;
     void releaseUsing(Level*, std::shared_ptr<LivingEntity>, int);
     void setTag(CompoundTag*);

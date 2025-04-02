@@ -128,7 +128,6 @@ public:
     void instaTick(BlockPos const&, BlockState const*, Random&);
     static void setInstaTick(bool);
 
-    void *VTable;
     int dword8;
     char gapC[36];
     void* qword30;
