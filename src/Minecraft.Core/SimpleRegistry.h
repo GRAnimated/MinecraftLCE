@@ -11,6 +11,7 @@ public:
     Value getRandom(Random*) override;
     bool containsKey(const Key&) override;
 
+    char fill[0x50 - 0x8];
     //void* qword8;
     //std::unordered_map<Key, Value> mMap;
 };
