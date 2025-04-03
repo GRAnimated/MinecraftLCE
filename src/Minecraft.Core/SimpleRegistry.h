@@ -9,7 +9,7 @@ public:
     void registerKey(const Key& key, const Value& value) override;
     std::unordered_map<Key, Value> keySet() override;
     Value getRandom(Random*) override;
-    bool containsKey(const Key&) override;
+    bool containsKey(const Key&);
 
     char fill[0x50 - 0x8];
     //void* qword8;

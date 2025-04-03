@@ -11,5 +11,5 @@ public:
     virtual void registerKey(const Key& key, const Value& value) = 0;
     virtual std::unordered_map<Key, Value> keySet() = 0;
     virtual Value getRandom(Random*) = 0;
-    virtual bool containsKey(const Key&) = 0;
+    //virtual bool containsKey(const Key&) = 0;
 };
