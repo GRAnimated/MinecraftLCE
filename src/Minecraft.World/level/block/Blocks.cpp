@@ -1,4 +1,10 @@
 #include "Minecraft.World/level/block/Blocks.h"
+#include "Minecraft.Client/resources/ResourceLocation.h"
+
+Block* Blocks::get(std::wstring const& name) {
+    ResourceLocation loc = ResourceLocation(name);
+    return Registry->get(loc);
+}
 
 void Blocks::staticInit() {
     AIR = get(L"air");
