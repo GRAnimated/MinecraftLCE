@@ -2,7 +2,8 @@
 
 #include <memory>
 #include <set>
-#include <string>
+#include "Minecraft.World/InteractionHand.h"
+#include "Minecraft.World/eINSTANCEOF.h"
 #include "Minecraft.World/entity/CommandSender.h"
 #include "Minecraft.World/InteractionHand.h"
 
@@ -32,7 +33,6 @@ class Explosion;
 class ServerPlayer;
 class Mirror;
 class EntityDataAccessor_Base;
-class eINSTANCEOF;
 class Vec3;
 class Random;
 class SynchedEntityData;

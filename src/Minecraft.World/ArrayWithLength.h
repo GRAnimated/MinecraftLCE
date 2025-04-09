@@ -11,21 +11,13 @@ public:
     arrayWithLength(T* initialData, int length);
     arrayWithLength(int size, bool a2);
 
-    //// NON_MATCHING
-    // T& get(unsigned int index) { return (*data)[index]; }
-    //
-    // T& operator[](unsigned int index) { return get(index); }
-    //
-    // explicit operator bool() const { return !data->empty(); }
+    T& get(unsigned int i) { return data[i]; }
 
-    T& get(unsigned int index) { return static_cast<T*>(data)[index]; }
-
-    T& operator[](unsigned int index) { return get(index); }
+    T& operator[](unsigned int i) { return get(i); }
 
     // explicit operator bool() const { return !data->empty(); }
 
-    // std::vector<T>* data = nullptr;
-    void** data = nullptr;
+    T* data = nullptr;
     unsigned int length = 0;
 };
 

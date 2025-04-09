@@ -3,6 +3,7 @@
 #include <memory>
 #include <string>
 #include <vector>
+#include "Minecraft.World/InteractionHand.h"
 #include "types.h"
 #include "Minecraft.World/InteractionHand.h"
 

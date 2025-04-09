@@ -35,6 +35,7 @@ public:
     void putBoolean(const std::wstring&, bool);
     void putInt(const std::wstring&, int);
     void putFloat(const std::wstring&, float);
+    void putString(const std::wstring&, const std::wstring&);
 
     void* field_8;
     void* field_10;
