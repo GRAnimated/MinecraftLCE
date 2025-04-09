@@ -14,19 +14,19 @@ const ItemPropertyFunction* cooldownFunction = nullptr;
 
 Item::Item(){
     // Some of those should probably be moved to header def but idk which ones
-        this->maxStackSize = 64;
-        this->maxDamage = 0;
-        this->handEquipped = false;
-        this->stackedByData = 0;
-        this->craftingRemainingItem = nullptr;
+        this->mMaxStackSize = 64;
+        this->mMaxDamage = 0;
+        this->mHandEquipped = false;
+        this->mStackedByData = 0;
+        this->mCraftingRemainingItem = nullptr;
         this->wstring_1 = L"";
-        this->baseItemType = 0;
-        this->material = 0;
-        this->iconName = L"";
-        this->icon = nullptr;
+        this->mBaseItemType = 0;
+        this->mMaterial = 0;
+        this->mIconName = L"";
+        this->mIcon = nullptr;
         this->byte78 = 0;
     //
-    this->simpleRegistry = new SimpleRegistry<ResourceLocation, const ItemPropertyFunction*>();
+    this->mSimpleRegistry = new SimpleRegistry<ResourceLocation, const ItemPropertyFunction*>();
 
     this->addProperty(ResourceLocation(L"lefthanded"), lefthandedFunction);
 
@@ -34,7 +34,15 @@ Item::Item(){
 }
 
 bool Item::canBeDepleted(){
-    return this->maxDamage > 0 && (!this->stackedByData || this->maxStackSize == 1);
+    return this->mMaxDamage > 0 && (!this->mStackedByData || this->mMaxStackSize == 1);
+}
+
+void Item::setIconName(std::wstring const& iconName){
+    this->mIconName = iconName;
+}
+
+std::shared_ptr<ItemInstance> Item::getDefaultInstance(const std::shared_ptr<ItemInstance>& a2){
+    return std::shared_ptr<ItemInstance>(new ItemInstance(this));
 }
 
 bool Item::verifyTagAfterLoad(CompoundTag*){
@@ -66,7 +74,7 @@ not_null_ptr<ItemInstance> Item::finishUsingItem(not_null_ptr<ItemInstance> item
 }
 
 int Item::getMaxStackSize(){
-    return this->maxStackSize;
+    return this->mMaxStackSize;
 }
 
 int Item::getLevelDataForAuxValue(int){
@@ -94,7 +102,7 @@ bool Item::interactEnemy(const std::shared_ptr<ItemInstance>&, const std::shared
 }
 
 bool Item::isHandEquipped(){
-    return this->handEquipped;
+    return this->mHandEquipped;
 }
 
 bool Item::isMirroredArt(){
@@ -102,19 +110,19 @@ bool Item::isMirroredArt(){
 }
 
 int Item::getDescriptionId(int){
-    return this->descriptionId;
+    return this->mDescriptionId;
 }
 
 int Item::getDescriptionId(const std::shared_ptr<ItemInstance>&){
-    return this->descriptionId;
+    return this->mDescriptionId;
 }
 
 int Item::getUseDescriptionId(){
-    return this->useDescriptionId;
+    return this->mUseDescriptionId;
 }
 
 int Item::getUseDescriptionId(const std::shared_ptr<ItemInstance>&){
-    return this->useDescriptionId;
+    return this->mUseDescriptionId;
 }
 
 bool Item::shouldOverrideMultiplayerNBT(){
@@ -178,7 +186,7 @@ int Item::getIconType(){
 }
 
 void* Item::getIcon(int){
-    return this->icon;
+    return this->mIcon;
 }
 
 int Item::GetArmorType(){

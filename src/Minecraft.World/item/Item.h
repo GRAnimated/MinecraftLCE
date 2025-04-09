@@ -36,7 +36,7 @@ class Item {
     static Item* byString(const std::wstring& string);
     static void registerItem(int id, const std::wstring& name, Item* item);
 
-    virtual const std::shared_ptr<ItemInstance>& getDefaultInstance(const std::shared_ptr<ItemInstance>&);
+    virtual std::shared_ptr<ItemInstance> getDefaultInstance(const std::shared_ptr<ItemInstance>&);
     virtual bool verifyTagAfterLoad(CompoundTag*);
     virtual int GetUseTooltip(const ItemToolTipDataHolder&);
     virtual ~Item();
@@ -87,19 +87,19 @@ class Item {
     virtual void* GetOverrideCountIcon(const std::shared_ptr<ItemInstance>&);
 
     void* qword8;
-    SimpleRegistry<ResourceLocation, const ItemPropertyFunction*>* simpleRegistry;
-    int maxStackSize;
-    int maxDamage;
-    void* icon; // I assume it's pointer to something, idk what though
-    int baseItemType;
-    int material;
-    bool handEquipped;
-    bool stackedByData;
+    SimpleRegistry<ResourceLocation, const ItemPropertyFunction*>* mSimpleRegistry;
+    int mMaxStackSize;
+    int mMaxDamage;
+    void* mIcon; // I assume it's pointer to something, idk what though
+    int mBaseItemType;
+    int mMaterial;
+    bool mHandEquipped;
+    bool mStackedByData;
     char gap32[6];
-    void* craftingRemainingItem;
+    void* mCraftingRemainingItem;
     std::wstring wstring_1;
-    int descriptionId;
-    int useDescriptionId;
-    std::wstring iconName;
+    int mDescriptionId;
+    int mUseDescriptionId;
+    std::wstring mIconName;
     char byte78; // probably bool but idk
 };
