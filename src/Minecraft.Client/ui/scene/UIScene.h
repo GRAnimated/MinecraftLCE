@@ -3,15 +3,13 @@
 #include <string>
 #include <unordered_map>
 #include <vector>
+#include "Minecraft.Client/renderer/C4JRender.h"
 
-class C4JRender {
-public:
-    enum eViewportType {};
-};
-class EUIMessage;
+enum EUIMessage{};
 class fuiFile;
 class fuiRect;
 class UILayer;
+class UIControl;
 
 class UIScene {
 public:
@@ -22,33 +20,37 @@ public:
 
     UIScene(int, UILayer*);
 
+    void setSafeZone(double, double, double, double);
+    void tickTimers();
+    //void handleFocusChange(int, int);
+
     virtual void reloadMovie(bool);
-    virtual void needsReloaded();
-    virtual void hasMovie();
+    virtual bool needsReloaded();
+    virtual bool hasMovie();
     virtual void updateSafeZone();
     virtual void updateViewportTouchOffset();
-    virtual void getSafeZoneHalfHeight();
-    virtual void getSafeZoneHalfWidth();
+    virtual double getSafeZoneHalfHeight();
+    virtual double getSafeZoneHalfWidth();
     virtual void getMoviePath() = 0;
-    virtual void mapElementsAndNames();
+    virtual bool mapElementsAndNames();
     virtual ~UIScene();
     virtual void getSceneType() = 0;
-    virtual void getSubSceneType() const;
+    virtual int getSubSceneType() const;
     virtual void tick();
     virtual void SetFocusToElement(int);
     virtual void handleTimerComplete(int);
-    virtual void stealsFocus();
-    virtual void hasFocus(int);
+    virtual bool stealsFocus();
+    virtual bool hasFocus(int);
     virtual void updateTooltips();
     virtual void updateComponents();
     virtual void handleGainFocus(bool);
     virtual void handleLoseFocus();
-    virtual void hidesLowerScenes();
-    virtual void blocksInput();
-    virtual void GetMainPanel();
+    virtual bool hidesLowerScenes();
+    virtual bool blocksInput();
+    virtual void* GetMainPanel();
     virtual void render(int, int, C4JRender::eViewportType);
     virtual void customDraw(char const*, fuiRect*);
-    virtual void allowRepeat(int);
+    virtual bool allowRepeat(int);
     virtual void handleInput(int, int, bool, bool, bool, bool const);
     virtual void handleDestroy();
     virtual void handlePreUnloadForReload();
@@ -76,38 +78,37 @@ public:
     virtual void isReadyToDelete();
 
 private:
-    void* qword_8 = nullptr;
-    void* qword_10 = nullptr;
-    void* qword_18 = nullptr;
-    fuiFile* mFuiFile = nullptr;
-    void* qword_28 = nullptr;
-    void* qword_30 = nullptr;
+    std::wstring wstring_8;
+    fuiFile* mFuiFile;
+    bool bool_28;
+    char gap_29[3];
+    void *qword30;
     std::unordered_map<std::wstring, bool> map1;
     std::unordered_map<int, UIScene::_TimerInfo> map2;
-    int dword_88 = -1;
-    int dword_8c = 0;
-    float dword_90 = 1.0f;
-    bool mIsInitializedMovie = false;
-    bool byte_95 = true;
-    bool byte_96 = false;
-    bool bool_97 = false;
-    UIScene* mBackScene = nullptr;
-    void* qword_a0 = nullptr;
-    int field_A8 = 0;
-    bool bool_ac = false;
-    bool bool_ad = false;
-    int mStageWidth = 0;
-    int mStageHeight = 0;
-    int mStageWidth2 = 0;
-    int mStageHeight2 = 0;
+    int mControlFocus;
+    int mControlChildFocus;
+    float mOpacity;
+    bool mIsInitializedMovie;
+    bool mVisible;
+    bool byte_96;
+    bool bool_97;
+    UIScene* mBackScene;
+    void *mCallbackUniqueId;
+    int mResType; // 0 - 1080p | 1 - 720p
+    bool mHidden;
+    bool bool_ad;
+    int mStageWidth;
+    int mStageHeight;
+    int mStageWidth2;
+    int mStageHeight2;
+    std::vector<UIControl*> mUIControls;
+    UILayer* mUILayer;
+    bool mFocusRelated;
+    int mPadID;
+    bool mHideLowerScenes;
+    bool byte_e9;
+    bool byte_ea;
+    bool byte_eb;
+    int dwordF8;
     std::vector<UIScene::_CachedSlotDrawData*> mCachedSlotDrawData;
-    UILayer* mUILayer = nullptr;
-    bool byte_e0 = false;
-    int dword_e4 = 0;
-    bool mIsHideLowerScenes = false;
-    bool byte_e9 = false;
-    bool byte_ea = true;
-    bool byte_eb = false;
-    int dword_ec = 0;
-    std::wstring string1 = nullptr;
 };
