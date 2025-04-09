@@ -2,6 +2,8 @@
 
 #include <memory>
 #include <set>
+#include "Minecraft.World/InteractionHand.h"
+#include "Minecraft.World/eINSTANCEOF.h"
 #include "Minecraft.World/entity/CommandSender.h"
 
 #include "types.h"
@@ -19,9 +21,6 @@ class Item;
 class CompoundTag;
 class ItemInstance;
 class Direction;
-namespace InteractionHand {
-enum EInteractionHand {};
-}
 class LightningBolt;
 class Team;
 class EntityTooltipDataHolder;
@@ -33,7 +32,6 @@ class Explosion;
 class ServerPlayer;
 class Mirror;
 class EntityDataAccessor_Base;
-class eINSTANCEOF;
 class Vec3;
 
 class Entity : public std::enable_shared_from_this<Entity>, public CommandSender {
