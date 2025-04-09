@@ -1,5 +1,6 @@
 #include "Minecraft.World/level/levelgen/NetherFlatLevelSource.h"
 #include "Minecraft.Client/CMinecraftApp.h"
+#include "Minecraft.Client/platform/NX/Platform.h"
 #include "Minecraft.World/ArrayWithLength.h"
 #include "Minecraft.World/Random.h"
 #include "Minecraft.World/level/Level.h"
@@ -10,7 +11,6 @@
 #include "Minecraft.World/level/levelgen/feature/HellFireFeature.h"
 #include "Minecraft.World/level/levelgen/feature/LightGemFeature.h"
 #include "Minecraft.World/level/storage/LevelData.h"
-#include "windows.h"
 
 // NON_MATCHING: Regswap
 NetherFlatLevelSource::NetherFlatLevelSource(Level* level, bool isGenerateMapFeatures, long long seed) {
