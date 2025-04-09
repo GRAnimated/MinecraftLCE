@@ -10,13 +10,13 @@ public:
     arrayWithLength(T* initialData, int length);
     arrayWithLength(int size, bool a2);
 
-    T& get(unsigned int index) { return static_cast<T*>(data)[index]; }
+    T& get(unsigned int i) { return data[i]; }
 
-    T& operator[](unsigned int index) { return get(index); }
+    T& operator[](unsigned int i) { return get(i); }
 
     explicit operator bool() const { return !static_cast<std::vector<T>*>(data)->empty(); }
 
-    void* data = nullptr;
+    T* data = nullptr;
     unsigned int length = 0;
 };
 
