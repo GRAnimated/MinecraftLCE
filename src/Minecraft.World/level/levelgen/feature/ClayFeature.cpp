@@ -8,7 +8,6 @@
 
 ClayFeature::ClayFeature(int unk) : Feature(false), mBlock(Blocks::CLAY), field_18(unk) {}
 
-// NON_MATCHING: the second level->getBlockState(pos) mismatches
 bool ClayFeature::place(Level* level, Random& random, const BlockPos& pos) {
     if (level->getBlockState(pos)->getBlock()->getMaterial() != (Material*)Material::WATER) {
         return false;
@@ -24,8 +23,7 @@ bool ClayFeature::place(Level* level, Random& random, const BlockPos& pos) {
                 int y = pos.getY();
                 for (int currentY = y - 1; currentY <= pos.getY() + 1; currentY++) {
                     BlockPos result = BlockPos(x, currentY, z);
-                    // mismatch with getBlockState
-                    Block* block = level->getBlockState(pos)->getBlock();
+                    Block* block = level->getBlockState(result)->getBlock();
 
                     if (block == Blocks::DIRT || block == Blocks::CLAY)
                         level->setBlock(result, mBlock->defaultBlockState(), 2, false);
