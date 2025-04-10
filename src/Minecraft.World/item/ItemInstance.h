@@ -21,6 +21,7 @@ class LivingEntity;
 class Player;
 class Random;
 class Tag;
+class CensoredString;
 
 class ItemInstance {
 public:
@@ -30,7 +31,7 @@ public:
     void setCount(int);
     Item* getItem() const;
     ~ItemInstance();
-    void _init(Item*, int, int);
+    void init(Item* item, int count, int aux);
     ItemInstance(Block*);
     ItemInstance(Block*, int);
     ItemInstance(Block*, int, int);
@@ -48,10 +49,10 @@ public:
     void TestUse(Level*, std::shared_ptr<Player>, InteractionHand::EInteractionHand);
     void use(Level*, std::shared_ptr<Player>, InteractionHand::EInteractionHand);
     void finishUsingItem(Level*, std::shared_ptr<Player>);
-    void save(CompoundTag*);
+    CompoundTag* save(CompoundTag*);
     void getMaxStackSize();
-    void hasTag();
-    void getTag();
+    bool hasTag();
+    CompoundTag* getTag();
     bool isDamageableItem();
     bool isDamaged();
     bool isStackable();
@@ -81,7 +82,7 @@ public:
     void toString();
     void inventoryTick(Level*, std::shared_ptr<Entity>, int, bool);
     void onCraftedBy(Level*, std::shared_ptr<Player>, int);
-    void getUseDuration();
+    int getUseDuration();
     void getUseAnimation() const;
     void releaseUsing(Level*, std::shared_ptr<LivingEntity>, int);
     void setTag(CompoundTag*);
@@ -125,19 +126,18 @@ public:
     bool operator=(ItemInstance const&);
 
 private:
-    void* qword_0;
-    void* qword_8;
+    void *qword_0 = nullptr;
+    void *qword_8 = nullptr;
     int mCount;
     int dword_14;
-    void* mItem;
-    void* qword_20;
+    Item *mItem;
+    CompoundTag *mTag;
     bool mIsEmpty;
-    int dword_2c;
+    int mDamage;
     bool byte_30;
-    void* qword_38;
-    void* qword_40;
-    void* qword_48;
-    void* qword_50;
-    void* qword_58;
+    void *qword_38 = nullptr;
+    void *qword_40 = nullptr;
+    std::shared_ptr<CensoredString*> mCensoredString;
+    void *qword_58;
     bool byte_60;
 };

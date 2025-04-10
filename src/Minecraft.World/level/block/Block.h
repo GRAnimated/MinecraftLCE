@@ -6,6 +6,7 @@
 #include "Minecraft.World/InteractionHand.h"
 #include "Minecraft.World/level/block/state/BlockState.h"
 #include "types.h"
+#include "Minecraft.World/InteractionHand.h"
 
 typedef unsigned char uchar;
 

@@ -1,7 +1,7 @@
 #include "Minecraft.World/level/block/entity/BlockEntity.h"
 #include <memory>
 #include "Minecraft.Client/resources/ResourceLocation.h"
-#include "Minecraft.Core/IdMapper.h"
+#include "Minecraft.Client/resources/IdMapper.h"
 #include "Minecraft.Nbt/CompoundTag.h"
 #include "Minecraft.World/eINSTANCEOF.h"
 #include "Minecraft.World/level/Level.h"

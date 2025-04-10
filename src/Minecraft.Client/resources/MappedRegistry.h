@@ -1,37 +1,28 @@
 #pragma once
+#include "Minecraft.Client/resources/SimpleRegistry.h"
+#include "Minecraft.Client/resources/IdMap.h"
 
-#include <functional>
-
-class Random;
-
-template <typename KeyType, typename ValueType, typename KeyHash = std::hash<KeyType>, typename KeyEqual = std::equal_to<KeyType>, typename ValueHash = std::hash<ValueType>,
-          typename ValueEqual = std::equal_to<ValueType>>
-class MappedRegistry {
+template <typename Key, typename Value, typename Hash = std::hash<Key>, typename KeyEqual = std::equal_to<Key>, typename HashValue = std::hash<Value>, typename ValueEqual = std::equal_to<Value>>
+class MappedRegistry : public SimpleRegistry<Key, Value>, public IdMap<Value>{
 public:
-    MappedRegistry();
-
-    virtual ValueType get(KeyType);
-    virtual void registerKey(KeyType, ValueType);
-    virtual void keySet();
-    virtual ValueType getRandom(Random*);
-    virtual bool containsKey(KeyType);
-
-    KeyType getKey(ValueType) const;
-    int getId(ValueType);
-    ValueType byId(int);
-    void registerMapping(int, KeyType, ValueType);
-    bool containsId(int);
+    // override everything from base, also this is wrong for whatever reason, idk how to fix it properly
+    virtual void registerMapping(int id, Key key, Value value);
+    virtual Key getKey(Value) const;
+    virtual int getId(Value) override;
+    virtual Value byId(int) override;
+    virtual bool containsId(int);
 };
 
-template <typename KeyType, typename ValueType, typename KeyHash = std::hash<KeyType>, typename KeyEqual = std::equal_to<KeyType>, typename ValueHash = std::hash<ValueType>,
-          typename ValueEqual = std::equal_to<ValueType>>
-class DefaultedMappedRegistry : public MappedRegistry<KeyType, ValueType> {
+template <typename Key, typename Value, typename KeyHash = std::hash<Key>, typename KeyEqual = std::equal_to<Key>, typename ValueHash = std::hash<Value>,
+          typename ValueEqual = std::equal_to<Value>>
+class DefaultedMappedRegistry : public MappedRegistry<Key, Value> {
 public:
     DefaultedMappedRegistry();
 
-    ValueType get(KeyType) override;
-    void registerKey(KeyType, ValueType) override;
-    void keySet() override;
-    ValueType getRandom(Random*) override;
-    bool containsKey(KeyType) override;
+    // marked as virtual as if DefaultedMappedRegistry is going to be overriden one more time it won't allow you to overwrite
+    virtual Value get(Key) override;
+    virtual void registerKey(Key key, Value value) override;
+    virtual std::unordered_map<Key, Value> keySet() override;
+    virtual Value getRandom(Random*) override;
+    virtual bool containsKey(Key) override;
 };

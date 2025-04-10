@@ -1,9 +1,9 @@
 #pragma once
-#include <cstdint>
 #include <memory>
 #include <string>
 #include "Minecraft.World/InteractionHand.h"
-#include "Minecraft.World/SimpleRegistry.h"
+#include "Minecraft.Client/resources/SimpleRegistry.h"
+#include "Minecraft.World/Item/InteractionResultHolder.h"
 #include "types.h"
 
 class ResourceLocation;
@@ -28,17 +28,22 @@ class Item {
     void addProperty(ResourceLocation, ItemPropertyFunction const*);
     int getId();
     bool canBeDepleted();
+    void setIconName(std::wstring const&);
+
     static Item* byId(int id);
     static void registerBlock(Block* block);
+    static Item* byBlock(Block* block);
+    static Item* byString(const std::wstring& string);
+    static void registerItem(int id, const std::wstring& name, Item* item);
 
-    virtual const std::__shared_weak_count* getDefaultInstance(const std::shared_ptr<ItemInstance>&);
+    virtual std::shared_ptr<ItemInstance> getDefaultInstance(const std::shared_ptr<ItemInstance>&);
     virtual bool verifyTagAfterLoad(CompoundTag*);
     virtual int GetUseTooltip(const ItemToolTipDataHolder&);
     virtual ~Item();
     virtual bool useOn(const std::shared_ptr<Player>&, Level*, const BlockPos&, InteractionHand::EInteractionHand, const Direction*, float, float, float, bool);
     virtual float getDestroySpeed(const std::shared_ptr<ItemInstance>&, BlockState*);
     virtual bool TestUse(Level*, const std::shared_ptr<Player>&, InteractionHand::EInteractionHand);
-    virtual void use(uintptr_t unk, Level*, const std::shared_ptr<Player>&, InteractionHand::EInteractionHand); // this def need complete overhaul as it's...
+    virtual InteractionResultHolder use(Level*, const std::shared_ptr<Player>&, InteractionHand::EInteractionHand); // this def need complete overhaul as it's...
     virtual not_null_ptr<ItemInstance> finishUsingItem(not_null_ptr<ItemInstance>, Level*, const std::shared_ptr<LivingEntity>&);
     virtual int getMaxStackSize();
     virtual int getLevelDataForAuxValue(int);
@@ -82,19 +87,19 @@ class Item {
     virtual void* GetOverrideCountIcon(const std::shared_ptr<ItemInstance>&);
 
     void* qword8;
-    SimpleRegistry<ResourceLocation, const ItemPropertyFunction*>* simpleRegistry;
-    int maxStackSize;
-    int maxDamage;
-    void* icon; // I assume it's pointer to something, idk what though
-    int baseItemType;
-    int material;
-    bool handEquipped;
-    bool stackedByData;
+    SimpleRegistry<ResourceLocation, const ItemPropertyFunction*>* mSimpleRegistry;
+    int mMaxStackSize;
+    int mMaxDamage;
+    void* mIcon; // I assume it's pointer to something, idk what though
+    int mBaseItemType;
+    int mMaterial;
+    bool mHandEquipped;
+    bool mStackedByData;
     char gap32[6];
-    void* craftingRemainingItem;
+    void* mCraftingRemainingItem;
     std::wstring wstring_1;
-    int descriptionId;
-    int useDescriptionId;
-    std::wstring iconName;
+    int mDescriptionId;
+    int mUseDescriptionId;
+    std::wstring mIconName;
     char byte78; // probably bool but idk
 };

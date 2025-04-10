@@ -5,6 +5,7 @@
 #include "Minecraft.World/InteractionHand.h"
 #include "Minecraft.World/eINSTANCEOF.h"
 #include "Minecraft.World/entity/CommandSender.h"
+#include "Minecraft.World/InteractionHand.h"
 
 #include "types.h"
 
@@ -33,14 +34,16 @@ class ServerPlayer;
 class Mirror;
 class EntityDataAccessor_Base;
 class Vec3;
+class Random;
+class SynchedEntityData;
 
 class Entity : public std::enable_shared_from_this<Entity>, public CommandSender {
 public:
     virtual ~Entity();
-    virtual void vtbl_71010534A0_func_12() = 0;
-    virtual void vtbl_71010534A0_func_13();
+    virtual void GetType() = 0;
+    virtual void fjDerivedCtorCalls();
     virtual void kill();
-    virtual void vtbl_71010534A0_func_15() = 0;
+    virtual void defineSynchedData() = 0;
     virtual void resetPos();
     virtual void remove();
     virtual void setDropContainerContent(bool);
@@ -89,7 +92,7 @@ public:
     virtual void push(double, double, double);
     virtual void markHurt();
     virtual void hurt(DamageSource*, float);
-    virtual void getViewVector(float);
+    virtual Vec3* getViewVector(float);
     virtual void isPickable();
     virtual void isPushable();
     virtual void awardKillScore(std::shared_ptr<Entity>, int, DamageSource*);
@@ -99,8 +102,8 @@ public:
     virtual void save(CompoundTag*);
     virtual void load(CompoundTag*);
     virtual void repositionEntityAfterLoad();
-    virtual void __cxa_pure_virtual_unk1() = 0;
-    virtual void __cxa_pure_virtual_unk2() = 0;
+    virtual void readAdditionalSaveData(CompoundTag *) = 0;
+    virtual void addAdditonalSaveData(CompoundTag *) = 0;
     virtual void readAdditionContructionTag_4(CompoundTag*);
     virtual void getAdditionContructionTag();
     virtual void spawnAtLocation(Item*, int);
@@ -193,7 +196,7 @@ public:
     virtual void isPushedByWater();
     virtual void getViewScale();
     virtual void setViewScale(double);
-    virtual void getDisplayName();
+    virtual std::wstring getDisplayName();
     virtual void setCustomName(std::wstring const&, std::wstring const&, bool);
     virtual void getCustomName();
     virtual void hasCustomName();
@@ -233,7 +236,7 @@ public:
     virtual void getVehicle();
     virtual void getPistonPushReaction();
     virtual void getSoundSource();
-    virtual void isCreative();
+    virtual bool isCreative();
     virtual void isDespawnProtected();
     virtual void setDespawnProtected();
     virtual void couldWander();
@@ -251,4 +254,64 @@ public:
     virtual void getFireImmuneTicks();
 
     Vec3 getPos(float);
+    bool isType(int);
+
+    void* qword18;
+    void* qword20;
+    void* qword28;
+    void* qword30;
+    void* qword38;
+    void* qword40;
+    void* qword48;
+    void* qword50;
+    void* qword58;
+    void* qword60;
+    void* qword68;
+    void* qword70;
+    void* qword78;
+    void* qword80;
+    void* qword88;
+    Vec3 motion;
+    float yaw;
+    float pitch;
+    char gapik[64];
+    int dwordF0;
+    char gapEC[76];
+    Random* rand;
+    void* qword148;
+    void* qword150;
+    SynchedEntityData* entityData;
+    char gap[16];
+    void* qword160;
+    char gap168[64];
+    int dword1A8;
+    char gap1AC[28];
+    void* qword1C8;
+    char gap1D0[8];
+    void* qword1D8;
+    void* qword1E0;
+    void* qword1E8;
+    char gap1F0[8];
+    void* qword1F8;
+    void* qword200;
+    char gap208[8];
+    void* qword210;
+    int dword218;
+    char gap21C[4];
+    void* qword220;
+    void* qword228;
+    char gap230[8];
+    void* qword238;
+    void* qword240;
+    char gap248[8];
+    void* qword250;
+    int dword258;
+    char gap25C[16];
+    void* qword26C;
+    void* qword274;
+    void* qword27C;
+    void* qword284;
+    int dword2A4;
+    void* qword2A8;
+    void* qword2B0;
 };

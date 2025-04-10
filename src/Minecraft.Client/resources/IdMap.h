@@ -5,6 +5,6 @@ class BlockState;
 template <typename T>
 class IdMap {
 public:
-    virtual int getId(const BlockState* state);
+    virtual int getId(T object);
     virtual T byId(int id);
 };

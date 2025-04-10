@@ -10,4 +10,7 @@ public:
     void setFocus(FJ_FuiNode*);
     void getFocus();
     void removeFocus(FJ_FuiNode*);
+
+    void* mIdk;
+    FJ_FuiNode* mfocusedFJ_FuiNode; 
 };

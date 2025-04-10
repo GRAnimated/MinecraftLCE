@@ -1,12 +1,12 @@
 #pragma once
 
-#include "Minecraft.Core/IdMap.h"
+#include "Minecraft.Client/resources/IdMap.h"
 
 template <typename T>
 class IdMapper : public IdMap<T> {
 public:
     void addMapping(T type, int id);
-    int getId(const BlockState* state) override;
+    int getId(T object) override;
     T byId(int id) override;
 
 private:
