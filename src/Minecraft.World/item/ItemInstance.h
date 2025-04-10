@@ -44,7 +44,8 @@ public:
     void grow(int);
     void shrink(int);
     void split(int);
-    void useOn(std::shared_ptr<Player>, Level*, BlockPos const&, InteractionHand::EInteractionHand, Direction const*, float, float, float, bool);
+    void useOn(std::shared_ptr<Player>, Level*, BlockPos const&, InteractionHand::EInteractionHand,
+               Direction const*, float, float, float, bool);
     void getDestroySpeed(BlockState const*);
     void TestUse(Level*, std::shared_ptr<Player>, InteractionHand::EInteractionHand);
     void use(Level*, std::shared_ptr<Player>, InteractionHand::EInteractionHand);
@@ -66,7 +67,8 @@ public:
     void hurtEnemy(std::shared_ptr<LivingEntity>, std::shared_ptr<Player>);
     void mineBlock(Level*, BlockState const*, BlockPos const&, std::shared_ptr<Player>);
     void canDestroySpecial(BlockState const*);
-    void interactEnemy(std::shared_ptr<Player>, std::shared_ptr<LivingEntity>, InteractionHand::EInteractionHand);
+    void interactEnemy(std::shared_ptr<Player>, std::shared_ptr<LivingEntity>,
+                       InteractionHand::EInteractionHand);
     void copy_not_shared() const;
     static void tagMatches(not_null_ptr<ItemInstance> const&, not_null_ptr<ItemInstance> const&);
     void matches(not_null_ptr<ItemInstance> const&, bool);
@@ -126,18 +128,18 @@ public:
     bool operator=(ItemInstance const&);
 
 private:
-    void *qword_0 = nullptr;
-    void *qword_8 = nullptr;
+    void* qword_0 = nullptr;
+    void* qword_8 = nullptr;
     int mCount;
     int dword_14;
-    Item *mItem;
-    CompoundTag *mTag;
+    Item* mItem;
+    CompoundTag* mTag;
     bool mIsEmpty;
     int mDamage;
     bool byte_30;
-    void *qword_38 = nullptr;
-    void *qword_40 = nullptr;
+    void* qword_38 = nullptr;
+    void* qword_40 = nullptr;
     std::shared_ptr<CensoredString*> mCensoredString;
-    void *qword_58;
+    void* qword_58;
     bool byte_60;
 };

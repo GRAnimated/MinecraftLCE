@@ -2,7 +2,7 @@
 #include <cstdarg>
 class ItemInstance;
 
-class Recipes{
+class Recipes {
 public:
     Recipes();
     void addShapedRecipe(ItemInstance*, ...);

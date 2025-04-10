@@ -1,18 +1,15 @@
 #include "types.h"
 
 class ItemInstance;
-class InteractionResult{
+class InteractionResult {
 public:
-    enum EInteractionResult{
-        SUCCESS,
-        PASS,
-        FAIL
-    };
+    enum EInteractionResult { SUCCESS, PASS, FAIL };
 };
 
-class InteractionResultHolder{
+class InteractionResultHolder {
 public:
-    InteractionResultHolder(InteractionResult::EInteractionResult result, const not_null_ptr<ItemInstance>& item){
+    InteractionResultHolder(InteractionResult::EInteractionResult result,
+                            const not_null_ptr<ItemInstance>& item) {
         this->result = result;
         this->item = item;
     }

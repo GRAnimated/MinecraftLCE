@@ -87,7 +87,8 @@ void CustomizableSourceSettings::Builder::setDefaults() {
     lapisSpread = 16;
 }
 
-CustomizableSourceSettings::Builder* CustomizableSourceSettings::Builder::fromString(SuperflatConfig* config) {
+CustomizableSourceSettings::Builder*
+CustomizableSourceSettings::Builder::fromString(SuperflatConfig* config) {
     return new Builder();
 }
 

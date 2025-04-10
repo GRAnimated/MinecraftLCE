@@ -1,5 +1,5 @@
-#include "Minecraft.Network/protocol/Packet.h"
 #include "Minecraft.Core/System.h"
+#include "Minecraft.Network/protocol/Packet.h"
 
 Packet::Packet() {
     mCreatedTime = System::processTimeInMilliSecs();

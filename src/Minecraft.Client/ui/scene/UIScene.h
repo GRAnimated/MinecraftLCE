@@ -1,11 +1,11 @@
 #pragma once
 
+#include "Minecraft.Client/renderer/C4JRender.h"
 #include <string>
 #include <unordered_map>
 #include <vector>
-#include "Minecraft.Client/renderer/C4JRender.h"
 
-enum EUIMessage{};
+enum EUIMessage {};
 class fuiFile;
 class fuiRect;
 class UILayer;
@@ -22,7 +22,7 @@ public:
 
     void setSafeZone(double, double, double, double);
     void tickTimers();
-    //void handleFocusChange(int, int);
+    // void handleFocusChange(int, int);
 
     virtual void reloadMovie(bool);
     virtual bool needsReloaded();
@@ -82,7 +82,7 @@ private:
     fuiFile* mFuiFile;
     bool bool_28;
     char gap_29[3];
-    void *qword30;
+    void* qword30;
     std::unordered_map<std::wstring, bool> map1;
     std::unordered_map<int, UIScene::_TimerInfo> map2;
     int mControlFocus;
@@ -93,8 +93,8 @@ private:
     bool byte_96;
     bool bool_97;
     UIScene* mBackScene;
-    void *mCallbackUniqueId;
-    int mResType; // 0 - 1080p | 1 - 720p
+    void* mCallbackUniqueId;
+    int mResType;  // 0 - 1080p | 1 - 720p
     bool mHidden;
     bool bool_ad;
     int mStageWidth;

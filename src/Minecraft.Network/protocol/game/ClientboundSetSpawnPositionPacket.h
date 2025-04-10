@@ -3,7 +3,9 @@
 #include "Minecraft.Core/BlockPos.h"
 #include "Minecraft.Network/protocol/Packet.h"
 
-class ClientboundSetSpawnPositionPacket : public Packet, public std::enable_shared_from_this<ClientboundSetSpawnPositionPacket> {
+class ClientboundSetSpawnPositionPacket
+    : public Packet,
+      public std::enable_shared_from_this<ClientboundSetSpawnPositionPacket> {
 public:
     static std::shared_ptr<Packet> create();
 

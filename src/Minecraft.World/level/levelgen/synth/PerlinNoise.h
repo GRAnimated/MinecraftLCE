@@ -12,7 +12,8 @@ public:
     virtual ~PerlinNoise();
     virtual double getValue(double, double) override;
     void init(Random*, int);
-    arrayWithLength<double> getRegion(arrayWithLength<double>, int, int, int, int, int, int, double, double, double);
+    arrayWithLength<double> getRegion(arrayWithLength<double>, int, int, int, int, int, int, double, double,
+                                      double);
     arrayWithLength<double> getRegion(arrayWithLength<double>, int, int, int, int, double, double, double);
 
     ImprovedNoise** mNoiseLevels;

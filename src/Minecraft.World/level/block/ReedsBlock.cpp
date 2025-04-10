@@ -1,6 +1,5 @@
 #include "Minecraft.World/level/block/ReedsBlock.h"
 
-#include "Minecraft.Core/BlockPos.h"
 #include "Minecraft.World/level/Level.h"
 #include "Minecraft.World/level/block/Blocks.h"
 #include "Minecraft.World/level/block/BonemealableBlock.h"
@@ -8,6 +7,7 @@
 #include "Minecraft.World/level/block/state/IntegerProperty.h"
 #include "Minecraft.World/level/material/DecorationMaterial.h"
 #include "Minecraft.World/phys/AABB.h"
+#include "Minecraft.Core/BlockPos.h"
 
 IntegerProperty* ReedsBlock::sAgeProperty = IntegerProperty::create(L"age", 0, 15);
 
@@ -63,7 +63,8 @@ bool ReedsBlock::checkAlive(Level* level, const BlockPos& pos, const BlockState*
 
 // ReedsBlock::mayPlace
 
-void ReedsBlock::neighborChanged(const BlockState* blockState, Level* level, const BlockPos& pos, Block*, const BlockPos& pos2) {
+void ReedsBlock::neighborChanged(const BlockState* blockState, Level* level, const BlockPos& pos, Block*,
+                                 const BlockPos& pos2) {
     checkAlive(level, pos, blockState);
 }
 

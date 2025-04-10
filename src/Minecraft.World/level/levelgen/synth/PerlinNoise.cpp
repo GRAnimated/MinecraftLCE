@@ -1,7 +1,7 @@
 #include "Minecraft.World/level/levelgen/synth/PerlinNoise.h"
 
-#include "Minecraft.Util/Mth.h"
 #include "Minecraft.World/level/levelgen/synth/ImprovedNoise.h"
+#include "Minecraft.Util/Mth.h"
 
 #include "Minecraft.Client/platform/NX/Platform.h"
 
@@ -53,7 +53,9 @@ void PerlinNoise::init(Random* random, int maxOctaves) {
 }
 
 // NON_MATCHING: the octaves for loop is mismatching
-arrayWithLength<double> PerlinNoise::getRegion(arrayWithLength<double> noise, int posX, int posY, int posZ, int width, int depth, int length, double scaleX, double scaleY, double scaleZ) {
+arrayWithLength<double> PerlinNoise::getRegion(arrayWithLength<double> noise, int posX, int posY, int posZ,
+                                               int width, int depth, int length, double scaleX, double scaleY,
+                                               double scaleZ) {
     if (noise.data) {
         if (noise.length) {
             for (unsigned int i = 0; i < noise.length; i++) {
@@ -80,7 +82,8 @@ arrayWithLength<double> PerlinNoise::getRegion(arrayWithLength<double> noise, in
         double fracY = posY * currentSize * scaleY;
         double fracZ = (posZ * currentSize * scaleZ) - floorZ % 0x1000000;
 
-        mNoiseLevels[i]->add(noise, fracX, fracY, fracZ, width, depth, length, currentSize * scaleX, currentSize * scaleY, currentSize * scaleZ, currentSize);
+        mNoiseLevels[i]->add(noise, fracX, fracY, fracZ, width, depth, length, currentSize * scaleX,
+                             currentSize * scaleY, currentSize * scaleZ, currentSize);
 
         currentSize *= 0.5;
     }
@@ -88,6 +91,7 @@ arrayWithLength<double> PerlinNoise::getRegion(arrayWithLength<double> noise, in
     return noise;
 }
 
-arrayWithLength<double> PerlinNoise::getRegion(arrayWithLength<double> array, int i3, int i4, int i5, int i6, double d7, double d8, double d9) {
+arrayWithLength<double> PerlinNoise::getRegion(arrayWithLength<double> array, int i3, int i4, int i5, int i6,
+                                               double d7, double d8, double d9) {
     return getRegion(array, i3, 10, i4, i5, 1, i6, d7, 1.0, d8);
 }

@@ -1,4 +1,4 @@
-class Rarity{
+class Rarity {
 public:
     static Rarity* UNCOMMON;
 };

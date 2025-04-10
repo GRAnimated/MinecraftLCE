@@ -49,7 +49,8 @@ public:
     virtual void EndOrderIndependentAlpha();
     virtual void vtbl_7101130608_func_35();
     virtual void vtbl_7101130608_func_36();
-    virtual void DrawVertices(C4JRender::ePrimitiveType, int, void*, C4JRender::eVertexType, C4JRender::ePixelShaderType, unsigned char*);
+    virtual void DrawVertices(C4JRender::ePrimitiveType, int, void*, C4JRender::eVertexType,
+                              C4JRender::ePixelShaderType, unsigned char*);
     virtual void CBuffLockStaticCreations();
     virtual void CBuffCreate(int);
     virtual void CBuffDelete(int, int);

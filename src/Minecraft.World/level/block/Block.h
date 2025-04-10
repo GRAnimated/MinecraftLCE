@@ -1,12 +1,11 @@
 #pragma once
 
+#include "types.h"
+#include "Minecraft.World/InteractionHand.h"
+#include "Minecraft.World/level/block/state/BlockState.h"
 #include <memory>
 #include <string>
 #include <vector>
-#include "Minecraft.World/InteractionHand.h"
-#include "Minecraft.World/level/block/state/BlockState.h"
-#include "types.h"
-#include "Minecraft.World/InteractionHand.h"
 
 typedef unsigned char uchar;
 
@@ -57,7 +56,8 @@ public:
     virtual void getMapColor(const BlockState* blockState, LevelSource* levelSource, const BlockPos& pos);
     virtual const BlockState* getBlockState(int);
     virtual int convertBlockStateToLegacyData(const BlockState* blockState);
-    virtual void fillVirtualBlockStateProperties(const BlockState* blockState, LevelSource* levelSource, const BlockPos& pos);
+    virtual void fillVirtualBlockStateProperties(const BlockState* blockState, LevelSource* levelSource,
+                                                 const BlockPos& pos);
     virtual void rotate(const BlockState* blockState, Rotation*);
     virtual void mirror(const BlockState* blockState, Mirror*);
     virtual ~Block();
@@ -85,13 +85,17 @@ public:
     virtual void setSemiTransparent();
     virtual bool isTicking();
     virtual AABB* getShape(const BlockState* blockState, LevelSource* levelSource, const BlockPos& pos);
-    virtual void getLightColor(const BlockState* blockState, LevelSource* levelSource, const BlockPos& pos, int);
-    virtual void shouldRenderFace(const BlockState* blockState, LevelSource* levelSource, const BlockPos& pos, const Direction* direction);
+    virtual void getLightColor(const BlockState* blockState, LevelSource* levelSource, const BlockPos& pos,
+                               int);
+    virtual void shouldRenderFace(const BlockState* blockState, LevelSource* levelSource, const BlockPos& pos,
+                                  const Direction* direction);
     virtual AABB* getShapes(const BlockState* blockState, LevelSource* levelSource, BlockPos const*);
     virtual bool isSolidFace(LevelSource* levelSource, const BlockPos& pos, const Direction* direction);
-    virtual void getBlockFaceShape(LevelSource* levelSource, const BlockState* blockState, const BlockPos& pos, const Direction* direction);
+    virtual void getBlockFaceShape(LevelSource* levelSource, const BlockState* blockState,
+                                   const BlockPos& pos, const Direction* direction);
     virtual void getOutlineAABB(const BlockState* blockState, Level* level, const BlockPos& pos);
-    virtual void addCollisionAABBs(const BlockState* blockState, Level* level, const BlockPos& pos, AABB const*, std::vector<AABB*>*, std::shared_ptr<Entity>, bool);
+    virtual void addCollisionAABBs(const BlockState* blockState, Level* level, const BlockPos& pos,
+                                   AABB const*, std::vector<AABB*>*, std::shared_ptr<Entity>, bool);
     virtual void addCollisionAABB(const BlockPos& pos, AABB const*, std::vector<AABB*>*, AABB const*);
     virtual AABB* getClipAABB(const BlockState* blockState, LevelSource* levelSource, const BlockPos& pos);
     virtual bool isSolidRender(const BlockState* blockState);
@@ -101,14 +105,16 @@ public:
     virtual void tick(Level* level, const BlockPos& pos, const BlockState* blockState, Random*);
     virtual void animateTick(const BlockState* blockState, Level* level, const BlockPos& pos, Random*);
     virtual void destroy(Level* level, const BlockPos& pos, const BlockState* blockState);
-    virtual void neighborChanged(const BlockState* blockState, Level* level, const BlockPos& pos, Block*, const BlockPos& pos2);
+    virtual void neighborChanged(const BlockState* blockState, Level* level, const BlockPos& pos, Block*,
+                                 const BlockPos& pos2);
     virtual void addLights(Level* level, const BlockPos& pos);
     virtual void getTickDelay(Level* level);
     virtual void onPlace(Level* level, const BlockPos& pos, const BlockState* blockState);
     virtual void onRemove(Level* level, const BlockPos& pos, const BlockState* blockState);
     virtual void getResourceCount(Random*);
     virtual void getResource(const BlockState* blockState, Random*, int);
-    virtual void getDestroyProgress(const BlockState* blockState, std::shared_ptr<Player> player, Level* level, const BlockPos& pos);
+    virtual void getDestroyProgress(const BlockState* blockState, std::shared_ptr<Player> player,
+                                    Level* level, const BlockPos& pos);
     virtual void spawnResources(Level* level, const BlockPos& pos, const BlockState* blockState, int);
     virtual void spawnResources(Level* level, const BlockPos& pos, const BlockState* blockState, float, int);
     virtual void popExperience(Level* level, const BlockPos& pos, int);
@@ -121,11 +127,14 @@ public:
     virtual bool mayPlace(Level* level, const BlockPos& pos, const Direction* direction);
     virtual bool mayPlace(Level* level, const BlockPos& pos);
     virtual void TestUse();
-    virtual void TestUse(Level* level, const BlockPos& pos, const BlockState* blockState, std::shared_ptr<Player> player);
-    virtual void use(Level* level, const BlockPos& pos, const BlockState* blockState, std::shared_ptr<Player> player, InteractionHand::EInteractionHand, const Direction* direction, float, float,
-                     float, bool);
+    virtual void TestUse(Level* level, const BlockPos& pos, const BlockState* blockState,
+                         std::shared_ptr<Player> player);
+    virtual void use(Level* level, const BlockPos& pos, const BlockState* blockState,
+                     std::shared_ptr<Player> player, InteractionHand::EInteractionHand,
+                     const Direction* direction, float, float, float, bool);
     virtual void stepOn(Level* level, const BlockPos& pos, std::shared_ptr<Entity>);
-    virtual void getStateForPlacement(Level* level, const BlockPos& pos, const Direction* direction, float, float, float, int, std::shared_ptr<LivingEntity>);
+    virtual void getStateForPlacement(Level* level, const BlockPos& pos, const Direction* direction, float,
+                                      float, float, int, std::shared_ptr<LivingEntity>);
     virtual void prepareRender(Level* level, const BlockPos& pos);
     virtual void attack(Level* level, const BlockPos& pos, std::shared_ptr<Player> player);
     virtual void handleEntityInside(Level* level, const BlockPos& pos, std::shared_ptr<Entity>, Vec3*);
@@ -134,15 +143,21 @@ public:
     virtual void getColor(LevelSource* levelSource, const BlockPos& pos, int);
     virtual void getColor(LevelSource* levelSource, const BlockPos& pos);
     virtual void getColor(LevelSource* levelSource, const BlockPos& pos, const BlockState* blockState);
-    virtual void getSignal(const BlockState* blockState, LevelSource* levelSource, const BlockPos& pos, const Direction* direction);
+    virtual void getSignal(const BlockState* blockState, LevelSource* levelSource, const BlockPos& pos,
+                           const Direction* direction);
     virtual bool isSignalSource(const BlockState* blockState);
-    virtual void entityInside(Level* level, const BlockPos& pos, const BlockState* blockState, std::shared_ptr<Entity> const&);
-    virtual void getDirectSignal(const BlockState* blockState, LevelSource* levelSource, const BlockPos& pos, const Direction* direction);
-    virtual void playerDestroy(Level* level, std::shared_ptr<Player> player, const BlockPos& pos, const BlockState* blockState, std::shared_ptr<BlockEntity>, not_null_ptr<ItemInstance>);
+    virtual void entityInside(Level* level, const BlockPos& pos, const BlockState* blockState,
+                              std::shared_ptr<Entity> const&);
+    virtual void getDirectSignal(const BlockState* blockState, LevelSource* levelSource, const BlockPos& pos,
+                                 const Direction* direction);
+    virtual void playerDestroy(Level* level, std::shared_ptr<Player> player, const BlockPos& pos,
+                               const BlockState* blockState, std::shared_ptr<BlockEntity>,
+                               not_null_ptr<ItemInstance>);
     virtual bool isSilkTouchable();
     virtual void getSilkTouchItemInstance(const BlockState* blockState);
     virtual void getResourceCountForLootBonus(int, Random*);
-    virtual void setPlacedBy(Level* level, const BlockPos& pos, const BlockState* blockState, std::shared_ptr<LivingEntity>, not_null_ptr<ItemInstance>);
+    virtual void setPlacedBy(Level* level, const BlockPos& pos, const BlockState* blockState,
+                             std::shared_ptr<LivingEntity>, not_null_ptr<ItemInstance>);
     virtual void setNameAndDescriptionId(int, int);
     virtual bool isPossibleToRespawnInThis();
     virtual void getName();
@@ -157,7 +172,8 @@ public:
     virtual void fallOn(Level* level, const BlockPos& pos, std::shared_ptr<Entity>, float);
     virtual void updateEntityAfterFallOn(Level* level, std::shared_ptr<Entity>);
     virtual void getCloneItemInstance(Level* level, const BlockPos& pos, const BlockState* blockState);
-    virtual void playerWillDestroy(Level* level, const BlockPos& pos, const BlockState* blockState, std::shared_ptr<Player> player);
+    virtual void playerWillDestroy(Level* level, const BlockPos& pos, const BlockState* blockState,
+                                   std::shared_ptr<Player> player);
     virtual void handleRain(Level* level, const BlockPos& pos);
     virtual void canInstantlyTick();
     virtual void dropFromExplosion(Explosion*);
@@ -169,7 +185,8 @@ public:
     virtual void registerIcons(IconRegister*);
     virtual void getTileItemIconName();
     virtual void getIconTexture(const Direction* direction, const BlockState* blockState);
-    virtual void getTexture(LevelSource* levelSource, const BlockPos& pos, const Direction* direction, const BlockState* blockState);
+    virtual void getTexture(LevelSource* levelSource, const BlockPos& pos, const Direction* direction,
+                            const BlockState* blockState);
     virtual void getTexture(const Direction* direction, const BlockState* blockState);
     virtual void getTexture(const Direction* direction);
     virtual void getInventoryRenderState(const BlockState* blockState);
@@ -179,7 +196,8 @@ public:
     virtual void getOffset(const BlockState* blockState, LevelSource* levelSource, const BlockPos& pos);
     virtual void getSoundType();
     virtual void toString();
-    virtual void appendHoverText(not_null_ptr<ItemInstance>, std::shared_ptr<Player> player, std::vector<HtmlString>*, bool);
+    virtual void appendHoverText(not_null_ptr<ItemInstance>, std::shared_ptr<Player> player,
+                                 std::vector<HtmlString>*, bool);
     virtual bool isLiquidBlock();
 
     Material* getMaterial();

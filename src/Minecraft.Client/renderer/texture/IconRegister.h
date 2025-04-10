@@ -1,7 +1,7 @@
 #pragma once
 #include <string>
 
-class IconRegister{
+class IconRegister {
 public:
     virtual ~IconRegister();
     virtual void* registerIcon(std::wstring const&) = 0;

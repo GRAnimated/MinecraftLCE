@@ -1,13 +1,13 @@
 #pragma once
+#include "types.h"
 #include "Minecraft.World/entity/Entity.h"
 #include "Minecraft.World/item/ItemInstance.h"
-#include "types.h"
 
 class Attribute;
 class MobEffect;
 class MobEffectInstance;
 
-class LivingEntity : public Entity{
+class LivingEntity : public Entity {
 public:
     int getUseItemRemainingTicks();
 
@@ -18,31 +18,31 @@ public:
     virtual void tick() override;
     virtual void baseTick() override;
     virtual void outOfWorld() override;
-    virtual void checkFallDamage(double,bool,Block *,BlockPos const&) override;
-    virtual void causeFallDamage(float,float) override;
+    virtual void checkFallDamage(double, bool, Block*, BlockPos const&) override;
+    virtual void causeFallDamage(float, float) override;
     virtual void getLightColor() override;
     virtual void markHurt() override;
-    virtual void hurt(DamageSource *,float) override;
+    virtual void hurt(DamageSource*, float) override;
     virtual Vec3* getViewVector(float) override;
     virtual void isPickable() override;
     virtual void isPushable() override;
-    virtual void readAdditionalSaveData(CompoundTag *) override;
-    virtual void addAdditonalSaveData(CompoundTag *) override;
+    virtual void readAdditionalSaveData(CompoundTag*) override;
+    virtual void addAdditonalSaveData(CompoundTag*) override;
     virtual void isAlive() override;
     virtual void rideTick() override;
     virtual void stopRiding() override;
-    virtual void lerpTo(double,double,double,float,float,int,bool) override;
-    virtual void handleEntityEvent(unsigned char,int) override;
+    virtual void lerpTo(double, double, double, float, float, int, bool) override;
+    virtual void handleEntityEvent(unsigned char, int) override;
     virtual void animateHurt() override;
     virtual void setSprinting(bool) override;
     virtual void getTeam() override;
-    virtual void spawnEatParticles(ItemInstance const&,int) override;
+    virtual void spawnEatParticles(ItemInstance const&, int) override;
     virtual void getYHeadRot() override;
     virtual void setYHeadRot(float) override;
     virtual void setYBodyRot(float) override;
     virtual void shouldShowName() override;
     virtual void onSyncedDataUpdated(EntityDataAccessor_Base const*) override;
-    virtual void setBoundingBox(AABB *) override;
+    virtual void setBoundingBox(AABB*) override;
     virtual void stopCurrentLerp() override;
     virtual void registerAttributes();
     virtual void isWaterMob();
@@ -66,42 +66,42 @@ public:
     virtual void removeEffectParticles();
     virtual void removeAllEffects();
     virtual void getActiveEffects();
-    virtual void hasEffect(MobEffect *);
-    virtual void getEffect(MobEffect *);
-    virtual void addEffect(MobEffectInstance *,std::shared_ptr<Entity> const&);
-    virtual void addEffectNoUpdate(MobEffectInstance *);
-    virtual void canBeAffected(MobEffectInstance *);
+    virtual void hasEffect(MobEffect*);
+    virtual void getEffect(MobEffect*);
+    virtual void addEffect(MobEffectInstance*, std::shared_ptr<Entity> const&);
+    virtual void addEffectNoUpdate(MobEffectInstance*);
+    virtual void canBeAffected(MobEffectInstance*);
     virtual void isInvertedHealAndHarm();
-    virtual void removeEffectNoUpdate(MobEffect *);
-    virtual void removeEffect(MobEffect *);
-    virtual void onEffectAdded(MobEffectInstance *);
-    virtual void onEffectUpdated(MobEffectInstance *,bool);
-    virtual void onEffectRemoved(MobEffectInstance *);
+    virtual void removeEffectNoUpdate(MobEffect*);
+    virtual void removeEffect(MobEffect*);
+    virtual void onEffectAdded(MobEffectInstance*);
+    virtual void onEffectUpdated(MobEffectInstance*, bool);
+    virtual void onEffectRemoved(MobEffectInstance*);
     virtual void heal(float);
     virtual void getHealth();
     virtual void setHealth(float);
     virtual void getLastDamageSource();
     virtual void blockUsingShield(std::shared_ptr<LivingEntity> const&);
-    virtual void playHurtSound(DamageSource *);
-    virtual void checkTotemDeathProtection(DamageSource *);
-    virtual void isDamageSourceBlocked(DamageSource *);
+    virtual void playHurtSound(DamageSource*);
+    virtual void checkTotemDeathProtection(DamageSource*);
+    virtual void isDamageSourceBlocked(DamageSource*);
     virtual void breakItem(not_null_ptr<ItemInstance>);
-    virtual void die(DamageSource *);
-    virtual void dropEquipment(bool,int);
-    virtual void knockback(std::shared_ptr<Entity>,float,double,double);
-    virtual void getHurtSound(DamageSource *);
+    virtual void die(DamageSource*);
+    virtual void dropEquipment(bool, int);
+    virtual void knockback(std::shared_ptr<Entity>, float, double, double);
+    virtual void getHurtSound(DamageSource*);
     virtual void getDeathSound();
     virtual void getFallDamageSound(int);
-    virtual void dropAllDeathLoot(bool,int,DamageSource *);
-    virtual void dropDeathLoot(bool,int);
+    virtual void dropAllDeathLoot(bool, int, DamageSource*);
+    virtual void dropDeathLoot(bool, int);
     virtual void onLadder();
     virtual void isShootable();
     virtual void getArmorValue();
     virtual void hurtArmor(float);
     virtual void hurtCurrentlyUsedShield(float);
-    virtual void getDamageAfterArmorAbsorb(DamageSource,float);
-    virtual void getDamageAfterMagicAbsorb(DamageSource,float);
-    virtual void actuallyHurt(DamageSource,float);
+    virtual void getDamageAfterArmorAbsorb(DamageSource, float);
+    virtual void getDamageAfterMagicAbsorb(DamageSource, float);
+    virtual void actuallyHurt(DamageSource, float);
     virtual void getCombatTracker();
     virtual void getKillCredit();
     virtual void getMaxHealth();
@@ -109,16 +109,16 @@ public:
     virtual void setArrowCount(int);
     virtual void swing(InteractionHand::EInteractionHand);
     virtual void updateSwingTime();
-    virtual void getAttribute(Attribute *);
+    virtual void getAttribute(Attribute*);
     virtual void getAttributes();
     virtual void getMobType();
     virtual void getMainHandItem();
     virtual void getOffhandItem();
     virtual not_null_ptr<ItemInstance> getItemInHand(InteractionHand::EInteractionHand);
-    virtual void setItemInHand(InteractionHand::EInteractionHand,not_null_ptr<ItemInstance>);
+    virtual void setItemInHand(InteractionHand::EInteractionHand, not_null_ptr<ItemInstance>);
     virtual void hasItemInSlot(EquipmentSlot const*);
     virtual void pure_virtual_0();
-    virtual void getItemInHandIcon(not_null_ptr<ItemInstance>,int);
+    virtual void getItemInHandIcon(not_null_ptr<ItemInstance>, int);
     virtual void getSoundVolume();
     virtual void getVoicePitch();
     virtual void isImmobile();
@@ -128,19 +128,19 @@ public:
     virtual void jumpInWater();
     virtual void jumpInLava();
     virtual void getWaterSlowDown();
-    virtual void travel(float,float,float);
+    virtual void travel(float, float, float);
     virtual void updateModelAnimation();
     virtual void getSpeed();
     virtual void setSpeed(float);
     virtual void doHurtTarget(std::shared_ptr<Entity>);
     virtual void isSleeping();
-    virtual void tickHeadTurn(float,float);
+    virtual void tickHeadTurn(float, float);
     virtual void aiStep();
     virtual void serverAiStep();
     virtual void pushEntities();
     virtual void doPush(std::shared_ptr<Entity>);
     virtual void setJumping(bool);
-    virtual void take(std::shared_ptr<Entity>,int);
+    virtual void take(std::shared_ptr<Entity>, int);
     virtual void canSee(std::shared_ptr<Entity>);
     virtual void getAttackAnim(float);
     virtual void getSweptVolume();
@@ -155,7 +155,7 @@ public:
     virtual void getUsedItemHand();
     virtual void updatingUsingItem();
     virtual void startUsingItem(InteractionHand::EInteractionHand);
-    virtual void spawnItemUseParticles(not_null_ptr<ItemInstance>,int);
+    virtual void spawnItemUseParticles(not_null_ptr<ItemInstance>, int);
     virtual void completeUsingItem();
     virtual int getTicksUsingItem();
     virtual void releaseUsingItem();
@@ -166,5 +166,5 @@ public:
     virtual void getFallFlyingTicks();
     virtual void isAffectedByPotions();
     virtual void attackable();
-    virtual void setRecordPlayingNearby(BlockPos const&,bool);
+    virtual void setRecordPlayingNearby(BlockPos const&, bool);
 };

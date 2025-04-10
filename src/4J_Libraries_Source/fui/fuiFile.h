@@ -1,9 +1,10 @@
 #pragma once
 
-#include "Minecraft.World/ArrayWithLength.h"
 #include "types.h"
+#include "Minecraft.World/ArrayWithLength.h"
 
-// Most structs derived from https://github.com/NessieHax/fui-research-repo/blob/main/DOCUMENTATION.md
+// Most structs derived from
+// https://github.com/NessieHax/fui-research-repo/blob/main/DOCUMENTATION.md
 
 class fuiRenderNode;
 class fuiBitmap;

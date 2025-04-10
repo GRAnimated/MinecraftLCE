@@ -43,6 +43,7 @@ public:
     void bucket(int);
     void hasMaxVertices();
     void setVertexFormat(const VertexFormat*);
-    void blockRainQuad(float, float, float, float, float, float, float, float, float, float, float, float, float, float, float, float, float, float, float, float, float, float, float, float, float,
-                       float, float, float, int);
+    void blockRainQuad(float, float, float, float, float, float, float, float, float, float, float, float,
+                       float, float, float, float, float, float, float, float, float, float, float, float,
+                       float, float, float, float, int);
 };

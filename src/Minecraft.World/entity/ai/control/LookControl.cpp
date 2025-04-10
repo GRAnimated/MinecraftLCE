@@ -3,7 +3,8 @@
 // NON_MATCHING
 LookControl::LookControl(Mob* mob) : mMob(mob) {}
 
-void LookControl::setLookAt(double wantedX, double wantedY, double wantedZ, float yMaxRotSpeed, float xMaxRotAngle) {
+void LookControl::setLookAt(double wantedX, double wantedY, double wantedZ, float yMaxRotSpeed,
+                            float xMaxRotAngle) {
     mWantedX = wantedX;
     mWantedY = wantedY;
     mWantedZ = wantedZ;

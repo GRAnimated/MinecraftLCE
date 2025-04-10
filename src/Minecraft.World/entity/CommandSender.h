@@ -1,18 +1,18 @@
 #pragma once
-#include <string>
-#include "Minecraft.Core/BlockPos.h"
-#include "Minecraft.World/phys/Vec3.h"
 #include "types.h"
+#include "Minecraft.World/phys/Vec3.h"
+#include "Minecraft.Core/BlockPos.h"
+#include <string>
 
-class ClientboundChatPacket{
+class ClientboundChatPacket {
 public:
     enum EChatPacketMessage {};
 };
-enum EGameCommand{};
+enum EGameCommand {};
 class Level;
-class CommandStats{
+class CommandStats {
 public:
-    enum CommandStatType{};
+    enum CommandStatType {};
 };
 
 class CommandSender {
@@ -20,7 +20,8 @@ public:
     virtual ~CommandSender();
     virtual void sendMessage(ClientboundChatPacket::EChatPacketMessage, int*, uint, std::wstring*, uint) = 0;
     virtual void hasPermission(EGameCommand) = 0;
-    // according to symbol it should be getDisplayName buttt idk how to correctly do that shit so it generates this and one in Entity VTable (later on)
+    // according to symbol it should be getDisplayName buttt idk how to correctly do that shit so it
+    // generates this and one in Entity VTable (later on)
     virtual std::wstring getNetworkName() = 0;
     virtual BlockPos getCommandSenderBlockPosition() = 0;
     virtual Vec3 getCommandSenderWorldPosition() = 0;

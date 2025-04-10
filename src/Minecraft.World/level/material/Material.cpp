@@ -25,7 +25,10 @@ void Material::staticCtor() {
     LAVA = (LiquidMaterial*)(new LiquidMaterial(MaterialColor::FIRE))->destroyOnPush();
     LEAVES = (new Material(MaterialColor::PLANT))->flammable()->neverBuildable()->destroyOnPush();
     PLANTS = (DecorationMaterial*)(new DecorationMaterial(MaterialColor::PLANT))->destroyOnPush();
-    MOSS = (DecorationMaterial*)(new DecorationMaterial(MaterialColor::PLANT))->flammable()->destroyOnPush()->replaceable();
+    MOSS = (DecorationMaterial*)(new DecorationMaterial(MaterialColor::PLANT))
+               ->flammable()
+               ->destroyOnPush()
+               ->replaceable();
     SPONGE = new Material(MaterialColor::WOOL);
     WOOL = (new Material(MaterialColor::WOOL))->flammable();
     FIRE = (GasMaterial*)(new GasMaterial(MaterialColor::NONE))->destroyOnPush();
@@ -38,7 +41,11 @@ void Material::staticCtor() {
     CORAL = (new Material(MaterialColor::PLANT))->destroyOnPush();
     ICE = (new Material(MaterialColor::ICE))->neverBuildable()->makeDestroyedByHand();
     ICE_SOLID = (new Material(MaterialColor::ICE))->makeDestroyedByHand();
-    TOP_SNOW = (DecorationMaterial*)(new DecorationMaterial(MaterialColor::SNOW))->replaceable()->neverBuildable()->notAlwaysDestroyable()->destroyOnPush();
+    TOP_SNOW = (DecorationMaterial*)(new DecorationMaterial(MaterialColor::SNOW))
+                   ->replaceable()
+                   ->neverBuildable()
+                   ->notAlwaysDestroyable()
+                   ->destroyOnPush();
     SNOW = (new Material(MaterialColor::SNOW))->notAlwaysDestroyable();
     CACTUS = (new Material(MaterialColor::PLANT))->neverBuildable()->destroyOnPush();
     CLAY = new Material(MaterialColor::CLAY);

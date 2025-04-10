@@ -1,13 +1,13 @@
-#include "Minecraft.World/level/block/entity/BlockEntity.h"
-#include <memory>
-#include "Minecraft.Client/resources/ResourceLocation.h"
 #include "Minecraft.Client/resources/IdMapper.h"
+#include "Minecraft.Client/resources/ResourceLocation.h"
 #include "Minecraft.Nbt/CompoundTag.h"
 #include "Minecraft.World/eINSTANCEOF.h"
 #include "Minecraft.World/level/Level.h"
 #include "Minecraft.World/level/block/Block.h"
 #include "Minecraft.World/level/block/Blocks.h"
+#include "Minecraft.World/level/block/entity/BlockEntity.h"
 #include "Minecraft.World/level/block/state/BlockState.h"
+#include <memory>
 
 IdMapper<eINSTANCEOF> idMapper;
 

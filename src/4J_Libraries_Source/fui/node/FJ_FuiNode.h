@@ -1,7 +1,7 @@
 #pragma once
 
-#include <vector>
 #include "4J_Libraries_Source/fui/node/FJ_EventListener.h"
+#include <vector>
 
 class fuiRenderNode;
 class FJ_FuiNodeStage;

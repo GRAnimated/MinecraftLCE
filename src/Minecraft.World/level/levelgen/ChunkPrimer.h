@@ -1,7 +1,7 @@
 #pragma once
 
-#include "Minecraft.World/ArrayWithLength.h"
 #include "types.h"
+#include "Minecraft.World/ArrayWithLength.h"
 
 class BlockState;
 

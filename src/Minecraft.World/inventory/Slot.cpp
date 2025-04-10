@@ -6,7 +6,8 @@
 #include "Minecraft.World/item/Item.h"
 #include "Minecraft.World/item/ItemInstance.h"
 
-Slot::Slot(std::shared_ptr<Container> container, int index, int x, int y) : mSlot(index), mContainer(container), mX(x), mY(y) {}
+Slot::Slot(std::shared_ptr<Container> container, int index, int x, int y)
+    : mSlot(index), mContainer(container), mX(x), mY(y) {}
 
 Slot::~Slot() {}
 

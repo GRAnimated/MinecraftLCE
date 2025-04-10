@@ -1,5 +1,5 @@
-#include "Minecraft.World/level/levelgen/feature/Feature.h"
 #include "Minecraft.World/level/Level.h"
+#include "Minecraft.World/level/levelgen/feature/Feature.h"
 
 Feature::Feature(bool isUpdate) : mIsUpdate(isUpdate) {}
 

@@ -5,7 +5,8 @@
 #include "Minecraft.Core/io/DataOutputStream.h"
 #include "Minecraft.Core/io/FileOutputStream.h"
 
-Options::Option::Option(const std::wstring& a2, bool isProgress, bool a4) : mIsProgress(isProgress), field_1(a4), mOptionName(a2) {}
+Options::Option::Option(const std::wstring& a2, bool isProgress, bool a4)
+    : mIsProgress(isProgress), field_1(a4), mOptionName(a2) {}
 
 bool Options::Option::isProgress() const {
     return mIsProgress;
@@ -110,7 +111,8 @@ void Options::save() {
     dataOutput.writeChars(L"skin:" + mSkin);
     dataOutput.writeChars(L"lastServer:" + mLastServer);
     for (int i = 0; i < 14; i++) {
-        dataOutput.writeChars(L"key_" + mKeyMappings[i]->mKeyDescription + L":" + std::to_wstring(mKeyMappings[i]->mKeyCode));
+        dataOutput.writeChars(L"key_" + mKeyMappings[i]->mKeyDescription + L":"
+                              + std::to_wstring(mKeyMappings[i]->mKeyCode));
     }
 
     dataOutput.close();

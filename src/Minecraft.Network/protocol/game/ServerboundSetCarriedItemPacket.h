@@ -2,7 +2,8 @@
 
 #include "Minecraft.Network/protocol/Packet.h"
 
-class ServerboundSetCarriedItemPacket : public Packet, public std::enable_shared_from_this<ServerboundSetCarriedItemPacket> {
+class ServerboundSetCarriedItemPacket : public Packet,
+                                        public std::enable_shared_from_this<ServerboundSetCarriedItemPacket> {
 public:
     static std::shared_ptr<Packet> create();
 

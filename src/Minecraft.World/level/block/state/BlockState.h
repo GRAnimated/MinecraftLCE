@@ -53,7 +53,8 @@ public:
     virtual bool shouldRenderFace(LevelSource*, BlockPos const&, Direction const*) const = 0;
     virtual bool isSolidRender() const = 0;
     virtual AABB* getClipAABB(LevelSource*, BlockPos const&) const = 0;
-    virtual void addCollissionAABBs(Level*, BlockPos const&, AABB const*, std::vector<AABB*>*, std::shared_ptr<Entity>, bool) const = 0;
+    virtual void addCollissionAABBs(Level*, BlockPos const&, AABB const*, std::vector<AABB*>*,
+                                    std::shared_ptr<Entity>, bool) const = 0;
     virtual AABB* getShape(LevelSource*, BlockPos const&) const = 0;
     virtual void clip(Level*, BlockPos const&, Vec3*, Vec3*) const = 0;
     virtual bool isTopSolidBlocking() const = 0;

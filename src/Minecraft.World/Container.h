@@ -1,7 +1,7 @@
 #pragma once
 
-#include "Minecraft.World/Nameable.h"
 #include "types.h"
+#include "Minecraft.World/Nameable.h"
 
 class Slot;
 class ItemInstance;

@@ -18,11 +18,13 @@ public:
     bool isCubeShaped(const BlockState* blockState) override;
     void getRenderShape(const BlockState* blockState) override;
     AABB* getShape(const BlockState* blockState, LevelSource* levelSource, const BlockPos& pos) override;
-    void getBlockFaceShape(LevelSource* levelSource, const BlockState* blockState, const BlockPos& pos, const Direction* direction) override;
+    void getBlockFaceShape(LevelSource* levelSource, const BlockState* blockState, const BlockPos& pos,
+                           const Direction* direction) override;
     AABB* getClipAABB(const BlockState* blockState, LevelSource* levelSource, const BlockPos& pos) override;
     bool isSolidRender(const BlockState* blockState) override;
     void tick(Level* level, const BlockPos& pos, const BlockState* blockState, Random*) override;
-    void neighborChanged(const BlockState* blockState, Level* level, const BlockPos& pos, Block*, const BlockPos& pos2) override;
+    void neighborChanged(const BlockState* blockState, Level* level, const BlockPos& pos, Block*,
+                         const BlockPos& pos2) override;
     void getResource(const BlockState* blockState, Random*, int) override;
     void getRenderLayer() override;
     bool mayPlace(Level* level, const BlockPos& pos) override;

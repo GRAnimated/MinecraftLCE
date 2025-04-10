@@ -19,7 +19,9 @@ void Direction::staticCtor() {
 }
 
 // NON_MATCHING: There's more code surrounding the values push back
-Direction::Direction(int dirX, int dirY, int dirZ, const std::wstring& name, Direction::AxisDirection* axisDirection, Direction::Axis* axis, Vec3i* pos, unsigned char u8) {
+Direction::Direction(int dirX, int dirY, int dirZ, const std::wstring& name,
+                     Direction::AxisDirection* axisDirection, Direction::Axis* axis, Vec3i* pos,
+                     unsigned char u8) {
     mDirX = dirX;
     mDirY = dirY;
     mDirZ = dirZ;

@@ -39,7 +39,8 @@ public:
         bool shouldRenderFace(LevelSource*, BlockPos const&, Direction const*) const override;
         bool isSolidRender() const override;
         AABB* getClipAABB(LevelSource*, BlockPos const&) const override;
-        void addCollissionAABBs(Level*, BlockPos const&, AABB const*, std::vector<AABB*>*, std::shared_ptr<Entity>, bool) const override;
+        void addCollissionAABBs(Level*, BlockPos const&, AABB const*, std::vector<AABB*>*,
+                                std::shared_ptr<Entity>, bool) const override;
         AABB* getShape(LevelSource*, BlockPos const&) const override;
         void clip(Level*, BlockPos const&, Vec3*, Vec3*) const override;
         bool isTopSolidBlocking() const override;

@@ -1,5 +1,5 @@
 
-class EquipmentSlot{
+class EquipmentSlot {
 public:
     static EquipmentSlot* MAINHAND;
     static EquipmentSlot* OFFHAND;

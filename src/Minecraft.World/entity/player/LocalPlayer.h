@@ -2,6 +2,4 @@
 
 #include "Minecraft.World/entity/player/AbstractClientPlayer.h"
 
-class LocalPlayer : public AbstractClientPlayer{
-
-};
+class LocalPlayer : public AbstractClientPlayer {};

@@ -12,7 +12,8 @@ public:
 
 class Layer {
 public:
-    static void getDefaultLayers(long long, LevelType*, SuperflatConfig*, LevelData*, BiomeSource::LayerOverrideSettings*);
+    static void getDefaultLayers(long long, LevelType*, SuperflatConfig*, LevelData*,
+                                 BiomeSource::LayerOverrideSettings*);
 
     Layer(long long seed);
     ~Layer();

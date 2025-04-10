@@ -1,5 +1,6 @@
 #include <new>
 
+#include "nn/os/os_MutexTypes.h"
 #include "Minecraft.Client/CInput.h"
 #include "Minecraft.Client/Compression.h"
 #include "Minecraft.Client/renderer/Renderer.h"
@@ -7,7 +8,6 @@
 #include "nn/nifm.h"
 #include "nn/oe.h"
 #include "nn/os.h"
-#include "nn/os/os_MutexTypes.h"
 #include "nn/time.h"
 
 static nn::oe::PerformanceMode PERFORMANCE_MODE;
@@ -15,13 +15,13 @@ static nn::os::MessageQueueType* MESSAGE_QUEUE;
 static u64* MESSAGE_QUEUE_BUFFER;
 static nn::os::MutexType* MAIN_MUTEX;
 
-void InitializeCriticalSection(nn::os::MutexType* mutex){
+void InitializeCriticalSection(nn::os::MutexType* mutex) {
     nn::os::InitializeMutex(mutex, 1LL, 0LL);
     nn::os::LockMutex(mutex);
     nn::os::UnlockMutex(mutex);
 }
 
-void sub_7100607FBC(nn::os::MutexType* mutex){
+void sub_7100607FBC(nn::os::MutexType* mutex) {
     InitializeCriticalSection(mutex);
 }
 
@@ -46,7 +46,6 @@ extern "C" void nnMain() {
 
     // v9 = InitializeCriticalSection(&stru_71017C1830);
     // sub_71007E0F98(v9);
-    
 
     Compression::CreateNewThreadStorage();
     Renderer::sInstance->Initialise();

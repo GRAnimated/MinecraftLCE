@@ -10,7 +10,8 @@ enum eFuiObjectType {};
 
 class fuiRenderNode {
 public:
-    fuiRenderNode(fuiRenderNode*, fuiRenderNode*, fuiObject*, unsigned int, eFuiObjectType, unsigned char, fuiRGBA*, unsigned char, bool, fuiFile*);
+    fuiRenderNode(fuiRenderNode*, fuiRenderNode*, fuiObject*, unsigned int, eFuiObjectType, unsigned char,
+                  fuiRGBA*, unsigned char, bool, fuiFile*);
 
     virtual ~fuiRenderNode();
     virtual void shutdown();

@@ -1,8 +1,8 @@
 #pragma once
-#include <string>
 #include "Minecraft.Client/renderer/texture/IconRegister.h"
+#include <string>
 
-class TextureAtlas : public IconRegister{
+class TextureAtlas : public IconRegister {
 public:
     // it's probably TextureAtlasSprite but unsure
     virtual void* registerIcon(std::wstring const&) override;

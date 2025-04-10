@@ -1,10 +1,10 @@
 #pragma once
-#include <memory>
-#include <string>
+#include "types.h"
 #include "Minecraft.Client/resources/SimpleRegistry.h"
 #include "Minecraft.World/InteractionHand.h"
 #include "Minecraft.World/item/InteractionResultHolder.h"
-#include "types.h"
+#include <memory>
+#include <string>
 
 class ResourceLocation;
 class ItemPropertyFunction;
@@ -40,18 +40,25 @@ public:
     virtual bool verifyTagAfterLoad(CompoundTag*);
     virtual int GetUseTooltip(const ItemToolTipDataHolder&);
     virtual ~Item();
-    virtual bool useOn(const std::shared_ptr<Player>&, Level*, const BlockPos&, InteractionHand::EInteractionHand, const Direction*, float, float, float, bool);
+    virtual bool useOn(const std::shared_ptr<Player>&, Level*, const BlockPos&,
+                       InteractionHand::EInteractionHand, const Direction*, float, float, float, bool);
     virtual float getDestroySpeed(const std::shared_ptr<ItemInstance>&, BlockState*);
     virtual bool TestUse(Level*, const std::shared_ptr<Player>&, InteractionHand::EInteractionHand);
-    virtual InteractionResultHolder use(Level*, const std::shared_ptr<Player>&, InteractionHand::EInteractionHand);  // this def need complete overhaul as it's...
-    virtual not_null_ptr<ItemInstance> finishUsingItem(not_null_ptr<ItemInstance>, Level*, const std::shared_ptr<LivingEntity>&);
+    virtual InteractionResultHolder
+    use(Level*, const std::shared_ptr<Player>&,
+        InteractionHand::EInteractionHand);  // this def need complete overhaul as it's...
+    virtual not_null_ptr<ItemInstance> finishUsingItem(not_null_ptr<ItemInstance>, Level*,
+                                                       const std::shared_ptr<LivingEntity>&);
     virtual int getMaxStackSize();
     virtual int getLevelDataForAuxValue(int);
-    virtual bool hurtEnemy(const std::shared_ptr<ItemInstance>&, const std::shared_ptr<LivingEntity>&, const std::shared_ptr<LivingEntity>&);
-    virtual bool mineBlock(const std::shared_ptr<ItemInstance>&, Level*, const BlockState*, const BlockPos&, std::shared_ptr<LivingEntity>&);
+    virtual bool hurtEnemy(const std::shared_ptr<ItemInstance>&, const std::shared_ptr<LivingEntity>&,
+                           const std::shared_ptr<LivingEntity>&);
+    virtual bool mineBlock(const std::shared_ptr<ItemInstance>&, Level*, const BlockState*, const BlockPos&,
+                           std::shared_ptr<LivingEntity>&);
     virtual int getAttackDamage(const std::shared_ptr<Entity>&);
     virtual bool canDestroySpecial(const BlockState*);
-    virtual bool interactEnemy(const std::shared_ptr<ItemInstance>&, const std::shared_ptr<Player>&, const std::shared_ptr<LivingEntity>&, InteractionHand::EInteractionHand);
+    virtual bool interactEnemy(const std::shared_ptr<ItemInstance>&, const std::shared_ptr<Player>&,
+                               const std::shared_ptr<LivingEntity>&, InteractionHand::EInteractionHand);
     virtual bool isHandEquipped();
     virtual bool isMirroredArt();
     virtual int getDescriptionId(int);
@@ -65,15 +72,18 @@ public:
     virtual bool isComplex();
     virtual int getUseAnimation(const std::shared_ptr<ItemInstance>&);
     virtual int getUseDuration(const std::shared_ptr<ItemInstance>&);
-    virtual void releaseUsing(const std::shared_ptr<ItemInstance>&, Level*, const std::shared_ptr<LivingEntity>&, int);
-    virtual void appendHoverText(const std::shared_ptr<ItemInstance>&, const std::shared_ptr<Player>&, void* htmlString, bool);
+    virtual void releaseUsing(const std::shared_ptr<ItemInstance>&, Level*,
+                              const std::shared_ptr<LivingEntity>&, int);
+    virtual void appendHoverText(const std::shared_ptr<ItemInstance>&, const std::shared_ptr<Player>&,
+                                 void* htmlString, bool);
     virtual void getName(const std::shared_ptr<ItemInstance>&);
     virtual bool isFoil(not_null_ptr<ItemInstance>);
     virtual void getRarity(const std::shared_ptr<ItemInstance>&);
     virtual bool isEnchantable(const std::shared_ptr<ItemInstance>&);
     virtual int getEnchantmentValue();
     virtual bool mayBePlacedInAdventureMode();
-    virtual bool isValidRepairItem(const std::shared_ptr<ItemInstance>&, const std::shared_ptr<ItemInstance>&);
+    virtual bool isValidRepairItem(const std::shared_ptr<ItemInstance>&,
+                                   const std::shared_ptr<ItemInstance>&);
     virtual void getDefaultAttributeModifiers(const EquipementSlot*);
     virtual void registerIcons(IconRegister*);
     virtual bool hasMultipleSpriteLayers();

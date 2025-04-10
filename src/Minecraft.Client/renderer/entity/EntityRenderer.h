@@ -30,7 +30,8 @@ class EntityRenderer {
     virtual void renderFlame(SharedEntity&, double, double, double, float);
     virtual void renderShadow(SharedEntity&, double, double, double, float, float);
     virtual void getLevel();
-    virtual void renderBlockShadow(BlockState const*, double, double, double, BlockPos const&, float, float, double, double, double);
+    virtual void renderBlockShadow(BlockState const*, double, double, double, BlockPos const&, float, float,
+                                   double, double, double);
     virtual void postRender(SharedEntity&, double, double, double, float, float, bool);
     virtual void getFont();
     virtual void renderNameTag(SharedEntity&, std::wstring const&, double, double, double, int, int);

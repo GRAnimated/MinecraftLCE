@@ -5,7 +5,7 @@
 class ItemInstance;
 class Enchantment;
 
-class EnchantmentHelper{
+class EnchantmentHelper {
 public:
     static int getItemEnchantmentLevel(const Enchantment*, not_null_ptr<ItemInstance> const&);
 };

@@ -17,7 +17,8 @@ public:
     virtual void onQuickCraft(not_null_ptr<ItemInstance> item, int count);
     virtual void onSwapCraft(int count);
     virtual void checkTakeAchievements(not_null_ptr<ItemInstance> item);
-    virtual not_null_ptr<ItemInstance> onTake(std::shared_ptr<Player> player, not_null_ptr<ItemInstance> item);
+    virtual not_null_ptr<ItemInstance> onTake(std::shared_ptr<Player> player,
+                                              not_null_ptr<ItemInstance> item);
     virtual bool mayPlace(not_null_ptr<ItemInstance> item);
     virtual not_null_ptr<ItemInstance> getItem();
     virtual bool hasItem();

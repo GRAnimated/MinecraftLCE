@@ -46,7 +46,9 @@ public:
     virtual void GetTouchPadData(int, C_4JInput::ETouchType, bool) = 0;
     virtual void SetMenuDisplayed(int, bool) = 0;
     virtual void func_7100790580(void) = 0;
-    virtual void RequestKeyboard(wchar_t const*, wchar_t const*, uint, uint, int (*)(void*, bool), void*, C_4JInput::EKeyboardMode) = 0;
+    virtual void RequestKeyboard(wchar_t const*, wchar_t const*, uint, uint, int (*)(void*, bool), void*,
+                                 C_4JInput::EKeyboardMode)
+        = 0;
     virtual void RequestErrorViewer(uint, uint, int (*)(void*), void*) = 0;
     virtual void RequestErrorViewer(uint, wchar_t*, wchar_t*, int (*)(void*), void*) = 0;
     virtual void SetLocalMultiplayer(bool) = 0;
@@ -104,7 +106,8 @@ public:
     void GetTouchPadData(int, C_4JInput::ETouchType, bool);
     void SetMenuDisplayed(int, bool);
     void func_7100790580(void);
-    void RequestKeyboard(wchar_t const*, wchar_t const*, uint, uint, int (*)(void*, bool), void*, C_4JInput::EKeyboardMode);
+    void RequestKeyboard(wchar_t const*, wchar_t const*, uint, uint, int (*)(void*, bool), void*,
+                         C_4JInput::EKeyboardMode);
     void RequestErrorViewer(uint, uint, int (*)(void*), void*);
     void RequestErrorViewer(uint, wchar_t*, wchar_t*, int (*)(void*), void*);
     void SetLocalMultiplayer(bool);

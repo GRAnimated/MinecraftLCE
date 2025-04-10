@@ -10,7 +10,7 @@ AllowAllParametersOfDeclarationOnNextLine: true
 AllowShortBlocksOnASingleLine: Never
 AllowShortCaseLabelsOnASingleLine: false
 AllowShortFunctionsOnASingleLine: Inline
-AllowShortIfStatementsOnASingleLine: Never
+AllowShortIfStatementsOnASingleLine: false
 AllowShortLoopsOnASingleLine: false
 AlwaysBreakAfterDefinitionReturnType: None
 AlwaysBreakAfterReturnType: None
@@ -18,11 +18,11 @@ AlwaysBreakBeforeMultilineStrings: false
 AlwaysBreakTemplateDeclarations: Yes
 BinPackArguments: true
 BinPackParameters: true
-BreakBeforeBinaryOperators: None
+BreakBeforeBinaryOperators: All
 BreakBeforeBraces: Attach
 BreakBeforeTernaryOperators: false
 BreakConstructorInitializersBeforeComma: false
-ColumnLimit:     200
+ColumnLimit:     110
 CommentPragmas:  '^ (IWYU pragma:|NOLINT)'
 ConstructorInitializerAllOnOneLineOrOnePerLine: false
 ConstructorInitializerIndentWidth: 4
@@ -31,13 +31,6 @@ Cpp11BracedListStyle: true
 DerivePointerAlignment: false
 DisableFormat:   false
 ForEachMacros:   []
-IncludeCategories:
-  - Regex:           '^<[Ww]indows\.h>$'
-    Priority:        1
-  - Regex:           '^<'
-    Priority:        2
-  - Regex:           '^"'
-    Priority:        3
 IndentCaseLabels: false
 IndentWidth:     4
 IndentWrappedFunctionNames: false
@@ -57,7 +50,6 @@ PenaltyExcessCharacter: 1000000
 PenaltyReturnTypeOnItsOwnLine: 60
 PointerAlignment: Left
 ReflowComments:  true
-SortIncludes:    true
 SpaceAfterCStyleCast: false
 SpaceBeforeAssignmentOperators: true
 SpaceBeforeParens: ControlStatements
@@ -71,5 +63,26 @@ SpacesInSquareBrackets: false
 Standard: c++17
 TabWidth:        4
 UseTab:          Never
-WhitespaceSensitiveMacros: ["SEAD_ENUM", "SEAD_ENUM_EX", "SEAD_ENUM_EX_VALUES"]
+WhitespaceSensitiveMacros: []
+
+SortIncludes: true
+IncludeBlocks: Preserve
+IncludeIsMainRegex: '([-_a-zA-Z0-9]+)\.(h|hpp)'
+IncludeCategories:
+  - Regex: '".*types\.h"'
+    Priority: 1
+  - Regex: '^"4J_Libraries_Source/'
+    Priority: 2
+  - Regex: '^"Minecraft\.Client/'
+    Priority: 3
+  - Regex: '^"Minecraft\.Nbt/'
+    Priority: 4
+  - Regex: '^"Minecraft\.Server/'
+    Priority: 5
+  - Regex: '^"Minecraft\.World/'
+    Priority: 6
+  - Regex: '^"PlatformLibraries_Source/'
+    Priority: 7
+  - Regex: '.*'
+    Priority: 8
 ...

@@ -1,13 +1,14 @@
 #pragma once
 
-#include <memory>
 #include "Minecraft.Core/BlockPos.h"
 #include "Minecraft.Network/PacketType.h"
 #include "Minecraft.Network/protocol/Packet.h"
+#include <memory>
 
 class Player;
 
-class ClientboundPlayerSleepPacket : public Packet, public std::enable_shared_from_this<ClientboundPlayerSleepPacket> {
+class ClientboundPlayerSleepPacket : public Packet,
+                                     public std::enable_shared_from_this<ClientboundPlayerSleepPacket> {
 public:
     static std::shared_ptr<Packet> create();
 

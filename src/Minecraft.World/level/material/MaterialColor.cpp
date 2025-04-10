@@ -75,5 +75,6 @@ int MaterialColor::calculateRGBColor(int colorIntensity) const {
         rgbIntensity = 180;
     }
 
-    return 0xFF000000 | (((mColor & 0xFF0000) >> 16) * rgbIntensity / 255) << 16 | (((mColor & 0xFF00) >> 8) * rgbIntensity / 255) << 8 | (mColor & 0xFF) * rgbIntensity / 255;
+    return 0xFF000000 | (((mColor & 0xFF0000) >> 16) * rgbIntensity / 255) << 16
+           | (((mColor & 0xFF00) >> 8) * rgbIntensity / 255) << 8 | (mColor & 0xFF) * rgbIntensity / 255;
 }

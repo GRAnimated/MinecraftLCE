@@ -2,6 +2,4 @@
 
 #include "Minecraft.World/entity/player/LocalPlayer.h"
 
-class MultiplayerLocalPlayer : public LocalPlayer{
-
-};
+class MultiplayerLocalPlayer : public LocalPlayer {};

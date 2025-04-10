@@ -66,8 +66,10 @@ public:
     virtual void unload(bool, bool);
     virtual void containsPlayer();
     virtual void markUnsaved();
-    virtual void getEntities(std::shared_ptr<Entity>, AABB const*, std::vector<std::shared_ptr<Entity>>&, Predicate<std::shared_ptr<Entity>> const*);
-    virtual void getEntitiesOfClass(std::type_info const&, AABB const*, std::vector<std::shared_ptr<Entity>>&, Predicate<std::shared_ptr<Entity>> const*, bool);
+    virtual void getEntities(std::shared_ptr<Entity>, AABB const*, std::vector<std::shared_ptr<Entity>>&,
+                             Predicate<std::shared_ptr<Entity>> const*);
+    virtual void getEntitiesOfClass(std::type_info const&, AABB const*, std::vector<std::shared_ptr<Entity>>&,
+                                    Predicate<std::shared_ptr<Entity>> const*, bool);
     virtual void countEntities();
     virtual void shouldSave(bool);
     virtual void getBlocksAndData(arrayWithLength<unsigned char>*, int, int, int, int, int, int, int, bool);

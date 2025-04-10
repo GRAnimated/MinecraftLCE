@@ -1,8 +1,8 @@
 #pragma once
 
-#include "Minecraft.Nbt/Tag.h"
 #include "nn/types.h"
 #include "types.h"
+#include "Minecraft.Nbt/Tag.h"
 
 class CompoundTag : public Tag {
 public:

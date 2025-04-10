@@ -1,8 +1,8 @@
 #pragma once
 
-#include <memory>
-#include "Minecraft.Network/protocol/Packet.h"
 #include "types.h"
+#include "Minecraft.Network/protocol/Packet.h"
+#include <memory>
 
 class XZPacket : public Packet, public std::enable_shared_from_this<XZPacket> {
 public:

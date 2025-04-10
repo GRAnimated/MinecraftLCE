@@ -2,7 +2,8 @@
 
 #include "Minecraft.Network/protocol/Packet.h"
 
-class ClientboundSetTimePacket : public Packet, public std::enable_shared_from_this<ClientboundSetTimePacket> {
+class ClientboundSetTimePacket : public Packet,
+                                 public std::enable_shared_from_this<ClientboundSetTimePacket> {
 public:
     static std::shared_ptr<Packet> create();
 

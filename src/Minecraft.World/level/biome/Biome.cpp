@@ -2,14 +2,14 @@
 
 #include "Minecraft.Client/Minecraft.h"
 #include "Minecraft.Client/color/ColourTable.h"
-#include "Minecraft.Core/BlockPos.h"
-#include "Minecraft.Util/Mth.h"
 #include "Minecraft.World/Random.h"
 #include "Minecraft.World/level/block/FoliageColor.h"
 #include "Minecraft.World/level/block/GrassColor.h"
 #include "Minecraft.World/level/levelgen/feature/FlowerFeature.h"
 #include "Minecraft.World/level/levelgen/synth/PerlinSimplexNoise.h"
 #include "Minecraft.World/level/material/MaterialColor.h"
+#include "Minecraft.Core/BlockPos.h"
+#include "Minecraft.Util/Mth.h"
 
 // NON_MATCHING
 Biome::BiomeProperties::BiomeProperties(const std::wstring& name) : mBiomeName(name) {}
@@ -103,11 +103,13 @@ float Biome::getTemperature(const BlockPos* pos) {
 }
 
 unsigned int Biome::getGrassColor(const BlockPos* pos) {
-    return GrassColor::get(Mth::clamp(getTemperature(pos), 0.0f, 1.0f), Mth::clamp(getDownfall(), 0.0f, 1.0f));
+    return GrassColor::get(Mth::clamp(getTemperature(pos), 0.0f, 1.0f),
+                           Mth::clamp(getDownfall(), 0.0f, 1.0f));
 }
 
 unsigned int Biome::getFoliageColor(const BlockPos* pos) {
-    return FoliageColor::get(Mth::clamp(getTemperature(pos), 0.0f, 1.0f), Mth::clamp(getDownfall(), 0.0f, 1.0f));
+    return FoliageColor::get(Mth::clamp(getTemperature(pos), 0.0f, 1.0f),
+                             Mth::clamp(getDownfall(), 0.0f, 1.0f));
 }
 
 void Biome::setGrassColor(const BlockPos* pos, unsigned int color) {

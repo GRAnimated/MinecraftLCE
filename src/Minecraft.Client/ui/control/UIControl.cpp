@@ -1,7 +1,7 @@
-#include "Minecraft.Client/ui/control/UIControl.h"
 #include "4J_Libraries_Source/fui/fuiRenderNode.h"
+#include "Minecraft.Client/ui/control/UIControl.h"
 
-UIControl::UIControl(){
+UIControl::UIControl() {
     this->mParentUIScene = nullptr;
     this->mOpacity = 1.0f;
     this->mName = "";
@@ -11,12 +11,12 @@ UIControl::UIControl(){
     this->mFuiRenderNode = nullptr;
 }
 
-bool UIControl::setupControl(UIScene * parentUIScene, fuiRenderNode * renderNode, std::string const& name){
+bool UIControl::setupControl(UIScene* parentUIScene, fuiRenderNode* renderNode, std::string const& name) {
     this->mParentUIScene = parentUIScene;
     this->mName = name;
     this->mFuiRenderNode = renderNode->findNode(name.c_str());
-    
-    if(this->mFuiRenderNode){
+
+    if (this->mFuiRenderNode) {
         this->mPosX = this->mFuiRenderNode->getX();
         this->mPosY = this->mFuiRenderNode->getY();
         this->mWidth = this->mFuiRenderNode->getWidth();
@@ -26,8 +26,8 @@ bool UIControl::setupControl(UIScene * parentUIScene, fuiRenderNode * renderNode
     return this->mFuiRenderNode != nullptr;
 }
 
-void UIControl::UpdateControl(){
-    if(this->mFuiRenderNode){
+void UIControl::UpdateControl() {
+    if (this->mFuiRenderNode) {
         this->mPosX = this->mFuiRenderNode->getX();
         this->mPosY = this->mFuiRenderNode->getY();
         this->mWidth = this->mFuiRenderNode->getWidth();
@@ -35,17 +35,17 @@ void UIControl::UpdateControl(){
     }
 }
 
-void UIControl::tick(){}
+void UIControl::tick() {}
 
-void UIControl::ReInit(){
-    if(this->mFuiRenderNode){
+void UIControl::ReInit() {
+    if (this->mFuiRenderNode) {
         this->mFuiRenderNode->setAlpha(this->mOpacity);
         this->mFuiRenderNode->setVisibility(this->mVisible);
     }
 }
 
-void UIControl::setFocus(){}
+void UIControl::setFocus() {}
 
-bool UIControl::hasFocus(){
+bool UIControl::hasFocus() {
     return false;
 }

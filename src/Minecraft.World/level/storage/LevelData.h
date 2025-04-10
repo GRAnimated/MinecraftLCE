@@ -1,11 +1,11 @@
 #pragma once
 
+#include "Minecraft.World/level/GameRules.h"
+#include "Minecraft.Core/BlockPos.h"
 #include <memory>
 #include <string>
 #include <unordered_map>
 #include <vector>
-#include "Minecraft.Core/BlockPos.h"
-#include "Minecraft.World/level/GameRules.h"
 
 class CompoundTag;
 class BlockPos;

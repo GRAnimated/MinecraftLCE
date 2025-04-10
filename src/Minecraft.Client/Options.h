@@ -1,7 +1,7 @@
 #pragma once
 
-#include <string>
 #include "Minecraft.Core/io/File.h"
+#include <string>
 
 class KeyMapping;
 class Minecraft;

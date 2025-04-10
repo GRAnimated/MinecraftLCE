@@ -1,11 +1,10 @@
 #pragma once
 
-#include <memory>
-#include <set>
 #include "Minecraft.World/InteractionHand.h"
 #include "Minecraft.World/eINSTANCEOF.h"
 #include "Minecraft.World/entity/CommandSender.h"
-#include "Minecraft.World/InteractionHand.h"
+#include <memory>
+#include <set>
 
 #include "types.h"
 
@@ -102,8 +101,8 @@ public:
     virtual void save(CompoundTag*);
     virtual void load(CompoundTag*);
     virtual void repositionEntityAfterLoad();
-    virtual void readAdditionalSaveData(CompoundTag *) = 0;
-    virtual void addAdditonalSaveData(CompoundTag *) = 0;
+    virtual void readAdditionalSaveData(CompoundTag*) = 0;
+    virtual void addAdditonalSaveData(CompoundTag*) = 0;
     virtual void readAdditionContructionTag_4(CompoundTag*);
     virtual void getAdditionContructionTag();
     virtual void spawnAtLocation(Item*, int);

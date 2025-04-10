@@ -24,7 +24,8 @@ Value SimpleRegistry<Key, Value, Hash, KeyEqual>::getRandom(Random* random) {
 
     // Assuming Random is some custom random number generator class with an appropriate method
     auto it = mMap.begin();
-    std::advance(it, random->nextInt(mMap.size())); // 'nextInt' should return a random index in the range
+    std::advance(it, random->nextInt(mMap.size())); // 'nextInt' should return a random index in the
+range
 
     return it->second;
 }

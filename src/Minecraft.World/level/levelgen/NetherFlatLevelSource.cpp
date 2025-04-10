@@ -1,4 +1,3 @@
-#include "Minecraft.World/level/levelgen/NetherFlatLevelSource.h"
 #include "Minecraft.Client/CMinecraftApp.h"
 #include "Minecraft.Client/platform/NX/Platform.h"
 #include "Minecraft.World/ArrayWithLength.h"
@@ -8,6 +7,7 @@
 #include "Minecraft.World/level/block/Blocks.h"
 #include "Minecraft.World/level/chunk/LevelChunk.h"
 #include "Minecraft.World/level/levelgen/ChunkPrimer.h"
+#include "Minecraft.World/level/levelgen/NetherFlatLevelSource.h"
 #include "Minecraft.World/level/levelgen/feature/HellFireFeature.h"
 #include "Minecraft.World/level/levelgen/feature/LightGemFeature.h"
 #include "Minecraft.World/level/storage/LevelData.h"
@@ -67,7 +67,8 @@ void NetherFlatLevelSource::buildSurfaces(int x, int z, ChunkPrimer* primer) {
                     }
                 }
 
-                if ((adjustedSize / 2 - 1 <= z && (mRandom->nextInt(4) + y > 14 || adjustedSize / 2 < z)) || (y >= (127 - mRandom->nextInt(5)) || y <= mRandom->nextInt(5))) {
+                if ((adjustedSize / 2 - 1 <= z && (mRandom->nextInt(4) + y > 14 || adjustedSize / 2 < z))
+                    || (y >= (127 - mRandom->nextInt(5)) || y <= mRandom->nextInt(5))) {
                     primer->setState((y << 11) | (chunkX << 7) | chunkZ, bedrock);
                 }
             }
@@ -161,7 +162,8 @@ void NetherFlatLevelSource::getMobsAt(MobCategory* category, BlockPos const& pos
         biome->getMobs(category);
 }
 
-void* NetherFlatLevelSource::findNearestMapFeature(Level* level, std::wstring const& name, BlockPos const& pos, bool flag) {
+void* NetherFlatLevelSource::findNearestMapFeature(Level* level, std::wstring const& name,
+                                                   BlockPos const& pos, bool flag) {
     return nullptr;
 }
 

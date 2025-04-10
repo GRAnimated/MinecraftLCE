@@ -1,7 +1,7 @@
 #pragma once
 class Item;
 
-class MenuBuilder{
+class MenuBuilder {
 public:
     void ADD_ITEM(Item*, int);
 };

@@ -1,6 +1,5 @@
-#pragma once 
+#pragma once
+
 #include "Minecraft.World/entity/player/Player.h"
 
-class AbstractClientPlayer : public Player{
-
-};
+class AbstractClientPlayer : public Player {};

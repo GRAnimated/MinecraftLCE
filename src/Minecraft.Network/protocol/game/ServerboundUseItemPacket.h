@@ -1,9 +1,10 @@
 #pragma once
 
-#include "Minecraft.Network/protocol/Packet.h"
 #include "Minecraft.World/InteractionHand.h"
+#include "Minecraft.Network/protocol/Packet.h"
 
-class ServerboundUseItemPacket : public Packet, public std::enable_shared_from_this<ServerboundUseItemPacket> {
+class ServerboundUseItemPacket : public Packet,
+                                 public std::enable_shared_from_this<ServerboundUseItemPacket> {
 public:
     static std::shared_ptr<Packet> create();
 

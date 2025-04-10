@@ -1,7 +1,7 @@
 #include "Minecraft.Core/io/FileEntry.h"
 
-#include <cstring>
 #include "Minecraft.Core/io/File.h"
+#include <cstring>
 
 FileEntry::FileEntry(wchar_t* a2, unsigned int a3, unsigned int a4) {
     mOffset = a3;

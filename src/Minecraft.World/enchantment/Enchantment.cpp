@@ -1,8 +1,10 @@
-#include "Enchantment.h"
 #include "Minecraft.World/enchantment/EnchantmentCategory.h"
 #include "Minecraft.World/item/ItemInstance.h"
+#include "Enchantment.h"
 
-Enchantment::Enchantment(const Rarity* rarity, const EnchantmentCategory* category, arrayWithLength<EquipmentSlot> array) : mEnchantmentCategory(category){
+Enchantment::Enchantment(const Rarity* rarity, const EnchantmentCategory* category,
+                         arrayWithLength<EquipmentSlot> array)
+    : mEnchantmentCategory(category) {
     this->mRarity = rarity;
     this->mSlots.data = array.data;
     this->mSlots.length = array.length;
@@ -50,7 +52,7 @@ int Enchantment::getDescriptionId() {
     return this->mDescriptionId;
 }
 
-bool Enchantment::canEnchant(const std::shared_ptr<ItemInstance>& item){
+bool Enchantment::canEnchant(const std::shared_ptr<ItemInstance>& item) {
     return this->mEnchantmentCategory->canEnchant(item->getItem());
 }
 
@@ -67,6 +69,4 @@ bool Enchantment::isCurse() {
 }
 
 // I don't know how to handle destructors...
-Enchantment::~Enchantment() {
-
-}
+Enchantment::~Enchantment() {}

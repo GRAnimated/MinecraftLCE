@@ -33,7 +33,8 @@ public:
 
     static void staticCtor();
 
-    Direction(int, int, int, const std::wstring&, Direction::AxisDirection*, Direction::Axis*, Vec3i*, unsigned char);
+    Direction(int, int, int, const std::wstring&, Direction::AxisDirection*, Direction::Axis*, Vec3i*,
+              unsigned char);
     virtual ~Direction();
 
     int getX() const;

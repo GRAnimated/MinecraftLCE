@@ -4,7 +4,9 @@
 
 class Abilities;
 
-class ClientboundPlayerAbilitiesPacket : public Packet, public std::enable_shared_from_this<ClientboundPlayerAbilitiesPacket> {
+class ClientboundPlayerAbilitiesPacket
+    : public Packet,
+      public std::enable_shared_from_this<ClientboundPlayerAbilitiesPacket> {
 public:
     static std::shared_ptr<Packet> create();
 

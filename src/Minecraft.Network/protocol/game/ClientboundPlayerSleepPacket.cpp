@@ -14,7 +14,9 @@ ClientboundPlayerSleepPacket::ClientboundPlayerSleepPacket() : Packet() {
 }
 
 // NON_MATCHING: Requires Player header
-ClientboundPlayerSleepPacket::ClientboundPlayerSleepPacket(std::shared_ptr<Player> player, BlockPos const& pos) : Packet() {
+ClientboundPlayerSleepPacket::ClientboundPlayerSleepPacket(std::shared_ptr<Player> player,
+                                                           BlockPos const& pos)
+    : Packet() {
     // mPlayerId = player->getId();
     mPos = pos;
 }

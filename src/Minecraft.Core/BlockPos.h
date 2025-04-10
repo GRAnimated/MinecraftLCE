@@ -1,8 +1,8 @@
 #pragma once
 
-#include <memory>
-#include "Minecraft.Core/Vec3i.h"
 #include "types.h"
+#include "Minecraft.Core/Vec3i.h"
+#include <memory>
 
 class Direction;
 class Entity;

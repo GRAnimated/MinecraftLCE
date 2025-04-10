@@ -1,7 +1,5 @@
 #include "Minecraft.Network/Connection.h"
 
-#include <cstdio>
-#include <memory>
 #include "Minecraft.Client/C4JEventImpl.h"
 #include "Minecraft.Client/C4JThreadImpl.h"
 #include "Minecraft.Client/CGameNetworkManager.h"
@@ -21,6 +19,8 @@
 #include "Minecraft.Network/protocol/game/ServerboundKeepAlivePacket.h"
 #include "Minecraft.Network/protocol/game/ServerboundPlayerActionPacket.h"
 #include "nn/os/os_Mutex.h"
+#include <cstdio>
+#include <memory>
 
 bool Connection::getAndSetRunning(bool running) {
     nn::os::LockMutex(&mIsRunningMutex);
@@ -91,7 +91,9 @@ Connection::~Connection() {
 static char filename[0x100] = {};
 
 Connection::Connection(Socket* socket, std::wstring const& type, PacketListener* packetListener)
-    : mIncomingQueue(std::deque<std::shared_ptr<Packet>>()), mOutgoingQueue(std::deque<std::shared_ptr<Packet>>()), mSlowOutgoingQueue(std::deque<std::shared_ptr<Packet>>()) {
+    : mIncomingQueue(std::deque<std::shared_ptr<Packet>>()),
+      mOutgoingQueue(std::deque<std::shared_ptr<Packet>>()),
+      mSlowOutgoingQueue(std::deque<std::shared_ptr<Packet>>()) {
     _init();
     mSocket = socket;
     mRemoteSocketAddress = socket->getRemoteSocketAddress();
@@ -178,7 +180,8 @@ int Connection::runWrite(void* conn) {
                 do {
                     writeSuccess = connection->writeTick();
                     currentTime = System::processTimeInMilliSecs();
-                } while (connection->mDataOutputStream->getSize() != 0x7FFFFFFF && writeSuccess && (currentTime - startTime) <= 199);
+                } while (connection->mDataOutputStream->getSize() != 0x7FFFFFFF && writeSuccess
+                         && (currentTime - startTime) <= 199);
 
                 writeStatus = connection->mC4JEventImpl2->WaitForSignal(100);
 
@@ -242,7 +245,9 @@ bool Connection::writeTick() {
         return false;
 
     bool returnValue;
-    if (!mOutgoingQueue.empty() && (!mFakeLag || (System::processTimeInMilliSecs() - mOutgoingQueue.front()->mCreatedTime >= mFakeLag))) {
+    if (!mOutgoingQueue.empty()
+        && (!mFakeLag
+            || (System::processTimeInMilliSecs() - mOutgoingQueue.front()->mCreatedTime >= mFakeLag))) {
         nn::os::LockMutex(&mOutgoingMutex);
         std::shared_ptr<Packet> packet = mOutgoingQueue.front();
         mOutgoingQueue.pop_front();
@@ -259,7 +264,9 @@ bool Connection::writeTick() {
         returnValue = false;
     }
 
-    if (mDelay-- > 0 || mSlowOutgoingQueue.empty() || (mFakeLag && System::processTimeInMilliSecs() - mSlowOutgoingQueue.front()->mCreatedTime < mFakeLag)) {
+    if (mDelay-- > 0 || mSlowOutgoingQueue.empty()
+        || (mFakeLag
+            && System::processTimeInMilliSecs() - mSlowOutgoingQueue.front()->mCreatedTime < mFakeLag)) {
         return returnValue;
     }
 
@@ -275,7 +282,8 @@ bool Connection::writeTick() {
 
         if (mDataOutputStream)
             mDataOutputStream->flush();
-        mSocketOutputStream->writeWithFlags(mByteArrayOutputStream->mBuffer, 0, mByteArrayOutputStream->size(), 1);
+        mSocketOutputStream->writeWithFlags(mByteArrayOutputStream->mBuffer, 0,
+                                            mByteArrayOutputStream->size(), 1);
         mByteArrayOutputStream->clear();
     } else {
         Packet::writePacket(packet, mDataOutputStream, mPacketListener->isServerPacketListener(), field_164);
@@ -294,7 +302,8 @@ void Connection::flush() {
 
 bool Connection::readTick() {
     if (mDataInputStream && !field_119) {
-        std::shared_ptr<Packet> packet = Packet::readPacket(mDataInputStream, mPacketListener->isServerPacketListener(), field_160, field_119);
+        std::shared_ptr<Packet> packet = Packet::readPacket(
+            mDataInputStream, mPacketListener->isServerPacketListener(), field_160, field_119);
         if (packet) {
             dword_71017865A0[packet->getPacketId()] += packet->getEstimatedSize() + 1;
             nn::os::LockMutex(&mIncomingMutex);

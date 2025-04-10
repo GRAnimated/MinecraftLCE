@@ -2,7 +2,8 @@
 
 #include "Minecraft.Network/protocol/Packet.h"
 
-class ClientboundKeepAlivePacket : public Packet, public std::enable_shared_from_this<ClientboundKeepAlivePacket> {
+class ClientboundKeepAlivePacket : public Packet,
+                                   public std::enable_shared_from_this<ClientboundKeepAlivePacket> {
 public:
     static std::shared_ptr<Packet> create();
 

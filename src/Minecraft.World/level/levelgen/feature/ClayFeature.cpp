@@ -1,10 +1,10 @@
-#include "Minecraft.World/level/levelgen/feature/ClayFeature.h"
-#include "Minecraft.Core/BlockPos.h"
 #include "Minecraft.World/Random.h"
 #include "Minecraft.World/level/Level.h"
 #include "Minecraft.World/level/block/Blocks.h"
 #include "Minecraft.World/level/block/state/BlockState.h"
+#include "Minecraft.World/level/levelgen/feature/ClayFeature.h"
 #include "Minecraft.World/level/material/Material.h"
+#include "Minecraft.Core/BlockPos.h"
 
 ClayFeature::ClayFeature(int unk) : Feature(false), mBlock(Blocks::CLAY), field_18(unk) {}
 

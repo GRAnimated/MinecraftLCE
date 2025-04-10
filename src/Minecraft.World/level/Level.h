@@ -64,9 +64,12 @@ public:
     virtual void sendBlockUpdated(BlockPos const&, BlockState const*, BlockState const*, int, bool);
     virtual bool isBlockToBeTickedAt(BlockPos const&, Block*);
     virtual void getNeighbourBrightnesses(int*, LightLayer::variety, int, int, int);
-    virtual void playSound(std::shared_ptr<Player>, BlockPos const&, SoundEvent const*, SoundSource::ESoundSource, float, float, float);
-    virtual void playSound(std::shared_ptr<Player>, double, double, double, SoundEvent const*, SoundSource::ESoundSource, float, float, float);
-    virtual void playLocalSound(double, double, double, SoundEvent const*, SoundSource::ESoundSource, float, float, bool, float);
+    virtual void playSound(std::shared_ptr<Player>, BlockPos const&, SoundEvent const*,
+                           SoundSource::ESoundSource, float, float, float);
+    virtual void playSound(std::shared_ptr<Player>, double, double, double, SoundEvent const*,
+                           SoundSource::ESoundSource, float, float, float);
+    virtual void playLocalSound(double, double, double, SoundEvent const*, SoundSource::ESoundSource, float,
+                                float, bool, float);
     virtual void addGlobalEntity(std::shared_ptr<Entity>);
     virtual void addEntity(std::shared_ptr<Entity>);
     virtual void entityAdded(std::shared_ptr<Entity>);
@@ -94,7 +97,8 @@ public:
     virtual void fetchTicksInArea(BoundingBox*, bool);
     virtual void getEntity(int);
     virtual void addEntities(std::vector<std::shared_ptr<Entity>, std::allocator<std::shared_ptr<Entity>>>*);
-    virtual void removeEntities(std::vector<std::shared_ptr<Entity>, std::allocator<std::shared_ptr<Entity>>>*);
+    virtual void
+    removeEntities(std::vector<std::shared_ptr<Entity>, std::allocator<std::shared_ptr<Entity>>>*);
     virtual void disconnect(bool);
     virtual void mayInteract(std::shared_ptr<Player>, BlockPos const&, Block*);
     virtual void broadcastEntityEvent(std::shared_ptr<Entity>, unsigned int, int);
@@ -104,7 +108,9 @@ public:
     virtual void pure_virtual_4() = 0;
     virtual void updateNeighbourForOutputSignal(BlockPos const&, Block*);
     virtual void sendPacketToServer(std::shared_ptr<Packet>);
-    virtual void findNearestMapFeature(std::basic_string<wchar_t, std::char_traits<wchar_t>, std::allocator<wchar_t>> const&, BlockPos const&, bool);
+    virtual void findNearestMapFeature(
+        std::basic_string<wchar_t, std::char_traits<wchar_t>, std::allocator<wchar_t>> const&,
+        BlockPos const&, bool);
     virtual void newPrimedTntAllowed();
     virtual void newFallingBlockAllowed();
     virtual void explodeNextEnderCrystal();
@@ -163,15 +169,15 @@ public:
     void* qword130;
     int dword138;
     int dword13C;
-    void *qword140;
+    void* qword140;
     int dword148;
     int dword14C;
-    void *qword150;
-    void *qword158;
-    void *qword160;
-    void *qword168;
-    void *mRandom;
-    void *qword178;
+    void* qword150;
+    void* qword158;
+    void* qword160;
+    void* qword168;
+    void* mRandom;
+    void* qword178;
     void* qword180;
     char gap188[8];
     void* qword190;
@@ -179,7 +185,7 @@ public:
     void* qword1A0;
     char gap1A8[8];
     void* qword1B0;
-    void *qword1B8;
+    void* qword1B8;
     void* qword1C0;
     char gap1C8[16];
     void* qword1D8;

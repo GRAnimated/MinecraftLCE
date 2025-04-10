@@ -4,12 +4,12 @@
 class UIScene;
 class fuiRenderNode;
 
-class UIControl{
+class UIControl {
 public:
     UIControl();
 
     virtual ~UIControl();
-    virtual bool setupControl(UIScene *, fuiRenderNode *, std::string const&);
+    virtual bool setupControl(UIScene*, fuiRenderNode*, std::string const&);
     virtual void UpdateControl();
     virtual void tick();
     virtual void ReInit();

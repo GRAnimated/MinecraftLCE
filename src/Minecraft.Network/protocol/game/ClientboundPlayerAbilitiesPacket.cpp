@@ -1,9 +1,9 @@
 #include "Minecraft.Network/protocol/game/ClientboundPlayerAbilitiesPacket.h"
 
 #include "Minecraft.Client/multiplayer/PacketListener.h"
+#include "Minecraft.World/entity/player/Abilities.h"
 #include "Minecraft.Core/io/DataInputStream.h"
 #include "Minecraft.Core/io/DataOutputStream.h"
-#include "Minecraft.World/entity/player/Abilities.h"
 
 std::shared_ptr<Packet> ClientboundPlayerAbilitiesPacket::create() {
     return std::shared_ptr<Packet>(new ClientboundPlayerAbilitiesPacket());
@@ -20,7 +20,8 @@ ClientboundPlayerAbilitiesPacket::ClientboundPlayerAbilitiesPacket() : Packet() 
     mPlayerId = 0;
 }
 
-ClientboundPlayerAbilitiesPacket::ClientboundPlayerAbilitiesPacket(Abilities* abilities, int playerId) : Packet() {
+ClientboundPlayerAbilitiesPacket::ClientboundPlayerAbilitiesPacket(Abilities* abilities, int playerId)
+    : Packet() {
     setInvulnerable(abilities->mIsInvulnerable);
     setFlying(abilities->mIsFlying);
     setCanFly(abilities->mIsEnableFly);

@@ -4,7 +4,7 @@
 class Entity;
 class HitResult;
 
-class Projectile{
+class Projectile {
 public:
     virtual ~Projectile();
     virtual void shoot(double, double, double, float, float) = 0;

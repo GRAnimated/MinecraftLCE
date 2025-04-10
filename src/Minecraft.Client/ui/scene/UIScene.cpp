@@ -1,11 +1,11 @@
-#include "Minecraft.Client/ui/scene/UIScene.h"
 #include "Minecraft.Client/ui/ConsoleUIController.h"
-#include "Minecraft.Client/ui/scene/UILayer.h"
 #include "Minecraft.Client/ui/control/UIControl.h"
+#include "Minecraft.Client/ui/scene/UILayer.h"
+#include "Minecraft.Client/ui/scene/UIScene.h"
 #include <string>
 
 // It's matching but... some of those variable inits should be moved to header
-UIScene::UIScene(int padID, UILayer* uiLayer){
+UIScene::UIScene(int padID, UILayer* uiLayer) {
     this->mPadID = padID;
     this->qword30 = nullptr;
     this->mFuiFile = nullptr;
@@ -29,107 +29,108 @@ UIScene::UIScene(int padID, UILayer* uiLayer){
     this->bool_28 = 0;
 }
 
-bool UIScene::needsReloaded(){
+bool UIScene::needsReloaded() {
     return !this->mFuiFile && (!this->stealsFocus() || this->mFocusRelated);
 }
 
-bool UIScene::hasMovie(){
+bool UIScene::hasMovie() {
     return this->mFuiFile != nullptr;
 }
 
-void UIScene::updateSafeZone(){
+void UIScene::updateSafeZone() {
     double v1 = 0.0, v2 = 0.0, v4 = 0.0, v5 = 0.0;
 
     switch (this->mUILayer->getViewPort()) {
-        case 1:
-            v1 = this->getSafeZoneHalfHeight();
-            v4 = v5 = v2;
-            break;
-        case 2:
-            v2 = this->getSafeZoneHalfHeight();
-            v4 = v5 = v1;
-            break;
-        case 3:
-            v4 = this->getSafeZoneHalfWidth();
-            v2 = v5 = v1;
-            break;
-        case 4:
-            v5 = this->getSafeZoneHalfWidth();
-            v2 = v1;
-            v4 = v1;
-            break;
-        case 5:
-            v1 = this->getSafeZoneHalfHeight();
-            v4 = this->getSafeZoneHalfWidth();
-            v5 = v2;
-            break;
-        case 6:
-            v1 = this->getSafeZoneHalfHeight();
-            v5 = this->getSafeZoneHalfWidth();
-            v4 = v2;
-            break;
-        case 7:
-            v2 = this->getSafeZoneHalfHeight();
-            v4 = this->getSafeZoneHalfWidth();
-            v5 = v1;
-            break;
-        case 8:
-            v2 = this->getSafeZoneHalfHeight();
-            v5 = this->getSafeZoneHalfWidth();
-            v4 = v1;
-            break;
-        default:
-            v1 = this->getSafeZoneHalfHeight();
-            v2 = this->getSafeZoneHalfHeight();
-            v4 = this->getSafeZoneHalfWidth();
-            v5 = this->getSafeZoneHalfWidth();
-            break;
+    case 1:
+        v1 = this->getSafeZoneHalfHeight();
+        v4 = v5 = v2;
+        break;
+    case 2:
+        v2 = this->getSafeZoneHalfHeight();
+        v4 = v5 = v1;
+        break;
+    case 3:
+        v4 = this->getSafeZoneHalfWidth();
+        v2 = v5 = v1;
+        break;
+    case 4:
+        v5 = this->getSafeZoneHalfWidth();
+        v2 = v1;
+        v4 = v1;
+        break;
+    case 5:
+        v1 = this->getSafeZoneHalfHeight();
+        v4 = this->getSafeZoneHalfWidth();
+        v5 = v2;
+        break;
+    case 6:
+        v1 = this->getSafeZoneHalfHeight();
+        v5 = this->getSafeZoneHalfWidth();
+        v4 = v2;
+        break;
+    case 7:
+        v2 = this->getSafeZoneHalfHeight();
+        v4 = this->getSafeZoneHalfWidth();
+        v5 = v1;
+        break;
+    case 8:
+        v2 = this->getSafeZoneHalfHeight();
+        v5 = this->getSafeZoneHalfWidth();
+        v4 = v1;
+        break;
+    default:
+        v1 = this->getSafeZoneHalfHeight();
+        v2 = this->getSafeZoneHalfHeight();
+        v4 = this->getSafeZoneHalfWidth();
+        v5 = this->getSafeZoneHalfWidth();
+        break;
     }
 
     this->setSafeZone(v1, v2, v4, v5);
 }
 
-void UIScene::updateViewportTouchOffset(){
+void UIScene::updateViewportTouchOffset() {
     C4JRender::eViewportType viewPortType = this->mUILayer->getViewPort();
     gConsoleUIController.updateViewportTouchOffset(viewPortType);
 }
 
-bool UIScene::mapElementsAndNames(){
+bool UIScene::mapElementsAndNames() {
     return true;
 }
 
-int UIScene::getSubSceneType() const{
+int UIScene::getSubSceneType() const {
     return 0;
 }
 
 // NON-MATCHING: may be wrong but I think it's beacuse for loop generating wrongly
-void UIScene::tick(){
-    if(!this->mHidden){
-        if(this->mHideLowerScenes)
+void UIScene::tick() {
+    if (!this->mHidden) {
+        if (this->mHideLowerScenes)
             this->byte_96 = 1;
 
         this->tickTimers();
 
-        for(UIControl* uiControl : this->mUIControls)
+        for (UIControl* uiControl : this->mUIControls)
             uiControl->tick();
-        
+
         this->mHideLowerScenes = true;
     }
 }
 
 void UIScene::handleTimerComplete(int) {}
 
-bool UIScene::stealsFocus(){
+bool UIScene::stealsFocus() {
     return true;
 }
 
-bool UIScene::hasFocus(int padID){
+bool UIScene::hasFocus(int padID) {
     return this->mFocusRelated && this->mPadID == padID;
 }
 
-void UIScene::updateTooltips(){
-    if(!gConsoleUIController.IsReloadingSkin()){
-        gConsoleUIController.SetTooltips(this->mPadID, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 0, 0);
+void UIScene::updateTooltips() {
+    if (!gConsoleUIController.IsReloadingSkin()) {
+        gConsoleUIController.SetTooltips(this->mPadID, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
+                                         -1, -1, 0, 0);
     }
 }
 
@@ -137,15 +138,15 @@ void UIScene::updateComponents() {}
 void UIScene::handleGainFocus(bool) {}
 void UIScene::handleLoseFocus() {}
 
-bool UIScene::hidesLowerScenes(){
+bool UIScene::hidesLowerScenes() {
     return this->mHideLowerScenes;
 }
 
-bool UIScene::blocksInput(){
+bool UIScene::blocksInput() {
     return false;
 }
 
-void* UIScene::GetMainPanel(){
+void* UIScene::GetMainPanel() {
     return nullptr;
 }
 

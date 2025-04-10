@@ -1,6 +1,6 @@
+#include "Minecraft.World/phys/Vec3.h"
 #include "Minecraft.Core/BlockPos.h"
 #include "Minecraft.Core/Direction.h"
-#include "Minecraft.World/phys/Vec3.h"
 
 BlockPos::BlockPos(int x, int y, int z) : Vec3i(x, y, z) {}
 
@@ -27,7 +27,8 @@ BlockPos BlockPos::relative(Direction const* direction) const {
 }
 
 BlockPos BlockPos::relative(Direction const* direction, int amount) const {
-    return BlockPos(getX() + direction->getX() * amount, getY() + direction->getY() * amount, getZ() + direction->getZ() * amount);
+    return BlockPos(getX() + direction->getX() * amount, getY() + direction->getY() * amount,
+                    getZ() + direction->getZ() * amount);
 }
 
 BlockPos BlockPos::above() const {

@@ -1,10 +1,10 @@
 #pragma once
 
-#include <memory>
-#include <vector>
+#include "types.h"
 #include "Minecraft.World/level/border/BorderChangeListener.h"
 #include "Minecraft.World/level/border/BorderStatus.h"
-#include "types.h"
+#include <memory>
+#include <vector>
 
 class AABB;
 class BlockPos;

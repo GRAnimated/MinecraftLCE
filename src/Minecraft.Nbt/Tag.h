@@ -1,7 +1,7 @@
 #pragma once
 
-#include <string>
 #include "nn/types.h"
+#include <string>
 
 class DataOutput;
 class DataInput;

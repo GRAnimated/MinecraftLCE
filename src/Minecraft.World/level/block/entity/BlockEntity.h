@@ -1,13 +1,13 @@
 #pragma once
 
-#include <memory>
-#include <unordered_map>
-#include "Minecraft.Core/BlockPos.h"
+#include "types.h"
 #include "Minecraft.Client/resources/IdMapper.h"
 #include "Minecraft.Nbt/CompoundTag.h"
-#include "Minecraft.Network/protocol/Packet.h"
 #include "Minecraft.World/eINSTANCEOF.h"
-#include "types.h"
+#include "Minecraft.Core/BlockPos.h"
+#include "Minecraft.Network/protocol/Packet.h"
+#include <memory>
+#include <unordered_map>
 
 class Level;
 class Block;
@@ -18,7 +18,9 @@ class BlockEntity : public std::enable_shared_from_this<BlockEntity> {
 public:
     using BlockEntityFunctor = BlockEntity* (*)();
 
-    static std::unordered_map<std::wstring, BlockEntityFunctor, std::hash<std::wstring>, std::equal_to<std::wstring>, std::allocator<std::pair<const std::wstring, BlockEntityFunctor>>>
+    static std::unordered_map<std::wstring, BlockEntityFunctor, std::hash<std::wstring>,
+                              std::equal_to<std::wstring>,
+                              std::allocator<std::pair<const std::wstring, BlockEntityFunctor>>>
         blockEntityFactoryMap;
 
     static void Register(int, BlockEntityFunctor, eINSTANCEOF, std::wstring);

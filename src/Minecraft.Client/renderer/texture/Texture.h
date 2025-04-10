@@ -1,7 +1,7 @@
 #pragma once
 
-#include <string>
 #include "types.h"
+#include <string>
 
 class BufferedImage;
 class Rect2i;

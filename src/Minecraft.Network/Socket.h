@@ -1,7 +1,7 @@
 #pragma once
 
-#include "Minecraft.Core/io/OutputStream.h"
 #include "Minecraft.World/ArrayWithLength.h"
+#include "Minecraft.Core/io/OutputStream.h"
 
 class InputStream;
 
