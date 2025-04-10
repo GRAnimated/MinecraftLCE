@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Minecraft.Core/IdMap.h"
+#include "Minecraft.Client/resources/IdMap.h"
 
 template <typename T>
 class IdMapper : public IdMap<T> {

@@ -1,6 +1,6 @@
 #pragma once
 #include <unordered_map>
-#include "Minecraft.Core/Registry.h"
+#include "Minecraft.Client/resources/Registry.h"
 
 template <typename Key, typename Value, typename Hash = std::hash<Key>, typename KeyEqual = std::equal_to<Key>>
 class SimpleRegistry : public Registry<Key, Value> {
