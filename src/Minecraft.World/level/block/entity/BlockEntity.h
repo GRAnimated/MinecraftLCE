@@ -3,7 +3,7 @@
 #include <memory>
 #include <unordered_map>
 #include "Minecraft.Core/BlockPos.h"
-#include "Minecraft.Core/IdMapper.h"
+#include "Minecraft.Client/resources/IdMapper.h"
 #include "Minecraft.Nbt/CompoundTag.h"
 #include "Minecraft.Network/protocol/Packet.h"
 #include "Minecraft.World/eINSTANCEOF.h"

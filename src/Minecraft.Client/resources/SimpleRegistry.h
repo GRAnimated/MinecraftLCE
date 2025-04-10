@@ -5,11 +5,11 @@
 template <typename Key, typename Value, typename Hash = std::hash<Key>, typename KeyEqual = std::equal_to<Key>>
 class SimpleRegistry : public Registry<Key, Value> {
 public:
-    Value get(const Key&) override;
-    void registerKey(const Key& key, const Value& value) override;
-    std::unordered_map<Key, Value> keySet() override;
-    Value getRandom(Random*) override;
-    bool containsKey(const Key&);
+    virtual Value get(Key) override;
+    virtual void registerKey(Key key, Value value) override;
+    virtual std::unordered_map<Key, Value> keySet() override;
+    virtual Value getRandom(Random*) override;
+    virtual bool containsKey(Key);
 
     char fill[0x50 - 0x8];
     //void* qword8;

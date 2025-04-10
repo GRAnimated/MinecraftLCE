@@ -5,7 +5,7 @@
 #include "Minecraft.World/entity/player/Player.h"
 #include "types.h"
 
-#include "Minecraft.Core/MappedRegistry.h"
+#include "Minecraft.Client/resources/MappedRegistry.h"
 
 // should be replaced with proper ones later on
 // even though those are unused

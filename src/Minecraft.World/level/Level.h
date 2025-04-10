@@ -128,6 +128,8 @@ public:
     void instaTick(BlockPos const&, BlockState const*, Random&);
     static void setInstaTick(bool);
 
+    void blockEntityChanged(BlockPos const&, std::shared_ptr<BlockEntity>);
+
     int dword8;
     char gapC[36];
     void* qword30;

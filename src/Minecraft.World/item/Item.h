@@ -2,7 +2,7 @@
 #include <memory>
 #include <string>
 #include "Minecraft.World/InteractionHand.h"
-#include "Minecraft.Core/SimpleRegistry.h"
+#include "Minecraft.Client/resources/SimpleRegistry.h"
 #include "Minecraft.World/Item/InteractionResultHolder.h"
 #include "types.h"
 
