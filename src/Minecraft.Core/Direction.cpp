@@ -17,3 +17,21 @@ void Direction::staticCtor() {
 
     VALUES = {DOWN, UP, NORTH, SOUTH, EAST, WEST};
 }
+
+// NON_MATCHING: There's more code surrounding the values push back
+Direction::Direction(int dirX, int dirY, int dirZ, const std::wstring& name, Direction::AxisDirection* axisDirection, Direction::Axis* axis, Vec3i* pos, unsigned char u8) {
+    mDirX = dirX;
+    mDirY = dirY;
+    mDirZ = dirZ;
+    field_18 = name;
+    field_30 = axis;
+    field_38 = axisDirection;
+    mPos = new Vec3i(*pos);
+    byte_48 = u8;
+
+    VALUES.push_back(this);
+
+    mX = pos->getX();
+    mY = pos->getY();
+    mZ = pos->getZ();
+}

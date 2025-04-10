@@ -2,6 +2,7 @@
 
 #include <memory>
 
+#include "Minecraft.World/level/block/boxed/TypedBoxed.h"
 #include "Minecraft.World/level/block/state/BlockBehaviours.h"
 #include "Minecraft.World/level/block/state/BlockProperties.h"
 
@@ -51,9 +52,9 @@ public:
     virtual void getOutlineAABB(Level*, BlockPos const&) const = 0;
     virtual bool shouldRenderFace(LevelSource*, BlockPos const&, Direction const*) const = 0;
     virtual bool isSolidRender() const = 0;
-    virtual void getClipAABB(LevelSource*, BlockPos const&) const = 0;
+    virtual AABB* getClipAABB(LevelSource*, BlockPos const&) const = 0;
     virtual void addCollissionAABBs(Level*, BlockPos const&, AABB const*, std::vector<AABB*>*, std::shared_ptr<Entity>, bool) const = 0;
-    virtual void getShape(LevelSource*, BlockPos const&) const = 0;
+    virtual AABB* getShape(LevelSource*, BlockPos const&) const = 0;
     virtual void clip(Level*, BlockPos const&, Vec3*, Vec3*) const = 0;
     virtual bool isTopSolidBlocking() const = 0;
     virtual void getOffset(LevelSource*, BlockPos const&) const = 0;
@@ -71,4 +72,14 @@ public:
     virtual void hashCode() const = 0;
     virtual void triggerEvent(Level*, BlockPos const&, int, int) const = 0;
     virtual void neighborChanged(Level*, BlockPos const&, Block*, BlockPos const&) const = 0;
+
+    // NON_MATCHING: i'm so confused
+    const BlockState* setPropertyState(Property* property, int id) const {
+        TypedBoxed<int> boxed(&id);
+        setBoxedValue(property, &boxed);
+        return this;
+    }
+
+    // Inlined function that gets the boxed value from the property
+    int getPropertyValue(Property* property) const;
 };

@@ -2,7 +2,7 @@
 
 /*
 
-The game uses many functions defined by the Windows/XBOX API. Anything used should be put here
+This file contains all of the Switch implementations of Windows/XBOX functions
 
 */
 

@@ -1,4 +1,4 @@
-#include "windows.h"
+#include "Minecraft.Client/platform/NX/Platform.h"
 
 #include <cstdlib>
 #include <cstring>

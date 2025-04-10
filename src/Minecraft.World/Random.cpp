@@ -1,6 +1,6 @@
 #include "Minecraft.World/Random.h"
 
-#include "windows.h"
+#include "Minecraft.Client/platform/NX/Platform.h"
 
 // TODO: Move this
 Random gRandomInstance = Random();

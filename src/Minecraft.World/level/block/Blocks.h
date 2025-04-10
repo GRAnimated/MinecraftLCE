@@ -1,6 +1,9 @@
 #pragma once
 
+#include "Minecraft.Client/resources/MappedRegistry.h"
 #include "Minecraft.World/level/block/Block.h"
+
+class ResourceLocation;
 
 class FireBlock {
 public:
@@ -9,6 +12,8 @@ public:
 
 class Blocks {
 public:
+    static DefaultedMappedRegistry<ResourceLocation, Block*, std::hash<ResourceLocation>, std::equal_to<ResourceLocation>, std::hash<Block*>, std::equal_to<Block*>>* Registry;
+
     static void staticInit();
     static Block* get(std::wstring const&);
 

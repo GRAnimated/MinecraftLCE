@@ -3,7 +3,7 @@
 #include "Minecraft.Util/Mth.h"
 #include "Minecraft.World/level/levelgen/synth/ImprovedNoise.h"
 
-#include "windows.h"
+#include "Minecraft.Client/platform/NX/Platform.h"
 
 PerlinNoise::PerlinNoise(Random* random, int maxOctaves) {
     init(random, maxOctaves);

@@ -8,6 +8,7 @@
 #include "Minecraft.Client/Compression.h"
 #include "Minecraft.Client/ShutdownManager.h"
 #include "Minecraft.Client/multiplayer/PacketListener.h"
+#include "Minecraft.Client/platform/NX/Platform.h"
 #include "Minecraft.Core/System.h"
 #include "Minecraft.Core/io/BufferedOutputStream.h"
 #include "Minecraft.Core/io/ByteArrayOutputStream.h"
@@ -20,7 +21,6 @@
 #include "Minecraft.Network/protocol/game/ServerboundKeepAlivePacket.h"
 #include "Minecraft.Network/protocol/game/ServerboundPlayerActionPacket.h"
 #include "nn/os/os_Mutex.h"
-#include "windows.h"
 
 bool Connection::getAndSetRunning(bool running) {
     nn::os::LockMutex(&mIsRunningMutex);
