@@ -1,9 +1,9 @@
 #pragma once
 #include <memory>
 #include <string>
-#include "Minecraft.World/InteractionHand.h"
 #include "Minecraft.Client/resources/SimpleRegistry.h"
-#include "Minecraft.World/Item/InteractionResultHolder.h"
+#include "Minecraft.World/InteractionHand.h"
+#include "Minecraft.World/item/InteractionResultHolder.h"
 #include "types.h"
 
 class ResourceLocation;
@@ -23,7 +23,7 @@ class BlockPos;
 class Direction;
 
 class Item {
-    public:
+public:
     Item();
     void addProperty(ResourceLocation, ItemPropertyFunction const*);
     int getId();
@@ -43,7 +43,7 @@ class Item {
     virtual bool useOn(const std::shared_ptr<Player>&, Level*, const BlockPos&, InteractionHand::EInteractionHand, const Direction*, float, float, float, bool);
     virtual float getDestroySpeed(const std::shared_ptr<ItemInstance>&, BlockState*);
     virtual bool TestUse(Level*, const std::shared_ptr<Player>&, InteractionHand::EInteractionHand);
-    virtual InteractionResultHolder use(Level*, const std::shared_ptr<Player>&, InteractionHand::EInteractionHand); // this def need complete overhaul as it's...
+    virtual InteractionResultHolder use(Level*, const std::shared_ptr<Player>&, InteractionHand::EInteractionHand);  // this def need complete overhaul as it's...
     virtual not_null_ptr<ItemInstance> finishUsingItem(not_null_ptr<ItemInstance>, Level*, const std::shared_ptr<LivingEntity>&);
     virtual int getMaxStackSize();
     virtual int getLevelDataForAuxValue(int);
@@ -90,7 +90,7 @@ class Item {
     SimpleRegistry<ResourceLocation, const ItemPropertyFunction*>* mSimpleRegistry;
     int mMaxStackSize;
     int mMaxDamage;
-    void* mIcon; // I assume it's pointer to something, idk what though
+    void* mIcon;  // I assume it's pointer to something, idk what though
     int mBaseItemType;
     int mMaterial;
     bool mHandEquipped;
@@ -101,5 +101,5 @@ class Item {
     int mDescriptionId;
     int mUseDescriptionId;
     std::wstring mIconName;
-    char byte78; // probably bool but idk
+    char byte78;  // probably bool but idk
 };
