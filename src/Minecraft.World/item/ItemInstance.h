@@ -142,4 +142,6 @@ private:
     std::shared_ptr<CensoredString*> mCensoredString;
     void* qword_58;
     bool byte_60;
+    void* qword_68;
+    void* qword_70;
 };

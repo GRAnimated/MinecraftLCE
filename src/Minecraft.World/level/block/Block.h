@@ -34,6 +34,7 @@ class Rotation;
 class SoundType;
 class Texture;
 class Vec3;
+class Item;
 
 class Block {
 public:
@@ -73,7 +74,7 @@ public:
     virtual bool isCubeShaped(const BlockState* blockState);
     virtual void hasCustomBreakingProgress(const BlockState* blockState);
     virtual bool isPathfindable(LevelSource* levelSource, const BlockPos& pos);
-    virtual void getRenderShape(const BlockState* blockState);
+    virtual int getRenderShape(const BlockState* blockState);
     virtual void hasInHandRenderOffset();
     virtual void mayReplaceWithPlace(LevelSource* levelSource, const BlockPos& pos);
     virtual void setDestroyTime(float);
@@ -91,14 +92,14 @@ public:
                                   const Direction* direction);
     virtual AABB* getShapes(const BlockState* blockState, LevelSource* levelSource, BlockPos const*);
     virtual bool isSolidFace(LevelSource* levelSource, const BlockPos& pos, const Direction* direction);
-    virtual void getBlockFaceShape(LevelSource* levelSource, const BlockState* blockState,
-                                   const BlockPos& pos, const Direction* direction);
+    virtual int getBlockFaceShape(LevelSource* levelSource, const BlockState* blockState, const BlockPos& pos,
+                                  const Direction* direction);
     virtual void getOutlineAABB(const BlockState* blockState, Level* level, const BlockPos& pos);
     virtual void addCollisionAABBs(const BlockState* blockState, Level* level, const BlockPos& pos,
                                    AABB const*, std::vector<AABB*>*, std::shared_ptr<Entity>, bool);
     virtual void addCollisionAABB(const BlockPos& pos, AABB const*, std::vector<AABB*>*, AABB const*);
     virtual AABB* getClipAABB(const BlockState* blockState, LevelSource* levelSource, const BlockPos& pos);
-    virtual bool isSolidRender(const BlockState* blockState);
+    virtual bool isSolidRender(const BlockState* blockState) const;
     virtual void mayPick(const BlockState* blockState, bool);
     virtual void mayPick();
     virtual void randomTick(Level* level, const BlockPos& pos, const BlockState* blockState, Random*);
@@ -111,8 +112,8 @@ public:
     virtual void getTickDelay(Level* level);
     virtual void onPlace(Level* level, const BlockPos& pos, const BlockState* blockState);
     virtual void onRemove(Level* level, const BlockPos& pos, const BlockState* blockState);
-    virtual void getResourceCount(Random*);
-    virtual void getResource(const BlockState* blockState, Random*, int);
+    virtual Item* getResourceCount(Random*);
+    virtual Item* getResource(const BlockState* blockState, Random*, int);
     virtual void getDestroyProgress(const BlockState* blockState, std::shared_ptr<Player> player,
                                     Level* level, const BlockPos& pos);
     virtual void spawnResources(Level* level, const BlockPos& pos, const BlockState* blockState, int);
@@ -123,7 +124,7 @@ public:
     virtual void clip(const BlockState* blockState, Level* level, const BlockPos& pos, Vec3*, Vec3*);
     virtual void clip(const BlockPos& pos, Vec3*, Vec3*, AABB const*);
     virtual void wasExploded(Level* level, const BlockPos& pos, Explosion*);
-    virtual void getRenderLayer();
+    virtual int getRenderLayer();
     virtual bool mayPlace(Level* level, const BlockPos& pos, const Direction* direction);
     virtual bool mayPlace(Level* level, const BlockPos& pos);
     virtual void TestUse();
@@ -138,11 +139,11 @@ public:
     virtual void prepareRender(Level* level, const BlockPos& pos);
     virtual void attack(Level* level, const BlockPos& pos, std::shared_ptr<Player> player);
     virtual void handleEntityInside(Level* level, const BlockPos& pos, std::shared_ptr<Entity>, Vec3*);
-    virtual void getColor();
-    virtual void getColor(const BlockState* blockState);
-    virtual void getColor(LevelSource* levelSource, const BlockPos& pos, int);
-    virtual void getColor(LevelSource* levelSource, const BlockPos& pos);
-    virtual void getColor(LevelSource* levelSource, const BlockPos& pos, const BlockState* blockState);
+    virtual int getColor();
+    virtual int getColor(const BlockState* blockState);
+    virtual int getColor(LevelSource* levelSource, const BlockPos& pos, int);
+    virtual int getColor(LevelSource* levelSource, const BlockPos& pos);
+    virtual int getColor(LevelSource* levelSource, const BlockPos& pos, const BlockState* blockState);
     virtual void getSignal(const BlockState* blockState, LevelSource* levelSource, const BlockPos& pos,
                            const Direction* direction);
     virtual bool isSignalSource(const BlockState* blockState);
@@ -155,7 +156,7 @@ public:
                                not_null_ptr<ItemInstance>);
     virtual bool isSilkTouchable();
     virtual void getSilkTouchItemInstance(const BlockState* blockState);
-    virtual void getResourceCountForLootBonus(int, Random*);
+    virtual Item* getResourceCountForLootBonus(int, Random*);
     virtual void setPlacedBy(Level* level, const BlockPos& pos, const BlockState* blockState,
                              std::shared_ptr<LivingEntity>, not_null_ptr<ItemInstance>);
     virtual void setNameAndDescriptionId(int, int);
@@ -165,13 +166,14 @@ public:
     virtual void getUseDescriptionId();
     virtual void triggerEvent(const BlockState* blockState, Level* level, const BlockPos& pos, int, int);
     virtual bool isCollectStatistics();
-    virtual void shouldBlockTick(Level* level, const BlockPos& pos, const BlockState* blockState);
+    virtual bool shouldBlockTick(Level* level, const BlockPos& pos, const BlockState* blockState);
     virtual void setNotCollectStatistics();
     virtual void getPistonPushReaction(const BlockState* blockState);
     virtual void getShadeBrightness(const BlockState* blockState);
     virtual void fallOn(Level* level, const BlockPos& pos, std::shared_ptr<Entity>, float);
     virtual void updateEntityAfterFallOn(Level* level, std::shared_ptr<Entity>);
-    virtual void getCloneItemInstance(Level* level, const BlockPos& pos, const BlockState* blockState);
+    virtual std::shared_ptr<ItemInstance> getCloneItemInstance(Level* level, const BlockPos& pos,
+                                                               const BlockState* blockState);
     virtual void playerWillDestroy(Level* level, const BlockPos& pos, const BlockState* blockState,
                                    std::shared_ptr<Player> player);
     virtual void handleRain(Level* level, const BlockPos& pos);

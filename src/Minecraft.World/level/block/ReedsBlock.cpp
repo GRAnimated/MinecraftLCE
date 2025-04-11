@@ -1,3 +1,5 @@
+#include "Minecraft.World/item/ItemInstance.h"
+#include "Minecraft.World/item/Items.h"
 #include "Minecraft.World/level/block/ReedsBlock.h"
 
 #include "Minecraft.World/level/Level.h"
@@ -9,6 +11,8 @@
 #include "Minecraft.World/phys/AABB.h"
 #include "Minecraft.Core/BlockPos.h"
 
+static std::atomic_bool hasCreatedDefinition;
+std::vector<Property const*> sAgeProperties;
 IntegerProperty* ReedsBlock::sAgeProperty = IntegerProperty::create(L"age", 0, 15);
 
 const f32 size = 6.0f / 16.0f;  // 0.375f
@@ -75,3 +79,62 @@ bool ReedsBlock::canSurvive(Level* level, BlockPos const& pos) {
 AABB* ReedsBlock::getClipAABB(const BlockState* blockState, LevelSource* levelSource, const BlockPos& pos) {
     return sAABB;
 }
+
+Item* ReedsBlock::getResource(const BlockState* blockState, Random*, int) {
+    return Items::REEDS;
+}
+
+bool ReedsBlock::isSolidRender(const BlockState* blockState) const {
+    return false;
+}
+
+bool ReedsBlock::isCubeShaped(const BlockState* blockState) {
+    return false;
+}
+
+// NON_MATCHING: Different shared_ptr constructor?
+std::shared_ptr<ItemInstance> ReedsBlock::getCloneItemInstance(Level* level, const BlockPos& pos,
+                                                               const BlockState* blockState) {
+    return std::shared_ptr<ItemInstance>(new ItemInstance(Items::REEDS));
+}
+
+int ReedsBlock::getColor(LevelSource* levelSource, const BlockPos& pos, int) {
+    return 0xFFFFFF;
+}
+
+int ReedsBlock::getRenderLayer() {
+    return 0;
+}
+
+const BlockState* ReedsBlock::getBlockState(int age) {
+    return defaultBlockState()->setPropertyState(sAgeProperty, age);
+}
+
+int ReedsBlock::convertBlockStateToLegacyData(const BlockState* blockState) {
+    return blockState->getPropertyValue(sAgeProperty);
+}
+
+// NON_MATCHING: Original does some weird atomic stuff, i think hasCreatedDefinition is fake
+BlockStateDefinition* ReedsBlock::createBlockStateDefinition() {
+    if (hasCreatedDefinition == false) {
+        hasCreatedDefinition = true;
+        sAgeProperties[0] = sAgeProperty;
+    }
+
+    return new BlockStateDefinition(this, sAgeProperties.data());
+}
+
+int ReedsBlock::getBlockFaceShape(LevelSource* levelSource, const BlockState* blockState, const BlockPos& pos,
+                                  const Direction* direction) {
+    return 8;
+}
+
+bool ReedsBlock::shouldBlockTick(Level* level, const BlockPos& pos, const BlockState* blockState) {
+    return level->isEmptyBlock(pos.above());
+}
+
+int ReedsBlock::getRenderShape(const BlockState* blockState) {
+    return 1;
+}
+
+// ReedsBlock::GetInteractTooltip
