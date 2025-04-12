@@ -13,7 +13,6 @@ const ItemPropertyFunction* lefthandedFunction = nullptr;
 const ItemPropertyFunction* cooldownFunction = nullptr;
 
 Item::Item() {
-    // Some of those should probably be moved to header def but idk which ones
     this->mMaxStackSize = 64;
     this->mMaxDamage = 0;
     this->mHandEquipped = false;
@@ -25,7 +24,7 @@ Item::Item() {
     this->mIconName = L"";
     this->mIcon = nullptr;
     this->byte78 = 0;
-    //
+
     this->mSimpleRegistry = new SimpleRegistry<ResourceLocation, const ItemPropertyFunction*>();
 
     this->addProperty(ResourceLocation(L"lefthanded"), lefthandedFunction);

@@ -12,7 +12,7 @@ public:
     virtual Value getRandom(Random*) override;
     virtual bool containsKey(Key);
 
-    char fill[0x50 - 0x8];
+    char filler[0x50 - 0x8];
     // void* qword8;
     // std::unordered_map<Key, Value> mMap;
 };

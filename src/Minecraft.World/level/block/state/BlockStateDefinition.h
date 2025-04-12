@@ -21,7 +21,7 @@ public:
         void mirror(Mirror*) const override;
         bool isCubeShaped() const override;
         void hasCustomBreakingProgress() const override;
-        void getRenderShape() const override;
+        int getRenderShape() const override;
         void getLightColor(LevelSource*, BlockPos const&) const override;
         void getShadeBrightness() const override;
         bool isSolidBlockingCube() const override;
@@ -46,7 +46,7 @@ public:
         bool isTopSolidBlocking() const override;
         void getOffset(LevelSource*, BlockPos const&) const override;
         bool isViewBlocking() const override;
-        void getBlockFaceShape(LevelSource*, BlockPos const&, Direction const*) const override;
+        int getBlockFaceShape(LevelSource*, BlockPos const&, Direction const*) const override;
         void getProperties() const override;
         void hasProperty(Property const*) const override;
         void getBoxedValue(Property const*) const override;
@@ -62,7 +62,13 @@ public:
     };
 
     BlockStateDefinition(Block* block);
+    BlockStateDefinition(Block* block, Property const** properties) { _init(block, properties, 1); }
+
+    void _init(Block* block, Property const** properties, unsigned int damage);
 
     Block* getBlock();
     const BlockState* any();
+
+private:
+    char filler[0x40];
 };

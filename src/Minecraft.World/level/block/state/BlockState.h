@@ -35,7 +35,7 @@ public:
     virtual void mirror(Mirror*) const = 0;
     virtual bool isCubeShaped() const = 0;
     virtual void hasCustomBreakingProgress() const = 0;
-    virtual void getRenderShape() const = 0;
+    virtual int getRenderShape() const = 0;
     virtual void getLightColor(LevelSource*, BlockPos const&) const = 0;
     virtual void getShadeBrightness() const = 0;
     virtual bool isSolidBlockingCube() const = 0;
@@ -60,7 +60,7 @@ public:
     virtual bool isTopSolidBlocking() const = 0;
     virtual void getOffset(LevelSource*, BlockPos const&) const = 0;
     virtual bool isViewBlocking() const = 0;
-    virtual void getBlockFaceShape(LevelSource*, BlockPos const&, Direction const*) const = 0;
+    virtual int getBlockFaceShape(LevelSource*, BlockPos const&, Direction const*) const = 0;
     virtual void getProperties() const = 0;
     virtual void hasProperty(Property const*) const = 0;
     virtual void getBoxedValue(Property const*) const = 0;
