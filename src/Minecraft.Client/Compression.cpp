@@ -1,6 +1,5 @@
 #include <types.h>
 #include "Compression.h"
-#include <cstdint>
 
 void Compression::VitaVirtualDecompress(void* dst, uint* dstSize, void* src, uint srcSize) {
     uchar* srcPtr = (uchar*)src;
