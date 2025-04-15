@@ -6,6 +6,8 @@ class C4JThreadImpl : public C4JThread {
 public:
     C4JThreadImpl(int (*)(void*), void*, char const*, int);
 
+    static void SetMainThreadID();
+
     virtual ~C4JThreadImpl() override;
     virtual void Run() override;
     virtual void isRunning() override;
