@@ -1,0 +1,101 @@
+#pragma once
+
+class CProfile{
+public:
+    static CProfile* sInstance;
+
+    CProfile();
+
+    virtual void Initialise(void const *,void const *,unsigned short,unsigned int,unsigned int,unsigned int *,int,unsigned int *);
+    // virtuals are completly different than WiiU, this class is completly different
+
+    /*virtual void GetLockedProfile();
+    virtual void SetLockedProfile(int);
+    virtual void IsSignedIn(int);
+    virtual void IsSignedInLive(int);
+    virtual void IsSigningIn(int);
+    virtual void IsGuest(int);
+    virtual void RequestSignInUI(bool,bool,bool,bool,bool,int (*)(void *,bool,int,bool),void *,int);
+    virtual void SignInUser(MiiDataEntry *,int);
+    virtual void SignOutUser(FFLCreateID &);
+    virtual void SignOutUser(int);
+    virtual void SetUserSigningIn(int,bool);
+    virtual void DisplayOfflineProfile(int (*)(void *,bool,int),void *,int);
+    virtual void sub_32F9A00();
+    virtual void SetPrimaryPlayerChanged(bool);
+    virtual void QuerySigninStatus();
+    virtual void GetXUID(int,PlayerUID *,bool);
+    virtual void sub_32F9D8C();
+    virtual void AllowedToPlayMultiplayer(int);
+    virtual void StartTrialGame();
+    virtual void sub_32F9DB8();
+    virtual void CanViewPlayerCreatedContent(int,bool,PlayerUID *,unsigned int);
+    virtual void GetProfileAvatar(int,int (*)(void *,unsigned char *,unsigned int),void *);
+    virtual void CancelProfileAvatarRequest();
+    virtual void SetGetStringFunc(wchar_t const *(*)(int));
+    virtual void SetPlayerListTitleID(int);
+    virtual void SetFatalTrophyErrorID(int);
+    virtual void GetPrimaryPad();
+    virtual void SetPrimaryPad(int);
+    virtual void ClearGameUsers();
+    virtual void GetMiiName(int);
+    virtual void GetGamertag(int);
+    virtual void GetDisplayName(int);
+    virtual void GetNetworkAccountID();
+    virtual void IsFullVersion();
+    virtual void SetFullVersion(bool);
+    virtual void SetSignInChangeCallback(void (*)(void *,bool,unsigned int),void *);
+    virtual void sub_32FB28C();
+    virtual void sub_32FE5C8();
+    virtual void RegionIsNorthAmerica();
+    virtual void LocaleIsUSorCanada();
+    virtual void GetLiveConnectionStatus();
+    virtual void IsSystemUIDisplayed();
+    virtual void SetProfileReadErrorCallback(void (*)(void *),void *);
+    virtual void ResetProfileProcessState();
+    virtual void Tick();
+    virtual void sub_3313960();
+    virtual void GetAwardId(int);
+    virtual void GetAwardType(int);
+    virtual void sub_3313988();
+    virtual void sub_33143A8();
+    virtual void sub_331455C();
+    virtual void sub_3314610();
+    virtual void Terminate();
+    virtual void sub_32FC18C();
+    virtual void sub_32FC1D4();
+    virtual void RichPresenceRegisterContextString(int,int,int);
+    virtual void RichPresenceInit(int,int);
+    virtual void sub_32FE04C();
+    virtual void sub_32FE0E4();
+    virtual void SetRichPresenceSettingFn(int (*)(void const *));
+    virtual void SetRichPresenceGameModeData(nn::fp::GameMode &);
+    virtual void SetFriendPresenceChangeCallback(void (*)(unsigned int,void *),void *);
+    virtual void SetRichPresenceGetStringCallback(wchar_t *(*)(int));
+    virtual void SetFriendPresenceOnline(bool);
+    virtual void sub_32FE60C();
+    virtual void SetUpsellCallback(void (*)(void *,eUpsellType,eUpsellResponse,int),void *);
+    virtual void SetDebugFullOverride(bool);
+    virtual void SetNetworkStatus(bool);
+    virtual void SetNetworkStatusWithoutSigninChange(bool);
+    virtual void TryToConnectOnline();
+    virtual void GetSignedInUsersMask();
+    virtual void RefreshChatAndContentRestrictions(void (*)(void *),void *);
+    virtual void sub_32FB908();
+    virtual void SetServiceID(char *);
+    virtual void HandleNetworkTicket(int,void *);
+    virtual void SetMinimumAge(int);
+    virtual void getUserID(int);
+    virtual void getQuadrant(ACTUuid &);
+    virtual void SetSignInChoicesCallback(int (*)(int));
+    virtual void GetSignInEntries();
+    virtual void LoadAllMiiData();
+    virtual void FreeAllMiiData();
+    virtual void GetNumSysUserMiis();
+    virtual void GetNumFavouriteMiis();
+    virtual void GetNumGuestMiis();
+    virtual void GetSysUserMiiData(int);
+    virtual void GetFavouriteMiiData(int);
+    virtual void GetGuestMiiData(int);
+    virtual void IsHasAchievementsFile(int);*/
+};
