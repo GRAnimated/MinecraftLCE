@@ -120,15 +120,6 @@ void Compression::SetDecompressionType(ESavePlatform platform) {
     }
 }
 
-// SHOULD NOT EXIST
-// WHY DOES THIS EXIST
-// Literally only found on Switch Edition, with no symbol to go along with it on Wii U Edition.
-// All other editions have this inlined at a direct set.
-// Also only used in 2 places, which are ConsoleSchematicFile::load and Compression::SetDecompressionType.
-void Compression::SetType(ECompressionTypes type) {
-    this->type = type;
-}
-
 int Compression::Compress(void* dst, unsigned int* dstSize, void* src, unsigned int srcSize) {
     unsigned int res;
     unsigned long newDestSize;

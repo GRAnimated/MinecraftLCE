@@ -35,11 +35,7 @@ public:
 
     void SetDecompressionType(ESavePlatform platform);
 
-    // NONEXISTENT ON WII U, XBOX ONE.
-    // Seen on Nintendo Switch Edition under ConsoleSchematicFile::load and called once under SetDecompressionType (well, after the compiler got it's hands on it)
-    // Replaced with direct setter on other versions.
-    // Could also be part of a different class, as it appears outside of the big Compression class blob in memory
-    void SetType(ECompressionTypes type);
+    void SetType(ECompressionTypes type) { this->type = type; };
 
     /// @brief Compresses src data with Zlib (if dst is not nullptr)
     /// @param dst Output buffer to store compressed data, optionally can be nullptr if you just want size bound
@@ -73,6 +69,7 @@ public:
 
     static int internalCompressRle(void* dst, uint* dstSize, void* src, uint srcSize);
 
+private:
     void *XMemCompressionContext;
     void *XMemDecompressionContext;
     nn::os::MutexType cMutex; // compression mutex
