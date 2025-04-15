@@ -1,9 +1,250 @@
 #include <types.h>
 #include "Compression.h"
+#include <string.h>
+
+Compression::Compression() {
+    this->dcData = 0;
+
+    // set up flags (guessing)
+    struct {
+        uint64_t unk;
+        uint32_t unk2; 
+    } XMemFlags;
+
+    XMemFlags.unk = 0x2000000000000;
+    XMemFlags.unk2 = 0x20000;
+
+    // IDA wouldn't show this in it's pseudocode... Ghidra did though.
+    XMemCreateCompressionContext(PLACEHOLDER, &XMemFlags, 0, &this->XMemCompressionContext);
+    XMemCreateDecompressionContext(PLACEHOLDER, &XMemFlags, 0, &this->XMemDecompressionContext);
+
+    this->type = ZLIB;
+    this->unk2 = ZLIB;
+
+    InitializeCriticalSection(&this->cMutex);
+    InitializeCriticalSection(&this->dcMutex);
+}
+
+Compression::~Compression() {
+    XMemDestroyCompressionContext(this->XMemCompressionContext);
+    XMemDestroyDecompressionContext(this->XMemDecompressionContext);
+
+    nn::os::FinalizeMutex(&this->cMutex);
+    nn::os::FinalizeMutex(&this->dcMutex);
+
+    if (this->dcData) {
+        delete this->dcData;
+    }
+}
+
+void Compression::CreateNewThreadStorage() {
+    Compression::ThreadStorage *ts = new ThreadStorage();
+    unsigned int alloc;
+
+    if (threadStorage == nullptr) {
+        alloc = TlsAlloc();
+
+        tlsIndex = alloc;
+        threadStorage = ts;
+    } else {
+        alloc = tlsIndex;
+    }
+
+    TlsSetValue(alloc, (void*)ts);
+}
+
+void Compression::ReleaseThreadStorage() {
+    Compression::ThreadStorage *ts = (Compression::ThreadStorage *)TlsGetValue(tlsIndex);
+    // not sure what this is meant to be
+    bool tsStatus;
+
+    if (ts) {
+        tsStatus = (ts == threadStorage);
+    } else {
+        // return true????
+        tsStatus = true;
+    }
+
+    if ( !tsStatus ) {
+        delete ts;
+    }
+}
+
+void Compression::UseDefaultThreadStorage() {
+    TlsSetValue(tlsIndex, threadStorage);
+}
+
+Compression* Compression::getCompression() {
+    return ((ThreadStorage*)TlsGetValue(tlsIndex))->compression;
+}
+
+void Compression::SetDecompressionType(ESavePlatform platform) {
+    if (platform == Xbox360) {
+        Compression::getCompression()->SetType(LZX);
+        return;
+    }
+
+    if (platform == XBoxOne) {
+        Compression::getCompression()->SetType(ZLIB);
+        return;
+    }
+
+    if (platform == WiiU) {
+        Compression::getCompression()->SetType(ZLIB);
+        return;
+    }
+
+    if (platform == Switch) {
+        Compression::getCompression()->SetType(ZLIB);
+        return;
+    }
+
+    if (platform == PS3) {
+        Compression::getCompression()->SetType(DEFLATE);
+        return;
+    }
+
+    if (platform == PSVita) {
+        Compression::getCompression()->SetType(ZLIB);
+        return;
+    }
+
+    if (platform == PS4) {
+        Compression::getCompression()->SetType(ZLIB);
+        return;
+    }
+
+    if (platform == PC) {
+        Compression::getCompression()->SetType(ZLIB);
+        return;
+    }
+}
+
+int Compression::Compress(void* dst, unsigned int* dstSize, void* src, unsigned int srcSize) {
+    unsigned int res;
+    unsigned long newDestSize;
+    
+    // for passing to Zlib
+    unsigned long ulDestSize = *dstSize;
+
+    // if dst is nullptr it means we just want size bound
+    if (dst) {
+        // compress and check for error
+        bool zErr = (compress((unsigned char*)dst, &ulDestSize, (unsigned char*)src, srcSize) != Z_OK);
+
+        // move zlib's destSize to our destSize
+        newDestSize = ulDestSize;
+
+        // set res
+        res = zErr;
+    } else {
+        // get size bound
+        newDestSize = compressBound(srcSize); 
+
+        // no error
+        res = 0;
+
+        // why?
+        ulDestSize = newDestSize;
+    }
+
+    // set dstSize to the new size
+    *dstSize = newDestSize;
+    
+    // if the res code is not negative, we know nothing went wrong.
+    return -(res != 0);
+}
+
+int Compression::CompressLZXRLE(void* dst, unsigned int* dstSize, void* src, unsigned int srcSize) {
+    int res;
+
+    nn::os::MutexType* mtx = &this->cMutex;
+
+    EnterCriticalSection(&this->cMutex);
+
+    unsigned char* buf = this->cData;
+    unsigned int initDstSize = 0x40000;
+
+    res = internalCompressRle(buf, &initDstSize, src, srcSize);
+
+    if (!res) {
+        PIXBeginNamedEvent(0.0, "Secondary compression");
+        res = Compress(dst, dstSize, buf, initDstSize);
+        PIXEndNamedEvent();
+    }
+
+    LeaveCriticalSection(mtx);
+    return res;
+}
+
+int Compression::Decompress(void* dst, unsigned int* dstSize, void* src, unsigned int srcSize) {
+    int res;
+
+    if (this->type != this->unk2)
+        return DecompressWithType(dst, dstSize, src, srcSize);
+
+    EnterCriticalSection(&this->dcMutex);
+
+    unsigned long ulDestSize = *dstSize;
+    res = uncompress((unsigned char*)dst, &ulDestSize, (unsigned char*)src, srcSize);
+
+    *dstSize = ulDestSize;
+
+    LeaveCriticalSection(&this->dcMutex);
+
+    // if not Z_OK, we know there's an error
+    if (res) return -1;
+
+    return 0;
+    
+}
+
+int Compression::DecompressLZXRLE(void* dst, unsigned int* dstSize, void* src, unsigned int srcSize) {
+    EnterCriticalSection(&this->dcMutex);
+    
+    unsigned char* temp;
+    unsigned long ulDestSize;
+    unsigned int initDstSize = 0x32000;
+
+    ulDestSize = *dstSize;
+    if (ulDestSize > 0x32000)
+    {
+        initDstSize = *dstSize;
+        temp = new unsigned char[ulDestSize];
+
+        Decompress(temp, &initDstSize, src, srcSize);
+        internalDecompressRle(dst, dstSize, temp, initDstSize);
+
+        if (temp) delete[] temp;
+    } else {
+        
+        if ( !this->dcData )
+        {
+          this->dcData = operator new[](0x32000);
+        }
+  
+        Compression::Decompress(this->dcData, &initDstSize, src, srcSize);
+        Compression::internalDecompressRle(dst, dstSize, this->dcData, initDstSize);
+    }
+    LeaveCriticalSection(&this->dcMutex);
+    return 0;
+}
+
+int Compression::DecompressWithType(void* dst, unsigned int* dstSize, void* src, unsigned int srcSize) {
+    // I'm confused... how does this decompress?
+    // unless it got ifdef'd out
+    if (this->type < 2) {
+        memcpy(dst, src, srcSize);
+        *dstSize = srcSize;
+        return 0;
+    }
+
+    return -1;
+}
 
 void Compression::VitaVirtualDecompress(void* dst, uint* dstSize, void* src, uint srcSize) {
-    uchar* srcPtr = (uchar*)src;
-    uchar* dstPtr = (uchar*)dst;
+    unsigned char* srcPtr = (unsigned char*)src;
+    unsigned char* dstPtr = (unsigned char*)dst;
     int dstOffset = 0;
     int index = 0;
 
@@ -71,4 +312,12 @@ bool Compression::internalDecompressRle(void* dst, unsigned int* dstSize, void* 
 
     // thanks 4J for making this specific decompression function return bool, also it always returns false... why?
     return false;
+}
+
+Compression::ThreadStorage::ThreadStorage() {
+    this->compression = new Compression();
+}
+
+Compression::ThreadStorage::~ThreadStorage() {
+    if (compression) delete compression;
 }
