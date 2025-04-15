@@ -6,6 +6,8 @@ This file contains all of the Switch implementations of Windows/XBOX functions
 
 */
 
+#include <nn/os.h>
+
 typedef bool BOOL;
 typedef long long LARGE_INTEGER;
 
@@ -19,3 +21,23 @@ void MemSect(int);
 
 void PIXBeginNamedEvent(float, char const*, ...);
 void PIXEndNamedEvent();
+
+// this should be in System.h shouldn't it????
+// or should stuff from System.h be moved here
+void EnterCriticalSection(nn::os::MutexType* mutex);
+void LeaveCriticalSection(nn::os::MutexType* mutex);
+
+// NON-MATCHING
+enum _XMEMCODEC_TYPE {
+    PLACEHOLDER = 1,
+};
+
+int XMemCreateCompressionContext(_XMEMCODEC_TYPE type, const void* param_2, unsigned int param_3, void** param_4);
+int XMemCreateDecompressionContext(_XMEMCODEC_TYPE type, const void* param_2, unsigned int param_3, void** param_4);
+void XMemDestroyCompressionContext(void* ctxt);
+void XMemDestroyDecompressionContext(void* ctxt);
+
+unsigned int TlsAlloc();
+int TlsFree(unsigned int unk);
+void* TlsGetValue(unsigned int index);
+int TlsSetValue(unsigned int index, void* value);
