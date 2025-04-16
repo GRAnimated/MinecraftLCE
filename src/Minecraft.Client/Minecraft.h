@@ -2,34 +2,41 @@
 
 #include <memory>
 #include <string>
+#include "Minecraft.World/level/storage/McRegionLevelStorageSource.h"
+#include "Options.h"
+#include "resources/TexturePackRepository.h"
+#include "Textures.h"
+#include "gui/Font.h"
+#include "Minecraft.World/level/block/GrassColor.h"
+#include "Minecraft.World/level/block/FoliageColor.h"
+#include "Minecraft.World/level/biome/Biome.h"
+#include "renderer/texture/TextureAtlas.h"
+#include "Minecraft.World/level/block/BlockColors.h"
+#include "Minecraft.World/level/block/ItemColors.h"
+#include "renderer/item/ItemRenderer.h"
+#include "renderer/entity/EntityRenderDispatcher.h"
+#include "renderer/entity/EntityBlockRenderer.h"
+#include "renderer/BlockRenderDispatcher.h"
+#include "renderer/GlStateManager.h"
+#include "renderer/item/ItemInHandRenderer.h"
+#include "renderer/GameRenderer.h"
+#include "StatsCounter.h"
+#include "renderer/LevelRenderer.h"
+#include "ParticleEngine.h"
+#include "renderer/Renderer.h"
+#include "gui/Gui.h"
+#include "ui/screen/TitleScreen.h"
+#include "renderer/ProgressRenderer.h"
 
 class DataFixerUpper;
 class MultiPlayerGameMode;
-class LevelRenderer;
 class LocalPlayer;
-class ParticleEngine;
-class ProgressRenderer;
-class GameRenderer;
 class Entity;
-class EntityRenderDispatcher;
-class ItemInHandRenderer;
-class BlockColors;
-class ItemColors;
-class TextureAtlas;
-class ItemRenderer;
-class BlockRenderDispatcher;
-class Gui;
-class Options;
 class SoundEngine;
-class TexturePackRepository;
 class File;
-class McRegionLevelStorageSource;
-class StatsCounter;
 class FrameTimer;
 class ClientMasterGameMode;
 class GhostController;
-class Textures;
-class Font;
 class ColourTable;
 class MultiplayerLocalPlayer;
 
@@ -38,13 +45,17 @@ public:
     static Minecraft* sInstance;
     static Minecraft* GetInstance();
 
-    Minecraft(class Component*, class Canvas*, class MinecraftApplet*, int, int, bool);
+    Minecraft(class Component*, class Canvas*, class MinecraftApplet*, int width, int height, bool);
     void run();
-    inline void init();
+
+    void init();
+
     static inline void currentTimeMillis();
     static void start(const std::wstring& str1, const std::wstring& str2);
     static void startAndConnectTo(const std::wstring& arg1, const std::wstring& arg2,
                                   const std::wstring& arg3);
+
+    DataFixerUpper *getFixerUpper();
 
     std::shared_ptr<Entity> getCameraEntity();
 
@@ -52,6 +63,12 @@ public:
 
     bool isUsingDefaultSkin();
 
+    // replaced with direct access on Wii U Edition but does nothing on Switch Edition.
+    static void setStatsCounter(StatsCounter *counter) { return; };
+
+    void setScreen(Screen *screen);
+
+    static EntityBlockRenderer *sEntityBlockRenderer;
     DataFixerUpper* mFixerUpper;
     MultiPlayerGameMode* mMultiPlayerGameMode;
     bool byte_10;
@@ -64,7 +81,7 @@ public:
     void* qword_30;
     char byte_38;
     void* qword_40;
-    void* qword_48;
+    Level *mLevel;
     LevelRenderer* mLevelRenderer;
     LocalPlayer* mLocalPlayer;
     void* qword_60;
@@ -120,18 +137,17 @@ public:
     SoundEngine* mSoundEngine;
     void* qword_258;
     TexturePackRepository* mTexturePackRepository;
-    File* mSaves;
-    char gap_270[16];
+    File mSaves;
     McRegionLevelStorageSource* mMcRegionLevelStorageSource;
     StatsCounter* mStatsCounter1;
     StatsCounter* mStatsCounter2;
     StatsCounter* mStatsCounter3;
     StatsCounter* mStatsCounter4;
-    void* qword_2a8;
-    void* qword_2b0;
+    std::wstring *wstring_2a8;
+    std::wstring *wstring_2b0;
     void* qword_2b8;
     int dword_2c0;
-    char byte_2c4;
+    bool mInitialized;
     char gap_2C5[3];
     void* qword_2c8;
     void* qword_2d0;

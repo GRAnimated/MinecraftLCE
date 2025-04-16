@@ -2,13 +2,10 @@
 
 #include "types.h"
 #include <memory>
+#include "Minecraft.World/InteractionHand.h"
 
 class BlockPos;
 class Direction;
-class InteractionHand {
-public:
-    enum EInteractionHand {};
-};
 class Player;
 class Level;
 class GameType;
