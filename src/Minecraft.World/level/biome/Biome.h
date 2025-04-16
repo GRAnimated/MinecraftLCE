@@ -186,6 +186,8 @@ public:
     float getTemperature();
     float getDownfall();
 
+    static void generateColoursDebugOutput();
+
     int mNameId;
     int mDescriptionId;
     float mDepth;

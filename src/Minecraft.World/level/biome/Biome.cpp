@@ -10,6 +10,7 @@
 #include "Minecraft.World/level/material/MaterialColor.h"
 #include "Minecraft.Core/BlockPos.h"
 #include "Minecraft.Util/Mth.h"
+#include "Biome.h"
 
 // NON_MATCHING
 Biome::BiomeProperties::BiomeProperties(const std::wstring& name) : mBiomeName(name) {}
@@ -170,4 +171,9 @@ bool Biome::isNatural() {
 
 bool Biome::isSnowCovered() {
     return mIsSnow;
+}
+
+// does nothing on Switch
+void Biome::generateColoursDebugOutput() {
+    return;
 }
