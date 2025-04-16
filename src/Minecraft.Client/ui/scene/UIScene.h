@@ -51,7 +51,7 @@ public:
     virtual void render(int, int, C4JRender::eViewportType);
     virtual void customDraw(char const*, fuiRect*);
     virtual bool allowRepeat(int);
-    virtual void handleInput(int, int, bool, bool, bool, bool const);
+    virtual void handleInput(int, int, bool, bool, bool, bool&);
     virtual void handleDestroy();
     virtual void handlePreUnloadForReload();
     virtual void handlePreReload();

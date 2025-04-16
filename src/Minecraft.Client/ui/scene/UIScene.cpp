@@ -151,7 +151,7 @@ void* UIScene::GetMainPanel() {
 }
 
 void UIScene::customDraw(char const*, fuiRect*) {}
-void UIScene::handleInput(int, int, bool, bool, bool, bool const) {}
+void UIScene::handleInput(int, int, bool, bool, bool, bool&) {}
 void UIScene::handleDestroy() {}
 void UIScene::handlePreUnloadForReload() {}
 void UIScene::handlePreReload() {}

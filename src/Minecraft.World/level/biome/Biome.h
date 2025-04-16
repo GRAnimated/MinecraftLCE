@@ -3,6 +3,7 @@
 #include <string>
 #include <vector>
 
+#include "Minecraft.World/WeighedRandomItem.h"
 #include "Minecraft.World/level/material/MaterialColor.h"
 #include "Minecraft.World/phys/Vec3.h"
 
@@ -15,12 +16,6 @@ class MobCategory;
 class BiomeDecorator;
 class Feature;
 class PerlinSimplexNoise;
-
-// TODO: Move this
-class WeightedRandomItem {
-public:
-    virtual ~WeightedRandomItem();
-};
 
 class Biome {
 public:
@@ -137,7 +132,7 @@ public:
         std::wstring mMutatedBiomeName;
     };
 
-    class MobSpawnerData {
+    class MobSpawnerData : public WeighedRandomItem {
     public:
         virtual ~MobSpawnerData();
     };
