@@ -2,40 +2,28 @@
 #include "Minecraft.Core/io/File.h"
 #include "platform/NX/Platform.h"
 #include "Minecraft.World/ArrayWithLength.h"
+#include "renderer/entity/BlockEntityRenderDispatcher.h"
 
 Minecraft* Minecraft::GetInstance() {
     return sInstance;
 }
 
 // NON_MATCHING
-void Minecraft::run() {
-    File *saves = new File(L"");
-    this->mSaves = *saves;
-    delete saves;
+void Minecraft::init() {
+    this->mSaves = File(L"");
 
-    File *sourceFile = new File(this->mSaves, L"saves");
-    this->mMcRegionLevelStorageSource = new McRegionLevelStorageSource(*sourceFile, getFixerUpper());
-    delete sourceFile;
+    this->mMcRegionLevelStorageSource = new McRegionLevelStorageSource(File(this->mSaves, L"saves"), getFixerUpper());
 
-    // I don't think mSaves should be used here directly...
-    // name probably also shouldn't be here too but I need to destroy the file, and needed a name to create it.
-    File *optionsFile = new File(this->mSaves, L"options.txt");
-    this->mOptions = new Options(this, *optionsFile);
-    delete optionsFile;
+    this->mOptions = new Options(this, File(this->mSaves));
 
-    // same deal
-    // these calls are actually trying to create what looks to be a new wstring... but that doesn't seem right to me... why pass entire save folder to this? (never even makes a "resourcepacks" folder)
-    File *texturesFolder = new File(this->mSaves, L"");
-    this->mTexturePackRepository = new TexturePackRepository(*texturesFolder, this);
-    delete texturesFolder;
-
+    this->mTexturePackRepository = new TexturePackRepository(File(this->mSaves), this);
     this->mTexturePackRepository->addDebugPacks();
 
     this->mTextures = new Textures(this->mTexturePackRepository, this->mOptions);
 
     // nullptr values are temp.
+    // first one is a ResourceLocation* initialized in __sti___17_UnityClient13_cpp_useLomp
     this->mDefaultFont = new Font(this->mOptions, L"font/Default", this->mTextures, 0, nullptr, 23, 28, 16, 16, nullptr);
-
     // first nullptr value is temp, second is meant to be nullptr
     this->mAlternateFont = new Font(this->mOptions, L"font/Alternate", this->mTextures, 0, nullptr, 16, 16, 8, 8, nullptr);
 
@@ -49,6 +37,7 @@ void Minecraft::run() {
 
     this->mBlockAtlas = new TextureAtlas(0, L"terrain", L"textures/blocks/", 0, true);
 
+    // TODO: get class size
     this->mBlockColors = BlockColors::createDefault();
     this->mItemColors = ItemColors::createDefault(this->mBlockColors);
 
@@ -61,6 +50,8 @@ void Minecraft::run() {
 
     this->mGameRenderer = new GameRenderer(this, 0);
     this->mBlockRenderDispatcher = new BlockRenderDispatcher(this->mBlockColors);
+    // static shit
+    BlockEntityRenderDispatcher::sInstance->mTextures = this->mTextures;
     this->sEntityBlockRenderer = new EntityBlockRenderer();
 
     this->mStatsCounter1 = new StatsCounter();
@@ -74,12 +65,12 @@ void Minecraft::run() {
     MemSect(0);
 
     GlStateManager::enableTexture();
-    GlStateManager::shadeModel(0LL);
+    GlStateManager::shadeModel(0);
     GlStateManager::clearDepth(1.0);
     GlStateManager::enableDepthTest();
-    GlStateManager::depthFunc(4u);
+    GlStateManager::depthFunc(4);
     GlStateManager::enableAlphaTest();
-    GlStateManager::alphaFunc(5u, 0.1);
+    GlStateManager::alphaFunc(5, 0.1);
     GlStateManager::cullFace(1);
     GlStateManager::matrixMode(1);
     GlStateManager::loadIdentity();
@@ -90,6 +81,9 @@ void Minecraft::run() {
     MemSect(0);
 
     this->mLevelRenderer = new LevelRenderer(this, this->mTextures);
+    
+    this->mTextures->stitch();
+
     this->mParticleEngine = new ParticleEngine(this->mLevel, this->mTextures);
 
     MemSect(31);
@@ -98,21 +92,19 @@ void Minecraft::run() {
 
     this->mGui = new Gui(this);
     
+    // what the fuck is this
+    // Wii U Edition says it's countLeadingZeros
+    // although it looks like it's checking a flag left in a wstring pointer????
     std::wstring *ul2b0;
     bool ul2a8 = ((unsigned long long)wstring_2a8 & 1);
 
-    // idk what this is for, ~~maybe qword_2a8 is meant to be a bool?~~
-    // nvm it's used for a string
-    // I think we literally just check if the first byte is empty
     if (ul2a8)
         ul2b0 = this->wstring_2b0; // ???
     else
         ul2b0 = (std::wstring*)((unsigned long long)this->wstring_2a8 >> 1); // idfk anymore LMFAO
 
-    // not matching statement
-    if (!this->wstring_2a8->compare(0, -1, L""/*, ul2b0*/)) {
-        TitleScreen *titleScreen = new TitleScreen();
-        this->setScreen(titleScreen);
+    if (!(this->wstring_2a8->c_str() == L"")) {
+        this->setScreen(new TitleScreen());
     }
 
     this->mProgressRenderer = new ProgressRenderer(this);
@@ -123,7 +115,7 @@ DataFixerUpper* Minecraft::getFixerUpper() {
     return this->mFixerUpper;
 }
 
-void Minecraft::init() {
-    this->mInitialized = 1;
-    run();
+void Minecraft::run() {
+    this->mIsRunning = true;
+    init();
 };

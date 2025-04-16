@@ -16,4 +16,6 @@ public:
     void draw(const std::wstring&, int, int, int, bool, bool);
     std::wstring sanitize(const std::wstring&, bool);
     int width(const std::wstring&);
+
+    unsigned char padding[0xE8];
 };

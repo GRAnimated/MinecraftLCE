@@ -12,4 +12,6 @@ class GameRenderer {
                                      bool, int, float);
     public:
     GameRenderer(Minecraft *mc, ResourceManager *rsrcManager);
+
+    unsigned char padding[0x2290];
 };

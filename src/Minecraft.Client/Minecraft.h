@@ -5,7 +5,7 @@
 #include "Minecraft.World/level/storage/McRegionLevelStorageSource.h"
 #include "Options.h"
 #include "resources/TexturePackRepository.h"
-#include "Textures.h"
+#include "renderer/texture/Textures.h"
 #include "gui/Font.h"
 #include "Minecraft.World/level/block/GrassColor.h"
 #include "Minecraft.World/level/block/FoliageColor.h"
@@ -125,7 +125,7 @@ public:
     ItemColors* mItemColors;
     TextureAtlas* mBlockAtlas;
     ItemRenderer* mItemRenderer;
-    BlockRenderDispatcher* mBlockRenderDispatcher;
+    BlockRenderDispatcher *mBlockRenderDispatcher;
     void* qword_210;
     void* qword_218;
     int dword_220;
@@ -147,7 +147,7 @@ public:
     std::wstring *wstring_2b0;
     void* qword_2b8;
     int dword_2c0;
-    bool mInitialized;
+    bool mIsRunning;
     char gap_2C5[3];
     void* qword_2c8;
     void* qword_2d0;
