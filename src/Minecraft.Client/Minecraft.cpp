@@ -122,3 +122,8 @@ void Minecraft::run() {
 DataFixerUpper* Minecraft::getFixerUpper() {
     return this->mFixerUpper;
 }
+
+void Minecraft::init() {
+    this->mInitialized = 1;
+    run();
+};

@@ -48,10 +48,7 @@ public:
     Minecraft(class Component*, class Canvas*, class MinecraftApplet*, int width, int height, bool);
     void run();
 
-    inline void init() {
-        this->byte_2c4 = 1;
-        run();
-    };
+    void init();
 
     static inline void currentTimeMillis();
     static void start(const std::wstring& str1, const std::wstring& str2);
@@ -150,7 +147,7 @@ public:
     std::wstring *wstring_2b0;
     void* qword_2b8;
     int dword_2c0;
-    char byte_2c4;
+    bool mInitialized;
     char gap_2C5[3];
     void* qword_2c8;
     void* qword_2d0;
