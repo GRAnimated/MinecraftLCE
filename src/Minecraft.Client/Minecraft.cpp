@@ -3,6 +3,11 @@
 #include "platform/NX/Platform.h"
 #include "Minecraft.World/ArrayWithLength.h"
 
+Minecraft* Minecraft::GetInstance() {
+    return sInstance;
+}
+
+// NON_MATCHING
 void Minecraft::run() {
     File *saves = new File(L"");
     this->mSaves = *saves;
