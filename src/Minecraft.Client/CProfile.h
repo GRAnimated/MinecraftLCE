@@ -6,6 +6,7 @@ public:
 
     CProfile();
 
+    // all args seems to be unused
     virtual void Initialise(void const*,void const*,unsigned short,unsigned int,unsigned int,unsigned int *,int,unsigned int *);
     virtual void sub_7100791F54();
     virtual void sub_7100791F14();
@@ -97,9 +98,10 @@ public:
     virtual void sub_7100792BC8();
     virtual void sub_7100792BD0();
     virtual void sub_7100792BD8();
-    virtual void sub_7100792C3C();
+    virtual void SetSignInChoicesCallback(int(*)(int));
     virtual void sub_7100792C44();
     virtual void sub_7100791DAC();
+    virtual void sub_7100791D54();
     // virtuals are completly different than WiiU, this class is completly different
 
     /*virtual void GetLockedProfile();

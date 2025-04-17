@@ -1,15 +1,30 @@
 #pragma once
 
+#include "nn/types.h"
 #include <vector>
 
 template <typename T>
 class arrayWithLength {
 public:
-    arrayWithLength() {}
+    arrayWithLength() {
+        this->data = nullptr;
+        this->length = 0;
+    }
     //~arrayWithLength() { delete data; }
     arrayWithLength(std::vector<T> initialData, int length);
-    arrayWithLength(T* initialData, int length);
-    arrayWithLength(int size, bool a2);
+    arrayWithLength(T* initialData, int length){
+        this->data = initialData;
+        this->length = length;
+    }
+    arrayWithLength(unsigned int size, bool a3){
+        T* temp;
+        if(a3)
+            temp = createDataBuffer(size);
+        else
+            temp = (T*)operator new[](sizeof(T) * size);
+        this->data = temp;
+        this->length = size;
+    }
 
     T& get(unsigned int i) { return data[i]; }
 
@@ -17,8 +32,10 @@ public:
 
     // explicit operator bool() const { return !data->empty(); }
 
-    T* data = nullptr;
-    unsigned int length = 0;
+    T* data;
+    unsigned int length;
+private:
+    static T* createDataBuffer(unsigned int);
 };
 
 template <typename T>

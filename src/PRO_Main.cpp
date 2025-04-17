@@ -2,6 +2,7 @@
 
 #include "Minecraft.Client/C4JThreadImpl.h"
 #include "Minecraft.Client/CInput.h"
+#include "Minecraft.Client/CMinecraftApp.h"
 #include "Minecraft.Client/Compression.h"
 #include "Minecraft.Client/renderer/Renderer.h"
 #include "Minecraft.Client/GameSettings.h"
@@ -11,6 +12,11 @@
 #include "nn/os.h"
 #include "nn/time.h"
 #include "Minecraft.Client/CProfile.h"
+#include "Minecraft.Client/resources/L10N.h"
+#include "Minecraft.Client/ui/ConsoleUIController.h"
+#include "Minecraft.World/ArrayWithLength.h"
+#include "Minecraft.World/entity/Entity.h"
+#include "Minecraft.World/level/biome/Biome.h"
 
 static nn::oe::PerformanceMode PERFORMANCE_MODE;
 static nn::os::MessageQueueType* MESSAGE_QUEUE;
@@ -104,76 +110,81 @@ void DefineActions(){
     GameSettings::SetDefaultActionMapping(2, 22, 3);
     GameSettings::SetDefaultActionMapping(2, 23, 1);
     GameSettings::SetDefaultActionMapping(2, 24, 4);
-
+    CInput* localCInput = CInput::sInstance;
     for(int i = 0; i != 4; ++i){
-        if(CInput::sInstance->IsCircleCrossSwapped()){
-            CInput::sInstance->SetGameControllerTypeJoypadMaps(i, 0, 1);
-            CInput::sInstance->SetGameControllerTypeJoypadMaps(i, 20, 1);
-            CInput::sInstance->SetGameControllerTypeJoypadMaps(i, 1, 2);
-            CInput::sInstance->SetGameControllerTypeJoypadMaps(i, 21, 2);
+        if(localCInput->IsCircleCrossSwapped()){
+            localCInput->SetGameControllerTypeJoypadMaps(i, 0, 1);
+            localCInput->SetGameControllerTypeJoypadMaps(i, 20, 1);
+            localCInput->SetGameControllerTypeJoypadMaps(i, 1, 2);
+            localCInput->SetGameControllerTypeJoypadMaps(i, 21, 2);
         }else{
-            CInput::sInstance->SetGameControllerTypeJoypadMaps(i, 0, 2);
-            CInput::sInstance->SetGameControllerTypeJoypadMaps(i, 20, 2);
-            CInput::sInstance->SetGameControllerTypeJoypadMaps(i, 1, 1);
-            CInput::sInstance->SetGameControllerTypeJoypadMaps(i, 21, 1);
+            localCInput->SetGameControllerTypeJoypadMaps(i, 0, 2);
+            localCInput->SetGameControllerTypeJoypadMaps(i, 20, 2);
+            localCInput->SetGameControllerTypeJoypadMaps(i, 1, 1);
+            localCInput->SetGameControllerTypeJoypadMaps(i, 21, 1);
         }
-        CInput::sInstance->SetGameControllerTypeJoypadMaps(i, 2, 4);
-        CInput::sInstance->SetGameControllerTypeJoypadMaps(i, 3, 8);
-        CInput::sInstance->SetGameControllerTypeJoypadMaps(i, 4, 0x200400);
-        CInput::sInstance->SetGameControllerTypeJoypadMaps(i, 5, 0x100800);
-        CInput::sInstance->SetGameControllerTypeJoypadMaps(i, 7, 0x9000);
-        CInput::sInstance->SetGameControllerTypeJoypadMaps(i, 6, 0x6000);
-        CInput::sInstance->SetGameControllerTypeJoypadMaps(i, 8, 0x800000);
-        CInput::sInstance->SetGameControllerTypeJoypadMaps(i, 9, 0x400000);
-        CInput::sInstance->SetGameControllerTypeJoypadMaps(i, 10, 64);
-        CInput::sInstance->SetGameControllerTypeJoypadMaps(i, 11, 128);
-        CInput::sInstance->SetGameControllerTypeJoypadMaps(i, 18, 16);
-        CInput::sInstance->SetGameControllerTypeJoypadMaps(i, 19, 32);
-        CInput::sInstance->SetGameControllerTypeJoypadMaps(i, 14, 0x20000);
-        CInput::sInstance->SetGameControllerTypeJoypadMaps(i, 15, 0x10000);
-        CInput::sInstance->SetGameControllerTypeJoypadMaps(i, 16, 0x80000);
-        CInput::sInstance->SetGameControllerTypeJoypadMaps(i, 17, 0x40000);
-        CInput::sInstance->SetGameControllerTypeJoypadMaps(i, 32, 2);
-        CInput::sInstance->SetGameControllerTypeJoypadMaps(i, 24, 0x200000);
-        CInput::sInstance->SetGameControllerTypeJoypadMaps(i, 25, 0x100000);
-        CInput::sInstance->SetGameControllerTypeJoypadMaps(i, 26, 0x8000);
-        CInput::sInstance->SetGameControllerTypeJoypadMaps(i, 27, 0x4000);
-        CInput::sInstance->SetGameControllerTypeJoypadMaps(i, 28, 0x80000);
-        CInput::sInstance->SetGameControllerTypeJoypadMaps(i, 29, 0x40000);
-        CInput::sInstance->SetGameControllerTypeJoypadMaps(i, 30, 0x20000);
-        CInput::sInstance->SetGameControllerTypeJoypadMaps(i, 31, 0x10000);
-        CInput::sInstance->SetGameControllerTypeJoypadMaps(i, 33, 0x800000);
-        CInput::sInstance->SetGameControllerTypeJoypadMaps(i, 34, 0x400000);
-        CInput::sInstance->SetGameControllerTypeJoypadMaps(i, 36, 64);
-        CInput::sInstance->SetGameControllerTypeJoypadMaps(i, 35, 128);
-        CInput::sInstance->SetGameControllerTypeJoypadMaps(i, 37, 8);
-        CInput::sInstance->SetGameControllerTypeJoypadMaps(i, 22, 16);
-        CInput::sInstance->SetGameControllerTypeJoypadMaps(i, 38, 1);
+        localCInput->SetGameControllerTypeJoypadMaps(i, 2, 4);
+        localCInput->SetGameControllerTypeJoypadMaps(i, 3, 8);
+        localCInput->SetGameControllerTypeJoypadMaps(i, 4, 0x200400);
+        localCInput->SetGameControllerTypeJoypadMaps(i, 5, 0x100800);
+        localCInput->SetGameControllerTypeJoypadMaps(i, 7, 0x9000);
+        localCInput->SetGameControllerTypeJoypadMaps(i, 6, 0x6000);
+        localCInput->SetGameControllerTypeJoypadMaps(i, 8, 0x800000);
+        localCInput->SetGameControllerTypeJoypadMaps(i, 9, 0x400000);
+        localCInput->SetGameControllerTypeJoypadMaps(i, 10, 64);
+        localCInput->SetGameControllerTypeJoypadMaps(i, 11, 128);
+        localCInput->SetGameControllerTypeJoypadMaps(i, 18, 16);
+        localCInput->SetGameControllerTypeJoypadMaps(i, 19, 32);
+        localCInput->SetGameControllerTypeJoypadMaps(i, 14, 0x20000);
+        localCInput->SetGameControllerTypeJoypadMaps(i, 15, 0x10000);
+        localCInput->SetGameControllerTypeJoypadMaps(i, 16, 0x80000);
+        localCInput->SetGameControllerTypeJoypadMaps(i, 17, 0x40000);
+        localCInput->SetGameControllerTypeJoypadMaps(i, 32, 2);
+        localCInput->SetGameControllerTypeJoypadMaps(i, 24, 0x200000);
+        localCInput->SetGameControllerTypeJoypadMaps(i, 25, 0x100000);
+        localCInput->SetGameControllerTypeJoypadMaps(i, 26, 0x8000);
+        localCInput->SetGameControllerTypeJoypadMaps(i, 27, 0x4000);
+        localCInput->SetGameControllerTypeJoypadMaps(i, 28, 0x80000);
+        localCInput->SetGameControllerTypeJoypadMaps(i, 29, 0x40000);
+        localCInput->SetGameControllerTypeJoypadMaps(i, 30, 0x20000);
+        localCInput->SetGameControllerTypeJoypadMaps(i, 31, 0x10000);
+        localCInput->SetGameControllerTypeJoypadMaps(i, 33, 0x800000);
+        localCInput->SetGameControllerTypeJoypadMaps(i, 34, 0x400000);
+        localCInput->SetGameControllerTypeJoypadMaps(i, 36, 64);
+        localCInput->SetGameControllerTypeJoypadMaps(i, 35, 128);
+        localCInput->SetGameControllerTypeJoypadMaps(i, 37, 8);
+        localCInput->SetGameControllerTypeJoypadMaps(i, 22, 16);
+        localCInput->SetGameControllerTypeJoypadMaps(i, 38, 1);
 
         if(i){
-            CInput::sInstance->SetGameControllerTypeJoypadMaps(i, 39, 256);
-            CInput::sInstance->SetGameControllerTypeJoypadMaps(i, 41, 512);
-            CInput::sInstance->SetGameControllerTypeJoypadMaps(i, 12, 512);
-            CInput::sInstance->SetGameControllerTypeJoypadMaps(i, 13, 256);
+            localCInput->SetGameControllerTypeJoypadMaps(i, 39, 256);
+            localCInput->SetGameControllerTypeJoypadMaps(i, 41, 512);
+            localCInput->SetGameControllerTypeJoypadMaps(i, 12, 512);
+            localCInput->SetGameControllerTypeJoypadMaps(i, 13, 256);
         }else{
-            CInput::sInstance->SetGameControllerTypeJoypadMaps(0, 39, 2048);
-            CInput::sInstance->SetGameControllerTypeJoypadMaps(0, 41, 1024);
-            CInput::sInstance->SetGameControllerTypeJoypadMaps(0, 12, 1024);
-            CInput::sInstance->SetGameControllerTypeJoypadMaps(0, 13, 2048);
+            localCInput->SetGameControllerTypeJoypadMaps(0, 39, 2048);
+            localCInput->SetGameControllerTypeJoypadMaps(0, 41, 1024);
+            localCInput->SetGameControllerTypeJoypadMaps(0, 12, 1024);
+            localCInput->SetGameControllerTypeJoypadMaps(0, 13, 2048);
         }
 
-        CInput::sInstance->SetGameControllerTypeJoypadMaps(i, 40, 4);
-        CInput::sInstance->SetGameControllerTypeJoypadMaps(i, 23, 0x20);
-        CInput::sInstance->SetGameControllerTypeJoypadMaps(i, 42, 0x1000);
-        CInput::sInstance->SetGameControllerTypeJoypadMaps(i, 43, 0x2000);
-        CInput::sInstance->SetGameControllerTypeJoypadMaps(i, 44, 0x400);
-        CInput::sInstance->SetGameControllerTypeJoypadMaps(i, 45, 0x800);
-        CInput::sInstance->SetGameControllerTypeJoypadMaps(i, 57, 0x1000);
-        CInput::sInstance->SetGameControllerTypeJoypadMaps(i, 58, 0x2000);
-        CInput::sInstance->SetGameControllerTypeJoypadMaps(i, 59, 0x400);
-        CInput::sInstance->SetGameControllerTypeJoypadMaps(i, 60, 0x800);
+        localCInput->SetGameControllerTypeJoypadMaps(i, 40, 4);
+        localCInput->SetGameControllerTypeJoypadMaps(i, 23, 0x20);
+        localCInput->SetGameControllerTypeJoypadMaps(i, 42, 0x1000);
+        localCInput->SetGameControllerTypeJoypadMaps(i, 43, 0x2000);
+        localCInput->SetGameControllerTypeJoypadMaps(i, 44, 0x400);
+        localCInput->SetGameControllerTypeJoypadMaps(i, 45, 0x800);
+        localCInput->SetGameControllerTypeJoypadMaps(i, 57, 0x1000);
+        localCInput->SetGameControllerTypeJoypadMaps(i, 58, 0x2000);
+        localCInput->SetGameControllerTypeJoypadMaps(i, 59, 0x400);
+        localCInput->SetGameControllerTypeJoypadMaps(i, 60, 0x800);
     }
 }
+
+
+int dword_7100D6B4AC;
+unsigned int dword_71017C0AB0;
+unsigned int unk_71017C17BC;
 
 // NON_MATCHING: Incomplete
 extern "C" void nnMain() {
@@ -201,7 +212,37 @@ extern "C" void nnMain() {
     Compression::CreateNewThreadStorage();
     Renderer::sInstance->Initialise();
     CProfile::sInstance->AwardManagerOnCreate();
-    CInput::sInstance->Initialise(1, 61, 23);
 
-    
+    CInput::sInstance->Initialise(1, 61, 23);
+    DefineActions();
+    CInput::sInstance->SetJoypadMapArraySetupComplete();
+    CInput::sInstance->SetKeyRepeatRate(0.3f, 0.2f);
+    CInput::sInstance->SetDeadzoneAndMovementRange(0, 20000, 0x7FFF);
+
+    CConsoleMinecraftApp::sInstance->loadMediaArchive();
+    CConsoleMinecraftApp::sInstance->InitialiseDLCInfo();
+    if(CConsoleMinecraftApp::sInstance->ReadProductCodes()){
+        L10N::loadStringTable();
+        CInput::sInstance->SetCircleCrossSwapped(true);
+        int screenType = 1; // shove function that gets screenType, haven't done it so far because i'm unsure on how to name that func
+        gConsoleUIController.setUnk(false);
+
+        int screenWidth, screenHeight;
+        if ( screenType == 1 )
+        {
+            screenHeight = 1080;
+            screenWidth = 1920;
+        }
+        else
+        {
+            screenWidth = 1280;
+            screenHeight = 720;
+        }
+
+        gConsoleUIController.init(screenWidth, screenHeight);
+        CConsoleMinecraftApp::sInstance->CommerceInit();
+        CConsoleMinecraftApp::sInstance->initTime();
+        // funny thing is that all args seems to be unused
+        CProfile::sInstance->Initialise(&dword_7100D6B4AC, &dword_7100D6B4AC, 33, 5, 4, &unk_71017C17BC, 7776, &dword_71017C0AB0);
+    }
 }
