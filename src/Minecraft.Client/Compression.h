@@ -35,7 +35,7 @@ public:
 
     void SetDecompressionType(ESavePlatform platform);
 
-    void SetType(ECompressionTypes type) { this->type = type; };
+    void SetType(ECompressionTypes type) { this->type = type; }
 
     /// @brief Compresses src data with Zlib (if dst is not nullptr)
     /// @param dst Output buffer to store compressed data, optionally can be nullptr if you just want size bound

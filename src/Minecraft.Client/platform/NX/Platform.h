@@ -27,7 +27,7 @@ void PIXEndNamedEvent();
 void EnterCriticalSection(nn::os::MutexType* mutex);
 void LeaveCriticalSection(nn::os::MutexType* mutex);
 
-// NON-MATCHING
+// NON_MATCHING
 enum _XMEMCODEC_TYPE {
     PLACEHOLDER = 1,
 };

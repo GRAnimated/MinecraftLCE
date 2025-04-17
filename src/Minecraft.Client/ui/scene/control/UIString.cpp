@@ -1,0 +1,1 @@
+#include "Minecraft.Client/ui/scene/control/UIString.h"

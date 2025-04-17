@@ -33,11 +33,13 @@ public:
 
     void processSchematics(LevelChunk*);
     LevelGenerationOptions* getLevelGenerationOptions();
+    void loadMediaArchive();
+    void initTime();
 };
 
 class CConsoleMinecraftApp : public CMinecraftApp {
 public:
-    static CConsoleMinecraftApp* instance;
+    static CConsoleMinecraftApp sInstance;
 
     CConsoleMinecraftApp();
     virtual ~CConsoleMinecraftApp();
@@ -55,4 +57,11 @@ public:
     void FreeLocalTMSFiles(eTMSFileType) override;
     void GetLocalTMSFileIndex(wchar_t*, bool, eFileExtensionType) override;
     virtual void TemporaryCreateGameStart();
+
+    void InitialiseDLCInfo();
+    bool ReadProductCodes();
+    void CommerceInit();
+    int GetLocalPlayerCount();
+
+    static int RequestSignInUIChoices(int);
 };

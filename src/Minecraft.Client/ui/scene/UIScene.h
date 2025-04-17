@@ -11,6 +11,85 @@ class fuiRect;
 class UILayer;
 class UIControl;
 
+enum EUIScene{
+    UIScene_Intro = 1,
+    UIScene_SaveMessage = 2,
+    UIScene_MainMenu = 3,
+    UIScene_FullscreenProgress = 4,
+    UIScene_PauseMenu = 5,
+    UIScene_CraftingMenu = 6,
+    UIScene_FurnaceMenu = 8,
+    UIScene_ContainerMenu = 9,
+    UIScene_InventoryMenu = 11,
+    UIScene_DispenserMenu = 12,
+    UIScene_HelpAndOptionsMenu = 15,
+    UIScene_HowToPlay = 16,
+    UIScene_HowToPlayMenu = 17,
+    UIScene_ControlsMenu = 18,
+    UIScene_SettingsListMenu = 19,
+    UIScene_InGameSettingsListMenu = 20,
+    UIScene_SettingsMenu = 21,
+    UIScene_LeaderboardsMenu = 22,
+    UIScene_Credits = 23,
+    UIScene_DeathMenu = 24,
+    UIScene_CreateWorldMenu = 26,
+    UIScene_LoadCreateJoinMenu = 27,
+    UIScene_JoinMenu = 28,
+    UIScene_SignEntryMenu = 29,
+    UIScene_InGameInfoMenu = 30,
+    UIScene_ConnectingProgress = 31,
+    UIScene_DLCOffersMenu = 32,
+    UIScene_TrialExitUpsell = 34,
+    UIScene_LoadMenu = 35,
+    UIScene_ReinstallMenu = 37,
+    UIScene_SkinSelectMenu = 38,
+    UIScene_InGameHostOptionsMenu = 40,
+    UIScene_InGamePlayerOptionsMenu = 41,
+    UIScene_CreativeMenu = 42,
+    UIScene_LaunchMoreOptionsMenu = 43,
+    UIScene_DLCMainMenu = 44,
+    UIScene_NewUpdateMessage = 45,
+    UIScene_EnchantingMenu = 46,
+    UIScene_BrewingStandMenu = 47,
+    UIScene_EndPoem = 48,
+    UIScene_TradingMenu = 50,
+    UIScene_AnvilMenu = 51,
+    UIScene_TeleportMenu = 52,
+    UIScene_HopperMenu = 53,
+    UIScene_BeaconMenu = 54,
+    UIScene_HorseInventoryMenu = 55,
+    UIScene_ClassicCraftingMenu = 56,
+    UIScene_SuperFlatMenu = 57,
+    UIScene_SuperFlatEditLayer = 58,
+    UIScene_SuperFlatPresets = 59,
+    UIScene_GameModeScoreboardMenu = 60,
+    UIScene_WritableBookMenu = 61,
+    UIScene_MapVoteMenu = 62,
+    UIScene_MapSelectMenu = 63,
+    UIScene_BiomePreviewMenu = 64,
+    UIScene_Keyboard = 72,
+    UIScene_QuadrantSignin = 73,
+    UIScene_MessageBox = 74,
+    UIScene_Timer = 75,
+    UIScene_EULA = 76,
+    UIScene_InGameSaveManagementMenu = 77,
+    UIScene_LanguageSelector = 78,
+    UIScene_AchievementsMenu = 79,
+    UIScene_BedrockUpsell = 80,
+
+    
+    UIComponent_TutorialPopup = 25,
+    UIComponent_Chat = 36,
+    UIScene_HUD = 49,
+    UIComponent_Panorama = 65,
+    UIComponent_Logo = 66,
+    UIComponent_DebugUIConsole = 67,
+    UIComponent_DebugUIMarketingGuide = 68,
+    UIComponent_Tooltips = 69,
+    UIComponent_PressStartToPlay = 70,
+    UIComponent_MenuBackground = 71
+};
+
 class UIScene {
 public:
     class _CachedSlotDrawData;
@@ -22,6 +101,11 @@ public:
 
     void setSafeZone(double, double, double, double);
     void tickTimers();
+    void initialiseMovie();
+    void loadMovie();
+    void doHorizontalResizeCheck();
+    bool navigateBack();
+    bool sendInputToMovie(int, bool, bool, bool);
     // void handleFocusChange(int, int);
 
     virtual void reloadMovie(bool);
@@ -31,7 +115,7 @@ public:
     virtual void updateViewportTouchOffset();
     virtual double getSafeZoneHalfHeight();
     virtual double getSafeZoneHalfWidth();
-    virtual void getMoviePath() = 0;
+    virtual std::wstring getMoviePath() = 0;
     virtual bool mapElementsAndNames();
     virtual ~UIScene();
     virtual void getSceneType() = 0;
@@ -51,7 +135,7 @@ public:
     virtual void render(int, int, C4JRender::eViewportType);
     virtual void customDraw(char const*, fuiRect*);
     virtual bool allowRepeat(int);
-    virtual void handleInput(int, int, bool, bool, bool, bool&);
+    virtual bool handleInput(int, int, bool, bool, bool, bool&);
     virtual void handleDestroy();
     virtual void handlePreUnloadForReload();
     virtual void handlePreReload();
@@ -77,7 +161,6 @@ public:
     virtual void handleTouchInput(unsigned int, int, int, int, bool, bool, bool);
     virtual void isReadyToDelete();
 
-private:
     std::wstring wstring_8;
     fuiFile* mFuiFile;
     bool bool_28;

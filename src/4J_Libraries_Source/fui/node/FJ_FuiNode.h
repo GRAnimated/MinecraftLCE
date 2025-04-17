@@ -6,6 +6,12 @@
 class fuiRenderNode;
 class FJ_FuiNodeStage;
 class UIScene;
+class FJ_Base;
+class FJ_List;
+class FJ_List_MenuButton;
+class FJ_List_ListButton;
+class FJ_List_ListButtonPlayerList;
+class FJ_Document;
 
 class FJ_FuiNode {
 public:
@@ -23,6 +29,14 @@ public:
     FJ_FuiNodeStage* getStage();
 
     void setCallbackScene(UIScene*);
+
+
+    FJ_Base* asFJ_Base();
+    FJ_List* asFJ_List();
+    FJ_List_MenuButton* asFJ_List_MenuButton();
+    FJ_List_ListButton* asFJ_List_ListButton();
+    FJ_List_ListButtonPlayerList* asFJ_List_ListButtonPlayerList();
+    FJ_Document* asFJ_Document();
 
     fuiRenderNode* mRenderNode;
     int mTabIndex;

@@ -1,5 +1,5 @@
 #include "Minecraft.Client/ui/ConsoleUIController.h"
-#include "Minecraft.Client/ui/control/UIControl.h"
+#include "Minecraft.Client/ui/scene/control/UIControl.h"
 #include "Minecraft.Client/ui/scene/UILayer.h"
 #include "Minecraft.Client/ui/scene/UIScene.h"
 #include <string>
@@ -27,6 +27,14 @@ UIScene::UIScene(int padID, UILayer* uiLayer) {
     this->mCallbackUniqueId = nullptr;
     this->wstring_8 = L"";
     this->bool_28 = 0;
+}
+
+void UIScene::initialiseMovie(){
+    this->loadMovie();
+    this->mapElementsAndNames();
+    this->updateSafeZone();
+
+    this->mIsInitializedMovie = true;
 }
 
 bool UIScene::needsReloaded() {
@@ -102,7 +110,6 @@ int UIScene::getSubSceneType() const {
     return 0;
 }
 
-// NON-MATCHING: may be wrong but I think it's beacuse for loop generating wrongly
 void UIScene::tick() {
     if (!this->mHidden) {
         if (this->mHideLowerScenes)
@@ -110,8 +117,11 @@ void UIScene::tick() {
 
         this->tickTimers();
 
-        for (UIControl* uiControl : this->mUIControls)
+        // had to do it hacky way as idk how to force compiler to output same thing it does in target, unless that's how it looked in source
+        for (auto i = this->mUIControls.begin(); i != this->mUIControls.end(); ++i ){
+            UIControl* uiControl = *i;
             uiControl->tick();
+        } 
 
         this->mHideLowerScenes = true;
     }
@@ -151,7 +161,7 @@ void* UIScene::GetMainPanel() {
 }
 
 void UIScene::customDraw(char const*, fuiRect*) {}
-void UIScene::handleInput(int, int, bool, bool, bool, bool&) {}
+bool UIScene::handleInput(int, int, bool, bool, bool, bool&) {}
 void UIScene::handleDestroy() {}
 void UIScene::handlePreUnloadForReload() {}
 void UIScene::handlePreReload() {}
