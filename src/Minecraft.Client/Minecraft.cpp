@@ -1,8 +1,24 @@
+#include "Minecraft.Client/CMinecraftApp.h"
+#include "Minecraft.Core/System.h"
 #include "Minecraft.h"
 #include "Minecraft.Core/io/File.h"
 #include "platform/NX/Platform.h"
 #include "Minecraft.World/ArrayWithLength.h"
+#include "renderer/GlStateManager.h"
 #include "renderer/entity/BlockEntityRenderDispatcher.h"
+#include <string>
+#include "Minecraft.World/MinecraftWorld.h"
+#include "User.h"
+#include "Minecraft.World/Tutorial.h"
+#include "Minecraft.World/StructureManager.h"
+#include "Tooltips.h"
+#include "ui/scene/scenes/UIScene_CreativeMenu.h"
+#include "ui/scene/scenes/UIScene_LeaderboardsMenu.h"
+#include "ParticleType.h"
+#include "Minecraft.World/level/gamemode/MasterGameMode.h"
+#include "Minecraft.World/level/gamemode/minigames/MiniGameMedals.h"
+#include "Minecraft.World/level/gamemode/minigames/MiniGameDef.h"
+#include "multiplayer/ClientPacketListener.h"
 
 Minecraft* Minecraft::GetInstance() {
     return sInstance;
@@ -111,8 +127,73 @@ void Minecraft::init() {
     Renderer::sInstance->CBuffLockStaticCreations();
 }
 
+// NOT_MATCHING
+void Minecraft::main() {
+    sUnk = true;
+    MinecraftWorld_RunStaticCtors();
+    User::staticCtor();
+    Tutorial::staticCtor();
+    ColourTable::staticCtor();
+    StructureManager::staticCtor();
+    Tooltips::staticCtor();
+    GlStateManager::staticCtor();
+    CConsoleMinecraftApp::sInstance->loadDefaultGameRules();
+
+    long ms = System::processTimeInMilliSecs();    
+    std::wstring playerName = L"Player" + _toString(ms % 1000);
+
+    UIScene_CreativeMenu::staticCtor();
+    UIScene_LeaderboardsMenu::staticCtor();
+    BlockEntityRenderDispatcher::staticCtor();
+
+    start(playerName, L"-");
+    
+    ParticleType::staticCtor();
+    // who was in charge of naming this one
+    MasterGameMode::StaticCtor();
+    MiniGameMedals::staticCtor();
+    CMinecraftApp::StaticCtor();
+    MiniGameDef::StaticCtor();
+    Minecraft::GetInstance()->mLobbyGameMode = MiniGameDef::GetCustomGameModeById(LOBBY, true);
+    ClientPacketListener::staticCtor();
+}
+
+BlockRenderDispatcher* Minecraft::getBlockRenderer() {
+    return this->mBlockRenderDispatcher;
+}
+
+EntityRenderDispatcher* Minecraft::getEntityRenderDispatcher() {
+    return this->mEntityRenderDispatcher;
+}
+
 DataFixerUpper* Minecraft::getFixerUpper() {
     return this->mFixerUpper;
+}
+
+ItemInHandRenderer* Minecraft::getItemInHandRenderer() {
+    return this->mItemInHandRenderer;
+}
+
+ItemRenderer* Minecraft::getItemRenderer() {
+    return this->mItemRenderer;
+}
+
+int Minecraft::getAverageFps() {
+    return sAverageFps;
+}
+
+bool Minecraft::isUsingDefaultSkin()
+{
+    return GetInstance()->mTexturePackRepository->getSelected();
+}
+
+bool Minecraft::isTutorial()
+{
+    return this->byte_320 != 0;
+}
+
+bool Minecraft::useFancyGraphics() {
+    return Minecraft::sInstance && Minecraft::sInstance->mOptions->mIsFancyGraphics;
 }
 
 void Minecraft::run() {

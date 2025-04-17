@@ -1,5 +1,6 @@
 #pragma once
 
+#include "Minecraft.Network/Connection.h"
 #include <memory>
 #include <string>
 #include "Minecraft.World/level/storage/McRegionLevelStorageSource.h"
@@ -27,6 +28,7 @@
 #include "gui/Gui.h"
 #include "ui/screen/TitleScreen.h"
 #include "renderer/ProgressRenderer.h"
+#include "color/ColourTable.h"
 
 class DataFixerUpper;
 class MultiPlayerGameMode;
@@ -37,8 +39,8 @@ class File;
 class FrameTimer;
 class ClientMasterGameMode;
 class GhostController;
-class ColourTable;
 class MultiplayerLocalPlayer;
+class BlockRenderer;
 
 class Minecraft {
 public:
@@ -50,24 +52,37 @@ public:
 
     void init();
 
+    void main();
+
     static inline void currentTimeMillis();
     static void start(const std::wstring& str1, const std::wstring& str2);
     static void startAndConnectTo(const std::wstring& arg1, const std::wstring& arg2,
                                   const std::wstring& arg3);
 
-    DataFixerUpper *getFixerUpper();
-
-    std::shared_ptr<Entity> getCameraEntity();
-
-    ColourTable* getColourTable();
-
-    bool isUsingDefaultSkin();
-
     // replaced with direct access on Wii U Edition but does nothing on Switch Edition.
     static void setStatsCounter(StatsCounter *counter) { return; };
 
+    // feel like this is meant to be BlockRenderer, not BlockRenderDispatcher... but maybe it is just a container for BlockRenderer
+    // although wouldn't getEntityRenderDispatcher also be called getEntityRenderer?
+    BlockRenderDispatcher *getBlockRenderer(); 
+    std::shared_ptr<Entity> getCameraEntity();
+    ColourTable *getColourTable();
+    Connection *getConnection(int);
+    EntityRenderDispatcher *getEntityRenderDispatcher();
+    DataFixerUpper *getFixerUpper();
+    ItemInHandRenderer *getItemInHandRenderer();
+    ItemRenderer *getItemRenderer();
+    ClientMasterGameMode *GetClientMasterGameMode(); // PascalCase
+
+    bool isUsingDefaultSkin();
+    bool isTutorial();
+    static int getAverageFps();
+    static bool useFancyGraphics();
+
     void setScreen(Screen *screen);
 
+    static int sAverageFps; // or would it be const (I think const does the same thing as static where it shoves it into the executable)
+    static bool sUnk;
     static EntityBlockRenderer *sEntityBlockRenderer;
     DataFixerUpper* mFixerUpper;
     MultiPlayerGameMode* mMultiPlayerGameMode;
@@ -125,7 +140,7 @@ public:
     ItemColors* mItemColors;
     TextureAtlas* mBlockAtlas;
     ItemRenderer* mItemRenderer;
-    BlockRenderDispatcher *mBlockRenderDispatcher;
+    BlockRenderDispatcher *mBlockRenderDispatcher; // meant to be BlockRenderer???
     void* qword_210;
     void* qword_218;
     int dword_220;
@@ -166,7 +181,7 @@ public:
     void* qword_348;
     void* qword_350;
     void* qword_358;
-    void* qword_360;
+    void* mLobbyGameMode; // check MiniGameDef.h
     ClientMasterGameMode* mClientMasterGameMode;
     char gap_370[8];
     GhostController* mGhostController;

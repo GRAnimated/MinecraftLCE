@@ -31,13 +31,15 @@ public:
     virtual void GetTMSXUIDsFileRead();
     virtual void GetFileFromTPD(eTPDFileType, unsigned char*, unsigned int, unsigned char**, unsigned int*);
 
+    static void StaticCtor();
+    void loadDefaultGameRules(); // is this virtual?
     void processSchematics(LevelChunk*);
     LevelGenerationOptions* getLevelGenerationOptions();
 };
 
 class CConsoleMinecraftApp : public CMinecraftApp {
 public:
-    static CConsoleMinecraftApp* instance;
+    static CConsoleMinecraftApp* sInstance;
 
     CConsoleMinecraftApp();
     virtual ~CConsoleMinecraftApp();
