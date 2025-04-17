@@ -145,7 +145,7 @@ void NetherFlatLevelSource::postProcess(int x, int z) {
     }
 
     inPostProcessStep = false;
-    CConsoleMinecraftApp::sInstance->processSchematics(mLevel->getChunk(x, z));
+    CConsoleMinecraftApp::sInstance.processSchematics(mLevel->getChunk(x, z));
 }
 
 void NetherFlatLevelSource::lightChunk(LevelChunk* chunk) {

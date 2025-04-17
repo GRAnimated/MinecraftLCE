@@ -3,6 +3,12 @@
 #include "4J_Libraries_Source/fui/fui.h"
 #include "4J_Libraries_Source/fui/fuiRenderNode.h"
 #include "4J_Libraries_Source/fui/node/FJ_FuiNodeStage.h"
+#include "4J_Libraries_Source/fui/node/FJ_Base.h"
+#include "4J_Libraries_Source/fui/node/FJ_Document.h"
+#include "4J_Libraries_Source/fui/node/FJ_List.h"
+#include "4J_Libraries_Source/fui/node/FJ_List_ListButton.h"
+#include "4J_Libraries_Source/fui/node/FJ_List_ListButtonPlayerList.h"
+#include "4J_Libraries_Source/fui/node/FJ_List_MenuButton.h"
 
 FJ_FuiNode::FJ_FuiNode(fuiRenderNode* renderNode) {
     mTabIndex = -1;
@@ -49,4 +55,28 @@ FJ_FuiNodeStage* FJ_FuiNode::getStage() {
 
 void FJ_FuiNode::setCallbackScene(UIScene* scene) {
     mCallbackScene = scene;
+}
+
+FJ_Base* FJ_FuiNode::asFJ_Base(){
+    return dynamic_cast<FJ_Base*>(this);
+}
+
+FJ_Document* FJ_FuiNode::asFJ_Document(){
+    return dynamic_cast<FJ_Document*>(this);
+}
+
+FJ_List* FJ_FuiNode::asFJ_List(){
+    return dynamic_cast<FJ_List*>(this);
+}
+
+FJ_List_ListButton* FJ_FuiNode::asFJ_List_ListButton(){
+    return dynamic_cast<FJ_List_ListButton*>(this);
+}
+
+FJ_List_ListButtonPlayerList* FJ_FuiNode::asFJ_List_ListButtonPlayerList(){
+    return dynamic_cast<FJ_List_ListButtonPlayerList*>(this);
+}
+
+FJ_List_MenuButton* FJ_FuiNode::asFJ_List_MenuButton(){
+    return dynamic_cast<FJ_List_MenuButton*>(this);
 }
