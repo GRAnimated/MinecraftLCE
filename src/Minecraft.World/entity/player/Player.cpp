@@ -2,6 +2,7 @@
 #include "Player.h"
 #include "Minecraft.Client/CMinecraftApp.h"
 
+// NON_MATCHING
 void Player::staticCtor()
 {
     // 4 counts of defineIdInternal
