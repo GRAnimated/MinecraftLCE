@@ -1,3 +1,4 @@
+#include <cstring>
 #include <new>
 
 #include "Minecraft.Client/C4JThreadImpl.h"
@@ -181,6 +182,9 @@ void DefineActions(){
     }
 }
 
+void PopupToast(){
+    gConsoleUIController.SetAchievementUnlocked();
+}
 
 int dword_7100D6B4AC;
 unsigned int dword_71017C0AB0;
@@ -219,9 +223,9 @@ extern "C" void nnMain() {
     CInput::sInstance->SetKeyRepeatRate(0.3f, 0.2f);
     CInput::sInstance->SetDeadzoneAndMovementRange(0, 20000, 0x7FFF);
 
-    CConsoleMinecraftApp::sInstance->loadMediaArchive();
-    CConsoleMinecraftApp::sInstance->InitialiseDLCInfo();
-    if(CConsoleMinecraftApp::sInstance->ReadProductCodes()){
+    CConsoleMinecraftApp::sInstance.loadMediaArchive();
+    CConsoleMinecraftApp::sInstance.InitialiseDLCInfo();
+    if(CConsoleMinecraftApp::sInstance.ReadProductCodes()){
         L10N::loadStringTable();
         CInput::sInstance->SetCircleCrossSwapped(true);
         int screenType = 1; // shove function that gets screenType, haven't done it so far because i'm unsure on how to name that func
@@ -240,9 +244,11 @@ extern "C" void nnMain() {
         }
 
         gConsoleUIController.init(screenWidth, screenHeight);
-        CConsoleMinecraftApp::sInstance->CommerceInit();
-        CConsoleMinecraftApp::sInstance->initTime();
+        CConsoleMinecraftApp::sInstance.CommerceInit();
+        CConsoleMinecraftApp::sInstance.initTime();
         // funny thing is that all args seems to be unused
         CProfile::sInstance->Initialise(&dword_7100D6B4AC, &dword_7100D6B4AC, 33, 5, 4, &unk_71017C17BC, 7776, &dword_71017C0AB0);
+        CProfile::sInstance->SetSignInChoicesCallback(CConsoleMinecraftApp::RequestSignInUIChoices);
+        CProfile::sInstance->SetOnAwardHandler(PopupToast, 0);
     }
 }

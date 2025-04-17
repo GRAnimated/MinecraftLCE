@@ -39,7 +39,7 @@ public:
 
 class CConsoleMinecraftApp : public CMinecraftApp {
 public:
-    static CConsoleMinecraftApp* sInstance;
+    static CConsoleMinecraftApp sInstance;
 
     CConsoleMinecraftApp();
     virtual ~CConsoleMinecraftApp();
@@ -61,6 +61,7 @@ public:
     void InitialiseDLCInfo();
     bool ReadProductCodes();
     void CommerceInit();
+    int GetLocalPlayerCount();
 
-    static void RequestSignInUIChoices(int);
+    static int RequestSignInUIChoices(int);
 };

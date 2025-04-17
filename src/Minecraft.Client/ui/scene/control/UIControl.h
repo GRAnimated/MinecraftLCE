@@ -6,6 +6,8 @@ class fuiRenderNode;
 
 class UIControl {
 public:
+    enum eUIControlType{};
+
     UIControl();
 
     virtual ~UIControl();
@@ -29,4 +31,5 @@ public:
     float mHeight;
     float mOpacity;
     bool mVisible;
+    bool mBoolIdk2;
 };
