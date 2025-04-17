@@ -1,6 +1,6 @@
 #pragma once
 
 class StructureManager {
-    public:
+public:
     static void staticCtor();
 };

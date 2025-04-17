@@ -1,6 +1,6 @@
 #pragma once
 
 class Tooltips {
-    public:
+public:
     static void staticCtor();
 };

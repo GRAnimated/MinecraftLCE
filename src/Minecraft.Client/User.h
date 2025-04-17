@@ -2,10 +2,10 @@
 #include <string>
 
 class User {
-    public:
+public:
     static void staticCtor();
 
-    User(const std::wstring &name, const std::wstring &session);
+    User(const std::wstring& name, const std::wstring& session);
 
     std::wstring mName;
     std::wstring mSession;

@@ -3,10 +3,9 @@
 #include <unordered_map>
 #include <vector>
 
-
-class UIControl_List : public UIControl_Base{
+class UIControl_List : public UIControl_Base {
 public:
-    class GenericPendingUpdate{
+    class GenericPendingUpdate {
     public:
     };
 

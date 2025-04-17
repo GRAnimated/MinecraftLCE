@@ -1,6 +1,6 @@
 #pragma once
 
 class ClientPacketListener {
-    public:
+public:
     static void staticCtor();
 };

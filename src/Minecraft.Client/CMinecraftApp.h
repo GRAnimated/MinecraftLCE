@@ -1,8 +1,8 @@
 #pragma once
 #include "Minecraft.World/level/levelgen/LevelGenerationOptions.h"
 
-#include "eGameHostOption.h"
 #include "Minecraft.World/level/gamemode/GameType.h"
+#include "eGameHostOption.h"
 
 enum eTMSAction {};
 enum eFileExtensionType {};
@@ -38,10 +38,10 @@ public:
     int GetGameHostOption(unsigned int, eGameHostOption option);
     bool GetChangingSessionType();
     bool GetGameStarted();
-    static void *getSkinIdFromPath(const std::wstring &path); 
-    bool isXuidNotch(PlayerUID *id);
+    static void* getSkinIdFromPath(const std::wstring& path);
+    bool isXuidNotch(PlayerUID* id);
     static void StaticCtor();
-    void loadDefaultGameRules(); // is this virtual?
+    void loadDefaultGameRules();  // is this virtual?
     void processSchematics(LevelChunk*);
     LevelGenerationOptions* getLevelGenerationOptions();
     void loadMediaArchive();

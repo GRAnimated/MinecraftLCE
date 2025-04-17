@@ -1,10 +1,9 @@
+#include "Minecraft.Client/CMinecraftApp.h"
 #include "Minecraft.World/entity/LivingEntity.h"
 #include "Player.h"
-#include "Minecraft.Client/CMinecraftApp.h"
 
 // NON_MATCHING
-void Player::staticCtor()
-{
+void Player::staticCtor() {
     // 4 counts of defineIdInternal
     // also SynchedEntityData :abyss:
     sSkins.push_back(CMinecraftApp::getSkinIdFromPath(L"dlcskin00000107"));
@@ -36,5 +35,4 @@ void Player::staticCtor()
     sSkins.push_back(CMinecraftApp::getSkinIdFromPath(L"dlcskin00002730"));
     sSkins.push_back(CMinecraftApp::getSkinIdFromPath(L"dlcskin00002715"));
     sSkins.push_back(CMinecraftApp::getSkinIdFromPath(L"dlcskin00002104"));
-
 }

@@ -3,8 +3,8 @@
 class BlockColors;
 
 class BlockRenderDispatcher {
-    public:
-    BlockRenderDispatcher(BlockColors *);
+public:
+    BlockRenderDispatcher(BlockColors*);
 
     void* padding;
 };

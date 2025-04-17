@@ -9,5 +9,5 @@ class Player : public LivingEntity {
     static void staticCtor();
 
     // dunno the type
-    static std::vector<void *> sSkins;
+    static std::vector<void*> sSkins;
 };

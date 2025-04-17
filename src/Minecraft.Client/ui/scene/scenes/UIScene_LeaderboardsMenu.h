@@ -2,6 +2,6 @@
 
 // inherits something I know that
 class UIScene_LeaderboardsMenu {
-    public:
+public:
     static void staticCtor();
 };

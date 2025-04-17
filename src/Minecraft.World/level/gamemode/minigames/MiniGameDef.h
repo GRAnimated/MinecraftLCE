@@ -2,12 +2,12 @@
 
 // NON_MATCHING: Enum values are not known
 enum EMiniGameId {
-    LOBBY = 0xF // Named SERVER in my xb1 symbols but might be lobby... not sure.
+    LOBBY = 0xF  // Named SERVER in my xb1 symbols but might be lobby... not sure.
 };
 
 class MiniGameDef {
-    public:
+public:
     static void StaticCtor();
 
-    static void *GetCustomGameModeById(EMiniGameId id, bool);
+    static void* GetCustomGameModeById(EMiniGameId id, bool);
 };

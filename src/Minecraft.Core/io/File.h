@@ -13,7 +13,7 @@ public:
     File();
     File(const std::wstring& path);
     File(const File& other, const std::wstring& path);
-    File(const std::wstring &, const std::wstring &);
+    File(const std::wstring&, const std::wstring&);
     ~File();
 
     File& operator=(const File& other);

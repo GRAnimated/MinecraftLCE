@@ -1,7 +1,7 @@
 #pragma once
 
 class Timer {
-    public:
+public:
     Timer(float tps);
 
     unsigned char padding[0x40];

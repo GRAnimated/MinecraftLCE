@@ -1,8 +1,8 @@
 #include <memory>
 #include <string>
-class UIString{
+class UIString {
 public:
-    class UIStringCore{
+    class UIStringCore {
     public:
         UIStringCore(const std::wstring&);
     };
