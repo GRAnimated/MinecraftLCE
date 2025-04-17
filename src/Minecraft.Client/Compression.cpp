@@ -1,6 +1,6 @@
-#include <types.h>
 #include "Compression.h"
 #include <string.h>
+#include <types.h>
 
 Compression::Compression() {
     this->dcData = 0;
@@ -8,7 +8,7 @@ Compression::Compression() {
     // set up flags (guessing)
     struct {
         uint64_t unk;
-        uint32_t unk2; 
+        uint32_t unk2;
     } XMemFlags;
 
     XMemFlags.unk = 0x2000000000000;
@@ -38,7 +38,7 @@ Compression::~Compression() {
 }
 
 void Compression::CreateNewThreadStorage() {
-    Compression::ThreadStorage *ts = new ThreadStorage();
+    Compression::ThreadStorage* ts = new ThreadStorage();
     unsigned int alloc;
 
     if (threadStorage == nullptr) {
@@ -54,7 +54,7 @@ void Compression::CreateNewThreadStorage() {
 }
 
 void Compression::ReleaseThreadStorage() {
-    Compression::ThreadStorage *ts = (Compression::ThreadStorage *)TlsGetValue(tlsIndex);
+    Compression::ThreadStorage* ts = (Compression::ThreadStorage*)TlsGetValue(tlsIndex);
     // not sure what this is meant to be
     bool tsStatus;
 
@@ -65,7 +65,7 @@ void Compression::ReleaseThreadStorage() {
         tsStatus = true;
     }
 
-    if ( !tsStatus ) {
+    if (!tsStatus) {
         delete ts;
     }
 }
@@ -123,7 +123,7 @@ void Compression::SetDecompressionType(ESavePlatform platform) {
 int Compression::Compress(void* dst, unsigned int* dstSize, void* src, unsigned int srcSize) {
     unsigned int res;
     unsigned long newDestSize;
-    
+
     // for passing to Zlib
     unsigned long ulDestSize = *dstSize;
 
@@ -139,7 +139,7 @@ int Compression::Compress(void* dst, unsigned int* dstSize, void* src, unsigned 
         res = zErr;
     } else {
         // get size bound
-        newDestSize = compressBound(srcSize); 
+        newDestSize = compressBound(srcSize);
 
         // no error
         res = 0;
@@ -150,7 +150,7 @@ int Compression::Compress(void* dst, unsigned int* dstSize, void* src, unsigned 
 
     // set dstSize to the new size
     *dstSize = newDestSize;
-    
+
     // if the res code is not negative, we know nothing went wrong.
     return -(res != 0);
 }
@@ -193,36 +193,34 @@ int Compression::Decompress(void* dst, unsigned int* dstSize, void* src, unsigne
     LeaveCriticalSection(&this->dcMutex);
 
     // if not Z_OK, we know there's an error
-    if (res) return -1;
+    if (res)
+        return -1;
 
     return 0;
-    
 }
 
 int Compression::DecompressLZXRLE(void* dst, unsigned int* dstSize, void* src, unsigned int srcSize) {
     EnterCriticalSection(&this->dcMutex);
-    
+
     unsigned char* temp;
     unsigned long ulDestSize;
     unsigned int initDstSize = 0x32000;
 
     ulDestSize = *dstSize;
-    if (ulDestSize > 0x32000)
-    {
+    if (ulDestSize > 0x32000) {
         initDstSize = *dstSize;
         temp = new unsigned char[ulDestSize];
 
         Decompress(temp, &initDstSize, src, srcSize);
         internalDecompressRle(dst, dstSize, temp, initDstSize);
 
-        if (temp) delete[] temp;
+        if (temp)
+            delete[] temp;
     } else {
-        
-        if ( !this->dcData )
-        {
-          this->dcData = operator new[](0x32000);
+        if (!this->dcData) {
+            this->dcData = operator new[](0x32000);
         }
-  
+
         Compression::Decompress(this->dcData, &initDstSize, src, srcSize);
         Compression::internalDecompressRle(dst, dstSize, this->dcData, initDstSize);
     }
@@ -264,7 +262,7 @@ void Compression::VitaVirtualDecompress(void* dst, uint* dstSize, void* src, uin
             }
         }
     }
-    
+
     // set the dstSize to how many bytes we wrote to the output buffer
     *dstSize = dstOffset;
 }
@@ -288,8 +286,9 @@ bool Compression::internalDecompressRle(void* dst, unsigned int* dstSize, void* 
                 unsigned char repeatValue;
 
                 // if count is bigger than 3, we should repeat the next byte count times
-                // reason (likely) being is that it's not making the file smaller when taking up 3 bytes of space for just 2-3 repeated bytes
-                // also the logic also probably allows for files containing 0xFF to not break the compression. (untested)
+                // reason (likely) being is that it's not making the file smaller when taking up 3 bytes of
+                // space for just 2-3 repeated bytes also the logic also probably allows for files containing
+                // 0xFF to not break the compression. (untested)
                 if (count < 3) {
                     repeatValue = 0xff;
                 } else {
@@ -310,7 +309,8 @@ bool Compression::internalDecompressRle(void* dst, unsigned int* dstSize, void* 
     // set the dstSize to how many bytes we wrote to the output buffer
     *dstSize = dstOffset - dst8;
 
-    // thanks 4J for making this specific decompression function return bool, also it always returns false... why?
+    // thanks 4J for making this specific decompression function return bool, also it always returns false...
+    // why?
     return false;
 }
 
@@ -319,5 +319,6 @@ Compression::ThreadStorage::ThreadStorage() {
 }
 
 Compression::ThreadStorage::~ThreadStorage() {
-    if (compression) delete compression;
+    if (compression)
+        delete compression;
 }

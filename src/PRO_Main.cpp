@@ -4,20 +4,20 @@
 #include "Minecraft.Client/C4JThreadImpl.h"
 #include "Minecraft.Client/CInput.h"
 #include "Minecraft.Client/CMinecraftApp.h"
-#include "Minecraft.Client/Compression.h"
-#include "Minecraft.Client/renderer/Renderer.h"
-#include "Minecraft.Client/GameSettings.h"
-#include "nn/fs.h"
-#include "nn/nifm.h"
-#include "nn/oe.h"
-#include "nn/os.h"
-#include "nn/time.h"
 #include "Minecraft.Client/CProfile.h"
+#include "Minecraft.Client/Compression.h"
+#include "Minecraft.Client/GameSettings.h"
+#include "Minecraft.Client/renderer/Renderer.h"
 #include "Minecraft.Client/resources/L10N.h"
 #include "Minecraft.Client/ui/ConsoleUIController.h"
 #include "Minecraft.World/ArrayWithLength.h"
 #include "Minecraft.World/entity/Entity.h"
 #include "Minecraft.World/level/biome/Biome.h"
+#include "nn/fs.h"
+#include "nn/nifm.h"
+#include "nn/oe.h"
+#include "nn/os.h"
+#include "nn/time.h"
 
 static nn::oe::PerformanceMode PERFORMANCE_MODE;
 static nn::os::MessageQueueType* MESSAGE_QUEUE;
@@ -31,11 +31,11 @@ void InitializeCriticalSection(nn::os::MutexType* mutex) {
     nn::os::UnlockMutex(mutex);
 }
 
-void sub_7100607FBC(){
+void sub_7100607FBC() {
     InitializeCriticalSection(MAIN_MUTEX);
 }
 
-void DefineActions(){
+void DefineActions() {
     GameSettings::SetDefaultActionMapping(0, 0, 2);
     GameSettings::SetDefaultActionMapping(0, 1, 12);
     GameSettings::SetDefaultActionMapping(0, 2, 11);
@@ -112,13 +112,13 @@ void DefineActions(){
     GameSettings::SetDefaultActionMapping(2, 23, 1);
     GameSettings::SetDefaultActionMapping(2, 24, 4);
     CInput* localCInput = CInput::sInstance;
-    for(int i = 0; i != 4; ++i){
-        if(localCInput->IsCircleCrossSwapped()){
+    for (int i = 0; i != 4; ++i) {
+        if (localCInput->IsCircleCrossSwapped()) {
             localCInput->SetGameControllerTypeJoypadMaps(i, 0, 1);
             localCInput->SetGameControllerTypeJoypadMaps(i, 20, 1);
             localCInput->SetGameControllerTypeJoypadMaps(i, 1, 2);
             localCInput->SetGameControllerTypeJoypadMaps(i, 21, 2);
-        }else{
+        } else {
             localCInput->SetGameControllerTypeJoypadMaps(i, 0, 2);
             localCInput->SetGameControllerTypeJoypadMaps(i, 20, 2);
             localCInput->SetGameControllerTypeJoypadMaps(i, 1, 1);
@@ -157,12 +157,12 @@ void DefineActions(){
         localCInput->SetGameControllerTypeJoypadMaps(i, 22, 16);
         localCInput->SetGameControllerTypeJoypadMaps(i, 38, 1);
 
-        if(i){
+        if (i) {
             localCInput->SetGameControllerTypeJoypadMaps(i, 39, 256);
             localCInput->SetGameControllerTypeJoypadMaps(i, 41, 512);
             localCInput->SetGameControllerTypeJoypadMaps(i, 12, 512);
             localCInput->SetGameControllerTypeJoypadMaps(i, 13, 256);
-        }else{
+        } else {
             localCInput->SetGameControllerTypeJoypadMaps(0, 39, 2048);
             localCInput->SetGameControllerTypeJoypadMaps(0, 41, 1024);
             localCInput->SetGameControllerTypeJoypadMaps(0, 12, 1024);
@@ -182,7 +182,7 @@ void DefineActions(){
     }
 }
 
-void PopupToast(){
+void PopupToast() {
     gConsoleUIController.SetAchievementUnlocked();
 }
 
@@ -211,7 +211,6 @@ extern "C" void nnMain() {
 
     InitializeCriticalSection(MAIN_MUTEX2);
     C4JThreadImpl::SetMainThreadID();
-    
 
     Compression::CreateNewThreadStorage();
     Renderer::sInstance->Initialise();
@@ -225,20 +224,18 @@ extern "C" void nnMain() {
 
     CConsoleMinecraftApp::sInstance.loadMediaArchive();
     CConsoleMinecraftApp::sInstance.InitialiseDLCInfo();
-    if(CConsoleMinecraftApp::sInstance.ReadProductCodes()){
+    if (CConsoleMinecraftApp::sInstance.ReadProductCodes()) {
         L10N::loadStringTable();
         CInput::sInstance->SetCircleCrossSwapped(true);
-        int screenType = 1; // shove function that gets screenType, haven't done it so far because i'm unsure on how to name that func
+        int screenType = 1;  // shove function that gets screenType, haven't done it so far because i'm unsure
+                             // on how to name that func
         gConsoleUIController.setUnk(false);
 
         int screenWidth, screenHeight;
-        if ( screenType == 1 )
-        {
+        if (screenType == 1) {
             screenHeight = 1080;
             screenWidth = 1920;
-        }
-        else
-        {
+        } else {
             screenWidth = 1280;
             screenHeight = 720;
         }
@@ -247,7 +244,8 @@ extern "C" void nnMain() {
         CConsoleMinecraftApp::sInstance.CommerceInit();
         CConsoleMinecraftApp::sInstance.initTime();
         // funny thing is that all args seems to be unused
-        CProfile::sInstance->Initialise(&dword_7100D6B4AC, &dword_7100D6B4AC, 33, 5, 4, &unk_71017C17BC, 7776, &dword_71017C0AB0);
+        CProfile::sInstance->Initialise(&dword_7100D6B4AC, &dword_7100D6B4AC, 33, 5, 4, &unk_71017C17BC, 7776,
+                                        &dword_71017C0AB0);
         CProfile::sInstance->SetSignInChoicesCallback(CConsoleMinecraftApp::RequestSignInUIChoices);
         CProfile::sInstance->SetOnAwardHandler(PopupToast, 0);
     }

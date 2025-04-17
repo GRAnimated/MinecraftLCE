@@ -1,24 +1,24 @@
 #include "Minecraft.Client/CMinecraftApp.h"
-#include "Minecraft.Core/System.h"
-#include "Minecraft.h"
-#include "Minecraft.Core/io/File.h"
-#include "platform/NX/Platform.h"
 #include "Minecraft.World/ArrayWithLength.h"
+#include "Minecraft.World/MinecraftWorld.h"
+#include "Minecraft.World/StructureManager.h"
+#include "Minecraft.World/Tutorial.h"
+#include "Minecraft.World/level/gamemode/MasterGameMode.h"
+#include "Minecraft.World/level/gamemode/minigames/MiniGameDef.h"
+#include "Minecraft.World/level/gamemode/minigames/MiniGameMedals.h"
+#include "Minecraft.Core/System.h"
+#include "Minecraft.Core/io/File.h"
+#include "Minecraft.h"
+#include "ParticleType.h"
+#include "Tooltips.h"
+#include "User.h"
+#include "multiplayer/ClientPacketListener.h"
+#include "platform/NX/Platform.h"
 #include "renderer/GlStateManager.h"
 #include "renderer/entity/BlockEntityRenderDispatcher.h"
-#include <string>
-#include "Minecraft.World/MinecraftWorld.h"
-#include "User.h"
-#include "Minecraft.World/Tutorial.h"
-#include "Minecraft.World/StructureManager.h"
-#include "Tooltips.h"
 #include "ui/scene/scenes/UIScene_CreativeMenu.h"
 #include "ui/scene/scenes/UIScene_LeaderboardsMenu.h"
-#include "ParticleType.h"
-#include "Minecraft.World/level/gamemode/MasterGameMode.h"
-#include "Minecraft.World/level/gamemode/minigames/MiniGameMedals.h"
-#include "Minecraft.World/level/gamemode/minigames/MiniGameDef.h"
-#include "multiplayer/ClientPacketListener.h"
+#include <string>
 
 Minecraft* Minecraft::GetInstance() {
     return sInstance;
@@ -28,7 +28,8 @@ Minecraft* Minecraft::GetInstance() {
 void Minecraft::init() {
     this->mSaves = File(L"");
 
-    this->mMcRegionLevelStorageSource = new McRegionLevelStorageSource(File(this->mSaves, L"saves"), getFixerUpper());
+    this->mMcRegionLevelStorageSource
+        = new McRegionLevelStorageSource(File(this->mSaves, L"saves"), getFixerUpper());
 
     this->mOptions = new Options(this, File(this->mSaves));
 
@@ -39,14 +40,18 @@ void Minecraft::init() {
 
     // nullptr values are temp.
     // first one is a ResourceLocation* initialized in __sti___17_UnityClient13_cpp_useLomp
-    this->mDefaultFont = new Font(this->mOptions, L"font/Default", this->mTextures, 0, nullptr, 23, 28, 16, 16, nullptr);
+    this->mDefaultFont
+        = new Font(this->mOptions, L"font/Default", this->mTextures, 0, nullptr, 23, 28, 16, 16, nullptr);
     // first nullptr value is temp, second is meant to be nullptr
-    this->mAlternateFont = new Font(this->mOptions, L"font/Alternate", this->mTextures, 0, nullptr, 16, 16, 8, 8, nullptr);
+    this->mAlternateFont
+        = new Font(this->mOptions, L"font/Alternate", this->mTextures, 0, nullptr, 16, 16, 8, 8, nullptr);
 
-    arrayWithLength<int> grassColorTexture = this->mTextures->loadTexturePixels(_TEXTURE_NAME::GRASS_COLOR, L"misc/grasscolor");
+    arrayWithLength<int> grassColorTexture
+        = this->mTextures->loadTexturePixels(_TEXTURE_NAME::GRASS_COLOR, L"misc/grasscolor");
     GrassColor::init(grassColorTexture);
 
-    arrayWithLength<int> foliageColorTexture = this->mTextures->loadTexturePixels(_TEXTURE_NAME::FOLIAGE_COLOR, L"misc/foliagecolor");
+    arrayWithLength<int> foliageColorTexture
+        = this->mTextures->loadTexturePixels(_TEXTURE_NAME::FOLIAGE_COLOR, L"misc/foliagecolor");
     FoliageColor::init(foliageColorTexture);
 
     Biome::generateColoursDebugOutput();
@@ -97,7 +102,7 @@ void Minecraft::init() {
     MemSect(0);
 
     this->mLevelRenderer = new LevelRenderer(this, this->mTextures);
-    
+
     this->mTextures->stitch();
 
     this->mParticleEngine = new ParticleEngine(this->mLevel, this->mTextures);
@@ -126,9 +131,9 @@ void Minecraft::main() {
     StructureManager::staticCtor();
     Tooltips::staticCtor();
     GlStateManager::staticCtor();
-    CConsoleMinecraftApp::sInstance->loadDefaultGameRules();
+    CConsoleMinecraftApp::sInstance.loadDefaultGameRules();
 
-    long ms = System::processTimeInMilliSecs();    
+    long ms = System::processTimeInMilliSecs();
     std::wstring playerName = L"Player" + _toString(ms % 1000);
 
     UIScene_CreativeMenu::staticCtor();
@@ -136,7 +141,7 @@ void Minecraft::main() {
     BlockEntityRenderDispatcher::staticCtor();
 
     start(playerName, L"-");
-    
+
     ParticleType::staticCtor();
     // who was in charge of naming this one
     MasterGameMode::StaticCtor();
@@ -148,18 +153,16 @@ void Minecraft::main() {
     ClientPacketListener::staticCtor();
 }
 
-void Minecraft::start(const std::wstring& str1, const std::wstring& str2)
-{
+void Minecraft::start(const std::wstring& str1, const std::wstring& str2) {
     startAndConnectTo(str1, str2, L"");
 }
 
 // NON_MATCHING: score 16007
-Minecraft::Minecraft(class Component*, class Canvas*, class MinecraftApplet*, int width, int height, bool)
-{
+Minecraft::Minecraft(class Component*, class Canvas*, class MinecraftApplet*, int width, int height, bool) {
     this->mLocalPlayer = nullptr;
     this->qword_60 = nullptr;
-    // this->qword_68 = ?? 
-    this->website = nullptr; // we should be setting like size or some shit to 0 here
+    // this->qword_68 = ??
+    this->website = nullptr;  // we should be setting like size or some shit to 0 here
     mLocalPlayers[0] = nullptr;
     mLocalPlayers[1] = nullptr;
     mLocalPlayers[2] = nullptr;
@@ -168,7 +171,7 @@ Minecraft::Minecraft(class Component*, class Canvas*, class MinecraftApplet*, in
     this->qword_158 = nullptr;
     this->qword_160 = nullptr;
     this->qword_168 = nullptr;
-    this->website = nullptr; // we should be setting like size or some shit to 0 here
+    this->website = nullptr;  // we should be setting like size or some shit to 0 here
     File(this->mSaves);
     this->wstring_2a8 = nullptr;
     this->wstring_2b0 = nullptr;
@@ -183,7 +186,7 @@ Minecraft::Minecraft(class Component*, class Canvas*, class MinecraftApplet*, in
     this->qword_348 = nullptr;
     this->qword_350 = nullptr;
     this->qword_358 = nullptr;
-    this->qword_380 = &this->qword_380; // ?
+    this->qword_380 = &this->qword_380;  // ?
     this->qword_388 = &this->qword_380;
     this->qword_390 = nullptr;
     this->mFixerUpper = DataFixers::createFixerUpper();
@@ -200,16 +203,16 @@ Minecraft::Minecraft(class Component*, class Canvas*, class MinecraftApplet*, in
 }
 
 // NON_MATCHING: score 5636
-void Minecraft::startAndConnectTo(const std::wstring &name, const std::wstring &session, const std::wstring &arg3)
-{
-    Minecraft *mc = new Minecraft(nullptr, nullptr, nullptr, 1280, 720, false);
+void Minecraft::startAndConnectTo(const std::wstring& name, const std::wstring& session,
+                                  const std::wstring& arg3) {
+    Minecraft* mc = new Minecraft(nullptr, nullptr, nullptr, 1280, 720, false);
     mc->website = L"www.minecraft.net";
 
     if (!name.empty() && !session.empty()) {
         mc->user = new User(name, session);
     } else {
         mc->user = new User(L"Player" + std::to_wstring(System::processTimeInMilliSecs() % 1000), L"");
-    }   
+    }
 
     mc->run();
 }

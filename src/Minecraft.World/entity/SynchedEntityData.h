@@ -3,6 +3,6 @@
 #include "Minecraft.World/eINSTANCEOF.h"
 
 class SynchedEntityData {
-    public:
+public:
     static void defineIdInternal(eINSTANCEOF, eINSTANCEOF);
 };

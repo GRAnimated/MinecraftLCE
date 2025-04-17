@@ -1,6 +1,6 @@
 #pragma once
-#include <string>
 #include "ChunkStorage.h"
+#include <string>
 
 class ConsoleSaveFile;
 class DataFixerUpper;
@@ -9,7 +9,7 @@ class LevelChunk;
 
 class McRegionChunkStorage : public ChunkStorage {
 public:
-    McRegionChunkStorage(ConsoleSaveFile *sf, const std::wstring &unk, DataFixerUpper *dfu);
+    McRegionChunkStorage(ConsoleSaveFile* sf, const std::wstring& unk, DataFixerUpper* dfu);
     ~McRegionChunkStorage();
     // params guessed, I assume that's normal around here.
     void load(Level* level, int x, int z, LevelChunk* chunk) override;

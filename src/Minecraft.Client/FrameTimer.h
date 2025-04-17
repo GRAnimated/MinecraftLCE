@@ -1,6 +1,6 @@
 #pragma once
 
 class FrameTimer {
-    public:
+public:
     unsigned char padding[0x790];
 };

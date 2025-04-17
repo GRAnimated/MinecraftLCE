@@ -3,11 +3,10 @@
 #include "nn/os/os_MutexTypes.h"
 #include <string>
 
-
 // TODO: Find location
 void InitializeCriticalSection(nn::os::MutexType* mutexType);
 // TODO: Find location
-template<typename T>
+template <typename T>
 std::wstring _toString(T type) {
     // std::wstringstream ss;
     // ss << type;

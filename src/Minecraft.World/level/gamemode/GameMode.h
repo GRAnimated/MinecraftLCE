@@ -1,8 +1,8 @@
 #pragma once
 
 #include "types.h"
-#include <memory>
 #include "Minecraft.World/InteractionHand.h"
+#include <memory>
 
 class BlockPos;
 class Direction;

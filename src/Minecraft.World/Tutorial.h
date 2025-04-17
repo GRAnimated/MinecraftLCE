@@ -1,6 +1,6 @@
 #pragma once
 
 class Tutorial {
-    public:
+public:
     static void staticCtor();
 };

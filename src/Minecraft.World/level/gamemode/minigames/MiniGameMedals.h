@@ -2,6 +2,6 @@
 
 // closest matching place to put this header in atm
 class MiniGameMedals {
-    public:
+public:
     static void staticCtor();
 };

@@ -6,7 +6,7 @@ class fuiRenderNode;
 
 class UIControl {
 public:
-    enum eUIControlType{};
+    enum eUIControlType {};
 
     UIControl();
 

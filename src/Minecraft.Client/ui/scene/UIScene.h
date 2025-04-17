@@ -11,7 +11,7 @@ class fuiRect;
 class UILayer;
 class UIControl;
 
-enum EUIScene{
+enum EUIScene {
     UIScene_Intro = 1,
     UIScene_SaveMessage = 2,
     UIScene_MainMenu = 3,
@@ -77,7 +77,6 @@ enum EUIScene{
     UIScene_AchievementsMenu = 79,
     UIScene_BedrockUpsell = 80,
 
-    
     UIComponent_TutorialPopup = 25,
     UIComponent_Chat = 36,
     UIScene_HUD = 49,

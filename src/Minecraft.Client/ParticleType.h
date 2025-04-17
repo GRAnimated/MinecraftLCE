@@ -2,6 +2,6 @@
 
 // might be wrong project to put this in
 class ParticleType {
-    public:
+public:
     static void staticCtor();
 };

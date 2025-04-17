@@ -6,7 +6,7 @@ class BufferedImage;
 
 class TextureAtlas : public IconRegister {
 public:
-    TextureAtlas(int, const std::wstring &path, const std::wstring &filename, BufferedImage *image, bool);
+    TextureAtlas(int, const std::wstring& path, const std::wstring& filename, BufferedImage* image, bool);
 
     // it's probably TextureAtlasSprite but unsure
     virtual void* registerIcon(std::wstring const&) override;

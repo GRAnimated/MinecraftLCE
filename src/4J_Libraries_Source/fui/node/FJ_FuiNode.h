@@ -30,7 +30,6 @@ public:
 
     void setCallbackScene(UIScene*);
 
-
     FJ_Base* asFJ_Base();
     FJ_List* asFJ_List();
     FJ_List_MenuButton* asFJ_List_MenuButton();

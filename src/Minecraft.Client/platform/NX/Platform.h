@@ -32,8 +32,10 @@ enum _XMEMCODEC_TYPE {
     PLACEHOLDER = 1,
 };
 
-int XMemCreateCompressionContext(_XMEMCODEC_TYPE type, const void* param_2, unsigned int param_3, void** param_4);
-int XMemCreateDecompressionContext(_XMEMCODEC_TYPE type, const void* param_2, unsigned int param_3, void** param_4);
+int XMemCreateCompressionContext(_XMEMCODEC_TYPE type, const void* param_2, unsigned int param_3,
+                                 void** param_4);
+int XMemCreateDecompressionContext(_XMEMCODEC_TYPE type, const void* param_2, unsigned int param_3,
+                                   void** param_4);
 void XMemDestroyCompressionContext(void* ctxt);
 void XMemDestroyDecompressionContext(void* ctxt);
 

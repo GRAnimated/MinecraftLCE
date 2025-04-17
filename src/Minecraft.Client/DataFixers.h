@@ -3,6 +3,6 @@
 class DataFixerUpper;
 
 class DataFixers {
-    public:
-    static DataFixerUpper *createFixerUpper();
+public:
+    static DataFixerUpper* createFixerUpper();
 };
