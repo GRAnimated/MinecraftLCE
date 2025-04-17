@@ -6,6 +6,7 @@ enum eFileExtensionType {};
 enum eTMSFileType {};
 enum eTPDFileType {};
 class LevelChunk;
+class PlayerUID;
 
 class CMinecraftApp {
 public:
@@ -31,6 +32,8 @@ public:
     virtual void GetTMSXUIDsFileRead();
     virtual void GetFileFromTPD(eTPDFileType, unsigned char*, unsigned int, unsigned char**, unsigned int*);
 
+    static void *getSkinIdFromPath(const std::wstring &path); 
+    bool isXuidNotch(PlayerUID *id);
     static void StaticCtor();
     void loadDefaultGameRules(); // is this virtual?
     void processSchematics(LevelChunk*);
