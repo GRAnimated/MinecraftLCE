@@ -1,5 +1,6 @@
 #pragma once
 
+#include "Minecraft.Client/User.h"
 #include "Minecraft.Network/Connection.h"
 #include <memory>
 #include <string>
@@ -29,6 +30,9 @@
 #include "ui/screen/TitleScreen.h"
 #include "renderer/ProgressRenderer.h"
 #include "color/ColourTable.h"
+#include "FrameTimer.h"
+#include "Timer.h"
+#include "DataFixers.h"
 
 class DataFixerUpper;
 class MultiPlayerGameMode;
@@ -36,7 +40,6 @@ class LocalPlayer;
 class Entity;
 class SoundEngine;
 class File;
-class FrameTimer;
 class ClientMasterGameMode;
 class GhostController;
 class MultiplayerLocalPlayer;
@@ -48,16 +51,14 @@ public:
     static Minecraft* GetInstance();
 
     Minecraft(class Component*, class Canvas*, class MinecraftApplet*, int width, int height, bool);
+
     void run();
-
     void init();
-
     void main();
 
     static inline void currentTimeMillis();
     static void start(const std::wstring& str1, const std::wstring& str2);
-    static void startAndConnectTo(const std::wstring& arg1, const std::wstring& arg2,
-                                  const std::wstring& arg3);
+    static void startAndConnectTo(const std::wstring &name, const std::wstring &session, const std::wstring &arg3);
 
     // replaced with direct access on Wii U Edition but does nothing on Switch Edition.
     static void setStatsCounter(StatsCounter *counter) { return; };
@@ -93,7 +94,7 @@ public:
     int dword_24;
     int dword_28;
     int dword_2c;
-    void* qword_30;
+    Timer *mTimer;
     char byte_38;
     void* qword_40;
     Level *mLevel;
@@ -119,12 +120,13 @@ public:
     int dword_148;
     void* qword_150;
     void* qword_158;
-    char gap_160[16];
+    void* qword_160;
+    void* qword_168;
     ParticleEngine* mParticleEngine;
-    void* qword_178;
-    void* qword_180;
-    void* qword_188;
-    char gap_190[8];
+    User *user;
+    std::wstring website;
+    // void* qword_188;
+    // char gap_190[8];
     void* qword_198;
     char byte_1a0;
     bool mHasRenderedTick;
