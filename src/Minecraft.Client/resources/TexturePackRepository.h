@@ -8,4 +8,7 @@ class TexturePackRepository {
     TexturePackRepository(File, Minecraft *);
 
     void addDebugPacks();
+    bool getSelected();
+
+    unsigned char padding[0xA8];
 };

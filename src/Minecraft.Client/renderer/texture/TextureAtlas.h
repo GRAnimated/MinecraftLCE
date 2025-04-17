@@ -15,5 +15,9 @@ public:
     void addIcon(bool, int, int, const std::wstring&);
     void addIconWithName(bool, int, int, const std::wstring&, const std::wstring&);
 
+    void stitch();
+
     bool isItems;
+
+    unsigned char padding[0xB8];
 };

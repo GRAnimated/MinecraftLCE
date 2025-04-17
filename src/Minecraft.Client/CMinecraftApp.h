@@ -1,11 +1,15 @@
 #pragma once
 #include "Minecraft.World/level/levelgen/LevelGenerationOptions.h"
 
+#include "eGameHostOption.h"
+#include "Minecraft.World/level/gamemode/GameType.h"
+
 enum eTMSAction {};
 enum eFileExtensionType {};
 enum eTMSFileType {};
 enum eTPDFileType {};
 class LevelChunk;
+class PlayerUID;
 
 class CMinecraftApp {
 public:
@@ -31,10 +35,26 @@ public:
     virtual void GetTMSXUIDsFileRead();
     virtual void GetFileFromTPD(eTPDFileType, unsigned char*, unsigned int, unsigned char**, unsigned int*);
 
+    int GetGameHostOption(unsigned int, eGameHostOption option);
+    bool GetChangingSessionType();
+    bool GetGameStarted();
+    static void *getSkinIdFromPath(const std::wstring &path); 
+    bool isXuidNotch(PlayerUID *id);
+    static void StaticCtor();
+    void loadDefaultGameRules(); // is this virtual?
     void processSchematics(LevelChunk*);
     LevelGenerationOptions* getLevelGenerationOptions();
     void loadMediaArchive();
     void initTime();
+
+    // note to self: vftable pushes everything over by 8 inside decompiler view
+    unsigned char padding[312];
+    int mAutosaveTimerTime;
+    unsigned char padding2[144];
+    bool mGameStarted;
+    char padding3;
+    char padding4;
+    bool mChangingSessionType;
 };
 
 class CConsoleMinecraftApp : public CMinecraftApp {

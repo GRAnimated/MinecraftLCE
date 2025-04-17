@@ -22,4 +22,6 @@ public:
                            not_null_ptr<ItemInstance> item, float equippedProgress);
     void renderItem(std::shared_ptr<LivingEntity> ent, not_null_ptr<ItemInstance> item, int a4, bool a5,
                     int a6, bool a7);
+
+    unsigned char padding[0x50];
 };
