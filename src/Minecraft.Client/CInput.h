@@ -28,7 +28,7 @@ public:
     virtual void GetIdleSeconds(int) = 0;
     virtual void IsPadConnected(int) = 0;
     virtual void SetCircleCrossSwapped(bool) = 0;
-    virtual void IsCircleCrossSwapped(void) = 0;
+    virtual bool IsCircleCrossSwapped(void) = 0;
     virtual void func_7100790784(void) = 0;
     virtual void MapTouchInput(int, uint) = 0;
     virtual float GetJoypadStick_Menu_LX(int) = 0;
@@ -88,7 +88,7 @@ public:
     void GetIdleSeconds(int);
     void IsPadConnected(int);
     void SetCircleCrossSwapped(bool);
-    void IsCircleCrossSwapped(void);
+    bool IsCircleCrossSwapped(void);
     void func_7100790784(void);
     void MapTouchInput(int, uint);
     float GetJoypadStick_Menu_LX(int);

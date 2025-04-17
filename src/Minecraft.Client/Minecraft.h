@@ -64,7 +64,7 @@ public:
     bool isUsingDefaultSkin();
 
     // replaced with direct access on Wii U Edition but does nothing on Switch Edition.
-    static void setStatsCounter(StatsCounter *counter) { return; };
+    static void setStatsCounter(StatsCounter *counter) { return; }
 
     void setScreen(Screen *screen);
 
