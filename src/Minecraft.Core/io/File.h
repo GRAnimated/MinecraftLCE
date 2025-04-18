@@ -34,7 +34,7 @@ public:
     static size_t hash_fnct(const File& file);
     static bool eq_test(const File& file1, const File& file2);
 
-    void* filler[3];
+    std::wstring name;
 };
 
 std::wstring char16towstring(wchar_t*);
