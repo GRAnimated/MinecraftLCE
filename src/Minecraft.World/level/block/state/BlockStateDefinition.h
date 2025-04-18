@@ -62,6 +62,8 @@ public:
     };
 
     BlockStateDefinition(Block* block);
+
+    // NON_MATCHING
     BlockStateDefinition(Block* block, Property const** properties) { _init(block, properties, 1); }
 
     void _init(Block* block, Property const** properties, unsigned int damage);
