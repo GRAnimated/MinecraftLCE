@@ -1,4 +1,5 @@
 #include "Minecraft.Client/CMinecraftApp.h"
+#include "Minecraft.Client/resources/StringTable.h"
 #include "Minecraft.World/ArrayWithLength.h"
 #include "Minecraft.World/MinecraftWorld.h"
 #include "Minecraft.World/StructureManager.h"
@@ -24,41 +25,29 @@ Minecraft* Minecraft::GetInstance() {
     return sInstance;
 }
 
-// NON_MATCHING: score 8813
 void Minecraft::init() {
     this->mSaves = File(L"");
 
     this->mMcRegionLevelStorageSource
         = new McRegionLevelStorageSource(File(this->mSaves, L"saves"), getFixerUpper());
 
-    this->mOptions = new Options(this, File(this->mSaves));
+    this->mOptions = new Options(this, this->mSaves);
 
     this->mTexturePackRepository = new TexturePackRepository(File(this->mSaves), this);
     this->mTexturePackRepository->addDebugPacks();
 
     this->mTextures = new Textures(this->mTexturePackRepository, this->mOptions);
 
-    // nullptr values are temp.
-    // first one is a ResourceLocation* initialized in __sti___17_UnityClient13_cpp_useLomp
-    this->mDefaultFont
-        = new Font(this->mOptions, L"font/Default", this->mTextures, 0, nullptr, 23, 28, 16, 16, nullptr);
-    // first nullptr value is temp, second is meant to be nullptr
-    this->mAlternateFont
-        = new Font(this->mOptions, L"font/Alternate", this->mTextures, 0, nullptr, 16, 16, 8, 8, nullptr);
+    this->mDefaultFont = new Font(this->mOptions, L"font/Default", this->mTextures, 0, &Font::sDefaultFontRsrc, 23, 28, 16, 16, Font::sDefaultText);
+    this->mAlternateFont = new Font(this->mOptions, L"font/alternate", this->mTextures, 0, &Font::sAlternateFontRsrc, 16, 16, 8, 8, nullptr);
 
-    arrayWithLength<int> grassColorTexture
-        = this->mTextures->loadTexturePixels(_TEXTURE_NAME::GRASS_COLOR, L"misc/grasscolor");
-    GrassColor::init(grassColorTexture);
-
-    arrayWithLength<int> foliageColorTexture
-        = this->mTextures->loadTexturePixels(_TEXTURE_NAME::FOLIAGE_COLOR, L"misc/foliagecolor");
-    FoliageColor::init(foliageColorTexture);
+    GrassColor::init(this->mTextures->loadTexturePixels(_TEXTURE_NAME::GRASS_COLOR, L"misc/grasscolor"));
+    FoliageColor::init(this->mTextures->loadTexturePixels(_TEXTURE_NAME::FOLIAGE_COLOR, L"misc/foliagecolor"));
 
     Biome::generateColoursDebugOutput();
 
     this->mBlockAtlas = new TextureAtlas(0, L"terrain", L"textures/blocks/", 0, true);
 
-    // TODO: get class size
     this->mBlockColors = BlockColors::createDefault();
     this->mItemColors = ItemColors::createDefault(this->mBlockColors);
 
@@ -79,10 +68,11 @@ void Minecraft::init() {
     this->mStatsCounter2 = new StatsCounter();
     this->mStatsCounter3 = new StatsCounter();
     this->mStatsCounter4 = new StatsCounter();
-    setStatsCounter(this->mStatsCounter4);
+    setupStatsCounter();
 
+    // this is cursed why would you do this
     MemSect(31);
-    std::wstring status = L"Pre startup";
+    { std::wstring status(L"Pre startup"); }
     MemSect(0);
 
     GlStateManager::enableTexture();
@@ -98,7 +88,7 @@ void Minecraft::init() {
     GlStateManager::matrixMode(0);
 
     MemSect(31);
-    status = L"Startup";
+    { std::wstring status(L"Startup"); }
     MemSect(0);
 
     this->mLevelRenderer = new LevelRenderer(this, this->mTextures);
@@ -108,12 +98,12 @@ void Minecraft::init() {
     this->mParticleEngine = new ParticleEngine(this->mLevel, this->mTextures);
 
     MemSect(31);
-    status = L"Post startup";
+    { std::wstring status(L"Post startup"); }
     MemSect(0);
 
     this->mGui = new Gui(this);
 
-    if (!this->wstring_2a8->empty()) {
+    if (this->wstring_2a8 == L"") {
         this->setScreen(new TitleScreen());
     }
 
@@ -174,8 +164,6 @@ Minecraft::Minecraft(class Component*, class Canvas*, class MinecraftApplet*, in
     this->website = nullptr;  // we should be setting like size or some shit to 0 here
     File(this->mSaves);
     this->wstring_2a8 = nullptr;
-    this->wstring_2b0 = nullptr;
-    this->qword_2b8 = nullptr;
     this->qword_2c8 = nullptr;
     this->qword_2d0 = nullptr;
     this->qword_2d8 = nullptr;

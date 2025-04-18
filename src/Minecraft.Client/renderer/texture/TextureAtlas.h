@@ -19,5 +19,5 @@ public:
 
     bool isItems;
 
-    unsigned char padding[0xB8];
+    unsigned char padding[0xAF];
 };

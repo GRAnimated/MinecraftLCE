@@ -8,7 +8,7 @@ class D3DXIMAGE_INFO;
 
 class Renderer : public C4JRender {
 public:
-    static Renderer* sInstance;
+    static Renderer *sInstance;
 
     virtual void Tick();
     virtual void UpdateGamma(unsigned short);

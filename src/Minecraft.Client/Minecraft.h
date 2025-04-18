@@ -61,8 +61,8 @@ public:
     static void startAndConnectTo(const std::wstring& name, const std::wstring& session,
                                   const std::wstring& arg3);
 
-    // replaced with direct access on Wii U Edition but does nothing on Switch Edition.
-    static void setStatsCounter(StatsCounter* counter) { return; }
+    // called after all 4 StatsCounters are created in init
+    static void setupStatsCounter() { return; }
 
     // feel like this is meant to be BlockRenderer, not BlockRenderDispatcher... but maybe it is just a
     // container for BlockRenderer although wouldn't getEntityRenderDispatcher also be called
@@ -163,9 +163,7 @@ public:
     StatsCounter* mStatsCounter2;
     StatsCounter* mStatsCounter3;
     StatsCounter* mStatsCounter4;
-    std::wstring* wstring_2a8;
-    std::wstring* wstring_2b0;
-    void* qword_2b8;
+    std::wstring wstring_2a8;
     int dword_2c0;
     bool mIsRunning;
     char gap_2C5[3];
