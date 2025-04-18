@@ -7,7 +7,7 @@
 void InitializeCriticalSection(nn::os::MutexType* mutexType);
 // TODO: Find location
 template <typename T>
-std::wstring _toString(T type) {
+const std::wstring _toString(T type) {
     // std::wstringstream ss;
     // ss << type;
     // return ss.str();

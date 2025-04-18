@@ -4,6 +4,8 @@
 #include "Minecraft.Network/PacketType.h"
 #include <deque>
 #include <memory>
+// #include <iostream>
+#include "Minecraft.Core/io/DataInputStream.h"
 
 class DataInputStream;
 class DataOutputStream;
@@ -25,6 +27,8 @@ public:
     virtual bool isInvalidatedBy(std::shared_ptr<Packet> packet);
     virtual bool isAync();
     virtual bool tryReplaceDuplicatePacket(std::deque<std::shared_ptr<Packet>>* duplicatePacket);
+
+    std::wstring readUtf(DataInputStream *in, int length);
 
     long mCreatedTime;
     bool mShouldDelay;
