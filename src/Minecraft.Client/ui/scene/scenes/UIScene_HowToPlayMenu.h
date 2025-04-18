@@ -1,7 +1,7 @@
 #include "Minecraft.Client/ui/scene/UIScene.h"
 #include "Minecraft.Client/ui/scene/control/UIControl_ButtonList.h"
 
-class UIScene_HowToPlayMenu : public UIScene{
+class UIScene_HowToPlayMenu : public UIScene {
     UIScene_HowToPlayMenu(int, void*, UILayer*);
 
     std::wstring getMoviePath() override;

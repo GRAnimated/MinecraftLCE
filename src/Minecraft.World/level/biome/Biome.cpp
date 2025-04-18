@@ -8,9 +8,9 @@
 #include "Minecraft.World/level/levelgen/feature/FlowerFeature.h"
 #include "Minecraft.World/level/levelgen/synth/PerlinSimplexNoise.h"
 #include "Minecraft.World/level/material/MaterialColor.h"
+#include "Biome.h"
 #include "Minecraft.Core/BlockPos.h"
 #include "Minecraft.Util/Mth.h"
-#include "Biome.h"
 
 // NON_MATCHING
 Biome::BiomeProperties::BiomeProperties(const std::wstring& name) : mBiomeName(name) {}

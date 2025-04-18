@@ -12,13 +12,13 @@ public:
     }
     //~arrayWithLength() { delete data; }
     arrayWithLength(std::vector<T> initialData, int length);
-    arrayWithLength(T* initialData, int length){
+    arrayWithLength(T* initialData, int length) {
         this->data = initialData;
         this->length = length;
     }
-    arrayWithLength(unsigned int size, bool a3){
+    arrayWithLength(unsigned int size, bool a3) {
         T* temp;
-        if(a3)
+        if (a3)
             temp = createDataBuffer(size);
         else
             temp = (T*)operator new[](sizeof(T) * size);

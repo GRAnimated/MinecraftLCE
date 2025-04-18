@@ -1,7 +1,7 @@
 #include "Minecraft.Client/ui/ConsoleUIController.h"
-#include "Minecraft.Client/ui/scene/control/UIControl.h"
 #include "Minecraft.Client/ui/scene/UILayer.h"
 #include "Minecraft.Client/ui/scene/UIScene.h"
+#include "Minecraft.Client/ui/scene/control/UIControl.h"
 #include <string>
 
 // It's matching but... some of those variable inits should be moved to header
@@ -29,7 +29,7 @@ UIScene::UIScene(int padID, UILayer* uiLayer) {
     this->bool_28 = 0;
 }
 
-void UIScene::initialiseMovie(){
+void UIScene::initialiseMovie() {
     this->loadMovie();
     this->mapElementsAndNames();
     this->updateSafeZone();
@@ -117,11 +117,12 @@ void UIScene::tick() {
 
         this->tickTimers();
 
-        // had to do it hacky way as idk how to force compiler to output same thing it does in target, unless that's how it looked in source
-        for (auto i = this->mUIControls.begin(); i != this->mUIControls.end(); ++i ){
+        // had to do it hacky way as idk how to force compiler to output same thing it does in target, unless
+        // that's how it looked in source
+        for (auto i = this->mUIControls.begin(); i != this->mUIControls.end(); ++i) {
             UIControl* uiControl = *i;
             uiControl->tick();
-        } 
+        }
 
         this->mHideLowerScenes = true;
     }

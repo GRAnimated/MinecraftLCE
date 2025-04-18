@@ -13,7 +13,7 @@ public:
     File();
     File(const std::wstring& path);
     File(const File& other, const std::wstring& path);
-    File(const std::wstring &, const std::wstring &);
+    File(const std::wstring&, const std::wstring&);
     ~File();
 
     File& operator=(const File& other);
@@ -34,7 +34,7 @@ public:
     static size_t hash_fnct(const File& file);
     static bool eq_test(const File& file1, const File& file2);
 
-    void* filler[3];
+    std::wstring name;
 };
 
 std::wstring char16towstring(wchar_t*);

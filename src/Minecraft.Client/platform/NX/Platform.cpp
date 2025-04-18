@@ -1,8 +1,8 @@
 #include "Minecraft.Client/platform/NX/Platform.h"
 
+#include "Platform.h"
 #include <cstdlib>
 #include <cstring>
-#include "Platform.h"
 
 // NON_MATCHING
 void* XPhysicalAlloc(unsigned long a1, unsigned long a2, unsigned long a3, unsigned int a4) {
@@ -29,11 +29,13 @@ void LeaveCriticalSection(nn::os::MutexType* mutex) {
 
 // XMemCompress/LZX Functions
 // Stubbed on Nintendo Switch Edition
-int XMemCreateCompressionContext(_XMEMCODEC_TYPE type, const void *param_2, unsigned int param_3, void** param_4) {
+int XMemCreateCompressionContext(_XMEMCODEC_TYPE type, const void* param_2, unsigned int param_3,
+                                 void** param_4) {
     return 0;
 }
 
-int XMemCreateDecompressionContext(_XMEMCODEC_TYPE type, const void *param_2, unsigned int param_3, void** param_4) {
+int XMemCreateDecompressionContext(_XMEMCODEC_TYPE type, const void* param_2, unsigned int param_3,
+                                   void** param_4) {
     return 0;
 }
 

@@ -1,14 +1,15 @@
 #pragma once
 
 #include <cstdint>
-class CProfile{
+class CProfile {
 public:
     static CProfile* sInstance;
 
     CProfile();
 
     // all args seems to be unused
-    virtual void Initialise(void const*,void const*,unsigned short,unsigned int,unsigned int,unsigned int *,int,unsigned int *);
+    virtual void Initialise(void const*, void const*, unsigned short, unsigned int, unsigned int,
+                            unsigned int*, int, unsigned int*);
     virtual void sub_7100791F54();
     virtual void sub_7100791F14();
     virtual void sub_7100791EEC();
@@ -68,7 +69,7 @@ public:
     virtual void sub_71007A2DF4();
     virtual void sub_71007A2894();
     virtual void sub_71007A2994();
-    virtual void SetOnAwardHandler(void(*)(), void*);
+    virtual void SetOnAwardHandler(void (*)(), void*);
     virtual void sub_7100792C4C();
     virtual void sub_7100794818();
     virtual void sub_7100793C60();
@@ -99,7 +100,7 @@ public:
     virtual void sub_7100792BC8();
     virtual void sub_7100792BD0();
     virtual void sub_7100792BD8();
-    virtual void SetSignInChoicesCallback(int(*)(int));
+    virtual void SetSignInChoicesCallback(int (*)(int));
     virtual void sub_7100792C44();
     virtual void sub_7100791DAC();
     virtual void sub_7100791D54();
@@ -292,7 +293,7 @@ public:
     void* qwordAA8;
     char gapAB0[272];
     void (*mOnAwardHandler)();
-    void *mAwardHandlerVar;
+    void* mAwardHandlerVar;
     void* qwordBD0;
     void* qwordBD8;
     void* qwordBE0;
