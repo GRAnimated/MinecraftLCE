@@ -1,4 +1,5 @@
 #pragma once
+#include <string>
 
 #include "Minecraft.World/ArrayWithLength.h"
 

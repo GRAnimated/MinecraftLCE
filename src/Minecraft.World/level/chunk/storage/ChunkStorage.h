@@ -2,6 +2,7 @@
 
 class Level;
 class LevelChunk;
+class CompoundTag;
 
 class ChunkStorage {
 public:
