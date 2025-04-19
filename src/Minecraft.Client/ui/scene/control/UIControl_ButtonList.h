@@ -7,4 +7,5 @@ public:
     UIControl_ButtonList();
 
     void addItem(std::wstring const&, int);
+    bool setupControl(UIScene*, fuiRenderNode*, std::string const&);
 };

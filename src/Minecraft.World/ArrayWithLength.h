@@ -34,7 +34,6 @@ public:
 
     T* data;
     unsigned int length;
-
 private:
     static T* createDataBuffer(unsigned int);
 };

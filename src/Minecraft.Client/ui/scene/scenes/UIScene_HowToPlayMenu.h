@@ -8,9 +8,10 @@ class UIScene_HowToPlayMenu : public UIScene {
     void updateTooltips() override;
     void updateComponents() override;
     void handleReload() override;
-    bool handleInput(int, int, bool, bool, bool, bool&) override;
+    void handleInput(int, int, bool, bool, bool, bool&) override;
     void handlePress(int, int) override;
     bool mapElementsAndNames() override;
+    int getSceneType() override;
 
     void* qword108;
     UIControl_ButtonList uicontrol_list110;

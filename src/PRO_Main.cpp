@@ -25,12 +25,6 @@ static u64* MESSAGE_QUEUE_BUFFER;
 static nn::os::MutexType* MAIN_MUTEX;
 static nn::os::MutexType* MAIN_MUTEX2;
 
-void InitializeCriticalSection(nn::os::MutexType* mutex) {
-    nn::os::InitializeMutex(mutex, 1, 0);
-    nn::os::LockMutex(mutex);
-    nn::os::UnlockMutex(mutex);
-}
-
 void sub_7100607FBC() {
     InitializeCriticalSection(MAIN_MUTEX);
 }
