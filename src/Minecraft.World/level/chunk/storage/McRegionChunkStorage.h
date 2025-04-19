@@ -1,14 +1,16 @@
 #pragma once
-#include "ChunkStorage.h"
-#include <string>
+#include "Minecraft.Client/platform/NX/Platform.h"
 #include "Minecraft.World/level/Level.h"
 #include "Minecraft.World/level/chunk/LevelChunk.h"
-#include "Minecraft.Core/io/DataOutputStream.h"
 #include "Minecraft.World/level/storage/RegionFileCache.h"
+#include "Minecraft.World/level/storage/save/ConsoleSaveFileCommon.h"
+#include "ChunkStorage.h"
 #include "Minecraft.Core/System.h"
-#include "Minecraft.Client/platform/NX/Platform.h"
+#include "Minecraft.Core/io/DataOutputStream.h"
+#include <string>
 
-class ConsoleSaveFile;
+#include <deque>
+
 class DataFixerUpper;
 
 class McRegionChunkStorage : public ChunkStorage {
@@ -35,9 +37,9 @@ public:
     // same with this
     // void WaitForSaves();
 
+    static std::deque<DataOutputStream*> sDeque;
     static nn::os::MutexType *sMutex;
     char unk[8];
     std::wstring unk2;
-    #warning "McRegionChunkStorage->mSaveFile: Wrong offset"
-    ConsoleSaveFile* mSaveFile; // wrong offset...
+    ConsoleSaveFileCommon* mSaveFile;
 };

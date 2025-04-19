@@ -28,7 +28,11 @@ public:
     virtual bool isAync();
     virtual bool tryReplaceDuplicatePacket(std::deque<std::shared_ptr<Packet>>* duplicatePacket);
 
-    std::wstring readUtf(DataInputStream *in, int length);
+    /** Reads a length-prefixed UTF16 string
+     * @param in The input stream to read from
+     * @param maxLength The maximum allowed length of the string you want to read
+     */
+    static std::wstring readUtf(DataInputStream *in, int maxLength);
 
     long mCreatedTime;
     bool mShouldDelay;

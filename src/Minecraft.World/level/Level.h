@@ -132,6 +132,8 @@ public:
     int getSeaLevel();
     void setSeaLevel(int);
 
+    long getGameTime();
+
     void instaTick(BlockPos const&, BlockState const*, Random&);
     static void setInstaTick(bool);
 

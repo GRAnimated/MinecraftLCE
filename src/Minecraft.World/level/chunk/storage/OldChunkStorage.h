@@ -1,9 +1,8 @@
 #pragma once
 #include "Minecraft.Core/io/DataOutputStream.h"
-
-class LevelChunk;
-class Level;
-class CompoundTag;
+#include "Minecraft.Nbt/CompoundTag.h"
+#include "Minecraft.World/level/Level.h"
+#include "Minecraft.World/level/chunk/LevelChunk.h"
 
 class OldChunkStorage {
     public:

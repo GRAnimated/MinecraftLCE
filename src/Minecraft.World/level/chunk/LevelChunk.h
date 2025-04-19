@@ -84,7 +84,9 @@ public:
     virtual void getReorderedBlocksAndData(int, int, int, int, int&, int);
 
     char unk[520];
-    int x; // GUESSED
-    int z; // GUESSED
-    char unk2[188];
+    int xPos;
+    int zPos;
+    char unk2[90];
+    long inhabitedTime;
+    char unk3[86];
 };

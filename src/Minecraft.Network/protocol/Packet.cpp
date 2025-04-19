@@ -1,5 +1,6 @@
 #include "Minecraft.Core/System.h"
 #include "Minecraft.Network/protocol/Packet.h"
+#include <sstream>
 
 Packet::Packet() {
     mCreatedTime = System::processTimeInMilliSecs();
@@ -22,6 +23,7 @@ bool Packet::isInvalidatedBy(std::shared_ptr<Packet> packet) {
     return false;
 }
 
+// amazing
 bool Packet::isAync() {
     return false;
 }
@@ -30,22 +32,19 @@ bool Packet::tryReplaceDuplicatePacket(std::deque<std::shared_ptr<Packet>>* dupl
     return false;
 }
 
-std::wstring Packet::readUtf(DataInputStream *in, int length)
-{
-    short rLength = in->readShort();
-    // this won't match until we can fix this stupid error: use of undeclared identifier 'strtoll_l'
-    // if (rLength > length) {
-    //     std::wcout << L"Received string length longer than maximum allowed ("
-    //                 << rLength << L" > " << length << L")" << std::endl;
-    // }
+std::wstring Packet::readUtf(DataInputStream *in, int maxLength) {
+    short length = in->readShort();
 
-    std::wstring str;
-    if (length >= 1) {
-        while (length) {
-            str.push_back(in->readChar());
-            length--;
-        }
+    if (length > maxLength) {
+        std::wstringstream warning;
+        warning << L"Received string length longer than maximum allowed ("
+                    << length << L" > " << maxLength << L")";
     }
-    
+
+    std::wstring str = L"";
+    for (int i = 0; i < length; ++i) {
+        str.push_back(in->readChar());
+    }
+
     return str;
 }
