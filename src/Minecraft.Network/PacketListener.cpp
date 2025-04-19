@@ -1,4 +1,4 @@
-#include "Minecraft.Client/multiplayer/PacketListener.h"
+#include "PacketListener.h"
 
 #include "Minecraft.Network/protocol/game/ClientboundKeepAlivePacket.h"
 #include "Minecraft.Network/protocol/game/ClientboundPlayerSleepPacket.h"

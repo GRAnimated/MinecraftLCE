@@ -2,6 +2,7 @@
 
 #include "nn/types.h"
 #include <string>
+#include <unordered_map>
 
 class DataOutput;
 class DataInput;

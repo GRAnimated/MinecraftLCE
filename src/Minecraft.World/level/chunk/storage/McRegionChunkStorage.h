@@ -1,11 +1,17 @@
 #pragma once
+#include "Minecraft.Client/platform/NX/Platform.h"
+#include "Minecraft.World/level/Level.h"
+#include "Minecraft.World/level/chunk/LevelChunk.h"
+#include "Minecraft.World/level/storage/RegionFileCache.h"
+#include "Minecraft.World/level/storage/save/ConsoleSaveFileCommon.h"
 #include "ChunkStorage.h"
+#include "Minecraft.Core/System.h"
+#include "Minecraft.Core/io/DataOutputStream.h"
 #include <string>
 
-class ConsoleSaveFile;
+#include <deque>
+
 class DataFixerUpper;
-class Level;
-class LevelChunk;
 
 class McRegionChunkStorage : public ChunkStorage {
 public:
@@ -30,4 +36,10 @@ public:
     // void WaitForAllSaves();
     // same with this
     // void WaitForSaves();
+
+    static std::deque<DataOutputStream*> sDeque;
+    static nn::os::MutexType *sMutex;
+    char unk[8];
+    std::wstring unk2;
+    ConsoleSaveFileCommon* mSaveFile;
 };

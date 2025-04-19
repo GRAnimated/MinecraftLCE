@@ -16,10 +16,10 @@ public:
     virtual void close();
     virtual void skip(long long);
     virtual bool readBoolean();
-    virtual unsigned char readByte();
-    virtual void readUnsignedByte();
-    virtual void readUnsignedShort();
-    virtual char readChar();
+    virtual char readByte();
+    virtual int readUnsignedByte();
+    virtual int readUnsignedShort();
+    virtual wchar_t readChar();
     virtual void readFully(arrayWithLength<unsigned char>);
     virtual void readFully(arrayWithLength<char>);
     virtual void readBytes(arrayWithLength<unsigned char>);

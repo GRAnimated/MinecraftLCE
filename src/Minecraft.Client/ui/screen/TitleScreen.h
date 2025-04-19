@@ -1,5 +1,5 @@
 #pragma once
-#include "Screen.h"
+#include "Minecraft.Client/gui/Screen.h"
 
 class TitleScreen : public Screen {
     public:

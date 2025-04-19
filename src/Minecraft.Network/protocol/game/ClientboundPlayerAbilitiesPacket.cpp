@@ -1,6 +1,6 @@
 #include "Minecraft.Network/protocol/game/ClientboundPlayerAbilitiesPacket.h"
 
-#include "Minecraft.Client/multiplayer/PacketListener.h"
+#include "Minecraft.Network/PacketListener.h"
 #include "Minecraft.World/entity/player/Abilities.h"
 #include "Minecraft.Core/io/DataInputStream.h"
 #include "Minecraft.Core/io/DataOutputStream.h"

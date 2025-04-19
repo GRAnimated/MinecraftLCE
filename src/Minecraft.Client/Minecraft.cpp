@@ -111,7 +111,7 @@ void Minecraft::init() {
     Renderer::sInstance->CBuffLockStaticCreations();
 }
 
-// NON_MATCHING: score 4620
+// NON_MATCHING: score 5385
 void Minecraft::main() {
     sUnk = true;
     MinecraftWorld_RunStaticCtors();
@@ -139,7 +139,9 @@ void Minecraft::main() {
     // and these
     CMinecraftApp::StaticCtor();
     MiniGameDef::StaticCtor();
+
     Minecraft::GetInstance()->mLobbyGameMode = MiniGameDef::GetCustomGameModeById(LOBBY, true);
+
     ClientPacketListener::staticCtor();
 }
 
@@ -190,16 +192,16 @@ Minecraft::Minecraft(class Component*, class Canvas*, class MinecraftApplet*, in
     // TODO: continue
 }
 
-// NON_MATCHING: score 5636
+// NON_MATCHING: score 3141
 void Minecraft::startAndConnectTo(const std::wstring& name, const std::wstring& session,
                                   const std::wstring& arg3) {
     Minecraft* mc = new Minecraft(nullptr, nullptr, nullptr, 1280, 720, false);
     mc->website = L"www.minecraft.net";
 
-    if (!name.empty() && !session.empty()) {
+    if (name != L"" && session != L"") {
         mc->user = new User(name, session);
     } else {
-        mc->user = new User(L"Player" + std::to_wstring(System::processTimeInMilliSecs() % 1000), L"");
+        mc->user = new User(L"Player" + _toString<long>(System::processTimeInMilliSecs() % 1000), L"");
     }
 
     mc->run();
@@ -244,4 +246,4 @@ bool Minecraft::useFancyGraphics() {
 void Minecraft::run() {
     this->mIsRunning = true;
     init();
-};
+}

@@ -83,5 +83,10 @@ public:
     virtual void compressData();
     virtual void getReorderedBlocksAndData(int, int, int, int, int&, int);
 
-    char unk[0x2D0];
+    char unk[520];
+    int xPos;
+    int zPos;
+    char unk2[90];
+    long inhabitedTime;
+    char unk3[86];
 };

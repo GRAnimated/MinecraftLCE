@@ -1,6 +1,7 @@
 #pragma once
 
 #include <memory>
+#include <vector>
 
 #include "Minecraft.World/level/storage/LevelSource.h"
 
@@ -131,11 +132,13 @@ public:
     int getSeaLevel();
     void setSeaLevel(int);
 
+    long getGameTime();
+
     void instaTick(BlockPos const&, BlockState const*, Random&);
     static void setInstaTick(bool);
 
     void blockEntityChanged(BlockPos const&, std::shared_ptr<BlockEntity>);
-
+    void checkSession(); // RETURN TYPE UNKNOWN
     int dword8;
     char gapC[36];
     void* qword30;
