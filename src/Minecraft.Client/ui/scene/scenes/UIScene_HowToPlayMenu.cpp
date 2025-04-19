@@ -1,14 +1,14 @@
+#include "4J_Libraries_Source/fui/fuiFile.h"
+#include "4J_Libraries_Source/fui/fuiRenderNode.h"
 #include "Minecraft.Client/CMinecraftApp.h"
 #include "Minecraft.Client/Minecraft.h"
+#include "Minecraft.Client/SoundEvent.h"
 #include "Minecraft.Client/resources/L10N.h"
 #include "Minecraft.Client/ui/ConsoleUIController.h"
 #include "Minecraft.Client/ui/scene/UILayer.h"
 #include "Minecraft.Client/ui/scene/UIScene.h"
 #include "Minecraft.Client/ui/scene/control/UIControl_List.h"
 #include "Minecraft.Client/ui/scene/scenes/UIScene_HowToPlayMenu.h"
-#include "Minecraft.Client/SoundEvent.h"
-#include "4J_Libraries_Source/fui/fuiFile.h"
-#include "4J_Libraries_Source/fui/fuiRenderNode.h"
 #include <cstdint>
 #include <string>
 
@@ -19,11 +19,9 @@ unsigned int dword_7101107860[30]{
     0xD554B135, 0x7FF49BC,  0x90785456, 0x670457B6, 0x3FE78B47, 0xF3D9C148,
 };
 
-int dword_71011078D8[30]{
-    0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 0xC, 0xE, 0xF, 0x10,
-    0x11, 0x12, 0x13, 0x14, 0x15, 0x16, 0x17, 0x18, 0x19,
-    0x1A, 0x1B, 0x1C, 0x1D, 0x1E, 0x1F, 0x20
-};
+int dword_71011078D8[30]{0,    1,    2,    3,    4,    5,    6,    7,    8,    9,
+                         0xC,  0xE,  0xF,  0x10, 0x11, 0x12, 0x13, 0x14, 0x15, 0x16,
+                         0x17, 0x18, 0x19, 0x1A, 0x1B, 0x1C, 0x1D, 0x1E, 0x1F, 0x20};
 
 UIScene_HowToPlayMenu::UIScene_HowToPlayMenu(int padID, void* unk_unused, UILayer* uiLayer)
     : UIScene(padID, uiLayer) {
@@ -53,10 +51,10 @@ void UIScene_HowToPlayMenu::updateTooltips() {
 }
 
 void UIScene_HowToPlayMenu::updateComponents() {
-    if (!Minecraft::GetInstance()->mLevel){
+    if (!Minecraft::GetInstance()->mLevel) {
         this->mUILayer->showComponent(this->mPadID, EUIScene::UIComponent_Panorama, true);
         this->mUILayer->showComponent(this->mPadID, EUIScene::UIComponent_Logo, true);
-    }else{
+    } else {
         this->mUILayer->showComponent(this->mPadID, EUIScene::UIComponent_Panorama, false);
         if (CConsoleMinecraftApp::sInstance.GetLocalPlayerCount() == 1)
             this->mUILayer->showComponent(this->mPadID, EUIScene::UIComponent_Logo, true);
@@ -96,21 +94,23 @@ void UIScene_HowToPlayMenu::handleInput(int a2, int key, bool a4, bool a5, bool 
 }
 
 // NON_MATCHING: due to idk
-void UIScene_HowToPlayMenu::handlePress(int a2, int a3){
-    if(!a2){
+void UIScene_HowToPlayMenu::handlePress(int a2, int a3) {
+    if (!a2) {
         this->dword200 = a3;
         gConsoleUIController.PlayUISFX(SoundEvent::UI_PRESS);
-        gConsoleUIController.NavigateToScene(this->mPadID, EUIScene::UIScene_HowToPlay, (int*)((this->mPadID | (dword_71011078D8[a3] << 16) | 0x80000000)), EUILayer::unk, EUIGroup::unkkk);
+        gConsoleUIController.NavigateToScene(
+            this->mPadID, EUIScene::UIScene_HowToPlay,
+            (int*)((this->mPadID | (dword_71011078D8[a3] << 16) | 0x80000000)), (EUILayer)6, (EUIGroup)6);
     }
 }
 
-bool UIScene_HowToPlayMenu::mapElementsAndNames(){
+bool UIScene_HowToPlayMenu::mapElementsAndNames() {
     fuiRenderNode* node = this->getFuiFile()->getRootNode();
     this->uicontrol_list110.setupControl(this, node, "HowToList");
     this->mUIControls.push_back(&this->uicontrol_list110);
     return true;
 }
 
-int UIScene_HowToPlayMenu::getSceneType(){
+int UIScene_HowToPlayMenu::getSceneType() {
     return 17;
 }

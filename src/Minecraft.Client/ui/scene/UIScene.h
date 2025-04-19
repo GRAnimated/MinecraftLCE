@@ -107,9 +107,7 @@ public:
     void sendInputToMovie(int, bool, bool, bool);
     // void handleFocusChange(int, int);
 
-    fuiFile* getFuiFile(){
-        return this->mFuiFile;
-    }
+    fuiFile* getFuiFile() { return this->mFuiFile; }
 
     virtual void reloadMovie(bool);
     virtual bool needsReloaded();
@@ -163,6 +161,8 @@ public:
     virtual void handleUnlockFullVersion();
     virtual void handleTouchInput(unsigned int, int, int, int, bool, bool, bool);
     virtual void isReadyToDelete();
+
+    static void customDrawFui(void*, char const*, fuiRect*);
 
     std::wstring wstring_8;
     fuiFile* mFuiFile;

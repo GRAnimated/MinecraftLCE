@@ -13,11 +13,11 @@ public:
 
     fui();
     void setScreenSize(float, float);
-    void load(arrayWithLength<unsigned char>, bool, int);
+    fuiFile* load(arrayWithLength<unsigned char>, bool, int);
     void allocatePermanentFileIndex(int);
     void unloadScene(fuiFile*);
     void setResolution(int);
-    void getResolution();
+    int getResolution();
     void tick();
     void preRender(fuiFile*);
     void render(fuiFile*, float, float, float, float);
