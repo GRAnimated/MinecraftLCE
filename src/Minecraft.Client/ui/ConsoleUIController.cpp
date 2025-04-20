@@ -71,7 +71,6 @@ ConsoleUIController::ConsoleUIController() {
     this->dword440 = 0;
 }
 
-// looks like shit, doubt that's how source looked like
 arrayWithLength<uchar> ConsoleUIController::getMovieData(std::wstring const& name) {
     long v4 = System::processTimeInMilliSecs() + 60000;
 
