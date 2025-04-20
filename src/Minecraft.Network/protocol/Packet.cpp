@@ -1,5 +1,6 @@
 #include "Minecraft.Core/System.h"
 #include "Minecraft.Network/protocol/Packet.h"
+
 #include <sstream>
 
 Packet::Packet() {
