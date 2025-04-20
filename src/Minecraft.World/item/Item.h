@@ -76,7 +76,7 @@ public:
                               const std::shared_ptr<LivingEntity>&, int);
     virtual void appendHoverText(const std::shared_ptr<ItemInstance>&, const std::shared_ptr<Player>&,
                                  void* htmlString, bool);
-    virtual void getName(const std::shared_ptr<ItemInstance>&);
+    virtual std::wstring getName(const std::shared_ptr<ItemInstance>&);
     virtual bool isFoil(not_null_ptr<ItemInstance>);
     virtual void getRarity(const std::shared_ptr<ItemInstance>&);
     virtual bool isEnchantable(const std::shared_ptr<ItemInstance>&);

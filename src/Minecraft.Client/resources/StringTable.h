@@ -1,7 +1,9 @@
 #pragma once
+#include "types.h"
 #include "Minecraft.World/ArrayWithLength.h"
 #include <string>
 #include <unordered_map>
+#include <utility>
 
 class Random;
 class DataInputStream;
@@ -42,9 +44,15 @@ public:
     ~StringTable();
 
     static StringTable* instance;
-    bool unk;
-    bool unk2;  // used in ReloadStringTable
-    unsigned char unk3[102];
-    // guessed, might actually be their weird _LanguageData class as second param
-    std::unordered_map<int, std::wstring> table;
+    bool bool0;
+    bool bool1;
+    char char2;
+    char gap3[5];
+    std::unordered_map<std::wstring, StringTable::_LanguageData> map;
+    std::vector<int> vector1;
+    std::vector<std::wstring> vector2;
+    std::vector<std::pair<std::wstring, int>> vector3;  // this is kinda guessed but should be correct
+    void* qword78;
+    void* qword80;
+    arrayWithLength<uchar> languagesLocArchiveFile;
 };

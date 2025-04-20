@@ -4,9 +4,11 @@
 #include "Minecraft.Client/Minecraft.h"
 #include "Minecraft.Client/SoundEvent.h"
 #include "Minecraft.Client/resources/L10N.h"
+#include "Minecraft.Client/resources/ResourceLocation.h"
 #include "Minecraft.Client/ui/ConsoleUIController.h"
 #include "Minecraft.Client/ui/scene/UILayer.h"
 #include "Minecraft.Client/ui/scene/UIScene.h"
+#include "Minecraft.Client/ui/scene/control/UIControl.h"
 #include "Minecraft.Client/ui/scene/control/UIControl_List.h"
 #include "Minecraft.Client/ui/scene/scenes/UIScene_HowToPlayMenu.h"
 #include <cstdint>

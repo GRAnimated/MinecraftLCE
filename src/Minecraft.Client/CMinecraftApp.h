@@ -50,6 +50,7 @@ public:
     void loadMediaArchive();
     void initTime();
     arrayWithLength<uchar> getArchiveFile(std::wstring const&, bool);
+    bool hasArchiveFile(std::wstring const&, bool);
 
     // note to self: vftable pushes everything over by 8 inside decompiler view
     unsigned char padding[312];

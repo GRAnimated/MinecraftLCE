@@ -10,7 +10,7 @@ public:
         this->data = nullptr;
         this->length = 0;
     }
-    //~arrayWithLength() { delete data; }
+    // ~arrayWithLength() { delete data; }
     arrayWithLength(std::vector<T> initialData, int length);
     arrayWithLength(T* initialData, int length) {
         this->data = initialData;
@@ -34,6 +34,7 @@ public:
 
     T* data;
     unsigned int length;
+
 private:
     static T* createDataBuffer(unsigned int);
 };

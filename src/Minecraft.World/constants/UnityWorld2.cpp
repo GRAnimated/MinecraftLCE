@@ -12,8 +12,5 @@ BorderStatus* gBorderStatusGrowing = new BorderStatus(0x40FF80);
 BorderStatus* gBorderStatusShrinking = new BorderStatus(0xFF3030);
 BorderStatus* gBorderStatusStationary = new BorderStatus(0x20A0FF);
 
-MappedRegistry<ResourceLocation, eINSTANCEOF, std::hash<ResourceLocation>, std::equal_to<ResourceLocation>,
-               std::hash<eINSTANCEOF>, std::equal_to<eINSTANCEOF>>
-    ResourceLocation::Registry
-    = MappedRegistry<ResourceLocation, eINSTANCEOF, std::hash<ResourceLocation>,
-                     std::equal_to<ResourceLocation>, std::hash<eINSTANCEOF>, std::equal_to<eINSTANCEOF>>();
+MappedRegistry<ResourceLocation, eINSTANCEOF> ResourceLocation::Registry
+    = MappedRegistry<ResourceLocation, eINSTANCEOF>();
