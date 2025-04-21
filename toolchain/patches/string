@@ -1,3 +1,8 @@
+/*
+Changes made:
+Removed a few inline attributes to match the game's behavior
+*/
+
 // -*- C++ -*-
 //===--------------------------- string -----------------------------------===//
 //
