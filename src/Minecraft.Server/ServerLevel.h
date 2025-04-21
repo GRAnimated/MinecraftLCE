@@ -1,6 +1,3 @@
-//
-// Created by DexrnZacAttack on 4/19/2025 (ZPC-I1)
-//
 #pragma once
 #include "Minecraft.World/level/Level.h"
 

@@ -1,7 +1,3 @@
-//
-// Created by DexrnZacAttack on 4/18/2025.
-//
-
 #include "CompoundTag.h"
 
 // NON_MATCHING

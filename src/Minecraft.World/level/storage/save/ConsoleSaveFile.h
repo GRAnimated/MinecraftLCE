@@ -1,6 +1,3 @@
-//
-// Created by DexrnZacAttack on 4/18/2025.
-//
 #pragma once
 #include "Minecraft.Client/ESavePlatform.h"
 #include "Minecraft.World/level/storage/LevelStorage.h"

@@ -1,7 +1,3 @@
-//
-// Created by DexrnZacAttack on 4/19/2025 (ZPC-I1)
-//
-
 #include "ServerLevel.h"
 #include "Minecraft.World/phys/BoundingBox.h"
 #include "Minecraft.World/level/chunk/ChunkPos.h"
