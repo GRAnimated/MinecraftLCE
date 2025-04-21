@@ -5,7 +5,7 @@
 #include "Minecraft.Client/CGameNetworkManager.h"
 #include "Minecraft.Client/Compression.h"
 #include "Minecraft.Client/ShutdownManager.h"
-#include "Minecraft.Client/multiplayer/PacketListener.h"
+#include "Minecraft.Network/PacketListener.h"
 #include "Minecraft.Client/platform/NX/Platform.h"
 #include "Minecraft.Core/System.h"
 #include "Minecraft.Core/io/BufferedOutputStream.h"

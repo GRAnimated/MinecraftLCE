@@ -9,7 +9,7 @@ class BufferBuilder;
 class Font {
 public:
     Font(Options*, const std::wstring&, Textures*, bool, ResourceLocation*, int, int, int, int,
-         unsigned short*);
+         unsigned short *renderList);
     void cacheCharacter(int);
     void renderCharacter(wchar_t, BufferBuilder*);
     void drawShadow(const std::wstring&, int, int, int);

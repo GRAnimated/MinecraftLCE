@@ -111,8 +111,10 @@ void Minecraft::init() {
     Renderer::sInstance->CBuffLockStaticCreations();
 }
 
-// NON_MATCHING: score 4620
 void Minecraft::main() {
+    std::wstring playerName;
+    std::wstring session;
+
     sUnk = true;
     MinecraftWorld_RunStaticCtors();
     User::staticCtor();
@@ -124,13 +126,14 @@ void Minecraft::main() {
     CConsoleMinecraftApp::sInstance.loadDefaultGameRules();
 
     long ms = System::processTimeInMilliSecs();
-    std::wstring playerName = L"Player" + _toString(ms % 1000);
+    playerName = L"Player" + _toString(ms % 1000);
+    session = L"-";
 
     UIScene_CreativeMenu::staticCtor();
     UIScene_LeaderboardsMenu::staticCtor();
     BlockEntityRenderDispatcher::staticCtor();
 
-    start(playerName, L"-");
+    start(playerName, session);
 
     ParticleType::staticCtor();
     // who was in charge of naming this one
@@ -190,16 +193,16 @@ Minecraft::Minecraft(class Component*, class Canvas*, class MinecraftApplet*, in
     // TODO: continue
 }
 
-// NON_MATCHING: score 5636
+// NON_MATCHING: score 3141
 void Minecraft::startAndConnectTo(const std::wstring& name, const std::wstring& session,
                                   const std::wstring& arg3) {
     Minecraft* mc = new Minecraft(nullptr, nullptr, nullptr, 1280, 720, false);
     mc->website = L"www.minecraft.net";
 
-    if (!name.empty() && !session.empty()) {
+    if (name != L"" && session != L"") {
         mc->user = new User(name, session);
     } else {
-        mc->user = new User(L"Player" + std::to_wstring(System::processTimeInMilliSecs() % 1000), L"");
+        mc->user = new User(L"Player" + _toString<long>(System::processTimeInMilliSecs() % 1000), L"");
     }
 
     mc->run();
@@ -244,4 +247,4 @@ bool Minecraft::useFancyGraphics() {
 void Minecraft::run() {
     this->mIsRunning = true;
     init();
-};
+}
