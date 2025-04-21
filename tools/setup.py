@@ -68,9 +68,13 @@ def create_build_dir():
     print(">>> created build directory")
 
 def patch_clang():
-    patch_file = setup.ROOT / "toolchain/patches/string"
-    target_file = setup.ROOT / "toolchain/clang-4.0.1/include/c++/v1/string"
-    shutil.copyfile(patch_file, target_file)
+    string_file = setup.ROOT / "toolchain/patches/string"
+    string_target = setup.ROOT / "toolchain/clang-4.0.1/include/c++/v1/string"
+    shutil.copyfile(string_file, string_target)
+    
+    locale_file = setup.ROOT / "toolchain/patches/locale"
+    locale_target = setup.ROOT / "toolchain/clang-4.0.1/include/c++/v1/locale"
+    shutil.copyfile(locale_file, locale_target)
     print(">>> Clang patched successfully")
 
 def main():
