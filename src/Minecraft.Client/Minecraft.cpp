@@ -111,8 +111,10 @@ void Minecraft::init() {
     Renderer::sInstance->CBuffLockStaticCreations();
 }
 
-// NON_MATCHING: score 5385
 void Minecraft::main() {
+    std::wstring playerName;
+    std::wstring session;
+
     sUnk = true;
     MinecraftWorld_RunStaticCtors();
     User::staticCtor();
@@ -124,13 +126,14 @@ void Minecraft::main() {
     CConsoleMinecraftApp::sInstance.loadDefaultGameRules();
 
     long ms = System::processTimeInMilliSecs();
-    std::wstring playerName = L"Player" + _toString(ms % 1000);
+    playerName = L"Player" + _toString(ms % 1000);
+    session = L"-";
 
     UIScene_CreativeMenu::staticCtor();
     UIScene_LeaderboardsMenu::staticCtor();
     BlockEntityRenderDispatcher::staticCtor();
 
-    start(playerName, L"-");
+    start(playerName, session);
 
     ParticleType::staticCtor();
     // who was in charge of naming this one
@@ -139,9 +142,7 @@ void Minecraft::main() {
     // and these
     CMinecraftApp::StaticCtor();
     MiniGameDef::StaticCtor();
-
     Minecraft::GetInstance()->mLobbyGameMode = MiniGameDef::GetCustomGameModeById(LOBBY, true);
-
     ClientPacketListener::staticCtor();
 }
 
