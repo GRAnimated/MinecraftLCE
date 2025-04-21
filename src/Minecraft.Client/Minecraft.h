@@ -54,7 +54,7 @@ public:
 
     void run();
     void init();
-    void main();
+    static void main();
 
     static inline void currentTimeMillis();
     static void start(const std::wstring& str1, const std::wstring& str2);

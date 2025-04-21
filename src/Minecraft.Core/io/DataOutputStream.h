@@ -1,8 +1,12 @@
 #pragma once
+#include <string>
 
 #include "Minecraft.World/ArrayWithLength.h"
 #include "Minecraft.Core/io/DataOutput.h"
 #include "Minecraft.Core/io/OutputStream.h"
+#include "Minecraft.Core/io/types/Double.h"
+#include "Minecraft.Core/io/types/Float.h"
+
 
 class BlockPos;
 
@@ -11,24 +15,24 @@ public:
     DataOutputStream(OutputStream*);
 
     virtual ~DataOutputStream();
-    virtual void write(unsigned int);
-    virtual void write(arrayWithLength<unsigned char>);
-    virtual void write(arrayWithLength<unsigned char>, unsigned int, unsigned int);
-    virtual void close();
-    virtual void flush();
-    virtual void writeBytes(arrayWithLength<unsigned char>);
-    virtual void writeByte(unsigned char);
-    virtual void writeDouble(double);
-    virtual void writeFloat(float);
-    virtual void writeInt(int);
-    virtual void writeLong(long long);
-    virtual void writeShort(short);
-    virtual void writeUnsignedShort(unsigned short);
-    virtual void writeChar(wchar_t);
-    virtual void writeChars(std::wstring const&);
-    virtual void writeBoolean(bool);
-    virtual void writeUTF(std::wstring const&);
-    virtual void writePlayerUID(PlayerUID);
+    void write(unsigned int) override;
+    void write(arrayWithLength<unsigned char>) override;
+    void write(arrayWithLength<unsigned char>, unsigned int, unsigned int) override;
+    void close() override;
+    void flush() override;
+    void writeBytes(arrayWithLength<unsigned char>) override;
+    void writeByte(unsigned char) override;
+    void writeDouble(double) override;
+    void writeFloat(float) override;
+    void writeInt(int) override;
+    void writeLong(long long) override;
+    void writeShort(short) override;
+    void writeUnsignedShort(unsigned short) override;
+    void writeChar(wchar_t) override;
+    void writeChars(const std::wstring &str) override;
+    void writeBoolean(bool) override;
+    void writeUTF(std::wstring const&) override;
+    void writePlayerUID(PlayerUID) override;
 
     void writeVarInt(int);
     void writeBlockPos(const BlockPos&) const;

@@ -1,9 +1,11 @@
 #pragma once
 
 #include <memory>
+#include <vector>
 
 #include "Minecraft.World/level/storage/LevelSource.h"
 
+class TickNextTickData;
 class BlockPos;
 class BlockState;
 class LevelSettings;
@@ -93,8 +95,8 @@ public:
     virtual void tickClientSideBlocks(int, int, LevelChunk*);
     virtual void tickBlocks();
     virtual void tickPendingTicks(bool);
-    virtual void fetchTicksInChunk(LevelChunk*, bool);
-    virtual void fetchTicksInArea(BoundingBox*, bool);
+    virtual std::vector<TickNextTickData*> *fetchTicksInChunk(LevelChunk*, bool);
+    virtual std::vector<TickNextTickData*> *fetchTicksInArea(BoundingBox*, bool);
     virtual void getEntity(int);
     virtual void addEntities(std::vector<std::shared_ptr<Entity>, std::allocator<std::shared_ptr<Entity>>>*);
     virtual void
@@ -131,11 +133,13 @@ public:
     int getSeaLevel();
     void setSeaLevel(int);
 
+    long getGameTime();
+
     void instaTick(BlockPos const&, BlockState const*, Random&);
     static void setInstaTick(bool);
 
     void blockEntityChanged(BlockPos const&, std::shared_ptr<BlockEntity>);
-
+    void checkSession(); // RETURN TYPE UNKNOWN
     int dword8;
     char gapC[36];
     void* qword30;

@@ -2,6 +2,10 @@
 
 #include "Minecraft.World/ArrayWithLength.h"
 #include "Minecraft.World/level/LightLayer.h"
+#include "Minecraft.World/level/chunk/ChunkPos.h"
+
+#include <memory>
+#include <unordered_map>
 
 template <typename T>
 class Predicate;
@@ -15,6 +19,7 @@ class AABB;
 class BiomeSource;
 class Entity;
 class ChunkPrimer;
+class DataOutputStream;
 
 class LevelChunk {
 public:
@@ -38,7 +43,7 @@ public:
     virtual void init(Level*, int, int);
     virtual ~LevelChunk();
     virtual void isAt(int, int);
-    virtual void getHeightmap(int, int);
+    virtual arrayWithLength<unsigned char> getHeightmap(int, int);
     virtual void recalcBlockLights();
     virtual void recalcHeightmapOnly();
     virtual void recalcHeightmap();
@@ -83,5 +88,24 @@ public:
     virtual void compressData();
     virtual void getReorderedBlocksAndData(int, int, int, int, int&, int);
 
-    char unk[0x2D0];
+    // are these meant to be virtual?
+    arrayWithLength<unsigned char> getHeightmap();
+    arrayWithLength<unsigned char> getHeightmap(BlockPos &pos);
+    arrayWithLength<unsigned char> getBiomes();
+    void writeCompressedBlockData(DataOutputStream *out);
+    void writeCompressedDataData(DataOutputStream *out);
+    void writeCompressedSkyLightData(DataOutputStream *out);
+    void writeCompressedBlockLightData(DataOutputStream *out);
+    ChunkPos getPos();
+
+    char unk[510];
+    int xPos;
+    int zPos;
+    char unk2[14];
+    std::unordered_map<BlockPos, std::shared_ptr<BlockEntity>> *blockEntities;
+    char unk3[32];
+    short biomeCount;
+    char unk4[42];
+    long inhabitedTime;
+    char unk5[86];
 };

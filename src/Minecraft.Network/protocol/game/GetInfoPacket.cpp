@@ -1,6 +1,6 @@
 #include "Minecraft.Network/protocol/game/GetInfoPacket.h"
 
-#include "Minecraft.Client/multiplayer/PacketListener.h"
+#include "Minecraft.Network/PacketListener.h"
 
 // NON_MATCHING: Needs to set mCreatedTime and mShouldDelay to 0
 std::shared_ptr<Packet> GetInfoPacket::create() {
