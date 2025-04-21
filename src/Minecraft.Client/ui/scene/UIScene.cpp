@@ -1,7 +1,14 @@
+#include "4J_Libraries_Source/fui/fui.h"
+#include "4J_Libraries_Source/fui/fuiFile.h"
+#include "4J_Libraries_Source/fui/fuiRenderNode.h"
+#include "4J_Libraries_Source/fui/node/FJ_FuiNodeStage.h"
+#include "Minecraft.Client/platform/NX/Platform.h"
 #include "Minecraft.Client/ui/ConsoleUIController.h"
 #include "Minecraft.Client/ui/scene/UILayer.h"
 #include "Minecraft.Client/ui/scene/UIScene.h"
 #include "Minecraft.Client/ui/scene/control/UIControl.h"
+#include "Minecraft.World/ArrayWithLength.h"
+#include "Minecraft.Core/System.h"
 #include <string>
 
 // It's matching but... some of those variable inits should be moved to header
@@ -27,6 +34,36 @@ UIScene::UIScene(int padID, UILayer* uiLayer) {
     this->mCallbackUniqueId = nullptr;
     this->wstring_8 = L"";
     this->bool_28 = 0;
+}
+
+// NON_MATCHING: some crap, idk what exactly
+void UIScene::loadMovie() {
+    EnterCriticalSection(&ConsoleUIController::unk_71017BE928);
+    std::wstring moviePath = this->getMoviePath();
+
+    fui* fui = fui::sInstance;
+
+    int v3;
+    if (fui->getResolution()) {
+        moviePath.append(L"1080.fui");
+        v3 = 0;
+    } else {
+        moviePath.append(L"720.fui");
+        v3 = 1;
+    }
+    this->mResType = v3;
+    arrayWithLength<uchar> movieData = gConsoleUIController.getMovieData(moviePath.c_str());
+    this->mFuiFile = fui->load(movieData, true, fui->getResolution());
+
+    this->mFuiFile->getRootNode()->mFuiNodeStage->setCallbackScene(this);
+    this->mFuiFile->setCustomDrawCallback(UIScene::customDrawFui, this);
+
+    /// this is non matching
+    this->mStageWidth2 = this->mStageWidth = this->mFuiFile->getStageWidth();
+    this->mStageHeight2 = this->mStageHeight = this->mFuiFile->getStageHeight();
+    ///
+
+    LeaveCriticalSection(&ConsoleUIController::unk_71017BE928);
 }
 
 void UIScene::initialiseMovie() {
@@ -162,7 +199,7 @@ void* UIScene::GetMainPanel() {
 }
 
 void UIScene::customDraw(char const*, fuiRect*) {}
-bool UIScene::handleInput(int, int, bool, bool, bool, bool&) {}
+void UIScene::handleInput(int, int, bool, bool, bool, bool&) {}
 void UIScene::handleDestroy() {}
 void UIScene::handlePreUnloadForReload() {}
 void UIScene::handlePreReload() {}

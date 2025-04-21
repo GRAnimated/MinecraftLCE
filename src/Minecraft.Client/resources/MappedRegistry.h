@@ -27,7 +27,7 @@ public:
     // won't allow you to overwrite
     virtual Value get(Key) override;
     virtual void registerKey(Key key, Value value) override;
-    virtual std::unordered_map<Key, Value> keySet() override;
-    virtual Value getRandom(Random*) override;
+    virtual std::unordered_map<Key, Value>* keySet() override;
+    virtual Value* getRandom(Random*) override;
     virtual bool containsKey(Key) override;
 };

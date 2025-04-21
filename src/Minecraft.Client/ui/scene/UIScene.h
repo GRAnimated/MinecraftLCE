@@ -103,9 +103,11 @@ public:
     void initialiseMovie();
     void loadMovie();
     void doHorizontalResizeCheck();
-    bool navigateBack();
-    bool sendInputToMovie(int, bool, bool, bool);
+    void navigateBack();
+    void sendInputToMovie(int, bool, bool, bool);
     // void handleFocusChange(int, int);
+
+    fuiFile* getFuiFile() { return this->mFuiFile; }
 
     virtual void reloadMovie(bool);
     virtual bool needsReloaded();
@@ -117,7 +119,7 @@ public:
     virtual std::wstring getMoviePath() = 0;
     virtual bool mapElementsAndNames();
     virtual ~UIScene();
-    virtual void getSceneType() = 0;
+    virtual int getSceneType() = 0;
     virtual int getSubSceneType() const;
     virtual void tick();
     virtual void SetFocusToElement(int);
@@ -134,7 +136,7 @@ public:
     virtual void render(int, int, C4JRender::eViewportType);
     virtual void customDraw(char const*, fuiRect*);
     virtual bool allowRepeat(int);
-    virtual bool handleInput(int, int, bool, bool, bool, bool&);
+    virtual void handleInput(int, int, bool, bool, bool, bool&);
     virtual void handleDestroy();
     virtual void handlePreUnloadForReload();
     virtual void handlePreReload();
@@ -159,6 +161,8 @@ public:
     virtual void handleUnlockFullVersion();
     virtual void handleTouchInput(unsigned int, int, int, int, bool, bool, bool);
     virtual void isReadyToDelete();
+
+    static void customDrawFui(void*, char const*, fuiRect*);
 
     std::wstring wstring_8;
     fuiFile* mFuiFile;
