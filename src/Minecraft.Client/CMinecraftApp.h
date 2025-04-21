@@ -1,8 +1,11 @@
 #pragma once
+#include "types.h"
+#include "Minecraft.World/ArrayWithLength.h"
 #include "Minecraft.World/level/levelgen/LevelGenerationOptions.h"
 
 #include "Minecraft.World/level/gamemode/GameType.h"
 #include "eGameHostOption.h"
+#include <string>
 
 enum eTMSAction {};
 enum eFileExtensionType {};
@@ -46,6 +49,8 @@ public:
     LevelGenerationOptions* getLevelGenerationOptions();
     void loadMediaArchive();
     void initTime();
+    arrayWithLength<uchar> getArchiveFile(std::wstring const&, bool);
+    bool hasArchiveFile(std::wstring const&, bool);
 
     // note to self: vftable pushes everything over by 8 inside decompiler view
     unsigned char padding[312];

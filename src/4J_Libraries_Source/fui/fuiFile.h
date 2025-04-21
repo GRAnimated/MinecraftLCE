@@ -110,6 +110,7 @@ struct fuiData {
 };
 
 class fuiFile {
+public:
     fuiFile();
     ~fuiFile();
     void addDataRegion(uint, uint, uchar**, void (*)(void*));
@@ -117,13 +118,13 @@ class fuiFile {
     bool resolveReferences(fuiFile*);
     void dumpUnresolvedReferences();
     void initialiseRenderTexture(fuiBitmap*, bool);
-    void getRootNode();
+    fuiRenderNode* getRootNode();
     void createNodeFromSymbol(char* const, fuiRenderNode*, int);
     // findNode - doesn't exist in switch edition
     // setVisible - doesn't exist in switch edition
     void setCustomDrawCallback(void (*)(void*, char const*, fuiRect*), void*);
-    void getStageWidth();
-    void getStageHeight();
+    int getStageWidth();
+    int getStageHeight();
     void setIndex(int);
 
     fuiHeader mHeader;
