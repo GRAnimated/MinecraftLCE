@@ -16,7 +16,7 @@ public:
     virtual void close();
     virtual void skip(long long);
     virtual bool readBoolean();
-    virtual char readByte();
+    virtual unsigned char readByte();
     virtual int readUnsignedByte();
     virtual int readUnsignedShort();
     virtual wchar_t readChar();
