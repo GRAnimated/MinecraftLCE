@@ -1,4 +1,4 @@
-#include "Minecraft.Network/protocol/game/ClientboundPlayerAbilitiesPacket.h"
+#include "Minecraft.Network/protocol/game/clientbound/ClientboundPlayerAbilitiesPacket.h"
 
 #include "Minecraft.Network/PacketListener.h"
 #include "Minecraft.World/entity/player/Abilities.h"

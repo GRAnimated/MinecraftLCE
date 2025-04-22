@@ -6,5 +6,9 @@ public:
     Vec3 min;
     Vec3 max;
 
+    static void CreateNewThreadStorage();
+
+    class ThreadStorage {};
+
     static AABB* newPermanent(double, double, double, double, double, double);
 };

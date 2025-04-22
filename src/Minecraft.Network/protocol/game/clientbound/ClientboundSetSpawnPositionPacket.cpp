@@ -1,4 +1,4 @@
-#include "Minecraft.Network/protocol/game/ClientboundSetSpawnPositionPacket.h"
+#include "Minecraft.Network/protocol/game/clientbound/ClientboundSetSpawnPositionPacket.h"
 
 #include "Minecraft.Network/PacketListener.h"
 #include "Minecraft.Core/io/DataInputStream.h"

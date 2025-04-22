@@ -1,4 +1,4 @@
-#include "Minecraft.Network/protocol/game/ServerboundUseItemPacket.h"
+#include "Minecraft.Network/protocol/game/serverbound/ServerboundUseItemPacket.h"
 
 #include "Minecraft.Network/PacketListener.h"
 #include "Minecraft.Core/io/DataInputStream.h"

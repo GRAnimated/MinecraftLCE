@@ -1,4 +1,4 @@
-#include "Minecraft.Network/protocol/game/ServerboundKeepAlivePacket.h"
+#include "Minecraft.Network/protocol/game/serverbound/ServerboundKeepAlivePacket.h"
 
 #include "Minecraft.Network/PacketListener.h"
 #include "Minecraft.Core/io/DataInputStream.h"
