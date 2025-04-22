@@ -272,14 +272,18 @@ extern "C" void nnMain() {
     CStorage::sInstance->field_198();
     CStorage::sInstance->SetGameSaveFolderPrefix("");
     CStorage::sInstance->SetMaxSaves(99);
-    {
-        arrayWithLength<unsigned char> img1;
-        arrayWithLength<unsigned char> img2;
-        auto saveThumbnail = CConsoleMinecraftApp::sInstance.getArchiveFile(L"DefaultSaveThumbnail64x64.png", false);
-        // TODO: does this want `arrayWithLength` instead of `unsigned char*` now?
-        CStorage::sInstance->SetDefaultImages(img1.data, 0, img2.data, 0, saveThumbnail.data, 0); // TODO: the last 0 is meant to be something else... dunno what
-        CStorage::sInstance->SetIncompleteSaveCallback(CConsoleMinecraftApp::Callback_SaveGameIncomplete, &CConsoleMinecraftApp::sInstance);
-    }
+
+    arrayWithLength<unsigned char> img1;
+    arrayWithLength<unsigned char> img2;
+    auto saveThumbnail = CConsoleMinecraftApp::sInstance.getArchiveFile(L"DefaultSaveThumbnail64x64.png", false);
+
+    CStorage::sInstance->SetDefaultImages(img1.data, img1.length, img2.data, img2.length, saveThumbnail.data, saveThumbnail.length); // TODO: the last 0 is meant to be something else... dunno what
+    CStorage::sInstance->SetIncompleteSaveCallback(CConsoleMinecraftApp::Callback_SaveGameIncomplete, &CConsoleMinecraftApp::sInstance);
+
+    delete img1.data;
+    delete img2.data;
+    delete saveThumbnail.data;
+
     CStorage::sInstance->SetSaveTitle(L"Default Save");
     CStorage::sInstance->SetOpenDirFn(OpenDir);
     CStorage::sInstance->SetReadDirFn(ReadDir);
