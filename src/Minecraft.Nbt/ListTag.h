@@ -14,8 +14,8 @@ public:
     void print(const std::wstring&, char*, std::wostream&) override;
     ~ListTag() override;
     void equals(Tag*) override;
-    Tag* copy() override; // originally void but was throwing error
+    Tag* copy() override;  // originally void but was throwing error
     void stripEmptyChildren() override;
     bool isEmpty() const override;
-    void add(Tag *tag);
+    void add(Tag* tag);
 };

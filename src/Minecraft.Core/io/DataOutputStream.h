@@ -7,7 +7,6 @@
 #include "Minecraft.Core/io/types/Double.h"
 #include "Minecraft.Core/io/types/Float.h"
 
-
 class BlockPos;
 
 class DataOutputStream : public OutputStream, public DataOutput {
@@ -29,7 +28,7 @@ public:
     void writeShort(short) override;
     void writeUnsignedShort(unsigned short) override;
     void writeChar(wchar_t) override;
-    void writeChars(const std::wstring &str) override;
+    void writeChars(const std::wstring& str) override;
     void writeBoolean(bool) override;
     void writeUTF(std::wstring const&) override;
     void writePlayerUID(PlayerUID) override;

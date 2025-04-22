@@ -70,7 +70,7 @@ Additionally, you'll also need:
     * This will:
         * install tools/check to check for differences in decompiled code
         * convert the executable if necessary
-        * set up [Clang 5.0.1](https://releases.llvm.org/download.html#5.0.1) by downloading it from the official LLVM website
+        * set up [Clang 4.0.1](https://releases.llvm.org/download.html#4.0.1) by downloading it from the official LLVM website
         * create a build directory in `build/`
     * If something goes wrong, follow the instructions given to you by the script.
     * If you wish to use a CMake generator that isn't Ninja, use `--cmake_backend` to specify it.

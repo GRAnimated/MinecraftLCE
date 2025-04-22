@@ -2,11 +2,11 @@
 #include "Minecraft.Client/gui/Screen.h"
 
 class TitleScreen : public Screen {
-    public:
+public:
     // unsure what the args are for any of these, assuming they're default.
     void render(int, int, float) override;
     void keyPressed(wchar_t key, int) override;
-    void buttonClicked(Button *button) override;
+    void buttonClicked(Button* button) override;
     void setSize(int width, int height) override;
     void tick() override;
 

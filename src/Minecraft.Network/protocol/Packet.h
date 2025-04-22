@@ -32,7 +32,7 @@ public:
      * @param in The input stream to read from
      * @param maxLength The maximum allowed length of the string you want to read
      */
-    static std::wstring readUtf(DataInputStream *in, int maxLength);
+    static std::wstring readUtf(DataInputStream* in, int maxLength);
 
     long mCreatedTime;
     bool mShouldDelay;

@@ -146,7 +146,7 @@ public:
      */
     void putString(const std::wstring& name, const std::wstring& str);
 
-    std::unordered_map<std::wstring, Tag*> *childTags;
+    std::unordered_map<std::wstring, Tag*>* childTags;
     void* field_8;
     void* field_10;
     void* field_18;

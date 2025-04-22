@@ -95,8 +95,8 @@ public:
     virtual void tickClientSideBlocks(int, int, LevelChunk*);
     virtual void tickBlocks();
     virtual void tickPendingTicks(bool);
-    virtual std::vector<TickNextTickData*> *fetchTicksInChunk(LevelChunk*, bool);
-    virtual std::vector<TickNextTickData*> *fetchTicksInArea(BoundingBox*, bool);
+    virtual std::vector<TickNextTickData*>* fetchTicksInChunk(LevelChunk*, bool);
+    virtual std::vector<TickNextTickData*>* fetchTicksInArea(BoundingBox*, bool);
     virtual void getEntity(int);
     virtual void addEntities(std::vector<std::shared_ptr<Entity>, std::allocator<std::shared_ptr<Entity>>>*);
     virtual void
@@ -139,7 +139,7 @@ public:
     static void setInstaTick(bool);
 
     void blockEntityChanged(BlockPos const&, std::shared_ptr<BlockEntity>);
-    void checkSession(); // RETURN TYPE UNKNOWN
+    void checkSession();  // RETURN TYPE UNKNOWN
     int dword8;
     char gapC[36];
     void* qword30;

@@ -1,17 +1,17 @@
 #include "Minecraft.Client/platform/NX/Platform.h"
 #include "Minecraft.Nbt/CompoundTag.h"
-#include "McRegionChunkStorage.h"
-#include "OldChunkStorage.h"
 #include "Minecraft.Nbt/NbtIo.h"
 #include "Minecraft.World/level/storage/LevelData.h"
+#include "McRegionChunkStorage.h"
+#include "OldChunkStorage.h"
 
 // NON_MATCHING: score 1295 (lower is better)
-void McRegionChunkStorage::save(Level* level, LevelChunk* chunk)
-{
+void McRegionChunkStorage::save(Level* level, LevelChunk* chunk) {
     level->checkSession();
     MemSect(30);
     PIXBeginNamedEvent(0.0, "Getting output stream\n");
-    DataOutputStream *chunkOutputStream = RegionFileCache::getChunkDataOutputStream(this->mSaveFile, this->unk2, chunk->xPos, chunk->zPos, false);
+    DataOutputStream* chunkOutputStream = RegionFileCache::getChunkDataOutputStream(
+        this->mSaveFile, this->unk2, chunk->xPos, chunk->zPos, false);
     PIXEndNamedEvent();
 
     // If the version is greater than 7, then we should write the newer save format.
@@ -32,8 +32,8 @@ void McRegionChunkStorage::save(Level* level, LevelChunk* chunk)
         EnterCriticalSection(sMutex);
 
         PIXBeginNamedEvent(0.0, "Creating tags\n");
-        CompoundTag *levelTag = new CompoundTag();
-        CompoundTag *tag2 = new CompoundTag();
+        CompoundTag* levelTag = new CompoundTag();
+        CompoundTag* tag2 = new CompoundTag();
         levelTag->put(L"Level", tag2);
         OldChunkStorage::save(chunk, level, tag2);
         PIXEndNamedEvent();

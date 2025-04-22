@@ -1,8 +1,8 @@
 #pragma once
 
 #include "nn/os/os_MutexTypes.h"
-#include <string>
 #include <sstream>
+#include <string>
 
 // TODO: Find location
 void InitializeCriticalSection(nn::os::MutexType* mutexType);
@@ -18,4 +18,3 @@ namespace System {
 long processTimeInMilliSecs();
 long processTimeInNanoSecs();
 }  // namespace System
-

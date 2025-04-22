@@ -4,7 +4,6 @@
 
 class TickNextTickData {
 public:
-    Block *block;
-    Vec3i *pos;
+    Block* block;
+    Vec3i* pos;
 };
-
