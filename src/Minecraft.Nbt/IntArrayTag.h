@@ -6,6 +6,7 @@
 class IntArrayTag : public Tag {
 public:
     IntArrayTag();
+    IntArrayTag(arrayWithLength<int> data);
 
     void write(DataOutput*) override;
     void load(DataInput*, int) override;

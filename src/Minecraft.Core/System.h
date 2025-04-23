@@ -22,4 +22,7 @@ public:
 
     static void arraycopy(arrayWithLength<u8>, unsigned int, arrayWithLength<u8>*, unsigned int,
                           unsigned int);
+
+    static void arraycopy(arrayWithLength<int>, unsigned int, arrayWithLength<int>*, unsigned int,
+                          unsigned int);
 };
