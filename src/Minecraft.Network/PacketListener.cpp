@@ -1,14 +1,26 @@
 #include "PacketListener.h"
 
+#include "Minecraft.Network/protocol/game/ClientboundAnimatePacket.h"
+#include "Minecraft.Network/protocol/game/ClientboundContainerClosePacket.h"
 #include "Minecraft.Network/protocol/game/ClientboundKeepAlivePacket.h"
+#include "Minecraft.Network/protocol/game/ClientboundOpenSignEditorPacket.h"
+#include "Minecraft.Network/protocol/game/ClientboundPlayerAbilitiesPacket.h"
 #include "Minecraft.Network/protocol/game/ClientboundPlayerSleepPacket.h"
+#include "Minecraft.Network/protocol/game/ClientboundSetCarriedItemPacket.h"
 #include "Minecraft.Network/protocol/game/ClientboundSetSpawnPositionPacket.h"
 #include "Minecraft.Network/protocol/game/ClientboundSetTimePacket.h"
 #include "Minecraft.Network/protocol/game/DisconnectPacket.h"
 #include "Minecraft.Network/protocol/game/GetInfoPacket.h"
+#include "Minecraft.Network/protocol/game/ServerboundClientCommandPacket.h"
+#include "Minecraft.Network/protocol/game/ServerboundContainerClosePacket.h"
 #include "Minecraft.Network/protocol/game/ServerboundKeepAlivePacket.h"
 #include "Minecraft.Network/protocol/game/ServerboundPlayerActionPacket.h"
+#include "Minecraft.Network/protocol/game/ServerboundPlayerInputPacket.h"
+#include "Minecraft.Network/protocol/game/ServerboundResourcePackPacket.h"
 #include "Minecraft.Network/protocol/game/ServerboundSetCarriedItemPacket.h"
+#include "Minecraft.Network/protocol/game/ServerboundSwingPacket.h"
+#include "Minecraft.Network/protocol/game/ServerboundUseItemPacket.h"
+#include "Minecraft.Network/protocol/game/UpdateProgressPacket.h"
 #include "Minecraft.Network/protocol/game/VotePacket.h"
 #include "Minecraft.Network/protocol/game/XZPacket.h"
 
@@ -20,11 +32,11 @@ HANDLE_IMPL(GetInfo, GetInfoPacket)
 // HANDLE_IMPL(AddMob, ClientboundAddMobPacket)
 // HANDLE_IMPL(AddPainting, ClientboundAddPaintingPacket)
 // HANDLE_IMPL(AddPlayer, ClientboundAddPlayerPacket)
-// HANDLE_IMPL(Animate, ClientboundAnimatePacket)
+HANDLE_IMPL(Animate, ClientboundAnimatePacket)
 // HANDLE_IMPL(AwardStat, ClientboundAwardStatPacket)
 // HANDLE_IMPL(BlockDestruction, ClientboundBlockDestructionPacket)
 // HANDLE_IMPL(BlockCollectionDestruction, ClientboundBlockCollectionDestructionPacket)
-// HANDLE_IMPL(OpenSignEditor, ClientboundOpenSignEditorPacket)
+HANDLE_IMPL(OpenSignEditor, ClientboundOpenSignEditorPacket)
 // HANDLE_IMPL(BlockEntityData, ClientboundBlockEntityDataPacket)
 // HANDLE_IMPL(BlockEvent, ClientboundBlockEventPacket)
 // HANDLE_IMPL(BlockUpdate, ClientboundBlockUpdatePacket)
@@ -36,7 +48,7 @@ HANDLE_IMPL(GetInfo, GetInfoPacket)
 // HANDLE_IMPL(ChunkVisibilityArea, ChunkVisibilityAreaPacket)
 // HANDLE_IMPL(MapItemData, ClientboundMapItemDataPacket)
 // HANDLE_IMPL(ContainerAck, ClientboundContainerAckPacket)
-// HANDLE_IMPL(ContainerClose, ClientboundContainerClosePacket)
+HANDLE_IMPL(ContainerClose, ClientboundContainerClosePacket)
 // HANDLE_IMPL(ContainerContent, ClientboundContainerSetContentPacket)
 // HANDLE_IMPL(ContainerOpen, ClientboundContainerOpenPacket)
 // HANDLE_IMPL(ContainerSetData, ClientboundContainerSetDataPacket)
@@ -56,14 +68,14 @@ HANDLE_IMPL(KeepAlive, ClientboundKeepAlivePacket)
 // HANDLE_IMPL(MoveEntitySmall, MoveEntityPacketSmall)
 // HANDLE_IMPL(MovePlayer, ClientboundPlayerPositionPacket)
 // HANDLE_IMPL(ParticleEvent, ClientboundLevelParticlesPacket)
-// HANDLE_IMPL(PlayerAbilities, ClientboundPlayerAbilitiesPacket)
+HANDLE_IMPL(PlayerAbilities, ClientboundPlayerAbilitiesPacket)
 // HANDLE_IMPL(PlayerInfo, PlayerInfoPacket)
 // HANDLE_IMPL(PreLogin, ClientboundPreLoginPacket)
 // HANDLE_IMPL(RemoveEntity, ClientboundRemoveEntitiesPacket)
 // HANDLE_IMPL(RemoveMobEffect, ClientboundRemoveMobEffectPacket)
 // HANDLE_IMPL(Respawn, ClientboundRespawnPacket)
 // HANDLE_IMPL(RotateMob, ClientboundRotateHeadPacket)
-// HANDLE_IMPL(SetCarriedItem, ClientboundSetCarriedItemPacket)
+HANDLE_IMPL(SetCarriedItem, ClientboundSetCarriedItemPacket)
 // HANDLE_IMPL(SetEntityData, ClientboundSetEntityDataPacket)
 // HANDLE_IMPL(SetEntityMotion, ClientboundSetEntityMotionPacket)
 // HANDLE_IMPL(SetEquippedItem, ClientboundSetEquippedItemPacket)
@@ -90,7 +102,7 @@ HANDLE_IMPL(SetTime, ClientboundSetTimePacket)
 // HANDLE_IMPL(ServerSettingsChanged, ServerSettingsChangedPacket)
 // HANDLE_IMPL(Texture, TexturePacket)
 // HANDLE_IMPL(TextureAndGeometry, TextureAndGeometryPacket)
-// HANDLE_IMPL(UpdateProgress, UpdateProgressPacket)
+HANDLE_IMPL(UpdateProgress, UpdateProgressPacket)
 // HANDLE_IMPL(TextureChange, TextureChangePacket)
 // HANDLE_IMPL(TextureAndGeometryChange, TextureAndGeometryChangePacket)
 // HANDLE_IMPL(UpdateGameRuleProgressPacket, UpdateGameRuleProgressPacket)
@@ -102,15 +114,15 @@ HANDLE_IMPL(XZ, XZPacket)
 // HANDLE_IMPL(Powerup, ClientboundPowerupPacket)
 // HANDLE_IMPL(DamageIndicator, ClientboundDamageIndicatorPacket)
 // HANDLE_IMPL(MiniGamePlayerSettingsUpdatePacket, ClientboundMGPlayerSettingsUpdatePacket)
-// HANDLE_IMPL(Animate, ServerboundSwingPacket)
+HANDLE_IMPL(Animate, ServerboundSwingPacket)
 // HANDLE_IMPL(Chat, ServerboundChatPacket)
 // HANDLE_IMPL(ChatAutoComplete, ServerboundChatAutoCompletePacket)
-// HANDLE_IMPL(ClientCommand, ServerboundClientCommandPacket)
+HANDLE_IMPL(ClientCommand, ServerboundClientCommandPacket)
 // HANDLE_IMPL(ClientInformation, ServerboundClientInformationPacket)
 // HANDLE_IMPL(ContainerAck, ServerboundContainerAckPacket)
 // HANDLE_IMPL(ContainerButtonClick, ServerboundContainerButtonClickPacket)
 // HANDLE_IMPL(ContainerClick, ServerboundContainerClickPacket)
-// HANDLE_IMPL(ContainerClose, ServerboundContainerClosePacket)
+HANDLE_IMPL(ContainerClose, ServerboundContainerClosePacket)
 // HANDLE_IMPL(CustomPayload, ServerboundCustomPayloadPacket)
 // HANDLE_IMPL(Interact, ServerboundInteractPacket)
 HANDLE_IMPL(KeepAlive, ServerboundKeepAlivePacket)
@@ -118,15 +130,15 @@ HANDLE_IMPL(KeepAlive, ServerboundKeepAlivePacket)
 // HANDLE_IMPL(PlayerAbilities, ServerboundPlayerAbilitiesPacket)
 HANDLE_IMPL(PlayerAction, ServerboundPlayerActionPacket)
 // HANDLE_IMPL(PlayerCommand, ServerboundPlayerCommandPacket)
-// HANDLE_IMPL(PlayerInput, ServerboundPlayerInputPacket)
+HANDLE_IMPL(PlayerInput, ServerboundPlayerInputPacket)
 // HANDLE_IMPL(PreLogin, ServerboundPreLoginPacket)
 HANDLE_IMPL(SetCarriedItem, ServerboundSetCarriedItemPacket)
 // HANDLE_IMPL(SetCreativeModeSlot, ServerboundSetCreativeModeSlotPacket)
 // HANDLE_IMPL(SignUpdate, ServerboundSignUpdatePacket)
 // HANDLE_IMPL(UseItemOn, ServerboundUseItemOnPacket)
-// HANDLE_IMPL(UseItem, ServerboundUseItemPacket)
+HANDLE_IMPL(UseItem, ServerboundUseItemPacket)
 // HANDLE_IMPL(TeleportToEntityPacket, ServerboundTeleportToEntityPacket)
-// HANDLE_IMPL(ResourcePackResponse, ServerboundResourcePackPacket)
+HANDLE_IMPL(ResourcePackResponse, ServerboundResourcePackPacket)
 // HANDLE_IMPL(PaddleBoat, ServerboundPaddleBoatPacket)
 // HANDLE_IMPL(MoveVehicle, ServerboundMoveVehiclePacket)
 // HANDLE_IMPL(AcceptTeleportPacket, ServerboundAcceptTeleportationPacket)
