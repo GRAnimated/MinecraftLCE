@@ -11,7 +11,8 @@ public:
 
     virtual ~DataOutput();
     virtual void close();
-    virtual void flush();
+    virtual void writeFully(arrayWithLength<unsigned char>);  // guessed name
+    virtual void _20();                                       // unknown function
     virtual void writeBytes(arrayWithLength<unsigned char>) = 0;
     virtual void writeByte(unsigned char) = 0;
     virtual void writeDouble(double) = 0;

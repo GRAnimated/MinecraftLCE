@@ -5,19 +5,20 @@
 class ShortTag : public NumericTag {
 public:
     ShortTag();
+    ShortTag(int data);
 
     void write(DataOutput*) override;
     void load(DataInput*, int) override;
-    void toString() override;
+    std::wstring toString() override;
     u8 getId() override;
-    void equals(Tag*) override;
-    void getAsLong() override;
-    void getAsInt() override;
-    void getAsShort() override;
-    void getAsByte() override;
-    void getAsDouble() override;
-    void getAsFloat() override;
-    void copy() override;
+    bool equals(Tag*) override;
+    long getAsLong() override;
+    int getAsInt() override;
+    short getAsShort() override;
+    u8 getAsByte() override;
+    double getAsDouble() override;
+    float getAsFloat() override;
+    Tag* copy() override;
 
     short mData;
 };

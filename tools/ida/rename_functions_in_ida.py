@@ -15,18 +15,18 @@ def can_overwrite_name(addr: int, new_name: str):
     if not new_name or new_name.startswith(("sub_", "nullsub_", "j_")):
         return False
 
-    old_name: str = idc.get_name(addr)
-    if not old_name:
-        return True
-
-    if old_name.startswith(("sub_", "nullsub_", "j_")):
-        return True
-
-    if old_name.startswith("_Z"):
-        return True
-
-    if new_name.startswith("_Z"):
-        return True
+    # old_name: str = idc.get_name(addr)
+    # if not old_name:
+    #     return True
+# 
+    # if old_name.startswith(("sub_", "nullsub_", "j_")):
+    #     return True
+# 
+    # if old_name.startswith("_Z"):
+    #     return True
+# 
+    # if new_name.startswith("_Z"):
+    #     return True
 
     return True # we have to allow wii u symbols
 

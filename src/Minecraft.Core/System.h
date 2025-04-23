@@ -1,6 +1,7 @@
 #pragma once
 
 #include "nn/os/os_MutexTypes.h"
+#include "Minecraft.World/ArrayWithLength.h"
 #include <sstream>
 #include <string>
 
@@ -14,7 +15,11 @@ const std::wstring _toString(T type) {
     return ss.str();
 }
 
-namespace System {
-long processTimeInMilliSecs();
-long processTimeInNanoSecs();
-}  // namespace System
+class System {
+public:
+    static long processTimeInMilliSecs();
+    static long processTimeInNanoSecs();
+
+    static void arraycopy(arrayWithLength<u8>, unsigned int, arrayWithLength<u8>*, unsigned int,
+                          unsigned int);
+};

@@ -8,13 +8,13 @@ public:
 
     void write(DataOutput*) override;
     void load(DataInput*, int) override;
-    void toString() override;
+    std::wstring toString() override;
     u8 getId() override;
     ~StringTag() override;
-    void equals(Tag*) override;
-    void copy() override;
+    bool equals(Tag*) override;
+    Tag* copy() override;
     bool isEmpty() const override;
-    void getAsString() override;
+    std::wstring getAsString() override;
 
     std::wstring mData;
 };
