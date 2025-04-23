@@ -23,7 +23,7 @@ public:
         void hasCustomBreakingProgress() const override;
         int getRenderShape() const override;
         void getLightColor(LevelSource*, BlockPos const&) const override;
-        void getShadeBrightness() const override;
+        float getShadeBrightness() const override;
         bool isSolidBlockingCube() const override;
         bool isSolidBlockingCubeAndNotSignalSource() const override;
         bool isSignalSource() const override;

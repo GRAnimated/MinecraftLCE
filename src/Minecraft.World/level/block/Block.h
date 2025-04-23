@@ -76,7 +76,7 @@ public:
     virtual bool isPathfindable(LevelSource* levelSource, const BlockPos& pos);
     virtual int getRenderShape(const BlockState* blockState);
     virtual void hasInHandRenderOffset();
-    virtual void mayReplaceWithPlace(LevelSource* levelSource, const BlockPos& pos);
+    virtual bool mayReplaceWithPlace(LevelSource* levelSource, const BlockPos& pos);
     virtual void setDestroyTime(float);
     virtual void setIndestructible();
     virtual bool isIndestructible();
@@ -100,8 +100,8 @@ public:
     virtual void addCollisionAABB(const BlockPos& pos, AABB const*, std::vector<AABB*>*, AABB const*);
     virtual AABB* getClipAABB(const BlockState* blockState, LevelSource* levelSource, const BlockPos& pos);
     virtual bool isSolidRender(const BlockState* blockState) const;
-    virtual void mayPick(const BlockState* blockState, bool);
-    virtual void mayPick();
+    virtual bool mayPick(const BlockState* blockState, bool);
+    virtual bool mayPick();
     virtual void randomTick(Level* level, const BlockPos& pos, const BlockState* blockState, Random*);
     virtual void tick(Level* level, const BlockPos& pos, const BlockState* blockState, Random*);
     virtual void animateTick(const BlockState* blockState, Level* level, const BlockPos& pos, Random*);
@@ -169,7 +169,7 @@ public:
     virtual bool shouldBlockTick(Level* level, const BlockPos& pos, const BlockState* blockState);
     virtual void setNotCollectStatistics();
     virtual void getPistonPushReaction(const BlockState* blockState);
-    virtual void getShadeBrightness(const BlockState* blockState);
+    virtual float getShadeBrightness(const BlockState* blockState);
     virtual void fallOn(Level* level, const BlockPos& pos, std::shared_ptr<Entity>, float);
     virtual void updateEntityAfterFallOn(Level* level, std::shared_ptr<Entity>);
     virtual std::shared_ptr<ItemInstance> getCloneItemInstance(Level* level, const BlockPos& pos,
