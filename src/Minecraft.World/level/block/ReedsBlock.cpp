@@ -1,13 +1,14 @@
-#include "Minecraft.World/item/ItemInstance.h"
-#include "Minecraft.World/item/Items.h"
 #include "Minecraft.World/level/block/ReedsBlock.h"
 
+#include "Minecraft.World/item/ItemInstance.h"
+#include "Minecraft.World/item/Items.h"
 #include "Minecraft.World/level/Level.h"
 #include "Minecraft.World/level/block/Blocks.h"
 #include "Minecraft.World/level/block/BonemealableBlock.h"
+#include "Minecraft.World/level/block/RenderShape.h"
 #include "Minecraft.World/level/block/state/BlockStateDefinition.h"
 #include "Minecraft.World/level/block/state/IntegerProperty.h"
-#include "Minecraft.World/level/material/DecorationMaterial.h"
+#include "Minecraft.World/level/material/Material.h"
 #include "Minecraft.World/phys/AABB.h"
 #include "Minecraft.Core/BlockPos.h"
 
@@ -133,8 +134,8 @@ bool ReedsBlock::shouldBlockTick(Level* level, const BlockPos& pos, const BlockS
     return level->isEmptyBlock(pos.above());
 }
 
-int ReedsBlock::getRenderShape(const BlockState* blockState) {
-    return 1;
+RenderShape ReedsBlock::getRenderShape(const BlockState* blockState) {
+    return RenderShape_CROSS;
 }
 
 // ReedsBlock::GetInteractTooltip

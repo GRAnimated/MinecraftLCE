@@ -1,6 +1,5 @@
 #pragma once
 
-#include "nn/types.h"
 #include <vector>
 
 template <typename T>
@@ -28,7 +27,7 @@ public:
 
     T& get(unsigned int i) { return data[i]; }
 
-    T& operator[](unsigned int i) { return get(i); }
+    T& operator[](unsigned int i) { return data[i]; }
 
     // explicit operator bool() const { return !data->empty(); }
 
@@ -36,7 +35,13 @@ public:
     unsigned int length;
 
 private:
-    static T* createDataBuffer(unsigned int);
+    static T* createDataBuffer(unsigned int size) {
+        T* buffer = (T*)operator new[](sizeof(T) * size);
+        for (unsigned int i = 0; i < size; i++) {
+            new (buffer + i) T();
+        }
+        return buffer;
+    }
 };
 
 template <typename T>

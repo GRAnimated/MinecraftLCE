@@ -33,13 +33,13 @@ bool Packet::tryReplaceDuplicatePacket(std::deque<std::shared_ptr<Packet>>* dupl
     return false;
 }
 
-std::wstring Packet::readUtf(DataInputStream *in, int maxLength) {
+std::wstring Packet::readUtf(DataInputStream* in, int maxLength) {
     short length = in->readShort();
 
     if (length > maxLength) {
         std::wstringstream warning;
-        warning << L"Received string length longer than maximum allowed ("
-                    << length << L" > " << maxLength << L")";
+        warning << L"Received string length longer than maximum allowed (" << length << L" > " << maxLength
+                << L")";
     }
 
     std::wstring str = L"";

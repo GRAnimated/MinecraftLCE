@@ -3,6 +3,7 @@
 #include "nn/types.h"
 #include "types.h"
 #include "Minecraft.Nbt/Tag.h"
+#include <unordered_map>
 
 class CompoundTag : public Tag {
 public:
@@ -10,11 +11,11 @@ public:
 
     void write(DataOutput*) override;
     void load(DataInput*, int) override;
-    void toString() override;
+    std::wstring toString() override;
     u8 getId() override;
     void print(const std::wstring&, char*, std::wostream&) override;
     ~CompoundTag();
-    void equals(Tag*) override;
+    bool equals(Tag*) override;
     CompoundTag* copy() override;
     void stripEmptyChildren() override;
     bool isEmpty() const override;
@@ -146,9 +147,5 @@ public:
      */
     void putString(const std::wstring& name, const std::wstring& str);
 
-    std::unordered_map<std::wstring, Tag*> *childTags;
-    void* field_8;
-    void* field_10;
-    void* field_18;
-    float field_28 = 1.0f;
+    std::unordered_map<std::wstring, Tag*> childTags;
 };

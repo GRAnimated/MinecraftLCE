@@ -5,14 +5,20 @@
 class ByteTag : public NumericTag {
 public:
     ByteTag();
+    ByteTag(u8 data);
 
-    void getAsLong() override;
-    void getAsInt() override;
-    void getAsShort() override;
-    void getAsByte() override;
-    void getAsDouble() override;
-    void getAsFloat() override;
-    void copy() override;
+    void write(DataOutput*) override;
+    void load(DataInput*, int) override;
+    std::wstring toString() override;
+    u8 getId() override;
+    bool equals(Tag*) override;
+    long getAsLong() override;
+    int getAsInt() override;
+    short getAsShort() override;
+    u8 getAsByte() override;
+    double getAsDouble() override;
+    float getAsFloat() override;
+    Tag* copy() override;
 
     u8 mData;
 };

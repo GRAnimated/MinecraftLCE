@@ -8,8 +8,8 @@ public:
 
     void write(DataOutput*) override;
     void load(DataInput*, int) override;
-    void toString() override;
+    std::wstring toString() override;
     u8 getId() override;
-    void equals(Tag*) override;
-    void copy() override;
+    bool equals(Tag*) override;
+    Tag* copy() override;
 };

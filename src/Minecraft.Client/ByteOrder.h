@@ -1,6 +1,3 @@
 #pragma once
 // NON_MATCHING: Unchecked
-enum ByteOrder {
-    BIG,
-    LITTLE
-};
+enum ByteOrder { BIG, LITTLE };

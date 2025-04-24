@@ -12,7 +12,7 @@
 
 FJ_FuiNode::FJ_FuiNode(fuiRenderNode* renderNode) {
     mTabIndex = -1;
-    this->mRenderNode = renderNode;
+    mRenderNode = renderNode;
     mCallbackScene = nullptr;
 }
 

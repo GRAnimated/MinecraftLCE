@@ -9,8 +9,8 @@ class Screen : GuiComponent {
     virtual void keyPressed(wchar_t key, int);
     virtual void mouseClicked(int, int, int);
     virtual void mouseReleased(int, int, int);
-    virtual void buttonClicked(Button *button);
-    virtual void init(Minecraft *, int, int);
+    virtual void buttonClicked(Button* button);
+    virtual void init(Minecraft*, int, int);
     virtual void init();
     virtual void setSize(int width, int height);
     virtual void updateEvents();

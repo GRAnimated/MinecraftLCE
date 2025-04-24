@@ -7,4 +7,3 @@ public:
 
     ChunkPos(int x, int z);
 };
-
