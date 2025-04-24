@@ -134,7 +134,7 @@ bool ReedsBlock::shouldBlockTick(Level* level, const BlockPos& pos, const BlockS
     return level->isEmptyBlock(pos.above());
 }
 
-int ReedsBlock::getRenderShape(const BlockState* blockState) {
+RenderShape ReedsBlock::getRenderShape(const BlockState* blockState) {
     return RenderShape_CROSS;
 }
 

@@ -12,7 +12,7 @@ bool AirBlock::isCubeShaped(const BlockState* blockState) {
     return false;
 }
 
-int AirBlock::getRenderShape(const BlockState* blockState) {
+RenderShape AirBlock::getRenderShape(const BlockState* blockState) {
     return RenderShape_INVISIBLE;
 }
 

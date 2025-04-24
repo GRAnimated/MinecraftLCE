@@ -7,7 +7,7 @@ public:
     AirBlock();
 
     bool isCubeShaped(const BlockState* blockState) override;
-    int getRenderShape(const BlockState* blockState) override;
+    RenderShape getRenderShape(const BlockState* blockState) override;
     bool mayReplaceWithPlace(LevelSource* levelSource, const BlockPos& pos) override;
     int getBlockFaceShape(LevelSource* levelSource, const BlockState* blockState, const BlockPos& pos,
                           const Direction* direction) override;

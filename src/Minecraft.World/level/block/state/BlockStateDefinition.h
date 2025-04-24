@@ -21,7 +21,7 @@ public:
         void mirror(Mirror*) const override;
         bool isCubeShaped() const override;
         void hasCustomBreakingProgress() const override;
-        int getRenderShape() const override;
+        RenderShape getRenderShape() const override;
         void getLightColor(LevelSource*, BlockPos const&) const override;
         float getShadeBrightness() const override;
         bool isSolidBlockingCube() const override;

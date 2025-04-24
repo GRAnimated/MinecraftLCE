@@ -2,6 +2,7 @@
 
 #include <memory>
 
+#include "Minecraft.World/level/block/RenderShape.h"
 #include "Minecraft.World/level/block/boxed/TypedBoxed.h"
 #include "Minecraft.World/level/block/state/BlockBehaviours.h"
 #include "Minecraft.World/level/block/state/BlockProperties.h"
@@ -35,7 +36,7 @@ public:
     virtual void mirror(Mirror*) const = 0;
     virtual bool isCubeShaped() const = 0;
     virtual void hasCustomBreakingProgress() const = 0;
-    virtual int getRenderShape() const = 0;
+    virtual RenderShape getRenderShape() const = 0;
     virtual void getLightColor(LevelSource*, BlockPos const&) const = 0;
     virtual float getShadeBrightness() const = 0;
     virtual bool isSolidBlockingCube() const = 0;

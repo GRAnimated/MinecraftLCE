@@ -21,7 +21,7 @@ ByteArrayTag::~ByteArrayTag() {
 
 void ByteArrayTag::write(DataOutput* outputStream) {
     outputStream->writeInt(mData.length);
-    outputStream->writeFully(mData);
+    outputStream->write(mData);
 }
 
 void ByteArrayTag::load(DataInput* inputStream, int) {

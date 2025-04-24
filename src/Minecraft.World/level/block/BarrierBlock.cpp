@@ -11,7 +11,7 @@ BarrierBlock::BarrierBlock() : Block(Material::BARRIER) {
     isBlocksLight = true;
 }
 
-int BarrierBlock::getRenderShape(const BlockState* blockState) {
+RenderShape BarrierBlock::getRenderShape(const BlockState* blockState) {
     return RenderShape_INVISIBLE;
 }
 

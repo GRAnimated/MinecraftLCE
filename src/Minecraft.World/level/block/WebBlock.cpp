@@ -20,7 +20,7 @@ bool WebBlock::isCubeShaped(const BlockState* blockState) {
     return false;
 }
 
-int WebBlock::getRenderShape(const BlockState* blockState) {
+RenderShape WebBlock::getRenderShape(const BlockState* blockState) {
     return RenderShape_CROSS;
 }
 

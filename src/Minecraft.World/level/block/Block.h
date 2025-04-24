@@ -74,7 +74,7 @@ public:
     virtual bool isCubeShaped(const BlockState* blockState);
     virtual void hasCustomBreakingProgress(const BlockState* blockState);
     virtual bool isPathfindable(LevelSource* levelSource, const BlockPos& pos);
-    virtual int getRenderShape(const BlockState* blockState);
+    virtual RenderShape getRenderShape(const BlockState* blockState);
     virtual void hasInHandRenderOffset();
     virtual bool mayReplaceWithPlace(LevelSource* levelSource, const BlockPos& pos);
     virtual void setDestroyTime(float);
@@ -139,7 +139,7 @@ public:
     virtual void prepareRender(Level* level, const BlockPos& pos);
     virtual void attack(Level* level, const BlockPos& pos, std::shared_ptr<Player> player);
     virtual void handleEntityInside(Level* level, const BlockPos& pos, std::shared_ptr<Entity>, Vec3*);
-    virtual int getColor();
+    virtual int getColor() const;
     virtual int getColor(const BlockState* blockState);
     virtual int getColor(LevelSource* levelSource, const BlockPos& pos, int);
     virtual int getColor(LevelSource* levelSource, const BlockPos& pos);
