@@ -59,7 +59,7 @@ arrayWithLength<double> PerlinNoise::getRegion(arrayWithLength<double> noise, in
     if (noise.data) {
         if (noise.length) {
             for (unsigned int i = 0; i < noise.length; i++) {
-                noise.get(i) = 0;
+                noise[i] = 0;
             }
         }
     } else {

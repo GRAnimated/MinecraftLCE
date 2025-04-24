@@ -10,13 +10,12 @@ ChunkPrimer::ChunkPrimer(bool unk, arrayWithLength<uchar> blockIds, arrayWithLen
     byte_28 = unk;
 }
 
-// NON_MATCHING
 ChunkPrimer::~ChunkPrimer() {
     if (byte_28) {
         if (mBlockIds.data)
-            delete[] & mBlockIds.data;
+            delete mBlockIds.data;
         if (mBlockData.data)
-            delete[] & mBlockData.data;
+            delete mBlockData.data;
     }
 }
 
@@ -28,7 +27,7 @@ const BlockState* ChunkPrimer::getState(int a2) {
 
     int bitShift = 4 * (a2 & 1);
 
-    return Block::getStateByIdAndData(mBlockIds.get(a2), (mBlockData.get(blockDataIndex) >> bitShift) & 0xF);
+    return Block::getStateByIdAndData(mBlockIds[a2], (mBlockData[blockDataIndex] >> bitShift) & 0xF);
 }
 
 const BlockState* ChunkPrimer::getState(int x, int y, int z) {
@@ -52,14 +51,14 @@ void ChunkPrimer::setState(int packedPos, const BlockState* state) {
         data = stateId & 0xF;
     }
 
-    mBlockIds.get(packedPos) = id;
+    mBlockIds[packedPos] = id;
 
     int test = packedPos / 2;
 
     if (packedPos & 1)
-        mBlockData.get(test) = (mBlockData.get(test) & 0xF) | (16 * data);
+        mBlockData[test] = (mBlockData[test] & 0xF) | (16 * data);
     else
-        mBlockData.get(test) = (mBlockData.get(test) & 0xF0) | data;
+        mBlockData[test] = (mBlockData[test] & 0xF0) | data;
 }
 
 void ChunkPrimer::setState(int x, int y, int z, BlockState const* state) {
@@ -74,20 +73,20 @@ void ChunkPrimer::setState(int x, int y, int z, BlockState const* state) {
 
 // NON_MATCHING: CMP 0x1 vs CMP 0x0
 void ChunkPrimer::setBlockAndData(int packedPos, int id, int data) {
-    mBlockIds.get(packedPos) = id;
+    mBlockIds[packedPos] = id;
 
     int v9 = (packedPos <= 0) ? (packedPos + 1) : packedPos;
 
     int test = v9 >> 1;
 
     if (packedPos & 1)
-        mBlockData.get(test) = (mBlockData.get(test) & 0xF) | (16 * data);
+        mBlockData[test] = (mBlockData[test] & 0xF) | (16 * data);
     else
-        mBlockData.get(test) = (mBlockData.get(test) & 0xF0) | data;
+        mBlockData[test] = (mBlockData[test] & 0xF0) | data;
 }
 
 int ChunkPrimer::getBlockId(int a) {
-    return mBlockIds.get(a);
+    return mBlockIds[a];
 }
 
 arrayWithLength<uchar> ChunkPrimer::getBlockIds() {
@@ -105,7 +104,7 @@ int ChunkPrimer::getHighestNonAirPos(int x, int z) {
     int packedXZ = (x << 11) | (z << 7) | 1;
 
     for (int y = 127; y >= 0; y--) {
-        if (sub_7100029D84(mBlockIds.get(packedXZ + y + 126)) != Blocks::AIR) {
+        if (sub_7100029D84(mBlockIds[packedXZ + y + 126]) != Blocks::AIR) {
             return y;
         }
     }
