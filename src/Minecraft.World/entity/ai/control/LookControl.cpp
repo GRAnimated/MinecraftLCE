@@ -4,10 +4,7 @@ LookControl::LookControl(Mob* mob) : mMob(mob) {
     mYMaxRotSpeed = 0.0f;
     mXMaxRotAngle = 0.0f;
     mIsHasWanted = false;
-    // WTF?
-    mWantedZ = 0.0;
-    mWantedY = mWantedZ;
-    mWantedX = mWantedY;
+    mWantedX = mWantedY = mWantedZ = 0.0;
 }
 
 void LookControl::setLookAt(double wantedX, double wantedY, double wantedZ, float yMaxRotSpeed,
