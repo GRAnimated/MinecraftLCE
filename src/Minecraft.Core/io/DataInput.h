@@ -7,7 +7,7 @@ public:
     virtual ~DataInput();
     virtual bool readBoolean() = 0;
     virtual unsigned char readByte() = 0;
-    virtual int readUnsignedByte() = 0;
+    virtual unsigned char readUnsignedByte() = 0;
     virtual int readUnsignedShort() = 0;
     virtual wchar_t readChar() = 0;
     // is this correct? i swapped the two readFully methods for a match in ByteArrayTag::load

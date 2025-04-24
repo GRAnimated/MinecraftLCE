@@ -36,7 +36,7 @@ public:
     static Item* byString(const std::wstring& string);
     static void registerItem(int id, const std::wstring& name, Item* item);
 
-    virtual std::shared_ptr<ItemInstance> getDefaultInstance(const std::shared_ptr<ItemInstance>&);
+    virtual not_null_ptr<ItemInstance> getDefaultInstance(const std::shared_ptr<ItemInstance>&);
     virtual bool verifyTagAfterLoad(CompoundTag*);
     virtual int GetUseTooltip(const ItemToolTipDataHolder&);
     virtual ~Item();

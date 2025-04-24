@@ -34,6 +34,7 @@ public:
     void writePlayerUID(PlayerUID) override;
 
     void writeVarInt(int);
+    void writeVarLong(long);
     void writeBlockPos(const BlockPos&) const;
 
     void deleteChildStream();
