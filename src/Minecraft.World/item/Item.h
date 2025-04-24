@@ -2,6 +2,7 @@
 #include "types.h"
 #include "Minecraft.Client/resources/SimpleRegistry.h"
 #include "Minecraft.World/InteractionHand.h"
+#include "Minecraft.World/inventory/EquipmentSlot.h"
 #include "Minecraft.World/item/InteractionResultHolder.h"
 #include <memory>
 #include <string>
@@ -18,7 +19,6 @@ class CompoundTag;
 class ItemToolTipDataHolder;
 class Entity;
 class IconRegister;
-class EquipementSlot;
 class BlockPos;
 class Direction;
 
@@ -84,7 +84,7 @@ public:
     virtual bool mayBePlacedInAdventureMode();
     virtual bool isValidRepairItem(const std::shared_ptr<ItemInstance>&,
                                    const std::shared_ptr<ItemInstance>&);
-    virtual void getDefaultAttributeModifiers(const EquipementSlot*);
+    virtual void getDefaultAttributeModifiers(const EquipmentSlot*);
     virtual void registerIcons(IconRegister*);
     virtual bool hasMultipleSpriteLayers();
     virtual void* getLayerIcon(int, int, const std::shared_ptr<ItemInstance>&);

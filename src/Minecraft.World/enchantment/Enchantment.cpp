@@ -3,11 +3,10 @@
 #include "Enchantment.h"
 
 Enchantment::Enchantment(const Rarity* rarity, const EnchantmentCategory* category,
-                         arrayWithLength<EquipmentSlot> array)
+                         arrayWithLength<const EquipmentSlot*> array)
     : mEnchantmentCategory(category) {
     this->mRarity = rarity;
-    this->mSlots.data = array.data;
-    this->mSlots.length = array.length;
+    this->mSlots = array;
 }
 
 const Rarity* Enchantment::getRarity() {
@@ -52,7 +51,7 @@ int Enchantment::getDescriptionId() {
     return this->mDescriptionId;
 }
 
-bool Enchantment::canEnchant(const std::shared_ptr<ItemInstance>& item) {
+bool Enchantment::canEnchant(const not_null_ptr<ItemInstance>& item) {
     return this->mEnchantmentCategory->canEnchant(item->getItem());
 }
 
