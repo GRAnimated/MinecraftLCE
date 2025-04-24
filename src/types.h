@@ -12,7 +12,12 @@
 #endif
 
 template <typename T>
-class not_null_ptr : public std::shared_ptr<T> {};
+class not_null_ptr : public std::shared_ptr<T> {
+public:
+    not_null_ptr() = default;
+    not_null_ptr(T* ptr);
+    not_null_ptr(T const& other);
+};
 
 typedef unsigned char uchar;
 typedef unsigned int uint;

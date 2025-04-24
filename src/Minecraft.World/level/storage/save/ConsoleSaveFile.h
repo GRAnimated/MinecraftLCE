@@ -1,9 +1,9 @@
 #pragma once
+#include "Minecraft.Client/ByteOrder.h"
 #include "Minecraft.Client/ESavePlatform.h"
 #include "Minecraft.World/level/storage/LevelStorage.h"
 #include "Minecraft.Core/io/File.h"
 #include "Minecraft.Core/io/FileEntry.h"
-#include "Minecraft.Client/ByteOrder.h"
 
 class ConsoleSaveFile {
 public:
@@ -15,14 +15,14 @@ public:
     virtual void vf_4() = 0;
     virtual void vf_5() = 0;
     virtual void vf_6() = 0;
-    virtual void closeHandle(FileEntry *entry) = 0;
+    virtual void closeHandle(FileEntry* entry) = 0;
     virtual void finalizeWrite() = 0;
     virtual void tick();
     virtual bool doesFileExist(ConsoleSavePath path) = 0;
     virtual unsigned long vf_11() = 0;
     virtual unsigned int getSizeOnDisk() = 0;
-    virtual std::wstring getFilename() = 0; // may be u16string (:abyss:)
-    virtual void *getFilesWithPrefix(const std::wstring &prefix) = 0; // unk return type
+    virtual std::wstring getFilename() = 0;                            // may be u16string (:abyss:)
+    virtual void* getFilesWithPrefix(const std::wstring& prefix) = 0;  // unk return type
     virtual void vf_15() = 0;
     virtual void vf_16() = 0;
     virtual void vf_17() = 0;
@@ -40,7 +40,6 @@ public:
     virtual void setEndian(ByteOrder order) = 0;
     virtual void ConvertRegionFile(File regionFile) = 0;
     virtual void ConvertToLocalPlatform() = 0;
-    virtual void *getWritePointer(FileEntry *entry);
+    virtual void* getWritePointer(FileEntry* entry);
     virtual void refreshFromLevelgen();
 };
-

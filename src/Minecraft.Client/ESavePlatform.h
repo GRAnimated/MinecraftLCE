@@ -1,3 +1,5 @@
+#pragma once
+
 enum ESavePlatform {
     Xbox360 = 0x30363358,  // X360
     WiiU = 0x55494957,     // WIIU

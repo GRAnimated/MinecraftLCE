@@ -82,3 +82,10 @@ public:
     PushReaction mPushReaction;
     bool mIsDestroyedByHand;
 };
+
+// To avoid clangd warning about unused includes in other files, we include them here.
+#include "Minecraft.World/level/material/DecorationMaterial.h"
+#include "Minecraft.World/level/material/GasMaterial.h"
+#include "Minecraft.World/level/material/LiquidMaterial.h"
+#include "Minecraft.World/level/material/PortalMaterial.h"
+#include "Minecraft.World/level/material/WebMaterial.h"

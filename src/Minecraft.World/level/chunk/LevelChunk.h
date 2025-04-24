@@ -90,19 +90,19 @@ public:
 
     // are these meant to be virtual?
     arrayWithLength<unsigned char> getHeightmap();
-    arrayWithLength<unsigned char> getHeightmap(BlockPos &pos);
+    arrayWithLength<unsigned char> getHeightmap(BlockPos& pos);
     arrayWithLength<unsigned char> getBiomes();
-    void writeCompressedBlockData(DataOutputStream *out);
-    void writeCompressedDataData(DataOutputStream *out);
-    void writeCompressedSkyLightData(DataOutputStream *out);
-    void writeCompressedBlockLightData(DataOutputStream *out);
+    void writeCompressedBlockData(DataOutputStream* out);
+    void writeCompressedDataData(DataOutputStream* out);
+    void writeCompressedSkyLightData(DataOutputStream* out);
+    void writeCompressedBlockLightData(DataOutputStream* out);
     ChunkPos getPos();
 
     char unk[510];
     int xPos;
     int zPos;
     char unk2[14];
-    std::unordered_map<BlockPos, std::shared_ptr<BlockEntity>> *blockEntities;
+    std::unordered_map<BlockPos, std::shared_ptr<BlockEntity>>* blockEntities;
     char unk3[32];
     short biomeCount;
     char unk4[42];

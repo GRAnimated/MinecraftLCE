@@ -83,8 +83,70 @@ public:
 
     static PerlinSimplexNoise* TEMPERATURE_NOISE;
 
-    enum EBiomeIDs : unsigned int {
-        LIMIT = 256,
+    enum EBiomeIDs : int {
+        BiomeID_OCEAN = 0,
+        BiomeID_PLAINS = 1,
+        BiomeID_DESERT = 2,
+        BiomeID_EXTREME_HILLS = 3,
+        BiomeID_FOREST = 4,
+        BiomeID_TAIGA = 5,
+        BiomeID_SWAMPLAND = 6,
+        BiomeID_RIVER = 7,
+        BiomeID_HELL = 8,
+        BiomeID_THE_END = 9,
+        BiomeID_FROZEN_OCEAN = 10,
+        BiomeID_FROZEN_RIVER = 11,
+        BiomeID_ICE_PLAINS = 12,
+        BiomeID_ICE_MOUNTAINS = 13,
+        BiomeID_MUSHROOM_ISLAND = 14,
+        BiomeID_MUSHROOM_ISLAND_SHORE = 15,
+        BiomeID_BEACH = 16,
+        BiomeID_DESERT_HILLS = 17,
+        BiomeID_FOREST_HILLS = 18,
+        BiomeID_TAIGA_HILLS = 19,
+        BiomeID_EXTREME_HILLS_EDGE = 20,
+        BiomeID_JUNGLE = 21,
+        BiomeID_JUNGLE_HILLS = 22,
+        BiomeID_JUNGLE_EDGE = 23,
+        BiomeID_DEEP_OCEAN = 24,
+        BiomeID_STONE_BEACH = 25,
+        BiomeID_COLD_BEACH = 26,
+        BiomeID_BIRCH_FOREST = 27,
+        BiomeID_BIRCH_FOREST_HILLS = 28,
+        BiomeID_ROOFED_FOREST = 29,
+        BiomeID_COLD_TAIGA = 30,
+        BiomeID_COLD_TAIGA_HILLS = 31,
+        BiomeID_MEGA_TAIGA = 32,
+        BiomeID_MEGA_TAIGA_HILLS = 33,
+        BiomeID_EXTREME_HILLS_PLUS = 34,
+        BiomeID_SAVANNA = 35,
+        BiomeID_SAVANNA_PLATEAU = 36,
+        BiomeID_MESA = 37,
+        BiomeID_MESA_PLATEAU_F = 38,
+        BiomeID_MESA_PLATEAU = 39,
+        BiomeID_THE_VOID = 127,
+        BiomeID_SUNFLOWER_PLAINS = 129,
+        BiomeID_DESERT_M = 130,
+        BiomeID_EXTREME_HILLS_M = 131,
+        BiomeID_FLOWER_FOREST = 132,
+        BiomeID_TAIGA_M = 133,
+        BiomeID_SWAMPLAND_M = 134,
+        BiomeID_ICE_PLAINS_SPIKES = 140,
+        BiomeID_JUNGLE_M = 149,
+        BiomeID_JUNGLE_EDGE_M = 151,
+        BiomeID_BIRCH_FOREST_M = 155,
+        BiomeID_BIRCH_FOREST_HILLS_M = 156,
+        BiomeID_ROOFED_FOREST_M = 157,
+        BiomeID_COLD_TAIGA_M = 158,
+        BiomeID_MEGA_SPRUCE_TAIGA = 160,
+        BiomeID_REDWOOD_TAIGA_HILLS_M = 161,
+        BiomeID_EXTREME_HILLS_PLUS_M = 162,
+        BiomeID_SAVANNA_M = 163,
+        BiomeID_SAVANNA_PLATEAU_M = 164,
+        BiomeID_MESA_BRYCE = 165,
+        BiomeID_MESA_PLATEAU_F_M = 166,
+        BiomeID_MESA_PLATEAU_M = 167,
+        BiomeID_LIMIT = 256,
     };
 
     enum BaseClass {
@@ -120,7 +182,6 @@ public:
         void temperature(float);
         void waterColor(int);
 
-    private:
         std::wstring mBiomeName;
         float mDepth = 0.1f;
         float mScale = 0.2f;
@@ -134,13 +195,31 @@ public:
 
     class MobSpawnerData : public WeighedRandomItem {
     public:
-        virtual ~MobSpawnerData();
+        MobSpawnerData(int instanceType, int weight, int unk, int unk2) : WeighedRandomItem(weight) {
+            mInstanceType = instanceType;
+            _10 = unk;
+            _14 = unk2;
+        }
+
+    private:
+        int mInstanceType;
+        int _10;
+        int _14;
+    };
+
+    struct LegacyBlockData {  // Guessed name
+        LegacyBlockData(int blockId = 0, int blockData = 0) : id(blockId), data(blockData) {}
+        int id = 0;
+        int data = 0;
     };
 
     Biome(Biome::EBiomeIDs, Biome::BiomeProperties*);
     static Biome** getBiomes();
     static Biome* getBiome(int);
     static Biome* getBiome(int, Biome*);
+    static Biome* byId(int);
+
+    static BiomeDecorator* createDecorator();
 
     virtual ~Biome();
     virtual Feature* getTreeFeature(Random&);
@@ -191,25 +270,20 @@ public:
     float mDownfall;
     bool mIsSnow;
     bool mIsDry;
-    void* qword_28;
-    void* qword_30;
-    void* qword_38;
-    void* qword_40;
-    void* qword_48;
-    void* qword_50;
-    int mGrassId;
-    int field_5C;
-    int mDirtId;
+    std::wstring mMutatedBiomeName;
+    std::wstring mBiomeName;
+    LegacyBlockData mGrass;
+    LegacyBlockData mDirt;
     BiomeDecorator* mBiomeDecorator;
-    int dword_70;
-    std::vector<void*> field_78;
-    std::vector<void*> field_90;
-    std::vector<void*> field_a8;
-    std::vector<void*> field_c0;
-    std::vector<void*> field_d8;
-    std::vector<void*> field_f0;
-    std::vector<void*> field_108;
-    std::vector<void*> field_120;
+    int mBiomeID;
+    std::vector<Biome::MobSpawnerData*> mHostileMobs;
+    std::vector<Biome::MobSpawnerData*> mPassiveMobs;
+    std::vector<Biome::MobSpawnerData*> mAquaticMobs;
+    std::vector<Biome::MobSpawnerData*> mChickens;
+    std::vector<Biome::MobSpawnerData*> field_d8;
+    std::vector<Biome::MobSpawnerData*> field_f0;
+    std::vector<Biome::MobSpawnerData*> mNeutralMobs;
+    std::vector<Biome::MobSpawnerData*> mAmbientMobs;
     eMinecraftColour mWaterColor;
     eMinecraftColour mSkyColor;
     eMinecraftColour mPreviewColor;

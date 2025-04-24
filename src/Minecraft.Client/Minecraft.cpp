@@ -38,11 +38,14 @@ void Minecraft::init() {
 
     this->mTextures = new Textures(this->mTexturePackRepository, this->mOptions);
 
-    this->mDefaultFont = new Font(this->mOptions, L"font/Default", this->mTextures, 0, &Font::sDefaultFontRsrc, 23, 28, 16, 16, Font::sDefaultText);
-    this->mAlternateFont = new Font(this->mOptions, L"font/alternate", this->mTextures, 0, &Font::sAlternateFontRsrc, 16, 16, 8, 8, nullptr);
+    this->mDefaultFont = new Font(this->mOptions, L"font/Default", this->mTextures, 0,
+                                  &Font::sDefaultFontRsrc, 23, 28, 16, 16, Font::sDefaultText);
+    this->mAlternateFont = new Font(this->mOptions, L"font/alternate", this->mTextures, 0,
+                                    &Font::sAlternateFontRsrc, 16, 16, 8, 8, nullptr);
 
     GrassColor::init(this->mTextures->loadTexturePixels(_TEXTURE_NAME::GRASS_COLOR, L"misc/grasscolor"));
-    FoliageColor::init(this->mTextures->loadTexturePixels(_TEXTURE_NAME::FOLIAGE_COLOR, L"misc/foliagecolor"));
+    FoliageColor::init(
+        this->mTextures->loadTexturePixels(_TEXTURE_NAME::FOLIAGE_COLOR, L"misc/foliagecolor"));
 
     Biome::generateColoursDebugOutput();
 

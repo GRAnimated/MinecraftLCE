@@ -1,8 +1,4 @@
-#include "Minecraft.World/level/material/DecorationMaterial.h"
-#include "Minecraft.World/level/material/GasMaterial.h"
-#include "Minecraft.World/level/material/LiquidMaterial.h"
-#include "Minecraft.World/level/material/PortalMaterial.h"
-#include "Minecraft.World/level/material/WebMaterial.h"
+#include "Minecraft.World/level/material/Material.h"
 
 Material::Material(MaterialColor const* color) : mColor(color) {
     mIsFlammable = false;

@@ -10,4 +10,6 @@ public:
     static void StaticCtor();
 
     static void* GetCustomGameModeById(EMiniGameId id, bool);
+
+    bool HasFeatureDirectionalFireworks() const;
 };

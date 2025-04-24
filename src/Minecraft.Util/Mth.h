@@ -5,6 +5,7 @@ public:
     static float sin(float);
     static float cos(float);
     static int floor(double);
+    static int floor(float);
     static double clamp(double, double, double);
     static float clamp(float, float, float);
     static float wrapDegrees(float);

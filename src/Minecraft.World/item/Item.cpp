@@ -40,8 +40,8 @@ void Item::setIconName(std::wstring const& iconName) {
     this->mIconName = iconName;
 }
 
-std::shared_ptr<ItemInstance> Item::getDefaultInstance(const std::shared_ptr<ItemInstance>& a2) {
-    return std::shared_ptr<ItemInstance>(new ItemInstance(this));
+not_null_ptr<ItemInstance> Item::getDefaultInstance(const std::shared_ptr<ItemInstance>& a2) {
+    return not_null_ptr<ItemInstance>(new ItemInstance(this));
 }
 
 bool Item::verifyTagAfterLoad(CompoundTag*) {

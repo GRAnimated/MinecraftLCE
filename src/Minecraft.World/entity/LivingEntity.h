@@ -11,7 +11,7 @@ class LivingEntity : public Entity {
 public:
     int getUseItemRemainingTicks();
 
-    virtual void GetType() override;
+    virtual eINSTANCEOF GetType() override;
     virtual void fjDerivedCtorCalls() override;
     virtual void kill() override;
     virtual void defineSynchedData() override;

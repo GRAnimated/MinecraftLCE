@@ -10,11 +10,12 @@ public:
 
     void write(DataOutput*) override;
     void load(DataInput*, int) override;
-    void toString() override;
+    std::wstring toString() override;
     u8 getId() override;
     ~ByteArrayTag() override;
-    void equals(Tag*) override;
-    void copy() override;
+    bool equals(Tag*) override;
+    Tag* copy() override;
 
-    u8 data[];
+    arrayWithLength<u8> mData;
+    bool unknown;
 };
