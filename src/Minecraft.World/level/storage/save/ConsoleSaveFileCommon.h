@@ -3,7 +3,7 @@
 
 class ConsoleSaveFileCommon : public ConsoleSaveFile {
 public:
-    ~ConsoleSaveFileCommon();
+    ~ConsoleSaveFileCommon() override;
     void closeHandle(FileEntry* entry) override;
     void finalizeWrite() override;
     bool doesFileExist(ConsoleSavePath path) override;
@@ -13,8 +13,8 @@ public:
     void vf_16() override;
     void vf_17() override;
     void vf_18() override;
-    short getSaveVersion() override;
-    short getOriginalSaveVersion() override;
+    int getSaveVersion() override;
+    int getOriginalSaveVersion() override;
     void LockSaveAccess() override;
     void ReleaseSaveAccess() override;
     ESavePlatform getSavePlatform() override;

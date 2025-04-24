@@ -7,14 +7,13 @@
 
 class ConsoleSaveFile {
 public:
-    ~ConsoleSaveFile();
+    virtual ~ConsoleSaveFile();
     virtual void vf_0() = 0;
     virtual void vf_1() = 0;
     virtual void vf_2() = 0;
     virtual void vf_3() = 0;
     virtual void vf_4() = 0;
     virtual void vf_5() = 0;
-    virtual void vf_6() = 0;
     virtual void closeHandle(FileEntry* entry) = 0;
     virtual void finalizeWrite() = 0;
     virtual void tick();
@@ -27,8 +26,8 @@ public:
     virtual void vf_16() = 0;
     virtual void vf_17() = 0;
     virtual void vf_18() = 0;
-    virtual short getSaveVersion() = 0;
-    virtual short getOriginalSaveVersion() = 0;
+    virtual int getSaveVersion() = 0;
+    virtual int getOriginalSaveVersion() = 0;
     virtual void LockSaveAccess() = 0;
     virtual void ReleaseSaveAccess() = 0;
     virtual ESavePlatform getSavePlatform() = 0;
