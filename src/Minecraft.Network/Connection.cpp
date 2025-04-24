@@ -15,10 +15,10 @@
 #include "Minecraft.Network/PacketListener.h"
 #include "Minecraft.Network/PacketType.h"
 #include "Minecraft.Network/Socket.h"
-#include "Minecraft.Network/protocol/game/clientbound/ClientboundKeepAlivePacket.h"
-#include "Minecraft.Network/protocol/game/serverbound/ServerboundKeepAlivePacket.h"
-#include "Minecraft.Network/protocol/game/serverbound/ServerboundPlayerActionPacket.h"
+#include "Minecraft.Network/protocol/game/ServerboundPlayerActionPacket.h"
 #include "nn/os/os_Mutex.h"
+#include "protocol/game/ClientboundKeepAlivePacket.h"
+#include "protocol/game/ServerboundKeepAlivePacket.h"
 #include <cstdio>
 #include <memory>
 

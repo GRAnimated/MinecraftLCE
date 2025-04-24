@@ -1,4 +1,4 @@
-#include "clientbound/ClientboundAnimatePacket.h"
+#include "ClientboundAnimatePacket.h"
 
 #include "../../../Minecraft.Core/io/DataInputStream.h"
 #include "../../../Minecraft.Core/io/DataOutputStream.h"

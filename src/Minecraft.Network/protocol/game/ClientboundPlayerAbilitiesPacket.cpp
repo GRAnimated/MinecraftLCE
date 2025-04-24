@@ -1,4 +1,4 @@
-#include "clientbound/ClientboundPlayerAbilitiesPacket.h"
+#include "ClientboundPlayerAbilitiesPacket.h"
 
 #include "../../../Minecraft.Core/io/DataInputStream.h"
 #include "../../../Minecraft.Core/io/DataOutputStream.h"

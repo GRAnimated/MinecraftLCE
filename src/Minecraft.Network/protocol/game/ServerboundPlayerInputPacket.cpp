@@ -1,11 +1,7 @@
 #include "../../../Minecraft.Core/io/DataInputStream.h"
 #include "../../../Minecraft.Core/io/DataOutputStream.h"
-<<<<<<< HEAD:src/Minecraft.Network/protocol/game/serverbound/ServerboundPlayerInputPacket.cpp
-#include "serverbound/ServerboundPlayerInputPacket.h"
-    =======
 #include "../../PacketListener.h"
 #include "Minecraft.Network/protocol/game/ServerboundPlayerInputPacket.h"
->>>>>>> upstream/main:src/Minecraft.Network/protocol/game/ServerboundPlayerInputPacket.cpp
 
 std::shared_ptr<Packet> ServerboundPlayerInputPacket::create() {
     return std::shared_ptr<Packet>(new ServerboundPlayerInputPacket());

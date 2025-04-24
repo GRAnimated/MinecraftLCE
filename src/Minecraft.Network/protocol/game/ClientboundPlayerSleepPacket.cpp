@@ -1,4 +1,4 @@
-#include "clientbound/ClientboundPlayerSleepPacket.h"
+#include "ClientboundPlayerSleepPacket.h"
 
 #include "../../../Minecraft.Core/io/DataInputStream.h"
 #include "../../../Minecraft.Core/io/DataOutputStream.h"

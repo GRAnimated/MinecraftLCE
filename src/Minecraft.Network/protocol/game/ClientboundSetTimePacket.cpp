@@ -1,4 +1,4 @@
-#include "clientbound/ClientboundSetTimePacket.h"
+#include "ClientboundSetTimePacket.h"
 
 #include "../../../Minecraft.Core/io/DataInputStream.h"
 #include "../../../Minecraft.Core/io/DataOutputStream.h"

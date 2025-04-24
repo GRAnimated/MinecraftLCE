@@ -1,4 +1,4 @@
-#include "clientbound/ClientboundSetCarriedItemPacket.h"
+#include "ClientboundSetCarriedItemPacket.h"
 
 #include "../../../Minecraft.Core/io/DataInputStream.h"
 #include "../../../Minecraft.Core/io/DataOutputStream.h"

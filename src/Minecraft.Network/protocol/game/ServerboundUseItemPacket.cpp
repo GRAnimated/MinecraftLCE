@@ -1,4 +1,4 @@
-#include "serverbound/ServerboundUseItemPacket.h"
+#include "ServerboundUseItemPacket.h"
 
 #include "../../../Minecraft.Core/io/DataInputStream.h"
 #include "../../../Minecraft.Core/io/DataOutputStream.h"

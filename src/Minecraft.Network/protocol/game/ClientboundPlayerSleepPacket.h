@@ -3,7 +3,7 @@
 #include "../../../Minecraft.Core/BlockPos.h"
 #include "../../PacketType.h"
 #include "../Packet.h"
-#include <../../../../toolchain/clang-4.0.1/include/c++/v1/memory>
+#include <memory>
 
 class Player;
 
