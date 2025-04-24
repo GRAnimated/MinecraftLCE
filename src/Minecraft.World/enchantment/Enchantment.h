@@ -1,4 +1,5 @@
 #pragma once
+#include "types.h"
 #include "Minecraft.World/ArrayWithLength.h"
 #include <memory>
 
@@ -6,7 +7,7 @@ class EnchantmentCategory;
 class EquipmentSlot;
 class LivingEntity;
 class DamageSource;
-class MobType {};
+enum MobType {};
 class ItemInstance;
 class Entity;
 class Rarity;
@@ -14,7 +15,7 @@ class Rarity;
 class Enchantment {
 public:
     Enchantment(const Rarity* rarity, const EnchantmentCategory* category,
-                arrayWithLength<EquipmentSlot> array);
+                arrayWithLength<const EquipmentSlot*> array);
 
     virtual const Rarity* getRarity();
     virtual void getSlotItems(const std::shared_ptr<LivingEntity>&);
@@ -28,7 +29,7 @@ public:
     virtual void setDescriptionId(int);
     virtual int getDescriptionId();
     virtual void getFullname(int);
-    virtual bool canEnchant(const std::shared_ptr<ItemInstance>&);
+    virtual bool canEnchant(const not_null_ptr<ItemInstance>&);
     virtual void doPostAttack(const std::shared_ptr<LivingEntity>&, const std::shared_ptr<Entity>&, int);
     virtual void doPostHurt(const std::shared_ptr<LivingEntity>&, const std::shared_ptr<Entity>&, int);
     virtual bool isTreasureOnly();
@@ -37,6 +38,6 @@ public:
 
     const EnchantmentCategory* mEnchantmentCategory;
     int mDescriptionId;
-    arrayWithLength<EquipmentSlot> mSlots;
+    arrayWithLength<const EquipmentSlot*> mSlots;
     const Rarity* mRarity;
 };
