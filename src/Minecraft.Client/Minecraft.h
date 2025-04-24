@@ -44,6 +44,7 @@ class ClientMasterGameMode;
 class GhostController;
 class MultiplayerLocalPlayer;
 class BlockRenderer;
+class MiniGameDef;
 
 class Minecraft {
 public:
@@ -75,7 +76,9 @@ public:
     DataFixerUpper* getFixerUpper();
     ItemInHandRenderer* getItemInHandRenderer();
     ItemRenderer* getItemRenderer();
+
     ClientMasterGameMode* GetClientMasterGameMode();  // PascalCase
+    MiniGameDef* GetMiniGame();
 
     bool isUsingDefaultSkin();
     bool isTutorial();

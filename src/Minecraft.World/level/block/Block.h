@@ -204,7 +204,9 @@ public:
 
     Material* getMaterial();
     int getId();
+
     static Block* byId(int id);
+    static void popResource(Level*, BlockPos const&, not_null_ptr<ItemInstance>);
 
     int field_8;
     bool field_C;

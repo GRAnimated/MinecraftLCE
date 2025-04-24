@@ -39,7 +39,7 @@ class SynchedEntityData;
 class Entity : public std::enable_shared_from_this<Entity>, public CommandSender {
 public:
     virtual ~Entity();
-    virtual void GetType() = 0;
+    virtual eINSTANCEOF GetType() = 0;
     virtual void fjDerivedCtorCalls();
     virtual void kill();
     virtual void defineSynchedData() = 0;
@@ -273,9 +273,14 @@ public:
     Vec3 motion;
     float yaw;
     float pitch;
-    char gapik[64];
-    int dwordF0;
-    char gapEC[76];
+    void* filler[2];
+    bool _c0;
+    bool _c1;
+    bool _c2;
+    bool _c3;
+    void* filler2[3];
+    int dwordE0;
+    char gapE4[76];
     Random* rand;
     void* qword148;
     void* qword150;
@@ -314,3 +319,5 @@ public:
     void* qword2A8;
     void* qword2B0;
 };
+
+ASSERT_SIZEOF(Entity, 0x2a8)

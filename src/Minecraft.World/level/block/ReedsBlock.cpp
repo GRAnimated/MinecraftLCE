@@ -8,7 +8,7 @@
 #include "Minecraft.World/level/block/RenderShape.h"
 #include "Minecraft.World/level/block/state/BlockStateDefinition.h"
 #include "Minecraft.World/level/block/state/IntegerProperty.h"
-#include "Minecraft.World/level/material/DecorationMaterial.h"
+#include "Minecraft.World/level/material/Material.h"
 #include "Minecraft.World/phys/AABB.h"
 #include "Minecraft.Core/BlockPos.h"
 
