@@ -10,7 +10,6 @@
 
 LightGemFeature::LightGemFeature() : Feature(false) {}
 
-// NON_MATCHING
 bool LightGemFeature::place(Level* level, Random& random, const BlockPos& pos) {
     if (!level->isEmptyBlock(pos)) {
         return false;
@@ -27,17 +26,15 @@ bool LightGemFeature::place(Level* level, Random& random, const BlockPos& pos) {
         if (level->getBlockState(randomPos)->getMaterial() == (Material*)Material::AIR) {
             int glowstoneCount = 0;
 
-            for (Direction* direction : Direction::VALUES) {
-                BlockPos randomPos2 = randomPos.relative(direction);
-                if (level->getBlockState(randomPos2)->getBlock() != Blocks::GLOWSTONE)
-                    continue;
+            for (auto it = Direction::VALUES.begin(); it != Direction::VALUES.end(); ++it) {
+                const Direction* direction = *it;
+                if (level->getBlockState(randomPos.relative(direction))->getBlock() == Blocks::GLOWSTONE)
+                    glowstoneCount++;
 
-                glowstoneCount++;
                 if (glowstoneCount > 1) {
                     break;
                 }
             }
-
             if (glowstoneCount == 1) {
                 level->setBlock(randomPos, Blocks::GLOWSTONE->defaultBlockState(), 2, false);
             }
