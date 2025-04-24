@@ -1,8 +1,10 @@
+#include "Minecraft.World/eINSTANCEOF.h"
 #include "Minecraft.World/level/biome/Biome.h"
 
 #include "Minecraft.Client/Minecraft.h"
 #include "Minecraft.Client/color/ColourTable.h"
 #include "Minecraft.World/Random.h"
+#include "Minecraft.World/level/block/Blocks.h"
 #include "Minecraft.World/level/block/FoliageColor.h"
 #include "Minecraft.World/level/block/GrassColor.h"
 #include "Minecraft.World/level/levelgen/feature/FlowerFeature.h"
@@ -48,6 +50,49 @@ void Biome::BiomeProperties::waterColor(int waterColor) {
     mWaterColor = waterColor;
 }
 
+Biome::Biome(Biome::EBiomeIDs biomeID, Biome::BiomeProperties* biomeProperties) : mBiomeID(biomeID) {
+    mPreviewColor = Preview_Plains;
+
+    mGrass.id = Block::getId(Blocks::GRASS);
+    mGrass.data = Blocks::GRASS->convertBlockStateToLegacyData(Blocks::GRASS->defaultBlockState());
+
+    mDirt.id = Block::getId(Blocks::DIRT);
+    mDirt.data = Blocks::DIRT->convertBlockStateToLegacyData(Blocks::DIRT->defaultBlockState());
+
+    mBiomeName = biomeProperties->mBiomeName;
+    mDepth = biomeProperties->mDepth;
+    mScale = biomeProperties->mScale;
+    mTemperature = biomeProperties->mTemperature;
+    mDownfall = biomeProperties->mDownfall;
+    mIsSnow = biomeProperties->mIsSnow;
+    mIsDry = biomeProperties->mIsNotDry;
+    mMutatedBiomeName = biomeProperties->mMutatedBiomeName;
+
+    delete biomeProperties;
+
+    mWaterColor = NOTSET;
+    Biome::BIOMES[biomeID] = this;
+    mBiomeDecorator = createDecorator();
+
+    mPassiveMobs.push_back(new Biome::MobSpawnerData(eSheep, 12, 4, 4));
+    mPassiveMobs.push_back(new Biome::MobSpawnerData(ePig, 10, 4, 4));
+    mChickens.push_back(new Biome::MobSpawnerData(eChicken, 10, 4, 4));
+    mPassiveMobs.push_back(new Biome::MobSpawnerData(eCow, 8, 4, 4));
+    mHostileMobs.push_back(new Biome::MobSpawnerData(eSpider, 100, 4, 4));
+    mHostileMobs.push_back(new Biome::MobSpawnerData(eZombie, 95, 4, 4));
+    mHostileMobs.push_back(new Biome::MobSpawnerData(eZombieVillager, 5, 1, 1));
+    mHostileMobs.push_back(new Biome::MobSpawnerData(eSkeleton, 100, 4, 4));
+    mHostileMobs.push_back(new Biome::MobSpawnerData(eCreeper, 100, 4, 4));
+    if (biomeID != BiomeID_HELL && biomeID != BiomeID_THE_END)
+        mNeutralMobs.push_back(new Biome::MobSpawnerData(eSlime, 100, 4, 4));
+    mHostileMobs.push_back(new Biome::MobSpawnerData(eEnderMan, 10, 1, 4));
+    mHostileMobs.push_back(new Biome::MobSpawnerData(eWitch, 5, 1, 1));
+    mAquaticMobs.push_back(new Biome::MobSpawnerData(eSquid, 10, 4, 4));
+    mAmbientMobs.push_back(new Biome::MobSpawnerData(eBat, 10, 8, 8));
+
+    mNameId = -1;
+}
+
 Biome** Biome::getBiomes() {
     return BIOMES;
 }
@@ -57,7 +102,7 @@ Biome* Biome::getBiome(int id) {
 }
 
 Biome* Biome::getBiome(int id, Biome* biome) {
-    if ((unsigned int)id > EBiomeIDs::LIMIT)  // cast required for match
+    if ((unsigned int)id > BiomeID_LIMIT)  // cast required for match
         return OCEAN;
     if (BIOMES[id])
         return BIOMES[id];
@@ -77,6 +122,10 @@ unsigned int Biome::getSkyColor(float timeOfDay) {
     }
     ColourTable* colourTable = Minecraft::GetInstance()->getColourTable();
     return colourTable->getColour(mSkyColor);
+}
+
+Biome* Biome::byId(int id) {
+    return Biome::BIOMES[id];
 }
 
 bool Biome::hasSnow() {

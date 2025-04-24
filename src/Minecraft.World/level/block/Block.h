@@ -203,7 +203,7 @@ public:
     virtual bool isLiquidBlock();
 
     Material* getMaterial();
-    int getId();
+    static int getId(Block* block);
 
     static Block* byId(int id);
     static void popResource(Level*, BlockPos const&, not_null_ptr<ItemInstance>);
