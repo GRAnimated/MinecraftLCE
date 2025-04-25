@@ -5,7 +5,7 @@
 #include "Minecraft.World/entity/Entity.h"
 #include "Minecraft.World/level/Level.h"
 #include "Minecraft.World/level/block/Blocks.h"
-#include "Minecraft.World/level/block/state/properties/FluidProperties.h"
+#include "Minecraft.World/level/block/state/properties/BlockStateProperties.h"
 #include "Minecraft.World/level/material/Material.h"
 #include "Minecraft.World/level/material/MaterialColor.h"
 #include "Minecraft.World/phys/AABB.h"
@@ -70,6 +70,6 @@ bool WaterlilyBlock::canSurvive(Level* level, BlockPos const& pos, BlockState co
     const BlockState* belowState = level->getBlockState(pos.below());
     Material* material = belowState->getMaterial();
 
-    return (material == Material::WATER && !belowState->getPropertyValue(FluidProperties::sWaterProperty))
+    return (material == Material::WATER && !belowState->getValue<int>(BlockStateProperties::WATER_LEVEL))
            || material == Material::ICE;
 }

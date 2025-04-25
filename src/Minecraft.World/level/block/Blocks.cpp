@@ -1,5 +1,8 @@
-#include "Minecraft.Client/resources/ResourceLocation.h"
 #include "Minecraft.World/level/block/Blocks.h"
+
+#include "Minecraft.Client/resources/ResourceLocation.h"
+#include "Minecraft.World/level/block/FireBlock.h"
+#include "Minecraft.World/level/block/WaterlilyBlock.h"
 
 Block* Blocks::get(std::wstring const& name) {
     ResourceLocation loc = ResourceLocation(name);
@@ -39,7 +42,7 @@ void Blocks::staticInit() {
     GOLDEN_RAIL = get(L"golden_rail");
     DETECTOR_RAIL = get(L"detector_rail");
     STICKY_PISTON = get(L"sticky_piston");
-    WEB = get(L"web");
+    WEB = (WebBlock*)get(L"web");
     TALLGRASS = get(L"tallgrass");
     DEADBUSH = get(L"deadbush");
     PISTON = get(L"piston");
@@ -55,12 +58,12 @@ void Blocks::staticInit() {
     DOUBLE_STONE_SLAB = get(L"double_stone_slab");
     STONE_SLAB = get(L"stone_slab");
     BRICK_BLOCK = get(L"brick_block");
-    TNT = get(L"tnt");
+    TNT = (TntBlock*)get(L"tnt");
     BOOKSHELF = get(L"bookshelf");
     MOSSY_COBBLESTONE = get(L"mossy_cobblestone");
     OBSIDIAN = get(L"obsidian");
     TORCH = get(L"torch");
-    FIRE = get(L"fire");
+    FIRE = (FireBlock*)get(L"fire");
     MOB_SPAWNER = get(L"mob_spawner");
     OAK_STAIRS = get(L"oak_stairs");
     CHEST = get(L"chest");
@@ -97,7 +100,7 @@ void Blocks::staticInit() {
     SNOW = get(L"snow");
     CACTUS = get(L"cactus");
     CLAY = get(L"clay");
-    REEDS = get(L"reeds");
+    REEDS = (ReedsBlock*)get(L"reeds");
     JUKEBOX = get(L"jukebox");
     FENCE = get(L"fence");
     SPRUCE_FENCE = get(L"spruce_fence");
@@ -105,11 +108,11 @@ void Blocks::staticInit() {
     JUNGLE_FENCE = get(L"jungle_fence");
     DARK_OAK_FENCE = get(L"dark_oak_fence");
     ACACIA_FENCE = get(L"acacia_fence");
-    PUMPKIN = get(L"pumpkin");
+    PUMPKIN = (PumpkinBlock*)get(L"pumpkin");
     NETHERRACK = get(L"netherrack");
     SOUL_SAND = get(L"soul_sand");
     GLOWSTONE = get(L"glowstone");
-    PORTAL = get(L"portal");
+    PORTAL = (PortalBlock*)get(L"portal");
     LIT_PUMPKIN = get(L"lit_pumpkin");
     CAKE = get(L"cake");
     UNPOWERED_REPEATER = get(L"unpowered_repeater");
@@ -134,7 +137,7 @@ void Blocks::staticInit() {
     BRICK_STAIRS = get(L"brick_stairs");
     STONE_BRICK_STAIRS = get(L"stone_brick_stairs");
     MYCELIUM = get(L"mycelium");
-    WATERLILY = get(L"waterlily");
+    WATERLILY = (WaterlilyBlock*)get(L"waterlily");
     NETHER_BRICK = get(L"nether_brick");
     NETHER_BRICK_FENCE = get(L"nether_brick_fence");
     NETHER_BRICK_STAIRS = get(L"nether_brick_stairs");

@@ -5,4 +5,6 @@
 class BlockItem : public Item {
 public:
     BlockItem(Block* block);
+
+    Block* getBlock();
 };

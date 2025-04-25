@@ -1,11 +1,13 @@
 #pragma once
+
 #include "types.h"
+
+#include "Minecraft.Client/eGameHostOption.h"
 #include "Minecraft.World/ArrayWithLength.h"
 #include "Minecraft.World/level/levelgen/LevelGenerationOptions.h"
-
 #include "Minecraft.World/level/gamemode/GameType.h"
 #include "Minecraft.Core/profile/CProfile.h"
-#include "eGameHostOption.h"
+#include "Minecraft.Client/eGameHostOption.h"
 #include <Minecraft.Core/storage/C4JStorage.h>
 #include <string>
 
@@ -41,6 +43,7 @@ public:
     virtual void GetFileFromTPD(eTPDFileType, unsigned char*, unsigned int, unsigned char**, unsigned int*);
 
     int GetGameHostOption(unsigned int, eGameHostOption option);
+    int GetGameHostOption(eGameHostOption option);
     bool GetChangingSessionType();
     bool GetGameStarted();
     static void* getSkinIdFromPath(const std::wstring& path);

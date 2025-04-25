@@ -9,7 +9,7 @@ public:
     TextureAtlas(int, const std::wstring& path, const std::wstring& filename, BufferedImage* image, bool);
 
     // it's probably TextureAtlasSprite but unsure
-    virtual void* registerIcon(std::wstring const&) override;
+    virtual Texture* registerIcon(std::wstring const&) override;
     virtual int getIconType() override;
 
     void addIcon(bool, int, int, const std::wstring&);

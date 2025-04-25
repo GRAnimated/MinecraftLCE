@@ -2,6 +2,7 @@
 
 class BiomeSource;
 class BlockPos;
+class DimensionType;
 class File;
 class Level;
 class LevelType;
@@ -36,7 +37,7 @@ public:
     virtual void saveData();
     virtual void tick();
     virtual bool canUnloadChunk(int, int);
-    virtual void getType() = 0;
+    virtual DimensionType* getType() = 0;
     virtual int getXZSize();
     virtual void getPlayerConstraints(BlockPos const&);
     virtual void inPlayerConstraints(BlockPos const&);

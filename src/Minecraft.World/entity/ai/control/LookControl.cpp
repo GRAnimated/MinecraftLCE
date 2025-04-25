@@ -1,7 +1,11 @@
 #include "Minecraft.World/entity/ai/control/LookControl.h"
 
-// NON_MATCHING
-LookControl::LookControl(Mob* mob) : mMob(mob) {}
+LookControl::LookControl(Mob* mob) : mMob(mob) {
+    mYMaxRotSpeed = 0.0f;
+    mXMaxRotAngle = 0.0f;
+    mIsHasWanted = false;
+    mWantedX = mWantedY = mWantedZ = 0.0;
+}
 
 void LookControl::setLookAt(double wantedX, double wantedY, double wantedZ, float yMaxRotSpeed,
                             float xMaxRotAngle) {

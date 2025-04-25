@@ -38,7 +38,8 @@ public:
     // void WaitForSaves();
 
     static std::deque<DataOutputStream*> sDeque;
-    static nn::os::MutexType* sMutex;
+    static nn::os::MutexType sMutex;
+
     char unk[8];
     std::wstring unk2;
     ConsoleSaveFileCommon* mSaveFile;

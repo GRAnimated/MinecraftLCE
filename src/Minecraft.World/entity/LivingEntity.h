@@ -1,5 +1,6 @@
 #pragma once
 #include "types.h"
+#include "Minecraft.World/enchantment/Enchantment.h"
 #include "Minecraft.World/entity/Entity.h"
 #include "Minecraft.World/item/ItemInstance.h"
 
@@ -53,7 +54,7 @@ public:
     virtual void decreaseAirSupply(int);
     virtual void getExperienceReward(std::shared_ptr<Player>);
     virtual void isAlwaysExperienceDropper();
-    virtual void getRandom();
+    virtual Random* getRandom();
     virtual void getLastHurtByMob();
     virtual void getLastHurtByMobTimestamp();
     virtual void setLastHurtByMob(std::shared_ptr<LivingEntity>);
@@ -111,7 +112,7 @@ public:
     virtual void updateSwingTime();
     virtual void getAttribute(Attribute*);
     virtual void getAttributes();
-    virtual void getMobType();
+    virtual MobType getMobType();
     virtual void getMainHandItem();
     virtual void getOffhandItem();
     virtual not_null_ptr<ItemInstance> getItemInHand(InteractionHand::EInteractionHand);

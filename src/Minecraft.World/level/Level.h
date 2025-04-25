@@ -3,22 +3,22 @@
 #include <memory>
 #include <vector>
 
+#include "Minecraft.World/ArrayWithLength.h"
+#include "Minecraft.World/level/GameRules.h"
 #include "Minecraft.World/level/storage/LevelSource.h"
+#include "Minecraft.World/sounds/SoundSource.h"
 
 class TickNextTickData;
 class BlockPos;
 class BlockState;
 class LevelSettings;
 class Direction;
+class Difficulty;
 class Player;
 class SoundEvent;
 class Entity;
 class BlockEntity;
 class Block;
-class SoundSource {
-public:
-    enum ESoundSource {};
-};
 class LevelChunk;
 class LevelStorage;
 class LevelData;
@@ -28,6 +28,7 @@ class CompoundTag;
 class Packet;
 class Random;
 class WorldBorder;
+class ParticleType;
 
 class Level : public LevelSource {
 public:
@@ -128,6 +129,8 @@ public:
 
     LevelData* getLevelData();
     WorldBorder* getWorldBorder();
+    GameRules* getGameRules();
+    Difficulty* getDifficulty();
 
     long long getSeed();
     int getSeaLevel();
@@ -136,8 +139,15 @@ public:
 
     long getGameTime();
 
+    bool isRaining();
+    bool isRainingAt(BlockPos const&);
+    bool isHumidAt(BlockPos const&);
+
     void instaTick(BlockPos const&, BlockState const*, Random&);
     static void setInstaTick(bool);
+
+    void addParticle(ParticleType const*, double, double, double, double, double, double,
+                     arrayWithLength<int>);
 
     void blockEntityChanged(BlockPos const&, std::shared_ptr<BlockEntity>);
     void checkSession();  // RETURN TYPE UNKNOWN
@@ -181,9 +191,9 @@ public:
     void* qword158;
     void* qword160;
     void* qword168;
-    void* mRandom;
+    Random* mRandom;
     void* qword178;
-    void* qword180;
+    Dimension* mDimension;
     char gap188[8];
     void* qword190;
     void* qword198;

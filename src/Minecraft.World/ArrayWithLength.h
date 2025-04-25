@@ -25,7 +25,7 @@ public:
         this->length = size;
     }
 
-    T& get(unsigned int i) { return data[i]; }
+    // T& get(unsigned int i) { return data[i]; }//
 
     T& operator[](unsigned int i) { return data[i]; }
 

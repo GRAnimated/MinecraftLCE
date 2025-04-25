@@ -22,7 +22,7 @@ AABB* ReedsBlock::sAABB = AABB::newPermanent(0.5f - size, 0.0f, 0.5f - size, siz
 
 ReedsBlock::ReedsBlock() : Block(Material::PLANTS) {
     Block::DerivedInit();
-    const BlockState* propertyState = mBlockStateDefinition->any()->setPropertyState(sAgeProperty, 0);
+    const BlockState* propertyState = mBlockStateDefinition->any()->setValue(sAgeProperty, 0);
     registerDefaultState(propertyState);
     setTicking(true);
 }
@@ -46,12 +46,12 @@ void ReedsBlock::tick(Level* level, const BlockPos& pos, const BlockState* block
     }
 
     if (height < 3) {
-        int age = blockState->getPropertyValue(sAgeProperty);
+        int age = blockState->getValue<int>(sAgeProperty);
         if (age == 15) {
             level->setBlockAndUpdate(pos.above(), defaultBlockState());
-            level->setBlock(pos, blockState->setPropertyState(sAgeProperty, 0), 4, false);
+            level->setBlock(pos, blockState->setValue(sAgeProperty, 0), 4, false);
         } else {
-            level->setBlock(pos, blockState->setPropertyState(sAgeProperty, age + 1), 4, false);
+            level->setBlock(pos, blockState->setValue(sAgeProperty, age + 1), 4, false);
         }
     }
 }
@@ -108,11 +108,11 @@ int ReedsBlock::getRenderLayer() {
 }
 
 const BlockState* ReedsBlock::getBlockState(int age) {
-    return defaultBlockState()->setPropertyState(sAgeProperty, age);
+    return defaultBlockState()->setValue(sAgeProperty, age);
 }
 
 int ReedsBlock::convertBlockStateToLegacyData(const BlockState* blockState) {
-    return blockState->getPropertyValue(sAgeProperty);
+    return blockState->getValue<int>(sAgeProperty);
 }
 
 // NON_MATCHING: Original does some weird atomic stuff, i think hasCreatedDefinition is fake
