@@ -54,11 +54,12 @@ public:
     virtual void ParticlesSurviveWithin();
     virtual void GetInteractTooltip(const BlockTooltipDataHolder& blockTooltipDataHolder);
     virtual void GetHitTooltip(const BlockTooltipDataHolder& blockTooltipDataHolder);
-    virtual void getMapColor(const BlockState* blockState, LevelSource* levelSource, const BlockPos& pos);
+    virtual MaterialColor* getMapColor(const BlockState* blockState, LevelSource* levelSource,
+                                       const BlockPos& pos);
     virtual const BlockState* getBlockState(int);
     virtual int convertBlockStateToLegacyData(const BlockState* blockState);
-    virtual void fillVirtualBlockStateProperties(const BlockState* blockState, LevelSource* levelSource,
-                                                 const BlockPos& pos);
+    virtual const BlockState* fillVirtualBlockStateProperties(const BlockState* blockState,
+                                                              LevelSource* levelSource, const BlockPos& pos);
     virtual void rotate(const BlockState* blockState, Rotation*);
     virtual void mirror(const BlockState* blockState, Mirror*);
     virtual ~Block();
@@ -109,10 +110,10 @@ public:
     virtual void neighborChanged(const BlockState* blockState, Level* level, const BlockPos& pos, Block*,
                                  const BlockPos& pos2);
     virtual void addLights(Level* level, const BlockPos& pos);
-    virtual void getTickDelay(Level* level);
+    virtual int getTickDelay(Level* level);
     virtual void onPlace(Level* level, const BlockPos& pos, const BlockState* blockState);
     virtual void onRemove(Level* level, const BlockPos& pos, const BlockState* blockState);
-    virtual Item* getResourceCount(Random*);
+    virtual int getResourceCount(Random*);
     virtual Item* getResource(const BlockState* blockState, Random*, int);
     virtual void getDestroyProgress(const BlockState* blockState, std::shared_ptr<Player> player,
                                     Level* level, const BlockPos& pos);
@@ -156,7 +157,7 @@ public:
                                not_null_ptr<ItemInstance>);
     virtual bool isSilkTouchable();
     virtual void getSilkTouchItemInstance(const BlockState* blockState);
-    virtual Item* getResourceCountForLootBonus(int, Random*);
+    virtual int getResourceCountForLootBonus(int, Random*);
     virtual void setPlacedBy(Level* level, const BlockPos& pos, const BlockState* blockState,
                              std::shared_ptr<LivingEntity>, not_null_ptr<ItemInstance>);
     virtual void setNameAndDescriptionId(int, int);
@@ -177,7 +178,7 @@ public:
     virtual void playerWillDestroy(Level* level, const BlockPos& pos, const BlockState* blockState,
                                    std::shared_ptr<Player> player);
     virtual void handleRain(Level* level, const BlockPos& pos);
-    virtual void canInstantlyTick();
+    virtual bool canInstantlyTick();
     virtual void dropFromExplosion(Explosion*);
     virtual bool isMatching(Block*);
     virtual void hasAnalogOutputSignal(const BlockState* blockState);
@@ -187,10 +188,10 @@ public:
     virtual void registerIcons(IconRegister*);
     virtual void getTileItemIconName();
     virtual void getIconTexture(const Direction* direction, const BlockState* blockState);
-    virtual void getTexture(LevelSource* levelSource, const BlockPos& pos, const Direction* direction,
-                            const BlockState* blockState);
-    virtual void getTexture(const Direction* direction, const BlockState* blockState);
-    virtual void getTexture(const Direction* direction);
+    virtual Texture* getTexture(LevelSource* levelSource, const BlockPos& pos, const Direction* direction,
+                                const BlockState* blockState);
+    virtual Texture* getTexture(const Direction* direction, const BlockState* blockState);
+    virtual Texture* getTexture(const Direction* direction);
     virtual void getInventoryRenderState(const BlockState* blockState);
     virtual BlockStateDefinition* createBlockStateDefinition();
     virtual void getBlockStateDefinition();

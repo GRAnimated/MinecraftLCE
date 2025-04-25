@@ -1,3 +1,3 @@
 #pragma once
 
-enum eGameHostOption {};
+enum eGameHostOption : int {};

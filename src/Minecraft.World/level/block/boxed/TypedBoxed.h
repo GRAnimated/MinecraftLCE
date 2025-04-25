@@ -12,4 +12,8 @@ public:
     bool operator==(Boxed const*) const override;
     void setValue(Boxed const*) override;
     std::wstring toString() const override;
+
+    // Inlined, guessed name
+    TypedBoxed<T>* tryGetType() const;
+    T* getValue() const;
 };
