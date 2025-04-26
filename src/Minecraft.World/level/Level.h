@@ -135,6 +135,7 @@ public:
     long long getSeed();
     int getSeaLevel();
     void setSeaLevel(int);
+    static void enableLightingCache();
 
     long getGameTime();
 

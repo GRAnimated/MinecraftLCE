@@ -1,8 +1,8 @@
 #pragma once
 
-#include "Minecraft.Core/BlockPos.h"
-#include "Minecraft.Network/PacketType.h"
-#include "Minecraft.Network/protocol/Packet.h"
+#include "../../../Minecraft.Core/BlockPos.h"
+#include "../../PacketType.h"
+#include "../Packet.h"
 #include <memory>
 
 class Player;

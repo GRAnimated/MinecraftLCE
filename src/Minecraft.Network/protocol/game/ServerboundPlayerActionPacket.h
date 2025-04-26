@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Minecraft.Network/protocol/Packet.h"
+#include "../Packet.h"
 
 class ServerboundPlayerActionPacket : public Packet {
 public:

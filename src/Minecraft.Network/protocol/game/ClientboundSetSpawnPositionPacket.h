@@ -1,7 +1,7 @@
 #pragma once
 
-#include "Minecraft.Core/BlockPos.h"
-#include "Minecraft.Network/protocol/Packet.h"
+#include "../../../Minecraft.Core/BlockPos.h"
+#include "../Packet.h"
 
 class ClientboundSetSpawnPositionPacket
     : public Packet,

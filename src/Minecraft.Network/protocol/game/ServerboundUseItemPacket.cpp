@@ -1,8 +1,8 @@
-#include "Minecraft.Network/protocol/game/ServerboundUseItemPacket.h"
+#include "ServerboundUseItemPacket.h"
 
-#include "Minecraft.Core/io/DataInputStream.h"
-#include "Minecraft.Core/io/DataOutputStream.h"
-#include "Minecraft.Network/PacketListener.h"
+#include "../../../Minecraft.Core/io/DataInputStream.h"
+#include "../../../Minecraft.Core/io/DataOutputStream.h"
+#include "../../PacketListener.h"
 
 std::shared_ptr<Packet> ServerboundUseItemPacket::create() {
     return std::shared_ptr<Packet>(new ServerboundUseItemPacket());

@@ -1,8 +1,8 @@
-#include "Minecraft.Network/protocol/game/ClientboundOpenSignEditorPacket.h"
+#include "ClientboundOpenSignEditorPacket.h"
 
-#include "Minecraft.Core/io/DataInputStream.h"
-#include "Minecraft.Core/io/DataOutputStream.h"
-#include "Minecraft.Network/PacketListener.h"
+#include "../../../Minecraft.Core/io/DataInputStream.h"
+#include "../../../Minecraft.Core/io/DataOutputStream.h"
+#include "../../PacketListener.h"
 
 std::shared_ptr<Packet> ClientboundOpenSignEditorPacket::create() {
     return std::shared_ptr<Packet>(new ClientboundOpenSignEditorPacket());

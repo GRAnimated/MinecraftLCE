@@ -209,6 +209,10 @@ public:
     static Block* byId(int id);
     static void popResource(Level*, BlockPos const&, not_null_ptr<ItemInstance>);
 
+    static void CreateNewThreadStorage();
+
+    class ThreadStorage {};
+
     int field_8;
     bool field_C;
     std::wstring mItemName;

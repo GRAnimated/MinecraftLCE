@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Minecraft.Network/protocol/Packet.h"
+#include "../Packet.h"
 
 class ServerboundResourcePackPacket : public Packet,
                                       public std::enable_shared_from_this<ServerboundResourcePackPacket> {

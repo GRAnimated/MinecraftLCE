@@ -1,9 +1,9 @@
-#include "Minecraft.Network/protocol/game/ClientboundPlayerAbilitiesPacket.h"
+#include "ClientboundPlayerAbilitiesPacket.h"
 
-#include "Minecraft.World/entity/player/Abilities.h"
-#include "Minecraft.Core/io/DataInputStream.h"
-#include "Minecraft.Core/io/DataOutputStream.h"
-#include "Minecraft.Network/PacketListener.h"
+#include "../../../Minecraft.Core/io/DataInputStream.h"
+#include "../../../Minecraft.Core/io/DataOutputStream.h"
+#include "../../../Minecraft.World/entity/player/Abilities.h"
+#include "../../PacketListener.h"
 
 std::shared_ptr<Packet> ClientboundPlayerAbilitiesPacket::create() {
     return std::shared_ptr<Packet>(new ClientboundPlayerAbilitiesPacket());
