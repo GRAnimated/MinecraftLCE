@@ -12,7 +12,7 @@ public:
     ~PortalBlock() override;
     bool isCubeShaped(const BlockState* blockState) override;
     AABB* getShape(const BlockState* blockState, LevelSource* levelSource, const BlockPos& pos) override;
-    void shouldRenderFace(const BlockState* blockState, LevelSource* levelSource, const BlockPos& pos,
+    bool shouldRenderFace(const BlockState* blockState, LevelSource* levelSource, const BlockPos& pos,
                           const Direction* direction) override;
     int getBlockFaceShape(LevelSource* levelSource, const BlockState* blockState, const BlockPos& pos,
                           const Direction* direction) override;

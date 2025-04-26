@@ -4,12 +4,13 @@ class C4JStorage {
 public:
     enum ESavingMessage {};
     enum ESaveIncompleteType {};
-    enum eOptionsCallback {};  // why do you guys keep switching casing style
+    enum eOptionsCallback {};
 
     class PROFILESETTINGS {};
 
     virtual void Tick() = 0;
-#warning Last param may be incorrect. Xbox One Edition did change the signature though so this could be correct. It just doesn't make sense to pass a function/jump in place of a bool *.
+    // Last param may be incorrect. Xbox One Edition did change the signature though so this could be
+    // correct. It just doesn't make sense to pass a function/jump in place of a bool *.
     virtual void Init(unsigned int, const wchar_t*, const char*, int,
                       int (*)(void*, C4JStorage::ESavingMessage, int), void*, const char*, void*)
         = 0;

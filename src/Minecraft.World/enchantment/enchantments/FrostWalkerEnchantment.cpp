@@ -25,6 +25,6 @@ bool FrostWalkerEnchantment::isTreasureOnly() {
 }
 
 bool FrostWalkerEnchantment::checkCompatibility(Enchantment const* other) {
-#warning CHANGE nullptr TO depth_strider LATER ON
+    // TODO: CHANGE nullptr TO depth_strider LATER ON
     return Enchantment::checkCompatibility(other) && nullptr != other;
 }

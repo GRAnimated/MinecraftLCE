@@ -22,6 +22,6 @@ int WaterWalkerEnchantment::getMaxCost(int a2) {
 
 // NON_MATCHING: see warning below
 bool WaterWalkerEnchantment::checkCompatibility(Enchantment const* other) {
-#warning CHANGE nullptr TO frost_walker LATER ON
+    // TODO: CHANGE nullptr TO frost_walker LATER ON
     return Enchantment::checkCompatibility(other) && other != nullptr;
 }

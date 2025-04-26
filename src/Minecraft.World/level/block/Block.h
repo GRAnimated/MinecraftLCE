@@ -89,7 +89,7 @@ public:
     virtual AABB* getShape(const BlockState* blockState, LevelSource* levelSource, const BlockPos& pos);
     virtual void getLightColor(const BlockState* blockState, LevelSource* levelSource, const BlockPos& pos,
                                int);
-    virtual void shouldRenderFace(const BlockState* blockState, LevelSource* levelSource, const BlockPos& pos,
+    virtual bool shouldRenderFace(const BlockState* blockState, LevelSource* levelSource, const BlockPos& pos,
                                   const Direction* direction);
     virtual AABB* getShapes(const BlockState* blockState, LevelSource* levelSource, BlockPos const*);
     virtual bool isSolidFace(LevelSource* levelSource, const BlockPos& pos, const Direction* direction);
