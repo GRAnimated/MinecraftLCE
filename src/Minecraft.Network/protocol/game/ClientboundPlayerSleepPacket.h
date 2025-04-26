@@ -1,7 +1,6 @@
 #pragma once
 
 #include "Minecraft.Core/BlockPos.h"
-#include "Minecraft.Network/PacketType.h"
 #include "Minecraft.Network/protocol/Packet.h"
 #include <memory>
 

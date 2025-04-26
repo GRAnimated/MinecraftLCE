@@ -1,4 +1,4 @@
-#include "Minecraft.Network/protocol/game/ServerboundSetCarriedItemPacket.h"
+#include "ServerboundSetCarriedItemPacket.h"
 
 #include "Minecraft.Core/io/DataInputStream.h"
 #include "Minecraft.Core/io/DataOutputStream.h"

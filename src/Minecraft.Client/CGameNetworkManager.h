@@ -6,4 +6,6 @@ public:
 
     bool IsLeavingGame();
     bool IsInSession();
+    void Initialise();
+    void SetLocalGame(bool local);
 };

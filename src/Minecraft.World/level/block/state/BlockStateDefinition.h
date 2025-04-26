@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Minecraft.World/level/block/state/BlockState.h"
+#include <vector>
 
 class Block;
 class BlockState;
@@ -16,7 +17,7 @@ public:
         void getLightEmission() const override;
         bool isTranslucent() const override;
         void doesPropagate() const override;
-        void getMapColor(LevelSource*, BlockPos const&) override;
+        MaterialColor* getMapColor(LevelSource*, BlockPos const&) override;
         void rotate(Rotation*) const override;
         void mirror(Mirror*) const override;
         bool isCubeShaped() const override;
@@ -34,7 +35,7 @@ public:
         void getDestroyProgress(std::shared_ptr<Player>, Level*, BlockPos const&) const override;
         void getDirectSignal(LevelSource*, BlockPos const&, Direction const*) const override;
         void getPistonPushReaction() const override;
-        void fillVirtualBlockStateProperties(LevelSource*, BlockPos const&) const override;
+        const BlockState* fillVirtualBlockStateProperties(LevelSource*, BlockPos const&) const override;
         void getOutlineAABB(Level*, BlockPos const&) const override;
         bool shouldRenderFace(LevelSource*, BlockPos const&, Direction const*) const override;
         bool isSolidRender() const override;
@@ -49,8 +50,8 @@ public:
         int getBlockFaceShape(LevelSource*, BlockPos const&, Direction const*) const override;
         void getProperties() const override;
         void hasProperty(Property const*) const override;
-        void getBoxedValue(Property const*) const override;
-        void setBoxedValue(Property const*, Boxed*) const override;
+        Boxed* getBoxedValue(Property const*) const override;
+        const BlockState* setBoxedValue(Property const*, Boxed*) const override;
         void cycle(Property const*) const override;
         void getValues() const override;
         Block* getBlock() const override;
@@ -64,7 +65,12 @@ public:
     BlockStateDefinition(Block* block);
 
     // NON_MATCHING
-    BlockStateDefinition(Block* block, Property const** properties) { _init(block, properties, 1); }
+    template <typename T>
+    BlockStateDefinition(Block* block, T* properties) {
+        // std::vector<const Property*> propertiesVec{properties...};
+        // _init(block, propertiesVec.data(), propertiesVec.size());
+        _init(block, properties, sizeof(properties));
+    }
 
     void _init(Block* block, Property const** properties, unsigned int damage);
 

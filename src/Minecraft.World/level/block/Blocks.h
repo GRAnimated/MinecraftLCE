@@ -2,13 +2,15 @@
 
 #include "Minecraft.Client/resources/MappedRegistry.h"
 #include "Minecraft.World/level/block/Block.h"
+#include "Minecraft.World/level/block/FireBlock.h"
+#include "Minecraft.World/level/block/PortalBlock.h"
+#include "Minecraft.World/level/block/PumpkinBlock.h"
+#include "Minecraft.World/level/block/ReedsBlock.h"
+#include "Minecraft.World/level/block/TntBlock.h"
+#include "Minecraft.World/level/block/WaterlilyBlock.h"
+#include "Minecraft.World/level/block/WebBlock.h"
 
 class ResourceLocation;
-
-class FireBlock {
-public:
-    static void staticCtor();
-};
 
 class Blocks {
 public:
@@ -51,7 +53,7 @@ public:
     static Block* GOLDEN_RAIL;
     static Block* DETECTOR_RAIL;
     static Block* STICKY_PISTON;
-    static Block* WEB;
+    static WebBlock* WEB;
     static Block* TALLGRASS;
     static Block* DEADBUSH;
     static Block* PISTON;
@@ -67,12 +69,12 @@ public:
     static Block* DOUBLE_STONE_SLAB;
     static Block* STONE_SLAB;
     static Block* BRICK_BLOCK;
-    static Block* TNT;
+    static TntBlock* TNT;
     static Block* BOOKSHELF;
     static Block* MOSSY_COBBLESTONE;
     static Block* OBSIDIAN;
     static Block* TORCH;
-    static Block* FIRE;
+    static FireBlock* FIRE;
     static Block* MOB_SPAWNER;
     static Block* OAK_STAIRS;
     static Block* CHEST;
@@ -109,7 +111,7 @@ public:
     static Block* SNOW;
     static Block* CACTUS;
     static Block* CLAY;
-    static Block* REEDS;
+    static ReedsBlock* REEDS;
     static Block* JUKEBOX;
     static Block* FENCE;
     static Block* SPRUCE_FENCE;
@@ -117,11 +119,11 @@ public:
     static Block* JUNGLE_FENCE;
     static Block* DARK_OAK_FENCE;
     static Block* ACACIA_FENCE;
-    static Block* PUMPKIN;
+    static PumpkinBlock* PUMPKIN;
     static Block* NETHERRACK;
     static Block* SOUL_SAND;
     static Block* GLOWSTONE;
-    static Block* PORTAL;
+    static PortalBlock* PORTAL;
     static Block* LIT_PUMPKIN;
     static Block* CAKE;
     static Block* UNPOWERED_REPEATER;
@@ -146,7 +148,7 @@ public:
     static Block* BRICK_STAIRS;
     static Block* STONE_BRICK_STAIRS;
     static Block* MYCELIUM;
-    static Block* WATERLILY;
+    static WaterlilyBlock* WATERLILY;
     static Block* NETHER_BRICK;
     static Block* NETHER_BRICK_FENCE;
     static Block* NETHER_BRICK_STAIRS;

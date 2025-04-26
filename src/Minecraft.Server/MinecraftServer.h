@@ -5,6 +5,7 @@ class Level;
 class LevelStorageSource;
 class LevelType;
 class _NetworkGameInitData;
+class PlayerList;
 
 class MinecraftServer {
 public:
@@ -16,4 +17,6 @@ public:
     void saveGameRules();
 
     Level* getLevel(int);
+
+    PlayerList* getPlayers();
 };

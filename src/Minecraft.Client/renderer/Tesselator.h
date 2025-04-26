@@ -6,6 +6,8 @@ class Tesselator {
 public:
     static Tesselator* getInstance();
 
+    static void CreateNewThreadStorage(int);
+
     Tesselator(int);
 
     BufferBuilder* getBuilder() const;

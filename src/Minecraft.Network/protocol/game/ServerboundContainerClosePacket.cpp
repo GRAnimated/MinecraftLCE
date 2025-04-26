@@ -1,4 +1,4 @@
-#include "Minecraft.Network/protocol/game/ServerboundContainerClosePacket.h"
+#include "ServerboundContainerClosePacket.h"
 
 #include "Minecraft.Core/io/DataInputStream.h"
 #include "Minecraft.Core/io/DataOutputStream.h"

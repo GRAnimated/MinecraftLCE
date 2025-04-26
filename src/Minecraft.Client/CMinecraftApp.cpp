@@ -1,5 +1,7 @@
 #include "CMinecraftApp.h"
 
+#include "Minecraft.World/level/gamemode/GameType.h"
+
 bool CMinecraftApp::isXuidNotch(PlayerUID* id) {
     return 0;
 }

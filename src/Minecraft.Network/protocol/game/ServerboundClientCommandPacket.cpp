@@ -1,4 +1,4 @@
-#include "Minecraft.Network/protocol/game/ServerboundClientCommandPacket.h"
+#include "ServerboundClientCommandPacket.h"
 
 #include "Minecraft.Core/io/DataInputStream.h"
 #include "Minecraft.Core/io/DataOutputStream.h"

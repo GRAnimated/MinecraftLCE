@@ -21,6 +21,7 @@ class Block;
 class Player;
 class AABB;
 class Material;
+class MaterialColor;
 
 class BlockState : public BlockProperties, public BlockBehaviours {
 public:
@@ -31,7 +32,7 @@ public:
     virtual void getLightEmission() const = 0;
     virtual bool isTranslucent() const = 0;
     virtual void doesPropagate() const = 0;
-    virtual void getMapColor(LevelSource*, BlockPos const&) = 0;
+    virtual MaterialColor* getMapColor(LevelSource*, BlockPos const&) = 0;
     virtual void rotate(Rotation*) const = 0;
     virtual void mirror(Mirror*) const = 0;
     virtual bool isCubeShaped() const = 0;
@@ -49,7 +50,7 @@ public:
     virtual void getDestroyProgress(std::shared_ptr<Player>, Level*, BlockPos const&) const = 0;
     virtual void getDirectSignal(LevelSource*, BlockPos const&, Direction const*) const = 0;
     virtual void getPistonPushReaction() const = 0;
-    virtual void fillVirtualBlockStateProperties(LevelSource*, BlockPos const&) const = 0;
+    virtual const BlockState* fillVirtualBlockStateProperties(LevelSource*, BlockPos const&) const = 0;
     virtual void getOutlineAABB(Level*, BlockPos const&) const = 0;
     virtual bool shouldRenderFace(LevelSource*, BlockPos const&, Direction const*) const = 0;
     virtual bool isSolidRender() const = 0;
@@ -64,8 +65,8 @@ public:
     virtual int getBlockFaceShape(LevelSource*, BlockPos const&, Direction const*) const = 0;
     virtual void getProperties() const = 0;
     virtual void hasProperty(Property const*) const = 0;
-    virtual void getBoxedValue(Property const*) const = 0;
-    virtual void setBoxedValue(Property const*, Boxed*) const = 0;
+    virtual Boxed* getBoxedValue(Property const*) const = 0;
+    virtual const BlockState* setBoxedValue(Property const*, Boxed*) const = 0;
     virtual void cycle(Property const*) const = 0;
     virtual void getValues() const = 0;
     virtual Block* getBlock() const = 0;
@@ -75,13 +76,17 @@ public:
     virtual void triggerEvent(Level*, BlockPos const&, int, int) const = 0;
     virtual void neighborChanged(Level*, BlockPos const&, Block*, BlockPos const&) const = 0;
 
-    // NON_MATCHING: i'm so confused
-    const BlockState* setPropertyState(Property* property, int id) const {
-        TypedBoxed<int> boxed(&id);
-        setBoxedValue(property, &boxed);
-        return this;
+    // NON_MATCHING: Decomp is using add sp, 0x8 instead of mov sp
+    template <typename T>
+    const BlockState* setValue(Property* property, T value) const {
+        TypedBoxed<T> boxed(&value);
+        return setBoxedValue(property, &boxed);
     }
 
-    // Inlined function that gets the boxed value from the property
-    int getPropertyValue(Property* property) const;
+    template <typename T>
+    T getValue(Property* property) const {
+        TypedBoxed<T>* typedBoxed = (TypedBoxed<T>*)getBoxedValue(property);
+        TypedBoxed<T>* type = typedBoxed->tryGetType();
+        return *type->getValue();
+    }
 };

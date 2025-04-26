@@ -1,4 +1,4 @@
-#include "Minecraft.Network/protocol/game/ClientboundOpenSignEditorPacket.h"
+#include "ClientboundOpenSignEditorPacket.h"
 
 #include "Minecraft.Core/io/DataInputStream.h"
 #include "Minecraft.Core/io/DataOutputStream.h"

@@ -21,6 +21,10 @@ public:
 
     Vec3 operator/(Vec3 o) { return Vec3(x / o.x, y / o.y, z / o.z); }
 
+    static void CreateNewThreadStorage();
+
+    class ThreadStorage {};
+
     double x;
     double y;
     double z;
