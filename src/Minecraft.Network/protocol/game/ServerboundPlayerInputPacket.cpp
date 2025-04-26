@@ -1,6 +1,6 @@
-#include "../../../Minecraft.Core/io/DataInputStream.h"
-#include "../../../Minecraft.Core/io/DataOutputStream.h"
-#include "../../PacketListener.h"
+#include "Minecraft.Core/io/DataInputStream.h"
+#include "Minecraft.Core/io/DataOutputStream.h"
+#include "Minecraft.Network/PacketListener.h"
 #include "Minecraft.Network/protocol/game/ServerboundPlayerInputPacket.h"
 
 std::shared_ptr<Packet> ServerboundPlayerInputPacket::create() {

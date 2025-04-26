@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../Packet.h"
+#include "Minecraft.Network/protocol/Packet.h"
 
 class Abilities;
 

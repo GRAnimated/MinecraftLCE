@@ -10,7 +10,7 @@ public:
     /** Saves using the older McRegion style chunk format */
     static void save(LevelChunk* chunk, Level* lvl, CompoundTag* tag);
     /** Saves using the new chunk format */
-    static void save(LevelChunk *chunk, Level *lvl, DataOutputStream *stream);
+    static void save(LevelChunk* chunk, Level* lvl, DataOutputStream* stream);
 
     static void CreateNewThreadStorage();
 

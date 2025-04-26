@@ -2,7 +2,7 @@
 
 // can't be bothered to find correct base class (if there even is one)
 class FireworksRecipe {
-    public:
+public:
     static void CreateNewThreadStorage();
 
     class ThreadStorage {};

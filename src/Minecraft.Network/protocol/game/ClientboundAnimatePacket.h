@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../Packet.h"
+#include "Minecraft.Network/protocol/Packet.h"
 
 class ClientboundAnimatePacket : public Packet,
                                  public std::enable_shared_from_this<ClientboundAnimatePacket> {

@@ -1,8 +1,8 @@
 #include "ServerboundClientCommandPacket.h"
 
-#include "../../../Minecraft.Core/io/DataInputStream.h"
-#include "../../../Minecraft.Core/io/DataOutputStream.h"
-#include "../../PacketListener.h"
+#include "Minecraft.Core/io/DataInputStream.h"
+#include "Minecraft.Core/io/DataOutputStream.h"
+#include "Minecraft.Network/PacketListener.h"
 #include <memory>
 
 std::shared_ptr<Packet> ServerboundClientCommandPacket::create() {

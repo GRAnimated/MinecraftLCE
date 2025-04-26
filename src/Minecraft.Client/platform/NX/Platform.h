@@ -44,6 +44,6 @@ int TlsFree(unsigned int unk);
 void* TlsGetValue(unsigned int index);
 int TlsSetValue(unsigned int index, void* value);
 
-int OpenDir(const char *, int *);
-int ReadDir(int *, struct FSDirEntry *); // TODO: what is FSDirEntry?
-int CloseDir(int *);
+int OpenDir(const char*, int*);
+int ReadDir(int*, struct FSDirEntry*);  // TODO: what is FSDirEntry?
+int CloseDir(int*);

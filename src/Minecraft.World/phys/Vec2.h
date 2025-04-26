@@ -1,10 +1,10 @@
 #pragma once
 
 namespace phys {
-    class Vec2 {
-    public:
-        static void CreateNewThreadStorage();
+class Vec2 {
+public:
+    static void CreateNewThreadStorage();
 
-        class ThreadStorage {};
-    };
-}
+    class ThreadStorage {};
+};
+}  // namespace phys

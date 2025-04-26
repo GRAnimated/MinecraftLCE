@@ -1,9 +1,8 @@
 #pragma once
 
 class IntCache {
-    public:
+public:
     static void CreateNewThreadStorage();
 
     class ThreadStorage {};
-
 };
