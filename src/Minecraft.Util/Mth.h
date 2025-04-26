@@ -8,6 +8,7 @@ public:
     static int floor(float);
     static double clamp(double, double, double);
     static float clamp(float, float, float);
+    static int clamp(int, int, int);
     static float wrapDegrees(float);
     static void cached_atan_index(int, int);
     static void init(void);

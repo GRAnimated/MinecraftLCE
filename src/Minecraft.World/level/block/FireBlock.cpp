@@ -370,8 +370,8 @@ BlockStateDefinition* FireBlock::createBlockStateDefinition() {
 }
 
 void FireBlock::setFlammable(Block* block, int a3, int a4) {
-    map[block] = a3;
-    map2[block] = a4;
+    mFlameOdds[block] = a3;
+    mBurnOdds[block] = a4;
 }
 
 bool FireBlock::canBurn(LevelSource* level, BlockPos const& pos) {
@@ -429,16 +429,16 @@ int FireBlock::getFireOdds(Level* level, const BlockPos& pos) {
 }
 
 int FireBlock::getFlameOdds(Block* block) {
-    auto it = map.find(block);
-    if (it != map.end())
+    auto it = mFlameOdds.find(block);
+    if (it != mFlameOdds.end())
         return it->second;
 
     return 0;
 }
 
 int FireBlock::getBurnOdd(Block* block) {
-    auto it = map2.find(block);
-    if (it != map2.end())
+    auto it = mBurnOdds.find(block);
+    if (it != mBurnOdds.end())
         return it->second;
 
     return 0;

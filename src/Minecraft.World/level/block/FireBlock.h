@@ -58,7 +58,7 @@ public:
     Texture* getTextureLayer(int);
 
 private:
-    std::unordered_map<Block*, int> map;
-    std::unordered_map<Block*, int> map2;
+    std::unordered_map<Block*, int> mFlameOdds;
+    std::unordered_map<Block*, int> mBurnOdds;
     Texture* mTexture[2];
 };
