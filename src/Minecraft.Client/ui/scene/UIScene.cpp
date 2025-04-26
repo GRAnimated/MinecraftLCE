@@ -11,6 +11,9 @@
 #include "Minecraft.Core/System.h"
 #include <string>
 
+const int dword_7100E23090[22]
+    = {0, 7, 8, 9, 3, 4, 6, 5, 1, 2, 0xA, 0xB, 0x64, 0xC, 0x11, 0x12, 0x64, 0x64, 0x64, 0x64, 0, 7};
+
 // It's matching but... some of those variable inits should be moved to header
 UIScene::UIScene(int padID, UILayer* uiLayer) {
     this->mPadID = padID;
@@ -36,7 +39,11 @@ UIScene::UIScene(int padID, UILayer* uiLayer) {
     this->bool_28 = 0;
 }
 
-// NON_MATCHING: some crap, idk what exactly
+void UIScene::customDrawFui(void* a1, char const* a2, fuiRect* a3) {
+    ((UIScene*)a1)->customDraw(a2, a3);
+}
+
+// NON_MATCHING: some crap, with setting the stageWidth/stageHeight, see below
 void UIScene::loadMovie() {
     EnterCriticalSection(&ConsoleUIController::unk_71017BE928);
     std::wstring moviePath = this->getMoviePath();
@@ -59,11 +66,24 @@ void UIScene::loadMovie() {
     this->mFuiFile->setCustomDrawCallback(UIScene::customDrawFui, this);
 
     /// this is non matching
-    this->mStageWidth2 = this->mStageWidth = this->mFuiFile->getStageWidth();
-    this->mStageHeight2 = this->mStageHeight = this->mFuiFile->getStageHeight();
+    this->mStageWidth = this->mFuiFile->getStageWidth();
+    this->mStageWidth2 = this->mStageWidth;
+    this->mStageHeight = this->mFuiFile->getStageHeight();
+    this->mStageHeight2 = this->mStageHeight;
     ///
 
     LeaveCriticalSection(&ConsoleUIController::unk_71017BE928);
+}
+
+// NON_MATCHING: it's creating temp instance of fui::sInstance, idk how to avoid that
+void UIScene::sendInputToMovie(int key, bool a3, bool a4, bool a5) {
+    if (this->mFuiFile)
+        fui::sInstance->dispatchKeyboardEvent(this->mFuiFile, a4, this->convertGameActionToFuiKeycode(key));
+}
+
+// symbol from WiiU doesn't say that argument is unsigned int so let's follow that
+int UIScene::convertGameActionToFuiKeycode(int gameAction) {
+    return (unsigned int)gameAction <= 0x15 ? dword_7100E23090[gameAction] : 100;
 }
 
 void UIScene::initialiseMovie() {

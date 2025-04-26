@@ -17,6 +17,8 @@ public:
     Enchantment(const Rarity* rarity, const EnchantmentCategory* category,
                 arrayWithLength<const EquipmentSlot*> array);
 
+    static void staticCtor();
+
     virtual const Rarity* getRarity();
     virtual void getSlotItems(const std::shared_ptr<LivingEntity>&);
     virtual int getMinLevel();

@@ -105,6 +105,7 @@ public:
     void doHorizontalResizeCheck();
     void navigateBack();
     void sendInputToMovie(int, bool, bool, bool);
+    int convertGameActionToFuiKeycode(int);
     // void handleFocusChange(int, int);
 
     fuiFile* getFuiFile() { return this->mFuiFile; }
