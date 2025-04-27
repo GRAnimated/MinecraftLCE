@@ -7,6 +7,11 @@ import csv
 import idc
 import ida_funcs
 import os
+
+# Solution for util not being found since we're in a different directory
+common_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "common"))
+sys.path.append(common_path)
+
 from util import config
 
 csv_path = config.get_functions_csv_path()
@@ -44,3 +49,4 @@ with open(csv_path, "r") as f:
 
         if can_overwrite_name(addr, name):
             idc.set_name(addr, name, idc.SN_CHECK | idc.SN_NOWARN)
+    print("Renaming from functions completed.")

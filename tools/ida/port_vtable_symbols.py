@@ -2,6 +2,8 @@ import idc
 import ida_name
 import ida_kernwin
 
+# TODO: This stupid script is very hardcoded
+
 rename_these = [
     "IslandLayer",
     "FuzzyZoomLayer",
