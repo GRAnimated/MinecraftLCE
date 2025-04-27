@@ -1,4 +1,5 @@
 #include "Minecraft.World/enchantment/Enchantment.h"
+#include "Minecraft.World/enchantment/Enchantments.h"
 #include "Minecraft.World/enchantment/categories/DiggerCategory.h"
 #include "Minecraft.World/enchantment/enchantments/UntouchingEnchantment.h"
 
@@ -20,8 +21,6 @@ int UntouchingEnchantment::getMaxCost(int a2) {
     return Enchantment::getMinCost(a2) + 50;
 }
 
-// NON_MATCHING: see warning below
 bool UntouchingEnchantment::checkCompatibility(Enchantment const* other) {
-    // TODO: CHANGE nullptr TO fortune ENCHANTMENT
-    return Enchantment::checkCompatibility(other) && nullptr != other;
+    return Enchantment::checkCompatibility(other) && Enchantments::FORTUNE != other;
 }

@@ -1,4 +1,5 @@
 #include "Minecraft.World/enchantment/Enchantment.h"
+#include "Minecraft.World/enchantment/Enchantments.h"
 #include "Minecraft.World/enchantment/categories/FeetArmorCategory.h"
 #include "Minecraft.World/enchantment/enchantments/WaterWalkerEnchantment.h"
 
@@ -20,8 +21,6 @@ int WaterWalkerEnchantment::getMaxCost(int a2) {
     return Enchantment::getMinCost(a2) + 15;
 }
 
-// NON_MATCHING: see warning below
 bool WaterWalkerEnchantment::checkCompatibility(Enchantment const* other) {
-    // TODO: CHANGE nullptr TO frost_walker LATER ON
-    return Enchantment::checkCompatibility(other) && other != nullptr;
+    return Enchantment::checkCompatibility(other) && Enchantments::FROST_WALKER != other;
 }
