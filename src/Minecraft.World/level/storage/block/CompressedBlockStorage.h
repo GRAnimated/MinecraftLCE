@@ -3,5 +3,7 @@
 
 class CompressedBlockStorage {
 public:
-  void write(DataOutputStream *out);
+    void write(DataOutputStream* out);
+
+    arrayWithLength<unsigned char> storage;
 };
