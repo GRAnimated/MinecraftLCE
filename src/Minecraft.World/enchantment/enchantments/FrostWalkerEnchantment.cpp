@@ -1,4 +1,5 @@
 #include "Minecraft.World/enchantment/Enchantment.h"
+#include "Minecraft.World/enchantment/Enchantments.h"
 #include "Minecraft.World/enchantment/categories/FeetArmorCategory.h"
 #include "Minecraft.World/enchantment/enchantments/FrostWalkerEnchantment.h"
 
@@ -24,8 +25,6 @@ bool FrostWalkerEnchantment::isTreasureOnly() {
     return true;
 }
 
-// NON_MATCHING: see warning below
 bool FrostWalkerEnchantment::checkCompatibility(Enchantment const* other) {
-    // TODO: CHANGE nullptr TO depth_strider LATER ON
-    return Enchantment::checkCompatibility(other) && nullptr != other;
+    return Enchantment::checkCompatibility(other) && Enchantments::DEPTH_STRIDER != other;
 }

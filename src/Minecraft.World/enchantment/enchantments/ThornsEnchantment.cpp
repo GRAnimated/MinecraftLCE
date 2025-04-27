@@ -2,6 +2,7 @@
 #include "Minecraft.World/Random.h"
 #include "Minecraft.World/enchantment/Enchantment.h"
 #include "Minecraft.World/enchantment/EnchantmentHelper.h"
+#include "Minecraft.World/enchantment/Enchantments.h"
 #include "Minecraft.World/enchantment/categories/ChestArmorCategory.h"
 #include "Minecraft.World/enchantment/enchantments/ThornsEnchantment.h"
 #include "Minecraft.World/entity/LivingEntity.h"
@@ -34,8 +35,7 @@ bool ThornsEnchantment::canEnchant(not_null_ptr<ItemInstance> const& itemInstanc
 void ThornsEnchantment::doPostHurt(const std::shared_ptr<LivingEntity>& receiver,
                                    const std::shared_ptr<Entity>& attacker, int a4) {
     Random* random = receiver->getRandom();
-    // // TODO: LATER REPLACE WITH PROPER ENCHANTMENT THAT GETS INITALIZED IN Enchantments::staticCtor
-    std::shared_ptr<ItemInstance> item = EnchantmentHelper::getRandomItemWith(nullptr, receiver);
+    std::shared_ptr<ItemInstance> item = EnchantmentHelper::getRandomItemWith(Enchantments::THORNS, receiver);
 
     if (shouldHit(a4, random)) {
         if (attacker.get()) {
