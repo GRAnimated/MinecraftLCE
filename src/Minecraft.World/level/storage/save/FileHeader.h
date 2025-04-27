@@ -1,14 +1,17 @@
 #pragma once
-#include <string>
-#include "Minecraft.Client/ESavePlatform.h"
 #include "Minecraft.Client/ByteOrder.h"
+#include "Minecraft.Client/ESavePlatform.h"
+#include "Minecraft.Core/io/FileEntry.h"
+#include <string>
+#include <vector>
 
 class FileHeader {
+public:
     FileHeader();
 
     static ByteOrder getEndian(ESavePlatform platform);
 
-    std::wstring filename;
+    std::vector<FileEntry*> files;
     ESavePlatform platform;
     ByteOrder endian;
     short originalVersion;

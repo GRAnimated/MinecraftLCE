@@ -3,5 +3,7 @@
 
 class SparseDataStorage {
 public:
-    void write(DataOutputStream *out);
+    void write(DataOutputStream* out);
+    void tick();
+    static void staticCtor();
 };

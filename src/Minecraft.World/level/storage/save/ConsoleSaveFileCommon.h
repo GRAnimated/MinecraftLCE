@@ -1,5 +1,6 @@
 #pragma once
 #include "ConsoleSaveFile.h"
+#include "Minecraft.World/level/storage/save/FileHeader.h"
 
 class ConsoleSaveFileCommon : public ConsoleSaveFile {
 public:
@@ -32,4 +33,8 @@ public:
     virtual void vf_33() = 0;
     virtual bool isLocalEndianDifferent(ESavePlatform platform);
     virtual bool fjHasRegionFile(const File& regionFile);  // return type guessed
+
+    ESavePlatform getPlatform() { return this->header.platform; }
+
+    FileHeader header;
 };

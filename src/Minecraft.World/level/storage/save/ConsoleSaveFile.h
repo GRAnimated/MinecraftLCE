@@ -2,6 +2,8 @@
 #include "Minecraft.Client/ByteOrder.h"
 #include "Minecraft.Client/ESavePlatform.h"
 #include "Minecraft.World/level/storage/LevelStorage.h"
+
+#include "FileHeader.h"
 #include "Minecraft.Core/io/File.h"
 #include "Minecraft.Core/io/FileEntry.h"
 
