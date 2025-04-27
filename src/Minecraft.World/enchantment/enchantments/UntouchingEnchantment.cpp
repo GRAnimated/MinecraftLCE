@@ -22,6 +22,6 @@ int UntouchingEnchantment::getMaxCost(int a2) {
 
 // NON_MATCHING: see warning below
 bool UntouchingEnchantment::checkCompatibility(Enchantment const* other) {
-#warning CHANGE nullptr TO fortune ENCHANTMENT
+    // WARNING: CHANGE nullptr TO fortune ENCHANTMENT
     return Enchantment::checkCompatibility(other) && nullptr != other;
 }
