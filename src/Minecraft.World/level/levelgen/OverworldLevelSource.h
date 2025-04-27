@@ -15,16 +15,16 @@ class LargeFeature;
 class OverworldLevelSource : public ChunkGenerator, public GenericOverworldLevelSource {
 public:
     OverworldLevelSource(Level*, long long, bool, SuperflatConfig*);
-    virtual ~OverworldLevelSource() override;
-    virtual LevelChunk* createChunk(int, int) override;
-    virtual void postProcess(int, int) override;
-    virtual bool postProcessLoadedChunk(LevelChunk*, int, int) override;
-    virtual void getMobsAt(MobCategory*, BlockPos const&) override;
-    virtual void* findNearestMapFeature(Level*, std::wstring const&, BlockPos const&, bool) override;
-    virtual void recreateLogicStructuresForChunk(LevelChunk*, int, int) override;
-    virtual bool isPosInFeature(Level*, std::wstring const&, BlockPos const&) override;
-    virtual void lightChunk(LevelChunk*) override;
-    void prepareHeights(int, int, ChunkPrimer*);
+    ~OverworldLevelSource() override;
+    LevelChunk* createChunk(int, int) override;
+    void postProcess(int, int) override;
+    bool postProcessLoadedChunk(LevelChunk*, int, int) override;
+    void getMobsAt(MobCategory*, BlockPos const&) override;
+    void* findNearestMapFeature(Level*, std::wstring const&, BlockPos const&, bool) override;
+    void recreateLogicStructuresForChunk(LevelChunk*, int, int) override;
+    bool isPosInFeature(Level*, std::wstring const&, BlockPos const&) override;
+    void lightChunk(LevelChunk*) override;
+    void prepareHeights(int, int, ChunkPrimer*) override;
     void getHeights(int, int, int, arrayWithLength<Biome*>&, arrayWithLength<double>&);
     void buildSurfaces(int, int, ChunkPrimer*, arrayWithLength<Biome*>);
 
@@ -37,7 +37,7 @@ public:
     CustomizableSourceSettings mSourceSettings;
     const BlockState* field_118;
     void* qword_120;
-    char gap_128[8];
+    void* qword_128;
     LargeFeature* mCaveFeature;
     void* field_138;
     void* field_140;

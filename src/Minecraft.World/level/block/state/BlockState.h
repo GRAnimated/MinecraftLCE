@@ -1,6 +1,7 @@
 #pragma once
 
 #include <memory>
+#include <vector>
 
 #include "Minecraft.World/level/block/RenderShape.h"
 #include "Minecraft.World/level/block/boxed/TypedBoxed.h"

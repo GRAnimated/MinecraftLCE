@@ -1,6 +1,9 @@
 #pragma once
 
+class ChunkPrimer;
+
 class GenericOverworldLevelSource {
 public:
-    virtual ~GenericOverworldLevelSource();
+    virtual void prepareHeights(int, int, ChunkPrimer*) = 0;
+    virtual bool isFlat();
 };
