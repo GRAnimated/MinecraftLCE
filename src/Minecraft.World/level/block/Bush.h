@@ -5,6 +5,7 @@
 class Bush : public Block {
 public:
     Bush();
+    Bush(Material*);
     void _init();
 
     bool isCubeShaped(const BlockState* blockState) override;

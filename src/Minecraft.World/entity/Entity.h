@@ -280,8 +280,8 @@ public:
     bool _c3;
     void* filler2[3];
     int dwordE0;
-    char gapE4[76];
-    Random* rand;
+    char gapE4[76 + 0x10];
+    Random* rand;  // 0x140
     void* qword148;
     void* qword150;
     SynchedEntityData* entityData;
@@ -320,4 +320,4 @@ public:
     void* qword2B0;
 };
 
-ASSERT_SIZEOF(Entity, 0x2a8)
+ASSERT_SIZEOF(Entity, 0x2B8)

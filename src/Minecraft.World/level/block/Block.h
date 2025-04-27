@@ -183,7 +183,7 @@ public:
     virtual bool isMatching(Block*);
     virtual void hasAnalogOutputSignal(const BlockState* blockState);
     virtual void getAnalogOutputSignal(const BlockState* blockState, Level* level, const BlockPos& pos);
-    virtual void setIconName(const std::wstring&);
+    virtual Item* setIconName(const std::wstring&);
     virtual void getIconName();
     virtual void registerIcons(IconRegister*);
     virtual void getTileItemIconName();
