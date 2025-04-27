@@ -34,7 +34,7 @@ bool ThornsEnchantment::canEnchant(not_null_ptr<ItemInstance> const& itemInstanc
 void ThornsEnchantment::doPostHurt(const std::shared_ptr<LivingEntity>& receiver,
                                    const std::shared_ptr<Entity>& attacker, int a4) {
     Random* random = receiver->getRandom();
-    // TODO: LATER REPLACE WITH PROPER ENCHANTMENT THAT GETS INITALIZED IN Enchantments::staticCtor
+    // // TODO: LATER REPLACE WITH PROPER ENCHANTMENT THAT GETS INITALIZED IN Enchantments::staticCtor
     std::shared_ptr<ItemInstance> item = EnchantmentHelper::getRandomItemWith(nullptr, receiver);
 
     if (shouldHit(a4, random)) {
