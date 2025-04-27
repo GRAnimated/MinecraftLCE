@@ -1,8 +1,11 @@
 #include "types.h"
 #include "Minecraft.Client/resources/ResourceLocation.h"
 #include "Minecraft.World/entity/player/Player.h"
+#include "Minecraft.World/item/BlockItem.h"
 #include "Minecraft.World/item/Item.h"
 #include "Minecraft.World/item/ItemInstance.h"
+#include "Minecraft.World/level/block/Block.h"
+#include "Minecraft.World/level/block/Blocks.h"
 #include <memory>
 
 #include "Minecraft.Client/resources/MappedRegistry.h"
@@ -11,6 +14,8 @@
 // even though those are unused
 const ItemPropertyFunction* lefthandedFunction = nullptr;
 const ItemPropertyFunction* cooldownFunction = nullptr;
+
+extern std::unordered_map<Block*, Item*> blocksMap;
 
 Item::Item() {
     this->mMaxStackSize = 64;
@@ -30,6 +35,15 @@ Item::Item() {
     this->addProperty(ResourceLocation(L"lefthanded"), lefthandedFunction);
 
     this->addProperty(ResourceLocation(L"cooldown"), cooldownFunction);
+}
+
+void Item::registerBlock(Block* block) {
+    Item::registerBlock(block, new BlockItem(block));
+}
+
+void Item::registerBlock(Block* block, Item* item) {
+    Item::registerItem(block->getId(), Blocks::Registry->getKey(block), item);
+    blocksMap[block] = item;
 }
 
 bool Item::canBeDepleted() {
