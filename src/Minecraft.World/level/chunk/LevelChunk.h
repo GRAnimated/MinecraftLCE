@@ -3,6 +3,10 @@
 #include "Minecraft.World/ArrayWithLength.h"
 #include "Minecraft.World/level/LightLayer.h"
 #include "Minecraft.World/level/chunk/ChunkPos.h"
+#include "Minecraft.World/level/storage/data/SparseDataStorage.h"
+#include "Minecraft.World/level/storage/light/SparseLightStorage.h"
+#include "Minecraft.World/level/storage/block/CompressedBlockStorage.h"
+
 
 #include <memory>
 #include <unordered_map>
@@ -98,7 +102,17 @@ public:
     void writeCompressedBlockLightData(DataOutputStream* out);
     ChunkPos getPos();
 
-    char unk[510];
+    char padding_0[24];
+    CompressedBlockStorage *blockData1;
+    CompressedBlockStorage *blockData2;
+    char unk[400];
+    SparseDataStorage *dataData1;
+    SparseDataStorage *dataData2;
+    SparseLightStorage *skyLightData1;
+    SparseLightStorage *skyLightData2;
+    SparseLightStorage *blockLightData1;
+    SparseLightStorage *blockLightData2;
+    char padding_480[24];
     int xPos;
     int zPos;
     char unk2[14];
