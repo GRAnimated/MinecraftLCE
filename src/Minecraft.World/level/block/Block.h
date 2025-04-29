@@ -162,7 +162,7 @@ public:
                              std::shared_ptr<LivingEntity>, not_null_ptr<ItemInstance>);
     virtual Block* setNameAndDescriptionId(int, int);
     virtual bool isPossibleToRespawnInThis();
-    virtual void getName();
+    virtual std::wstring getName();
     virtual void getDescriptionId(int);
     virtual void getUseDescriptionId();
     virtual void triggerEvent(const BlockState* blockState, Level* level, const BlockPos& pos, int, int);
@@ -216,7 +216,7 @@ public:
     int field_8;
     bool field_C;
     std::wstring mItemName;
-    int field_24;
+    int mId;
     bool field_28;
     int lightEmission;
     bool isBlocksLight;

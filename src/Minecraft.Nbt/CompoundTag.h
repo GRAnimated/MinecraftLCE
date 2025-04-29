@@ -3,6 +3,7 @@
 #include "nn/types.h"
 #include "types.h"
 #include "Minecraft.Nbt/Tag.h"
+#include "Minecraft.World/ArrayWithLength.h"
 #include <unordered_map>
 
 class CompoundTag : public Tag {
@@ -86,6 +87,12 @@ public:
 
     /** Checks if a child with the provided name exists
      *
+     *  @param name The name of the child tag
+     */
+    bool contains(std::wstring const& name);
+
+    /** Checks if a child with the provided name exists
+     *
      *  Dunno what the int is for
      *  @param name The name of the child tag
      */
@@ -146,6 +153,9 @@ public:
      *  @param str The string
      */
     void putString(const std::wstring& name, const std::wstring& str);
+
+    void putByteArray(const std::wstring&, arrayWithLength<u8>);
+    arrayWithLength<u8> getByteArray(const std::wstring&);
 
     std::unordered_map<std::wstring, Tag*> childTags;
 };
