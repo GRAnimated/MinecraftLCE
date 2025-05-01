@@ -144,13 +144,12 @@ const int DIRT = 3;
 const int BEDROCK = 7;
 const int SKIP = 255;
 
-// NON_MATCHING: https://decomp.me/scratch/pjvPn
+// NON_MATCHING: 93.18%, https://decomp.me/scratch/Kc2zB
 void Chunk::rebuild() {
     PIXBeginNamedEvent(0.0f, "Rebuilding chunk %d, %d, %d", mX, mY, mZ);
     PIXBeginNamedEvent(0.0f, "Rebuild section A");
 
-    Tesselator* tesselator = Tesselator::getInstance();
-    BufferBuilder* builder = tesselator->getBuilder();
+    BufferBuilder* builder = Tesselator::getInstance()->getBuilder();
 
     updates++;  // Name from b1.2_01
 
@@ -192,7 +191,7 @@ void Chunk::rebuild() {
     int end_start = y1 / 4;
 
     int startIndexY = y0 < 4 ? 0 : start - 1;
-    int endIndexY = y1 > 255 ? 64 : end_start + 1;
+    int endIndexY = y1 > WORLD_HEIGHT - 1 ? WORLD_HEIGHT / 4 : end_start + 1;
 
     // Gets the correct 16x16x16 region of blocks from the chunk
     mLevel->getChunkAt(origin)->getBlockDataRange(blocks, startIndexY, endIndexY);
@@ -233,11 +232,10 @@ void Chunk::rebuild() {
                 // Skip rendering blocks above the world height
                 if (curY == WORLD_HEIGHT - 1)
                     continue;
-
                 // Skip rendering blocks on the side of the chunk
-                if (curX == 0 || curX == 15)
+                if (curX == 0 || curX == CHUNK_SIZE - 1)
                     continue;
-                if (curZ == 0 || curZ == 15)
+                if (curZ == 0 || curZ == CHUNK_SIZE - 1)
                     continue;
 
                 // Special case for the edge of the world:
@@ -258,6 +256,7 @@ void Chunk::rebuild() {
                 unsigned char idPosZ = blockMemory[offset + ((curX << 11) | ((curZ + 1) << 7) | y)];
                 if (idPosZ != STONE && idPosZ != DIRT && idPosZ != BEDROCK && idPosZ != SKIP)
                     continue;
+
                 if (curY > 0) {
                     int below = curY - 1;
                     int belowOffset = 0;
@@ -270,6 +269,7 @@ void Chunk::rebuild() {
                     if (idNegY != STONE && idNegY != DIRT && idNegY != BEDROCK && idNegY != SKIP)
                         continue;
                 }
+
                 int above = curY + 1;
                 int aboveOffset = 0;
                 if (above >= DATA_SLICE) {
@@ -302,9 +302,13 @@ void Chunk::rebuild() {
             gameRules->getRingsWithinArea(&ringsInArea, chunkBounds);
 
         for (auto it = ringsInArea.begin(); it != ringsInArea.end(); ++it) {
+            TargetAreaRuleDefinition* def = *it;
             std::vector<BlockPos> ringBlockPositions;
 
-            GlideRingGenerator::BuildRing(ringBlockPositions, (*it)->getArea(), (*it)->getSize());
+            const AABB* test = def->getArea();
+            GlideRingGenerator::eGlideRingSize test2 = def->getSize();
+
+            GlideRingGenerator::BuildRing(ringBlockPositions, test, test2);
 
             for (auto it2 = ringBlockPositions.begin(); it2 != ringBlockPositions.end(); ++it2) {
                 const BlockPos& blockPos = *it2;
@@ -316,23 +320,23 @@ void Chunk::rebuild() {
                 }
             }
         }
-    }
 
-    // Skip rendering the inside of the boost areas
-    for (auto it = glideRingPositions.begin(); it != glideRingPositions.end(); ++it) {
-        const BlockPos& blockPos = *it;
-        int ringY = blockPos.getY();
+        // Skip rendering the inside of the boost areas
+        for (auto it = glideRingPositions.begin(); it != glideRingPositions.end(); ++it) {
+            const BlockPos& blockPos = *it;
+            int ringY = blockPos.getY();
 
-        if (ringY >= 0 && ringY < WORLD_HEIGHT) {
-            int yOffset = 0;
-            if (ringY >= DATA_SLICE) {
-                ringY -= DATA_SLICE;
-                yOffset = 0x8000;
+            if (ringY >= 0 && ringY < WORLD_HEIGHT) {
+                int yOffset = 0;
+                if (ringY >= DATA_SLICE) {
+                    ringY -= DATA_SLICE;
+                    yOffset = 0x8000;
+                }
+                int ringX = blockPos.getX() - x0;
+                int ringZ = blockPos.getZ() - z0;
+
+                blockMemory[yOffset + ((ringX << 11) | ((ringZ) << 7) | ringY)] = 255;
             }
-            int ringX = blockPos.getX() - x0;
-            int ringZ = blockPos.getZ() - z0;
-
-            blockMemory[yOffset + ((ringX << 11) | ((ringZ) << 7) | ringY)] = SKIP;
         }
     }
 
@@ -352,11 +356,11 @@ void Chunk::rebuild() {
         int globalChunkIndex = LevelRenderer::sInstance->getGlobalIndexForChunk(mX, mY, mZ, mLevel);
 
         EnterCriticalSection(mMutex);
-
         auto it = mBlockEntityMap->find(globalChunkIndex);
 
         if (it != mBlockEntityMap->end()) {
-            for (auto entityIterator = it->second.begin(); entityIterator != it->second.end();) {
+            for (auto entityIterator = it->second.begin(); entityIterator != it->second.end();
+                 entityIterator++) {
                 (*entityIterator)->setRenderRemoveStage(1);
             }
         }
@@ -366,7 +370,6 @@ void Chunk::rebuild() {
         delete region;
         delete blockRenderer;
 
-        PIXEndNamedEvent();
         PIXEndNamedEvent();
 
         return;
@@ -405,15 +408,12 @@ void Chunk::rebuild() {
             builder->begin();
             builder->offset(-mX, -mY, -mZ);
 
-            for (size_t i = 0; i < glideRingPositions.size(); ++i) {
+            for (size_t i = 0; i < glideRingPositions.size(); i++) {
                 PIXBeginNamedEvent(0.0f, "Tesselate in world");
-                const BlockPos& ringPos = glideRingPositions.at(i);
-
-                TextureAtlasSprite* textureIcon = GlideRingGenerator::getIcon(glideRingSizes.at(i));
-
                 blockRenderer->setLightOverride(0x7FFFFFFF);
-                blockRenderer->tesselateInWorldFixedTexture(Blocks::STAINED_GLASS->defaultBlockState(),
-                                                            ringPos, textureIcon);
+                blockRenderer->tesselateInWorldFixedTexture(
+                    Blocks::STAINED_GLASS->defaultBlockState(), glideRingPositions.at(i),
+                    GlideRingGenerator::getIcon(glideRingSizes.at(i)));
                 blockRenderer->clearLightOverride();
 
                 rendered = true;
@@ -426,12 +426,12 @@ void Chunk::rebuild() {
         for (int curZ = z0; curZ < z1; curZ++) {
             for (int curX = x0; curX < x1; curX++) {
                 for (int curY = y0; curY < y1; curY++) {
-                    int yIndex = curY % DATA_SLICE;
-                    int offsetShift = (curY >= DATA_SLICE) ? 0x8000 : 0;
+                    int yIndex = curY >= DATA_SLICE ? curY - DATA_SLICE : curY;
+                    int offsetShift = (curY >= DATA_SLICE) << 15;
 
                     // Get the ID of the current block
                     unsigned char id
-                        = blockMemory[offsetShift | ((curX - x0) << 11) | ((curZ - z0) << 7) | yIndex];
+                        = blockMemory[offsetShift + (((curX - x0) << 11) | ((curZ - z0) << 7) | yIndex)];
 
                     if (id == AIR || id == SKIP)
                         continue;
@@ -462,13 +462,12 @@ void Chunk::rebuild() {
                     int blockRenderLayer = block->getRenderLayer();
 
                     // Tesselate blocks
-                    if (blockRenderLayer < layer) {
+                    if (blockRenderLayer > layer) {
                         renderNextLayer = true;
                     } else if (blockRenderLayer == layer) {
-                        PIXBeginNamedEvent(0.0, "Tesselate in world");
-                        const BlockState* blockState = region->getBlockState(currentPos);
-                        rendered
-                            |= blockRenderer->tesselateInWorld(blockState, currentPos, blockState, nullptr);
+                        PIXBeginNamedEvent(0.0f, "Tesselate in world");
+                        rendered |= blockRenderer->tesselateInWorld(region->getBlockState(currentPos),
+                                                                    currentPos, nullptr, nullptr);
                         PIXEndNamedEvent();
                     }
                 }
@@ -527,35 +526,33 @@ void Chunk::rebuild() {
 
     // Render block entities
     if (currentBlockEntities.size()) {
-        auto mapIterator = mBlockEntityMap->find(index);
-        if (mapIterator == mBlockEntityMap->end()) {
+        auto it = mBlockEntityMap->find(index);
+        if (it == mBlockEntityMap->end()) {
             for (size_t i = 0; i < currentBlockEntities.size(); i++) {
                 (*mBlockEntityMap)[index].push_back(currentBlockEntities[i]);
             }
         } else {
-            auto& existingList = mapIterator->second;
+            auto& blockEntities = it->second;
 
-            for (auto entityIterator = existingList.begin(); entityIterator != existingList.end();
-                 entityIterator++) {
-                (*entityIterator)->setRenderRemoveStage(1);
+            for (auto entity = blockEntities.begin(); entity != blockEntities.end(); entity++) {
+                (*entity)->setRenderRemoveStage(1);
             }
 
             for (size_t i = 0; i < currentBlockEntities.size(); i++) {
-                auto existingIter
-                    = std::find(existingList.begin(), existingList.end(), currentBlockEntities[i]);
-                if (existingIter == existingList.end()) {
+                auto entity = std::find(blockEntities.begin(), blockEntities.end(), currentBlockEntities[i]);
+                if (entity == blockEntities.end()) {
                     (*mBlockEntityMap)[index].push_back(currentBlockEntities[i]);
                 } else {
-                    (*existingIter)->setRenderRemoveStage(0);
+                    (*entity)->setRenderRemoveStage(0);
                 }
             }
         }
     } else {
-        auto mapIterator = mBlockEntityMap->find(index);
+        auto it = mBlockEntityMap->find(index);
 
-        if (mapIterator != mBlockEntityMap->end()) {
-            for (auto entityIterator = mapIterator->second.begin();
-                 entityIterator != mapIterator->second.end();) {
+        if (it != mBlockEntityMap->end()) {
+            for (auto entityIterator = it->second.begin(); entityIterator != it->second.end();
+                 entityIterator++) {
                 (*entityIterator)->setRenderRemoveStage(1);
             }
         }
@@ -564,7 +561,7 @@ void Chunk::rebuild() {
     LeaveCriticalSection(mMutex);
     PIXEndNamedEvent();
 
-    // Mark the chunk dirty(?) and ready to rebuild again
+    // Mark the chunk ready to rebuild again
     LevelRenderer::sInstance->setGlobalChunkFlag(mX, mY, mZ, mLevel, 1, 0);
 
     PIXEndNamedEvent();
