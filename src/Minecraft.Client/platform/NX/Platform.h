@@ -21,6 +21,7 @@ void MemSect(int);
 
 void PIXBeginNamedEvent(float, char const*, ...);
 void PIXEndNamedEvent();
+void PIXSetMarkerDeprecated(float, char const*, ...);
 
 // this should be in System.h shouldn't it????
 // or should stuff from System.h be moved here

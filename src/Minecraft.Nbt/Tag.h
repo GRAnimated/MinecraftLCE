@@ -2,6 +2,7 @@
 
 #include "nn/types.h"
 #include <string>
+#include <vector>
 
 class DataOutput;
 class DataInput;

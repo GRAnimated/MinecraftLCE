@@ -58,6 +58,8 @@ public:
 
     CompoundTag* saveMetadata(CompoundTag*);
 
+    void setRenderRemoveStage(unsigned char);
+
     bool mIsRemoved;
     bool field_19;
     Level* mLevel;

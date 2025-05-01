@@ -6,6 +6,7 @@
 #include "Minecraft.World/level/block/FoliageColor.h"
 #include "Minecraft.World/level/block/GrassColor.h"
 #include "Minecraft.World/level/block/ItemColors.h"
+#include "Minecraft.World/level/gamemode/minigames/MiniGameDef.h"
 #include "Minecraft.World/level/storage/McRegionLevelStorageSource.h"
 #include "DataFixers.h"
 #include "FrameTimer.h"
@@ -79,6 +80,7 @@ public:
 
     ClientMasterGameMode* GetClientMasterGameMode();  // PascalCase
     MiniGameDef* GetMiniGame();
+    static bool InMiniGame(EMiniGameId, bool);
 
     bool isUsingDefaultSkin();
     bool isTutorial();

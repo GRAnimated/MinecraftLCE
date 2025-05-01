@@ -1,14 +1,19 @@
 #pragma once
 
-class C4JRender {
-public:
-    enum eVertexType {};
-    enum ePixelShaderType {};
-};
+#include "types.h"
+#include "Minecraft.Client/renderer/C4JRender.h"
+#include "Minecraft.World/ArrayWithLength.h"
+
 class VertexFormat;
 
 class BufferBuilder {
 public:
+    struct Bounds {
+        void addBounds(BufferBuilder::Bounds&);
+
+        float bounds[6];
+    };
+
     BufferBuilder(int);
 
     void clear();
@@ -46,4 +51,37 @@ public:
     void blockRainQuad(float, float, float, float, float, float, float, float, float, float, float, float,
                        float, float, float, float, float, float, float, float, float, float, float, float,
                        float, float, float, float, int);
+
+    arrayWithLength<int> field_0;
+    arrayWithLength<int> field_10;
+    int dword_20;
+    short word_24;
+    short word_26;
+    int dword_28;
+    short word_2c;
+    char gap_2E[2];
+    void* qword_30;
+    char byte_38;
+    char byte_39;
+    char gap_3A[2];
+    int dword_3c;
+    char byte_40;
+    char gap_41[3];
+    int dword_44;
+    void* qword_48;
+    void* qword_50;
+    void* qword_58;
+    void* qword_60;
+    int dword_68;
+    char byte_6c;
+    char byte_6d;
+    char byte_6e;
+    char gap_6F;
+    arrayWithLength<int> field_70;
+    int dword_80;
+    void* gap[13];
+    int unk;
+    Bounds mBounds;
 };
+
+ASSERT_SIZEOF(BufferBuilder, 0x110)

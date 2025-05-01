@@ -11,6 +11,10 @@ public:
     class ThreadStorage {};
 
     static AABB* newPermanent(double, double, double, double, double, double);
+    static AABB* newTemp(double, double, double, double, double, double);
+    bool containsIncludingLowerBound(Vec3*) const;
+
+    void set(double, double, double, double, double, double);
 
     static AABB* sCrossShape;  // .got:000000710176F5E0
 };

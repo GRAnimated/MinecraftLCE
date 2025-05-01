@@ -10,7 +10,7 @@ class Region : public LevelSource {
 public:
     Region(Level*, BlockPos const&, BlockPos const&, int);
 
-    virtual void getBlockEntity(BlockPos const&) override;
+    virtual std::shared_ptr<BlockEntity> getBlockEntity(BlockPos const&) override;
     virtual void getLightColor(BlockPos const&, int, int) override;
     virtual void getBrightness(LightLayer::variety, BlockPos const&) override;
     virtual void getBrightness(BlockPos const&, int) override;
@@ -27,6 +27,8 @@ public:
     virtual void getDirectSignal(BlockPos const&, Direction const*) override;
     virtual void getGeneratorType() override;
     virtual ~Region();
+
+    void setCachedBlocksAndData(unsigned char*, unsigned char*, int, int, int, const BlockState**);
 
     int x;
     int y;

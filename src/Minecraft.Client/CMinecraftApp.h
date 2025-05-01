@@ -14,6 +14,7 @@ enum eTMSAction {};
 enum eFileExtensionType {};
 enum eTMSFileType {};
 enum eTPDFileType {};
+class GameRuleDefinition;
 class LevelChunk;
 class PlayerUID;
 
@@ -57,6 +58,7 @@ public:
     bool hasArchiveFile(std::wstring const&, bool);
     void InitialiseTips();
     void InitGameSettings();
+    LevelRuleset* getGameRuleDefinitions();
 
     static int DefaultOptionsCallback(void*, C4JStorage::PROFILESETTINGS*, int);
     static int OptionsDataCallback(void*, int, unsigned short, C4JStorage::eOptionsCallback);
