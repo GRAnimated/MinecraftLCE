@@ -173,8 +173,8 @@ public:
     virtual float getShadeBrightness(const BlockState* blockState);
     virtual void fallOn(Level* level, const BlockPos& pos, std::shared_ptr<Entity>, float);
     virtual void updateEntityAfterFallOn(Level* level, std::shared_ptr<Entity>);
-    virtual std::shared_ptr<ItemInstance> getCloneItemInstance(Level* level, const BlockPos& pos,
-                                                               const BlockState* blockState);
+    virtual not_null_ptr<ItemInstance> getCloneItemInstance(Level* level, const BlockPos& pos,
+                                                            const BlockState* blockState);
     virtual void playerWillDestroy(Level* level, const BlockPos& pos, const BlockState* blockState,
                                    std::shared_ptr<Player> player);
     virtual void handleRain(Level* level, const BlockPos& pos);

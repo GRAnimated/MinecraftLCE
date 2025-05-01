@@ -19,6 +19,9 @@ void XPhysicalFree(void* ptr) {
 
 void MemSect(int) {}
 
+void PIXBeginNamedEvent(float, char const*, ...) {}
+void PIXEndNamedEvent() {}
+
 void EnterCriticalSection(nn::os::MutexType* mutex) {
     nn::os::LockMutex(mutex);
 }

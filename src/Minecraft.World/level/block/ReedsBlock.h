@@ -31,8 +31,8 @@ public:
     bool mayPlace(Level* level, const BlockPos& pos) override;
     int getColor(LevelSource* levelSource, const BlockPos& pos, int) override;
     bool shouldBlockTick(Level* level, const BlockPos& pos, const BlockState* blockState) override;
-    std::shared_ptr<ItemInstance> getCloneItemInstance(Level* level, const BlockPos& pos,
-                                                       const BlockState* blockState) override;
+    not_null_ptr<ItemInstance> getCloneItemInstance(Level* level, const BlockPos& pos,
+                                                    const BlockState* blockState) override;
     BlockStateDefinition* createBlockStateDefinition() override;
     bool isValidBonemealTarget(Level*, BlockPos const&, BlockState const*, bool) override;
     bool isBonemealSuccess(Level*, Random*, BlockPos const&, BlockState const*) override;
