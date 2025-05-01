@@ -2,6 +2,7 @@
 
 // NON_MATCHING: Enum values are not known
 enum EMiniGameId {
+    GLIDE = 3,
     LOBBY = 0xF  // Named SERVER in my xb1 symbols but might be lobby... not sure.
 };
 

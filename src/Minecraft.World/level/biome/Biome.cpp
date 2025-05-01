@@ -193,7 +193,7 @@ void Biome::getWaterColor() {
     colourTable->getColour(mWaterColor);
 }
 
-Vec3 Biome::getFogColor(float a2, float a3) const {
+Vec3* Biome::getFogColor(float a2, float a3) const {
     float v3 = Mth::cos(a2 * 3.1415927f * 2.0f);
     float v4 = std::min(std::max((v3 + v3) + 0.5f, 0.0f), 1.0f);
 

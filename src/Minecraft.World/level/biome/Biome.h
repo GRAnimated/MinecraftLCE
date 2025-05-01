@@ -242,7 +242,7 @@ public:
     virtual int getTemperatureCategory();
     virtual bool isAlwaysValidSpawn();
     virtual void getWaterColor();
-    virtual Vec3 getFogColor(float, float) const;
+    virtual Vec3* getFogColor(float, float) const;
     virtual bool isFoggy();
     virtual bool isNatural();
 

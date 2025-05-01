@@ -9,7 +9,7 @@ public:
     }
     Vec3() = default;
 
-    static Vec3 newTemp(double x, double y, double z);
+    static Vec3* newTemp(double x, double y, double z);
 
     Vec3 operator=(Vec3 o);
 

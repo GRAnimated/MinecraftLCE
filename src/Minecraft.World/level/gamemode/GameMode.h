@@ -2,6 +2,7 @@
 
 #include "types.h"
 #include "Minecraft.World/InteractionHand.h"
+#include "Minecraft.World/level/gamemode/minigames/glide/GlideRingGenerator.h"
 #include <memory>
 
 class BlockPos;
@@ -16,10 +17,6 @@ class CombatEntry;
 class ClientboundChatPacket;
 class ItemInstance;
 class Minecraft;
-class GlideRingGenerator {
-public:
-    enum eGlideRingSize {};
-};
 
 class GameMode {
 public:

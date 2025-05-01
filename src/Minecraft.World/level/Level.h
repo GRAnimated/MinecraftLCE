@@ -34,7 +34,7 @@ class Level : public LevelSource {
 public:
     Level(std::shared_ptr<LevelStorage>, LevelData*, Dimension*, bool);
 
-    virtual void getBlockEntity(BlockPos const&) override;
+    virtual std::shared_ptr<BlockEntity> getBlockEntity(BlockPos const&) override;
     virtual void getLightColor(BlockPos const&, int, int) override;
     virtual void getBrightness(LightLayer::variety, BlockPos const&) override;
     virtual void getBrightness(BlockPos const&, int) override;

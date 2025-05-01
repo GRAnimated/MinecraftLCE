@@ -45,7 +45,7 @@ public:
     void registerDefaultState(const BlockState* blockState);
     static const BlockState* getStateByIdAndData(int, unsigned char);
 
-    static void registerBlock(int id, std::wstring const& name, Block* block);
+    static void registerBlock(int id, const std::wstring& name, Block* block);
 
     void init(Material* material, const MaterialColor* materialColor);
 
@@ -83,7 +83,7 @@ public:
     virtual bool isIndestructible();
     virtual void getDestroySpeed(const BlockState* blockState, Level* level, const BlockPos& pos);
     virtual void setTicking(bool);
-    virtual void disableMipmap();
+    virtual Block* disableMipmap();
     virtual void setSemiTransparent();
     virtual bool isTicking();
     virtual AABB* getShape(const BlockState* blockState, LevelSource* levelSource, const BlockPos& pos);
@@ -160,15 +160,15 @@ public:
     virtual int getResourceCountForLootBonus(int, Random*);
     virtual void setPlacedBy(Level* level, const BlockPos& pos, const BlockState* blockState,
                              std::shared_ptr<LivingEntity>, not_null_ptr<ItemInstance>);
-    virtual void setNameAndDescriptionId(int, int);
+    virtual Block* setNameAndDescriptionId(int, int);
     virtual bool isPossibleToRespawnInThis();
-    virtual void getName();
+    virtual std::wstring getName();
     virtual void getDescriptionId(int);
     virtual void getUseDescriptionId();
     virtual void triggerEvent(const BlockState* blockState, Level* level, const BlockPos& pos, int, int);
     virtual bool isCollectStatistics();
     virtual bool shouldBlockTick(Level* level, const BlockPos& pos, const BlockState* blockState);
-    virtual void setNotCollectStatistics();
+    virtual Block* setNotCollectStatistics();
     virtual void getPistonPushReaction(const BlockState* blockState);
     virtual float getShadeBrightness(const BlockState* blockState);
     virtual void fallOn(Level* level, const BlockPos& pos, std::shared_ptr<Entity>, float);
@@ -211,12 +211,16 @@ public:
 
     static void CreateNewThreadStorage();
 
+    bool isBlockEntity() const {
+        return mIsSilkTouchable;
+    }  // I think we have this one wrong... also guessed name
+
     class ThreadStorage {};
 
     int field_8;
     bool field_C;
     std::wstring mItemName;
-    int field_24;
+    int mId;
     bool field_28;
     int lightEmission;
     bool isBlocksLight;

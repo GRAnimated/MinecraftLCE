@@ -55,4 +55,6 @@ public:
     static void clearDepth(double);
     static void staticCtor();
     static void disableClientState(int);
+    static void newList(int, int);
+    static void endList(int);
 };

@@ -1,7 +1,9 @@
 #pragma once
 
 #include "Minecraft.World/level/LightLayer.h"
+#include <memory>
 
+class BlockEntity;
 class BlockState;
 class BlockPos;
 class Direction;
@@ -11,7 +13,7 @@ class Block;
 
 class LevelSource {
 public:
-    virtual void getBlockEntity(BlockPos const&) = 0;
+    virtual std::shared_ptr<BlockEntity> getBlockEntity(BlockPos const&) = 0;
     virtual void getLightColor(BlockPos const&, int, int) = 0;
     virtual void getBrightness(LightLayer::variety, BlockPos const&) = 0;
     virtual void getBrightness(BlockPos const&, int) = 0;
