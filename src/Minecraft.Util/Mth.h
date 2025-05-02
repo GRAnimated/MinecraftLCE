@@ -1,5 +1,7 @@
 #pragma once
 
+class Random;
+
 class Mth {
 public:
     static float sin(float);
@@ -16,4 +18,5 @@ public:
     static void clampedLerp(double, double, double);
     static void frac(double);
     static int hsvToRgb(float, float, float);
+    static int nextInt(Random*, int, int);
 };

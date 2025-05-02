@@ -118,9 +118,10 @@ public:
     virtual void getDestroyProgress(const BlockState* blockState, std::shared_ptr<Player> player,
                                     Level* level, const BlockPos& pos);
     virtual void spawnResources(Level* level, const BlockPos& pos, const BlockState* blockState, int);
-    virtual void spawnResources(Level* level, const BlockPos& pos, const BlockState* blockState, float, int);
+    virtual void spawnResources(Level* level, const BlockPos& pos, const BlockState* blockState, float chance,
+                                int fortuneLevel);
     virtual void popExperience(Level* level, const BlockPos& pos, int);
-    virtual void getSpawnResourcesAuxValue(const BlockState* blockState);
+    virtual int getSpawnResourcesAuxValue(const BlockState* blockState);
     virtual void getExplosionResistance(std::shared_ptr<Entity>);
     virtual void clip(const BlockState* blockState, Level* level, const BlockPos& pos, Vec3*, Vec3*);
     virtual void clip(const BlockPos& pos, Vec3*, Vec3*, AABB const*);
@@ -194,7 +195,7 @@ public:
     virtual Texture* getTexture(const Direction* direction);
     virtual void getInventoryRenderState(const BlockState* blockState);
     virtual BlockStateDefinition* createBlockStateDefinition();
-    virtual void getBlockStateDefinition();
+    virtual BlockStateDefinition* getBlockStateDefinition();
     virtual void getOffsetType();
     virtual void getOffset(const BlockState* blockState, LevelSource* levelSource, const BlockPos& pos);
     virtual void getSoundType();

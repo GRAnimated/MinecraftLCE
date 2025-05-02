@@ -1,4 +1,5 @@
 #include "Minecraft.World/enchantment/Enchantment.h"
+#include <memory>
 
 class ProtectionEnchantment : public Enchantment {
 public:
@@ -30,6 +31,8 @@ public:
     int getDamageProtection(int, DamageSource const*) override;
     bool checkCompatibility(Enchantment const*) override;
     int getDescriptionId() override;
+
+    static int getFireAfterDampener(std::shared_ptr<LivingEntity> const&, int);
 
     const Type* mType;
 };
