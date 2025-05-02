@@ -60,8 +60,12 @@ public:
 
     void setRenderRemoveStage(unsigned char);
 
+    // Made up name
+    bool isReadyToRender() const { return mRenderFlag == 2; }
+
     bool mIsRemoved;
     bool field_19;
+    u8 mRenderFlag;
     Level* mLevel;
     BlockPos mPos;
     int mData;

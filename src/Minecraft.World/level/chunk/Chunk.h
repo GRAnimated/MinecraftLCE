@@ -42,7 +42,7 @@ struct ClipChunk {
 
 class Chunk {
 public:
-    static int updates;  // Name from b1.2_01
+    static int updates;  // Name from b1.2_02
 
     Chunk(Level* level, BlockEntityMap& map, nn::os::MutexType& mutex, int x, int y, int z,
           ClipChunk* clipChunk);

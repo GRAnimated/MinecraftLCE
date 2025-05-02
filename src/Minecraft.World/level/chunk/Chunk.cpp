@@ -144,14 +144,14 @@ const int DIRT = 3;
 const int BEDROCK = 7;
 const int SKIP = 255;
 
-// NON_MATCHING: 93.18%, https://decomp.me/scratch/Kc2zB
+// NON_MATCHING: 93.40%, https://decomp.me/scratch/Kc2zB
 void Chunk::rebuild() {
     PIXBeginNamedEvent(0.0f, "Rebuilding chunk %d, %d, %d", mX, mY, mZ);
     PIXBeginNamedEvent(0.0f, "Rebuild section A");
 
     BufferBuilder* builder = Tesselator::getInstance()->getBuilder();
 
-    updates++;  // Name from b1.2_01
+    updates++;  // Name from b1.2_02
 
     int x0 = mX;
     int y0 = mY;
@@ -160,7 +160,7 @@ void Chunk::rebuild() {
     int y1 = y0 + CHUNK_SIZE;
     int z1 = z0 + CHUNK_SIZE;
 
-    LevelChunk::touchedSky = false;  // Name from b1.2_01
+    LevelChunk::touchedSky = false;  // Name from b1.2_02
 
     std::vector<std::shared_ptr<BlockEntity>> currentBlockEntities;
 
@@ -529,6 +529,7 @@ void Chunk::rebuild() {
         auto it = mBlockEntityMap->find(index);
         if (it == mBlockEntityMap->end()) {
             for (size_t i = 0; i < currentBlockEntities.size(); i++) {
+                currentBlockEntities[i]->isReadyToRender();  // Unused check
                 (*mBlockEntityMap)[index].push_back(currentBlockEntities[i]);
             }
         } else {
