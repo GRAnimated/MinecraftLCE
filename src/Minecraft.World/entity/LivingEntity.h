@@ -118,7 +118,7 @@ public:
     virtual not_null_ptr<ItemInstance> getItemInHand(InteractionHand::EInteractionHand);
     virtual void setItemInHand(InteractionHand::EInteractionHand, not_null_ptr<ItemInstance>);
     virtual void hasItemInSlot(EquipmentSlot const*);
-    virtual void pure_virtual_0();
+    virtual void getItemSlot(EquipmentSlot const*) = 0;
     virtual void getItemInHandIcon(not_null_ptr<ItemInstance>, int);
     virtual void getSoundVolume();
     virtual void getVoicePitch();
@@ -151,7 +151,7 @@ public:
     virtual void onEnterCombat();
     virtual void onLeaveCombat();
     virtual void updateEffectVisibility();
-    virtual void pure_virtual_1();
+    virtual void getMainArm() = 0;
     virtual bool isUsingItem();
     virtual void getUsedItemHand();
     virtual void updatingUsingItem();

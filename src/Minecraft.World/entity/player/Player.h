@@ -1,12 +1,173 @@
 #pragma once
 
+#include "Minecraft.World/ArrayWithLength.h"
+#include "Minecraft.World/eINSTANCEOF.h"
 #include "Minecraft.World/entity/Entity.h"
 #include "Minecraft.World/entity/LivingEntity.h"
+#include "Minecraft.World/sounds/SoundSource.h"
+#include <memory>
+#include <string>
 
 class DamageSource;
+class Merchant;
+class ItemEntity;
+class CameraController;
+class SignBlockEntity;
+class BaseCommandBlock;
+class CommandBlockEntity;
+class Container;
+class Stat;
+class InteractionObject;
+class AbstractHorse;
+class Achievement;
+class GameType;
 
 class Player : public LivingEntity {
+public:
+    Player(Level*, std::wstring const&);
     static void staticCtor();
+
+    virtual eINSTANCEOF GetType() override;
+    virtual void defineSynchedData() override;
+    virtual void resetPos() override;
+    virtual void remove() override;
+    virtual void tick() override;
+    virtual int getPortalWaitTime() override;
+    virtual void getSwimSound() override;
+    virtual void getSwimSplashSound() override;
+    virtual void playSound(SoundEvent const*, float, float) override;
+    virtual bool makeStepSound() override;
+    virtual void causeFallDamage(float, float) override;
+    virtual void doWaterSplashEffect() override;
+    virtual void push(std::shared_ptr<Entity>) override;
+    virtual void hurt(DamageSource*, float) override;
+    virtual void isPickable() override;
+    virtual void shouldRenderAtSqrDistance(double) override;
+    virtual void readAdditionalSaveData(CompoundTag*) override;
+    virtual void addAdditonalSaveData(CompoundTag*) override;
+    virtual void isInWall() override;
+    virtual void rideTick() override;
+    virtual void getRidingHeight() override;
+    virtual void stopRiding() override;
+    virtual void getDimensionChangingDelay() override;
+    virtual void handleEntityEvent(unsigned char, int) override;
+    virtual void getHandSlots() override;
+    virtual void getArmorSlots() override;
+    virtual void setItemSlot(EquipmentSlot const*, not_null_ptr<ItemInstance>) override;
+    virtual void isInvisibleTo(std::shared_ptr<Player>) override;
+    virtual void getTeam() override;
+    virtual void setInvisible(bool) override;
+    virtual void ShouldRenderShadow() override;
+    virtual void killed(std::shared_ptr<LivingEntity>) override;
+    virtual void makeStuckInWeb() override;
+    virtual void getName() override;
+    virtual void isPushedByWater() override;
+    virtual std::wstring getDisplayName() override;
+    virtual void shouldShowName() override;
+    virtual void onSyncedDataUpdated(EntityDataAccessor_Base const*) override;
+    virtual void getEyeHeight() override;
+    virtual void setSlot(int, not_null_ptr<ItemInstance> const&) override;
+    virtual SoundSource::ESoundSource getSoundSource() override;
+    virtual void canCreateParticles() override;
+    virtual void PositionLocked_4() override;
+    virtual void SetPositionLocked_4(bool) override;
+    virtual void TakeGlideCollisionDamage_4() override;
+    virtual void SetGlideCollisionDamage_4(bool) override;
+    virtual void GetLiftForceModifier_4() override;
+    virtual void SetLiftForceModifier_4(double) override;
+    virtual void registerAttributes() override;
+    virtual void onChangedBlock(BlockPos const&) override;
+    virtual void getExperienceReward(std::shared_ptr<Player>) override;
+    virtual void isAlwaysExperienceDropper() override;
+    virtual void blockUsingShield(std::shared_ptr<LivingEntity> const&) override;
+    virtual void die(DamageSource*) override;
+    virtual void getHurtSound(DamageSource*) override;
+    virtual void getDeathSound() override;
+    virtual void getFallDamageSound(int) override;
+    virtual void hurtArmor(float) override;
+    virtual void hurtCurrentlyUsedShield(float) override;
+    virtual void actuallyHurt(DamageSource, float) override;
+    virtual void getItemSlot(EquipmentSlot const*) override;
+    virtual void getItemInHandIcon(not_null_ptr<ItemInstance>, int) override;
+    virtual void isImmobile() override;
+    virtual void jumpFromGround() override;
+    virtual void travel(float, float, float) override;
+    virtual void getSpeed() override;
+    virtual void isSleeping() override;
+    virtual void aiStep() override;
+    virtual void serverAiStep() override;
+    virtual void pushEntities() override;
+    virtual void getAbsorptionAmount() override;
+    virtual void setAbsorptionAmount(float) override;
+    virtual void getMainArm() override;
+    virtual void IsCreativeFlying();
+    virtual void updateFrameTick();
+    virtual void closeContainer();
+    virtual void touch(std::shared_ptr<Entity>);
+    virtual void getScore();
+    virtual void setScore(int);
+    virtual void increaseScore(int);
+    virtual void drop(bool);
+    virtual void reallyDrop(std::shared_ptr<ItemEntity>);
+    virtual void GetThirdPersonView(bool);
+    virtual void SetThirdPersonView(int);
+    virtual void CanChangeThirdPersonView();
+    virtual void GetCameraController();
+    virtual void SetCameraController(CameraController*, bool);
+    virtual void canHarmPlayer(std::shared_ptr<Player>);
+    virtual void canHarmPlayer(std::wstring);
+    virtual void getArmorCoverPercentage();
+    virtual void openTextEdit(std::shared_ptr<SignBlockEntity>);
+    virtual void openMinecartCommandBlock(std::shared_ptr<BaseCommandBlock>);
+    virtual void openCommandBlock(std::shared_ptr<CommandBlockEntity>);
+    virtual void openTrading(std::shared_ptr<Merchant>, std::wstring const&, int);
+    virtual void openContainer(std::shared_ptr<Container>);
+    virtual void openHorseInventory(std::shared_ptr<AbstractHorse>, std::shared_ptr<Container>);
+    virtual void startBlockInteraction(InteractionObject&);
+    virtual void openItemInstanceGui(not_null_ptr<ItemInstance>, InteractionHand::EInteractionHand);
+    virtual void interactOn(std::shared_ptr<Entity>, InteractionHand::EInteractionHand);
+    virtual void attack(std::shared_ptr<Entity>);
+    virtual void disableShield(bool);
+    virtual void crit(std::shared_ptr<Entity>);
+    virtual void magicCrit(std::shared_ptr<Entity>);
+    virtual void respawn();
+    virtual void isLocalPlayer();
+    virtual void getGameProfile();
+    virtual void startSleepInBed(BlockPos const&, bool);
+    virtual void stopSleepInBed(bool, bool, bool);
+    virtual void displayClientMessage(int, bool);
+    virtual void getRespawnPosition();
+    virtual void isRespawnForced();
+    virtual void setRespawnPosition(BlockPos*, bool);
+    virtual void hasAchievement(Achievement*);
+    virtual void awardStat(Stat*, arrayWithLength<unsigned char>);
+    virtual void resetStat(Stat*);
+    virtual void checkMovementStatistiscs(double, double, double);
+    virtual void increaseXp(int);
+    virtual void getEnchantmentSeed();
+    virtual void onEnchantmentPerformed(int);
+    virtual void giveExperienceLevels(int);
+    virtual void mayBuild();
+    virtual void mayUseItemAt(BlockPos const&, Direction const*, not_null_ptr<ItemInstance>);
+    virtual void onUpdateAbilities();
+    virtual void setGameMode(GameType const*);
+    virtual void pure_virtual() = 0;
+    virtual void GetScoreboard();
+    virtual void onCrafted(not_null_ptr<ItemInstance>);
+    virtual void getTexture();
+    virtual void setCustomSkin(unsigned int);
+    virtual void setCustomCape(unsigned int);
+    virtual void handleCollectItem(not_null_ptr<ItemInstance>);
+    virtual void SetCamera(std::shared_ptr<Entity>);
+    virtual void SpectatePlayerNext();
+    virtual void SpectatePlayerPrev();
+    virtual void StopSpectatingPlayer();
+    virtual void IsSpectatingOtherPlayer();
+    virtual void pure_virtual_12() = 0;
+    virtual void GetGameMode();
+    virtual void AutoEquip(not_null_ptr<ItemInstance>, bool&);
+    virtual void OnEquipArmor(not_null_ptr<ItemInstance>);
+    virtual void OnTakeFromAnvil(not_null_ptr<ItemInstance>);
 
     // dunno the type
     static std::vector<void*> sSkins;
