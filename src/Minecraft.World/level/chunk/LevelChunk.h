@@ -26,7 +26,7 @@ class DataOutputStream;
 
 class LevelChunk {
 public:
-    static bool touchedSky;  // Name from b1.2_01
+    static bool touchedSky;  // Name from b1.2_02
 
     LevelChunk(Level*, ChunkPrimer*, int, int);
 
