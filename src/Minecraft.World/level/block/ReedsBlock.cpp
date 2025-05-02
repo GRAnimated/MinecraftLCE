@@ -93,10 +93,9 @@ bool ReedsBlock::isCubeShaped(const BlockState* blockState) {
     return false;
 }
 
-// NON_MATCHING: Different shared_ptr constructor?
-std::shared_ptr<ItemInstance> ReedsBlock::getCloneItemInstance(Level* level, const BlockPos& pos,
-                                                               const BlockState* blockState) {
-    return std::shared_ptr<ItemInstance>(new ItemInstance(Items::REEDS));
+not_null_ptr<ItemInstance> ReedsBlock::getCloneItemInstance(Level* level, const BlockPos& pos,
+                                                            const BlockState* blockState) {
+    return new ItemInstance(Items::REEDS);
 }
 
 int ReedsBlock::getColor(LevelSource* levelSource, const BlockPos& pos, int) {

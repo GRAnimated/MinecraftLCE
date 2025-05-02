@@ -76,6 +76,7 @@ public:
 
     Block* getBlock();
     const BlockState* any();
+    const BlockState* getPossibleBlockStates();
 
 private:
     char filler[0x40];

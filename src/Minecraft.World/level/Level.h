@@ -6,6 +6,7 @@
 #include "Minecraft.World/ArrayWithLength.h"
 #include "Minecraft.World/level/GameRules.h"
 #include "Minecraft.World/level/storage/LevelSource.h"
+#include "Minecraft.World/phys/AABB.h"
 #include "Minecraft.World/sounds/SoundSource.h"
 
 class TickNextTickData;
@@ -151,6 +152,9 @@ public:
 
     void blockEntityChanged(BlockPos const&, std::shared_ptr<BlockEntity>);
     void checkSession();  // RETURN TYPE UNKNOWN
+
+    std::vector<AABB> getCollisionAABBs(std::shared_ptr<Entity> const&, const AABB*, bool, bool, bool);
+
     int dword8;
     char gapC[36];
     void* qword30;

@@ -83,7 +83,7 @@ void OldChunkStorage::save(LevelChunk* chunk, Level* lvl, DataOutputStream* out)
         // ((__int64)(v20[1] - *v20) >> 4) ))
         for (TickNextTickData* tick : *ticks) {
             CompoundTag* tickTag = new CompoundTag();
-            tickTag->putInt(L"i", Block::getId(tick->block));
+            tickTag->putInt(L"i", tick->block->getId());
             tickTag->putInt(L"x", tick->pos->getX());
             tickTag->putInt(L"y", tick->pos->getY());
             tickTag->putInt(L"z", tick->pos->getZ());

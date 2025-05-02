@@ -26,8 +26,8 @@ public:
     int getRenderLayer() override;
     void entityInside(Level* level, const BlockPos& pos, const BlockState* blockState,
                       std::shared_ptr<Entity> const&) override;
-    std::shared_ptr<ItemInstance> getCloneItemInstance(Level* level, const BlockPos& pos,
-                                                       const BlockState* blockState) override;
+    not_null_ptr<ItemInstance> getCloneItemInstance(Level* level, const BlockPos& pos,
+                                                    const BlockState* blockState) override;
     BlockStateDefinition* createBlockStateDefinition() override;
     virtual bool trySpawnPortal(Level*, BlockPos const&, bool);
 };

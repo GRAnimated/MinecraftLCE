@@ -7,4 +7,6 @@ public:
     BlockItem(Block* block);
 
     Block* getBlock();
+
+    void* filler[2];
 };

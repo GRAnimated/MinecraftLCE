@@ -32,9 +32,11 @@ public:
 
     static Item* byId(int id);
     static void registerBlock(Block* block);
+    static void registerBlock(Block* block, Item*);
     static Item* byBlock(Block* block);
     static Item* byString(const std::wstring& string);
-    static void registerItem(int id, const std::wstring& name, Item* item);
+    static void registerItem(int id, const std::wstring& name_id, Item* item);
+    static void registerItem(int id, ResourceLocation const& name_id, Item* item);
 
     virtual not_null_ptr<ItemInstance> getDefaultInstance(const std::shared_ptr<ItemInstance>&);
     virtual bool verifyTagAfterLoad(CompoundTag*);

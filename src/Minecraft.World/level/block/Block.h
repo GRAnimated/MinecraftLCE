@@ -118,9 +118,10 @@ public:
     virtual void getDestroyProgress(const BlockState* blockState, std::shared_ptr<Player> player,
                                     Level* level, const BlockPos& pos);
     virtual void spawnResources(Level* level, const BlockPos& pos, const BlockState* blockState, int);
-    virtual void spawnResources(Level* level, const BlockPos& pos, const BlockState* blockState, float, int);
+    virtual void spawnResources(Level* level, const BlockPos& pos, const BlockState* blockState, float chance,
+                                int fortuneLevel);
     virtual void popExperience(Level* level, const BlockPos& pos, int);
-    virtual void getSpawnResourcesAuxValue(const BlockState* blockState);
+    virtual int getSpawnResourcesAuxValue(const BlockState* blockState);
     virtual void getExplosionResistance(std::shared_ptr<Entity>);
     virtual void clip(const BlockState* blockState, Level* level, const BlockPos& pos, Vec3*, Vec3*);
     virtual void clip(const BlockPos& pos, Vec3*, Vec3*, AABB const*);
@@ -173,8 +174,8 @@ public:
     virtual float getShadeBrightness(const BlockState* blockState);
     virtual void fallOn(Level* level, const BlockPos& pos, std::shared_ptr<Entity>, float);
     virtual void updateEntityAfterFallOn(Level* level, std::shared_ptr<Entity>);
-    virtual std::shared_ptr<ItemInstance> getCloneItemInstance(Level* level, const BlockPos& pos,
-                                                               const BlockState* blockState);
+    virtual not_null_ptr<ItemInstance> getCloneItemInstance(Level* level, const BlockPos& pos,
+                                                            const BlockState* blockState);
     virtual void playerWillDestroy(Level* level, const BlockPos& pos, const BlockState* blockState,
                                    std::shared_ptr<Player> player);
     virtual void handleRain(Level* level, const BlockPos& pos);
@@ -183,7 +184,7 @@ public:
     virtual bool isMatching(Block*);
     virtual void hasAnalogOutputSignal(const BlockState* blockState);
     virtual void getAnalogOutputSignal(const BlockState* blockState, Level* level, const BlockPos& pos);
-    virtual void setIconName(const std::wstring&);
+    virtual Item* setIconName(const std::wstring&);
     virtual void getIconName();
     virtual void registerIcons(IconRegister*);
     virtual void getTileItemIconName();
@@ -194,7 +195,7 @@ public:
     virtual Texture* getTexture(const Direction* direction);
     virtual void getInventoryRenderState(const BlockState* blockState);
     virtual BlockStateDefinition* createBlockStateDefinition();
-    virtual void getBlockStateDefinition();
+    virtual BlockStateDefinition* getBlockStateDefinition();
     virtual void getOffsetType();
     virtual void getOffset(const BlockState* blockState, LevelSource* levelSource, const BlockPos& pos);
     virtual void getSoundType();
@@ -204,7 +205,7 @@ public:
     virtual bool isLiquidBlock();
 
     Material* getMaterial();
-    static int getId(Block* block);
+    int getId();
 
     static Block* byId(int id);
     static void popResource(Level*, BlockPos const&, not_null_ptr<ItemInstance>);

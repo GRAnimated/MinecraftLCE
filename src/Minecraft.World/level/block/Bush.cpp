@@ -17,6 +17,10 @@ Bush::Bush() : Block(Material::PLANTS) {
     _init();
 }
 
+Bush::Bush(Material* material) : Block(material) {
+    _init();
+}
+
 void Bush::_init() {
     setTicking(true);
 }

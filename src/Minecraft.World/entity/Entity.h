@@ -1,14 +1,19 @@
 #pragma once
 
+#include "Minecraft.World/ArrayWithLength.h"
 #include "Minecraft.World/InteractionHand.h"
 #include "Minecraft.World/eINSTANCEOF.h"
 #include "Minecraft.World/entity/CommandSender.h"
+#include "Minecraft.World/sounds/SoundSource.h"
+#include <cstdint>
 #include <memory>
 #include <set>
 
 #include "types.h"
 
-class MoverType;
+enum MoverType {
+
+};
 class Block;
 class BlockPos;
 class BlockState;
@@ -51,7 +56,7 @@ public:
     virtual void tick();
     virtual void baseTick();
     virtual void processDimensionDelay();
-    virtual void getPortalWaitTime();
+    virtual int getPortalWaitTime();
     virtual void setSecondsOnFire(int);
     virtual void clearFire();
     virtual void outOfWorld();
@@ -63,16 +68,17 @@ public:
     virtual void checkInsideBlocks();
     virtual void onInsideBlock(BlockState const*);
     virtual void playStepSound(BlockPos const&, Block*);
-    virtual void playFlySound(float);
-    virtual void makeFlySound();
+    virtual float playFlySound(float);
+    virtual bool makeFlySound();
     virtual void playSound(SoundEvent const*, float, float);
-    virtual void isSilent();
+    virtual bool isSilent();
     virtual void setSilent(bool);
     virtual void isNoGravity();
     virtual void setNoGravity(bool);
-    virtual void makeStepSound();
+    // more understandable would be "canMakeStepSound" or "shouldMakeStepSound"
+    virtual bool makeStepSound();
     virtual void checkFallDamage(double, bool, Block*, BlockPos const&);
-    virtual void getCollideBox();
+    virtual AABB* getCollideBox();
     virtual void burn(int);
     virtual void causeFallDamage(float, float);
     virtual void isInWater();
@@ -152,7 +158,7 @@ public:
     virtual void setIsIdle(bool);
     virtual void isSprinting();
     virtual void setSprinting(bool);
-    virtual void isGlowing();
+    virtual bool isGlowing();
     virtual void setGlowing(bool);
     virtual void isInvisible();
     virtual void isInvisibleTo(std::shared_ptr<Player>);
@@ -207,7 +213,7 @@ public:
     virtual Direction* getDirection();
     virtual void getMotionDirection();
     virtual void broadcastToPlayer(std::shared_ptr<ServerPlayer>);
-    virtual void getBoundingBox();
+    virtual const AABB* getBoundingBox();
     virtual void getBoundingBoxForCulling();
     virtual void setBoundingBox(AABB*);
     virtual void getEyeHeight();
@@ -234,7 +240,7 @@ public:
     virtual void isControlledByLocalInstance();
     virtual void getVehicle();
     virtual void getPistonPushReaction();
-    virtual void getSoundSource();
+    virtual SoundSource::ESoundSource getSoundSource();
     virtual bool isCreative();
     virtual void isDespawnProtected();
     virtual void setDespawnProtected();
@@ -253,43 +259,73 @@ public:
     virtual void getFireImmuneTicks();
 
     Vec3 getPos(float);
-    bool isType(int);
+    bool isType(eINSTANCEOF);
+    void setSharedFlag(int, bool);
+    Vec3* calculateViewVector(float, float);
 
-    void* qword18;
-    void* qword20;
-    void* qword28;
-    void* qword30;
-    void* qword38;
-    void* qword40;
-    void* qword48;
-    void* qword50;
-    void* qword58;
-    void* qword60;
-    void* qword68;
-    void* qword70;
-    void* qword78;
-    void* qword80;
-    void* qword88;
-    Vec3 motion;
-    float yaw;
-    float pitch;
-    void* filler[2];
-    bool _c0;
-    bool _c1;
-    bool _c2;
-    bool _c3;
-    void* filler2[3];
+    int mEntityId;
+    bool mPreventEntitySpawning;
+    std::vector<std::weak_ptr<Entity>> mPassengers;
+    int mRideCooldown;
+    std::shared_ptr<Entity> mRidingEntity;
+    bool mForceSpawn;
+    Level* mLevel;
+    double mPrevPosX;
+    double mPrevPosY;
+    double mPrevPosZ;
+    double mPosX;
+    double mPosY;
+    double mPosZ;
+    Vec3 mMotion;
+    float mYaw;
+    float mPitch;
+    float mPrevYaw;
+    float mPrevPitch;
+    AABB* mBoundingBox;
+    bool mOnGround;
+    bool mCollidedHorizontally;
+    bool mCollidedVertically;
+    bool mCollided;
+    bool mVelocityChanged;
+    int mFire;
+    void* mFillererek[2];
     int dwordE0;
-    char gapE4[76];
-    Random* rand;
-    void* qword148;
-    void* qword150;
-    SynchedEntityData* entityData;
-    char gap[16];
+    int dwordE4;
+    int dwordE8;
+    bool mIsInWeb;
+    bool mOutsideWorldBorder;
+    bool mCipa;
+    bool mRemoved;
+    float mWidth;
+    float mHeight;
+    float mPrevDistanceWalkedModified;
+    float mDistanceWalkedModified;
+    float mDistanceWalkedOnStepModified;
+    float mFallDistance;
+    uint16_t idk;
+    uint16_t mFallTicks2;
+    float mNextStepDistance;
+    float mNextFlap;
+    void* mFill[3];
+    float mStepHeight;
+    bool mNoClip;
+    void* mUnk138;
+    Random* mRand;
+    int mTicksExisted;
+    bool mInWater;
+    int mHurtResistantTime;
+    bool mFirstUpdate;
+    bool mIsImmuneToFire;
+    SynchedEntityData* mEntityData;
     void* qword160;
-    char gap168[64];
-    int dword1A8;
-    char gap1AC[28];
+    char gap168[52];
+    int mTimeUntilPortal;
+    bool mInPortal;
+    int mPortalCounter;
+    int mDimension;
+    BlockPos mPortalEntranceBlock;
+    Vec3* mLastPortalVec;
+    Direction* mTeleportDirection;
     void* qword1C8;
     char gap1D0[8];
     void* qword1D8;
@@ -302,22 +338,24 @@ public:
     void* qword210;
     int dword218;
     char gap21C[4];
-    void* qword220;
+    bool mGlowing;
     void* qword228;
     char gap230[8];
     void* qword238;
     void* qword240;
-    char gap248[8];
-    void* qword250;
-    int dword258;
-    char gap25C[16];
-    void* qword26C;
-    void* qword274;
-    void* qword27C;
-    void* qword284;
-    int dword2A4;
-    void* qword2A8;
-    void* qword2B0;
+    arrayWithLength<double> mPistonDeltas;
+    long mPistonDeltasGameTime;
+    int mType;
+    void* qword268;
+    void* qword270;
+    void* qword278;
+    void* qword280;
+    void* qword288;
+    int dword290;
+    void* qword298;
+    void* qword2A0;
+    void* fillToSize0x2B8[2];  // I assume that Entity is 0x2B8 in size because if you look at typeinfo it
+                               // seems that second type is placed on 0x2B8 (idk how to put this in words)
 };
 
-ASSERT_SIZEOF(Entity, 0x2a8)
+ASSERT_SIZEOF(Entity, 0x2B8)

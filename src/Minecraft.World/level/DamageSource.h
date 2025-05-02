@@ -3,6 +3,7 @@
 class DamageSource {
 public:
     static const DamageSource* BYPASS_ARMOUR;
+    static DamageSource* IN_FIRE;
 
     static DamageSource* CreateThorns(std::shared_ptr<Entity>);
 

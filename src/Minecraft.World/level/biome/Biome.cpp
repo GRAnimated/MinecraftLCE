@@ -53,10 +53,10 @@ void Biome::BiomeProperties::waterColor(int waterColor) {
 Biome::Biome(Biome::EBiomeIDs biomeID, Biome::BiomeProperties* biomeProperties) : mBiomeID(biomeID) {
     mPreviewColor = Preview_Plains;
 
-    mGrass.id = Block::getId(Blocks::GRASS);
+    mGrass.id = Blocks::GRASS->getId();
     mGrass.data = Blocks::GRASS->convertBlockStateToLegacyData(Blocks::GRASS->defaultBlockState());
 
-    mDirt.id = Block::getId(Blocks::DIRT);
+    mDirt.id = Blocks::DIRT->getId();
     mDirt.data = Blocks::DIRT->convertBlockStateToLegacyData(Blocks::DIRT->defaultBlockState());
 
     mBiomeName = biomeProperties->mBiomeName;

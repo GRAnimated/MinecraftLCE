@@ -2,6 +2,8 @@
 
 #include "Minecraft.Client/resources/IdMap.h"
 
+class BlockState;
+
 template <typename T>
 class IdMapper : public IdMap<T> {
 public:
