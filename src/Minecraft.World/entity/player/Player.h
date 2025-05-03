@@ -1,10 +1,18 @@
 #pragma once
 
+#include "types.h"
 #include "Minecraft.World/ArrayWithLength.h"
+#include "Minecraft.World/PlayerUID.h"
 #include "Minecraft.World/eINSTANCEOF.h"
 #include "Minecraft.World/entity/Entity.h"
 #include "Minecraft.World/entity/LivingEntity.h"
+#include "Minecraft.World/entity/player/Abilities.h"
+#include "Minecraft.World/entity/player/FoodData.h"
+#include "Minecraft.World/entity/player/StatsUID.h"
+#include "Minecraft.World/item/ItemInstance.h"
+#include "Minecraft.World/level/gamemode/minigames/glide/PowerupItems.h"
 #include "Minecraft.World/sounds/SoundSource.h"
+#include <cstdint>
 #include <memory>
 #include <string>
 
@@ -21,6 +29,8 @@ class InteractionObject;
 class AbstractHorse;
 class Achievement;
 class GameType;
+class Inventory;
+class PlayerEnderChestContainer;
 
 class Player : public LivingEntity {
 public:
@@ -41,11 +51,11 @@ public:
     virtual void doWaterSplashEffect() override;
     virtual void push(std::shared_ptr<Entity>) override;
     virtual void hurt(DamageSource*, float) override;
-    virtual void isPickable() override;
+    virtual bool isPickable() override;
     virtual void shouldRenderAtSqrDistance(double) override;
     virtual void readAdditionalSaveData(CompoundTag*) override;
     virtual void addAdditonalSaveData(CompoundTag*) override;
-    virtual void isInWall() override;
+    virtual bool isInWall() override;
     virtual void rideTick() override;
     virtual void getRidingHeight() override;
     virtual void stopRiding() override;
@@ -54,14 +64,14 @@ public:
     virtual void getHandSlots() override;
     virtual void getArmorSlots() override;
     virtual void setItemSlot(EquipmentSlot const*, not_null_ptr<ItemInstance>) override;
-    virtual void isInvisibleTo(std::shared_ptr<Player>) override;
+    virtual bool isInvisibleTo(std::shared_ptr<Player>) override;
     virtual void getTeam() override;
     virtual void setInvisible(bool) override;
     virtual void ShouldRenderShadow() override;
     virtual void killed(std::shared_ptr<LivingEntity>) override;
     virtual void makeStuckInWeb() override;
     virtual void getName() override;
-    virtual void isPushedByWater() override;
+    virtual bool isPushedByWater() override;
     virtual std::wstring getDisplayName() override;
     virtual void shouldShowName() override;
     virtual void onSyncedDataUpdated(EntityDataAccessor_Base const*) override;
@@ -78,7 +88,7 @@ public:
     virtual void registerAttributes() override;
     virtual void onChangedBlock(BlockPos const&) override;
     virtual void getExperienceReward(std::shared_ptr<Player>) override;
-    virtual void isAlwaysExperienceDropper() override;
+    virtual bool isAlwaysExperienceDropper() override;
     virtual void blockUsingShield(std::shared_ptr<LivingEntity> const&) override;
     virtual void die(DamageSource*) override;
     virtual void getHurtSound(DamageSource*) override;
@@ -89,18 +99,18 @@ public:
     virtual void actuallyHurt(DamageSource, float) override;
     virtual void getItemSlot(EquipmentSlot const*) override;
     virtual void getItemInHandIcon(not_null_ptr<ItemInstance>, int) override;
-    virtual void isImmobile() override;
+    virtual bool isImmobile() override;
     virtual void jumpFromGround() override;
     virtual void travel(float, float, float) override;
     virtual void getSpeed() override;
-    virtual void isSleeping() override;
+    virtual bool isSleeping() override;
     virtual void aiStep() override;
     virtual void serverAiStep() override;
     virtual void pushEntities() override;
     virtual void getAbsorptionAmount() override;
     virtual void setAbsorptionAmount(float) override;
     virtual void getMainArm() override;
-    virtual void IsCreativeFlying();
+    virtual bool IsCreativeFlying();
     virtual void updateFrameTick();
     virtual void closeContainer();
     virtual void touch(std::shared_ptr<Entity>);
@@ -131,13 +141,13 @@ public:
     virtual void crit(std::shared_ptr<Entity>);
     virtual void magicCrit(std::shared_ptr<Entity>);
     virtual void respawn();
-    virtual void isLocalPlayer();
+    virtual bool isLocalPlayer();
     virtual void getGameProfile();
     virtual void startSleepInBed(BlockPos const&, bool);
     virtual void stopSleepInBed(bool, bool, bool);
     virtual void displayClientMessage(int, bool);
     virtual void getRespawnPosition();
-    virtual void isRespawnForced();
+    virtual bool isRespawnForced();
     virtual void setRespawnPosition(BlockPos*, bool);
     virtual void hasAchievement(Achievement*);
     virtual void awardStat(Stat*, arrayWithLength<unsigned char>);
@@ -151,7 +161,7 @@ public:
     virtual void mayUseItemAt(BlockPos const&, Direction const*, not_null_ptr<ItemInstance>);
     virtual void onUpdateAbilities();
     virtual void setGameMode(GameType const*);
-    virtual void pure_virtual() = 0;
+    virtual void isSpectator() = 0;
     virtual void GetScoreboard();
     virtual void onCrafted(not_null_ptr<ItemInstance>);
     virtual void getTexture();
@@ -162,13 +172,121 @@ public:
     virtual void SpectatePlayerNext();
     virtual void SpectatePlayerPrev();
     virtual void StopSpectatingPlayer();
-    virtual void IsSpectatingOtherPlayer();
+    virtual bool IsSpectatingOtherPlayer();
     virtual void pure_virtual_12() = 0;
     virtual void GetGameMode();
     virtual void AutoEquip(not_null_ptr<ItemInstance>, bool&);
     virtual void OnEquipArmor(not_null_ptr<ItemInstance>);
     virtual void OnTakeFromAnvil(not_null_ptr<ItemInstance>);
 
+    void init();
+    void updatePlayerSize();
+    void SetPowerupTicks(PowerupItems::eGlide_Timed_Powerup_ID, int ticks);
+    // this is gameHostOption for player
+    void setBool7FC(bool);
+
     // dunno the type
     static std::vector<void*> sSkins;
+
+    std::shared_ptr<Inventory> mInventory = nullptr;
+    PlayerEnderChestContainer* mEnderChestInventory = nullptr;
+    void* qword5C8 = nullptr;
+    void* mInventoryMenu;
+    void* mContainerMenu;
+    FoodData mFoodData;
+    int align;
+    int mJumpTriggerTime;
+    float mOBob;
+    float mBob;
+    int dword600;
+    int dword604;
+    std::wstring mCustomSkinName;
+    std::wstring mCustomCapeName;
+    int dword638;
+    char gap63C[4];
+    double mXCloakO;
+    double mYCloakO;
+    double mZCloakO;
+    double mXCloak;
+    double mYCloak;
+    double mZCloak;
+    std::wstring mNetworkName;
+    char mSleeping;
+    BlockPos* respawnPosition;
+    int mSleepTimer;
+    int somethingrelatedtorespawn;
+    void* qword6A0;
+    int dword6A8;
+    char gap6AC[4];
+    void* qword6B0;
+    BlockPos* mRespawnPosition;
+    bool mRespawnForced;
+    char gap6C1[7];
+    void* qword6C8;
+    int WALK_ONE_CM;
+    int WALK_ON_WATER_ONE_CM;
+    int WALK_UNDER_WATER_ONE_CM;
+    int FALL_ONE_CM;
+    int CLIMB_ONE_CM;
+    int MINECART_ONE_CM;
+    int BOAT_ONE_CM;
+    int PIG_ONE_CM;
+    Abilities mAbilities;
+    int mExperienceLevel;
+    int mTotalExperience;
+    float mExperienceProgress;
+    char gap70C[4];
+    void* qword710 = nullptr;
+    void* qword718 = nullptr;
+    int mEnchantmentSeed;
+    int mDefaultFlySpeed;
+    void* qword728;
+    int mLastLevelUpTime;
+    int dword734;
+    std::wstring mGameProfile;
+    bool mReducedDebugInfo;
+    not_null_ptr<ItemInstance> mLastItemInMainHand;
+    arrayWithLength<not_null_ptr<ItemInstance>> mHandSlots;
+    void* lakslkds[2];
+    CameraController* mCameraController;
+    char byte790;
+    char byte791;
+    char byte792;
+    char gap793[5];
+    PlayerUID playerUID1 = PlayerUID(0);
+    PlayerUID playerUID2 = PlayerUID(0);
+    StatsUID statsUID = StatsUID();
+    int dword7F8;
+    bool bool7FC;
+    bool bool7FD;
+    char gap7FE[2];
+    arrayWithLength<not_null_ptr<ItemInstance>> mArmorSlots;
+    void* qword810;
+    int dword818;
+    int dword81C;
+    int dword820;
+    unsigned int mSkinId;
+    unsigned int mSkinCapeId;
+    unsigned int dword82C;
+    int dword830;
+    bool bool834;
+    void* qword838;
+    bool bool840;
+    int mGamePrivileges;
+    void* qword848;
+    uint16_t word850;
+    char gap852[6];
+    std::shared_ptr<Entity> mCameraEntity;
+    bool mPositionLocked;
+    bool mGlideCollisionDamage;
+    char gap86A[6];
+    double mLiftForceModifier;
+    char gap878[8];
+    int dword880;
+    char byte884;
+    int mGlidepowerUpTicks[3];
+    char byte894;
+    void* qword898;
+    void* qword8A0;
+    int dword8A8;
 };

@@ -50,7 +50,7 @@ void WebBlock::entityInside(Level* level, const BlockPos& pos, const BlockState*
     entity->makeStuckInWeb();
     if (entity->GetType() == eFireworksRocketEntity) {
         if (Minecraft::GetInstance()->GetMiniGame()->HasFeatureDirectionalFireworks())
-            entity->mCollided = true;
+            entity->mCollision = true;
     }
 }
 

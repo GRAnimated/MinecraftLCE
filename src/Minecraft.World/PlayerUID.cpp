@@ -3,5 +3,5 @@
 #include <cstring>
 
 PlayerUID::PlayerUID(int uid) {
-    memset(mUIDParts, 0, sizeof(mUIDParts));
+    memset(this, 0, 0x20);
 }

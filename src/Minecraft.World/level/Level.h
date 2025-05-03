@@ -154,6 +154,9 @@ public:
     void checkSession();  // RETURN TYPE UNKNOWN
 
     std::vector<AABB> getCollisionAABBs(std::shared_ptr<Entity> const&, const AABB*, bool, bool, bool);
+    bool hasBlockCubes(const AABB*);
+
+    BlockPos getSharedSpawnPos();
 
     int dword8;
     char gapC[36];
