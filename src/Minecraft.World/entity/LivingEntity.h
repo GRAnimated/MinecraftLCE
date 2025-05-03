@@ -1,15 +1,23 @@
 #pragma once
 #include "types.h"
+#include "Minecraft.World/InteractionHand.h"
 #include "Minecraft.World/enchantment/Enchantment.h"
 #include "Minecraft.World/entity/Entity.h"
 #include "Minecraft.World/item/ItemInstance.h"
+#include "Minecraft.World/level/Level.h"
+#include "Minecraft.Core/NonNullList.h"
+#include <cstdint>
+#include <unordered_map>
 
 class Attribute;
 class MobEffect;
 class MobEffectInstance;
+class CombatTracker;
 
 class LivingEntity : public Entity {
 public:
+    LivingEntity(Level*);
+
     int getUseItemRemainingTicks();
 
     virtual eINSTANCEOF GetType() override;
@@ -25,11 +33,11 @@ public:
     virtual void markHurt() override;
     virtual void hurt(DamageSource*, float) override;
     virtual Vec3* getViewVector(float) override;
-    virtual void isPickable() override;
-    virtual void isPushable() override;
+    virtual bool isPickable() override;
+    virtual bool isPushable() override;
     virtual void readAdditionalSaveData(CompoundTag*) override;
     virtual void addAdditonalSaveData(CompoundTag*) override;
-    virtual void isAlive() override;
+    virtual bool isAlive() override;
     virtual void rideTick() override;
     virtual void stopRiding() override;
     virtual void lerpTo(double, double, double, float, float, int, bool) override;
@@ -46,14 +54,14 @@ public:
     virtual void setBoundingBox(AABB*) override;
     virtual void stopCurrentLerp() override;
     virtual void registerAttributes();
-    virtual void isWaterMob();
+    virtual bool isWaterMob();
     virtual void onChangedBlock(BlockPos const&);
-    virtual void isBaby();
+    virtual bool isBaby();
     virtual void tickDeath();
     virtual void shouldDropExperience();
     virtual void decreaseAirSupply(int);
     virtual void getExperienceReward(std::shared_ptr<Player>);
-    virtual void isAlwaysExperienceDropper();
+    virtual bool isAlwaysExperienceDropper();
     virtual Random* getRandom();
     virtual void getLastHurtByMob();
     virtual void getLastHurtByMobTimestamp();
@@ -72,7 +80,7 @@ public:
     virtual void addEffect(MobEffectInstance*, std::shared_ptr<Entity> const&);
     virtual void addEffectNoUpdate(MobEffectInstance*);
     virtual void canBeAffected(MobEffectInstance*);
-    virtual void isInvertedHealAndHarm();
+    virtual bool isInvertedHealAndHarm();
     virtual void removeEffectNoUpdate(MobEffect*);
     virtual void removeEffect(MobEffect*);
     virtual void onEffectAdded(MobEffectInstance*);
@@ -85,7 +93,7 @@ public:
     virtual void blockUsingShield(std::shared_ptr<LivingEntity> const&);
     virtual void playHurtSound(DamageSource*);
     virtual void checkTotemDeathProtection(DamageSource*);
-    virtual void isDamageSourceBlocked(DamageSource*);
+    virtual bool isDamageSourceBlocked(DamageSource*);
     virtual void breakItem(not_null_ptr<ItemInstance>);
     virtual void die(DamageSource*);
     virtual void dropEquipment(bool, int);
@@ -96,7 +104,7 @@ public:
     virtual void dropAllDeathLoot(bool, int, DamageSource*);
     virtual void dropDeathLoot(bool, int);
     virtual void onLadder();
-    virtual void isShootable();
+    virtual bool isShootable();
     virtual void getArmorValue();
     virtual void hurtArmor(float);
     virtual void hurtCurrentlyUsedShield(float);
@@ -122,7 +130,7 @@ public:
     virtual void getItemInHandIcon(not_null_ptr<ItemInstance>, int);
     virtual void getSoundVolume();
     virtual void getVoicePitch();
-    virtual void isImmobile();
+    virtual bool isImmobile();
     virtual void findStandUpPosition(std::shared_ptr<Entity>);
     virtual void getJumpPower();
     virtual void jumpFromGround();
@@ -134,7 +142,7 @@ public:
     virtual void getSpeed();
     virtual void setSpeed(float);
     virtual void doHurtTarget(std::shared_ptr<Entity>);
-    virtual void isSleeping();
+    virtual bool isSleeping();
     virtual void tickHeadTurn(float, float);
     virtual void aiStep();
     virtual void serverAiStep();
@@ -145,7 +153,7 @@ public:
     virtual void canSee(std::shared_ptr<Entity>);
     virtual void getAttackAnim(float);
     virtual void getSweptVolume();
-    virtual void isEffectiveAi();
+    virtual bool isEffectiveAi();
     virtual void getAbsorptionAmount();
     virtual void setAbsorptionAmount(float);
     virtual void onEnterCombat();
@@ -162,10 +170,102 @@ public:
     virtual void releaseUsingItem();
     virtual void releaseUsingItem(int);
     virtual void stopUsingItem();
-    virtual void isBlocking();
-    virtual void isFallFlying();
+    virtual bool isBlocking();
+    virtual bool isFallFlying();
     virtual void getFallFlyingTicks();
-    virtual void isAffectedByPotions();
+    virtual bool isAffectedByPotions();
     virtual void attackable();
     virtual void setRecordPlayingNearby(BlockPos const&, bool);
+
+    Attribute* mAttributes;
+    CombatTracker* mCombatTracker;
+    std::unordered_map<MobEffect*, MobEffectInstance*> mActivePotionsMap;
+    NonNullList<not_null_ptr<ItemInstance>> mLastHandItemStacks;
+    NonNullList<not_null_ptr<ItemInstance>> mLastArmorItemStacks;
+    bool mSwinging;
+    InteractionHand::EInteractionHand mSwingingArm;
+    int mSwingTime;
+    int mSwingTime2;
+    int mRemoveArrowTime;
+    int mHurtTime;
+    int mHurtDuration;
+    float mHurtDir;
+    int mDeathTime;
+    float mOAttackAnim;
+    float mAttackAnim;
+    int mAttackStrengthTicker;
+    float mAnimationSpeedOld;
+    float mAnimationSpeed;
+    float mAnimationPosition;
+    int dword36C;
+    float mTilto;
+    float mTilt;
+    float mRandomUnused2;
+    float mRandomUnused1;
+    float mYBodyRot;
+    float mYBodyRotO;
+    float mYHeadRot;
+    float mYHeadRot0;
+    float mFlyingSpeed;
+    void* qword398;
+    void* qword3A0;
+    char byte3A8;
+    int dword3AC;
+    void* qword3B0;
+    char byte3B8;
+    void* qword3C0;
+    uint16_t word3C8;
+    void* qword3D0;
+    void* qword3D8;
+    char gap3E0;
+    char byte3E1;
+    void* qword3E8;
+    char byte3F0;
+    int dword3F4;
+    char gap3F8[24];
+    char byte410;
+    std::shared_ptr<Player> mLastHurtByPlayer;
+    int mLastHurtByPlayerTime;
+    int mIsDead;
+    int mNoActionTime;
+    float mORun;
+    float mRun;
+    float mAnimStep;
+    float mOAnimStep;
+    float mRotOffs;
+    int mDeathScore;
+    float mLastHurt;
+    bool mJumping;
+    float mXxa;
+    float mYya;
+    float mZza;
+    float mYRotA;
+    int mLerpSteps;
+    double mLerpX;
+    double mLerpY;
+    double mLerpZ;
+    double mLerpYRot;
+    double mLerpXRot;
+    bool mEffectsDirty;
+    std::shared_ptr<LivingEntity> mLastHurtByMob;
+    int mLastHurtByMobTimestamp;
+    std::shared_ptr<LivingEntity> mLastHurtMob;
+    int mLastHurtMobTimestamp;
+    float mSpeed;
+    int mNoJumpDelay;
+    float mAbsorptionAmount;
+    std::shared_ptr<ItemInstance> mUseItem;  // probably not_null_ptr
+    int mUseItemRemaining;
+    int mFallFlyTicks;
+    BlockPos mLastPos;
+    DamageSource* mLastDamageSource;
+    long mLastDamageStamp;
+    char byte508;
+    int dword50C;
+    void* qword510;
+    void* qword518;
+    void* qword520;
+    char gap528[128];
+    char byte5A8;
+    int dword5AC;
 };

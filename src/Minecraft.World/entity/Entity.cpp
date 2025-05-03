@@ -23,8 +23,8 @@ void Entity::kill() {
 // NON_MATCHING: some shared_ptr crap
 void Entity::resetPos() {
     if (this->mLevel) {
-        while (this->mPosY > 0.0 && this->mPosY < 256.0) {
-            this->setPos(this->mPosX, this->mPosY, this->mPosZ);
+        while (this->mY > 0.0 && this->mY < 256.0) {
+            this->setPos(this->mX, this->mY, this->mZ);
 
             if (this->mLevel
                     ->getCollisionAABBs(shared_from_this(), this->getBoundingBox(), false, false, false)
@@ -32,11 +32,11 @@ void Entity::resetPos() {
                 break;
             }
 
-            ++this->mPosY;
+            ++this->mY;
         }
 
-        this->mMotion.x = this->mMotion.y = this->mMotion.z = 0.0;
-        this->mPitch = 0.0f;
+        this->mDeltaMovement.x = this->mDeltaMovement.y = this->mDeltaMovement.z = 0.0;
+        this->mXRot = 0.0f;
     }
 }
 
@@ -54,25 +54,25 @@ void Entity::setSize(float width, float height) {
         this->mHeight = height;
         if (this->mWidth < widthBefore) {
             double halfWidth = width / 2.0;
-            this->setBoundingBox(AABB::newTemp(this->mPosX - halfWidth, this->mPosY, this->mPosZ - halfWidth,
-                                               this->mPosX + halfWidth, this->mPosY + this->mHeight,
-                                               this->mPosZ + halfWidth));
+            this->setBoundingBox(AABB::newTemp(this->mX - halfWidth, this->mY, this->mZ - halfWidth,
+                                               this->mX + halfWidth, this->mY + this->mHeight,
+                                               this->mZ + halfWidth));
             return;
         }
 
         const AABB* aabb = this->getBoundingBox();
         this->setBoundingBox(AABB::newTemp(aabb->min.x, aabb->min.y, aabb->min.z, aabb->min.x + this->mWidth,
                                            aabb->min.y + this->mHeight, aabb->min.z + this->mWidth));
-        if (this->mWidth > widthBefore && !this->mFirstUpdate && !this->mLevel->mIsLocal) {
+        if (this->mWidth > widthBefore && !this->mFirstTick && !this->mLevel->mIsLocal) {
             this->move((MoverType)0, (widthBefore - this->mWidth), 0.0, (widthBefore - this->mWidth), false);
         }
     }
 }
 
 void Entity::setPos(double x, double y, double z) {
-    this->mPosX = x;
-    this->mPosY = y;
-    this->mPosZ = z;
+    this->mX = x;
+    this->mY = y;
+    this->mZ = z;
     float halfWidth = this->mWidth / 2.0f;
     this->setBoundingBox(
         AABB::newTemp(x - halfWidth, y, z - halfWidth, x + halfWidth, y + this->mHeight, z + halfWidth));
@@ -91,8 +91,8 @@ void Entity::tick() {
 // void baseTick() {} // don't care about this rn
 
 void Entity::processDimensionDelay() {
-    if (this->mTimeUntilPortal > 0)
-        --this->mTimeUntilPortal;
+    if (this->mChangingDimensionDelay > 0)
+        --this->mChangingDimensionDelay;
 }
 
 int Entity::getPortalWaitTime() {
@@ -123,9 +123,9 @@ void Entity::outOfWorld() {
 void Entity::updateDeltaAfterMove(Block* block, double oldX, double oldY, double oldZ, double& newX,
                                   double& newY, double& newZ) {
     if (newX != oldX)
-        this->mMotion.x = 0.0f;
+        this->mDeltaMovement.x = 0.0f;
     if (newZ != oldZ)
-        this->mMotion.z = 0.0f;
+        this->mDeltaMovement.z = 0.0f;
     if (newY != oldY) {
         PIXBeginNamedEvent(0.0f, "Update entity after falling");
         block->updateEntityAfterFallOn(this->mLevel, shared_from_this());
@@ -135,9 +135,9 @@ void Entity::updateDeltaAfterMove(Block* block, double oldX, double oldY, double
 
 void Entity::setLocationFromBoundingbox() {
     const AABB* tempAABB = this->getBoundingBox();
-    this->mPosX = (tempAABB->min.x + tempAABB->max.x) / 2.0;
-    this->mPosY = tempAABB->min.y;
-    this->mPosZ = (tempAABB->min.z + tempAABB->max.z) / 2.0;
+    this->mX = (tempAABB->min.x + tempAABB->max.x) / 2.0;
+    this->mY = tempAABB->min.y;
+    this->mZ = (tempAABB->min.z + tempAABB->max.z) / 2.0;
 }
 
 /* TOO LAZY TO DO SOUNDEVENTS
@@ -162,8 +162,8 @@ bool Entity::makeFlySound() {
 
 void Entity::playSound(SoundEvent const* sound, float volume, float pitch) {
     if (!this->isSilent()) {
-        this->mLevel->playSound(nullptr, this->mPosX, this->mPosY, this->mPosZ, sound, this->getSoundSource(),
-                                volume, pitch, 16.0f);
+        this->mLevel->playSound(nullptr, this->mX, this->mY, this->mZ, sound, this->getSoundSource(), volume,
+                                pitch, 16.0f);
     }
 }
 
@@ -204,13 +204,13 @@ void Entity::burn(int howMuch) {
 
 // NON_MATCHING: some magic crap
 Vec3* Entity::getViewVector(float partialTicks) {
-    float yaw = this->mYaw;
+    float yaw = this->mYRot;
     float pitch;
     if (partialTicks == 1.0f) {
-        pitch = this->mPitch;
+        pitch = this->mXRot;
     } else {
-        yaw = this->mPrevYaw + ((yaw - this->mPrevYaw) * partialTicks);
-        pitch = this->mPrevPitch + ((this->mPitch - this->mPrevPitch) * partialTicks);
+        yaw = this->mYRotO + ((yaw - this->mYRotO) * partialTicks);
+        pitch = this->mXRotO + ((this->mXRot - this->mXRotO) * partialTicks);
     }
     return this->calculateViewVector(pitch, yaw);
 }
