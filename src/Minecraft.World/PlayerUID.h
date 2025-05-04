@@ -8,7 +8,7 @@ public:
 
     char char0;
     char gap1[7];
-    void* qword8;
-    void* qword10;
+    long mMostSigBits;  // grabbed from JDK, doubt those are correct but yeah, pure guess
+    long mLeastSigBits;
     char byte18;
 };

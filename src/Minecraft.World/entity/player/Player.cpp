@@ -3,6 +3,7 @@
 #include "Minecraft.Client/platform/NX/Platform.h"
 #include "Minecraft.World/PlayerUID.h"
 #include "Minecraft.World/entity/LivingEntity.h"
+#include "Minecraft.World/entity/player/CameraController.h"
 #include "Minecraft.World/inventory/Inventory.h"
 #include "Minecraft.World/inventory/InventoryMenu.h"
 #include "Minecraft.World/level/Level.h"
@@ -19,7 +20,7 @@ Player::Player(Level* level, std::wstring const& a3) : LivingEntity(level) {
     this->mContainerMenu = this->mInventoryMenu;
     BlockPos sharedSpawnPos = level->getSharedSpawnPos();
     this->moveTo((double)sharedSpawnPos.getX() + 0.5, (double)(sharedSpawnPos.getY() + 1),
-                 (double)sharedSpawnPos.getZ() + 0.5, 0.0F, 0.0F);
+                 (double)sharedSpawnPos.getZ() + 0.5, 0.0f, 0.0f);
     this->mRotOffs = 180.0f;
     this->dword820 = 1;
     this->mSkinCapeId = 0;
@@ -38,8 +39,67 @@ Player::Player(Level* level, std::wstring const& a3) : LivingEntity(level) {
     this->bool7FD = false;
 }
 
+bool Player::IsCreativeFlying() {
+    return this->mAbilities.mIsFlying;
+}
+
+// void Player::updateFrameTick() {}
+
+void Player::closeContainer() {
+    this->mContainerMenu = this->mInventoryMenu;
+}
+
+void Player::touch(std::shared_ptr<Entity> entToTouch) {
+    entToTouch->playerTouch(std::static_pointer_cast<Player>(shared_from_this()));
+}
+
+/*  SynchedEntityData crap
+   void Player::getScore(){}
+   void setScore(int);
+   void increaseScore(int);
+*/
+
+// void Player::drop(bool allItems) {}
+// void Player::reallyDrop(std::shared_ptr<ItemEntity>);
+
+int Player::GetThirdPersonView(bool) {
+    return 0;
+}
+
+void Player::SetThirdPersonView(int) {}
+
+bool Player::CanChangeThirdPersonView() {
+    return false;
+}
+
+CameraController* Player::GetCameraController() {
+    return this->mCameraController;
+}
+
+void Player::SetCameraController(CameraController* newCameraController, bool v5) {
+    if (this->byte790)
+        if (this->mCameraController)
+            delete this->mCameraController;
+
+    this->byte790 = v5;
+    this->mCameraController = newCameraController;
+    if (newCameraController) {
+        this->SetThirdPersonView(newCameraController->getCameraMode());
+    }
+}
+
 void Player::SetPowerupTicks(PowerupItems::eGlide_Timed_Powerup_ID id, int ticks) {
     this->mGlidepowerUpTicks[id] = ticks;
+}
+
+/// bool Player::canHarmPlayer(std::shared_ptr<Player>) {}
+
+bool Player::canHarmPlayer(std::wstring) {
+    return this->isAllowedToAttackPlayers();
+}
+
+float Player::getArmorCoverPercentage() {
+    return 0.0f;
 }
 
 // NON_MATCHING
@@ -77,28 +137,28 @@ void Player::staticCtor() {
     sSkins.push_back(CMinecraftApp::getSkinIdFromPath(L"dlcskin00002104"));
 }
 
+// NON-MATCHING: some crap, logic should be the same though
 void Player::updatePlayerSize() {
     float newHeight, newWidth;
 
-    if (this->dword880 == 2) {
+    if (this->mCurrentMiniGameID == 2) {
         newHeight = 0.0f;
         newWidth = 0.0f;
-    } else if (this->dword880 == 1) {
+    } else if (this->mCurrentMiniGameID == 1) {
         newHeight = 0.3f;
         newWidth = 0.3f;
+    } else if (this->isFallFlying()) {
+        newHeight = 0.6f;
+        newWidth = 0.6f;
+    } else if (this->isSleeping()) {
+        newHeight = 0.2f;
+        newWidth = 0.2f;
     } else {
-        if (this->isFallFlying()) {
-            newHeight = 0.6f;
-            newWidth = 0.6f;
-        } else if (this->isSleeping()) {
-            newHeight = 0.2f;
-            newWidth = 0.2f;
-        } else if (this->isSneaking()) {
+        newWidth = 0.6f;
+        if (this->isSneaking()) {
             newHeight = 1.65f;
-            newWidth = 0.6f;
         } else {
             newHeight = 1.8f;
-            newWidth = 0.6f;
         }
     }
 
@@ -111,4 +171,15 @@ void Player::updatePlayerSize() {
             this->setSize(newWidth, newHeight);
         }
     }
+}
+
+// NON-MATCHING: some crap, logic should be the same though
+bool Player::isAllowedToAttackPlayers() {
+    if (!this->hasInvisiblePrivilege()
+        && CConsoleMinecraftApp::sInstance.GetGameHostOption((eGameHostOption)11)) {
+        return CConsoleMinecraftApp::sInstance.GetGameHostOption((eGameHostOption)12)
+               || !this->getPlayerGamePrivilege((EPlayerGamePrivileges)3);
+    }
+
+    return true;
 }

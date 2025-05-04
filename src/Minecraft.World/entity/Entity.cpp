@@ -202,15 +202,11 @@ void Entity::burn(int howMuch) {
         this->hurt(DamageSource::IN_FIRE, howMuch);
 }
 
-// NON_MATCHING: some magic crap
 Vec3* Entity::getViewVector(float partialTicks) {
-    float yaw = this->mYRot;
-    float pitch;
     if (partialTicks == 1.0f) {
-        pitch = this->mXRot;
+        return this->calculateViewVector(this->mXRot, this->mYRot);
     } else {
-        yaw = this->mYRotO + ((yaw - this->mYRotO) * partialTicks);
-        pitch = this->mXRotO + ((this->mXRot - this->mXRotO) * partialTicks);
+        return this->calculateViewVector(this->mXRotO + ((this->mXRot - this->mXRotO) * partialTicks),
+                                         this->mYRotO + ((this->mYRot - this->mYRotO) * partialTicks));
     }
-    return this->calculateViewVector(pitch, yaw);
 }

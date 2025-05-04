@@ -176,6 +176,7 @@ public:
     virtual bool isAffectedByPotions();
     virtual void attackable();
     virtual void setRecordPlayingNearby(BlockPos const&, bool);
+    virtual bool IsCreativeFlying();
 
     Attribute* mAttributes;
     CombatTracker* mCombatTracker;
