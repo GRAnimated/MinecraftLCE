@@ -11,6 +11,8 @@
 #include "Minecraft.Core/BlockPos.h"
 #include <memory>
 
+Entity::Entity(Level*, bool) {}
+
 void Entity::fjDerivedCtorCalls() {
     this->mType = this->GetType();
     this->defineSynchedData();
@@ -23,12 +25,11 @@ void Entity::kill() {
 // NON_MATCHING: some shared_ptr crap
 void Entity::resetPos() {
     if (this->mLevel) {
+        std::shared_ptr<Entity> ent = shared_from_this();
         while (this->mY > 0.0 && this->mY < 256.0) {
             this->setPos(this->mX, this->mY, this->mZ);
 
-            if (this->mLevel
-                    ->getCollisionAABBs(shared_from_this(), this->getBoundingBox(), false, false, false)
-                    .empty()) {
+            if (this->mLevel->getCollisionAABBs(ent, this->getBoundingBox(), false, false, false).empty()) {
                 break;
             }
 
@@ -202,15 +203,11 @@ void Entity::burn(int howMuch) {
         this->hurt(DamageSource::IN_FIRE, howMuch);
 }
 
-// NON_MATCHING: some magic crap
 Vec3* Entity::getViewVector(float partialTicks) {
-    float yaw = this->mYRot;
-    float pitch;
     if (partialTicks == 1.0f) {
-        pitch = this->mXRot;
+        return this->calculateViewVector(this->mXRot, this->mYRot);
     } else {
-        yaw = this->mYRotO + ((yaw - this->mYRotO) * partialTicks);
-        pitch = this->mXRotO + ((this->mXRot - this->mXRotO) * partialTicks);
+        return this->calculateViewVector(this->mXRotO + ((this->mXRot - this->mXRotO) * partialTicks),
+                                         this->mYRotO + ((this->mYRot - this->mYRotO) * partialTicks));
     }
-    return this->calculateViewVector(pitch, yaw);
 }

@@ -24,9 +24,8 @@ void ServerboundSwingPacket::read(DataInputStream* input) {
     mInteractionHand = (InteractionHand::EInteractionHand)input->read();
 }
 
-// NON_MATCHING: game uses LDRB while decomp uses LDR
 void ServerboundSwingPacket::write(DataOutputStream* output) {
-    output->write(mInteractionHand);
+    output->write((unsigned char)mInteractionHand);
 }
 
 void ServerboundSwingPacket::handle(PacketListener* listener) {

@@ -34,6 +34,9 @@ class PlayerEnderChestContainer;
 
 class Player : public LivingEntity {
 public:
+    enum EPlayerGamePrivileges {
+
+    };
     Player(Level*, std::wstring const&);
     static void staticCtor();
 
@@ -110,23 +113,23 @@ public:
     virtual void getAbsorptionAmount() override;
     virtual void setAbsorptionAmount(float) override;
     virtual void getMainArm() override;
-    virtual bool IsCreativeFlying();
+    virtual bool IsCreativeFlying() override;
     virtual void updateFrameTick();
     virtual void closeContainer();
-    virtual void touch(std::shared_ptr<Entity>);
+    virtual void touch(std::shared_ptr<Entity> entToTouch);
     virtual void getScore();
     virtual void setScore(int);
     virtual void increaseScore(int);
-    virtual void drop(bool);
+    virtual void drop(bool allItems);
     virtual void reallyDrop(std::shared_ptr<ItemEntity>);
-    virtual void GetThirdPersonView(bool);
+    virtual int GetThirdPersonView(bool);
     virtual void SetThirdPersonView(int);
-    virtual void CanChangeThirdPersonView();
-    virtual void GetCameraController();
+    virtual bool CanChangeThirdPersonView();
+    virtual CameraController* GetCameraController();
     virtual void SetCameraController(CameraController*, bool);
-    virtual void canHarmPlayer(std::shared_ptr<Player>);
-    virtual void canHarmPlayer(std::wstring);
-    virtual void getArmorCoverPercentage();
+    virtual bool canHarmPlayer(std::shared_ptr<Player>);
+    virtual bool canHarmPlayer(std::wstring);
+    virtual float getArmorCoverPercentage();
     virtual void openTextEdit(std::shared_ptr<SignBlockEntity>);
     virtual void openMinecartCommandBlock(std::shared_ptr<BaseCommandBlock>);
     virtual void openCommandBlock(std::shared_ptr<CommandBlockEntity>);
@@ -184,6 +187,9 @@ public:
     void SetPowerupTicks(PowerupItems::eGlide_Timed_Powerup_ID, int ticks);
     // this is gameHostOption for player
     void setBool7FC(bool);
+    bool isAllowedToAttackPlayers();
+    bool hasInvisiblePrivilege();
+    bool getPlayerGamePrivilege(EPlayerGamePrivileges);
 
     // dunno the type
     static std::vector<void*> sSkins;
@@ -203,7 +209,6 @@ public:
     std::wstring mCustomSkinName;
     std::wstring mCustomCapeName;
     int dword638;
-    char gap63C[4];
     double mXCloakO;
     double mYCloakO;
     double mZCloakO;
@@ -217,11 +222,9 @@ public:
     int somethingrelatedtorespawn;
     void* qword6A0;
     int dword6A8;
-    char gap6AC[4];
     void* qword6B0;
     BlockPos* mRespawnPosition;
     bool mRespawnForced;
-    char gap6C1[7];
     void* qword6C8;
     int WALK_ONE_CM;
     int WALK_ON_WATER_ONE_CM;
@@ -235,7 +238,6 @@ public:
     int mExperienceLevel;
     int mTotalExperience;
     float mExperienceProgress;
-    char gap70C[4];
     void* qword710 = nullptr;
     void* qword718 = nullptr;
     int mEnchantmentSeed;
@@ -246,24 +248,18 @@ public:
     std::wstring mGameProfile;
     bool mReducedDebugInfo;
     not_null_ptr<ItemInstance> mLastItemInMainHand;
-    arrayWithLength<not_null_ptr<ItemInstance>> mHandSlots;
-    void* lakslkds[2];
+    NonNullList<not_null_ptr<ItemInstance>> mTempHandSlots;
     CameraController* mCameraController;
-    char byte790;
+    bool byte790;
     char byte791;
     char byte792;
-    char gap793[5];
     PlayerUID playerUID1 = PlayerUID(0);
     PlayerUID playerUID2 = PlayerUID(0);
     StatsUID statsUID = StatsUID();
     int dword7F8;
     bool bool7FC;
     bool bool7FD;
-    char gap7FE[2];
-    arrayWithLength<not_null_ptr<ItemInstance>> mArmorSlots;
-    void* qword810;
-    int dword818;
-    int dword81C;
+    NonNullList<not_null_ptr<ItemInstance>> mTempArmorSlots;
     int dword820;
     unsigned int mSkinId;
     unsigned int mSkinCapeId;
@@ -275,14 +271,12 @@ public:
     int mGamePrivileges;
     void* qword848;
     uint16_t word850;
-    char gap852[6];
     std::shared_ptr<Entity> mCameraEntity;
     bool mPositionLocked;
     bool mGlideCollisionDamage;
-    char gap86A[6];
     double mLiftForceModifier;
-    char gap878[8];
-    int dword880;
+    void* qword878;
+    int mSizeType;
     char byte884;
     int mGlidepowerUpTicks[3];
     char byte894;

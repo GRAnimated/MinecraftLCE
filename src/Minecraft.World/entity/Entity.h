@@ -43,6 +43,18 @@ class SynchedEntityData;
 
 class Entity : public std::enable_shared_from_this<Entity>, public CommandSender {
 public:
+    Entity(Level*, bool);
+
+    void sendMessage(ClientboundChatPacket::EChatPacketMessage, int*, uint, std::wstring*, uint) override;
+    bool hasPermission(EGameCommand) override;
+    std::wstring getNetworkName() override;
+    BlockPos getCommandSenderBlockPosition() override;
+    Vec3 getCommandSenderWorldPosition() override;
+    Level* getCommandSenderWorld() override;
+    void getCommandSenderEntity() override;
+    bool isSendMessageEnabled() override;
+    void setCommandStats(CommandStats::CommandStatType, int) override;
+    void getServer() override;
     virtual ~Entity();
     virtual eINSTANCEOF GetType() = 0;
     virtual void fjDerivedCtorCalls();
@@ -262,6 +274,7 @@ public:
     bool isType(eINSTANCEOF);
     void setSharedFlag(int, bool);
     Vec3* calculateViewVector(float, float);
+    int getId();
 
     int mId;
     bool mBlocksBuilding;

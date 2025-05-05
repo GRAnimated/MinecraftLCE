@@ -4,7 +4,6 @@
 #include <cstdlib>
 #include <cstring>
 
-// NON_MATCHING
 void* XPhysicalAlloc(unsigned long a1, unsigned long a2, unsigned long a3, unsigned int a4) {
     return malloc(a1);
 }

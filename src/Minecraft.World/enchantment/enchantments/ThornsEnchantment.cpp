@@ -9,6 +9,7 @@
 #include "Minecraft.World/item/ArmorItem.h"
 #include "Minecraft.World/item/ItemInstance.h"
 #include "Minecraft.World/level/DamageSource.h"
+#include "Minecraft.World/sounds/SoundEvents.h"
 #include <memory>
 
 ThornsEnchantment::ThornsEnchantment(const Rarity* rarity,
@@ -31,7 +32,7 @@ bool ThornsEnchantment::canEnchant(not_null_ptr<ItemInstance> const& itemInstanc
                true :
                Enchantment::canEnchant(not_null_ptr<ItemInstance>(itemInstance));
 }
-// NON_MATCHING: this is std::shared_ptr hell
+
 void ThornsEnchantment::doPostHurt(const std::shared_ptr<LivingEntity>& receiver,
                                    const std::shared_ptr<Entity>& attacker, int a4) {
     Random* random = receiver->getRandom();
@@ -39,7 +40,11 @@ void ThornsEnchantment::doPostHurt(const std::shared_ptr<LivingEntity>& receiver
 
     if (shouldHit(a4, random)) {
         if (attacker.get()) {
-            attacker->hurt(DamageSource::CreateThorns(receiver), getDamage(a4, random));
+            DamageSource* damage = DamageSource::CreateThorns(receiver);
+            attacker->hurt(damage, getDamage(a4, random));
+            delete damage;
+
+            attacker->playSound(SoundEvents::ENCHANT_THORNS_HIT, 0.5f, 1.0f);
         }
 
         if (!item->isEmpty()) {
