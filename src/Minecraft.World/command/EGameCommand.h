@@ -1,3 +1,5 @@
+#pragma once
+
 enum EGameCommand {
     eDefaultGameModeCommand = 0,
     eEnchantItemCommand = 2,

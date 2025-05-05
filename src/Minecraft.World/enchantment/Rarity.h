@@ -1,3 +1,5 @@
+#pragma once
+
 class Rarity {
 public:
     static Rarity* COMMON;

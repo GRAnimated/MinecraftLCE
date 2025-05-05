@@ -1,3 +1,5 @@
+#pragma once
+
 #include "Minecraft.World/enchantment/Enchantment.h"
 class ArrowKnockbackEnchantment : public Enchantment {
 public:

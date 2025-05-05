@@ -1,3 +1,5 @@
+#pragma once
+
 #include "Minecraft.World/entity/Entity.h"
 #include "Minecraft.Core/Direction.h"
 #include <memory>

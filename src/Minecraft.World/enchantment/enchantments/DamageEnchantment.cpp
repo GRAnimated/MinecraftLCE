@@ -29,11 +29,13 @@ int DamageEnchantment::getMaxCost(int a2) {
 // down here was enum but I don't even care about it now
 float DamageEnchantment::getDamageBonus(int a2, MobType mobType) {
     if (this->mDamageType == 0) {
+#ifdef MATCHING_HACK
         float result, lhs = (float)a2 - 1.0f, rhs = 0.0f;
         __asm__ volatile("fmaxnm %s[result], %s[lhs], %s[rhs]"
                          : [result] "=w"(result)
                          : [lhs] "w"(lhs), [rhs] "w"(rhs));
         return result * 0.5f + 1.0f;
+#endif
     } else if (this->mDamageType == 1 && mobType == 1) {  // enum here
         return (float)a2 * 2.5f;
     } else {

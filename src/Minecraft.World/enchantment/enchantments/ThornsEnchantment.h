@@ -1,3 +1,5 @@
+#pragma once
+
 #include "Minecraft.World/enchantment/Enchantment.h"
 #include "Minecraft.World/item/ItemInstance.h"
 #include <memory>

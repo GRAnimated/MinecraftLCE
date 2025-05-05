@@ -1,3 +1,5 @@
+#pragma once
+
 #include "Minecraft.Client/ui/scene/UIScene.h"
 #include "Minecraft.Client/ui/scene/control/UIControl_ButtonList.h"
 

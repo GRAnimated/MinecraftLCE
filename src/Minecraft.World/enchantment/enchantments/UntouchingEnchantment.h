@@ -1,3 +1,5 @@
+#pragma once
+
 #include "Minecraft.World/enchantment/Enchantment.h"
 class UntouchingEnchantment : public Enchantment {
 public:

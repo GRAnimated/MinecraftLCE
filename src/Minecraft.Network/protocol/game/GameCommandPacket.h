@@ -1,3 +1,5 @@
+#pragma once
+
 #include "types.h"
 #include "Minecraft.World/ArrayWithLength.h"
 #include "Minecraft.World/command/EGameCommand.h"
