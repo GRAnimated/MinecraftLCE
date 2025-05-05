@@ -1,5 +1,6 @@
 #pragma once
 
+#include "types.h"
 #include "Minecraft.World/ArrayWithLength.h"
 #include "Minecraft.Core/io/OutputStream.h"
 
@@ -12,7 +13,7 @@ public:
     virtual void write(arrayWithLength<unsigned char>, unsigned int, unsigned int) override;
     virtual void close() override;
     virtual void flush() override;
-    virtual void toByteArray();
+    virtual arrayWithLength<uchar> toByteArray();
 
     unsigned int size();
     void clear();

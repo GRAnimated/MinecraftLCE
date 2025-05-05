@@ -11,6 +11,8 @@
 #include "Minecraft.Core/BlockPos.h"
 #include <memory>
 
+Entity::Entity(Level*, bool) {}
+
 void Entity::fjDerivedCtorCalls() {
     this->mType = this->GetType();
     this->defineSynchedData();
@@ -23,12 +25,11 @@ void Entity::kill() {
 // NON_MATCHING: some shared_ptr crap
 void Entity::resetPos() {
     if (this->mLevel) {
+        std::shared_ptr<Entity> ent = shared_from_this();
         while (this->mY > 0.0 && this->mY < 256.0) {
             this->setPos(this->mX, this->mY, this->mZ);
 
-            if (this->mLevel
-                    ->getCollisionAABBs(shared_from_this(), this->getBoundingBox(), false, false, false)
-                    .empty()) {
+            if (this->mLevel->getCollisionAABBs(ent, this->getBoundingBox(), false, false, false).empty()) {
                 break;
             }
 

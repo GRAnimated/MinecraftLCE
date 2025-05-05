@@ -276,7 +276,7 @@ public:
     bool mGlideCollisionDamage;
     double mLiftForceModifier;
     void* qword878;
-    int mCurrentMiniGameID;
+    int mSizeType;
     char byte884;
     int mGlidepowerUpTicks[3];
     char byte894;

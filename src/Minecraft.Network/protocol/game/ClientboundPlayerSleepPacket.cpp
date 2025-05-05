@@ -1,5 +1,6 @@
 #include "ClientboundPlayerSleepPacket.h"
 
+#include "Minecraft.World/entity/player/Player.h"
 #include "Minecraft.Core/io/DataInputStream.h"
 #include "Minecraft.Core/io/DataOutputStream.h"
 #include "Minecraft.Network/PacketListener.h"
@@ -13,11 +14,10 @@ ClientboundPlayerSleepPacket::ClientboundPlayerSleepPacket() : Packet() {
     mPos = BlockPos();
 }
 
-// NON_MATCHING: Requires Player header
 ClientboundPlayerSleepPacket::ClientboundPlayerSleepPacket(std::shared_ptr<Player> player,
                                                            BlockPos const& pos)
     : Packet() {
-    // mPlayerId = player->getId();
+    mPlayerId = player->getId();
     mPos = pos;
 }
 

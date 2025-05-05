@@ -168,7 +168,7 @@ int Connection::runWrite(void* conn) {
 
         if (connection->mIsRunning) {
             int writeStatus;
-            while ((connection->mIsRunning || writeStatus != 0)) {
+            while ((connection->mIsRunning || !writeStatus)) {
                 if (!ShutdownManager::ShouldRun(ShutdownManager::EThreadId::_9))
                     break;
 
