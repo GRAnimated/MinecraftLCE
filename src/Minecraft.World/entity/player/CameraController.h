@@ -1,3 +1,5 @@
+#pragma once
+
 #include "Minecraft.World/phys/Vec3.h"
 #include <vector>
 class CameraController {

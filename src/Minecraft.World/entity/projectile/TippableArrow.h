@@ -1,3 +1,5 @@
+#pragma once
+
 #include "types.h"
 #include "Minecraft.World/entity/LivingEntity.h"
 #include "Minecraft.World/entity/projectile/Arrow.h"

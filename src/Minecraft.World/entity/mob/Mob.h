@@ -1,3 +1,5 @@
+#pragma once
+
 #include "Minecraft.World/pathfinding/BlockPathTypes.h"
 #include "types.h"
 #include "Minecraft.Client/resources/ResourceLocation.h"
