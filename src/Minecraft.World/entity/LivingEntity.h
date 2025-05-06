@@ -150,7 +150,7 @@ public:
     virtual void doPush(std::shared_ptr<Entity>);
     virtual void setJumping(bool);
     virtual void take(std::shared_ptr<Entity>, int);
-    virtual void canSee(std::shared_ptr<Entity>);
+    virtual bool canSee(std::shared_ptr<Entity>);
     virtual void getAttackAnim(float);
     virtual void getSweptVolume();
     virtual bool isEffectiveAi();
