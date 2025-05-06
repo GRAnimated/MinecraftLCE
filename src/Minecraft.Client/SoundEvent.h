@@ -1,3 +1,5 @@
+#pragma once
+
 
 class SoundEvent {
 public:

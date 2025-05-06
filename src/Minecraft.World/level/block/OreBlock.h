@@ -1,3 +1,5 @@
+#pragma once
+
 #include "Minecraft.World/level/block/Block.h"
 #include "Minecraft.World/level/material/MaterialColor.h"
 class OreBlock : public Block {

@@ -1,3 +1,5 @@
+#pragma once
+
 #include "Minecraft.World/PlayerUID.h"
 class StatsUID : public PlayerUID {
 public:

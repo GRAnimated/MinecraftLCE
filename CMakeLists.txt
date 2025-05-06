@@ -45,6 +45,7 @@ target_include_directories(mcswitch PUBLIC lib/libpng)
 target_include_directories(mcswitch PUBLIC lib)
 
 target_compile_definitions(mcswitch PRIVATE NON_MATCHING)
+target_compile_definitions(mcswitch PRIVATE MATCHING_HACK)
 target_compile_options(mcswitch PRIVATE -fno-exceptions)
 target_compile_options(mcswitch PRIVATE -fno-strict-aliasing)
 target_compile_options(mcswitch PRIVATE -fsigned-char)
