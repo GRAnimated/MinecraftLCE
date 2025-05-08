@@ -19,9 +19,17 @@ ChunkPrimer::~ChunkPrimer() {
     }
 }
 
-// NON_MATCHING: CMP 0x1 vs CMP 0x0
 const BlockState* ChunkPrimer::getState(int a2) {
+// shit below is what's here, but due to some crappy optimatisation it does fail to do that the LCE way
+#ifdef MATCHING_HACK
+    int packedPos;
+    __asm__("cmp %w1, #0\n"
+            "cinc %w0, %w1, lt\n"
+            : "=r"(packedPos)
+            : "r"(a2));
+#else
     int packedPos = a2 <= 0 ? a2 + 1 : a2;
+#endif
 
     int blockDataIndex = packedPos >> 1;
 

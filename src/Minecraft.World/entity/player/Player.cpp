@@ -141,10 +141,10 @@ void Player::staticCtor() {
 void Player::updatePlayerSize() {
     float newHeight, newWidth;
 
-    if (this->mCurrentMiniGameID == 2) {
+    if (this->mSizeType == 2) {
         newHeight = 0.0f;
         newWidth = 0.0f;
-    } else if (this->mCurrentMiniGameID == 1) {
+    } else if (this->mSizeType == 1) {
         newHeight = 0.3f;
         newWidth = 0.3f;
     } else if (this->isFallFlying()) {
@@ -153,13 +153,12 @@ void Player::updatePlayerSize() {
     } else if (this->isSleeping()) {
         newHeight = 0.2f;
         newWidth = 0.2f;
-    } else {
+    } else if (this->isSneaking()) {
+        newHeight = 1.65f;
         newWidth = 0.6f;
-        if (this->isSneaking()) {
-            newHeight = 1.65f;
-        } else {
-            newHeight = 1.8f;
-        }
+    } else {
+        newHeight = 1.8f;
+        newWidth = 0.6f;
     }
 
     if (newWidth != this->mWidth || newHeight != this->mHeight) {

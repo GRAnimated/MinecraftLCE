@@ -153,7 +153,7 @@ public:
     void blockEntityChanged(BlockPos const&, std::shared_ptr<BlockEntity>);
     void checkSession();  // RETURN TYPE UNKNOWN
 
-    std::vector<AABB> getCollisionAABBs(std::shared_ptr<Entity> const&, const AABB*, bool, bool, bool);
+    std::vector<AABB> getCollisionAABBs(std::shared_ptr<Entity>, const AABB*, bool, bool, bool);
     bool hasBlockCubes(const AABB*);
 
     BlockPos getSharedSpawnPos();

@@ -1,3 +1,5 @@
+#pragma once
+
 #include "Minecraft.World/inventory/AbstractContainerMenu.h"
 #include <memory>
 

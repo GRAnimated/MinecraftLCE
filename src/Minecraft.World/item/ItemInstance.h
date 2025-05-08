@@ -25,6 +25,8 @@ class CensoredString;
 
 class ItemInstance {
 public:
+    static not_null_ptr<ItemInstance> EMPTY;
+
     bool isEmpty() const;
     int getCount();
     void updateEmptyCacheFlag();
