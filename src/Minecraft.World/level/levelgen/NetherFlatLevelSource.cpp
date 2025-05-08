@@ -12,11 +12,10 @@
 #include "Minecraft.World/level/levelgen/feature/LightGemFeature.h"
 #include "Minecraft.World/level/storage/LevelData.h"
 
-// NON_MATCHING: Regswap
 NetherFlatLevelSource::NetherFlatLevelSource(Level* level, bool isGenerateMapFeatures, long long seed) {
     int xzSize = level->getLevelData()->getXZSize();
-    float hellScale = level->getLevelData()->getHellScale();
-    mSize = ceilf(xzSize / hellScale);
+    int hellScale = level->getLevelData()->getHellScale();
+    mSize = ceil((float)xzSize / hellScale);
     mLevel = level;
     mIsGenerateMapFeatures = isGenerateMapFeatures;
     mSeed = new Random(seed);
@@ -47,29 +46,45 @@ void NetherFlatLevelSource::buildSurfaces(int x, int z, ChunkPrimer* primer) {
 
     for (int chunkX = 0; chunkX < 16; ++chunkX) {
         for (int chunkZ = 0; chunkZ < 16; ++chunkZ) {
-            int adjustedSize = (mSize >= 0) ? mSize : mSize + 1;
-            int halfSize = adjustedSize >> 1;
+            for (int y = 127; y >= 0; --y) {
+                int adjusted = (chunkZ * 16 + chunkX) * 128 + y;
 
-            for (int y = 127; y > 0; --y) {
-                if (-halfSize < x || (chunkX > mRandom->nextInt(4) && halfSize >= x)) {
-                    primer->setState((y << 11) | (chunkX << 7) | chunkZ, bedrock);
-                }
+                bool unk = false;
 
-                if (-halfSize >= z) {
-                    if (y <= mRandom->nextInt(4) || halfSize > z) {
+                if (chunkX <= -adjusted / 2) {
+                    if (chunkX > mRandom->nextInt(4) && x < -mSize / 2) {
                         primer->setState((y << 11) | (chunkX << 7) | chunkZ, bedrock);
+                        unk = true;
                     }
                 }
 
-                if (halfSize - 1 <= x) {
-                    if (mRandom->nextInt(4) + chunkX > 14 || halfSize < x) {
+                if (chunkZ <= -adjusted / 2) {
+                    if (chunkX - mRandom->nextInt(4) <= 0 || z < -mSize / 2) {
                         primer->setState((y << 11) | (chunkX << 7) | chunkZ, bedrock);
+                        unk = true;
                     }
                 }
 
-                if ((adjustedSize / 2 - 1 <= z && (mRandom->nextInt(4) + y > 14 || adjustedSize / 2 < z))
-                    || (y >= (127 - mRandom->nextInt(5)) || y <= mRandom->nextInt(5))) {
-                    primer->setState((y << 11) | (chunkX << 7) | chunkZ, bedrock);
+                if (chunkX <= -adjusted / 2 - 1) {
+                    if (mRandom->nextInt(4) + chunkX > 14 || x > mSize / 2) {
+                        primer->setState((y << 11) | (chunkX << 7) | chunkZ, bedrock);
+                        unk = true;
+                    }
+                }
+
+                if (chunkZ <= -adjusted / 2 - 1) {
+                    if (mRandom->nextInt(4) + chunkX > 14 || z > mSize / 2) {
+                        primer->setState((y << 11) | (chunkX << 7) | chunkZ, bedrock);
+                        unk = true;
+                    }
+                }
+
+                if (!unk) {
+                    if (y >= 127 - mRandom->nextInt(5)) {
+                        primer->setState((y << 11) | (chunkX << 7) | chunkZ, bedrock);
+                    } else if (y <= 0 + mRandom->nextInt(5)) {
+                        primer->setState((y << 11) | (chunkX << 7) | chunkZ, bedrock);
+                    }
                 }
             }
         }
