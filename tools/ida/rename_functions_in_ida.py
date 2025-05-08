@@ -6,6 +6,8 @@
 import csv
 import idc
 import ida_funcs
+import ida_range
+import idautils
 import os
 
 # Solution for util not being found since we're in a different directory
@@ -16,37 +18,59 @@ from util import config
 
 csv_path = config.get_functions_csv_path()
 
+# From https://gist.github.com/tmr232/1bd64fbbbc07f2a7634bcb9275929dac
+def iter_all_funcs():
+    for func_ea in idautils.Functions(idaapi.cvar.inf.min_ea, idaapi.cvar.inf.max_ea):
+        yield idaapi.get_func(func_ea)
+
+def iter_multichunk_funcs():
+    for func_t in iter_all_funcs():
+        if func_t.tailqty > 0:
+            yield func_t
+
+def delete_multichunk_funcs():
+    for func_t in iter_multichunk_funcs():
+        idaapi.del_func(func_t.start_ea)
+
+
+
 def can_overwrite_name(addr: int, new_name: str):
     if not new_name or new_name.startswith(("sub_", "nullsub_", "j_")):
         return False
 
-    # old_name: str = idc.get_name(addr)
-    # if not old_name:
-    #     return True
-# 
-    # if old_name.startswith(("sub_", "nullsub_", "j_")):
-    #     return True
-# 
-    # if old_name.startswith("_Z"):
-    #     return True
-# 
-    # if new_name.startswith("_Z"):
-    #     return True
-
     return True # we have to allow wii u symbols
+
+delete_multichunk_funcs()
 
 with open(csv_path, "r") as f:
     reader = csv.reader(f)
     next(reader)
 
+    prev_addr = 0
+    prev_size = 0
+
     for fn in reader:
         addr = int(fn[0], 16)
+        size = int(fn[2])
         name = fn[3]
 
-        if ida_funcs.get_func(addr) is None:
+        func = ida_funcs.get_func(addr)
+
+        if func is None:
             print(f"Creating function at {hex(addr)} with name {name}")
             ida_funcs.add_func(addr)
+            ida_funcs.set_func_end(addr, addr + size)
+
+        elif func.start_ea != addr:
+            print(f"Fixing function at {hex(addr)} with name {name}")
+            ida_funcs.set_func_end(prev_addr, prev_addr + prev_size)
+            ida_funcs.add_func(addr)
+            ida_funcs.set_func_end(addr, addr + size)
+
 
         if can_overwrite_name(addr, name):
             idc.set_name(addr, name, idc.SN_CHECK | idc.SN_NOWARN)
+        
+        prev_addr = addr
+        prev_size = size
     print("Renaming from functions completed.")
