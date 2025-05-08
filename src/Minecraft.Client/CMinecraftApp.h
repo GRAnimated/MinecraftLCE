@@ -5,6 +5,7 @@
 #include "Minecraft.Client/eGameHostOption.h"
 #include "Minecraft.World/ArrayWithLength.h"
 #include "Minecraft.World/level/gamemode/GameType.h"
+#include "Minecraft.World/level/gamemode/minigames/MiniGameDef.h"
 #include "Minecraft.World/level/levelgen/LevelGenerationOptions.h"
 #include "Minecraft.Core/profile/CProfile.h"
 #include <Minecraft.Core/storage/C4JStorage.h>
@@ -59,6 +60,8 @@ public:
     void InitialiseTips();
     void InitGameSettings();
     LevelRuleset* getGameRuleDefinitions();
+    EMiniGameId GetFirstMiniGameType();
+    bool IsAppPaused();
 
     static int DefaultOptionsCallback(void*, C4JStorage::PROFILESETTINGS*, int);
     static int OptionsDataCallback(void*, int, unsigned short, C4JStorage::eOptionsCallback);

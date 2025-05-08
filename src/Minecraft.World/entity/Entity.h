@@ -11,9 +11,7 @@
 
 #include "types.h"
 
-enum MoverType {
-
-};
+enum MoverType { SELF, PLAYER, PISTON, SHULKER_BOX, SHULKER };
 class Block;
 class BlockPos;
 class BlockState;
@@ -149,7 +147,7 @@ public:
     virtual void canAddPassenger(std::shared_ptr<Entity>);
     virtual void lerpTo(double, double, double, float, float, int, bool);
     virtual void getPickRadius();
-    virtual void getLookAngle();
+    virtual Vec3* getLookAngle();
     virtual void getRotationVector();
     virtual void getForward();
     virtual void handleInsidePortal(BlockPos const&);
@@ -259,11 +257,11 @@ public:
     virtual void couldWander();
     virtual void canCreateParticles();
     virtual void stopCurrentLerp();
-    virtual void PositionLocked_4();
+    virtual bool PositionLocked_4();
     virtual void SetPositionLocked_4(bool);
     virtual void TakeGlideCollisionDamage_4();
     virtual void SetGlideCollisionDamage_4(bool);
-    virtual void GetLiftForceModifier_4();
+    virtual double GetLiftForceModifier_4();
     virtual void SetLiftForceModifier_4(double);
     virtual void onLoadedFromSave_4();
     virtual bool isUsingItemFlag_4();
@@ -275,6 +273,9 @@ public:
     void setSharedFlag(int, bool);
     Vec3* calculateViewVector(float, float);
     int getId();
+    bool isInLava();
+    void moveRelative(float, float, float, float);
+    bool isFree(double, double, double);
 
     int mId;
     bool mBlocksBuilding;

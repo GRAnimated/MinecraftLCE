@@ -75,8 +75,8 @@ public:
     virtual void removeEffectParticles();
     virtual void removeAllEffects();
     virtual void getActiveEffects();
-    virtual void hasEffect(MobEffect*);
-    virtual void getEffect(MobEffect*);
+    virtual bool hasEffect(MobEffect*);
+    virtual MobEffectInstance* getEffect(MobEffect*);
     virtual void addEffect(MobEffectInstance*, std::shared_ptr<Entity> const&);
     virtual void addEffectNoUpdate(MobEffectInstance*);
     virtual void canBeAffected(MobEffectInstance*);
@@ -103,7 +103,7 @@ public:
     virtual void getFallDamageSound(int);
     virtual void dropAllDeathLoot(bool, int, DamageSource*);
     virtual void dropDeathLoot(bool, int);
-    virtual void onLadder();
+    virtual bool onLadder();
     virtual bool isShootable();
     virtual void getArmorValue();
     virtual void hurtArmor(float);
@@ -125,7 +125,7 @@ public:
     virtual void getOffhandItem();
     virtual not_null_ptr<ItemInstance> getItemInHand(InteractionHand::EInteractionHand);
     virtual void setItemInHand(InteractionHand::EInteractionHand, not_null_ptr<ItemInstance>);
-    virtual void hasItemInSlot(EquipmentSlot const*);
+    virtual bool hasItemInSlot(EquipmentSlot const*);
     virtual void getItemSlot(EquipmentSlot const*) = 0;
     virtual void getItemInHandIcon(not_null_ptr<ItemInstance>, int);
     virtual void getSoundVolume();
@@ -136,10 +136,10 @@ public:
     virtual void jumpFromGround();
     virtual void jumpInWater();
     virtual void jumpInLava();
-    virtual void getWaterSlowDown();
+    virtual float getWaterSlowDown();
     virtual void travel(float, float, float);
     virtual void updateModelAnimation();
-    virtual void getSpeed();
+    virtual float getSpeed();
     virtual void setSpeed(float);
     virtual void doHurtTarget(std::shared_ptr<Entity>);
     virtual bool isSleeping();
@@ -178,6 +178,9 @@ public:
     virtual void setRecordPlayingNearby(BlockPos const&, bool);
     virtual bool IsCreativeFlying();
 
+    void CheckThermalAreas();
+    void fallFlyingTravel(double&, double&, double&, Vec3*, float&, float&, double&, double);
+
     Attribute* mAttributes;
     CombatTracker* mCombatTracker;
     std::unordered_map<MobEffect*, MobEffectInstance*> mActivePotionsMap;
@@ -208,8 +211,8 @@ public:
     float mYHeadRot;
     float mYHeadRot0;
     float mFlyingSpeed;
-    void* qword398;
-    void* qword3A0;
+    double double398;
+    double double3A0;
     char byte3A8;
     int dword3AC;
     void* qword3B0;

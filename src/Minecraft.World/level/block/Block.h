@@ -32,7 +32,7 @@ class Player;
 class Random;
 class Rotation;
 class SoundType;
-class Texture;
+class TextureAtlasSprite;
 class Vec3;
 class Item;
 
@@ -189,10 +189,10 @@ public:
     virtual void registerIcons(IconRegister*);
     virtual void getTileItemIconName();
     virtual void getIconTexture(const Direction* direction, const BlockState* blockState);
-    virtual Texture* getTexture(LevelSource* levelSource, const BlockPos& pos, const Direction* direction,
-                                const BlockState* blockState);
-    virtual Texture* getTexture(const Direction* direction, const BlockState* blockState);
-    virtual Texture* getTexture(const Direction* direction);
+    virtual TextureAtlasSprite* getTexture(LevelSource* levelSource, const BlockPos& pos,
+                                           const Direction* direction, const BlockState* blockState);
+    virtual TextureAtlasSprite* getTexture(const Direction* direction, const BlockState* blockState);
+    virtual TextureAtlasSprite* getTexture(const Direction* direction);
     virtual void getInventoryRenderState(const BlockState* blockState);
     virtual BlockStateDefinition* createBlockStateDefinition();
     virtual BlockStateDefinition* getBlockStateDefinition();
@@ -248,7 +248,7 @@ public:
     const BlockState* mBlockState;
     int mDescriptionId;
     int mUseDescriptionId;
-    Texture* mTexture;
+    TextureAtlasSprite* mTexture;
     int field_A0;
 };
 

@@ -1,28 +1,7 @@
 #pragma once
 
+#include "Minecraft.World/level/block/FlowerBlock.h"
 #include "Minecraft.World/level/levelgen/feature/Feature.h"
-#include <string>
-
-// TODO: Move this to its own file when blocks start getting decomped
-class FlowerBlock {
-public:
-    class FlowerCategory;
-    class Flower {
-    public:
-        static Flower* YELLOW_FLOWER;
-        static Flower* RED_FLOWER;
-        static Flower* RED_MUSHROOM;
-        static Flower* BROWN_MUSHROOM;
-
-        enum EFlower {};
-
-        Flower(FlowerBlock::FlowerCategory*, int, const std::wstring&, int, int, const std::wstring&,
-               FlowerBlock::Flower::EFlower);
-
-        void* field_0;
-        int field_8;
-    };
-};
 
 class FlowerFeature : public Feature {
 public:
