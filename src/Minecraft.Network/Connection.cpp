@@ -168,10 +168,8 @@ int Connection::runWrite(void* conn) {
 
         if (connection->mIsRunning) {
             int writeStatus;
-            while ((connection->mIsRunning || !writeStatus)) {
-                if (!ShutdownManager::ShouldRun(ShutdownManager::EThreadId::_9))
-                    break;
-
+            while ((connection->mIsRunning || !writeStatus)
+                   && ShutdownManager::ShouldRun(ShutdownManager::EThreadId::_9)) {
                 long long startTime = System::processTimeInMilliSecs();
 
                 bool writeSuccess = false;
@@ -181,7 +179,7 @@ int Connection::runWrite(void* conn) {
                     writeSuccess = connection->writeTick();
                     currentTime = System::processTimeInMilliSecs();
                 } while (connection->mDataOutputStream->getSize() != 0x7FFFFFFF && writeSuccess
-                         && (currentTime - startTime) <= 199);
+                         && (currentTime - startTime) < 200);
 
                 writeStatus = connection->mC4JEventImpl2->WaitForSignal(100);
 
@@ -248,11 +246,13 @@ bool Connection::writeTick() {
     if (!mOutgoingQueue.empty()
         && (!mFakeLag
             || (System::processTimeInMilliSecs() - mOutgoingQueue.front()->mCreatedTime >= mFakeLag))) {
+        std::shared_ptr<Packet> packet;
         EnterCriticalSection(&mOutgoingMutex);
-        std::shared_ptr<Packet> packet = mOutgoingQueue.front();
+
+        packet = mOutgoingQueue.front();
         mOutgoingQueue.pop_front();
 
-        mEstimatedSize += ~packet->getEstimatedSize();
+        mEstimatedSize -= packet->getEstimatedSize() + 1;
         LeaveCriticalSection(&mOutgoingMutex);
 
         Packet::writePacket(packet, mDataOutputStream, mPacketListener->isServerPacketListener(), field_164);

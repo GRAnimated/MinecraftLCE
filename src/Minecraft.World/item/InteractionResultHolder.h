@@ -11,10 +11,8 @@ public:
 class InteractionResultHolder {
 public:
     InteractionResultHolder(InteractionResult::EInteractionResult result,
-                            const not_null_ptr<ItemInstance>& item) {
-        this->result = result;
-        this->item = item;
-    }
+                            const not_null_ptr<ItemInstance>& item)
+        : result(result), item(item) {}
     InteractionResult::EInteractionResult result;
     not_null_ptr<ItemInstance> item;
 };

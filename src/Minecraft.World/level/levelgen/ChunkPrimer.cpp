@@ -19,23 +19,12 @@ ChunkPrimer::~ChunkPrimer() {
     }
 }
 
-const BlockState* ChunkPrimer::getState(int a2) {
-// shit below is what's here, but due to some crappy optimatisation it does fail to do that the LCE way
-#ifdef MATCHING_HACK
-    int packedPos;
-    __asm__("cmp %w1, #0\n"
-            "cinc %w0, %w1, lt\n"
-            : "=r"(packedPos)
-            : "r"(a2));
-#else
-    int packedPos = a2 <= 0 ? a2 + 1 : a2;
-#endif
+const BlockState* ChunkPrimer::getState(int packedPos) {
+    int index = packedPos / 2;
 
-    int blockDataIndex = packedPos >> 1;
+    int bitShift = 4 * (packedPos & 1);
 
-    int bitShift = 4 * (a2 & 1);
-
-    return Block::getStateByIdAndData(mBlockIds[a2], (mBlockData[blockDataIndex] >> bitShift) & 0xF);
+    return Block::getStateByIdAndData(mBlockIds[packedPos], (mBlockData[index] >> bitShift) & 0xF);
 }
 
 const BlockState* ChunkPrimer::getState(int x, int y, int z) {
@@ -48,25 +37,30 @@ const BlockState* ChunkPrimer::getState(int x, int y, int z) {
     return getState(packedPos);
 }
 
-// NON_MATCHING
 void ChunkPrimer::setState(int packedPos, const BlockState* state) {
-    int id = 0;
-    int data = 0;
+    unsigned int id = 0;
+    unsigned char lowerNibble = 0;
+    unsigned char upperNibble = 0;
 
     if (state) {
-        int stateId = sBlockStateMapper->getId(state);
-        id = stateId >> 0x4;
-        data = stateId & 0xF;
+        id = sBlockStateMapper->getId(state);
+        upperNibble = id / 16;
+        lowerNibble = id & 0xF;
     }
 
-    mBlockIds[packedPos] = id;
+    mBlockIds[packedPos] = upperNibble;
 
-    int test = packedPos / 2;
+    int dataIndex = packedPos / 2;
 
-    if (packedPos & 1)
-        mBlockData[test] = (mBlockData[test] & 0xF) | (16 * data);
-    else
-        mBlockData[test] = (mBlockData[test] & 0xF0) | data;
+    unsigned char currentValue = mBlockData[dataIndex];
+
+    if (packedPos & 1) {
+        currentValue = (currentValue & 0x0F) | (lowerNibble << 4);
+    } else {
+        currentValue = (currentValue & 0xF0) | lowerNibble;
+    }
+
+    mBlockData[dataIndex] = currentValue;
 }
 
 void ChunkPrimer::setState(int x, int y, int z, BlockState const* state) {
@@ -79,18 +73,15 @@ void ChunkPrimer::setState(int x, int y, int z, BlockState const* state) {
     setState(packedPos, state);
 }
 
-// NON_MATCHING: CMP 0x1 vs CMP 0x0
 void ChunkPrimer::setBlockAndData(int packedPos, int id, int data) {
     mBlockIds[packedPos] = id;
 
-    int v9 = (packedPos <= 0) ? (packedPos + 1) : packedPos;
-
-    int test = v9 >> 1;
+    int index = packedPos / 2;
 
     if (packedPos & 1)
-        mBlockData[test] = (mBlockData[test] & 0xF) | (16 * data);
+        mBlockData[index] = (mBlockData[index] & 0xF) | (data << 4);
     else
-        mBlockData[test] = (mBlockData[test] & 0xF0) | data;
+        mBlockData[index] = (mBlockData[index] & 0xF0) | data;
 }
 
 int ChunkPrimer::getBlockId(int a) {
