@@ -15,6 +15,7 @@ public:
     bool containsIncludingLowerBound(Vec3*) const;
 
     void set(double, double, double, double, double, double);
+    Vec3* getCenter();
 
     static AABB* sCrossShape;  // .got:000000710176F5E0
 };

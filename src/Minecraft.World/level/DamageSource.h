@@ -5,8 +5,9 @@
 #include <memory>
 class DamageSource {
 public:
-    static const DamageSource* BYPASS_ARMOUR;
+    static DamageSource* BYPASS_ARMOUR;
     static DamageSource* IN_FIRE;
+    static DamageSource* WITHER;
 
     static DamageSource* CreateThorns(std::shared_ptr<Entity>);
 

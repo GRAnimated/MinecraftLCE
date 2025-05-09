@@ -75,7 +75,7 @@ public:
     virtual void playLocalSound(double, double, double, SoundEvent const*, SoundSource::ESoundSource, float,
                                 float, bool, float);
     virtual void addGlobalEntity(std::shared_ptr<Entity>);
-    virtual void addEntity(std::shared_ptr<Entity>);
+    virtual void addEntity(const std::shared_ptr<Entity>&);
     virtual void entityAdded(std::shared_ptr<Entity>);
     virtual void entityRemoved(std::shared_ptr<Entity>);
     virtual void playerRemoved(std::shared_ptr<Entity>);
@@ -131,7 +131,7 @@ public:
     LevelData* getLevelData();
     WorldBorder* getWorldBorder();
     GameRules* getGameRules();
-    Difficulty* getDifficulty();
+    const Difficulty* getDifficulty();
 
     long long getSeed();
     int getSeaLevel();

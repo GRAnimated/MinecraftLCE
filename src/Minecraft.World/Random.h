@@ -11,6 +11,7 @@ public:
     int nextInt();
     void setSeed(long long seed);
     long nextLong();
+    bool nextBoolean();
 
     long val;
     bool field_8;
