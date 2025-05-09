@@ -9,16 +9,11 @@ PerlinNoise::PerlinNoise(Random* random, int maxOctaves) {
     init(random, maxOctaves);
 }
 
-// NON_MATCHING
 PerlinNoise::~PerlinNoise() {
-    if (mMaxOctaves > 0) {
-        for (int i = 0; i < mMaxOctaves; i++) {
-            delete mNoiseLevels[i];
-        }
+    for (int i = 0; i < mMaxOctaves; i++) {
+        delete mNoiseLevels[i];
     }
-    if (mNoiseLevels) {
-        delete[] mNoiseLevels;
-    }
+    delete[] mNoiseLevels;
 }
 
 double PerlinNoise::getValue(double d1, double d2) {
@@ -52,37 +47,35 @@ void PerlinNoise::init(Random* random, int maxOctaves) {
     MemSect(0);
 }
 
-// NON_MATCHING: the octaves for loop is mismatching
 arrayWithLength<double> PerlinNoise::getRegion(arrayWithLength<double> noise, int posX, int posY, int posZ,
                                                int width, int depth, int length, double scaleX, double scaleY,
                                                double scaleZ) {
     if (noise.data) {
-        if (noise.length) {
-            for (unsigned int i = 0; i < noise.length; i++) {
-                noise[i] = 0;
-            }
+        for (unsigned int i = 0; i < noise.length; i++) {
+            noise[i] = 0;
         }
     } else {
         noise = arrayWithLength<double>(depth * width * length, true);
     }
 
-    if (mMaxOctaves < 1)
-        return noise;
-
     double currentSize = 1.0;
 
     for (int i = 0; i < mMaxOctaves; i++) {
-        double scaledZ = posZ * currentSize * scaleZ;
         double scaledX = posX * currentSize * scaleX;
+        double scaledY = posY * currentSize * scaleY;
+        double scaledZ = posZ * currentSize * scaleZ;
 
         long long floorX = Mth::lfloor(scaledX);
         long long floorZ = Mth::lfloor(scaledZ);
 
-        double fracX = (posX * currentSize * scaleX) - floorX % 0x1000000;
-        double fracY = posY * currentSize * scaleY;
-        double fracZ = (posZ * currentSize * scaleZ) - floorZ % 0x1000000;
+        scaledX -= floorX;
+        scaledZ -= floorZ;
+        floorX = floorX % 0x1000000;
+        floorZ = floorZ % 0x1000000;
+        scaledX += floorX;
+        scaledZ += floorZ;
 
-        mNoiseLevels[i]->add(noise, fracX, fracY, fracZ, width, depth, length, currentSize * scaleX,
+        mNoiseLevels[i]->add(noise, scaledX, scaledY, scaledZ, width, depth, length, currentSize * scaleX,
                              currentSize * scaleY, currentSize * scaleZ, currentSize);
 
         currentSize *= 0.5;
