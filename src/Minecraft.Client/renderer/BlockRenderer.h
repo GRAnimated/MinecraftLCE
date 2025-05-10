@@ -30,10 +30,14 @@ public:
                     float);
 
     TextureAtlasSprite* getTexture(const BlockState*, const Direction*);
+    bool hasFixedTexture();
 
     void tesselateEndRodCenter(BlockState const*, float, float, float);
+    void tesselateCrossTexture(BlockState const*, float, float, float, float);
 
-    char gap0[152];
+    char gap0[16];
+    TextureAtlasSprite* mFixedTexture;
+    char gap18[128];
     int dword98;
     int dword9C;
     int dwordA0;

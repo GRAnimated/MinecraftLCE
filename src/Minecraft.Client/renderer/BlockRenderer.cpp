@@ -204,3 +204,38 @@ void BlockRenderer::tesselateEndRodCenter(BlockState const* state, float x, floa
     this->dwordC4 = 0;
     this->dwordC8 = 0;
 }
+
+// NON_MATCHING: you will have to play with double and floats
+void BlockRenderer::tesselateCrossTexture(BlockState const* state, float x, float y, float z, float unk) {
+    BufferBuilder* builder = Tesselator::getInstance()->getBuilder();
+    TextureAtlasSprite* sprite = this->getTexture(state, Direction::UP);
+    if (this->hasFixedTexture())
+        sprite = this->mFixedTexture;
+
+    float U0 = sprite->getU0(1.0f);
+    float V0 = sprite->getV0(1.0f);
+    float U1 = sprite->getU1(1.0f);
+    float V1 = sprite->getV1(1.0f);
+
+    float v20 = ((double)x + 0.5) - (unk * 0.45);
+    float v21 = ((double)x + 0.5) + (unk * 0.45);
+    float v25 = ((double)z + 0.5) - (unk * 0.45);
+    float v24 = ((double)z + 0.5) + (unk * 0.45);
+
+    builder->vertexUV(v20, y + unk, v25, U0, V0);
+    builder->vertexUV(v20, y + 0.0f, v25, U0, V1);
+    builder->vertexUV(v21, y + 0.0f, v24, U1, V1);
+    builder->vertexUV(v21, y + unk, v24, U1, V0);
+    builder->vertexUV(v21, y + unk, v24, U0, V0);
+    builder->vertexUV(v21, y + 0.0, v24, U0, V1);
+    builder->vertexUV(v20, y + 0.0, v25, U1, V1);
+    builder->vertexUV(v20, y + unk, v25, U1, V0);
+    builder->vertexUV(v20, y + unk, v24, U0, V0);
+    builder->vertexUV(v20, y + 0.0, v24, U0, V1);
+    builder->vertexUV(v21, y + 0.0, v25, U1, V1);
+    builder->vertexUV(v21, y + unk, v25, U1, V0);
+    builder->vertexUV(v21, y + unk, v25, U0, V0);
+    builder->vertexUV(v21, y + 0.0, v25, U0, V1);
+    builder->vertexUV(v20, y + 0.0, v24, U1, V1);
+    builder->vertexUV(v20, y + unk, v24, U1, V0);
+}

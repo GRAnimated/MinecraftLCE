@@ -120,8 +120,8 @@ BlockStateDefinition* ReedsBlock::createBlockStateDefinition() {
         hasCreatedDefinition = true;
         sAgeProperties[0] = sAgeProperty;
     }
-
-    return new BlockStateDefinition(this, sAgeProperties.data());
+    // removed as this needs to be reworked :skull:
+    // return new BlockStateDefinition(this, sAgeProperties.data());
 }
 
 int ReedsBlock::getBlockFaceShape(LevelSource* levelSource, const BlockState* blockState, const BlockPos& pos,
