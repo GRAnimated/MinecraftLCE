@@ -2,8 +2,6 @@
 
 ChunkStorage::ChunkStorage() {}
 
-ChunkStorage::~ChunkStorage() {}
-
 void ChunkStorage::WaitForAll() {}
 
 void ChunkStorage::WaitIfTooManyQueuedChunks() {}

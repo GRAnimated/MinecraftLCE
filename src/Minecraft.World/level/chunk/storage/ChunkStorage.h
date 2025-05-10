@@ -8,7 +8,7 @@ class ChunkStorage {
 public:
     ChunkStorage();
 
-    virtual ~ChunkStorage();
+    virtual ~ChunkStorage() {}
     virtual void load(Level*, int, int, LevelChunk*) = 0;
     virtual void save(Level*, LevelChunk*) = 0;
     virtual void saveEntities(Level*, LevelChunk*) = 0;

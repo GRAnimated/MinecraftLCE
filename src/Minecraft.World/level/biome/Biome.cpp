@@ -14,8 +14,17 @@
 #include "Minecraft.Core/BlockPos.h"
 #include "Minecraft.Util/Mth.h"
 
-// NON_MATCHING
-Biome::BiomeProperties::BiomeProperties(const std::wstring& name) : mBiomeName(name) {}
+Biome::BiomeProperties::BiomeProperties(const std::wstring& name) {
+    mBiomeName = name;
+    mDepth = 0.1f;
+    mScale = 0.2f;
+    mTemperature = 0.5f;
+    mDownfall = 0.5f;
+    mWaterColor = 0xFFFFFF;
+    mIsSnow = false;
+    mIsNotDry = true;
+    mMutatedBiomeName = L"";
+}
 
 void Biome::BiomeProperties::depth(float depth) {
     mDepth = depth;
