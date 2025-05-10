@@ -33,7 +33,11 @@ public:
 
     void tesselateEndRodCenter(BlockState const*, float, float, float);
 
-    char gap0[152];
+    char gap0[8];
+    LevelSource* mSource;
+    char gap18[5];
+    bool mCullfaceDown;
+    char gap1E[120];
     int dword98;
     int dword9C;
     int dwordA0;

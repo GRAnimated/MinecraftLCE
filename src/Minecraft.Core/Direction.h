@@ -55,6 +55,8 @@ public:
 
     std::wstring getName() const;
 
+    const Direction* getOpposite() const;
+
 private:
     int mDirX;
     int mDirY;
