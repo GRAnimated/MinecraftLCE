@@ -102,6 +102,7 @@ public:
     void writeCompressedSkyLightData(DataOutputStream* out);
     void writeCompressedBlockLightData(DataOutputStream* out);
     ChunkPos getPos();
+    bool isTerrainPopulated();
 
     char padding_0[24];
     CompressedBlockStorage* blockData1;

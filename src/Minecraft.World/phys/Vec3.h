@@ -24,6 +24,8 @@ public:
     static void CreateNewThreadStorage();
     static Vec3* newPermanent(double, double, double);
 
+    Vec3 yRot(float);
+
     class ThreadStorage {};
 
     double x;

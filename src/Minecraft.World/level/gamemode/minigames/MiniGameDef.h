@@ -1,10 +1,6 @@
 #pragma once
 
-// NON_MATCHING: Enum values are not known
-enum EMiniGameId {
-    GLIDE = 3,
-    LOBBY = 0xF  // Named SERVER in my xb1 symbols but might be lobby... not sure.
-};
+enum EMiniGameId { LOBBY = 0, BATTLE = 1, TUMBLE = 2, GLIDE = 3, BUILD_OFF = 4, NORMAL_WORLD = 15 };
 
 class MiniGameDef {
 public:
