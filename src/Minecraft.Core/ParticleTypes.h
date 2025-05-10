@@ -4,5 +4,6 @@
 
 class ParticleTypes {
 public:
+    static ParticleType* SMOKE;
     static ParticleType* LARGE_SMOKE;
 };

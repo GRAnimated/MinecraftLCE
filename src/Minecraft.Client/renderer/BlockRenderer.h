@@ -35,9 +35,12 @@ public:
     void tesselateEndRodCenter(BlockState const*, float, float, float);
     void tesselateCrossTexture(BlockState const*, float, float, float, float);
 
-    char gap0[16];
+    char gap0[8];
+    LevelSource* mSource;
     TextureAtlasSprite* mFixedTexture;
-    char gap18[128];
+    char gap18[5];
+    bool mCullfaceDown;
+    char gap1E[120];
     int dword98;
     int dword9C;
     int dwordA0;
