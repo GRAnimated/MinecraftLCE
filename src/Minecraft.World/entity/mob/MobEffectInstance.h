@@ -6,6 +6,7 @@ class MobEffect;
 class MobEffectInstance {
 public:
     MobEffectInstance(MobEffect*, int duration, int amplifier);
+    int getAmplifier();
 
     MobEffect* mEffect;
     int mDuration;

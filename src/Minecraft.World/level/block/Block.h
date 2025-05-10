@@ -32,7 +32,7 @@ class Player;
 class Random;
 class Rotation;
 class SoundType;
-class Texture;
+class TextureAtlasSprite;
 class Vec3;
 class Item;
 
@@ -67,7 +67,7 @@ public:
     virtual void sendBlockData(uchar);
     virtual void setSoundType(SoundType const*);
     virtual void setLightBlock(int);
-    virtual void setLightEmission(float);
+    virtual Block* setLightEmission(float);
     virtual void setExplodeable(float);
     virtual bool isSolidBlockingCube(const BlockState* blockState);
     virtual bool isSolidBlockingCubeAndNotSignalSource(const BlockState* blockState);
@@ -136,8 +136,9 @@ public:
                      std::shared_ptr<Player> player, InteractionHand::EInteractionHand,
                      const Direction* direction, float, float, float, bool);
     virtual void stepOn(Level* level, const BlockPos& pos, std::shared_ptr<Entity>);
-    virtual void getStateForPlacement(Level* level, const BlockPos& pos, const Direction* direction, float,
-                                      float, float, int, std::shared_ptr<LivingEntity>);
+    virtual const BlockState* getStateForPlacement(Level* level, const BlockPos& pos,
+                                                   const Direction* direction, float, float, float, int,
+                                                   std::shared_ptr<LivingEntity>);
     virtual void prepareRender(Level* level, const BlockPos& pos);
     virtual void attack(Level* level, const BlockPos& pos, std::shared_ptr<Player> player);
     virtual void handleEntityInside(Level* level, const BlockPos& pos, std::shared_ptr<Entity>, Vec3*);
@@ -184,15 +185,15 @@ public:
     virtual bool isMatching(Block*);
     virtual void hasAnalogOutputSignal(const BlockState* blockState);
     virtual void getAnalogOutputSignal(const BlockState* blockState, Level* level, const BlockPos& pos);
-    virtual Item* setIconName(const std::wstring&);
+    virtual Block* setIconName(const std::wstring&);
     virtual void getIconName();
     virtual void registerIcons(IconRegister*);
     virtual void getTileItemIconName();
     virtual void getIconTexture(const Direction* direction, const BlockState* blockState);
-    virtual Texture* getTexture(LevelSource* levelSource, const BlockPos& pos, const Direction* direction,
-                                const BlockState* blockState);
-    virtual Texture* getTexture(const Direction* direction, const BlockState* blockState);
-    virtual Texture* getTexture(const Direction* direction);
+    virtual TextureAtlasSprite* getTexture(LevelSource* levelSource, const BlockPos& pos,
+                                           const Direction* direction, const BlockState* blockState);
+    virtual TextureAtlasSprite* getTexture(const Direction* direction, const BlockState* blockState);
+    virtual TextureAtlasSprite* getTexture(const Direction* direction);
     virtual void getInventoryRenderState(const BlockState* blockState);
     virtual BlockStateDefinition* createBlockStateDefinition();
     virtual BlockStateDefinition* getBlockStateDefinition();
@@ -248,7 +249,7 @@ public:
     const BlockState* mBlockState;
     int mDescriptionId;
     int mUseDescriptionId;
-    Texture* mTexture;
+    TextureAtlasSprite* mTexture;
     int field_A0;
 };
 

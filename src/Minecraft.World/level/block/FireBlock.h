@@ -1,5 +1,6 @@
 #pragma once
 
+#include "Minecraft.Client/renderer/texture/TextureAtlasSprite.h"
 #include "Minecraft.World/level/block/Block.h"
 #include <unordered_map>
 
@@ -44,7 +45,7 @@ public:
     bool mayPlace(Level* level, const BlockPos& pos) override;
     bool canInstantlyTick() override;
     void registerIcons(IconRegister*) override;
-    Texture* getTexture(const Direction* direction, const BlockState* blockState) override;
+    TextureAtlasSprite* getTexture(const Direction* direction, const BlockState* blockState) override;
     BlockStateDefinition* createBlockStateDefinition() override;
 
     void setFlammable(Block*, int, int);
@@ -55,10 +56,10 @@ public:
     int getFireOdds(Level*, BlockPos const&);
     int getFlameOdds(Block*);
     int getBurnOdd(Block*);
-    Texture* getTextureLayer(int);
+    TextureAtlasSprite* getTextureLayer(int);
 
 private:
     std::unordered_map<Block*, int> mFlameOdds;
     std::unordered_map<Block*, int> mBurnOdds;
-    Texture* mTexture[2];
+    TextureAtlasSprite* mTexture[2];
 };

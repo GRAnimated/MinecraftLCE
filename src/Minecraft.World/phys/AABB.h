@@ -16,6 +16,7 @@ public:
 
     void set(double, double, double, double, double, double);
     Vec3* getCenter();
+    AABB* divideInternalsBy(double);
 
     static AABB* sCrossShape;  // .got:000000710176F5E0
 };

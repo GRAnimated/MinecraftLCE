@@ -5,7 +5,7 @@
 #include <memory>
 class DamageSource {
 public:
-    static DamageSource* BYPASS_ARMOUR;
+    static DamageSource* BYPASS_ARMOUR;  // this name is wrong
     static DamageSource* IN_FIRE;
     static DamageSource* WITHER;
 

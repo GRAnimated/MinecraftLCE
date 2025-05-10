@@ -4,6 +4,7 @@
 #include "Minecraft.Client/CMinecraftApp.h"
 #include "Minecraft.Client/eGameHostOption.h"
 #include "Minecraft.Client/renderer/texture/IconRegister.h"
+#include "Minecraft.Client/renderer/texture/TextureAtlasSprite.h"
 #include "Minecraft.Server/MinecraftServer.h"
 #include "Minecraft.Server/PlayerList.h"
 #include "Minecraft.World/ArrayWithLength.h"
@@ -356,7 +357,7 @@ void FireBlock::registerIcons(IconRegister* iconRegister) {
     mTexture[1] = iconRegister->registerIcon(fire_1);
 }
 
-Texture* FireBlock::getTexture(const Direction* direction, const BlockState* blockState) {
+TextureAtlasSprite* FireBlock::getTexture(const Direction* direction, const BlockState* blockState) {
     return mTexture[0];
 }
 
@@ -444,6 +445,6 @@ int FireBlock::getBurnOdd(Block* block) {
     return 0;
 }
 
-Texture* FireBlock::getTextureLayer(int offset) {
+TextureAtlasSprite* FireBlock::getTextureLayer(int offset) {
     return mTexture[offset];
 }

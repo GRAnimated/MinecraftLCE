@@ -127,6 +127,7 @@ public:
     BlockPos getTopSolidBlockPos(BlockPos const&);
     BlockPos getTopRainBlockPos(BlockPos const&);
     BlockPos getHeightmapPos(BlockPos const&);
+    BlockPos getSharedSpawnPos();
 
     LevelData* getLevelData();
     WorldBorder* getWorldBorder();
@@ -143,6 +144,8 @@ public:
     bool isRaining();
     bool isRainingAt(BlockPos const&);
     bool isHumidAt(BlockPos const&);
+    bool hasChunkAt(BlockPos const&);
+    bool hasBlockCubes(const AABB*);
 
     void instaTick(BlockPos const&, BlockState const*, Random&);
     static void setInstaTick(bool);
@@ -154,9 +157,6 @@ public:
     void checkSession();  // RETURN TYPE UNKNOWN
 
     std::vector<AABB> getCollisionAABBs(std::shared_ptr<Entity>, const AABB*, bool, bool, bool);
-    bool hasBlockCubes(const AABB*);
-
-    BlockPos getSharedSpawnPos();
 
     int dword8;
     char gapC[36];

@@ -1,5 +1,7 @@
 #pragma once
 
+#include "Minecraft.World/ArrayWithLength.h"
+#include "Minecraft.World/level/block/state/AbstractProperty.h"
 #include "Minecraft.World/level/block/state/BlockState.h"
 #include <vector>
 
@@ -61,23 +63,22 @@ public:
         void triggerEvent(Level*, BlockPos const&, int, int) const override;
         void neighborChanged(Level*, BlockPos const&, Block*, BlockPos const&) const override;
     };
-
     BlockStateDefinition(Block* block);
 
-    // NON_MATCHING
-    template <typename T>
-    BlockStateDefinition(Block* block, T* properties) {
-        // std::vector<const Property*> propertiesVec{properties...};
-        // _init(block, propertiesVec.data(), propertiesVec.size());
-        _init(block, properties, sizeof(properties));
+    template <int N>
+    BlockStateDefinition(Block* block, const Property* (&properties_array)[N]) {
+        _init(block, properties_array, N);
     }
 
-    void _init(Block* block, Property const** properties, unsigned int damage);
+    void _init(Block* block, Property const** properties, unsigned int propertiesCount);
 
     Block* getBlock();
     const BlockState* any();
     const BlockState* getPossibleBlockStates();
 
 private:
-    char filler[0x40];
+    Block* mBlock;
+    std::vector<const Property*> mProperties;
+    arrayWithLength<const BlockState*> mStates;
+    char filler[24];
 };

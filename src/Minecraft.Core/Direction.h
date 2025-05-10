@@ -48,12 +48,14 @@ public:
     int getY() const { return mY; }
     int getZ() const { return mZ; }
 
-    int get3DDataValue() const;
+    unsigned int get3DDataValue() const;
     int get2DDataValue() const;
 
     Axis* getAxis() const;
 
     std::wstring getName() const;
+
+    const Direction* getOpposite() const;
 
 private:
     int mDirX;

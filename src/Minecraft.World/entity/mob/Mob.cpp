@@ -52,7 +52,7 @@ void Mob::init() {
     this->mArrayOfFloats[4] = 0.0f;
     this->mCanPickUpLoot = false;
     this->mPersistenceRequired = false;
-    this->mCensoredString = (std::shared_ptr<CensoredString>)new CensoredString();
+    this->mCensoredString = std::shared_ptr<CensoredString>(new CensoredString());
     this->mLootTable = nullptr;
     this->mLootTableSeed = 0;
     this->mHandItems = NonNullList<not_null_ptr<ItemInstance>>::withSize(2, ItemInstance::EMPTY);

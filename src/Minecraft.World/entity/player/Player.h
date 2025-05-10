@@ -82,11 +82,11 @@ public:
     virtual void setSlot(int, not_null_ptr<ItemInstance> const&) override;
     virtual SoundSource::ESoundSource getSoundSource() override;
     virtual void canCreateParticles() override;
-    virtual void PositionLocked_4() override;
+    virtual bool PositionLocked_4() override;
     virtual void SetPositionLocked_4(bool) override;
     virtual void TakeGlideCollisionDamage_4() override;
     virtual void SetGlideCollisionDamage_4(bool) override;
-    virtual void GetLiftForceModifier_4() override;
+    virtual double GetLiftForceModifier_4() override;
     virtual void SetLiftForceModifier_4(double) override;
     virtual void registerAttributes() override;
     virtual void onChangedBlock(BlockPos const&) override;
@@ -105,7 +105,7 @@ public:
     virtual bool isImmobile() override;
     virtual void jumpFromGround() override;
     virtual void travel(float, float, float) override;
-    virtual void getSpeed() override;
+    virtual float getSpeed() override;
     virtual bool isSleeping() override;
     virtual void aiStep() override;
     virtual void serverAiStep() override;
@@ -190,6 +190,7 @@ public:
     bool isAllowedToAttackPlayers();
     bool hasInvisiblePrivilege();
     bool getPlayerGamePrivilege(EPlayerGamePrivileges);
+    bool CheckPowerup(PowerupItems::eGlide_Timed_Powerup_ID);
 
     // dunno the type
     static std::vector<void*> sSkins;

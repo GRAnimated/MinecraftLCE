@@ -1,11 +1,11 @@
 #pragma once
 #include <string>
 
-class Texture;
+class TextureAtlasSprite;
 
 class IconRegister {
 public:
     virtual ~IconRegister();
-    virtual Texture* registerIcon(std::wstring const&) = 0;
+    virtual TextureAtlasSprite* registerIcon(std::wstring const&) = 0;
     virtual int getIconType() = 0;
 };
