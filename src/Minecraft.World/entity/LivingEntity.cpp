@@ -89,22 +89,14 @@ void LivingEntity::travel(float x, float y, float z) {
                     finalFriction = 0.91f;
                     if (this->mOnGround) {
                         PIXBeginNamedEvent(0.0, "Get friction 2");
-                        Block* block
-                            = this->mLevel
-                                  ->getBlockState(blockPos.set(
-                                      Mth::floor(this->mX), Mth::floor(this->getBoundingBox()->min.y - 1.0),
-                                      Mth::floor(this->mZ)))
-                                  ->getBlock();
+                        blockPos.set(Mth::floor(this->mX), Mth::floor(this->getBoundingBox()->min.y - 1.0),
+                                     Mth::floor(this->mZ));
+                        Block* block = this->mLevel->getBlockState(blockPos)->getBlock();
                         block = this->IsCreativeFlying()
                                         && (block == Blocks::ICE || block == Blocks::PACKED_ICE
                                             || block == Blocks::FROSTED_ICE || block == Blocks::SLIME) ?
                                     Blocks::STONE :
-                                    this->mLevel
-                                        ->getBlockState(
-                                            blockPos.set(Mth::floor(this->mX),
-                                                         Mth::floor(this->getBoundingBox()->min.y - 1.0),
-                                                         Mth::floor(this->mZ)))
-                                        ->getBlock();
+                                    this->mLevel->getBlockState(blockPos)->getBlock();
                         finalFriction = block->mFriction * 0.91;
                         PIXEndNamedEvent();
                     }
