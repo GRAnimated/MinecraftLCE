@@ -14,37 +14,75 @@ Property* FACING;
 // later fill with something actuall but without this it doesn't match as in original it doesn't use state arg
 // and then it removes the state arg from being passed in final binary,
 // so it shouldn't be marked as MATCHING_HACK
-void BlockRenderer::renderFaceUp(BlockState const* pState, double x, double y, double z,
+void BlockRenderer::renderFaceUp(const BlockState* pState, double x, double y, double z,
                                  TextureAtlasSprite* sprite, float u, float v, float u2, float v2) {
     printf("", this, x, y, z, sprite, u, v, u2, v2);
 }
 
-void BlockRenderer::renderFaceDown(BlockState const* pState, double x, double y, double z,
+void BlockRenderer::renderFaceDown(const BlockState* pState, double x, double y, double z,
                                    TextureAtlasSprite* sprite, float u, float v, float u2, float v2) {
     printf("", this, x, y, z, sprite, u, v, u2, v2);
 }
 
-void BlockRenderer::renderNorth(BlockState const* pState, double x, double y, double z,
+void BlockRenderer::renderNorth(const BlockState* pState, double x, double y, double z,
                                 TextureAtlasSprite* sprite, float u, float v, float u2, float v2) {
     printf("", this, x, y, z, sprite, u, v, u2, v2);
 }
 
-void BlockRenderer::renderSouth(BlockState const* pState, double x, double y, double z,
+void BlockRenderer::renderSouth(const BlockState* pState, double x, double y, double z,
                                 TextureAtlasSprite* sprite, float u, float v, float u2, float v2) {
     printf("", this, x, y, z, sprite, u, v, u2, v2);
 }
 
-void BlockRenderer::renderEast(BlockState const* pState, double x, double y, double z,
+void BlockRenderer::renderEast(const BlockState* pState, double x, double y, double z,
                                TextureAtlasSprite* sprite, float u, float v, float u2, float v2) {
     printf("", this, x, y, z, sprite, u, v, u2, v2);
 }
 
-void BlockRenderer::renderWest(BlockState const* pState, double x, double y, double z,
+// NON_MATCHING: WIP
+void BlockRenderer::renderWest(const BlockState* pState, double x, double y, double z,
                                TextureAtlasSprite* sprite, float u, float v, float u2, float v2) {
     printf("", this, x, y, z, sprite, u, v, u2, v2);
+    // double v58 = v;
+    // double v59 = u;
+    // double v56 = v2;
+    // double v57 = u2;
+    //
+    // BufferBuilder* builder = Tesselator::getInstance()->getBuilder();
+    //
+    // if (mIsFlippedTexture) {
+    //    v59 = u2;
+    //    v57 = u;
+    //}
+    //
+    // if (_30 < 0.0 || _34 > 1.0) {
+    //    v59 = sprite->getU0(true);
+    //    v57 = sprite->getU1(true);
+    //}
+    //
+    // if (_28 < 0.0 || _2C > 1.0) {
+    //    v58 = sprite->getV0(true);
+    //    v56 = sprite->getV1(true);
+    //}
+    //
+    // int t = dwordA4;
+    // if (t == 3) {
+    //    v59 = sprite->getU(16.0 - (_30 * 16.0));
+    //    v57 = sprite->getU(16.0 - (_34 * 16.0));
+    //    v58 = sprite->getV(16.0 - (_2C * 16.0));
+    //    v56 = sprite->getV(16.0 - (_28 * 16.0f));
+    //    float temp_59 = v59;
+    //    float temp_57 = v57;
+    //    float temp_58 = v58;
+    //    float temp_56 = v56;
+    //    sprite->adjustUV(temp_59, temp_57);
+    //    sprite->adjustUV(temp_58, temp_56);
+    //} else if (t == 2) {
+    //} else if (t == 1) {
+    //}
 }
 
-void BlockRenderer::tesselateEndRodCenter(BlockState const* state, float x, float y, float z) {
+void BlockRenderer::tesselateEndRodCenter(const BlockState* state, float x, float y, float z) {
     BufferBuilder* builder = Tesselator::getInstance()->getBuilder();
     this->setShape(((EndRodBlock*)Blocks::END_ROD)->getShapeRod(state));
 
@@ -205,8 +243,7 @@ void BlockRenderer::tesselateEndRodCenter(BlockState const* state, float x, floa
     this->dwordC8 = 0;
 }
 
-// NON_MATCHING: you will have to play with double and floats
-void BlockRenderer::tesselateCrossTexture(BlockState const* state, float x, float y, float z, float unk) {
+void BlockRenderer::tesselateCrossTexture(const BlockState* state, float x, float y, float z, float unk) {
     BufferBuilder* builder = Tesselator::getInstance()->getBuilder();
     TextureAtlasSprite* sprite = this->getTexture(state, Direction::UP);
     if (this->hasFixedTexture())
@@ -217,14 +254,15 @@ void BlockRenderer::tesselateCrossTexture(BlockState const* state, float x, floa
     float U1 = sprite->getU1(1.0f);
     float V1 = sprite->getV1(1.0f);
 
-    float v20 = ((double)x + 0.5) - (unk * 0.45);
-    float v21 = ((double)x + 0.5) + (unk * 0.45);
-    float v25 = ((double)z + 0.5) - (unk * 0.45);
-    float v24 = ((double)z + 0.5) + (unk * 0.45);
+    float test = unk * 0.45;
+    float v20 = (x + 0.5) - test;
+    float v21 = (x + 0.5) + test;
+    float v25 = (z + 0.5) - test;
+    float v24 = (z + 0.5) + test;
 
     builder->vertexUV(v20, y + unk, v25, U0, V0);
-    builder->vertexUV(v20, y + 0.0f, v25, U0, V1);
-    builder->vertexUV(v21, y + 0.0f, v24, U1, V1);
+    builder->vertexUV(v20, y + 0.0, v25, U0, V1);
+    builder->vertexUV(v21, y + 0.0, v24, U1, V1);
     builder->vertexUV(v21, y + unk, v24, U1, V0);
     builder->vertexUV(v21, y + unk, v24, U0, V0);
     builder->vertexUV(v21, y + 0.0, v24, U0, V1);
