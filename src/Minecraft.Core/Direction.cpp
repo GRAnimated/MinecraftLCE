@@ -46,7 +46,7 @@ Direction::Direction(int dirX, int dirY, int dirZ, const std::wstring& name,
     mZ = pos->getZ();
 }
 
-int Direction::get3DDataValue() const {
+unsigned int Direction::get3DDataValue() const {
     return mDirX;
 }
 
