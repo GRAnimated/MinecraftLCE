@@ -5,6 +5,7 @@ class Button;
 class Minecraft;
 
 class Screen : GuiComponent {
+public:
     virtual void render(int, int, float);
     virtual void keyPressed(wchar_t key, int);
     virtual void mouseClicked(int, int, int);

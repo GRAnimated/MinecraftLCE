@@ -208,7 +208,7 @@ void Blocks::staticInit() {
     RED_SANDSTONE_STAIRS = get(L"red_sandstone_stairs");
     DOUBLE_STONE_SLAB2 = get(L"double_stone_slab2");
     STONE_SLAB2 = get(L"stone_slab2");
-    END_ROD = get(L"end_rod");
+    END_ROD = (EndRodBlock*)get(L"end_rod");
     CHORUS_PLANT = get(L"chorus_plant");
     CHORUS_FLOWER = get(L"chorus_flower");
     PURPUR_BLOCK = get(L"purpur_block");

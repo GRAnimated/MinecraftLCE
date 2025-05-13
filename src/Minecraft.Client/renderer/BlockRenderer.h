@@ -63,7 +63,11 @@ public:
     int dwordC0;
     int dwordC4;
     int dwordC8;
-    bool _CC;
+    bool mIsEnableAO;
     void* qwordD0;
-    char gapD8[216];
+    char unk[152];
+    int mBrightness_TL, mBrightness_BL, mBrightness_BR, mBrightness_TR;
+    float mColorR_TL, mColorR_BL, mColorR_BR, mColorR_TR;
+    float mColorG_TL, mColorG_BL, mColorG_BR, mColorG_TR;
+    float mColorB_TL, mColorB_BL, mColorB_BR, mColorB_TR;
 };

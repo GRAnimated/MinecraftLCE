@@ -2,6 +2,7 @@
 
 #include "Minecraft.Client/resources/MappedRegistry.h"
 #include "Minecraft.World/level/block/Block.h"
+#include "Minecraft.World/level/block/EndRodBlock.h"
 #include "Minecraft.World/level/block/FireBlock.h"
 #include "Minecraft.World/level/block/PortalBlock.h"
 #include "Minecraft.World/level/block/PumpkinBlock.h"
@@ -219,7 +220,7 @@ public:
     static Block* RED_SANDSTONE_STAIRS;
     static Block* DOUBLE_STONE_SLAB2;
     static Block* STONE_SLAB2;
-    static Block* END_ROD;
+    static EndRodBlock* END_ROD;
     static Block* CHORUS_PLANT;
     static Block* CHORUS_FLOWER;
     static Block* PURPUR_BLOCK;
