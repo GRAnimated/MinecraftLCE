@@ -36,6 +36,6 @@ void Enchantments::staticCtor() {
     VANISHING_CURSE = Enchantments::get(L"vanishing_curse");
 }
 
-Enchantment* Enchantments::get(std::wstring const& key) {
+Enchantment* Enchantments::get(const std::wstring& key) {
     return sEnchantmentRegistry->get(ResourceLocation(key));
 }

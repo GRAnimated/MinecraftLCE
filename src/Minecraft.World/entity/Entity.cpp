@@ -151,7 +151,7 @@ void Entity::getSwimSplashSound() {}
 
 void Entity::onInsideBlock(BlockState const*) {}
 
-// void playStepSound(BlockPos const&, Block*) {}
+// void playStepSound(const BlockPos&, Block*) {}
 
 float Entity::playFlySound(float) {
     return 0.0f;
@@ -179,7 +179,7 @@ bool Entity::makeStepSound() {
     return true;
 }
 
-void Entity::checkFallDamage(double fall, bool onGround, Block* block, BlockPos const& pos) {
+void Entity::checkFallDamage(double fall, bool onGround, Block* block, const BlockPos& pos) {
     if (onGround) {
         if (this->mFallDistance > 0.0f) {
             block->fallOn(this->mLevel, pos, shared_from_this(), this->mFallDistance);

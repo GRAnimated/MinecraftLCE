@@ -4,7 +4,7 @@
 
 class BooleanProperty : public AbstractProperty<bool> {
 public:
-    static BooleanProperty* create(std::wstring const&);
+    static BooleanProperty* create(const std::wstring&);
 
     int getPossibleValues() const override;
     bool equals(Property const*) const override;
@@ -12,7 +12,7 @@ public:
     int getValueCount() const override;
     int getValueAtIndex(unsigned int) const override;
     int getIndexForValue(Boxed*) const override;
-    std::wstring getName(int const&) const override;
-    int getUnboxedValue(std::wstring const&) const override;
+    std::wstring getName(const int&) const override;
+    int getUnboxedValue(const std::wstring&) const override;
     ~BooleanProperty();
 };

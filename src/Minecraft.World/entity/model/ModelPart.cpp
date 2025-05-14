@@ -1,4 +1,4 @@
 #include "ModelPart.h"
 #include <string>
 
-void ModelPart::construct(Model*, std::wstring const&) {}
+void ModelPart::construct(Model*, const std::wstring&) {}

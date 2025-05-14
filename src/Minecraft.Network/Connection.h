@@ -26,7 +26,7 @@ public:
     bool getAndSetRunning(bool);
     void _init();
     ~Connection();
-    Connection(Socket*, std::wstring const&, PacketListener*);
+    Connection(Socket*, const std::wstring&, PacketListener*);
 
     static int runRead(void*);
     static int runWrite(void*);

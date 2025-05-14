@@ -45,7 +45,7 @@ public:
     void AnimateKeyPress(int, int, bool, bool, bool);
     void PlayUISFX(const SoundEvent*);
     void NavigateToScene(int, EUIScene, void*, EUILayer, EUIGroup);
-    arrayWithLength<uchar> getMovieData(std::wstring const&);
+    arrayWithLength<uchar> getMovieData(const std::wstring&);
 
     // void* VTable;
     void* qword8;

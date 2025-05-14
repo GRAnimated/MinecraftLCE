@@ -7,7 +7,7 @@ class CompoundTag;
 
 class SavedData : std::enable_shared_from_this<SavedData> {
 public:
-    SavedData(std::wstring const&);
+    SavedData(const std::wstring&);
     virtual ~SavedData();
     virtual void load(CompoundTag*) = 0;
     virtual void save(CompoundTag*) = 0;

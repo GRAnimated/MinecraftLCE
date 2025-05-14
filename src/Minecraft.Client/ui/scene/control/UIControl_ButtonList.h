@@ -6,6 +6,6 @@ class UIControl_ButtonList : public UIControl_List {
 public:
     UIControl_ButtonList();
 
-    void addItem(std::wstring const&, int);
-    bool setupControl(UIScene*, fuiRenderNode*, std::string const&);
+    void addItem(const std::wstring&, int);
+    bool setupControl(UIScene*, fuiRenderNode*, const std::string&);
 };

@@ -22,6 +22,6 @@ public:
     bool mayPlace(Level* level, const BlockPos& pos) override;
 
     virtual bool mayPlaceOn(BlockState const* blockState);
-    virtual void checkAlive(Level* level, BlockPos const& pos, BlockState const* blockState);
-    virtual bool canSurvive(Level* level, BlockPos const& pos, BlockState const* blockState);
+    virtual void checkAlive(Level* level, const BlockPos& pos, BlockState const* blockState);
+    virtual bool canSurvive(Level* level, const BlockPos& pos, BlockState const* blockState);
 };

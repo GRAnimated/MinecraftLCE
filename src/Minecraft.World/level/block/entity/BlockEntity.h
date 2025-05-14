@@ -50,7 +50,7 @@ public:
     virtual void clearRemoved();
     virtual void triggerEvent(int, int);
     virtual void clearCache();
-    virtual void setPosition(BlockPos const&);
+    virtual void setPosition(const BlockPos&);
     virtual bool onlyOpCanSetNbt();
     virtual std::wstring getDisplayName();
     virtual void rotate(Rotation*);

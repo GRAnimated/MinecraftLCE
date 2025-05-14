@@ -172,11 +172,11 @@ public:
 
     class BiomeProperties {
     public:
-        BiomeProperties(std::wstring const&);
+        BiomeProperties(const std::wstring&);
         void depth(float);
         void downfall(float);
         void dry(void);
-        BiomeProperties* mutated(std::wstring const&);
+        BiomeProperties* mutated(const std::wstring&);
         void scale(float);
         void snow(void);
         void temperature(float);

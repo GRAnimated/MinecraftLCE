@@ -73,7 +73,7 @@ void ReedsBlock::neighborChanged(const BlockState* blockState, Level* level, con
     checkAlive(level, pos, blockState);
 }
 
-bool ReedsBlock::canSurvive(Level* level, BlockPos const& pos) {
+bool ReedsBlock::canSurvive(Level* level, const BlockPos& pos) {
     return mayPlace(level, pos);
 }
 

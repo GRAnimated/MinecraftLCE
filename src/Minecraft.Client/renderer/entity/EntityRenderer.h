@@ -21,27 +21,27 @@ class EntityRenderer {
     virtual void render(AABB*, double, double, double);
     virtual void renderName(SharedEntity&, double, double, double);
     virtual void shouldShowName(SharedEntity&);
-    virtual void renderNameTags(SharedEntity&, double, double, double, std::wstring const&, double, int);
+    virtual void renderNameTags(SharedEntity&, double, double, double, const std::wstring&, double, int);
     virtual void bindTexture(SharedEntity&);
     virtual void bindTexture(ResourceLocation const*);
-    virtual void bindTexture(std::wstring const&, int);
-    virtual void bindTexture(std::wstring const&, std::wstring const&);
+    virtual void bindTexture(const std::wstring&, int);
+    virtual void bindTexture(const std::wstring&, const std::wstring&);
     virtual void getTextureLocation(SharedEntity&);
     virtual void renderFlame(SharedEntity&, double, double, double, float);
     virtual void renderShadow(SharedEntity&, double, double, double, float, float);
     virtual void getLevel();
-    virtual void renderBlockShadow(BlockState const*, double, double, double, BlockPos const&, float, float,
+    virtual void renderBlockShadow(BlockState const*, double, double, double, const BlockPos&, float, float,
                                    double, double, double);
     virtual void postRender(SharedEntity&, double, double, double, float, float, bool);
     virtual void getFont();
-    virtual void renderNameTag(SharedEntity&, std::wstring const&, double, double, double, int, int);
+    virtual void renderNameTag(SharedEntity&, const std::wstring&, double, double, double, int, int);
     virtual void hasSecondPass();
     virtual void renderSecondPass(SharedEntity&, double, double, double, float, float);
     virtual void setupForTexturePack(TexturePack*);
     virtual void SetItemFrame(bool);
     virtual void getModel();
     virtual void getModelName();
-    virtual void createModel(ModelDefinition const&);
+    virtual void createModel(const ModelDefinition&);
 
     EntityRenderDispatcher* mDispatcher;
     int field_10;

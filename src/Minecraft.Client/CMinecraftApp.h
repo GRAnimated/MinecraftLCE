@@ -55,8 +55,8 @@ public:
     LevelGenerationOptions* getLevelGenerationOptions();
     void loadMediaArchive();
     void initTime();
-    arrayWithLength<uchar> getArchiveFile(std::wstring const&, bool);
-    bool hasArchiveFile(std::wstring const&, bool);
+    arrayWithLength<uchar> getArchiveFile(const std::wstring&, bool);
+    bool hasArchiveFile(const std::wstring&, bool);
     void InitialiseTips();
     void InitGameSettings();
     LevelRuleset* getGameRuleDefinitions();

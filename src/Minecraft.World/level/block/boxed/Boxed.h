@@ -8,7 +8,7 @@ public:
     virtual ~Boxed();
 
     virtual bool isA(std::type_info const* type) const { return mTypeInfo == type; }
-    virtual bool isA(std::type_info const& type) const { return mTypeInfo == &type; }
+    virtual bool isA(const std::type_info& type) const { return mTypeInfo == &type; }
     virtual unsigned int hashOf() const = 0;
     virtual bool operator==(Boxed const* other) const = 0;
     virtual bool operator==(Boxed* other) const { return operator==(static_cast<Boxed const*>(other)); }

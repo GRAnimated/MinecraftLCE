@@ -36,7 +36,7 @@ void GameMode::RecordGainPoints(int) {}
 
 void GameMode::ResetTempPoints() {}
 
-bool GameMode::RecordSecondaryTargetReached(std::wstring const&, int, GlideRingGenerator::eGlideRingSize) {
+bool GameMode::RecordSecondaryTargetReached(const std::wstring&, int, GlideRingGenerator::eGlideRingSize) {
     return false;
 }
 
@@ -56,11 +56,11 @@ bool GameMode::RecordProgress(double, double, double, double) {
 
 void GameMode::RecordSpawnedAtCheckpoint(int) {}
 
-void GameMode::RecordBlockPlaced(BlockPos const&, int) {}
+void GameMode::RecordBlockPlaced(const BlockPos&, int) {}
 
-void GameMode::RecordBlockDestroyed(BlockPos const&, int) {}
+void GameMode::RecordBlockDestroyed(const BlockPos&, int) {}
 
-void GameMode::RecordBlockPresent(BlockPos const&, int) {}
+void GameMode::RecordBlockPresent(const BlockPos&, int) {}
 
 void GameMode::RecordLayerTime() {}
 
@@ -68,7 +68,7 @@ void GameMode::RecordSnowballHit() {}
 
 void GameMode::RecordHitBySnowball() {}
 
-void GameMode::RecordLanding(BlockPos const&) {}
+void GameMode::RecordLanding(const BlockPos&) {}
 
 void GameMode::OnMouseDown() {}
 

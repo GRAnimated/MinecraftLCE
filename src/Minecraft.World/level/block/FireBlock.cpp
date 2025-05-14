@@ -375,16 +375,16 @@ void FireBlock::setFlammable(Block* block, int a3, int a4) {
     mBurnOdds[block] = a4;
 }
 
-bool FireBlock::canBurn(LevelSource* level, BlockPos const& pos) {
+bool FireBlock::canBurn(LevelSource* level, const BlockPos& pos) {
     return getFlameOdds(level->getBlockState(pos)->getBlock()) > 0;
 }
 
-bool FireBlock::isNearRain(Level* level, BlockPos const& pos) {
+bool FireBlock::isNearRain(Level* level, const BlockPos& pos) {
     return level->isRainingAt(pos) || level->isRainingAt(pos.west()) || level->isRainingAt(pos.east())
            || level->isRainingAt(pos.north()) || level->isRainingAt(pos.south());
 }
 
-void FireBlock::checkBurnOut(Level* level, BlockPos const& pos, int n, Random* random, int n2) {
+void FireBlock::checkBurnOut(Level* level, const BlockPos& pos, int n, Random* random, int n2) {
     int n3 = getBurnOdd(level->getBlockState(pos)->getBlock());
 
     if (random->nextInt(n) < n3) {
@@ -404,7 +404,7 @@ void FireBlock::checkBurnOut(Level* level, BlockPos const& pos, int n, Random* r
     }
 }
 
-bool FireBlock::isValidFireLocation(Level* level, BlockPos const& pos) {
+bool FireBlock::isValidFireLocation(Level* level, const BlockPos& pos) {
     for (auto it = Direction::VALUES.begin(); it != Direction::VALUES.end(); ++it) {
         const Direction* direction = *it;
         BlockPos newPos = pos.relative(direction);

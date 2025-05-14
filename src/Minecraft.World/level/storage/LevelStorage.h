@@ -23,7 +23,7 @@ public:
     virtual PlayerIO* getPlayerIO() = 0;
     virtual void closeAll() = 0;
     virtual void getFolder() = 0;
-    virtual ConsoleSavePath getDataFile(std::wstring const&) = 0;
+    virtual ConsoleSavePath getDataFile(const std::wstring&) = 0;
     virtual void getLevelId() = 0;
     virtual void getStructureManager() = 0;
     virtual ConsoleSaveFile* getSaveFile();

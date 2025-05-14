@@ -4,7 +4,7 @@
 #include "Minecraft.World/level/block/FireBlock.h"
 #include "Minecraft.World/level/block/WaterlilyBlock.h"
 
-Block* Blocks::get(std::wstring const& name) {
+Block* Blocks::get(const std::wstring& name) {
     ResourceLocation loc = ResourceLocation(name);
     return Registry->get(loc);
 }

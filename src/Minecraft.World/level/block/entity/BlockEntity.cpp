@@ -153,7 +153,7 @@ void BlockEntity::clearCache() {
     mData = -1;
 }
 
-void BlockEntity::setPosition(BlockPos const& pos) {
+void BlockEntity::setPosition(const BlockPos& pos) {
     mPos = pos;
 }
 

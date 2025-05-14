@@ -90,7 +90,7 @@ Connection::~Connection() {
 
 static char filename[0x100] = {};
 
-Connection::Connection(Socket* socket, std::wstring const& type, PacketListener* packetListener)
+Connection::Connection(Socket* socket, const std::wstring& type, PacketListener* packetListener)
     : mIncomingQueue(std::deque<std::shared_ptr<Packet>>()),
       mOutgoingQueue(std::deque<std::shared_ptr<Packet>>()),
       mSlowOutgoingQueue(std::deque<std::shared_ptr<Packet>>()) {

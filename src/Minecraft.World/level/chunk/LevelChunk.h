@@ -53,33 +53,33 @@ public:
     virtual void recalcHeightmapOnly();
     virtual void recalcHeightmap();
     virtual void lightLava();
-    virtual void getBlockLightBlock(BlockPos const&);
-    virtual Block* getBlock(BlockPos const&);
-    virtual const BlockState* getBlockState(BlockPos const&);
-    virtual void getData(BlockPos const&);
+    virtual void getBlockLightBlock(const BlockPos&);
+    virtual Block* getBlock(const BlockPos&);
+    virtual const BlockState* getBlockState(const BlockPos&);
+    virtual void getData(const BlockPos&);
     virtual void setData(int, int, int, int, int, bool*);
-    virtual void setBlock(BlockPos const&, BlockState const*);
+    virtual void setBlock(const BlockPos&, BlockState const*);
     virtual void setBlockAndData(int, int, int, int, int, bool);
-    virtual void getBrightness(LightLayer::variety, BlockPos const&);
+    virtual void getBrightness(LightLayer::variety, const BlockPos&);
     virtual void getNeighbourBrightnesses(int*, LightLayer::variety, int, int, int);
-    virtual void setBrightness(LightLayer::variety, BlockPos const&, int);
-    virtual void getRawBrightness(BlockPos const&, int);
+    virtual void setBrightness(LightLayer::variety, const BlockPos&, int);
+    virtual void getRawBrightness(const BlockPos&, int);
     virtual void addEntity(std::shared_ptr<Entity>);
     virtual void removeEntity(std::shared_ptr<Entity>);
     virtual void removeEntity(std::shared_ptr<Entity>, int);
-    virtual void isSkyLit(BlockPos const&);
-    virtual void getBlockEntity(BlockPos const&, LevelChunk::EntityCreationType);
+    virtual void isSkyLit(const BlockPos&);
+    virtual void getBlockEntity(const BlockPos&, LevelChunk::EntityCreationType);
     virtual void addBlockEntity(std::shared_ptr<BlockEntity>);
-    virtual void setBlockEntity(BlockPos const&, std::shared_ptr<BlockEntity>);
-    virtual void removeBlockEntity(BlockPos const&);
+    virtual void setBlockEntity(const BlockPos&, std::shared_ptr<BlockEntity>);
+    virtual void removeBlockEntity(const BlockPos&);
     virtual void load(bool);
     virtual void unload(bool, bool);
     virtual void containsPlayer();
     virtual void markUnsaved();
     virtual void getEntities(std::shared_ptr<Entity>, AABB const*, std::vector<std::shared_ptr<Entity>>&,
-                             Predicate<std::shared_ptr<Entity>> const*);
-    virtual void getEntitiesOfClass(std::type_info const&, AABB const*, std::vector<std::shared_ptr<Entity>>&,
-                                    Predicate<std::shared_ptr<Entity>> const*, bool);
+                             const Predicate<std::shared_ptr<Entity>>*);
+    virtual void getEntitiesOfClass(const std::type_info&, AABB const*, std::vector<std::shared_ptr<Entity>>&,
+                                    const Predicate<std::shared_ptr<Entity>>*, bool);
     virtual void countEntities();
     virtual void shouldSave(bool);
     virtual void getBlocksAndData(arrayWithLength<unsigned char>*, int, int, int, int, int, int, int, bool);
@@ -87,7 +87,7 @@ public:
     virtual void testSetBlocksAndData(arrayWithLength<unsigned char>, int, int, int, int, int, int, int);
     virtual void getRandom(long long);
     virtual void isEmpty();
-    virtual void getBiome(BlockPos const&, BiomeSource*);
+    virtual void getBiome(const BlockPos&, BiomeSource*);
     virtual void compressLighting();
     virtual void compressBlocks();
     virtual void compressData();

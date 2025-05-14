@@ -50,7 +50,7 @@ bool Item::canBeDepleted() {
     return this->mMaxDamage > 0 && (!this->mStackedByData || this->mMaxStackSize == 1);
 }
 
-void Item::setIconName(std::wstring const& iconName) {
+void Item::setIconName(const std::wstring& iconName) {
     this->mIconName = iconName;
 }
 

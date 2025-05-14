@@ -171,14 +171,14 @@ bool NetherFlatLevelSource::postProcessLoadedChunk(LevelChunk* chunk, int x, int
     return false;
 }
 
-void NetherFlatLevelSource::getMobsAt(MobCategory* category, BlockPos const& pos) {
+void NetherFlatLevelSource::getMobsAt(MobCategory* category, const BlockPos& pos) {
     Biome* biome = mLevel->getBiome(pos);
     if (biome)
         biome->getMobs(category);
 }
 
-void* NetherFlatLevelSource::findNearestMapFeature(Level* level, std::wstring const& name,
-                                                   BlockPos const& pos, bool flag) {
+void* NetherFlatLevelSource::findNearestMapFeature(Level* level, const std::wstring& name,
+                                                   const BlockPos& pos, bool flag) {
     return nullptr;
 }
 
@@ -186,6 +186,6 @@ void NetherFlatLevelSource::recreateLogicStructuresForChunk(LevelChunk* chunk, i
     return;
 }
 
-bool NetherFlatLevelSource::isPosInFeature(Level* level, std::wstring const& name, BlockPos const& pos) {
+bool NetherFlatLevelSource::isPosInFeature(Level* level, const std::wstring& name, const BlockPos& pos) {
     return false;
 }

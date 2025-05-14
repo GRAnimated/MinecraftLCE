@@ -32,37 +32,38 @@ public:
     virtual void getLightEmission() const = 0;
     virtual bool isTranslucent() const = 0;
     virtual void doesPropagate() const = 0;
-    virtual MaterialColor* getMapColor(LevelSource*, BlockPos const&) = 0;
+    virtual MaterialColor* getMapColor(LevelSource*, const BlockPos&) = 0;
     virtual void rotate(Rotation*) const = 0;
     virtual void mirror(Mirror*) const = 0;
     virtual bool isCubeShaped() const = 0;
     virtual void hasCustomBreakingProgress() const = 0;
     virtual RenderShape getRenderShape() const = 0;
-    virtual void getLightColor(LevelSource*, BlockPos const&) const = 0;
+    virtual void getLightColor(LevelSource*, const BlockPos&) const = 0;
     virtual float getShadeBrightness() const = 0;
     virtual bool isSolidBlockingCube() const = 0;
     virtual bool isSolidBlockingCubeAndNotSignalSource() const = 0;
     virtual bool isSignalSource() const = 0;
-    virtual void getSignal(LevelSource*, BlockPos const&, Direction const*) const = 0;
+    virtual void getSignal(LevelSource*, const BlockPos&, const Direction*) const = 0;
     virtual void hasAnalogOutputSignal() const = 0;
-    virtual void getAnalogOutputSignal(Level*, BlockPos const&) const = 0;
-    virtual void getDestroySpeed(Level*, BlockPos const&) const = 0;
-    virtual void getDestroyProgress(std::shared_ptr<Player>, Level*, BlockPos const&) const = 0;
-    virtual void getDirectSignal(LevelSource*, BlockPos const&, Direction const*) const = 0;
+    virtual void getAnalogOutputSignal(Level*, const BlockPos&) const = 0;
+    virtual void getDestroySpeed(Level*, const BlockPos&) const = 0;
+    virtual void getDestroyProgress(std::shared_ptr<Player>, Level*, const BlockPos&) const = 0;
+    virtual void getDirectSignal(LevelSource*, const BlockPos&, const Direction*) const = 0;
     virtual void getPistonPushReaction() const = 0;
-    virtual const BlockState* fillVirtualBlockStateProperties(LevelSource*, BlockPos const&) const = 0;
-    virtual void getOutlineAABB(Level*, BlockPos const&) const = 0;
-    virtual bool shouldRenderFace(LevelSource*, BlockPos const&, Direction const*) const = 0;
+    virtual const BlockState* fillVirtualBlockStateProperties(LevelSource*, const BlockPos&) const = 0;
+    virtual void getOutlineAABB(Level*, const BlockPos&) const = 0;
+    virtual bool shouldRenderFace(LevelSource*, const BlockPos&, const Direction*) const = 0;
     virtual bool isSolidRender() const = 0;
-    virtual AABB* getClipAABB(LevelSource*, BlockPos const&) const = 0;
-    virtual void addCollissionAABBs(Level*, BlockPos const&, AABB const*, std::vector<AABB*>*,
-                                    std::shared_ptr<Entity>, bool) const = 0;
-    virtual AABB* getShape(LevelSource*, BlockPos const&) const = 0;
-    virtual void clip(Level*, BlockPos const&, Vec3*, Vec3*) const = 0;
+    virtual AABB* getClipAABB(LevelSource*, const BlockPos&) const = 0;
+    virtual void addCollissionAABBs(Level*, const BlockPos&, AABB const*, std::vector<AABB*>*,
+                                    std::shared_ptr<Entity>, bool) const
+        = 0;
+    virtual AABB* getShape(LevelSource*, const BlockPos&) const = 0;
+    virtual void clip(Level*, const BlockPos&, Vec3*, Vec3*) const = 0;
     virtual bool isTopSolidBlocking() const = 0;
-    virtual void getOffset(LevelSource*, BlockPos const&) const = 0;
+    virtual void getOffset(LevelSource*, const BlockPos&) const = 0;
     virtual bool isViewBlocking() const = 0;
-    virtual int getBlockFaceShape(LevelSource*, BlockPos const&, Direction const*) const = 0;
+    virtual int getBlockFaceShape(LevelSource*, const BlockPos&, const Direction*) const = 0;
     virtual void getProperties() const = 0;
     virtual void hasProperty(Property const*) const = 0;
     virtual Boxed* getBoxedValue(Property const*) const = 0;
@@ -73,8 +74,8 @@ public:
     virtual void toString() const = 0;
     virtual void equals(BlockState const*) = 0;
     virtual void hashCode() const = 0;
-    virtual void triggerEvent(Level*, BlockPos const&, int, int) const = 0;
-    virtual void neighborChanged(Level*, BlockPos const&, Block*, BlockPos const&) const = 0;
+    virtual void triggerEvent(Level*, const BlockPos&, int, int) const = 0;
+    virtual void neighborChanged(Level*, const BlockPos&, Block*, const BlockPos&) const = 0;
 
     // NON_MATCHING: Decomp is using add sp, 0x8 instead of mov sp
     template <typename T>

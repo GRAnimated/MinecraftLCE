@@ -5,5 +5,5 @@ class Dimension;
 
 class PlayerList {
 public:
-    bool isTrackingBlock(BlockPos const&, Dimension const*);
+    bool isTrackingBlock(const BlockPos&, Dimension const*);
 };

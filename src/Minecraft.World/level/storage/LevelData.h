@@ -21,7 +21,7 @@ class LevelData {
 public:
     LevelData();
     LevelData(CompoundTag*);
-    LevelData(LevelSettings*, std::wstring const&);
+    LevelData(LevelSettings*, const std::wstring&);
     LevelData(LevelData*);
     virtual ~LevelData();
     virtual CompoundTag* createTag();
@@ -55,9 +55,9 @@ public:
     virtual void setDayTime(long long);
     virtual void setSizeOnDisk(long long);
     virtual void setLoadedPlayerTag(CompoundTag*);
-    virtual void setSpawn(BlockPos const&);
+    virtual void setSpawn(const BlockPos&);
     virtual std::wstring getLevelName();
-    virtual void setLevelName(std::wstring const&);
+    virtual void setLevelName(const std::wstring&);
     virtual int getVersion();
     virtual void setVersion(int);
     virtual long getLastPlayed();

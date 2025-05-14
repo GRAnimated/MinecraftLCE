@@ -27,7 +27,7 @@ public:
     virtual void tick() override;
     virtual void baseTick() override;
     virtual void outOfWorld() override;
-    virtual void checkFallDamage(double, bool, Block*, BlockPos const&) override;
+    virtual void checkFallDamage(double, bool, Block*, const BlockPos&) override;
     virtual void causeFallDamage(float, float) override;
     virtual void getLightColor() override;
     virtual void markHurt() override;
@@ -45,7 +45,7 @@ public:
     virtual void animateHurt() override;
     virtual void setSprinting(bool) override;
     virtual void getTeam() override;
-    virtual void spawnEatParticles(ItemInstance const&, int) override;
+    virtual void spawnEatParticles(const ItemInstance&, int) override;
     virtual void getYHeadRot() override;
     virtual void setYHeadRot(float) override;
     virtual void setYBodyRot(float) override;
@@ -55,7 +55,7 @@ public:
     virtual void stopCurrentLerp() override;
     virtual void registerAttributes();
     virtual bool isWaterMob();
-    virtual void onChangedBlock(BlockPos const&);
+    virtual void onChangedBlock(const BlockPos&);
     virtual bool isBaby();
     virtual void tickDeath();
     virtual void shouldDropExperience();
@@ -175,7 +175,7 @@ public:
     virtual void getFallFlyingTicks();
     virtual bool isAffectedByPotions();
     virtual void attackable();
-    virtual void setRecordPlayingNearby(BlockPos const&, bool);
+    virtual void setRecordPlayingNearby(const BlockPos&, bool);
     virtual bool IsCreativeFlying();
 
     void CheckThermalAreas();

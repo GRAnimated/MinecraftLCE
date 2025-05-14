@@ -146,7 +146,7 @@ void LevelData::setSizeOnDisk(long long sizeOnDisk) {
     mSizeOnDisk = sizeOnDisk;
 }
 void LevelData::setLoadedPlayerTag(CompoundTag*) {}
-void LevelData::setSpawn(BlockPos const& pos) {
+void LevelData::setSpawn(const BlockPos& pos) {
     mSpawnPosX = pos.getX();
     mSpawnPosY = pos.getY();
     mSpawnPosZ = pos.getZ();
@@ -155,7 +155,7 @@ std::wstring LevelData::getLevelName() {
     return mLevelName;
 }
 
-void LevelData::setLevelName(std::wstring const& name) {
+void LevelData::setLevelName(const std::wstring& name) {
     mLevelName = name;
 }
 int LevelData::getVersion() {

@@ -63,7 +63,7 @@ bool WaterlilyBlock::mayPlaceOn(BlockState const* blockState) {
     return blockState->getBlock() == Blocks::WATER || blockState->getMaterial() == Material::ICE;
 }
 
-bool WaterlilyBlock::canSurvive(Level* level, BlockPos const& pos, BlockState const* blockState) {
+bool WaterlilyBlock::canSurvive(Level* level, const BlockPos& pos, BlockState const* blockState) {
     if (pos.getY() < 0 || pos.getY() > 255)
         return false;
 

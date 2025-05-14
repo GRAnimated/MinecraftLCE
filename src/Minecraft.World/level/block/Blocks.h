@@ -20,7 +20,7 @@ public:
         Registry;
 
     static void staticInit();
-    static Block* get(std::wstring const&);
+    static Block* get(const std::wstring&);
 
     static Block* AIR;
     static Block* STONE;

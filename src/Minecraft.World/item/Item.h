@@ -28,7 +28,7 @@ public:
     void addProperty(ResourceLocation, ItemPropertyFunction const*);
     int getId();
     bool canBeDepleted();
-    void setIconName(std::wstring const&);
+    void setIconName(const std::wstring&);
 
     static Item* byId(int id);
     static void registerBlock(Block* block);
@@ -36,7 +36,7 @@ public:
     static Item* byBlock(Block* block);
     static Item* byString(const std::wstring& string);
     static void registerItem(int id, const std::wstring& name_id, Item* item);
-    static void registerItem(int id, ResourceLocation const& name_id, Item* item);
+    static void registerItem(int id, const ResourceLocation& name_id, Item* item);
 
     virtual not_null_ptr<ItemInstance> getDefaultInstance(const std::shared_ptr<ItemInstance>&);
     virtual bool verifyTagAfterLoad(CompoundTag*);

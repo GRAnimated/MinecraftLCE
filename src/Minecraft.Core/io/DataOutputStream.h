@@ -30,7 +30,7 @@ public:
     void writeChar(wchar_t) override;
     void writeChars(const std::wstring& str) override;
     void writeBoolean(bool) override;
-    void writeUTF(std::wstring const&) override;
+    void writeUTF(const std::wstring&) override;
     void writePlayerUID(PlayerUID) override;
 
     void writeVarInt(int);
