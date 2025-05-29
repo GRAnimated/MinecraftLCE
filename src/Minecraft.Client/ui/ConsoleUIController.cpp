@@ -71,7 +71,7 @@ ConsoleUIController::ConsoleUIController() {
     this->dword440 = 0;
 }
 
-arrayWithLength<uchar> ConsoleUIController::getMovieData(std::wstring const& name) {
+arrayWithLength<uchar> ConsoleUIController::getMovieData(const std::wstring& name) {
     long v4 = System::processTimeInMilliSecs() + 60000;
 
     if (auto search = mCachedMovieDatas.find(name); search != mCachedMovieDatas.end()) {

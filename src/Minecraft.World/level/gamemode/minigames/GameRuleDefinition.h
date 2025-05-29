@@ -24,7 +24,7 @@ public:
     virtual void getChildren(std::vector<GameRuleDefinition*>*);
     virtual void getChildren(std::vector<GameRuleDefinition*>*, ConsoleGameRules::EGameRuleType);
     virtual void addChild(ConsoleGameRules::EGameRuleType);
-    virtual void addAttribute(std::wstring const&, std::wstring const&);
+    virtual void addAttribute(const std::wstring&, const std::wstring&);
     virtual void onAttributesAdded();
     virtual void populateGameRule(GameRulesInstance::EGameRulesInstanceType, GameRule*);
     virtual void getGoal();
@@ -33,7 +33,7 @@ public:
     virtual void getAuxValue();
     virtual void onUseBlock(GameRule*, int, int, int, int);
     virtual void onCollectItem(GameRule*, not_null_ptr<ItemInstance>);
-    virtual void evaluateRule(Level*, LevelRuleset*, MiniGameDef const&);
+    virtual void evaluateRule(Level*, LevelRuleset*, const MiniGameDef&);
     virtual void postProcessPlayer(std::shared_ptr<Player>);
     virtual void WriteXMLData(std::string&);
     virtual void WriteAttributesAsXML(std::string&);

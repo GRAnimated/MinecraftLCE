@@ -209,7 +209,7 @@ public:
     int getId();
 
     static Block* byId(int id);
-    static void popResource(Level*, BlockPos const&, not_null_ptr<ItemInstance>);
+    static void popResource(Level*, const BlockPos&, not_null_ptr<ItemInstance>);
 
     static void CreateNewThreadStorage();
 

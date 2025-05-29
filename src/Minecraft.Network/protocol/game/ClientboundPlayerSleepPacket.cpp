@@ -15,7 +15,7 @@ ClientboundPlayerSleepPacket::ClientboundPlayerSleepPacket() : Packet() {
 }
 
 ClientboundPlayerSleepPacket::ClientboundPlayerSleepPacket(std::shared_ptr<Player> player,
-                                                           BlockPos const& pos)
+                                                           const BlockPos& pos)
     : Packet() {
     mPlayerId = player->getId();
     mPos = pos;

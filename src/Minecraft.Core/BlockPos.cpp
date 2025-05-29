@@ -8,9 +8,9 @@ BlockPos::BlockPos() : Vec3i(0, 0, 0) {}
 
 BlockPos::BlockPos(Vec3* vec) : Vec3i(vec->x, vec->y, vec->z) {}
 
-BlockPos::BlockPos(Vec3i const& vec) : Vec3i(vec.getX(), vec.getY(), vec.getZ()) {}
+BlockPos::BlockPos(const Vec3i& vec) : Vec3i(vec.getX(), vec.getY(), vec.getZ()) {}
 
-bool BlockPos::equals(BlockPos const& pos) const {
+bool BlockPos::equals(const BlockPos& pos) const {
     return getX() == pos.getX() && getY() == pos.getY() && getZ() == pos.getZ();
 }
 
@@ -22,11 +22,11 @@ BlockPos BlockPos::offset(int x, int y, int z) const {
     return BlockPos(getX() + x, getY() + y, getZ() + z);
 }
 
-BlockPos BlockPos::relative(Direction const* direction) const {
+BlockPos BlockPos::relative(const Direction* direction) const {
     return relative(direction, 1);
 }
 
-BlockPos BlockPos::relative(Direction const* direction, int amount) const {
+BlockPos BlockPos::relative(const Direction* direction, int amount) const {
     return BlockPos(getX() + direction->getX() * amount, getY() + direction->getY() * amount,
                     getZ() + direction->getZ() * amount);
 }

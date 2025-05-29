@@ -49,11 +49,11 @@ public:
     BlockStateDefinition* createBlockStateDefinition() override;
 
     void setFlammable(Block*, int, int);
-    bool canBurn(LevelSource*, BlockPos const&);
-    bool isNearRain(Level*, BlockPos const&);
-    void checkBurnOut(Level*, BlockPos const&, int, Random*, int);
-    bool isValidFireLocation(Level*, BlockPos const&);
-    int getFireOdds(Level*, BlockPos const&);
+    bool canBurn(LevelSource*, const BlockPos&);
+    bool isNearRain(Level*, const BlockPos&);
+    void checkBurnOut(Level*, const BlockPos&, int, Random*, int);
+    bool isValidFireLocation(Level*, const BlockPos&);
+    int getFireOdds(Level*, const BlockPos&);
     int getFlameOdds(Block*);
     int getBurnOdd(Block*);
     TextureAtlasSprite* getTextureLayer(int);

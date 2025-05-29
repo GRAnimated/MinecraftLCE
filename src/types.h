@@ -16,7 +16,7 @@ class not_null_ptr : public std::shared_ptr<T> {
 public:
     not_null_ptr() = default;
     not_null_ptr(T* ptr);
-    not_null_ptr(T const& other);
+    not_null_ptr(const T& other);
 };
 
 typedef unsigned char uchar;

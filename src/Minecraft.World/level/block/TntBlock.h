@@ -26,5 +26,5 @@ public:
     void dropFromExplosion(Explosion*) override;
     TextureAtlasSprite* getTexture(const Direction* direction, const BlockState* blockState) override;
     BlockStateDefinition* createBlockStateDefinition() override;
-    virtual void destroy(Level*, BlockPos const&, BlockState const*, std::shared_ptr<LivingEntity>);
+    virtual void destroy(Level*, const BlockPos&, BlockState const*, std::shared_ptr<LivingEntity>);
 };

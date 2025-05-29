@@ -37,7 +37,7 @@ public:
     enum EPlayerGamePrivileges {
 
     };
-    Player(Level*, std::wstring const&);
+    Player(Level*, const std::wstring&);
     static void staticCtor();
 
     virtual eINSTANCEOF GetType() override;
@@ -89,7 +89,7 @@ public:
     virtual double GetLiftForceModifier_4() override;
     virtual void SetLiftForceModifier_4(double) override;
     virtual void registerAttributes() override;
-    virtual void onChangedBlock(BlockPos const&) override;
+    virtual void onChangedBlock(const BlockPos&) override;
     virtual void getExperienceReward(std::shared_ptr<Player>) override;
     virtual bool isAlwaysExperienceDropper() override;
     virtual void blockUsingShield(std::shared_ptr<LivingEntity> const&) override;
@@ -133,7 +133,7 @@ public:
     virtual void openTextEdit(std::shared_ptr<SignBlockEntity>);
     virtual void openMinecartCommandBlock(std::shared_ptr<BaseCommandBlock>);
     virtual void openCommandBlock(std::shared_ptr<CommandBlockEntity>);
-    virtual void openTrading(std::shared_ptr<Merchant>, std::wstring const&, int);
+    virtual void openTrading(std::shared_ptr<Merchant>, const std::wstring&, int);
     virtual void openContainer(std::shared_ptr<Container>);
     virtual void openHorseInventory(std::shared_ptr<AbstractHorse>, std::shared_ptr<Container>);
     virtual void startBlockInteraction(InteractionObject&);
@@ -146,7 +146,7 @@ public:
     virtual void respawn();
     virtual bool isLocalPlayer();
     virtual void getGameProfile();
-    virtual void startSleepInBed(BlockPos const&, bool);
+    virtual void startSleepInBed(const BlockPos&, bool);
     virtual void stopSleepInBed(bool, bool, bool);
     virtual void displayClientMessage(int, bool);
     virtual void getRespawnPosition();
@@ -161,7 +161,7 @@ public:
     virtual void onEnchantmentPerformed(int);
     virtual void giveExperienceLevels(int);
     virtual void mayBuild();
-    virtual void mayUseItemAt(BlockPos const&, Direction const*, not_null_ptr<ItemInstance>);
+    virtual void mayUseItemAt(const BlockPos&, const Direction*, not_null_ptr<ItemInstance>);
     virtual void onUpdateAbilities();
     virtual void setGameMode(GameType const*);
     virtual void isSpectator() = 0;

@@ -19,10 +19,10 @@ public:
     virtual LevelChunk* createChunk(int, int) override;
     virtual void postProcess(int, int) override;
     virtual bool postProcessLoadedChunk(LevelChunk*, int, int) override;
-    virtual void getMobsAt(MobCategory*, BlockPos const&) override;
-    virtual void* findNearestMapFeature(Level*, std::wstring const&, BlockPos const&, bool) override;
+    virtual void getMobsAt(MobCategory*, const BlockPos&) override;
+    virtual void* findNearestMapFeature(Level*, const std::wstring&, const BlockPos&, bool) override;
     virtual void recreateLogicStructuresForChunk(LevelChunk*, int, int) override;
-    virtual bool isPosInFeature(Level*, std::wstring const&, BlockPos const&) override;
+    virtual bool isPosInFeature(Level*, const std::wstring&, const BlockPos&) override;
     virtual void lightChunk(LevelChunk*) override;
     void prepareHeights(int, int, ChunkPrimer*);
     void getHeights(int, int, int, arrayWithLength<Biome*>&, arrayWithLength<double>&);

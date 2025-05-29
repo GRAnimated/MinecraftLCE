@@ -75,7 +75,7 @@ bool Bush::mayPlaceOn(BlockState const* blockState) {
            || blockState->getBlock() == Blocks::FARMLAND;
 }
 
-void Bush::checkAlive(Level* level, BlockPos const& pos, BlockState const* blockState) {
+void Bush::checkAlive(Level* level, const BlockPos& pos, BlockState const* blockState) {
     bool canBlockSurvive = canSurvive(level, pos, blockState);
     if (canBlockSurvive)
         return;
@@ -85,6 +85,6 @@ void Bush::checkAlive(Level* level, BlockPos const& pos, BlockState const* block
     level->setBlock(pos, Blocks::AIR->defaultBlockState(), 3, false);
 }
 
-bool Bush::canSurvive(Level* level, BlockPos const& pos, BlockState const* blockState) {
+bool Bush::canSurvive(Level* level, const BlockPos& pos, BlockState const* blockState) {
     return mayPlaceOn(level->getBlockState(pos.below()));
 }

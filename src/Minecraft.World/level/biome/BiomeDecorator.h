@@ -11,7 +11,7 @@ class BiomeDecorator {
 public:
     BiomeDecorator();
     virtual ~BiomeDecorator();
-    virtual void decorate(Level*, Random&, Biome*, BlockPos const&);
+    virtual void decorate(Level*, Random&, Biome*, const BlockPos&);
     virtual void decorate(Biome*, Level*, Random&);
     virtual void decorateOres(Level*, Random&);
 

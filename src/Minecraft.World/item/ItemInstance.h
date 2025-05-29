@@ -46,8 +46,8 @@ public:
     void grow(int);
     void shrink(int);
     void split(int);
-    void useOn(std::shared_ptr<Player>, Level*, BlockPos const&, InteractionHand::EInteractionHand,
-               Direction const*, float, float, float, bool);
+    void useOn(std::shared_ptr<Player>, Level*, const BlockPos&, InteractionHand::EInteractionHand,
+               const Direction*, float, float, float, bool);
     void getDestroySpeed(BlockState const*);
     void TestUse(Level*, std::shared_ptr<Player>, InteractionHand::EInteractionHand);
     void use(Level*, std::shared_ptr<Player>, InteractionHand::EInteractionHand);
@@ -67,7 +67,7 @@ public:
     void hurt(int, Random*);
     void hurtAndBreak(int, std::shared_ptr<LivingEntity>);
     void hurtEnemy(std::shared_ptr<LivingEntity>, std::shared_ptr<Player>);
-    void mineBlock(Level*, BlockState const*, BlockPos const&, std::shared_ptr<Player>);
+    void mineBlock(Level*, BlockState const*, const BlockPos&, std::shared_ptr<Player>);
     void canDestroySpecial(BlockState const*);
     void interactEnemy(std::shared_ptr<Player>, std::shared_ptr<LivingEntity>,
                        InteractionHand::EInteractionHand);
@@ -91,15 +91,15 @@ public:
     void releaseUsing(Level*, std::shared_ptr<LivingEntity>, int);
     void setTag(CompoundTag*);
     void addTagElement(std::wstring, Tag*);
-    void getOrCreateTagElement(std::wstring const&);
-    void getTagElement(std::wstring const&);
+    void getOrCreateTagElement(const std::wstring&);
+    void getTagElement(const std::wstring&);
     void getEnchantmentTags();
     void wasCreatedByRestrictedPlayer();
     void getHoverNameUnfiltered();
     void getHoverName();
     void setTranslatableName(int);
-    void setHoverName(std::wstring const&);
-    void setCensorshipInfo(std::wstring const&, bool);
+    void setHoverName(const std::wstring&);
+    void setCensorshipInfo(const std::wstring&, bool);
     void getOwnerUUID();
     void wasCreatedOnHost();
     void resetHoverName();
@@ -127,7 +127,7 @@ public:
     void hasPotionStrengthBar();
     void GetPotionStrength();
 
-    bool operator=(ItemInstance const&);
+    bool operator=(const ItemInstance&);
 
 private:
     void* qword_0 = nullptr;

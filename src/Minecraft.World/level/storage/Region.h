@@ -8,23 +8,23 @@ class LevelChunk;
 
 class Region : public LevelSource {
 public:
-    Region(Level*, BlockPos const&, BlockPos const&, int);
+    Region(Level*, const BlockPos&, const BlockPos&, int);
 
-    virtual std::shared_ptr<BlockEntity> getBlockEntity(BlockPos const&) override;
-    virtual void getLightColor(BlockPos const&, int, int) override;
-    virtual void getBrightness(LightLayer::variety, BlockPos const&) override;
-    virtual void getBrightness(BlockPos const&, int) override;
-    virtual void getBrightness(BlockPos const&) override;
-    virtual const BlockState* getBlockState(BlockPos const&) override;
+    virtual std::shared_ptr<BlockEntity> getBlockEntity(const BlockPos&) override;
+    virtual void getLightColor(const BlockPos&, int, int) override;
+    virtual void getBrightness(LightLayer::variety, const BlockPos&) override;
+    virtual void getBrightness(const BlockPos&, int) override;
+    virtual void getBrightness(const BlockPos&) override;
+    virtual const BlockState* getBlockState(const BlockPos&) override;
     virtual void getBlockId(int, int, int) override;
     virtual void getBlockData(int, int, int) override;
-    virtual Block* getBlock(BlockPos const&) override;
-    virtual bool isEmptyBlock(BlockPos const&) override;
-    virtual Biome* getBiome(BlockPos const&) override;
+    virtual Block* getBlock(const BlockPos&) override;
+    virtual bool isEmptyBlock(const BlockPos&) override;
+    virtual Biome* getBiome(const BlockPos&) override;
     virtual BiomeSource* getBiomeSource() override;
     virtual void getMaxBuildHeight() override;
     virtual bool isAllEmpty() override;
-    virtual void getDirectSignal(BlockPos const&, Direction const*) override;
+    virtual void getDirectSignal(const BlockPos&, const Direction*) override;
     virtual void getGeneratorType() override;
     virtual ~Region();
 

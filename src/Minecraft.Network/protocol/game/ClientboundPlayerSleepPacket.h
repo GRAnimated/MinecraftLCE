@@ -12,7 +12,7 @@ public:
     static std::shared_ptr<Packet> create();
 
     ClientboundPlayerSleepPacket();
-    ClientboundPlayerSleepPacket(std::shared_ptr<Player>, BlockPos const&);
+    ClientboundPlayerSleepPacket(std::shared_ptr<Player>, const BlockPos&);
 
     EPacketType getPacketId() override;
     void read(DataInputStream* input) override;

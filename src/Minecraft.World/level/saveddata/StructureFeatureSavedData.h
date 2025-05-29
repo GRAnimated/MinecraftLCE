@@ -6,7 +6,7 @@ class CompoundTag;
 
 class StructureFeatureSavedData : public SavedData {
 public:
-    StructureFeatureSavedData(std::wstring const&);
+    StructureFeatureSavedData(const std::wstring&);
 
     virtual void load(CompoundTag*) override;
     virtual void save(CompoundTag*) override;

@@ -39,8 +39,8 @@ public:
     virtual bool canUnloadChunk(int, int);
     virtual DimensionType* getType() = 0;
     virtual int getXZSize();
-    virtual void getPlayerConstraints(BlockPos const&);
-    virtual void inPlayerConstraints(BlockPos const&);
+    virtual void getPlayerConstraints(const BlockPos&);
+    virtual void inPlayerConstraints(const BlockPos&);
     virtual void containsChunk(int, int);
     virtual void getBlockLightColour();
 

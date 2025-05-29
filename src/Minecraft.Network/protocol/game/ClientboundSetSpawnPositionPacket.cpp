@@ -16,7 +16,7 @@ ClientboundSetSpawnPositionPacket::ClientboundSetSpawnPositionPacket(int x, int 
     mPos = BlockPos(x, y, z);
 }
 
-ClientboundSetSpawnPositionPacket::ClientboundSetSpawnPositionPacket(BlockPos const& pos) : Packet() {
+ClientboundSetSpawnPositionPacket::ClientboundSetSpawnPositionPacket(const BlockPos& pos) : Packet() {
     mPos = pos;
 }
 

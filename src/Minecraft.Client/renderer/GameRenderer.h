@@ -8,7 +8,7 @@ class Minecraft;
 
 class GameRenderer {
     // meant to be public?
-    static void renderNameTagInWorld(Font*, std::wstring const&, float, float, float, int, float, float, bool,
+    static void renderNameTagInWorld(Font*, const std::wstring&, float, float, float, int, float, float, bool,
                                      bool, int, float);
 
 public:

@@ -1,6 +1,6 @@
 #include "Minecraft.World/level/saveddata/SavedData.h"
 
-SavedData::SavedData(std::wstring const& path) : mPath(path) {}
+SavedData::SavedData(const std::wstring& path) : mPath(path) {}
 
 SavedData::~SavedData() {}
 

@@ -16,15 +16,15 @@ public:
     BlockPos();
     BlockPos(std::shared_ptr<Entity> const&);
     BlockPos(Vec3*);
-    BlockPos(Vec3i const&);
+    BlockPos(const Vec3i&);
 
-    bool equals(BlockPos const& pos) const;
+    bool equals(const BlockPos& pos) const;
     bool equals(BlockPos const* pos) const;
 
     BlockPos offset(int x, int y, int z) const;
 
-    BlockPos relative(Direction const*) const;
-    BlockPos relative(Direction const*, int) const;
+    BlockPos relative(const Direction*) const;
+    BlockPos relative(const Direction*, int) const;
 
     BlockPos above() const;
     BlockPos above(int) const;

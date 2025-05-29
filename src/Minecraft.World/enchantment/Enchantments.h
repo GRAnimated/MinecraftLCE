@@ -37,5 +37,5 @@ public:
     static Enchantment* VANISHING_CURSE;
 
     static void staticCtor();
-    static Enchantment* get(std::wstring const&);
+    static Enchantment* get(const std::wstring&);
 };

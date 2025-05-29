@@ -24,6 +24,6 @@ public:
     virtual void writeChar(wchar_t) = 0;
     virtual void writeChars(const std::wstring&) = 0;
     virtual void writeBoolean(bool) = 0;
-    virtual void writeUTF(std::wstring const&) = 0;
+    virtual void writeUTF(const std::wstring&) = 0;
     virtual void writePlayerUID(PlayerUID) = 0;
 };

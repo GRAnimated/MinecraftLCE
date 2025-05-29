@@ -24,8 +24,8 @@ public:
     void dispatchKeyboardEvent(fuiFile*, bool, int);
     void dispatchMouseMoveEvent(fuiFile*, float, float);
     void dispatchEnterFrameEvent();
-    void addDirectEventListener(FJ_EventListener const&);
-    void removeDirectEventListener(FJ_EventListener const&);
+    void addDirectEventListener(const FJ_EventListener&);
+    void removeDirectEventListener(const FJ_EventListener&);
     void removeEventListenerForNode(FJ_FuiNode*);
     void manageTexture(fuiFile*, fuiBitmap*);
     void removeManagedTexture(fuiFile*, fuiBitmap*);

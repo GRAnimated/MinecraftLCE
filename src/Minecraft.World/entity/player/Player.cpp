@@ -11,7 +11,7 @@
 #include "Player.h"
 #include <memory>
 
-Player::Player(Level* level, std::wstring const& a3) : LivingEntity(level) {
+Player::Player(Level* level, const std::wstring& a3) : LivingEntity(level) {
     this->init();
     this->mGameProfile = a3;
     MemSect(11);

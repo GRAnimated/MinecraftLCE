@@ -11,7 +11,7 @@ UIControl::UIControl() {
     this->mFuiRenderNode = nullptr;
 }
 
-bool UIControl::setupControl(UIScene* parentUIScene, fuiRenderNode* renderNode, std::string const& name) {
+bool UIControl::setupControl(UIScene* parentUIScene, fuiRenderNode* renderNode, const std::string& name) {
     this->mParentUIScene = parentUIScene;
     this->mName = name;
     this->mFuiRenderNode = renderNode->findNode(name.c_str());

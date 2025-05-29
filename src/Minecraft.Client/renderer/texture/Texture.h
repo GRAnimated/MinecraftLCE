@@ -8,11 +8,11 @@ class Rect2i;
 
 class Texture {
 public:
-    Texture(std::wstring const&, int, int, int, int, int, int, int, BufferedImage*, bool);
-    Texture(std::wstring const&, int, int, int, int, int, int, int, int, BufferedImage*, bool);
+    Texture(const std::wstring&, int, int, int, int, int, int, int, BufferedImage*, bool);
+    Texture(const std::wstring&, int, int, int, int, int, int, int, int, BufferedImage*, bool);
     ~Texture();
-    void init(std::wstring const&, int, int, int, int, int, int, int, int, bool);
-    void init(std::wstring const&, int, int, int, int, int, int, int, int, BufferedImage*, bool);
+    void init(const std::wstring&, int, int, int, int, int, int, int, int, bool);
+    void init(const std::wstring&, int, int, int, int, int, int, int, int, BufferedImage*, bool);
     void updateOnGPU();
     void transferFromImage(BufferedImage*);
     void getData(u32);

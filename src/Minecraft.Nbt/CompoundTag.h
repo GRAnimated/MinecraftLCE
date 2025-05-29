@@ -25,56 +25,56 @@ public:
      *
      * @param name The name of the `Tag` that you want to get
      */
-    CompoundTag* getCompound(std::wstring const& name);
+    CompoundTag* getCompound(const std::wstring& name);
 
     /** Gets a child `bool`
      *
      * @param name The name of the `Tag` that you want to get
      */
-    bool getBoolean(std::wstring const& name);
+    bool getBoolean(const std::wstring& name);
 
     /** Gets a child `Byte`
      *
      * @param name The name of the `Tag` that you want to get
      */
-    byte getByte(std::wstring const& name);
+    byte getByte(const std::wstring& name);
 
     /** Gets a child `std::wstring`
      *
      * @param name The name of the `Tag` that you want to get
      */
-    std::wstring getString(std::wstring const& name);
+    std::wstring getString(const std::wstring& name);
 
     /** Gets a child `Int`
      *
      * @param name The name of the `Tag` that you want to get
      */
-    int getInt(std::wstring const& name);
+    int getInt(const std::wstring& name);
 
     /** Gets a child `Short`
      *
      * @param name The name of the `Tag` that you want to get
      */
-    short getShort(std::wstring const& name);
+    short getShort(const std::wstring& name);
 
     /** Gets a child `Float`
      *
      * @param name The name of the `Tag` that you want to get
      */
-    float getFloat(std::wstring const& name);
+    float getFloat(const std::wstring& name);
 
     /** Gets a child `List Tag` (but returns void???)
      *
      *  @param name The name of the child tag
      *  @param length The length of the list (unconfirmed)
      */
-    void getList(std::wstring const& name, int length);
+    void getList(const std::wstring& name, int length);
 
     /** Gets a child `Tag` with the provided name
      *
      * @param name The name of the tag that you want to get.
      */
-    CompoundTag* get(std::wstring const& name);
+    CompoundTag* get(const std::wstring& name);
 
     /** Gets a child `List Tag` (Safe)
      *
@@ -83,20 +83,20 @@ public:
      *  @param name The name of the child tag
      *  @param length The length of the list (unconfirmed)
      */
-    void fjSafeGetListTag(std::wstring const& name, int length);
+    void fjSafeGetListTag(const std::wstring& name, int length);
 
     /** Checks if a child with the provided name exists
      *
      *  @param name The name of the child tag
      */
-    bool contains(std::wstring const& name);
+    bool contains(const std::wstring& name);
 
     /** Checks if a child with the provided name exists
      *
      *  Dunno what the int is for
      *  @param name The name of the child tag
      */
-    bool contains(std::wstring const& name, int);
+    bool contains(const std::wstring& name, int);
 
     /** Adds a `Tag`
      *

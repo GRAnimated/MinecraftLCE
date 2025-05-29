@@ -11,7 +11,7 @@ public:
     UIControl();
 
     virtual ~UIControl();
-    virtual bool setupControl(UIScene*, fuiRenderNode*, std::string const&);
+    virtual bool setupControl(UIScene*, fuiRenderNode*, const std::string&);
     virtual void UpdateControl();
     virtual void tick();
     virtual void ReInit();

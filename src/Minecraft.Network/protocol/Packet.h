@@ -33,7 +33,7 @@ public:
      * @param maxLength The maximum allowed length of the string you want to read
      */
     static std::wstring readUtf(DataInputStream* in, int maxLength);
-    static void writeUtf(std::wstring const& str, DataOutputStream* out);
+    static void writeUtf(const std::wstring& str, DataOutputStream* out);
 
     long mCreatedTime;
     bool mShouldDelay;

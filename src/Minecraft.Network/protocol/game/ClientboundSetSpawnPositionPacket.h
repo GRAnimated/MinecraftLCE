@@ -11,7 +11,7 @@ public:
 
     ClientboundSetSpawnPositionPacket();
     ClientboundSetSpawnPositionPacket(int, int, int);
-    ClientboundSetSpawnPositionPacket(BlockPos const&);
+    ClientboundSetSpawnPositionPacket(const BlockPos&);
 
     EPacketType getPacketId() override;
     void read(DataInputStream* input) override;

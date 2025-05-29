@@ -77,7 +77,7 @@ public:
     virtual void getSwimSplashSound();
     virtual void checkInsideBlocks();
     virtual void onInsideBlock(BlockState const*);
-    virtual void playStepSound(BlockPos const&, Block*);
+    virtual void playStepSound(const BlockPos&, Block*);
     virtual float playFlySound(float);
     virtual bool makeFlySound();
     virtual void playSound(SoundEvent const*, float, float);
@@ -87,7 +87,7 @@ public:
     virtual void setNoGravity(bool);
     // more understandable would be "canMakeStepSound" or "shouldMakeStepSound"
     virtual bool makeStepSound();
-    virtual void checkFallDamage(double, bool, Block*, BlockPos const&);
+    virtual void checkFallDamage(double, bool, Block*, const BlockPos&);
     virtual AABB* getCollideBox();
     virtual void burn(int);
     virtual void causeFallDamage(float, float);
@@ -135,8 +135,8 @@ public:
     virtual void getRideHeight();
     virtual void startRiding(std::shared_ptr<Entity>);
     virtual void startRiding(std::shared_ptr<Entity>, bool);
-    virtual void GetInteractTooltip(EntityTooltipDataHolder const&);
-    virtual void GetHitTooltip(EntityTooltipDataHolder const&);
+    virtual void GetInteractTooltip(const EntityTooltipDataHolder&);
+    virtual void GetHitTooltip(const EntityTooltipDataHolder&);
     virtual void HideUseTooltips();
     virtual void canRide(std::shared_ptr<Entity>);
     virtual void ejectPassengers();
@@ -150,7 +150,7 @@ public:
     virtual Vec3* getLookAngle();
     virtual void getRotationVector();
     virtual void getForward();
-    virtual void handleInsidePortal(BlockPos const&);
+    virtual void handleInsidePortal(const BlockPos&);
     virtual void getDimensionChangingDelay();
     virtual void lerpMotion(double, double, double);
     virtual void handleEntityEvent(unsigned char, int);
@@ -181,7 +181,7 @@ public:
     virtual void thunderHit(LightningBolt const*);
     virtual void killed(std::shared_ptr<LivingEntity>);
     virtual void checkInBlock(double, double, double);
-    virtual void spawnEatParticles(ItemInstance const&, int);
+    virtual void spawnEatParticles(const ItemInstance&, int);
     virtual void makeStuckInWeb();
     virtual void getName();
     virtual bool isInvulnerableTo(DamageSource*);
@@ -197,22 +197,22 @@ public:
     virtual void copyPosition(std::shared_ptr<Entity>);
     virtual void changeDimension(int);
     virtual void canChangeDimensions();
-    virtual void getBlockExplosionResistance(Explosion*, Level*, BlockPos const&);
-    virtual void shouldBlockExplode(Explosion*, Level*, BlockPos const&, float);
+    virtual void getBlockExplosionResistance(Explosion*, Level*, const BlockPos&);
+    virtual void shouldBlockExplode(Explosion*, Level*, const BlockPos&, float);
     virtual void getMaxFallDistance();
     virtual void getPortalEntranceBlock();
     virtual void getPortalEntranceOffset();
     virtual void getPortalEntranceForwards();
     virtual bool isIgnoringBlockTriggers();
     virtual void displayFireAnimation();
-    virtual void setUUID(std::wstring const&);
+    virtual void setUUID(const std::wstring&);
     virtual void getUUID();
     virtual void getStringUUID();
     virtual bool isPushedByWater();
     virtual void getViewScale();
     virtual void setViewScale(double);
     virtual std::wstring getDisplayName();
-    virtual void setCustomName(std::wstring const&, std::wstring const&, bool);
+    virtual void setCustomName(const std::wstring&, const std::wstring&, bool);
     virtual void getCustomName();
     virtual void hasCustomName();
     virtual void setCustomNameVisible(bool);

@@ -9,8 +9,8 @@ class Random;
 class BiomeSource {
 public:
     virtual ~BiomeSource();
-    virtual void getBiome(BlockPos const&);
-    virtual void getBiome(BlockPos const&, Biome*);
+    virtual void getBiome(const BlockPos&);
+    virtual void getBiome(const BlockPos&, Biome*);
     virtual void getRawBiomeBlock(arrayWithLength<Biome*>&, int, int, int, int) const;
     virtual void getRawBiomeIndices(arrayWithLength<int>&, int, int, int, int) const;
     virtual void getBiomeBlock(arrayWithLength<Biome*>&, int, int, int, int, bool) const;

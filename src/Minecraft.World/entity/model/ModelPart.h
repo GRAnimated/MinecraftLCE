@@ -5,5 +5,5 @@ class Model;
 
 class ModelPart {
 public:
-    void construct(Model*, std::wstring const&);
+    void construct(Model*, const std::wstring&);
 };

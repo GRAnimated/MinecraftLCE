@@ -60,9 +60,9 @@ public:
     virtual void getSizeScale();
     virtual void getHeadSizeScale();
     virtual void getMaxSpawnClusterSize();
-    virtual void populateDefaultEquipmentSlots(DifficultyInstance const&);
-    virtual void populateDefaultEquipmentEnchantments(DifficultyInstance const&);
-    virtual void finalizeMobSpawn(DifficultyInstance const&, MobGroupData*, std::wstring const&);
+    virtual void populateDefaultEquipmentSlots(const DifficultyInstance&);
+    virtual void populateDefaultEquipmentEnchantments(const DifficultyInstance&);
+    virtual void finalizeMobSpawn(const DifficultyInstance&, MobGroupData*, const std::wstring&);
     virtual void finalizeSpawnEggSpawn(int);
     virtual void canBeControlledByRider();
     virtual void setDropChance(EquipmentSlot const*, float);

@@ -4,7 +4,6 @@
 #include "Minecraft.Client/renderer/Tesselator.h"
 #include "Minecraft.Client/renderer/texture/TextureAtlasSprite.h"
 #include "Minecraft.World/level/block/Blocks.h"
-#include "Minecraft.World/level/block/EndRodBlock.h"
 #include "Minecraft.World/level/block/state/AbstractProperty.h"
 #include "Minecraft.Core/Direction.h"
 #include <cstdio>
@@ -14,39 +13,162 @@ Property* FACING;
 // later fill with something actuall but without this it doesn't match as in original it doesn't use state arg
 // and then it removes the state arg from being passed in final binary,
 // so it shouldn't be marked as MATCHING_HACK
-void BlockRenderer::renderFaceUp(BlockState const* pState, double x, double y, double z,
+void BlockRenderer::renderFaceUp(const BlockState* blockState, double x, double y, double z,
                                  TextureAtlasSprite* sprite, float u, float v, float u2, float v2) {
     printf("", this, x, y, z, sprite, u, v, u2, v2);
 }
 
-void BlockRenderer::renderFaceDown(BlockState const* pState, double x, double y, double z,
+void BlockRenderer::renderFaceDown(const BlockState* blockState, double x, double y, double z,
                                    TextureAtlasSprite* sprite, float u, float v, float u2, float v2) {
     printf("", this, x, y, z, sprite, u, v, u2, v2);
 }
 
-void BlockRenderer::renderNorth(BlockState const* pState, double x, double y, double z,
+void BlockRenderer::renderNorth(const BlockState* blockState, double x, double y, double z,
                                 TextureAtlasSprite* sprite, float u, float v, float u2, float v2) {
     printf("", this, x, y, z, sprite, u, v, u2, v2);
 }
 
-void BlockRenderer::renderSouth(BlockState const* pState, double x, double y, double z,
+void BlockRenderer::renderSouth(const BlockState* blockState, double x, double y, double z,
                                 TextureAtlasSprite* sprite, float u, float v, float u2, float v2) {
     printf("", this, x, y, z, sprite, u, v, u2, v2);
 }
 
-void BlockRenderer::renderEast(BlockState const* pState, double x, double y, double z,
+void BlockRenderer::renderEast(const BlockState* blockState, double x, double y, double z,
                                TextureAtlasSprite* sprite, float u, float v, float u2, float v2) {
     printf("", this, x, y, z, sprite, u, v, u2, v2);
 }
 
-void BlockRenderer::renderWest(BlockState const* pState, double x, double y, double z,
+// NON_MATCHING
+void BlockRenderer::renderWest(const BlockState* blockState, double x, double y, double z,
                                TextureAtlasSprite* sprite, float u, float v, float u2, float v2) {
-    printf("", this, x, y, z, sprite, u, v, u2, v2);
-}
+    float u0 = u;
+    float v0 = v;
+    float u1 = u2;
+    float v1 = v2;
 
-void BlockRenderer::tesselateEndRodCenter(BlockState const* state, float x, float y, float z) {
     BufferBuilder* builder = Tesselator::getInstance()->getBuilder();
-    this->setShape(((EndRodBlock*)Blocks::END_ROD)->getShapeRod(state));
+
+    if (mIsFlippedTexture) {
+        std::swap(u0, u1);
+    }
+
+    if (this->_30 < 0.0f || this->_34 > 1.0f) {
+        u0 = sprite->getU0(true);
+        u1 = sprite->getU1(true);
+    }
+
+    if (this->_28 < 0.0f || this->_2C > 1.0f) {
+        v0 = sprite->getV0(true);
+        v1 = sprite->getV1(true);
+    }
+
+    if (this->dwordA4 == 1) {
+        u0 = sprite->getU(this->_28 * 16.0f);
+        v0 = sprite->getV(16.0f - (this->_34 * 16.0f));
+        u1 = sprite->getU(this->_2C * 16.0f);
+        v1 = sprite->getV(16.0f - (this->_30 * 16.0f));
+        sprite->adjustUV(u0, u1);
+        sprite->adjustUV(v0, v1);
+    } else if (this->dwordA4 == 2) {
+        u0 = sprite->getU(16.0f - (this->_2C * 16.0f));
+        v0 = sprite->getV(this->_30 * 16.0f);
+        u1 = sprite->getU(16.0f - (this->_28 * 16.0f));
+        v1 = sprite->getV(this->_34 * 16.0f);
+        sprite->adjustUV(u0, u1);
+        sprite->adjustUV(v0, v1);
+    } else if (this->dwordA4 == 3) {
+        u0 = sprite->getU(16.0f - (this->_30 * 16.0f));
+        u1 = sprite->getU(16.0f - (this->_34 * 16.0f));
+        v0 = sprite->getV(this->_2C * 16.0f);
+        v1 = sprite->getV(this->_28 * 16.0f);
+        sprite->adjustUV(u0, u1);
+        sprite->adjustUV(v0, v1);
+    }
+
+    int uvLockMode = this->dwordC0;
+    if (uvLockMode == 3) {
+        std::swap(u0, u1);
+    } else if (uvLockMode == 2) {
+        std::swap(u0, u1);
+    } else if (uvLockMode == 1) {
+        std::swap(v0, v1);
+    }
+
+    float uv1_u, uv1_v;
+    float uv2_u, uv2_v;
+    float uv3_u, uv3_v;
+    float uv4_u, uv4_v;
+
+    switch (this->dwordA4) {
+    case 1:
+    case 4:
+        uv1_u = u0;
+        uv1_v = v0;
+        uv2_u = u0;
+        uv2_v = v1;
+        uv3_u = u1;
+        uv3_v = v1;
+        uv4_u = u1;
+        uv4_v = v0;
+        break;
+    case 2:
+    case 5:
+        uv1_u = u1;
+        uv1_v = v1;
+        uv2_u = u1;
+        uv2_v = v0;
+        uv3_u = u0;
+        uv3_v = v0;
+        uv4_u = u0;
+        uv4_v = v1;
+        break;
+    default:
+        uv1_u = u1;
+        uv1_v = v0;
+        uv2_u = u0;
+        uv2_v = v0;
+        uv3_u = u0;
+        uv3_v = v1;
+        uv4_u = u1;
+        uv4_v = v1;
+        break;
+    }
+
+    double x0 = this->_20 + x;
+    double y0 = this->_28 + y;
+    double y1 = this->_2C + y;
+    double z0 = this->_30 + z;
+    double z1 = this->_34 + z;
+
+    builder->bucket(5);
+
+    if (this->mIsEnableAO) {
+        builder->color(mColorR_TL, mColorG_TL, mColorB_TL);
+        builder->tex2(mBrightness_TL);
+        builder->vertexUV(x0, y1, z1, uv1_u, uv1_v);
+
+        builder->color(mColorR_BL, mColorG_BL, mColorB_BL);
+        builder->tex2(mBrightness_BL);
+        builder->vertexUV(x0, y1, z0, uv2_u, uv2_v);
+
+        builder->color(mColorR_BR, mColorG_BR, mColorB_BR);
+        builder->tex2(mBrightness_BR);
+        builder->vertexUV(x0, y0, z0, uv3_u, uv3_v);
+
+        builder->color(mColorR_TR, mColorG_TR, mColorB_TR);
+        builder->tex2(mBrightness_TR);
+        builder->vertexUV(x0, y0, z1, uv4_u, uv4_v);
+    } else {
+        builder->vertexUV(x0, y1, z1, uv1_u, uv1_v);
+        builder->vertexUV(x0, y1, z0, uv2_u, uv2_v);
+        builder->vertexUV(x0, y0, z0, uv3_u, uv3_v);
+        builder->vertexUV(x0, y0, z1, uv4_u, uv4_v);
+    }
+}
+
+void BlockRenderer::tesselateEndRodCenter(const BlockState* state, float x, float y, float z) {
+    BufferBuilder* builder = Tesselator::getInstance()->getBuilder();
+    this->setShape(Blocks::END_ROD->getShapeRod(state));
 
     TextureAtlasSprite* sprite = this->getTexture(state, Direction::DOWN);
     float startRodU, startRodV;
@@ -205,8 +327,7 @@ void BlockRenderer::tesselateEndRodCenter(BlockState const* state, float x, floa
     this->dwordC8 = 0;
 }
 
-// NON_MATCHING: you will have to play with double and floats
-void BlockRenderer::tesselateCrossTexture(BlockState const* state, float x, float y, float z, float unk) {
+void BlockRenderer::tesselateCrossTexture(const BlockState* state, float x, float y, float z, float unk) {
     BufferBuilder* builder = Tesselator::getInstance()->getBuilder();
     TextureAtlasSprite* sprite = this->getTexture(state, Direction::UP);
     if (this->hasFixedTexture())
@@ -217,14 +338,15 @@ void BlockRenderer::tesselateCrossTexture(BlockState const* state, float x, floa
     float U1 = sprite->getU1(1.0f);
     float V1 = sprite->getV1(1.0f);
 
-    float v20 = ((double)x + 0.5) - (unk * 0.45);
-    float v21 = ((double)x + 0.5) + (unk * 0.45);
-    float v25 = ((double)z + 0.5) - (unk * 0.45);
-    float v24 = ((double)z + 0.5) + (unk * 0.45);
+    float test = unk * 0.45;
+    float v20 = (x + 0.5) - test;
+    float v21 = (x + 0.5) + test;
+    float v25 = (z + 0.5) - test;
+    float v24 = (z + 0.5) + test;
 
     builder->vertexUV(v20, y + unk, v25, U0, V0);
-    builder->vertexUV(v20, y + 0.0f, v25, U0, V1);
-    builder->vertexUV(v21, y + 0.0f, v24, U1, V1);
+    builder->vertexUV(v20, y + 0.0, v25, U0, V1);
+    builder->vertexUV(v21, y + 0.0, v24, U1, V1);
     builder->vertexUV(v21, y + unk, v24, U1, V0);
     builder->vertexUV(v21, y + unk, v24, U0, V0);
     builder->vertexUV(v21, y + 0.0, v24, U0, V1);

@@ -4,7 +4,7 @@
 
 class KeyMapping {
 public:
-    KeyMapping(std::wstring const&, int);
+    KeyMapping(const std::wstring&, int);
 
     std::wstring mKeyDescription;
     int mKeyCode;

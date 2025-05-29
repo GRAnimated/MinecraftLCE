@@ -1,6 +1,6 @@
 #include "Minecraft.Client/KeyMapping.h"
 
-KeyMapping::KeyMapping(std::wstring const& name, int key) {
+KeyMapping::KeyMapping(const std::wstring& name, int key) {
     mKeyDescription = name;
     mKeyCode = key;
 }

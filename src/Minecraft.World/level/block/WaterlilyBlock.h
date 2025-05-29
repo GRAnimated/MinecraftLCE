@@ -18,5 +18,5 @@ public:
     void entityInside(Level* level, const BlockPos& pos, const BlockState* blockState,
                       std::shared_ptr<Entity> const&) override;
     bool mayPlaceOn(BlockState const* blockState) override;
-    bool canSurvive(Level* level, BlockPos const& pos, BlockState const* blockState) override;
+    bool canSurvive(Level* level, const BlockPos& pos, BlockState const* blockState) override;
 };
