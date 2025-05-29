@@ -43,7 +43,6 @@ void UIScene::customDrawFui(void* a1, char const* a2, fuiRect* a3) {
     ((UIScene*)a1)->customDraw(a2, a3);
 }
 
-// NON_MATCHING: some crap, with setting the stageWidth/stageHeight, see below
 void UIScene::loadMovie() {
     EnterCriticalSection(&ConsoleUIController::unk_71017BE928);
     std::wstring moviePath = this->getMoviePath();
@@ -65,20 +64,19 @@ void UIScene::loadMovie() {
     this->mFuiFile->getRootNode()->mFuiNodeStage->setCallbackScene(this);
     this->mFuiFile->setCustomDrawCallback(UIScene::customDrawFui, this);
 
-    /// this is non matching
     this->mStageWidth = this->mFuiFile->getStageWidth();
-    this->mStageWidth2 = this->mStageWidth;
     this->mStageHeight = this->mFuiFile->getStageHeight();
+    this->mStageWidth2 = this->mStageWidth;
     this->mStageHeight2 = this->mStageHeight;
-    ///
 
     LeaveCriticalSection(&ConsoleUIController::unk_71017BE928);
 }
 
 // NON_MATCHING: it's creating temp instance of fui::sInstance, idk how to avoid that
 void UIScene::sendInputToMovie(int key, bool a3, bool a4, bool a5) {
-    if (this->mFuiFile)
-        fui::sInstance->dispatchKeyboardEvent(this->mFuiFile, a4, this->convertGameActionToFuiKeycode(key));
+    fuiFile* file = this->mFuiFile;
+    if (file)
+        fui::sInstance->dispatchKeyboardEvent(file, !a4, this->convertGameActionToFuiKeycode(key));
 }
 
 // symbol from WiiU doesn't say that argument is unsigned int so let's follow that

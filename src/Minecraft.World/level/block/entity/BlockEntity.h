@@ -59,6 +59,7 @@ public:
     CompoundTag* saveMetadata(CompoundTag*);
 
     void setRenderRemoveStage(unsigned char);
+    bool shouldRemoveForRender();
 
     // Made up name
     bool isReadyToRender() const { return mRenderFlag == 2; }

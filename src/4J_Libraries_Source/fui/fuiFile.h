@@ -123,8 +123,8 @@ public:
     // findNode - doesn't exist in switch edition
     // setVisible - doesn't exist in switch edition
     void setCustomDrawCallback(void (*)(void*, char const*, fuiRect*), void*);
-    int getStageWidth();
-    int getStageHeight();
+    float getStageWidth();
+    float getStageHeight();
     void setIndex(int);
 
     fuiHeader mHeader;
