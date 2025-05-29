@@ -46,6 +46,7 @@ public:
     void PlayUISFX(const SoundEvent*);
     void NavigateToScene(int, EUIScene, void*, EUILayer, EUIGroup);
     arrayWithLength<uchar> getMovieData(const std::wstring&);
+    void setupRenderPosition(C4JRender::eViewportType);
 
     // void* VTable;
     void* qword8;

@@ -75,7 +75,9 @@ void Minecraft::init() {
 
     // this is cursed why would you do this
     MemSect(31);
-    { std::wstring status(L"Pre startup"); }
+    {
+        std::wstring status(L"Pre startup");
+    }
     MemSect(0);
 
     GlStateManager::enableTexture();
@@ -91,7 +93,9 @@ void Minecraft::init() {
     GlStateManager::matrixMode(0);
 
     MemSect(31);
-    { std::wstring status(L"Startup"); }
+    {
+        std::wstring status(L"Startup");
+    }
     MemSect(0);
 
     this->mLevelRenderer = new LevelRenderer(this, this->mTextures);
@@ -101,7 +105,9 @@ void Minecraft::init() {
     this->mParticleEngine = new ParticleEngine(this->mLevel, this->mTextures);
 
     MemSect(31);
-    { std::wstring status(L"Post startup"); }
+    {
+        std::wstring status(L"Post startup");
+    }
     MemSect(0);
 
     this->mGui = new Gui(this);
@@ -154,7 +160,13 @@ void Minecraft::start(const std::wstring& str1, const std::wstring& str2) {
 }
 
 // NON_MATCHING: score 16007
-Minecraft::Minecraft(class Component*, class Canvas*, class MinecraftApplet*, int width, int height, bool) {
+Minecraft::Minecraft(class Component* a1, class Canvas* a2, class MinecraftApplet* a3, int width, int height,
+                     bool) {
+    // remove this after if you implemented this function to the end
+    asm volatile("" : : "r"(width) :);
+    asm volatile("" : : "r"(height) :);
+    // remove this after if you implemented this function to the end
+
     this->mLocalPlayer = nullptr;
     this->qword_60 = nullptr;
     // this->qword_68 = ??
@@ -196,16 +208,16 @@ Minecraft::Minecraft(class Component*, class Canvas*, class MinecraftApplet*, in
     // TODO: continue
 }
 
-// NON_MATCHING: score 3141
 void Minecraft::startAndConnectTo(const std::wstring& name, const std::wstring& session,
                                   const std::wstring& arg3) {
+    std::wstring copy_name = name;  // why? you literally could make it not pass ptr to string
     Minecraft* mc = new Minecraft(nullptr, nullptr, nullptr, 1280, 720, false);
     mc->website = L"www.minecraft.net";
 
-    if (name != L"" && session != L"") {
-        mc->user = new User(name, session);
+    if (copy_name != L"" && session != L"") {
+        mc->user = new User(copy_name, session);
     } else {
-        mc->user = new User(L"Player" + _toString<long>(System::processTimeInMilliSecs() % 1000), L"");
+        mc->user = new User(L"Player" + std::to_wstring((int)(System::processTimeInMilliSecs() % 1000)), L"");
     }
 
     mc->run();

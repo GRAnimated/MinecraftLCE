@@ -74,9 +74,9 @@ void UIScene::loadMovie() {
 
 // NON_MATCHING: it's creating temp instance of fui::sInstance, idk how to avoid that
 void UIScene::sendInputToMovie(int key, bool a3, bool a4, bool a5) {
-    fuiFile* file = this->mFuiFile;
-    if (file)
-        fui::sInstance->dispatchKeyboardEvent(file, !a4, this->convertGameActionToFuiKeycode(key));
+    if (!this->mFuiFile)
+        return;
+    fui::sInstance->dispatchKeyboardEvent(this->mFuiFile, !a4, this->convertGameActionToFuiKeycode(key));
 }
 
 // symbol from WiiU doesn't say that argument is unsigned int so let's follow that
@@ -214,6 +214,15 @@ bool UIScene::blocksInput() {
 
 void* UIScene::GetMainPanel() {
     return nullptr;
+}
+
+void UIScene::render(int a2, int a3, C4JRender::eViewportType viewPortType) {
+    if (!this->mHidden && this->mHideLowerScenes) {
+        if (this->mFuiFile) {
+            gConsoleUIController.setupRenderPosition(viewPortType);
+            fui::sInstance->render(this->mFuiFile, 0.0f, 0.0f, a2, a3);
+        }
+    }
 }
 
 void UIScene::customDraw(char const*, fuiRect*) {}
