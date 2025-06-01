@@ -164,7 +164,7 @@ public:
     virtual void mayUseItemAt(const BlockPos&, const Direction*, not_null_ptr<ItemInstance>);
     virtual void onUpdateAbilities();
     virtual void setGameMode(GameType const*);
-    virtual void isSpectator() = 0;
+    virtual bool isSpectator() = 0;
     virtual void GetScoreboard();
     virtual void onCrafted(not_null_ptr<ItemInstance>);
     virtual void getTexture();

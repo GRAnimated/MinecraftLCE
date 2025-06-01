@@ -7,7 +7,7 @@
 // https://github.com/NessieHax/fui-research-repo/blob/main/DOCUMENTATION.md
 
 class fuiRenderNode;
-class fuiBitmap;
+class fuiBitmapFont;
 struct fuiRect {
     float minX;
     float maxX;
@@ -102,7 +102,7 @@ struct fuiData {
     fuiReference* fuiReference;
     fuiEdittext* fuiEdittext;
     _48* size_0x48;
-    fuiBitmap* fuiBitmap;
+    fuiBitmapFont* fuiBitmap;
     void* size_0x20;
     fuiFontName* fuiFontName;
     fuiSymbol* fuiSymbol;

@@ -9,5 +9,12 @@ public:
         UIStringCore(const std::wstring&);
     };
 
-    std::shared_ptr<std::wstring> text;
+    UIString();
+    UIString(wchar_t const*);
+    UIString(const std::wstring&);
+
+    bool needsUpdating();
+    void setUpdated();
+
+    std::shared_ptr<UIStringCore*> text;
 };

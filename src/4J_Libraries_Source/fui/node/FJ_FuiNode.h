@@ -11,6 +11,7 @@ class FJ_List;
 class FJ_List_MenuButton;
 class FJ_List_ListButton;
 class FJ_List_ListButtonPlayerList;
+class FJ_Button;
 class FJ_Document;
 
 class FJ_FuiNode {
@@ -36,6 +37,7 @@ public:
     FJ_List_ListButton* asFJ_List_ListButton();
     FJ_List_ListButtonPlayerList* asFJ_List_ListButtonPlayerList();
     FJ_Document* asFJ_Document();
+    FJ_Button* asFJ_Button();
 
     fuiRenderNode* mRenderNode;
     int mTabIndex;

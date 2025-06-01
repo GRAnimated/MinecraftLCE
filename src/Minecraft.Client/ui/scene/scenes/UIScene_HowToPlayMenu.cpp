@@ -113,6 +113,6 @@ bool UIScene_HowToPlayMenu::mapElementsAndNames() {
     return true;
 }
 
-int UIScene_HowToPlayMenu::getSceneType() {
-    return 17;
+EUIScene UIScene_HowToPlayMenu::getSceneType() {
+    return EUIScene::UIScene_HowToPlayMenu;
 }

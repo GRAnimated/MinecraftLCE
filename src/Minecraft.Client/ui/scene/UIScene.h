@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Minecraft.Client/renderer/C4JRender.h"
+#include "Minecraft.Client/ui/scene/control/UIControl_Base.h"
 #include <string>
 #include <unordered_map>
 #include <vector>
@@ -76,6 +77,7 @@ enum EUIScene {
     UIScene_LanguageSelector = 78,
     UIScene_AchievementsMenu = 79,
     UIScene_BedrockUpsell = 80,
+    UIScene_DefaultMAYBE = 81,
 
     UIComponent_TutorialPopup = 25,
     UIComponent_Chat = 36,
@@ -94,6 +96,12 @@ public:
     class _CachedSlotDrawData;
     class _TimerInfo {
     public:
+        int mTimeDelay;
+        int mNextTickTime;
+        bool mEnabled;
+        char byte9;
+        char byteA;
+        char byteB;
     };
 
     UIScene(int, UILayer*);
@@ -107,6 +115,12 @@ public:
     void sendInputToMovie(int, bool, bool, bool);
     int convertGameActionToFuiKeycode(int);
     // void handleFocusChange(int, int);
+    bool controlHasFocus(UIControl_Base*);
+    bool controlHasFocus(int);
+    void addTimer(int, int);
+    void killTimer(int);
+    bool hasTimer(int);
+    void* GetCallbackUniqueId();
 
     fuiFile* getFuiFile() { return this->mFuiFile; }
 
@@ -120,7 +134,7 @@ public:
     virtual std::wstring getMoviePath() = 0;
     virtual bool mapElementsAndNames();
     virtual ~UIScene();
-    virtual int getSceneType() = 0;
+    virtual EUIScene getSceneType() = 0;
     virtual int getSubSceneType() const;
     virtual void tick();
     virtual void SetFocusToElement(int);
@@ -171,8 +185,8 @@ public:
     char gap_29[3];
     void* qword30;
     std::unordered_map<std::wstring, bool> map1;
-    std::unordered_map<int, UIScene::_TimerInfo> map2;
-    int mControlFocus;
+    std::unordered_map<int, UIScene::_TimerInfo*> mTimersMap;
+    int mControlFocused;
     int mControlChildFocus;
     float mOpacity;
     bool mIsInitializedMovie;

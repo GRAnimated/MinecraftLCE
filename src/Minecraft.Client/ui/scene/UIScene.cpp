@@ -8,8 +8,10 @@
 #include "Minecraft.Client/ui/scene/UIScene.h"
 #include "Minecraft.Client/ui/scene/control/UIControl.h"
 #include "Minecraft.World/ArrayWithLength.h"
+#include "Minecraft.World/sounds/SoundEvents.h"
 #include "Minecraft.Core/System.h"
 #include <string>
+#include <utility>
 
 const int dword_7100E23090[22]
     = {0, 7, 8, 9, 3, 4, 6, 5, 1, 2, 0xA, 0xB, 0x64, 0xC, 0x11, 0x12, 0x64, 0x64, 0x64, 0x64, 0, 7};
@@ -26,7 +28,7 @@ UIScene::UIScene(int padID, UILayer* uiLayer) {
     this->bool_ad = 0;
     this->mVisible = 1;
     this->byte_96 = 0;
-    this->mControlFocus = -1;
+    this->mControlFocused = -1;
     this->mControlChildFocus = 0;
     this->mOpacity = 1.0;
     this->mIsInitializedMovie = 0;
@@ -41,6 +43,14 @@ UIScene::UIScene(int padID, UILayer* uiLayer) {
 
 void UIScene::customDrawFui(void* a1, char const* a2, fuiRect* a3) {
     ((UIScene*)a1)->customDraw(a2, a3);
+}
+
+void UIScene::initialiseMovie() {
+    this->loadMovie();
+    this->mapElementsAndNames();
+    this->updateSafeZone();
+
+    this->mIsInitializedMovie = true;
 }
 
 void UIScene::loadMovie() {
@@ -72,6 +82,11 @@ void UIScene::loadMovie() {
     LeaveCriticalSection(&ConsoleUIController::unk_71017BE928);
 }
 
+void UIScene::navigateBack() {
+    gConsoleUIController.PlayUISFX(SoundEvents::BACK);
+    gConsoleUIController.NavigateBack(this->mPadID, false, UIScene_DefaultMAYBE, (EUILayer)8);
+}
+
 // NON_MATCHING: it's creating temp instance of fui::sInstance, idk how to avoid that
 void UIScene::sendInputToMovie(int key, bool a3, bool a4, bool a5) {
     if (!this->mFuiFile)
@@ -79,17 +94,37 @@ void UIScene::sendInputToMovie(int key, bool a3, bool a4, bool a5) {
     fui::sInstance->dispatchKeyboardEvent(this->mFuiFile, !a4, this->convertGameActionToFuiKeycode(key));
 }
 
-// symbol from WiiU doesn't say that argument is unsigned int so let's follow that
-int UIScene::convertGameActionToFuiKeycode(int gameAction) {
-    return (unsigned int)gameAction <= 0x15 ? dword_7100E23090[gameAction] : 100;
+bool UIScene::controlHasFocus(UIControl_Base* control) {
+    return this->controlHasFocus(control->getControlID());
 }
 
-void UIScene::initialiseMovie() {
-    this->loadMovie();
-    this->mapElementsAndNames();
-    this->updateSafeZone();
+bool UIScene::controlHasFocus(int controlID) {
+    return this->mControlFocused == controlID;
+}
 
-    this->mIsInitializedMovie = true;
+void UIScene::addTimer(int id, int time) {
+    int endTime = System::processTimeInMilliSecs() + time;
+    UIScene::_TimerInfo* timer = this->mTimersMap[id];
+    timer->mTimeDelay = time;
+    timer->mNextTickTime = endTime;
+    timer->mEnabled = true;
+    timer->byteB = 0;
+    timer->byte9 = 0;
+    timer->byteA = 0;
+}
+
+// Probably better way to do this but I'm lazy
+void* UIScene::GetCallbackUniqueId() {
+    void* ret = this->mCallbackUniqueId;
+    if (!ret) {
+        ret = gConsoleUIController.RegisterForCallbackId(this);
+        this->mCallbackUniqueId = ret;
+    }
+    return ret;
+}
+
+int UIScene::convertGameActionToFuiKeycode(int gameAction) {
+    return (unsigned int)gameAction <= 0x15 ? dword_7100E23090[gameAction] : 100;
 }
 
 bool UIScene::needsReloaded() {

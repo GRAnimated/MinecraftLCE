@@ -2,7 +2,7 @@
 
 #include "Minecraft.World/level/gamemode/CommonMasterGameMode.h"
 
-class MasterGameMode : public CommonMasterGameMode {
+class ClientMasterGameMode : public CommonMasterGameMode {
 public:
-    static void StaticCtor();
+    bool IsRoundRestarting();
 };

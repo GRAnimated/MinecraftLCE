@@ -6,8 +6,8 @@ UIControl::UIControl() {
     this->mOpacity = 1.0f;
     this->mName = "";
     this->mVisible = true;
-    this->mBoolIdk = false;
-    this->mIntIdk = 0;
+    this->mBoolIdk = 0;
+    this->mSettedUp = 0;
     this->mFuiRenderNode = nullptr;
 }
 
@@ -44,7 +44,7 @@ void UIControl::ReInit() {
     }
 }
 
-void UIControl::setFocus() {}
+void UIControl::setFocus(bool) {}
 
 bool UIControl::hasFocus() {
     return false;
