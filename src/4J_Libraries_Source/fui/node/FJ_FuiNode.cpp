@@ -3,6 +3,7 @@
 #include "4J_Libraries_Source/fui/fui.h"
 #include "4J_Libraries_Source/fui/fuiRenderNode.h"
 #include "4J_Libraries_Source/fui/node/FJ_Base.h"
+#include "4J_Libraries_Source/fui/node/FJ_Button.h"
 #include "4J_Libraries_Source/fui/node/FJ_Document.h"
 #include "4J_Libraries_Source/fui/node/FJ_FuiNodeStage.h"
 #include "4J_Libraries_Source/fui/node/FJ_List.h"
@@ -79,4 +80,8 @@ FJ_List_ListButtonPlayerList* FJ_FuiNode::asFJ_List_ListButtonPlayerList() {
 
 FJ_List_MenuButton* FJ_FuiNode::asFJ_List_MenuButton() {
     return dynamic_cast<FJ_List_MenuButton*>(this);
+}
+
+FJ_Button* FJ_FuiNode::asFJ_Button() {
+    return dynamic_cast<FJ_Button*>(this);
 }

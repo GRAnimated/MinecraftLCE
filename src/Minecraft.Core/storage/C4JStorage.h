@@ -5,6 +5,7 @@ public:
     enum ESavingMessage {};
     enum ESaveIncompleteType {};
     enum eOptionsCallback {};
+    enum EMessageResult {};
 
     class PROFILESETTINGS {};
 

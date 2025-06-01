@@ -112,10 +112,7 @@ public:
     void* qword_68;
     void* qword_70;
     std::shared_ptr<MultiplayerLocalPlayer> mLocalPlayers[4];
-    void* qword_b8;
-    void* qword_c0;
-    void* qword_c8;
-    void* qword_d0;
+    MultiPlayerGameMode* mGameModes[4];
     int dword_d8;
     char gap_DC[52];
     short word_110;

@@ -15,6 +15,7 @@ enum eTMSAction {};
 enum eFileExtensionType {};
 enum eTMSFileType {};
 enum eTPDFileType {};
+enum eXuiAction {};
 class GameRuleDefinition;
 class LevelChunk;
 class PlayerUID;
@@ -62,6 +63,7 @@ public:
     LevelRuleset* getGameRuleDefinitions();
     EMiniGameId GetFirstMiniGameType();
     bool IsAppPaused();
+    void SetAction(int, eXuiAction, void*);
 
     static int DefaultOptionsCallback(void*, C4JStorage::PROFILESETTINGS*, int);
     static int OptionsDataCallback(void*, int, unsigned short, C4JStorage::eOptionsCallback);

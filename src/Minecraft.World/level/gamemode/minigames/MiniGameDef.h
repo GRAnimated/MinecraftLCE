@@ -9,4 +9,5 @@ public:
     static void* GetCustomGameModeById(EMiniGameId id, bool);
 
     bool HasFeatureDirectionalFireworks() const;
+    int GetLivesPerRound() const;
 };

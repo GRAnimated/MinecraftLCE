@@ -48,14 +48,15 @@ public:
     float float_28;
     float float_2c;
     float float_30;
-    float float_34;
-    float float_38;
+    float mX;
+    float mY;
     char gap_3C[28];
     fuiFile* field_58;
     void* qword_60;
     void* qword_68;
     void* qword_70;
-    void* qword_78;
+    int dword78;
+    float mAlpha;
     void* qword_80;
     void* qword_88;
     char byte_90[64];
@@ -64,7 +65,7 @@ public:
     int dword_e0;
     bool byte_e4;
     fuiRenderNode* mStage;
-    fuiRenderNode* field_f0;
+    fuiRenderNode* mTimeline;
     FJ_FuiNodeStage* mFuiNodeStage;
     void* field_100;
 };

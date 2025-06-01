@@ -8,8 +8,10 @@
 #include "Minecraft.Client/ui/scene/UIScene.h"
 #include "Minecraft.Client/ui/scene/control/UIControl.h"
 #include "Minecraft.World/ArrayWithLength.h"
+#include "Minecraft.World/sounds/SoundEvents.h"
 #include "Minecraft.Core/System.h"
 #include <string>
+#include <utility>
 
 const int dword_7100E23090[22]
     = {0, 7, 8, 9, 3, 4, 6, 5, 1, 2, 0xA, 0xB, 0x64, 0xC, 0x11, 0x12, 0x64, 0x64, 0x64, 0x64, 0, 7};
@@ -26,7 +28,7 @@ UIScene::UIScene(int padID, UILayer* uiLayer) {
     this->bool_ad = 0;
     this->mVisible = 1;
     this->byte_96 = 0;
-    this->mControlFocus = -1;
+    this->mControlFocused = -1;
     this->mControlChildFocus = 0;
     this->mOpacity = 1.0;
     this->mIsInitializedMovie = 0;
@@ -43,7 +45,14 @@ void UIScene::customDrawFui(void* a1, char const* a2, fuiRect* a3) {
     ((UIScene*)a1)->customDraw(a2, a3);
 }
 
-// NON_MATCHING: some crap, with setting the stageWidth/stageHeight, see below
+void UIScene::initialiseMovie() {
+    this->loadMovie();
+    this->mapElementsAndNames();
+    this->updateSafeZone();
+
+    this->mIsInitializedMovie = true;
+}
+
 void UIScene::loadMovie() {
     EnterCriticalSection(&ConsoleUIController::unk_71017BE928);
     std::wstring moviePath = this->getMoviePath();
@@ -65,33 +74,57 @@ void UIScene::loadMovie() {
     this->mFuiFile->getRootNode()->mFuiNodeStage->setCallbackScene(this);
     this->mFuiFile->setCustomDrawCallback(UIScene::customDrawFui, this);
 
-    /// this is non matching
     this->mStageWidth = this->mFuiFile->getStageWidth();
-    this->mStageWidth2 = this->mStageWidth;
     this->mStageHeight = this->mFuiFile->getStageHeight();
+    this->mStageWidth2 = this->mStageWidth;
     this->mStageHeight2 = this->mStageHeight;
-    ///
 
     LeaveCriticalSection(&ConsoleUIController::unk_71017BE928);
 }
 
+void UIScene::navigateBack() {
+    gConsoleUIController.PlayUISFX(SoundEvents::BACK);
+    gConsoleUIController.NavigateBack(this->mPadID, false, UIScene_DefaultMAYBE, (EUILayer)8);
+}
+
 // NON_MATCHING: it's creating temp instance of fui::sInstance, idk how to avoid that
 void UIScene::sendInputToMovie(int key, bool a3, bool a4, bool a5) {
-    if (this->mFuiFile)
-        fui::sInstance->dispatchKeyboardEvent(this->mFuiFile, a4, this->convertGameActionToFuiKeycode(key));
+    if (!this->mFuiFile)
+        return;
+    fui::sInstance->dispatchKeyboardEvent(this->mFuiFile, !a4, this->convertGameActionToFuiKeycode(key));
 }
 
-// symbol from WiiU doesn't say that argument is unsigned int so let's follow that
+bool UIScene::controlHasFocus(UIControl_Base* control) {
+    return this->controlHasFocus(control->getControlID());
+}
+
+bool UIScene::controlHasFocus(int controlID) {
+    return this->mControlFocused == controlID;
+}
+
+void UIScene::addTimer(int id, int time) {
+    int endTime = System::processTimeInMilliSecs() + time;
+    UIScene::_TimerInfo* timer = this->mTimersMap[id];
+    timer->mTimeDelay = time;
+    timer->mNextTickTime = endTime;
+    timer->mEnabled = true;
+    timer->byteB = 0;
+    timer->byte9 = 0;
+    timer->byteA = 0;
+}
+
+// Probably better way to do this but I'm lazy
+void* UIScene::GetCallbackUniqueId() {
+    void* ret = this->mCallbackUniqueId;
+    if (!ret) {
+        ret = gConsoleUIController.RegisterForCallbackId(this);
+        this->mCallbackUniqueId = ret;
+    }
+    return ret;
+}
+
 int UIScene::convertGameActionToFuiKeycode(int gameAction) {
     return (unsigned int)gameAction <= 0x15 ? dword_7100E23090[gameAction] : 100;
-}
-
-void UIScene::initialiseMovie() {
-    this->loadMovie();
-    this->mapElementsAndNames();
-    this->updateSafeZone();
-
-    this->mIsInitializedMovie = true;
 }
 
 bool UIScene::needsReloaded() {
@@ -216,6 +249,15 @@ bool UIScene::blocksInput() {
 
 void* UIScene::GetMainPanel() {
     return nullptr;
+}
+
+void UIScene::render(int a2, int a3, C4JRender::eViewportType viewPortType) {
+    if (!this->mHidden && this->mHideLowerScenes) {
+        if (this->mFuiFile) {
+            gConsoleUIController.setupRenderPosition(viewPortType);
+            fui::sInstance->render(this->mFuiFile, 0.0f, 0.0f, a2, a3);
+        }
+    }
 }
 
 void UIScene::customDraw(char const*, fuiRect*) {}

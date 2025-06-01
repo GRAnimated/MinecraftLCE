@@ -15,11 +15,19 @@ public:
     virtual void UpdateControl();
     virtual void tick();
     virtual void ReInit();
-    virtual void setFocus();
+    virtual void setFocus(bool);
     virtual bool hasFocus();
 
-    int mIntIdk;
-    int mIntIdk2;
+    int getControlID() {
+        return mControlID;
+    }  // not sure if it should be here or _Base as UIScene::hasControlFocus passes _Base for whatever
+       // reason...
+
+    void setSettedUp(int val) { this->mSettedUp = val; }
+    void setVisible(bool);
+
+    int mSettedUp;  // not sure
+    int mControlID;
     bool mBoolIdk;
     char fill[0x7];
     std::string mName;
