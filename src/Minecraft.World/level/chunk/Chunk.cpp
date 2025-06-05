@@ -144,7 +144,7 @@ const int DIRT = 3;
 const int BEDROCK = 7;
 const int SKIP = 255;
 
-// NON_MATCHING: 93.40%, https://decomp.me/scratch/Kc2zB
+// NON_MATCHING: 93.43%, https://decomp.me/scratch/Kc2zB
 void Chunk::rebuild() {
     PIXBeginNamedEvent(0.0f, "Rebuilding chunk %d, %d, %d", mX, mY, mZ);
     PIXBeginNamedEvent(0.0f, "Rebuild section A");
@@ -196,13 +196,13 @@ void Chunk::rebuild() {
     // Gets the correct 16x16x16 region of blocks from the chunk
     mLevel->getChunkAt(origin)->getBlockDataRange(blocks, startIndexY, endIndexY);
 
-    int startY_data = y0 < 1 ? 0 : y0 - 1;
+    int startY_data = y0 <= 0 ? 0 : y0 - 1;
     int endY_Data = y1 + 1 < WORLD_HEIGHT ? y1 + 1 : WORLD_HEIGHT;
 
     // Gets the correct 16x16x16 region of metadata from the chunk
     mLevel->getChunkAt(origin)->getDataDataRange(blockData, startY_data, endY_Data);
 
-    Region* region = new Region(mLevel, {x0 - 1, y0 - 1, z0 - 1}, {x1 + 1, endY_Data, z1 + 1}, true);
+    Region* region = new Region(mLevel, {x0 - 1, y0 - 1, z0 - 1}, {x1 + 1, y1 + 1, z1 + 1}, true);
     region->setCachedBlocksAndData(blockMemory, blockDataMemory, mX >> 4, mY >> 4, mZ >> 4, blockStateMemory);
 
     PIXBeginNamedEvent(0.0f, "Creating BlockRenderer\n");
@@ -426,12 +426,16 @@ void Chunk::rebuild() {
         for (int curZ = z0; curZ < z1; curZ++) {
             for (int curX = x0; curX < x1; curX++) {
                 for (int curY = y0; curY < y1; curY++) {
-                    int yIndex = curY >= DATA_SLICE ? curY - DATA_SLICE : curY;
-                    int offsetShift = (curY >= DATA_SLICE) << 15;
+                    int yOffset = 0;
+                    int yIndex = curY;
+                    if (yIndex >= DATA_SLICE) {
+                        yIndex -= DATA_SLICE;
+                        yOffset = 0x8000;
+                    }
 
                     // Get the ID of the current block
                     unsigned char id
-                        = blockMemory[offsetShift + (((curX - x0) << 11) | ((curZ - z0) << 7) | yIndex)];
+                        = blockMemory[yOffset + (((curX - x0) << 11) | ((curZ - z0) << 7) | yIndex)];
 
                     if (id == AIR || id == SKIP)
                         continue;
