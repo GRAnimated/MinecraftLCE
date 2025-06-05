@@ -1,5 +1,5 @@
 #pragma once
-#include "Minecraft.Client/gui/Screen.h"
+#include "Minecraft.Client/gui/screens/Screen.h"
 
 class TitleScreen : public Screen {
 public:
@@ -13,5 +13,5 @@ public:
     TitleScreen();
 
     // assumed
-    unsigned char padding[0x20];
+    unsigned char padding[0x28];
 };

@@ -9,6 +9,8 @@ class BossHealthOverlay;
 
 class Gui : public GuiComponent {
 public:
+    static float sGuiScale;  // Used in Gui::render and GuiComponent::blit
+
     Gui(Minecraft* mc);
 
     std::wstring sub_71005806DC(int);  // I don't have a damn clue what text it actually returns
