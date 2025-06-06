@@ -1,6 +1,5 @@
 #include "Minecraft.Client/CMinecraftApp.h"
 #include "Minecraft.Client/DataFixers.h"
-#include "Minecraft.Client/FrameTimer.h"
 #include "Minecraft.Client/GhostController.h"
 #include "Minecraft.Client/Minecraft.h"
 #include "Minecraft.Client/Options.h"
@@ -56,21 +55,21 @@ Minecraft* Minecraft::GetInstance() {
 }
 
 void Minecraft::init() {
-    mSaves = File(L"");
+    mWorkingDirectory = File(L"");
 
-    mMcRegionLevelStorageSource = new McRegionLevelStorageSource(File(mSaves, L"saves"), getFixerUpper());
+    mLevelStorageSource = new McRegionLevelStorageSource(File(mWorkingDirectory, L"saves"), getFixerUpper());
 
-    mOptions = new Options(this, mSaves);
+    mOptions = new Options(this, mWorkingDirectory);
 
-    mTexturePackRepository = new TexturePackRepository(File(mSaves), this);
+    mTexturePackRepository = new TexturePackRepository(File(mWorkingDirectory), this);
     mTexturePackRepository->addDebugPacks();
 
     mTextures = new Textures(mTexturePackRepository, mOptions);
 
-    mDefaultFont = new Font(mOptions, L"font/Default", mTextures, 0, &Font::sDefaultFontRsrc, 23, 28, 16, 16,
-                            Font::sDefaultText);
-    mAlternateFont = new Font(mOptions, L"font/alternate", mTextures, 0, &Font::sAlternateFontRsrc, 16, 16, 8,
-                              8, nullptr);
+    mFont = new Font(mOptions, L"font/Default", mTextures, 0, &Font::sDefaultFontRsrc, 23, 28, 16, 16,
+                     Font::sDefaultText);
+    mAltFont = new Font(mOptions, L"font/alternate", mTextures, 0, &Font::sAlternateFontRsrc, 16, 16, 8, 8,
+                        nullptr);
 
     GrassColor::init(mTextures->loadTexturePixels(_TEXTURE_NAME::GRASS_COLOR, L"misc/grasscolor"));
     FoliageColor::init(mTextures->loadTexturePixels(_TEXTURE_NAME::FOLIAGE_COLOR, L"misc/foliagecolor"));
@@ -141,7 +140,7 @@ void Minecraft::init() {
 
     mGui = new Gui(this);
 
-    if (wstring_2a8 == L"") {
+    if (mConnectToIp == L"") {
         setScreen(new TitleScreen());
     }
 
@@ -202,43 +201,43 @@ Minecraft::Minecraft(Component* component, Canvas* canvas, MinecraftApplet* mine
     ptr_150 = nullptr;
     mParticleEngine = nullptr;
     mUser = nullptr;
-    mHasRenderedTick = false;
+    mIsPaused = false;
     mScreen = nullptr;
     dword_d8 = 0;
     mTextures = nullptr;
-    mDefaultFont = nullptr;
+    mFont = nullptr;
     InitializeCriticalSection(&unk_71017C65F0);
     InitializeCriticalSection(&mCriticalSection);
     mProgressRenderer = nullptr;
     mGameRenderer = nullptr;
     qword_210 = nullptr;
     qword_218 = nullptr;
-    dword_220 = 0;
+    mOrigHeight = 0;
     mGui = nullptr;
-    byte_230 = false;
+    mIsNoRender = false;
     mHitResult = nullptr;
     mOptions = nullptr;
     mSoundEngine = new SoundEngine();
     qword_258 = nullptr;
     mTexturePackRepository = nullptr;
-    mSaves = File(L"");
-    mMcRegionLevelStorageSource = nullptr;
+    mWorkingDirectory = File(L"");
+    mLevelStorageSource = nullptr;
 
     for (int i = 0; i < 4; i++) {
         mStatsCounters[i] = nullptr;
     }
 
-    dword_2c0 = 0;
+    mConnectToPort = 0;
     sUnkFile = File(L"");
-    long_2e0 = -1;
+    mLastTimer = -1;
     dword_2e8 = 0;
     mIsRunning = true;
     dword_148 = -1;
     Stats::init();
-    dword_220 = height;
+    mOrigHeight = height;
     mIsFullscreen = fullscreen;
     mMinecraftApplet = nullptr;
-    mCanvas = nullptr;
+    mParent = nullptr;
     mBlockColors = nullptr;
     mItemColors = nullptr;
 
@@ -252,7 +251,7 @@ Minecraft::Minecraft(Component* component, Canvas* canvas, MinecraftApplet* mine
     mDisplayHeight = height;
 
     mIsFullscreen = fullscreen;  // this is set twice
-    byte_1a0 = false;
+    mIsAppletMode = false;
 
     sInstance = this;
 
@@ -277,7 +276,7 @@ void Minecraft::startAndConnectTo(const std::wstring& name, const std::wstring& 
                                   const std::wstring& arg3) {
     std::wstring copy_name = name;  // why? you literally could make it not pass ptr to string
     Minecraft* mc = new Minecraft(nullptr, nullptr, nullptr, 1280, 720, false);
-    mc->mWebsite = L"www.minecraft.net";
+    mc->mServerDomain = L"www.minecraft.net";
 
     if (copy_name != L"" && session != L"") {
         mc->mUser = new User(copy_name, session);

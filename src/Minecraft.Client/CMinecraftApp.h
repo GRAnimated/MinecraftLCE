@@ -4,7 +4,6 @@
 
 #include "Minecraft.Client/eGameHostOption.h"
 #include "Minecraft.World/ArrayWithLength.h"
-#include "Minecraft.World/level/gamemode/GameType.h"
 #include "Minecraft.World/level/gamemode/minigames/MiniGameDef.h"
 #include "Minecraft.World/level/levelgen/LevelGenerationOptions.h"
 #include "Minecraft.Core/profile/CProfile.h"

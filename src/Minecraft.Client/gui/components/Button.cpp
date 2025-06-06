@@ -37,7 +37,7 @@ void Button::render(Minecraft* minecraft, int x, int y) {
     if (!mIsVisible)
         return;
 
-    Font* font = minecraft->mDefaultFont;
+    Font* font = minecraft->mFont;
     int texture = minecraft->mTextures->loadTexture(8);
     GlStateManager::bindTexture(texture);
     GlStateManager::color4f(1.0f, 1.0f, 1.0f, 1.0f);

@@ -55,7 +55,7 @@ void Screen::init(Minecraft* minecraft, int width, int height) {
     mGuiParticles = new GuiParticles(minecraft);
 
     mMinecraft = minecraft;
-    mFont = minecraft->mDefaultFont;
+    mFont = minecraft->mFont;
     mWidth = width;
     mHeight = height;
     mButtons.clear();
