@@ -533,7 +533,7 @@ void Chunk::rebuild() {
         auto it = mBlockEntityMap->find(index);
         if (it == mBlockEntityMap->end()) {
             for (size_t i = 0; i < currentBlockEntities.size(); i++) {
-                currentBlockEntities[i]->isReadyToRender();  // Unused check
+                currentBlockEntities[i]->shouldRemoveForRender();  // Unused check
                 (*mBlockEntityMap)[index].push_back(currentBlockEntities[i]);
             }
         } else {

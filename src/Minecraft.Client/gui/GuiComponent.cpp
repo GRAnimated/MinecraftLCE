@@ -1,4 +1,5 @@
 #include "Minecraft.Client/Minecraft.h"
+#include "Minecraft.Client/gui/Gui.h"
 #include "Minecraft.Client/gui/GuiComponent.h"
 
 #include "Minecraft.Client/gui/Font.h"
@@ -95,7 +96,7 @@ void GuiComponent::blit(int x, int y, int sx, int sy, int w, int h) {
 
     Minecraft* minecraft = Minecraft::GetInstance();
 
-    float so = minecraft->dword_20 * 0.75f / minecraft->dword_28 / Gui::sGuiScale;
+    float so = minecraft->mWidth * 0.75f / minecraft->mDisplayWidth / Gui::sGuiScale;
     float vo = 0.75f / Gui::sGuiScale;
     float to = 0.75f / Gui::sGuiScale;
 

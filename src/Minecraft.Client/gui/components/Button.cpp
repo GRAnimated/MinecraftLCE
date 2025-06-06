@@ -1,6 +1,8 @@
 #include "Minecraft.Client/gui/components/Button.h"
 
 #include "Minecraft.Client/Minecraft.h"
+#include "Minecraft.Client/renderer/GlStateManager.h"
+#include "Minecraft.Client/renderer/texture/Textures.h"
 
 Button::Button(int id, int x, int y, const std::wstring& name) {
     init(id, x, y, 200, 20, name);
