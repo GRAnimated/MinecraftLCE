@@ -1,11 +1,12 @@
 #include "types.h"
+#include "4J_Libraries_Source/fui/fui.h"
 #include "Minecraft.Client/CMinecraftApp.h"
 #include "Minecraft.Client/ui/ConsoleUIController.h"
 #include "Minecraft.World/ArrayWithLength.h"
 #include "Minecraft.Core/System.h"
 #include <string>
 
-// NON_MATCHING: not finished
+// NON_MATCHING: TODO: finish this shit
 ConsoleUIController::ConsoleUIController() {
     qword_71017BE950 = nullptr;
     this->qword8 = 0LL;
@@ -22,7 +23,7 @@ ConsoleUIController::ConsoleUIController() {
     this->mScreenWidth = 1280.0f;
     this->mScreenHeight = 720.0f;
     this->byte41A = 0;
-    this->byte3E0 = 0;
+    this->mPreInited = 0;
     this->qword13420 = 0LL;
     this->qword13428 = 0LL;
     this->qword13430 = 0LL;
@@ -66,9 +67,17 @@ ConsoleUIController::ConsoleUIController() {
     this->byte1340C = 0;
     this->byte13418 = 0;
     this->qword13410 = 0LL;
-    this->qword13600 = 0LL;
+    this->mViewportTouchOffset1 = 0;
+    this->mViewportTouchOffset2 = 0;
 
     this->dword440 = 0;
+}
+
+// NON_MATCHING: WiiU pseudocode looks completly different than Switch one, also pseudocode is 2 simple lines
+// of code while asm shows it does have switch case like in WiiU
+void ConsoleUIController::updateViewportTouchOffset(C4JRender::eViewportType) {
+    this->mViewportTouchOffset1 = this->getScreenWidth() * 0.25f;
+    this->mViewportTouchOffset2 = 0;
 }
 
 arrayWithLength<uchar> ConsoleUIController::getMovieData(const std::wstring& name) {
@@ -86,4 +95,19 @@ arrayWithLength<uchar> ConsoleUIController::getMovieData(const std::wstring& nam
         mCachedMovieDatas[name] = temp;
         return cipa;
     }
+}
+
+void ConsoleUIController::preInit(int screenWidth, int screenHeight) {
+    this->mScreenWidth = screenWidth;
+    this->mScreenHeight = screenHeight;
+    this->mPreInited = true;
+}
+
+void ConsoleUIController::init(int screenWidth, int screenHeight) {
+    if (screenWidth == 1920 && screenHeight == 1080)
+        fui::sInstance->setResolution(1);
+    else
+        fui::sInstance->setResolution(0);
+    this->preInit(screenWidth, screenHeight);
+    this->postInit();
 }

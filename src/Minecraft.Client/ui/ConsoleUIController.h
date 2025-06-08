@@ -39,7 +39,9 @@ public:
     // I don't know what it sets, and it seems that there's no such a thing on WiiU (not that it's inlined or
     // something, it's just not there at all)
     void setUnk(bool);
+    void preInit(int screenWidth, int screenHeight);
     void init(int screenWidth, int screenHeight);
+    void postInit();
     int SetAchievementUnlocked();
     void TouchBoxRebuild(UIScene*);
     void AnimateKeyPress(int, int, bool, bool, bool);
@@ -50,6 +52,8 @@ public:
     void NavigateBack(int, bool, EUIScene, EUILayer);
     void* RegisterForCallbackId(UIScene*);
 
+    float getScreenWidth() { return this->mScreenWidth; }
+
     // void* VTable;
     void* qword8;
     void* qword10;
@@ -59,7 +63,7 @@ public:
     char gap10[864];
     float mScreenWidth;
     float mScreenHeight;
-    char byte3E0;
+    bool mPreInited;
     char gap3E1[15];
     nn::os::MutexType mMutex4;
     void* qword410;
@@ -121,7 +125,8 @@ public:
     char gap135A8[16];
     std::unordered_map<int, UIScene*> mUIScenes;
     nn::os::MutexType mMutex6;
-    void* qword13600;
+    int mViewportTouchOffset1;
+    int mViewportTouchOffset2;
 };
 
 extern ConsoleUIController gConsoleUIController;

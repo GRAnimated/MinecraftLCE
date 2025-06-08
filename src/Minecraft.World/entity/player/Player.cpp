@@ -172,13 +172,14 @@ void Player::updatePlayerSize() {
     }
 }
 
-// NON-MATCHING: some crap, logic should be the same though
+// this looks ugly, that could look like this in source, but highly doubt
 bool Player::isAllowedToAttackPlayers() {
     if (!this->hasInvisiblePrivilege()
         && CConsoleMinecraftApp::sInstance.GetGameHostOption((eGameHostOption)11)) {
-        return CConsoleMinecraftApp::sInstance.GetGameHostOption((eGameHostOption)12)
-               || !this->getPlayerGamePrivilege((EPlayerGamePrivileges)3);
+        if (CConsoleMinecraftApp::sInstance.GetGameHostOption((eGameHostOption)12)
+            || !this->getPlayerGamePrivilege((EPlayerGamePrivileges)3))
+            return true;
     }
 
-    return true;
+    return false;
 }

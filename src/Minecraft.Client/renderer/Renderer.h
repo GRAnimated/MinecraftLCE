@@ -8,6 +8,8 @@ class D3DXIMAGE_INFO;
 
 class Renderer : public C4JRender {
 public:
+    Renderer();
+
     static Renderer* sInstance;
 
     virtual void Tick();

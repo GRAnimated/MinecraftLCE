@@ -103,14 +103,17 @@ bool UIScene::controlHasFocus(int controlID) {
 }
 
 void UIScene::addTimer(int id, int time) {
-    int endTime = System::processTimeInMilliSecs() + time;
-    UIScene::_TimerInfo* timer = this->mTimersMap[id];
-    timer->mTimeDelay = time;
-    timer->mNextTickTime = endTime;
-    timer->mEnabled = true;
-    timer->byteB = 0;
-    timer->byte9 = 0;
-    timer->byteA = 0;
+    this->mTimersMap[id] = _TimerInfo{time, (int)System::processTimeInMilliSecs() + time, true};
+}
+
+void UIScene::killTimer(int id) {
+    if (auto elo = this->mTimersMap.find(id); elo != this->mTimersMap.end())
+        elo->second.mEnabled = false;
+}
+
+bool UIScene::hasTimer(int id) {
+    auto elo = this->mTimersMap.find(id);
+    return elo != this->mTimersMap.end() && elo->second.mEnabled != false;
 }
 
 // Probably better way to do this but I'm lazy
