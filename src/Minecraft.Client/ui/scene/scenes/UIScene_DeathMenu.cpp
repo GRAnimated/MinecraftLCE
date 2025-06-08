@@ -47,7 +47,7 @@ UIScene_DeathMenu::UIScene_DeathMenu(int padID, void* a2, UILayer* uiLayer) : UI
         this->mTitleLabel.setLabel(L10N::GetString(0x69C7EDA4), false, false);
 
     Minecraft* mc = Minecraft::GetInstance();
-    Gui* gui = mc->mGui;
+    Gui* gui = Minecraft::GetInstance()->mGui;
     this->mDeathMessageLabel.setLabel(Minecraft::InMiniGame(EMiniGameId::TUMBLE, true)
                                               || Minecraft::InMiniGame(EMiniGameId::GLIDE, true) ?
                                           L"" :

@@ -189,7 +189,7 @@ public:
     void setBool7FC(bool);
     bool isAllowedToAttackPlayers();
     bool hasInvisiblePrivilege();
-    bool getPlayerGamePrivilege(EPlayerGamePrivileges);
+    int getPlayerGamePrivilege(EPlayerGamePrivileges);
     bool CheckPowerup(PowerupItems::eGlide_Timed_Powerup_ID);
 
     // dunno the type

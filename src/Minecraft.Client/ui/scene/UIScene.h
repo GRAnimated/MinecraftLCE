@@ -2,6 +2,7 @@
 
 #include "Minecraft.Client/renderer/C4JRender.h"
 #include "Minecraft.Client/ui/scene/control/UIControl_Base.h"
+#include <cstdint>
 #include <string>
 #include <unordered_map>
 #include <vector>
@@ -99,9 +100,6 @@ public:
         int mTimeDelay;
         int mNextTickTime;
         bool mEnabled;
-        char byte9;
-        char byteA;
-        char byteB;
     };
 
     UIScene(int, UILayer*);
@@ -185,7 +183,7 @@ public:
     char gap_29[3];
     void* qword30;
     std::unordered_map<std::wstring, bool> map1;
-    std::unordered_map<int, UIScene::_TimerInfo*> mTimersMap;
+    std::unordered_map<int, UIScene::_TimerInfo> mTimersMap;
     int mControlFocused;
     int mControlChildFocus;
     float mOpacity;
