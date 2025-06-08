@@ -1,16 +1,45 @@
 #include "Minecraft.Client/CMinecraftApp.h"
+#include "Minecraft.Client/DataFixers.h"
+#include "Minecraft.Client/GhostController.h"
 #include "Minecraft.Client/Minecraft.h"
+#include "Minecraft.Client/Options.h"
+#include "Minecraft.Client/ParticleEngine.h"
+#include "Minecraft.Client/StatsCounter.h"
+#include "Minecraft.Client/Timer.h"
 #include "Minecraft.Client/Tooltips.h"
 #include "Minecraft.Client/User.h"
+#include "Minecraft.Client/color/ColourTable.h"
+#include "Minecraft.Client/gui/Font.h"
+#include "Minecraft.Client/gui/Gui.h"
+#include "Minecraft.Client/gui/screens/TitleScreen.h"
 #include "Minecraft.Client/multiplayer/ClientPacketListener.h"
-#include "Minecraft.Client/resources/StringTable.h"
+#include "Minecraft.Client/renderer/BlockRenderDispatcher.h"
+#include "Minecraft.Client/renderer/GameRenderer.h"
+#include "Minecraft.Client/renderer/LevelRenderer.h"
+#include "Minecraft.Client/renderer/ProgressRenderer.h"
+#include "Minecraft.Client/renderer/Renderer.h"
+#include "Minecraft.Client/renderer/entity/EntityBlockRenderer.h"
+#include "Minecraft.Client/renderer/entity/EntityRenderDispatcher.h"
+#include "Minecraft.Client/renderer/item/ItemInHandRenderer.h"
+#include "Minecraft.Client/renderer/item/ItemRenderer.h"
+#include "Minecraft.Client/renderer/texture/TextureManager.h"
+#include "Minecraft.Client/renderer/texture/Textures.h"
+#include "Minecraft.Client/resources/TexturePackRepository.h"
+#include "Minecraft.Client/sounds/SoundEngine.h"
 #include "Minecraft.World/ArrayWithLength.h"
 #include "Minecraft.World/MinecraftWorld.h"
 #include "Minecraft.World/StructureManager.h"
 #include "Minecraft.World/Tutorial.h"
+#include "Minecraft.World/level/block/BlockColors.h"
+#include "Minecraft.World/level/block/FoliageColor.h"
+#include "Minecraft.World/level/block/GrassColor.h"
+#include "Minecraft.World/level/block/ItemColors.h"
+#include "Minecraft.World/level/gamemode/ClientMasterGameMode.h"
 #include "Minecraft.World/level/gamemode/MasterGameMode.h"
 #include "Minecraft.World/level/gamemode/minigames/MiniGameDef.h"
 #include "Minecraft.World/level/gamemode/minigames/MiniGameMedals.h"
+#include "Minecraft.World/level/storage/McRegionLevelStorageSource.h"
+#include "Minecraft.World/stats/Stats.h"
 #include "Minecraft.Core/ParticleType.h"
 #include "Minecraft.Core/System.h"
 #include "Minecraft.Core/io/File.h"
@@ -26,52 +55,51 @@ Minecraft* Minecraft::GetInstance() {
 }
 
 void Minecraft::init() {
-    this->mSaves = File(L"");
+    mWorkingDirectory = File(L"");
 
-    this->mMcRegionLevelStorageSource
-        = new McRegionLevelStorageSource(File(this->mSaves, L"saves"), getFixerUpper());
+    mLevelStorageSource = new McRegionLevelStorageSource(File(mWorkingDirectory, L"saves"), getFixerUpper());
 
-    this->mOptions = new Options(this, this->mSaves);
+    mOptions = new Options(this, mWorkingDirectory);
 
-    this->mTexturePackRepository = new TexturePackRepository(File(this->mSaves), this);
-    this->mTexturePackRepository->addDebugPacks();
+    mTexturePackRepository = new TexturePackRepository(File(mWorkingDirectory), this);
+    mTexturePackRepository->addDebugPacks();
 
-    this->mTextures = new Textures(this->mTexturePackRepository, this->mOptions);
+    mTextures = new Textures(mTexturePackRepository, mOptions);
 
-    this->mDefaultFont = new Font(this->mOptions, L"font/Default", this->mTextures, 0,
-                                  &Font::sDefaultFontRsrc, 23, 28, 16, 16, Font::sDefaultText);
-    this->mAlternateFont = new Font(this->mOptions, L"font/alternate", this->mTextures, 0,
-                                    &Font::sAlternateFontRsrc, 16, 16, 8, 8, nullptr);
+    mFont = new Font(mOptions, L"font/Default", mTextures, 0, &Font::sDefaultFontRsrc, 23, 28, 16, 16,
+                     Font::sDefaultText);
+    mAltFont = new Font(mOptions, L"font/alternate", mTextures, 0, &Font::sAlternateFontRsrc, 16, 16, 8, 8,
+                        nullptr);
 
-    GrassColor::init(this->mTextures->loadTexturePixels(_TEXTURE_NAME::GRASS_COLOR, L"misc/grasscolor"));
-    FoliageColor::init(
-        this->mTextures->loadTexturePixels(_TEXTURE_NAME::FOLIAGE_COLOR, L"misc/foliagecolor"));
+    GrassColor::init(mTextures->loadTexturePixels(_TEXTURE_NAME::GRASS_COLOR, L"misc/grasscolor"));
+    FoliageColor::init(mTextures->loadTexturePixels(_TEXTURE_NAME::FOLIAGE_COLOR, L"misc/foliagecolor"));
 
     Biome::generateColoursDebugOutput();
 
-    this->mBlockAtlas = new TextureAtlas(0, L"terrain", L"textures/blocks/", 0, true);
+    mBlockAtlas = new TextureAtlas(0, L"terrain", L"textures/blocks/", 0, true);
 
-    this->mBlockColors = BlockColors::createDefault();
-    this->mItemColors = ItemColors::createDefault(this->mBlockColors);
+    mBlockColors = BlockColors::createDefault();
+    mItemColors = ItemColors::createDefault(mBlockColors);
 
-    this->mItemRenderer = new ItemRenderer(this->mEntityRenderDispatcher, this->mTextures, this->mItemColors);
-    this->mEntityRenderDispatcher = new EntityRenderDispatcher(this->mTextures, this->mItemRenderer);
+    mItemRenderer = new ItemRenderer(mEntityRenderDispatcher, mTextures, mItemColors);
+    mEntityRenderDispatcher = new EntityRenderDispatcher(mTextures, mItemRenderer);
 
     GlStateManager::enableLighting();
-    this->mItemInHandRenderer = new ItemInHandRenderer(this);
+    mItemInHandRenderer = new ItemInHandRenderer(this);
     GlStateManager::disableLighting();
 
-    this->mGameRenderer = new GameRenderer(this, 0);
-    this->mBlockRenderDispatcher = new BlockRenderDispatcher(this->mBlockColors);
+    mGameRenderer = new GameRenderer(this, 0);
+    mBlockRenderDispatcher = new BlockRenderDispatcher(mBlockColors);
     // static shit
-    BlockEntityRenderDispatcher::sInstance->mTextures = this->mTextures;
-    this->sEntityBlockRenderer = new EntityBlockRenderer();
+    BlockEntityRenderDispatcher::sInstance->mTextures = mTextures;
+    sEntityBlockRenderer = new EntityBlockRenderer();
 
-    this->mStatsCounter1 = new StatsCounter();
-    this->mStatsCounter2 = new StatsCounter();
-    this->mStatsCounter3 = new StatsCounter();
-    this->mStatsCounter4 = new StatsCounter();
-    setupStatsCounter();
+    mStatsCounters[0] = new StatsCounter();
+    mStatsCounters[1] = new StatsCounter();
+    mStatsCounters[2] = new StatsCounter();
+    mStatsCounters[3] = new StatsCounter();
+
+    _71006D7E4C();
 
     // this is cursed why would you do this
     MemSect(31);
@@ -98,11 +126,11 @@ void Minecraft::init() {
     }
     MemSect(0);
 
-    this->mLevelRenderer = new LevelRenderer(this, this->mTextures);
+    mLevelRenderer = new LevelRenderer(this, mTextures);
 
-    this->mTextures->stitch();
+    mTextures->stitch();
 
-    this->mParticleEngine = new ParticleEngine(this->mLevel, this->mTextures);
+    mParticleEngine = new ParticleEngine(mLevel, mTextures);
 
     MemSect(31);
     {
@@ -110,13 +138,13 @@ void Minecraft::init() {
     }
     MemSect(0);
 
-    this->mGui = new Gui(this);
+    mGui = new Gui(this);
 
-    if (this->wstring_2a8 == L"") {
-        this->setScreen(new TitleScreen());
+    if (mConnectToIp == L"") {
+        setScreen(new TitleScreen());
     }
 
-    this->mProgressRenderer = new ProgressRenderer(this);
+    mProgressRenderer = new ProgressRenderer(this);
     Renderer::sInstance->CBuffLockStaticCreations();
 }
 
@@ -159,88 +187,125 @@ void Minecraft::start(const std::wstring& str1, const std::wstring& str2) {
     startAndConnectTo(str1, str2, L"");
 }
 
-// NON_MATCHING: score 16007
-Minecraft::Minecraft(class Component* a1, class Canvas* a2, class MinecraftApplet* a3, int width, int height,
-                     bool) {
-    // remove this after if you implemented this function to the end
-    asm volatile("" : : "r"(width) :);
-    asm volatile("" : : "r"(height) :);
-    // remove this after if you implemented this function to the end
+Minecraft::Minecraft(Component* component, Canvas* canvas, MinecraftApplet* minecraftApplet, int width,
+                     int height, bool fullscreen) {
+    mFixerUpper = DataFixers::createFixerUpper();
+    mMultiPlayerGameMode = nullptr;
+    bool_11 = false;
+    mTimer = new Timer(20.0f);
+    qword_40 = nullptr;
+    mLevel = nullptr;
+    array_68 = arrayWithLength<void*>(3, true);
+    mLevelRenderer = nullptr;
+    mLocalPlayer = nullptr;
+    ptr_150 = nullptr;
+    mParticleEngine = nullptr;
+    mUser = nullptr;
+    mIsPaused = false;
+    mScreen = nullptr;
+    dword_d8 = 0;
+    mTextures = nullptr;
+    mFont = nullptr;
+    InitializeCriticalSection(&unk_71017C65F0);
+    InitializeCriticalSection(&mCriticalSection);
+    mProgressRenderer = nullptr;
+    mGameRenderer = nullptr;
+    qword_210 = nullptr;
+    qword_218 = nullptr;
+    mOrigHeight = 0;
+    mGui = nullptr;
+    mIsNoRender = false;
+    mHitResult = nullptr;
+    mOptions = nullptr;
+    mSoundEngine = new SoundEngine();
+    qword_258 = nullptr;
+    mTexturePackRepository = nullptr;
+    mWorkingDirectory = File(L"");
+    mLevelStorageSource = nullptr;
 
-    this->mLocalPlayer = nullptr;
-    this->qword_60 = nullptr;
-    // this->qword_68 = ??
-    this->website = nullptr;  // we should be setting like size or some shit to 0 here
-    mLocalPlayers[0] = nullptr;
-    mLocalPlayers[1] = nullptr;
-    mLocalPlayers[2] = nullptr;
-    mLocalPlayers[3] = nullptr;
-    this->qword_150 = nullptr;
-    this->qword_158 = nullptr;
-    this->qword_160 = nullptr;
-    this->qword_168 = nullptr;
-    this->website = nullptr;  // we should be setting like size or some shit to 0 here
-    File(this->mSaves);
-    this->wstring_2a8 = nullptr;
-    this->qword_2c8 = nullptr;
-    this->qword_2d0 = nullptr;
-    this->qword_2d8 = nullptr;
-    this->mFrameTimer = new FrameTimer();
-    this->qword_330 = nullptr;
-    this->qword_338 = nullptr;
-    this->qword_340 = nullptr;
-    this->qword_348 = nullptr;
-    this->qword_350 = nullptr;
-    this->qword_358 = nullptr;
-    this->qword_380 = &this->qword_380;  // ?
-    this->qword_388 = &this->qword_380;
-    this->qword_390 = nullptr;
-    this->mFixerUpper = DataFixers::createFixerUpper();
-    this->mMultiPlayerGameMode = nullptr;
-    this->byte_11 = 0;
-    this->mTimer = new Timer(20.0);
-    this->qword_40 = nullptr;
-    this->mLevel = nullptr;
-    // sub_71006D770C((__int64)&v24, 3u, 1);
-    // LODWORD(this->qword_70) = v24.qword8;
-    // this->qword_68 = (void *)v24.qword0;
-    this->mLevelRenderer = nullptr;
-    // TODO: continue
+    for (int i = 0; i < 4; i++) {
+        mStatsCounters[i] = nullptr;
+    }
+
+    mConnectToPort = 0;
+    sUnkFile = File(L"");
+    mLastTimer = -1;
+    dword_2e8 = 0;
+    mIsRunning = true;
+    dword_148 = -1;
+    Stats::init();
+    mOrigHeight = height;
+    mIsFullscreen = fullscreen;
+    mMinecraftApplet = nullptr;
+    mParent = nullptr;
+    mBlockColors = nullptr;
+    mItemColors = nullptr;
+
+    bool isWidescreen = Renderer::sInstance->IsWidescreen();
+    int curWidth = width;
+    if (!isWidescreen)
+        curWidth = 3 * width / 4;
+    mWidth = curWidth;
+    mHeight = height;
+    mDisplayWidth = width;
+    mDisplayHeight = height;
+
+    mIsFullscreen = fullscreen;  // this is set twice
+    mIsAppletMode = false;
+
+    sInstance = this;
+
+    TextureManager::createInstance();
+
+    for (int i = 0; i < 4; i++) {
+        array_110[i] = 0;
+        arr_128[i] = nullptr;
+        mGameModes[i] = nullptr;
+    }
+
+    qword_328 = nullptr;
+    mTutorialFlags = 0;
+    byte_38 = false;
+    mSoundEngine->init(nullptr);
+    mClientMasterGameMode = new ClientMasterGameMode();
+    mGhostController = nullptr;
+    mLobbyGameMode = nullptr;
 }
 
 void Minecraft::startAndConnectTo(const std::wstring& name, const std::wstring& session,
                                   const std::wstring& arg3) {
     std::wstring copy_name = name;  // why? you literally could make it not pass ptr to string
     Minecraft* mc = new Minecraft(nullptr, nullptr, nullptr, 1280, 720, false);
-    mc->website = L"www.minecraft.net";
+    mc->mServerDomain = L"www.minecraft.net";
 
     if (copy_name != L"" && session != L"") {
-        mc->user = new User(copy_name, session);
+        mc->mUser = new User(copy_name, session);
     } else {
-        mc->user = new User(L"Player" + std::to_wstring((int)(System::processTimeInMilliSecs() % 1000)), L"");
+        mc->mUser
+            = new User(L"Player" + std::to_wstring((int)(System::processTimeInMilliSecs() % 1000)), L"");
     }
 
     mc->run();
 }
 
 BlockRenderDispatcher* Minecraft::getBlockRenderer() {
-    return this->mBlockRenderDispatcher;
+    return mBlockRenderDispatcher;
 }
 
 EntityRenderDispatcher* Minecraft::getEntityRenderDispatcher() {
-    return this->mEntityRenderDispatcher;
+    return mEntityRenderDispatcher;
 }
 
 DataFixerUpper* Minecraft::getFixerUpper() {
-    return this->mFixerUpper;
+    return mFixerUpper;
 }
 
 ItemInHandRenderer* Minecraft::getItemInHandRenderer() {
-    return this->mItemInHandRenderer;
+    return mItemInHandRenderer;
 }
 
 ItemRenderer* Minecraft::getItemRenderer() {
-    return this->mItemRenderer;
+    return mItemRenderer;
 }
 
 int Minecraft::getAverageFps() {
@@ -252,7 +317,7 @@ bool Minecraft::isUsingDefaultSkin() {
 }
 
 bool Minecraft::isTutorial() {
-    return this->byte_320 != 0;
+    return mTutorialFlags != 0;
 }
 
 bool Minecraft::useFancyGraphics() {
@@ -260,6 +325,14 @@ bool Minecraft::useFancyGraphics() {
 }
 
 void Minecraft::run() {
-    this->mIsRunning = true;
+    mIsRunning = true;
     init();
+}
+
+void Minecraft::SetGhostController(GhostController* ghostController) {
+    if (mGhostController) {
+        mGhostController->setDone();
+        mGhostControllers.push_back(mGhostController);
+    }
+    mGhostController = ghostController;
 }

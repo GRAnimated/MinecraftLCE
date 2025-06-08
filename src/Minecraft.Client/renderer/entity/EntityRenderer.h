@@ -13,6 +13,7 @@ class ModelDefinition;
 class EntityRenderDispatcher;
 
 class EntityRenderer {
+public:
     EntityRenderer(EntityRenderDispatcher*);
     virtual ~EntityRenderer();
     virtual void shouldRender(SharedEntity&, Culler*, double, double, double);

@@ -6,7 +6,7 @@
 #include <cmath>
 
 ScreenSizeCalculator::ScreenSizeCalculator(Options* options, int scale) {
-    init(options, Minecraft::GetInstance()->dword_20, Minecraft::GetInstance()->dword_24, scale);
+    init(options, Minecraft::GetInstance()->mWidth, Minecraft::GetInstance()->mHeight, scale);
 }
 
 ScreenSizeCalculator::ScreenSizeCalculator(Options* options, int width, int height, int scale) {

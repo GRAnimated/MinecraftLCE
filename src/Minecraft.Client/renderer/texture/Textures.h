@@ -16,6 +16,7 @@ public:
     void stitch();
     arrayWithLength<int> loadTexturePixels(_TEXTURE_NAME name, const std::wstring&);
     arrayWithLength<int> loadTexturePixels(BufferedImage* image);
+    int loadTexture(int);
     void readImage(_TEXTURE_NAME name, const std::wstring&);
     bool IsTUImage(_TEXTURE_NAME name, const std::wstring&);
 

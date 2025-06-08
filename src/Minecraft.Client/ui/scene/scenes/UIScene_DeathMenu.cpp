@@ -4,6 +4,7 @@
 #include "Minecraft.Client/CTelemetryManager.h"
 #include "Minecraft.Client/Minecraft.h"
 #include "Minecraft.Client/eGameHostOption.h"
+#include "Minecraft.Client/gui/Gui.h"
 #include "Minecraft.Client/resources/L10N.h"
 #include "Minecraft.Client/ui/ConsoleUIController.h"
 #include "Minecraft.Client/ui/scene/UIScene.h"
