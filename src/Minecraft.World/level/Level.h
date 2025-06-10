@@ -1,71 +1,81 @@
 #pragma once
 
+#include "nn/os/os_MutexTypes.h"
+#include "types.h"
 #include <memory>
+#include <unordered_map>
 #include <vector>
 
 #include "Minecraft.World/ArrayWithLength.h"
+#include "Minecraft.World/CustomSet.h"
+#include "Minecraft.World/IntKey.h"
 #include "Minecraft.World/level/GameRules.h"
 #include "Minecraft.World/level/storage/LevelSource.h"
 #include "Minecraft.World/phys/AABB.h"
 #include "Minecraft.World/sounds/SoundSource.h"
 
 class TickNextTickData;
-class BlockPos;
-class BlockState;
 class LevelSettings;
-class Direction;
+class LevelListener;
 class Difficulty;
 class Player;
 class SoundEvent;
-class Entity;
-class BlockEntity;
-class Block;
+class ChunkSource;
 class LevelChunk;
 class LevelStorage;
 class LevelData;
 class Dimension;
+class Villages;
 class BoundingBox;
 class CompoundTag;
 class Packet;
 class Random;
 class WorldBorder;
 class ParticleType;
+class PathNavigationListener;
+class MinecraftServer;
+
+using EntityPtr = std::shared_ptr<Entity>;
+using EntityId = int;
+using EntityIdMapAllocator = std::allocator<std::pair<const EntityId, EntityPtr>>;
 
 class Level : public LevelSource {
 public:
+    static const int HEIGHT_LIMIT = 256;
+
     Level(std::shared_ptr<LevelStorage>, LevelData*, Dimension*, bool);
 
     virtual std::shared_ptr<BlockEntity> getBlockEntity(const BlockPos&) override;
-    virtual void getLightColor(const BlockPos&, int, int) override;
-    virtual void getBrightness(LightLayer::variety, const BlockPos&) override;
-    virtual void getBrightness(const BlockPos&, int) override;
-    virtual void getBrightness(const BlockPos&) override;
+    virtual int getLightColor(const BlockPos&, int, int) override;
+    virtual int getBrightness(LightLayer::variety, const BlockPos&) override;
+    virtual float getBrightness(const BlockPos&, int) override;
+    virtual float getBrightness(const BlockPos&) override;
     virtual const BlockState* getBlockState(const BlockPos&) override;
-    virtual void getBlockId(int, int, int) override;
-    virtual void getBlockData(int, int, int) override;
+    virtual int getBlockId(int, int, int) override;
+    virtual int getBlockData(int, int, int) override;
     virtual Block* getBlock(const BlockPos&) override;
     virtual bool isEmptyBlock(const BlockPos&) override;
     virtual Biome* getBiome(const BlockPos&) override;
     virtual BiomeSource* getBiomeSource() override;
-    virtual void getMaxBuildHeight() override;
+    virtual int getMaxBuildHeight() override;
     virtual bool isAllEmpty() override;
-    virtual void getDirectSignal(const BlockPos&, const Direction*) override;
-    virtual void getGeneratorType() override;
+    virtual int getDirectSignal(const BlockPos&, const Direction*) override;
+    virtual LevelType* getGeneratorType() override;
     virtual ~Level() override;
     virtual void postConstruct();
     virtual void pure_virtual_1() = 0;
     virtual void initializeLevel(LevelSettings*);
-    virtual void getServer();
+    virtual MinecraftServer* getServer();
     virtual void validateSpawn();
-    virtual void pure_virtual_2() = 0;
+    virtual bool hasChunk(int, int, bool) = 0;
     virtual bool isChunkGeneratedAt(int, int);
-    virtual void setBlock(const BlockPos&, BlockState const*, int, bool);
+    virtual void setBlock(const BlockPos&, const BlockState*, int, bool);
     virtual void setData(const BlockPos&, int, int, bool);
     virtual void setData(int, int, int, int, int, bool);
     virtual void removeBlock(const BlockPos&);
     virtual void destroyBlock(const BlockPos&, bool);
-    virtual void setBlockAndUpdate(const BlockPos&, BlockState const*);
-    virtual void sendBlockUpdated(const BlockPos&, BlockState const*, BlockState const*, int, bool);
+    virtual void setBlockAndUpdate(const BlockPos&, const BlockState*);
+    virtual void sendBlockUpdated(const BlockPos&, const BlockState*, const BlockState*, int, bool);
     virtual bool isBlockToBeTickedAt(const BlockPos&, Block*);
     virtual void getNeighbourBrightnesses(int*, LightLayer::variety, int, int, int);
     virtual void playSound(std::shared_ptr<Player>, const BlockPos&, SoundEvent const*,
@@ -74,13 +84,13 @@ public:
                            SoundSource::ESoundSource, float, float, float);
     virtual void playLocalSound(double, double, double, SoundEvent const*, SoundSource::ESoundSource, float,
                                 float, bool, float);
-    virtual void addGlobalEntity(std::shared_ptr<Entity>);
-    virtual void addEntity(const std::shared_ptr<Entity>&);
+    virtual bool addGlobalEntity(std::shared_ptr<Entity>);
+    virtual bool addEntity(const std::shared_ptr<Entity>&);
     virtual void entityAdded(std::shared_ptr<Entity>);
     virtual void entityRemoved(std::shared_ptr<Entity>);
     virtual void playerRemoved(std::shared_ptr<Entity>);
     virtual void removeEntity(std::shared_ptr<Entity>);
-    virtual void hasTickNextTick(const BlockPos&, Block*);
+    virtual bool hasTickNextTick(const BlockPos&, Block*);
     virtual void addToTickNextTick(const BlockPos&, Block*, int);
     virtual void addToTickNextTick(const BlockPos&, Block*, int, int);
     virtual void forceAddBlockTick(const BlockPos&, Block*, int, int);
@@ -96,15 +106,15 @@ public:
     virtual void pure_virtual_3() = 0;
     virtual void tickClientSideBlocks(int, int, LevelChunk*);
     virtual void tickBlocks();
-    virtual void tickPendingTicks(bool);
+    virtual bool tickPendingTicks(bool);
     virtual std::vector<TickNextTickData*>* fetchTicksInChunk(LevelChunk*, bool);
     virtual std::vector<TickNextTickData*>* fetchTicksInArea(BoundingBox*, bool);
-    virtual void getEntity(int);
+    virtual std::shared_ptr<Entity> getEntity(int);
     virtual void addEntities(std::vector<std::shared_ptr<Entity>, std::allocator<std::shared_ptr<Entity>>>*);
     virtual void
     removeEntities(std::vector<std::shared_ptr<Entity>, std::allocator<std::shared_ptr<Entity>>>*);
     virtual void disconnect(bool);
-    virtual void mayInteract(std::shared_ptr<Player>, const BlockPos&, Block*);
+    virtual bool mayInteract(std::shared_ptr<Player>, const BlockPos&, Block*);
     virtual void broadcastEntityEvent(std::shared_ptr<Entity>, unsigned int, int);
     virtual void blockEvent(const BlockPos&, Block*, int, int);
     virtual void updateSleepingPlayerList();
@@ -112,115 +122,122 @@ public:
     virtual void pure_virtual_4() = 0;
     virtual void updateNeighbourForOutputSignal(const BlockPos&, Block*);
     virtual void sendPacketToServer(std::shared_ptr<Packet>);
-    virtual void findNearestMapFeature(
-        std::basic_string<wchar_t, std::char_traits<wchar_t>, std::allocator<wchar_t>> const&,
-        const BlockPos&, bool);
-    virtual void newPrimedTntAllowed();
-    virtual void newFallingBlockAllowed();
-    virtual void explodeNextEnderCrystal();
-    virtual void AllPlayersAreSleeping();
+    virtual void* findNearestMapFeature(const std::wstring&, const BlockPos&, bool);
+    virtual bool newPrimedTntAllowed();
+    virtual bool newFallingBlockAllowed();
+    virtual bool explodeNextEnderCrystal();
+    virtual bool AllPlayersAreSleeping();
 
+    void _init();
+    bool hasChunkAt(const BlockPos&, bool);
     bool isOutsideBuildHeight(const BlockPos&);
     LevelChunk* getChunkAt(const BlockPos&);
     LevelChunk* getChunk(int, int);
-
     BlockPos getTopSolidBlockPos(const BlockPos&);
     BlockPos getTopRainBlockPos(const BlockPos&);
     BlockPos getHeightmapPos(const BlockPos&);
     BlockPos getSharedSpawnPos();
-
     LevelData* getLevelData();
     WorldBorder* getWorldBorder();
     GameRules* getGameRules();
     const Difficulty* getDifficulty();
-
+    ChunkSource* getChunkSource();
     long long getSeed();
     int getSeaLevel();
     void setSeaLevel(int);
     static void enableLightingCache();
-
+    void setSpawnPos(const BlockPos&);
+    const BlockState* getTopBlockState(const BlockPos&);
+    bool isInWorldBounds(const BlockPos&);
+    bool isInWorldBounds(int, int, int);
+    float getRainLevel(float);
+    void blockUpdated(const BlockPos&, Block*, bool);
+    void updateNeighborsAt(const BlockPos&, Block*, bool);
+    void updateObservingBlocksAt(const BlockPos&, Block*);
+    void observedNeighborChanged(const BlockPos&, Block*, const BlockPos&);
+    void levelEvent(int, const BlockPos&, int);
+    void levelEvent(std::shared_ptr<Player>, int, const BlockPos&, int);
+    void lightColumnChanged(int, int, int, int);
+    void checkLight(LightLayer::variety, const BlockPos&, bool, bool);
+    void setBlocksDirty(const BlockPos&, const BlockPos&);
+    void neighborChanged(const BlockPos&, Block*, const BlockPos&);
+    bool canSeeSky(BlockPos const&);
+    bool canSeeSkyFromBelowWater(BlockPos const&);
+    int getRawBrightness(BlockPos const&);
+    int getRawBrightness(BlockPos const&, bool);
+    int getHeightmapHeight(int, int);
+    int getHeightmap(int, int);
+    bool isWithinLevelBounds(int, int);
+    int getBrightnessPropagate(LightLayer::variety, BlockPos const&);
     long getGameTime();
-
+    long getDayTime();
     bool isRaining();
     bool isRainingAt(const BlockPos&);
     bool isHumidAt(const BlockPos&);
     bool hasChunkAt(const BlockPos&);
     bool hasBlockCubes(const AABB*);
-
-    void instaTick(const BlockPos&, BlockState const*, Random&);
+    void instaTick(const BlockPos&, const BlockState*, Random&);
     static void setInstaTick(bool);
-
     void addParticle(ParticleType const*, double, double, double, double, double, double,
                      arrayWithLength<int>);
-
     void blockEntityChanged(const BlockPos&, std::shared_ptr<BlockEntity>);
     void checkSession();  // RETURN TYPE UNKNOWN
-
+    void addListener(LevelListener*);
+    void removeListener(LevelListener*);
+    int getHeight();
+    int getFogDistance();
+    int getSkyFlashTime();
     std::vector<AABB> getCollisionAABBs(std::shared_ptr<Entity>, const AABB*, bool, bool, bool);
 
-    int dword8;
-    char gapC[36];
-    void* qword30;
-    void* qword38;
-    void* qword40;
-    void* qword48;
-    void* qword50;
-    void* qword58;
-    char gap60[40];
-    void* qword88;
-    void* qword90;
-    void* qword98;
-    void* qwordA0;
-    void* qwordA8;
-    void* qwordB0;
-    void* qwordB8;
-    void* qwordC0;
-    void* qwordC8;
-    void* qwordD0;
-    void* qwordD8;
-    void* qwordE0;
-    void* qwordE8;
-    void* qwordF0;
-    void* qwordF8;
-    void* qword100;
-    void* qword108;
-    void* qword110;
-    void* qword118;
-    void* qword120;
-    void* qword128;
-    void* qword130;
-    int dword138;
-    int dword13C;
-    void* qword140;
-    int dword148;
-    int dword14C;
-    void* qword150;
-    void* qword158;
-    void* qword160;
-    void* qword168;
+    int mSeaLevel = 63;
+    nn::os::MutexType mEntityMutex;
+    std::vector<std::shared_ptr<Entity>> mEntities;
+    std::vector<std::shared_ptr<Entity>> mEntitiesToRemove;
+    bool byte_60;
+    nn::os::MutexType mBlockEntityMutex;
+    std::vector<std::shared_ptr<BlockEntity>> qword_88;
+    std::vector<std::shared_ptr<BlockEntity>> qword_a0;
+    std::vector<std::shared_ptr<BlockEntity>> qword_b8;
+    std::vector<std::shared_ptr<BlockEntity>> qword_d0;
+    std::vector<std::shared_ptr<Player>> mPlayers;
+    std::vector<std::shared_ptr<Entity>> mGlobalEntities;
+    std::unordered_map<EntityId, EntityPtr, IntKeyHash2, IntKeyEq, EntityIdMapAllocator> mEntityIdMap;
+    int mCloudColor;
+    int mSkyDarken;
+    bool byte_148;
+    int dword_14c;
+    void* qword_150;
+    int dword_158;
+    int dword_15c;
+    int dword_160;
+    int dword_164;
+    int dword_168;
+    int mSkyFlashTime;
     Random* mRandom;
-    void* qword178;
+    bool byte_178;
     Dimension* mDimension;
-    char gap188[8];
-    void* qword190;
-    void* qword198;
-    void* qword1A0;
-    char gap1A8[8];
-    void* qword1B0;
-    void* qword1B8;
-    void* qword1C0;
-    char gap1C8[16];
-    void* qword1D8;
-    void* qword1E0;
+    PathNavigationListener* mPathNavigationListener;
+    std::vector<LevelListener*> mLevelListeners;
+    ChunkSource* mChunkSource;
+    std::shared_ptr<LevelStorage> mLevelStorage;
+    LevelData* mLevelData;
+    bool byte_1c8;
+    void* qword_1d0;
+    std::shared_ptr<Villages> mVillages;
     bool mIsLocal;
-    char gap1E9[47];
-    void* qword218;
-    char gap220[32];
-    void* qword240;
-    void* qword248;
-    void* qword250;
-    char gap258[8];
-    void* qword260;
-    void* qword268;
-    void* qword270;
+    CustomSet mChunksToPoll;
+    bool byte_210;
+    bool byte_211;
+    bool byte_212;
+    WorldBorder* mWorldBorder;
+    char gap_220[32];
+    std::vector<void*> qword_240;
+    void* qword_258;
+    std::vector<void*> qword_260;
+    char gap_278[16];
+    nn::os::MutexType mUnkMutex;
+    int dword_2a8;
+    int mFogDistance;
 };
+
+ASSERT_SIZEOF(Level, 0x2B0)

@@ -11,21 +11,21 @@ public:
     Region(Level*, const BlockPos&, const BlockPos&, int);
 
     virtual std::shared_ptr<BlockEntity> getBlockEntity(const BlockPos&) override;
-    virtual void getLightColor(const BlockPos&, int, int) override;
-    virtual void getBrightness(LightLayer::variety, const BlockPos&) override;
-    virtual void getBrightness(const BlockPos&, int) override;
-    virtual void getBrightness(const BlockPos&) override;
+    virtual int getLightColor(const BlockPos&, int, int) override;
+    virtual int getBrightness(LightLayer::variety, const BlockPos&) override;
+    virtual float getBrightness(const BlockPos&, int) override;
+    virtual float getBrightness(const BlockPos&) override;
     virtual const BlockState* getBlockState(const BlockPos&) override;
-    virtual void getBlockId(int, int, int) override;
-    virtual void getBlockData(int, int, int) override;
+    virtual int getBlockId(int, int, int) override;
+    virtual int getBlockData(int, int, int) override;
     virtual Block* getBlock(const BlockPos&) override;
     virtual bool isEmptyBlock(const BlockPos&) override;
     virtual Biome* getBiome(const BlockPos&) override;
     virtual BiomeSource* getBiomeSource() override;
-    virtual void getMaxBuildHeight() override;
+    virtual int getMaxBuildHeight() override;
     virtual bool isAllEmpty() override;
-    virtual void getDirectSignal(const BlockPos&, const Direction*) override;
-    virtual void getGeneratorType() override;
+    virtual int getDirectSignal(const BlockPos&, const Direction*) override;
+    virtual LevelType* getGeneratorType() override;
     virtual ~Region();
 
     void setCachedBlocksAndData(unsigned char*, unsigned char*, int, int, int, const BlockState**);

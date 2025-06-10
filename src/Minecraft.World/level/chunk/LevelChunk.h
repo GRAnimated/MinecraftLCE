@@ -20,6 +20,7 @@ class BlockEntity;
 class Level;
 class AABB;
 class BiomeSource;
+class Biome;
 class Entity;
 class ChunkPrimer;
 class DataOutputStream;
@@ -48,7 +49,7 @@ public:
     virtual void init(Level*, int, int);
     virtual ~LevelChunk();
     virtual void isAt(int, int);
-    virtual arrayWithLength<unsigned char> getHeightmap(int, int);
+    virtual int getHeightmap(int, int);
     virtual void recalcBlockLights();
     virtual void recalcHeightmapOnly();
     virtual void recalcHeightmap();
@@ -60,14 +61,14 @@ public:
     virtual void setData(int, int, int, int, int, bool*);
     virtual void setBlock(const BlockPos&, BlockState const*);
     virtual void setBlockAndData(int, int, int, int, int, bool);
-    virtual void getBrightness(LightLayer::variety, const BlockPos&);
+    virtual int getBrightness(LightLayer::variety, const BlockPos&);
     virtual void getNeighbourBrightnesses(int*, LightLayer::variety, int, int, int);
     virtual void setBrightness(LightLayer::variety, const BlockPos&, int);
-    virtual void getRawBrightness(const BlockPos&, int);
+    virtual int getRawBrightness(const BlockPos&, int);
     virtual void addEntity(std::shared_ptr<Entity>);
     virtual void removeEntity(std::shared_ptr<Entity>);
     virtual void removeEntity(std::shared_ptr<Entity>, int);
-    virtual void isSkyLit(const BlockPos&);
+    virtual bool isSkyLit(const BlockPos&);
     virtual void getBlockEntity(const BlockPos&, LevelChunk::EntityCreationType);
     virtual void addBlockEntity(std::shared_ptr<BlockEntity>);
     virtual void setBlockEntity(const BlockPos&, std::shared_ptr<BlockEntity>);
@@ -75,6 +76,7 @@ public:
     virtual void load(bool);
     virtual void unload(bool, bool);
     virtual void containsPlayer();
+    virtual void field_160();
     virtual void markUnsaved();
     virtual void getEntities(std::shared_ptr<Entity>, AABB const*, std::vector<std::shared_ptr<Entity>>&,
                              const Predicate<std::shared_ptr<Entity>>*);
@@ -87,7 +89,7 @@ public:
     virtual void testSetBlocksAndData(arrayWithLength<unsigned char>, int, int, int, int, int, int, int);
     virtual void getRandom(long long);
     virtual void isEmpty();
-    virtual void getBiome(const BlockPos&, BiomeSource*);
+    virtual Biome* getBiome(const BlockPos&, BiomeSource*);
     virtual void compressLighting();
     virtual void compressBlocks();
     virtual void compressData();
@@ -103,6 +105,9 @@ public:
     void writeCompressedBlockLightData(DataOutputStream* out);
     ChunkPos getPos();
     bool isTerrainPopulated();
+
+    int getBlockId(int, int, int);
+    int getData(int, int, int);
 
     char padding_0[24];
     CompressedBlockStorage* blockData1;

@@ -47,6 +47,8 @@ public:
     BiomeSource* getBiomeSource();
     bool isHasCeiling();
     float* getBrightnessRamp();
+    bool isHasSkyLight();
+    bool isUltraWarm();
 
     Level* mLevel;
     LevelType* mLevelType;

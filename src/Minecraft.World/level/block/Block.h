@@ -152,8 +152,8 @@ public:
     virtual bool isSignalSource(const BlockState* blockState);
     virtual void entityInside(Level* level, const BlockPos& pos, const BlockState* blockState,
                               std::shared_ptr<Entity> const&);
-    virtual void getDirectSignal(const BlockState* blockState, LevelSource* levelSource, const BlockPos& pos,
-                                 const Direction* direction);
+    virtual int getDirectSignal(const BlockState* blockState, LevelSource* levelSource, const BlockPos& pos,
+                                const Direction* direction);
     virtual void playerDestroy(Level* level, std::shared_ptr<Player> player, const BlockPos& pos,
                                const BlockState* blockState, std::shared_ptr<BlockEntity>,
                                not_null_ptr<ItemInstance>);

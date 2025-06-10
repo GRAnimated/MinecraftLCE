@@ -28,10 +28,10 @@ public:
     virtual Material* getMaterial() const = 0;
     virtual bool isSolid() const = 0;
     virtual bool isValidSpawn(std::shared_ptr<Entity>) const = 0;
-    virtual void getLightBlock() const = 0;
+    virtual int getLightBlock() const = 0;
     virtual void getLightEmission() const = 0;
     virtual bool isTranslucent() const = 0;
-    virtual void doesPropagate() const = 0;
+    virtual bool doesPropagate() const = 0;
     virtual MaterialColor* getMapColor(LevelSource*, const BlockPos&) = 0;
     virtual void rotate(Rotation*) const = 0;
     virtual void mirror(Mirror*) const = 0;
@@ -48,7 +48,7 @@ public:
     virtual void getAnalogOutputSignal(Level*, const BlockPos&) const = 0;
     virtual void getDestroySpeed(Level*, const BlockPos&) const = 0;
     virtual void getDestroyProgress(std::shared_ptr<Player>, Level*, const BlockPos&) const = 0;
-    virtual void getDirectSignal(LevelSource*, const BlockPos&, const Direction*) const = 0;
+    virtual int getDirectSignal(LevelSource*, const BlockPos&, const Direction*) const = 0;
     virtual void getPistonPushReaction() const = 0;
     virtual const BlockState* fillVirtualBlockStateProperties(LevelSource*, const BlockPos&) const = 0;
     virtual void getOutlineAABB(Level*, const BlockPos&) const = 0;

@@ -276,6 +276,7 @@ public:
     bool isInLava();
     void moveRelative(float, float, float, float);
     bool isFree(double, double, double);
+    void fjCheckDerivedConstruction();
 
     int mId;
     bool mBlocksBuilding;
