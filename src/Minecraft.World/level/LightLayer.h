@@ -2,5 +2,5 @@
 
 class LightLayer {
 public:
-    enum variety {};
+    enum variety { BLOCK = 0, SKY = 15 };
 };

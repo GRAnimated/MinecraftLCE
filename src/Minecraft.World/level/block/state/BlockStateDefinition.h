@@ -15,10 +15,10 @@ public:
         Material* getMaterial() const override;
         bool isSolid() const override;
         bool isValidSpawn(std::shared_ptr<Entity>) const override;
-        void getLightBlock() const override;
+        int getLightBlock() const override;
         void getLightEmission() const override;
         bool isTranslucent() const override;
-        void doesPropagate() const override;
+        bool doesPropagate() const override;
         MaterialColor* getMapColor(LevelSource*, const BlockPos&) override;
         void rotate(Rotation*) const override;
         void mirror(Mirror*) const override;
@@ -35,7 +35,7 @@ public:
         void getAnalogOutputSignal(Level*, const BlockPos&) const override;
         void getDestroySpeed(Level*, const BlockPos&) const override;
         void getDestroyProgress(std::shared_ptr<Player>, Level*, const BlockPos&) const override;
-        void getDirectSignal(LevelSource*, const BlockPos&, const Direction*) const override;
+        int getDirectSignal(LevelSource*, const BlockPos&, const Direction*) const override;
         void getPistonPushReaction() const override;
         const BlockState* fillVirtualBlockStateProperties(LevelSource*, const BlockPos&) const override;
         void getOutlineAABB(Level*, const BlockPos&) const override;

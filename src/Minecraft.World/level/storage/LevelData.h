@@ -89,7 +89,7 @@ public:
     virtual void setAllowCommands(bool);
     virtual bool isInitialized();
     virtual void setInitialized(bool);
-    virtual int getGameRules();
+    virtual GameRules* getGameRules();
     virtual const Difficulty* getDifficulty();
     virtual void setDifficulty(Difficulty const*);
     virtual int getCloudHeight();

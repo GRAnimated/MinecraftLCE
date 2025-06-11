@@ -128,7 +128,7 @@ void LivingEntity::travel(float x, float y, float z) {
                                * 0.2;
                     } else {
                         blockPos.set(Mth::floor(this->mX), 0, Mth::floor(this->mZ));
-                        bool v67 = this->mLevel->mIsLocal ? CGameNetworkManager::sInstance->IsHost() : true;
+                        bool v67 = this->mLevel->mIsLocal ? CGameNetworkManager::sInstance.IsHost() : true;
                         if (this->PositionLocked_4()) {
                             if (Minecraft::InMiniGame(TUMBLE, false) || Minecraft::InMiniGame(GLIDE, false)) {
                                 this->mDeltaMovement.y = 0;

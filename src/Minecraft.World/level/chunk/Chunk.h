@@ -4,22 +4,14 @@
 
 #include "nn/os/os_MutexTypes.h"
 
+#include "Minecraft.World/IntKey.h"
+
 class AABB;
 class BlockEntity;
 class BlockState;
 class Chunk;
 class Level;
 class TargetAreaRuleDefinition;
-
-struct IntKeyHash {
-    // NON_MATCHING
-    std::size_t operator()(int key) const noexcept { return std::hash<int>{}(key); }
-};
-
-struct IntKeyEq {
-    // NON_MATCHING
-    bool operator()(int lhs, int rhs) const noexcept { return lhs == rhs; }
-};
 
 typedef std::unordered_map<int, std::vector<std::shared_ptr<BlockEntity>>, IntKeyHash, IntKeyEq>
     BlockEntityMap;

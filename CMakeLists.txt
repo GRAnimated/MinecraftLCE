@@ -51,11 +51,15 @@ target_compile_options(mcswitch PRIVATE -fno-exceptions)
 target_compile_options(mcswitch PRIVATE -fno-strict-aliasing)
 target_compile_options(mcswitch PRIVATE -fsigned-char)
 target_compile_options(mcswitch PRIVATE -Wall -Wextra -Wdeprecated)
-target_compile_options(mcswitch PRIVATE -Wno-unused-parameter -Wno-unused-private-field)
-target_compile_options(mcswitch PRIVATE -Wno-invalid-offsetof)
 target_compile_options(mcswitch PRIVATE -Wextra-semi)
 target_compile_options(mcswitch PRIVATE -fno-inline -fno-inline-functions)
 target_compile_options(mcswitch PRIVATE -fno-builtin)
+
+# Disable some warnings that are unavoidable
+target_compile_options(mcswitch PRIVATE -Wno-unused-parameter -Wno-unused-private-field)
+target_compile_options(mcswitch PRIVATE -Wno-invalid-offsetof)
+# target_compile_options(mcswitch PRIVATE -Wno-delete-incomplete) # clangd warns about this one in MultiPlayerLevel.cpp
+target_compile_options(mcswitch PRIVATE -Wno-sign-compare)
 
 add_definitions(-D SAFETY_CHECKS)
 

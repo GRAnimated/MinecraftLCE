@@ -16,7 +16,7 @@ public:
     WorldBorder(Level*);
     virtual ~WorldBorder();
 
-    void isWithinBounds(const BlockPos&);
+    bool isWithinBounds(const BlockPos&);
     double getMinX();
     double getMaxX();
     double getMinZ();

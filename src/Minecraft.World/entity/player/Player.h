@@ -48,7 +48,7 @@ public:
     virtual int getPortalWaitTime() override;
     virtual void getSwimSound() override;
     virtual void getSwimSplashSound() override;
-    virtual void playSound(SoundEvent const*, float, float) override;
+    virtual void playSound(const SoundEvent*, float, float) override;
     virtual bool makeStepSound() override;
     virtual void causeFallDamage(float, float) override;
     virtual void doWaterSplashEffect() override;

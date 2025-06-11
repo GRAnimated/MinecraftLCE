@@ -315,6 +315,6 @@ extern "C" void nnMain() {
     CProfile::sInstance->SetUpsellCallback(CMinecraftApp::UpsellReturnedCallback,
                                            &CConsoleMinecraftApp::sInstance);
     CConsoleMinecraftApp::sInstance.InitialiseTips();
-    CGameNetworkManager::sInstance->Initialise();
-    CGameNetworkManager::sInstance->SetLocalGame(true);
+    CGameNetworkManager::sInstance.Initialise();
+    CGameNetworkManager::sInstance.SetLocalGame(true);
 }
