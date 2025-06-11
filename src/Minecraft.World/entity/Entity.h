@@ -80,7 +80,7 @@ public:
     virtual void playStepSound(const BlockPos&, Block*);
     virtual float playFlySound(float);
     virtual bool makeFlySound();
-    virtual void playSound(SoundEvent const*, float, float);
+    virtual void playSound(const SoundEvent*, float, float);
     virtual bool isSilent();
     virtual void setSilent(bool);
     virtual bool isNoGravity();

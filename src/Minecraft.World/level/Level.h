@@ -34,6 +34,7 @@ class WorldBorder;
 class ParticleType;
 class PathNavigationListener;
 class MinecraftServer;
+class SavedDataStorage;
 
 using EntityPtr = std::shared_ptr<Entity>;
 using EntityId = int;
@@ -63,13 +64,13 @@ public:
     virtual LevelType* getGeneratorType() override;
     virtual ~Level() override;
     virtual void postConstruct();
-    virtual void pure_virtual_1() = 0;
+    virtual ChunkSource* createChunkSource() = 0;
     virtual void initializeLevel(LevelSettings*);
     virtual MinecraftServer* getServer();
     virtual void validateSpawn();
     virtual bool hasChunk(int, int, bool) = 0;
     virtual bool isChunkGeneratedAt(int, int);
-    virtual void setBlock(const BlockPos&, const BlockState*, int, bool);
+    virtual bool setBlock(const BlockPos&, const BlockState*, int, bool);
     virtual void setData(const BlockPos&, int, int, bool);
     virtual void setData(int, int, int, int, int, bool);
     virtual void removeBlock(const BlockPos&);
@@ -78,11 +79,11 @@ public:
     virtual void sendBlockUpdated(const BlockPos&, const BlockState*, const BlockState*, int, bool);
     virtual bool isBlockToBeTickedAt(const BlockPos&, Block*);
     virtual void getNeighbourBrightnesses(int*, LightLayer::variety, int, int, int);
-    virtual void playSound(std::shared_ptr<Player>, const BlockPos&, SoundEvent const*,
+    virtual void playSound(std::shared_ptr<Player>, const BlockPos&, const SoundEvent*,
                            SoundSource::ESoundSource, float, float, float);
-    virtual void playSound(std::shared_ptr<Player>, double, double, double, SoundEvent const*,
+    virtual void playSound(std::shared_ptr<Player>, double, double, double, const SoundEvent*,
                            SoundSource::ESoundSource, float, float, float);
-    virtual void playLocalSound(double, double, double, SoundEvent const*, SoundSource::ESoundSource, float,
+    virtual void playLocalSound(double, double, double, const SoundEvent*, SoundSource::ESoundSource, float,
                                 float, bool, float);
     virtual bool addGlobalEntity(std::shared_ptr<Entity>);
     virtual bool addEntity(const std::shared_ptr<Entity>&);
@@ -97,29 +98,29 @@ public:
     virtual void tickEntities();
     virtual void tickServerPlayers();
     virtual void tick(std::shared_ptr<Entity>, bool);
-    virtual void sub_71002017F0();
+    virtual void explode(std::shared_ptr<Entity>, double, double, double, float, bool, bool, bool, bool, bool,
+                         float);
     virtual void tick();
     virtual void blockEntityAddedExtra(std::shared_ptr<BlockEntity>);
     virtual void blockEntityRemovedExtra(std::shared_ptr<BlockEntity>);
     virtual void tickWeather(bool);
     virtual void buildAndPrepareChunksToPoll();
-    virtual void pure_virtual_3() = 0;
+    virtual int getChunkPollRange() = 0;
     virtual void tickClientSideBlocks(int, int, LevelChunk*);
     virtual void tickBlocks();
     virtual bool tickPendingTicks(bool);
     virtual std::vector<TickNextTickData*>* fetchTicksInChunk(LevelChunk*, bool);
     virtual std::vector<TickNextTickData*>* fetchTicksInArea(BoundingBox*, bool);
     virtual std::shared_ptr<Entity> getEntity(int);
-    virtual void addEntities(std::vector<std::shared_ptr<Entity>, std::allocator<std::shared_ptr<Entity>>>*);
-    virtual void
-    removeEntities(std::vector<std::shared_ptr<Entity>, std::allocator<std::shared_ptr<Entity>>>*);
+    virtual void addEntities(std::vector<std::shared_ptr<Entity>>*);
+    virtual void removeEntities(std::vector<std::shared_ptr<Entity>>*);
     virtual void disconnect(bool);
     virtual bool mayInteract(std::shared_ptr<Player>, const BlockPos&, Block*);
     virtual void broadcastEntityEvent(std::shared_ptr<Entity>, unsigned int, int);
     virtual void blockEvent(const BlockPos&, Block*, int, int);
     virtual void updateSleepingPlayerList();
     virtual void createFireworks(double, double, double, double, double, double, CompoundTag*);
-    virtual void pure_virtual_4() = 0;
+    virtual void GetScoreboard() = 0;
     virtual void updateNeighbourForOutputSignal(const BlockPos&, Block*);
     virtual void sendPacketToServer(std::shared_ptr<Packet>);
     virtual void* findNearestMapFeature(const std::wstring&, const BlockPos&, bool);
@@ -159,16 +160,17 @@ public:
     void levelEvent(std::shared_ptr<Player>, int, const BlockPos&, int);
     void lightColumnChanged(int, int, int, int);
     void checkLight(LightLayer::variety, const BlockPos&, bool, bool);
+    void checkLight(const BlockPos&, bool, bool);
     void setBlocksDirty(const BlockPos&, const BlockPos&);
     void neighborChanged(const BlockPos&, Block*, const BlockPos&);
-    bool canSeeSky(BlockPos const&);
-    bool canSeeSkyFromBelowWater(BlockPos const&);
-    int getRawBrightness(BlockPos const&);
-    int getRawBrightness(BlockPos const&, bool);
+    bool canSeeSky(const BlockPos&);
+    bool canSeeSkyFromBelowWater(const BlockPos&);
+    int getRawBrightness(const BlockPos&);
+    int getRawBrightness(const BlockPos&, bool);
     int getHeightmapHeight(int, int);
     int getHeightmap(int, int);
     bool isWithinLevelBounds(int, int);
-    int getBrightnessPropagate(LightLayer::variety, BlockPos const&);
+    int getBrightnessPropagate(LightLayer::variety, const BlockPos&);
     long getGameTime();
     long getDayTime();
     bool isRaining();
@@ -188,6 +190,9 @@ public:
     int getFogDistance();
     int getSkyFlashTime();
     std::vector<AABB> getCollisionAABBs(std::shared_ptr<Entity>, const AABB*, bool, bool, bool);
+    void updateSkyBrightness();
+    void prepareWeather();
+    void setDayTime(long long);
 
     int mSeaLevel = 63;
     nn::os::MutexType mEntityMutex;
@@ -222,7 +227,7 @@ public:
     std::shared_ptr<LevelStorage> mLevelStorage;
     LevelData* mLevelData;
     bool byte_1c8;
-    void* qword_1d0;
+    SavedDataStorage* mSavedDataStorage;
     std::shared_ptr<Villages> mVillages;
     bool mIsLocal;
     CustomSet mChunksToPoll;
@@ -234,7 +239,8 @@ public:
     std::vector<void*> qword_240;
     void* qword_258;
     std::vector<void*> qword_260;
-    char gap_278[16];
+    ChunkSource* mChunkCache;
+    int mXZSize;
     nn::os::MutexType mUnkMutex;
     int dword_2a8;
     int mFogDistance;

@@ -19,7 +19,7 @@ public:
     BlockPos(const Vec3i&);
 
     bool equals(const BlockPos& pos) const;
-    bool equals(BlockPos const* pos) const;
+    bool equals(const BlockPos* pos) const;
 
     BlockPos offset(int x, int y, int z) const;
 

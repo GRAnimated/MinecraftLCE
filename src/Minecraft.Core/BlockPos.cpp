@@ -14,7 +14,7 @@ bool BlockPos::equals(const BlockPos& pos) const {
     return getX() == pos.getX() && getY() == pos.getY() && getZ() == pos.getZ();
 }
 
-bool BlockPos::equals(BlockPos const* pos) const {
+bool BlockPos::equals(const BlockPos* pos) const {
     return equals(*pos);
 }
 

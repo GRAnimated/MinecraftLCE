@@ -88,7 +88,7 @@ public:
     virtual void setBlocksAndData(arrayWithLength<unsigned char>, int, int, int, int, int, int, int, bool);
     virtual void testSetBlocksAndData(arrayWithLength<unsigned char>, int, int, int, int, int, int, int);
     virtual void getRandom(long long);
-    virtual void isEmpty();
+    virtual bool isEmpty();
     virtual Biome* getBiome(const BlockPos&, BiomeSource*);
     virtual void compressLighting();
     virtual void compressBlocks();

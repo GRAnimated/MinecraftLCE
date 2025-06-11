@@ -91,7 +91,7 @@ public:
                                int);
     virtual bool shouldRenderFace(const BlockState* blockState, LevelSource* levelSource, const BlockPos& pos,
                                   const Direction* direction);
-    virtual AABB* getShapes(const BlockState* blockState, LevelSource* levelSource, BlockPos const*);
+    virtual AABB* getShapes(const BlockState* blockState, LevelSource* levelSource, const BlockPos*);
     virtual bool isSolidFace(LevelSource* levelSource, const BlockPos& pos, const Direction* direction);
     virtual int getBlockFaceShape(LevelSource* levelSource, const BlockState* blockState, const BlockPos& pos,
                                   const Direction* direction);

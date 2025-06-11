@@ -52,7 +52,7 @@ void Level::_init() {
     mLevelStorage = nullptr;
     mLevelData = nullptr;
     byte_1c8 = false;
-    qword_1d0 = nullptr;
+    mSavedDataStorage = nullptr;
     byte_210 = true;
     byte_211 = true;
 
@@ -252,11 +252,11 @@ bool Level::isBlockToBeTickedAt(const BlockPos& pos, Block* block) {
     return false;
 }
 
-bool Level::canSeeSky(BlockPos const& pos) {
+bool Level::canSeeSky(const BlockPos& pos) {
     return getChunkAt(pos)->isSkyLit(pos);
 }
 
-bool Level::canSeeSkyFromBelowWater(BlockPos const& pos) {
+bool Level::canSeeSkyFromBelowWater(const BlockPos& pos) {
     if (pos.getY() >= 63)
         return canSeeSky(pos);
 
@@ -277,11 +277,11 @@ bool Level::canSeeSkyFromBelowWater(BlockPos const& pos) {
     return true;
 }
 
-int Level::getRawBrightness(BlockPos const& pos) {
+int Level::getRawBrightness(const BlockPos& pos) {
     return getRawBrightness(pos, true);
 }
 
-int Level::getRawBrightness(BlockPos const& pos, bool unk) {
+int Level::getRawBrightness(const BlockPos& pos, bool unk) {
     if (!isWithinLevelBounds(pos.getX(), pos.getZ()))
         return 15;
 
@@ -342,7 +342,7 @@ int Level::getHeightmap(int x, int z) {
     return chunk->getHeightmap(x & 0xF, z & 0xF);
 }
 
-int Level::getBrightnessPropagate(LightLayer::variety layer, BlockPos const& pos) {
+int Level::getBrightnessPropagate(LightLayer::variety layer, const BlockPos& pos) {
     if (!mDimension->isHasSkyLight() && layer == LightLayer::variety::SKY) {
         return 0;
     }
@@ -419,7 +419,7 @@ int Level::getBlockData(int x, int y, int z) {
     return chunk->getData(x & 0xF, y, z & 0xF);
 }
 
-void Level::playLocalSound(double, double, double, SoundEvent const*, SoundSource::ESoundSource, float, float,
+void Level::playLocalSound(double, double, double, const SoundEvent*, SoundSource::ESoundSource, float, float,
                            bool, float) {}
 
 bool Level::addGlobalEntity(std::shared_ptr<Entity> entity) {

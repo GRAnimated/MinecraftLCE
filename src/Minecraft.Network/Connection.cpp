@@ -380,9 +380,9 @@ void Connection::tick() {
     EnterCriticalSection(&mIncomingMutex);
     std::deque<std::shared_ptr<Packet>> queue;
     int maxIterations = 1000;
-    CGameNetworkManager* inst = CGameNetworkManager::sInstance;
-    while (!inst->IsLeavingGame()) {
-        if (!inst->IsInSession())
+    CGameNetworkManager inst = CGameNetworkManager::sInstance;
+    while (!inst.IsLeavingGame()) {
+        if (!inst.IsInSession())
             break;
         if (mIncomingQueue.size() == 0)
             break;

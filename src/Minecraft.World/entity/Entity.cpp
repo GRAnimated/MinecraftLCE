@@ -161,7 +161,7 @@ bool Entity::makeFlySound() {
     return false;
 }
 
-void Entity::playSound(SoundEvent const* sound, float volume, float pitch) {
+void Entity::playSound(const SoundEvent* sound, float volume, float pitch) {
     if (!this->isSilent()) {
         this->mLevel->playSound(nullptr, this->mX, this->mY, this->mZ, sound, this->getSoundSource(), volume,
                                 pitch, 16.0f);
