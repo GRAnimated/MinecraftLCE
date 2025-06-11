@@ -5,9 +5,7 @@
 import csv
 import os
 
-from ghidra.app.script import askFile
-from ghidra.program.module.listing import FunctionManager
-function_manager = currentProgram().getFunctionManager()
+from ghidra.app.script import GhidraScript
 
 # this is java.io.file
 OutputFilePathObject = askFile("Select the CSV file to update, checked functions will be preserved", "OK")
@@ -31,10 +29,10 @@ if output_file_path:
         csvwriter = csv.DictWriter(csvfile, fieldnames=fieldnames)
         csvwriter.writeheader()
 
-        for func in function_manager.getFunctions(True):
-            func_name = func.getName()
+        for func in currentProgram().getListing().getFunctions(True):
+            func_name = func.getName() 
             func_size = func.getBody().getNumAddresses()
-            address = f'0x{hex(func.getEntryPoint())[2:].zfill(16)}'
+            address   = func.getEntryPoint().toString(False, 16)
 
             quality = existing_data.get(address, {}).get('Quality', 'U')
 
