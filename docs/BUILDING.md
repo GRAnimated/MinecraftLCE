@@ -52,3 +52,7 @@ ninja -C build
 By default, a multithreaded build is performed.
 
 To check whether everything built correctly, just run `tools/check` after the build completes.
+
+## 4. Decompilers
+
+For instructions on setting up a decompiler, see [DECOMPILERS.md](DECOMPILERS.md).
