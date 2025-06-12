@@ -103,15 +103,15 @@ public:
     ChunkPos getPos();
 
     char padding_0[24];
-    CompressedBlockStorage *blockData1;
-    CompressedBlockStorage *blockData2;
+    CompressedBlockStorage *mBlockDataLower; // Y0-Y127
+    CompressedBlockStorage *mBlockDataUpper; // Y128-Y255
     char unk[400];
-    SparseDataStorage *dataData1;
-    SparseDataStorage *dataData2;
-    SparseLightStorage *skyLightData1;
-    SparseLightStorage *skyLightData2;
-    SparseLightStorage *blockLightData1;
-    SparseLightStorage *blockLightData2;
+    SparseDataStorage *mDataDataLower; // Y0-Y127
+    SparseDataStorage *mDataDataUpper; // Y128-Y255
+    SparseLightStorage *mSkyLightDataLower; // Y0-Y127
+    SparseLightStorage *mSkyLightDataUpper; // Y128-Y255
+    SparseLightStorage *mBlockLightDataLower; // Y0-Y127
+    SparseLightStorage *mBlockLightDataUpper; // Y128-Y255
     char padding_480[24];
     int xPos;
     int zPos;

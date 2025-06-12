@@ -1,23 +1,23 @@
 #include "Minecraft.World/level/chunk/LevelChunk.h"
 
 void LevelChunk::writeCompressedDataData(DataOutputStream* out) {
-    dataData1->write(out);
-    dataData2->write(out);
+    mDataDataLower->write(out);
+    mDataDataUpper->write(out);
 }
 
 void LevelChunk::writeCompressedBlockData(DataOutputStream* out) {
-    blockData1->write(out);
-    blockData2->write(out);
+    mBlockDataLower->write(out);
+    mBlockDataUpper->write(out);
 }
 
 void LevelChunk::writeCompressedSkyLightData(DataOutputStream* out) {
-    skyLightData1->write(out);
-    skyLightData2->write(out);
+    mSkyLightDataLower->write(out);
+    mSkyLightDataUpper->write(out);
 }
 
 void LevelChunk::writeCompressedBlockLightData(DataOutputStream* out) {
-    blockLightData1->write(out);
-    blockLightData2->write(out);
+    mBlockLightDataLower->write(out);
+    mBlockLightDataUpper->write(out);
 }
 
 ChunkPos LevelChunk::getPos() {

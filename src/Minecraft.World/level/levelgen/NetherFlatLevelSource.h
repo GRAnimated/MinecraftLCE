@@ -20,8 +20,6 @@ public:
     void prepareHeights(int, int, ChunkPrimer*);
     void buildSurfaces(int, int, ChunkPrimer*);
 
-    int field_8;
-    int mSize;
     Random* mSeed;
     Random* mRandom;
     bool mIsGenerateMapFeatures;

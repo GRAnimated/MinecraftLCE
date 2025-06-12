@@ -21,4 +21,10 @@ public:
     virtual void lightChunk(LevelChunk*);
 
     static bool inPostProcessStep;
+    // had to move these here since offset was wrong when they were in OverworldLevelSource
+    bool mIsLevelClassic;
+    bool mIsLevelSmall;
+    bool mIsLevelMedium;
+    char unknown;
+    int mSize;
 };
