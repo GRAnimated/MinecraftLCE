@@ -12,7 +12,7 @@ OutputFilePathObject = askFile("Select the CSV file to update, checked functions
 output_file_path = OutputFilePathObject.getAbsolutePath()
 
 def is_valid_name(name: str) -> bool:
-    return not name.startswith(("sub_", "nullsub_", "j_"))
+    return not name.startswith(("sub_", "nullsub_", "j_", "FUN_", "thunk_FUN_"))
 
 # Load the existing csv if it exists
 existing_data = {}
