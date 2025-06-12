@@ -15,10 +15,10 @@ public:
     void tick() override;
     void gatherStats() override;
     void getLoadedChunksCount() override;
-    void isChunkGeneratedAt(int, int) override;
-    void hasChunk(int, int) override;
-    void getChunk(int, int) override;
-    void getChunkAt(const BlockPos&) override;
+    bool isChunkGeneratedAt(int, int) override;
+    bool hasChunk(int, int) override;
+    LevelChunk* getChunk(int, int) override;
+    LevelChunk* getChunkAt(const BlockPos&) override;
     void create(int, int) override;
     void save(bool, ProgressListener*) override;
     void shouldSave() override;
