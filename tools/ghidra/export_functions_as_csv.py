@@ -32,12 +32,12 @@ if output_file_path:
         for func in currentProgram().getListing().getFunctions(True):
             func_name = func.getName() 
             func_size = func.getBody().getNumAddresses()
-            address   = func.getEntryPoint().toString(False, 16)
+            address   = func.getEntryPoint().getOffset()
 
             quality = existing_data.get(address, {}).get('Quality', 'U')
 
             csvwriter.writerow({
-                'Address': address,
+                'Address': f"0x{address:016X}",
                 'Quality': quality,
                 'Size': str(func_size).zfill(6),
                 'Name': func_name if is_valid_name(func_name) else ''
