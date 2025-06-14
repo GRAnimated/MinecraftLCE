@@ -7,6 +7,7 @@
 #include "Minecraft.World/entity/Entity.h"
 #include "Minecraft.World/entity/LivingEntity.h"
 #include "Minecraft.World/entity/ai/control/GoalSelector.h"
+#include "Minecraft.World/item/ItemInstance.h"
 #include <string>
 
 class ItemEntity;
@@ -19,10 +20,13 @@ class PathNavigation;
 class Sensing;
 class BodyController;
 class CensoredString;
+class EquipmentSlot;
 
 class Mob : public LivingEntity {
 public:
     Mob(Level*);
+
+    static EquipmentSlot* getEquipmentSlotForItem(not_null_ptr<ItemInstance>);
 
     virtual void registerGoals();
     virtual void createNavigation(Level*);

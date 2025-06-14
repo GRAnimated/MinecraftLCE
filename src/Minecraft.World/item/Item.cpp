@@ -27,7 +27,7 @@ Item::Item() {
     this->mBaseItemType = 0;
     this->mMaterial = 0;
     this->mIconName = L"";
-    this->mIcon = nullptr;
+    this->mDefaultIcon = nullptr;
     this->byte78 = 0;
 
     this->mSimpleRegistry = new SimpleRegistry<ResourceLocation, const ItemPropertyFunction*>();
@@ -198,7 +198,7 @@ bool Item::hasMultipleSpriteLayers() {
     return false;
 }
 
-void* Item::getLayerIcon(int a2, int, const std::shared_ptr<ItemInstance>&) {
+TextureAtlasSprite* Item::getLayerIcon(int a2, int, const std::shared_ptr<ItemInstance>&) {
     return this->getIcon(a2);
 }
 
@@ -206,8 +206,8 @@ int Item::getIconType() {
     return 1;
 }
 
-void* Item::getIcon(int) {
-    return this->mIcon;
+TextureAtlasSprite* Item::getIcon(int) {
+    return this->mDefaultIcon;
 }
 
 int Item::GetArmorType() {
@@ -222,6 +222,6 @@ int Item::GetOverrideCountColour() {
     return -1;
 }
 
-void* Item::GetOverrideCountIcon(const std::shared_ptr<ItemInstance>&) {
+TextureAtlasSprite* Item::GetOverrideCountIcon(const std::shared_ptr<ItemInstance>&) {
     return nullptr;
 }

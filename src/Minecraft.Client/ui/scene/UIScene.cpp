@@ -113,7 +113,7 @@ void UIScene::killTimer(int id) {
 
 bool UIScene::hasTimer(int id) {
     auto elo = this->mTimersMap.find(id);
-    return elo != this->mTimersMap.end() && elo->second.mEnabled != false;
+    return elo != this->mTimersMap.end() && elo->second.mEnabled;
 }
 
 // Probably better way to do this but I'm lazy

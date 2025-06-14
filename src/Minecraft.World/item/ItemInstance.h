@@ -42,7 +42,7 @@ public:
     ItemInstance(Item*, int, int);
     ItemInstance(CompoundTag*);
     static void addDataWalkers(DataFixerUpper*);
-    void copy() const;
+    not_null_ptr<ItemInstance> copy() const;
     void grow(int);
     void shrink(int);
     void split(int);
@@ -60,10 +60,10 @@ public:
     bool isDamaged();
     bool isStackable();
     bool isStackedByData();
-    void getDamageValue();
+    int getDamageValue();
     void getAuxValue() const;
     void setAuxValue(int);
-    void getMaxDamage();
+    int getMaxDamage();
     void hurt(int, Random*);
     void hurtAndBreak(int, std::shared_ptr<LivingEntity>);
     void hurtEnemy(std::shared_ptr<LivingEntity>, std::shared_ptr<Player>);

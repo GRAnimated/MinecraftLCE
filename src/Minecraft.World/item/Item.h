@@ -8,7 +8,6 @@
 #include <string>
 
 class ResourceLocation;
-class ItemPropertyFunction;
 class Block;
 class LivingEntity;
 class ItemInstance;
@@ -16,11 +15,21 @@ class Level;
 class Player;
 class BlockState;
 class CompoundTag;
-class ItemToolTipDataHolder;
+class ItemToolTipDataHolder {
+public:
+    char gap0[24];
+    int idk;
+};
 class Entity;
 class IconRegister;
 class BlockPos;
 class Direction;
+class TextureAtlasSprite;
+
+class ItemPropertyFunction {
+public:
+    virtual void call(not_null_ptr<ItemInstance>, Level*, std::shared_ptr<LivingEntity>);
+};
 
 class Item {
 public:
@@ -29,6 +38,8 @@ public:
     int getId();
     bool canBeDepleted();
     void setIconName(const std::wstring&);
+    void setMaxDamage(int);
+    int getMaxDamage();
 
     static Item* byId(int id);
     static void registerBlock(Block* block);
@@ -46,9 +57,8 @@ public:
                        InteractionHand::EInteractionHand, const Direction*, float, float, float, bool);
     virtual float getDestroySpeed(const std::shared_ptr<ItemInstance>&, BlockState*);
     virtual bool TestUse(Level*, const std::shared_ptr<Player>&, InteractionHand::EInteractionHand);
-    virtual InteractionResultHolder
-    use(Level*, const std::shared_ptr<Player>&,
-        InteractionHand::EInteractionHand);  // this def need complete overhaul as it's...
+    virtual InteractionResultHolder use(Level*, const std::shared_ptr<Player>&,
+                                        InteractionHand::EInteractionHand);
     virtual not_null_ptr<ItemInstance> finishUsingItem(not_null_ptr<ItemInstance>, Level*,
                                                        const std::shared_ptr<LivingEntity>&);
     virtual int getMaxStackSize();
@@ -84,25 +94,25 @@ public:
     virtual bool isEnchantable(const std::shared_ptr<ItemInstance>&);
     virtual int getEnchantmentValue();
     virtual bool mayBePlacedInAdventureMode();
-    virtual bool isValidRepairItem(const std::shared_ptr<ItemInstance>&,
-                                   const std::shared_ptr<ItemInstance>&);
+    virtual bool isValidRepairItem(const std::shared_ptr<ItemInstance>& source,
+                                   const std::shared_ptr<ItemInstance>& repairItem);
     virtual void getDefaultAttributeModifiers(const EquipmentSlot*);
     virtual void registerIcons(IconRegister*);
     virtual bool hasMultipleSpriteLayers();
-    virtual void* getLayerIcon(int, int, const std::shared_ptr<ItemInstance>&);
+    virtual TextureAtlasSprite* getLayerIcon(int, int, const std::shared_ptr<ItemInstance>&);
     virtual int getIconType();
-    virtual void* getIcon(int);
-    virtual void* getIcon(const std::shared_ptr<ItemInstance>&);
+    virtual TextureAtlasSprite* getIcon(int);
+    virtual TextureAtlasSprite* getIcon(not_null_ptr<ItemInstance>);
     virtual int GetArmorType();
     virtual int GetOverrideCount();
     virtual int GetOverrideCountColour();
-    virtual void* GetOverrideCountIcon(const std::shared_ptr<ItemInstance>&);
+    virtual TextureAtlasSprite* GetOverrideCountIcon(const std::shared_ptr<ItemInstance>&);
 
     void* qword8;
     SimpleRegistry<ResourceLocation, const ItemPropertyFunction*>* mSimpleRegistry;
     int mMaxStackSize;
     int mMaxDamage;
-    void* mIcon;  // I assume it's pointer to something, idk what though
+    TextureAtlasSprite* mDefaultIcon;
     int mBaseItemType;
     int mMaterial;
     bool mHandEquipped;
