@@ -100,7 +100,7 @@ public:
     virtual void hurtArmor(float) override;
     virtual void hurtCurrentlyUsedShield(float) override;
     virtual void actuallyHurt(DamageSource, float) override;
-    virtual void getItemSlot(EquipmentSlot const*) override;
+    virtual not_null_ptr<ItemInstance> getItemSlot(EquipmentSlot const*) override;
     virtual void getItemInHandIcon(not_null_ptr<ItemInstance>, int) override;
     virtual bool isImmobile() override;
     virtual void jumpFromGround() override;

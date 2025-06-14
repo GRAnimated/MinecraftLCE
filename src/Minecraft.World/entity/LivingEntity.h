@@ -126,7 +126,7 @@ public:
     virtual not_null_ptr<ItemInstance> getItemInHand(InteractionHand::EInteractionHand);
     virtual void setItemInHand(InteractionHand::EInteractionHand, not_null_ptr<ItemInstance>);
     virtual bool hasItemInSlot(EquipmentSlot const*);
-    virtual void getItemSlot(EquipmentSlot const*) = 0;
+    virtual not_null_ptr<ItemInstance> getItemSlot(EquipmentSlot const*) = 0;
     virtual void getItemInHandIcon(not_null_ptr<ItemInstance>, int);
     virtual void getSoundVolume();
     virtual void getVoicePitch();
