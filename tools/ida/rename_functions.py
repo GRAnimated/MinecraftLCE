@@ -1,8 +1,6 @@
 # Renames functions in an IDA database to match the function names
 # in the decompiled source code
 
-# TODO: PR this to upstream!!! This is modified to create functions that don't already exist
-
 import csv
 import idc
 import ida_funcs

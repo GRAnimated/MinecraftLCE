@@ -33,70 +33,12 @@ The Nintendo Switch Edition release only lasted for a year, before being replace
 While the latest version of Nintendo Switch Edition is v1.0.17, that version only matches up with Wii U Edition's Patch 35 (v560). Wii U Edition would get a further 8 updates (up until v688) before LCE was abandoned for good.
 
 ## Building
-The decomp toolchain was created for Linux & MacOS users. While it isn't a hard requirement, if you're running Windows its advised that you [setup WSL](https://learn.microsoft.com/en-us/windows/wsl/install) with an Ubuntu-like distro for the easiest setup.
-
-The instructions below assume you're running a form of Linux (WSL or native).
-
-### 1. Set up dependencies
-
-* Python 3.6 or newer with [pip](https://pip.pypa.io/en/stable/installation/)
-* Ninja
-* CMake 3.13+
-    * If you are on Ubuntu 18.04, you must first [update CMake by using the official CMake APT repository](https://apt.kitware.com/).
-* ccache (to speed up builds)
-* xdelta3
-* clang (for compiling Rust tools)
-
-Ubuntu users can install those dependencies by running:
-
-```shell
-sudo apt install python3 ninja-build cmake ccache xdelta3 clang libssl-dev libncurses5
-```
-
-Additionally, you'll also need:
-
-* A Rust toolchain ([follow the instructions here](https://www.rust-lang.org/tools/install))
-* The following Python modules: `capstone colorama cxxfilt pyelftools ansiwrap watchdog python-Levenshtein toml` (install them with `pip install ...`)
-
-### 2. Set up the project
-
-1. Clone this repository. If you are using WSL, please clone the repo *inside* WSL, *not* on the Windows side (for performance reasons).
-
-2. Run `git submodule update --init --recursive`
-
-    Next, you'll need to acquire the **original v1.0.17 `main` NSO executable**.
-
-3. Run `tools/setup.py [path to the NSO]`
-    * This will:
-        * install tools/check to check for differences in decompiled code
-        * convert the executable if necessary
-        * set up [Clang 4.0.1](https://releases.llvm.org/download.html#4.0.1) by downloading it from the official LLVM website
-        * create a build directory in `build/`
-    * If something goes wrong, follow the instructions given to you by the script.
-    * If you wish to use a CMake generator that isn't Ninja, use `--cmake_backend` to specify it.
-
-### 3. Build
-
-To start the build, just run
-
-```shell
-ninja -C build
-```
-
-By default, a multithreaded build is performed.
-
-To check whether everything built correctly, just run `tools/check` after the build completes.
+See [BUILDING.md](docs/BUILDING.md).
 
 ## Contributing
-As this project is in its very early stages, its hard to put guidelines on something that will evolve over time as contributors gain a better understanding of the game's internals.
+See [CONTRIBUTING.md](docs/CONTRIBUTING.md).
 
-While almost all source paths aren't known, a few .cpp file names do appear in the Wii U Edition's global static constructors, along with a couple asserts giving file paths. Follow these file names wherever possible.
-
-Another point of reference is the Switch Edition, showing us the file path to `Minecraft.World/Calendar.cpp` and some other files in that folder. World generation should be stored in this folder based on `MinecraftWorld_RunStaticCtors` routing all worldgen static constructors inside of the folder.
-
-For another point of reference, you could also look at [the Minecraft: Pocket Edition decompilation](https://github.com/MCPE-RE/0.1.3j-core) for more inspiration. As a matter of fact, a lot of classes from that decompilation project share function names with this game's symbols. Both editions originated from Notch's messy Minecraft beta code, so it's no wonder that a lot of names were probably copied from Mojang's official mappings at the time.
-
-##
+---
 
 Minecraft LCE Decompilation logo by [@break-core](https://github.com/break-core?tab=repositories)
 
