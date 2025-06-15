@@ -23,7 +23,7 @@ csv_path = config.get_functions_csv_path()
 function_manager = currentProgram().getFunctionManager()
 
 def can_overwrite_name(new_name: str):
-    if not new_name or new_name.startswith(("sub_", "nullsub_", "j_")):
+    if not new_name or new_name.startswith(("FUN_", "thunk_FUN_")):
         return False
 
     return True # we have to allow wii u symbols
