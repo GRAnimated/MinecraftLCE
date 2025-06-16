@@ -1,5 +1,29 @@
 #pragma once
 
+#include "Minecraft.World/ArrayWithLength.h"
 #include "Minecraft.World/item/Item.h"
 
-class DiggerItem : public Item {};
+class DiggerItem : public Item {
+public:
+    DiggerItem(Item::Tier const* tier, arrayWithLength<Block*> blocks);
+    DiggerItem(float attackDamage, float attackSpeed, Item::Tier const* tier, arrayWithLength<Block*> blocks);
+
+    void _init(float attackDamage, float attackSpeed, arrayWithLength<Block*> blocks);
+
+    ~DiggerItem() override;
+    float getDestroySpeed(not_null_ptr<ItemInstance>, BlockState*) override;
+    bool hurtEnemy(not_null_ptr<ItemInstance>, std::shared_ptr<LivingEntity>,
+                   std::shared_ptr<LivingEntity>) override;
+    bool mineBlock(not_null_ptr<ItemInstance>, Level*, const BlockState*, const BlockPos&,
+                   std::shared_ptr<LivingEntity>) override;
+    bool isHandEquipped() override;
+    int getEnchantmentValue() override;
+    bool isValidRepairItem(not_null_ptr<ItemInstance> source, not_null_ptr<ItemInstance> repairItem) override;
+    void getDefaultAttributeModifiers(const EquipmentSlot*) override;
+
+    arrayWithLength<Block*> mBlocks = arrayWithLength<Block*>();
+    float mSpeed;
+    float mAttackDamage;
+    float mAttackSpeed;
+    const Item::Tier* mTier;
+};

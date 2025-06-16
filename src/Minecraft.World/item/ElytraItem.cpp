@@ -37,11 +37,11 @@ int ElytraItem::GetUseTooltip(const ItemToolTipDataHolder& data) {
 
 ElytraItem::~ElytraItem() {}
 
-bool ElytraItem::TestUse(Level*, const std::shared_ptr<Player>&, InteractionHand::EInteractionHand) {
+bool ElytraItem::TestUse(Level*, std::shared_ptr<Player>, InteractionHand::EInteractionHand) {
     return true;
 }
 
-InteractionResultHolder ElytraItem::use(Level*, const std::shared_ptr<Player>& player,
+InteractionResultHolder ElytraItem::use(Level*, std::shared_ptr<Player> player,
                                         InteractionHand::EInteractionHand hand) {
     not_null_ptr<ItemInstance> heldItem = player->getItemInHand(hand);
     EquipmentSlot* slot = Mob::getEquipmentSlotForItem(heldItem);
@@ -58,8 +58,7 @@ InteractionResultHolder ElytraItem::use(Level*, const std::shared_ptr<Player>& p
     }
 }
 
-bool ElytraItem::isValidRepairItem(const std::shared_ptr<ItemInstance>& source,
-                                   const std::shared_ptr<ItemInstance>& repairItem) {
+bool ElytraItem::isValidRepairItem(not_null_ptr<ItemInstance> source, not_null_ptr<ItemInstance> repairItem) {
     return repairItem->getItem() == Items::LEATHER;
 }
 
@@ -69,7 +68,7 @@ void ElytraItem::registerIcons(IconRegister* iconRegister) {
     this->mBrokenElytraIcon = iconRegister->registerIcon(L"broken_elytra");
 }
 
-TextureAtlasSprite* ElytraItem::getLayerIcon(int usage, int, const std::shared_ptr<ItemInstance>&) {
+TextureAtlasSprite* ElytraItem::getLayerIcon(int usage, int, not_null_ptr<ItemInstance>) {
     if (this->getMaxDamage() - 1 > usage)
         return this->mDefaultIcon;
     else
