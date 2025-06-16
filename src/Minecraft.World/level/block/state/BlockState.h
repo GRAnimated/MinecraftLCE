@@ -46,7 +46,7 @@ public:
     virtual void getSignal(LevelSource*, const BlockPos&, const Direction*) const = 0;
     virtual void hasAnalogOutputSignal() const = 0;
     virtual void getAnalogOutputSignal(Level*, const BlockPos&) const = 0;
-    virtual void getDestroySpeed(Level*, const BlockPos&) const = 0;
+    virtual float getDestroySpeed(Level*, const BlockPos&) const = 0;
     virtual void getDestroyProgress(std::shared_ptr<Player>, Level*, const BlockPos&) const = 0;
     virtual int getDirectSignal(LevelSource*, const BlockPos&, const Direction*) const = 0;
     virtual void getPistonPushReaction() const = 0;

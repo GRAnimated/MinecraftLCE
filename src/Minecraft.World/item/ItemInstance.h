@@ -61,7 +61,7 @@ public:
     bool isStackable();
     bool isStackedByData();
     int getDamageValue();
-    void getAuxValue() const;
+    int getAuxValue() const;
     void setAuxValue(int);
     int getMaxDamage();
     void hurt(int, Random*);

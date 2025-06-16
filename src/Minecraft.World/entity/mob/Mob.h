@@ -72,7 +72,7 @@ public:
     virtual void setDropChance(EquipmentSlot const*, float);
     virtual void canPickUpLoot();
     virtual void setCanPickUpLoot(bool);
-    virtual void isPersistenceRequired();
+    virtual bool isPersistenceRequired();
     virtual void mobInteract(std::shared_ptr<Player> const&, InteractionHand::EInteractionHand);
     virtual void tickLeash();
     virtual void dropLeash(bool, bool);
@@ -87,6 +87,7 @@ public:
     virtual void isNoAi();
 
     void init();
+    void setPersistenceRequired(bool);
 
     int mAmbientSoundTime;
     int mXpReward;

@@ -33,7 +33,7 @@ public:
         void getSignal(LevelSource*, const BlockPos&, const Direction*) const override;
         void hasAnalogOutputSignal() const override;
         void getAnalogOutputSignal(Level*, const BlockPos&) const override;
-        void getDestroySpeed(Level*, const BlockPos&) const override;
+        float getDestroySpeed(Level*, const BlockPos&) const override;
         void getDestroyProgress(std::shared_ptr<Player>, Level*, const BlockPos&) const override;
         int getDirectSignal(LevelSource*, const BlockPos&, const Direction*) const override;
         void getPistonPushReaction() const override;
