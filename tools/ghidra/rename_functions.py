@@ -18,22 +18,19 @@ spec = importlib.util.spec_from_file_location("config", config_path)
 config = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(config)
 
+adf = currentProgram().getAddressFactory()
+mem = currentProgram().getMemory()
+text_space = adf.getAddressSpace(".text")
+
 csv_path = config.get_functions_csv_path()
 
 function_manager = currentProgram().getFunctionManager()
 
 def can_overwrite_name(new_name: str):
-    if not new_name or new_name.startswith(("FUN_", "thunk_FUN_")):
+    if new_name is "" or new_name.startswith(("FUN_", "thunk_FUN_")):
         return False
 
     return True # we have to allow wii u symbols
-
-def delete_multichunk_funcs():
-    for func in function_manager.getFunctions(True):
-        if func.getBody().getNumAddressRanges() > 1:
-            function_manager.removeFunction(func.getEntryPoint())
-
-delete_multichunk_funcs()
 
 with open(csv_path, "r") as f:
     reader = csv.reader(f)
@@ -42,14 +39,15 @@ with open(csv_path, "r") as f:
     prev_func = None
 
     for fn in reader:
-        addr = toAddr(fn[0])
+        raw_addr = int(fn[0], 16)
         size = int(fn[2])
         name = fn[3]
 
+        addr = text_space.getAddress(raw_addr)
         func = function_manager.getFunctionAt(addr)
-
+        
         if func is None:
-            print(f"Creating function at {addr} with name {name}")
+            print(f"Creating function at {addr} {name}")
             func = function_manager.createFunction(None, addr, AddressSet(addr, addr.add(size - 1)), SourceType.USER_DEFINED)
         
         elif func.getEntryPoint() != addr:
@@ -58,6 +56,7 @@ with open(csv_path, "r") as f:
             func = function_manager.createFunction(None, addr, AddressSet(addr, addr.add(size - 1)), SourceType.USER_DEFINED)
 
         if can_overwrite_name(name):
+            print(f"Renaming {addr} to {name}")
             func.setName(name, SourceType.USER_DEFINED)
             
         prev_func = func
