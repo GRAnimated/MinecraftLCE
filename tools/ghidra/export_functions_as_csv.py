@@ -37,7 +37,7 @@ if output_file_path:
             quality = existing_data.get(address, {}).get('Quality', 'U')
 
             csvwriter.writerow({
-                'Address': f"0x{address:016X}",
+                'Address': f"0x{address:016x}",
                 'Quality': quality,
                 'Size': str(func_size).zfill(6),
                 'Name': func_name if is_valid_name(func_name) else ''
