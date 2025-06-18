@@ -20,14 +20,14 @@ spec.loader.exec_module(config)
 
 adf = currentProgram().getAddressFactory()
 mem = currentProgram().getMemory()
-text_space = adf.getAddressSpace(".text")
+text_block = mem.getBlock(".text")
 
 csv_path = config.get_functions_csv_path()
 
 function_manager = currentProgram().getFunctionManager()
 
 def can_overwrite_name(new_name: str):
-    if new_name is "" or new_name.startswith(("FUN_", "thunk_FUN_")):
+    if new_name == "" or new_name.startswith(("FUN_", "thunk_FUN_")):
         return False
 
     return True # we have to allow wii u symbols
@@ -43,13 +43,17 @@ with open(csv_path, "r") as f:
         size = int(fn[2])
         name = fn[3]
 
-        addr = text_space.getAddress(raw_addr)
+        addr = text_block.getStart().getNewAddress(raw_addr)
         func = function_manager.getFunctionAt(addr)
         
         if func is None:
             print(f"Creating function at {addr} {name}")
-            func = function_manager.createFunction(None, addr, AddressSet(addr, addr.add(size - 1)), SourceType.USER_DEFINED)
-        
+            try:
+                func = function_manager.createFunction(None, addr, AddressSet(addr, addr.add(size - 1)), SourceType.USER_DEFINED)
+            except:
+                print(f"Creating function at {addr} failed")
+                continue
+
         elif func.getEntryPoint() != addr:
             print(f"Fixing function at {addr} with name {name}")
             prev_func.setBody(AddressSet(prev_func.getEntryPoint(), func.getBody().getMaxAddress().add(1)))
