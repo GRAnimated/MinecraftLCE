@@ -36,7 +36,6 @@ if output_file_path:
             address = f"0x{address_raw:016x}"
 
             quality = existing_data.get(address, {}).get('Quality', 'U')
-            print(existing_data.get(address, {}))
 
             csvwriter.writerow({
                 'Address': address,
