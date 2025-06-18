@@ -12,8 +12,6 @@ from ghidra.program.model.symbol import SourceType
 InputFilePathObject = askFile("Import from CSV file", "OK")
 input_file_path = InputFilePathObject.getAbsolutePath()
 
-bss = currentProgram().getAddressFactory().getAddressSpace(".bss")
-
 if input_file_path:
     with open(input_file_path, 'r', newline='') as csvfile:
         csvreader = csv.reader(csvfile)
