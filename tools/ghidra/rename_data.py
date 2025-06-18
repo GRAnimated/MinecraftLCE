@@ -1,4 +1,4 @@
-# !!!UNTESTED!!!
+# Renames data to those from the CSV
 #@author Boreal
 #@category NX-Switch
 

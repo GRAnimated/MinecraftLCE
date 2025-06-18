@@ -1,4 +1,4 @@
-# !!!UNTESTED!!!
+# Export functions to a CSV (CURRENTLY NOT MATCHING IDA!!!)
 #@author Boreal
 #@category NX-Switch
 

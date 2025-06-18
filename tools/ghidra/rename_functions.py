@@ -1,4 +1,4 @@
-# !!!UNTESTED!!!
+# Renames functions to those from the CSV
 #@author Boreal
 #@category NX-Switch
 
@@ -22,7 +22,7 @@ adf = currentProgram().getAddressFactory()
 mem = currentProgram().getMemory()
 text_space = adf.getAddressSpace(".text")
 
-csv_path = config.get_functions_csv_path()
+csv_path = config.get_data_csv_path()
 
 function_manager = currentProgram().getFunctionManager()
 
