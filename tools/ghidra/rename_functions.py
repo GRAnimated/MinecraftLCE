@@ -26,6 +26,15 @@ csv_path = config.get_functions_csv_path()
 
 function_manager = currentProgram().getFunctionManager()
 
+
+def delete_multichunk_funcs():
+    for func in function_manager.getFunctions(True):
+        if func.getBody().getNumAddressRanges() > 1:
+            function_manager.removeFunction(func.getEntryPoint())
+            print(f"deleted multichunk function {func.getEntryPoint().getOffset():016x}")
+
+delete_multichunk_funcs()
+
 def can_overwrite_name(new_name: str):
     if new_name == "" or new_name.startswith(("FUN_", "thunk_FUN_")):
         return False
