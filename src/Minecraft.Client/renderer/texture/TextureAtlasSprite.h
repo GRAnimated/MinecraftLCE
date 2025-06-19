@@ -4,7 +4,10 @@
 
 class TextureAtlasSprite {
 public:
-    TextureAtlasSprite(const std::wstring&, const std::wstring&, float, float, float, float);
+    TextureAtlasSprite(const std::wstring& id, const std::wstring& name, float u0, float v0, float u1,
+                       float v1);
+
+    static TextureAtlasSprite* create(const std::wstring&);
 
     virtual ~TextureAtlasSprite();
     virtual int getX() const;
@@ -28,4 +31,7 @@ public:
     virtual bool hasOwnData();
 
     void adjustUV(float&, float&);
+    void initUVs(float u0, float v0, float u1, float v1);
+
+    char filler[0x90 - 8];
 };

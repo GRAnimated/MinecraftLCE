@@ -3,9 +3,11 @@
 #include "Minecraft.Client/resources/SimpleRegistry.h"
 #include "Minecraft.World/InteractionHand.h"
 #include "Minecraft.World/inventory/EquipmentSlot.h"
+#include "Minecraft.World/item/AttributeModifier.h"
 #include "Minecraft.World/item/InteractionResultHolder.h"
 #include <memory>
 #include <string>
+#include <unordered_map>
 
 class ResourceLocation;
 class Block;
@@ -30,6 +32,9 @@ class ItemPropertyFunction {
 public:
     virtual void call(not_null_ptr<ItemInstance>, Level*, std::shared_ptr<LivingEntity>);
 };
+
+// Don't know if this exists, it exists on Java
+enum ActionResultType { SUCCESS, PASS, FAIL };
 
 class Item {
 public:
@@ -78,6 +83,7 @@ public:
     void setIconName(const std::wstring&);
     void setMaxDamage(int);
     int getMaxDamage();
+    void setStackedByData(bool);
 
     static Item* byId(int id);
     static void registerBlock(Block* block);
@@ -88,59 +94,67 @@ public:
     static void registerItem(int id, const ResourceLocation& name_id, Item* item);
 
     virtual not_null_ptr<ItemInstance> getDefaultInstance();
-    virtual bool verifyTagAfterLoad(CompoundTag*);
-    virtual int GetUseTooltip(const ItemToolTipDataHolder&);
+    virtual bool verifyTagAfterLoad(CompoundTag* tag);
+    virtual int GetUseTooltip(const ItemToolTipDataHolder& toolTipDataHolder);
     virtual ~Item();
-    virtual bool useOn(std::shared_ptr<Player>, Level*, const BlockPos&, InteractionHand::EInteractionHand,
-                       const Direction*, float, float, float, bool);
-    virtual float getDestroySpeed(not_null_ptr<ItemInstance>, BlockState*);
-    virtual bool TestUse(Level*, std::shared_ptr<Player>, InteractionHand::EInteractionHand);
-    virtual InteractionResultHolder use(Level*, std::shared_ptr<Player>, InteractionHand::EInteractionHand);
-    virtual not_null_ptr<ItemInstance> finishUsingItem(not_null_ptr<ItemInstance>, Level*,
-                                                       std::shared_ptr<LivingEntity>);
+    virtual ActionResultType useOn(std::shared_ptr<Player> user, Level* level, const BlockPos& pos,
+                                   InteractionHand::EInteractionHand hand, const Direction* direction,
+                                   float rayX, float rayY, float rayZ,
+                                   bool missOrInside);  // it's either miss or inside (taken from mojmap)
+    virtual float getDestroySpeed(not_null_ptr<ItemInstance> itemInstance, BlockState* state);
+    virtual bool TestUse(Level* level, std::shared_ptr<Player> user, InteractionHand::EInteractionHand hand);
+    virtual InteractionResultHolder use(Level* level, std::shared_ptr<Player> user,
+                                        InteractionHand::EInteractionHand hand);
+    virtual not_null_ptr<ItemInstance> finishUsingItem(not_null_ptr<ItemInstance> itemInstance, Level* level,
+                                                       std::shared_ptr<LivingEntity> user);
     virtual int getMaxStackSize();
-    virtual int getLevelDataForAuxValue(int);
-    virtual bool hurtEnemy(not_null_ptr<ItemInstance>, std::shared_ptr<LivingEntity>,
-                           std::shared_ptr<LivingEntity>);
-    virtual bool mineBlock(not_null_ptr<ItemInstance>, Level*, const BlockState*, const BlockPos&,
-                           std::shared_ptr<LivingEntity>);
-    virtual int getAttackDamage(std::shared_ptr<Entity>);
-    virtual bool canDestroySpecial(const BlockState*);
-    virtual bool interactEnemy(not_null_ptr<ItemInstance>, std::shared_ptr<Player>,
-                               std::shared_ptr<LivingEntity>, InteractionHand::EInteractionHand);
+    virtual int getLevelDataForAuxValue(int auxValue);
+    virtual bool hurtEnemy(not_null_ptr<ItemInstance> itemInstance, std::shared_ptr<LivingEntity> victim,
+                           std::shared_ptr<LivingEntity> attacker);
+    virtual bool mineBlock(not_null_ptr<ItemInstance> itemInstance, Level* level, const BlockState* state,
+                           const BlockPos& pos, std::shared_ptr<LivingEntity> user);
+    virtual int getAttackDamage(std::shared_ptr<Entity> entity);
+    virtual bool canDestroySpecial(const BlockState* state);
+    virtual bool interactEnemy(not_null_ptr<ItemInstance> itemInstance, std::shared_ptr<Player> user,
+                               std::shared_ptr<LivingEntity> ent, InteractionHand::EInteractionHand);
     virtual bool isHandEquipped();
     virtual bool isMirroredArt();
-    virtual int getDescriptionId(int);
-    virtual int getDescriptionId(not_null_ptr<ItemInstance>);
+    virtual int getDescriptionId(int auxValue);
+    virtual int getDescriptionId(not_null_ptr<ItemInstance> itemInstance);
     virtual int getUseDescriptionId();
-    virtual int getUseDescriptionId(not_null_ptr<ItemInstance>);
+    virtual int getUseDescriptionId(not_null_ptr<ItemInstance> itemInstance);
     virtual bool shouldOverrideMultiplayerNBT();
-    virtual int getColor(not_null_ptr<ItemInstance>, int);
-    virtual void inventoryTick(not_null_ptr<ItemInstance>, Level*, std::shared_ptr<Entity>, int, bool);
-    virtual void onCraftedBy(not_null_ptr<ItemInstance>, Level*, std::shared_ptr<Player>);
+    virtual int getColor(not_null_ptr<ItemInstance> itemInstance,
+                         int auxValue);  // not sure about auxValue, pure guess
+    virtual void inventoryTick(not_null_ptr<ItemInstance> itemInstance, Level* level,
+                               std::shared_ptr<Entity> ent, int slot, bool inHand);
+    virtual void onCraftedBy(not_null_ptr<ItemInstance> itemInstance, Level*, std::shared_ptr<Player> player);
     virtual bool isComplex();
-    virtual int getUseAnimation(not_null_ptr<ItemInstance>);
-    virtual int getUseDuration(not_null_ptr<ItemInstance>);
-    virtual void releaseUsing(not_null_ptr<ItemInstance>, Level*, std::shared_ptr<LivingEntity>, int);
-    virtual void appendHoverText(not_null_ptr<ItemInstance>, std::shared_ptr<Player>, void* htmlString, bool);
-    virtual std::wstring getName(not_null_ptr<ItemInstance>);
-    virtual bool isFoil(not_null_ptr<ItemInstance>);
-    virtual void getRarity(not_null_ptr<ItemInstance>);
-    virtual bool isEnchantable(not_null_ptr<ItemInstance>);
+    virtual int getUseAnimation(not_null_ptr<ItemInstance> itemInstance);
+    virtual int getUseDuration(not_null_ptr<ItemInstance> itemInstance);
+    virtual void releaseUsing(not_null_ptr<ItemInstance> itemInstance, Level* level,
+                              std::shared_ptr<LivingEntity> livingEnt, int remainingTicks);
+    virtual void appendHoverText(not_null_ptr<ItemInstance> itemInstance, std::shared_ptr<Player> player,
+                                 void* htmlString, bool);
+    virtual std::wstring getName(not_null_ptr<ItemInstance> itemInstance);
+    virtual bool isFoil(not_null_ptr<ItemInstance> itemInstance);
+    virtual void getRarity(not_null_ptr<ItemInstance> itemInstance);
+    virtual bool isEnchantable(not_null_ptr<ItemInstance> itemInstance);
     virtual int getEnchantmentValue();
     virtual bool mayBePlacedInAdventureMode();
     virtual bool isValidRepairItem(not_null_ptr<ItemInstance> source, not_null_ptr<ItemInstance> repairItem);
-    virtual void getDefaultAttributeModifiers(const EquipmentSlot*);
-    virtual void registerIcons(IconRegister*);
+    virtual std::unordered_map<eATTRIBUTE_ID, AttributeModifier*>*
+    getDefaultAttributeModifiers(const EquipmentSlot* eqpSlot);
+    virtual void registerIcons(IconRegister* iconRegister);
     virtual bool hasMultipleSpriteLayers();
-    virtual TextureAtlasSprite* getLayerIcon(int, int, not_null_ptr<ItemInstance>);
+    virtual TextureAtlasSprite* getLayerIcon(int, int, not_null_ptr<ItemInstance> itemInstance);
     virtual int getIconType();
-    virtual TextureAtlasSprite* getIcon(int);
-    virtual TextureAtlasSprite* getIcon(not_null_ptr<ItemInstance>);
+    virtual TextureAtlasSprite* getIcon(int auxValue);
+    virtual TextureAtlasSprite* getIcon(not_null_ptr<ItemInstance> itemInstance);
     virtual int GetArmorType();
     virtual int GetOverrideCount();
     virtual int GetOverrideCountColour();
-    virtual TextureAtlasSprite* GetOverrideCountIcon(not_null_ptr<ItemInstance>);
+    virtual TextureAtlasSprite* GetOverrideCountIcon(not_null_ptr<ItemInstance> itemInstance);
 
     void* qword8;
     SimpleRegistry<ResourceLocation, const ItemPropertyFunction*>* mSimpleRegistry;

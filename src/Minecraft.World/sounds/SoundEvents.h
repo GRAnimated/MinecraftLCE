@@ -8,4 +8,5 @@ public:
     static SoundEvent* FIRE_AMBIENT;
     static SoundEvent* ENCHANT_THORNS_HIT;
     static SoundEvent* RANDOM_CLICK;
+    static SoundEvent* SHOVEL_FLATTEN;
 };

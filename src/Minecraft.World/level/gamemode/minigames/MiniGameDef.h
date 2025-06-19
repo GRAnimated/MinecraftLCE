@@ -10,4 +10,5 @@ public:
 
     bool HasFeatureDirectionalFireworks() const;
     int GetLivesPerRound() const;
+    double getBaseDamage(int, double) const;
 };

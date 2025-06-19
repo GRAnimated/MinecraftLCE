@@ -1,4 +1,5 @@
 #include "types.h"
+#include "Minecraft.Client/renderer/texture/IconRegister.h"
 #include "Minecraft.Client/resources/ResourceLocation.h"
 #include "Minecraft.World/entity/player/Player.h"
 #include "Minecraft.World/item/BlockItem.h"
@@ -7,6 +8,7 @@
 #include "Minecraft.World/level/block/Block.h"
 #include "Minecraft.World/level/block/Blocks.h"
 #include <memory>
+#include <unordered_map>
 
 #include "Minecraft.Client/resources/MappedRegistry.h"
 
@@ -72,9 +74,9 @@ int Item::GetUseTooltip(const ItemToolTipDataHolder&) {
     return -1;
 }
 
-bool Item::useOn(std::shared_ptr<Player>, Level*, const BlockPos&, InteractionHand::EInteractionHand,
-                 const Direction*, float, float, float, bool) {
-    return true;
+ActionResultType Item::useOn(std::shared_ptr<Player>, Level*, const BlockPos&,
+                             InteractionHand::EInteractionHand, const Direction*, float, float, float, bool) {
+    return ActionResultType::PASS;
 }
 
 float Item::getDestroySpeed(not_null_ptr<ItemInstance>, BlockState*) {
@@ -196,6 +198,15 @@ bool Item::mayBePlacedInAdventureMode() {
 
 bool Item::isValidRepairItem(not_null_ptr<ItemInstance>, not_null_ptr<ItemInstance>) {
     return false;
+}
+
+std::unordered_map<eATTRIBUTE_ID, AttributeModifier*>*
+Item::getDefaultAttributeModifiers(const EquipmentSlot*) {
+    return new std::unordered_map<eATTRIBUTE_ID, AttributeModifier*>();
+}
+
+void Item::registerIcons(IconRegister* iconRegister) {
+    this->mDefaultIcon = iconRegister->registerIcon(this->mIconName);
 }
 
 bool Item::hasMultipleSpriteLayers() {
