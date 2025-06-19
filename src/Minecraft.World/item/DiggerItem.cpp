@@ -1,7 +1,12 @@
+#include "Minecraft.Client/Minecraft.h"
+#include "Minecraft.World/inventory/EquipmentSlot.h"
+#include "Minecraft.World/item/Attribute.h"
 #include "Minecraft.World/item/DiggerItem.h"
+#include "Minecraft.World/item/Item.h"
 #include "Minecraft.World/item/ItemInstance.h"
 #include "Minecraft.World/level/Level.h"
 #include "Minecraft.World/level/block/Block.h"
+#include "Minecraft.World/level/gamemode/minigames/MiniGameDef.h"
 
 DiggerItem::DiggerItem(Item::Tier const* tier, arrayWithLength<Block*> blocks) : mTier(tier) {
     this->_init(0, 0, blocks);
@@ -33,9 +38,9 @@ float DiggerItem::getDestroySpeed(not_null_ptr<ItemInstance> item, BlockState* s
     return 1.0f;
 }
 
-bool DiggerItem::hurtEnemy(not_null_ptr<ItemInstance> item, std::shared_ptr<LivingEntity> attacker,
-                           std::shared_ptr<LivingEntity> victim) {
-    item->hurtAndBreak(2, victim);
+bool DiggerItem::hurtEnemy(not_null_ptr<ItemInstance> item, std::shared_ptr<LivingEntity> victim,
+                           std::shared_ptr<LivingEntity> attacker) {
+    item->hurtAndBreak(2, attacker);
     return true;
 }
 
@@ -59,5 +64,23 @@ bool DiggerItem::isValidRepairItem(not_null_ptr<ItemInstance> source, not_null_p
     return this->mTier->getTierItem() == repairItem->getItem() || Item::isValidRepairItem(source, repairItem);
 }
 
-// TODO: maybe not today, implement it later, after REing AttributeModifier
-// void DiggerItem::getDefaultAttributeModifiers(const EquipmentSlot*) {}
+std::unordered_map<eATTRIBUTE_ID, AttributeModifier*>*
+DiggerItem::getDefaultAttributeModifiers(const EquipmentSlot* eqpSlot) {
+    std::unordered_map<eATTRIBUTE_ID, AttributeModifier*>* map = Item::getDefaultAttributeModifiers(eqpSlot);
+
+    // that's very ugly, but couldn't match it any other way
+    double v6 = this->mAttackDamage;
+    v6 = Minecraft::InMiniGame(NORMAL_WORLD, true) ?
+             Minecraft::GetInstance()->GetMiniGame()->getBaseDamage(this->getId(), this->mAttackDamage) :
+             v6;
+    //
+
+    if (eqpSlot == EquipmentSlot::MAINHAND) {
+        (*map)[(eATTRIBUTE_ID)RangedAttribute::ATTACK_DAMAGE->getId()]
+            = new AttributeModifier(BASE_ATTACK_DAMAGE, v6, 0);
+
+        (*map)[(eATTRIBUTE_ID)RangedAttribute::ATTACK_SPEED->getId()]
+            = new AttributeModifier(BASE_ATTACK_SPEED, this->mAttackSpeed, 0);
+    }
+    return map;
+}

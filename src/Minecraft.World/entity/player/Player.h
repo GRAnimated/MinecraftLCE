@@ -161,7 +161,7 @@ public:
     virtual void onEnchantmentPerformed(int);
     virtual void giveExperienceLevels(int);
     virtual void mayBuild();
-    virtual void mayUseItemAt(const BlockPos&, const Direction*, not_null_ptr<ItemInstance>);
+    virtual bool mayUseItemAt(const BlockPos&, const Direction*, not_null_ptr<ItemInstance>);
     virtual void onUpdateAbilities();
     virtual void setGameMode(GameType const*);
     virtual bool isSpectator() = 0;
