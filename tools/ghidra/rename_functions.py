@@ -36,7 +36,7 @@ def delete_multichunk_funcs():
 delete_multichunk_funcs()
 
 def can_overwrite_name(new_name: str):
-    if new_name == "" or new_name.startswith(("FUN_", "thunk_FUN_")):
+    if new_name == "":
         return False
 
     return True # we have to allow wii u symbols
