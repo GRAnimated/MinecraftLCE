@@ -1,7 +1,8 @@
 # Decompilers
 
 ## IDA Pro
-*TODO: Add IDA instructions*
+1. Install `nxo64.py` from `reswitched/loaders`. Instructions are available [here](https://github.com/reswitched/loaders?tab=readme-ov-file#installation)
+2. Open `ida64.exe` and disassemble `main.nso`.
 
 ## Ghidra
 ### Setup Instructions
