@@ -10,11 +10,11 @@ class DataInputStream : public InputStream, public DataInput {
 public:
     DataInputStream(InputStream*);
     virtual ~DataInputStream();
-    virtual unsigned int read();
-    virtual void read(arrayWithLength<unsigned char>);
-    virtual void read(arrayWithLength<unsigned char>, unsigned int, unsigned int);
+    virtual int read();
+    virtual int read(arrayWithLength<unsigned char>);
+    virtual int read(arrayWithLength<unsigned char>, unsigned int, unsigned int);
     virtual void close();
-    virtual void skip(long long);
+    virtual long long skip(long long);
     virtual bool readBoolean();
     virtual unsigned char readByte();
     virtual unsigned char readUnsignedByte();

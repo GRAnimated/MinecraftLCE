@@ -40,6 +40,9 @@ int XMemCreateDecompressionContext(_XMEMCODEC_TYPE type, const void* param_2, un
 void XMemDestroyCompressionContext(void* ctxt);
 void XMemDestroyDecompressionContext(void* ctxt);
 
+// the last argument is 32 bit on Wii U Edition, but 64 bit on Switch, so I bet it's a size_t
+void XMemCpy(void* buf, const void* data, size_t size);
+
 unsigned int TlsAlloc();
 int TlsFree(unsigned int unk);
 void* TlsGetValue(unsigned int index);

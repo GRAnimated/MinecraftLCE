@@ -6,7 +6,9 @@
 
 class ByteArrayOutputStream : public OutputStream {
 public:
+    ByteArrayOutputStream();
     ByteArrayOutputStream(unsigned int);
+
     virtual ~ByteArrayOutputStream() override;
     virtual void write(unsigned int) override;
     virtual void write(arrayWithLength<unsigned char>) override;

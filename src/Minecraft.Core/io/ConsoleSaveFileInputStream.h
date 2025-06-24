@@ -7,11 +7,11 @@ class FileEntry;
 
 class ConsoleSaveFileInputStream : public InputStream {
 public:
-    virtual unsigned int read() override;
-    virtual void read(arrayWithLength<unsigned char>) override;
-    virtual void read(arrayWithLength<unsigned char>, unsigned int, unsigned int) override;
+    virtual int read() override;
+    virtual int read(arrayWithLength<unsigned char>) override;
+    virtual int read(arrayWithLength<unsigned char>, unsigned int, unsigned int) override;
     virtual void close() override;
-    virtual void skip(long long) override;
+    virtual long long skip(long long) override;
 
     ConsoleSaveFile* mConsoleSaveFile;
     FileEntry* mFileEntry;

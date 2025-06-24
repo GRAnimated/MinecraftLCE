@@ -5,6 +5,9 @@
 template <typename T>
 class arrayWithLength {
 public:
+    T* data;
+    unsigned int length;
+
     arrayWithLength() {
         this->data = nullptr;
         this->length = 0;
@@ -25,14 +28,59 @@ public:
         this->length = size;
     }
 
-    // T& get(unsigned int i) { return data[i]; }//
-
     T& operator[](unsigned int i) { return data[i]; }
 
-    // explicit operator bool() const { return !data->empty(); }
+    void resize(unsigned int newSize) {
+        if (length == newSize) {
+            return;
+        }
+        T* dataBuffer = createDataBuffer(newSize);
+        if (data) {
+            int len;
+            if (length >= newSize)
+                len = newSize;
+            else
+                len = length;
+            copy(dataBuffer, data, len);
 
-    T* data;
-    unsigned int length;
+            delete[] data;
+        }
+
+        data = dataBuffer;
+        length = newSize;
+    }
+
+    // NON_MATCHING
+    static void copy(T* dest, T* src, unsigned int size) {
+        if (size) {
+            unsigned int i = 0;
+            for (; (size & 3) != i; ++i) {
+                dest[i] = src[i];
+            }
+            if (size - 1 >= 3) {
+                unsigned int remaining = size - i;
+                unsigned int offset = i + 3;
+                T* destPtr = dest + offset;
+                T* srcPtr = src + offset;
+                do {
+                    *(destPtr - 3) = *(srcPtr - 3);
+                    *(destPtr - 2) = *(srcPtr - 2);
+                    *(destPtr - 1) = *(srcPtr - 1);
+                    *destPtr = *srcPtr;
+                    srcPtr += 4;
+                    remaining -= 4;
+                    destPtr += 4;
+                } while (remaining);
+            }
+        }
+    }
+
+    // maybe this should be a constructor?
+    static arrayWithLength<T> createFromOther(arrayWithLength<T> other) {
+        arrayWithLength<unsigned char> out(other.length, true);
+        out.copy(out.data, other.data, other.length);
+        return out;
+    }
 
 private:
     static T* createDataBuffer(unsigned int size) {

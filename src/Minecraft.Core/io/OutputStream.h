@@ -4,9 +4,9 @@
 
 class OutputStream {
 public:
-    OutputStream();
+    OutputStream() {}
 
-    virtual ~OutputStream();
+    virtual ~OutputStream() {}
     virtual void write(unsigned int) = 0;
     virtual void write(arrayWithLength<unsigned char>) = 0;
     virtual void write(arrayWithLength<unsigned char>, unsigned int, unsigned int) = 0;

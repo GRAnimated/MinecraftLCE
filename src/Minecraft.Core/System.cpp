@@ -9,7 +9,7 @@ void InitializeCriticalSection(nn::os::MutexType* mutex) {
 }
 
 long System::currentRealTimeMillis() {
-    nn::time::PosixTime t;  // they left uninitialized
+    nn::time::PosixTime t;
     nn::time::StandardUserSystemClock::GetCurrentTime(&t);
     return t.time;
 }
@@ -61,7 +61,6 @@ void System::ReverseULONG(unsigned int* v) {
     *(reinterpret_cast<unsigned char*>(v) + 3) = lb;
 }
 
-
 // NON_MATCHING | Score 260 (lower is better)
 // Not sure but this (along with the others) probably uses some compiler intrinsic
 // I had to arrange this using odd then even
@@ -82,5 +81,3 @@ void System::ReverseCHAR16A(char16_t* str, int len) {
     for (int i = 0; i < len; i++)
         System::ReverseUSHORT(reinterpret_cast<unsigned short*>(str + i));
 }
-
-
