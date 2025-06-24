@@ -66,3 +66,5 @@ add_definitions(-D SAFETY_CHECKS)
 add_subdirectory(lib/zlib)
 target_include_directories(mcswitch PRIVATE ${CMAKE_CURRENT_BINARY_DIR}/lib/zlib) # for zconf.h
 target_link_libraries(mcswitch PRIVATE zlibstatic)
+
+# add_subdirectory(lib/libpng)
