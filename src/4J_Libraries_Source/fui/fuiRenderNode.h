@@ -1,7 +1,8 @@
 #pragma once
 
-#include "4J_Libraries_Source/fui/node/FJ_FuiNode.h"
-class fuiFile;
+#include "fuiFile.h";
+
+class FJ_FuiNodeStage;
 class fuiMatrix;
 class fuiObject;
 class fuiRect;

@@ -8,11 +8,22 @@
 
 class fuiRenderNode;
 class fuiBitmapFont;
-struct fuiRect {
+class fuiRect {
     float minX;
     float maxX;
     float minY;
     float maxY;
+
+public:
+    // getHeight?
+    float _7100404428() {
+        return this->maxY - this->minY;
+    }
+
+    // getWidth?
+    float _710040CCA0() {
+        return this->maxX - this->minX;
+    }
 };
 struct fuiRGBA {
     int color;  // RGBA
@@ -82,6 +93,7 @@ struct fuiHeader {
     int field_7C;
     int fontNameCount;
     int importAssetCount;
+    int mUnk;
     fuiRect stageSize;
     int index;
 };
