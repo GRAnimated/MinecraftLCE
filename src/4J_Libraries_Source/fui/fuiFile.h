@@ -9,19 +9,19 @@
 class fuiRenderNode;
 class fuiBitmapFont;
 class fuiRect {
+public:
     float minX;
     float maxX;
     float minY;
     float maxY;
 
-public:
     // getHeight?
-    float _7100404428() {
+    float getHeight() {
         return this->maxY - this->minY;
     }
 
     // getWidth?
-    float _710040CCA0() {
+    float getWidth() {
         return this->maxX - this->minX;
     }
 };

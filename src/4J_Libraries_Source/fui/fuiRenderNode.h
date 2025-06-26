@@ -8,7 +8,14 @@ class fuiMatrix;
 class fuiObject;
 class fuiRect;
 class fuiRGBA;
-enum eFuiObjectType {};
+enum eFuiObjectType {
+    RENDER_NODE_STAGE = 0
+};
+
+// weird flag thing
+constexpr uint32_t FLAG_CTOR_ENABLED = 0x1;
+constexpr uint32_t FLAG_NODE_VISIBLE = 0x8;
+constexpr const char* DEFAULT_PATH = "?";
 
 class fuiRenderNode {
 public:
@@ -24,6 +31,7 @@ public:
     virtual fuiRenderNode* findNode(const char*);
     virtual fuiRenderNode* getNodeFromPath(const char*);
     virtual void setVisibility(bool);
+    bool isVisible();
     virtual void setX(float);
     virtual void setY(float);
     virtual void setWidth(float);
@@ -36,7 +44,7 @@ public:
     float getX();
     float getY();
     void disableCtor();
-    void setAlpha(float);
+    void setAlpha(float a);
     void progogateBounds(); // english 100
 
     void setScaleX(float sX);
@@ -49,7 +57,7 @@ public:
 
     fuiRenderNodeTimeline *asTimeline();
 
-    int dword_8;
+    int mFlags;
     bool byte_c;
     bool byte_d;
     unsigned int dword_10;
@@ -65,9 +73,8 @@ public:
     void* qword_70;
     int dword78;
     float mAlpha;
-    void* qword_80;
-    void* qword_88;
-    char byte_90[64];
+    fuiRect mRect;
+    char mPath[64];
     void* qword_d0;
     void* qword_d8;
     int dword_e0;
@@ -75,5 +82,4 @@ public:
     fuiRenderNode* mStage;
     fuiRenderNodeTimeline* mTimeline;
     FJ_FuiNodeStage* mFuiNodeStage;
-    void* field_100;
 };
