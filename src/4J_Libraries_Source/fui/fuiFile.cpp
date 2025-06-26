@@ -17,9 +17,9 @@ void fuiMatrix::mul(const fuiMatrix& lhs, const fuiMatrix& rhs, fuiMatrix& out) 
 }
 
 float fuiFile::getStageWidth() {
-    return this->mHeader.stageSize._710040CCA0();
+    return this->mHeader.stageSize.getWidth();
 }
 
 float fuiFile::getStageHeight() {
-    return this->mHeader.stageSize._7100404428();
+    return this->mHeader.stageSize.getHeight();
 }
