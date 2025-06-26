@@ -2,6 +2,7 @@
 
 #include "fuiFile.h";
 
+class fuiRenderNodeTimeline;
 class FJ_FuiNodeStage;
 class fuiMatrix;
 class fuiObject;
@@ -34,9 +35,19 @@ public:
 
     float getX();
     float getY();
+    void disableCtor();
     void setAlpha(float);
+    void progogateBounds(); // english 100
+
+    void setScaleX(float sX);
+    void setScaleY(float sY);
+
+    float getScaleX();
+    float getScaleY();
 
     fuiRenderNode* getStage() { return mStage; }
+
+    fuiRenderNodeTimeline *asTimeline();
 
     int dword_8;
     bool byte_c;
@@ -45,13 +56,9 @@ public:
     int dword_14;
     fuiObject* field_18;
     eFuiObjectType field_20;
-    float float_24;
-    float float_28;
-    float float_2c;
-    float float_30;
-    float mX;
-    float mY;
-    char gap_3C[28];
+    fuiMatrix mMatrix;
+    fuiMatrix mMatrix2;
+    int unk;
     fuiFile* field_58;
     void* qword_60;
     void* qword_68;
@@ -66,7 +73,7 @@ public:
     int dword_e0;
     bool byte_e4;
     fuiRenderNode* mStage;
-    fuiRenderNode* mTimeline;
+    fuiRenderNodeTimeline* mTimeline;
     FJ_FuiNodeStage* mFuiNodeStage;
     void* field_100;
 };

@@ -29,12 +29,23 @@ struct fuiRGBA {
     int color;  // RGBA
 };
 struct fuiMatrix {
-    float scaleX;
-    float scaleY;
-    float rotateSkew0;
-    float rotateSkew1;
-    float posX;
-    float posY;
+    float mScaleX;
+    float mScaleY;
+    float mRotSkewX;
+    float mRotSkewY;
+    float mPosX;
+    float mPosY;
+
+    // spent an hour trying to figure out what this was
+    // finally thought of it being a built in C++ operator... which looks good to me.
+    fuiMatrix operator*(const fuiMatrix &rhs) const {
+        fuiMatrix out = {};
+        mul(*this, rhs, out);
+
+        return out;
+    }
+
+    static void mul(const fuiMatrix &lhs, const fuiMatrix &rhs, fuiMatrix &out);
 };
 struct fuiColorTransform {
     float redMultTerm;
