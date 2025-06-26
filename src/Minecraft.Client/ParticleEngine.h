@@ -5,7 +5,7 @@ class Textures;
 
 class ParticleEngine {
 public:
-    ParticleEngine(Level* lvl, Textures* textures);
+    ParticleEngine(Level* level, Textures* textures);
 
-    unsigned char padding[0x250];
+    unsigned char size[0x250];
 };
