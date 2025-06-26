@@ -46,6 +46,14 @@ int FJ_FuiNode::getType() {
     return 0;
 }
 
+void FJ_FuiNode::setScaleX(float sX) {
+    this->mRenderNode->setScaleX(sX);
+}
+
+void FJ_FuiNode::setScaleY(float sY) {
+    this->mRenderNode->setScaleY(sY);
+}
+
 int FJ_FuiNode::getTabIndex() {
     return mTabIndex;
 }
@@ -84,4 +92,8 @@ FJ_List_MenuButton* FJ_FuiNode::asFJ_List_MenuButton() {
 
 FJ_Button* FJ_FuiNode::asFJ_Button() {
     return dynamic_cast<FJ_Button*>(this);
+}
+
+bool FJ_FuiNode::isFJ_Document() {
+    return this->asFJ_Document() != nullptr;
 }

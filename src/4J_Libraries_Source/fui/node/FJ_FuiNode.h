@@ -28,6 +28,9 @@ public:
     virtual void setVisible(bool);
     virtual int getType();
 
+    void setScaleX(float sX);
+    void setScaleY(float sY);
+
     int getTabIndex();
     FJ_FuiNodeStage* getStage();
 
@@ -41,6 +44,8 @@ public:
     FJ_List_ListButtonPlayerList* asFJ_List_ListButtonPlayerList();
     FJ_Document* asFJ_Document();
     FJ_Button* asFJ_Button();
+
+    bool isFJ_Document();
 
     fuiRenderNode* mRenderNode;
     int mTabIndex;
