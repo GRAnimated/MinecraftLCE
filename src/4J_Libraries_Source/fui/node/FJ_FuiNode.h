@@ -1,6 +1,8 @@
 #pragma once
 
-#include "4J_Libraries_Source/fui/node/FJ_EventListener.h"
+#include "../event/FJ_EventListener.h"
+#include "../event/FJ_Event.h"
+#include "../fuiRenderNodeStage.h"
 #include <vector>
 
 class fuiRenderNode;
@@ -30,6 +32,7 @@ public:
     FJ_FuiNodeStage* getStage();
 
     void setCallbackScene(UIScene*);
+    void dispatchEvent(FJ_Event* event);
 
     FJ_Base* asFJ_Base();
     FJ_List* asFJ_List();
