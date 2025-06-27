@@ -1,6 +1,7 @@
 #pragma once
 
 #include "types.h"
+#include "fuiSymbol.h"
 #include "Minecraft.World/ArrayWithLength.h"
 
 // Most structs derived from
@@ -80,7 +81,6 @@ struct fuiReference {
 class fuiEdittext;
 class fuiBitmap;
 class fuiFontName;
-class fuiSymbol;
 class fuiImportAsset;
 class FJ_FuiNode;
 
@@ -136,7 +136,9 @@ class fuiFile {
 public:
     fuiFile();
     ~fuiFile();
-    void addDataRegion(uint, uint, uchar**, void (*)(void*));
+    // NOTE: HAD TO CHANGE THE SIGNATURE BECAUSE OF THE METHOD BEING DIFFERENT
+    // ORIG HAD A CALLBACK METHOD INSTEAD OF DATA
+    static uint64_t addDataRegion(uint a1, uint a2, uchar** ptr, uint64_t *callbackData);
     void load(arrayWithLength<uchar>, int);
     bool resolveReferences(fuiFile*);
     void dumpUnresolvedReferences();
@@ -145,7 +147,8 @@ public:
     void createNodeFromSymbol(char* const, fuiRenderNode*, int);
     // findNode - doesn't exist in switch edition
     // setVisible - doesn't exist in switch edition
-    void setCustomDrawCallback(void (*)(void*, const char*, fuiRect*), void*);
+
+    void setCustomDrawCallback(void (*)(void*, char const*, fuiRect*), void* node);
     float getStageWidth();
     float getStageHeight();
     void setIndex(int);

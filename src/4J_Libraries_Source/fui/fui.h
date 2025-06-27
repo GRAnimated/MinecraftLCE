@@ -6,13 +6,17 @@ class fuiBitmap;
 class fuiFile;
 class FJ_FuiNode;
 class FJ_EventListener;
+class fuiTextureManager;
+
+constexpr int FUI_RESOLUTION_1080 = 1;
+constexpr int FUI_RESOLUTION_720 = 0;
 
 class fui {
 public:
     static fui* sInstance;
 
     fui();
-    void setScreenSize(float, float);
+    void setScreenSize(float width, float height);
     fuiFile* load(arrayWithLength<unsigned char>, bool, int);
     void allocatePermanentFileIndex(int);
     void unloadScene(fuiFile*);
@@ -29,5 +33,14 @@ public:
     void removeEventListenerForNode(FJ_FuiNode*);
     void manageTexture(fuiFile*, fuiBitmap*);
     void removeManagedTexture(fuiFile*, fuiBitmap*);
-    void setFontIndirection(const char*, const char*);
+    void setFontIndirection(char const*, char const*);
+
+    char padding[659];
+    float mScreenWidth;
+    float mScreenHeight;
+    char padding2[0x128];
+    std::vector<FJ_EventListener> mEventListeners;
+    char padding4[0x68];
+    fuiTextureManager *mTextureManager;
+    int mResolution;
 };
