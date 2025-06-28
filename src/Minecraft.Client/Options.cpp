@@ -119,7 +119,7 @@ void Options::save() {
 }
 
 // NON_MATCHING: Unfinished
-void Options::getMessage(Option const* option) {
+void Options::getMessage(const Option* option) {
     Language* language = Language::getInstance();
     std::wstring captionId = option->getCaptionId();
     std::wstring element = language->getElement(captionId).append(L": ");

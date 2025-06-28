@@ -1,6 +1,5 @@
 #pragma once
 
-
 class DyeColor {
 public:
     static const DyeColor* WHITE;

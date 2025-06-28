@@ -4,19 +4,19 @@
 
 class Boxed {
 public:
-    Boxed(std::type_info const* typeInfo);
+    Boxed(const std::type_info* typeInfo);
     virtual ~Boxed();
 
-    virtual bool isA(std::type_info const* type) const { return mTypeInfo == type; }
+    virtual bool isA(const std::type_info* type) const { return mTypeInfo == type; }
     virtual bool isA(const std::type_info& type) const { return mTypeInfo == &type; }
     virtual unsigned int hashOf() const = 0;
-    virtual bool operator==(Boxed const* other) const = 0;
-    virtual bool operator==(Boxed* other) const { return operator==(static_cast<Boxed const*>(other)); }
-    virtual bool operator!=(Boxed const* other) const { return !operator==(other); }
-    virtual bool operator!=(Boxed* other) const { return !operator==(static_cast<Boxed const*>(other)); }
-    virtual void setValue(Boxed const* other) = 0;
+    virtual bool operator==(const Boxed* other) const = 0;
+    virtual bool operator==(Boxed* other) const { return operator==(static_cast<const Boxed*>(other)); }
+    virtual bool operator!=(const Boxed* other) const { return !operator==(other); }
+    virtual bool operator!=(Boxed* other) const { return !operator==(static_cast<const Boxed*>(other)); }
+    virtual void setValue(const Boxed* other) = 0;
     virtual std::wstring toString() const = 0;
 
 private:
-    std::type_info const* mTypeInfo;
+    const std::type_info* mTypeInfo;
 };

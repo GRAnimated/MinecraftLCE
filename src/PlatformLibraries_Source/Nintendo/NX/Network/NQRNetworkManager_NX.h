@@ -21,8 +21,8 @@ public:
     virtual void FriendRoomManagerGetCount() override;
     virtual void FriendRoomManagerGetRoomInfo(int, NQRNetworkManager::SessionSearchResult*) override;
     virtual void JoinRoom(NQRNetworkManager::SessionSearchResult*, int) override;
-    virtual void JoinRoom(unsigned int, int, NQRNetworkManager::PresenceSyncInfo const*) override;
-    virtual void JoinRoom(int, nn::friends::FriendPresence const*) override;
+    virtual void JoinRoom(unsigned int, int, const NQRNetworkManager::PresenceSyncInfo*) override;
+    virtual void JoinRoom(int, const nn::friends::FriendPresence*) override;
     virtual void FriendPresenceUpdatedRoomList() override;
     virtual void GetFriendRoomSearchResults(int*) override;
     virtual void GetExtDataForRoom(unsigned int, void*, void (*)(bool, void*), void*) override;
@@ -45,8 +45,8 @@ public:
     virtual void GetHostPlayer() override;
     virtual void SetPresenceDataStartHostingGame() override;
     virtual void GetJoiningReadyPercentage() override;
-    virtual void LocalDataSend(NQRNetworkPlayer*, NQRNetworkPlayer*, void const*, unsigned int) override;
-    virtual void RemoteDataSend(NQRNetworkPlayer*, NQRNetworkPlayer*, void const*, unsigned int) override;
+    virtual void LocalDataSend(NQRNetworkPlayer*, NQRNetworkPlayer*, const void*, unsigned int) override;
+    virtual void RemoteDataSend(NQRNetworkPlayer*, NQRNetworkPlayer*, const void*, unsigned int) override;
     virtual void GetSessionIndex(NQRNetworkPlayer*) override;
     virtual void TryToConnectOnline(int (*)(void*, bool, int), void*, bool) override;
     virtual void isAdhocConnected() override;

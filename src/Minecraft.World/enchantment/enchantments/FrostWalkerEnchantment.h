@@ -8,6 +8,6 @@ public:
     int getMaxLevel() override;
     int getMinCost(int) override;
     int getMaxCost(int) override;
-    bool checkCompatibility(Enchantment const*) override;
+    bool checkCompatibility(const Enchantment*) override;
     bool isTreasureOnly() override;
 };

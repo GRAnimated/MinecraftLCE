@@ -5,8 +5,8 @@
 
 class DiggerItem : public Item {
 public:
-    DiggerItem(Item::Tier const* tier, arrayWithLength<Block*> blocks);
-    DiggerItem(float attackDamage, float attackSpeed, Item::Tier const* tier, arrayWithLength<Block*> blocks);
+    DiggerItem(const Item::Tier* tier, arrayWithLength<Block*> blocks);
+    DiggerItem(float attackDamage, float attackSpeed, const Item::Tier* tier, arrayWithLength<Block*> blocks);
 
     void _init(float attackDamage, float attackSpeed, arrayWithLength<Block*> blocks);
 

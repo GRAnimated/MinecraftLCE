@@ -30,8 +30,8 @@ public:
 
     virtual void registerGoals();
     virtual void createNavigation(Level*);
-    virtual void getPathfindingMalus(BlockPathTypes const*);
-    virtual void setPathfindingMalus(BlockPathTypes const*, float);
+    virtual void getPathfindingMalus(const BlockPathTypes*);
+    virtual void setPathfindingMalus(const BlockPathTypes*, float);
     virtual void createBodyControl();
     virtual void getLookControl();
     virtual void getMoveControl();
@@ -69,17 +69,17 @@ public:
     virtual void finalizeMobSpawn(const DifficultyInstance&, MobGroupData*, const std::wstring&);
     virtual void finalizeSpawnEggSpawn(int);
     virtual void canBeControlledByRider();
-    virtual void setDropChance(EquipmentSlot const*, float);
+    virtual void setDropChance(const EquipmentSlot*, float);
     virtual void canPickUpLoot();
     virtual void setCanPickUpLoot(bool);
     virtual bool isPersistenceRequired();
-    virtual void mobInteract(std::shared_ptr<Player> const&, InteractionHand::EInteractionHand);
+    virtual void mobInteract(const std::shared_ptr<Player>&, InteractionHand::EInteractionHand);
     virtual void tickLeash();
     virtual void dropLeash(bool, bool);
-    virtual void canBeLeashed(std::shared_ptr<Player> const&);
+    virtual void canBeLeashed(const std::shared_ptr<Player>&);
     virtual void isLeashed();
     virtual void getLeashHolder();
-    virtual void isLeashedToPlayer(std::shared_ptr<Player> const&);
+    virtual void isLeashedToPlayer(const std::shared_ptr<Player>&);
     virtual void setLeashedTo(std::shared_ptr<Entity>, bool);
     virtual void restoreLeashFromSave();
     virtual void setNoAi(bool);

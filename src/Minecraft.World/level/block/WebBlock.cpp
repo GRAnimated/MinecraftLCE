@@ -46,7 +46,7 @@ int WebBlock::getRenderLayer() {
 }
 
 void WebBlock::entityInside(Level* level, const BlockPos& pos, const BlockState* blockState,
-                            std::shared_ptr<Entity> const& entity) {
+                            const std::shared_ptr<Entity>& entity) {
     entity->makeStuckInWeb();
     if (entity->GetType() == eFireworksRocketEntity) {
         if (Minecraft::GetInstance()->GetMiniGame()->HasFeatureDirectionalFireworks())

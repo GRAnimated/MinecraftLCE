@@ -24,7 +24,7 @@ public:
     virtual void SetJoypadStickAxisMap(int, uint, uint) = 0;
     virtual void SetJoypadStickTriggerMap(int, uint, uint) = 0;
     virtual void SetKeyRepeatRate(float, float) = 0;
-    virtual void SetDebugSequence(char const*, int (*)(void*), void*) = 0;
+    virtual void SetDebugSequence(const char*, int (*)(void*), void*) = 0;
     virtual void GetIdleSeconds(int) = 0;
     virtual void IsPadConnected(int) = 0;
     virtual void SetCircleCrossSwapped(bool) = 0;
@@ -46,7 +46,7 @@ public:
     virtual void GetTouchPadData(int, C_4JInput::ETouchType, bool) = 0;
     virtual void SetMenuDisplayed(int, bool) = 0;
     virtual void func_7100790580(void) = 0;
-    virtual void RequestKeyboard(wchar_t const*, wchar_t const*, uint, uint, int (*)(void*, bool), void*,
+    virtual void RequestKeyboard(const wchar_t*, const wchar_t*, uint, uint, int (*)(void*, bool), void*,
                                  C_4JInput::EKeyboardMode)
         = 0;
     virtual void RequestErrorViewer(uint, uint, int (*)(void*), void*) = 0;
@@ -84,7 +84,7 @@ public:
     void SetJoypadStickAxisMap(int, uint, uint);
     void SetJoypadStickTriggerMap(int, uint, uint);
     void SetKeyRepeatRate(float, float);
-    void SetDebugSequence(char const*, int (*)(void*), void*);
+    void SetDebugSequence(const char*, int (*)(void*), void*);
     void GetIdleSeconds(int);
     void IsPadConnected(int);
     void SetCircleCrossSwapped(bool);
@@ -106,7 +106,7 @@ public:
     void GetTouchPadData(int, C_4JInput::ETouchType, bool);
     void SetMenuDisplayed(int, bool);
     void func_7100790580(void);
-    void RequestKeyboard(wchar_t const*, wchar_t const*, uint, uint, int (*)(void*, bool), void*,
+    void RequestKeyboard(const wchar_t*, const wchar_t*, uint, uint, int (*)(void*, bool), void*,
                          C_4JInput::EKeyboardMode);
     void RequestErrorViewer(uint, uint, int (*)(void*), void*);
     void RequestErrorViewer(uint, wchar_t*, wchar_t*, int (*)(void*), void*);

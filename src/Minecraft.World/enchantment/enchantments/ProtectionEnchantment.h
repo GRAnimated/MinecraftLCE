@@ -30,11 +30,11 @@ public:
     int getMaxLevel() override;
     int getMinCost(int) override;
     int getMaxCost(int) override;
-    int getDamageProtection(int, DamageSource const*) override;
-    bool checkCompatibility(Enchantment const*) override;
+    int getDamageProtection(int, const DamageSource*) override;
+    bool checkCompatibility(const Enchantment*) override;
     int getDescriptionId() override;
 
-    static int getFireAfterDampener(std::shared_ptr<LivingEntity> const&, int);
+    static int getFireAfterDampener(const std::shared_ptr<LivingEntity>&, int);
 
     const Type* mType;
 };

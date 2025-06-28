@@ -21,6 +21,6 @@ int WaterWalkerEnchantment::getMaxCost(int a2) {
     return Enchantment::getMinCost(a2) + 15;
 }
 
-bool WaterWalkerEnchantment::checkCompatibility(Enchantment const* other) {
+bool WaterWalkerEnchantment::checkCompatibility(const Enchantment* other) {
     return Enchantment::checkCompatibility(other) && Enchantments::FROST_WALKER != other;
 }

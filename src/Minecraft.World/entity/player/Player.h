@@ -66,7 +66,7 @@ public:
     virtual void handleEntityEvent(unsigned char, int) override;
     virtual void getHandSlots() override;
     virtual void getArmorSlots() override;
-    virtual void setItemSlot(EquipmentSlot const*, not_null_ptr<ItemInstance>) override;
+    virtual void setItemSlot(const EquipmentSlot*, not_null_ptr<ItemInstance>) override;
     virtual bool isInvisibleTo(std::shared_ptr<Player>) override;
     virtual void getTeam() override;
     virtual void setInvisible(bool) override;
@@ -77,9 +77,9 @@ public:
     virtual bool isPushedByWater() override;
     virtual std::wstring getDisplayName() override;
     virtual void shouldShowName() override;
-    virtual void onSyncedDataUpdated(EntityDataAccessor_Base const*) override;
+    virtual void onSyncedDataUpdated(const EntityDataAccessor_Base*) override;
     virtual void getEyeHeight() override;
-    virtual void setSlot(int, not_null_ptr<ItemInstance> const&) override;
+    virtual void setSlot(int, const not_null_ptr<ItemInstance>&) override;
     virtual SoundSource::ESoundSource getSoundSource() override;
     virtual void canCreateParticles() override;
     virtual bool PositionLocked_4() override;
@@ -92,7 +92,7 @@ public:
     virtual void onChangedBlock(const BlockPos&) override;
     virtual void getExperienceReward(std::shared_ptr<Player>) override;
     virtual bool isAlwaysExperienceDropper() override;
-    virtual void blockUsingShield(std::shared_ptr<LivingEntity> const&) override;
+    virtual void blockUsingShield(const std::shared_ptr<LivingEntity>&) override;
     virtual void die(DamageSource*) override;
     virtual void getHurtSound(DamageSource*) override;
     virtual void getDeathSound() override;
@@ -100,7 +100,7 @@ public:
     virtual void hurtArmor(float) override;
     virtual void hurtCurrentlyUsedShield(float) override;
     virtual void actuallyHurt(DamageSource, float) override;
-    virtual not_null_ptr<ItemInstance> getItemSlot(EquipmentSlot const*) override;
+    virtual not_null_ptr<ItemInstance> getItemSlot(const EquipmentSlot*) override;
     virtual void getItemInHandIcon(not_null_ptr<ItemInstance>, int) override;
     virtual bool isImmobile() override;
     virtual void jumpFromGround() override;
@@ -163,7 +163,7 @@ public:
     virtual void mayBuild();
     virtual bool mayUseItemAt(const BlockPos&, const Direction*, not_null_ptr<ItemInstance>);
     virtual void onUpdateAbilities();
-    virtual void setGameMode(GameType const*);
+    virtual void setGameMode(const GameType*);
     virtual bool isSpectator() = 0;
     virtual void GetScoreboard();
     virtual void onCrafted(not_null_ptr<ItemInstance>);

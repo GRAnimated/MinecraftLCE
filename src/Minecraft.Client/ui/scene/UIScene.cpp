@@ -41,7 +41,7 @@ UIScene::UIScene(int padID, UILayer* uiLayer) {
     this->bool_28 = 0;
 }
 
-void UIScene::customDrawFui(void* a1, char const* a2, fuiRect* a3) {
+void UIScene::customDrawFui(void* a1, const char* a2, fuiRect* a3) {
     ((UIScene*)a1)->customDraw(a2, a3);
 }
 
@@ -263,7 +263,7 @@ void UIScene::render(int a2, int a3, C4JRender::eViewportType viewPortType) {
     }
 }
 
-void UIScene::customDraw(char const*, fuiRect*) {}
+void UIScene::customDraw(const char*, fuiRect*) {}
 void UIScene::handleInput(int, int, bool, bool, bool, bool&) {}
 void UIScene::handleDestroy() {}
 void UIScene::handlePreUnloadForReload() {}

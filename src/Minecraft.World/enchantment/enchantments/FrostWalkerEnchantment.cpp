@@ -25,6 +25,6 @@ bool FrostWalkerEnchantment::isTreasureOnly() {
     return true;
 }
 
-bool FrostWalkerEnchantment::checkCompatibility(Enchantment const* other) {
+bool FrostWalkerEnchantment::checkCompatibility(const Enchantment* other) {
     return Enchantment::checkCompatibility(other) && Enchantments::DEPTH_STRIDER != other;
 }

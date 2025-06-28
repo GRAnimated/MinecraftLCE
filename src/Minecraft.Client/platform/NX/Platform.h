@@ -19,9 +19,9 @@ void XPhysicalFree(void*);
 
 void MemSect(int);
 
-void PIXBeginNamedEvent(float, char const*, ...);
+void PIXBeginNamedEvent(float, const char*, ...);
 void PIXEndNamedEvent();
-void PIXSetMarkerDeprecated(float, char const*, ...);
+void PIXSetMarkerDeprecated(float, const char*, ...);
 
 // this should be in System.h shouldn't it????
 // or should stuff from System.h be moved here

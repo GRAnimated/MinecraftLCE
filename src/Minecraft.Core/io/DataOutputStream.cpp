@@ -38,13 +38,13 @@ void DataOutputStream::write(unsigned int value) {
 
 void DataOutputStream::writeUnsignedShort(unsigned short value) {
     this->mOutputStream->write((value >> 8) & 0xFF);
-    this->mOutputStream->write((value)&0xFF);
+    this->mOutputStream->write((value) & 0xFF);
     this->mSize += 2;
 }
 
 void DataOutputStream::writeShort(short value) {
     this->mOutputStream->write((value >> 8) & 0xFF);
-    this->mOutputStream->write((value)&0xFF);
+    this->mOutputStream->write((value) & 0xFF);
     this->mSize += 2;
 }
 

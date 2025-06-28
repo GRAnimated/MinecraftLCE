@@ -21,7 +21,7 @@ public:
     int getRenderLayer() override;
     bool mayPlace(Level* level, const BlockPos& pos) override;
 
-    virtual bool mayPlaceOn(BlockState const* blockState);
-    virtual void checkAlive(Level* level, const BlockPos& pos, BlockState const* blockState);
-    virtual bool canSurvive(Level* level, const BlockPos& pos, BlockState const* blockState);
+    virtual bool mayPlaceOn(const BlockState* blockState);
+    virtual void checkAlive(Level* level, const BlockPos& pos, const BlockState* blockState);
+    virtual bool canSurvive(Level* level, const BlockPos& pos, const BlockState* blockState);
 };

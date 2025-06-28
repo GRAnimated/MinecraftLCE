@@ -21,6 +21,6 @@ int ArrowInfiniteEnchantment::getMaxCost(int a2) {
     return 50;
 }
 
-bool ArrowInfiniteEnchantment::checkCompatibility(Enchantment const* other) {
+bool ArrowInfiniteEnchantment::checkCompatibility(const Enchantment* other) {
     return !dynamic_cast<const MendingEnchantment*>(other) && Enchantment::checkCompatibility(other);
 }

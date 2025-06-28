@@ -25,9 +25,9 @@ public:
     virtual int getMaxLevel();
     virtual int getMinCost(int);
     virtual int getMaxCost(int);
-    virtual int getDamageProtection(int, DamageSource const*);
+    virtual int getDamageProtection(int, const DamageSource*);
     virtual float getDamageBonus(int, MobType);
-    virtual bool checkCompatibility(Enchantment const*);
+    virtual bool checkCompatibility(const Enchantment*);
     virtual void setDescriptionId(int);
     virtual int getDescriptionId();
     virtual void getFullname(int);

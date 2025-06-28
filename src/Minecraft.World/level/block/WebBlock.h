@@ -15,7 +15,7 @@ public:
     Item* getResource(const BlockState* blockState, Random*, int) override;
     int getRenderLayer() override;
     void entityInside(Level* level, const BlockPos& pos, const BlockState* blockState,
-                      std::shared_ptr<Entity> const&) override;
+                      const std::shared_ptr<Entity>&) override;
     void playerDestroy(Level* level, std::shared_ptr<Player> player, const BlockPos& pos,
                        const BlockState* blockState, std::shared_ptr<BlockEntity>,
                        not_null_ptr<ItemInstance>) override;

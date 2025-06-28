@@ -52,18 +52,18 @@ int WaterlilyBlock::getColor(LevelSource* levelSource, const BlockPos& pos, cons
 }
 
 void WaterlilyBlock::entityInside(Level* level, const BlockPos& pos, const BlockState* blockState,
-                                  std::shared_ptr<Entity> const& entity) {
+                                  const std::shared_ptr<Entity>& entity) {
     Block::entityInside(level, pos, blockState, entity);
     if (entity->isType(eBoat)) {
         level->destroyBlock(pos, true);
     }
 }
 
-bool WaterlilyBlock::mayPlaceOn(BlockState const* blockState) {
+bool WaterlilyBlock::mayPlaceOn(const BlockState* blockState) {
     return blockState->getBlock() == Blocks::WATER || blockState->getMaterial() == Material::ICE;
 }
 
-bool WaterlilyBlock::canSurvive(Level* level, const BlockPos& pos, BlockState const* blockState) {
+bool WaterlilyBlock::canSurvive(Level* level, const BlockPos& pos, const BlockState* blockState) {
     if (pos.getY() < 0 || pos.getY() > 255)
         return false;
 

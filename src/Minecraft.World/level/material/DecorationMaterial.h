@@ -4,7 +4,7 @@
 
 class DecorationMaterial : public Material {
 public:
-    DecorationMaterial(MaterialColor const* color);
+    DecorationMaterial(const MaterialColor* color);
     ~DecorationMaterial() override;
     bool isSolid() override;
     bool blocksLight() override;

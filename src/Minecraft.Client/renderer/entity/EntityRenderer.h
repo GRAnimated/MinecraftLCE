@@ -24,14 +24,14 @@ public:
     virtual void shouldShowName(SharedEntity&);
     virtual void renderNameTags(SharedEntity&, double, double, double, const std::wstring&, double, int);
     virtual void bindTexture(SharedEntity&);
-    virtual void bindTexture(ResourceLocation const*);
+    virtual void bindTexture(const ResourceLocation*);
     virtual void bindTexture(const std::wstring&, int);
     virtual void bindTexture(const std::wstring&, const std::wstring&);
     virtual void getTextureLocation(SharedEntity&);
     virtual void renderFlame(SharedEntity&, double, double, double, float);
     virtual void renderShadow(SharedEntity&, double, double, double, float, float);
     virtual void getLevel();
-    virtual void renderBlockShadow(BlockState const*, double, double, double, const BlockPos&, float, float,
+    virtual void renderBlockShadow(const BlockState*, double, double, double, const BlockPos&, float, float,
                                    double, double, double);
     virtual void postRender(SharedEntity&, double, double, double, float, float, bool);
     virtual void getFont();

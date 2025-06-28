@@ -21,6 +21,6 @@ int UntouchingEnchantment::getMaxCost(int a2) {
     return Enchantment::getMinCost(a2) + 50;
 }
 
-bool UntouchingEnchantment::checkCompatibility(Enchantment const* other) {
+bool UntouchingEnchantment::checkCompatibility(const Enchantment* other) {
     return Enchantment::checkCompatibility(other) && Enchantments::FORTUNE != other;
 }

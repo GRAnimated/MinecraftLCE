@@ -16,24 +16,24 @@ public:
     void tesselateInWorldFixedTexture(const BlockState*, const BlockPos&, TextureAtlasSprite*);
     void clearLightOverride();
     void setShape(const AABB*);
-    void renderFaceUp(BlockState const*, double, double, double, TextureAtlasSprite*, float, float, float,
+    void renderFaceUp(const BlockState*, double, double, double, TextureAtlasSprite*, float, float, float,
                       float);
-    void renderFaceDown(BlockState const*, double, double, double, TextureAtlasSprite*, float, float, float,
+    void renderFaceDown(const BlockState*, double, double, double, TextureAtlasSprite*, float, float, float,
                         float);
-    void renderNorth(BlockState const*, double, double, double, TextureAtlasSprite*, float, float, float,
+    void renderNorth(const BlockState*, double, double, double, TextureAtlasSprite*, float, float, float,
                      float);
-    void renderSouth(BlockState const*, double, double, double, TextureAtlasSprite*, float, float, float,
+    void renderSouth(const BlockState*, double, double, double, TextureAtlasSprite*, float, float, float,
                      float);
-    void renderEast(BlockState const*, double, double, double, TextureAtlasSprite*, float, float, float,
+    void renderEast(const BlockState*, double, double, double, TextureAtlasSprite*, float, float, float,
                     float);
-    void renderWest(BlockState const*, double, double, double, TextureAtlasSprite*, float, float, float,
+    void renderWest(const BlockState*, double, double, double, TextureAtlasSprite*, float, float, float,
                     float);
 
     TextureAtlasSprite* getTexture(const BlockState*, const Direction*);
     bool hasFixedTexture();
 
-    void tesselateEndRodCenter(BlockState const*, float, float, float);
-    void tesselateCrossTexture(BlockState const*, float, float, float, float);
+    void tesselateEndRodCenter(const BlockState*, float, float, float);
+    void tesselateCrossTexture(const BlockState*, float, float, float, float);
 
     char gap0[8];
     LevelSource* mSource;

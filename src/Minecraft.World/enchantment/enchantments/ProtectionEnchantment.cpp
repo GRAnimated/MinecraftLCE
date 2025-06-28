@@ -34,7 +34,7 @@ int ProtectionEnchantment::getMinCost(int a2) {
 int ProtectionEnchantment::getMaxCost(int a2) {
     return this->getMinCost(a2) + this->mType->getLevelCost();
 }
-int ProtectionEnchantment::getDamageProtection(int level, DamageSource const* source) {
+int ProtectionEnchantment::getDamageProtection(int level, const DamageSource* source) {
     if (source->isBypassInvul()) {
         return 0;
     } else if (this->mType == ALL) {
@@ -49,7 +49,7 @@ int ProtectionEnchantment::getDamageProtection(int level, DamageSource const* so
         return this->mType == PROJECTILE && source->isProjectile() ? level * 2 : 0;
     }
 }
-bool ProtectionEnchantment::checkCompatibility(Enchantment const* other) {
+bool ProtectionEnchantment::checkCompatibility(const Enchantment* other) {
     const ProtectionEnchantment* otherCasted = dynamic_cast<const ProtectionEnchantment*>(other);
     if (otherCasted) {
         return otherCasted->mType != this->mType && (this->mType == FALL || otherCasted->mType == FALL);

@@ -25,7 +25,7 @@ public:
     int getResourceCount(Random*) override;
     int getRenderLayer() override;
     void entityInside(Level* level, const BlockPos& pos, const BlockState* blockState,
-                      std::shared_ptr<Entity> const&) override;
+                      const std::shared_ptr<Entity>&) override;
     not_null_ptr<ItemInstance> getCloneItemInstance(Level* level, const BlockPos& pos,
                                                     const BlockState* blockState) override;
     BlockStateDefinition* createBlockStateDefinition() override;

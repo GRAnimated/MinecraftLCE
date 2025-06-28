@@ -14,7 +14,7 @@ public:
 
     BlockPos(int x, int y, int z);
     BlockPos();
-    BlockPos(std::shared_ptr<Entity> const&);
+    BlockPos(const std::shared_ptr<Entity>&);
     BlockPos(Vec3*);
     BlockPos(const Vec3i&);
 

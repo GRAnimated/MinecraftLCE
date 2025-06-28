@@ -48,7 +48,7 @@ public:
     void split(int);
     void useOn(std::shared_ptr<Player>, Level*, const BlockPos&, InteractionHand::EInteractionHand,
                const Direction*, float, float, float, bool);
-    void getDestroySpeed(BlockState const*);
+    void getDestroySpeed(const BlockState*);
     void TestUse(Level*, std::shared_ptr<Player>, InteractionHand::EInteractionHand);
     void use(Level*, std::shared_ptr<Player>, InteractionHand::EInteractionHand);
     void finishUsingItem(Level*, std::shared_ptr<Player>);
@@ -67,19 +67,19 @@ public:
     void hurt(int, Random*);
     void hurtAndBreak(int, std::shared_ptr<LivingEntity>);
     void hurtEnemy(std::shared_ptr<LivingEntity>, std::shared_ptr<Player>);
-    void mineBlock(Level*, BlockState const*, const BlockPos&, std::shared_ptr<Player>);
-    void canDestroySpecial(BlockState const*);
+    void mineBlock(Level*, const BlockState*, const BlockPos&, std::shared_ptr<Player>);
+    void canDestroySpecial(const BlockState*);
     void interactEnemy(std::shared_ptr<Player>, std::shared_ptr<LivingEntity>,
                        InteractionHand::EInteractionHand);
     void copy_not_shared() const;
-    static void tagMatches(not_null_ptr<ItemInstance> const&, not_null_ptr<ItemInstance> const&);
-    void matches(not_null_ptr<ItemInstance> const&, bool);
-    static void matches(not_null_ptr<ItemInstance> const&, not_null_ptr<ItemInstance> const&, bool);
-    void sameItem(not_null_ptr<ItemInstance> const&);
-    static bool isSame(not_null_ptr<ItemInstance> const&, not_null_ptr<ItemInstance> const&);
-    void sameItemIgnoreDurability(not_null_ptr<ItemInstance> const&);
-    static bool isSameIgnoreDurability(not_null_ptr<ItemInstance> const&, not_null_ptr<ItemInstance> const&);
-    void sameItemWithTags(not_null_ptr<ItemInstance> const&, std::vector<std::wstring>*);
+    static void tagMatches(const not_null_ptr<ItemInstance>&, const not_null_ptr<ItemInstance>&);
+    void matches(const not_null_ptr<ItemInstance>&, bool);
+    static void matches(const not_null_ptr<ItemInstance>&, const not_null_ptr<ItemInstance>&, bool);
+    void sameItem(const not_null_ptr<ItemInstance>&);
+    static bool isSame(const not_null_ptr<ItemInstance>&, const not_null_ptr<ItemInstance>&);
+    void sameItemIgnoreDurability(const not_null_ptr<ItemInstance>&);
+    static bool isSameIgnoreDurability(const not_null_ptr<ItemInstance>&, const not_null_ptr<ItemInstance>&);
+    void sameItemWithTags(const not_null_ptr<ItemInstance>&, std::vector<std::wstring>*);
     void sameItem_not_shared(ItemInstance*);
     void getUseDescriptionId();
     void getDescriptionId(int);
@@ -104,7 +104,7 @@ public:
     void wasCreatedOnHost();
     void resetHoverName();
     void hasCustomHoverName();
-    void getAttributeModifiers(EquipmentSlot const*);
+    void getAttributeModifiers(const EquipmentSlot*);
     void getTooltipLines(std::shared_ptr<Player>, bool);
     void getHoverTextOnly(std::shared_ptr<Player>, bool);
     void hasFoil();

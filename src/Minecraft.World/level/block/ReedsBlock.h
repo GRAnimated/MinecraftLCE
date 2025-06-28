@@ -34,10 +34,10 @@ public:
     not_null_ptr<ItemInstance> getCloneItemInstance(Level* level, const BlockPos& pos,
                                                     const BlockState* blockState) override;
     BlockStateDefinition* createBlockStateDefinition() override;
-    bool isValidBonemealTarget(Level*, const BlockPos&, BlockState const*, bool) override;
-    bool isBonemealSuccess(Level*, Random*, const BlockPos&, BlockState const*) override;
-    void performBonemeal(Level*, Random*, const BlockPos&, BlockState const*) override;
+    bool isValidBonemealTarget(Level*, const BlockPos&, const BlockState*, bool) override;
+    bool isBonemealSuccess(Level*, Random*, const BlockPos&, const BlockState*) override;
+    void performBonemeal(Level*, Random*, const BlockPos&, const BlockState*) override;
 
     bool canSurvive(Level*, const BlockPos&);
-    bool checkAlive(Level*, const BlockPos&, BlockState const*);
+    bool checkAlive(Level*, const BlockPos&, const BlockState*);
 };

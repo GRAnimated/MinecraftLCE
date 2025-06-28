@@ -25,7 +25,7 @@ public:
     virtual void startDestroyBlock(const BlockPos&, const Direction*) = 0;
     virtual void tick() = 0;
     virtual void useItem(std::shared_ptr<Player>, Level*, InteractionHand::EInteractionHand, bool) = 0;
-    virtual void SetGameType(GameType const*) = 0;
+    virtual void SetGameType(const GameType*) = 0;
     virtual void GetGameType() = 0;
     virtual bool CanRecordStatsAndAchievements();
     virtual void MayDestroy(const BlockPos&);

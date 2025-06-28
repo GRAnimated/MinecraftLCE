@@ -149,7 +149,7 @@ void Entity::getSwimSplashSound() {}
 
 // void Entity::checkInsideBlocks() {}
 
-void Entity::onInsideBlock(BlockState const*) {}
+void Entity::onInsideBlock(const BlockState*) {}
 
 // void playStepSound(const BlockPos&, Block*) {}
 

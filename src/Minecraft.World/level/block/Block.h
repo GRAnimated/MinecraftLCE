@@ -65,7 +65,7 @@ public:
     virtual ~Block();
     virtual void DerivedInit();
     virtual void sendBlockData(uchar);
-    virtual void setSoundType(SoundType const*);
+    virtual void setSoundType(const SoundType*);
     virtual void setLightBlock(int);
     virtual Block* setLightEmission(float);
     virtual void setExplodeable(float);
@@ -151,7 +151,7 @@ public:
                            const Direction* direction);
     virtual bool isSignalSource(const BlockState* blockState);
     virtual void entityInside(Level* level, const BlockPos& pos, const BlockState* blockState,
-                              std::shared_ptr<Entity> const&);
+                              const std::shared_ptr<Entity>&);
     virtual int getDirectSignal(const BlockState* blockState, LevelSource* levelSource, const BlockPos& pos,
                                 const Direction* direction);
     virtual void playerDestroy(Level* level, std::shared_ptr<Player> player, const BlockPos& pos,

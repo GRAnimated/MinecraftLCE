@@ -19,7 +19,7 @@ public:
 
     void addIcon(bool terrain, int y, int x, const std::wstring& id);
     void addIconWithName(bool terrain, int y, int x, const std::wstring& id, const std::wstring& name);
-    void addIconSize(bool terrain, int y, int x, std::wstring const& id, int sizeX, int sizeY);
+    void addIconSize(bool terrain, int y, int x, const std::wstring& id, int sizeX, int sizeY);
     void stitch();
     void loadUVs();
 

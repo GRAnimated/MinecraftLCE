@@ -50,19 +50,19 @@ extern MappedRegistry<ResourceLocation, Enchantment*>* sEnchantmentRegistry;
 // keep in mind that arguments passed into as pointers may be wrong, I've checked them through but still some
 // missmatch could occur
 void Enchantment::staticCtor() {
-    arrayWithLength<EquipmentSlot const*> ARMOR_SLOTS(4, true);
+    arrayWithLength<const EquipmentSlot*> ARMOR_SLOTS(4, true);
     ARMOR_SLOTS[0] = EquipmentSlot::HEAD;
     ARMOR_SLOTS[1] = EquipmentSlot::CHEST;
     ARMOR_SLOTS[2] = EquipmentSlot::LEGS;
     ARMOR_SLOTS[3] = EquipmentSlot::FEET;
 
-    arrayWithLength<EquipmentSlot const*> MAIN_HAND_SLOT(1, true);
+    arrayWithLength<const EquipmentSlot*> MAIN_HAND_SLOT(1, true);
     MAIN_HAND_SLOT[0] = EquipmentSlot::MAINHAND;
 
-    arrayWithLength<EquipmentSlot const*> FEET_SLOT(1, true);
+    arrayWithLength<const EquipmentSlot*> FEET_SLOT(1, true);
     FEET_SLOT[0] = EquipmentSlot::FEET;
 
-    arrayWithLength<EquipmentSlot const*> ALL_SLOTS(6, true);
+    arrayWithLength<const EquipmentSlot*> ALL_SLOTS(6, true);
     ALL_SLOTS[0] = EquipmentSlot::MAINHAND;
     ALL_SLOTS[1] = EquipmentSlot::OFFHAND;
     ALL_SLOTS[2] = EquipmentSlot::FEET;
@@ -189,7 +189,7 @@ int Enchantment::getMaxCost(int a2) {
     return this->getMinCost(a2) + 5;
 }
 
-int Enchantment::getDamageProtection(int, DamageSource const*) {
+int Enchantment::getDamageProtection(int, const DamageSource*) {
     return 0;
 }
 
@@ -197,7 +197,7 @@ float Enchantment::getDamageBonus(int, MobType) {
     return 0.0f;
 }
 
-bool Enchantment::checkCompatibility(Enchantment const* a2) {
+bool Enchantment::checkCompatibility(const Enchantment* a2) {
     return this != a2;
 }
 

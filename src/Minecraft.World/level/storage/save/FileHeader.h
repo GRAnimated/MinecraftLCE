@@ -16,5 +16,5 @@ public:
     ByteOrder endian;
     short originalVersion;
     short version;
-    void *unk2;
+    void* unk2;
 };

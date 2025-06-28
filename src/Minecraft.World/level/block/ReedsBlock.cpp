@@ -13,7 +13,7 @@
 #include "Minecraft.Core/BlockPos.h"
 
 static std::atomic_bool hasCreatedDefinition;
-std::vector<Property const*> sAgeProperties;
+std::vector<const Property*> sAgeProperties;
 IntegerProperty* ReedsBlock::sAgeProperty = IntegerProperty::create(L"age", 0, 15);
 
 const f32 size = 6.0f / 16.0f;  // 0.375f

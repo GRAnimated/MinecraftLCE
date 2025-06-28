@@ -4,7 +4,7 @@
 class ArmorItem : public Item {
 public:
     class ArmorMaterial;
-    ArmorItem(ArmorMaterial const*, int, const EquipmentSlot*);
+    ArmorItem(const ArmorMaterial*, int, const EquipmentSlot*);
 
     const EquipmentSlot* mEquipmentSlot;
     int mDefenseForSlot;

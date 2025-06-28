@@ -552,7 +552,7 @@ public:
 
     MaterialColor(int, eMinecraftColour);
     int calculateRGBColor(int) const;
-    static void getDyeMaterial(DyeColor const*);
+    static void getDyeMaterial(const DyeColor*);
 
     eMinecraftColour mColor;
     int mID;

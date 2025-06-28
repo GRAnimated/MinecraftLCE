@@ -10,5 +10,5 @@ class TippableArrow : public Arrow {
 public:
     TippableArrow(Level*, std::shared_ptr<LivingEntity>);
 
-    void setEffectsFromItem(not_null_ptr<ItemInstance> const&);
+    void setEffectsFromItem(const not_null_ptr<ItemInstance>&);
 };

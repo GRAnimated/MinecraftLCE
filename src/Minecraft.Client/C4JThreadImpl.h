@@ -4,7 +4,7 @@
 
 class C4JThreadImpl : public C4JThread {
 public:
-    C4JThreadImpl(int (*)(void*), void*, char const*, int);
+    C4JThreadImpl(int (*)(void*), void*, const char*, int);
 
     static void SetMainThreadID();
 

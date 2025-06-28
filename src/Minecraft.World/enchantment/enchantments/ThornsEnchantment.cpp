@@ -27,7 +27,7 @@ int ThornsEnchantment::getMinCost(int a2) {
 int ThornsEnchantment::getMaxCost(int a2) {
     return Enchantment::getMinCost(a2) + 50;
 }
-bool ThornsEnchantment::canEnchant(not_null_ptr<ItemInstance> const& itemInstance) {
+bool ThornsEnchantment::canEnchant(const not_null_ptr<ItemInstance>& itemInstance) {
     return dynamic_cast<const ArmorItem*>(itemInstance->getItem()) ?
                true :
                Enchantment::canEnchant(not_null_ptr<ItemInstance>(itemInstance));

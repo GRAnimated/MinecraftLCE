@@ -75,7 +75,7 @@ public:
     virtual bool isGenerateMapFeatures();
     virtual void setGenerateMapFeatures(bool);
     virtual bool getSpawnBonusChest();
-    virtual void setGameType(GameType const*);
+    virtual void setGameType(const GameType*);
     virtual bool useNewSeaLevel();
     virtual bool getHasBeenInCreative();
     virtual void setHasBeenInCreative(bool);
@@ -91,13 +91,13 @@ public:
     virtual void setInitialized(bool);
     virtual GameRules* getGameRules();
     virtual const Difficulty* getDifficulty();
-    virtual void setDifficulty(Difficulty const*);
+    virtual void setDifficulty(const Difficulty*);
     virtual int getCloudHeight();
     virtual void setCloudHeight(int);
     virtual bool isDifficultyLocked();
     virtual void setDifficultyLocked(bool);
-    virtual void getDimensionData(DimensionType const*);
-    virtual void setDimensionData(DimensionType const*, CompoundTag*);
+    virtual void getDimensionData(const DimensionType*);
+    virtual void setDimensionData(const DimensionType*, CompoundTag*);
     virtual int getXZSize();
     virtual int getCurrentXZSize();
     virtual void func_710021221C();

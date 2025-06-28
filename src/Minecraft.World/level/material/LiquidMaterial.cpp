@@ -1,6 +1,6 @@
 #include "Minecraft.World/level/material/LiquidMaterial.h"
 
-LiquidMaterial::LiquidMaterial(MaterialColor const* color) : Material(color) {
+LiquidMaterial::LiquidMaterial(const MaterialColor* color) : Material(color) {
     replaceable()->destroyOnPush();
 }
 

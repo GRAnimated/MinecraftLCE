@@ -7,7 +7,7 @@ public:
     static IntegerProperty* create(const std::wstring&, int, int);
 
     int getPossibleValues() const override;
-    bool equals(Property const*) const override;
+    bool equals(const Property*) const override;
     int hashCode() const override;
     int getValueCount() const override;
     int getValueAtIndex(unsigned int) const override;

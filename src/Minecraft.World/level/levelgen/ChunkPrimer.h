@@ -11,8 +11,8 @@ public:
     ~ChunkPrimer();
     const BlockState* getState(int);
     const BlockState* getState(int, int, int);
-    void setState(int, BlockState const*);
-    void setState(int, int, int, BlockState const*);
+    void setState(int, const BlockState*);
+    void setState(int, int, int, const BlockState*);
     void setBlockAndData(int, int, int);
     int getBlockId(int);
     arrayWithLength<uchar> getBlockIds();

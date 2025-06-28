@@ -147,7 +147,7 @@ public:
     virtual bool blocksInput();
     virtual void* GetMainPanel();
     virtual void render(int, int, C4JRender::eViewportType);
-    virtual void customDraw(char const*, fuiRect*);
+    virtual void customDraw(const char*, fuiRect*);
     virtual bool allowRepeat(int);
     virtual void handleInput(int, int, bool, bool, bool, bool&);
     virtual void handleDestroy();
@@ -175,7 +175,7 @@ public:
     virtual void handleTouchInput(unsigned int, int, int, int, bool, bool, bool);
     virtual void isReadyToDelete();
 
-    static void customDrawFui(void*, char const*, fuiRect*);
+    static void customDrawFui(void*, const char*, fuiRect*);
 
     std::wstring wstring_8;
     fuiFile* mFuiFile;

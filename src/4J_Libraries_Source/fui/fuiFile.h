@@ -122,7 +122,7 @@ public:
     void createNodeFromSymbol(char* const, fuiRenderNode*, int);
     // findNode - doesn't exist in switch edition
     // setVisible - doesn't exist in switch edition
-    void setCustomDrawCallback(void (*)(void*, char const*, fuiRect*), void*);
+    void setCustomDrawCallback(void (*)(void*, const char*, fuiRect*), void*);
     float getStageWidth();
     float getStageHeight();
     void setIndex(int);

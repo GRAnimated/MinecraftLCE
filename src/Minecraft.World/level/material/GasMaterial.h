@@ -4,7 +4,7 @@
 
 class GasMaterial : public Material {
 public:
-    GasMaterial(MaterialColor const* color);
+    GasMaterial(const MaterialColor* color);
     ~GasMaterial() override;
     bool isSolid() override;
     bool blocksLight() override;

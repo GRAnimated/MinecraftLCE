@@ -16,7 +16,7 @@ public:
     int getColor(LevelSource* levelSource, const BlockPos& pos) override;
     int getColor(LevelSource* levelSource, const BlockPos& pos, const BlockState* blockState) override;
     void entityInside(Level* level, const BlockPos& pos, const BlockState* blockState,
-                      std::shared_ptr<Entity> const&) override;
-    bool mayPlaceOn(BlockState const* blockState) override;
-    bool canSurvive(Level* level, const BlockPos& pos, BlockState const* blockState) override;
+                      const std::shared_ptr<Entity>&) override;
+    bool mayPlaceOn(const BlockState* blockState) override;
+    bool canSurvive(Level* level, const BlockPos& pos, const BlockState* blockState) override;
 };

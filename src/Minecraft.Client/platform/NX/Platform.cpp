@@ -18,7 +18,7 @@ void XPhysicalFree(void* ptr) {
 
 void MemSect(int) {}
 
-void PIXBeginNamedEvent(float, char const*, ...) {}
+void PIXBeginNamedEvent(float, const char*, ...) {}
 void PIXEndNamedEvent() {}
 
 void EnterCriticalSection(nn::os::MutexType* mutex) {

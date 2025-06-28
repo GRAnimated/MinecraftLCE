@@ -25,7 +25,7 @@ public:
     virtual ~CMinecraftApp();
     virtual void CaptureScreenshot(int);
     virtual void SetRichPresenceContext(int, int) = 0;
-    virtual void FatalLoadError(wchar_t const*, ...);
+    virtual void FatalLoadError(const wchar_t*, ...);
     virtual void StoreLaunchData();
     virtual void ExitGame();
     virtual void RunFrame();
@@ -87,7 +87,7 @@ public:
     CConsoleMinecraftApp();
     virtual ~CConsoleMinecraftApp();
     void SetRichPresenceContext(int, int) override;
-    void FatalLoadError(wchar_t const*, ...) override;
+    void FatalLoadError(const wchar_t*, ...) override;
     void StoreLaunchData() override;
     void ExitGame() override;
     void CaptureSaveThumbnail() override;

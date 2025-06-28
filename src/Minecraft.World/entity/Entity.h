@@ -76,7 +76,7 @@ public:
     virtual void getSwimSound();
     virtual void getSwimSplashSound();
     virtual void checkInsideBlocks();
-    virtual void onInsideBlock(BlockState const*);
+    virtual void onInsideBlock(const BlockState*);
     virtual void playStepSound(const BlockPos&, Block*);
     virtual float playFlySound(float);
     virtual bool makeFlySound();
@@ -126,10 +126,10 @@ public:
     virtual void spawnAtLocation(not_null_ptr<ItemInstance>, float);
     virtual bool isAlive();
     virtual bool isInWall();
-    virtual void interact(std::shared_ptr<Player> const&, InteractionHand::EInteractionHand);
+    virtual void interact(const std::shared_ptr<Player>&, InteractionHand::EInteractionHand);
     virtual void getCollideAgainstBox(std::shared_ptr<Entity>);
     virtual void rideTick();
-    virtual void positionRider(std::shared_ptr<Entity> const&);
+    virtual void positionRider(const std::shared_ptr<Entity>&);
     virtual void onPassengerTurned(std::shared_ptr<Entity>);
     virtual void getRidingHeight();
     virtual void getRideHeight();
@@ -158,7 +158,7 @@ public:
     virtual void getHandSlots();
     virtual void getArmorSlots();
     virtual void getAllSlots();
-    virtual void setItemSlot(EquipmentSlot const*, not_null_ptr<ItemInstance>);
+    virtual void setItemSlot(const EquipmentSlot*, not_null_ptr<ItemInstance>);
     virtual bool isOnFire();
     virtual bool isPassenger();
     virtual bool isVehicle();
@@ -178,7 +178,7 @@ public:
     virtual void setInvisible(bool);
     virtual void ShouldRenderShadow();
     virtual void canFly();
-    virtual void thunderHit(LightningBolt const*);
+    virtual void thunderHit(const LightningBolt*);
     virtual void killed(std::shared_ptr<LivingEntity>);
     virtual void checkInBlock(double, double, double);
     virtual void spawnEatParticles(const ItemInstance&, int);
@@ -219,7 +219,7 @@ public:
     virtual bool isCustomNameVisible();
     virtual void teleportTo(double, double, double);
     virtual void shouldShowName();
-    virtual void onSyncedDataUpdated(EntityDataAccessor_Base const*);
+    virtual void onSyncedDataUpdated(const EntityDataAccessor_Base*);
     virtual Direction* getDirection();
     virtual void getMotionDirection();
     virtual void broadcastToPlayer(std::shared_ptr<ServerPlayer>);
@@ -227,8 +227,8 @@ public:
     virtual void getBoundingBoxForCulling();
     virtual void setBoundingBox(AABB*);
     virtual void getEyeHeight();
-    virtual void setSlot(int, not_null_ptr<ItemInstance> const&);
-    virtual void interactAt(std::shared_ptr<Player> const&, Vec3*, InteractionHand::EInteractionHand);
+    virtual void setSlot(int, const not_null_ptr<ItemInstance>&);
+    virtual void interactAt(const std::shared_ptr<Player>&, Vec3*, InteractionHand::EInteractionHand);
     virtual void ignoreExplosion();
     virtual void startSeenByPlayer(std::shared_ptr<ServerPlayer>);
     virtual void stopSeenByPlayer(std::shared_ptr<ServerPlayer>);

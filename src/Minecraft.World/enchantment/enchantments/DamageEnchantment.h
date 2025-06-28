@@ -10,7 +10,7 @@ public:
     int getMinCost(int) override;
     int getMaxCost(int) override;
     float getDamageBonus(int, MobType) override;
-    bool checkCompatibility(Enchantment const*) override;
+    bool checkCompatibility(const Enchantment*) override;
     int getDescriptionId() override;
     bool canEnchant(const not_null_ptr<ItemInstance>&) override;
     void doPostAttack(const std::shared_ptr<LivingEntity>&, const std::shared_ptr<Entity>&, int) override;

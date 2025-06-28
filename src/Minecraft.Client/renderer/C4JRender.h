@@ -34,7 +34,7 @@ public:
     virtual void vtbl_7101130608_func_19();
     virtual void Present();
     virtual void Clear(int);
-    virtual void SetClearColour(float const*);
+    virtual void SetClearColour(const float*);
     virtual void vtbl_7101130608_func_23();
     virtual bool IsWidescreen();
     virtual bool IsHiDef();
@@ -76,7 +76,7 @@ public:
     virtual void TextureSetParam(int, int);
     virtual void TextureDynamicUpdateStart();
     virtual void TextureDynamicUpdateEnd();
-    virtual void LoadTextureData(char const*, D3DXIMAGE_INFO*, int**);
+    virtual void LoadTextureData(const char*, D3DXIMAGE_INFO*, int**);
     virtual void LoadTextureData(unsigned char*, unsigned int, D3DXIMAGE_INFO*, int**);
     virtual void vtbl_7101130608_func_65();
     virtual void vtbl_7101130608_func_66();
@@ -126,6 +126,6 @@ public:
     virtual void StateSetBoneMatrixNull(int);
     virtual void GetNumCommandBufferVertsDrawnLastFrame();
     virtual void GetNumVertsInCommandBuffer(int);
-    virtual void BeginEvent(wchar_t const*);
+    virtual void BeginEvent(const wchar_t*);
     virtual void EndEvent();
 };

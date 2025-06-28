@@ -29,5 +29,5 @@ public:
     void removeEventListenerForNode(FJ_FuiNode*);
     void manageTexture(fuiFile*, fuiBitmap*);
     void removeManagedTexture(fuiFile*, fuiBitmap*);
-    void setFontIndirection(char const*, char const*);
+    void setFontIndirection(const char*, const char*);
 };

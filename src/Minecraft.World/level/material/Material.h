@@ -52,7 +52,7 @@ public:
     static Material* BARRIER;
     static GasMaterial* STRUCTURAL_AIR;
 
-    Material(MaterialColor const* color);
+    Material(const MaterialColor* color);
     virtual ~Material();
     virtual bool isLiquid();
     virtual bool letsWaterThrough();

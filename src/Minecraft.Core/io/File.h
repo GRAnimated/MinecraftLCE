@@ -40,8 +40,8 @@ public:
 std::wstring char16towstring(wchar_t*);
 const char* wstringtofilename(const std::wstring&, char (&)[256]);
 bool CreateDirectoryA(const char*, void*);
-bool GetFileAttributesA(char const*);
-bool MoveFileA(char const*, char const*);
+bool GetFileAttributesA(const char*);
+bool MoveFileA(const char*, const char*);
 int GetLastError();
 
 bool isDirectory(const std::wstring&);

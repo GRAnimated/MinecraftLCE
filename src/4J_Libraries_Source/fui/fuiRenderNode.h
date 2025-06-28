@@ -19,8 +19,8 @@ public:
     virtual void preRender() = 0;
     virtual void render(fuiRect*, fuiMatrix*) = 0;
     virtual void handleAddedToStage();
-    virtual fuiRenderNode* findNode(char const*);
-    virtual fuiRenderNode* getNodeFromPath(char const*);
+    virtual fuiRenderNode* findNode(const char*);
+    virtual fuiRenderNode* getNodeFromPath(const char*);
     virtual void setVisibility(bool);
     virtual void setX(float);
     virtual void setY(float);

@@ -42,14 +42,14 @@ public:
     virtual void RecordSkinChanged(int, int);
     virtual void RecordBanLevel(int);
     virtual void RecordUnBanLevel(int);
-    virtual void PrepareMiniGameHostOptions(int, LaunchMoreOptionsMenuInitData const*, TelemetryJoinMethod);
+    virtual void PrepareMiniGameHostOptions(int, const LaunchMoreOptionsMenuInitData*, TelemetryJoinMethod);
     virtual void RecordMiniGameHostOptions(int, EMiniGameId);
     virtual void RecordPlayerSettings(int);
     virtual void sub_2CA1730();
     virtual void sub_2CA1738();
     virtual void sub_2CA1740();
     virtual void sub_2CA1748();
-    virtual void RecordGameModeRoundStart(std::wstring const&, std::wstring const&);
+    virtual void RecordGameModeRoundStart(const std::wstring&, const std::wstring&);
     virtual void RecordGameModeRoundFinished();
     virtual void RecordSavesInformation(int, SAVE_DETAILS const*, unsigned int);
     virtual void GetMultiplayerInstanceID();

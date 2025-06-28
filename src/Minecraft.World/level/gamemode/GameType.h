@@ -24,7 +24,7 @@ public:
     void updatePlayerAbilities(Abilities*) const;
     bool isCreative() const;
     bool isSurvival() const;
-    static const GameType* byId(int, GameType const*);
+    static const GameType* byId(int, const GameType*);
     static const GameType* byId(int);
 
 private:

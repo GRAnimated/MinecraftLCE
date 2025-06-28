@@ -13,7 +13,7 @@ HalfTransparentBlock::HalfTransparentBlock(const std::wstring& textureName, Mate
 }
 
 HalfTransparentBlock::HalfTransparentBlock(const std::wstring& textureName, Material* material, bool unk,
-                                           MaterialColor const* color)
+                                           const MaterialColor* color)
     : Block(material, color) {
     bool_a4 = unk;
     mTextureName = textureName;

@@ -6,7 +6,7 @@ class HalfTransparentBlock : public Block {
 public:
     HalfTransparentBlock(const std::wstring& textureName, Material* material, bool);
     HalfTransparentBlock(const std::wstring& textureName, Material* material, bool,
-                         MaterialColor const* color);
+                         const MaterialColor* color);
 
     bool shouldRenderFace(const BlockState* blockState, LevelSource* levelSource, const BlockPos& pos,
                           const Direction* direction) override;

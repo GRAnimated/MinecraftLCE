@@ -27,7 +27,7 @@ public:
     static const wchar_t* getTagTypeName(u8 id);
 
     template <class T>
-    static void deleteElements(std::vector<T> const&);
+    static void deleteElements(const std::vector<T>&);
 
 protected:
     static const u8 TAG_End = 0;

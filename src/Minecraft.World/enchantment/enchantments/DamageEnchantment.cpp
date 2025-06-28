@@ -45,7 +45,7 @@ float DamageEnchantment::getDamageBonus(int a2, MobType mobType) {
     }
     return 0.0f;
 }
-bool DamageEnchantment::checkCompatibility(Enchantment const* other) {
+bool DamageEnchantment::checkCompatibility(const Enchantment* other) {
     return !dynamic_cast<const DamageEnchantment*>(other);
 }
 int DamageEnchantment::getDescriptionId() {

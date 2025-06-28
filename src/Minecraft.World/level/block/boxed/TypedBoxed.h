@@ -9,8 +9,8 @@ public:
     ~TypedBoxed() override;
 
     unsigned int hashOf() const override;
-    bool operator==(Boxed const*) const override;
-    void setValue(Boxed const*) override;
+    bool operator==(const Boxed*) const override;
+    void setValue(const Boxed*) override;
     std::wstring toString() const override;
 
     // Inlined, guessed name

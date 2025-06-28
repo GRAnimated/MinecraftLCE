@@ -51,14 +51,14 @@ public:
         bool isViewBlocking() const override;
         int getBlockFaceShape(LevelSource*, const BlockPos&, const Direction*) const override;
         void getProperties() const override;
-        void hasProperty(Property const*) const override;
-        Boxed* getBoxedValue(Property const*) const override;
-        const BlockState* setBoxedValue(Property const*, Boxed*) const override;
-        void cycle(Property const*) const override;
+        void hasProperty(const Property*) const override;
+        Boxed* getBoxedValue(const Property*) const override;
+        const BlockState* setBoxedValue(const Property*, Boxed*) const override;
+        void cycle(const Property*) const override;
         void getValues() const override;
         Block* getBlock() const override;
         void toString() const override;
-        void equals(BlockState const*) override;
+        void equals(const BlockState*) override;
         void hashCode() const override;
         void triggerEvent(Level*, const BlockPos&, int, int) const override;
         void neighborChanged(Level*, const BlockPos&, Block*, const BlockPos&) const override;
@@ -70,7 +70,7 @@ public:
         _init(block, properties_array, N);
     }
 
-    void _init(Block* block, Property const** properties, unsigned int propertiesCount);
+    void _init(Block* block, const Property** properties, unsigned int propertiesCount);
 
     Block* getBlock();
     const BlockState* any();

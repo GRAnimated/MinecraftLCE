@@ -20,11 +20,11 @@ public:
              InteractionHand::EInteractionHand, const Direction* direction, float, float, float,
              bool) override;
     void entityInside(Level* level, const BlockPos& pos, const BlockState* blockState,
-                      std::shared_ptr<Entity> const&) override;
+                      const std::shared_ptr<Entity>&) override;
     void setPlacedBy(Level* level, const BlockPos& pos, const BlockState* blockState,
                      std::shared_ptr<LivingEntity>, not_null_ptr<ItemInstance>) override;
     void dropFromExplosion(Explosion*) override;
     TextureAtlasSprite* getTexture(const Direction* direction, const BlockState* blockState) override;
     BlockStateDefinition* createBlockStateDefinition() override;
-    virtual void destroy(Level*, const BlockPos&, BlockState const*, std::shared_ptr<LivingEntity>);
+    virtual void destroy(Level*, const BlockPos&, const BlockState*, std::shared_ptr<LivingEntity>);
 };

@@ -1,6 +1,6 @@
 #include "Minecraft.World/level/material/Material.h"
 
-Material::Material(MaterialColor const* color) : mColor(color) {
+Material::Material(const MaterialColor* color) : mColor(color) {
     mIsFlammable = false;
     mIsReplaceable = false;
     mIsNeverBuildable = false;
@@ -138,6 +138,6 @@ Material* Material::makeDestroyedByHand() {
     return this;
 }
 
-MaterialColor const* Material::getColor() const {
+const MaterialColor* Material::getColor() const {
     return mColor;
 }

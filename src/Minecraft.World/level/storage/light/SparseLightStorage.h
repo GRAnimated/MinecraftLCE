@@ -3,5 +3,5 @@
 
 class SparseLightStorage {
 public:
-    void write(DataOutputStream *out);
+    void write(DataOutputStream* out);
 };

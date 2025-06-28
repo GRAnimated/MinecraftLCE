@@ -10,7 +10,7 @@ class FJ_Base : public FJ_FuiNode {
     int getType() override;
     virtual void getLabelTooWide();
     virtual unsigned int getOldWidth();
-    virtual void SetLabel(std::wstring const&);
+    virtual void SetLabel(const std::wstring&);
     virtual void GetLabelTooWide(fuiRenderNodeEditText*);
     virtual void SetNewObjectWidth(int);
     virtual void SetNewObjectHeight(int);  // this doesn't seem to exist on WiiU, why would they add it on

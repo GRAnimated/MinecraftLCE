@@ -10,7 +10,7 @@ public:
     };
 
     UIString();
-    UIString(wchar_t const*);
+    UIString(const wchar_t*);
     UIString(const std::wstring&);
 
     bool needsUpdating();

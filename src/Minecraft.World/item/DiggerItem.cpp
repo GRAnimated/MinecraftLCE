@@ -8,11 +8,11 @@
 #include "Minecraft.World/level/block/Block.h"
 #include "Minecraft.World/level/gamemode/minigames/MiniGameDef.h"
 
-DiggerItem::DiggerItem(Item::Tier const* tier, arrayWithLength<Block*> blocks) : mTier(tier) {
+DiggerItem::DiggerItem(const Item::Tier* tier, arrayWithLength<Block*> blocks) : mTier(tier) {
     this->_init(0, 0, blocks);
 }
 
-DiggerItem::DiggerItem(float attackDamage, float attackSpeed, Item::Tier const* tier,
+DiggerItem::DiggerItem(float attackDamage, float attackSpeed, const Item::Tier* tier,
                        arrayWithLength<Block*> blocks)
     : mTier(tier) {
     this->_init(attackDamage, attackSpeed, blocks);

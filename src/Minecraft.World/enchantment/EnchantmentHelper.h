@@ -9,8 +9,8 @@ class Enchantment;
 
 class EnchantmentHelper {
 public:
-    static int getItemEnchantmentLevel(const Enchantment*, not_null_ptr<ItemInstance> const&);
+    static int getItemEnchantmentLevel(const Enchantment*, const not_null_ptr<ItemInstance>&);
     static std::shared_ptr<ItemInstance> getRandomItemWith(const Enchantment*,
                                                            const std::shared_ptr<LivingEntity>&);
-    static int getDepthStrider(std::shared_ptr<LivingEntity> const&);
+    static int getDepthStrider(const std::shared_ptr<LivingEntity>&);
 };

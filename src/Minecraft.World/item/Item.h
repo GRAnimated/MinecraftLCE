@@ -77,7 +77,7 @@ public:
     };
 
     Item();
-    void addProperty(ResourceLocation, ItemPropertyFunction const*);
+    void addProperty(ResourceLocation, const ItemPropertyFunction*);
     int getId();
     bool canBeDepleted();
     void setIconName(const std::wstring&);

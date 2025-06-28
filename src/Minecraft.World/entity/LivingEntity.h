@@ -50,7 +50,7 @@ public:
     virtual void setYHeadRot(float) override;
     virtual void setYBodyRot(float) override;
     virtual void shouldShowName() override;
-    virtual void onSyncedDataUpdated(EntityDataAccessor_Base const*) override;
+    virtual void onSyncedDataUpdated(const EntityDataAccessor_Base*) override;
     virtual void setBoundingBox(AABB*) override;
     virtual void stopCurrentLerp() override;
     virtual void registerAttributes();
@@ -77,7 +77,7 @@ public:
     virtual void getActiveEffects();
     virtual bool hasEffect(MobEffect*);
     virtual MobEffectInstance* getEffect(MobEffect*);
-    virtual void addEffect(MobEffectInstance*, std::shared_ptr<Entity> const&);
+    virtual void addEffect(MobEffectInstance*, const std::shared_ptr<Entity>&);
     virtual void addEffectNoUpdate(MobEffectInstance*);
     virtual void canBeAffected(MobEffectInstance*);
     virtual bool isInvertedHealAndHarm();
@@ -90,7 +90,7 @@ public:
     virtual void getHealth();
     virtual void setHealth(float);
     virtual void getLastDamageSource();
-    virtual void blockUsingShield(std::shared_ptr<LivingEntity> const&);
+    virtual void blockUsingShield(const std::shared_ptr<LivingEntity>&);
     virtual void playHurtSound(DamageSource*);
     virtual void checkTotemDeathProtection(DamageSource*);
     virtual bool isDamageSourceBlocked(DamageSource*);
@@ -125,8 +125,8 @@ public:
     virtual void getOffhandItem();
     virtual not_null_ptr<ItemInstance> getItemInHand(InteractionHand::EInteractionHand);
     virtual void setItemInHand(InteractionHand::EInteractionHand, not_null_ptr<ItemInstance>);
-    virtual bool hasItemInSlot(EquipmentSlot const*);
-    virtual not_null_ptr<ItemInstance> getItemSlot(EquipmentSlot const*) = 0;
+    virtual bool hasItemInSlot(const EquipmentSlot*);
+    virtual not_null_ptr<ItemInstance> getItemSlot(const EquipmentSlot*) = 0;
     virtual void getItemInHandIcon(not_null_ptr<ItemInstance>, int);
     virtual void getSoundVolume();
     virtual void getVoicePitch();

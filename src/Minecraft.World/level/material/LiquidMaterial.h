@@ -4,7 +4,7 @@
 
 class LiquidMaterial : public Material {
 public:
-    LiquidMaterial(MaterialColor const* color);
+    LiquidMaterial(const MaterialColor* color);
     ~LiquidMaterial() override;
     bool isLiquid() override;
     bool isSolid() override;

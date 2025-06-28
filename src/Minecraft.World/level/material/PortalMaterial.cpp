@@ -1,6 +1,6 @@
 #include "Minecraft.World/level/material/PortalMaterial.h"
 
-PortalMaterial::PortalMaterial(MaterialColor const* color) : Material(color) {}
+PortalMaterial::PortalMaterial(const MaterialColor* color) : Material(color) {}
 
 bool PortalMaterial::isSolid() {
     return false;

@@ -180,7 +180,7 @@ public:
     bool hasBlockCubes(const AABB*);
     void instaTick(const BlockPos&, const BlockState*, Random&);
     static void setInstaTick(bool);
-    void addParticle(ParticleType const*, double, double, double, double, double, double,
+    void addParticle(const ParticleType*, double, double, double, double, double, double,
                      arrayWithLength<int>);
     void blockEntityChanged(const BlockPos&, std::shared_ptr<BlockEntity>);
     void checkSession();  // RETURN TYPE UNKNOWN

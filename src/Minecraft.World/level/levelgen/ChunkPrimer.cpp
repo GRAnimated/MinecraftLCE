@@ -63,7 +63,7 @@ void ChunkPrimer::setState(int packedPos, const BlockState* state) {
     mBlockData[dataIndex] = currentValue;
 }
 
-void ChunkPrimer::setState(int x, int y, int z, BlockState const* state) {
+void ChunkPrimer::setState(int x, int y, int z, const BlockState* state) {
     int v5 = 0;
     if (mBlockIds.length > 0x8000u && y >= 128) {
         y -= 128;
