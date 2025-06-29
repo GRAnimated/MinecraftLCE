@@ -18,9 +18,10 @@ public:
     Vec3* getCenter();
     AABB* divideInternalsBy(double);
     double getSize() const;
-    AABB *grow(double multiplier) const;
-    AABB *grow(double x, double y, double z) const;
-    bool intersects(const AABB *rhs) const;
+    AABB* grow(double multiplier) const;
+    AABB* grow(double x, double y, double z) const;
+    bool intersects(const AABB* rhs) const;
+    void resetPool();
 
     static AABB* sCrossShape;  // .got:000000710176F5E0
 };

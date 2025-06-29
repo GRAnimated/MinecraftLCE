@@ -35,3 +35,5 @@ bool AABB::intersects(const AABB* rhs) const {
            (this->min.y < rhs->max.y) && (rhs->min.y < this->max.y) &&
            (this->min.z < rhs->max.z) && (rhs->min.z < this->max.z);
 }
+
+void AABB::resetPool() {};

@@ -1,3 +1,5 @@
+#include "Minecraft.World/item/Item.h"
+
 #include "Block.h"
 
 #include "Minecraft.World/level/block/SoundType.h"
@@ -63,3 +65,24 @@ void Block::DerivedInit() {
     field_28 = isSolidRender;
     lightEmission = isSolidRender ? 255 : 0;
 }
+
+Item* Block::getResource(const BlockState* blockState, Random*, int) {
+    return Item::byBlock(this);
+}
+
+// does nothing
+void Block::tick(Level* level, const BlockPos& pos, const BlockState* blockState, Random*) {}
+void Block::animateTick(const BlockState* blockState, Level* level, const BlockPos& pos, Random*) {}
+void Block::destroy(Level* level, const BlockPos& pos, const BlockState* blockState) {}
+void Block::addLights(Level* level, const BlockPos& pos) {}
+void Block::onPlace(Level* level, const BlockPos& pos, const BlockState* blockState) {}
+void Block::stepOn(Level* level, const BlockPos& pos, std::shared_ptr<Entity>) {}
+void Block::prepareRender(Level* level, const BlockPos& pos) {}
+void Block::attack(Level* level, const BlockPos& pos, std::shared_ptr<Player> player) {}
+void Block::entityInside(Level* level, const BlockPos& pos, const BlockState* blockState,
+                         std::shared_ptr<Entity> const&) {}
+void Block::playerWillDestroy(Level* level, const BlockPos& pos, const BlockState* blockState,
+                              std::shared_ptr<Player> player) {}
+void Block::handleRain(Level* level, const BlockPos& pos) {}
+void Block::appendHoverText(not_null_ptr<ItemInstance>, std::shared_ptr<Player> player,
+                            std::vector<HtmlString>*, bool) {}
