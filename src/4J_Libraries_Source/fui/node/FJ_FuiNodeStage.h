@@ -6,11 +6,12 @@ class FJ_FuiNodeStage : public FJ_FuiNode {
 public:
     FJ_FuiNodeStage(fuiRenderNode*);
 
-    void getStageHeight();
-    void setFocus(FJ_FuiNode*);
-    void getFocus();
-    void removeFocus(FJ_FuiNode*);
+    float getStageWidth();
+    float getStageHeight();
+    void setFocus(FJ_FuiNode *node);
+    FJ_FuiNode *getFocus();
+    void removeFocus(FJ_FuiNode *node);
 
+    FJ_FuiNode* mFocusedNode;
     void* mIdk;
-    FJ_FuiNode* mfocusedFJ_FuiNode;
 };

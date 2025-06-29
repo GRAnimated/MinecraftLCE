@@ -1,12 +1,21 @@
 #pragma once
 
-#include "4J_Libraries_Source/fui/node/FJ_FuiNode.h"
-class fuiFile;
+#include "fuiFile.h";
+
+class fuiRenderNodeTimeline;
+class FJ_FuiNodeStage;
 class fuiMatrix;
 class fuiObject;
 class fuiRect;
 class fuiRGBA;
-enum eFuiObjectType {};
+enum eFuiObjectType {
+    RENDER_NODE_STAGE = 0
+};
+
+// weird flag thing
+constexpr uint32_t FLAG_CTOR_ENABLED = 0x1;
+constexpr uint32_t FLAG_NODE_VISIBLE = 0x8;
+constexpr const char* DEFAULT_PATH = "?";
 
 class fuiRenderNode {
 public:
@@ -22,6 +31,7 @@ public:
     virtual fuiRenderNode* findNode(const char*);
     virtual fuiRenderNode* getNodeFromPath(const char*);
     virtual void setVisibility(bool);
+    bool isVisible();
     virtual void setX(float);
     virtual void setY(float);
     virtual void setWidth(float);
@@ -31,41 +41,48 @@ public:
     virtual void getParentSpaceBounds(fuiRect*);
     virtual void generateGlobalMatrix();
 
+    // apparently this is static? (SFP)
+    static FJ_FuiNode *Create(fuiRenderNode *node);
+
     float getX();
     float getY();
-    void setAlpha(float);
+    void disableCtor();
+    void setAlpha(float a);
+    void progogateBounds(); // english 100
+
+    void setScaleX(float sX);
+    void setScaleY(float sY);
+
+    float getScaleX();
+    float getScaleY();
 
     fuiRenderNode* getStage() { return mStage; }
 
-    int dword_8;
+    fuiRenderNodeTimeline *asTimeline();
+
+    int mFlags;
     bool byte_c;
     bool byte_d;
     unsigned int dword_10;
     int dword_14;
     fuiObject* field_18;
     eFuiObjectType field_20;
-    float float_24;
-    float float_28;
-    float float_2c;
-    float float_30;
-    float mX;
-    float mY;
-    char gap_3C[28];
+    fuiMatrix mMatrix;
+    fuiMatrix mMatrix2;
+    int unk;
     fuiFile* field_58;
     void* qword_60;
     void* qword_68;
     void* qword_70;
     int dword78;
     float mAlpha;
-    void* qword_80;
-    void* qword_88;
-    char byte_90[64];
+    fuiRect mRect;
+    char mPath[64];
     void* qword_d0;
     void* qword_d8;
     int dword_e0;
     bool byte_e4;
     fuiRenderNode* mStage;
-    fuiRenderNode* mTimeline;
+    fuiRenderNodeTimeline* mTimeline;
     FJ_FuiNodeStage* mFuiNodeStage;
-    void* field_100;
 };

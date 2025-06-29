@@ -110,7 +110,7 @@ public:
     virtual void aiStep() override;
     virtual void serverAiStep() override;
     virtual void pushEntities() override;
-    virtual void getAbsorptionAmount() override;
+    virtual float getAbsorptionAmount() override;
     virtual void setAbsorptionAmount(float) override;
     virtual void getMainArm() override;
     virtual bool IsCreativeFlying() override;

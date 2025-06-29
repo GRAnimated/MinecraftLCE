@@ -11,12 +11,12 @@ class FileFilter;
 class File {
 public:
     File();
-    File(const std::wstring& path);
+    File(const std::wstring& name);
     File(const File& other, const std::wstring& path);
     File(const std::wstring&, const std::wstring&);
     ~File();
 
-    File& operator=(const File& other);
+    File& operator=(const File& rhs);
 
     std::wstring getPath() const;
     void _delete();

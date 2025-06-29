@@ -2,6 +2,9 @@
 #include <string.h>
 #include <types.h>
 
+unsigned int Compression::sTlsIndex;
+Compression::ThreadStorage* Compression::sThreadStorage;
+
 Compression::Compression() {
     this->dcData = 0;
 
@@ -41,25 +44,25 @@ void Compression::CreateNewThreadStorage() {
     Compression::ThreadStorage* ts = new ThreadStorage();
     unsigned int alloc;
 
-    if (threadStorage == nullptr) {
+    if (sThreadStorage == nullptr) {
         alloc = TlsAlloc();
 
-        tlsIndex = alloc;
-        threadStorage = ts;
+        sTlsIndex = alloc;
+        sThreadStorage = ts;
     } else {
-        alloc = tlsIndex;
+        alloc = sTlsIndex;
     }
 
     TlsSetValue(alloc, (void*)ts);
 }
 
 void Compression::ReleaseThreadStorage() {
-    Compression::ThreadStorage* ts = (Compression::ThreadStorage*)TlsGetValue(tlsIndex);
+    Compression::ThreadStorage* ts = (Compression::ThreadStorage*)TlsGetValue(sTlsIndex);
     // not sure what this is meant to be
     bool tsStatus;
 
     if (ts) {
-        tsStatus = (ts == threadStorage);
+        tsStatus = (ts == sThreadStorage);
     } else {
         // return true????
         tsStatus = true;
@@ -71,11 +74,11 @@ void Compression::ReleaseThreadStorage() {
 }
 
 void Compression::UseDefaultThreadStorage() {
-    TlsSetValue(tlsIndex, threadStorage);
+    TlsSetValue(sTlsIndex, sThreadStorage);
 }
 
 Compression* Compression::getCompression() {
-    return ((ThreadStorage*)TlsGetValue(tlsIndex))->compression;
+    return ((ThreadStorage*)TlsGetValue(sTlsIndex))->compression;
 }
 
 void Compression::SetDecompressionType(ESavePlatform platform) {
