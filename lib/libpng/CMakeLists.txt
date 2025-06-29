@@ -32,7 +32,7 @@ add_library(libpng STATIC
   ${libpng_sources}
   png.h
   pngconf.h
-  ${CMAKE_CURRENT_BINARY_DIR}/pnglibconf.h
+  pnglibconf.h
   pngdebug.h
   pnginfo.h
   pngpriv.h
