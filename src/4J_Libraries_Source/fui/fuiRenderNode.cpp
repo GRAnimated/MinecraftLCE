@@ -96,7 +96,7 @@ bool fuiRenderNode::isVisible() {
 
 void fuiRenderNode::handleAddedToStage() {
     if (this->mFuiNodeStage) {
-        this->mFuiNodeStage->dispatchEvent(new FJ_Event(ADDED_TO_STAGE, false ,false));
+        this->mFuiNodeStage->dispatchEvent(new FJ_Event(eFJEventType::ADDED_TO_STAGE, false ,false));
     }
 }
 
@@ -149,4 +149,7 @@ void fuiRenderNode::generateGlobalMatrix() {
     } else {
         this->mMatrix2 = this->mMatrix;
     }
+}
+FJ_FuiNode* fuiRenderNode::Create(fuiRenderNode* node) {
+    return new FJ_FuiNode(node);
 }

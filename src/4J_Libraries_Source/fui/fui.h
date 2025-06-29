@@ -2,6 +2,8 @@
 
 #include "Minecraft.World/ArrayWithLength.h"
 
+#include "nn/os.h"
+
 class fuiBitmap;
 class fuiFile;
 class FJ_FuiNode;
@@ -23,24 +25,39 @@ public:
     void setResolution(int);
     int getResolution();
     void tick();
-    void preRender(fuiFile*);
+    void preRender(fuiFile *file);
     void render(fuiFile*, float, float, float, float);
     void dispatchKeyboardEvent(fuiFile*, bool, int);
     void dispatchMouseMoveEvent(fuiFile*, float, float);
     void dispatchEnterFrameEvent();
     void addDirectEventListener(const FJ_EventListener&);
     void removeDirectEventListener(const FJ_EventListener&);
-    void removeEventListenerForNode(FJ_FuiNode*);
+    void removeEventListenerForNode(FJ_FuiNode *node);
     void manageTexture(fuiFile*, fuiBitmap*);
     void removeManagedTexture(fuiFile*, fuiBitmap*);
     void setFontIndirection(char const*, char const*);
 
-    char padding[659];
+    float mUnk1;
+    char mFPad[16]; // to pad each float since each one is +20 offset
+    float mUnk2;
+    char mFPad2[16];
+    float mUnk3;
+    char mFPad3[16];
+    float mUnk4;
+    char mFPad4[16];
+    char padding[568];
+    float mUnk5;
+    float mUnk6;
+    char padding3[0x4];
     float mScreenWidth;
     float mScreenHeight;
-    char padding2[0x128];
+    int padding6;
+    std::vector<fuiFile*> mScenes;
+    char padding2[0x110];
     std::vector<FJ_EventListener> mEventListeners;
-    char padding4[0x68];
+    char padding4[72];
+    nn::os::MutexType* mScenesMutex;
+    char padding5[24];
     fuiTextureManager *mTextureManager;
     int mResolution;
 };

@@ -2,6 +2,13 @@
 
 #include "Minecraft.World/entity/player/Abilities.h"
 
+GameType* GameType::NOT_SET;
+GameType* GameType::SURVIVAL;
+GameType* GameType::CREATIVE;
+GameType* GameType::ADVENTURE;
+GameType* GameType::SPECTATOR;
+GameType* GameType::LOBBY;
+
 void GameType::staticCtor() {
     NOT_SET = new GameType(-1, L"", L"", -1, -1);
     SURVIVAL = new GameType(0, L"survival", L"s", 0x15AA0E94, 0x9BA782A6);
