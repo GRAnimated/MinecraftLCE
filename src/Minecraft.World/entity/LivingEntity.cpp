@@ -23,6 +23,10 @@ eINSTANCEOF LivingEntity::GetType() {
     return eLivingEntity;
 }
 
+void LivingEntity::dropEquipment(bool, int) {}
+void LivingEntity::dropDeathLoot(bool, int) {}
+void LivingEntity::hurtArmor(float) {}
+void LivingEntity::hurtCurrentlyUsedShield(float) {}
 void LivingEntity::travel(float x, float y, float z) {
     Player* player = this->isType(ePlayer) ? (Player*)this : nullptr;
     if (this->PositionLocked_4()) {
@@ -218,6 +222,7 @@ void LivingEntity::travel(float x, float y, float z) {
     this->updateModelAnimation();
 }
 
+void LivingEntity::serverAiStep() {}
 float LivingEntity::getAttackAnim(float a2) {
     float v3 = this->mAttackAnim - this->mOAttackAnim;
     if ( v3 < 0.0 ) v3 = v3 + 1.0;
@@ -235,3 +240,6 @@ float LivingEntity::getAbsorptionAmount() {
 void LivingEntity::setAbsorptionAmount(float amount) {
     this->mAbsorptionAmount = fmaxf(amount, 0.0);
 }
+void LivingEntity::onEnterCombat() {}
+void LivingEntity::onLeaveCombat() {}
+void LivingEntity::setRecordPlayingNearby(const BlockPos&, bool) {}
