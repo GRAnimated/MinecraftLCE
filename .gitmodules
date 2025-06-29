@@ -7,10 +7,6 @@
 [submodule "toolchain/musl"]
 	path = toolchain/musl
 	url = https://github.com/open-ead/botw-lib-musl
-[submodule "lib/libpng"]
-	path = lib/libpng
-	url = https://github.com/pnggroup/libpng.git
-	branch = master
 [submodule "lib/stb_image"]
 	path = lib/stb_image
 	url = https://github.com/nothings/stb.git
