@@ -17,6 +17,10 @@ public:
     void set(double, double, double, double, double, double);
     Vec3* getCenter();
     AABB* divideInternalsBy(double);
+    double getSize() const;
+    AABB *grow(double multiplier) const;
+    AABB *grow(double x, double y, double z) const;
+    bool intersects(const AABB *rhs) const;
 
     static AABB* sCrossShape;  // .got:000000710176F5E0
 };

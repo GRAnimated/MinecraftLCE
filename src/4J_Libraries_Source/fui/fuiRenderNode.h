@@ -41,6 +41,9 @@ public:
     virtual void getParentSpaceBounds(fuiRect*);
     virtual void generateGlobalMatrix();
 
+    // apparently this is static? (SFP)
+    static FJ_FuiNode *Create(fuiRenderNode *node);
+
     float getX();
     float getY();
     void disableCtor();
