@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Minecraft.Client/renderer/C4JRender.h"
+#include <arm_neon.h>
 
 class _XSOCIAL_PREVIEWIMAGE;
 class ImageFileBuffer;
@@ -13,7 +14,7 @@ public:
     static Renderer* sInstance;
 
     virtual void Tick();
-    virtual void UpdateGamma(unsigned short);
+    virtual void UpdateGamma(unsigned short gamma);
     virtual void MatrixMode(int);
     virtual void MatrixSetIdentity();
     virtual void MatrixTranslate(float, float, float);
@@ -23,7 +24,7 @@ public:
     virtual void MatrixOrthogonal(float, float, float, float, float, float);
     virtual void MatrixPop();
     virtual void MatrixPush();
-    virtual void MatrixMult(float*);
+    virtual float32x4_t MatrixMult(float *matrix);
     virtual void MatrixGet(int);
     virtual void Set_matrixDirty();
     virtual void Initialise();
@@ -62,7 +63,7 @@ public:
     virtual void CBuffTick();
     virtual void CBuffDeferredModeStart();
     virtual void CBuffDeferredModeEnd();
-    virtual void GetMaxTextures();
+    virtual int GetMaxTextures();
     virtual void TextureCreate();
     virtual void TextureFree(int);
     virtual void TextureBind(int);
@@ -128,4 +129,20 @@ public:
     virtual void GetNumVertsInCommandBuffer(int);
     virtual void BeginEvent(const wchar_t*);
     virtual void EndEvent();
+
+    float32x4_t MultWithStack(float (*)[4]);
+
+    // SIZE IS WRONG IM PRETTY SURE
+    char unk[10636];
+    unsigned short mGamma;
+    char gap_29D8[237648];
+    void* qword_3ca28;
+    void* qword_3ca30;
+    void* qword_3ca38;
+    void* qword_3ca40;
+    float dword_3ca48;
+    char gap_3CA4C[828];
+    void* qword_3cd88;
+    void* qword_3cd90;
+    void* qword_3cd98;
 };

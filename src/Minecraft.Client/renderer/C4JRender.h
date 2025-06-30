@@ -1,4 +1,5 @@
 #pragma once
+#include <arm_neon.h>
 
 class _XSOCIAL_PREVIEWIMAGE;
 class ImageFileBuffer;
@@ -23,7 +24,7 @@ public:
     virtual void MatrixOrthogonal(float, float, float, float, float, float);
     virtual void MatrixPop();
     virtual void MatrixPush();
-    virtual void MatrixMult(float*);
+    virtual float32x4_t MatrixMult(float*);
     virtual void MatrixGet(int);
     virtual void Set_matrixDirty();
     virtual void Initialise();
@@ -62,7 +63,7 @@ public:
     virtual void CBuffTick();
     virtual void CBuffDeferredModeStart();
     virtual void CBuffDeferredModeEnd();
-    virtual void GetMaxTextures();
+    virtual int GetMaxTextures();
     virtual void TextureCreate();
     virtual void TextureFree(int);
     virtual void TextureBind(int);
