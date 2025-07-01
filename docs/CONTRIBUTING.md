@@ -1,4 +1,5 @@
 # Contributing
+
 As this project is in its very early stages, its hard to put guidelines on something that will evolve over time as contributors gain a better understanding of the game's internals.
 
 While almost all source paths aren't known, a few .cpp file names do appear in the Wii U Edition's global static constructors, along with a couple asserts giving file paths. Follow these file names wherever possible.

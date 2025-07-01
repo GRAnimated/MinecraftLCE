@@ -1,4 +1,5 @@
 # Building
+
 The decomp toolchain was created for Linux & MacOS users. While it isn't a hard requirement, if you're running Windows its advised that you [setup WSL](https://learn.microsoft.com/en-us/windows/wsl/install) with an Ubuntu-like distro for the easiest setup.
 
 The instructions below assume you're running a form of Linux (WSL or native).
@@ -8,7 +9,7 @@ The instructions below assume you're running a form of Linux (WSL or native).
 * Python 3.6 or newer with [pip](https://pip.pypa.io/en/stable/installation/)
 * Ninja
 * CMake 3.13+
-    * If you are on Ubuntu 18.04, you must
+  * If you are on Ubuntu 18.04, you must
       first [update CMake by using the official CMake APT repository](https://apt.kitware.com/).
 * ccache (to speed up builds)
 * llvm-objdump
