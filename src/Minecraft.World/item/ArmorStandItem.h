@@ -5,8 +5,9 @@
 class ArmorStandItem : public Item {
 public:
     ArmorStandItem();    
+    ~ArmorStandItem() override;
 
-    virtual ActionResultType useOn(std::shared_ptr<Player> user, Level* level, const BlockPos& pos,
+    ActionResultType useOn(std::shared_ptr<Player> user, Level* level, const BlockPos& pos,
         InteractionHand::EInteractionHand hand, const Direction* direction,
         float rayX, float rayY, float rayZ,
         bool missOrInside) override; 
