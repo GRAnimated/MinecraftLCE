@@ -4,6 +4,7 @@
 
 1. Install `nxo64.py` from `reswitched/loaders`.  [Instructions](https://github.com/reswitched/loaders?tab=readme-ov-file#installation)
 2. Open `ida64.exe` and disassemble `main.nso`.
+3. To use scripts, click `File->Script File` and select the script you want to use.  
 
 ## Ghidra
 
