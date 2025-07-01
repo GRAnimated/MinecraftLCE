@@ -41,9 +41,16 @@ Additionally, you'll also need:
 
 2. Run `git submodule update --init --recursive`
 
-    Next, you'll need to acquire the **original v1.0.17 `main` NSO executable**.
+3. Acquire the **original v1.0.17 `main` NSO executable**.
+    1. Acquire an NSP dump of v1.0.17. [Dumping guide](https://zeldamods.org/wiki/Help:Dumping_games#Switch)
+    2. Setup [hactool](https://github.com/SciresM/hactool) and configure your dumped `title.keys`.
+    3. Run `hactool [path to the NSP] -t pfs0 --outdir=extracted`.
+    4. `cd` into `extracted`.
+    5. Find the largest NCA.
+    6. Run `hactool [path to largest NCA] -t nca --exefsdir=exefs`
+    7. `exefs/main` is the NSO.
 
-3. Run `tools/setup.py [path to the NSO]`
+4. Run `tools/setup.py [path to the NSO]`
     * This will:
         * install tools/check to check for differences in decompiled code
         * convert the executable if necessary
