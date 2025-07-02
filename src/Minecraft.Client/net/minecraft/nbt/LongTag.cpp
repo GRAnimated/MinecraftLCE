@@ -1,7 +1,7 @@
-#include "Minecraft.Nbt/LongTag.h"
+#include "net/minecraft/nbt/LongTag.h"
 
-#include "Minecraft.Core/io/DataInput.h"
-#include "Minecraft.Core/io/DataOutput.h"
+#include "net/minecraft/core/io/DataInput.h"
+#include "net/minecraft/core/io/DataOutput.h"
 
 LongTag::LongTag() : mData(0) {}
 

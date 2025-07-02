@@ -3,8 +3,8 @@
 #include <unordered_map>
 #include <vector>
 
-#include "Minecraft.World/Random.h"
-#include "Minecraft.World/entity/model/ModelPartsSkinned.h"
+#include "net/minecraft/client/model/ModelPartsSkinned.h"
+#include "net/minecraft/world/Random.h"
 
 class Entity;
 class LivingEntity;

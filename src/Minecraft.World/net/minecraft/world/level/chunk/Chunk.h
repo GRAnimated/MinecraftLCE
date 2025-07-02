@@ -4,7 +4,7 @@
 
 #include "nn/os/os_MutexTypes.h"
 
-#include "Minecraft.World/IntKey.h"
+#include "net/minecraft/world/IntKey.h"
 
 class AABB;
 class BlockEntity;

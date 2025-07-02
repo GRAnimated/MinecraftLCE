@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Minecraft.World/entity/ai/control/Control.h"
+#include "net/minecraft/world/entity/ai/control/Control.h"
 
 class Mob;
 

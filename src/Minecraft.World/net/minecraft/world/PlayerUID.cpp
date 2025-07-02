@@ -1,4 +1,4 @@
-#include "Minecraft.World/PlayerUID.h"
+#include "net/minecraft/world/PlayerUID.h"
 
 #include <cstring>
 

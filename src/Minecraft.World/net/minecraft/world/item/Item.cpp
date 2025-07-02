@@ -1,16 +1,16 @@
 #include "types.h"
-#include "Minecraft.Client/renderer/texture/IconRegister.h"
-#include "Minecraft.Client/resources/ResourceLocation.h"
-#include "Minecraft.World/entity/player/Player.h"
-#include "Minecraft.World/item/BlockItem.h"
-#include "Minecraft.World/item/Item.h"
-#include "Minecraft.World/item/ItemInstance.h"
-#include "Minecraft.World/level/block/Block.h"
-#include "Minecraft.World/level/block/Blocks.h"
+#include "net/minecraft/client/renderer/texture/IconRegister.h"
+#include "net/minecraft/resources/ResourceLocation.h"
+#include "net/minecraft/world/entity/player/Player.h"
+#include "net/minecraft/world/item/BlockItem.h"
+#include "net/minecraft/world/item/Item.h"
+#include "net/minecraft/world/item/ItemInstance.h"
+#include "net/minecraft/world/level/block/Block.h"
+#include "net/minecraft/world/level/block/Blocks.h"
 #include <memory>
 #include <unordered_map>
 
-#include "Minecraft.Client/resources/MappedRegistry.h"
+#include "net/minecraft/client/resources/MappedRegistry.h"
 
 // should be replaced with proper ones later on
 // even though those are unused

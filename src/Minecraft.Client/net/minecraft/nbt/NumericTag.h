@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Minecraft.Nbt/Tag.h"
+#include "net/minecraft/tags/Tag.h"
 
 class NumericTag : public Tag {
 public:

@@ -1,1 +1,1 @@
-#include "Minecraft.Client/renderer/item/ItemInHandRenderer.h"
+#include "net/minecraft/client/renderer/item/ItemInHandRenderer.h"

@@ -1,7 +1,7 @@
 #pragma once
 
-#include "Minecraft.World/entity/Entity.h"
-#include "Minecraft.Core/Direction.h"
+#include "net/minecraft/core/Direction.h"
+#include "net/minecraft/world/entity/Entity.h"
 #include <memory>
 class DamageSource {
 public:

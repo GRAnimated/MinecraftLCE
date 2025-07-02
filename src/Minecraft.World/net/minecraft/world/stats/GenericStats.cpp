@@ -1,4 +1,4 @@
-#include "Minecraft.World/stats/GenericStats.h"
+#include "net/minecraft/world/stats/GenericStats.h"
 
 Stat* GenericStats::get_achievement(eAward) {
     return nullptr;

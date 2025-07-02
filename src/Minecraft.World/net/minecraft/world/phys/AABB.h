@@ -1,5 +1,5 @@
 #pragma once
-#include "Minecraft.World/phys/Vec3.h"
+#include "net/minecraft/world/phys/Vec3.h"
 
 class AABB {
 public:

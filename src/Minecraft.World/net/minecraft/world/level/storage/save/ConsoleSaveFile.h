@@ -1,11 +1,11 @@
 #pragma once
-#include "Minecraft.Client/ByteOrder.h"
-#include "Minecraft.Client/ESavePlatform.h"
-#include "Minecraft.World/level/storage/LevelStorage.h"
+#include "net/minecraft/client/ByteOrder.h"
+#include "net/minecraft/client/ESavePlatform.h"
+#include "net/minecraft/world/level/storage/LevelStorage.h"
 
 #include "FileHeader.h"
-#include "Minecraft.Core/io/File.h"
-#include "Minecraft.Core/io/FileEntry.h"
+#include "net/minecraft/core/io/File.h"
+#include "net/minecraft/core/io/FileEntry.h"
 
 class ConsoleSaveFile {
 public:

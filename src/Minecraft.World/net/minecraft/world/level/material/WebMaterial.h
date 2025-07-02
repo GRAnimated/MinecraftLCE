@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Minecraft.World/level/material/Material.h"
+#include "net/minecraft/world/level/material/Material.h"
 
 class WebMaterial : public Material {
 public:

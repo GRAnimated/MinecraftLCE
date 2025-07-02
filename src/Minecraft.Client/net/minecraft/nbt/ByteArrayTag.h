@@ -1,7 +1,7 @@
 #pragma once
 
-#include "Minecraft.Nbt/Tag.h"
-#include "Minecraft.World/ArrayWithLength.h"
+#include "net/minecraft/tags/Tag.h"
+#include "net/minecraft/world/ArrayWithLength.h"
 
 class ByteArrayTag : public Tag {
 public:

@@ -1,8 +1,8 @@
-#include "Minecraft.World/level/block/Blocks.h"
+#include "net/minecraft/world/level/block/Blocks.h"
 
-#include "Minecraft.Client/resources/ResourceLocation.h"
-#include "Minecraft.World/level/block/FireBlock.h"
-#include "Minecraft.World/level/block/WaterlilyBlock.h"
+#include "net/minecraft/resources/ResourceLocation.h"
+#include "net/minecraft/world/level/block/FireBlock.h"
+#include "net/minecraft/world/level/block/WaterlilyBlock.h"
 
 Block* Blocks::get(const std::wstring& name) {
     ResourceLocation loc = ResourceLocation(name);

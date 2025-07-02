@@ -1,8 +1,8 @@
 #pragma once
 
 #include "types.h"
-#include "Minecraft.World/level/border/BorderChangeListener.h"
-#include "Minecraft.World/level/border/BorderStatus.h"
+#include "net/minecraft/world/level/border/BorderChangeListener.h"
+#include "net/minecraft/world/level/border/BorderStatus.h"
 #include <memory>
 #include <vector>
 

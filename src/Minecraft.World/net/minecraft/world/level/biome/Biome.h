@@ -3,9 +3,9 @@
 #include <string>
 #include <vector>
 
-#include "Minecraft.World/WeighedRandomItem.h"
-#include "Minecraft.World/level/material/MaterialColor.h"
-#include "Minecraft.World/phys/Vec3.h"
+#include "net/minecraft/world/WeighedRandomItem.h"
+#include "net/minecraft/world/level/material/MaterialColor.h"
+#include "net/minecraft/world/phys/Vec3.h"
 
 class Random;
 class Block;

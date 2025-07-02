@@ -1,7 +1,7 @@
-#include "Minecraft.Nbt/IntTag.h"
+#include "net/minecraft/nbt/IntTag.h"
 
-#include "Minecraft.Core/io/DataInput.h"
-#include "Minecraft.Core/io/DataOutput.h"
+#include "net/minecraft/core/io/DataInput.h"
+#include "net/minecraft/core/io/DataOutput.h"
 
 IntTag::IntTag() {}
 

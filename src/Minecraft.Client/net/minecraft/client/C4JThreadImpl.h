@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Minecraft.Client/C4JThread.h"
+#include "net/minecraft/client/C4JThread.h"
 
 class C4JThreadImpl : public C4JThread {
 public:

@@ -1,7 +1,7 @@
 #pragma once
 
-#include "Minecraft.World/ArrayWithLength.h"
-#include "Minecraft.World/level/storage/LevelSource.h"
+#include "net/minecraft/world/ArrayWithLength.h"
+#include "net/minecraft/world/level/storage/LevelSource.h"
 
 class Level;
 class LevelChunk;

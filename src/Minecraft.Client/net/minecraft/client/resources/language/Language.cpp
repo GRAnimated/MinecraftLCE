@@ -1,1 +1,1 @@
-#include "Minecraft.Client/resources/language/Language.h"
+#include "net/minecraft/client/resources/language/Language.h"

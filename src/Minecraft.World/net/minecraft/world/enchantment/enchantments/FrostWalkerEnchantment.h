@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Minecraft.World/enchantment/Enchantment.h"
+#include "net/minecraft/world/enchantment/Enchantment.h"
 class FrostWalkerEnchantment : public Enchantment {
 public:
     FrostWalkerEnchantment(const Rarity*, arrayWithLength<const EquipmentSlot*>);

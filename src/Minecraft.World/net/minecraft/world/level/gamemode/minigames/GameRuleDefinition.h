@@ -3,8 +3,8 @@
 #include "types.h"
 #include <vector>
 
-#include "Minecraft.World/level/gamemode/ConsoleGameRules.h"
-#include "Minecraft.World/level/gamemode/GameRulesInstance.h"
+#include "net/minecraft/world/level/gamemode/ConsoleGameRules.h"
+#include "net/minecraft/world/level/gamemode/GameRulesInstance.h"
 
 class Player;
 class MiniGameDef;

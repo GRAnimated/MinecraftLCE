@@ -1,11 +1,11 @@
-#include "Minecraft.World/enchantment/categories/WearableCategory.h"
-#include "Minecraft.World/inventory/EquipmentSlot.h"
-#include "Minecraft.World/item/ArmorItem.h"
-#include "Minecraft.World/item/BlockItem.h"
-#include "Minecraft.World/item/ElytraItem.h"
-#include "Minecraft.World/item/SkullItem.h"
-#include "Minecraft.World/level/block/Block.h"
-#include "Minecraft.World/level/block/PumpkinBlock.h"
+#include "net/minecraft/world/enchantment/categories/WearableCategory.h"
+#include "net/minecraft/world/entity/EquipmentSlot.h"
+#include "net/minecraft/world/item/ArmorItem.h"
+#include "net/minecraft/world/item/BlockItem.h"
+#include "net/minecraft/world/item/ElytraItem.h"
+#include "net/minecraft/world/item/SkullItem.h"
+#include "net/minecraft/world/level/block/Block.h"
+#include "net/minecraft/world/level/block/PumpkinBlock.h"
 
 const WearableCategory* WearableCategory::sWearableCategory = new WearableCategory();
 

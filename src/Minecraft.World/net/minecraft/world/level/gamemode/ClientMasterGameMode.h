@@ -1,7 +1,7 @@
 #pragma once
 
 #include "types.h"
-#include "Minecraft.World/level/gamemode/CommonMasterGameMode.h"
+#include "net/minecraft/world/level/gamemode/CommonMasterGameMode.h"
 
 class ClientMasterGameMode : public CommonMasterGameMode {
 public:

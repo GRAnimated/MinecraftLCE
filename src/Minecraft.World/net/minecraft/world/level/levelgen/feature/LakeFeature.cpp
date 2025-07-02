@@ -1,4 +1,4 @@
-#include "Minecraft.World/level/levelgen/feature/LakeFeature.h"
+#include "net/minecraft/world/level/levelgen/feature/LakeFeature.h"
 
 LakeFeature::LakeFeature(Block* block) : Feature(false), mBlock(block) {}
 

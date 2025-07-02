@@ -1,6 +1,6 @@
-#include "Minecraft.Core/Direction.h"
+#include "net/minecraft/core/Direction.h"
 
-#include "Minecraft.Core/Vec3i.h"
+#include "net/minecraft/core/Vec3i.h"
 
 #include <string>
 

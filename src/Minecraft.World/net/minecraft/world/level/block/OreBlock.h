@@ -1,7 +1,7 @@
 #pragma once
 
-#include "Minecraft.World/level/block/Block.h"
-#include "Minecraft.World/level/material/MaterialColor.h"
+#include "net/minecraft/world/level/block/Block.h"
+#include "net/minecraft/world/level/material/MaterialColor.h"
 class OreBlock : public Block {
     OreBlock();
     OreBlock(const MaterialColor*);

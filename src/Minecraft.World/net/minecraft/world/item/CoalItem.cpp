@@ -1,6 +1,6 @@
-#include "Minecraft.Client/renderer/texture/IconRegister.h"
-#include "Minecraft.World/item/CoalItem.h"
-#include "Minecraft.World/item/ItemInstance.h"
+#include "net/minecraft/client/renderer/texture/IconRegister.h"
+#include "net/minecraft/world/item/CoalItem.h"
+#include "net/minecraft/world/item/ItemInstance.h"
 
 CoalItem::CoalItem() {
     this->setStackedByData(true);

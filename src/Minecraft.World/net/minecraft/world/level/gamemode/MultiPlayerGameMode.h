@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Minecraft.World/level/gamemode/GameMode.h"
+#include "net/minecraft/world/level/gamemode/GameMode.h"
 
 class Tutorial;
 

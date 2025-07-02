@@ -1,4 +1,4 @@
-#include "Minecraft.World/level/chunk/storage/ChunkStorage.h"
+#include "net/minecraft/world/level/chunk/storage/ChunkStorage.h"
 
 ChunkStorage::ChunkStorage() {}
 

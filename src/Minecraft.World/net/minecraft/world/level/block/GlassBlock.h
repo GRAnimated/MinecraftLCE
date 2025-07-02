@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Minecraft.World/level/block/HalfTransparentBlock.h"
+#include "net/minecraft/world/level/block/HalfTransparentBlock.h"
 
 class GlassBlock : public HalfTransparentBlock {
 public:

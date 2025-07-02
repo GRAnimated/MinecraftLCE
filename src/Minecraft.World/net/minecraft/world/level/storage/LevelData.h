@@ -1,7 +1,7 @@
 #pragma once
 
-#include "Minecraft.World/level/GameRules.h"
-#include "Minecraft.Core/BlockPos.h"
+#include "net/minecraft/core/BlockPos.h"
+#include "net/minecraft/world/level/GameRules.h"
 #include <memory>
 #include <string>
 #include <unordered_map>

@@ -19,7 +19,7 @@ def find_cpp_classes(src_dir):
                         rel_path = os.path.relpath(filepath, src_dir).replace("\\", "/")
 
                         # all sources we care about are either in Minecraft.Client or Minecraft.World
-                        rel_path = rel_path.replace("Minecraft.Client/", "").replace("Minecraft.World/", "")
+                        # rel_path = rel_path.replace("net/minecraft/client/", "").replace("net/minecraft/world/", "")
 
                         class_map[name] = rel_path
     return class_map

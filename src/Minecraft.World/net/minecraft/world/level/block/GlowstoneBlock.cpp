@@ -1,8 +1,8 @@
-#include "Minecraft.World/level/block/GlowstoneBlock.h"
+#include "net/minecraft/world/level/block/GlowstoneBlock.h"
 
-#include "Minecraft.World/item/Items.h"
-#include "Minecraft.World/level/material/MaterialColor.h"
-#include "Minecraft.Util/Mth.h"
+#include "net/minecraft/util/Mth.h"
+#include "net/minecraft/world/item/Items.h"
+#include "net/minecraft/world/level/material/MaterialColor.h"
 
 Glowstoneblock::Glowstoneblock(Material* material) : Block(material) {
     DerivedInit();

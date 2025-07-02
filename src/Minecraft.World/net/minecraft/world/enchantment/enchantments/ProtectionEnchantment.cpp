@@ -1,9 +1,9 @@
-#include "Minecraft.World/enchantment/Enchantment.h"
-#include "Minecraft.World/enchantment/EnchantmentCategory.h"
-#include "Minecraft.World/enchantment/categories/ArmorCategory.h"
-#include "Minecraft.World/enchantment/categories/FeetArmorCategory.h"
-#include "Minecraft.World/enchantment/enchantments/ProtectionEnchantment.h"
-#include "Minecraft.World/level/DamageSource.h"
+#include "net/minecraft/world/damagesource/DamageSource.h"
+#include "net/minecraft/world/enchantment/Enchantment.h"
+#include "net/minecraft/world/enchantment/categories/ArmorCategory.h"
+#include "net/minecraft/world/enchantment/categories/FeetArmorCategory.h"
+#include "net/minecraft/world/enchantment/enchantments/ProtectionEnchantment.h"
+#include "net/minecraft/world/item/enchantment/EnchantmentCategory.h"
 
 const ProtectionEnchantment::Type* ALL = new ProtectionEnchantment::Type(0xF84A0F07, 1, 11, 20);
 const ProtectionEnchantment::Type* FIRE = new ProtectionEnchantment::Type(0xE1AA8A26, 10, 8, 12);

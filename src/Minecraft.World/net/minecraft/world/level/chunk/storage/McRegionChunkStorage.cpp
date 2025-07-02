@@ -1,9 +1,9 @@
-#include "Minecraft.Client/platform/NX/Platform.h"
-#include "Minecraft.Nbt/CompoundTag.h"
-#include "Minecraft.Nbt/NbtIo.h"
-#include "Minecraft.World/level/storage/LevelData.h"
 #include "McRegionChunkStorage.h"
 #include "OldChunkStorage.h"
+#include "net/minecraft/client/platform/NX/Platform.h"
+#include "net/minecraft/nbt/CompoundTag.h"
+#include "net/minecraft/nbt/NbtIo.h"
+#include "net/minecraft/world/level/storage/LevelData.h"
 
 void McRegionChunkStorage::save(Level* level, LevelChunk* chunk) {
     level->checkSession();

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Minecraft.World/level/block/boxed/Boxed.h"
+#include "net/minecraft/world/level/block/boxed/Boxed.h"
 
 template <typename T>
 class TypedBoxed : public Boxed {

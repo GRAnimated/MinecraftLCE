@@ -1,7 +1,7 @@
 #pragma once
 #include <string>
 
-#include "Minecraft.World/ArrayWithLength.h"
+#include "net/minecraft/world/ArrayWithLength.h"
 
 class PlayerUID;
 

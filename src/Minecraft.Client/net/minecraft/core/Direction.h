@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Minecraft.Core/StringRepresentable.h"
+#include "net/minecraft/core/StringRepresentable.h"
 #include <string>
 #include <unordered_map>
 #include <vector>

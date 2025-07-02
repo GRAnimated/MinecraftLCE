@@ -1,11 +1,11 @@
-#include "Minecraft.Client/Minecraft.h"
-#include "Minecraft.Client/gui/Gui.h"
-#include "Minecraft.Client/gui/GuiComponent.h"
+#include "net/minecraft/client/Minecraft.h"
+#include "net/minecraft/client/gui/Gui.h"
+#include "net/minecraft/client/gui/GuiComponent.h"
 
-#include "Minecraft.Client/gui/Font.h"
-#include "Minecraft.Client/renderer/BufferBuilder.h"
-#include "Minecraft.Client/renderer/GlStateManager.h"
-#include "Minecraft.Client/renderer/Tesselator.h"
+#include "com/mojang/blaze3d/platform/GlStateManager.h"
+#include "com/mojang/blaze3d/vertex/BufferBuilder.h"
+#include "com/mojang/blaze3d/vertex/Tesselator.h"
+#include "net/minecraft/client/gui/Font.h"
 #include <cmath>
 
 GuiComponent::GuiComponent() {}

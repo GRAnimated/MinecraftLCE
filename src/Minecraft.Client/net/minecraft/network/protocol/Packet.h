@@ -1,11 +1,11 @@
 #pragma once
 
 #include "types.h"
-#include "Minecraft.Network/PacketType.h"
+#include "net/minecraft/network/PacketType.h"
 #include <deque>
 #include <memory>
 // #include <iostream>
-#include "Minecraft.Core/io/DataInputStream.h"
+#include "net/minecraft/core/io/DataInputStream.h"
 
 class DataInputStream;
 class DataOutputStream;

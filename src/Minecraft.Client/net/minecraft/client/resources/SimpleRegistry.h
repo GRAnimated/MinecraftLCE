@@ -1,6 +1,6 @@
 #pragma once
-#include "Minecraft.Client/resources/Registry.h"
-#include "Minecraft.World/Random.h"
+#include "net/minecraft/client/resources/Registry.h"
+#include "net/minecraft/world/Random.h"
 #include <set>
 #include <unordered_map>
 

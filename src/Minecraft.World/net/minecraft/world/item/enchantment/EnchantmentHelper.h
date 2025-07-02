@@ -1,7 +1,7 @@
 #pragma once
 
 #include "types.h"
-#include "Minecraft.World/entity/LivingEntity.h"
+#include "net/minecraft/world/entity/LivingEntity.h"
 #include <memory>
 
 class ItemInstance;

@@ -1,10 +1,10 @@
 #pragma once
 
-#include "Minecraft.World/ArrayWithLength.h"
-#include "Minecraft.World/InteractionHand.h"
-#include "Minecraft.World/eINSTANCEOF.h"
-#include "Minecraft.World/entity/CommandSender.h"
-#include "Minecraft.World/sounds/SoundSource.h"
+#include "net/minecraft/sounds/SoundSource.h"
+#include "net/minecraft/world/ArrayWithLength.h"
+#include "net/minecraft/world/InteractionHand.h"
+#include "net/minecraft/world/eINSTANCEOF.h"
+#include "net/minecraft/world/entity/CommandSender.h"
 #include <cstdint>
 #include <memory>
 #include <set>

@@ -1,8 +1,8 @@
-#include "Minecraft.Nbt/DoubleTag.h"
+#include "net/minecraft/nbt/DoubleTag.h"
 
-#include "Minecraft.Core/io/DataInput.h"
-#include "Minecraft.Core/io/DataOutput.h"
-#include "Minecraft.Util/Mth.h"
+#include "net/minecraft/core/io/DataInput.h"
+#include "net/minecraft/core/io/DataOutput.h"
+#include "net/minecraft/util/Mth.h"
 #include <cmath>
 
 DoubleTag::DoubleTag() : mData(0.0f) {}

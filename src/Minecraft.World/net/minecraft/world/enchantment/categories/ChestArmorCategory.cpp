@@ -1,6 +1,6 @@
-#include "Minecraft.World/enchantment/categories/ChestArmorCategory.h"
-#include "Minecraft.World/inventory/EquipmentSlot.h"
-#include "Minecraft.World/item/ArmorItem.h"
+#include "net/minecraft/world/enchantment/categories/ChestArmorCategory.h"
+#include "net/minecraft/world/entity/EquipmentSlot.h"
+#include "net/minecraft/world/item/ArmorItem.h"
 
 const ChestArmorCategory* ChestArmorCategory::sChestArmorCategory = new ChestArmorCategory();
 

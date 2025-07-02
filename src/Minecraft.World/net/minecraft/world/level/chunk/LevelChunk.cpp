@@ -1,4 +1,4 @@
-#include "Minecraft.World/level/chunk/LevelChunk.h"
+#include "net/minecraft/world/level/chunk/LevelChunk.h"
 
 void LevelChunk::writeCompressedDataData(DataOutputStream* out) {
     dataData1->write(out);

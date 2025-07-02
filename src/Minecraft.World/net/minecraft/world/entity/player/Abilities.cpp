@@ -1,8 +1,8 @@
-#include "Minecraft.World/entity/player/Abilities.h"
+#include "net/minecraft/world/entity/player/Abilities.h"
 
-#include "Minecraft.Nbt/CompoundTag.h"
-#include "Minecraft.Core/io/DataInputStream.h"
-#include "Minecraft.Core/io/DataOutputStream.h"
+#include "net/minecraft/core/io/DataInputStream.h"
+#include "net/minecraft/core/io/DataOutputStream.h"
+#include "net/minecraft/nbt/CompoundTag.h"
 
 Abilities::Abilities() {}
 

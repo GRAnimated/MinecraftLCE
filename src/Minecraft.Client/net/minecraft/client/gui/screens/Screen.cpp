@@ -1,10 +1,10 @@
-#include "Minecraft.Client/gui/screens/Screen.h"
+#include "net/minecraft/client/gui/screens/Screen.h"
 
-#include "Minecraft.Client/Minecraft.h"
-#include "Minecraft.Client/gui/components/Button.h"
-#include "Minecraft.Client/gui/components/GuiParticles.h"
-#include "Minecraft.Client/sounds/SoundEngine.h"
-#include "Minecraft.World/sounds/SoundEvents.h"
+#include "net/minecraft/client/Minecraft.h"
+#include "net/minecraft/client/gui/components/Button.h"
+#include "net/minecraft/client/gui/components/GuiParticles.h"
+#include "net/minecraft/client/sounds/SoundEngine.h"
+#include "net/minecraft/sounds/SoundEvents.h"
 
 Screen::Screen() {
     mMinecraft = nullptr;

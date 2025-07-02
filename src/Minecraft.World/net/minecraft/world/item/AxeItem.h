@@ -1,7 +1,7 @@
 #pragma once
 
-#include "Minecraft.World/ArrayWithLength.h"
-#include "Minecraft.World/item/DiggerItem.h"
+#include "net/minecraft/world/ArrayWithLength.h"
+#include "net/minecraft/world/item/DiggerItem.h"
 
 class AxeItem : public DiggerItem {
 public:

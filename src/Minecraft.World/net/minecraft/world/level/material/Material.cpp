@@ -1,4 +1,4 @@
-#include "Minecraft.World/level/material/Material.h"
+#include "net/minecraft/world/level/material/Material.h"
 
 Material::Material(const MaterialColor* color) : mColor(color) {
     mIsFlammable = false;

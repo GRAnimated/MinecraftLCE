@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Minecraft.World/level/gamemode/minigames/GameRuleDefinition.h"
+#include "net/minecraft/world/level/gamemode/minigames/GameRuleDefinition.h"
 
 class AABB;
 class BlockPos;

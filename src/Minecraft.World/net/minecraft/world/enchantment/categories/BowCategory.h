@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Minecraft.World/enchantment/EnchantmentCategory.h"
+#include "net/minecraft/world/item/enchantment/EnchantmentCategory.h"
 
 class BowCategory : public EnchantmentCategory {
 public:

@@ -1,7 +1,7 @@
 #pragma once
 
-#include "Minecraft.World/ArrayWithLength.h"
-#include "Minecraft.World/level/levelgen/synth/Synth.h"
+#include "net/minecraft/world/ArrayWithLength.h"
+#include "net/minecraft/world/level/levelgen/synth/Synth.h"
 
 class Random;
 

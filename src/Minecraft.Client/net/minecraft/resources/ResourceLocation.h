@@ -1,6 +1,6 @@
 #pragma once
-#include "Minecraft.Client/resources/MappedRegistry.h"
-#include "Minecraft.World/entity/Entity.h"
+#include "net/minecraft/client/resources/MappedRegistry.h"
+#include "net/minecraft/world/entity/Entity.h"
 #include <string>
 
 class ResourceLocation {

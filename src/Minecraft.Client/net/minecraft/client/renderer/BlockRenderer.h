@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Minecraft.World/level/storage/LevelSource.h"
+#include "net/minecraft/world/level/storage/LevelSource.h"
 
 class TextureAtlasSprite;
 class AABB;

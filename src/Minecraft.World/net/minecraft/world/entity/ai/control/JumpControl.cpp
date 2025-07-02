@@ -1,6 +1,6 @@
-#include "Minecraft.World/entity/ai/control/JumpControl.h"
+#include "net/minecraft/world/entity/ai/control/JumpControl.h"
 
-#include "Minecraft.World/entity/mob/Mob.h"
+#include "net/minecraft/world/entity/mob/Mob.h"
 
 JumpControl::JumpControl(Mob* mob) {
     this->mMob = mob;

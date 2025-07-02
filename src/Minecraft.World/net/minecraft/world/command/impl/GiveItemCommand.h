@@ -1,7 +1,7 @@
 #pragma once
 
-#include "Minecraft.World/command/Command.h"
-#include "Minecraft.World/entity/CommandSender.h"
+#include "net/minecraft/world/command/Command.h"
+#include "net/minecraft/world/entity/CommandSender.h"
 
 class GiveItemCommand : public Command {
 public:

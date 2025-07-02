@@ -1,8 +1,8 @@
-#include "Minecraft.World/level/block/AirBlock.h"
+#include "net/minecraft/world/level/block/AirBlock.h"
 
-#include "Minecraft.World/level/block/Block.h"
-#include "Minecraft.World/level/block/RenderShape.h"
-#include "Minecraft.World/level/material/Material.h"
+#include "net/minecraft/world/level/block/Block.h"
+#include "net/minecraft/world/level/block/RenderShape.h"
+#include "net/minecraft/world/level/material/Material.h"
 
 AirBlock::AirBlock() : Block(Material::AIR) {
     DerivedInit();

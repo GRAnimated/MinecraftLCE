@@ -1,6 +1,6 @@
 #pragma once
 
-#include "AttributeModifier.h"
+#include "net/minecraft/world/entity/ai/attributes/AttributeModifier.h"
 
 class Attribute {
 public:

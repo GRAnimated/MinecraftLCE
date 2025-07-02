@@ -1,7 +1,7 @@
 #pragma once
 
-#include "Minecraft.World/level/material/MaterialColor.h"
-#include "Minecraft.World/level/material/PushReaction.h"
+#include "net/minecraft/world/level/material/MaterialColor.h"
+#include "net/minecraft/world/level/material/PushReaction.h"
 
 class DecorationMaterial;
 class GasMaterial;
@@ -84,8 +84,8 @@ public:
 };
 
 // To avoid clangd warning about unused includes in other files, we include them here.
-#include "Minecraft.World/level/material/DecorationMaterial.h"
-#include "Minecraft.World/level/material/GasMaterial.h"
-#include "Minecraft.World/level/material/LiquidMaterial.h"
-#include "Minecraft.World/level/material/PortalMaterial.h"
-#include "Minecraft.World/level/material/WebMaterial.h"
+#include "net/minecraft/world/level/material/DecorationMaterial.h"
+#include "net/minecraft/world/level/material/GasMaterial.h"
+#include "net/minecraft/world/level/material/LiquidMaterial.h"
+#include "net/minecraft/world/level/material/PortalMaterial.h"
+#include "net/minecraft/world/level/material/WebMaterial.h"

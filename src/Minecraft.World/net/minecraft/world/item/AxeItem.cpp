@@ -1,8 +1,8 @@
-#include "Minecraft.World/ArrayWithLength.h"
-#include "Minecraft.World/item/AxeItem.h"
-#include "Minecraft.World/item/DiggerItem.h"
-#include "Minecraft.World/level/block/Blocks.h"
-#include "Minecraft.World/level/material/Material.h"
+#include "net/minecraft/world/ArrayWithLength.h"
+#include "net/minecraft/world/item/AxeItem.h"
+#include "net/minecraft/world/item/DiggerItem.h"
+#include "net/minecraft/world/level/block/Blocks.h"
+#include "net/minecraft/world/level/material/Material.h"
 
 arrayWithLength<Block*> AxeItem::DIGGABLES = arrayWithLength<Block*>(11, true);
 

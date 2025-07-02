@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Minecraft.Client/resources/IdMap.h"
+#include "net/minecraft/client/resources/IdMap.h"
 
 class BlockState;
 

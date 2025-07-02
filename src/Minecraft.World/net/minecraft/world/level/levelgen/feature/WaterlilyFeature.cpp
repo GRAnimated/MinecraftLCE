@@ -1,9 +1,9 @@
-#include "Minecraft.World/Random.h"
-#include "Minecraft.World/level/Level.h"
-#include "Minecraft.World/level/block/Blocks.h"
-#include "Minecraft.World/level/block/state/BlockState.h"
-#include "Minecraft.World/level/levelgen/feature/WaterlilyFeature.h"
-#include "Minecraft.Core/BlockPos.h"
+#include "net/minecraft/core/BlockPos.h"
+#include "net/minecraft/world/Random.h"
+#include "net/minecraft/world/level/Level.h"
+#include "net/minecraft/world/level/block/Blocks.h"
+#include "net/minecraft/world/level/block/state/BlockState.h"
+#include "net/minecraft/world/level/levelgen/feature/WaterlilyFeature.h"
 
 WaterlilyFeature::WaterlilyFeature() : Feature(false) {}
 

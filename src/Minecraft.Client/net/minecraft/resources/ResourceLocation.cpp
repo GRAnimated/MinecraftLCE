@@ -1,4 +1,4 @@
-#include "Minecraft.Client/resources/ResourceLocation.h"
+#include "net/minecraft/resources/ResourceLocation.h"
 #include <string>
 
 bool ResourceLocation::operator==(const ResourceLocation* other) const {

@@ -1,4 +1,4 @@
-#include "Minecraft.World/entity/model/Model.h"
+#include "net/minecraft/client/model/Model.h"
 
 Model::Model() {
     this->mRiding = false;

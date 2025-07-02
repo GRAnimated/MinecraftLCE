@@ -1,10 +1,10 @@
-#include "Minecraft.World/inventory/Slot.h"
+#include "net/minecraft/world/inventory/Slot.h"
 
 #include "types.h"
 
-#include "Minecraft.World/Container.h"
-#include "Minecraft.World/item/Item.h"
-#include "Minecraft.World/item/ItemInstance.h"
+#include "net/minecraft/world/Container.h"
+#include "net/minecraft/world/item/Item.h"
+#include "net/minecraft/world/item/ItemInstance.h"
 
 Slot::Slot(std::shared_ptr<Container> container, int index, int x, int y)
     : mSlot(index), mContainer(container), mX(x), mY(y) {}

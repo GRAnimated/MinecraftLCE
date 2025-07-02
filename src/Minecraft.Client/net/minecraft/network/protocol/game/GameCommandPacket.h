@@ -1,9 +1,9 @@
 #pragma once
 
 #include "types.h"
-#include "Minecraft.World/ArrayWithLength.h"
-#include "Minecraft.World/command/EGameCommand.h"
-#include "Minecraft.Network/protocol/Packet.h"
+#include "net/minecraft/network/protocol/Packet.h"
+#include "net/minecraft/world/ArrayWithLength.h"
+#include "net/minecraft/world/command/EGameCommand.h"
 
 class GameCommandPacket : public Packet, public std::enable_shared_from_this<GameCommandPacket> {
     GameCommandPacket();

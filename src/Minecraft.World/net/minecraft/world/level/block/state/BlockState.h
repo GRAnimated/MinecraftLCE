@@ -2,10 +2,10 @@
 
 #include <memory>
 
-#include "Minecraft.World/level/block/RenderShape.h"
-#include "Minecraft.World/level/block/boxed/TypedBoxed.h"
-#include "Minecraft.World/level/block/state/BlockBehaviours.h"
-#include "Minecraft.World/level/block/state/BlockProperties.h"
+#include "net/minecraft/world/level/block/RenderShape.h"
+#include "net/minecraft/world/level/block/boxed/TypedBoxed.h"
+#include "net/minecraft/world/level/block/state/BlockBehaviours.h"
+#include "net/minecraft/world/level/block/state/BlockProperties.h"
 
 class Entity;
 class BlockPos;

@@ -1,7 +1,7 @@
 #pragma once
 
-#include "Minecraft.Client/renderer/texture/TextureAtlasSprite.h"
-#include "Minecraft.World/level/block/Block.h"
+#include "net/minecraft/client/renderer/texture/TextureAtlasSprite.h"
+#include "net/minecraft/world/level/block/Block.h"
 #include <unordered_map>
 
 class IntegerProperty;

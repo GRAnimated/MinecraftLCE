@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Minecraft.World/item/Item.h"
+#include "net/minecraft/world/item/Item.h"
 class ArmorItem : public Item {
 public:
     class ArmorMaterial;

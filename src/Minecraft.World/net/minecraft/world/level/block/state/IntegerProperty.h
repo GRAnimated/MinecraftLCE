@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Minecraft.World/level/block/state/AbstractProperty.h"
+#include "net/minecraft/world/level/block/state/AbstractProperty.h"
 
 class IntegerProperty : public AbstractProperty<int> {
 public:

@@ -1,4 +1,4 @@
-#include "Minecraft.World/enchantment/categories/AllCategory.h"
+#include "net/minecraft/world/enchantment/categories/AllCategory.h"
 
 const AllCategory* AllCategory::sAllCategory = new AllCategory();
 

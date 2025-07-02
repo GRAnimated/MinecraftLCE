@@ -1,5 +1,5 @@
-#include "Minecraft.World/enchantment/categories/DiggerCategory.h"
-#include "Minecraft.World/item/DiggerItem.h"
+#include "net/minecraft/world/enchantment/categories/DiggerCategory.h"
+#include "net/minecraft/world/item/DiggerItem.h"
 
 const DiggerCategory* DiggerCategory::sDiggerCategory = new DiggerCategory();
 

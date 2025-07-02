@@ -1,11 +1,12 @@
 #pragma once
 #include "types.h"
-#include "Minecraft.World/InteractionHand.h"
-#include "Minecraft.World/enchantment/Enchantment.h"
-#include "Minecraft.World/entity/Entity.h"
-#include "Minecraft.World/item/ItemInstance.h"
-#include "Minecraft.World/level/Level.h"
-#include "Minecraft.Core/NonNullList.h"
+#include "net/minecraft/core/NonNullList.h"
+#include "net/minecraft/world/InteractionHand.h"
+#include "net/minecraft/world/enchantment/Enchantment.h"
+#include "net/minecraft/world/entity/Entity.h"
+#include "net/minecraft/world/entity/MobType.h"
+#include "net/minecraft/world/item/ItemInstance.h"
+#include "net/minecraft/world/level/Level.h"
 #include <cstdint>
 #include <unordered_map>
 

@@ -1,10 +1,10 @@
-#include "Minecraft.World/enchantment/Enchantment.h"
-#include "Minecraft.World/enchantment/EnchantmentCategory.h"
-#include "Minecraft.World/enchantment/enchantments/LootBonusEnchantment.h"
+#include "net/minecraft/world/enchantment/Enchantment.h"
+#include "net/minecraft/world/enchantment/enchantments/LootBonusEnchantment.h"
+#include "net/minecraft/world/item/enchantment/EnchantmentCategory.h"
 
-#include "Minecraft.World/enchantment/categories/DiggerCategory.h"
-#include "Minecraft.World/enchantment/categories/FishingRodCategory.h"
-#include "Minecraft.World/enchantment/categories/WeaponCategory.h"
+#include "net/minecraft/world/enchantment/categories/DiggerCategory.h"
+#include "net/minecraft/world/enchantment/categories/FishingRodCategory.h"
+#include "net/minecraft/world/enchantment/categories/WeaponCategory.h"
 
 LootBonusEnchantment::LootBonusEnchantment(const Rarity* rarity, const EnchantmentCategory* category,
                                            arrayWithLength<const EquipmentSlot*> equipmentSlots)

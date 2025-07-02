@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Minecraft.Client/renderer/C4JRender.h"
+#include "net/minecraft/client/renderer/C4JRender.h"
 
 class _XSOCIAL_PREVIEWIMAGE;
 class ImageFileBuffer;

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Minecraft.Client/gui/GuiComponent.h"
+#include "net/minecraft/client/gui/GuiComponent.h"
 
 class Minecraft;
 

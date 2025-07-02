@@ -1,7 +1,7 @@
 #pragma once
 
-#include "Minecraft.Client/ui/scene/UIScene.h"
-#include "Minecraft.World/level/gamemode/minigames/MiniGameDef.h"
+#include "net/minecraft/client/ui/scene/UIScene.h"
+#include "net/minecraft/world/level/gamemode/minigames/MiniGameDef.h"
 
 enum ESen_FriendOrMatch {};
 enum ESen_CompeteOrCoop {};

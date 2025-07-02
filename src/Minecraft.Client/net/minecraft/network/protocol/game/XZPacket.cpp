@@ -1,8 +1,8 @@
-#include "Minecraft.Network/protocol/game/XZPacket.h"
+#include "net/minecraft/network/protocol/game/XZPacket.h"
 
-#include "Minecraft.Core/io/DataInputStream.h"
-#include "Minecraft.Core/io/DataOutputStream.h"
-#include "Minecraft.Network/PacketListener.h"
+#include "net/minecraft/core/io/DataInputStream.h"
+#include "net/minecraft/core/io/DataOutputStream.h"
+#include "net/minecraft/network/PacketListener.h"
 
 std::shared_ptr<Packet> XZPacket::create() {
     return std::shared_ptr<Packet>(new XZPacket());

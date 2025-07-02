@@ -1,6 +1,6 @@
 #pragma once
-#include "Minecraft.World/ArrayWithLength.h"
 #include "TextureAtlas.h"
+#include "net/minecraft/world/ArrayWithLength.h"
 #include <string>
 
 class BufferedImage;

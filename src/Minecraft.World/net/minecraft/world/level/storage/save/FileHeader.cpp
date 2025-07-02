@@ -1,4 +1,4 @@
-#include "Minecraft.World/level/storage/save/FileHeader.h"
+#include "net/minecraft/world/level/storage/save/FileHeader.h"
 
 FileHeader::FileHeader() {
     this->version = 10;

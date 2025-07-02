@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Minecraft.World/PlayerUID.h"
+#include "net/minecraft/world/PlayerUID.h"
 class StatsUID : public PlayerUID {
 public:
     StatsUID();

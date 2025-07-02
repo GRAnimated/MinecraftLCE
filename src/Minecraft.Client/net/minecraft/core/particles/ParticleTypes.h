@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Minecraft.Core/ParticleType.h"
+#include "net/minecraft/core/particles/ParticleType.h"
 
 class ParticleTypes {
 public:

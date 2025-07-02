@@ -2,4 +2,4 @@
 #define STBI_ASSERT(x)
 #include "stb_image.h"
 
-#include "Minecraft.Client/renderer/TextureUtil.h"
+#include "net/minecraft/client/renderer/TextureUtil.h"

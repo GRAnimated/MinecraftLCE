@@ -1,4 +1,4 @@
-#include "Minecraft.Client/platform/NX/Platform.h"
+#include "net/minecraft/client/platform/NX/Platform.h"
 
 #include "Platform.h"
 #include <cstdlib>

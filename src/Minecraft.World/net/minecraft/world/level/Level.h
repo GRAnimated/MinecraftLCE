@@ -6,13 +6,13 @@
 #include <unordered_map>
 #include <vector>
 
-#include "Minecraft.World/ArrayWithLength.h"
-#include "Minecraft.World/CustomSet.h"
-#include "Minecraft.World/IntKey.h"
-#include "Minecraft.World/level/GameRules.h"
-#include "Minecraft.World/level/storage/LevelSource.h"
-#include "Minecraft.World/phys/AABB.h"
-#include "Minecraft.World/sounds/SoundSource.h"
+#include "net/minecraft/sounds/SoundSource.h"
+#include "net/minecraft/world/ArrayWithLength.h"
+#include "net/minecraft/world/CustomSet.h"
+#include "net/minecraft/world/IntKey.h"
+#include "net/minecraft/world/level/GameRules.h"
+#include "net/minecraft/world/level/storage/LevelSource.h"
+#include "net/minecraft/world/phys/AABB.h"
 
 class TickNextTickData;
 class LevelSettings;

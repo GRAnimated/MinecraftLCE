@@ -1,6 +1,7 @@
 #pragma once
 #include "types.h"
-#include "Minecraft.World/ArrayWithLength.h"
+#include "net/minecraft/world/ArrayWithLength.h"
+#include "net/minecraft/world/entity/MobType.h"
 #include <memory>
 
 class EnchantmentCategory;

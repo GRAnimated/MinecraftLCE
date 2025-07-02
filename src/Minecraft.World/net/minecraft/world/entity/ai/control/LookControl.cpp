@@ -1,4 +1,4 @@
-#include "Minecraft.World/entity/ai/control/LookControl.h"
+#include "net/minecraft/world/entity/ai/control/LookControl.h"
 
 LookControl::LookControl(Mob* mob) : mMob(mob) {
     mYMaxRotSpeed = 0.0f;

@@ -1,5 +1,5 @@
 #pragma once
-#include "Minecraft.World/phys/AABB.h"
+#include "net/minecraft/world/phys/AABB.h"
 #include <vector>
 
 class TargetAreaRuleDefinition;

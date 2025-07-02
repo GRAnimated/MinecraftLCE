@@ -1,6 +1,6 @@
-#include "Minecraft.Client/resources/ResourceLocation.h"
-#include "Minecraft.World/enchantment/Enchantment.h"
-#include "Minecraft.World/enchantment/Enchantments.h"
+#include "net/minecraft/resources/ResourceLocation.h"
+#include "net/minecraft/world/enchantment/Enchantment.h"
+#include "net/minecraft/world/item/enchantment/Enchantments.h"
 
 extern MappedRegistry<ResourceLocation, Enchantment*>* sEnchantmentRegistry;
 

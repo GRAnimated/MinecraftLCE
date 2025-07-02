@@ -1,4 +1,4 @@
-#include "Minecraft.Network/protocol/game/GameCommandPacket.h"
+#include "net/minecraft/network/protocol/game/GameCommandPacket.h"
 
 GameCommandPacket::GameCommandPacket(EGameCommand command, arrayWithLength<uchar> commandArguments) {
     this->mCommandArguments = commandArguments;

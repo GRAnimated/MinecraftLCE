@@ -1,5 +1,5 @@
-#include "Minecraft.Client/resources/ResourceLocation.h"
-#include "Minecraft.World/item/Items.h"
+#include "net/minecraft/resources/ResourceLocation.h"
+#include "net/minecraft/world/item/Items.h"
 
 Item* Items::get(const std::wstring& name) {
     return Registry.get(std::wstring(name));

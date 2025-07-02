@@ -1,11 +1,11 @@
-#include "Minecraft.Client/platform/NX/Platform.h"
+#include "net/minecraft/client/platform/NX/Platform.h"
 
-#include "Minecraft.Nbt/ListTag.h"
-#include "Minecraft.Nbt/NbtIo.h"
+#include "net/minecraft/nbt/ListTag.h"
+#include "net/minecraft/nbt/NbtIo.h"
 
-#include "Minecraft.World/level/Level.h"
-#include "Minecraft.World/level/block/entity/BlockEntity.h"
-#include "Minecraft.World/level/tick/TickNextTickData.h"
+#include "net/minecraft/world/level/Level.h"
+#include "net/minecraft/world/level/block/entity/BlockEntity.h"
+#include "net/minecraft/world/level/tick/TickNextTickData.h"
 
 #include "OldChunkStorage.h"
 

@@ -1,6 +1,6 @@
 #pragma once
-#include "Minecraft.World/level/block/Block.h"
-#include "Minecraft.Core/Vec3i.h"
+#include "net/minecraft/core/Vec3i.h"
+#include "net/minecraft/world/level/block/Block.h"
 
 class TickNextTickData {
 public:

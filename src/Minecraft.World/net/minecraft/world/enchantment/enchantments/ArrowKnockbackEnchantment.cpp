@@ -1,5 +1,5 @@
-#include "Minecraft.World/enchantment/categories/BowCategory.h"
-#include "Minecraft.World/enchantment/enchantments/ArrowKnockbackEnchantment.h"
+#include "net/minecraft/world/enchantment/categories/BowCategory.h"
+#include "net/minecraft/world/enchantment/enchantments/ArrowKnockbackEnchantment.h"
 
 ArrowKnockbackEnchantment::ArrowKnockbackEnchantment(const Rarity* rarity,
                                                      arrayWithLength<const EquipmentSlot*> equipmentSlots)

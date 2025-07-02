@@ -1,12 +1,12 @@
-#include "Minecraft.World/level/block/Bush.h"
+#include "net/minecraft/world/level/block/Bush.h"
 
-#include "Minecraft.World/level/Level.h"
-#include "Minecraft.World/level/block/Blocks.h"
-#include "Minecraft.World/level/block/RenderShape.h"
-#include "Minecraft.World/level/block/state/BlockState.h"
-#include "Minecraft.World/level/material/Material.h"
-#include "Minecraft.World/phys/AABB.h"
-#include "Minecraft.Core/BlockPos.h"
+#include "net/minecraft/core/BlockPos.h"
+#include "net/minecraft/world/level/Level.h"
+#include "net/minecraft/world/level/block/Blocks.h"
+#include "net/minecraft/world/level/block/RenderShape.h"
+#include "net/minecraft/world/level/block/state/BlockState.h"
+#include "net/minecraft/world/level/material/Material.h"
+#include "net/minecraft/world/phys/AABB.h"
 
 static float boundingSize = 0.2f;
 

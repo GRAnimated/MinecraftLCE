@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Minecraft.World/level/block/Block.h"
+#include "net/minecraft/world/level/block/Block.h"
 
 // Yes, 4J really named this class Glowstoneblock and not GlowstoneBlock.
 // I've chosen to not name the file like that because it looks ugly.

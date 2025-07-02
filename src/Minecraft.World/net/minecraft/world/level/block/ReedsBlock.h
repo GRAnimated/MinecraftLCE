@@ -1,8 +1,8 @@
 #pragma once
 
-#include "Minecraft.World/level/block/Block.h"
-#include "Minecraft.World/level/block/BonemealableBlock.h"
-#include "Minecraft.World/level/block/state/IntegerProperty.h"
+#include "net/minecraft/world/level/block/Block.h"
+#include "net/minecraft/world/level/block/BonemealableBlock.h"
+#include "net/minecraft/world/level/block/state/IntegerProperty.h"
 #include <memory>
 
 class ReedsBlock : public Block, public BonemealableBlock {

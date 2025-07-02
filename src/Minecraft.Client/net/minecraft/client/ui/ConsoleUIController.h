@@ -1,9 +1,9 @@
 #pragma once
 #include "nn/os/os_MutexTypes.h"
 #include "types.h"
-#include "Minecraft.Client/renderer/C4JRender.h"
-#include "Minecraft.Client/ui/scene/UIScene.h"
-#include "Minecraft.World/ArrayWithLength.h"
+#include "net/minecraft/client/renderer/C4JRender.h"
+#include "net/minecraft/client/ui/scene/UIScene.h"
+#include "net/minecraft/world/ArrayWithLength.h"
 #include <string>
 #include <unordered_map>
 #include <vector>

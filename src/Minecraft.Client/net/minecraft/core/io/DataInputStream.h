@@ -1,8 +1,8 @@
 #pragma once
 
-#include "Minecraft.World/ArrayWithLength.h"
-#include "Minecraft.Core/io/DataInput.h"
-#include "Minecraft.Core/io/InputStream.h"
+#include "net/minecraft/core/io/DataInput.h"
+#include "net/minecraft/core/io/InputStream.h"
+#include "net/minecraft/world/ArrayWithLength.h"
 
 class BlockPos;
 

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Minecraft.World/enchantment/Enchantment.h"
+#include "net/minecraft/world/enchantment/Enchantment.h"
 class KnockbackEnchantment : public Enchantment {
 public:
     KnockbackEnchantment(const Rarity*, arrayWithLength<const EquipmentSlot*>);

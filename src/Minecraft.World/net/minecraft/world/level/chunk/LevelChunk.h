@@ -1,11 +1,11 @@
 #pragma once
 
-#include "Minecraft.World/ArrayWithLength.h"
-#include "Minecraft.World/level/LightLayer.h"
-#include "Minecraft.World/level/chunk/ChunkPos.h"
-#include "Minecraft.World/level/storage/block/CompressedBlockStorage.h"
-#include "Minecraft.World/level/storage/data/SparseDataStorage.h"
-#include "Minecraft.World/level/storage/light/SparseLightStorage.h"
+#include "net/minecraft/world/ArrayWithLength.h"
+#include "net/minecraft/world/level/LightLayer.h"
+#include "net/minecraft/world/level/chunk/ChunkPos.h"
+#include "net/minecraft/world/level/storage/block/CompressedBlockStorage.h"
+#include "net/minecraft/world/level/storage/data/SparseDataStorage.h"
+#include "net/minecraft/world/level/storage/light/SparseLightStorage.h"
 
 #include <memory>
 #include <unordered_map>

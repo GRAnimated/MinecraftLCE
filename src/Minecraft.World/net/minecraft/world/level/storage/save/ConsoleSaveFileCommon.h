@@ -1,6 +1,6 @@
 #pragma once
-#include "Minecraft.World/level/storage/save/FileHeader.h"
 #include "ConsoleSaveFile.h"
+#include "net/minecraft/world/level/storage/save/FileHeader.h"
 
 class ConsoleSaveFileCommon : public ConsoleSaveFile {
 public:

@@ -1,7 +1,7 @@
-#include "Minecraft.World/enchantment/Enchantment.h"
-#include "Minecraft.World/enchantment/Enchantments.h"
-#include "Minecraft.World/enchantment/categories/FeetArmorCategory.h"
-#include "Minecraft.World/enchantment/enchantments/WaterWalkerEnchantment.h"
+#include "net/minecraft/world/enchantment/Enchantment.h"
+#include "net/minecraft/world/enchantment/categories/FeetArmorCategory.h"
+#include "net/minecraft/world/enchantment/enchantments/WaterWalkerEnchantment.h"
+#include "net/minecraft/world/item/enchantment/Enchantments.h"
 
 WaterWalkerEnchantment::WaterWalkerEnchantment(const Rarity* rarity,
                                                arrayWithLength<const EquipmentSlot*> equipmentSlots)

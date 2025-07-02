@@ -1,7 +1,7 @@
 #pragma once
 
-#include "Minecraft.World/level/block/Block.h"
-#include "Minecraft.World/level/block/state/BooleanProperty.h"
+#include "net/minecraft/world/level/block/Block.h"
+#include "net/minecraft/world/level/block/state/BooleanProperty.h"
 
 class TntBlock : public Block {
 public:

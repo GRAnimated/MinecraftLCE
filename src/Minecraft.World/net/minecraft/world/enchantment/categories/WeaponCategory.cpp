@@ -1,5 +1,5 @@
-#include "Minecraft.World/enchantment/categories/WeaponCategory.h"
-#include "Minecraft.World/item/SwordItem.h"
+#include "net/minecraft/world/enchantment/categories/WeaponCategory.h"
+#include "net/minecraft/world/item/SwordItem.h"
 
 const WeaponCategory* WeaponCategory::sWeaponCategory = new WeaponCategory();
 

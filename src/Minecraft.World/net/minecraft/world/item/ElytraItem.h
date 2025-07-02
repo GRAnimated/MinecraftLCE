@@ -1,7 +1,7 @@
 #pragma once
 
 #include "types.h"
-#include "Minecraft.World/item/Item.h"
+#include "net/minecraft/world/item/Item.h"
 
 class ElytraItem_ItemPropertyFunction : public ItemPropertyFunction {
     void call(not_null_ptr<ItemInstance>, Level*, std::shared_ptr<LivingEntity>) override;

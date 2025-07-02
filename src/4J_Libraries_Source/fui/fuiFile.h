@@ -1,7 +1,7 @@
 #pragma once
 
 #include "types.h"
-#include "Minecraft.World/ArrayWithLength.h"
+#include "net/minecraft/world/ArrayWithLength.h"
 
 // Most structs derived from
 // https://github.com/NessieHax/fui-research-repo/blob/main/DOCUMENTATION.md

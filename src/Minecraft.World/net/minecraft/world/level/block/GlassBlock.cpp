@@ -1,5 +1,5 @@
-#include "Minecraft.World/level/block/GlassBlock.h"
-#include "Minecraft.World/level/block/HalfTransparentBlock.h"
+#include "net/minecraft/world/level/block/GlassBlock.h"
+#include "net/minecraft/world/level/block/HalfTransparentBlock.h"
 
 GlassBlock::GlassBlock(Material* material, bool unk) : HalfTransparentBlock(L"glass", material, unk) {
     DerivedInit();

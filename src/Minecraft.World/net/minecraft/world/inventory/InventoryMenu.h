@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Minecraft.World/inventory/AbstractContainerMenu.h"
+#include "net/minecraft/world/inventory/AbstractContainerMenu.h"
 #include <memory>
 
 class Player;

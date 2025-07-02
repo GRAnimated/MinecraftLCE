@@ -1,7 +1,7 @@
-#include "Minecraft.Nbt/CompoundTag.h"
-#include "Minecraft.World/item/Item.h"
-#include "Minecraft.World/item/ItemInstance.h"
-#include "Minecraft.World/level/block/Block.h"
+#include "net/minecraft/nbt/CompoundTag.h"
+#include "net/minecraft/world/item/Item.h"
+#include "net/minecraft/world/item/ItemInstance.h"
+#include "net/minecraft/world/level/block/Block.h"
 
 ItemInstance::ItemInstance(Block* block) {
     this->init(Item::byBlock(block), 1, 0);

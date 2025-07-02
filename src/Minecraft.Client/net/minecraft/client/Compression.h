@@ -1,7 +1,7 @@
 #pragma once
 
 #include "ESavePlatform.h"
-#include "Minecraft.Core/System.h"
+#include "net/minecraft/core/System.h"
 #include "platform/NX/Platform.h"
 #include "zlib/zlib.h"
 

@@ -1,4 +1,4 @@
-#include "Minecraft.World/level/chunk/ChunkSource.h"
+#include "net/minecraft/world/level/chunk/ChunkSource.h"
 
 void ChunkSource::flagPostProcessComplete(short, int, int) {}
 

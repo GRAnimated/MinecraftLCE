@@ -1,8 +1,8 @@
 #include "ServerLevel.h"
 
-#include "Minecraft.World/level/chunk/ChunkPos.h"
-#include "Minecraft.World/level/chunk/LevelChunk.h"
-#include "Minecraft.World/phys/BoundingBox.h"
+#include "net/minecraft/world/level/chunk/ChunkPos.h"
+#include "net/minecraft/world/level/chunk/LevelChunk.h"
+#include "net/minecraft/world/level/levelgen/structure/BoundingBox.h"
 
 std::vector<TickNextTickData*>* ServerLevel::fetchTicksInChunk(LevelChunk* chunk, bool unk) {
     ChunkPos chunkPos = chunk->getPos();

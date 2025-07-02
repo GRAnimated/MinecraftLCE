@@ -1,11 +1,11 @@
-#include "Minecraft.Client/platform/NX/Platform.h"
-#include "Minecraft.Client/renderer/BlockRenderer.h"
-#include "Minecraft.Client/renderer/BufferBuilder.h"
-#include "Minecraft.Client/renderer/Tesselator.h"
-#include "Minecraft.Client/renderer/texture/TextureAtlasSprite.h"
-#include "Minecraft.World/level/block/Blocks.h"
-#include "Minecraft.World/level/block/state/AbstractProperty.h"
-#include "Minecraft.Core/Direction.h"
+#include "com/mojang/blaze3d/vertex/BufferBuilder.h"
+#include "com/mojang/blaze3d/vertex/Tesselator.h"
+#include "net/minecraft/client/platform/NX/Platform.h"
+#include "net/minecraft/client/renderer/BlockRenderer.h"
+#include "net/minecraft/client/renderer/texture/TextureAtlasSprite.h"
+#include "net/minecraft/core/Direction.h"
+#include "net/minecraft/world/level/block/Blocks.h"
+#include "net/minecraft/world/level/block/state/AbstractProperty.h"
 #include <cstdio>
 
 Property* FACING;

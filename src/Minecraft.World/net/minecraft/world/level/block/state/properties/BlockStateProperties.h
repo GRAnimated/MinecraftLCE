@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Minecraft.World/level/block/state/IntegerProperty.h"
+#include "net/minecraft/world/level/block/state/IntegerProperty.h"
 
 class BlockStateProperties {
 public:

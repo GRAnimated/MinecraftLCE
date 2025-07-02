@@ -1,5 +1,5 @@
-#include "Minecraft.Nbt/ByteTag.h"
 #include "CompoundTag.h"
+#include "net/minecraft/nbt/ByteTag.h"
 #include <string>
 
 void CompoundTag::putBoolean(const std::wstring& name, bool value) {

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Minecraft.World/level/saveddata/SavedData.h"
+#include "net/minecraft/world/level/saveddata/SavedData.h"
 
 class CompoundTag;
 

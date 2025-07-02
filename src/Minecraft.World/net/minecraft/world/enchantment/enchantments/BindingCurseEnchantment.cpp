@@ -1,6 +1,6 @@
-#include "Minecraft.World/enchantment/Enchantment.h"
-#include "Minecraft.World/enchantment/categories/WearableCategory.h"
-#include "Minecraft.World/enchantment/enchantments/BindingCurseEnchantment.h"
+#include "net/minecraft/world/enchantment/Enchantment.h"
+#include "net/minecraft/world/enchantment/categories/WearableCategory.h"
+#include "net/minecraft/world/enchantment/enchantments/BindingCurseEnchantment.h"
 
 BindingCurseEnchantment::BindingCurseEnchantment(const Rarity* rarity,
                                                  arrayWithLength<const EquipmentSlot*> equipmentSlots)

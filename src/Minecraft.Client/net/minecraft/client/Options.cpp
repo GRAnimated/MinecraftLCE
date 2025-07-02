@@ -1,9 +1,9 @@
-#include "Minecraft.Client/Options.h"
+#include "net/minecraft/client/Options.h"
 
-#include "Minecraft.Client/KeyMapping.h"
-#include "Minecraft.Client/resources/language/Language.h"
-#include "Minecraft.Core/io/DataOutputStream.h"
-#include "Minecraft.Core/io/FileOutputStream.h"
+#include "net/minecraft/client/KeyMapping.h"
+#include "net/minecraft/client/resources/language/Language.h"
+#include "net/minecraft/core/io/DataOutputStream.h"
+#include "net/minecraft/core/io/FileOutputStream.h"
 
 Options::Option::Option(const std::wstring& a2, bool isProgress, bool a4)
     : mIsProgress(isProgress), field_1(a4), mOptionName(a2) {}

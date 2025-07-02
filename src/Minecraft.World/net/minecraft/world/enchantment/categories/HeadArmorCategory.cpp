@@ -1,6 +1,6 @@
-#include "Minecraft.World/enchantment/categories/HeadArmorCategory.h"
-#include "Minecraft.World/inventory/EquipmentSlot.h"
-#include "Minecraft.World/item/ArmorItem.h"
+#include "net/minecraft/world/enchantment/categories/HeadArmorCategory.h"
+#include "net/minecraft/world/entity/EquipmentSlot.h"
+#include "net/minecraft/world/item/ArmorItem.h"
 
 const HeadArmorCategory* HeadArmorCategory::sHeadArmorCategory = new HeadArmorCategory();
 

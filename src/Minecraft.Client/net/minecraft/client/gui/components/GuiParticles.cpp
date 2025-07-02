@@ -1,5 +1,5 @@
-#include "Minecraft.Client/gui/components/GuiParticle.h"
-#include "Minecraft.Client/gui/components/GuiParticles.h"
+#include "net/minecraft/client/gui/components/GuiParticle.h"
+#include "net/minecraft/client/gui/components/GuiParticles.h"
 
 GuiParticles::GuiParticles(Minecraft* minecraft) : mMinecraft(minecraft) {}
 

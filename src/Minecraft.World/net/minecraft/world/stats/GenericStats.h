@@ -3,9 +3,9 @@
 #include "types.h"
 #include <memory>
 
-#include "Minecraft.World/ArrayWithLength.h"
-#include "Minecraft.World/eAward.h"
-#include "Minecraft.World/eINSTANCEOF.h"
+#include "net/minecraft/world/ArrayWithLength.h"
+#include "net/minecraft/world/eAward.h"
+#include "net/minecraft/world/eINSTANCEOF.h"
 
 class DamageSource;
 class ItemInstance;

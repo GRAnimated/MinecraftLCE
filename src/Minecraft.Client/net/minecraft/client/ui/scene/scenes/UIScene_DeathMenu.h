@@ -1,8 +1,8 @@
 #pragma once
 
-#include "Minecraft.Client/ui/scene/UIScene.h"
-#include "Minecraft.Client/ui/scene/control/UIControl_Button.h"
-#include "Minecraft.Client/ui/scene/control/UIControl_Label.h"
+#include "net/minecraft/client/ui/scene/UIScene.h"
+#include "net/minecraft/client/ui/scene/control/UIControl_Button.h"
+#include "net/minecraft/client/ui/scene/control/UIControl_Label.h"
 #include <cstdint>
 
 class UIScene_DeathMenu : public UIScene {

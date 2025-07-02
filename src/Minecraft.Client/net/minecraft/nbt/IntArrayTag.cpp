@@ -1,9 +1,9 @@
-#include "Minecraft.Nbt/IntArrayTag.h"
-#include "Minecraft.World/ArrayWithLength.h"
+#include "net/minecraft/nbt/IntArrayTag.h"
+#include "net/minecraft/world/ArrayWithLength.h"
 
-#include "Minecraft.Core/System.h"
-#include "Minecraft.Core/io/DataInput.h"
-#include "Minecraft.Core/io/DataOutput.h"
+#include "net/minecraft/core/System.h"
+#include "net/minecraft/core/io/DataInput.h"
+#include "net/minecraft/core/io/DataOutput.h"
 #include <cstring>
 
 IntArrayTag::IntArrayTag() {

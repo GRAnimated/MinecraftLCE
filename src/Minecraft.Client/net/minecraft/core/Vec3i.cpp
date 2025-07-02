@@ -1,5 +1,5 @@
-#include "Minecraft.Core/Vec3i.h"
-#include "Minecraft.Util/Mth.h"
+#include "net/minecraft/core/Vec3i.h"
+#include "net/minecraft/util/Mth.h"
 
 Vec3i::Vec3i(int x, int y, int z) {
     this->x = x;

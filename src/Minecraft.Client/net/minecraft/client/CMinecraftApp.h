@@ -2,12 +2,12 @@
 
 #include "types.h"
 
-#include "Minecraft.Client/eGameHostOption.h"
-#include "Minecraft.World/ArrayWithLength.h"
-#include "Minecraft.World/level/gamemode/minigames/MiniGameDef.h"
-#include "Minecraft.World/level/levelgen/LevelGenerationOptions.h"
-#include "Minecraft.Core/profile/CProfile.h"
-#include <Minecraft.Core/storage/C4JStorage.h>
+#include "net/minecraft/client/eGameHostOption.h"
+#include "net/minecraft/core/profile/CProfile.h"
+#include "net/minecraft/core/storage/C4JStorage.h"
+#include "net/minecraft/world/ArrayWithLength.h"
+#include "net/minecraft/world/level/gamemode/minigames/MiniGameDef.h"
+#include "net/minecraft/world/level/levelgen/LevelGenerationOptions.h"
 #include <string>
 
 enum eTMSAction {};

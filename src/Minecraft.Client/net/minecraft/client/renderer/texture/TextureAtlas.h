@@ -1,5 +1,5 @@
 #pragma once
-#include "Minecraft.Client/renderer/texture/IconRegister.h"
+#include "net/minecraft/client/renderer/texture/IconRegister.h"
 #include <string>
 #include <unordered_map>
 #include <vector>

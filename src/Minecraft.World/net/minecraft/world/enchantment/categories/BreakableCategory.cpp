@@ -1,5 +1,5 @@
-#include "Minecraft.World/enchantment/categories/BreakableCategory.h"
-#include "Minecraft.World/item/Item.h"
+#include "net/minecraft/world/enchantment/categories/BreakableCategory.h"
+#include "net/minecraft/world/item/Item.h"
 
 const BreakableCategory* BreakableCategory::sBreakableCategory = new BreakableCategory();
 

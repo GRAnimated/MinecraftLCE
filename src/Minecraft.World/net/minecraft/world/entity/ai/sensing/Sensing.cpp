@@ -1,5 +1,5 @@
-#include "Minecraft.World/entity/ai/Sensing.h"
-#include "Minecraft.World/entity/mob/Mob.h"
+#include "net/minecraft/world/entity/ai/sensing/Sensing.h"
+#include "net/minecraft/world/entity/mob/Mob.h"
 
 Sensing::Sensing(Mob* mob) : mMob(mob) {}
 

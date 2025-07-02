@@ -2,8 +2,8 @@
 
 #include <memory>
 
-#include "Minecraft.World/ArrayWithLength.h"
-#include "Minecraft.World/sounds/SoundSource.h"
+#include "net/minecraft/sounds/SoundSource.h"
+#include "net/minecraft/world/ArrayWithLength.h"
 
 class Player;
 class Level;

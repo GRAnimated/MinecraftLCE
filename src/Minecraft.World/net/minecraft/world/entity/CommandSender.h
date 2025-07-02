@@ -1,8 +1,9 @@
 #pragma once
 #include "types.h"
-#include "Minecraft.World/command/EGameCommand.h"
-#include "Minecraft.World/phys/Vec3.h"
-#include "Minecraft.Core/BlockPos.h"
+#include "net/minecraft/core/BlockPos.h"
+#include "net/minecraft/network/protocol/game/ClientboundChatPacket.h"
+#include "net/minecraft/world/command/EGameCommand.h"
+#include "net/minecraft/world/phys/Vec3.h"
 #include <string>
 
 class Level;

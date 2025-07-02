@@ -1,4 +1,4 @@
-#include "Minecraft.World/level/levelgen/synth/Synth.h"
+#include "net/minecraft/world/level/levelgen/synth/Synth.h"
 
 Synth::Synth() {}
 

@@ -1,11 +1,11 @@
 #pragma once
 #include <string>
 
-#include "Minecraft.World/ArrayWithLength.h"
-#include "Minecraft.Core/io/DataOutput.h"
-#include "Minecraft.Core/io/OutputStream.h"
-#include "Minecraft.Core/io/types/Double.h"
-#include "Minecraft.Core/io/types/Float.h"
+#include "net/minecraft/core/io/DataOutput.h"
+#include "net/minecraft/core/io/OutputStream.h"
+#include "net/minecraft/core/io/types/Double.h"
+#include "net/minecraft/core/io/types/Float.h"
+#include "net/minecraft/world/ArrayWithLength.h"
 
 class BlockPos;
 

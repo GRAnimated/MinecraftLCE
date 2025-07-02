@@ -2,8 +2,8 @@
 
 #include "nn/types.h"
 #include "types.h"
-#include "Minecraft.Nbt/Tag.h"
-#include "Minecraft.World/ArrayWithLength.h"
+#include "net/minecraft/tags/Tag.h"
+#include "net/minecraft/world/ArrayWithLength.h"
 #include <unordered_map>
 
 class CompoundTag : public Tag {

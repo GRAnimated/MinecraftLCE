@@ -1,7 +1,7 @@
 #pragma once
 
-#include "Minecraft.Client/renderer/C4JRender.h"
-#include "Minecraft.Client/ui/scene/control/UIControl_Base.h"
+#include "net/minecraft/client/renderer/C4JRender.h"
+#include "net/minecraft/client/ui/scene/control/UIControl_Base.h"
 #include <cstdint>
 #include <string>
 #include <unordered_map>

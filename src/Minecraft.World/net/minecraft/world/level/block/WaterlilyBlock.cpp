@@ -1,14 +1,14 @@
-#include "Minecraft.World/level/block/WaterlilyBlock.h"
+#include "net/minecraft/world/level/block/WaterlilyBlock.h"
 
-#include "Minecraft.Client/Minecraft.h"
-#include "Minecraft.Client/color/ColourTable.h"
-#include "Minecraft.World/entity/Entity.h"
-#include "Minecraft.World/level/Level.h"
-#include "Minecraft.World/level/block/Blocks.h"
-#include "Minecraft.World/level/block/state/properties/BlockStateProperties.h"
-#include "Minecraft.World/level/material/Material.h"
-#include "Minecraft.World/level/material/MaterialColor.h"
-#include "Minecraft.World/phys/AABB.h"
+#include "net/minecraft/client/Minecraft.h"
+#include "net/minecraft/client/color/ColourTable.h"
+#include "net/minecraft/world/entity/Entity.h"
+#include "net/minecraft/world/level/Level.h"
+#include "net/minecraft/world/level/block/Blocks.h"
+#include "net/minecraft/world/level/block/state/properties/BlockStateProperties.h"
+#include "net/minecraft/world/level/material/Material.h"
+#include "net/minecraft/world/level/material/MaterialColor.h"
+#include "net/minecraft/world/phys/AABB.h"
 
 AABB* waterlilyAABB = AABB::newPermanent(0.0625, 0.0f, 0.0625, 0.9375, 0.09375, 0.9375);
 

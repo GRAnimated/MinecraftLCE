@@ -2,14 +2,14 @@
 #include "4J_Libraries_Source/fui/fuiFile.h"
 #include "4J_Libraries_Source/fui/fuiRenderNode.h"
 #include "4J_Libraries_Source/fui/node/FJ_FuiNodeStage.h"
-#include "Minecraft.Client/platform/NX/Platform.h"
-#include "Minecraft.Client/ui/ConsoleUIController.h"
-#include "Minecraft.Client/ui/scene/UILayer.h"
-#include "Minecraft.Client/ui/scene/UIScene.h"
-#include "Minecraft.Client/ui/scene/control/UIControl.h"
-#include "Minecraft.World/ArrayWithLength.h"
-#include "Minecraft.World/sounds/SoundEvents.h"
-#include "Minecraft.Core/System.h"
+#include "net/minecraft/client/platform/NX/Platform.h"
+#include "net/minecraft/client/ui/ConsoleUIController.h"
+#include "net/minecraft/client/ui/scene/UILayer.h"
+#include "net/minecraft/client/ui/scene/UIScene.h"
+#include "net/minecraft/client/ui/scene/control/UIControl.h"
+#include "net/minecraft/core/System.h"
+#include "net/minecraft/sounds/SoundEvents.h"
+#include "net/minecraft/world/ArrayWithLength.h"
 #include <string>
 #include <utility>
 

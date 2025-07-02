@@ -1,16 +1,16 @@
-#include "Minecraft.World/level/block/ReedsBlock.h"
+#include "net/minecraft/world/level/block/ReedsBlock.h"
 
-#include "Minecraft.World/item/ItemInstance.h"
-#include "Minecraft.World/item/Items.h"
-#include "Minecraft.World/level/Level.h"
-#include "Minecraft.World/level/block/Blocks.h"
-#include "Minecraft.World/level/block/BonemealableBlock.h"
-#include "Minecraft.World/level/block/RenderShape.h"
-#include "Minecraft.World/level/block/state/BlockStateDefinition.h"
-#include "Minecraft.World/level/block/state/IntegerProperty.h"
-#include "Minecraft.World/level/material/Material.h"
-#include "Minecraft.World/phys/AABB.h"
-#include "Minecraft.Core/BlockPos.h"
+#include "net/minecraft/core/BlockPos.h"
+#include "net/minecraft/world/item/ItemInstance.h"
+#include "net/minecraft/world/item/Items.h"
+#include "net/minecraft/world/level/Level.h"
+#include "net/minecraft/world/level/block/Blocks.h"
+#include "net/minecraft/world/level/block/BonemealableBlock.h"
+#include "net/minecraft/world/level/block/RenderShape.h"
+#include "net/minecraft/world/level/block/state/BlockStateDefinition.h"
+#include "net/minecraft/world/level/block/state/IntegerProperty.h"
+#include "net/minecraft/world/level/material/Material.h"
+#include "net/minecraft/world/phys/AABB.h"
 
 static std::atomic_bool hasCreatedDefinition;
 std::vector<const Property*> sAgeProperties;

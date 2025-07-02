@@ -1,4 +1,4 @@
-#include "Minecraft.World/level/levelgen/CustomizableSourceSettings.h"
+#include "net/minecraft/world/level/levelgen/CustomizableSourceSettings.h"
 
 CustomizableSourceSettings::Builder::Builder() {
     setDefaults();

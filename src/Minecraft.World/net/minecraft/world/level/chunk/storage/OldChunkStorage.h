@@ -1,8 +1,8 @@
 #pragma once
-#include "Minecraft.Nbt/CompoundTag.h"
-#include "Minecraft.World/level/Level.h"
-#include "Minecraft.World/level/chunk/LevelChunk.h"
-#include "Minecraft.Core/io/DataOutputStream.h"
+#include "net/minecraft/core/io/DataOutputStream.h"
+#include "net/minecraft/nbt/CompoundTag.h"
+#include "net/minecraft/world/level/Level.h"
+#include "net/minecraft/world/level/chunk/LevelChunk.h"
 
 class OldChunkStorage {
 #define CHUNK_VERSION 11

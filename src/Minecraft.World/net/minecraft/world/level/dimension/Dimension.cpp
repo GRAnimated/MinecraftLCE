@@ -1,9 +1,9 @@
-#include "Minecraft.World/level/Level.h"
-#include "Minecraft.World/level/LevelType.h"
-#include "Minecraft.World/level/border/WorldBorder.h"
-#include "Minecraft.World/level/dimension/Dimension.h"
-#include "Minecraft.World/level/newbiome/layer/Layer.h"
-#include "Minecraft.World/level/storage/LevelData.h"
+#include "net/minecraft/world/level/Level.h"
+#include "net/minecraft/world/level/LevelType.h"
+#include "net/minecraft/world/level/border/WorldBorder.h"
+#include "net/minecraft/world/level/dimension/Dimension.h"
+#include "net/minecraft/world/level/newbiome/layer/Layer.h"
+#include "net/minecraft/world/level/storage/LevelData.h"
 
 Dimension::Dimension() {
     field_28 = false;

@@ -1,7 +1,7 @@
 #pragma once
 
-#include "Minecraft.World/enchantment/Enchantment.h"
-#include "Minecraft.World/item/ItemInstance.h"
+#include "net/minecraft/world/enchantment/Enchantment.h"
+#include "net/minecraft/world/item/ItemInstance.h"
 #include <memory>
 class ThornsEnchantment : public Enchantment {
 public:

@@ -1,4 +1,4 @@
-#include "Minecraft.Client/ui/scene/control/UIControl_List.h"
+#include "net/minecraft/client/ui/scene/control/UIControl_List.h"
 
 UIControl_List::UIControl_List() : UIControl_Base() {}
 

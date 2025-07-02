@@ -1,9 +1,9 @@
 #include "ClientboundPlayerSleepPacket.h"
 
-#include "Minecraft.World/entity/player/Player.h"
-#include "Minecraft.Core/io/DataInputStream.h"
-#include "Minecraft.Core/io/DataOutputStream.h"
-#include "Minecraft.Network/PacketListener.h"
+#include "net/minecraft/core/io/DataInputStream.h"
+#include "net/minecraft/core/io/DataOutputStream.h"
+#include "net/minecraft/network/PacketListener.h"
+#include "net/minecraft/world/entity/player/Player.h"
 
 std::shared_ptr<Packet> ClientboundPlayerSleepPacket::create() {
     return std::shared_ptr<Packet>(new ClientboundPlayerSleepPacket());

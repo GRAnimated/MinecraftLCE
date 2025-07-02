@@ -1,6 +1,6 @@
 #pragma once
-#include "Minecraft.Client/resources/IdMap.h"
-#include "Minecraft.Client/resources/SimpleRegistry.h"
+#include "net/minecraft/client/resources/IdMap.h"
+#include "net/minecraft/client/resources/SimpleRegistry.h"
 
 template <typename Key, typename Value, typename Hash = std::hash<Key>,
           typename KeyEqual = std::equal_to<Key>, typename HashValue = std::hash<Value>,

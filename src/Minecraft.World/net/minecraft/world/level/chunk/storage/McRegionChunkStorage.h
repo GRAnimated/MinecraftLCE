@@ -1,12 +1,12 @@
 #pragma once
-#include "Minecraft.Client/platform/NX/Platform.h"
-#include "Minecraft.World/level/Level.h"
-#include "Minecraft.World/level/chunk/LevelChunk.h"
-#include "Minecraft.World/level/storage/RegionFileCache.h"
-#include "Minecraft.World/level/storage/save/ConsoleSaveFileCommon.h"
 #include "ChunkStorage.h"
-#include "Minecraft.Core/System.h"
-#include "Minecraft.Core/io/DataOutputStream.h"
+#include "net/minecraft/client/platform/NX/Platform.h"
+#include "net/minecraft/core/System.h"
+#include "net/minecraft/core/io/DataOutputStream.h"
+#include "net/minecraft/world/level/Level.h"
+#include "net/minecraft/world/level/chunk/LevelChunk.h"
+#include "net/minecraft/world/level/storage/RegionFileCache.h"
+#include "net/minecraft/world/level/storage/save/ConsoleSaveFileCommon.h"
 #include <string>
 
 #include <deque>

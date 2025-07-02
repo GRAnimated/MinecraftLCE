@@ -1,8 +1,8 @@
-#include "Minecraft.Client/renderer/texture/TextureAtlas.h"
-#include "Minecraft.Client/renderer/texture/TextureAtlasSprite.h"
+#include "net/minecraft/client/renderer/texture/TextureAtlas.h"
+#include "net/minecraft/client/renderer/texture/TextureAtlasSprite.h"
 
-#include "Minecraft.Client/renderer/texture/atlases/ClockAtlasSprite.h"
-#include "Minecraft.Client/renderer/texture/atlases/CompassAtlasSprite.h"
+#include "net/minecraft/client/renderer/texture/atlases/ClockAtlasSprite.h"
+#include "net/minecraft/client/renderer/texture/atlases/CompassAtlasSprite.h"
 
 #define TERRAIN_RATIO (16.f / 512.f)  // 16 is one icon size, 512 terrain image height
 #define ITEM_RATIO (16.f / 272.f)     // 16 is one icon size, 272 item image height

@@ -1,4 +1,4 @@
-#include "Minecraft.World/entity/ai/control/MoveControl.h"
+#include "net/minecraft/world/entity/ai/control/MoveControl.h"
 
 MoveControl::MoveControl(Mob* mob) : mMob(mob) {}
 

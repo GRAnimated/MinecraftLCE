@@ -1,8 +1,8 @@
 #pragma once
 
 #include "types.h"
-#include "Minecraft.World/InteractionHand.h"
-#include "Minecraft.World/level/block/state/BlockState.h"
+#include "net/minecraft/world/InteractionHand.h"
+#include "net/minecraft/world/level/block/state/BlockState.h"
 #include <memory>
 #include <string>
 #include <vector>

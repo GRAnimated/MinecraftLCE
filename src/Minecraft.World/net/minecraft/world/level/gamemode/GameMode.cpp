@@ -1,7 +1,7 @@
-#include "Minecraft.World/level/gamemode/GameMode.h"
-#include "Minecraft.World/level/gamemode/GameType.h"
+#include "net/minecraft/world/level/gamemode/GameMode.h"
+#include "net/minecraft/world/level/gamemode/GameType.h"
 
-#include "Minecraft.Client/Minecraft.h"
+#include "net/minecraft/client/Minecraft.h"
 
 GameMode::GameMode() {
     mGameType = nullptr;

@@ -1,12 +1,12 @@
-#include "Minecraft.Client/Minecraft.h"
-#include "Minecraft.World/inventory/EquipmentSlot.h"
-#include "Minecraft.World/item/Attribute.h"
-#include "Minecraft.World/item/DiggerItem.h"
-#include "Minecraft.World/item/Item.h"
-#include "Minecraft.World/item/ItemInstance.h"
-#include "Minecraft.World/level/Level.h"
-#include "Minecraft.World/level/block/Block.h"
-#include "Minecraft.World/level/gamemode/minigames/MiniGameDef.h"
+#include "net/minecraft/client/Minecraft.h"
+#include "net/minecraft/world/entity/EquipmentSlot.h"
+#include "net/minecraft/world/item/Attribute.h"
+#include "net/minecraft/world/item/DiggerItem.h"
+#include "net/minecraft/world/item/Item.h"
+#include "net/minecraft/world/item/ItemInstance.h"
+#include "net/minecraft/world/level/Level.h"
+#include "net/minecraft/world/level/block/Block.h"
+#include "net/minecraft/world/level/gamemode/minigames/MiniGameDef.h"
 
 DiggerItem::DiggerItem(const Item::Tier* tier, arrayWithLength<Block*> blocks) : mTier(tier) {
     this->_init(0, 0, blocks);

@@ -1,5 +1,5 @@
-#include "Minecraft.World/enchantment/categories/BowCategory.h"
-#include "Minecraft.World/item/BowItem.h"
+#include "net/minecraft/world/enchantment/categories/BowCategory.h"
+#include "net/minecraft/world/item/BowItem.h"
 
 const BowCategory* BowCategory::sBowCategory = new BowCategory();
 

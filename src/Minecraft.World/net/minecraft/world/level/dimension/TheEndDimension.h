@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Minecraft.World/level/dimension/Dimension.h"
+#include "net/minecraft/world/level/dimension/Dimension.h"
 
 class TheEndDimension : public Dimension {
 public:

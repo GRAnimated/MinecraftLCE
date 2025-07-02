@@ -1,4 +1,4 @@
-#include "Minecraft.World/level/material/DecorationMaterial.h"
+#include "net/minecraft/world/level/material/DecorationMaterial.h"
 
 DecorationMaterial::DecorationMaterial(const MaterialColor* color) : Material(color) {
     makeDestroyedByHand();

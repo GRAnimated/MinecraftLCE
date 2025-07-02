@@ -1,13 +1,13 @@
 #pragma once
 
-#include "Minecraft.World/pathfinding/BlockPathTypes.h"
+#include "net/minecraft/world/level/pathfinder/BlockPathTypes.h"
 #include "types.h"
-#include "Minecraft.Client/resources/ResourceLocation.h"
-#include "Minecraft.World/ArrayWithLength.h"
-#include "Minecraft.World/entity/Entity.h"
-#include "Minecraft.World/entity/LivingEntity.h"
-#include "Minecraft.World/entity/ai/control/GoalSelector.h"
-#include "Minecraft.World/item/ItemInstance.h"
+#include "net/minecraft/resources/ResourceLocation.h"
+#include "net/minecraft/world/ArrayWithLength.h"
+#include "net/minecraft/world/entity/Entity.h"
+#include "net/minecraft/world/entity/LivingEntity.h"
+#include "net/minecraft/world/entity/ai/goal/GoalSelector.h"
+#include "net/minecraft/world/item/ItemInstance.h"
 #include <string>
 
 class ItemEntity;

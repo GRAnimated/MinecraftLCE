@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Minecraft.World/level/LightLayer.h"
+#include "net/minecraft/world/level/LightLayer.h"
 #include <memory>
 
 class BlockEntity;

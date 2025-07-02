@@ -1,5 +1,5 @@
-#include "Minecraft.World/enchantment/categories/ArmorCategory.h"
-#include "Minecraft.World/item/ArmorItem.h"
+#include "net/minecraft/world/enchantment/categories/ArmorCategory.h"
+#include "net/minecraft/world/item/ArmorItem.h"
 
 const ArmorCategory* ArmorCategory::sArmorCategory = new ArmorCategory();
 

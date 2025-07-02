@@ -1,4 +1,4 @@
-#include "Minecraft.World/level/material/MaterialColor.h"
+#include "net/minecraft/world/level/material/MaterialColor.h"
 
 MaterialColor::MaterialColor(int id, eMinecraftColour color) : mColor(color), mID(id) {
     MATERIAL_COLORS[id] = this;

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Minecraft.Core/io/File.h"
+#include "net/minecraft/core/io/File.h"
 #include <string>
 
 class KeyMapping;

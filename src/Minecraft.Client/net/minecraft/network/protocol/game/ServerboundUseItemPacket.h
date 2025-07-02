@@ -1,7 +1,7 @@
 #pragma once
 
-#include "Minecraft.World/InteractionHand.h"
-#include "Minecraft.Network/protocol/Packet.h"
+#include "net/minecraft/network/protocol/Packet.h"
+#include "net/minecraft/world/InteractionHand.h"
 
 class ServerboundUseItemPacket : public Packet,
                                  public std::enable_shared_from_this<ServerboundUseItemPacket> {

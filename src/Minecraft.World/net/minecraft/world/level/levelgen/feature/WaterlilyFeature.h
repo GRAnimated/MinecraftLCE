@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Minecraft.World/level/levelgen/feature/Feature.h"
+#include "net/minecraft/world/level/levelgen/feature/Feature.h"
 
 class WaterlilyFeature : public Feature {
 public:

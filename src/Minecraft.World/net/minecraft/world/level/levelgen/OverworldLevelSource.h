@@ -1,9 +1,9 @@
 #pragma once
 
-#include "Minecraft.World/ArrayWithLength.h"
-#include "Minecraft.World/level/levelgen/ChunkGenerator.h"
-#include "Minecraft.World/level/levelgen/CustomizableSourceSettings.h"
-#include "Minecraft.World/level/levelgen/GenericOverworldLevelSource.h"
+#include "net/minecraft/world/ArrayWithLength.h"
+#include "net/minecraft/world/level/levelgen/ChunkGenerator.h"
+#include "net/minecraft/world/level/levelgen/CustomizableSourceSettings.h"
+#include "net/minecraft/world/level/levelgen/GenericOverworldLevelSource.h"
 
 class Biome;
 class ChunkPrimer;

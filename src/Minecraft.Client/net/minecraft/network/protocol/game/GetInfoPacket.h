@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Minecraft.Network/protocol/Packet.h"
+#include "net/minecraft/network/protocol/Packet.h"
 
 class GetInfoPacket : public Packet, public std::enable_shared_from_this<GetInfoPacket> {
 public:

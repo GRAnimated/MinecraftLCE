@@ -1,5 +1,5 @@
-#include "Minecraft.World/enchantment/categories/BreakableCategory.h"
-#include "Minecraft.World/enchantment/enchantments/MendingEnchantment.h"
+#include "net/minecraft/world/enchantment/categories/BreakableCategory.h"
+#include "net/minecraft/world/enchantment/enchantments/MendingEnchantment.h"
 
 MendingEnchantment::MendingEnchantment(const Rarity* rarity,
                                        arrayWithLength<const EquipmentSlot*> equipmentSlots)

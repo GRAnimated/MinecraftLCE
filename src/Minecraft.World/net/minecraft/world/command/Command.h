@@ -1,8 +1,8 @@
 #pragma once
 
 #include "types.h"
-#include "Minecraft.World/ArrayWithLength.h"
-#include "Minecraft.World/entity/CommandSender.h"
+#include "net/minecraft/world/ArrayWithLength.h"
+#include "net/minecraft/world/entity/CommandSender.h"
 #include <memory>
 
 class CommandSender;

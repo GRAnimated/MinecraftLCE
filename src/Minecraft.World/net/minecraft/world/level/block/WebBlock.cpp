@@ -1,16 +1,16 @@
-#include "Minecraft.World/level/block/WebBlock.h"
+#include "net/minecraft/world/level/block/WebBlock.h"
 
-#include "Minecraft.Client/Minecraft.h"
-#include "Minecraft.World/eINSTANCEOF.h"
-#include "Minecraft.World/entity/Entity.h"
-#include "Minecraft.World/item/Item.h"
-#include "Minecraft.World/item/ItemInstance.h"
-#include "Minecraft.World/item/Items.h"
-#include "Minecraft.World/level/Level.h"
-#include "Minecraft.World/level/block/RenderShape.h"
-#include "Minecraft.World/level/gamemode/minigames/MiniGameDef.h"
-#include "Minecraft.World/level/material/Material.h"
-#include "Minecraft.World/phys/AABB.h"
+#include "net/minecraft/client/Minecraft.h"
+#include "net/minecraft/world/eINSTANCEOF.h"
+#include "net/minecraft/world/entity/Entity.h"
+#include "net/minecraft/world/item/Item.h"
+#include "net/minecraft/world/item/ItemInstance.h"
+#include "net/minecraft/world/item/Items.h"
+#include "net/minecraft/world/level/Level.h"
+#include "net/minecraft/world/level/block/RenderShape.h"
+#include "net/minecraft/world/level/gamemode/minigames/MiniGameDef.h"
+#include "net/minecraft/world/level/material/Material.h"
+#include "net/minecraft/world/phys/AABB.h"
 
 WebBlock::WebBlock() : Block(Material::CLOTH) {
     DerivedInit();

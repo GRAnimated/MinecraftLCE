@@ -1,7 +1,7 @@
-#include "Minecraft.World/level/levelgen/ChunkPrimer.h"
+#include "net/minecraft/world/level/levelgen/ChunkPrimer.h"
 
-#include "Minecraft.Client/resources/IdMapper.h"
-#include "Minecraft.World/level/block/Blocks.h"
+#include "net/minecraft/client/resources/IdMapper.h"
+#include "net/minecraft/world/level/block/Blocks.h"
 
 ChunkPrimer::ChunkPrimer(bool unk, arrayWithLength<uchar> blockIds, arrayWithLength<uchar> blockData) {
     mBlockIds = blockIds;

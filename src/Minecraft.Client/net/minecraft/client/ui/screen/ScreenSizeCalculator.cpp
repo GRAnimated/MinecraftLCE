@@ -1,7 +1,7 @@
-#include "Minecraft.Client/ui/screen/ScreenSizeCalculator.h"
+#include "net/minecraft/client/ui/screen/ScreenSizeCalculator.h"
 
-#include "Minecraft.Client/Minecraft.h"
-#include "Minecraft.Client/Options.h"
+#include "net/minecraft/client/Minecraft.h"
+#include "net/minecraft/client/Options.h"
 
 #include <cmath>
 

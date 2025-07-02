@@ -1,7 +1,7 @@
 #pragma once
 
-#include "Minecraft.Client/ui/scene/UIScene.h"
-#include "Minecraft.Client/ui/scene/control/UIControl_ButtonList.h"
+#include "net/minecraft/client/ui/scene/UIScene.h"
+#include "net/minecraft/client/ui/scene/control/UIControl_ButtonList.h"
 
 class UIScene_HowToPlayMenu : public UIScene {
     UIScene_HowToPlayMenu(int, void*, UILayer*);

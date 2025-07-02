@@ -1,1 +1,1 @@
-#include "Minecraft.Client/C4JThreadImpl.h"
+#include "net/minecraft/client/C4JThreadImpl.h"

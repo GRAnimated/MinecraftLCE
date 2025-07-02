@@ -1,5 +1,5 @@
-#include "Minecraft.World/enchantment/categories/FishingRodCategory.h"
-#include "Minecraft.World/item/FishingRodItem.h"
+#include "net/minecraft/world/enchantment/categories/FishingRodCategory.h"
+#include "net/minecraft/world/item/FishingRodItem.h"
 
 const FishingRodCategory* FishingRodCategory::sFishingRodCategory = new FishingRodCategory();
 

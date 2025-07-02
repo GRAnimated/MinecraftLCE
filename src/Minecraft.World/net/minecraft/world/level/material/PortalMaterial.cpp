@@ -1,4 +1,4 @@
-#include "Minecraft.World/level/material/PortalMaterial.h"
+#include "net/minecraft/world/level/material/PortalMaterial.h"
 
 PortalMaterial::PortalMaterial(const MaterialColor* color) : Material(color) {}
 

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Minecraft.Core/io/InputStream.h"
+#include "net/minecraft/core/io/InputStream.h"
 
 class ConsoleSaveFile;
 class FileEntry;

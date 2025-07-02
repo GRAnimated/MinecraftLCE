@@ -1,5 +1,5 @@
-#include "Minecraft.World/enchantment/categories/WeaponCategory.h"
-#include "Minecraft.World/enchantment/enchantments/FireAspectEnchantment.h"
+#include "net/minecraft/world/enchantment/categories/WeaponCategory.h"
+#include "net/minecraft/world/enchantment/enchantments/FireAspectEnchantment.h"
 
 FireAspectEnchantment::FireAspectEnchantment(const Rarity* rarity,
                                              arrayWithLength<const EquipmentSlot*> equipmentSlots)

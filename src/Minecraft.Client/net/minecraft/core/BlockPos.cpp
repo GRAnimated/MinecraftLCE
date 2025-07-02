@@ -1,6 +1,6 @@
-#include "Minecraft.World/phys/Vec3.h"
-#include "Minecraft.Core/BlockPos.h"
-#include "Minecraft.Core/Direction.h"
+#include "net/minecraft/core/BlockPos.h"
+#include "net/minecraft/core/Direction.h"
+#include "net/minecraft/world/phys/Vec3.h"
 
 BlockPos::BlockPos(int x, int y, int z) : Vec3i(x, y, z) {}
 

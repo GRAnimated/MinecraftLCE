@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Minecraft.World/level/Level.h"
+#include "net/minecraft/world/level/Level.h"
 #include <unordered_set>
 
 class ClientPacketListener;

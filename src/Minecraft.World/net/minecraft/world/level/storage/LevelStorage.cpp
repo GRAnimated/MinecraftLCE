@@ -1,5 +1,5 @@
-#include "Minecraft.World/PlayerUID.h"
-#include "Minecraft.World/level/storage/LevelStorage.h"
+#include "net/minecraft/world/PlayerUID.h"
+#include "net/minecraft/world/level/storage/LevelStorage.h"
 
 LevelStorage::LevelStorage() {}
 

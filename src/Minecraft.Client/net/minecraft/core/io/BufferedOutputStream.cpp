@@ -1,6 +1,6 @@
-#include "Minecraft.Core/io/BufferedOutputStream.h"
+#include "net/minecraft/core/io/BufferedOutputStream.h"
 
-#include "Minecraft.World/ArrayWithLength.h"
+#include "net/minecraft/world/ArrayWithLength.h"
 
 BufferedOutputStream::BufferedOutputStream(OutputStream* outputStream, int bufferSize) {
     mOutputStream = outputStream;

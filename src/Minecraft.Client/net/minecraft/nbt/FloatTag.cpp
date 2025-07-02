@@ -1,8 +1,8 @@
-#include "Minecraft.Nbt/FloatTag.h"
+#include "net/minecraft/nbt/FloatTag.h"
 
-#include "Minecraft.Core/io/DataInput.h"
-#include "Minecraft.Core/io/DataOutput.h"
-#include "Minecraft.Util/Mth.h"
+#include "net/minecraft/core/io/DataInput.h"
+#include "net/minecraft/core/io/DataOutput.h"
+#include "net/minecraft/util/Mth.h"
 
 FloatTag::FloatTag() : mData(0.0f) {}
 

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Minecraft.Client/C4JEvent.h"
+#include "net/minecraft/client/C4JEvent.h"
 #include "nn/os.h"
 
 class C4JEventImpl : public C4JEvent {

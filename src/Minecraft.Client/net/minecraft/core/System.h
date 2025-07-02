@@ -1,8 +1,8 @@
 #pragma once
 
 #include "nn/os/os_MutexTypes.h"
-#include "Minecraft.World/ArrayWithLength.h"
-#include "Minecraft.World/level/biome/Biome.h"
+#include "net/minecraft/world/ArrayWithLength.h"
+#include "net/minecraft/world/level/biome/Biome.h"
 
 #include <sstream>
 #include <string>

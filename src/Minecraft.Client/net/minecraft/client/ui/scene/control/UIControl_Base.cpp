@@ -1,6 +1,6 @@
-#include "Minecraft.Client/ui/scene/UIScene.h"
-#include "Minecraft.Client/ui/scene/control/UIControl.h"
-#include "Minecraft.Client/ui/scene/control/UIControl_Base.h"
+#include "net/minecraft/client/ui/scene/UIScene.h"
+#include "net/minecraft/client/ui/scene/control/UIControl.h"
+#include "net/minecraft/client/ui/scene/control/UIControl_Base.h"
 
 UIControl_Base::UIControl_Base() : UIControl() {
     this->mBoolIdk2 = false;

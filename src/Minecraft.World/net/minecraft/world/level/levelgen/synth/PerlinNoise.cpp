@@ -1,9 +1,9 @@
-#include "Minecraft.World/level/levelgen/synth/PerlinNoise.h"
+#include "net/minecraft/world/level/levelgen/synth/PerlinNoise.h"
 
-#include "Minecraft.World/level/levelgen/synth/ImprovedNoise.h"
-#include "Minecraft.Util/Mth.h"
+#include "net/minecraft/util/Mth.h"
+#include "net/minecraft/world/level/levelgen/synth/ImprovedNoise.h"
 
-#include "Minecraft.Client/platform/NX/Platform.h"
+#include "net/minecraft/client/platform/NX/Platform.h"
 
 PerlinNoise::PerlinNoise(Random* random, int maxOctaves) {
     init(random, maxOctaves);

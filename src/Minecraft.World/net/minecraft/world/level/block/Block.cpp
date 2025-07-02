@@ -1,9 +1,9 @@
 #include "Block.h"
 
-#include "Minecraft.World/level/block/SoundType.h"
-#include "Minecraft.World/level/block/state/BlockState.h"
-#include "Minecraft.World/level/block/state/BlockStateDefinition.h"
-#include "Minecraft.World/level/material/Material.h"
+#include "net/minecraft/world/level/block/SoundType.h"
+#include "net/minecraft/world/level/block/state/BlockState.h"
+#include "net/minecraft/world/level/block/state/BlockStateDefinition.h"
+#include "net/minecraft/world/level/material/Material.h"
 
 Block::Block(Material* material) {
     init(material, material->getColor());

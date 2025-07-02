@@ -1,4 +1,4 @@
-#include "Minecraft.World/level/material/GasMaterial.h"
+#include "net/minecraft/world/level/material/GasMaterial.h"
 
 GasMaterial::GasMaterial(const MaterialColor* color) : Material(color) {
     replaceable();

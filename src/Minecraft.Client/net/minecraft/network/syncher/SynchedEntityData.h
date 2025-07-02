@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Minecraft.World/eINSTANCEOF.h"
+#include "net/minecraft/world/eINSTANCEOF.h"
 
 class SynchedEntityData {
 public:

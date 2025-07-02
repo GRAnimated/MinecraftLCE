@@ -1,4 +1,4 @@
-#include "Minecraft.World/entity/player/CameraController.h"
+#include "net/minecraft/world/entity/player/CameraController.h"
 
 // NON_MATCHING ORDERING and type iirc
 CameraController::CameraController(int mode) : dword70(mode != 3), mCameraMode(mode) {

@@ -1,5 +1,5 @@
 #pragma once
 
-#include "Minecraft.World/entity/player/AbstractClientPlayer.h"
+#include "net/minecraft/world/entity/player/AbstractClientPlayer.h"
 
 class LocalPlayer : public AbstractClientPlayer {};

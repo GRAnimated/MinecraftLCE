@@ -1,7 +1,7 @@
-#include "Minecraft.Client/CMinecraftApp.h"
-#include "Minecraft.World/ArrayWithLength.h"
 #include "L10N.h"
 #include "StringTable.h"
+#include "net/minecraft/client/CMinecraftApp.h"
+#include "net/minecraft/world/ArrayWithLength.h"
 #include <string>
 
 const wchar_t* L10N::GetString(int id) {

@@ -38,6 +38,8 @@ set(NN_SDK_PATCH 1)
 set(NN_SDK_TYPE "Release")
 
 target_include_directories(mcswitch PRIVATE src)
+target_include_directories(mcswitch PRIVATE src/Minecraft.Client)
+target_include_directories(mcswitch PRIVATE src/Minecraft.World)
 target_include_directories(mcswitch PUBLIC lib/nnheaders/include)
 
 target_include_directories(mcswitch PUBLIC lib/stb_image)

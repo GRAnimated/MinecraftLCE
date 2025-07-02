@@ -1,9 +1,9 @@
-#include "Minecraft.World/ArrayWithLength.h"
-#include "Minecraft.Network/protocol/game/ClientboundAwardStatPacket.h"
+#include "net/minecraft/network/protocol/game/ClientboundAwardStatPacket.h"
+#include "net/minecraft/world/ArrayWithLength.h"
 
-#include "Minecraft.Core/io/DataInputStream.h"
-#include "Minecraft.Core/io/DataOutputStream.h"
-#include "Minecraft.Network/PacketListener.h"
+#include "net/minecraft/core/io/DataInputStream.h"
+#include "net/minecraft/core/io/DataOutputStream.h"
+#include "net/minecraft/network/PacketListener.h"
 
 std::shared_ptr<Packet> ClientboundAwardStatPacket::create() {
     return std::shared_ptr<Packet>(new ClientboundAwardStatPacket());

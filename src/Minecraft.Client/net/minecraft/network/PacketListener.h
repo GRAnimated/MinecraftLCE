@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Minecraft.Network/protocol/game/DisconnectPacket.h"
+#include "net/minecraft/network/protocol/game/DisconnectPacket.h"
 #include <memory>
 
 class Packet;

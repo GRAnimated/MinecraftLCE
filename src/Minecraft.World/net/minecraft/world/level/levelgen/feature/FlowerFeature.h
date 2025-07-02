@@ -1,7 +1,7 @@
 #pragma once
 
-#include "Minecraft.World/level/block/FlowerBlock.h"
-#include "Minecraft.World/level/levelgen/feature/Feature.h"
+#include "net/minecraft/world/level/block/FlowerBlock.h"
+#include "net/minecraft/world/level/levelgen/feature/Feature.h"
 
 class FlowerFeature : public Feature {
 public:

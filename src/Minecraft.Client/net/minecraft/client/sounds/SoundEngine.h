@@ -1,7 +1,7 @@
 #pragma once
 
 #include "types.h"
-#include "Minecraft.Client/sounds/ConsoleSoundEngine.h"
+#include "net/minecraft/client/sounds/ConsoleSoundEngine.h"
 
 class SoundEngine : public ConsoleSoundEngine {
 public:

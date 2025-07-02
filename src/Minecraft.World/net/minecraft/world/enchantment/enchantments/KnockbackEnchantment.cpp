@@ -1,5 +1,5 @@
-#include "Minecraft.World/enchantment/categories/WeaponCategory.h"
-#include "Minecraft.World/enchantment/enchantments/KnockbackEnchantment.h"
+#include "net/minecraft/world/enchantment/categories/WeaponCategory.h"
+#include "net/minecraft/world/enchantment/enchantments/KnockbackEnchantment.h"
 
 KnockbackEnchantment::KnockbackEnchantment(const Rarity* rarity,
                                            arrayWithLength<const EquipmentSlot*> equipmentSlots)

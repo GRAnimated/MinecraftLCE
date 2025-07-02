@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Minecraft.World/level/storage/LevelStorage.h"
+#include "net/minecraft/world/level/storage/LevelStorage.h"
 
 class MockedLevelStorage : public LevelStorage {
 public:

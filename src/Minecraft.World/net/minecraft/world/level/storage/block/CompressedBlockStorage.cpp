@@ -1,5 +1,5 @@
-#include "Minecraft.World/level/storage/block/CompressedBlockStorage.h"
-#include "Minecraft.Core/io/DataOutputStream.h"
+#include "net/minecraft/core/io/DataOutputStream.h"
+#include "net/minecraft/world/level/storage/block/CompressedBlockStorage.h"
 
 void CompressedBlockStorage::write(DataOutputStream* out) {
     out->writeInt(this->storage.length);

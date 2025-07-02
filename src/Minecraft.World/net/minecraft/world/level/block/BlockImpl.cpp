@@ -1,4 +1,4 @@
-#include "Minecraft.World/level/block/BlockImpl.h"
+#include "net/minecraft/world/level/block/BlockImpl.h"
 
 BlockImpl::BlockImpl(Material* material) : Block(material) {
     DerivedInit();

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Minecraft.World/level/block/Bush.h"
+#include "net/minecraft/world/level/block/Bush.h"
 
 class WaterlilyBlock : public Bush {
 public:

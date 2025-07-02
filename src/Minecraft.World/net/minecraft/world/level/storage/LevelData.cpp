@@ -1,8 +1,8 @@
-#include "Minecraft.World/level/storage/LevelData.h"
+#include "net/minecraft/world/level/storage/LevelData.h"
 
-#include "Minecraft.Nbt/CompoundTag.h"
-#include "Minecraft.World/level/LevelType.h"
-#include "Minecraft.Core/BlockPos.h"
+#include "net/minecraft/core/BlockPos.h"
+#include "net/minecraft/nbt/CompoundTag.h"
+#include "net/minecraft/world/level/LevelType.h"
 
 LevelData::LevelData(LevelData* other) {
     mSeed = other->mSeed;

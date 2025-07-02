@@ -1,5 +1,5 @@
 #pragma once
-#include "Minecraft.World/ArrayWithLength.h"
+#include "net/minecraft/world/ArrayWithLength.h"
 
 class GrassColor {
 public:

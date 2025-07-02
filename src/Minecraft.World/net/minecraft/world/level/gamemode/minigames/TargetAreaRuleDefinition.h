@@ -1,7 +1,7 @@
 #pragma once
 
-#include "Minecraft.World/level/gamemode/minigames/NamedAreaRuleDefinition.h"
-#include "Minecraft.World/level/gamemode/minigames/glide/GlideRingGenerator.h"
+#include "net/minecraft/world/level/gamemode/minigames/NamedAreaRuleDefinition.h"
+#include "net/minecraft/world/level/gamemode/minigames/glide/GlideRingGenerator.h"
 
 class TargetAreaRuleDefinition : public NamedAreaRuleDefinition {
 public:

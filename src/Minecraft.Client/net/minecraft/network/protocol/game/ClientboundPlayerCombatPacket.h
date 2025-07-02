@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Minecraft.Network/protocol/Packet.h"
+#include "net/minecraft/network/protocol/Packet.h"
 #include <string>
 
 class Item;

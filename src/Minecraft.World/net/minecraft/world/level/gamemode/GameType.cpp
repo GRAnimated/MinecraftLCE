@@ -1,6 +1,6 @@
-#include "Minecraft.World/level/gamemode/GameType.h"
+#include "net/minecraft/world/level/gamemode/GameType.h"
 
-#include "Minecraft.World/entity/player/Abilities.h"
+#include "net/minecraft/world/entity/player/Abilities.h"
 
 void GameType::staticCtor() {
     NOT_SET = new GameType(-1, L"", L"", -1, -1);

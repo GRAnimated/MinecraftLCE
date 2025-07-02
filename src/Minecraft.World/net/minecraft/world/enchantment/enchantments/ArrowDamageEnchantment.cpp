@@ -1,6 +1,6 @@
-#include "Minecraft.World/enchantment/Enchantment.h"
-#include "Minecraft.World/enchantment/categories/BowCategory.h"
-#include "Minecraft.World/enchantment/enchantments/ArrowDamageEnchantment.h"
+#include "net/minecraft/world/enchantment/Enchantment.h"
+#include "net/minecraft/world/enchantment/categories/BowCategory.h"
+#include "net/minecraft/world/enchantment/enchantments/ArrowDamageEnchantment.h"
 
 ArrowDamageEnchantment::ArrowDamageEnchantment(const Rarity* rarity,
                                                arrayWithLength<const EquipmentSlot*> equipmentSlots)

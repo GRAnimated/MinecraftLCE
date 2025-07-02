@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Minecraft.World/ArrayWithLength.h"
+#include "net/minecraft/world/ArrayWithLength.h"
 template <typename T>
 class NonNullList : arrayWithLength<T> {
 public:

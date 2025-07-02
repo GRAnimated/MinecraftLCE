@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Minecraft.Client/gui/screens/Screen.h"
+#include "net/minecraft/client/gui/screens/Screen.h"
 
 class TitleScreen : public Screen {
 public:

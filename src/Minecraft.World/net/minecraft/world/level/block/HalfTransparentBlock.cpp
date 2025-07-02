@@ -1,10 +1,10 @@
-#include "Minecraft.World/level/block/HalfTransparentBlock.h"
+#include "net/minecraft/world/level/block/HalfTransparentBlock.h"
 
-#include "Minecraft.Client/renderer/texture/IconRegister.h"
-#include "Minecraft.World/level/block/Blocks.h"
-#include "Minecraft.World/level/material/Material.h"
-#include "Minecraft.World/level/storage/LevelSource.h"
-#include "Minecraft.Core/BlockPos.h"
+#include "net/minecraft/client/renderer/texture/IconRegister.h"
+#include "net/minecraft/core/BlockPos.h"
+#include "net/minecraft/world/level/block/Blocks.h"
+#include "net/minecraft/world/level/material/Material.h"
+#include "net/minecraft/world/level/storage/LevelSource.h"
 
 HalfTransparentBlock::HalfTransparentBlock(const std::wstring& textureName, Material* material, bool unk)
     : Block(material, material->getColor()) {

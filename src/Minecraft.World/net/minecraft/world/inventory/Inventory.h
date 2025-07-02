@@ -1,4 +1,4 @@
 #pragma once
 
-#include "Minecraft.World/Container.h"
+#include "net/minecraft/world/Container.h"
 class Inventory : public Container {};

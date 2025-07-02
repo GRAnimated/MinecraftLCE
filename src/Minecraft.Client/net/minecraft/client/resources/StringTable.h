@@ -1,6 +1,6 @@
 #pragma once
 #include "types.h"
-#include "Minecraft.World/ArrayWithLength.h"
+#include "net/minecraft/world/ArrayWithLength.h"
 #include <string>
 #include <unordered_map>
 #include <utility>

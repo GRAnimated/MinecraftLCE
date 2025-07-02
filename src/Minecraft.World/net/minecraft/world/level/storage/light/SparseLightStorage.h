@@ -1,5 +1,5 @@
 #pragma once
-#include "Minecraft.Core/io/DataOutputStream.h"
+#include "net/minecraft/core/io/DataOutputStream.h"
 
 class SparseLightStorage {
 public:

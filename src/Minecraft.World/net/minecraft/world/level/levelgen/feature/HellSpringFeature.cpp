@@ -1,9 +1,9 @@
-#include "Minecraft.World/level/Level.h"
-#include "Minecraft.World/level/block/Blocks.h"
-#include "Minecraft.World/level/block/state/BlockState.h"
-#include "Minecraft.World/level/levelgen/feature/HellSpringFeature.h"
-#include "Minecraft.World/level/material/Material.h"
-#include "Minecraft.Core/BlockPos.h"
+#include "net/minecraft/core/BlockPos.h"
+#include "net/minecraft/world/level/Level.h"
+#include "net/minecraft/world/level/block/Blocks.h"
+#include "net/minecraft/world/level/block/state/BlockState.h"
+#include "net/minecraft/world/level/levelgen/feature/HellSpringFeature.h"
+#include "net/minecraft/world/level/material/Material.h"
 
 HellSpringFeature::HellSpringFeature(Block* block, bool forcePlacement)
     : Feature(false), mBlock(block), mIsForcePlacement(forcePlacement) {}

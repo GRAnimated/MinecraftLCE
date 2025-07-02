@@ -1,7 +1,7 @@
 #pragma once
 
 #include "nn/os/os_MutexTypes.h"
-#include "Minecraft.World/level/chunk/ChunkSource.h"
+#include "net/minecraft/world/level/chunk/ChunkSource.h"
 #include <vector>
 
 class ChunkGenerator;

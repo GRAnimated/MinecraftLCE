@@ -1,1 +1,1 @@
-#include "Minecraft.Client/renderer/texture/TextureAtlasSprite.h"
+#include "net/minecraft/client/renderer/texture/TextureAtlasSprite.h"

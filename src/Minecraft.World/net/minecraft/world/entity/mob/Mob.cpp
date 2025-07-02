@@ -1,17 +1,17 @@
 #include "types.h"
-#include "Minecraft.Client/platform/NX/Platform.h"
-#include "Minecraft.World/ArrayWithLength.h"
-#include "Minecraft.World/CensoredString.h"
-#include "Minecraft.World/entity/LivingEntity.h"
-#include "Minecraft.World/item/ItemInstance.h"
-#include "Minecraft.World/level/Level.h"
 #include "Mob.h"
+#include "net/minecraft/client/platform/NX/Platform.h"
+#include "net/minecraft/world/ArrayWithLength.h"
+#include "net/minecraft/world/CensoredString.h"
+#include "net/minecraft/world/entity/LivingEntity.h"
+#include "net/minecraft/world/item/ItemInstance.h"
+#include "net/minecraft/world/level/Level.h"
 #include <memory>
 
-#include "Minecraft.World/entity/ai/Sensing.h"
-#include "Minecraft.World/entity/ai/control/JumpControl.h"
-#include "Minecraft.World/entity/ai/control/LookControl.h"
-#include "Minecraft.World/entity/ai/control/MoveControl.h"
+#include "net/minecraft/world/entity/ai/control/JumpControl.h"
+#include "net/minecraft/world/entity/ai/control/LookControl.h"
+#include "net/minecraft/world/entity/ai/control/MoveControl.h"
+#include "net/minecraft/world/entity/ai/sensing/Sensing.h"
 
 Mob::Mob(Level* level) : LivingEntity(level) {
     MemSect(57);

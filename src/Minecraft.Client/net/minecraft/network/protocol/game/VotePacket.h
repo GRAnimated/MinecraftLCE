@@ -1,7 +1,7 @@
 #pragma once
 
-#include "Minecraft.Network/PacketType.h"
-#include "Minecraft.Network/protocol/Packet.h"
+#include "net/minecraft/network/PacketType.h"
+#include "net/minecraft/network/protocol/Packet.h"
 
 class VotePacket : public Packet, public std::enable_shared_from_this<VotePacket> {
 public:

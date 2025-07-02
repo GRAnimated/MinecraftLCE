@@ -1,11 +1,11 @@
 #pragma once
 
 #include "types.h"
-#include "Minecraft.Client/resources/IdMapper.h"
-#include "Minecraft.Nbt/CompoundTag.h"
-#include "Minecraft.World/eINSTANCEOF.h"
-#include "Minecraft.Core/BlockPos.h"
-#include "Minecraft.Network/protocol/Packet.h"
+#include "net/minecraft/client/resources/IdMapper.h"
+#include "net/minecraft/core/BlockPos.h"
+#include "net/minecraft/nbt/CompoundTag.h"
+#include "net/minecraft/network/protocol/Packet.h"
+#include "net/minecraft/world/eINSTANCEOF.h"
 #include <memory>
 #include <unordered_map>
 
