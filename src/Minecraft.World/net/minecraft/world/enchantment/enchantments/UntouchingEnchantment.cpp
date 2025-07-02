@@ -1,6 +1,6 @@
-#include "net/minecraft/world/enchantment/Enchantment.h"
 #include "net/minecraft/world/enchantment/categories/DiggerCategory.h"
 #include "net/minecraft/world/enchantment/enchantments/UntouchingEnchantment.h"
+#include "net/minecraft/world/item/enchantment/Enchantment.h"
 #include "net/minecraft/world/item/enchantment/Enchantments.h"
 
 UntouchingEnchantment::UntouchingEnchantment(const Rarity* rarity,

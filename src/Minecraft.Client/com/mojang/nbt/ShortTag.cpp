@@ -1,4 +1,4 @@
-#include "net/minecraft/nbt/ShortTag.h"
+#include "com/mojang/nbt/ShortTag.h"
 
 #include "net/minecraft/core/io/DataInput.h"
 #include "net/minecraft/core/io/DataOutput.h"

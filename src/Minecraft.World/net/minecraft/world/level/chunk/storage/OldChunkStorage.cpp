@@ -1,7 +1,7 @@
 #include "net/minecraft/client/platform/NX/Platform.h"
 
-#include "net/minecraft/nbt/ListTag.h"
-#include "net/minecraft/nbt/NbtIo.h"
+#include "com/mojang/nbt/ListTag.h"
+#include "com/mojang/nbt/NbtIo.h"
 
 #include "net/minecraft/world/level/Level.h"
 #include "net/minecraft/world/level/block/entity/BlockEntity.h"

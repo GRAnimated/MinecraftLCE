@@ -1,11 +1,11 @@
 #pragma once
 
-#include "net/minecraft/nbt/NumericTag.h"
+#include "com/mojang/nbt/NumericTag.h"
 
-class DoubleTag : public NumericTag {
+class LongTag : public NumericTag {
 public:
-    DoubleTag();
-    DoubleTag(double data);
+    LongTag();
+    LongTag(long data);
 
     void write(DataOutput*) override;
     void load(DataInput*, int) override;
@@ -20,5 +20,5 @@ public:
     float getAsFloat() override;
     Tag* copy() override;
 
-    double mData;
+    long mData;
 };

@@ -1,4 +1,4 @@
-#include "net/minecraft/nbt/FloatTag.h"
+#include "com/mojang/nbt/FloatTag.h"
 
 #include "net/minecraft/core/io/DataInput.h"
 #include "net/minecraft/core/io/DataOutput.h"

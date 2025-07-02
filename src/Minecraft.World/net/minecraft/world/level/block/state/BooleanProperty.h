@@ -1,6 +1,6 @@
 #pragma once
 
-#include "net/minecraft/world/level/block/state/AbstractProperty.h"
+#include "net/minecraft/world/level/block/state/properties/AbstractProperty.h"
 
 class BooleanProperty : public AbstractProperty<bool> {
 public:

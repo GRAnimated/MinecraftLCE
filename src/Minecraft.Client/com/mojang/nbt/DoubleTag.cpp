@@ -1,4 +1,4 @@
-#include "net/minecraft/nbt/DoubleTag.h"
+#include "com/mojang/nbt/DoubleTag.h"
 
 #include "net/minecraft/core/io/DataInput.h"
 #include "net/minecraft/core/io/DataOutput.h"

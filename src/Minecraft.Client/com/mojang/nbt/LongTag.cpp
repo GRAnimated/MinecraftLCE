@@ -1,4 +1,4 @@
-#include "net/minecraft/nbt/LongTag.h"
+#include "com/mojang/nbt/LongTag.h"
 
 #include "net/minecraft/core/io/DataInput.h"
 #include "net/minecraft/core/io/DataOutput.h"

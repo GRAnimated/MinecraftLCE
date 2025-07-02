@@ -1,6 +1,6 @@
 #pragma once
 
-#include "net/minecraft/world/level/levelgen/ChunkGenerator.h"
+#include "net/minecraft/world/level/chunk/ChunkGenerator.h"
 
 class Random;
 class ChunkPrimer;

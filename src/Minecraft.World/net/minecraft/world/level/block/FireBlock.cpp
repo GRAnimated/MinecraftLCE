@@ -8,7 +8,7 @@
 #include "net/minecraft/core/BlockPos.h"
 #include "net/minecraft/core/Direction.h"
 #include "net/minecraft/server/MinecraftServer.h"
-#include "net/minecraft/server/PlayerList.h"
+#include "net/minecraft/server/players/PlayerList.h"
 #include "net/minecraft/sounds/SoundEvents.h"
 #include "net/minecraft/sounds/SoundSource.h"
 #include "net/minecraft/world/ArrayWithLength.h"

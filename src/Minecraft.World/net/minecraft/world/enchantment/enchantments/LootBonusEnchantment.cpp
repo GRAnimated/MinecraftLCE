@@ -1,5 +1,5 @@
-#include "net/minecraft/world/enchantment/Enchantment.h"
 #include "net/minecraft/world/enchantment/enchantments/LootBonusEnchantment.h"
+#include "net/minecraft/world/item/enchantment/Enchantment.h"
 #include "net/minecraft/world/item/enchantment/EnchantmentCategory.h"
 
 #include "net/minecraft/world/enchantment/categories/DiggerCategory.h"

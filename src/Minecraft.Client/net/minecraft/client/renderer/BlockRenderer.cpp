@@ -5,7 +5,7 @@
 #include "net/minecraft/client/renderer/texture/TextureAtlasSprite.h"
 #include "net/minecraft/core/Direction.h"
 #include "net/minecraft/world/level/block/Blocks.h"
-#include "net/minecraft/world/level/block/state/AbstractProperty.h"
+#include "net/minecraft/world/level/block/state/properties/AbstractProperty.h"
 #include <cstdio>
 
 Property* FACING;

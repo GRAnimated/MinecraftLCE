@@ -1,6 +1,6 @@
 #pragma once
 
-#include "net/minecraft/nbt/NumericTag.h"
+#include "com/mojang/nbt/NumericTag.h"
 
 class IntTag : public NumericTag {
 public:

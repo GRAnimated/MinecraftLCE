@@ -1,4 +1,4 @@
-#include "net/minecraft/world/level/levelgen/ChunkGenerator.h"
+#include "net/minecraft/world/level/chunk/ChunkGenerator.h"
 
 ChunkGenerator::ChunkGenerator() {}
 

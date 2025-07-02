@@ -1,4 +1,4 @@
-#include "net/minecraft/nbt/IntTag.h"
+#include "com/mojang/nbt/IntTag.h"
 
 #include "net/minecraft/core/io/DataInput.h"
 #include "net/minecraft/core/io/DataOutput.h"

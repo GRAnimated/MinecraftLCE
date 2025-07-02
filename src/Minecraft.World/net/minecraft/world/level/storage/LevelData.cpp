@@ -1,7 +1,7 @@
 #include "net/minecraft/world/level/storage/LevelData.h"
 
+#include "com/mojang/nbt/CompoundTag.h"
 #include "net/minecraft/core/BlockPos.h"
-#include "net/minecraft/nbt/CompoundTag.h"
 #include "net/minecraft/world/level/LevelType.h"
 
 LevelData::LevelData(LevelData* other) {

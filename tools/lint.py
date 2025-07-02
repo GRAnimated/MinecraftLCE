@@ -43,23 +43,29 @@ def load_class_map_yaml(filename):
 def compare_class_locations(cpp_map, nested_class_map):
     mismatches = []
     expected_classes = flatten_nested_map(nested_class_map)
+    expected_class_names = {name for name, _ in expected_classes}
 
+    # check for mismatches where classes are in the wrong location
     for class_name, expected_path in expected_classes:
         cpp_location = cpp_map.get(class_name)
-        #if not cpp_location:
-        #    mismatches.append((class_name, "Missing in C++"))
-        #else:
         if cpp_location:
             cpp_location_norm = cpp_location.replace("\\", "/")
             if expected_path not in cpp_location_norm:
                 mismatches.append((class_name, f"Expected in '{expected_path}', found in '{cpp_location_norm}'"))
-    return mismatches
+
+    # check for C++ classes that are not in the class map
+    cpp_only = []
+    for cpp_class in cpp_map:
+        if cpp_class not in expected_class_names:
+            cpp_only.append((cpp_class, cpp_map[cpp_class]))
+
+    return mismatches, cpp_only
 
 def main():
     cpp_class_map = find_cpp_classes(SRC_DIR)
     nested_class_map = load_class_map_yaml("data/java_class_map.yaml")
 
-    mismatches = compare_class_locations(cpp_class_map, nested_class_map)
+    mismatches, cpp_only = compare_class_locations(cpp_class_map, nested_class_map)
     
     if not mismatches:
         print("All classes/enums are in expected locations.")
@@ -67,6 +73,11 @@ def main():
         print("Mismatches found:")
         for name, issue in mismatches:
             print(f" - {name}: {issue}")
+
+    # if cpp_only:
+    #     print("\nClasses/enums only found in C++ but not in YAML:")
+    #     for name, location in cpp_only:
+    #         print(f" - {name} in {location}")
 
 if __name__ == "__main__":
     main()

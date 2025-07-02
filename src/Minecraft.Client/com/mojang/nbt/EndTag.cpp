@@ -1,4 +1,4 @@
-#include "net/minecraft/nbt/EndTag.h"
+#include "com/mojang/nbt/EndTag.h"
 
 void EndTag::write(DataOutput*) {}
 

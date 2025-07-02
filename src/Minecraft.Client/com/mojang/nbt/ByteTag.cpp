@@ -1,4 +1,4 @@
-#include "net/minecraft/nbt/ByteTag.h"
+#include "com/mojang/nbt/ByteTag.h"
 
 #include "net/minecraft/core/io/DataInput.h"
 #include "net/minecraft/core/io/DataOutput.h"

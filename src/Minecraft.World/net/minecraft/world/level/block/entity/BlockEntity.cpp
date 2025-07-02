@@ -1,5 +1,5 @@
+#include "com/mojang/nbt/CompoundTag.h"
 #include "net/minecraft/client/resources/IdMapper.h"
-#include "net/minecraft/nbt/CompoundTag.h"
 #include "net/minecraft/resources/ResourceLocation.h"
 #include "net/minecraft/world/eINSTANCEOF.h"
 #include "net/minecraft/world/level/Level.h"

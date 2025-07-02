@@ -1,6 +1,6 @@
 #include "net/minecraft/client/Minecraft.h"
 #include "net/minecraft/world/entity/EquipmentSlot.h"
-#include "net/minecraft/world/item/Attribute.h"
+#include "net/minecraft/world/entity/ai/attributes/Attribute.h"
 #include "net/minecraft/world/item/DiggerItem.h"
 #include "net/minecraft/world/item/Item.h"
 #include "net/minecraft/world/item/ItemInstance.h"

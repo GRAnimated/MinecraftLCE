@@ -1,8 +1,8 @@
 #pragma once
 
 #include "net/minecraft/world/ArrayWithLength.h"
-#include "net/minecraft/world/level/block/state/AbstractProperty.h"
 #include "net/minecraft/world/level/block/state/BlockState.h"
+#include "net/minecraft/world/level/block/state/properties/AbstractProperty.h"
 #include <vector>
 
 class Block;

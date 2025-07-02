@@ -2,7 +2,7 @@
 
 #include "nn/types.h"
 #include "types.h"
-#include "net/minecraft/tags/Tag.h"
+#include "com/mojang/nbt/Tag.h"
 #include "net/minecraft/world/ArrayWithLength.h"
 #include <unordered_map>
 

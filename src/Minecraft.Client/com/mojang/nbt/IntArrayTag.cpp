@@ -1,4 +1,4 @@
-#include "net/minecraft/nbt/IntArrayTag.h"
+#include "com/mojang/nbt/IntArrayTag.h"
 #include "net/minecraft/world/ArrayWithLength.h"
 
 #include "net/minecraft/core/System.h"

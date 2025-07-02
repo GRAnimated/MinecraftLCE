@@ -1,4 +1,4 @@
-#include "net/minecraft/nbt/CompoundTag.h"
+#include "com/mojang/nbt/CompoundTag.h"
 #include "net/minecraft/world/item/Item.h"
 #include "net/minecraft/world/item/ItemInstance.h"
 #include "net/minecraft/world/level/block/Block.h"

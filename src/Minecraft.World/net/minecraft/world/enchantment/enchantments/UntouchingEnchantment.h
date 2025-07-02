@@ -1,6 +1,6 @@
 #pragma once
 
-#include "net/minecraft/world/enchantment/Enchantment.h"
+#include "net/minecraft/world/item/enchantment/Enchantment.h"
 class UntouchingEnchantment : public Enchantment {
 public:
     UntouchingEnchantment(const Rarity*, arrayWithLength<const EquipmentSlot*>);

@@ -2,12 +2,12 @@
 #include "net/minecraft/sounds/SoundEvents.h"
 #include "net/minecraft/world/Random.h"
 #include "net/minecraft/world/damagesource/DamageSource.h"
-#include "net/minecraft/world/enchantment/Enchantment.h"
 #include "net/minecraft/world/enchantment/categories/ChestArmorCategory.h"
 #include "net/minecraft/world/enchantment/enchantments/ThornsEnchantment.h"
 #include "net/minecraft/world/entity/LivingEntity.h"
 #include "net/minecraft/world/item/ArmorItem.h"
 #include "net/minecraft/world/item/ItemInstance.h"
+#include "net/minecraft/world/item/enchantment/Enchantment.h"
 #include "net/minecraft/world/item/enchantment/EnchantmentHelper.h"
 #include "net/minecraft/world/item/enchantment/Enchantments.h"
 #include <memory>
