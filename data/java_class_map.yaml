@@ -1,0 +1,991 @@
+net:
+  minecraft:
+    _enums: [ChatFormatting]
+    _classes: [CrashReport, CrashReportCategory, DefaultUncaughtExceptionHandler,
+      DefaultUncaughtExceptionHandlerWithName, DetectedVersion, FileUtil, ReportedException,
+      ResourceLocationException, SharedConstants, Util]
+    advancements:
+      _classes: [Advancement, AdvancementList, AdvancementProgress, AdvancementRewards,
+        CriteriaTriggers, Criterion, CriterionProgress, DisplayInfo, TreeNodePosition]
+      _enums: [FrameType]
+      critereon:
+        _classes: [AbstractCriterionTriggerInstance, BredAnimalsTrigger, BrewedPotionTrigger,
+          ChangeDimensionTrigger, ChanneledLightningTrigger, ConstructBeaconTrigger,
+          ConsumeItemTrigger, CuredZombieVillagerTrigger, DamagePredicate, DamageSourcePredicate,
+          DistancePredicate, EffectsChangedTrigger, EnchantedItemTrigger, EnchantmentPredicate,
+          EnterBlockTrigger, EntityEquipmentPredicate, EntityFlagsPredicate, EntityHurtPlayerTrigger,
+          EntityPredicate, FilledBucketTrigger, FishingRodHookedTrigger, ImpossibleTrigger,
+          InventoryChangeTrigger, ItemDurabilityTrigger, ItemPredicate, KilledByCrossbowTrigger,
+          KilledTrigger, LevitationTrigger, LocationPredicate, LocationTrigger, MobEffectsPredicate,
+          NbtPredicate, NetherTravelTrigger, PlacedBlockTrigger, PlayerHurtEntityTrigger,
+          RecipeUnlockedTrigger, ShotCrossbowTrigger, SummonedEntityTrigger, TameAnimalTrigger,
+          TickTrigger, TradeTrigger, UsedEnderEyeTrigger, UsedTotemTrigger, WrappedMinMaxBounds]
+    client:
+      _enums: [AmbientOcclusionStatus, AttackIndicatorStatus, CloudStatus, NarratorStatus,
+        ParticleStatus, RecipeBookCategories]
+      _classes: [BooleanOption, Camera, ClientBrandRetriever, ClientRecipeBook, CycleOption,
+        DebugQueryHandler, FullscreenResolutionProgressOption, Game, GuiMessage, HotbarManager,
+        KeyboardHandler, KeyMapping, LogaritmicProgressOption, Minecraft, MouseHandler,
+        Options, ProgressOption, Screenshot, Session, Timer, User]
+      color:
+        block:
+          _classes: [BlockColors]
+        item:
+          _classes: [ItemColors]
+      gui:
+        _classes: [Font, Gui, MapRenderer]
+        chat:
+          _classes: [NarratorChatListener, OverlayChatListener, StandardChatListener]
+        components:
+          _classes: [TrackedList, BossHealthOverlay, Button, ChatComponent, Checkbox,
+            ComponentRenderUtils, DebugScreenOverlay, EditBox, ImageButton, LerpingBossEvent,
+            LockIconButton, OptionButton, OptionsList, PlayerTabOverlay, SliderButton,
+            StateSwitchingButton, SubtitleOverlay, VolumeSlider]
+          spectator:
+            _classes: [SpectatorGui]
+          toasts:
+            _classes: [AdvancementToast, RecipeToast, SystemToast, ToastComponent,
+              TutorialToast]
+        font:
+          _classes: [AllMissingGlyphProvider, FontManager, FontSet, FontTexture, TextFieldHelper]
+          glyphs:
+            _classes: [BakedGlyph, EmptyGlyph]
+            _enums: [MissingGlyph]
+          providers:
+            _classes: [BitmapProvider, LegacyUnicodeBitmapsProvider, TrueTypeGlyphProviderBuilder]
+            _enums: [GlyphProviderBuilderType]
+        screens:
+          _classes: [AccessibilityOptionsScreen, AlertScreen, BackupConfirmScreen,
+            ChatOptionsScreen, ChatScreen, ConfirmLinkScreen, ConfirmScreen, ConnectScreen,
+            CreateBuffetWorldScreen, CreateFlatWorldScreen, DeathScreen, DemoIntroScreen,
+            DirectJoinServerScreen, DisconnectedScreen, EditServerScreen, ErrorScreen,
+            GenericDirtMessageScreen, InBedChatScreen, LanguageSelectScreen, LevelLoadingScreen,
+            LoadingOverlay, MenuScreens, MouseSettingsScreen, OptionsScreen, OutOfMemoryScreen,
+            PauseScreen, PresetFlatWorldScreen, ProgressScreen, ReceivingLevelScreen,
+            ShareToLanScreen, SkinCustomizationScreen, SoundOptionsScreen, TitleScreen,
+            VideoSettingsScreen, WinScreen]
+          achievement:
+            _classes: [StatsScreen]
+          advancements:
+            _classes: [AdvancementsScreen, AdvancementTab, AdvancementWidget]
+            _enums: [AdvancementTabType, AdvancementWidgetType]
+          controls:
+            _classes: [ControlList, ControlsScreen]
+          inventory:
+            _classes: [SuggestionsList, AnvilScreen, BeaconScreen, BlastFurnaceScreen,
+              BookEditScreen, BookViewScreen, BrewingStandScreen, CartographyScreen,
+              CommandBlockEditScreen, ContainerScreen, CraftingScreen, CreativeInventoryListener,
+              CreativeModeInventoryScreen, DispenserScreen, EnchantmentNames, EnchantmentScreen,
+              FurnaceScreen, GrindstoneScreen, HopperScreen, HorseInventoryScreen,
+              InventoryScreen, JigsawBlockEditScreen, LecternScreen, LoomScreen, MerchantScreen,
+              MinecartCommandBlockEditScreen, PageButton, ShulkerBoxScreen, SignEditScreen,
+              SmokerScreen, StonecutterScreen, StructureBlockEditScreen]
+          multiplayer:
+            _classes: [JoinMultiplayerScreen, ServerSelectionList]
+          recipebook:
+            _classes: [BlastingRecipeBookComponent, GhostRecipe, OverlayRecipeComponent,
+              RecipeBookComponent, RecipeBookPage, RecipeBookTabButton, RecipeButton,
+              RecipeCollection, SmeltingRecipeBookComponent, SmokingRecipeBookComponent]
+          resourcepacks:
+            _classes: [ResourcePackSelectScreen]
+            lists:
+              _classes: [AvailableResourcePackList, SelectedResourcePackList]
+          worldselection:
+            _classes: [CreateWorldScreen, EditWorldScreen, OptimizeWorldScreen, SelectWorldScreen,
+              WorldSelectionList]
+        spectator:
+          _classes: [PlayerMenuItem, RootSpectatorMenuCategory, SpectatorMenu]
+          categories:
+            _classes: [SpectatorPage, TeleportToPlayerMenuCategory, TeleportToTeamMenuCategory]
+      main:
+        _classes: [GameConfig, Main]
+      model:
+        _classes: [ArmorStandArmorModel, ArmorStandModel, BannerModel, BatModel, BedModel,
+          BellModel, BlazeModel, BoatModel, BookModel, CatModel, ChestedHorseModel,
+          ChestModel, ChickenModel, CodModel, CowModel, CreeperModel, DrownedModel,
+          ElytraModel, EndermanModel, EndermiteModel, EvokerFangsModel, FoxModel,
+          GhastModel, GiantZombieModel, GuardianModel, HorseModel, HumanoidHeadModel,
+          HumanoidModel, IllagerModel, IronGolemModel, LargeChestModel, LavaSlimeModel,
+          LeashKnotModel, LlamaModel, LlamaSpitModel, MinecartModel, Model, OcelotModel,
+          PandaModel, ParrotModel, PhantomModel, PigModel, PillagerModel, PlayerModel,
+          PolarBearModel, Polygon, PufferfishBigModel, PufferfishMidModel, PufferfishSmallModel,
+          QuadrupedModel, RabbitModel, RavagerModel, SalmonModel, SheepFurModel, SheepModel,
+          ShieldModel, ShulkerBulletModel, ShulkerModel, SignModel, SilverfishModel,
+          SkeletonModel, SkullModel, SlimeModel, SnowGolemModel, SpiderModel, SquidModel,
+          TridentModel, TropicalFishModelA, TropicalFishModelB, TurtleModel, Vertex,
+          VexModel, VillagerModel, WitchModel, WitherBossModel, WolfModel, ZombieModel,
+          ZombieVillagerModel]
+        dragon:
+          _classes: [DragonHeadModel, DragonModel, EndCrystalModel]
+        geom:
+          _classes: [Cube, ModelPart]
+      multiplayer:
+        _classes: [ClientAdvancements, ClientChunkCache, ClientHandshakePacketListenerImpl,
+          ClientPacketListener, ClientSuggestionProvider, MultiPlayerGameMode, MultiPlayerLevel,
+          PlayerInfo, ServerAddress, ServerData, ServerList, ServerStatusPinger]
+      particle:
+        _classes: [AttackSweepParticle, BarrierParticle, BreakingItemParticle, BubbleColumnUpParticle,
+          BubbleParticle, BubblePopParticle, CampfireSmokeParticle, CritParticle,
+          DragonBreathParticle, DripParticle, DustParticle, EnchantmentTableParticle,
+          EndRodParticle, ExplodeParticle, FallingDustParticle, FireworkParticles,
+          FlameParticle, HeartParticle, HugeExplosionParticle, HugeExplosionSeedParticle,
+          ItemPickupParticle, LargeSmokeParticle, LavaParticle, MobAppearanceParticle,
+          NoRenderParticle, NoteParticle, ParticleDescription, ParticleEngine, PlayerCloudParticle,
+          PortalParticle, SimpleAnimatedParticle, SmokeParticle, SpellParticle, SpitParticle,
+          SplashParticle, SquidInkParticle, SuspendedParticle, SuspendedTownParticle,
+          TerrainParticle, TotemParticle, TrackingEmitter, WakeParticle, WaterCurrentDownParticle,
+          WaterDropParticle]
+      player:
+        _classes: [Input, KeyboardInput, LocalPlayer, RemotePlayer]
+        inventory:
+          _classes: [Hotbar]
+      renderer:
+        _classes: [BiomeColors, ChunkBufferBuilderPack, CubeMap, EffectInstance, EntityBlockRenderer,
+          FogRenderer, GameRenderer, ItemInHandRenderer, ItemModelShaper, LevelRenderer,
+          LightTexture, MobSkinTextureProcessor, OffsettedRenderList, PanoramaRenderer,
+          PostChain, PostPass, Rect2i, VboRenderList, ViewArea]
+        _enums: [FaceInfo]
+        banner:
+          _classes: [BannerTextures]
+        block:
+          _classes: [AnimatedEntityBlockRenderer, BlockModelShaper, BlockRenderDispatcher,
+            LiquidBlockRenderer, ModelBlockRenderer]
+          model:
+            _classes: [BakedQuad, BlockElement, BlockElementFace, BlockElementRotation,
+              BlockFaceUV, BlockModel, BlockModelDefinition, BreakingQuad, FaceBakery,
+              ItemModelGenerator, ItemOverride, ItemOverrides, ItemTransform, ItemTransforms,
+              MultiVariant, Variant]
+            multipart:
+              _classes: [AndCondition, KeyValueCondition, MultiPart, OrCondition,
+                Selector]
+        blockentity:
+          _classes: [BannerRenderer, BeaconRenderer, BedRenderer, BellRenderer, BlockEntityRenderDispatcher,
+            CampfireRenderer, ChestRenderer, ConduitRenderer, EnchantTableRenderer,
+            LecternRenderer, PistonHeadRenderer, ShulkerBoxRenderer, SignRenderer,
+            SkullBlockRenderer, SpawnerRenderer, StructureBlockRenderer, TheEndGatewayRenderer,
+            TheEndPortalRenderer]
+        chunk:
+          _classes: [ChunkCompileTask, ChunkRenderDispatcher, ChunkRenderWorker, CompiledChunk,
+            ListedRenderChunk, RenderChunk, RenderChunkRegion, VisGraph, VisibilitySet]
+        culling:
+          _classes: [Frustum, FrustumCuller, FrustumData]
+        debug:
+          _classes: [CaveDebugRenderer, ChunkBorderRenderer, ChunkDebugRenderer, CollisionBoxRenderer,
+            DebugRenderer, GoalSelectorDebugRenderer, HeightMapRenderer, LightDebugRenderer,
+            NeighborsUpdateRenderer, PathfindingRenderer, RaidDebugRenderer, SolidFaceRenderer,
+            StructureRenderer, VillageDebugRenderer, WaterDebugRenderer, WorldGenAttemptRenderer]
+        entity:
+          _classes: [AreaEffectCloudRenderer, ArmorStandRenderer, BatRenderer, BlazeRenderer,
+            BoatRenderer, CatRenderer, CaveSpiderRenderer, ChestedHorseRenderer, ChickenRenderer,
+            CodRenderer, CowRenderer, CreeperRenderer, DefaultRenderer, DolphinModel,
+            DolphinRenderer, DragonFireballRenderer, DrownedRenderer, ElderGuardianRenderer,
+            EndCrystalRenderer, EnderDragonRenderer, EndermanRenderer, EndermiteRenderer,
+            EntityRenderDispatcher, EvokerFangsRenderer, EvokerRenderer, ExperienceOrbRenderer,
+            FallingBlockRenderer, FireworkEntityRenderer, FishingHookRenderer, FoxRenderer,
+            GhastRenderer, GiantMobRenderer, GuardianRenderer, HumanoidMobRenderer,
+            HuskRenderer, IllusionerRenderer, IronGolemRenderer, ItemEntityRenderer,
+            ItemFrameRenderer, ItemRenderer, LavaSlimeRenderer, LeashKnotRenderer,
+            LightningBoltRenderer, LlamaRenderer, LlamaSpitRenderer, MinecartRenderer,
+            MushroomCowRenderer, OcelotRenderer, PaintingRenderer, PandaRenderer,
+            ParrotRenderer, PhantomRenderer, PigRenderer, PigZombieRenderer, PillagerRenderer,
+            PolarBearRenderer, PufferfishRenderer, RabbitRenderer, RavagerRenderer,
+            SalmonRenderer, SheepRenderer, ShulkerBulletRenderer, ShulkerRenderer,
+            SilverfishRenderer, SkeletonRenderer, SlimeRenderer, SnowGolemRenderer,
+            SpectralArrowRenderer, SpiderRenderer, SquidRenderer, StrayRenderer, ThrownItemRenderer,
+            ThrownTridentRenderer, TippableArrowRenderer, TntMinecartRenderer, TntRenderer,
+            TropicalFishRenderer, TurtleRenderer, UndeadHorseRenderer, VexRenderer,
+            VillagerProfessionLayer, VillagerRenderer, VindicatorRenderer, WanderingTraderRenderer,
+            WitchRenderer, WitherBossRenderer, WitherSkeletonRenderer, WitherSkullRenderer,
+            WolfRenderer, ZombieRenderer, ZombieVillagerRenderer]
+          layers:
+            _classes: [ArrowLayer, CapeLayer, CarriedBlockLayer, CatCollarLayer, CreeperPowerLayer,
+              CustomHeadLayer, Deadmau5EarsLayer, DolphinCarryingItemLayer, DrownedOuterLayer,
+              ElytraLayer, EnderDragonDeathLayer, EnderDragonEyesLayer, EnderEyesLayer,
+              FoxHeldItemLayer, HorseArmorLayer, HumanoidArmorLayer, IronGolemFlowerLayer,
+              ItemInHandLayer, LlamaDecorLayer, MushroomCowMushroomLayer, PandaHoldsItemLayer,
+              ParrotOnShoulderLayer, PhantomEyesLayer, PigSaddleLayer, SheepFurLayer,
+              ShulkerHeadLayer, SlimeOuterLayer, SnowGolemHeadLayer, SpiderEyesLayer,
+              SpinAttackEffectLayer, StrayClothingLayer, TropicalFishPatternLayer,
+              VillagerTradeItemLayer, WitchItemLayer, WitherArmorLayer, WolfCollarLayer]
+          player:
+            _classes: [PlayerRenderer]
+        texture:
+          _classes: [DynamicTexture, HttpTexture, LayeredColorMaskTexture, LayeredTexture,
+            PreloadedTexture, SimpleTexture, Stitcher, StitcherException, TextureAtlas,
+            TextureAtlasSprite, TextureManager]
+      resources:
+        _classes: [AssetIndex, ClientPackSource, DefaultClientResourcePack, DefaultPlayerSkin,
+          DirectAssetIndex, FoliageColorReloadListener, GrassColorReloadListener,
+          LegacyResourcePackAdapter, LegacyStuffWrapper, MobEffectTextureManager,
+          PaintingTextureManager, SkinManager, SplashManager, UnopenedResourcePack]
+        language:
+          _classes: [I18n, Language, LanguageManager, Locale]
+        metadata:
+          animation:
+            _classes: [AnimationFrame, AnimationMetadataSection, AnimationMetadataSectionSerializer,
+              VillagerMetaDataSection, VillagerMetadataSectionSerializer]
+          language:
+            _classes: [LanguageMetadataSection, LanguageMetadataSectionSerializer]
+          texture:
+            _classes: [TextureMetadataSection, TextureMetadataSectionSerializer]
+        model:
+          _enums: [BlockModelRotation]
+          _classes: [BuiltInModel, ModelBakery, ModelManager, ModelResourceLocation,
+            MultiPartBakedModel, SimpleBakedModel, WeightedBakedModel]
+        sounds:
+          _classes: [BubbleColumnAmbientSoundHandler, ElytraOnPlayerSoundInstance,
+            EntityBoundSoundInstance, GuardianAttackSoundInstance, MinecartSoundInstance,
+            RidingMinecartSoundInstance, SimpleSoundInstance, Sound, SoundEventRegistration,
+            SoundEventRegistrationSerializer, UnderwaterAmbientSoundHandler, UnderwaterAmbientSoundInstances]
+      searchtree:
+        _classes: [ReloadableIdSearchTree, ReloadableSearchTree, SearchRegistry, SuffixArray]
+      server:
+        _classes: [IntegratedPlayerList, IntegratedServer, LanServer, LanServerDetection,
+          LanServerPinger]
+      sounds:
+        _classes: [ChannelAccess, MusicManager, SoundBufferLibrary, SoundEngine, SoundEngineExecutor,
+          SoundManager, WeighedSoundEvents]
+      tutorial:
+        _classes: [CompletedTutorialStepInstance, CraftPlanksTutorialStep, FindTreeTutorialStepInstance,
+          MovementTutorialStepInstance, OpenInventoryTutorialStep, PunchTreeTutorialStepInstance,
+          Tutorial]
+        _enums: [TutorialSteps]
+    commands:
+      _classes: [BrigadierExceptions, CommandFunction, CommandRuntimeException, Commands,
+        CommandSourceStack]
+      arguments:
+        _classes: [ColorArgument, ComponentArgument, CompoundTagArgument, DimensionTypeArgument,
+          EntityAnchorArgument, EntityArgument, EntitySummonArgument, GameProfileArgument,
+          ItemEnchantmentArgument, MessageArgument, MobEffectArgument, NbtPathArgument,
+          NbtTagArgument, ObjectiveArgument, ObjectiveCriteriaArgument, OperationArgument,
+          ParticleArgument, ResourceLocationArgument, ScoreboardSlotArgument, ScoreHolderArgument,
+          SlotArgument, TeamArgument, TimeArgument]
+        blocks:
+          _classes: [BlockInput, BlockPredicateArgument, BlockStateArgument, BlockStateParser]
+        coordinates:
+          _classes: [BlockPosArgument, ColumnPosArgument, LocalCoordinates, RotationArgument,
+            SwizzleArgument, Vec2Argument, Vec3Argument, WorldCoordinate, WorldCoordinates]
+        item:
+          _classes: [FunctionArgument, ItemArgument, ItemInput, ItemParser, ItemPredicateArgument]
+        selector:
+          _classes: [EntitySelector, EntitySelectorParser]
+          options:
+            _classes: [EntitySelectorOptions]
+      synchronization:
+        _classes: [ArgumentTypes, EmptyArgumentSerializer, SuggestionProviders]
+        brigadier:
+          _classes: [BrigadierArgumentSerializers, DoubleArgumentSerializer, FloatArgumentSerializer,
+            IntegerArgumentSerializer, LongArgumentSerializer, StringArgumentSerializer]
+    core:
+      _enums: [AxisCycle, Direction, Direction8]
+      _classes: [BlockPos, BlockSourceImpl, Cursor3D, DefaultedRegistry, IdMapper,
+        MapFiller, MappedRegistry, NonNullList, PositionImpl, Rotations, SectionPos,
+        Vec3i]
+      dispenser:
+        _classes: [BoatDispenseItemBehavior, DefaultDispenseItemBehavior, ShulkerBoxDispenseBehavior]
+      particles:
+        _classes: [BlockParticleOption, DustParticleOptions, ItemParticleOption, ParticleType,
+          ParticleTypes, SimpleParticleType]
+    data:
+      _classes: [DataGenerator, HashCache, Main]
+      advancements:
+        _classes: [AdvancementProvider, AdventureAdvancements, HusbandryAdvancements,
+          NetherAdvancements, StoryAdvancements, TheEndAdvancements]
+      info:
+        _classes: [BlockListReport, CommandsReport, RegistryDumpReport]
+      loot:
+        _classes: [BlockLoot, ChestLoot, EntityLoot, FishingLoot, GiftLoot, LootTableProvider]
+      recipes:
+        _classes: [RecipeProvider, ShapedRecipeBuilder, ShapelessRecipeBuilder, SimpleCookingRecipeBuilder,
+          SingleItemRecipeBuilder, SpecialRecipeBuilder]
+      structures:
+        _classes: [NbtToSnbt, SnbtToNbt, StructureUpdater]
+      tags:
+        _classes: [BlockTagsProvider, EntityTypeTagsProvider, FluidTagsProvider, ItemTagsProvider]
+    nbt:
+      _classes: [ByteArrayTag, ByteTag, CompoundTag, DoubleTag, EndTag, FloatTag,
+        IntArrayTag, IntTag, ListTag, LongArrayTag, LongTag, NbtAccounter, NbtIo,
+        NbtOps, ShortTag, StringTag, TagParser]
+    network:
+      _classes: [CipherBase, CipherDecoder, CipherEncoder, CompressionDecoder, CompressionEncoder,
+        Connection, FriendlyByteBuf, PacketDecoder, PacketEncoder, SkipPacketException,
+        Varint21FrameDecoder, Varint21LengthFieldPrepender]
+      _enums: [ConnectionProtocol]
+      chat:
+        _enums: [ChatType]
+        _classes: [ClickEvent, ComponentUtils, HoverEvent, KeybindComponent, ScoreComponent,
+          SelectorComponent, Style, TextComponent, TranslatableComponent, TranslatableFormatException]
+      protocol:
+        _enums: [PacketFlow]
+        _classes: [PacketUtils]
+        game:
+          _classes: [ClientboundAddEntityPacket, ClientboundAddExperienceOrbPacket,
+            ClientboundAddGlobalEntityPacket, ClientboundAddMobPacket, ClientboundAddPaintingPacket,
+            ClientboundAddPlayerPacket, ClientboundAnimatePacket, ClientboundAwardStatsPacket,
+            ClientboundBlockBreakAckPacket, ClientboundBlockDestructionPacket, ClientboundBlockEntityDataPacket,
+            ClientboundBlockEventPacket, ClientboundBlockUpdatePacket, ClientboundBossEventPacket,
+            ClientboundChangeDifficultyPacket, ClientboundChatPacket, ClientboundChunkBlocksUpdatePacket,
+            ClientboundCommandsPacket, ClientboundCommandSuggestionsPacket, ClientboundContainerAckPacket,
+            ClientboundContainerClosePacket, ClientboundContainerSetContentPacket,
+            ClientboundContainerSetDataPacket, ClientboundContainerSetSlotPacket,
+            ClientboundCooldownPacket, ClientboundCustomPayloadPacket, ClientboundCustomSoundPacket,
+            ClientboundDisconnectPacket, ClientboundEntityEventPacket, ClientboundExplodePacket,
+            ClientboundForgetLevelChunkPacket, ClientboundGameEventPacket, ClientboundHorseScreenOpenPacket,
+            ClientboundKeepAlivePacket, ClientboundLevelChunkPacket, ClientboundLevelEventPacket,
+            ClientboundLevelParticlesPacket, ClientboundLightUpdatePacket, ClientboundLoginPacket,
+            ClientboundMapItemDataPacket, ClientboundMerchantOffersPacket, ClientboundMoveEntityPacket,
+            ClientboundMoveVehiclePacket, ClientboundOpenBookPacket, ClientboundOpenScreenPacket,
+            ClientboundOpenSignEditorPacket, ClientboundPlaceGhostRecipePacket, ClientboundPlayerAbilitiesPacket,
+            ClientboundPlayerCombatPacket, ClientboundPlayerInfoPacket, ClientboundPlayerLookAtPacket,
+            ClientboundPlayerPositionPacket, ClientboundRecipePacket, ClientboundRemoveEntitiesPacket,
+            ClientboundRemoveMobEffectPacket, ClientboundResourcePackPacket, ClientboundRespawnPacket,
+            ClientboundRotateHeadPacket, ClientboundSelectAdvancementsTabPacket, ClientboundSetBorderPacket,
+            ClientboundSetCameraPacket, ClientboundSetCarriedItemPacket, ClientboundSetChunkCacheCenterPacket,
+            ClientboundSetChunkCacheRadiusPacket, ClientboundSetDisplayObjectivePacket,
+            ClientboundSetEntityDataPacket, ClientboundSetEntityLinkPacket, ClientboundSetEntityMotionPacket,
+            ClientboundSetEquippedItemPacket, ClientboundSetExperiencePacket, ClientboundSetHealthPacket,
+            ClientboundSetObjectivePacket, ClientboundSetPassengersPacket, ClientboundSetPlayerTeamPacket,
+            ClientboundSetScorePacket, ClientboundSetSpawnPositionPacket, ClientboundSetTimePacket,
+            ClientboundSetTitlesPacket, ClientboundSoundEntityPacket, ClientboundSoundPacket,
+            ClientboundStopSoundPacket, ClientboundTabListPacket, ClientboundTagQueryPacket,
+            ClientboundTakeItemEntityPacket, ClientboundTeleportEntityPacket, ClientboundUpdateAdvancementsPacket,
+            ClientboundUpdateAttributesPacket, ClientboundUpdateMobEffectPacket, ClientboundUpdateRecipesPacket,
+            ClientboundUpdateTagsPacket, DebugPackets, DebugVillagerNameGenerator,
+            ServerboundAcceptTeleportationPacket, ServerboundBlockEntityTagQuery,
+            ServerboundChangeDifficultyPacket, ServerboundChatPacket, ServerboundClientCommandPacket,
+            ServerboundClientInformationPacket, ServerboundCommandSuggestionPacket,
+            ServerboundContainerAckPacket, ServerboundContainerButtonClickPacket,
+            ServerboundContainerClickPacket, ServerboundContainerClosePacket, ServerboundCustomPayloadPacket,
+            ServerboundEditBookPacket, ServerboundEntityTagQuery, ServerboundInteractPacket,
+            ServerboundKeepAlivePacket, ServerboundLockDifficultyPacket, ServerboundMovePlayerPacket,
+            ServerboundMoveVehiclePacket, ServerboundPaddleBoatPacket, ServerboundPickItemPacket,
+            ServerboundPlaceRecipePacket, ServerboundPlayerAbilitiesPacket, ServerboundPlayerActionPacket,
+            ServerboundPlayerCommandPacket, ServerboundPlayerInputPacket, ServerboundRecipeBookUpdatePacket,
+            ServerboundRenameItemPacket, ServerboundResourcePackPacket, ServerboundSeenAdvancementsPacket,
+            ServerboundSelectTradePacket, ServerboundSetBeaconPacket, ServerboundSetCarriedItemPacket,
+            ServerboundSetCommandBlockPacket, ServerboundSetCommandMinecartPacket,
+            ServerboundSetCreativeModeSlotPacket, ServerboundSetJigsawBlockPacket,
+            ServerboundSetStructureBlockPacket, ServerboundSignUpdatePacket, ServerboundSwingPacket,
+            ServerboundTeleportToEntityPacket, ServerboundUseItemOnPacket, ServerboundUseItemPacket]
+        handshake:
+          _classes: [ClientIntentionPacket]
+        login:
+          _classes: [ClientboundCustomQueryPacket, ClientboundGameProfilePacket, ClientboundHelloPacket,
+            ClientboundLoginCompressionPacket, ClientboundLoginDisconnectPacket, ServerboundCustomQueryPacket,
+            ServerboundHelloPacket, ServerboundKeyPacket]
+        status:
+          _classes: [ClientboundPongResponsePacket, ClientboundStatusResponsePacket,
+            ServerboundPingRequestPacket, ServerboundStatusRequestPacket, ServerStatus]
+      syncher:
+        _classes: [EntityDataAccessor, EntityDataSerializers, SynchedEntityData]
+    realms:
+      _classes: [DisconnectedRealmsScreen, Realms, RealmsAnvilLevelStorageSource,
+        RealmsBridge, RealmsBufferBuilder, RealmsButtonProxy, RealmsClickableScrolledSelectionListProxy,
+        RealmsConnect, RealmsDefaultVertexFormat, RealmsEditBox, RealmsLabel, RealmsLabelProxy,
+        RealmsLevelSummary, RealmsMth, RealmsObjectSelectionListProxy, RealmsScreenProxy,
+        RealmsScrolledSelectionListProxy, RealmsServerAddress, RealmsSharedConstants,
+        RealmsSimpleScrolledSelectionListProxy, RealmsSliderButtonProxy, RealmsVertexFormat,
+        RealmsVertexFormatElement, RepeatedNarrator, Tezzelator]
+    recipebook:
+      _classes: [ServerPlaceRecipe, ServerPlaceSmeltingRecipe]
+    resources:
+      _classes: [ResourceLocation]
+    server:
+      _classes: [Bootstrap, ChainedJsonException, ConsoleInput, DebugLoggedPrintStream,
+        Eula, LoggedPrintStream, PlayerAdvancements, ServerAdvancementManager, ServerFunctionManager,
+        ServerScoreboard, TickTask]
+      bossevents:
+        _classes: [CustomBossEvent, CustomBossEvents]
+      commands:
+        _classes: [AdvancementCommands, BanIpCommands, BanListCommands, BanPlayerCommands,
+          BossBarCommands, ClearInventoryCommands, CloneCommands, DataPackCommand,
+          DebugCommand, DefaultGameModeCommands, DeOpCommands, DifficultyCommand,
+          EffectCommands, EmoteCommands, EnchantCommand, ExecuteCommand, ExperienceCommand,
+          FillCommand, ForceLoadCommand, FunctionCommand, GameModeCommand, GameRuleCommand,
+          GiveCommand, HelpCommand, KickCommand, KillCommand, ListPlayersCommand,
+          LocateCommand, LootCommand, MsgCommand, OpCommand, PardonCommand, PardonIpCommand,
+          ParticleCommand, PlaySoundCommand, PublishCommand, RecipeCommand, ReloadCommand,
+          ReplaceItemCommand, SaveAllCommand, SaveOffCommand, SaveOnCommand, SayCommand,
+          ScheduleCommand, ScoreboardCommand, SeedCommand, SetBlockCommand, SetPlayerIdleTimeoutCommand,
+          SetSpawnCommand, SetWorldSpawnCommand, SpreadPlayersCommand, StopCommand,
+          StopSoundCommand, SummonCommand, TagCommand, TeamCommand, TeamMsgCommand,
+          TeleportCommand, TellRawCommand, TimeCommand, TitleCommand, TriggerCommand,
+          WeatherCommand, WhitelistCommand, WorldBorderCommand]
+        data:
+          _classes: [BlockDataAccessor, DataCommands, EntityDataAccessor]
+      dedicated:
+        _classes: [DedicatedPlayerList, DedicatedServer, DedicatedServerProperties,
+          DedicatedServerSettings, ServerWatchdog, MutableValue]
+      gui:
+        _classes: [MinecraftServerGui, PlayerListComponent, StatsComponent]
+      level:
+        _classes: [BlockDestructionProgress, ChunkHolder, ChunkMap, ChunkTaskPriorityQueue,
+          ChunkTaskPriorityQueueSorter, ColumnPos, DemoMode, DerivedServerLevel, ChunkTicketTracker,
+          ServerBossEvent, ServerChunkCache, ServerEntity, ServerLevel, ServerPlayer,
+          ServerPlayerGameMode, ThreadedLevelLightEngine, TicketType, WorldGenRegion,
+          WorldGenTickList]
+        progress:
+          _classes: [LoggerChunkProgressListener, ProcessorChunkProgressListener,
+            StoringChunkProgressListener]
+      network:
+        _classes: [LegacyQueryHandler, MemoryServerHandshakePacketListenerImpl, ServerConnectionListener,
+          ServerGamePacketListenerImpl, ServerHandshakePacketListenerImpl, ServerLoginPacketListenerImpl,
+          ServerStatusPacketListenerImpl]
+      packs:
+        _classes: [FileResourcePack, FolderResourcePack, ResourcePackFileNotFoundException,
+          VanillaPack]
+        _enums: [PackType]
+        metadata:
+          pack:
+            _classes: [PackMetadataSection, PackMetadataSectionSerializer]
+        repository:
+          _classes: [FolderRepositorySource, PackRepository, ServerPacksSource, UnopenedPack]
+          _enums: [PackCompatibility]
+        resources:
+          _classes: [FallbackResourceManager, ProfiledReloadInstance, SimpleReloadableResourceManager,
+            SimpleReloadInstance, SimpleResource]
+      players:
+        _classes: [GameProfileCache, IpBanList, IpBanListEntry, OldUsersConverter,
+          ServerOpList, ServerOpListEntry, StoredUserEntry, StoredUserList, UserBanList,
+          UserBanListEntry, UserWhiteList, UserWhiteListEntry]
+      rcon:
+        _classes: [NetworkDataOutputStream, PktUtils, RconConsoleSource]
+        thread:
+          _classes: [QueryThreadGs4, RconClient, RconThread]
+    sounds:
+      _classes: [SoundEvent, SoundEvents]
+      _enums: [SoundSource]
+    stats:
+      _classes: [RecipeBook, ServerRecipeBook, ServerStatsCounter, Stat, Stats, StatsCounter,
+        StatType]
+    tags:
+      _classes: [BlockTags, EntityTypeTags, FluidTags, ItemTags, SynchronizableTagCollection,
+        Tag, TagCollection, TagManager]
+    util:
+      _classes: [BitStorage, ClassInstanceMultiMap, CrudeIncrementalIntIdentityHashBiMap,
+        Crypt, CsvOutput, FrameTimer, GsonHelper, HttpUtil, InsensitiveStringMap,
+        LazyLoadedValue, LowerCaseEnumTypeAdapterFactory, Mth, RewindableStream, SmoothDouble,
+        StringUtil, Tuple, WeighedRandom]
+      _enums: [Unit]
+      datafix:
+        _classes: [DataFixers, OminousBannerBlockEntityRenameFix, OminousBannerRenameFix]
+        _enums: [DataFixTypes]
+        fixes:
+          _classes: [AddNewChoices, AdvancementsFix, BedBlockEntityInjecter, BedItemColorFix,
+            BiomeFix, BlockEntityBannerColorFix, BlockEntityBlockStateFix, BlockEntityCustomNameToComponentFix,
+            BlockEntityIdFix, BlockEntityJukeboxFix, BlockEntityKeepPacked, BlockEntityShulkerBoxColorFix,
+            BlockEntitySignTextStrictJsonFix, BlockNameFlatteningFix, BlockStateData,
+            BlockStateStructureTemplateFix, CatTypeFix, ChunkLightRemoveFix, ChunkPalettedStorageFix,
+            ChunkStatusFix, ChunkStatusFix2, ChunkStructuresTemplateRenameFix, ChunkToProtochunkFix,
+            ColorlessShulkerEntityFix, DyeItemRenameFix, EntityArmorStandSilentFix,
+            EntityBlockStateFix, EntityCatSplitFix, EntityCodSalmonFix, EntityCustomNameToComponentFix,
+            EntityElderGuardianSplitFix, EntityEquipmentToArmorAndHandFix, EntityHealthFix,
+            EntityHorseSaddleFix, EntityHorseSplitFix, EntityIdFix, EntityItemFrameDirectionFix,
+            EntityMinecartIdentifiersFix, EntityPaintingItemFrameDirectionFix, EntityPaintingMotiveFix,
+            EntityPufferfishRenameFix, EntityRavagerRenameFix, EntityRedundantChanceTagsFix,
+            EntityRidingToPassengersFix, EntityShulkerColorFix, EntitySkeletonSplitFix,
+            EntityStringUuidFix, EntityTheRenameningFix, EntityTippedArrowFix, EntityWolfColorFix,
+            EntityZombieSplitFix, EntityZombieVillagerTypeFix, HeightmapRenamingFix,
+            IglooMetadataRemovalFix, ItemBannerColorFix, ItemCustomNameToComponentFix,
+            ItemIdFix, ItemLoreFix, ItemPotionFix, ItemShulkerBoxColorFix, ItemSpawnEggFix,
+            ItemStackEnchantmentNamesFix, ItemStackMapIdFix, ItemStackSpawnEggFix,
+            ItemStackTheFlatteningFix, ItemWaterPotionFix, ItemWrittenBookPagesStrictJsonFix,
+            LeavesFix, LevelDataGeneratorOptionsFix, LevelFlatGeneratorInfoFix, MapIdFix,
+            MobSpawnerEntityIdentifiersFix, NewVillageFix, ObjectiveDisplayNameFix,
+            ObjectiveRenderTypeFix, OptionsAddTextBackgroundFix, OptionsForceVBOFix,
+            OptionsKeyLwjgl3Fix, OptionsKeyTranslationFix, OptionsLowerCaseLanguageFix,
+            RecipesFix, RecipesRenameningFix, References, RenamedCoralFansFix, RenamedCoralFix,
+            ReorganizePoi, SavedDataVillageCropFix, StatsCounterFix, SwimStatsRenameFix,
+            TeamDisplayNameFix, TrappedChestBlockEntityFix, VillagerDataFix, VillagerRebuildLevelAndXpFix,
+            VillagerTradeFix, WriteAndReadFix, ZombieVillagerRebuildXpFix]
+        schemas:
+          _classes: [NamespacedSchema, V100, V102, V1022, V106, V107, V1125, V135,
+            V143, V1451, V1451_1, V1451_2, V1451_3, V1451_4, V1451_5, V1451_6, V1451_7,
+            V1460, V1466, V1470, V1481, V1483, V1486, V1510, V1800, V1801, V1904,
+            V1906, V1909, V1920, V1928, V1929, V1931, V501, V700, V701, V702, V703,
+            V704, V705, V808, V99]
+      profiling:
+        _classes: [ActiveProfiler, EmptyProfileResults, FilledProfileResults, GameProfiler,
+          InactiveProfiler]
+      thread:
+        _classes: [ProcessorMailbox]
+      worldupdate:
+        _classes: [WorldUpgrader]
+    world:
+      _classes: [CompoundContainer, ContainerHelper, Containers, DifficultyInstance,
+        InteractionResultHolder, LockCode, SimpleContainer, Snooper]
+      _enums: [Difficulty, InteractionHand, InteractionResult]
+      damagesource:
+        _classes: [CombatEntry, CombatRules, CombatTracker, DamageSource, EntityDamageSource,
+          IndirectEntityDamageSource, NetherBedDamage]
+      effect:
+        _classes: [AbsoptionMobEffect, AttackDamageMobEffect, HealthBoostMobEffect,
+          InstantenousMobEffect, MobEffect, MobEffectInstance, MobEffects]
+        _enums: [MobEffectCategory]
+      entity:
+        _classes: [AreaEffectCloud, EntityDimensions, EntityType, ExperienceOrb, MobType,
+          SpawnPlacements]
+        _enums: [EquipmentSlot, HumanoidArm, MobCategory, MobSpawnType, MoverType,
+          Pose]
+        ai:
+          _classes: [Brain]
+          attributes:
+            _classes: [AttributeModifier, ModifiableAttributeInstance, ModifiableAttributeMap,
+              RangedAttribute]
+          behavior:
+            _classes: [AcquirePoi, AssignProfessionFromJobSite, BehaviorUtils, BlockPosWrapper,
+              Celebrate, DoNothing, EntityPosWrapper, GateBehavior, GiveGiftToHero,
+              GoOutsideToCelebrate, GoToClosestVillage, HarvestFarmland, InsideBrownianWalk,
+              InteractWith, InteractWithDoor, JumpOnBed, LocateHidingPlace, LocateHidingPlaceDuringRaid,
+              LookAndFollowTradingPlayerSink, LookAtTargetSink, MakeLove, MoveToSkySeeingSpot,
+              MoveToTargetSink, PickUpItems, PlayTagWithOtherKids, ReactToBell, ResetProfession,
+              ResetRaidStatus, RingBell, RunOne, SetClosestHomeAsWalkTarget, SetEntityLookTarget,
+              SetHiddenState, SetLookAndInteract, SetRaidStatus, SetWalkTargetAwayFromEntity,
+              SetWalkTargetFromBlockMemory, SetWalkTargetFromLookTarget, ShowTradesToPlayer,
+              SleepInBed, SocializeAtBell, StrollAroundPoi, StrollToPoi, StrollToPoiList,
+              Swim, TradeWithVillager, UpdateActivityFromSchedule, ValidateNearbyPoi,
+              VictoryStroll, VillageBoundRandomStroll, VillagerCalmDown, VillagerGoalPackages,
+              VillagerPanicTrigger, WakeUp, WeightedList, WorkAtPoi]
+          control:
+            _classes: [BodyRotationControl, DolphinLookControl, FlyingMoveControl,
+              JumpControl, LookControl, MoveControl]
+          goal:
+            _classes: [AvoidEntityGoal, BegGoal, BreakDoorGoal, BreathAirGoal, BreedGoal,
+              CatLieOnBedGoal, CatSitOnBlockGoal, DolphinJumpGoal, EatBlockGoal, FleeSunGoal,
+              FloatGoal, FollowBoatGoal, FollowFlockLeaderGoal, FollowMobGoal, FollowOwnerFlyingGoal,
+              FollowOwnerGoal, FollowParentGoal, GoalSelector, InteractGoal, LandOnOwnersShoulderGoal,
+              LeapAtTargetGoal, LlamaFollowCaravanGoal, LookAtPlayerGoal, LookAtTradingPlayerGoal,
+              MeleeAttackGoal, MoveBackToVillage, MoveThroughVillageGoal, MoveTowardsRestrictionGoal,
+              MoveTowardsTargetGoal, OcelotAttackGoal, OfferFlowerGoal, OpenDoorGoal,
+              PanicGoal, PathfindToRaidGoal, RandomLookAroundGoal, RandomStrollGoal,
+              RandomSwimmingGoal, RangedAttackGoal, RangedBowAttackGoal, RangedCrossbowAttackGoal,
+              RemoveBlockGoal, RestrictSunGoal, RunAroundLikeCrazyGoal, SitGoal, StrollThroughVillageGoal,
+              SwellGoal, TemptGoal, TradeWithPlayerGoal, TryFindWaterGoal, UseItemGoal,
+              WaterAvoidingRandomFlyingGoal, WaterAvoidingRandomStrollGoal, WrappedGoal,
+              ZombieAttackGoal]
+            _enums: [BoatGoals]
+            target:
+              _classes: [DefendVillageTargetGoal, HurtByTargetGoal, NearestAttackableTargetGoal,
+                NearestAttackableWitchTargetGoal, NearestHealableRaiderTargetGoal,
+                NonTameRandomTargetGoal, OwnerHurtByTargetGoal, OwnerHurtTargetGoal]
+          gossip:
+            _classes: [GossipContainer]
+            _enums: [GossipType]
+          memory:
+            _classes: [MemoryModuleType, WalkTarget]
+            _enums: [MemoryStatus]
+          navigation:
+            _classes: [FlyingPathNavigation, GroundPathNavigation, WallClimberNavigation,
+              WaterBoundPathNavigation]
+          sensing:
+            _classes: [DummySensor, GolemSensor, HurtBySensor, InteractableDoorsSensor,
+              NearestBedSensor, NearestLivingEntitySensor, PlayerSensor, SecondaryPoiSensor,
+              Sensing, SensorType, VillagerBabiesSensor, VillagerHostilesSensor]
+          targeting:
+            _classes: [TargetingConditions]
+          util:
+            _classes: [RandomPos]
+          village:
+            _classes: [VillageSiege]
+            poi:
+              _classes: [PoiManager, PoiRecord, PoiSection, PoiType]
+        ambient:
+          _classes: [Bat]
+        animal:
+          _classes: [Cat, Chicken, Cod, Cow, Dolphin, Fox, IronGolem, MushroomCow,
+            Ocelot, Panda, Parrot, Pig, PolarBear, Pufferfish, Rabbit, Salmon, Sheep,
+            SnowGolem, Squid, TropicalFish, Turtle, Wolf]
+          horse:
+            _classes: [Donkey, Horse, Llama, Mule, SkeletonHorse, SkeletonTrapGoal,
+              TraderLlama, ZombieHorse]
+        boss:
+          _classes: [EnderDragonPart]
+          enderdragon:
+            _classes: [EndCrystal, EnderDragon]
+            phases:
+              _classes: [DragonChargePlayerPhase, DragonDeathPhase, DragonHoldingPatternPhase,
+                DragonHoverPhase, DragonLandingApproachPhase, DragonLandingPhase,
+                DragonSittingAttackingPhase, DragonSittingFlamingPhase, DragonSittingScanningPhase,
+                DragonStrafePlayerPhase, DragonTakeoffPhase, EnderDragonPhase, EnderDragonPhaseManager]
+          wither:
+            _classes: [WitherBoss]
+        decoration:
+          _classes: [ArmorStand, ItemFrame, LeashFenceKnotEntity, Motive, Painting]
+        fishing:
+          _classes: [FishingHook]
+        global:
+          _classes: [LightningBolt]
+        item:
+          _classes: [FallingBlockEntity, ItemEntity, PrimedTnt]
+        monster:
+          _classes: [RaiderOpenDoorGoal, Blaze, CaveSpider, Creeper, Drowned, ElderGuardian,
+            EnderMan, Endermite, Evoker, Ghast, Giant, Guardian, Husk, Illusioner,
+            MagmaCube, Phantom, PigZombie, Pillager, Ravager, SharedMonsterAttributes,
+            Shulker, Silverfish, Skeleton, Slime, SpellcasterCastingSpellGoal, Spider,
+            Stray, Vex, Vindicator, Witch, WitherSkeleton, Zombie, ZombieVillager]
+        npc:
+          _classes: [CatSpawner, ClientSideMerchant, Villager, VillagerData, VillagerProfession,
+            VillagerTrades, WanderingTrader, WanderingTraderSpawner]
+        player:
+          _classes: [Abilities, Inventory, StackedContents]
+          _enums: [ChatVisiblity, PlayerModelPart]
+        projectile:
+          _classes: [Arrow, DragonFireball, EvokerFangs, EyeOfEnder, FireworkRocketEntity,
+            LargeFireball, LlamaSpit, ShulkerBullet, SmallFireball, Snowball, SpectralArrow,
+            ThrownEgg, ThrownEnderpearl, ThrownExperienceBottle, ThrownPotion, ThrownTrident,
+            WitherSkull]
+        raid:
+          _classes: [Raid, HoldGroundAttackGoal, Raids]
+        schedule:
+          _classes: [Activity, Keyframe, Schedule, ScheduleBuilder, Timeline]
+        vehicle:
+          _classes: [Boat, Minecart, MinecartChest, MinecartCommandBlock, MinecartFurnace,
+            MinecartHopper, MinecartSpawner, MinecartTNT]
+      food:
+        _classes: [FoodData, FoodProperties, Foods]
+      inventory:
+        _classes: [AnvilMenu, BeaconMenu, BlastFurnaceMenu, BrewingStandMenu, CartographyMenu,
+          ChestMenu, CraftingContainer, CraftingMenu, DispenserMenu, EnchantmentMenu,
+          FurnaceFuelSlot, FurnaceMenu, FurnaceResultSlot, GrindstoneMenu, HopperMenu,
+          HorseInventoryMenu, InventoryMenu, LecternMenu, LoomMenu, MenuType, MerchantContainer,
+          MerchantMenu, MerchantResultSlot, PlayerEnderChestContainer, ResultContainer,
+          ResultSlot, ShulkerBoxMenu, ShulkerBoxSlot, SimpleContainerData, Slot, SmokerMenu,
+          StonecutterMenu]
+        _enums: [ClickType]
+      item:
+        _classes: [AirItem, ArmorItem, ArmorStandItem, ArrowItem, AxeItem, BannerItem,
+          BannerPatternItem, BedItem, BlockItem, BlockPlaceContext, BoatItem, BoneMealItem,
+          BookItem, BottleItem, BowItem, BowlFoodItem, BucketItem, CarrotOnAStickItem,
+          ChorusFruitItem, ClockItem, CompassItem, ComplexItem, CrossbowItem, DebugStickItem,
+          DiggerItem, DirectionalPlaceContext, DoubleHighBlockItem, DyeableArmorItem,
+          DyeableHorseArmorItem, DyeItem, EggItem, ElytraItem, EmptyMapItem, EnchantedBookItem,
+          EnchantedGoldenAppleItem, EndCrystalItem, EnderEyeItem, EnderpearlItem,
+          ExperienceBottleItem, FireChargeItem, FireworkRocketItem, FireworkStarItem,
+          FishBucketItem, FishingRodItem, FlintAndSteelItem, GameMasterBlockItem,
+          HangingEntityItem, HoeItem, HorseArmorItem, Item, ItemCooldowns, ItemFrameItem,
+          ItemNameBlockItem, Items, KnowledgeBookItem, LeadItem, LingeringPotionItem,
+          MapItem, MilkBucketItem, MinecartItem, NameTagItem, PickaxeItem, PlayerHeadItem,
+          PotionItem, RecordItem, SaddleItem, ScaffoldingBlockItem, ServerItemCooldowns,
+          ShearsItem, ShieldItem, ShovelItem, SignItem, SimpleFoiledItem, SnowballItem,
+          SpawnEggItem, SpectralArrowItem, SplashPotionItem, StandingAndWallBlockItem,
+          SuspiciousStewItem, SwordItem, TieredItem, TippedArrowItem, TridentItem,
+          UseOnContext, WaterLilyBlockItem, WritableBookItem, WrittenBookItem]
+        _enums: [ArmorMaterials, DyeColor, Rarity, Tiers, UseAnim]
+        alchemy:
+          _classes: [Potion, PotionBrewing, Potions, PotionUtils]
+        crafting:
+          _classes: [ArmorDyeRecipe, BannerDuplicateRecipe, BlastingRecipe, BookCloningRecipe,
+            CampfireCookingRecipe, FireworkRocketRecipe, FireworkStarFadeRecipe, FireworkStarRecipe,
+            MapCloningRecipe, MapExtendingRecipe, RecipeManager, RepairItemRecipe,
+            ShapedRecipe, ShapelessRecipe, ShieldDecorationRecipe, ShulkerBoxColoring,
+            SimpleCookingSerializer, SimpleRecipeSerializer, SmeltingRecipe, SmokingRecipe,
+            StonecutterRecipe, SuspiciousStewRecipe, TippedArrowRecipe]
+        enchantment:
+          _classes: [ArrowDamageEnchantment, ArrowFireEnchantment, ArrowInfiniteEnchantment,
+            ArrowKnockbackEnchantment, ArrowPiercingEnchantment, BindingCurseEnchantment,
+            DamageEnchantment, DigDurabilityEnchantment, DiggingEnchantment, EnchantmentHelper,
+            EnchantmentInstance, Enchantments, FireAspectEnchantment, FishingSpeedEnchantment,
+            FrostWalkerEnchantment, KnockbackEnchantment, LootBonusEnchantment, MendingEnchantment,
+            MultiShotEnchantment, OxygenEnchantment, ProtectionEnchantment, QuickChargeEnchantment,
+            SweepingEdgeEnchantment, ThornsEnchantment, TridentChannelingEnchantment,
+            TridentImpalerEnchantment, TridentLoyaltyEnchantment, TridentRiptideEnchantment,
+            UntouchingEnchantment, VanishingCurseEnchantment, WaterWalkerEnchantment,
+            WaterWorkerEnchantment]
+          _enums: [EnchantmentCategory]
+        trading:
+          _classes: [MerchantOffer, MerchantOffers]
+      level:
+        _classes: [BlockEventData, ChunkPos, ChunkTickList, ClipContext, EmptyTickList,
+          Explosion, FoliageColor, ForcedChunksSavedData, GameRules, GrassColor, LevelConflictException,
+          LevelType, PathNavigationRegion, PortalForcer, ServerTickList, SpawnData,
+          TickNextTickData]
+        _enums: [BlockLayer, EmptyBlockGetter, GameType, LightLayer, TickPriority]
+        biome:
+          _classes: [BambooJungleBiome, BiomeDefaultFeatures, BiomeSourceType, CheckerboardBiomeSource,
+            CheckerboardBiomeSourceSettings, ColdOceanBiome, DeepColdOceanBiome, DeepFrozenOceanBiome,
+            DeepLukeWarmOceanBiome, DeepWarmOceanBiome, EndBarrensBiome, EndHighlandsBiome,
+            EndMidlandsBiome, FixedBiomeSource, FixedBiomeSourceSettings, LukeWarmOceanBiome,
+            OverworldBiomeSource, OverworldBiomeSourceSettings, SmallEndIslandsBiome,
+            TheEndBiomeSource, TheEndBiomeSourceSettings, WarmOceanBiome]
+        block:
+          _classes: [AirBlock, AnvilBlock, AttachedStemBlock, BambooBlock, BambooSaplingBlock,
+            BannerBlock, BarrelBlock, BarrierBlock, BaseCoralFanBlock, BaseCoralPlantBlock,
+            BaseCoralPlantTypeBlock, BaseCoralWallFanBlock, BeaconBlock, BedBlock,
+            BedrockBlock, BeetrootBlock, BellBlock, BlastFurnaceBlock, Block, Blocks,
+            BrewingStandBlock, BubbleColumnBlock, BushBlock, CactusBlock, CakeBlock,
+            CampfireBlock, CarrotBlock, CartographyTableBlock, CarvedPumpkinBlock,
+            CauldronBlock, ChestBlock, ChorusFlowerBlock, ChorusPlantBlock, CocoaBlock,
+            CommandBlock, ComparatorBlock, ComposterBlock, ConcretePowderBlock, ConduitBlock,
+            CoralBlock, CoralFanBlock, CoralPlantBlock, CoralWallFanBlock, CraftingTableBlock,
+            CropBlock, CrossCollisionBlock, DaylightDetectorBlock, DeadBushBlock,
+            DetectorRailBlock, DispenserBlock, DoorBlock, DoublePlantBlock, DragonEggBlock,
+            DropperBlock, EnchantmentTableBlock, EnderChestBlock, EndGatewayBlock,
+            EndPortalBlock, EndPortalFrameBlock, EndRodBlock, FaceAttachedHorizontalDirectionalBlock,
+            FallingBlock, FarmBlock, FenceBlock, FenceGateBlock, FireBlock, FletchingTableBlock,
+            FlowerBlock, FlowerPotBlock, FrostedIceBlock, FurnaceBlock, GlassBlock,
+            GlazedTerracottaBlock, GrassBlock, GrassPathBlock, GravelBlock, GrindstoneBlock,
+            HalfTransparentBlock, HayBlock, HopperBlock, HugeMushroomBlock, IceBlock,
+            InfestedBlock, IronBarsBlock, JigsawBlock, JukeboxBlock, KelpBlock, KelpPlantBlock,
+            LadderBlock, Lantern, LeavesBlock, LecternBlock, LeverBlock, LiquidBlock,
+            LogBlock, LoomBlock, MagmaBlock, MelonBlock, MushroomBlock, MyceliumBlock,
+            NetherPortalBlock, NetherWartBlock, NoteBlock, ObserverBlock, OreBlock,
+            PipeBlock, PlayerHeadBlock, PlayerWallHeadBlock, PotatoBlock, PoweredBlock,
+            PoweredRailBlock, PressurePlateBlock, PumpkinBlock, RailBlock, RailState,
+            RedstoneLampBlock, RedStoneOreBlock, RedstoneTorchBlock, RedstoneWallTorchBlock,
+            RedStoneWireBlock, RepeaterBlock, RotatedPillarBlock, SandBlock, SaplingBlock,
+            ScaffoldingBlock, Seagrass, SeaPickleBlock, ShearableDoublePlantBlock,
+            ShulkerBoxBlock, SkullBlock, SlabBlock, SlimeBlock, SmithingTableBlock,
+            SmokerBlock, SnowLayerBlock, SnowyDirtBlock, SoulsandBlock, SoundType,
+            SpawnerBlock, SpongeBlock, StainedGlassBlock, StainedGlassPaneBlock, StairBlock,
+            StandingSignBlock, StemBlock, StoneButtonBlock, StonecutterBlock, StructureBlock,
+            StructureVoidBlock, SugarCaneBlock, SweetBerryBushBlock, TallFlowerBlock,
+            TallGrassBlock, TallSeagrass, TntBlock, TorchBlock, TrapDoorBlock, TrappedChestBlock,
+            TripWireBlock, TripWireHookBlock, TurtleEggBlock, VineBlock, WallBannerBlock,
+            WallBlock, WallSignBlock, WallSkullBlock, WallTorchBlock, WaterlilyBlock,
+            WebBlock, WeightedPressurePlateBlock, WetSpongeBlock, WitherRoseBlock,
+            WitherSkullBlock, WitherWallSkullBlock, WoodButtonBlock, WoolCarpetBlock]
+          _enums: [Mirror, RenderShape, Rotation]
+          entity:
+            _classes: [BannerBlockEntity, BarrelBlockEntity, BeaconBlockEntity, BedBlockEntity,
+              BellBlockEntity, BlastFurnaceBlockEntity, BlockEntityType, BrewingStandBlockEntity,
+              CampfireBlockEntity, ChestBlockEntity, CommandBlockEntity, ComparatorBlockEntity,
+              ConduitBlockEntity, DaylightDetectorBlockEntity, DispenserBlockEntity,
+              DropperBlockEntity, EnchantmentTableBlockEntity, EnderChestBlockEntity,
+              FurnaceBlockEntity, HopperBlockEntity, JigsawBlockEntity, JukeboxBlockEntity,
+              LecternBlockEntity, ShulkerBoxBlockEntity, SignBlockEntity, SkullBlockEntity,
+              SmokerBlockEntity, SpawnerBlockEntity, StructureBlockEntity, TheEndGatewayBlockEntity,
+              TheEndPortalBlockEntity, TrappedChestBlockEntity]
+            _enums: [BannerPattern]
+          grower:
+            _classes: [AcaciaTreeGrower, BirchTreeGrower, DarkOakTreeGrower, JungleTreeGrower,
+              OakTreeGrower, SpruceTreeGrower]
+          piston:
+            _classes: [MovingPistonBlock, PistonBaseBlock, PistonHeadBlock, PistonMovingBlockEntity,
+              PistonStructureResolver]
+          state:
+            _classes: [BlockState, StateDefinition]
+            pattern:
+              _classes: [BlockInWorld, BlockPattern, BlockPatternBuilder]
+            predicate:
+              _classes: [BlockMaterialPredicate, BlockPredicate, BlockStatePredicate]
+            properties:
+              _enums: [AttachFace, BambooLeaves, BedPart, BellAttachType, ChestType,
+                ComparatorMode, DoorHingeSide, DoubleBlockHalf, Half, NoteBlockInstrument,
+                PistonType, RailShape, RedstoneSide, SlabType, StairsShape, StructureMode]
+              _classes: [BlockStateProperties, BooleanProperty, DirectionProperty,
+                EnumProperty, IntegerProperty]
+        border:
+          _enums: [BorderStatus]
+          _classes: [WorldBorder]
+        chunk:
+          _classes: [ChunkGeneratorType, ChunkStatus, DataLayer, EmptyLevelChunk,
+            GlobalPalette, HashMapPalette, ImposterProtoChunk, LevelChunk, LevelChunkSection,
+            LinearPalette, OldDataLayer, PalettedContainer, ProtoChunk, ProtoTickList,
+            UpgradeData]
+          storage:
+            _classes: [ChunkSerializer, ChunkStorage, OldChunkStorage, RegionFile,
+              SectionStorage]
+        dimension:
+          _classes: [DimensionType, NetherDimension, NormalDimension]
+          end:
+            _enums: [DragonRespawnAnimation]
+            _classes: [EndDragonFight, TheEndDimension]
+        levelgen:
+          _classes: [ChunkGeneratorSettings, DebugGeneratorSettings, DebugLevelSource,
+            FlatLevelSource, GenerationStep, Heightmap, NetherGeneratorSettings, NetherLevelSource,
+            OverworldGeneratorSettings, OverworldLevelSource, PatrolSpawner, PhantomSpawner,
+            TheEndGeneratorSettings, TheEndLevelSource, WorldgenRandom]
+          carver:
+            _classes: [CanyonWorldCarver, CaveWorldCarver, ConfiguredWorldCarver,
+              HellCaveWorldCarver, NoneCarverConfiguration, UnderwaterCanyonWorldCarver,
+              UnderwaterCaveWorldCarver]
+          feature:
+            _classes: [BambooFeature, BigTreeFeature, BirchFeature, BlockBlobConfiguration,
+              BlockBlobFeature, BlueIceFeature, BonusChestFeature, BuriedTreasureConfiguration,
+              BuriedTreasureFeature, BushConfiguration, BushFeature, CactusFeature,
+              CentralSpikedFeature, ChorusPlantFeature, ConfiguredFeature, CoralClawFeature,
+              CoralMushroomFeature, CoralTreeFeature, CountFeatureConfiguration, DarkOakFeature,
+              DeadBushFeature, DecoratedFeature, DecoratedFeatureConfiguration, DecoratedFlowerFeature,
+              DecoratorChanceRange, DecoratorCountRange, DecoratorNoiseDependant,
+              DefaultFlowerFeature, DesertPyramidFeature, DesertVillagePools, DesertWellFeature,
+              DiskConfiguration, DiskReplaceFeature, DoublePlantConfiguration, DoublePlantFeature,
+              EndCityFeature, EndGatewayConfiguration, EndGatewayFeature, EndIslandFeature,
+              EndPodiumFeature, FeatureRadius, FillLayerFeature, ForestFlowerFeature,
+              FossilFeature, GeneralForestFlowerFeature, GlowstoneFeature, GrassConfiguration,
+              GrassFeature, GroundBushFeature, HayBlockPileFeature, HellFireFeature,
+              HellSpringConfiguration, HugeBrownMushroomFeature, HugeMushroomFeatureConfig,
+              HugeRedMushroomFeature, IcebergConfiguration, IcebergFeature, IceBlockPileFeature,
+              IcePatchFeature, IceSpikeFeature, IglooFeature, JungleGrassFeature,
+              JunglePyramidFeature, JungleTreeFeature, KelpFeature, LakeConfiguration,
+              LakeFeature, LayerConfiguration, MegaJungleTreeFeature, MegaPineTreeFeature,
+              MelonBlockPileFeature, MelonFeature, MineshaftConfiguration, MineshaftFeature,
+              MonsterRoomFeature, NetherFortressFeature, NetherSpringFeature, NoneDecoratorConfiguration,
+              NoneFeatureConfiguration, OceanMonumentFeature, OceanRuinConfiguration,
+              OreConfiguration, OreFeature, PillagerOutpostConfiguration, PillagerOutpostFeature,
+              PineFeature, PlainFlowerFeature, PlainVillagePools, ProbabilityFeatureConfiguration,
+              PumpkinBlockPileFeature, RandomBooleanFeatureConfig, RandomBooleanSelectorFeature,
+              RandomFeatureConfig, RandomRandomFeature, RandomRandomFeatureConfig,
+              RandomSelectorFeature, ReedsFeature, ReplaceBlockConfiguration, ReplaceBlockFeature,
+              SavannaTreeFeature, SavannaVillagePools, SeagrassFeature, SeagrassFeatureConfiguration,
+              SeaPickleFeature, ShipwreckConfiguration, ShipwreckFeature, SimpleBlockConfiguration,
+              SimpleBlockFeature, SimpleRandomFeatureConfig, SimpleRandomSelectorFeature,
+              SnowAndFreezeFeature, SnowBlockPileFeature, SnowyVillagePools, SpikeConfiguration,
+              SpikeFeature, SpringConfiguration, SpringFeature, SpruceFeature, StrongholdFeature,
+              SwampFlowerFeature, SwamplandHutFeature, SwampTreeFeature, TaigaGrassFeature,
+              TaigaVillagePools, TreeFeature, VillageConfiguration, VillageFeature,
+              VillagePieces, VinesFeature, VoidStartPlatformFeature, WaterlilyFeature,
+              WeightedConfiguredFeature, WoodlandMansionFeature]
+            structures:
+              _classes: [EmptyPoolElement, FeaturePoolElement, JigsawJunction, JigsawPlacement,
+                ListPoolElement, SinglePoolElement, StructureTemplatePool, StructureTemplatePools]
+          flat:
+            _classes: [FlatLayerInfo, FlatLevelGeneratorSettings]
+          placement:
+            _classes: [CarvingMaskDecorator, ChanceHeightmapDecorator, ChanceHeightmapDoubleDecorator,
+              ChancePassthroughDecorator, ChanceTopSolidHeightmapDecorator, ChorusPlantPlacementDecorator,
+              ConfiguredDecorator, CountBiasedRangeDecorator, CountChanceHeightmapDecorator,
+              CountChanceHeightmapDoubleDecorator, CountDepthAverageDecorator, CountHeighmapDoubleDecorator,
+              CountHeight64Decorator, CountHeightmap32Decorator, CountHeightmapDecorator,
+              CountTopSolidDecorator, CountVeryBiasedRangeDecorator, CountWithExtraChanceHeightmapDecorator,
+              DarkOakTreePlacementDecorator, DecoratorCarvingMaskConfig, DecoratorChance,
+              DecoratorFrequency, DecoratorFrequencyChance, DecoratorFrequencyWithExtraChance,
+              DecoratorNoiseCountFactor, DecoratorRange, DepthAverageConfigation,
+              EmeraldPlacementDecorator, EndGatewayPlacementDecorator, EndIslandPlacementDecorator,
+              ForestRockPlacementDecorator, IcebergPlacementDecorator, LakeChanceDecoratorConfig,
+              LakeLavaPlacementDecorator, LakeWaterPlacementDecorator, MonsterRoomPlacementConfiguration,
+              MonsterRoomPlacementDecorator, NoiseHeightmap32Decorator, NoiseHeightmapDoubleDecorator,
+              NopePlacementDecorator, TopSolidHeightMapDecorator, TopSolidHeightMapNoiseBasedDecorator,
+              TopSolidHeightMapRangeDecorator]
+            nether:
+              _classes: [ChanceRangeDecorator, CountRangeDecorator, HellFireDecorator,
+                LightGemChanceDecorator, MagmaDecorator, RandomCountRangeDecorator]
+          structure:
+            _classes: [BoundingBox, BuriedTreasurePieces, DesertPyramidPiece, EndCityPieces,
+              IglooPieces, JunglePyramidPiece, LegacyStructureDataHandler, MineShaftPieces,
+              NetherBridgePieces, OceanMonumentPieces, OceanRuinFeature, OceanRuinPieces,
+              PillagerOutpostPieces, ShipwreckPieces, StrongholdPieces, StructureFeatureIndexSavedData,
+              StructureFeatureIO, SwamplandHutPiece, WoodlandMansionPieces]
+            templatesystem:
+              _classes: [AlwaysTrueTest, BlockIgnoreProcessor, BlockMatchTest, BlockRotProcessor,
+                BlockStateMatchTest, GravityProcessor, JigsawReplacementProcessor,
+                NopProcessor, ProcessorRule, RandomBlockMatchTest, RandomBlockStateMatchTest,
+                RuleProcessor, StructureManager, StructurePlaceSettings, StructureTemplate,
+                TagMatchTest]
+          surfacebuilders:
+            _classes: [BadlandsSurfaceBuilder, ConfiguredSurfaceBuilder, DefaultSurfaceBuilder,
+              ErodedBadlandsSurfaceBuilder, FrozenOceanSurfaceBuilder, GiantTreeTaigaSurfaceBuilder,
+              GravellyMountainSurfaceBuilder, MountainSurfaceBuilder, NetherSurfaceBuilder,
+              NopeSurfaceBuilder, ShatteredSavanaSurfaceBuilder, SurfaceBuilderBaseConfiguration,
+              SwampSurfaceBuilder, WoodedBadlandsSurfaceBuilder]
+          synth:
+            _classes: [PerlinNoise, PerlinSimplexNoise, SimplexNoise]
+        lighting:
+          _classes: [BlockLightSectionStorage, FlatDataLayer, LevelLightEngine, SkyLightSectionStorage]
+        material:
+          _classes: [EmptyFluid, Fluids, FluidStateImpl, MaterialColor]
+          _enums: [PushReaction]
+        newbiome:
+          context:
+            _classes: [LazyAreaContext]
+          layer:
+            _enums: [AddDeepOceanLayer, AddIslandLayer, AddMushroomIslandLayer, AddSnowLayer,
+              BiomeEdgeLayer, IslandLayer, OceanLayer, OceanMixerLayer, RareBiomeLargeLayer,
+              RareBiomeSpotLayer, RegionHillsLayer, RemoveTooMuchOceanLayer, RiverInitLayer,
+              RiverLayer, RiverMixerLayer, ShoreLayer, SmoothLayer, VoronoiZoom, ZoomLayer]
+            _classes: [AddEdgeLayer, BiomeInitLayer, Layer, Layers]
+        pathfinder:
+          _classes: [BinaryHeap, FlyNodeEvaluator, Node, Path, PathFinder, SwimNodeEvaluator,
+            Target, TurtleNodeEvaluator, WalkNodeEvaluator]
+          _enums: [BlockPathTypes, PathComputationType]
+        saveddata:
+          _classes: [SaveDataDirtyRunnable]
+          maps:
+            _classes: [MapBanner, MapDecoration, MapFrame, MapIndex, MapItemSavedData]
+        storage:
+          _classes: [DerivedLevelData, DimensionDataStorage, LevelData, LevelStorage,
+            LevelStorageException, LevelStorageSource, LevelSummary, McRegionUpgrader]
+          loot:
+            _classes: [BuiltInLootTables, IntLimiter, LootContext, LootPool, LootTable,
+              LootTableProblemCollector, LootTables, RandomIntGenerators, RandomValueBounds]
+            entries:
+              _classes: [AlternativesEntry, DynamicLoot, EmptyLootItem, EntryGroup,
+                LootItem, LootPoolEntries, LootTableReference, SequentialEntry, TagEntry]
+            functions:
+              _classes: [ApplyBonusCount, ApplyExplosionDecay, CopyNameFunction, CopyNbtFunction,
+                EnchantRandomlyFunction, EnchantWithLevelsFunction, ExplorationMapFunction,
+                FillPlayerHead, LimitCount, LootingEnchantFunction, LootItemFunctions,
+                SetAttributesFunction, SetContainerContents, SetContainerLootTable,
+                SetItemCountFunction, SetItemDamageFunction, SetLoreFunction, SetNameFunction,
+                SetNbtFunction, SetStewEffectFunction, SmeltItemFunction]
+            parameters:
+              _classes: [LootContextParam, LootContextParams, LootContextParamSet,
+                LootContextParamSets]
+            predicates:
+              _classes: [AlternativeLootItemCondition, BonusLevelTableCondition, DamageSourceCondition,
+                EntityHasScoreCondition, ExplosionCondition, InvertedLootItemCondition,
+                LocationCheck, LootItemBlockStatePropertyCondition, LootItemConditions,
+                LootItemEntityPropertyCondition, LootItemKilledByPlayerCondition,
+                LootItemRandomChanceCondition, LootItemRandomChanceWithLootingCondition,
+                MatchTool, WeatherCheck]
+        timers:
+          _classes: [FunctionCallback, FunctionTagCallback, TimerCallbacks, TimerQueue]
+      phys:
+        _classes: [AABB, BlockHitResult, EntityHitResult, PosAndRot, Vec2, Vec3]
+        shapes:
+          _classes: [CubePointRange, EntityCollisionContext, IdenticalMerger, NonOverlappingMerger,
+            OffsetDoubleList, SliceShape]
+      scores:
+        _classes: [Objective, PlayerTeam, Score, Scoreboard, ScoreboardSaveData]
+        criteria:
+          _classes: [ObjectiveCriteria]
+com:
+  mojang:
+    blaze3d:
+      _classes: [Blaze3D]
+      audio:
+        _classes: [Channel, Library, Listener, OggAudioStream, OpenAlUtil, SoundBuffer]
+      font:
+        _classes: [TrueTypeGlyphProvider]
+      pipeline:
+        _classes: [RenderTarget]
+      platform:
+        _classes: [ClipboardManager, DebugMemoryUntracker, DisplayData, GlDebug, GlStateManager,
+          GLX, InputConstants, Lighting, MemoryTracker, PngInfo, ScreenManager, TextureUtil]
+      shaders:
+        _classes: [AbstractUniform, BlendMode, Program, ProgramManager, Uniform]
+      vertex:
+        _classes: [BufferBuilder, BufferUploader, DefaultVertexFormat, Tesselator,
+          VertexBuffer, VertexBufferUploader, VertexFormat, VertexFormatElement]
+    math:
+      _classes: [Vector3d, Vector4f]
+    realmsclient:
+      _classes: [KeyCombo, RealmsMainScreen]
+      client:
+        _classes: [FileDownload, FileUpload, Ping, RealmsClient, RealmsClientConfig,
+          RealmsError, UploadStatus]
+      dto:
+        _classes: [Backup, BackupList, Ops, PendingInvite, PendingInvitesList, PingResult,
+          PlayerInfo, RealmsDescriptionDto, RealmsNews, RealmsServer, RealmsServerAddress,
+          RealmsServerList, RealmsServerPing, RealmsServerPlayerList, RealmsServerPlayerLists,
+          RealmsWorldOptions, RealmsWorldResetDto, RegionPingResult, ServerActivity,
+          ServerActivityList, Subscription, UploadInfo, WorldDownload, WorldTemplate,
+          WorldTemplatePaginatedList]
+      exception:
+        _classes: [RealmsDefaultUncaughtExceptionHandler, RealmsHttpException, RealmsServiceException,
+          RetryCallException]
+      gui:
+        _enums: [ChatFormatting]
+        _classes: [RealmsConstants, RealmsDataFetcher, RealmsWorldSlotButton]
+        screens:
+          _classes: [RealmsBackupInfoScreen, RealmsBackupScreen, RealmsBrokenWorldScreen,
+            RealmsClientOutdatedScreen, RealmsConfigureWorldScreen, RealmsConfirmScreen,
+            RealmsCreateRealmScreen, RealmsCreateTrialScreen, RealmsDownloadLatestWorldScreen,
+            RealmsGenericErrorScreen, RealmsInviteScreen, RealmsLongConfirmationScreen,
+            RealmsLongRunningMcoTaskScreen, RealmsNotificationsScreen, RealmsParentalConsentScreen,
+            RealmsPendingInvitesScreen, RealmsPlayerScreen, RealmsResetNormalWorldScreen,
+            RealmsResetWorldScreen, RealmsResourcePackScreen, RealmsSelectFileToUploadScreen,
+            RealmsSelectWorldTemplateScreen, RealmsSettingsScreen, RealmsSlotOptionsScreen,
+            RealmsSubscriptionInfoScreen, RealmsTermsScreen, RealmsUploadScreen, UploadResult]
+      util:
+        _classes: [JsonUtils, RealmsPersistence, RealmsTasks, RealmsTextureManager,
+          RealmsUtil, SkinProcessor, TextRenderingUtils, UploadTokenCache]
