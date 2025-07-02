@@ -1,6 +1,6 @@
 #pragma once
 
-#include "net/minecraft/core/io/InputStream.h"
+#include "java/io/InputStream.h"
 
 class ByteArrayInputStream : public InputStream {
 public:

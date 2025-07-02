@@ -1,9 +1,9 @@
 #include "com/mojang/nbt/ByteArrayTag.h"
 #include "net/minecraft/world/ArrayWithLength.h"
 
+#include "java/io/DataInput.h"
+#include "java/io/DataOutput.h"
 #include "net/minecraft/core/System.h"
-#include "net/minecraft/core/io/DataInput.h"
-#include "net/minecraft/core/io/DataOutput.h"
 
 ByteArrayTag::ByteArrayTag() {
     unknown = false;

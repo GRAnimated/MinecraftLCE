@@ -1,7 +1,7 @@
 #include "ClientboundPlayerSleepPacket.h"
 
-#include "net/minecraft/core/io/DataInputStream.h"
-#include "net/minecraft/core/io/DataOutputStream.h"
+#include "java/io/DataInputStream.h"
+#include "java/io/DataOutputStream.h"
 #include "net/minecraft/network/PacketListener.h"
 #include "net/minecraft/world/entity/player/Player.h"
 

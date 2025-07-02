@@ -1,6 +1,6 @@
 #pragma once
 #include "com/mojang/nbt/CompoundTag.h"
-#include "net/minecraft/core/io/DataOutputStream.h"
+#include "java/io/DataOutputStream.h"
 #include "net/minecraft/world/level/Level.h"
 #include "net/minecraft/world/level/chunk/LevelChunk.h"
 

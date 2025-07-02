@@ -1,4 +1,5 @@
 #include "com/mojang/blaze3d/platform/GlStateManager.h"
+#include "java/io/File.h"
 #include "net/minecraft/client/CMinecraftApp.h"
 #include "net/minecraft/client/GhostController.h"
 #include "net/minecraft/client/Minecraft.h"
@@ -30,7 +31,6 @@
 #include "net/minecraft/client/sounds/SoundEngine.h"
 #include "net/minecraft/client/tutorial/Tutorial.h"
 #include "net/minecraft/core/System.h"
-#include "net/minecraft/core/io/File.h"
 #include "net/minecraft/core/particles/ParticleType.h"
 #include "net/minecraft/stats/Stats.h"
 #include "net/minecraft/stats/StatsCounter.h"

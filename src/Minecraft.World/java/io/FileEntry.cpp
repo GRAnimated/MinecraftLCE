@@ -1,6 +1,6 @@
-#include "net/minecraft/core/io/FileEntry.h"
+#include "java/io/FileEntry.h"
 
-#include "net/minecraft/core/io/File.h"
+#include "java/io/File.h"
 #include <cstring>
 
 FileEntry::FileEntry(wchar_t* a2, unsigned int a3, unsigned int a4) {

@@ -2,6 +2,7 @@
 #include <new>
 
 #include "com/mojang/blaze3d/vertex/Tesselator.h"
+#include "java/io/IntCache.h"
 #include "net/minecraft/client/C4JThreadImpl.h"
 #include "net/minecraft/client/CGameNetworkManager.h"
 #include "net/minecraft/client/CInput.h"
@@ -12,7 +13,6 @@
 #include "net/minecraft/client/renderer/Renderer.h"
 #include "net/minecraft/client/resources/L10N.h"
 #include "net/minecraft/client/ui/ConsoleUIController.h"
-#include "net/minecraft/core/io/IntCache.h"
 #include "net/minecraft/core/profile/CProfile.h"
 #include "net/minecraft/core/storage/CStorage.h"
 #include "net/minecraft/world/ArrayWithLength.h"

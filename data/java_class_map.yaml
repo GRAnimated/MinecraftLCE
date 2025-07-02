@@ -1,13 +1,43 @@
-# This file is generated from Minecraft Java Edition 1.14.4, and
-# augmented with some b1.2 locations and our own decisions.
-# Java-only classes have been removed.
-# For contributors, place comments at key additions.
+# This file is generated from Minecraft Java Edition 1.14.4,
+# augmented with some b1.2 locations with our own decisions, and
+# java-only classes have been removed.
+com:
+  mojang:
+    blaze3d:
+      platform:
+        _classes: [GlStateManager]
+      shaders:
+        _classes: [Effect, Program, ProgramManager, Uniform]
+      vertex:
+        _classes: [BufferBuilder, Tesselator, VertexFormat, VertexFormatElement]
+    nbt:
+      _classes:
+        [
+          ByteArrayTag,
+          ByteTag,
+          CompoundTag,
+          DoubleTag,
+          EndTag,
+          FloatTag,
+          IntArrayTag,
+          IntTag,
+          ListTag,
+          LongTag,
+          NumericTag,
+          ShortTag,
+          StringTag,
+          Tag,
+        ]
+    realmsclient:
+      gui:
+        _enums: [ChatFormatting]
 net:
   minecraft:
     _enums: [ChatFormatting]
     advancements:
       _enums: [FrameType]
     client:
+      _classes: [GuiMessage, KeyMapping, Minecraft, Options, Timer, User]
       _enums:
         [
           AmbientOcclusionStatus,
@@ -17,7 +47,6 @@ net:
           ParticleStatus,
           RecipeBookCategories,
         ]
-      _classes: [GuiMessage, KeyMapping, Minecraft, Options, Timer, User]
       color:
         block:
           _classes: [BlockColors]
@@ -26,14 +55,7 @@ net:
       gui:
         _classes: [Font, Gui, GuiComponent, MapRenderer]
         components:
-          _classes:
-            [
-              BossHealthOverlay,
-              Button,
-              EditBox,
-              LerpingBossEvent,
-              ScrolledSelectionList,
-            ]
+          _classes: [BossHealthOverlay, Button, EditBox, LerpingBossEvent, ScrolledSelectionList]
         font:
           glyphs:
             _enums: [MissingGlyph]
@@ -124,13 +146,7 @@ net:
         geom:
           _classes: [Cube, ModelPart]
       multiplayer:
-        _classes:
-          [
-            ClientChunkCache,
-            ClientPacketListener,
-            MultiPlayerGameMode,
-            MultiPlayerLevel,
-          ]
+        _classes: [ClientChunkCache, ClientPacketListener, MultiPlayerGameMode, MultiPlayerLevel]
       particle:
         _classes:
           [
@@ -352,7 +368,6 @@ net:
         selector:
           _classes: [EntitySelector]
     core:
-      _enums: [AxisCycle, Direction, Direction8]
       _classes:
         [
           BlockPos,
@@ -364,13 +379,10 @@ net:
           PositionImpl,
           Rotations,
         ]
+      _enums: [AxisCycle, Direction, Direction8]
       dispenser:
         _classes:
-          [
-            AbstractProjectileDispenseBehavior,
-            DefaultDispenseItemBehavior,
-            DispenseItemBehavior,
-          ]
+          [AbstractProjectileDispenseBehavior, DefaultDispenseItemBehavior, DispenseItemBehavior]
       particles:
         _classes: [ParticleType]
     locale:
@@ -589,13 +601,7 @@ net:
       _enums: [Difficulty, InteractionHand, InteractionResult]
       damagesource:
         _classes:
-          [
-            CombatEntry,
-            CombatTracker,
-            DamageSource,
-            EntityDamageSource,
-            IndirectEntityDamageSource,
-          ]
+          [CombatEntry, CombatTracker, DamageSource, EntityDamageSource, IndirectEntityDamageSource]
       effect:
         _classes:
           [
@@ -620,15 +626,7 @@ net:
             PathfinderMob,
             TamableAnimal,
           ]
-        _enums:
-          [
-            EquipmentSlot,
-            HumanoidArm,
-            MobCategory,
-            MobSpawnType,
-            MoverType,
-            Pose,
-          ]
+        _enums: [EquipmentSlot, HumanoidArm, MobCategory, MobSpawnType, MoverType, Pose]
         ai:
           attributes:
             _classes:
@@ -760,14 +758,7 @@ net:
           wither:
             _classes: [WitherBoss]
         decoration:
-          _classes:
-            [
-              ArmorStand,
-              HangingEntity,
-              ItemFrame,
-              LeashFenceKnotEntity,
-              Painting,
-            ]
+          _classes: [ArmorStand, HangingEntity, ItemFrame, LeashFenceKnotEntity, Painting]
         fishing:
           _classes: [FishingHook]
         global:
@@ -1003,8 +994,7 @@ net:
             SpawnData,
             TickNextTickData,
           ]
-        _enums:
-          [BlockLayer, EmptyBlockGetter, GameType, LightLayer, TickPriority]
+        _enums: [BlockLayer, EmptyBlockGetter, GameType, LightLayer, TickPriority]
         biome:
           _classes: [Biome, BiomeSource, FixedBiomeSource]
         block:
@@ -1209,21 +1199,14 @@ net:
             _enums: [BannerPattern]
           piston:
             _classes:
-              [
-                PistonBaseBlock,
-                PistonHeadBlock,
-                PistonMovingBlockEntity,
-                PistonStructureResolver,
-              ]
+              [PistonBaseBlock, PistonHeadBlock, PistonMovingBlockEntity, PistonStructureResolver]
           state:
             pattern:
               _classes: [BlockInWorld, BlockPattern, BlockPatternBuilder]
             predicate:
-              _classes:
-                [BlockMaterialPredicate, BlockPredicate, BlockStatePredicate]
+              _classes: [BlockMaterialPredicate, BlockPredicate, BlockStatePredicate]
             properties:
-              _classes:
-                [BooleanProperty, DirectionProperty, IntegerProperty, Property]
+              _classes: [BooleanProperty, DirectionProperty, IntegerProperty, Property]
               _enums:
                 [
                   AttachFace,
@@ -1253,16 +1236,10 @@ net:
         dimension:
           _classes: [Dimension, DimensionType, NetherDimension, NormalDimension]
           end:
-            _enums: [DragonRespawnAnimation]
             _classes: [EndDragonFight, TheEndDimension]
+            _enums: [DragonRespawnAnimation]
         levelgen:
-          _classes:
-            [
-              FlatLevelSource,
-              NetherLevelSource,
-              OverworldLevelSource,
-              TheEndLevelSource,
-            ]
+          _classes: [FlatLevelSource, NetherLevelSource, OverworldLevelSource, TheEndLevelSource]
           feature:
             _classes:
               [
@@ -1343,6 +1320,7 @@ net:
           _enums: [PushReaction]
         newbiome:
           layer:
+            _classes: [AddEdgeLayer, BiomeInitLayer, Layer]
             _enums:
               [
                 AddDeepOceanLayer,
@@ -1365,7 +1343,6 @@ net:
                 VoronoiZoom,
                 ZoomLayer,
               ]
-            _classes: [AddEdgeLayer, BiomeInitLayer, Layer]
         pathfinder:
           _classes:
             [
@@ -1385,19 +1362,11 @@ net:
             _classes: [MapDecoration, MapItemSavedData]
         storage:
           _classes:
-            [
-              DerivedLevelData,
-              LevelData,
-              LevelStorage,
-              LevelStorageSource,
-              LevelSummary,
-              PlayerIO,
-            ]
+            [DerivedLevelData, LevelData, LevelStorage, LevelStorageSource, LevelSummary, PlayerIO]
           loot:
             _classes: [LootPool, LootTable, LootTables, RandomValueBounds]
             entries:
-              _classes:
-                [EmptyLootItem, LootItem, LootPoolEntry, LootTableReference]
+              _classes: [EmptyLootItem, LootItem, LootPoolEntry, LootTableReference]
             functions:
               _classes:
                 [
@@ -1423,36 +1392,6 @@ net:
         _classes: [AABB, HitResult]
       scores:
         _classes: [PlayerTeam, Scoreboard, Team]
-com:
-  mojang:
-    blaze3d:
-      platform:
-        _classes: [GlStateManager]
-      shaders:
-        _classes: [Effect, Program, ProgramManager, Uniform]
-      vertex:
-        _classes: [BufferBuilder, Tesselator, VertexFormat, VertexFormatElement]
-    nbt:
-      _classes:
-        [
-          ByteArrayTag,
-          ByteTag,
-          CompoundTag,
-          DoubleTag,
-          EndTag,
-          FloatTag,
-          IntArrayTag,
-          IntTag,
-          ListTag,
-          LongTag,
-          NumericTag,
-          ShortTag,
-          StringTag,
-          Tag,
-        ]
-    realmsclient:
-      gui:
-        _enums: [ChatFormatting]
 unsorted:
   - ACTUuid
   - AbstractBlockState

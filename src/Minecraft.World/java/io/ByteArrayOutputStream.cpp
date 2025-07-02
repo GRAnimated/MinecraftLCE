@@ -1,4 +1,4 @@
-#include "net/minecraft/core/io/ByteArrayOutputStream.h"
+#include "java/io/ByteArrayOutputStream.h"
 
 #include "net/minecraft/client/platform/NX/Platform.h"
 

@@ -1,10 +1,10 @@
 #pragma once
 #include <string>
 
-#include "net/minecraft/core/io/DataOutput.h"
-#include "net/minecraft/core/io/OutputStream.h"
-#include "net/minecraft/core/io/types/Double.h"
-#include "net/minecraft/core/io/types/Float.h"
+#include "java/io/DataOutput.h"
+#include "java/io/OutputStream.h"
+#include "java/io/types/Double.h"
+#include "java/io/types/Float.h"
 #include "net/minecraft/world/ArrayWithLength.h"
 
 class BlockPos;

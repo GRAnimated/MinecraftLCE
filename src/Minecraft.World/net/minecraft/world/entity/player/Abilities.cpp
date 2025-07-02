@@ -1,8 +1,8 @@
 #include "net/minecraft/world/entity/player/Abilities.h"
 
 #include "com/mojang/nbt/CompoundTag.h"
-#include "net/minecraft/core/io/DataInputStream.h"
-#include "net/minecraft/core/io/DataOutputStream.h"
+#include "java/io/DataInputStream.h"
+#include "java/io/DataOutputStream.h"
 
 Abilities::Abilities() {}
 

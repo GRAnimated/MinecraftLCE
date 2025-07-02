@@ -1,6 +1,6 @@
 #pragma once
 
-#include "net/minecraft/core/io/OutputStream.h"
+#include "java/io/OutputStream.h"
 #include "net/minecraft/world/ArrayWithLength.h"
 
 class InputStream;

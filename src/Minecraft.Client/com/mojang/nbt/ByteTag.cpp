@@ -1,7 +1,7 @@
 #include "com/mojang/nbt/ByteTag.h"
 
-#include "net/minecraft/core/io/DataInput.h"
-#include "net/minecraft/core/io/DataOutput.h"
+#include "java/io/DataInput.h"
+#include "java/io/DataOutput.h"
 
 ByteTag::ByteTag() {}
 

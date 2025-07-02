@@ -1,4 +1,4 @@
-#include "net/minecraft/core/io/DataOutputStream.h"
+#include "java/io/DataOutputStream.h"
 #include "net/minecraft/world/level/storage/block/CompressedBlockStorage.h"
 
 void CompressedBlockStorage::write(DataOutputStream* out) {

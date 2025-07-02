@@ -5,7 +5,7 @@
 #include <deque>
 #include <memory>
 // #include <iostream>
-#include "net/minecraft/core/io/DataInputStream.h"
+#include "java/io/DataInputStream.h"
 
 class DataInputStream;
 class DataOutputStream;

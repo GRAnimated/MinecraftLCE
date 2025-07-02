@@ -4,8 +4,8 @@
 #include "net/minecraft/world/level/storage/LevelStorage.h"
 
 #include "FileHeader.h"
-#include "net/minecraft/core/io/File.h"
-#include "net/minecraft/core/io/FileEntry.h"
+#include "java/io/File.h"
+#include "java/io/FileEntry.h"
 
 class ConsoleSaveFile {
 public:

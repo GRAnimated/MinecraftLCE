@@ -4,7 +4,7 @@
 
 #include <nn/os/os_MutexTypes.h>
 
-#include "net/minecraft/core/io/File.h"
+#include "java/io/File.h"
 #include "net/minecraft/util/FrameTimer.h"
 #include "net/minecraft/world/ArrayWithLength.h"
 #include "net/minecraft/world/level/gamemode/minigames/MiniGameDef.h"

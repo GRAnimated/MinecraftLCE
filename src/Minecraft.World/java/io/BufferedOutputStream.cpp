@@ -1,4 +1,4 @@
-#include "net/minecraft/core/io/BufferedOutputStream.h"
+#include "java/io/BufferedOutputStream.h"
 
 #include "net/minecraft/world/ArrayWithLength.h"
 
