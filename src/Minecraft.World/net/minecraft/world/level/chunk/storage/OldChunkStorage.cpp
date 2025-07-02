@@ -1,4 +1,4 @@
-#include "net/minecraft/client/platform/NX/Platform.h"
+#include "NX/Platform.h"
 
 #include "com/mojang/nbt/ListTag.h"
 #include "com/mojang/nbt/NbtIo.h"

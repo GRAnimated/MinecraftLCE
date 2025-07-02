@@ -1,6 +1,6 @@
 #include "types.h"
 #include "Mob.h"
-#include "net/minecraft/client/platform/NX/Platform.h"
+#include "NX/Platform.h"
 #include "net/minecraft/world/ArrayWithLength.h"
 #include "net/minecraft/world/CensoredString.h"
 #include "net/minecraft/world/entity/LivingEntity.h"

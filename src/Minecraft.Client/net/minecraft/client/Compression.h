@@ -1,9 +1,8 @@
 #pragma once
 
+#include "types.h"
 #include "ESavePlatform.h"
-#include "net/minecraft/core/System.h"
-#include "platform/NX/Platform.h"
-#include "zlib/zlib.h"
+#include <nn/os.h>
 
 class Compression {
 public:

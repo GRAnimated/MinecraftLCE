@@ -1,6 +1,6 @@
+#include "NX/Platform.h"
 #include "com/mojang/blaze3d/vertex/BufferBuilder.h"
 #include "com/mojang/blaze3d/vertex/Tesselator.h"
-#include "net/minecraft/client/platform/NX/Platform.h"
 #include "net/minecraft/client/renderer/BlockRenderer.h"
 #include "net/minecraft/client/renderer/texture/TextureAtlasSprite.h"
 #include "net/minecraft/core/Direction.h"

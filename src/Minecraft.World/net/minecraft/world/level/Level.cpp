@@ -1,4 +1,4 @@
-#include "net/minecraft/client/platform/NX/Platform.h"
+#include "NX/Platform.h"
 #include "net/minecraft/core/System.h"
 #include "net/minecraft/world/entity/Entity.h"
 #include "net/minecraft/world/level/Level.h"

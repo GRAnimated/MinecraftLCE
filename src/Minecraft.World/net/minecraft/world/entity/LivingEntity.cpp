@@ -1,7 +1,7 @@
+#include "NX/Platform.h"
 #include "net/minecraft/client/CGameNetworkManager.h"
 #include "net/minecraft/client/CMinecraftApp.h"
 #include "net/minecraft/client/Minecraft.h"
-#include "net/minecraft/client/platform/NX/Platform.h"
 #include "net/minecraft/core/BlockPos.h"
 #include "net/minecraft/util/Mth.h"
 #include "net/minecraft/world/eINSTANCEOF.h"

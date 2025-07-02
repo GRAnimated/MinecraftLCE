@@ -1,5 +1,6 @@
 #include "net/minecraft/network/Connection.h"
 
+#include "NX/Platform.h"
 #include "java/io/BufferedOutputStream.h"
 #include "java/io/ByteArrayOutputStream.h"
 #include "java/io/DataInputStream.h"
@@ -10,7 +11,6 @@
 #include "net/minecraft/client/CGameNetworkManager.h"
 #include "net/minecraft/client/Compression.h"
 #include "net/minecraft/client/ShutdownManager.h"
-#include "net/minecraft/client/platform/NX/Platform.h"
 #include "net/minecraft/core/System.h"
 #include "net/minecraft/network/PacketListener.h"
 #include "net/minecraft/network/PacketType.h"

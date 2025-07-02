@@ -1,3 +1,5 @@
+#include "NX/Platform.h"
+#include "net/minecraft/core/System.h"
 #include <cstring>
 #include <new>
 

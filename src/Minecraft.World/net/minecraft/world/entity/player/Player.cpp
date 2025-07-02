@@ -1,7 +1,7 @@
+#include "NX/Platform.h"
 #include "Player.h"
 #include "net/minecraft/client/CMinecraftApp.h"
 #include "net/minecraft/client/eGameHostOption.h"
-#include "net/minecraft/client/platform/NX/Platform.h"
 #include "net/minecraft/core/BlockPos.h"
 #include "net/minecraft/world/PlayerUID.h"
 #include "net/minecraft/world/entity/LivingEntity.h"

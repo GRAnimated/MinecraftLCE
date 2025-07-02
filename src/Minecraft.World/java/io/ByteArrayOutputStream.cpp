@@ -1,6 +1,6 @@
 #include "java/io/ByteArrayOutputStream.h"
 
-#include "net/minecraft/client/platform/NX/Platform.h"
+#include "NX/Platform.h"
 
 ByteArrayOutputStream::ByteArrayOutputStream() {
     mSize = 0;

@@ -1,4 +1,4 @@
-#include "net/minecraft/client/platform/NX/Platform.h"
+#include "NX/Platform.h"
 #include "net/minecraft/core/BlockPos.h"
 #include "net/minecraft/world/damagesource/DamageSource.h"
 #include "net/minecraft/world/eINSTANCEOF.h"

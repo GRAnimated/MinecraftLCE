@@ -1,3 +1,4 @@
+#include "NX/Platform.h"
 #include "com/mojang/blaze3d/platform/GlStateManager.h"
 #include "java/io/File.h"
 #include "net/minecraft/client/CMinecraftApp.h"
@@ -45,7 +46,6 @@
 #include "net/minecraft/world/level/gamemode/minigames/MiniGameMedals.h"
 #include "net/minecraft/world/level/levelgen/structure/templatesystem/StructureManager.h"
 #include "net/minecraft/world/level/storage/McRegionLevelStorageSource.h"
-#include "platform/NX/Platform.h"
 #include "ui/scene/scenes/UIScene_CreativeMenu.h"
 #include "ui/scene/scenes/UIScene_LeaderboardsMenu.h"
 #include <string>

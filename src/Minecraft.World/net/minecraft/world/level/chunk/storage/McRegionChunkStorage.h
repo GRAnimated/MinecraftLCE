@@ -1,7 +1,7 @@
 #pragma once
 #include "ChunkStorage.h"
+#include "NX/Platform.h"
 #include "java/io/DataOutputStream.h"
-#include "net/minecraft/client/platform/NX/Platform.h"
 #include "net/minecraft/core/System.h"
 #include "net/minecraft/world/level/Level.h"
 #include "net/minecraft/world/level/chunk/LevelChunk.h"

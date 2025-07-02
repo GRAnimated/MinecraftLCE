@@ -1,5 +1,5 @@
+#include "NX/Platform.h"
 #include "java/io/ByteArrayInputStream.h"
-#include "net/minecraft/client/platform/NX/Platform.h"
 
 ByteArrayInputStream::ByteArrayInputStream(arrayWithLength<unsigned char> array, unsigned int start,
                                            unsigned int length) {

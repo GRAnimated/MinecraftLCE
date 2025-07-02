@@ -1,5 +1,5 @@
+#include "NX/Platform.h"
 #include "net/minecraft/client/CMinecraftApp.h"
-#include "net/minecraft/client/platform/NX/Platform.h"
 #include "net/minecraft/world/ArrayWithLength.h"
 #include "net/minecraft/world/Random.h"
 #include "net/minecraft/world/level/Level.h"

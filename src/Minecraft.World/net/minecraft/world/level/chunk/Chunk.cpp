@@ -1,11 +1,11 @@
 #include "net/minecraft/world/level/chunk/Chunk.h"
 
+#include "NX/Platform.h"
 #include "com/mojang/blaze3d/platform/GlStateManager.h"
 #include "com/mojang/blaze3d/vertex/BufferBuilder.h"
 #include "com/mojang/blaze3d/vertex/Tesselator.h"
 #include "net/minecraft/client/CMinecraftApp.h"
 #include "net/minecraft/client/Minecraft.h"
-#include "net/minecraft/client/platform/NX/Platform.h"
 #include "net/minecraft/client/renderer/BlockRenderer.h"
 #include "net/minecraft/client/renderer/LevelRenderer.h"
 #include "net/minecraft/client/renderer/Renderer.h"

@@ -1,4 +1,7 @@
 #include "Compression.h"
+#include "NX/Platform.h"
+#include "net/minecraft/core/System.h"
+#include "zlib.h"
 #include <string.h>
 #include <types.h>
 
