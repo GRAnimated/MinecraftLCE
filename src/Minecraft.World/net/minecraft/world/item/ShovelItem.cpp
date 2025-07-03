@@ -1,13 +1,14 @@
-#include "types.h"
+#include "net/minecraft/world/item/ShovelItem.h"
+
 #include "net/minecraft/core/Direction.h"
 #include "net/minecraft/sounds/SoundEvents.h"
 #include "net/minecraft/world/ArrayWithLength.h"
 #include "net/minecraft/world/entity/player/Player.h"
 #include "net/minecraft/world/item/Item.h"
 #include "net/minecraft/world/item/ItemInstance.h"
-#include "net/minecraft/world/item/ShovelItem.h"
 #include "net/minecraft/world/level/block/Blocks.h"
 #include "net/minecraft/world/level/material/Material.h"
+#include "types.h"
 
 arrayWithLength<Block*> ShovelItem::DIGGABLES = arrayWithLength<Block*>(12, true);
 

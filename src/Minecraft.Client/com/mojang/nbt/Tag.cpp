@@ -1,3 +1,5 @@
+#include "com/mojang/nbt/Tag.h"
+
 #include "com/mojang/nbt/ByteArrayTag.h"
 #include "com/mojang/nbt/ByteTag.h"
 #include "com/mojang/nbt/CompoundTag.h"
@@ -10,7 +12,6 @@
 #include "com/mojang/nbt/LongTag.h"
 #include "com/mojang/nbt/ShortTag.h"
 #include "com/mojang/nbt/StringTag.h"
-#include "com/mojang/nbt/Tag.h"
 #include <ostream>
 
 void Tag::print(const std::wstring& name, char* prefix, std::wostream& output) {

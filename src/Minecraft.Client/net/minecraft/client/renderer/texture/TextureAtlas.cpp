@@ -4,10 +4,10 @@
 #include "net/minecraft/client/renderer/texture/atlases/ClockAtlasSprite.h"
 #include "net/minecraft/client/renderer/texture/atlases/CompassAtlasSprite.h"
 
-#define TERRAIN_RATIO (16.f / 512.f)  // 16 is one icon size, 512 terrain image height
-#define ITEM_RATIO (16.f / 272.f)     // 16 is one icon size, 272 item image height
+#define TERRAIN_RATIO (16.0f / 512.0f)  // 16 is one icon size, 512 terrain image height
+#define ITEM_RATIO (16.0f / 272.0f)     // 16 is one icon size, 272 item image height
 
-#define RATIO (16.f / 256.f)
+#define RATIO (16.0f / 256.0f)
 
 TextureAtlas::~TextureAtlas() {}
 

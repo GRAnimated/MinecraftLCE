@@ -1,5 +1,6 @@
-#include "java/io/DataOutputStream.h"
 #include "net/minecraft/world/level/storage/block/CompressedBlockStorage.h"
+
+#include "java/io/DataOutputStream.h"
 
 void CompressedBlockStorage::write(DataOutputStream* out) {
     out->writeInt(this->storage.length);

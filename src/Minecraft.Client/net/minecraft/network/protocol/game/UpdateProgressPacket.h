@@ -9,11 +9,11 @@ public:
     UpdateProgressPacket();
     UpdateProgressPacket(int progress);
 
-    virtual EPacketType getPacketId() override;
-    virtual void read(DataInputStream* input) override;
-    virtual void write(DataOutputStream* output) override;
-    virtual void handle(PacketListener* listener) override;
-    virtual int getEstimatedSize() override;
+    EPacketType getPacketId() override;
+    void read(DataInputStream* input) override;
+    void write(DataOutputStream* output) override;
+    void handle(PacketListener* listener) override;
+    int getEstimatedSize() override;
 
     int mProgress;
 };

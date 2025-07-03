@@ -1,3 +1,5 @@
+#include "net/minecraft/world/level/levelgen/NetherFlatLevelSource.h"
+
 #include "NX/Platform.h"
 #include "net/minecraft/client/CMinecraftApp.h"
 #include "net/minecraft/world/ArrayWithLength.h"
@@ -7,7 +9,6 @@
 #include "net/minecraft/world/level/block/Blocks.h"
 #include "net/minecraft/world/level/chunk/LevelChunk.h"
 #include "net/minecraft/world/level/levelgen/ChunkPrimer.h"
-#include "net/minecraft/world/level/levelgen/NetherFlatLevelSource.h"
 #include "net/minecraft/world/level/levelgen/feature/HellFireFeature.h"
 #include "net/minecraft/world/level/levelgen/feature/LightGemFeature.h"
 #include "net/minecraft/world/level/storage/LevelData.h"

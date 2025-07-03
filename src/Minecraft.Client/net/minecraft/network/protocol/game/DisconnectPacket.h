@@ -17,13 +17,13 @@ public:
 
     DisconnectPacket();
 
-    virtual void read(DataInputStream* input) override;
-    virtual void write(DataOutputStream* output) override;
-    virtual EPacketType getPacketId() override;
-    virtual void handle(PacketListener* listener) override;
-    virtual int getEstimatedSize() override;
-    virtual bool canBeInvalidated() override;
-    virtual bool isInvalidatedBy(std::shared_ptr<Packet> packet) override;
+    void read(DataInputStream* input) override;
+    void write(DataOutputStream* output) override;
+    EPacketType getPacketId() override;
+    void handle(PacketListener* listener) override;
+    int getEstimatedSize() override;
+    bool canBeInvalidated() override;
+    bool isInvalidatedBy(std::shared_ptr<Packet> packet) override;
 
     eDisconnectReason mReason;
 };

@@ -1,5 +1,6 @@
-#include "net/minecraft/world/enchantment/categories/FeetArmorCategory.h"
 #include "net/minecraft/world/enchantment/enchantments/WaterWalkerEnchantment.h"
+
+#include "net/minecraft/world/enchantment/categories/FeetArmorCategory.h"
 #include "net/minecraft/world/item/enchantment/Enchantment.h"
 #include "net/minecraft/world/item/enchantment/Enchantments.h"
 

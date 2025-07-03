@@ -1,4 +1,5 @@
 #pragma once
+
 #include "net/minecraft/world/phys/Vec3.h"
 
 class AABB {

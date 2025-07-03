@@ -1,4 +1,5 @@
 #pragma once
+
 #include "types.h"
 
 class _STRING_VERIFY_RESPONSE;
@@ -69,12 +70,12 @@ public:
     static CInput* sInstance;
 
     void Initialise(int, uchar, uchar);
-    void Tick(void);
+    void Tick();
     void SetDeadzoneAndMovementRange(uint, uint, uint);
     void SetGameControllerTypeJoypadMaps(int, uchar, uint);
     void SetGameJoypadMaps(int, uchar, uint);
     void GetGameJoypadMaps(int, uchar);
-    void SetJoypadMapArraySetupComplete(void);
+    void SetJoypadMapArraySetupComplete();
     void SetJoypadSensitivity(int, float);
     void GetValue(int, uchar, bool);
     void SetFakePadValue(int, uchar);
@@ -88,8 +89,8 @@ public:
     void GetIdleSeconds(int);
     void IsPadConnected(int);
     void SetCircleCrossSwapped(bool);
-    bool IsCircleCrossSwapped(void);
-    void func_7100790784(void);
+    bool IsCircleCrossSwapped();
+    void func_7100790784();
     void MapTouchInput(int, uint);
     float GetJoypadStick_Menu_LX(int);
     float GetJoypadStick_Menu_LY(int);
@@ -105,20 +106,20 @@ public:
     void GetJoypadRTrigger(int, bool);
     void GetTouchPadData(int, C_4JInput::ETouchType, bool);
     void SetMenuDisplayed(int, bool);
-    void func_7100790580(void);
+    void func_7100790580();
     void RequestKeyboard(const wchar_t*, const wchar_t*, uint, uint, int (*)(void*, bool), void*,
                          C_4JInput::EKeyboardMode);
     void RequestErrorViewer(uint, uint, int (*)(void*), void*);
     void RequestErrorViewer(uint, wchar_t*, wchar_t*, int (*)(void*), void*);
     void SetLocalMultiplayer(bool);
-    void IsLocalMultiplayerAvailable(void);
-    void UsingRemoteVita(void);
+    void IsLocalMultiplayerAvailable();
+    void UsingRemoteVita();
     void VerifyStrings(wchar_t**, int, int (*)(void*, _STRING_VERIFY_RESPONSE*), void*);
     void CancelQueuedVerifyStrings(int (*)(void*, _STRING_VERIFY_RESPONSE*), void*);
-    void CancelAllVerifyInProgress(void);
+    void CancelAllVerifyInProgress();
     void LockPad(int, int);
     void UnlockPad(int);
     void IsPadLocked(int);
     void GetControllerID(int);
-    void AcquiredForeground(void);
+    void AcquiredForeground();
 };

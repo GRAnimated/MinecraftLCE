@@ -8,5 +8,5 @@ class LightGemFeature : public Feature {
 public:
     LightGemFeature();
 
-    virtual bool place(Level* level, Random& random, const BlockPos& pos) override;
+    bool place(Level* level, Random& random, const BlockPos& pos) override;
 };

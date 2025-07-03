@@ -1,5 +1,6 @@
-#include "net/minecraft/client/renderer/texture/IconRegister.h"
 #include "net/minecraft/world/item/CoalItem.h"
+
+#include "net/minecraft/client/renderer/texture/IconRegister.h"
 #include "net/minecraft/world/item/ItemInstance.h"
 
 CoalItem::CoalItem() {

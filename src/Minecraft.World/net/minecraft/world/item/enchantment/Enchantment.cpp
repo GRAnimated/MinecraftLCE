@@ -1,8 +1,9 @@
+#include "net/minecraft/world/item/enchantment/Enchantment.h"
+
 #include "net/minecraft/resources/ResourceLocation.h"
 #include "net/minecraft/world/entity/EquipmentSlot.h"
 #include "net/minecraft/world/item/ItemInstance.h"
 #include "net/minecraft/world/item/Rarity.h"
-#include "net/minecraft/world/item/enchantment/Enchantment.h"
 #include "net/minecraft/world/item/enchantment/EnchantmentCategory.h"
 
 #include "net/minecraft/world/enchantment/categories/ArmorCategory.h"

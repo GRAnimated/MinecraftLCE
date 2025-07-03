@@ -1,9 +1,10 @@
-#include "types.h"
+#include "net/minecraft/client/ui/ConsoleUIController.h"
+
 #include "4J_Libraries_Source/fui/fui.h"
 #include "net/minecraft/client/CMinecraftApp.h"
-#include "net/minecraft/client/ui/ConsoleUIController.h"
 #include "net/minecraft/core/System.h"
 #include "net/minecraft/world/ArrayWithLength.h"
+#include "types.h"
 #include <string>
 
 // NON_MATCHING: TODO: finish this shit

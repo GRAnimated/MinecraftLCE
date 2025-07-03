@@ -1,13 +1,14 @@
-#include "types.h"
+#include "net/minecraft/world/enchantment/enchantments/DamageEnchantment.h"
+
 #include "net/minecraft/world/eINSTANCEOF.h"
 #include "net/minecraft/world/effect/MobEffectInstance.h"
 #include "net/minecraft/world/effect/MobEffects.h"
 #include "net/minecraft/world/enchantment/categories/WeaponCategory.h"
-#include "net/minecraft/world/enchantment/enchantments/DamageEnchantment.h"
 #include "net/minecraft/world/entity/LivingEntity.h"
 #include "net/minecraft/world/item/AxeItem.h"
 #include "net/minecraft/world/item/ItemInstance.h"
 #include "net/minecraft/world/item/enchantment/Enchantment.h"
+#include "types.h"
 #include <memory>
 
 DamageEnchantment::DamageEnchantment(const Rarity* rarity, int type,

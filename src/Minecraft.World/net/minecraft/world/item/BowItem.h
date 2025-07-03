@@ -1,4 +1,5 @@
 #pragma once
+
 #include "net/minecraft/world/item/Item.h"
 #include <memory>
 

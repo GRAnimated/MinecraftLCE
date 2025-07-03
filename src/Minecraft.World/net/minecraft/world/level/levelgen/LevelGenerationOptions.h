@@ -1,4 +1,5 @@
 #pragma once
+
 #include "net/minecraft/world/level/LevelRuleset.h"
 
 class LevelGenerationOptions {

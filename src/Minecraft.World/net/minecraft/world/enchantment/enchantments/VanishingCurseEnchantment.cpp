@@ -1,5 +1,6 @@
-#include "net/minecraft/world/enchantment/categories/AllCategory.h"
 #include "net/minecraft/world/enchantment/enchantments/VanishingCurseEnchantment.h"
+
+#include "net/minecraft/world/enchantment/categories/AllCategory.h"
 
 VanishingCurseEnchantment::VanishingCurseEnchantment(const Rarity* rarity,
                                                      arrayWithLength<const EquipmentSlot*> equipmentSlots)

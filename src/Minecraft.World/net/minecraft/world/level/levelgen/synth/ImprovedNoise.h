@@ -9,7 +9,7 @@ class ImprovedNoise : public Synth {
 public:
     ImprovedNoise(Random*);
     virtual ~ImprovedNoise();
-    virtual double getValue(double, double) override;
+    double getValue(double, double) override;
     void init(Random*);
     void add(arrayWithLength<double>, double, double, double, int, int, int, double, double, double, double);
 

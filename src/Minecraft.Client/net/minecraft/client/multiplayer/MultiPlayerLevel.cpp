@@ -1,8 +1,9 @@
+#include "net/minecraft/client/multiplayer/MultiPlayerLevel.h"
+
 #include "net/minecraft/client/CGameNetworkManager.h"
 #include "net/minecraft/client/Minecraft.h"
 #include "net/minecraft/client/Options.h"
 #include "net/minecraft/client/multiplayer/ClientChunkCache.h"
-#include "net/minecraft/client/multiplayer/MultiPlayerLevel.h"
 #include "net/minecraft/world/Random.h"
 #include "net/minecraft/world/level/Level.h"
 #include "net/minecraft/world/level/chunk/ChunkSource.h"

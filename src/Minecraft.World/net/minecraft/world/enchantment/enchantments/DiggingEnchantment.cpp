@@ -1,9 +1,10 @@
-#include "types.h"
-#include "net/minecraft/world/enchantment/categories/DiggerCategory.h"
 #include "net/minecraft/world/enchantment/enchantments/DiggingEnchantment.h"
+
+#include "net/minecraft/world/enchantment/categories/DiggerCategory.h"
 #include "net/minecraft/world/item/ItemInstance.h"
 #include "net/minecraft/world/item/Items.h"
 #include "net/minecraft/world/item/enchantment/Enchantment.h"
+#include "types.h"
 
 DiggingEnchantment::DiggingEnchantment(const Rarity* rarity,
                                        arrayWithLength<const EquipmentSlot*> equipmentSlots)

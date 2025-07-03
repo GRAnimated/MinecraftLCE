@@ -1,3 +1,5 @@
+#include "OldChunkStorage.h"
+
 #include "NX/Platform.h"
 
 #include "com/mojang/nbt/ListTag.h"
@@ -6,8 +8,6 @@
 #include "net/minecraft/world/level/Level.h"
 #include "net/minecraft/world/level/block/entity/BlockEntity.h"
 #include "net/minecraft/world/level/tick/TickNextTickData.h"
-
-#include "OldChunkStorage.h"
 
 // NON_MATCHING | Score: 42929 (lower is better)
 void OldChunkStorage::save(LevelChunk* chunk, Level* lvl, CompoundTag* tag) {

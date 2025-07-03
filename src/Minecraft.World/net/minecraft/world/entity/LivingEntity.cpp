@@ -1,3 +1,5 @@
+#include "net/minecraft/world/entity/LivingEntity.h"
+
 #include "NX/Platform.h"
 #include "net/minecraft/client/CGameNetworkManager.h"
 #include "net/minecraft/client/CMinecraftApp.h"
@@ -8,7 +10,6 @@
 #include "net/minecraft/world/effect/MobEffectInstance.h"
 #include "net/minecraft/world/effect/MobEffects.h"
 #include "net/minecraft/world/entity/Entity.h"
-#include "net/minecraft/world/entity/LivingEntity.h"
 #include "net/minecraft/world/entity/player/Player.h"
 #include "net/minecraft/world/item/enchantment/EnchantmentHelper.h"
 #include "net/minecraft/world/level/block/Blocks.h"

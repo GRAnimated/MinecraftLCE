@@ -16,12 +16,12 @@ public:
     class SocketOutputStreamLocal : public OutputStream {
     public:
         SocketOutputStreamLocal(int);
-        virtual ~SocketOutputStreamLocal() override;
-        virtual void write(unsigned int) override;
-        virtual void write(arrayWithLength<unsigned char>) override;
-        virtual void write(arrayWithLength<unsigned char>, unsigned int, unsigned int) override;
-        virtual void close() override;
-        virtual void flush() override;
+        ~SocketOutputStreamLocal() override;
+        void write(unsigned int) override;
+        void write(arrayWithLength<unsigned char>) override;
+        void write(arrayWithLength<unsigned char>, unsigned int, unsigned int) override;
+        void close() override;
+        void flush() override;
         virtual void writeWithFlags(arrayWithLength<unsigned char>, unsigned int, unsigned int, int);
 
         int field_8;
@@ -31,12 +31,12 @@ public:
     class SocketOutputStreamNetwork : public OutputStream {
     public:
         SocketOutputStreamNetwork(Socket*, int);
-        virtual ~SocketOutputStreamNetwork() override;
-        virtual void write(unsigned int) override;
-        virtual void write(arrayWithLength<unsigned char>) override;
-        virtual void write(arrayWithLength<unsigned char>, unsigned int, unsigned int) override;
-        virtual void close() override;
-        virtual void flush() override;
+        ~SocketOutputStreamNetwork() override;
+        void write(unsigned int) override;
+        void write(arrayWithLength<unsigned char>) override;
+        void write(arrayWithLength<unsigned char>, unsigned int, unsigned int) override;
+        void close() override;
+        void flush() override;
         virtual void writeWithFlags(arrayWithLength<unsigned char>, unsigned int, unsigned int, int);
 
         int field_8;

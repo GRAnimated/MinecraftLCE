@@ -1,7 +1,8 @@
+#include "net/minecraft/world/level/Level.h"
+
 #include "NX/Platform.h"
 #include "net/minecraft/core/System.h"
 #include "net/minecraft/world/entity/Entity.h"
-#include "net/minecraft/world/level/Level.h"
 #include "net/minecraft/world/level/LevelListener.h"
 #include "net/minecraft/world/level/LevelType.h"
 #include "net/minecraft/world/level/LightLayer.h"

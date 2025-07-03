@@ -1,3 +1,5 @@
+#include "net/minecraft/client/ui/scene/scenes/UIScene_DeathMenu.h"
+
 #include "4J_Libraries_Source/fui/fuiFile.h"
 #include "4J_Libraries_Source/fui/fuiRenderNode.h"
 #include "net/minecraft/client/CMinecraftApp.h"
@@ -10,7 +12,6 @@
 #include "net/minecraft/client/ui/ConsoleUIController.h"
 #include "net/minecraft/client/ui/scene/UIScene.h"
 #include "net/minecraft/client/ui/scene/control/UIString.h"
-#include "net/minecraft/client/ui/scene/scenes/UIScene_DeathMenu.h"
 #include "net/minecraft/client/ui/scene/scenes/UIScene_PauseMenu.h"
 #include "net/minecraft/world/entity/player/MultiplayerLocalPlayer.h"
 #include "net/minecraft/world/entity/player/Player.h"

@@ -1,3 +1,5 @@
+#include "net/minecraft/world/level/block/entity/BlockEntity.h"
+
 #include "com/mojang/nbt/CompoundTag.h"
 #include "net/minecraft/client/resources/IdMapper.h"
 #include "net/minecraft/resources/ResourceLocation.h"
@@ -5,7 +7,6 @@
 #include "net/minecraft/world/level/Level.h"
 #include "net/minecraft/world/level/block/Block.h"
 #include "net/minecraft/world/level/block/Blocks.h"
-#include "net/minecraft/world/level/block/entity/BlockEntity.h"
 #include "net/minecraft/world/level/block/state/BlockState.h"
 #include <memory>
 

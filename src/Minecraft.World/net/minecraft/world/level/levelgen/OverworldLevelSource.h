@@ -15,15 +15,15 @@ class LargeFeature;
 class OverworldLevelSource : public ChunkGenerator, public GenericOverworldLevelSource {
 public:
     OverworldLevelSource(Level*, long long, bool, SuperflatConfig*);
-    virtual ~OverworldLevelSource() override;
-    virtual LevelChunk* createChunk(int, int) override;
-    virtual void postProcess(int, int) override;
-    virtual bool postProcessLoadedChunk(LevelChunk*, int, int) override;
-    virtual void getMobsAt(MobCategory*, const BlockPos&) override;
-    virtual void* findNearestMapFeature(Level*, const std::wstring&, const BlockPos&, bool) override;
-    virtual void recreateLogicStructuresForChunk(LevelChunk*, int, int) override;
-    virtual bool isPosInFeature(Level*, const std::wstring&, const BlockPos&) override;
-    virtual void lightChunk(LevelChunk*) override;
+    ~OverworldLevelSource() override;
+    LevelChunk* createChunk(int, int) override;
+    void postProcess(int, int) override;
+    bool postProcessLoadedChunk(LevelChunk*, int, int) override;
+    void getMobsAt(MobCategory*, const BlockPos&) override;
+    void* findNearestMapFeature(Level*, const std::wstring&, const BlockPos&, bool) override;
+    void recreateLogicStructuresForChunk(LevelChunk*, int, int) override;
+    bool isPosInFeature(Level*, const std::wstring&, const BlockPos&) override;
+    void lightChunk(LevelChunk*) override;
     void prepareHeights(int, int, ChunkPrimer*);
     void getHeights(int, int, int, arrayWithLength<Biome*>&, arrayWithLength<double>&);
     void buildSurfaces(int, int, ChunkPrimer*, arrayWithLength<Biome*>);

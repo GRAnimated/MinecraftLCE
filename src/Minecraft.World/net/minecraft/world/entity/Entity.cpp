@@ -1,9 +1,10 @@
+#include "net/minecraft/world/entity/Entity.h"
+
 #include "NX/Platform.h"
 #include "net/minecraft/core/BlockPos.h"
 #include "net/minecraft/world/damagesource/DamageSource.h"
 #include "net/minecraft/world/eINSTANCEOF.h"
 #include "net/minecraft/world/enchantment/enchantments/ProtectionEnchantment.h"
-#include "net/minecraft/world/entity/Entity.h"
 #include "net/minecraft/world/entity/LivingEntity.h"
 #include "net/minecraft/world/item/enchantment/Enchantment.h"
 #include "net/minecraft/world/level/Level.h"

@@ -1,12 +1,13 @@
-#include "types.h"
+#include "net/minecraft/world/item/Item.h"
+
 #include "net/minecraft/client/renderer/texture/IconRegister.h"
 #include "net/minecraft/resources/ResourceLocation.h"
 #include "net/minecraft/world/entity/player/Player.h"
 #include "net/minecraft/world/item/BlockItem.h"
-#include "net/minecraft/world/item/Item.h"
 #include "net/minecraft/world/item/ItemInstance.h"
 #include "net/minecraft/world/level/block/Block.h"
 #include "net/minecraft/world/level/block/Blocks.h"
+#include "types.h"
 #include <memory>
 #include <unordered_map>
 

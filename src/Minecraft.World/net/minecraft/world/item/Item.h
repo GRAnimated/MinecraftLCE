@@ -1,4 +1,5 @@
 #pragma once
+
 #include "types.h"
 #include "net/minecraft/client/resources/SimpleRegistry.h"
 #include "net/minecraft/world/InteractionHand.h"

@@ -1,3 +1,7 @@
+#pragma once
+
+#pragma once
+
 #include "net/minecraft/world/ArrayWithLength.h"
 #include "net/minecraft/world/item/DiggerItem.h"
 

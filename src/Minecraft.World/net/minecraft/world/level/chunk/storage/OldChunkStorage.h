@@ -1,4 +1,5 @@
 #pragma once
+
 #include "com/mojang/nbt/CompoundTag.h"
 #include "java/io/DataOutputStream.h"
 #include "net/minecraft/world/level/Level.h"

@@ -1,5 +1,6 @@
-#include "NX/Platform.h"
 #include "java/io/ByteArrayInputStream.h"
+
+#include "NX/Platform.h"
 
 ByteArrayInputStream::ByteArrayInputStream(arrayWithLength<unsigned char> array, unsigned int start,
                                            unsigned int length) {

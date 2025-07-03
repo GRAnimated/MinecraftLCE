@@ -1,14 +1,15 @@
-#include "types.h"
+#include "net/minecraft/world/item/ElytraItem.h"
+
 #include "net/minecraft/client/renderer/texture/IconRegister.h"
 #include "net/minecraft/resources/ResourceLocation.h"
 #include "net/minecraft/world/entity/EquipmentSlot.h"
 #include "net/minecraft/world/entity/mob/Mob.h"
 #include "net/minecraft/world/entity/player/Player.h"
 #include "net/minecraft/world/item/BehaviorRegistry.h"
-#include "net/minecraft/world/item/ElytraItem.h"
 #include "net/minecraft/world/item/InteractionResultHolder.h"
 #include "net/minecraft/world/item/ItemInstance.h"
 #include "net/minecraft/world/item/Items.h"
+#include "types.h"
 
 DispenseItemBehavior* elytraDispenseBehavior
     = nullptr;  // TODO: replace that with correct dispense behavior later

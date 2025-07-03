@@ -8,17 +8,17 @@ public:
 
     static void SetMainThreadID();
 
-    virtual ~C4JThreadImpl() override;
-    virtual void Run() override;
-    virtual void isRunning() override;
-    virtual void hasStarted() override;
-    virtual void SetProcessor(int) override;
-    virtual void GetProcessor() override;
-    virtual void SetPriority(int) override;
-    virtual void WaitForCompletion(int) override;
-    virtual void GetExitCode() override;
-    virtual void getName() override;
-    virtual void SetDeleteOnExit(bool) override;
+    ~C4JThreadImpl() override;
+    void Run() override;
+    void isRunning() override;
+    void hasStarted() override;
+    void SetProcessor(int) override;
+    void GetProcessor() override;
+    void SetPriority(int) override;
+    void WaitForCompletion(int) override;
+    void GetExitCode() override;
+    void getName() override;
+    void SetDeleteOnExit(bool) override;
 
     void* unknown[14];
 };

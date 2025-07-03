@@ -1,5 +1,6 @@
-#include "NX/Platform.h"
 #include "Player.h"
+
+#include "NX/Platform.h"
 #include "net/minecraft/client/CMinecraftApp.h"
 #include "net/minecraft/client/eGameHostOption.h"
 #include "net/minecraft/core/BlockPos.h"

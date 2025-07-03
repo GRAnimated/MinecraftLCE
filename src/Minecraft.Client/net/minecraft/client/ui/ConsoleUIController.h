@@ -1,4 +1,5 @@
 #pragma once
+
 #include "nn/os/os_MutexTypes.h"
 #include "types.h"
 #include "net/minecraft/client/renderer/C4JRender.h"

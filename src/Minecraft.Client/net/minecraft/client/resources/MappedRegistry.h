@@ -1,4 +1,5 @@
 #pragma once
+
 #include "net/minecraft/client/resources/IdMap.h"
 #include "net/minecraft/client/resources/SimpleRegistry.h"
 
@@ -11,8 +12,8 @@ public:
     // properly
     virtual void registerMapping(int id, Key key, Value value);
     virtual Key getKey(Value) const;
-    virtual int getId(Value) override;
-    virtual Value byId(int) override;
+    int getId(Value) override;
+    Value byId(int) override;
     virtual bool containsId(int);
 };
 
@@ -25,9 +26,9 @@ public:
 
     // marked as virtual as if DefaultedMappedRegistry is going to be overriden one more time it
     // won't allow you to overwrite
-    virtual Value get(Key) override;
-    virtual void registerKey(Key key, Value value) override;
-    virtual std::unordered_map<Key, Value>* keySet() override;
-    virtual Value* getRandom(Random*) override;
-    virtual bool containsKey(Key) override;
+    Value get(Key) override;
+    void registerKey(Key key, Value value) override;
+    std::unordered_map<Key, Value>* keySet() override;
+    Value* getRandom(Random*) override;
+    bool containsKey(Key) override;
 };

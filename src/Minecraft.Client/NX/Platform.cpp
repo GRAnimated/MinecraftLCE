@@ -1,6 +1,5 @@
 #include "NX/Platform.h"
 
-#include "Platform.h"
 #include <cstdlib>
 #include <cstring>
 

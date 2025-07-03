@@ -8,8 +8,8 @@ class StructureFeatureSavedData : public SavedData {
 public:
     StructureFeatureSavedData(const std::wstring&);
 
-    virtual void load(CompoundTag*) override;
-    virtual void save(CompoundTag*) override;
+    void load(CompoundTag*) override;
+    void save(CompoundTag*) override;
 
     CompoundTag* mTag;
 };

@@ -1,3 +1,5 @@
+#include "net/minecraft/world/level/block/OreBlock.h"
+
 #include "net/minecraft/util/Mth.h"
 #include "net/minecraft/world/item/DyeColor.h"
 #include "net/minecraft/world/item/Item.h"
@@ -6,7 +8,6 @@
 #include "net/minecraft/world/level/Level.h"
 #include "net/minecraft/world/level/block/Block.h"
 #include "net/minecraft/world/level/block/Blocks.h"
-#include "net/minecraft/world/level/block/OreBlock.h"
 #include "net/minecraft/world/level/block/state/BlockStateDefinition.h"
 #include "net/minecraft/world/level/material/Material.h"
 

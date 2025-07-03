@@ -9,10 +9,10 @@ public:
 
     ServerboundKeepAlivePacket();
 
-    virtual void read(DataInputStream* input) override;
-    virtual void write(DataOutputStream* output) override;
-    virtual EPacketType getPacketId() override;
-    virtual void handle(PacketListener* listener) override;
+    void read(DataInputStream* input) override;
+    void write(DataOutputStream* output) override;
+    EPacketType getPacketId() override;
+    void handle(PacketListener* listener) override;
 
     int mId;
 };

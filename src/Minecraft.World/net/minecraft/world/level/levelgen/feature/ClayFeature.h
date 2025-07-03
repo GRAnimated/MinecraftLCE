@@ -8,7 +8,7 @@ class ClayFeature : public Feature {
 public:
     ClayFeature(int unk);
 
-    virtual bool place(Level* level, Random& random, const BlockPos& pos) override;
+    bool place(Level* level, Random& random, const BlockPos& pos) override;
 
 private:
     Block* mBlock;

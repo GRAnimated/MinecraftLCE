@@ -1,4 +1,5 @@
 #pragma once
+
 class ItemInstance;
 class LivingEntity;
 class ItemTransform;

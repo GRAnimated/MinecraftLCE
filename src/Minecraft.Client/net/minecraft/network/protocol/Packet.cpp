@@ -1,5 +1,6 @@
-#include "net/minecraft/core/System.h"
 #include "net/minecraft/network/protocol/Packet.h"
+
+#include "net/minecraft/core/System.h"
 
 #include <sstream>
 

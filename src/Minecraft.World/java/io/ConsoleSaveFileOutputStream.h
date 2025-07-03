@@ -7,11 +7,11 @@ class FileEntry;
 
 class ConsoleSaveFileOutputStream : public OutputStream {
 public:
-    virtual void write(unsigned int) override;
-    virtual void write(arrayWithLength<unsigned char>) override;
-    virtual void write(arrayWithLength<unsigned char>, unsigned int, unsigned int) override;
-    virtual void close() override;
-    virtual void flush() override;
+    void write(unsigned int) override;
+    void write(arrayWithLength<unsigned char>) override;
+    void write(arrayWithLength<unsigned char>, unsigned int, unsigned int) override;
+    void close() override;
+    void flush() override;
 
     ConsoleSaveFile* mConsoleSaveFile;
     FileEntry* mFileEntry;

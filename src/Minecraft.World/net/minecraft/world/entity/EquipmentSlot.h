@@ -1,4 +1,5 @@
 #pragma once
+
 class EquipmentSlot {
 public:
     static EquipmentSlot* MAINHAND;

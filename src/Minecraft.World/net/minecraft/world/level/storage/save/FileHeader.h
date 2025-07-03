@@ -1,4 +1,5 @@
 #pragma once
+
 #include "java/io/FileEntry.h"
 #include "net/minecraft/client/ByteOrder.h"
 #include "net/minecraft/client/ESavePlatform.h"

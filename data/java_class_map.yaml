@@ -1,6 +1,7 @@
+---
 # This file is generated from Minecraft Java Edition 1.14.4,
-# augmented with some b1.2 locations with our own decisions, and
-# java-only classes have been removed.
+# augmented with some b1.2 locations with our own decisions,
+# and java-only classes have been removed.
 com:
   mojang:
     blaze3d:
@@ -12,22 +13,20 @@ com:
         _classes: [BufferBuilder, Tesselator, VertexFormat, VertexFormatElement]
     nbt:
       _classes:
-        [
-          ByteArrayTag,
-          ByteTag,
-          CompoundTag,
-          DoubleTag,
-          EndTag,
-          FloatTag,
-          IntArrayTag,
-          IntTag,
-          ListTag,
-          LongTag,
-          NumericTag,
-          ShortTag,
-          StringTag,
-          Tag,
-        ]
+        - ByteArrayTag
+        - ByteTag
+        - CompoundTag
+        - DoubleTag
+        - EndTag
+        - FloatTag
+        - IntArrayTag
+        - IntTag
+        - ListTag
+        - LongTag
+        - NumericTag
+        - ShortTag
+        - StringTag
+        - Tag
     realmsclient:
       gui:
         _enums: [ChatFormatting]
@@ -39,14 +38,12 @@ net:
     client:
       _classes: [GuiMessage, KeyMapping, Minecraft, Options, Timer, User]
       _enums:
-        [
-          AmbientOcclusionStatus,
-          AttackIndicatorStatus,
-          CloudStatus,
-          NarratorStatus,
-          ParticleStatus,
-          RecipeBookCategories,
-        ]
+        - AmbientOcclusionStatus
+        - AttackIndicatorStatus
+        - CloudStatus
+        - NarratorStatus
+        - ParticleStatus
+        - RecipeBookCategories
       color:
         block:
           _classes: [BlockColors]
@@ -63,19 +60,17 @@ net:
             _enums: [GlyphProviderBuilderType]
         screens:
           _classes:
-            [
-              ConfirmScreen,
-              ConnectScreen,
-              DeathScreen,
-              DisconnectedScreen,
-              ErrorScreen,
-              OptionsScreen,
-              PauseScreen,
-              ReceivingLevelScreen,
-              Screen,
-              TitleScreen,
-              VideoSettingsScreen,
-            ]
+            - ConfirmScreen
+            - ConnectScreen
+            - DeathScreen
+            - DisconnectedScreen
+            - ErrorScreen
+            - OptionsScreen
+            - PauseScreen
+            - ReceivingLevelScreen
+            - Screen
+            - TitleScreen
+            - VideoSettingsScreen
           advancements:
             _enums: [AdvancementTabType, AdvancementWidgetType]
           controls:
@@ -86,61 +81,59 @@ net:
             _classes: [CreateWorldScreen, SelectWorldScreen]
       model:
         _classes:
-          [
-            ArmorStandArmorModel,
-            ArmorStandModel,
-            BannerModel,
-            BatModel,
-            BedModel,
-            BlazeModel,
-            BoatModel,
-            BookModel,
-            ChestedHorseModel,
-            ChestModel,
-            ChickenModel,
-            CowModel,
-            CreeperModel,
-            ElytraModel,
-            EndermanModel,
-            EndermiteModel,
-            GhastModel,
-            GuardianModel,
-            HumanoidHeadModel,
-            HumanoidModel,
-            IllagerModel,
-            LargeChestModel,
-            LavaSlimeModel,
-            LeashKnotModel,
-            LlamaModel,
-            LlamaSpitModel,
-            MinecartModel,
-            Model,
-            OcelotModel,
-            ParrotModel,
-            PigModel,
-            PlayerModel,
-            PolarBearModel,
-            QuadrupedModel,
-            RabbitModel,
-            SheepFurModel,
-            SheepModel,
-            ShieldModel,
-            ShulkerBulletModel,
-            ShulkerModel,
-            SignModel,
-            SilverfishModel,
-            SkeletonModel,
-            SlimeModel,
-            SpiderModel,
-            SquidModel,
-            Vertex,
-            VexModel,
-            VillagerModel,
-            WitchModel,
-            WitherBossModel,
-            WolfModel,
-            ZombieModel,
-          ]
+          - ArmorStandArmorModel
+          - ArmorStandModel
+          - BannerModel
+          - BatModel
+          - BedModel
+          - BlazeModel
+          - BoatModel
+          - BookModel
+          - ChestedHorseModel
+          - ChestModel
+          - ChickenModel
+          - CowModel
+          - CreeperModel
+          - ElytraModel
+          - EndermanModel
+          - EndermiteModel
+          - GhastModel
+          - GuardianModel
+          - HumanoidHeadModel
+          - HumanoidModel
+          - IllagerModel
+          - LargeChestModel
+          - LavaSlimeModel
+          - LeashKnotModel
+          - LlamaModel
+          - LlamaSpitModel
+          - MinecartModel
+          - Model
+          - OcelotModel
+          - ParrotModel
+          - PigModel
+          - PlayerModel
+          - PolarBearModel
+          - QuadrupedModel
+          - RabbitModel
+          - SheepFurModel
+          - SheepModel
+          - ShieldModel
+          - ShulkerBulletModel
+          - ShulkerModel
+          - SignModel
+          - SilverfishModel
+          - SkeletonModel
+          - SlimeModel
+          - SpiderModel
+          - SquidModel
+          - Vertex
+          - VexModel
+          - VillagerModel
+          - WitchModel
+          - WitherBossModel
+          - WolfModel
+          - ZombieModel
         dragon:
           _classes: [DragonHeadModel, DragonModel]
         geom:
@@ -149,60 +142,56 @@ net:
         _classes: [ClientChunkCache, ClientPacketListener, MultiPlayerGameMode, MultiPlayerLevel]
       particle:
         _classes:
-          [
-            AttackSweepParticle,
-            BarrierParticle,
-            BreakingItemParticle,
-            BubbleParticle,
-            BubblePopParticle,
-            CritParticle,
-            DragonBreathParticle,
-            DripParticle,
-            EnchantmentTableParticle,
-            EndRodParticle,
-            ExplodeParticle,
-            FallingDustParticle,
-            FlameParticle,
-            HeartParticle,
-            HugeExplosionParticle,
-            HugeExplosionSeedParticle,
-            ItemPickupParticle,
-            LargeSmokeParticle,
-            LavaParticle,
-            MobAppearanceParticle,
-            NoteParticle,
-            Particle,
-            ParticleEngine,
-            PlayerCloudParticle,
-            SimpleAnimatedParticle,
-            SmokeParticle,
-            SpellParticle,
-            SpitParticle,
-            SplashParticle,
-            SuspendedParticle,
-            SuspendedTownParticle,
-            TerrainParticle,
-            TotemParticle,
-            TrackingEmitter,
-            WakeParticle,
-            WaterCurrentDownParticle,
-            WaterDropParticle,
-          ]
+          - AttackSweepParticle
+          - BarrierParticle
+          - BreakingItemParticle
+          - BubbleParticle
+          - BubblePopParticle
+          - CritParticle
+          - DragonBreathParticle
+          - DripParticle
+          - EnchantmentTableParticle
+          - EndRodParticle
+          - ExplodeParticle
+          - FallingDustParticle
+          - FlameParticle
+          - HeartParticle
+          - HugeExplosionParticle
+          - HugeExplosionSeedParticle
+          - ItemPickupParticle
+          - LargeSmokeParticle
+          - LavaParticle
+          - MobAppearanceParticle
+          - NoteParticle
+          - Particle
+          - ParticleEngine
+          - PlayerCloudParticle
+          - SimpleAnimatedParticle
+          - SmokeParticle
+          - SpellParticle
+          - SpitParticle
+          - SplashParticle
+          - SuspendedParticle
+          - SuspendedTownParticle
+          - TerrainParticle
+          - TotemParticle
+          - TrackingEmitter
+          - WakeParticle
+          - WaterCurrentDownParticle
+          - WaterDropParticle
       player:
         _classes: [AbstractClientPlayer, Input, LocalPlayer, RemotePlayer]
       renderer:
         _classes:
-          [
-            BiomeColors,
-            EntityBlockRenderer,
-            GameRenderer,
-            ItemInHandRenderer,
-            LevelRenderer,
-            MobSkinTextureProcessor,
-            OffsettedRenderList,
-            PostChain,
-            PostPass,
-          ]
+          - BiomeColors
+          - EntityBlockRenderer
+          - GameRenderer
+          - ItemInHandRenderer
+          - LevelRenderer
+          - MobSkinTextureProcessor
+          - OffsettedRenderList
+          - PostChain
+          - PostPass
         _enums: [FaceInfo]
         block:
           _classes: [BlockRenderDispatcher]
@@ -210,154 +199,144 @@ net:
             _classes: [ItemTransform, ItemTransforms]
         blockentity:
           _classes:
-            [
-              BannerRenderer,
-              BeaconRenderer,
-              BedRenderer,
-              BlockEntityRenderDispatcher,
-              BlockEntityRenderer,
-              ChestRenderer,
-              EnchantTableRenderer,
-              PistonHeadRenderer,
-              ShulkerBoxRenderer,
-              SignRenderer,
-              SkullBlockRenderer,
-              TheEndGatewayRenderer,
-              TheEndPortalRenderer,
-            ]
+            - BannerRenderer
+            - BeaconRenderer
+            - BedRenderer
+            - BlockEntityRenderDispatcher
+            - BlockEntityRenderer
+            - ChestRenderer
+            - EnchantTableRenderer
+            - PistonHeadRenderer
+            - ShulkerBoxRenderer
+            - SignRenderer
+            - SkullBlockRenderer
+            - TheEndGatewayRenderer
+            - TheEndPortalRenderer
         culling:
           _classes: [Culler, Frustum, FrustumCuller, FrustumData]
         entity:
           _classes:
-            [
-              AbstractHorseRenderer,
-              AreaEffectCloudRenderer,
-              ArmorStandRenderer,
-              ArrowRenderer,
-              BatRenderer,
-              BlazeRenderer,
-              BoatRenderer,
-              CaveSpiderRenderer,
-              ChestedHorseRenderer,
-              ChickenRenderer,
-              CowRenderer,
-              CreeperRenderer,
-              DefaultRenderer,
-              DragonFireballRenderer,
-              ElderGuardianRenderer,
-              EnderDragonRenderer,
-              EndermanRenderer,
-              EndermiteRenderer,
-              EntityRenderDispatcher,
-              EntityRenderer,
-              ExperienceOrbRenderer,
-              FallingBlockRenderer,
-              FishingHookRenderer,
-              GhastRenderer,
-              GiantMobRenderer,
-              GuardianRenderer,
-              HumanoidMobRenderer,
-              HuskRenderer,
-              ItemEntityRenderer,
-              ItemFrameRenderer,
-              ItemRenderer,
-              LavaSlimeRenderer,
-              LeashKnotRenderer,
-              LightningBoltRenderer,
-              LivingEntityRenderer,
-              LlamaRenderer,
-              LlamaSpitRenderer,
-              MinecartRenderer,
-              MobRenderer,
-              MushroomCowRenderer,
-              OcelotRenderer,
-              PaintingRenderer,
-              ParrotRenderer,
-              PigRenderer,
-              PigZombieRenderer,
-              PolarBearRenderer,
-              RabbitRenderer,
-              SheepRenderer,
-              ShulkerBulletRenderer,
-              ShulkerRenderer,
-              SilverfishRenderer,
-              SkeletonRenderer,
-              SlimeRenderer,
-              SpectralArrowRenderer,
-              SpiderRenderer,
-              SquidRenderer,
-              StrayRenderer,
-              ThrownItemRenderer,
-              TippableArrowRenderer,
-              TntMinecartRenderer,
-              TntRenderer,
-              UndeadHorseRenderer,
-              VexRenderer,
-              VillagerRenderer,
-              WitchRenderer,
-              WitherBossRenderer,
-              WitherSkeletonRenderer,
-              WitherSkullRenderer,
-              WolfRenderer,
-              ZombieRenderer,
-              ZombieVillagerRenderer,
-            ]
+            - AbstractHorseRenderer
+            - AreaEffectCloudRenderer
+            - ArmorStandRenderer
+            - ArrowRenderer
+            - BatRenderer
+            - BlazeRenderer
+            - BoatRenderer
+            - CaveSpiderRenderer
+            - ChestedHorseRenderer
+            - ChickenRenderer
+            - CowRenderer
+            - CreeperRenderer
+            - DefaultRenderer
+            - DragonFireballRenderer
+            - ElderGuardianRenderer
+            - EnderDragonRenderer
+            - EndermanRenderer
+            - EndermiteRenderer
+            - EntityRenderDispatcher
+            - EntityRenderer
+            - ExperienceOrbRenderer
+            - FallingBlockRenderer
+            - FishingHookRenderer
+            - GhastRenderer
+            - GiantMobRenderer
+            - GuardianRenderer
+            - HumanoidMobRenderer
+            - HuskRenderer
+            - ItemEntityRenderer
+            - ItemFrameRenderer
+            - ItemRenderer
+            - LavaSlimeRenderer
+            - LeashKnotRenderer
+            - LightningBoltRenderer
+            - LivingEntityRenderer
+            - LlamaRenderer
+            - LlamaSpitRenderer
+            - MinecartRenderer
+            - MobRenderer
+            - MushroomCowRenderer
+            - OcelotRenderer
+            - PaintingRenderer
+            - ParrotRenderer
+            - PigRenderer
+            - PigZombieRenderer
+            - PolarBearRenderer
+            - RabbitRenderer
+            - SheepRenderer
+            - ShulkerBulletRenderer
+            - ShulkerRenderer
+            - SilverfishRenderer
+            - SkeletonRenderer
+            - SlimeRenderer
+            - SpectralArrowRenderer
+            - SpiderRenderer
+            - SquidRenderer
+            - StrayRenderer
+            - ThrownItemRenderer
+            - TippableArrowRenderer
+            - TntMinecartRenderer
+            - TntRenderer
+            - UndeadHorseRenderer
+            - VexRenderer
+            - VillagerRenderer
+            - WitchRenderer
+            - WitherBossRenderer
+            - WitherSkeletonRenderer
+            - WitherSkullRenderer
+            - WolfRenderer
+            - ZombieRenderer
+            - ZombieVillagerRenderer
           layers:
             _classes:
-              [
-                AbstractArmorLayer,
-                ArrowLayer,
-                CapeLayer,
-                CarriedBlockLayer,
-                CreeperPowerLayer,
-                CustomHeadLayer,
-                ElytraLayer,
-                EnderDragonDeathLayer,
-                EnderDragonEyesLayer,
-                EnderEyesLayer,
-                HumanoidArmorLayer,
-                ItemInHandLayer,
-                LlamaDecorLayer,
-                MushroomCowMushroomLayer,
-                PigSaddleLayer,
-                RenderLayer,
-                SheepFurLayer,
-                ShulkerHeadLayer,
-                SlimeOuterLayer,
-                SpiderEyesLayer,
-                StrayClothingLayer,
-                WitchItemLayer,
-                WitherArmorLayer,
-                WolfCollarLayer,
-              ]
+              - AbstractArmorLayer
+              - ArrowLayer
+              - CapeLayer
+              - CarriedBlockLayer
+              - CreeperPowerLayer
+              - CustomHeadLayer
+              - ElytraLayer
+              - EnderDragonDeathLayer
+              - EnderDragonEyesLayer
+              - EnderEyesLayer
+              - HumanoidArmorLayer
+              - ItemInHandLayer
+              - LlamaDecorLayer
+              - MushroomCowMushroomLayer
+              - PigSaddleLayer
+              - RenderLayer
+              - SheepFurLayer
+              - ShulkerHeadLayer
+              - SlimeOuterLayer
+              - SpiderEyesLayer
+              - StrayClothingLayer
+              - WitchItemLayer
+              - WitherArmorLayer
+              - WolfCollarLayer
           player:
             _classes: [PlayerRenderer]
         texture:
           _classes:
-            [
-              AbstractTexture,
-              DynamicTexture,
-              LayeredColorMaskTexture,
-              TextureAtlas,
-              TextureAtlasSprite,
-              TextureManager,
-            ]
+            - AbstractTexture
+            - DynamicTexture
+            - LayeredColorMaskTexture
+            - TextureAtlas
+            - TextureAtlasSprite
+            - TextureManager
       resources:
         model:
           _classes: [ModelResourceLocation]
           _enums: [BlockModelRotation]
         sounds:
           _classes:
-            [
-              AbstractSoundInstance,
-              AbstractTickableSoundInstance,
-              ElytraOnPlayerSoundInstance,
-              GuardianAttackSoundInstance,
-              MinecartSoundInstance,
-              RidingMinecartSoundInstance,
-              SoundInstance,
-              TickableSoundInstance,
-            ]
+            - AbstractSoundInstance
+            - AbstractTickableSoundInstance
+            - ElytraOnPlayerSoundInstance
+            - GuardianAttackSoundInstance
+            - MinecartSoundInstance
+            - RidingMinecartSoundInstance
+            - SoundInstance
+            - TickableSoundInstance
       sounds:
         _classes: [SoundEngine]
       tutorial:
@@ -369,20 +348,20 @@ net:
           _classes: [EntitySelector]
     core:
       _classes:
-        [
-          BlockPos,
-          BlockSource,
-          BlockSourceImpl,
-          LocatableSource,
-          Location,
-          Position,
-          PositionImpl,
-          Rotations,
-        ]
+        - BlockPos
+        - BlockSource
+        - BlockSourceImpl
+        - LocatableSource
+        - Location
+        - Position
+        - PositionImpl
+        - Rotations
       _enums: [AxisCycle, Direction, Direction8]
       dispenser:
         _classes:
-          [AbstractProjectileDispenseBehavior, DefaultDispenseItemBehavior, DispenseItemBehavior]
+          - AbstractProjectileDispenseBehavior
+          - DefaultDispenseItemBehavior
+          - DispenseItemBehavior
       particles:
         _classes: [ParticleType]
     locale:
@@ -397,104 +376,102 @@ net:
         _enums: [PacketFlow]
         game:
           _classes:
-            [
-              ClientboundAddEntityPacket,
-              ClientboundAddExperienceOrbPacket,
-              ClientboundAddGlobalEntityPacket,
-              ClientboundAddMobPacket,
-              ClientboundAddPaintingPacket,
-              ClientboundAddPlayerPacket,
-              ClientboundAnimatePacket,
-              ClientboundBlockDestructionPacket,
-              ClientboundBlockEntityDataPacket,
-              ClientboundBlockEventPacket,
-              ClientboundBlockUpdatePacket,
-              ClientboundBossEventPacket,
-              ClientboundChangeDifficultyPacket,
-              ClientboundChatPacket,
-              ClientboundAwardStatPacket,
-              ClientboundBlockCollectionDestructionPacket,
-              ClientboundContainerOpenPacket,
-              ClientboundDamageIndicatorPacket,
-              ClientboundMGPlayerSettingsUpdatePacket,
-              ClientboundPlayerSleepPacket,
-              ClientboundPowerupPacket,
-              ClientboundPreLoginPacket,
-              ClientboundChunkBlocksUpdatePacket,
-              ClientboundContainerAckPacket,
-              ClientboundContainerClosePacket,
-              ClientboundContainerSetContentPacket,
-              ClientboundContainerSetDataPacket,
-              ClientboundContainerSetSlotPacket,
-              ClientboundCooldownPacket,
-              ClientboundCustomPayloadPacket,
-              ClientboundEntityEventPacket,
-              ClientboundExplodePacket,
-              ClientboundGameEventPacket,
-              ClientboundKeepAlivePacket,
-              ClientboundLevelEventPacket,
-              ClientboundLevelParticlesPacket,
-              ClientboundLoginPacket,
-              ClientboundMapItemDataPacket,
-              ClientboundMoveEntityPacket,
-              ClientboundMoveVehiclePacket,
-              ClientboundOpenSignEditorPacket,
-              ClientboundPlayerAbilitiesPacket,
-              ClientboundPlayerCombatPacket,
-              ClientboundPlayerPositionPacket,
-              ClientboundRemoveEntitiesPacket,
-              ClientboundRemoveMobEffectPacket,
-              ClientboundResourcePackPacket,
-              ClientboundRespawnPacket,
-              ClientboundRotateHeadPacket,
-              ClientboundSetBorderPacket,
-              ClientboundSetCameraPacket,
-              ClientboundSetCarriedItemPacket,
-              ClientboundSetEntityDataPacket,
-              ClientboundSetEntityLinkPacket,
-              ClientboundSetEntityMotionPacket,
-              ClientboundSetEquippedItemPacket,
-              ClientboundSetExperiencePacket,
-              ClientboundSetHealthPacket,
-              ClientboundSetPassengersPacket,
-              ClientboundSetPlayerTeamPacket,
-              ClientboundSetSpawnPositionPacket,
-              ClientboundSetTimePacket,
-              ClientboundSetTitlesPacket,
-              ClientboundSoundPacket,
-              ClientboundTabListPacket,
-              ClientboundTakeItemEntityPacket,
-              ClientboundTeleportEntityPacket,
-              ClientboundUpdateAttributesPacket,
-              ClientboundUpdateMobEffectPacket,
-              ClientGamePacketListener,
-              ServerboundAcceptTeleportationPacket,
-              ServerboundChatPacket,
-              ServerboundClientCommandPacket,
-              ServerboundContainerAckPacket,
-              ServerboundContainerButtonClickPacket,
-              ServerboundContainerClickPacket,
-              ServerboundContainerClosePacket,
-              ServerboundCustomPayloadPacket,
-              ServerboundInteractPacket,
-              ServerboundKeepAlivePacket,
-              ServerboundMovePlayerPacket,
-              ServerboundMoveVehiclePacket,
-              ServerboundPaddleBoatPacket,
-              ServerboundPlayerAbilitiesPacket,
-              ServerboundPlayerActionPacket,
-              ServerboundPlayerCommandPacket,
-              ServerboundPlayerInputPacket,
-              ServerboundResourcePackPacket,
-              ServerboundSetCarriedItemPacket,
-              ServerboundSetCreativeModeSlotPacket,
-              ServerboundSignUpdatePacket,
-              ServerboundSwingPacket,
-              ServerboundTeleportToEntityPacket,
-              ServerboundUseItemOnPacket,
-              ServerboundUseItemPacket,
-              ServerGamePacketListener,
-            ]
+            - ClientboundAddEntityPacket
+            - ClientboundAddExperienceOrbPacket
+            - ClientboundAddGlobalEntityPacket
+            - ClientboundAddMobPacket
+            - ClientboundAddPaintingPacket
+            - ClientboundAddPlayerPacket
+            - ClientboundAnimatePacket
+            - ClientboundBlockDestructionPacket
+            - ClientboundBlockEntityDataPacket
+            - ClientboundBlockEventPacket
+            - ClientboundBlockUpdatePacket
+            - ClientboundBossEventPacket
+            - ClientboundChangeDifficultyPacket
+            - ClientboundChatPacket
+            - ClientboundAwardStatPacket
+            - ClientboundBlockCollectionDestructionPacket
+            - ClientboundContainerOpenPacket
+            - ClientboundDamageIndicatorPacket
+            - ClientboundMGPlayerSettingsUpdatePacket
+            - ClientboundPlayerSleepPacket
+            - ClientboundPowerupPacket
+            - ClientboundPreLoginPacket
+            - ClientboundChunkBlocksUpdatePacket
+            - ClientboundContainerAckPacket
+            - ClientboundContainerClosePacket
+            - ClientboundContainerSetContentPacket
+            - ClientboundContainerSetDataPacket
+            - ClientboundContainerSetSlotPacket
+            - ClientboundCooldownPacket
+            - ClientboundCustomPayloadPacket
+            - ClientboundEntityEventPacket
+            - ClientboundExplodePacket
+            - ClientboundGameEventPacket
+            - ClientboundKeepAlivePacket
+            - ClientboundLevelEventPacket
+            - ClientboundLevelParticlesPacket
+            - ClientboundLoginPacket
+            - ClientboundMapItemDataPacket
+            - ClientboundMoveEntityPacket
+            - ClientboundMoveVehiclePacket
+            - ClientboundOpenSignEditorPacket
+            - ClientboundPlayerAbilitiesPacket
+            - ClientboundPlayerCombatPacket
+            - ClientboundPlayerPositionPacket
+            - ClientboundRemoveEntitiesPacket
+            - ClientboundRemoveMobEffectPacket
+            - ClientboundResourcePackPacket
+            - ClientboundRespawnPacket
+            - ClientboundRotateHeadPacket
+            - ClientboundSetBorderPacket
+            - ClientboundSetCameraPacket
+            - ClientboundSetCarriedItemPacket
+            - ClientboundSetEntityDataPacket
+            - ClientboundSetEntityLinkPacket
+            - ClientboundSetEntityMotionPacket
+            - ClientboundSetEquippedItemPacket
+            - ClientboundSetExperiencePacket
+            - ClientboundSetHealthPacket
+            - ClientboundSetPassengersPacket
+            - ClientboundSetPlayerTeamPacket
+            - ClientboundSetSpawnPositionPacket
+            - ClientboundSetTimePacket
+            - ClientboundSetTitlesPacket
+            - ClientboundSoundPacket
+            - ClientboundTabListPacket
+            - ClientboundTakeItemEntityPacket
+            - ClientboundTeleportEntityPacket
+            - ClientboundUpdateAttributesPacket
+            - ClientboundUpdateMobEffectPacket
+            - ClientGamePacketListener
+            - ServerboundAcceptTeleportationPacket
+            - ServerboundChatPacket
+            - ServerboundClientCommandPacket
+            - ServerboundContainerAckPacket
+            - ServerboundContainerButtonClickPacket
+            - ServerboundContainerClickPacket
+            - ServerboundContainerClosePacket
+            - ServerboundCustomPayloadPacket
+            - ServerboundInteractPacket
+            - ServerboundKeepAlivePacket
+            - ServerboundMovePlayerPacket
+            - ServerboundMoveVehiclePacket
+            - ServerboundPaddleBoatPacket
+            - ServerboundPlayerAbilitiesPacket
+            - ServerboundPlayerActionPacket
+            - ServerboundPlayerCommandPacket
+            - ServerboundPlayerInputPacket
+            - ServerboundResourcePackPacket
+            - ServerboundSetCarriedItemPacket
+            - ServerboundSetCreativeModeSlotPacket
+            - ServerboundSignUpdatePacket
+            - ServerboundSwingPacket
+            - ServerboundTeleportToEntityPacket
+            - ServerboundUseItemOnPacket
+            - ServerboundUseItemPacket
+            - ServerGamePacketListener
         handshake:
           _classes: [ClientIntentionPacket]
       syncher:
@@ -505,36 +482,32 @@ net:
       _classes: [MinecraftServer, ServerScoreboard]
       commands:
         _classes:
-          [
-            ExperienceCommand,
-            FillCommand,
-            GameModeCommand,
-            KillCommand,
-            ParticleCommand,
-            ReplaceItemCommand,
-            SayCommand,
-            SetBlockCommand,
-            SummonCommand,
-            TeleportCommand,
-            TimeCommand,
-            TitleCommand,
-            TriggerCommand,
-            WeatherCommand,
-            WorldBorderCommand,
-          ]
+          - ExperienceCommand
+          - FillCommand
+          - GameModeCommand
+          - KillCommand
+          - ParticleCommand
+          - ReplaceItemCommand
+          - SayCommand
+          - SetBlockCommand
+          - SummonCommand
+          - TeleportCommand
+          - TimeCommand
+          - TitleCommand
+          - TriggerCommand
+          - WeatherCommand
+          - WorldBorderCommand
       dedicated:
         _classes: [Settings]
       level:
         _classes:
-          [
-            BlockDestructionProgress,
-            DerivedServerLevel,
-            ServerBossEvent,
-            ServerChunkCache,
-            ServerLevel,
-            ServerPlayer,
-            ServerPlayerGameMode,
-          ]
+          - BlockDestructionProgress
+          - DerivedServerLevel
+          - ServerBossEvent
+          - ServerChunkCache
+          - ServerLevel
+          - ServerPlayer
+          - ServerPlayerGameMode
       network:
         _classes: [ServerConnectionListener, ServerGamePacketListenerImpl]
       packs:
@@ -555,166 +528,154 @@ net:
         _enums: [DataFixTypes]
         fixes:
           _classes:
-            [
-              BedBlockEntityInjecter,
-              BedItemColorFix,
-              BlockEntityIdFix,
-              BlockEntityShulkerBoxColorFix,
-              EntityArmorStandSilentFix,
-              EntityElderGuardianSplitFix,
-              EntityEquipmentToArmorAndHandFix,
-              EntityHealthFix,
-              EntityHorseSaddleFix,
-              EntityHorseSplitFix,
-              EntityIdFix,
-              EntityMinecartIdentifiersFix,
-              EntityPaintingItemFrameDirectionFix,
-              EntityRedundantChanceTagsFix,
-              EntityRidingToPassengersFix,
-              EntityShulkerColorFix,
-              EntitySkeletonSplitFix,
-              EntityStringUuidFix,
-              EntityZombieSplitFix,
-              EntityZombieVillagerTypeFix,
-              ItemBannerColorFix,
-              ItemIdFix,
-              ItemPotionFix,
-              ItemShulkerBoxColorFix,
-              ItemSpawnEggFix,
-              ItemWaterPotionFix,
-              ItemWrittenBookPagesStrictJsonFix,
-              OptionsForceVBOFix,
-              OptionsLowerCaseLanguageFix,
-            ]
+            - BedBlockEntityInjecter
+            - BedItemColorFix
+            - BlockEntityIdFix
+            - BlockEntityShulkerBoxColorFix
+            - EntityArmorStandSilentFix
+            - EntityElderGuardianSplitFix
+            - EntityEquipmentToArmorAndHandFix
+            - EntityHealthFix
+            - EntityHorseSaddleFix
+            - EntityHorseSplitFix
+            - EntityIdFix
+            - EntityMinecartIdentifiersFix
+            - EntityPaintingItemFrameDirectionFix
+            - EntityRedundantChanceTagsFix
+            - EntityRidingToPassengersFix
+            - EntityShulkerColorFix
+            - EntitySkeletonSplitFix
+            - EntityStringUuidFix
+            - EntityZombieSplitFix
+            - EntityZombieVillagerTypeFix
+            - ItemBannerColorFix
+            - ItemIdFix
+            - ItemPotionFix
+            - ItemShulkerBoxColorFix
+            - ItemSpawnEggFix
+            - ItemWaterPotionFix
+            - ItemWrittenBookPagesStrictJsonFix
+            - OptionsForceVBOFix
+            - OptionsLowerCaseLanguageFix
     world:
       _classes:
-        [
-          BossEvent,
-          CompoundContainer,
-          Container,
-          DifficultyInstance,
-          InteractionResultHolder,
-          LockCode,
-          SimpleContainer,
-          WorldlyContainer,
-        ]
+        - BossEvent
+        - CompoundContainer
+        - Container
+        - DifficultyInstance
+        - InteractionResultHolder
+        - LockCode
+        - SimpleContainer
+        - WorldlyContainer
       _enums: [Difficulty, InteractionHand, InteractionResult]
       damagesource:
         _classes:
-          [CombatEntry, CombatTracker, DamageSource, EntityDamageSource, IndirectEntityDamageSource]
+          - CombatEntry
+          - CombatTracker
+          - DamageSource
+          - EntityDamageSource
+          - IndirectEntityDamageSource
       effect:
         _classes:
-          [
-            AbsoptionMobEffect,
-            AttackDamageMobEffect,
-            HealthBoostMobEffect,
-            InstantenousMobEffect,
-            MobEffect,
-            MobEffectInstance,
-          ]
+          - AbsoptionMobEffect
+          - AttackDamageMobEffect
+          - HealthBoostMobEffect
+          - InstantenousMobEffect
+          - MobEffect
+          - MobEffectInstance
         _enums: [MobEffectCategory]
       entity:
         _classes:
-          [
-            AgableMob,
-            AreaEffectCloud,
-            Entity,
-            ExperienceOrb,
-            FlyingMob,
-            LivingEntity,
-            Mob,
-            PathfinderMob,
-            TamableAnimal,
-          ]
+          - AgableMob
+          - AreaEffectCloud
+          - Entity
+          - ExperienceOrb
+          - FlyingMob
+          - LivingEntity
+          - Mob
+          - PathfinderMob
+          - TamableAnimal
         _enums: [EquipmentSlot, HumanoidArm, MobCategory, MobSpawnType, MoverType, Pose]
         ai:
           attributes:
             _classes:
-              [
-                Attribute,
-                AttributeInstance,
-                AttributeModifier,
-                BaseAttribute,
-                BaseAttributeMap,
-                ModifiableAttributeInstance,
-                ModifiableAttributeMap,
-                RangedAttribute,
-              ]
+              - Attribute
+              - AttributeInstance
+              - AttributeModifier
+              - BaseAttribute
+              - BaseAttributeMap
+              - ModifiableAttributeInstance
+              - ModifiableAttributeMap
+              - RangedAttribute
           behavior:
             _classes: [Behavior]
           control:
             _classes: [FlyingMoveControl, JumpControl, LookControl, MoveControl]
           goal:
             _classes:
-              [
-                AvoidEntityGoal,
-                BegGoal,
-                BreakDoorGoal,
-                BreedGoal,
-                DoorInteractGoal,
-                EatBlockGoal,
-                FleeSunGoal,
-                FloatGoal,
-                FollowMobGoal,
-                FollowOwnerFlyingGoal,
-                FollowOwnerGoal,
-                FollowParentGoal,
-                Goal,
-                GoalSelector,
-                InteractGoal,
-                LandOnOwnersShoulderGoal,
-                LeapAtTargetGoal,
-                LlamaFollowCaravanGoal,
-                LookAtPlayerGoal,
-                LookAtTradingPlayerGoal,
-                MeleeAttackGoal,
-                MoveThroughVillageGoal,
-                MoveToBlockGoal,
-                MoveTowardsRestrictionGoal,
-                MoveTowardsTargetGoal,
-                OcelotAttackGoal,
-                OfferFlowerGoal,
-                OpenDoorGoal,
-                PanicGoal,
-                RandomLookAroundGoal,
-                RandomStrollGoal,
-                RangedAttackGoal,
-                RangedBowAttackGoal,
-                RestrictSunGoal,
-                RunAroundLikeCrazyGoal,
-                SitGoal,
-                SwellGoal,
-                TemptGoal,
-                TradeWithPlayerGoal,
-                WaterAvoidingRandomFlyingGoal,
-                WaterAvoidingRandomStrollGoal,
-                ZombieAttackGoal,
-              ]
+              - AvoidEntityGoal
+              - BegGoal
+              - BreakDoorGoal
+              - BreedGoal
+              - DoorInteractGoal
+              - EatBlockGoal
+              - FleeSunGoal
+              - FloatGoal
+              - FollowMobGoal
+              - FollowOwnerFlyingGoal
+              - FollowOwnerGoal
+              - FollowParentGoal
+              - Goal
+              - GoalSelector
+              - InteractGoal
+              - LandOnOwnersShoulderGoal
+              - LeapAtTargetGoal
+              - LlamaFollowCaravanGoal
+              - LookAtPlayerGoal
+              - LookAtTradingPlayerGoal
+              - MeleeAttackGoal
+              - MoveThroughVillageGoal
+              - MoveToBlockGoal
+              - MoveTowardsRestrictionGoal
+              - MoveTowardsTargetGoal
+              - OcelotAttackGoal
+              - OfferFlowerGoal
+              - OpenDoorGoal
+              - PanicGoal
+              - RandomLookAroundGoal
+              - RandomStrollGoal
+              - RangedAttackGoal
+              - RangedBowAttackGoal
+              - RestrictSunGoal
+              - RunAroundLikeCrazyGoal
+              - SitGoal
+              - SwellGoal
+              - TemptGoal
+              - TradeWithPlayerGoal
+              - WaterAvoidingRandomFlyingGoal
+              - WaterAvoidingRandomStrollGoal
+              - ZombieAttackGoal
             _enums: [BoatGoals]
             target:
               _classes:
-                [
-                  DefendVillageTargetGoal,
-                  HurtByTargetGoal,
-                  NearestAttackableTargetGoal,
-                  NonTameRandomTargetGoal,
-                  OwnerHurtByTargetGoal,
-                  OwnerHurtTargetGoal,
-                  TargetGoal,
-                ]
+                - DefendVillageTargetGoal
+                - HurtByTargetGoal
+                - NearestAttackableTargetGoal
+                - NonTameRandomTargetGoal
+                - OwnerHurtByTargetGoal
+                - OwnerHurtTargetGoal
+                - TargetGoal
           gossip:
             _enums: [GossipType]
           memory:
             _enums: [MemoryStatus]
           navigation:
             _classes:
-              [
-                FlyingPathNavigation,
-                GroundPathNavigation,
-                PathNavigation,
-                WallClimberNavigation,
-                WaterBoundPathNavigation,
-              ]
+              - FlyingPathNavigation
+              - GroundPathNavigation
+              - PathNavigation
+              - WallClimberNavigation
+              - WaterBoundPathNavigation
           sensing:
             _classes: [Sensing]
           village:
@@ -723,35 +684,31 @@ net:
           _classes: [AmbientCreature, Bat]
         animal:
           _classes:
-            [
-              Animal,
-              Chicken,
-              Cow,
-              MushroomCow,
-              Ocelot,
-              Parrot,
-              Pig,
-              PolarBear,
-              Rabbit,
-              Sheep,
-              ShoulderRidingEntity,
-              Squid,
-              WaterAnimal,
-              Wolf,
-            ]
+            - Animal
+            - Chicken
+            - Cow
+            - MushroomCow
+            - Ocelot
+            - Parrot
+            - Pig
+            - PolarBear
+            - Rabbit
+            - Sheep
+            - ShoulderRidingEntity
+            - Squid
+            - WaterAnimal
+            - Wolf
           horse:
             _classes:
-              [
-                AbstractChestedHorse,
-                AbstractHorse,
-                Donkey,
-                Horse,
-                Llama,
-                Mule,
-                SkeletonHorse,
-                SkeletonTrapGoal,
-                ZombieHorse,
-              ]
+              - AbstractChestedHorse
+              - AbstractHorse
+              - Donkey
+              - Horse
+              - Llama
+              - Mule
+              - SkeletonHorse
+              - SkeletonTrapGoal
+              - ZombieHorse
         boss:
           enderdragon:
             _classes: [EnderDragon]
@@ -767,36 +724,34 @@ net:
           _classes: [FallingBlockEntity, ItemEntity, PrimedTnt]
         monster:
           _classes:
-            [
-              AbstractIllager,
-              AbstractSkeleton,
-              Blaze,
-              CaveSpider,
-              Creeper,
-              ElderGuardian,
-              EnderMan,
-              Endermite,
-              Ghast,
-              Giant,
-              Guardian,
-              Husk,
-              MagmaCube,
-              Monster,
-              PigZombie,
-              RangedAttackMob,
-              Shulker,
-              Silverfish,
-              Skeleton,
-              Slime,
-              SpellcasterIllager,
-              Spider,
-              Stray,
-              Vex,
-              Witch,
-              WitherSkeleton,
-              Zombie,
-              ZombieVillager,
-            ]
+            - AbstractIllager
+            - AbstractSkeleton
+            - Blaze
+            - CaveSpider
+            - Creeper
+            - ElderGuardian
+            - EnderMan
+            - Endermite
+            - Ghast
+            - Giant
+            - Guardian
+            - Husk
+            - MagmaCube
+            - Monster
+            - PigZombie
+            - RangedAttackMob
+            - Shulker
+            - Silverfish
+            - Skeleton
+            - Slime
+            - SpellcasterIllager
+            - Spider
+            - Stray
+            - Vex
+            - Witch
+            - WitherSkeleton
+            - Zombie
+            - ZombieVillager
         npc:
           _classes: [ClientSideMerchant, Villager]
         player:
@@ -804,402 +759,410 @@ net:
           _enums: [ChatVisiblity, PlayerModelPart]
         projectile:
           _classes:
-            [
-              Arrow,
-              DragonFireball,
-              Fireball,
-              LargeFireball,
-              LlamaSpit,
-              Projectile,
-              ShulkerBullet,
-              SmallFireball,
-              Snowball,
-              SpectralArrow,
-              ThrowableProjectile,
-              ThrownEgg,
-              ThrownEnderpearl,
-              ThrownPotion,
-              WitherSkull,
-            ]
+            - Arrow
+            - DragonFireball
+            - Fireball
+            - LargeFireball
+            - LlamaSpit
+            - Projectile
+            - ShulkerBullet
+            - SmallFireball
+            - Snowball
+            - SpectralArrow
+            - ThrowableProjectile
+            - ThrownEgg
+            - ThrownEnderpearl
+            - ThrownPotion
+            - WitherSkull
         vehicle:
           _classes:
-            [
-              Boat,
-              Minecart,
-              MinecartChest,
-              MinecartCommandBlock,
-              MinecartFurnace,
-              MinecartHopper,
-              MinecartSpawner,
-              MinecartTNT,
-            ]
+            - Boat
+            - Minecart
+            - MinecartChest
+            - MinecartCommandBlock
+            - MinecartFurnace
+            - MinecartHopper
+            - MinecartSpawner
+            - MinecartTNT
       food:
         _classes: [FoodData]
       inventory:
         _classes:
-          [
-            AbstractContainerMenu,
-            AnvilMenu,
-            BeaconMenu,
-            BrewingStandMenu,
-            ChestMenu,
-            CraftingContainer,
-            CraftingMenu,
-            DispenserMenu,
-            EnchantmentMenu,
-            FurnaceFuelSlot,
-            FurnaceMenu,
-            FurnaceResultSlot,
-            HopperMenu,
-            HorseInventoryMenu,
-            InventoryMenu,
-            MerchantContainer,
-            MerchantMenu,
-            MerchantResultSlot,
-            PlayerEnderChestContainer,
-            ResultContainer,
-            ResultSlot,
-            ShulkerBoxMenu,
-            ShulkerBoxSlot,
-            Slot,
-          ]
+          - AbstractContainerMenu
+          - AnvilMenu
+          - BeaconMenu
+          - BrewingStandMenu
+          - ChestMenu
+          - CraftingContainer
+          - CraftingMenu
+          - DispenserMenu
+          - EnchantmentMenu
+          - FurnaceFuelSlot
+          - FurnaceMenu
+          - FurnaceResultSlot
+          - HopperMenu
+          - HorseInventoryMenu
+          - InventoryMenu
+          - MerchantContainer
+          - MerchantMenu
+          - MerchantResultSlot
+          - PlayerEnderChestContainer
+          - ResultContainer
+          - ResultSlot
+          - ShulkerBoxMenu
+          - ShulkerBoxSlot
+          - Slot
         _enums: [ClickType]
       item:
         _classes:
-          [
-            AirItem,
-            ArmorItem,
-            ArmorStandItem,
-            ArrowItem,
-            AxeItem,
-            BannerItem,
-            BedItem,
-            BlockItem,
-            BoatItem,
-            BookItem,
-            BottleItem,
-            BowItem,
-            BowlFoodItem,
-            BucketItem,
-            CarrotOnAStickItem,
-            ChorusFruitItem,
-            ClockItem,
-            CompassItem,
-            ComplexItem,
-            DiggerItem,
-            DyeItem,
-            EggItem,
-            ElytraItem,
-            EmptyMapItem,
-            EnchantedBookItem,
-            EndCrystalItem,
-            EnderEyeItem,
-            EnderpearlItem,
-            ExperienceBottleItem,
-            FireChargeItem,
-            FishingRodItem,
-            FlintAndSteelItem,
-            HangingEntityItem,
-            HoeItem,
-            HorseArmorItem,
-            Item,
-            ItemCooldowns,
-            LeadItem,
-            LingeringPotionItem,
-            MapItem,
-            MilkBucketItem,
-            MinecartItem,
-            NameTagItem,
-            PickaxeItem,
-            PotionItem,
-            RecordItem,
-            SaddleItem,
-            ServerItemCooldowns,
-            ShearsItem,
-            ShieldItem,
-            ShovelItem,
-            SignItem,
-            SimpleFoiledItem,
-            SnowballItem,
-            SpawnEggItem,
-            SpectralArrowItem,
-            SplashPotionItem,
-            SwordItem,
-            TippedArrowItem,
-            WaterLilyBlockItem,
-            WritableBookItem,
-            WrittenBookItem,
-          ]
+          - AirItem
+          - ArmorItem
+          - ArmorStandItem
+          - ArrowItem
+          - AxeItem
+          - BannerItem
+          - BedItem
+          - BlockItem
+          - BoatItem
+          - BookItem
+          - BottleItem
+          - BowItem
+          - BowlFoodItem
+          - BucketItem
+          - CarrotOnAStickItem
+          - ChorusFruitItem
+          - ClockItem
+          - CompassItem
+          - ComplexItem
+          - DiggerItem
+          - DyeItem
+          - EggItem
+          - ElytraItem
+          - EmptyMapItem
+          - EnchantedBookItem
+          - EndCrystalItem
+          - EnderEyeItem
+          - EnderpearlItem
+          - ExperienceBottleItem
+          - FireChargeItem
+          - FishingRodItem
+          - FlintAndSteelItem
+          - HangingEntityItem
+          - HoeItem
+          - HorseArmorItem
+          - Item
+          - ItemCooldowns
+          - LeadItem
+          - LingeringPotionItem
+          - MapItem
+          - MilkBucketItem
+          - MinecartItem
+          - NameTagItem
+          - PickaxeItem
+          - PotionItem
+          - RecordItem
+          - SaddleItem
+          - ServerItemCooldowns
+          - ShearsItem
+          - ShieldItem
+          - ShovelItem
+          - SignItem
+          - SimpleFoiledItem
+          - SnowballItem
+          - SpawnEggItem
+          - SpectralArrowItem
+          - SplashPotionItem
+          - SwordItem
+          - TippedArrowItem
+          - WaterLilyBlockItem
+          - WritableBookItem
+          - WrittenBookItem
         _enums: [ArmorMaterials, DyeColor, Rarity, Tiers, UseAnim]
         alchemy:
           _classes: [Potion, PotionBrewing]
         crafting:
           _classes:
-            [
-              ArmorDyeRecipe,
-              BookCloningRecipe,
-              MapCloningRecipe,
-              MapExtendingRecipe,
-              Recipe,
-              RepairItemRecipe,
-              ShapedRecipe,
-              ShapelessRecipe,
-              ShulkerBoxColoring,
-              TippedArrowRecipe,
-            ]
+            - ArmorDyeRecipe
+            - BookCloningRecipe
+            - MapCloningRecipe
+            - MapExtendingRecipe
+            - Recipe
+            - RepairItemRecipe
+            - ShapedRecipe
+            - ShapelessRecipe
+            - ShulkerBoxColoring
+            - TippedArrowRecipe
         enchantment:
           _classes:
-            [
-              ArrowDamageEnchantment,
-              ArrowFireEnchantment,
-              ArrowInfiniteEnchantment,
-              ArrowKnockbackEnchantment,
-              BindingCurseEnchantment,
-              DamageEnchantment,
-              DigDurabilityEnchantment,
-              DiggingEnchantment,
-              Enchantment,
-              EnchantmentHelper,
-              EnchantmentInstance,
-              FireAspectEnchantment,
-              FishingSpeedEnchantment,
-              FrostWalkerEnchantment,
-              KnockbackEnchantment,
-              LootBonusEnchantment,
-              MendingEnchantment,
-              OxygenEnchantment,
-              ProtectionEnchantment,
-              SweepingEdgeEnchantment,
-              ThornsEnchantment,
-              UntouchingEnchantment,
-              VanishingCurseEnchantment,
-              WaterWalkerEnchantment,
-              WaterWorkerEnchantment,
-            ]
+            - ArrowDamageEnchantment
+            - ArrowFireEnchantment
+            - ArrowInfiniteEnchantment
+            - ArrowKnockbackEnchantment
+            - BindingCurseEnchantment
+            - DamageEnchantment
+            - DigDurabilityEnchantment
+            - DiggingEnchantment
+            - Enchantment
+            - EnchantmentHelper
+            - EnchantmentInstance
+            - FireAspectEnchantment
+            - FishingSpeedEnchantment
+            - FrostWalkerEnchantment
+            - KnockbackEnchantment
+            - LootBonusEnchantment
+            - MendingEnchantment
+            - OxygenEnchantment
+            - ProtectionEnchantment
+            - SweepingEdgeEnchantment
+            - ThornsEnchantment
+            - UntouchingEnchantment
+            - VanishingCurseEnchantment
+            - WaterWalkerEnchantment
+            - WaterWorkerEnchantment
           _enums: [EnchantmentCategory]
         trading:
           _classes: [Merchant]
       level:
         _classes:
-          [
-            BaseCommandBlock,
-            BlockEventData,
-            ChunkPos,
-            Explosion,
-            GameRules,
-            Level,
-            LevelConflictException,
-            LevelType,
-            PortalForcer,
-            SpawnData,
-            TickNextTickData,
-          ]
+          - BaseCommandBlock
+          - BlockEventData
+          - ChunkPos
+          - Explosion
+          - GameRules
+          - Level
+          - LevelConflictException
+          - LevelType
+          - PortalForcer
+          - SpawnData
+          - TickNextTickData
         _enums: [BlockLayer, EmptyBlockGetter, GameType, LightLayer, TickPriority]
         biome:
-          _classes: [Biome, BiomeSource, FixedBiomeSource]
+          _classes:
+            - Biome
+            - BiomeSource
+            - FixedBiomeSource
+            - BeachBiome
+            - DesertBiome
+            - ExtremeHillsBiome
+            - ForestBiome
+            - HellBiome
+            - IceBiome
+            - JungleBiome
+            - MesaBiome
+            - MushroomIslandBiome
+            - MutatedForestBiome
+            - MutatedSavannaBiome
+            - OceanBiome
+            - PlainsBiome
+            - RiverBiome
+            - SavannaBiome
+            - StoneBeachBiome
+            - SwampBiome
+            - TaigaBiome
+            - TheEndBiome
+            - VoidBiome
         block:
           _classes:
-            [
-              AirBlock,
-              AnvilBlock,
-              BannerBlock,
-              BarrierBlock,
-              BaseEntityBlock,
-              BasePressurePlateBlock,
-              BaseRailBlock,
-              BeaconBlock,
-              BedBlock,
-              BeetrootBlock,
-              Block,
-              BrewingStandBlock,
-              ButtonBlock,
-              CactusBlock,
-              CakeBlock,
-              CarrotBlock,
-              CauldronBlock,
-              ChestBlock,
-              ChorusFlowerBlock,
-              ChorusPlantBlock,
-              CocoaBlock,
-              CommandBlock,
-              ComparatorBlock,
-              ConcretePowderBlock,
-              CraftingTableBlock,
-              CropBlock,
-              DaylightDetectorBlock,
-              DeadBushBlock,
-              DetectorRailBlock,
-              DiodeBlock,
-              DirectionalBlock,
-              DispenserBlock,
-              DoorBlock,
-              DoublePlantBlock,
-              DragonEggBlock,
-              DropperBlock,
-              EnchantmentTableBlock,
-              EnderChestBlock,
-              EndGatewayBlock,
-              EndPortalBlock,
-              EndPortalFrameBlock,
-              EndRodBlock,
-              EntityBlock,
-              FallingBlock,
-              FarmBlock,
-              FenceBlock,
-              FenceGateBlock,
-              FireBlock,
-              FlowerBlock,
-              FlowerPotBlock,
-              FrostedIceBlock,
-              FurnaceBlock,
-              GlassBlock,
-              GlazedTerracottaBlock,
-              GrassBlock,
-              GrassPathBlock,
-              GravelBlock,
-              HalfTransparentBlock,
-              HayBlock,
-              HopperBlock,
-              HorizontalDirectionalBlock,
-              HugeMushroomBlock,
-              IceBlock,
-              JukeboxBlock,
-              LadderBlock,
-              LeverBlock,
-              LiquidBlock,
-              LogBlock,
-              MagmaBlock,
-              MelonBlock,
-              MushroomBlock,
-              MyceliumBlock,
-              NetherWartBlock,
-              NoteBlock,
-              ObserverBlock,
-              OreBlock,
-              PotatoBlock,
-              PoweredBlock,
-              PoweredRailBlock,
-              PressurePlateBlock,
-              PumpkinBlock,
-              RailBlock,
-              RedstoneLampBlock,
-              RedStoneOreBlock,
-              RedstoneTorchBlock,
-              RedStoneWireBlock,
-              RepeaterBlock,
-              RotatedPillarBlock,
-              SandBlock,
-              SaplingBlock,
-              ShulkerBoxBlock,
-              SignBlock,
-              SkullBlock,
-              SlimeBlock,
-              SnowLayerBlock,
-              SoundType,
-              SpongeBlock,
-              StainedGlassBlock,
-              StainedGlassPaneBlock,
-              StairBlock,
-              StandingSignBlock,
-              StemBlock,
-              StoneButtonBlock,
-              StructureBlock,
-              StructureVoidBlock,
-              TallGrassBlock,
-              TntBlock,
-              TorchBlock,
-              TrapDoorBlock,
-              TripWireBlock,
-              TripWireHookBlock,
-              VineBlock,
-              WallBannerBlock,
-              WallBlock,
-              WallSignBlock,
-              WaterlilyBlock,
-              WebBlock,
-              WeightedPressurePlateBlock,
-              WoodButtonBlock,
-              WoolCarpetBlock,
-              BoneBlock,
-              BookshelfBlock,
-              ClayBlock,
-              ColoredBlock,
-              DirtBlock,
-              DynamicLiquidBlock,
-              FullNewStoneSlabBlock,
-              FullStoneSlabBlock,
-              FullWoodSlabBlock,
-              Glowstoneblock,
-              HalfNewStoneSlabBlock,
-              HalfSlabBlock,
-              HalfStoneSlabBlock,
-              HalfWoodSlabBlock,
-              HardenedClayBlock,
-              LeafBlock,
-              MobSpawnerBlock,
-              MonsterEggBlock,
-              NetherBrickBlock,
-              NetherrackBlock,
-              NewLeafBlock,
-              NewLogBlock,
-              NewStoneSlabBlock,
-              ObsidianBlock,
-              OldLeafBlock,
-              OldLogBlock,
-              PackedIceBlock,
-              PistonMagicBlock,
-              PlanksBlock,
-              PortalBlock,
-              PrismarineBlock,
-              PurpurSlabBlock,
-              QuartzBlock,
-              RedFlowerBlock,
-              RedSandStoneBlock,
-              ReedsBlock,
-              SandStoneBlock,
-              SeaLanternBlock,
-              SnowBlock,
-              SoulSandBlock,
-              StainedHardenedClayBlock,
-              StandingBannerBlock,
-              StaticLiquidBlock,
-              StoneBlock,
-              StoneBrickBlock,
-              StoneSlabBlock,
-              ThinFenceBlock,
-              TransparentBlock,
-              WoodSlabBlock,
-              XboxStructureActionPlaceBlock,
-              YellowFlowerBlock,
-            ]
+            - AirBlock
+            - AnvilBlock
+            - BannerBlock
+            - BarrierBlock
+            - BaseEntityBlock
+            - BasePressurePlateBlock
+            - BaseRailBlock
+            - BeaconBlock
+            - BedBlock
+            - BeetrootBlock
+            - Block
+            - BrewingStandBlock
+            - ButtonBlock
+            - CactusBlock
+            - CakeBlock
+            - CarrotBlock
+            - CauldronBlock
+            - ChestBlock
+            - ChorusFlowerBlock
+            - ChorusPlantBlock
+            - CocoaBlock
+            - CommandBlock
+            - ComparatorBlock
+            - ConcretePowderBlock
+            - CraftingTableBlock
+            - CropBlock
+            - DaylightDetectorBlock
+            - DeadBushBlock
+            - DetectorRailBlock
+            - DiodeBlock
+            - DirectionalBlock
+            - DispenserBlock
+            - DoorBlock
+            - DoublePlantBlock
+            - DragonEggBlock
+            - DropperBlock
+            - EnchantmentTableBlock
+            - EnderChestBlock
+            - EndGatewayBlock
+            - EndPortalBlock
+            - EndPortalFrameBlock
+            - EndRodBlock
+            - EntityBlock
+            - FallingBlock
+            - FarmBlock
+            - FenceBlock
+            - FenceGateBlock
+            - FireBlock
+            - FlowerBlock
+            - FlowerPotBlock
+            - FrostedIceBlock
+            - FurnaceBlock
+            - GlassBlock
+            - GlazedTerracottaBlock
+            - GrassBlock
+            - GrassPathBlock
+            - GravelBlock
+            - HalfTransparentBlock
+            - HayBlock
+            - HopperBlock
+            - HorizontalDirectionalBlock
+            - HugeMushroomBlock
+            - IceBlock
+            - JukeboxBlock
+            - LadderBlock
+            - LeverBlock
+            - LiquidBlock
+            - LogBlock
+            - MagmaBlock
+            - MelonBlock
+            - MushroomBlock
+            - MyceliumBlock
+            - NetherWartBlock
+            - NoteBlock
+            - ObserverBlock
+            - OreBlock
+            - PotatoBlock
+            - PoweredBlock
+            - PoweredRailBlock
+            - PressurePlateBlock
+            - PumpkinBlock
+            - RailBlock
+            - RedstoneLampBlock
+            - RedStoneOreBlock
+            - RedstoneTorchBlock
+            - RedStoneWireBlock
+            - RepeaterBlock
+            - RotatedPillarBlock
+            - SandBlock
+            - SaplingBlock
+            - ShulkerBoxBlock
+            - SignBlock
+            - SkullBlock
+            - SlimeBlock
+            - SnowLayerBlock
+            - SoundType
+            - SpongeBlock
+            - StainedGlassBlock
+            - StainedGlassPaneBlock
+            - StairBlock
+            - StandingSignBlock
+            - StemBlock
+            - StoneButtonBlock
+            - StructureBlock
+            - StructureVoidBlock
+            - TallGrassBlock
+            - TntBlock
+            - TorchBlock
+            - TrapDoorBlock
+            - TripWireBlock
+            - TripWireHookBlock
+            - VineBlock
+            - WallBannerBlock
+            - WallBlock
+            - WallSignBlock
+            - WaterlilyBlock
+            - WebBlock
+            - WeightedPressurePlateBlock
+            - WoodButtonBlock
+            - WoolCarpetBlock
+            - BoneBlock
+            - BookshelfBlock
+            - ClayBlock
+            - ColoredBlock
+            - DirtBlock
+            - DynamicLiquidBlock
+            - FullNewStoneSlabBlock
+            - FullStoneSlabBlock
+            - FullWoodSlabBlock
+            - Glowstoneblock
+            - HalfNewStoneSlabBlock
+            - HalfSlabBlock
+            - HalfStoneSlabBlock
+            - HalfWoodSlabBlock
+            - HardenedClayBlock
+            - LeafBlock
+            - MobSpawnerBlock
+            - MonsterEggBlock
+            - NetherBrickBlock
+            - NetherrackBlock
+            - NewLeafBlock
+            - NewLogBlock
+            - NewStoneSlabBlock
+            - ObsidianBlock
+            - OldLeafBlock
+            - OldLogBlock
+            - PackedIceBlock
+            - PistonMagicBlock
+            - PlanksBlock
+            - PortalBlock
+            - PrismarineBlock
+            - PurpurSlabBlock
+            - QuartzBlock
+            - RedFlowerBlock
+            - RedSandStoneBlock
+            - ReedsBlock
+            - SandStoneBlock
+            - SeaLanternBlock
+            - SnowBlock
+            - SoulSandBlock
+            - StainedHardenedClayBlock
+            - StandingBannerBlock
+            - StaticLiquidBlock
+            - StoneBlock
+            - StoneBrickBlock
+            - StoneSlabBlock
+            - ThinFenceBlock
+            - TransparentBlock
+            - WoodSlabBlock
+            - XboxStructureActionPlaceBlock
+            - YellowFlowerBlock
           _enums: [Mirror, RenderShape, Rotation]
           entity:
             _classes:
-              [
-                BannerBlockEntity,
-                BeaconBlockEntity,
-                BedBlockEntity,
-                BlockEntity,
-                BrewingStandBlockEntity,
-                ChestBlockEntity,
-                CommandBlockEntity,
-                ComparatorBlockEntity,
-                DaylightDetectorBlockEntity,
-                DispenserBlockEntity,
-                DropperBlockEntity,
-                EnderChestBlockEntity,
-                FurnaceBlockEntity,
-                Hopper,
-                HopperBlockEntity,
-                ShulkerBoxBlockEntity,
-                SignBlockEntity,
-                SkullBlockEntity,
-                TheEndPortalBlockEntity,
-              ]
+              - BannerBlockEntity
+              - BeaconBlockEntity
+              - BedBlockEntity
+              - BlockEntity
+              - BrewingStandBlockEntity
+              - ChestBlockEntity
+              - CommandBlockEntity
+              - ComparatorBlockEntity
+              - DaylightDetectorBlockEntity
+              - DispenserBlockEntity
+              - DropperBlockEntity
+              - EnderChestBlockEntity
+              - FurnaceBlockEntity
+              - Hopper
+              - HopperBlockEntity
+              - ShulkerBoxBlockEntity
+              - SignBlockEntity
+              - SkullBlockEntity
+              - TheEndPortalBlockEntity
             _enums: [BannerPattern]
           piston:
             _classes:
-              [PistonBaseBlock, PistonHeadBlock, PistonMovingBlockEntity, PistonStructureResolver]
+              - PistonBaseBlock
+              - PistonHeadBlock
+              - PistonMovingBlockEntity
+              - PistonStructureResolver
           state:
             pattern:
               _classes: [BlockInWorld, BlockPattern, BlockPatternBuilder]
@@ -1208,24 +1171,22 @@ net:
             properties:
               _classes: [BooleanProperty, DirectionProperty, IntegerProperty, Property]
               _enums:
-                [
-                  AttachFace,
-                  BambooLeaves,
-                  BedPart,
-                  BellAttachType,
-                  ChestType,
-                  ComparatorMode,
-                  DoorHingeSide,
-                  DoubleBlockHalf,
-                  Half,
-                  NoteBlockInstrument,
-                  PistonType,
-                  RailShape,
-                  RedstoneSide,
-                  SlabType,
-                  StairsShape,
-                  StructureMode,
-                ]
+                - AttachFace
+                - BambooLeaves
+                - BedPart
+                - BellAttachType
+                - ChestType
+                - ComparatorMode
+                - DoorHingeSide
+                - DoubleBlockHalf
+                - Half
+                - NoteBlockInstrument
+                - PistonType
+                - RailShape
+                - RedstoneSide
+                - SlabType
+                - StairsShape
+                - StructureMode
         border:
           _classes: [BorderChangeListener, WorldBorder]
           _enums: [BorderStatus]
@@ -1242,119 +1203,110 @@ net:
           _classes: [FlatLevelSource, NetherLevelSource, OverworldLevelSource, TheEndLevelSource]
           feature:
             _classes:
-              [
-                AbstractTreeFeature,
-                BigTreeFeature,
-                BirchFeature,
-                BlockBlobFeature,
-                BonusChestFeature,
-                BushFeature,
-                CactusFeature,
-                DeadBushFeature,
-                DesertWellFeature,
-                DoublePlantFeature,
-                EndCityFeature,
-                EndGatewayFeature,
-                EndIslandFeature,
-                EndPodiumFeature,
-                Feature,
-                FlowerFeature,
-                FossilFeature,
-                GroundBushFeature,
-                HellFireFeature,
-                IcePatchFeature,
-                IceSpikeFeature,
-                LakeFeature,
-                MegaJungleTreeFeature,
-                MegaPineTreeFeature,
-                MegaTreeFeature,
-                MelonFeature,
-                MonsterRoomFeature,
-                OceanMonumentFeature,
-                OreFeature,
-                PineFeature,
-                ReedsFeature,
-                SavannaTreeFeature,
-                SpikeFeature,
-                SpringFeature,
-                SpruceFeature,
-                StrongholdFeature,
-                StructureFeature,
-                SwampTreeFeature,
-                TreeFeature,
-                VillageFeature,
-                VillagePieces,
-                VinesFeature,
-                WaterlilyFeature,
-                WoodlandMansionFeature,
-              ]
+              - AbstractTreeFeature
+              - BigTreeFeature
+              - BirchFeature
+              - BlockBlobFeature
+              - BonusChestFeature
+              - BushFeature
+              - CactusFeature
+              - DeadBushFeature
+              - DesertWellFeature
+              - DoublePlantFeature
+              - EndCityFeature
+              - EndGatewayFeature
+              - EndIslandFeature
+              - EndPodiumFeature
+              - Feature
+              - FlowerFeature
+              - FossilFeature
+              - GroundBushFeature
+              - HellFireFeature
+              - IcePatchFeature
+              - IceSpikeFeature
+              - LakeFeature
+              - LightGemFeature
+              - MegaJungleTreeFeature
+              - MegaPineTreeFeature
+              - MegaTreeFeature
+              - MelonFeature
+              - MonsterRoomFeature
+              - OceanMonumentFeature
+              - OreFeature
+              - PineFeature
+              - ReedsFeature
+              - SavannaTreeFeature
+              - SpikeFeature
+              - SpringFeature
+              - SpruceFeature
+              - StrongholdFeature
+              - StructureFeature
+              - SwampTreeFeature
+              - TreeFeature
+              - VillageFeature
+              - VillagePieces
+              - VinesFeature
+              - WaterlilyFeature
+              - WoodlandMansionFeature
           flat:
             _classes: [FlatLayerInfo]
           structure:
             _classes:
-              [
-                BoundingBox,
-                EndCityPieces,
-                MineShaftPieces,
-                NetherBridgePieces,
-                OceanMonumentPieces,
-                StrongholdPieces,
-                StructurePiece,
-                StructureStart,
-                TemplateStructurePiece,
-                WoodlandMansionPieces,
-              ]
+              - BoundingBox
+              - EndCityPieces
+              - MineShaftPieces
+              - NetherBridgePieces
+              - OceanMonumentPieces
+              - StrongholdPieces
+              - StructurePiece
+              - StructureStart
+              - TemplateStructurePiece
+              - WoodlandMansionPieces
             templatesystem:
               _classes:
-                [
-                  BlockRotProcessor,
-                  StructureManager,
-                  StructurePlaceSettings,
-                  StructureProcessor,
-                  StructureTemplate,
-                ]
+                - BlockRotProcessor
+                - StructureManager
+                - StructurePlaceSettings
+                - StructureProcessor
+                - StructureTemplate
           synth:
             _classes: [PerlinNoise, PerlinSimplexNoise, SimplexNoise]
         material:
-          _classes: [MaterialColor]
+          _classes: [DecorationMaterial, GasMaterial, LiquidMaterial, Material, MaterialColor]
           _enums: [PushReaction]
         newbiome:
           layer:
             _classes: [AddEdgeLayer, BiomeInitLayer, Layer]
             _enums:
-              [
-                AddDeepOceanLayer,
-                AddIslandLayer,
-                AddMushroomIslandLayer,
-                AddSnowLayer,
-                BiomeEdgeLayer,
-                IslandLayer,
-                OceanLayer,
-                OceanMixerLayer,
-                RareBiomeLargeLayer,
-                RareBiomeSpotLayer,
-                RegionHillsLayer,
-                RemoveTooMuchOceanLayer,
-                RiverInitLayer,
-                RiverLayer,
-                RiverMixerLayer,
-                ShoreLayer,
-                SmoothLayer,
-                VoronoiZoom,
-                ZoomLayer,
-              ]
+              - AddDeepOceanLayer
+              - AddIslandLayer
+              - AddMushroomIslandLayer
+              - AddSnowLayer
+              - BiomeEdgeLayer
+              - IslandLayer
+              - OceanLayer
+              - OceanMixerLayer
+              - RareBiomeLargeLayer
+              - RareBiomeSpotLayer
+              - RegionHillsLayer
+              - RemoveTooMuchOceanLayer
+              - RiverInitLayer
+              - RiverLayer
+              - RiverMixerLayer
+              - ShoreLayer
+              - SmoothLayer
+              - VoronoiZoom
+              - ZoomLayer
         pathfinder:
           _classes:
-            [
-              BinaryHeap,
-              FlyNodeEvaluator,
-              Node,
-              NodeEvaluator,
-              Path,
-              PathFinder,
-              SwimNodeEvaluator,
-              WalkNodeEvaluator,
-            ]
+            - BinaryHeap
+            - FlyNodeEvaluator
+            - Node
+            - NodeEvaluator
+            - Path
+            - PathFinder
+            - SwimNodeEvaluator
+            - WalkNodeEvaluator
           _enums: [BlockPathTypes, PathComputationType]
         saveddata:
           _classes: [SavedData]
@@ -1362,32 +1314,33 @@ net:
             _classes: [MapDecoration, MapItemSavedData]
         storage:
           _classes:
-            [DerivedLevelData, LevelData, LevelStorage, LevelStorageSource, LevelSummary, PlayerIO]
+            - DerivedLevelData
+            - LevelData
+            - LevelStorage
+            - LevelStorageSource
+            - LevelSummary
+            - PlayerIO
           loot:
             _classes: [LootPool, LootTable, LootTables, RandomValueBounds]
             entries:
               _classes: [EmptyLootItem, LootItem, LootPoolEntry, LootTableReference]
             functions:
               _classes:
-                [
-                  EnchantRandomlyFunction,
-                  EnchantWithLevelsFunction,
-                  LootingEnchantFunction,
-                  LootItemFunction,
-                  SetAttributesFunction,
-                  SetItemCountFunction,
-                  SetItemDamageFunction,
-                  SmeltItemFunction,
-                ]
+                - EnchantRandomlyFunction
+                - EnchantWithLevelsFunction
+                - LootingEnchantFunction
+                - LootItemFunction
+                - SetAttributesFunction
+                - SetItemCountFunction
+                - SetItemDamageFunction
+                - SmeltItemFunction
             predicates:
               _classes:
-                [
-                  EntityHasScoreCondition,
-                  LootItemEntityPropertyCondition,
-                  LootItemKilledByPlayerCondition,
-                  LootItemRandomChanceCondition,
-                  LootItemRandomChanceWithLootingCondition,
-                ]
+                - EntityHasScoreCondition
+                - LootItemEntityPropertyCondition
+                - LootItemKilledByPlayerCondition
+                - LootItemRandomChanceCondition
+                - LootItemRandomChanceWithLootingCondition
       phys:
         _classes: [AABB, HitResult]
       scores:
@@ -1431,7 +1384,6 @@ unsorted:
   - BasicPatchesLayerTheme
   - BasicPatchesLayerThemeRuleDefinition
   - BasicShapeRuleDefinition
-  - BeachBiome
   - BehaviorRegistry
   - BiomeCache
   - BiomeCacheLayer
@@ -1600,14 +1552,12 @@ unsorted:
   - DebugOptionsPacket
   - DebugReadListener
   - DecimalFormat
-  - DecorationMaterial
   - DefaultGameModeCommand
   - DefaultStateMapper
   - DefaultTexturePack
   - DegradationRuleDefinition
   - DegradationSequenceRuleDefinition
   - DelayedRelease
-  - DesertBiome
   - DiggerCategory
   - DiggerItemHint
   - DirectionalDegrade
@@ -1655,7 +1605,6 @@ unsorted:
   - EvocationIllager
   - EvocationIllagerRenderer
   - ExecuteAtCommand
-  - ExtremeHillsBiome
   - EyeOfEnderSignal
   - FJStringBuilder
   - FakeClientPacketListener
@@ -1702,7 +1651,6 @@ unsorted:
   - FoodMedal
   - FoodRecipies
   - FootstepParticle
-  - ForestBiome
   - FullTutorial
   - FullTutorialActiveTask
   - FunctionLayerFill
@@ -1732,7 +1680,6 @@ unsorted:
   - GameSettings
   - GameStats
   - GameVoteMedal
-  - GasMaterial
   - GeneralStat
   - GenerationWriteTask
   - GenericMultiBlockThemeRuleDefinition
@@ -1754,7 +1701,6 @@ unsorted:
   - HarvestFarmBlockGoal
   - HasSpawnedAtAllCheckpointsCondition
   - HeadArmorCategory
-  - HellBiome
   - HellBiomeDecorator
   - HellPortalFeature
   - HellSpringFeature
@@ -1774,7 +1720,6 @@ unsorted:
   - IQNetPlayer
   - IScoreboardLayout
   - IUIController
-  - IceBiome
   - IconRegister
   - IdsStringBuilder
   - IllegalArgumentException
@@ -1806,7 +1751,6 @@ unsorted:
   - ItemTotemRenameFix
   - Joiner
   - JumpsMedal
-  - JungleBiome
   - KeyedDataWalker
   - KickPlayerPacket
   - KillboxRuleDefinition
@@ -1841,10 +1785,8 @@ unsorted:
   - LevelSource
   - LevelStorageProfilerDecorator
   - LifeSpanMedal
-  - LightGemFeature
   - LinearBlendSize
   - LinearBlendSizeRuleDefinition
-  - LiquidMaterial
   - LivingEntitySelector
   - LivingShulkerSelector
   - LocalBlockInteraction
@@ -1863,7 +1805,6 @@ unsorted:
   - MapGenerator
   - MapSelectInfoPacket
   - MasterGameMode
-  - Material
   - MaxSnowballHitsWithSnowballOnPlayerStatTracker
   - McRegionChunkStorage
   - McRegionLevelStorage
@@ -1874,7 +1815,6 @@ unsorted:
   - MenuBuilder
   - MerchantRecipe
   - MerchantRecipeList
-  - MesaBiome
   - MessageRawCommand
   - MineShaftFeature
   - MineShaftStart
@@ -1910,12 +1850,9 @@ unsorted:
   - MultiplayerLocalPlayer
   - MushroomBlockLayerTheme
   - MushroomBlockThemeRuleDefinition
-  - MushroomIslandBiome
   - MusicBlockEntity
   - MutableBlockPos
   - MutableBlockPosIterator
-  - MutatedForestBiome
-  - MutatedSavannaBiome
   - NQRNetworkManager
   - NQRNetworkPlayer
   - NameEntryScreen
@@ -1933,7 +1870,6 @@ unsorted:
   - NotFastestTimeButWonAnywayCondition
   - NotWinnerCondition
   - NullThemeRuleDefinition
-  - OceanBiome
   - OcelotSitOnBlockGoal
   - OnGameStartSpawnPositions
   - OnInitialiseWorld
@@ -1950,7 +1886,6 @@ unsorted:
   - PickupTask
   - PistonBlockItem
   - PlaceContainerRuleDefinition
-  - PlainsBiome
   - PlatformSoundEngine
   - PlatformSoundEngineImpl
   - PlayGoal
@@ -2012,7 +1947,6 @@ unsorted:
   - RingShape
   - RingShapeRuleDefinition
   - RingsMedal
-  - RiverBiome
   - RoofTreeFeature
   - Rotate
   - RotatedPillarBlockImpl
@@ -2023,7 +1957,6 @@ unsorted:
   - SFontData
   - SampleNotificationEventHandler
   - SandFeature
-  - SavannaBiome
   - SavedDataMemoryStorage
   - SavedDataStorage
   - Scale
@@ -2102,7 +2035,6 @@ unsorted:
   - StateMapper
   - StatsCommand
   - StatsUID
-  - StoneBeachBiome
   - StringBuilderCore
   - StringTable
   - StructureFeatureSavedData
@@ -2111,13 +2043,11 @@ unsorted:
   - SubselectEntitySelector
   - SuperflatConfig
   - SuperflatMenu
-  - SwampBiome
   - SwampRiversLayer
   - Synth
   - TLSStorageCafe
   - TagCollectorSaveInterface
   - TagUpdateWalker
-  - TaigaBiome
   - TakeFlowerGoal
   - TakeItemHint
   - TallgrassFeature
@@ -2142,7 +2072,6 @@ unsorted:
   - TextureThemeRuleDefinition
   - TextureUVCoordinateSet
   - Textures
-  - TheEndBiome
   - TheEndBiomeDecorator
   - TheEndGatewayEntity
   - ThemeSuggestionMedal
@@ -2209,7 +2138,6 @@ unsorted:
   - Villages
   - VindicationIllager
   - VindicationIllagerRenderer
-  - VoidBiome
   - VoidBiomeDecorator
   - VoidLayerTheme
   - VotePacket

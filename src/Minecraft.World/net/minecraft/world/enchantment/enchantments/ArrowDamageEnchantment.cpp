@@ -1,5 +1,6 @@
-#include "net/minecraft/world/enchantment/categories/BowCategory.h"
 #include "net/minecraft/world/enchantment/enchantments/ArrowDamageEnchantment.h"
+
+#include "net/minecraft/world/enchantment/categories/BowCategory.h"
 #include "net/minecraft/world/item/enchantment/Enchantment.h"
 
 ArrowDamageEnchantment::ArrowDamageEnchantment(const Rarity* rarity,

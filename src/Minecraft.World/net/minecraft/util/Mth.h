@@ -13,7 +13,7 @@ public:
     static int clamp(int, int, int);
     static float wrapDegrees(float);
     static void cached_atan_index(int, int);
-    static void init(void);
+    static void init();
     static long lfloor(double);
     static void clampedLerp(double, double, double);
     static void frac(double);

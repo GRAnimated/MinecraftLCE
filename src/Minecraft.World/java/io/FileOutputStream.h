@@ -8,12 +8,12 @@ class FileOutputStream : public OutputStream {
 public:
     FileOutputStream(const File&);
 
-    virtual ~FileOutputStream() override;
-    virtual void write(unsigned int) override;
-    virtual void write(arrayWithLength<unsigned char>) override;
-    virtual void write(arrayWithLength<unsigned char>, unsigned int, unsigned int) override;
-    virtual void close() override;
-    virtual void flush() override;
+    ~FileOutputStream() override;
+    void write(unsigned int) override;
+    void write(arrayWithLength<unsigned char>) override;
+    void write(arrayWithLength<unsigned char>, unsigned int, unsigned int) override;
+    void close() override;
+    void flush() override;
 
     void* field_8;
 };

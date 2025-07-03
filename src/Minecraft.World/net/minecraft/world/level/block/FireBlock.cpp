@@ -1,12 +1,12 @@
 #include "net/minecraft/world/level/block/FireBlock.h"
 
-#include "net/minecraft/core/particles/ParticleTypes.h"
 #include "net/minecraft/client/CMinecraftApp.h"
 #include "net/minecraft/client/eGameHostOption.h"
 #include "net/minecraft/client/renderer/texture/IconRegister.h"
 #include "net/minecraft/client/renderer/texture/TextureAtlasSprite.h"
 #include "net/minecraft/core/BlockPos.h"
 #include "net/minecraft/core/Direction.h"
+#include "net/minecraft/core/particles/ParticleTypes.h"
 #include "net/minecraft/server/MinecraftServer.h"
 #include "net/minecraft/server/players/PlayerList.h"
 #include "net/minecraft/sounds/SoundEvents.h"

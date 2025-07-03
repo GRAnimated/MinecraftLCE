@@ -1,4 +1,5 @@
 #pragma once
+
 #include "TextureAtlas.h"
 #include "net/minecraft/world/ArrayWithLength.h"
 #include <string>

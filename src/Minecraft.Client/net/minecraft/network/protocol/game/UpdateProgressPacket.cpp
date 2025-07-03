@@ -1,7 +1,8 @@
+#include "net/minecraft/network/protocol/game/UpdateProgressPacket.h"
+
 #include "java/io/DataInputStream.h"
 #include "java/io/DataOutputStream.h"
 #include "net/minecraft/network/PacketListener.h"
-#include "net/minecraft/network/protocol/game/UpdateProgressPacket.h"
 
 std::shared_ptr<Packet> UpdateProgressPacket::create() {
     return std::shared_ptr<Packet>(new UpdateProgressPacket());

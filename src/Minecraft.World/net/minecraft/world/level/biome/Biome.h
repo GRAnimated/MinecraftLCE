@@ -175,10 +175,10 @@ public:
         BiomeProperties(const std::wstring&);
         void depth(float);
         void downfall(float);
-        void dry(void);
+        void dry();
         BiomeProperties* mutated(const std::wstring&);
         void scale(float);
-        void snow(void);
+        void snow();
         void temperature(float);
         void waterColor(int);
 

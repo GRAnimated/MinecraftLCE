@@ -1,4 +1,5 @@
 #pragma once
+
 #include "net/minecraft/client/resources/MappedRegistry.h"
 #include "net/minecraft/world/entity/Entity.h"
 #include <string>

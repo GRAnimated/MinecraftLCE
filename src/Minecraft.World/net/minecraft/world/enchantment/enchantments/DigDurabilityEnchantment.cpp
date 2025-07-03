@@ -1,8 +1,9 @@
-#include "types.h"
-#include "net/minecraft/world/enchantment/categories/BreakableCategory.h"
 #include "net/minecraft/world/enchantment/enchantments/DigDurabilityEnchantment.h"
+
+#include "net/minecraft/world/enchantment/categories/BreakableCategory.h"
 #include "net/minecraft/world/item/ItemInstance.h"
 #include "net/minecraft/world/item/enchantment/Enchantment.h"
+#include "types.h"
 
 DigDurabilityEnchantment::DigDurabilityEnchantment(const Rarity* rarity,
                                                    arrayWithLength<const EquipmentSlot*> equipmentSlots)

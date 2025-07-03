@@ -1,7 +1,9 @@
-#include "net/minecraft/world/eINSTANCEOF.h"
 #include "net/minecraft/world/level/biome/Biome.h"
 
 #include "Biome.h"
+
+#include "net/minecraft/world/eINSTANCEOF.h"
+
 #include "net/minecraft/client/Minecraft.h"
 #include "net/minecraft/client/color/ColourTable.h"
 #include "net/minecraft/core/BlockPos.h"

@@ -1,4 +1,5 @@
 #pragma once
+
 class C_4JProfile {
 public:
     virtual void Initialise(const void*, const void*, unsigned short, unsigned int, unsigned int,

@@ -1,11 +1,12 @@
-#include "types.h"
 #include "Mob.h"
+
 #include "NX/Platform.h"
 #include "net/minecraft/world/ArrayWithLength.h"
 #include "net/minecraft/world/CensoredString.h"
 #include "net/minecraft/world/entity/LivingEntity.h"
 #include "net/minecraft/world/item/ItemInstance.h"
 #include "net/minecraft/world/level/Level.h"
+#include "types.h"
 #include <memory>
 
 #include "net/minecraft/world/entity/ai/control/JumpControl.h"

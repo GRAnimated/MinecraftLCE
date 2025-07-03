@@ -1,5 +1,6 @@
-#include "net/minecraft/world/enchantment/categories/WearableCategory.h"
 #include "net/minecraft/world/enchantment/enchantments/BindingCurseEnchantment.h"
+
+#include "net/minecraft/world/enchantment/categories/WearableCategory.h"
 #include "net/minecraft/world/item/enchantment/Enchantment.h"
 
 BindingCurseEnchantment::BindingCurseEnchantment(const Rarity* rarity,

@@ -1,5 +1,6 @@
-#include "net/minecraft/world/enchantment/categories/BowCategory.h"
 #include "net/minecraft/world/enchantment/enchantments/ArrowInfiniteEnchantment.h"
+
+#include "net/minecraft/world/enchantment/categories/BowCategory.h"
 #include "net/minecraft/world/enchantment/enchantments/MendingEnchantment.h"
 #include "net/minecraft/world/item/enchantment/Enchantment.h"
 

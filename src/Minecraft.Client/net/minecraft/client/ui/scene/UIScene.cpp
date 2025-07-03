@@ -1,3 +1,5 @@
+#include "net/minecraft/client/ui/scene/UIScene.h"
+
 #include "4J_Libraries_Source/fui/fui.h"
 #include "4J_Libraries_Source/fui/fuiFile.h"
 #include "4J_Libraries_Source/fui/fuiRenderNode.h"
@@ -5,7 +7,6 @@
 #include "NX/Platform.h"
 #include "net/minecraft/client/ui/ConsoleUIController.h"
 #include "net/minecraft/client/ui/scene/UILayer.h"
-#include "net/minecraft/client/ui/scene/UIScene.h"
 #include "net/minecraft/client/ui/scene/control/UIControl.h"
 #include "net/minecraft/core/System.h"
 #include "net/minecraft/sounds/SoundEvents.h"

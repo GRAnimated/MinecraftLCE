@@ -1,5 +1,6 @@
-#include "net/minecraft/world/enchantment/categories/HeadArmorCategory.h"
 #include "net/minecraft/world/enchantment/enchantments/WaterWorkerEnchantment.h"
+
+#include "net/minecraft/world/enchantment/categories/HeadArmorCategory.h"
 
 WaterWorkerEnchantment::WaterWorkerEnchantment(const Rarity* rarity,
                                                arrayWithLength<const EquipmentSlot*> equipmentSlots)

@@ -1,4 +1,5 @@
 #pragma once
+
 #include "java/io/DataOutputStream.h"
 
 class SparseDataStorage {

@@ -1,7 +1,8 @@
+#include "net/minecraft/world/item/DebugFourjItem.h"
+
 #include "net/minecraft/world/eINSTANCEOF.h"
 #include "net/minecraft/world/entity/mob/Mob.h"
 #include "net/minecraft/world/entity/player/Player.h"
-#include "net/minecraft/world/item/DebugFourjItem.h"
 #include <memory>
 
 DebugFourjItem::DebugFourjItem() {}

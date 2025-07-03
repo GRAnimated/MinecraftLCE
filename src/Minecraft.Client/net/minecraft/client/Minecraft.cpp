@@ -1,9 +1,10 @@
+#include "net/minecraft/client/Minecraft.h"
+
 #include "NX/Platform.h"
 #include "com/mojang/blaze3d/platform/GlStateManager.h"
 #include "java/io/File.h"
 #include "net/minecraft/client/CMinecraftApp.h"
 #include "net/minecraft/client/GhostController.h"
-#include "net/minecraft/client/Minecraft.h"
 #include "net/minecraft/client/Options.h"
 #include "net/minecraft/client/Timer.h"
 #include "net/minecraft/client/Tooltips.h"

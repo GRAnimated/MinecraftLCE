@@ -8,7 +8,7 @@ class OreFeature : public Feature {
 public:
     OreFeature(const BlockState* state, int unk);
 
-    virtual bool place(Level* level, Random& random, const BlockPos& pos) override;
+    bool place(Level* level, Random& random, const BlockPos& pos) override;
 
 private:
     const BlockState* mBlockState;

@@ -1,5 +1,6 @@
-#include "net/minecraft/core/System.h"
 #include "net/minecraft/world/level/border/WorldBorder.h"
+
+#include "net/minecraft/core/System.h"
 
 WorldBorder::WorldBorder(Level* level) {}
 

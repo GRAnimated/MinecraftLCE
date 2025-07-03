@@ -1,4 +1,5 @@
 #pragma once
+
 #include "types.h"
 #include "net/minecraft/core/BlockPos.h"
 #include "net/minecraft/network/protocol/game/ClientboundChatPacket.h"

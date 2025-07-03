@@ -1,7 +1,8 @@
+#include "net/minecraft/world/enchantment/enchantments/ProtectionEnchantment.h"
+
 #include "net/minecraft/world/damagesource/DamageSource.h"
 #include "net/minecraft/world/enchantment/categories/ArmorCategory.h"
 #include "net/minecraft/world/enchantment/categories/FeetArmorCategory.h"
-#include "net/minecraft/world/enchantment/enchantments/ProtectionEnchantment.h"
 #include "net/minecraft/world/item/enchantment/Enchantment.h"
 #include "net/minecraft/world/item/enchantment/EnchantmentCategory.h"
 

@@ -1,6 +1,7 @@
+#include "net/minecraft/client/gui/GuiComponent.h"
+
 #include "net/minecraft/client/Minecraft.h"
 #include "net/minecraft/client/gui/Gui.h"
-#include "net/minecraft/client/gui/GuiComponent.h"
 
 #include "com/mojang/blaze3d/platform/GlStateManager.h"
 #include "com/mojang/blaze3d/vertex/BufferBuilder.h"

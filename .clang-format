@@ -1,10 +1,10 @@
 ---
-Language:        Cpp
+Language: Cpp
 AccessModifierOffset: -4
 AlignAfterOpenBracket: Align
 AlignConsecutiveAssignments: false
 AlignConsecutiveDeclarations: false
-AlignOperands:   true
+AlignOperands: true
 AlignTrailingComments: true
 AllowAllParametersOfDeclarationOnNextLine: true
 AllowShortBlocksOnASingleLine: Never
@@ -22,21 +22,21 @@ BreakBeforeBinaryOperators: All
 BreakBeforeBraces: Attach
 BreakBeforeTernaryOperators: false
 BreakConstructorInitializersBeforeComma: false
-ColumnLimit:     110
-CommentPragmas:  '^ (IWYU pragma:|NOLINT)'
+ColumnLimit: 110
+CommentPragmas: "^ (IWYU pragma:|NOLINT)"
 ConstructorInitializerAllOnOneLineOrOnePerLine: false
 ConstructorInitializerIndentWidth: 4
 ContinuationIndentWidth: 4
 Cpp11BracedListStyle: true
 DerivePointerAlignment: false
-DisableFormat:   false
-ForEachMacros:   []
+DisableFormat: false
+ForEachMacros: []
 IndentCaseLabels: false
-IndentWidth:     4
+IndentWidth: 4
 IndentWrappedFunctionNames: false
 KeepEmptyLinesAtTheStartOfBlocks: false
-MacroBlockBegin: ''
-MacroBlockEnd:   ''
+MacroBlockBegin: ""
+MacroBlockEnd: ""
 MaxEmptyLinesToKeep: 1
 NamespaceIndentation: None
 ObjCBlockIndentWidth: 4
@@ -50,40 +50,22 @@ PenaltyExcessCharacter: 1000000
 PenaltyReturnTypeOnItsOwnLine: 60
 PointerAlignment: Left
 QualifierAlignment: Left
-ReflowComments:  true
+ReflowComments: true
 SpaceAfterCStyleCast: false
 SpaceBeforeAssignmentOperators: true
 SpaceBeforeParens: ControlStatements
 SpaceInEmptyParentheses: false
 SpacesBeforeTrailingComments: 2
-SpacesInAngles:  false
+SpacesInAngles: false
 SpacesInContainerLiterals: true
 SpacesInCStyleCastParentheses: false
 SpacesInParentheses: false
 SpacesInSquareBrackets: false
 Standard: c++17
-TabWidth:        4
-UseTab:          Never
+TabWidth: 4
+UseTab: Never
 WhitespaceSensitiveMacros: []
 
 SortIncludes: true
 IncludeBlocks: Preserve
 IncludeIsMainRegex: '([-_a-zA-Z0-9]+)\.(h|hpp)'
-IncludeCategories:
-  - Regex: '".*types\.h"'
-    Priority: 1
-  - Regex: '^"4J_Libraries_Source/'
-    Priority: 2
-  - Regex: '^"Minecraft\.Client/'
-    Priority: 3
-  - Regex: '^"Minecraft\.Nbt/'
-    Priority: 4
-  - Regex: '^"Minecraft\.Server/'
-    Priority: 5
-  - Regex: '^"Minecraft\.World/'
-    Priority: 6
-  - Regex: '^"PlatformLibraries_Source/'
-    Priority: 7
-  - Regex: '.*'
-    Priority: 8
-...

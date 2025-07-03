@@ -1,4 +1,5 @@
 #pragma once
+
 #include "types.h"
 #include "net/minecraft/core/NonNullList.h"
 #include "net/minecraft/world/InteractionHand.h"
@@ -21,39 +22,39 @@ public:
 
     int getUseItemRemainingTicks();
 
-    virtual eINSTANCEOF GetType() override;
-    virtual void fjDerivedCtorCalls() override;
-    virtual void kill() override;
-    virtual void defineSynchedData() override;
-    virtual void tick() override;
-    virtual void baseTick() override;
-    virtual void outOfWorld() override;
-    virtual void checkFallDamage(double, bool, Block*, const BlockPos&) override;
-    virtual void causeFallDamage(float, float) override;
-    virtual void getLightColor() override;
-    virtual void markHurt() override;
-    virtual void hurt(DamageSource*, float) override;
-    virtual Vec3* getViewVector(float) override;
-    virtual bool isPickable() override;
-    virtual bool isPushable() override;
-    virtual void readAdditionalSaveData(CompoundTag*) override;
-    virtual void addAdditonalSaveData(CompoundTag*) override;
-    virtual bool isAlive() override;
-    virtual void rideTick() override;
-    virtual void stopRiding() override;
-    virtual void lerpTo(double, double, double, float, float, int, bool) override;
-    virtual void handleEntityEvent(unsigned char, int) override;
-    virtual void animateHurt() override;
-    virtual void setSprinting(bool) override;
-    virtual void getTeam() override;
-    virtual void spawnEatParticles(const ItemInstance&, int) override;
-    virtual void getYHeadRot() override;
-    virtual void setYHeadRot(float) override;
-    virtual void setYBodyRot(float) override;
-    virtual void shouldShowName() override;
-    virtual void onSyncedDataUpdated(const EntityDataAccessor_Base*) override;
-    virtual void setBoundingBox(AABB*) override;
-    virtual void stopCurrentLerp() override;
+    eINSTANCEOF GetType() override;
+    void fjDerivedCtorCalls() override;
+    void kill() override;
+    void defineSynchedData() override;
+    void tick() override;
+    void baseTick() override;
+    void outOfWorld() override;
+    void checkFallDamage(double, bool, Block*, const BlockPos&) override;
+    void causeFallDamage(float, float) override;
+    void getLightColor() override;
+    void markHurt() override;
+    void hurt(DamageSource*, float) override;
+    Vec3* getViewVector(float) override;
+    bool isPickable() override;
+    bool isPushable() override;
+    void readAdditionalSaveData(CompoundTag*) override;
+    void addAdditonalSaveData(CompoundTag*) override;
+    bool isAlive() override;
+    void rideTick() override;
+    void stopRiding() override;
+    void lerpTo(double, double, double, float, float, int, bool) override;
+    void handleEntityEvent(unsigned char, int) override;
+    void animateHurt() override;
+    void setSprinting(bool) override;
+    void getTeam() override;
+    void spawnEatParticles(const ItemInstance&, int) override;
+    void getYHeadRot() override;
+    void setYHeadRot(float) override;
+    void setYBodyRot(float) override;
+    void shouldShowName() override;
+    void onSyncedDataUpdated(const EntityDataAccessor_Base*) override;
+    void setBoundingBox(AABB*) override;
+    void stopCurrentLerp() override;
     virtual void registerAttributes();
     virtual bool isWaterMob();
     virtual void onChangedBlock(const BlockPos&);
