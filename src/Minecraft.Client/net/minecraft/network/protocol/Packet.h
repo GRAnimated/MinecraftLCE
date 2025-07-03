@@ -1,7 +1,7 @@
 #pragma once
 
-#include "types.h"
 #include "net/minecraft/network/PacketType.h"
+#include "types.h"
 #include <deque>
 #include <memory>
 // #include <iostream>

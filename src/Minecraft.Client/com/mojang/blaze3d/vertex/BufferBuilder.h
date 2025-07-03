@@ -1,8 +1,8 @@
 #pragma once
 
-#include "types.h"
 #include "net/minecraft/client/renderer/C4JRender.h"
 #include "net/minecraft/world/ArrayWithLength.h"
+#include "types.h"
 
 class VertexFormat;
 

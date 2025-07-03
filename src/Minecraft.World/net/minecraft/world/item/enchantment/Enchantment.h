@@ -1,8 +1,8 @@
 #pragma once
 
-#include "types.h"
 #include "net/minecraft/world/ArrayWithLength.h"
 #include "net/minecraft/world/entity/MobType.h"
+#include "types.h"
 #include <memory>
 
 class EnchantmentCategory;

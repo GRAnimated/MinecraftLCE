@@ -1,8 +1,8 @@
 #pragma once
 
-#include "types.h"
 #include "net/minecraft/client/ui/scene/control/UIControl.h"
 #include "net/minecraft/client/ui/scene/control/UIString.h"
+#include "types.h"
 
 class UIControl_Base : public UIControl {
 public:

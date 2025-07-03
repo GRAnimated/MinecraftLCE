@@ -1,7 +1,7 @@
 #include "net/minecraft/client/ui/scene/scenes/UIScene_DeathMenu.h"
 
-#include "4J_Libraries_Source/fui/fuiFile.h"
-#include "4J_Libraries_Source/fui/fuiRenderNode.h"
+#include "fui/fuiFile.h"
+#include "fui/fuiRenderNode.h"
 #include "net/minecraft/client/CMinecraftApp.h"
 #include "net/minecraft/client/CTelemetryManager.h"
 #include "net/minecraft/client/Minecraft.h"

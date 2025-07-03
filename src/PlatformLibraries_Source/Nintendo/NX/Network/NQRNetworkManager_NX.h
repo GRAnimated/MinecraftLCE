@@ -1,6 +1,6 @@
 #pragma once
 
-#include "PlatformLibraries_Source/NQRNetworkManager.h"
+#include "NQRNetworkManager.h"
 
 class NQRNetworkManager_NX : public NQRNetworkManager {
 public:

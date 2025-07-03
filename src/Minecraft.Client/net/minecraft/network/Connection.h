@@ -1,8 +1,8 @@
 #pragma once
 
-#include "nn/os/os_MutexTypes.h"
 #include "net/minecraft/network/Socket.h"
 #include "net/minecraft/network/protocol/game/DisconnectPacket.h"
+#include "nn/os/os_MutexTypes.h"
 #include <deque>
 
 class Socket;

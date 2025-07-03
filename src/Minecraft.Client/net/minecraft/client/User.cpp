@@ -1,4 +1,4 @@
-#include "User.h"
+#include "net/minecraft/client/User.h"
 
 User::User(const std::wstring& name, const std::wstring& session) {
     this->mName = name;

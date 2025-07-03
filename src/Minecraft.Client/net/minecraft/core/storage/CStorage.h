@@ -1,6 +1,6 @@
 #pragma once
 
-#include "C4JStorage.h"
+#include "net/minecraft/core/storage/C4JStorage.h"
 
 class CStorage : public C4JStorage {
 public:

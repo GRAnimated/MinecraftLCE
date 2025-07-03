@@ -1,4 +1,4 @@
-#include "Block.h"
+#include "net/minecraft/world/level/block/Block.h"
 
 #include "net/minecraft/world/level/block/SoundType.h"
 #include "net/minecraft/world/level/block/state/BlockState.h"

@@ -1,8 +1,8 @@
 #include "McRegionChunkStorage.h"
 #include "NX/Platform.h"
-#include "OldChunkStorage.h"
 #include "com/mojang/nbt/CompoundTag.h"
 #include "com/mojang/nbt/NbtIo.h"
+#include "net/minecraft/world/level/chunk/storage/OldChunkStorage.h"
 #include "net/minecraft/world/level/storage/LevelData.h"
 
 void McRegionChunkStorage::save(Level* level, LevelChunk* chunk) {

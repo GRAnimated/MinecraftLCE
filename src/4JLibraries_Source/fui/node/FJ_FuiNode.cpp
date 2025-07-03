@@ -1,15 +1,15 @@
-#include "4J_Libraries_Source/fui/node/FJ_FuiNode.h"
+#include "fui/node/FJ_FuiNode.h"
 
-#include "4J_Libraries_Source/fui/fui.h"
-#include "4J_Libraries_Source/fui/fuiRenderNode.h"
-#include "4J_Libraries_Source/fui/node/FJ_Base.h"
-#include "4J_Libraries_Source/fui/node/FJ_Button.h"
-#include "4J_Libraries_Source/fui/node/FJ_Document.h"
-#include "4J_Libraries_Source/fui/node/FJ_FuiNodeStage.h"
-#include "4J_Libraries_Source/fui/node/FJ_List.h"
-#include "4J_Libraries_Source/fui/node/FJ_List_ListButton.h"
-#include "4J_Libraries_Source/fui/node/FJ_List_ListButtonPlayerList.h"
-#include "4J_Libraries_Source/fui/node/FJ_List_MenuButton.h"
+#include "fui/fui.h"
+#include "fui/fuiRenderNode.h"
+#include "fui/node/FJ_Base.h"
+#include "fui/node/FJ_Button.h"
+#include "fui/node/FJ_Document.h"
+#include "fui/node/FJ_FuiNodeStage.h"
+#include "fui/node/FJ_List.h"
+#include "fui/node/FJ_List_ListButton.h"
+#include "fui/node/FJ_List_ListButtonPlayerList.h"
+#include "fui/node/FJ_List_MenuButton.h"
 
 FJ_FuiNode::FJ_FuiNode(fuiRenderNode* renderNode) {
     mTabIndex = -1;

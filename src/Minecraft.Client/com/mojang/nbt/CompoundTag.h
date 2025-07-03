@@ -1,9 +1,9 @@
 #pragma once
 
-#include "nn/types.h"
-#include "types.h"
 #include "com/mojang/nbt/Tag.h"
 #include "net/minecraft/world/ArrayWithLength.h"
+#include "nn/types.h"
+#include "types.h"
 #include <unordered_map>
 
 class CompoundTag : public Tag {

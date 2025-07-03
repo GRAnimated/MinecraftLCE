@@ -1,11 +1,11 @@
 #pragma once
 
-#include "ChunkStorage.h"
 #include "NX/Platform.h"
 #include "java/io/DataOutputStream.h"
 #include "net/minecraft/core/System.h"
 #include "net/minecraft/world/level/Level.h"
 #include "net/minecraft/world/level/chunk/LevelChunk.h"
+#include "net/minecraft/world/level/chunk/storage/ChunkStorage.h"
 #include "net/minecraft/world/level/storage/RegionFileCache.h"
 #include "net/minecraft/world/level/storage/save/ConsoleSaveFileCommon.h"
 #include <string>

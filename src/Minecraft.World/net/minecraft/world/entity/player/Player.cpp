@@ -1,4 +1,4 @@
-#include "Player.h"
+#include "net/minecraft/world/entity/player/Player.h"
 
 #include "NX/Platform.h"
 #include "net/minecraft/client/CMinecraftApp.h"

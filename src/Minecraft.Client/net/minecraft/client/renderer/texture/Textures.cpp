@@ -1,4 +1,4 @@
-#include "Textures.h"
+#include "net/minecraft/client/renderer/texture/Textures.h"
 
 void Textures::stitch() {
     this->atlas->stitch();

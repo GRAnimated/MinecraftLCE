@@ -1,4 +1,4 @@
-#include "BoundingBox.h"
+#include "net/minecraft/world/level/levelgen/structure/BoundingBox.h"
 
 BoundingBox::BoundingBox(int x0, int y0, int z0, int x1, int y1, int z1) {
     this->x0 = x0;

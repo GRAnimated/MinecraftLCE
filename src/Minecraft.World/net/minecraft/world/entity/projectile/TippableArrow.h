@@ -1,9 +1,9 @@
 #pragma once
 
-#include "types.h"
 #include "net/minecraft/world/entity/LivingEntity.h"
 #include "net/minecraft/world/entity/projectile/Arrow.h"
 #include "net/minecraft/world/item/ItemInstance.h"
+#include "types.h"
 #include <memory>
 
 class TippableArrow : public Arrow {

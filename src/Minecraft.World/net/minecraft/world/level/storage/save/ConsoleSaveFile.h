@@ -4,9 +4,9 @@
 #include "net/minecraft/client/ESavePlatform.h"
 #include "net/minecraft/world/level/storage/LevelStorage.h"
 
-#include "FileHeader.h"
 #include "java/io/File.h"
 #include "java/io/FileEntry.h"
+#include "net/minecraft/world/level/storage/save/FileHeader.h"
 
 class ConsoleSaveFile {
 public:

@@ -32,6 +32,8 @@
 #include "net/minecraft/client/resources/TexturePackRepository.h"
 #include "net/minecraft/client/sounds/SoundEngine.h"
 #include "net/minecraft/client/tutorial/Tutorial.h"
+#include "net/minecraft/client/ui/scene/scenes/UIScene_CreativeMenu.h"
+#include "net/minecraft/client/ui/scene/scenes/UIScene_LeaderboardsMenu.h"
 #include "net/minecraft/core/System.h"
 #include "net/minecraft/core/particles/ParticleType.h"
 #include "net/minecraft/stats/Stats.h"
@@ -47,8 +49,6 @@
 #include "net/minecraft/world/level/gamemode/minigames/MiniGameMedals.h"
 #include "net/minecraft/world/level/levelgen/structure/templatesystem/StructureManager.h"
 #include "net/minecraft/world/level/storage/McRegionLevelStorageSource.h"
-#include "ui/scene/scenes/UIScene_CreativeMenu.h"
-#include "ui/scene/scenes/UIScene_LeaderboardsMenu.h"
 #include <string>
 
 Minecraft* Minecraft::GetInstance() {

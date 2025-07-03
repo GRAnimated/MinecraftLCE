@@ -25,14 +25,16 @@ def CHECK(cond, line, message, path):
     return False
 
 class CommonChecks:
-    def __init__(self, c, path, fix=False):
+    def __init__(self, c, path, cpp_class_map, fix=False):
         self.c = c
         self.path = path
         self.fix = fix
+        self.map = cpp_class_map
 
     def run(self):
         self.void_params()
         self.consistent_float_literals()
+        self.absolute_include_paths()
         self.newline_eof()
         return self.c
 
@@ -93,11 +95,37 @@ class CommonChecks:
         if changed:
             self.c = "\n".join(new_lines)
 
+    def absolute_include_paths(self):
+        lines = self.c.splitlines()
+        new_lines = []
+        changed = False
+
+        for line in lines:
+            original_line = line
+            match = re.match(r'#include\s+"([^"]+)"', line)
+            if match:
+                include_path = match.group(1)
+                absolute_path = next((path for path in self.map.values() if include_path in path), None)
+                if absolute_path:
+                    path = absolute_path.split('/', 1)
+                    path = path[1] if len(path) > 1 else absolute_path
+                    if not line.startswith(f'#include "{path}"'):
+                        FAIL(f'Include path "{include_path}" should be absolute as "{path}"!', original_line, self.path)
+                        # FIX
+                        if self.fix:
+                            line = f'#include "{path}"'
+                            changed = True
+            new_lines.append(line)
+
+        if changed:
+            self.c = "\n".join(new_lines)
+
 class HeaderChecks:
-    def __init__(self, c, path, fix=False):
+    def __init__(self, c, path, cpp_class_map, fix=False):
         self.c = c
         self.path = path
         self.fix = fix
+        self.map = cpp_class_map
 
     def run(self):
         self.pragma_once()
@@ -182,10 +210,11 @@ class HeaderChecks:
             self.c = "\n".join(new_lines)
 
 class SourceChecks:
-    def __init__(self, c, path, fix=False):
+    def __init__(self, c, path, cpp_class_map, fix=False):
         self.c = c
         self.path = path
         self.fix = fix
+        self.map = cpp_class_map
 
     def run(self):
         self.include_at_top()
@@ -355,9 +384,9 @@ def main():
         has_crlf = '\r\n' in original_content
         content_for_processing = original_content.replace('\r\n', '\n')
 
-        common_checks = CommonChecks(content_for_processing, cpp_path, fix=args.fix)
+        common_checks = CommonChecks(content_for_processing, cpp_path, cpp_class_map, fix=args.fix)
         modified_content = common_checks.run()
-        source_checks = SourceChecks(modified_content, cpp_path, fix=args.fix)
+        source_checks = SourceChecks(modified_content, cpp_path, cpp_class_map, fix=args.fix)
         modified_content = source_checks.run()
 
         # write fixes
@@ -375,9 +404,9 @@ def main():
         has_crlf = '\r\n' in original_content
         content_for_processing = original_content.replace('\r\n', '\n')
 
-        common_checks = CommonChecks(content_for_processing, h_path, fix=args.fix)
+        common_checks = CommonChecks(content_for_processing, h_path, cpp_class_map, fix=args.fix)
         modified_content = common_checks.run()
-        header_checks = HeaderChecks(modified_content, h_path, fix=args.fix)
+        header_checks = HeaderChecks(modified_content, h_path, cpp_class_map, fix=args.fix)
         modified_content = header_checks.run()
 
         # write fixes

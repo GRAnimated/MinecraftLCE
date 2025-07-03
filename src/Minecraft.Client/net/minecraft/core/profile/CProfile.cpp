@@ -1,4 +1,4 @@
-#include "CProfile.h"
+#include "net/minecraft/core/profile/CProfile.h"
 
 void CProfile::SetOnAwardHandler(void (*func)(), void* somePtr) {
     this->mOnAwardHandler = func;

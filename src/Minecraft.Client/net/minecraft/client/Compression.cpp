@@ -1,4 +1,5 @@
-#include "Compression.h"
+#include "net/minecraft/client/Compression.h"
+
 #include "NX/Platform.h"
 #include "net/minecraft/core/System.h"
 #include "zlib.h"

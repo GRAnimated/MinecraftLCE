@@ -1,8 +1,8 @@
 #pragma once
 
-#include "types.h"
 #include "java/io/OutputStream.h"
 #include "net/minecraft/world/ArrayWithLength.h"
+#include "types.h"
 
 class ByteArrayOutputStream : public OutputStream {
 public:

@@ -1,8 +1,8 @@
 #include "net/minecraft/client/ui/scene/control/UIControl_Button.h"
 
-#include "4J_Libraries_Source/fui/fuiRenderNode.h"
-#include "4J_Libraries_Source/fui/node/FJ_Button.h"
-#include "4J_Libraries_Source/fui/node/FJ_FuiNodeStage.h"
+#include "fui/fuiRenderNode.h"
+#include "fui/node/FJ_Button.h"
+#include "fui/node/FJ_FuiNodeStage.h"
 #include "net/minecraft/client/ui/scene/control/UIControl.h"
 #include "net/minecraft/client/ui/scene/control/UIControl_Base.h"
 

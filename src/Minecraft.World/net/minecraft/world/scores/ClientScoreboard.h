@@ -1,7 +1,7 @@
 #pragma once
 
-#include "types.h"
 #include "net/minecraft/world/scores/Scoreboard.h"
+#include "types.h"
 
 class ClientScoreboard : public Scoreboard {
 public:

@@ -1,7 +1,7 @@
 #pragma once
 
+#include "fui/node/FJ_FuiNode.h"
 #include "types.h"
-#include "4J_Libraries_Source/fui/node/FJ_FuiNode.h"
 
 class fuiRenderNodeEditText;
 

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "4J_Libraries_Source/fui/node/FJ_Base.h"
+#include "fui/node/FJ_Base.h"
 
 class FJ_Button : public FJ_Base {
 public:

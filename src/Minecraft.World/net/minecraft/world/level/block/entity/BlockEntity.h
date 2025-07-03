@@ -1,11 +1,11 @@
 #pragma once
 
-#include "types.h"
 #include "com/mojang/nbt/CompoundTag.h"
 #include "net/minecraft/client/resources/IdMapper.h"
 #include "net/minecraft/core/BlockPos.h"
 #include "net/minecraft/network/protocol/Packet.h"
 #include "net/minecraft/world/eINSTANCEOF.h"
+#include "types.h"
 #include <memory>
 #include <unordered_map>
 

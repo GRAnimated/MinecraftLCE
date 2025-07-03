@@ -1,11 +1,11 @@
 #pragma once
 
-#include "types.h"
 #include "net/minecraft/client/resources/SimpleRegistry.h"
 #include "net/minecraft/world/InteractionHand.h"
 #include "net/minecraft/world/entity/EquipmentSlot.h"
 #include "net/minecraft/world/entity/ai/attributes/AttributeModifier.h"
 #include "net/minecraft/world/item/InteractionResultHolder.h"
+#include "types.h"
 #include <memory>
 #include <string>
 #include <unordered_map>

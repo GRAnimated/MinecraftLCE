@@ -1,10 +1,10 @@
 #pragma once
 
-#include "nn/os/os_MutexTypes.h"
-#include "types.h"
 #include "net/minecraft/client/renderer/C4JRender.h"
 #include "net/minecraft/client/ui/scene/UIScene.h"
 #include "net/minecraft/world/ArrayWithLength.h"
+#include "nn/os/os_MutexTypes.h"
+#include "types.h"
 #include <string>
 #include <unordered_map>
 #include <vector>

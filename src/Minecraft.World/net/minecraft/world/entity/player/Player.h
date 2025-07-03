@@ -1,6 +1,5 @@
 #pragma once
 
-#include "types.h"
 #include "net/minecraft/sounds/SoundSource.h"
 #include "net/minecraft/world/ArrayWithLength.h"
 #include "net/minecraft/world/PlayerUID.h"
@@ -12,6 +11,7 @@
 #include "net/minecraft/world/food/FoodData.h"
 #include "net/minecraft/world/item/ItemInstance.h"
 #include "net/minecraft/world/level/gamemode/minigames/glide/PowerupItems.h"
+#include "types.h"
 #include <cstdint>
 #include <memory>
 #include <string>

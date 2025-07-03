@@ -1,6 +1,5 @@
 #pragma once
 
-#include "types.h"
 #include "net/minecraft/core/NonNullList.h"
 #include "net/minecraft/world/InteractionHand.h"
 #include "net/minecraft/world/entity/Entity.h"
@@ -8,6 +7,7 @@
 #include "net/minecraft/world/item/ItemInstance.h"
 #include "net/minecraft/world/item/enchantment/Enchantment.h"
 #include "net/minecraft/world/level/Level.h"
+#include "types.h"
 #include <cstdint>
 #include <unordered_map>
 

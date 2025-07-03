@@ -1,10 +1,10 @@
 #pragma once
 
-#include "types.h"
 #include "net/minecraft/core/BlockPos.h"
 #include "net/minecraft/network/protocol/game/ClientboundChatPacket.h"
 #include "net/minecraft/world/command/EGameCommand.h"
 #include "net/minecraft/world/phys/Vec3.h"
+#include "types.h"
 #include <string>
 
 class Level;

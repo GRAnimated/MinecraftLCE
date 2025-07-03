@@ -1,6 +1,6 @@
 #pragma once
 
-#include "4J_Libraries_Source/fui/node/FJ_FuiNode.h"
+#include "fui/node/FJ_FuiNode.h"
 class fuiFile;
 class fuiMatrix;
 class fuiObject;

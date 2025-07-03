@@ -1,4 +1,4 @@
-#include "CMinecraftApp.h"
+#include "net/minecraft/client/CMinecraftApp.h"
 
 #include "net/minecraft/world/level/gamemode/GameType.h"
 

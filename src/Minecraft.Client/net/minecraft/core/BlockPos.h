@@ -1,7 +1,7 @@
 #pragma once
 
-#include "types.h"
 #include "net/minecraft/core/Vec3i.h"
+#include "types.h"
 #include <memory>
 
 class Direction;

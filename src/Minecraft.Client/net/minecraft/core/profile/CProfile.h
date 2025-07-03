@@ -1,6 +1,6 @@
 #pragma once
 
-#include "C_4JProfile.h"
+#include "net/minecraft/core/profile/C_4JProfile.h"
 
 enum eUpsellType {};
 enum eUpsellResponse {};

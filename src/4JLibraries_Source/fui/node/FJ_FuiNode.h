@@ -1,6 +1,6 @@
 #pragma once
 
-#include "4J_Libraries_Source/fui/node/FJ_EventListener.h"
+#include "fui/node/FJ_EventListener.h"
 #include <vector>
 
 class fuiRenderNode;

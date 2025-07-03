@@ -1,7 +1,7 @@
 #pragma once
 
+#include "net/minecraft/client/ESavePlatform.h"
 #include "types.h"
-#include "ESavePlatform.h"
 #include <nn/os.h>
 
 class Compression {
