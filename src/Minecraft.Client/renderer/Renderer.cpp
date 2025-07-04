@@ -352,7 +352,7 @@ void Renderer::Initialise(bool) {
     memset(someString, 255, sizeof(someString));
     this->TextureData(16, 16, someString, 0, (C4JRender::eTextureFormat)0);
 
-    this->word2994 = 10922;
+    this->mGammaIntensity = 0x2AAA;
     this->dword2998 = 0;
     this->byte299C = 0;
 

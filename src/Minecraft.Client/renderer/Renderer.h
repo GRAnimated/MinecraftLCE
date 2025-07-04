@@ -260,7 +260,7 @@ public:
     NVNprogram* shaders14;
     char gap2960[48];
     int mTextureID_1;
-    uint16_t word2994;
+    unsigned short mGammaIntensity;
     int dword2998;
     char byte299C;
     nn::os::MutexType mMutex1;
