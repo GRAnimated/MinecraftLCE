@@ -70,6 +70,7 @@ void Renderer::Initialise() {
     this->Initialise(0);
 }
 
+// thanks to Fuzzy2319 for spotting last 2 fixes
 void Renderer::Initialise(bool) {
     nv::SetGraphicsAllocator(gfx_aligned_alloc, gfx_free, gfx_realloc, nullptr);
     nv::InitializeGraphics(malloc(0x800000), 0x800000);
