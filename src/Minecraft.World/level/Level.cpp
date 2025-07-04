@@ -1,5 +1,6 @@
 #include "Minecraft.Client/platform/NX/Platform.h"
 #include "Minecraft.World/entity/Entity.h"
+#include "Minecraft.World/entity/player/Player.h"
 #include "Minecraft.World/level/Level.h"
 #include "Minecraft.World/level/LevelListener.h"
 #include "Minecraft.World/level/LevelType.h"
@@ -15,6 +16,7 @@
 #include "Minecraft.World/level/storage/LevelData.h"
 #include "Minecraft.World/level/storage/LevelStorage.h"
 #include "Minecraft.Core/System.h"
+#include <memory>
 
 Level::Level(std::shared_ptr<LevelStorage> levelStorage, LevelData* levelData, Dimension* dimension,
              bool isLocal) {
@@ -189,10 +191,9 @@ void Level::levelEvent(int eventType, const BlockPos& pos, int data) {
     levelEvent(nullptr, eventType, pos, data);
 }
 
-// NON_MATCHING
 void Level::levelEvent(std::shared_ptr<Player> player, int eventType, const BlockPos& pos, int data) {
-    for (auto it = mLevelListeners.begin(); it != mLevelListeners.end(); ++it) {
-        (*it)->levelEvent(player, eventType, pos, data);
+    for (LevelListener* listener : this->mLevelListeners) {
+        listener->levelEvent(player, eventType, pos, data);
     }
 }
 
@@ -200,11 +201,10 @@ void Level::setBlockAndUpdate(const BlockPos& pos, const BlockState* state) {
     setBlock(pos, state, 3, false);
 }
 
-// NON_MATCHING
 void Level::sendBlockUpdated(const BlockPos& pos, const BlockState* state, const BlockState* state2, int id,
                              bool unk) {
-    for (auto it = mLevelListeners.begin(); it != mLevelListeners.end(); it++) {
-        (*it)->blockChanged(this, pos, state, state2, id, unk);
+    for (LevelListener* listener : this->mLevelListeners) {
+        listener->blockChanged(this, pos, state, state2, id, unk);
     }
 }
 
@@ -241,7 +241,6 @@ void Level::lightColumnChanged(int x, int z, int y0, int y1) {
     PIXEndNamedEvent();
 }
 
-// NON_MATCHING: This should call a thunk
 void Level::neighborChanged(const BlockPos& pos, Block* block, const BlockPos& neighborPos) {
     if (!mIsLocal) {
         getBlockState(pos)->neighborChanged(this, pos, block, neighborPos);
@@ -427,24 +426,21 @@ bool Level::addGlobalEntity(std::shared_ptr<Entity> entity) {
     return true;
 }
 
-// NON_MATCHING
 void Level::entityAdded(std::shared_ptr<Entity> entity) {
-    for (auto it = mLevelListeners.begin(); it != mLevelListeners.end(); ++it) {
-        (*it)->entityAdded(entity);
+    for (LevelListener* listener : this->mLevelListeners) {
+        listener->entityAdded(entity);
     }
 }
 
-// NON_MATCHING
 void Level::entityRemoved(std::shared_ptr<Entity> entity) {
-    for (auto it = mLevelListeners.begin(); it != mLevelListeners.end(); ++it) {
-        (*it)->entityRemoved(entity);
+    for (LevelListener* listener : this->mLevelListeners) {
+        listener->entityRemoved(entity);
     }
 }
 
-// NON_MATCHING
 void Level::playerRemoved(std::shared_ptr<Entity> entity) {
-    for (auto it = mLevelListeners.begin(); it != mLevelListeners.end(); ++it) {
-        (*it)->playerRemoved(entity);
+    for (LevelListener* listener : this->mLevelListeners) {
+        listener->playerRemoved(entity);
     }
 }
 
@@ -452,11 +448,12 @@ void Level::addListener(LevelListener* listener) {
     mLevelListeners.push_back(listener);
 }
 
-// NON_MATCHING
 void Level::removeListener(LevelListener* listener) {
-    auto it = mLevelListeners.begin();
-    if (it != mLevelListeners.end()) {
-        mLevelListeners.erase(it, mLevelListeners.end());
+    for (auto it = this->mLevelListeners.begin(); it != this->mLevelListeners.end(); it++) {
+        if (listener == *it) {
+            this->mLevelListeners.erase(it);
+            return;
+        }
     }
 }
 

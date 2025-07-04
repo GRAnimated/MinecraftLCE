@@ -222,7 +222,6 @@ LevelType* LevelData::getGeneratorType() {
     return mLevelType;
 }
 
-// NON_MATCHING: regswap
 void LevelData::setGeneratorType(LevelType* levelType) {
     bool hasBeenInCreative = mHasBeenInCreativeMode;
     LevelType* flatType = LevelType::FLAT;
