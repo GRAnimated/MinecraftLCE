@@ -9,17 +9,17 @@ ListTag::ListTag() {}
 
 ListTag::ListTag(int id) : mTagId(id) {}
 
-// NON_MATCHING: Missing block of assembly in the mData loop
 void ListTag::write(DataOutput* outputStream) {
-    if (mData.size() < 1) {
-        mTagId = mData[0]->getId();
-    } else {
+    if (mData.empty()) {
         mTagId = TAG_End;
+    } else {
+        mTagId = mData[0]->getId();
     }
 
     outputStream->writeByte(mTagId);
+    outputStream->writeInt(this->mData.size());
 
-    for (auto& tag : mData) {
+    for (auto tag : mData) {
         tag->write(outputStream);
     }
 }
@@ -78,13 +78,14 @@ bool ListTag::equals(Tag* other) {
     return true;
 }
 
-// NON_MATCHING: b.eq vs b.hs in std for loop
 Tag* ListTag::copy() {
     ListTag* copy = new ListTag(0);
     copy->mTagId = mTagId;
 
-    for (auto& tag : mData) {
-        copy->mData.push_back(tag->copy());
+    for (auto&& tag : mData) {
+        Tag* copied = tag->copy();  // you either do this or modify vector code, because for whatever
+                                    // reason push_back(value_type&& __x) has different comparision
+        copy->mData.push_back(copied);
     }
 
     return copy;
