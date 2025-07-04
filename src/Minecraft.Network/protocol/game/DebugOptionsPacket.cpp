@@ -12,9 +12,9 @@ DebugOptionsPacket::DebugOptionsPacket() {
     dword18 = 0;
 }
 
-DebugOptionsPacket::DebugOptionsPacket(unsigned int unk1) {
-    dword18 = unk1;
-}
+// DebugOptionsPacket::DebugOptionsPacket(unsigned int unk1) {
+//     dword18 = unk1;
+// }
 
 int DebugOptionsPacket::getEstimatedSize() {
     return 4;

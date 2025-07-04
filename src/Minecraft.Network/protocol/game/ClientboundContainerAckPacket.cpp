@@ -16,8 +16,8 @@ ClientboundContainerAckPacket::ClientboundContainerAckPacket() {
 
 ClientboundContainerAckPacket::ClientboundContainerAckPacket(int containerId, short uid, bool accepted) {
     mContainerId = containerId;
-    mAccepted = accepted;
     mUid = uid;
+    mAccepted = accepted;
 }
 
 int ClientboundContainerAckPacket::getEstimatedSize() {

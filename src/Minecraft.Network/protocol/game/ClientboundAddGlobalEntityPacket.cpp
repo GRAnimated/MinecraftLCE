@@ -22,7 +22,7 @@ ClientboundAddGlobalEntityPacket::ClientboundAddGlobalEntityPacket(std::shared_p
     x = Mth::floor(entity->mX * 32.0);
     y = Mth::floor(entity->mY * 32.0);
     z = Mth::floor(entity->mZ * 32.0);
-    type = (entity->GetType() == 0xB000001);
+    type = (entity->isType(eLightningBolt));
 }
 
 int ClientboundAddGlobalEntityPacket::getEstimatedSize() {

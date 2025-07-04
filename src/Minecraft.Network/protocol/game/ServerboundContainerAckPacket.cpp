@@ -12,12 +12,8 @@ ServerboundContainerAckPacket::ServerboundContainerAckPacket() {}
 
 ServerboundContainerAckPacket::ServerboundContainerAckPacket(int containerId, short uid, bool accepted) {
     mContainerId = containerId;
-    mAccepted = accepted;
     mUid = uid;
-}
-
-int ServerboundContainerAckPacket::getEstimatedSize() {
-    return 4;
+    mAccepted = accepted;
 }
 
 EPacketType ServerboundContainerAckPacket::getPacketId() {

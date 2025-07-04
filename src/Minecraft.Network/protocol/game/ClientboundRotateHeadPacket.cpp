@@ -11,9 +11,10 @@ std::shared_ptr<Packet> ClientboundRotateHeadPacket::create() {
 
 ClientboundRotateHeadPacket::ClientboundRotateHeadPacket() {}
 
-ClientboundRotateHeadPacket::ClientboundRotateHeadPacket(std::shared_ptr<Entity> entity, unsigned char yHeadRot) {
-    mYHeadRot = yHeadRot;
+ClientboundRotateHeadPacket::ClientboundRotateHeadPacket(std::shared_ptr<Entity> entity,
+                                                         unsigned char yHeadRot) {
     entityId = entity->getId();
+    mYHeadRot = yHeadRot;
 }
 
 int ClientboundRotateHeadPacket::getEstimatedSize() {

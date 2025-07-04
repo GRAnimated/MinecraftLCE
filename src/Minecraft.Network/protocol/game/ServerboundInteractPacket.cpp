@@ -17,20 +17,25 @@ ServerboundInteractPacket::ServerboundInteractPacket() {
 
 ServerboundInteractPacket::ServerboundInteractPacket(std::shared_ptr<Entity> target) {
     mTarget = target->getId();
-    mAction = eAction::Interact;
+    mAction = eAction::Attack;
+    mHand = InteractionHand::MAIN_HAND;
+    mLocation = 0;
 }
 
-ServerboundInteractPacket::ServerboundInteractPacket(std::shared_ptr<Entity> target, InteractionHand::EInteractionHand hand) {
+ServerboundInteractPacket::ServerboundInteractPacket(std::shared_ptr<Entity> target,
+                                                     InteractionHand::EInteractionHand hand) {
     mTarget = target->getId();
     mAction = eAction::Interact;
     mHand = hand;
+    mLocation = 0;
 }
 
-ServerboundInteractPacket::ServerboundInteractPacket(std::shared_ptr<Entity> target, InteractionHand::EInteractionHand hand, Vec3* location) {
+ServerboundInteractPacket::ServerboundInteractPacket(std::shared_ptr<Entity> target,
+                                                     InteractionHand::EInteractionHand hand, Vec3* location) {
     mTarget = target->getId();
     mAction = eAction::InteractAt;
     mHand = hand;
-    mLocation = location;
+    mLocation = Vec3::newPermanent(location->x, location->y, location->z);
 }
 
 int ServerboundInteractPacket::getEstimatedSize() {
@@ -85,5 +90,5 @@ InteractionHand::EInteractionHand ServerboundInteractPacket::getHand() {
 }
 
 Vec3* ServerboundInteractPacket::getLocation() {
-    return mLocation;
+    return Vec3::newTemp(mLocation);
 }

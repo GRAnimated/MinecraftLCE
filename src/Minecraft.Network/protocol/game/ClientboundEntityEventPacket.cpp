@@ -8,9 +8,10 @@ std::shared_ptr<Packet> ClientboundEntityEventPacket::create() {
     return std::shared_ptr<Packet>(new ClientboundEntityEventPacket());
 }
 
-ClientboundEntityEventPacket::ClientboundEntityEventPacket(std::shared_ptr<Entity> entity, unsigned char eventId, int data) {
-    mEventId = eventId;
+ClientboundEntityEventPacket::ClientboundEntityEventPacket(std::shared_ptr<Entity> entity,
+                                                           unsigned char eventId, int data) {
     mEntityId = entity->getId();
+    mEventId = eventId;
     mData = data;
 }
 
