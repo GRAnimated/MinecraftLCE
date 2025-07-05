@@ -29,11 +29,25 @@ AABB* AABB::grow(double x, double y, double z) const {
     return this->newTemp(x0, y0, z0, x1, y1, z1);
 }
 
-// NON_MATCHING | Score: 1485 (lower is better)
+bool AABB::contains(Vec3* vec) {
+    if (vec->x <= this->min.x || vec->x >= this->max.x)
+        return false;
+
+    if (vec->y <= this->min.y || vec->y >= this->max.y)
+        return false;
+
+    if (vec->z <= this->min.z || vec->z >= this->max.z)
+        return false;
+
+    return true;
+}
+
+// NON_MATCHING | Score: 1070 (lower is better)
 // Not sure how to make this match.
 bool AABB::intersects(const AABB* rhs) const {
-    return (this->min.x < rhs->max.x) && (rhs->min.x < this->max.x) && (this->min.y < rhs->max.y)
-           && (rhs->min.y < this->max.y) && (this->min.z < rhs->max.z) && (rhs->min.z < this->max.z);
+    return (this->min.x<rhs->max.x&& this->max.x> rhs->min.x
+            && this->min.y<rhs->max.y&& this->max.y> rhs->min.y
+            && this->min.z<rhs->max.z&& this->max.z> rhs->min.z);
 }
 
 void AABB::resetPool() {};

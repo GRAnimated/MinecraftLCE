@@ -1,5 +1,7 @@
 #pragma once
 
+class AABB;
+
 class Vec3 {
 public:
     Vec3(double x, double y, double z) {
@@ -26,6 +28,11 @@ public:
     static Vec3* newPermanent(double, double, double);
 
     Vec3 yRot(float);
+    double dot(Vec3 *rhs);
+    double length();
+    void set(double x, double y, double z);
+    void resetPool();
+    double distanceTo(AABB *aabb);
 
     class ThreadStorage {};
 
