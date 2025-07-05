@@ -1,4 +1,4 @@
-#include "ServerboundInteractPacket.h"
+#include "net/minecraft/network/protocol/game/ServerboundInteractPacket.h"
 
 #include "java/io/DataInputStream.h"
 #include "java/io/DataOutputStream.h"
