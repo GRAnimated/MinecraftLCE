@@ -2,6 +2,7 @@
 
 #include "net/minecraft/client/resources/MappedRegistry.h"
 #include <functional>
+
 class ResourceLocation;
 class Item;
 

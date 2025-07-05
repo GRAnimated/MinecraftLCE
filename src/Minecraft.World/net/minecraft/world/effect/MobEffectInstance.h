@@ -1,6 +1,7 @@
 #pragma once
 
 #include <cstdint>
+
 class MobEffect;
 
 class MobEffectInstance {

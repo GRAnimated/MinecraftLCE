@@ -2,6 +2,7 @@
 
 #include "net/minecraft/world/phys/Vec3.h"
 #include <vector>
+
 class CameraController {
 public:
     class SplineNode {};

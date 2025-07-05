@@ -35,6 +35,7 @@ class CommonChecks:
         self.void_params()
         self.consistent_float_literals()
         self.absolute_include_paths()
+        self.newline_after_last_include()
         self.newline_eof()
         return self.c
 
@@ -116,6 +117,30 @@ class CommonChecks:
                             line = f'#include "{path}"'
                             changed = True
             new_lines.append(line)
+
+        if changed:
+            self.c = "\n".join(new_lines)
+
+    def newline_after_last_include(self):
+        lines = self.c.splitlines()
+        new_lines = []
+        changed = False
+        last_include_index = -1
+
+        for i, line in enumerate(lines):
+            original_line = line
+            if line.strip().startswith("#include"):
+                last_include_index = len(new_lines)
+                new_lines.append(line)
+            else:
+                new_lines.append(line)
+
+        if last_include_index != -1 and last_include_index + 1 < len(new_lines) and new_lines[last_include_index + 1].strip() != "":
+            FAIL("There should be a newline after the last include!", new_lines[last_include_index], self.path)
+            # FIX
+            if self.fix:
+                new_lines.insert(last_include_index + 1, "")
+                changed = True
 
         if changed:
             self.c = "\n".join(new_lines)
@@ -335,10 +360,10 @@ def write_fixes(file_path, modified_content):
             f.write(modified_content)
 
 def main():
-    parser = argparse.ArgumentParser(description="Check and optionally fix C++ source file formatting.")
+    parser = argparse.ArgumentParser(description="Check and optionally fix decomp source file formatting.")
     parser.add_argument('--fix', action='store_true', help='Try to fix the formatting issues automatically.')
     parser.add_argument('--format', action='store_true', help='Run clang-format before checks.')
-    parser.add_argument('--find-unsorted', action='store_true', help='Find unsorted classes/enums in C++ files.')
+    parser.add_argument('--find-unsorted', action='store_true', help='Find unsorted classes/enums in the source files.')
 
     args = parser.parse_args()
 
@@ -373,6 +398,8 @@ def main():
             elif file.endswith(('.h', '.hpp')):
                 h_files.append(os.path.join(root, file))
     
+    print("Checking source files...")
+
     for cpp_path in cpp_files:
         if args.format:
             run_clang_format(cpp_path)
@@ -393,6 +420,8 @@ def main():
         if args.fix and modified_content != content_for_processing:
             write_fixes(cpp_path, modified_content)
 
+    print("Checking header files...")
+
     for h_path in h_files:
         if args.format:
             run_clang_format(h_path)
@@ -412,6 +441,9 @@ def main():
         # write fixes
         if args.fix and modified_content != content_for_processing:
             write_fixes(h_path, modified_content)
+    
+    if args.fix:
+        print("Automatic fixes completed. Please review the changes made.")
 
 if __name__ == "__main__":
     main()

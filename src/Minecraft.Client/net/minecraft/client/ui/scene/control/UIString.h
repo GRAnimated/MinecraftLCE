@@ -2,6 +2,7 @@
 
 #include <memory>
 #include <string>
+
 class UIString {
 public:
     class UIStringCore {

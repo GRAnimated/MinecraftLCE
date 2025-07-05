@@ -6,6 +6,7 @@ enum eUpsellType {};
 enum eUpsellResponse {};
 
 #include <cstdint>
+
 class CProfile : public C_4JProfile {
 public:
     static CProfile* sInstance;

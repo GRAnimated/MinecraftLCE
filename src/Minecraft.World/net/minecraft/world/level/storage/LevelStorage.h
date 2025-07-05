@@ -1,6 +1,7 @@
 #pragma once
 
 #include <memory>
+
 class Dimension;
 class LevelData;
 class PlayerUID;

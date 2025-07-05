@@ -1,6 +1,7 @@
 #pragma once
 
 #include "net/minecraft/world/item/enchantment/Enchantment.h"
+
 class ArrowDamageEnchantment : public Enchantment {
 public:
     ArrowDamageEnchantment(const Rarity*, arrayWithLength<const EquipmentSlot*>);

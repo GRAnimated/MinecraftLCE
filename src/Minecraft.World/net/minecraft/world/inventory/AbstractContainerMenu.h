@@ -1,6 +1,7 @@
 #pragma once
 
 #include <cstdint>
+
 class AbstractContainerMenu {
     void* qword0;
     void* qword8;

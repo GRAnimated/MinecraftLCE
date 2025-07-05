@@ -1,4 +1,5 @@
 #include "net/minecraft/world/phys/AABB.h"
+
 Vec3* AABB::getCenter() {
     return Vec3::newTemp(this->min.x + (this->max.x - this->min.x) * 0.5,
                          this->min.y + (this->max.y - this->min.y) * 0.5,

@@ -3,6 +3,7 @@
 #include "net/minecraft/world/item/ItemInstance.h"
 #include "net/minecraft/world/item/enchantment/Enchantment.h"
 #include <memory>
+
 class ThornsEnchantment : public Enchantment {
 public:
     ThornsEnchantment(const Rarity*, arrayWithLength<const EquipmentSlot*>);

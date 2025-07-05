@@ -2,6 +2,7 @@
 
 #include "nn/os/os_MutexTypes.h"
 #include "types.h"
+
 class Level;
 class Minecraft;
 class Textures;

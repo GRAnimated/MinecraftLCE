@@ -3,6 +3,7 @@
 #include "net/minecraft/client/ui/scene/control/UIControl_Base.h"
 #include "net/minecraft/client/ui/scene/control/UIString.h"
 #include <cstdint>
+
 class UIControl_Button : public UIControl_Base {
 public:
     UIControl_Button();

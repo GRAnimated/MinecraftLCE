@@ -2,6 +2,7 @@
 
 #include "net/minecraft/world/level/block/Block.h"
 #include "net/minecraft/world/level/material/MaterialColor.h"
+
 class OreBlock : public Block {
     OreBlock();
     OreBlock(const MaterialColor*);

@@ -1,6 +1,7 @@
 #pragma once
 
 #include "net/minecraft/world/item/enchantment/Enchantment.h"
+
 class WaterWorkerEnchantment : public Enchantment {
 public:
     WaterWorkerEnchantment(const Rarity*, arrayWithLength<const EquipmentSlot*>);

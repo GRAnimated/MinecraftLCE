@@ -2,6 +2,7 @@
 
 #include "types.h"
 #include <cstdint>
+
 class PlayerUID {
 public:
     PlayerUID(int uid);

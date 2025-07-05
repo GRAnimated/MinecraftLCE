@@ -3,6 +3,7 @@
 #include "net/minecraft/core/Direction.h"
 #include "net/minecraft/world/entity/Entity.h"
 #include <memory>
+
 class DamageSource {
 public:
     static DamageSource* BYPASS_ARMOUR;  // this name is wrong
