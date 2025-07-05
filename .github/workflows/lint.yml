@@ -5,10 +5,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
-    - uses: DoozyX/clang-format-lint-action@v0.18
+    - uses: DoozyX/clang-format-lint-action@v0.18.2
       with:
         source: 'src'
-        clangFormatVersion: 18
+        clangFormatVersion: 20
   custom-lint:
     runs-on: ubuntu-latest
     steps:
@@ -23,4 +23,4 @@ jobs:
     - name: Set up python package dependencies
       run: pip install pyyaml
     - name: Run custom code styling checks
-      run: tools/lint.py
+      run: python3 tools/lint.py

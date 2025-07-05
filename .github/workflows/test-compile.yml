@@ -29,6 +29,6 @@ jobs:
         path: |
           toolchain/clang-4.0.1
     - name: Run simplified setup
-      run: tools/setup.py --project
+      run: python3 tools/setup.py --project
     - name: Build project
-      run: tools/build.py
+      run: python3 tools/build.py
