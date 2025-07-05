@@ -167,6 +167,8 @@ public:
     virtual void BeginEvent(const wchar_t*);
     virtual void EndEvent();
 
+    float32x4_t MultWithStack(float (*)[4]);
+
     char gap8[16];
     NVNdevice* mNVNdevice;
     nn::vi::Display* mDisplay;
