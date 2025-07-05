@@ -1,4 +1,5 @@
 #pragma once
+#include <string>
 
 class LevelType {
 public:
@@ -7,4 +8,7 @@ public:
     static LevelType* LARGE_BIOMES;
     static LevelType* AMPLIFIED;
     static LevelType* NORMAL_1_1;
+
+    std::wstring getGeneratorName();
+    int getVersion();
 };

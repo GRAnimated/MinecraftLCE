@@ -35,6 +35,7 @@ class SoundType;
 class TextureAtlasSprite;
 class Vec3;
 class Item;
+class ResourceLocation;
 
 class Block {
 public:
@@ -46,6 +47,7 @@ public:
     static const BlockState* getStateByIdAndData(int, unsigned char);
 
     static void registerBlock(int id, const std::wstring& name, Block* block);
+    static void registerBlock(int id, const ResourceLocation& rLoc, Block* block);
 
     void init(Material* material, const MaterialColor* materialColor);
 
@@ -65,10 +67,10 @@ public:
     virtual ~Block();
     virtual void DerivedInit();
     virtual void sendBlockData(uchar);
-    virtual void setSoundType(const SoundType*);
+    virtual Block *setSoundType(const SoundType*);
     virtual void setLightBlock(int);
     virtual Block* setLightEmission(float);
-    virtual void setExplodeable(float);
+    virtual Block *setExplodeable(float);
     virtual bool isSolidBlockingCube(const BlockState* blockState);
     virtual bool isSolidBlockingCubeAndNotSignalSource(const BlockState* blockState);
     virtual bool isViewBlocking(const BlockState* blockState);
@@ -78,7 +80,7 @@ public:
     virtual RenderShape getRenderShape(const BlockState* blockState);
     virtual void hasInHandRenderOffset();
     virtual bool mayReplaceWithPlace(LevelSource* levelSource, const BlockPos& pos);
-    virtual void setDestroyTime(float);
+    virtual Block *setDestroyTime(float);
     virtual void setIndestructible();
     virtual bool isIndestructible();
     virtual void getDestroySpeed(const BlockState* blockState, Level* level, const BlockPos& pos);
@@ -162,7 +164,7 @@ public:
     virtual int getResourceCountForLootBonus(int, Random*);
     virtual void setPlacedBy(Level* level, const BlockPos& pos, const BlockState* blockState,
                              std::shared_ptr<LivingEntity>, not_null_ptr<ItemInstance>);
-    virtual Block* setNameAndDescriptionId(int, int);
+    virtual Block* setNameAndDescriptionId(int name, int desc);
     virtual bool isPossibleToRespawnInThis();
     virtual std::wstring getName();
     virtual void getDescriptionId(int);
@@ -212,6 +214,9 @@ public:
     static void popResource(Level*, const BlockPos&, not_null_ptr<ItemInstance>);
 
     static void CreateNewThreadStorage();
+
+    static void staticCtor();
+    void setBaseItemTypeAndMaterial(int, int);
 
     bool isBlockEntity() const {
         return mIsSilkTouchable;

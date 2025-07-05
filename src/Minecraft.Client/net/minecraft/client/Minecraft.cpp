@@ -51,6 +51,14 @@
 #include "net/minecraft/world/level/storage/McRegionLevelStorageSource.h"
 #include <string>
 
+Minecraft* Minecraft::sInstance;
+
+int Minecraft::sAverageFps;
+bool Minecraft::sUnk;
+EntityBlockRenderer* Minecraft::sEntityBlockRenderer;
+File Minecraft::sUnkFile;
+nn::os::MutexType Minecraft::unk_71017C65F0;
+
 Minecraft* Minecraft::GetInstance() {
     return sInstance;
 }

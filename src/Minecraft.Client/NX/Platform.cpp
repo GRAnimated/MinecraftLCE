@@ -47,3 +47,15 @@ void XMemDestroyCompressionContext(void* ctxt) {
 void XMemDestroyDecompressionContext(void* ctxt) {
     return;
 }
+
+void* gfx_aligned_alloc(ulong a1, ulong a2, void*) {
+    return aligned_alloc(a2, a1);
+}
+
+void gfx_free(void* ptr, void*) {
+    free(ptr);
+}
+
+void* gfx_realloc(void* ptr, ulong size, void*) {
+    realloc(ptr, size);
+}

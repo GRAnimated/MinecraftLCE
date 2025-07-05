@@ -11,6 +11,7 @@
 #include <cstdint>
 #include <unordered_map>
 
+class AttributeMap;
 class Attribute;
 class MobEffect;
 class MobEffectInstance;
@@ -18,7 +19,7 @@ class CombatTracker;
 
 class LivingEntity : public Entity {
 public:
-    LivingEntity(Level*);
+    LivingEntity(Level *level);
 
     int getUseItemRemainingTicks();
 
@@ -120,8 +121,8 @@ public:
     virtual void setArrowCount(int);
     virtual void swing(InteractionHand::EInteractionHand);
     virtual void updateSwingTime();
-    virtual void getAttribute(Attribute*);
-    virtual void getAttributes();
+    virtual Attribute *getAttribute(Attribute *attribute);
+    virtual AttributeMap *getAttributes();
     virtual MobType getMobType();
     virtual void getMainHandItem();
     virtual void getOffhandItem();
@@ -153,11 +154,11 @@ public:
     virtual void setJumping(bool);
     virtual void take(std::shared_ptr<Entity>, int);
     virtual bool canSee(std::shared_ptr<Entity>);
-    virtual void getAttackAnim(float);
+    virtual float getAttackAnim(float a2);
     virtual void getSweptVolume();
     virtual bool isEffectiveAi();
-    virtual void getAbsorptionAmount();
-    virtual void setAbsorptionAmount(float);
+    virtual float getAbsorptionAmount();
+    virtual void setAbsorptionAmount(float amount);
     virtual void onEnterCombat();
     virtual void onLeaveCombat();
     virtual void updateEffectVisibility();
@@ -180,6 +181,7 @@ public:
     virtual void setRecordPlayingNearby(const BlockPos&, bool);
     virtual bool IsCreativeFlying();
 
+    void init();
     void CheckThermalAreas();
     void fallFlyingTravel(double&, double&, double&, Vec3*, float&, float&, double&, double);
 

@@ -2,12 +2,9 @@
 
 #include "net/minecraft/network/PacketListener.h"
 
-// NON_MATCHING: Needs to set mCreatedTime and mShouldDelay to 0
 std::shared_ptr<Packet> GetInfoPacket::create() {
     return std::shared_ptr<Packet>(new GetInfoPacket());
 }
-
-GetInfoPacket::GetInfoPacket() {}
 
 EPacketType GetInfoPacket::getPacketId() {
     return EPacketType::_GetInfoPacket;

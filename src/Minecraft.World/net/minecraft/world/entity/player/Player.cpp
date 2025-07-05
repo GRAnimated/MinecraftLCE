@@ -40,6 +40,7 @@ Player::Player(Level* level, const std::wstring& a3) : LivingEntity(level) {
     this->bool7FD = false;
 }
 
+void Player::hurtCurrentlyUsedShield(float x) {}
 bool Player::IsCreativeFlying() {
     return this->mAbilities.mIsFlying;
 }
@@ -102,6 +103,19 @@ bool Player::canHarmPlayer(std::wstring) {
 float Player::getArmorCoverPercentage() {
     return 0.0f;
 }
+void Player::openTextEdit(std::shared_ptr<SignBlockEntity>) {}
+void Player::openMinecartCommandBlock(std::shared_ptr<BaseCommandBlock>) {}
+void Player::openCommandBlock(std::shared_ptr<CommandBlockEntity>) {}
+void Player::openItemInstanceGui(not_null_ptr<ItemInstance>, InteractionHand::EInteractionHand) {}
+void Player::disableShield(bool) {}
+void Player::crit(std::shared_ptr<Entity>) {}
+void Player::magicCrit(std::shared_ptr<Entity>) {}
+void Player::displayClientMessage(int, bool) {}
+void Player::resetStat(Stat*) {}
+void Player::onUpdateAbilities() {}
+void Player::setGameMode(GameType const*) {}
+void Player::onCrafted(not_null_ptr<ItemInstance>) {}
+void Player::handleCollectItem(not_null_ptr<ItemInstance>) {}
 
 // NON_MATCHING
 void Player::staticCtor() {
@@ -138,6 +152,8 @@ void Player::staticCtor() {
     sSkins.push_back(CMinecraftApp::getSkinIdFromPath(L"dlcskin00002104"));
 }
 
+void Player::OnEquipArmor(not_null_ptr<ItemInstance>) {}
+void Player::OnTakeFromAnvil(not_null_ptr<ItemInstance>) {}
 // NON-MATCHING: some crap, logic should be the same though
 void Player::updatePlayerSize() {
     float newHeight, newWidth;

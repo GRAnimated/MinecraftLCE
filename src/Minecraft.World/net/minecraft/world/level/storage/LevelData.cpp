@@ -1,8 +1,11 @@
-#include "net/minecraft/world/level/storage/LevelData.h"
+#include "Minecraft.World/level/storage/LevelData.h"
 
-#include "com/mojang/nbt/CompoundTag.h"
-#include "net/minecraft/core/BlockPos.h"
-#include "net/minecraft/world/level/LevelType.h"
+#include "Minecraft.Nbt/CompoundTag.h"
+
+#include "Minecraft.World/Difficulty.h"
+#include "Minecraft.World/level/LevelType.h"
+#include "Minecraft.Core/BlockPos.h"
+#include "Minecraft.Core/System.h"
 
 LevelData::LevelData(LevelData* other) {
     mSeed = other->mSeed;
@@ -62,6 +65,83 @@ CompoundTag* LevelData::createTag() {
 
 CompoundTag* LevelData::createTag(std::vector<std::shared_ptr<Player>>*) {
     return createTag();
+}
+
+void LevelData::setTagData(CompoundTag* out) {
+    out->putInt(sLevelDataVersionString, 922); // why is DataVersion it's own static shit wtf
+    out->putLong(L"RandomSeed", this->mSeed);
+    out->putString(L"generatorName", this->mLevelType->getGeneratorName());
+    out->putInt(L"generatorVersion", this->mLevelType->getVersion());
+
+    if (this->mGeneratorOptions) {
+        out->put(L"generatorOptions", this->mGeneratorOptions->toTag());
+    }
+
+    out->putInt(L"GameType", this->mGameType->getId());
+    out->putBoolean(L"MapFeatures", this->mIsGenerateMapFeatures);
+    out->putBoolean(L"spawnBonusChest", this->mIsSpawnBonusChest);
+    out->putInt(L"SpawnX", this->mSpawnPosX);
+    out->putInt(L"SpawnY", this->mSpawnPosY);
+    out->putInt(L"SpawnZ", this->mSpawnPosZ);
+    out->putLong(L"Time", this->mGameTime);
+    out->putLong(L"DayTime", this->mDayTime);
+    out->putLong(L"SizeOnDisk", this->mSizeOnDisk);
+    out->putLong(L"LastPlayed", System::processTimeInMilliSecs());
+    out->putString(L"LevelName", this->mLevelName);
+    out->putInt(L"version", this->mVersion);
+    out->putInt(L"clearWeatherTime", this->mClearWeatherTime);
+    out->putInt(L"rainTime", this->mRainTime);
+    out->putBoolean(L"raining", this->mIsRaining);
+    out->putInt(L"thunderTime", this->mThunderTime);
+    out->putBoolean(L"thundering", this->mIsThundering);
+    out->putBoolean(L"hardcore", this->mIsHardcore);
+    out->putBoolean(L"allowCommands", this->mAllowCommands);
+    out->putBoolean(L"initialized", this->mInited);
+
+    if (this->mDifficulty) {
+        out->putByte(L"Difficulty", this->mDifficulty->getId());
+    }
+
+    if (this->mCloudHeight != 128) {
+        out->putInt(L"cloudHeight", this->mCloudHeight);
+    }
+
+    out->putBoolean(L"DifficultyLocked", this->mIsDifficultyLocked);
+
+    CompoundTag *dimensionData = new CompoundTag();
+
+    // had to google for different ways to iterate over map bc theres like 50 ways this could have been done
+    std::unordered_map<const DimensionType*, CompoundTag*>::iterator it = mDimensionData.begin();
+    while (it != mDimensionData.end()) {
+        dimensionData->put(it->first->getName(), it->second->copy());
+        ++it;
+    }
+
+    out->put(L"DimensionData", dimensionData);
+
+    out->putBoolean(L"newSeaLevel", this->mUseNewSeaLevel);
+    out->putBoolean(L"hasBeenInCreative", this->mHasBeenInCreativeMode);
+
+    out->putBoolean(L"hasStronghold", this->mHasStronghold);
+    out->putInt(L"StrongholdX", this->mStrongholdPosX);
+    out->putInt(L"StrongholdY", this->mStrongholdPosY);
+    out->putInt(L"StrongholdZ", this->mStrongholdPosZ);
+
+    out->putBoolean(L"hasStrongholdEndPortal", this->mHasStrongholdEndPortal);
+    out->putInt(L"StrongholdEndPortalX", this->mStrongholdEndPortalX);
+    out->putInt(L"StrongholdEndPortalZ", this->mStrongholdEndPortalZ);
+
+    out->putInt(L"XZSize", this->mXZSize);
+    out->putInt(L"HellScale", this->mHellScale);
+    out->putBoolean(L"ModernEnd", this->mIsModernEnd);
+
+    out->putInt(L"ClassicMoat", this->mIsClassicMoat);
+    out->putInt(L"SmallMoat", this->mIsSmallMoat);
+    out->putInt(L"MediumMoat", this->mIsMediumMoat);
+
+    out->putInt(L"BiomeScale", this->mIsBiggerBiomes);
+    out->putInt(L"BiomeCentreXChunk", this->mBiomeCenterXChunk);
+    out->putInt(L"BiomeCentreZChunk", this->mBiomeCenterZChunk);
 }
 
 long LevelData::getSeed() {
@@ -158,9 +238,11 @@ std::wstring LevelData::getLevelName() {
 void LevelData::setLevelName(const std::wstring& name) {
     mLevelName = name;
 }
+
 int LevelData::getVersion() {
     return mVersion;
 }
+
 void LevelData::setVersion(int version) {
     mVersion = version;
 }
@@ -215,14 +297,15 @@ bool LevelData::useNewSeaLevel() {
 bool LevelData::getHasBeenInCreative() {
     return mHasBeenInCreativeMode;
 }
+
 void LevelData::setHasBeenInCreative(bool hasBeenInCreative) {
     mHasBeenInCreativeMode = hasBeenInCreative;
 }
+
 LevelType* LevelData::getGeneratorType() {
     return mLevelType;
 }
 
-// NON_MATCHING: regswap
 void LevelData::setGeneratorType(LevelType* levelType) {
     bool hasBeenInCreative = mHasBeenInCreativeMode;
     LevelType* flatType = LevelType::FLAT;

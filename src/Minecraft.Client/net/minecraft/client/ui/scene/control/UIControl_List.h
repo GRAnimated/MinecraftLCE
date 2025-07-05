@@ -1,6 +1,5 @@
 #pragma once
-
-#include "net/minecraft/client/ui/scene/control/UIControl_Base.h"
+#include "Minecraft.Client/ui/scene/control/UIControl_Base.h"
 #include <unordered_map>
 #include <vector>
 
@@ -8,9 +7,13 @@ class UIControl_List : public UIControl_Base {
 public:
     class GenericPendingUpdate {
     public:
+        virtual void nullsub_795();
+        virtual ~GenericPendingUpdate();
+        virtual void virtual_void_0() = 0;
     };
 
     UIControl_List();
+    ~UIControl_List();
 
     void addElement(eUIControlType, int);
     void init(int);
@@ -20,6 +23,6 @@ public:
     std::vector<int> mUIControlIDs;
     int dword98 = 0;
     int mListSize = 0;
-    std::unordered_map<int, eUIControlType> mUIControlsTypes;
-    std::unordered_map<int, bool> mUIControlsStates;
+    std::unordered_map<unsigned int, eUIControlType> mUIControlsTypes;
+    std::unordered_map<unsigned int, bool> mUIControlsStates;
 };

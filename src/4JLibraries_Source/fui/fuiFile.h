@@ -1,29 +1,52 @@
 #pragma once
 
-#include "net/minecraft/world/ArrayWithLength.h"
 #include "types.h"
+#include "fuiSymbol.h"
+#include "Minecraft.World/ArrayWithLength.h"
 
 // Most structs derived from
 // https://github.com/NessieHax/fui-research-repo/blob/main/DOCUMENTATION.md
 
 class fuiRenderNode;
 class fuiBitmapFont;
-struct fuiRect {
+class fuiRect {
+public:
     float minX;
     float maxX;
     float minY;
     float maxY;
+
+    // getHeight?
+    float getHeight() {
+        return this->maxY - this->minY;
+    }
+
+    // getWidth?
+    float getWidth() {
+        return this->maxX - this->minX;
+    }
 };
 struct fuiRGBA {
     int color;  // RGBA
 };
 struct fuiMatrix {
-    float scaleX;
-    float scaleY;
-    float rotateSkew0;
-    float rotateSkew1;
-    float posX;
-    float posY;
+    float mScaleX;
+    float mScaleY;
+    float mRotSkewX;
+    float mRotSkewY;
+    float mPosX;
+    float mPosY;
+
+    // spent an hour trying to figure out what this was
+    // finally thought of it being a built in C++ operator... which looks good to me.
+    fuiMatrix operator*(const fuiMatrix &rhs) const {
+        fuiMatrix out = {};
+        mul(*this, rhs, out);
+
+        return out;
+    }
+
+    static void mul(const fuiMatrix &lhs, const fuiMatrix &rhs, fuiMatrix &out);
 };
 struct fuiColorTransform {
     float redMultTerm;
@@ -58,7 +81,6 @@ struct fuiReference {
 class fuiEdittext;
 class fuiBitmap;
 class fuiFontName;
-class fuiSymbol;
 class fuiImportAsset;
 class FJ_FuiNode;
 
@@ -82,6 +104,7 @@ struct fuiHeader {
     int field_7C;
     int fontNameCount;
     int importAssetCount;
+    int mUnk;
     fuiRect stageSize;
     int index;
 };
@@ -113,7 +136,9 @@ class fuiFile {
 public:
     fuiFile();
     ~fuiFile();
-    void addDataRegion(uint, uint, uchar**, void (*)(void*));
+    // NOTE: HAD TO CHANGE THE SIGNATURE BECAUSE OF THE METHOD BEING DIFFERENT
+    // ORIG HAD A CALLBACK METHOD INSTEAD OF DATA
+    static uint64_t addDataRegion(uint a1, uint a2, uchar** ptr, uint64_t *callbackData);
     void load(arrayWithLength<uchar>, int);
     bool resolveReferences(fuiFile*);
     void dumpUnresolvedReferences();
@@ -122,7 +147,8 @@ public:
     void createNodeFromSymbol(char* const, fuiRenderNode*, int);
     // findNode - doesn't exist in switch edition
     // setVisible - doesn't exist in switch edition
-    void setCustomDrawCallback(void (*)(void*, const char*, fuiRect*), void*);
+
+    void setCustomDrawCallback(void (*)(void*, char const*, fuiRect*), void* node);
     float getStageWidth();
     float getStageHeight();
     void setIndex(int);

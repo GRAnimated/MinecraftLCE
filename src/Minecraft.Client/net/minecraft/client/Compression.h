@@ -20,8 +20,8 @@ public:
     ~Compression();
 
     // Thread Storage shit
-    static unsigned int tlsIndex;
-    static Compression::ThreadStorage* threadStorage;
+    static unsigned int sTlsIndex;
+    static Compression::ThreadStorage* sThreadStorage;
 
     static void CreateNewThreadStorage();
     static void ReleaseThreadStorage();

@@ -40,6 +40,8 @@ public:
 
     static void staticCtor();
 
+    static const Direction* from3DDataValue(int value);
+
     Direction(int, int, int, const std::wstring&, Direction::AxisDirection*, Direction::Axis*, Vec3i*,
               unsigned char);
     virtual ~Direction();

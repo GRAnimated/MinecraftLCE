@@ -1,7 +1,12 @@
 #pragma once
 
-#include "net/minecraft/core/BlockPos.h"
-#include "net/minecraft/world/level/GameRules.h"
+#include "Minecraft.World/level/GameRules.h"
+#include "Minecraft.World/level/LevelType.h"
+#include "Minecraft.World/level/dimension/DimensionType.h"
+#include "Minecraft.World/level/gamemode/GameType.h"
+
+#include "Minecraft.World/level/storage/config/SuperflatConfig.h"
+#include "Minecraft.Core/BlockPos.h"
 #include <memory>
 #include <string>
 #include <unordered_map>
@@ -10,15 +15,13 @@
 class CompoundTag;
 class BlockPos;
 class Player;
-class GameType;
-class LevelType;
-class SuperflatConfig;
 class Difficulty;
-class DimensionType;
 class LevelSettings;
 
 class LevelData {
 public:
+    static std::wstring sLevelDataVersionString;
+
     LevelData();
     LevelData(CompoundTag*);
     LevelData(LevelSettings*, const std::wstring&);
@@ -26,7 +29,7 @@ public:
     virtual ~LevelData();
     virtual CompoundTag* createTag();
     virtual CompoundTag* createTag(std::vector<std::shared_ptr<Player>>*);
-    virtual void setTagData(CompoundTag*);
+    virtual void setTagData(CompoundTag *out);
     virtual long getSeed();
     virtual int getXSpawn();
     virtual int getYSpawn();

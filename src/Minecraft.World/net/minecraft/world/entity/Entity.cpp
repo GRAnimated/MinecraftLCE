@@ -1,15 +1,14 @@
-#include "net/minecraft/world/entity/Entity.h"
-
-#include "NX/Platform.h"
-#include "net/minecraft/core/BlockPos.h"
-#include "net/minecraft/world/damagesource/DamageSource.h"
-#include "net/minecraft/world/eINSTANCEOF.h"
-#include "net/minecraft/world/enchantment/enchantments/ProtectionEnchantment.h"
-#include "net/minecraft/world/entity/LivingEntity.h"
-#include "net/minecraft/world/item/enchantment/Enchantment.h"
-#include "net/minecraft/world/level/Level.h"
-#include "net/minecraft/world/level/block/Block.h"
-#include "net/minecraft/world/phys/AABB.h"
+#include "Minecraft.Client/platform/NX/Platform.h"
+#include "Minecraft.World/eINSTANCEOF.h"
+#include "Minecraft.World/enchantment/Enchantment.h"
+#include "Minecraft.World/enchantment/enchantments/ProtectionEnchantment.h"
+#include "Minecraft.World/entity/Entity.h"
+#include "Minecraft.World/entity/LivingEntity.h"
+#include "Minecraft.World/level/DamageSource.h"
+#include "Minecraft.World/level/Level.h"
+#include "Minecraft.World/level/block/Block.h"
+#include "Minecraft.World/phys/AABB.h"
+#include "Minecraft.Core/BlockPos.h"
 #include <memory>
 
 Entity::Entity(Level*, bool) {}
@@ -212,3 +211,9 @@ Vec3* Entity::getViewVector(float partialTicks) {
                                          this->mYRotO + ((this->mYRot - this->mYRotO) * partialTicks));
     }
 }
+void Entity::readAdditionContructionTag_4(CompoundTag*) {}
+void Entity::SetPositionLocked_4(bool) {}
+void Entity::SetGlideCollisionDamage_4(bool) {}
+void Entity::SetLiftForceModifier_4(double) {}
+void Entity::onLoadedFromSave_4() {}
+void Entity::setUsingItemFlag_4(bool) {}

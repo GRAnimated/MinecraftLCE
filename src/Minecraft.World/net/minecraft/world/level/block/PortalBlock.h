@@ -30,4 +30,6 @@ public:
                                                     const BlockState* blockState) override;
     BlockStateDefinition* createBlockStateDefinition() override;
     virtual bool trySpawnPortal(Level*, const BlockPos&, bool);
+
+    static void blockStaticCtor();
 };
