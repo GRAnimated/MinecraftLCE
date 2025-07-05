@@ -1,4 +1,6 @@
-#include "File.h"
+#include "java/io/File.h"
+
+#include "fui/fuiFile.h"
 
 File::File() {
     this->name = L"";

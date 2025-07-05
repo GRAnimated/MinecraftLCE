@@ -67,10 +67,10 @@ public:
     virtual ~Block();
     virtual void DerivedInit();
     virtual void sendBlockData(uchar);
-    virtual Block *setSoundType(const SoundType*);
+    virtual Block* setSoundType(const SoundType*);
     virtual void setLightBlock(int);
     virtual Block* setLightEmission(float);
-    virtual Block *setExplodeable(float);
+    virtual Block* setExplodeable(float);
     virtual bool isSolidBlockingCube(const BlockState* blockState);
     virtual bool isSolidBlockingCubeAndNotSignalSource(const BlockState* blockState);
     virtual bool isViewBlocking(const BlockState* blockState);
@@ -80,7 +80,7 @@ public:
     virtual RenderShape getRenderShape(const BlockState* blockState);
     virtual void hasInHandRenderOffset();
     virtual bool mayReplaceWithPlace(LevelSource* levelSource, const BlockPos& pos);
-    virtual Block *setDestroyTime(float);
+    virtual Block* setDestroyTime(float);
     virtual void setIndestructible();
     virtual bool isIndestructible();
     virtual void getDestroySpeed(const BlockState* blockState, Level* level, const BlockPos& pos);

@@ -1,7 +1,7 @@
 #pragma once
 
-#include "../event/FJ_EventListener.h"
 #include "../event/FJ_Event.h"
+#include "../event/FJ_EventListener.h"
 #include "../fuiRenderNodeStage.h"
 #include <vector>
 
@@ -18,7 +18,7 @@ class FJ_Document;
 
 class FJ_FuiNode {
 public:
-    FJ_FuiNode(fuiRenderNode *renderNode);
+    FJ_FuiNode(fuiRenderNode* renderNode);
 
     virtual ~FJ_FuiNode();
     virtual void ASConstructor();
@@ -49,7 +49,7 @@ public:
     FJ_List_ListButtonPlayerList* asFJ_List_ListButtonPlayerList();
     FJ_Document* asFJ_Document();
     FJ_Button* asFJ_Button();
-    void *asMovieClip();
+    void* asMovieClip();
 
     bool isFJ_Document();
 

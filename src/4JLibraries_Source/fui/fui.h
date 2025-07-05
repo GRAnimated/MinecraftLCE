@@ -25,20 +25,20 @@ public:
     void setResolution(int);
     int getResolution();
     void tick();
-    void preRender(fuiFile *file);
+    void preRender(fuiFile* file);
     void render(fuiFile*, float, float, float, float);
     void dispatchKeyboardEvent(fuiFile*, bool, int);
     void dispatchMouseMoveEvent(fuiFile*, float, float);
     void dispatchEnterFrameEvent();
     void addDirectEventListener(const FJ_EventListener&);
     void removeDirectEventListener(const FJ_EventListener&);
-    void removeEventListenerForNode(FJ_FuiNode *node);
+    void removeEventListenerForNode(FJ_FuiNode* node);
     void manageTexture(fuiFile*, fuiBitmap*);
     void removeManagedTexture(fuiFile*, fuiBitmap*);
-    void setFontIndirection(char const*, char const*);
+    void setFontIndirection(const char*, const char*);
 
     float mUnk1;
-    char mFPad[16]; // to pad each float since each one is +20 offset
+    char mFPad[16];  // to pad each float since each one is +20 offset
     float mUnk2;
     char mFPad2[16];
     float mUnk3;
@@ -58,6 +58,6 @@ public:
     char padding4[72];
     nn::os::MutexType* mScenesMutex;
     char padding5[24];
-    fuiTextureManager *mTextureManager;
+    fuiTextureManager* mTextureManager;
     int mResolution;
 };

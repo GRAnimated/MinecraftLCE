@@ -8,7 +8,8 @@ void fuiRenderNodeTimeline::progogateBoundsFromChild() {
 
         fuiRenderNode* tl = cur->mTimeline;
 
-        if (!tl) break;
+        if (!tl)
+            break;
 
         cur = tl->asTimeline();
     } while (cur);

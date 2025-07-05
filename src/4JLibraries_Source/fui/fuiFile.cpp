@@ -1,5 +1,5 @@
-#include "fuiFile.h"
-#include "node/FJ_FuiNode.h"
+#include "fui/fuiFile.h"
+#include "fui/node/FJ_FuiNode.h"
 
 // NON_MATCHING | Score: 550 (lower is better)
 // Meth. Dunno what to do here...
@@ -28,7 +28,8 @@ fuiFile::fuiFile() {
 // NON_MATCHING | Score: 10 (lower is better)
 // 2 registers were swapped...
 uint64_t fuiFile::addDataRegion(uint a1, unsigned int size, unsigned char** data, uint64_t* callbackData) {
-    if (!size) return 0;
+    if (!size)
+        return 0;
 
     const uint64_t res = *callbackData;
     *callbackData += size * reinterpret_cast<uint64_t>(data);
@@ -40,8 +41,9 @@ fuiRenderNode* fuiFile::getRootNode() {
 }
 
 // NON_MATCHING | score: 10 (lower is better)
-// can also get it to match by swapping the params and using mRootNode in place of mCallbackData, but that's not correct surely
-void fuiFile::setCustomDrawCallback(void (*callback)(void*, char const*, fuiRect*), void* data) {
+// can also get it to match by swapping the params and using mRootNode in place of mCallbackData, but that's
+// not correct surely
+void fuiFile::setCustomDrawCallback(void (*callback)(void*, const char*, fuiRect*), void* data) {
     this->mCallbackData = data;
     this->mCallbackFunc = callback;
 }

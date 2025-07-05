@@ -5,9 +5,9 @@
 
 #include "event/FJ_KeyboardEvent.h"
 #include "event/FJ_MouseMoveEvent.h"
-#include "fuiFile.h"
-#include "fuiTextureManager.h"
-#include "node/FJ_FuiNode.h"
+#include "fui/fuiFile.h"
+#include "fui/fuiTextureManager.h"
+#include "fui/node/FJ_FuiNode.h"
 #include "node/FJ_FuiNodeStage.h"
 #include <cstring>
 

@@ -1,5 +1,3 @@
 #pragma once
 
-class FJ_Checkbox {
-
-};
+class FJ_Checkbox {};

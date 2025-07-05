@@ -1,6 +1,6 @@
-#include "net/minecraft/world/item/Item.h"
+#include "net/minecraft/world/level/block/Block.h"
 
-#include "Block.h"
+#include "net/minecraft/world/item/Item.h"
 
 #include "net/minecraft/world/level/block/SoundType.h"
 #include "net/minecraft/world/level/block/state/BlockState.h"
@@ -11,7 +11,6 @@
 #include "AnvilBlock.h"
 #include "BannerBlock.h"
 #include "BedBlock.h"
-#include "Blocks.h"
 #include "ButtonBlock.h"
 #include "ChestBlock.h"
 #include "ColoredBlock.h"
@@ -74,6 +73,7 @@
 #include "WallSignBlock.h"
 #include "WoodSlabBlock.h"
 #include "WoolCarpetBlock.h"
+#include "net/minecraft/world/level/block/Blocks.h"
 
 Block::Block(Material* material) {
     init(material, material->getColor());

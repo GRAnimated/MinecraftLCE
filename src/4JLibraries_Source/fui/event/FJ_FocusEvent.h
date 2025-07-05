@@ -1,5 +1,6 @@
 #pragma once
-#include "FJ_Event.h"
+
+#include "fui/event/FJ_Event.h"
 
 class FJ_FocusEvent : public FJ_Event {
 public:

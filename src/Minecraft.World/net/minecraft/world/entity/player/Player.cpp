@@ -113,7 +113,7 @@ void Player::magicCrit(std::shared_ptr<Entity>) {}
 void Player::displayClientMessage(int, bool) {}
 void Player::resetStat(Stat*) {}
 void Player::onUpdateAbilities() {}
-void Player::setGameMode(GameType const*) {}
+void Player::setGameMode(const GameType*) {}
 void Player::onCrafted(not_null_ptr<ItemInstance>) {}
 void Player::handleCollectItem(not_null_ptr<ItemInstance>) {}
 

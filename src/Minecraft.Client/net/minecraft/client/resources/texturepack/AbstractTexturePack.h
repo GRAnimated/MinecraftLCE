@@ -1,6 +1,7 @@
 #pragma once
-#include "TexturePack.h"
+
 #include "java/io/File.h"
+#include "net/minecraft/client/resources/texturepack/TexturePack.h"
 #include <string>
 
 class AbstractTexturePack : public TexturePack {

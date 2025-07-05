@@ -1,6 +1,6 @@
 #pragma once
 
-#include "fuiFile.h";
+#include "fui/fuiFile.h"
 
 class fuiRenderNodeTimeline;
 class FJ_FuiNodeStage;
@@ -8,9 +8,7 @@ class fuiMatrix;
 class fuiObject;
 class fuiRect;
 class fuiRGBA;
-enum eFuiObjectType {
-    RENDER_NODE_STAGE = 0
-};
+enum eFuiObjectType { RENDER_NODE_STAGE = 0 };
 
 // weird flag thing
 constexpr uint32_t FLAG_CTOR_ENABLED = 0x1;
@@ -42,13 +40,13 @@ public:
     virtual void generateGlobalMatrix();
 
     // apparently this is static? (SFP)
-    static FJ_FuiNode *Create(fuiRenderNode *node);
+    static FJ_FuiNode* Create(fuiRenderNode* node);
 
     float getX();
     float getY();
     void disableCtor();
     void setAlpha(float a);
-    void progogateBounds(); // english 100
+    void progogateBounds();  // english 100
 
     void setScaleX(float sX);
     void setScaleY(float sY);
@@ -58,7 +56,7 @@ public:
 
     fuiRenderNode* getStage() { return mStage; }
 
-    fuiRenderNodeTimeline *asTimeline();
+    fuiRenderNodeTimeline* asTimeline();
 
     int mFlags;
     bool byte_c;

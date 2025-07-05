@@ -5,5 +5,5 @@ class fuiFile;
 
 class fuiTextureManager {
 public:
-    void removeManagedTexture(fuiFile *file, fuiBitmap *texture);
+    void removeManagedTexture(fuiFile* file, fuiBitmap* texture);
 };

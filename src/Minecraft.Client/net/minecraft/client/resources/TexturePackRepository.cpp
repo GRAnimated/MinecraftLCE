@@ -1,9 +1,9 @@
-#include "TexturePackRepository.h"
+#include "net/minecraft/client/resources/TexturePackRepository.h"
 #include <unordered_map>
 
 // NON_MATCHING | Score: 3105 (lower is better)
 // confusion
-TexturePackRepository::TexturePackRepository(File file, Minecraft *mc) {
+TexturePackRepository::TexturePackRepository(File file, Minecraft* mc) {
     this->mFile = File();
     this->mFile2 = File();
     this->unk_80d = nullptr;

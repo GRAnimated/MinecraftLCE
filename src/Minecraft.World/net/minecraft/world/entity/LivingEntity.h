@@ -19,7 +19,7 @@ class CombatTracker;
 
 class LivingEntity : public Entity {
 public:
-    LivingEntity(Level *level);
+    LivingEntity(Level* level);
 
     int getUseItemRemainingTicks();
 
@@ -121,8 +121,8 @@ public:
     virtual void setArrowCount(int);
     virtual void swing(InteractionHand::EInteractionHand);
     virtual void updateSwingTime();
-    virtual Attribute *getAttribute(Attribute *attribute);
-    virtual AttributeMap *getAttributes();
+    virtual Attribute* getAttribute(Attribute* attribute);
+    virtual AttributeMap* getAttributes();
     virtual MobType getMobType();
     virtual void getMainHandItem();
     virtual void getOffhandItem();

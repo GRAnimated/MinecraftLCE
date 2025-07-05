@@ -1,4 +1,5 @@
 #pragma once
+
 #include "cstdint"
 #include "java/io/File.h"
 #include "texturepack/DefaultTexturePack.h"

@@ -1,13 +1,12 @@
-#include "net/minecraft/world/eINSTANCEOF.h"
 #include "net/minecraft/world/level/biome/Biome.h"
 
+#include "net/minecraft/world/eINSTANCEOF.h"
+
 #include "BeachBiome.h"
-#include "Biome.h"
 #include "DesertBiome.h"
 #include "ExtremeHillsBiome.h"
 #include "ForestBiome.h"
 #include "HellBiome.h"
-#include "IceBiome.h"
 #include "JungleBiome.h"
 #include "MesaBiome.h"
 #include "MushroomIslandBiome.h"
@@ -29,6 +28,7 @@
 #include "net/minecraft/world/Random.h"
 #include "net/minecraft/world/level/FoliageColor.h"
 #include "net/minecraft/world/level/GrassColor.h"
+#include "net/minecraft/world/level/biome/IceBiome.h"
 #include "net/minecraft/world/level/block/Blocks.h"
 #include "net/minecraft/world/level/levelgen/feature/FlowerFeature.h"
 #include "net/minecraft/world/level/levelgen/synth/PerlinSimplexNoise.h"

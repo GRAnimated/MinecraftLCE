@@ -1,4 +1,4 @@
-#include "AABB.h"
+#include "net/minecraft/world/phys/AABB.h"
 Vec3* AABB::getCenter() {
     return Vec3::newTemp(this->min.x + (this->max.x - this->min.x) * 0.5,
                          this->min.y + (this->max.y - this->min.y) * 0.5,
@@ -31,9 +31,8 @@ AABB* AABB::grow(double x, double y, double z) const {
 // NON_MATCHING | Score: 1485 (lower is better)
 // Not sure how to make this match.
 bool AABB::intersects(const AABB* rhs) const {
-    return (this->min.x < rhs->max.x) && (rhs->min.x < this->max.x) &&
-           (this->min.y < rhs->max.y) && (rhs->min.y < this->max.y) &&
-           (this->min.z < rhs->max.z) && (rhs->min.z < this->max.z);
+    return (this->min.x < rhs->max.x) && (rhs->min.x < this->max.x) && (this->min.y < rhs->max.y)
+           && (rhs->min.y < this->max.y) && (this->min.z < rhs->max.z) && (rhs->min.z < this->max.z);
 }
 
 void AABB::resetPool() {};

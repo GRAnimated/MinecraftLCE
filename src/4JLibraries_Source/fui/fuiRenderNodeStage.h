@@ -1,9 +1,10 @@
 #pragma once
-#include "fuiRenderNode.h"
+
+#include "fui/fuiRenderNode.h"
 
 class fuiRenderNodeStage : public fuiRenderNode {
 public:
-    explicit fuiRenderNodeStage(fuiFile *file);
+    explicit fuiRenderNodeStage(fuiFile* file);
     float getStageHeight();
     float getStageWidth();
     void addChild(fuiRenderNode* node);

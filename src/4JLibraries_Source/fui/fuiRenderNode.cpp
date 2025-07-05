@@ -1,7 +1,8 @@
-#include <cmath>
-#include "fuiRenderNode.h"
+#include "fui/fuiRenderNode.h"
+
 #include "fuiRenderNodeTimeline.h"
 #include "node/FJ_FuiNodeStage.h"
+#include <cmath>
 
 void fuiRenderNode::setScaleX(float sX) {
     float scaleX = sX / this->getScaleX();
@@ -27,32 +28,35 @@ void fuiRenderNode::setWidth(float w) {
     float cW = this->getWidth();
     float sX = this->getScaleX();
 
-    if (w > 0.0f) this->setScaleX(sX * (w / cW));
-    if (this->getWidth() != w) this->getWidth();
+    if (w > 0.0f)
+        this->setScaleX(sX * (w / cW));
+    if (this->getWidth() != w)
+        this->getWidth();
 }
 
 void fuiRenderNode::setHeight(float h) {
     const float cH = this->getHeight();
-    if (h > 0.0f)
-    {
+    if (h > 0.0f) {
         const float v5 = h / cH;
         this->setScaleY(v5 * this->getScaleY());
     }
 }
 
 float fuiRenderNode::getScaleY() {
-    return sqrtf((this->mMatrix.mScaleY * this->mMatrix.mScaleY) + (this->mMatrix.mRotSkewY * this->mMatrix.mRotSkewY));
+    return sqrtf((this->mMatrix.mScaleY * this->mMatrix.mScaleY)
+                 + (this->mMatrix.mRotSkewY * this->mMatrix.mRotSkewY));
 }
 
 fuiRenderNodeTimeline* fuiRenderNode::asTimeline() {
-    if ( this->field_20 != 2 ) // is field_20 type?
+    if (this->field_20 != 2)  // is field_20 type?
         return nullptr;
 
     return reinterpret_cast<fuiRenderNodeTimeline*>(this);
 }
 
 float fuiRenderNode::getScaleX() {
-    return sqrtf((this->mMatrix.mScaleX * this->mMatrix.mScaleX) + (this->mMatrix.mRotSkewX * this->mMatrix.mRotSkewX));
+    return sqrtf((this->mMatrix.mScaleX * this->mMatrix.mScaleX)
+                 + (this->mMatrix.mRotSkewX * this->mMatrix.mRotSkewX));
 }
 
 float fuiRenderNode::getX() {
@@ -86,8 +90,10 @@ void fuiRenderNode::setAlpha(float a) {
 }
 
 void fuiRenderNode::setVisibility(bool visible) {
-    if (visible) this->mFlags |= FLAG_NODE_VISIBLE;
-    else this->mFlags &= ~FLAG_NODE_VISIBLE;
+    if (visible)
+        this->mFlags |= FLAG_NODE_VISIBLE;
+    else
+        this->mFlags &= ~FLAG_NODE_VISIBLE;
 }
 
 bool fuiRenderNode::isVisible() {
@@ -96,19 +102,18 @@ bool fuiRenderNode::isVisible() {
 
 void fuiRenderNode::handleAddedToStage() {
     if (this->mFuiNodeStage) {
-        this->mFuiNodeStage->dispatchEvent(new FJ_Event(eFJEventType::ADDED_TO_STAGE, false ,false));
+        this->mFuiNodeStage->dispatchEvent(new FJ_Event(eFJEventType::ADDED_TO_STAGE, false, false));
     }
 }
 
-fuiRenderNode* fuiRenderNode::getNodeFromPath(char const *path) {
+fuiRenderNode* fuiRenderNode::getNodeFromPath(const char* path) {
     bool diff = strcmp(this->mPath, path) == 0 || strcmp(path, DEFAULT_PATH) == 0;
     return diff ? this : nullptr;
 }
 
-
-fuiRenderNode *fuiRenderNode::findNode(char const* name)
-{
-    if (strlen(name)) return nullptr;
+fuiRenderNode* fuiRenderNode::findNode(const char* name) {
+    if (strlen(name))
+        return nullptr;
 
     return this;
 }
@@ -134,7 +139,7 @@ float fuiRenderNode::getHeight() {
     return rect.getHeight();
 }
 
-void fuiRenderNode::getParentSpaceBounds(fuiRect *rect) {
+void fuiRenderNode::getParentSpaceBounds(fuiRect* rect) {
     rect->minX = this->mRect.minX * this->mMatrix.mScaleX + this->mMatrix.mPosX;
     rect->maxX = this->mRect.maxX * this->mMatrix.mScaleX + this->mMatrix.mPosX;
     rect->minY = this->mRect.minY * this->mMatrix.mRotSkewY + this->mMatrix.mPosY;

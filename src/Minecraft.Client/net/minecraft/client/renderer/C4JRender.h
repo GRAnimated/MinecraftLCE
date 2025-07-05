@@ -1,4 +1,5 @@
 #pragma once
+
 #include "arm_neon.h"
 
 class _XSOCIAL_PREVIEWIMAGE;

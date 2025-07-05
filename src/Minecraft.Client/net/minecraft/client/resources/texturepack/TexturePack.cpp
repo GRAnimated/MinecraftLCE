@@ -1,4 +1,4 @@
-#include "TexturePack.h"
+#include "net/minecraft/client/resources/texturepack/TexturePack.h"
 
 bool TexturePack::hasAudio() {
     return this->mHasAudio;
