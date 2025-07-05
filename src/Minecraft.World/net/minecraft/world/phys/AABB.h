@@ -21,6 +21,7 @@ public:
     double getSize() const;
     AABB* grow(double multiplier) const;
     AABB* grow(double x, double y, double z) const;
+    bool contains(Vec3 *vec);
     bool intersects(const AABB* rhs) const;
     void resetPool();
 
