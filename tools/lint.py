@@ -444,6 +444,12 @@ def main():
     
     if args.fix:
         print("Automatic fixes completed. Please review the changes made.")
+    
+    if issueFound:
+        print("Formatting issues found.")
+        exit(1)
+    else:
+        print("No issues found!")
 
 if __name__ == "__main__":
     main()

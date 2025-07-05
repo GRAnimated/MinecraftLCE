@@ -82,10 +82,13 @@ def main():
         "setup.py", description="Set up the decompilation project")
     parser.add_argument("original_nso", type=Path,
                         help="Path to the original NSO, compressed or not)", nargs="?")
+    parser.add_argument("--project-only", action="store_true",
+                    help="Disable original NSO setup")
     args = parser.parse_args()
 
     setup.install_viking()
-    prepare_executable(args.original_nso)
+    if not args.project_only:
+        prepare_executable(args.original_nso)
     setup.set_up_compiler("4.0.1")
     create_build_dir()
     patch_clang()

@@ -33,7 +33,7 @@ example [ncurses5-compat-libs](https://aur.archlinux.org/packages/ncurses5-compa
 Additionally, you'll also need:
 
 * A Rust toolchain ([follow the instructions here](https://www.rust-lang.org/tools/install))
-* The following Python modules: `pip install capstone colorama cxxfilt pyelftools ansiwrap watchdog python-Levenshtein toml`
+* The following Python modules: `pip install capstone colorama cxxfilt pyelftools ansiwrap watchdog python-Levenshtein toml pyyaml`
 
 ## 2. Set up the project
 
