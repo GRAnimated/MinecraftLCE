@@ -6,6 +6,7 @@ This file contains all of the Switch implementations of Windows/XBOX functions
 
 */
 
+#include <cstdlib>
 #include <nn/os.h>
 
 typedef bool BOOL;
@@ -51,3 +52,7 @@ int TlsSetValue(unsigned int index, void* value);
 int OpenDir(const char*, int*);
 int ReadDir(int*, struct FSDirEntry*);  // TODO: what is FSDirEntry?
 int CloseDir(int*);
+
+void* gfx_aligned_alloc(ulong a1, ulong a2, void*);
+void gfx_free(void* ptr, void*);
+void* gfx_realloc(void* ptr, ulong, void*);

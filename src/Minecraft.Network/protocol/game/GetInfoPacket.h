@@ -6,7 +6,6 @@ class GetInfoPacket : public Packet, public std::enable_shared_from_this<GetInfo
 public:
     static std::shared_ptr<Packet> create();
 
-    GetInfoPacket();
     virtual EPacketType getPacketId() override;
     virtual void read(DataInputStream* input) override;
     virtual void write(DataOutputStream* output) override;
