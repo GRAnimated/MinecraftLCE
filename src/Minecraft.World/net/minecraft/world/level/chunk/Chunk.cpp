@@ -1,7 +1,7 @@
 #include "net/minecraft/world/level/chunk/Chunk.h"
 
 #include "NX/Platform.h"
-#include "NX/Renderer.h"
+#include "NX/Render/RendererCore.h"
 #include "com/mojang/blaze3d/platform/GlStateManager.h"
 #include "com/mojang/blaze3d/vertex/BufferBuilder.h"
 #include "com/mojang/blaze3d/vertex/Tesselator.h"

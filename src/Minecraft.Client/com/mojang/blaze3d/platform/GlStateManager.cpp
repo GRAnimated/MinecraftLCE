@@ -1,6 +1,5 @@
+#include "NX/Render/RendererCore.h"
 #include "com/mojang/blaze3d/platform/GlStateManager.h"
-
-#include "NX/Renderer.h"
 
 /*
     A lot of names were taken from OpenGL docs

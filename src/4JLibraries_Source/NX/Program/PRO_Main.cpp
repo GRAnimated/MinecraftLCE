@@ -3,7 +3,7 @@
 #include <cstring>
 #include <new>
 
-#include "NX/Renderer.h"
+#include "NX/Render/RendererCore.h"
 #include "com/mojang/blaze3d/vertex/Tesselator.h"
 #include "java/io/IntCache.h"
 #include "net/minecraft/client/C4JThreadImpl.h"

@@ -1,7 +1,7 @@
 #include "fui/fui.h"
 
 #include "NX/Platform.h"
-#include "NX/Renderer.h"
+#include "NX/Render/RendererCore.h"
 
 #include "event/FJ_KeyboardEvent.h"
 #include "event/FJ_MouseMoveEvent.h"

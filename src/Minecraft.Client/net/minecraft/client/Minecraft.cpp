@@ -1,7 +1,7 @@
 #include "net/minecraft/client/Minecraft.h"
 
 #include "NX/Platform.h"
-#include "NX/Renderer.h"
+#include "NX/Render/RendererCore.h"
 #include "com/mojang/blaze3d/platform/GlStateManager.h"
 #include "java/io/File.h"
 #include "net/minecraft/client/CMinecraftApp.h"
