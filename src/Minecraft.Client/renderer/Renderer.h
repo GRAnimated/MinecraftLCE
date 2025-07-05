@@ -2,6 +2,7 @@
 
 #include "nn/os/os_MutexTypes.h"
 #include "Minecraft.Client/renderer/C4JRender.h"
+#include <arm_neon.h>
 #include "nn/vi.h"
 #include "nvn/nvn.h"
 #include <cstddef>
@@ -49,7 +50,7 @@ public:
     void Initialise(bool);
 
     virtual void Tick();
-    virtual void UpdateGamma(unsigned short);
+    virtual void UpdateGamma(unsigned short gamma);
     virtual void MatrixMode(int);
     virtual void MatrixSetIdentity();
     virtual void MatrixTranslate(float, float, float);
@@ -59,7 +60,7 @@ public:
     virtual void MatrixOrthogonal(float, float, float, float, float, float);
     virtual void MatrixPop();
     virtual void MatrixPush();
-    virtual void MatrixMult(float*);
+    virtual float32x4_t MatrixMult(float *matrix);
     virtual void MatrixGet(int);
     virtual void Set_matrixDirty();
     // unused params were probably used in Xbox One
@@ -99,7 +100,7 @@ public:
     virtual void CBuffTick();
     virtual void CBuffDeferredModeStart();
     virtual void CBuffDeferredModeEnd();
-    virtual void GetMaxTextures();
+    virtual int GetMaxTextures();
     virtual int TextureCreate();
     virtual void TextureFree(int);
     virtual void TextureBind(int);
@@ -165,6 +166,8 @@ public:
     virtual void GetNumVertsInCommandBuffer(int);
     virtual void BeginEvent(const wchar_t*);
     virtual void EndEvent();
+
+    float32x4_t MultWithStack(float (*)[4]);
 
     char gap8[16];
     NVNdevice* mNVNdevice;

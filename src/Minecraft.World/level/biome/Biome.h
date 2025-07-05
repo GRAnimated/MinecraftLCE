@@ -24,62 +24,66 @@ public:
     static Biome* OCEAN;
     static Biome* PLAINS;
     static Biome* DESERT;
-    static Biome* MOUNTAINS;
+    static Biome* EXTREME_HILLS;
     static Biome* FOREST;
     static Biome* TAIGA;
     static Biome* SWAMP;
     static Biome* RIVER;
+    static Biome* NETHER; // for some reason this is somewhere completely different in the executable
     static Biome* THE_END;
     static Biome* FROZEN_OCEAN;
     static Biome* FROZEN_RIVER;
-    static Biome* SNOWY_TUNDRA;
-    static Biome* SNOWY_MOUNTAINS;
-    static Biome* MUSHROOM_FIELD_SHORE;
+    static Biome* ICE_PLAINS;
+    static Biome* ICE_MOUNTAINS;
+    static Biome* MUSHROOM_ISLAND;
+    static Biome* MUSHROOM_ISLAND_SHORE;
     static Biome* BEACH;
     static Biome* DESERT_HILLS;
-    static Biome* WOODED_HILLS;
+    static Biome* FOREST_HILLS;
     static Biome* TAIGA_HILLS;
-    static Biome* MOUNTAIN_EDGE;
+    static Biome* EXTREME_HILLS_EDGE;
     static Biome* JUNGLE;
     static Biome* JUNGLE_HILLS;
     static Biome* JUNGLE_EDGE;
-    static Biome* STONE_SHORE;
-    static Biome* SNOWY_BEACH;
+    static Biome* DEEP_OCEAN;
+    static Biome* STONE_BEACH;
+    static Biome* COLD_BEACH;
     static Biome* BIRCH_FOREST;
     static Biome* BIRCH_FOREST_HILLS;
-    static Biome* DARK_FOREST;
-    static Biome* SNOWY_TAIGA;
-    static Biome* SNOWY_TAIGA_HILLS;
-    static Biome* GIANT_TREE_TAIGA;
-    static Biome* GIANT_TREE_TAIGA_HILLS;
-    static Biome* WOODED_MOUNTAINS;
+    static Biome* ROOFED_FOREST;
+    static Biome* COLD_TAIGA;
+    static Biome* COLD_TAIGA_HILLS;
+    static Biome* MEGA_TAIGA;
+    static Biome* MEGA_TAIGA_HILLS;
+    static Biome* EXTREME_HILLS_PLUS;
     static Biome* SAVANNA;
     static Biome* SAVANNA_PLATEAU;
-    static Biome* BADLANDS;
-    static Biome* WOODED_BADLANDS_PLATEAU;
-    static Biome* BADLANDS_PLATEAU;
+    static Biome* MESA;
+    static Biome* MESA_PLATEAU_F;
+    static Biome* MESA_PLATEAU;
     static Biome* THE_VOID;
     static Biome* SUNFLOWER_PLAINS;
-    static Biome* DESERT_LAKES;
-    static Biome* GRAVELLY_MOUNTAINS;
+    static Biome* DESERT_M;
+    static Biome* EXTREME_HILLS_M;
     static Biome* FLOWER_FOREST;
-    static Biome* TAIGA_MOUNTAINS;
-    static Biome* SWAMP_HILLS;
-    static Biome* ICE_SPIKES;
-    static Biome* MODIFIED_JUNGLE;
-    static Biome* MODIFIED_JUNGLE_EDGE;
-    static Biome* TALL_BIRCH_FOREST;
-    static Biome* TALL_BIRCH_HILLS;
-    static Biome* DARK_FOREST_HILLS;
-    static Biome* SNOWY_TAIGA_MOUNTAINS;
-    static Biome* GIANT_SPRUCE_TAIGA;
-    static Biome* GIANT_SPRUCE_TAIGA_HILLS;
-    static Biome* MODIFIED_GRAVELLY_MOUNTAINS;
-    static Biome* SHATTERED_SAVANNA;
-    static Biome* SHATTERED_SAVANNA_PLATEAU;
-    static Biome* ERODED_BADLANDS;
-    static Biome* MODIFIED_WOODED_BADLANDS_PLATEAU;
-    static Biome* MODIFIED_BADLANDS_PLATEAU;
+    static Biome* TAIGA_M;
+    static Biome* SWAMP_M;
+    static Biome* ICE_PLAINS_SPIKES;
+    static Biome* JUNGLE_M;
+    static Biome* JUNGLE_EDGE_M;
+    static Biome* BIRCH_FOREST_M;
+    static Biome* BIRCH_FOREST_HILLS_M;
+    static Biome* ROOFED_FOREST_M;
+    static Biome* COLD_TAIGA_M;
+    static Biome* MEGA_SPRUCE_TAIGA;
+    static Biome* REDWOOD_TAIGA_HILLS_M;
+    static Biome* EXTREME_HILLS_PLUS_M;
+    static Biome* SAVANNA_M;
+    static Biome* SAVANNA_PLATEAU_M;
+    static Biome* MESA_BRYCE;
+    static Biome* MESA_PLATEAU_F_M;
+    static Biome* MESA_PLATEAU_M;
+    static Biome* DEFAULT; // anything that gets a biome will fall back to this once nullptr is hit
 
     static PerlinSimplexNoise* TEMPERATURE_NOISE;
 
@@ -173,14 +177,14 @@ public:
     class BiomeProperties {
     public:
         BiomeProperties(const std::wstring&);
-        void depth(float);
-        void downfall(float);
-        void dry(void);
-        BiomeProperties* mutated(const std::wstring&);
-        void scale(float);
-        void snow(void);
-        void temperature(float);
-        void waterColor(int);
+        BiomeProperties *depth(float depth);
+        BiomeProperties *downfall(float downfall);
+        BiomeProperties *dry();
+        BiomeProperties *mutated(const std::wstring &name);
+        BiomeProperties *scale(float scale);
+        BiomeProperties *snow();
+        BiomeProperties *temperature(float temp);
+        BiomeProperties *waterColor(int color);
 
         std::wstring mBiomeName;
         float mDepth;
@@ -248,9 +252,9 @@ public:
 
     bool isSnowCovered();
 
-    void setNameAndDescription(int, int);
-    void setPreviewColor(eMinecraftColour);
-    void setWaterSkyColor(eMinecraftColour, eMinecraftColour);
+    Biome *setNameAndDescription(int name, int desc);
+    Biome *setPreviewColor(eMinecraftColour color);
+    Biome *setWaterSkyColor(eMinecraftColour water, eMinecraftColour sky);
 
     void getMobs(MobCategory*);
 
@@ -261,6 +265,8 @@ public:
     float getDownfall();
 
     static void generateColoursDebugOutput();
+
+    static void staticCtor();
 
     int mNameId;
     int mDescriptionId;

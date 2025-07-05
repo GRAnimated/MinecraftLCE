@@ -3,13 +3,13 @@
 #include "4J_Libraries_Source/fui/fui.h"
 #include "4J_Libraries_Source/fui/fuiRenderNode.h"
 #include "4J_Libraries_Source/fui/node/FJ_Base.h"
-#include "4J_Libraries_Source/fui/node/FJ_Button.h"
+#include "4J_Libraries_Source/fui/node/control/FJ_Button.h"
 #include "4J_Libraries_Source/fui/node/FJ_Document.h"
 #include "4J_Libraries_Source/fui/node/FJ_FuiNodeStage.h"
-#include "4J_Libraries_Source/fui/node/FJ_List.h"
-#include "4J_Libraries_Source/fui/node/FJ_List_ListButton.h"
-#include "4J_Libraries_Source/fui/node/FJ_List_ListButtonPlayerList.h"
-#include "4J_Libraries_Source/fui/node/FJ_List_MenuButton.h"
+#include "4J_Libraries_Source/fui/node/control/FJ_List_ListButton.h"
+#include "4J_Libraries_Source/fui/node/control/FJ_List_ListButtonPlayerList.h"
+#include "4J_Libraries_Source/fui/node/control/FJ_List_MenuButton.h"
+#include "control/FJ_List.h"
 
 FJ_FuiNode::FJ_FuiNode(fuiRenderNode* renderNode) {
     mTabIndex = -1;
@@ -27,23 +27,42 @@ FJ_FuiNode::~FJ_FuiNode() {
 void FJ_FuiNode::ASConstructor() {}
 
 void FJ_FuiNode::setX(float x) {
-    mRenderNode->setX(x);
+    this->mRenderNode->setX(x);
 }
 
 void FJ_FuiNode::setY(float y) {
-    mRenderNode->setY(y);
+    this->mRenderNode->setY(y);
 }
 
 void FJ_FuiNode::setHeight(float height) {
-    mRenderNode->setHeight(height);
+    this->mRenderNode->setHeight(height);
 }
 
 void FJ_FuiNode::setVisible(bool visible) {
-    mRenderNode->setVisibility(visible);
+    this->mRenderNode->setVisibility(visible);
 }
 
 int FJ_FuiNode::getType() {
     return 0;
+}
+
+void FJ_FuiNode::setScaleX(float sX) {
+    this->mRenderNode->setScaleX(sX);
+}
+
+void FJ_FuiNode::setScaleY(float sY) {
+    this->mRenderNode->setScaleY(sY);
+}
+float FJ_FuiNode::getWidth() {
+    return this->mRenderNode->getWidth();
+}
+
+float FJ_FuiNode::getHeight() {
+    return this->mRenderNode->getHeight();
+}
+
+void FJ_FuiNode::setWidth(float width) {
+    this->mRenderNode->setWidth(width);
 }
 
 int FJ_FuiNode::getTabIndex() {
@@ -84,4 +103,15 @@ FJ_List_MenuButton* FJ_FuiNode::asFJ_List_MenuButton() {
 
 FJ_Button* FJ_FuiNode::asFJ_Button() {
     return dynamic_cast<FJ_Button*>(this);
+}
+
+void* FJ_FuiNode::asMovieClip() {
+    if (this->mRenderNode->field_20 != 2)
+        return nullptr;
+
+    return this;
+}
+
+bool FJ_FuiNode::isFJ_Document() {
+    return this->asFJ_Document() != nullptr;
 }

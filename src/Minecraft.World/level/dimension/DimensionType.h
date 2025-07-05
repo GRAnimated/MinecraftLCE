@@ -1,4 +1,5 @@
 #pragma once
+#include <string>
 
 class Dimension;
 
@@ -9,5 +10,7 @@ public:
     static DimensionType* END;
 
     static DimensionType* getById(int dimensionId);
+
+    std::wstring getName() const;
     Dimension* create() const;
 };

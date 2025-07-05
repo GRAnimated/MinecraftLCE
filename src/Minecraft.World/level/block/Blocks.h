@@ -15,8 +15,7 @@ class ResourceLocation;
 
 class Blocks {
 public:
-    static DefaultedMappedRegistry<ResourceLocation, Block*, std::hash<ResourceLocation>,
-                                   std::equal_to<ResourceLocation>, std::hash<Block*>, std::equal_to<Block*>>*
+    static DefaultedMappedRegistry<ResourceLocation, Block*>*
         Registry;
 
     static void staticInit();
@@ -276,4 +275,6 @@ public:
     static Block* CONCRETE;
     static Block* CONCRETE_POWDER;
     static Block* STRUCTURE_BLOCK;
+
+    static ResourceLocation *AIR_RSRC;
 };
