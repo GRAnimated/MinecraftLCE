@@ -1,0 +1,26 @@
+name: lint
+on: [push, pull_request]
+jobs:
+  clang-format:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - uses: DoozyX/clang-format-lint-action@v0.20
+      with:
+        source: 'src'
+        clangFormatVersion: 20
+  custom-lint:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        submodules: recursive
+    - name: Set up python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.13'
+        cache: 'pip'
+    - name: Set up python package dependencies
+      run: pip install pyyaml
+    - name: Run custom code styling checks
+      run: python3 tools/lint.py

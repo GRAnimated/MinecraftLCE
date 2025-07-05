@@ -1,1 +1,0 @@
-#include "Minecraft.Client/renderer/item/ItemInHandRenderer.h"

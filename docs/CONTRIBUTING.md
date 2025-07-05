@@ -1,5 +1,18 @@
 # Contributing
 
+## Pull Requests
+Before submitting a change, make sure to run `tools/lint.py` to verify that your source files are formatted like the rest of the repository.
+
+Linter arguments:
+- `--fix`: Try to fix the formatting issues automatically.
+- `--format`: Run clang-format before checks.
+- `--find-unsorted`: Find unsorted classes/enums in the source files.
+
+GitHub Actions will run on your PR to verify that your code has been linted and clang formatted.
+
+### Warning: Make sure to backup your changes before running an automatic fix! The linter is experimental and could break your files.
+
+## Info
 As this project is in its very early stages, its hard to put guidelines on something that will evolve over time as contributors gain a better understanding of the game's internals.
 
 While almost all source paths aren't known, a few .cpp file names do appear in the Wii U Edition's global static constructors, along with a couple asserts giving file paths. Follow these file names wherever possible.
