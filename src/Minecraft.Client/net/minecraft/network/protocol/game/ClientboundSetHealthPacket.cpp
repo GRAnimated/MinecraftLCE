@@ -1,8 +1,8 @@
 #include "ClientboundSetHealthPacket.h"
 
-#include "Minecraft.Core/io/DataInputStream.h"
-#include "Minecraft.Core/io/DataOutputStream.h"
-#include "Minecraft.Network/PacketListener.h"
+#include "java/io/DataInputStream.h"
+#include "java/io/DataOutputStream.h"
+#include "net/minecraft/network/PacketListener.h"
 
 std::shared_ptr<Packet> ClientboundSetHealthPacket::create() {
     return std::shared_ptr<Packet>(new ClientboundSetHealthPacket());
@@ -65,4 +65,3 @@ int ClientboundSetHealthPacket::getFood() {
 float ClientboundSetHealthPacket::getSaturation() {
     return saturation;
 }
-

@@ -1,8 +1,8 @@
 #include "ServerboundUseItemOnPacket.h"
 
-#include "Minecraft.Core/io/DataInputStream.h"
-#include "Minecraft.Core/io/DataOutputStream.h"
-#include "Minecraft.Network/PacketListener.h"
+#include "java/io/DataInputStream.h"
+#include "java/io/DataOutputStream.h"
+#include "net/minecraft/network/PacketListener.h"
 
 std::shared_ptr<Packet> ServerboundUseItemOnPacket::create() {
     return std::shared_ptr<Packet>(new ServerboundUseItemOnPacket());
@@ -25,7 +25,7 @@ void ServerboundUseItemOnPacket::read(DataInputStream* input) {
 
 void ServerboundUseItemOnPacket::write(DataOutputStream* output) {
     output->writeBlockPos(pos);
-    output->writeByte(face->get3DDataValue()); 
+    output->writeByte(face->get3DDataValue());
     output->writeByte(hand);
     output->writeFloat(clickX);
     output->writeFloat(clickY);

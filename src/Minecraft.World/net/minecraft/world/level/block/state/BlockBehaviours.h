@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Minecraft.Core/BlockPos.h"
+#include "net/minecraft/core/BlockPos.h"
 class Level;
 class Block;
 

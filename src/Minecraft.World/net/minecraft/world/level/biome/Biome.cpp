@@ -1,15 +1,6 @@
-#include "Minecraft.World/eINSTANCEOF.h"
-#include "Minecraft.World/level/biome/Biome.h"
+#include "net/minecraft/world/eINSTANCEOF.h"
+#include "net/minecraft/world/level/biome/Biome.h"
 
-#include "Minecraft.Client/Minecraft.h"
-#include "Minecraft.Client/color/ColourTable.h"
-#include "Minecraft.World/Random.h"
-#include "Minecraft.World/level/block/Blocks.h"
-#include "Minecraft.World/level/block/FoliageColor.h"
-#include "Minecraft.World/level/block/GrassColor.h"
-#include "Minecraft.World/level/levelgen/feature/FlowerFeature.h"
-#include "Minecraft.World/level/levelgen/synth/PerlinSimplexNoise.h"
-#include "Minecraft.World/level/material/MaterialColor.h"
 #include "BeachBiome.h"
 #include "Biome.h"
 #include "DesertBiome.h"
@@ -19,8 +10,6 @@
 #include "IceBiome.h"
 #include "JungleBiome.h"
 #include "MesaBiome.h"
-#include "Minecraft.Core/BlockPos.h"
-#include "Minecraft.Util/Mth.h"
 #include "MushroomIslandBiome.h"
 #include "MutatedForestBiome.h"
 #include "MutatedSavannaBiome.h"
@@ -33,6 +22,17 @@
 #include "TaigaBiome.h"
 #include "TheEndBiome.h"
 #include "VoidBiome.h"
+#include "net/minecraft/client/Minecraft.h"
+#include "net/minecraft/client/color/ColourTable.h"
+#include "net/minecraft/core/BlockPos.h"
+#include "net/minecraft/util/Mth.h"
+#include "net/minecraft/world/Random.h"
+#include "net/minecraft/world/level/FoliageColor.h"
+#include "net/minecraft/world/level/GrassColor.h"
+#include "net/minecraft/world/level/block/Blocks.h"
+#include "net/minecraft/world/level/levelgen/feature/FlowerFeature.h"
+#include "net/minecraft/world/level/levelgen/synth/PerlinSimplexNoise.h"
+#include "net/minecraft/world/level/material/MaterialColor.h"
 
 Biome::BiomeProperties::BiomeProperties(const std::wstring& name) {
     mBiomeName = name;
@@ -271,13 +271,14 @@ void Biome::generateColoursDebugOutput() {
 
 // NON_MATCHING | Score: 5785 (lower is better)
 // literally took me so many hours to get it finally partially completed (all registered, down to 99k score)
-// but then I realized I had to make the last property of the BiomeProperties be set separately instead of chained
+// but then I realized I had to make the last property of the BiomeProperties be set separately instead of
+// chained
 // ...or did I? Nope, just a waste of time...
-// so then I figured out that I had to merge the BiomeProperties constructors directly into the Biome constructors...
-// This got me down to like 70k iirc, which was closer but not close enough.
-// then I saw that the wstring that gets assigned to the BiomeProperties constructor gets deleted after the var has been created but before the static Biome* has been set
-// so that means I had to separate out the Biome's setters from the constructor init...
-// and here I am, at 5785 score. -Dexrn
+// so then I figured out that I had to merge the BiomeProperties constructors directly into the Biome
+// constructors... This got me down to like 70k iirc, which was closer but not close enough. then I saw that
+// the wstring that gets assigned to the BiomeProperties constructor gets deleted after the var has been
+// created but before the static Biome* has been set so that means I had to separate out the Biome's setters
+// from the constructor init... and here I am, at 5785 score. -Dexrn
 void Biome::staticCtor() {
     Biome::OCEAN = new OceanBiome(BiomeID_OCEAN, (new BiomeProperties(L"Ocean"))->depth(-1.0)->scale(0.1));
 
@@ -377,24 +378,24 @@ void Biome::staticCtor() {
         ->setWaterSkyColor(Water_FrozenRiver, Sky_FrozenRiver);
 
     Biome::ICE_PLAINS = (new IceBiome(BiomeID_ICE_PLAINS, IceBiome::DEFAULT,
-                                        (new BiomeProperties(L"Ice Plains"))
-                                            ->depth(0.125)
-                                            ->scale(0.05)
-                                            ->temperature(0.0)
-                                            ->downfall(0.5)
-                                            ->snow()));
+                                      (new BiomeProperties(L"Ice Plains"))
+                                          ->depth(0.125)
+                                          ->scale(0.05)
+                                          ->temperature(0.0)
+                                          ->downfall(0.5)
+                                          ->snow()));
 
     Biome::ICE_PLAINS->setPreviewColor(Preview_IcePlains)
         ->setNameAndDescription(0x57FDD413, 0xC36E4255)
         ->setWaterSkyColor(Water_IcePlains, Sky_IcePlains);
 
     Biome::ICE_MOUNTAINS = (new IceBiome(BiomeID_ICE_MOUNTAINS, IceBiome::DEFAULT,
-                                           (new BiomeProperties(L"Ice Mountains"))
-                                               ->depth(0.45)
-                                               ->scale(0.3)
-                                               ->temperature(0.0)
-                                               ->downfall(0.5)
-                                               ->snow()));
+                                         (new BiomeProperties(L"Ice Mountains"))
+                                             ->depth(0.45)
+                                             ->scale(0.3)
+                                             ->temperature(0.0)
+                                             ->downfall(0.5)
+                                             ->snow()));
 
     Biome::ICE_MOUNTAINS->setPreviewColor(Preview_IceMountains)
         ->setNameAndDescription(0xCD8BF7D7, 0x94EEA7F1)
@@ -409,11 +410,11 @@ void Biome::staticCtor() {
         ->setWaterSkyColor(Water_MushroomIsland, Sky_MushroomIsland);
 
     Biome::MUSHROOM_ISLAND_SHORE = (new MushroomIslandBiome(BiomeID_MUSHROOM_ISLAND_SHORE,
-                                                           (new BiomeProperties(L"MushroomIslandShore"))
-                                                               ->depth(0.0)
-                                                               ->scale(0.025)
-                                                               ->temperature(0.9)
-                                                               ->downfall(1.0)));
+                                                            (new BiomeProperties(L"MushroomIslandShore"))
+                                                                ->depth(0.0)
+                                                                ->scale(0.025)
+                                                                ->temperature(0.9)
+                                                                ->downfall(1.0)));
 
     Biome::MUSHROOM_ISLAND_SHORE->setPreviewColor(Preview_MushroomIslandShore)
         ->setNameAndDescription(0xE340F7C1, 0x64137D27)
@@ -455,11 +456,11 @@ void Biome::staticCtor() {
         ->setWaterSkyColor(Water_TaigaHills, Sky_TaigaHills);
 
     Biome::EXTREME_HILLS_EDGE = (new ExtremeHillsBiome(BiomeID_EXTREME_HILLS_EDGE, ExtremeHillsBiome::EDGE,
-                                                  (new BiomeProperties(L"Extreme Hills Edge"))
-                                                      ->depth(0.8)
-                                                      ->scale(0.3)
-                                                      ->temperature(0.2)
-                                                      ->downfall(0.3)));
+                                                       (new BiomeProperties(L"Extreme Hills Edge"))
+                                                           ->depth(0.8)
+                                                           ->scale(0.3)
+                                                           ->temperature(0.2)
+                                                           ->downfall(0.3)));
 
     Biome::EXTREME_HILLS_EDGE->setPreviewColor(Preview_ExtremeHillsEdge)
         ->setNameAndDescription(0x10B1B364, 0xB5196CE2)
@@ -504,11 +505,11 @@ void Biome::staticCtor() {
         ->setWaterSkyColor(Water_StoneBeach, Sky_StoneBeach);
 
     Biome::COLD_BEACH = (new BeachBiome(BiomeID_COLD_BEACH, (new BiomeProperties(L"Cold Beach"))
-                                                                 ->depth(0.0)
-                                                                 ->scale(0.025)
-                                                                 ->temperature(0.05)
-                                                                 ->downfall(0.3)
-                                                                 ->snow()));
+                                                                ->depth(0.0)
+                                                                ->scale(0.025)
+                                                                ->temperature(0.05)
+                                                                ->downfall(0.3)
+                                                                ->snow()));
 
     Biome::COLD_BEACH->setPreviewColor(Preview_ColdBeach)
         ->setNameAndDescription(0xE41F8CB1, 0xFEFE5487)
@@ -542,24 +543,24 @@ void Biome::staticCtor() {
         ->setWaterSkyColor(Water_RoofedForest, Sky_RoofedForest);
 
     Biome::COLD_TAIGA = (new TaigaBiome(BiomeID_COLD_TAIGA, TaigaBiome::DEFAULT,
-                                         (new BiomeProperties(L"Cold Taiga"))
-                                             ->depth(0.2)
-                                             ->scale(0.2)
-                                             ->temperature(-0.5)
-                                             ->downfall(0.4)
-                                             ->snow()));
+                                        (new BiomeProperties(L"Cold Taiga"))
+                                            ->depth(0.2)
+                                            ->scale(0.2)
+                                            ->temperature(-0.5)
+                                            ->downfall(0.4)
+                                            ->snow()));
 
     Biome::COLD_TAIGA->setPreviewColor(Preview_ColdTaiga)
         ->setNameAndDescription(0x3EF261E, 0x54E18948)
         ->setWaterSkyColor(Water_ColdTaiga, Sky_ColdTaiga);
 
     Biome::COLD_TAIGA_HILLS = (new TaigaBiome(BiomeID_COLD_TAIGA_HILLS, TaigaBiome::DEFAULT,
-                                               (new BiomeProperties(L"Cold Taiga Hills"))
-                                                   ->depth(0.45)
-                                                   ->scale(0.3)
-                                                   ->temperature(-0.5)
-                                                   ->downfall(0.4)
-                                                   ->snow()));
+                                              (new BiomeProperties(L"Cold Taiga Hills"))
+                                                  ->depth(0.45)
+                                                  ->scale(0.3)
+                                                  ->temperature(-0.5)
+                                                  ->downfall(0.4)
+                                                  ->snow()));
 
     Biome::COLD_TAIGA_HILLS->setPreviewColor(Preview_ColdTaigaHills)
         ->setNameAndDescription(0x3EF261E, 0x54E18948)
@@ -574,11 +575,11 @@ void Biome::staticCtor() {
         ->setWaterSkyColor(Water_MegaTaiga, Sky_MegaTaiga);
 
     Biome::MEGA_TAIGA_HILLS = (new TaigaBiome(BiomeID_MEGA_TAIGA_HILLS, TaigaBiome::MEGA,
-                                                    (new BiomeProperties(L"Mega Taiga Hills"))
-                                                        ->depth(0.45)
-                                                        ->scale(0.3)
-                                                        ->temperature(0.3)
-                                                        ->downfall(0.8)));
+                                              (new BiomeProperties(L"Mega Taiga Hills"))
+                                                  ->depth(0.45)
+                                                  ->scale(0.3)
+                                                  ->temperature(0.3)
+                                                  ->downfall(0.8)));
 
     Biome::MEGA_TAIGA_HILLS->setPreviewColor(Preview_MegaTaigaHills)
         ->setNameAndDescription(0x4D8647D2, 0xB0F3C474)
@@ -615,29 +616,29 @@ void Biome::staticCtor() {
         ->setWaterSkyColor(Water_SavannaPlateau, Sky_SavannaPlateau);
 
     Biome::MESA = (new MesaBiome(BiomeID_MESA, false, false,
-                                     (new BiomeProperties(L"Mesa"))->temperature(2.0)->downfall(0.0)->dry()));
+                                 (new BiomeProperties(L"Mesa"))->temperature(2.0)->downfall(0.0)->dry()));
     Biome::MESA->setPreviewColor(Preview_Mesa)
         ->setNameAndDescription(0xF12C6D6D, 0x512D43DB)
         ->setWaterSkyColor(Water_Mesa, Sky_Mesa);
 
     Biome::MESA_PLATEAU_F = (new MesaBiome(BiomeID_MESA_PLATEAU_F, false, true,
-                                                    (new BiomeProperties(L"Mesa Plateau F"))
-                                                        ->depth(1.5)
-                                                        ->scale(0.025)
-                                                        ->temperature(2.0)
-                                                        ->downfall(0.0)
-                                                        ->dry()));
+                                           (new BiomeProperties(L"Mesa Plateau F"))
+                                               ->depth(1.5)
+                                               ->scale(0.025)
+                                               ->temperature(2.0)
+                                               ->downfall(0.0)
+                                               ->dry()));
     Biome::MESA_PLATEAU_F->setPreviewColor(Preview_MesaPlateauF)
         ->setNameAndDescription(0xF12C6D6D, 0x512D43DB)
         ->setWaterSkyColor(Water_MesaPlateauF, Sky_MesaPlateauF);
 
     Biome::MESA_PLATEAU = (new MesaBiome(BiomeID_MESA_PLATEAU, false, false,
-                                             (new BiomeProperties(L"Mesa Plateau"))
-                                                 ->depth(1.5)
-                                                 ->scale(0.025)
-                                                 ->temperature(2.0)
-                                                 ->downfall(0.0)
-                                                 ->dry()));
+                                         (new BiomeProperties(L"Mesa Plateau"))
+                                             ->depth(1.5)
+                                             ->scale(0.025)
+                                             ->temperature(2.0)
+                                             ->downfall(0.0)
+                                             ->dry()));
 
     Biome::MESA_PLATEAU->setPreviewColor(Preview_MesaPlateau)
         ->setNameAndDescription(0xF12C6D6D, 0x512D43DB)
@@ -658,24 +659,24 @@ void Biome::staticCtor() {
         ->setWaterSkyColor(Water_Plains, Sky_Plains);
 
     Biome::DESERT_M = (new DesertBiome(BiomeID_DESERT_M, (new BiomeProperties(L"Desert M"))
-                                                                 ->mutated(L"desert")
-                                                                 ->depth(0.225)
-                                                                 ->scale(0.25)
-                                                                 ->temperature(2.0)
-                                                                 ->downfall(0.0)
-                                                                 ->dry()));
+                                                             ->mutated(L"desert")
+                                                             ->depth(0.225)
+                                                             ->scale(0.25)
+                                                             ->temperature(2.0)
+                                                             ->downfall(0.0)
+                                                             ->dry()));
 
     Biome::DESERT_M->setPreviewColor(Preview_Desert_Mutated)
         ->setNameAndDescription(-636680762, -197082512)
         ->setWaterSkyColor(Water_Desert, Sky_Desert);
 
     Biome::EXTREME_HILLS_M = (new ExtremeHillsBiome(BiomeID_EXTREME_HILLS_M, ExtremeHillsBiome::M,
-                                                       (new BiomeProperties(L"Extreme Hills M"))
-                                                           ->mutated(L"extreme_hills")
-                                                           ->depth(1.0)
-                                                           ->scale(0.5)
-                                                           ->temperature(0.2)
-                                                           ->downfall(0.3)));
+                                                    (new BiomeProperties(L"Extreme Hills M"))
+                                                        ->mutated(L"extreme_hills")
+                                                        ->depth(1.0)
+                                                        ->scale(0.5)
+                                                        ->temperature(0.2)
+                                                        ->downfall(0.3)));
     Biome::EXTREME_HILLS_M->setPreviewColor(Preview_ExtremeHills_Mutated)
         ->setNameAndDescription(0x10B1B364, -1256624926)
         ->setWaterSkyColor(Water_ExtremeHills, Sky_ExtremeHills);
@@ -692,61 +693,61 @@ void Biome::staticCtor() {
         ->setWaterSkyColor(Water_Forest, Sky_Forest);
 
     Biome::TAIGA_M = (new TaigaBiome(BiomeID_TAIGA_M, TaigaBiome::DEFAULT,
-                                             (new BiomeProperties(L"Taiga M"))
-                                                 ->mutated(L"taiga")
-                                                 ->depth(0.3)
-                                                 ->scale(0.4)
-                                                 ->temperature(0.25)
-                                                 ->downfall(0.8)));
+                                     (new BiomeProperties(L"Taiga M"))
+                                         ->mutated(L"taiga")
+                                         ->depth(0.3)
+                                         ->scale(0.4)
+                                         ->temperature(0.25)
+                                         ->downfall(0.8)));
 
     Biome::TAIGA_M->setPreviewColor(Preview_Taiga_Mutated)
         ->setNameAndDescription(569313301, -1760909229)
         ->setWaterSkyColor(Water_Taiga, Sky_Taiga);
 
     Biome::SWAMP_M = (new SwampBiome(BiomeID_SWAMPLAND_M, (new BiomeProperties(L"Swampland M"))
-                                                                  ->mutated(L"swampland")
-                                                                  ->depth(-0.1)
-                                                                  ->scale(0.3)
-                                                                  ->temperature(0.8)
-                                                                  ->downfall(0.9)
-                                                                  ->waterColor(14745518)));
+                                                              ->mutated(L"swampland")
+                                                              ->depth(-0.1)
+                                                              ->scale(0.3)
+                                                              ->temperature(0.8)
+                                                              ->downfall(0.9)
+                                                              ->waterColor(14745518)));
 
     Biome::SWAMP_M->setPreviewColor(Preview_Swampland_Mutated)
         ->setNameAndDescription(-1710075368, -590672802)
         ->setWaterSkyColor(Water_Swampland, Sky_Swampland);
 
     Biome::ICE_PLAINS_SPIKES = (new IceBiome(BiomeID_ICE_PLAINS_SPIKES, IceBiome::SPIKES,
-                                      (new BiomeProperties(L"Ice Plains Spikes"))
-                                          ->mutated(L"ice_flats")
-                                          ->depth(0.425)
-                                          ->scale(0.45)
-                                          ->temperature(0.0)
-                                          ->downfall(0.5)
-                                          ->snow()));
+                                             (new BiomeProperties(L"Ice Plains Spikes"))
+                                                 ->mutated(L"ice_flats")
+                                                 ->depth(0.425)
+                                                 ->scale(0.45)
+                                                 ->temperature(0.0)
+                                                 ->downfall(0.5)
+                                                 ->snow()));
 
     Biome::ICE_PLAINS_SPIKES->setPreviewColor(Preview_IcePlains_Mutated)
         ->setNameAndDescription(1476252691, -1016184235)
         ->setWaterSkyColor(Water_IcePlains, Sky_IcePlains);
 
     Biome::JUNGLE_M = (new JungleBiome(BiomeID_JUNGLE_M, JungleBiome::DEFAULT,
-                                              (new BiomeProperties(L"Jungle M"))
-                                                  ->mutated(L"jungle")
-                                                  ->depth(0.2)
-                                                  ->scale(0.4)
-                                                  ->temperature(0.95)
-                                                  ->downfall(0.9)));
+                                       (new BiomeProperties(L"Jungle M"))
+                                           ->mutated(L"jungle")
+                                           ->depth(0.2)
+                                           ->scale(0.4)
+                                           ->temperature(0.95)
+                                           ->downfall(0.9)));
 
     Biome::JUNGLE_M->setPreviewColor(Preview_Jungle_Mutated)
         ->setNameAndDescription(-12715120, -843018138)
         ->setWaterSkyColor(Water_Jungle, Sky_Jungle);
 
     Biome::JUNGLE_EDGE_M = (new JungleBiome(BiomeID_JUNGLE_EDGE, JungleBiome::EDGE,
-                                                   (new BiomeProperties(L"JungleEdge M"))
-                                                       ->mutated(L"jungle_edge")
-                                                       ->depth(0.2)
-                                                       ->scale(0.4)
-                                                       ->temperature(0.95)
-                                                       ->downfall(0.8)));
+                                            (new BiomeProperties(L"JungleEdge M"))
+                                                ->mutated(L"jungle_edge")
+                                                ->depth(0.2)
+                                                ->scale(0.4)
+                                                ->temperature(0.95)
+                                                ->downfall(0.8)));
 
     Biome::JUNGLE_EDGE_M->setPreviewColor(Preview_JungleEdge_Mutated)
         ->setNameAndDescription(-12715120, -843018138)
@@ -777,72 +778,71 @@ void Biome::staticCtor() {
         ->setWaterSkyColor(Water_BirchForestHills, Sky_BirchForestHills);
 
     Biome::ROOFED_FOREST_M = (new ForestBiome(BiomeID_ROOFED_FOREST_M, ForestBiome::ROOFED,
-                                                (new BiomeProperties(L"Roofed Forest M"))
-                                                    ->mutated(L"roofed_forest")
-                                                    ->depth(0.2)
-                                                    ->scale(0.4)
-                                                    ->temperature(0.7)
-                                                    ->downfall(0.8)));
+                                              (new BiomeProperties(L"Roofed Forest M"))
+                                                  ->mutated(L"roofed_forest")
+                                                  ->depth(0.2)
+                                                  ->scale(0.4)
+                                                  ->temperature(0.7)
+                                                  ->downfall(0.8)));
 
     Biome::ROOFED_FOREST_M->setPreviewColor(Preview_RoofedForest_Mutated)
         ->setNameAndDescription(-831121740, -1511673614)
         ->setWaterSkyColor(Water_RoofedForest, Sky_RoofedForest);
 
     Biome::COLD_TAIGA_M = (new TaigaBiome(BiomeID_COLD_TAIGA_M, TaigaBiome::DEFAULT,
-                                                   (new BiomeProperties(L"Cold Taiga M"))
-                                                       ->mutated(L"taiga_cold")
-                                                       ->depth(0.3)
-                                                       ->scale(0.4)
-                                                       ->temperature(-0.5)
-                                                       ->downfall(0.4)
-                                                       ->snow()));
+                                          (new BiomeProperties(L"Cold Taiga M"))
+                                              ->mutated(L"taiga_cold")
+                                              ->depth(0.3)
+                                              ->scale(0.4)
+                                              ->temperature(-0.5)
+                                              ->downfall(0.4)
+                                              ->snow()));
 
     Biome::COLD_TAIGA_M->setPreviewColor(Preview_ColdTaiga_Mutated)
         ->setNameAndDescription(66004510, 1424066888)
         ->setWaterSkyColor(Water_ColdTaiga, Sky_ColdTaiga);
 
     Biome::MEGA_SPRUCE_TAIGA = (new TaigaBiome(BiomeID_MEGA_SPRUCE_TAIGA, TaigaBiome::MEGA_SPRUCE,
-                                                (new BiomeProperties(L"Mega Spruce Taiga"))
-                                                    ->mutated(L"redwood_taiga")
-                                                    ->depth(0.2)
-                                                    ->scale(0.2)
-                                                    ->temperature(0.25)
-                                                    ->downfall(0.8)));
+                                               (new BiomeProperties(L"Mega Spruce Taiga"))
+                                                   ->mutated(L"redwood_taiga")
+                                                   ->depth(0.2)
+                                                   ->scale(0.2)
+                                                   ->temperature(0.25)
+                                                   ->downfall(0.8)));
     Biome::MEGA_SPRUCE_TAIGA->setPreviewColor(Preview_MegaTaiga_Mutated)
         ->setNameAndDescription(1300645842, -1326201740)
         ->setWaterSkyColor(Water_MegaTaiga, Sky_MegaTaiga);
 
     Biome::REDWOOD_TAIGA_HILLS_M = (new TaigaBiome(BiomeID_REDWOOD_TAIGA_HILLS_M, TaigaBiome::MEGA_SPRUCE,
-                                                      (new BiomeProperties(L"Redwood Taiga Hills M"))
-                                                          ->mutated(L"redwood_taiga_hills")
-                                                          ->depth(0.2)
-                                                          ->scale(0.2)
-                                                          ->temperature(0.25)
-                                                          ->downfall(0.8)));
+                                                   (new BiomeProperties(L"Redwood Taiga Hills M"))
+                                                       ->mutated(L"redwood_taiga_hills")
+                                                       ->depth(0.2)
+                                                       ->scale(0.2)
+                                                       ->temperature(0.25)
+                                                       ->downfall(0.8)));
     Biome::REDWOOD_TAIGA_HILLS_M->setPreviewColor(Preview_MegaTaigaHills_Mutated)
         ->setNameAndDescription(1300645842, -1326201740)
         ->setWaterSkyColor(Water_MegaTaigaHills, Sky_MegaTaigaHills);
 
-    Biome::EXTREME_HILLS_PLUS_M
-        = (new ExtremeHillsBiome(BiomeID_EXTREME_HILLS_PLUS_M, ExtremeHillsBiome::M,
-                                 (new BiomeProperties(L"Extreme Hills+ M"))
-                                     ->mutated(L"extreme_hills_with_trees")
-                                     ->depth(1.0)
-                                     ->scale(0.5)
-                                     ->temperature(0.2)
-                                     ->downfall(0.3)));
+    Biome::EXTREME_HILLS_PLUS_M = (new ExtremeHillsBiome(BiomeID_EXTREME_HILLS_PLUS_M, ExtremeHillsBiome::M,
+                                                         (new BiomeProperties(L"Extreme Hills+ M"))
+                                                             ->mutated(L"extreme_hills_with_trees")
+                                                             ->depth(1.0)
+                                                             ->scale(0.5)
+                                                             ->temperature(0.2)
+                                                             ->downfall(0.3)));
 
     Biome::EXTREME_HILLS_PLUS_M->setPreviewColor(Preview_ExtremeHillsPlus_Mutated)
         ->setNameAndDescription(280081252, -1256624926)
         ->setWaterSkyColor(Water_ExtremeHillsPlus, Sky_ExtremeHillsPlus);
 
     Biome::SAVANNA_M = (new MutatedSavannaBiome(BiomeID_SAVANNA_M, (new BiomeProperties(L"Savanna M"))
-                                                                               ->mutated(L"savanna")
-                                                                               ->depth(0.3625)
-                                                                               ->scale(1.225)
-                                                                               ->temperature(1.1)
-                                                                               ->downfall(0.0)
-                                                                               ->dry()));
+                                                                       ->mutated(L"savanna")
+                                                                       ->depth(0.3625)
+                                                                       ->scale(1.225)
+                                                                       ->temperature(1.1)
+                                                                       ->downfall(0.0)
+                                                                       ->dry()));
     Biome::SAVANNA_M->setPreviewColor(Preview_Savanna_Mutated)
         ->setNameAndDescription(0x1CDB7ABB, 0x70594C1D)
         ->setWaterSkyColor(Water_Savanna, Sky_Savanna);
@@ -867,25 +867,25 @@ void Biome::staticCtor() {
         ->setWaterSkyColor(Water_Mesa, Sky_Mesa);
 
     Biome::MESA_PLATEAU_F_M = (new MesaBiome(BiomeID_MESA_PLATEAU_F_M, 0, 1,
-                                                             (new BiomeProperties(L"Mesa Plateau F M"))
-                                                                 ->mutated(L"mesa_rock")
-                                                                 ->depth(0.45)
-                                                                 ->scale(0.3)
-                                                                 ->temperature(2.0)
-                                                                 ->downfall(0.0)
-                                                                 ->dry()));
+                                             (new BiomeProperties(L"Mesa Plateau F M"))
+                                                 ->mutated(L"mesa_rock")
+                                                 ->depth(0.45)
+                                                 ->scale(0.3)
+                                                 ->temperature(2.0)
+                                                 ->downfall(0.0)
+                                                 ->dry()));
     Biome::MESA_PLATEAU_F_M->setPreviewColor(Preview_MesaPlateauF_Mutated)
         ->setNameAndDescription(0xF12C6D6D, 0x512D43DB)
         ->setWaterSkyColor(Water_MesaPlateauF, Sky_MesaPlateauF);
 
     Biome::MESA_PLATEAU_M = (new MesaBiome(BiomeID_MESA_PLATEAU_M, false, false,
-                                                      (new BiomeProperties(L"Mesa Plateau M"))
-                                                          ->mutated(L"mesa_clear_rock")
-                                                          ->depth(0.45)
-                                                          ->scale(0.3)
-                                                          ->temperature(2.0)
-                                                          ->downfall(0.0)
-                                                          ->dry()));
+                                           (new BiomeProperties(L"Mesa Plateau M"))
+                                               ->mutated(L"mesa_clear_rock")
+                                               ->depth(0.45)
+                                               ->scale(0.3)
+                                               ->temperature(2.0)
+                                               ->downfall(0.0)
+                                               ->dry()));
     Biome::MESA_PLATEAU_M->setPreviewColor(Preview_MesaPlateau_Mutated)
         ->setNameAndDescription(0xF12C6D6D, 0x512D43DB)
         ->setWaterSkyColor(Water_MesaPlateau, Sky_MesaPlateau);

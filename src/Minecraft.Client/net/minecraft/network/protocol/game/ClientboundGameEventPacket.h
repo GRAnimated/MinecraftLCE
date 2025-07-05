@@ -1,10 +1,10 @@
 #pragma once
 
-#include "Minecraft.Core/BlockPos.h"
-#include "Minecraft.Network/protocol/Packet.h"
+#include "net/minecraft/core/BlockPos.h"
+#include "net/minecraft/network/protocol/Packet.h"
 
 class ClientboundGameEventPacket : public Packet,
-                                       public std::enable_shared_from_this<ClientboundGameEventPacket> {
+                                   public std::enable_shared_from_this<ClientboundGameEventPacket> {
 public:
     static std::shared_ptr<Packet> create();
 

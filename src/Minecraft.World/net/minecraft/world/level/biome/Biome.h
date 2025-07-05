@@ -3,9 +3,9 @@
 #include <string>
 #include <vector>
 
-#include "Minecraft.World/WeighedRandomItem.h"
-#include "Minecraft.World/level/material/MaterialColor.h"
-#include "Minecraft.World/phys/Vec3.h"
+#include "net/minecraft/world/WeighedRandomItem.h"
+#include "net/minecraft/world/level/material/MaterialColor.h"
+#include "net/minecraft/world/phys/Vec3.h"
 
 class Random;
 class Block;
@@ -29,7 +29,7 @@ public:
     static Biome* TAIGA;
     static Biome* SWAMP;
     static Biome* RIVER;
-    static Biome* NETHER; // for some reason this is somewhere completely different in the executable
+    static Biome* NETHER;  // for some reason this is somewhere completely different in the executable
     static Biome* THE_END;
     static Biome* FROZEN_OCEAN;
     static Biome* FROZEN_RIVER;
@@ -83,7 +83,7 @@ public:
     static Biome* MESA_BRYCE;
     static Biome* MESA_PLATEAU_F_M;
     static Biome* MESA_PLATEAU_M;
-    static Biome* DEFAULT; // anything that gets a biome will fall back to this once nullptr is hit
+    static Biome* DEFAULT;  // anything that gets a biome will fall back to this once nullptr is hit
 
     static PerlinSimplexNoise* TEMPERATURE_NOISE;
 
@@ -177,14 +177,14 @@ public:
     class BiomeProperties {
     public:
         BiomeProperties(const std::wstring&);
-        BiomeProperties *depth(float depth);
-        BiomeProperties *downfall(float downfall);
-        BiomeProperties *dry();
-        BiomeProperties *mutated(const std::wstring &name);
-        BiomeProperties *scale(float scale);
-        BiomeProperties *snow();
-        BiomeProperties *temperature(float temp);
-        BiomeProperties *waterColor(int color);
+        BiomeProperties* depth(float depth);
+        BiomeProperties* downfall(float downfall);
+        BiomeProperties* dry();
+        BiomeProperties* mutated(const std::wstring& name);
+        BiomeProperties* scale(float scale);
+        BiomeProperties* snow();
+        BiomeProperties* temperature(float temp);
+        BiomeProperties* waterColor(int color);
 
         std::wstring mBiomeName;
         float mDepth;
@@ -252,9 +252,9 @@ public:
 
     bool isSnowCovered();
 
-    Biome *setNameAndDescription(int name, int desc);
-    Biome *setPreviewColor(eMinecraftColour color);
-    Biome *setWaterSkyColor(eMinecraftColour water, eMinecraftColour sky);
+    Biome* setNameAndDescription(int name, int desc);
+    Biome* setPreviewColor(eMinecraftColour color);
+    Biome* setWaterSkyColor(eMinecraftColour water, eMinecraftColour sky);
 
     void getMobs(MobCategory*);
 

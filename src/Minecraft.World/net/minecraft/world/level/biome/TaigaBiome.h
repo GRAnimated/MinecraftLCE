@@ -1,15 +1,11 @@
 #pragma once
-#include "Minecraft.World/level/biome/Biome.h"
+#include "net/minecraft/world/level/biome/Biome.h"
 
 class TaigaBiome : public Biome {
 public:
-    enum EType {
-        DEFAULT = 0,
-        MEGA = 1,
-        MEGA_SPRUCE = 2
-    };
+    enum EType { DEFAULT = 0, MEGA = 1, MEGA_SPRUCE = 2 };
 
-    TaigaBiome(EBiomeIDs id, EType type, BiomeProperties *properties);
-    
+    TaigaBiome(EBiomeIDs id, EType type, BiomeProperties* properties);
+
     int getBaseClass() override;
 };

@@ -1,10 +1,10 @@
 #pragma once
 
+#include "net/minecraft/client/renderer/C4JRender.h"
 #include "nn/os/os_MutexTypes.h"
-#include "Minecraft.Client/renderer/C4JRender.h"
-#include <arm_neon.h>
 #include "nn/vi.h"
 #include "nvn/nvn.h"
+#include <arm_neon.h>
 #include <cstddef>
 #include <cstdint>
 #include <unordered_map>
@@ -60,7 +60,7 @@ public:
     virtual void MatrixOrthogonal(float, float, float, float, float, float);
     virtual void MatrixPop();
     virtual void MatrixPush();
-    virtual float32x4_t MatrixMult(float *matrix);
+    virtual float32x4_t MatrixMult(float* matrix);
     virtual void MatrixGet(int);
     virtual void Set_matrixDirty();
     // unused params were probably used in Xbox One

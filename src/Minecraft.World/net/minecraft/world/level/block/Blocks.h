@@ -1,22 +1,21 @@
 #pragma once
 
-#include "Minecraft.Client/resources/MappedRegistry.h"
-#include "Minecraft.World/level/block/Block.h"
-#include "Minecraft.World/level/block/EndRodBlock.h"
-#include "Minecraft.World/level/block/FireBlock.h"
-#include "Minecraft.World/level/block/PortalBlock.h"
-#include "Minecraft.World/level/block/PumpkinBlock.h"
-#include "Minecraft.World/level/block/ReedsBlock.h"
-#include "Minecraft.World/level/block/TntBlock.h"
-#include "Minecraft.World/level/block/WaterlilyBlock.h"
-#include "Minecraft.World/level/block/WebBlock.h"
+#include "net/minecraft/client/resources/MappedRegistry.h"
+#include "net/minecraft/world/level/block/Block.h"
+#include "net/minecraft/world/level/block/EndRodBlock.h"
+#include "net/minecraft/world/level/block/FireBlock.h"
+#include "net/minecraft/world/level/block/PortalBlock.h"
+#include "net/minecraft/world/level/block/PumpkinBlock.h"
+#include "net/minecraft/world/level/block/ReedsBlock.h"
+#include "net/minecraft/world/level/block/TntBlock.h"
+#include "net/minecraft/world/level/block/WaterlilyBlock.h"
+#include "net/minecraft/world/level/block/WebBlock.h"
 
 class ResourceLocation;
 
 class Blocks {
 public:
-    static DefaultedMappedRegistry<ResourceLocation, Block*>*
-        Registry;
+    static DefaultedMappedRegistry<ResourceLocation, Block*>* Registry;
 
     static void staticInit();
     static Block* get(const std::wstring&);
@@ -276,5 +275,5 @@ public:
     static Block* CONCRETE_POWDER;
     static Block* STRUCTURE_BLOCK;
 
-    static ResourceLocation *AIR_RSRC;
+    static ResourceLocation* AIR_RSRC;
 };

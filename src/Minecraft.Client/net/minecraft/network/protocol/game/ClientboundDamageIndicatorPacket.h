@@ -1,10 +1,11 @@
 #pragma once
 
-#include "Minecraft.Network/protocol/Packet.h"
+#include "net/minecraft/network/protocol/Packet.h"
 #include <string>
 
-class ClientboundDamageIndicatorPacket : public Packet,
-                                       public std::enable_shared_from_this<ClientboundDamageIndicatorPacket> {
+class ClientboundDamageIndicatorPacket
+    : public Packet,
+      public std::enable_shared_from_this<ClientboundDamageIndicatorPacket> {
 public:
     static std::shared_ptr<Packet> create();
 

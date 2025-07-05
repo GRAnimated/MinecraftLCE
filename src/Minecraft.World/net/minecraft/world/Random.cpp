@@ -1,6 +1,6 @@
-#include "Minecraft.World/Random.h"
+#include "net/minecraft/world/Random.h"
 
-#include "Minecraft.Client/platform/NX/Platform.h"
+#include "NX/Platform.h"
 
 #include "cmath"
 
@@ -25,19 +25,19 @@ double Random::random() {
 }
 
 int Random::nextInt(int a1) {
-    int v4; // w0
-    int v5; // w8
+    int v4;  // w0
+    int v5;  // w8
 
     // why does ida fuck up with math so much
     // ghidra gave 10x better decompilation
     // except for the return statement here
-    if ((a1 & -a1) == a1) return (static_cast<long>(this->next(31)) * a1) >> 31;
+    if ((a1 & -a1) == a1)
+        return (static_cast<long>(this->next(31)) * a1) >> 31;
 
     do {
         v5 = this->next(31);
         v4 = v5 % a1;
-    }
-    while (v5 - v4 + (a1 - 1) < 0);
+    } while (v5 - v4 + (a1 - 1) < 0);
 
     return v4;
 }
@@ -73,9 +73,9 @@ int Random::next(int bits) {
 }
 
 double Random::nextGaussian() {
-    double v4; // d9
-    double v6; // d10
-    double v7; // d8
+    double v4;  // d9
+    double v6;  // d10
+    double v7;  // d8
 
     if (this->field_8) {
         this->field_8 = false;
@@ -84,7 +84,7 @@ double Random::nextGaussian() {
 
     do {
         const double v3 = this->nextDouble();
-        v4 = v3 + v3 - 1; // `+ -1.0` :sob:
+        v4 = v3 + v3 - 1;  // `+ -1.0` :sob:
 
         const double v5 = this->nextDouble();
         v6 = v5 + v5 - 1;

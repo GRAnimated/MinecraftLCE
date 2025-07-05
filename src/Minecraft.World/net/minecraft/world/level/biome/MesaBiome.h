@@ -1,10 +1,10 @@
 #pragma once
-#include "Minecraft.World/level/biome/Biome.h"
+#include "net/minecraft/world/level/biome/Biome.h"
 
 class MesaBiome : public Biome {
 public:
-    MesaBiome(EBiomeIDs id, bool, bool, BiomeProperties *properties);
-    
+    MesaBiome(EBiomeIDs id, bool, bool, BiomeProperties* properties);
+
     int getBaseClass() override;
 
     char padding[0x30];

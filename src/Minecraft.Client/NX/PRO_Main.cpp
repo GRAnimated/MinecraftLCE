@@ -3,6 +3,7 @@
 #include <cstring>
 #include <new>
 
+#include "NX/Renderer.h"
 #include "com/mojang/blaze3d/vertex/Tesselator.h"
 #include "java/io/IntCache.h"
 #include "net/minecraft/client/C4JThreadImpl.h"
@@ -12,7 +13,6 @@
 #include "net/minecraft/client/Compression.h"
 #include "net/minecraft/client/GameSettings.h"
 #include "net/minecraft/client/Minecraft.h"
-#include "net/minecraft/client/renderer/Renderer.h"
 #include "net/minecraft/client/resources/L10N.h"
 #include "net/minecraft/client/ui/ConsoleUIController.h"
 #include "net/minecraft/core/profile/CProfile.h"

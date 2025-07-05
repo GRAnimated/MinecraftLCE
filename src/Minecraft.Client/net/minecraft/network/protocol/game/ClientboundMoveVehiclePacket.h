@@ -1,10 +1,10 @@
 #pragma once
 
-#include "Minecraft.Network/protocol/Packet.h"
-#include "Minecraft.World/entity/Entity.h"
+#include "net/minecraft/network/protocol/Packet.h"
+#include "net/minecraft/world/entity/Entity.h"
 
 class ClientboundMoveVehiclePacket : public Packet,
-                                       public std::enable_shared_from_this<ClientboundMoveVehiclePacket> {
+                                     public std::enable_shared_from_this<ClientboundMoveVehiclePacket> {
 public:
     static std::shared_ptr<Packet> create();
 

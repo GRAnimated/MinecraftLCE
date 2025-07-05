@@ -1,11 +1,11 @@
-#include "Minecraft.World/level/storage/LevelData.h"
+#include "net/minecraft/world/level/storage/LevelData.h"
 
-#include "Minecraft.Nbt/CompoundTag.h"
+#include "com/mojang/nbt/CompoundTag.h"
 
-#include "Minecraft.World/Difficulty.h"
-#include "Minecraft.World/level/LevelType.h"
-#include "Minecraft.Core/BlockPos.h"
-#include "Minecraft.Core/System.h"
+#include "net/minecraft/core/BlockPos.h"
+#include "net/minecraft/core/System.h"
+#include "net/minecraft/world/Difficulty.h"
+#include "net/minecraft/world/level/LevelType.h"
 
 LevelData::LevelData(LevelData* other) {
     mSeed = other->mSeed;
@@ -68,7 +68,7 @@ CompoundTag* LevelData::createTag(std::vector<std::shared_ptr<Player>>*) {
 }
 
 void LevelData::setTagData(CompoundTag* out) {
-    out->putInt(sLevelDataVersionString, 922); // why is DataVersion it's own static shit wtf
+    out->putInt(sLevelDataVersionString, 922);  // why is DataVersion it's own static shit wtf
     out->putLong(L"RandomSeed", this->mSeed);
     out->putString(L"generatorName", this->mLevelType->getGeneratorName());
     out->putInt(L"generatorVersion", this->mLevelType->getVersion());
@@ -108,7 +108,7 @@ void LevelData::setTagData(CompoundTag* out) {
 
     out->putBoolean(L"DifficultyLocked", this->mIsDifficultyLocked);
 
-    CompoundTag *dimensionData = new CompoundTag();
+    CompoundTag* dimensionData = new CompoundTag();
 
     // had to google for different ways to iterate over map bc theres like 50 ways this could have been done
     std::unordered_map<const DimensionType*, CompoundTag*>::iterator it = mDimensionData.begin();

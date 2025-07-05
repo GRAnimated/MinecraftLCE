@@ -1,7 +1,7 @@
 #pragma once
-#include "Minecraft.World/level/block/Block.h"
+#include "net/minecraft/world/level/block/Block.h"
 
 class RailBlock : public Block {
 public:
-static void blockStaticCtor();
+    static void blockStaticCtor();
 };

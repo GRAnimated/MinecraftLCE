@@ -1,6 +1,7 @@
 #include "net/minecraft/client/Minecraft.h"
 
 #include "NX/Platform.h"
+#include "NX/Renderer.h"
 #include "com/mojang/blaze3d/platform/GlStateManager.h"
 #include "java/io/File.h"
 #include "net/minecraft/client/CMinecraftApp.h"
@@ -20,7 +21,6 @@
 #include "net/minecraft/client/renderer/GameRenderer.h"
 #include "net/minecraft/client/renderer/LevelRenderer.h"
 #include "net/minecraft/client/renderer/ProgressRenderer.h"
-#include "net/minecraft/client/renderer/Renderer.h"
 #include "net/minecraft/client/renderer/block/BlockRenderDispatcher.h"
 #include "net/minecraft/client/renderer/blockentity/BlockEntityRenderDispatcher.h"
 #include "net/minecraft/client/renderer/entity/EntityBlockRenderer.h"

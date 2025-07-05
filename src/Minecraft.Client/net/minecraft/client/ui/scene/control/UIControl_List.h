@@ -1,5 +1,5 @@
 #pragma once
-#include "Minecraft.Client/ui/scene/control/UIControl_Base.h"
+#include "net/minecraft/client/ui/scene/control/UIControl_Base.h"
 #include <unordered_map>
 #include <vector>
 

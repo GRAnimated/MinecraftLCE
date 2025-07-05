@@ -1,4 +1,4 @@
-#include "4J_Libraries_Source/fui/node/FJ_Base.h"
+#include "fui/node/FJ_Base.h"
 
 int FJ_Base::getType() {
     return 0x8000;

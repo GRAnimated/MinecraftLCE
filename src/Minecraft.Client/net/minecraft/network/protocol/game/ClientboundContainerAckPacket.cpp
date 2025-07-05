@@ -1,8 +1,8 @@
 #include "ClientboundContainerAckPacket.h"
 
-#include "Minecraft.Core/io/DataInputStream.h"
-#include "Minecraft.Core/io/DataOutputStream.h"
-#include "Minecraft.Network/PacketListener.h"
+#include "java/io/DataInputStream.h"
+#include "java/io/DataOutputStream.h"
+#include "net/minecraft/network/PacketListener.h"
 
 std::shared_ptr<Packet> ClientboundContainerAckPacket::create() {
     return std::shared_ptr<Packet>(new ClientboundContainerAckPacket());

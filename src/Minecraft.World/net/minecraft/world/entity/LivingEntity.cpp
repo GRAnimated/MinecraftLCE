@@ -1,21 +1,21 @@
-#include "Minecraft.Client/CGameNetworkManager.h"
-#include "Minecraft.Client/CMinecraftApp.h"
-#include "Minecraft.Client/Minecraft.h"
-#include "Minecraft.Client/platform/NX/Platform.h"
-#include "Minecraft.World/eINSTANCEOF.h"
-#include "Minecraft.World/enchantment/EnchantmentHelper.h"
-#include "Minecraft.World/entity/Entity.h"
-#include "Minecraft.World/entity/LivingEntity.h"
-#include "Minecraft.World/entity/mob/MobEffectInstance.h"
-#include "Minecraft.World/entity/mob/MobEffects.h"
-#include "Minecraft.World/entity/player/Player.h"
-#include "Minecraft.World/item/Attribute.h"
-#include "Minecraft.World/level/block/Blocks.h"
-#include "Minecraft.World/level/block/state/BlockState.h"
-#include "Minecraft.World/level/chunk/LevelChunk.h"
-#include "Minecraft.World/level/gamemode/minigames/MiniGameDef.h"
-#include "Minecraft.Core/BlockPos.h"
-#include "Minecraft.Util/Mth.h"
+#include "NX/Platform.h"
+#include "net/minecraft/client/CGameNetworkManager.h"
+#include "net/minecraft/client/CMinecraftApp.h"
+#include "net/minecraft/client/Minecraft.h"
+#include "net/minecraft/core/BlockPos.h"
+#include "net/minecraft/util/Mth.h"
+#include "net/minecraft/world/eINSTANCEOF.h"
+#include "net/minecraft/world/effect/MobEffectInstance.h"
+#include "net/minecraft/world/effect/MobEffects.h"
+#include "net/minecraft/world/entity/Entity.h"
+#include "net/minecraft/world/entity/LivingEntity.h"
+#include "net/minecraft/world/entity/ai/attributes/Attribute.h"
+#include "net/minecraft/world/entity/player/Player.h"
+#include "net/minecraft/world/item/enchantment/EnchantmentHelper.h"
+#include "net/minecraft/world/level/block/Blocks.h"
+#include "net/minecraft/world/level/block/state/BlockState.h"
+#include "net/minecraft/world/level/chunk/LevelChunk.h"
+#include "net/minecraft/world/level/gamemode/minigames/MiniGameDef.h"
 #include <cmath>
 #include <memory>
 
@@ -225,7 +225,8 @@ void LivingEntity::travel(float x, float y, float z) {
 void LivingEntity::serverAiStep() {}
 float LivingEntity::getAttackAnim(float a2) {
     float v3 = this->mAttackAnim - this->mOAttackAnim;
-    if ( v3 < 0.0 ) v3 = v3 + 1.0;
+    if (v3 < 0.0)
+        v3 = v3 + 1.0;
 
     return mOAttackAnim + v3 * a2;
 }

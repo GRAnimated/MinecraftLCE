@@ -1,9 +1,9 @@
 #include "ClientboundAddGlobalEntityPacket.h"
 
-#include "Minecraft.Core/io/DataInputStream.h"
-#include "Minecraft.Core/io/DataOutputStream.h"
-#include "Minecraft.Network/PacketListener.h"
-#include "Minecraft.Util/Mth.h"
+#include "java/io/DataInputStream.h"
+#include "java/io/DataOutputStream.h"
+#include "net/minecraft/network/PacketListener.h"
+#include "net/minecraft/util/Mth.h"
 
 std::shared_ptr<Packet> ClientboundAddGlobalEntityPacket::create() {
     return std::shared_ptr<Packet>(new ClientboundAddGlobalEntityPacket());

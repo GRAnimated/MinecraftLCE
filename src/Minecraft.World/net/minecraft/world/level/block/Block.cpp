@@ -1,11 +1,11 @@
-#include "Minecraft.World/item/Item.h"
+#include "net/minecraft/world/item/Item.h"
 
 #include "Block.h"
 
-#include "Minecraft.World/level/block/SoundType.h"
-#include "Minecraft.World/level/block/state/BlockState.h"
-#include "Minecraft.World/level/block/state/BlockStateDefinition.h"
-#include "Minecraft.World/level/material/Material.h"
+#include "net/minecraft/world/level/block/SoundType.h"
+#include "net/minecraft/world/level/block/state/BlockState.h"
+#include "net/minecraft/world/level/block/state/BlockStateDefinition.h"
+#include "net/minecraft/world/level/material/Material.h"
 
 #include "AirBlock.h"
 #include "AnvilBlock.h"
@@ -148,7 +148,7 @@ void Block::stepOn(Level* level, const BlockPos& pos, std::shared_ptr<Entity>) {
 void Block::prepareRender(Level* level, const BlockPos& pos) {}
 void Block::attack(Level* level, const BlockPos& pos, std::shared_ptr<Player> player) {}
 void Block::entityInside(Level* level, const BlockPos& pos, const BlockState* blockState,
-                         std::shared_ptr<Entity> const&) {}
+                         const std::shared_ptr<Entity>&) {}
 void Block::playerWillDestroy(Level* level, const BlockPos& pos, const BlockState* blockState,
                               std::shared_ptr<Player> player) {}
 void Block::handleRain(Level* level, const BlockPos& pos) {}
@@ -158,8 +158,9 @@ void Block::appendHoverText(not_null_ptr<ItemInstance>, std::shared_ptr<Player> 
 // NON_MATCHING | Score: 1479270 (lower is better)
 // This is the second-largest method in the entire executable
 // It might be easier than it would seem, since most of it is just block registry
-// but the main issue is that IDA does not give a clean enough decomp since every chained method creates a new lvar...
-// To be able to see vftable calls, you have to set that lvar's type to Block *... for every single one (there's about 2000 lvars)
+// but the main issue is that IDA does not give a clean enough decomp since every chained method creates a new
+// lvar... To be able to see vftable calls, you have to set that lvar's type to Block *... for every single
+// one (there's about 2000 lvars)
 void Block::staticCtor() {
     DirectionalBlock::blockStaticCtor();
     HorizontalDirectionalBlock::blockStaticCtor();
@@ -227,15 +228,15 @@ void Block::staticCtor() {
     ConcretePowderBlock::blockStaticCtor();
     StainedHardenedClayBlock::staticCtor();
 
-    Block *airBlock = (new AirBlock())->setNameAndDescriptionId(0xFFFFFFFF, 0xFFFFFFFF);
+    Block* airBlock = (new AirBlock())->setNameAndDescriptionId(0xFFFFFFFF, 0xFFFFFFFF);
     registerBlock(0, *Blocks::AIR_RSRC, airBlock);
 
-    Block *stoneBlock = (new StoneBlock())
-        ->setDestroyTime(1.5)
-        ->setExplodeable(10.0)
-        ->setSoundType(SoundType::STONE)
-        ->setIconName(L"stone")
-        ->setNameAndDescriptionId(0x8BAD4DAC, 0x46782239);
+    Block* stoneBlock = (new StoneBlock())
+                            ->setDestroyTime(1.5)
+                            ->setExplodeable(10.0)
+                            ->setSoundType(SoundType::STONE)
+                            ->setIconName(L"stone")
+                            ->setNameAndDescriptionId(0x8BAD4DAC, 0x46782239);
 
     stoneBlock->setBaseItemTypeAndMaterial(14, 2);
     registerBlock(1, L"stone", stoneBlock);

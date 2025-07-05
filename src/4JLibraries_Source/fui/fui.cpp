@@ -1,7 +1,7 @@
-#include "4J_Libraries_Source/fui/fui.h"
+#include "fui/fui.h"
 
-#include "Minecraft.Client/platform/NX/Platform.h"
-#include "Minecraft.Client/renderer/Renderer.h"
+#include "NX/Platform.h"
+#include "NX/Renderer.h"
 
 #include "event/FJ_KeyboardEvent.h"
 #include "event/FJ_MouseMoveEvent.h"
@@ -24,8 +24,9 @@ void fui::setScreenSize(float width, float height) {
     this->mScreenHeight = height;
 }
 
-void fui::unloadScene(fuiFile *file) {
-    if (!file) return;
+void fui::unloadScene(fuiFile* file) {
+    if (!file)
+        return;
 
     EnterCriticalSection(this->mScenesMutex);
     delete file;
@@ -56,19 +57,19 @@ int fui::getResolution() {
 // NON_MATCHING | Score: 2521 (lower is better)
 // I think our mData struct is fucked since fuiSymbol has NO vftable...
 // and the pseudocode shows it trying to make calls to it's vftable.
-void fui::render(fuiFile *file, float a1, float a2, float a3, float a4) {
+void fui::render(fuiFile* file, float a1, float a2, float a3, float a4) {
     float unk1 = 1;
     float unk2 = 1;
     float unk3 = 1;
 
-    std::memset(this, 0, 0x40); // what is this even doing???
+    std::memset(this, 0, 0x40);  // what is this even doing???
 
     this->mUnk1 = 1;
     this->mUnk2 = 1;
     this->mUnk3 = 1;
     this->mUnk4 = 1;
 
-    Renderer *renderer = Renderer::sInstance;
+    Renderer* renderer = Renderer::sInstance;
 
     renderer->vtbl_7101130608_func_19();
 
@@ -82,13 +83,7 @@ void fui::render(fuiFile *file, float a1, float a2, float a3, float a4) {
 
     renderer->MatrixMode(1);
     renderer->MatrixSetIdentity();
-    renderer->MatrixOrthogonal(
-    0.0f,
-    this->mScreenWidth,
-    this->mScreenHeight,
-    0.0f,
-    1000.0f,
-    3000.0f);
+    renderer->MatrixOrthogonal(0.0f, this->mScreenWidth, this->mScreenHeight, 0.0f, 1000.0f, 3000.0f);
 
     renderer->MatrixMode(0);
     renderer->MatrixSetIdentity();
@@ -130,7 +125,7 @@ void fui::dispatchMouseMoveEvent(fuiFile* file, float x, float y) {
     node->dispatchEvent(new FJ_MouseMoveEvent(x, y, true, false));
 }
 
-void fui::addDirectEventListener(const FJ_EventListener &listener) {
+void fui::addDirectEventListener(const FJ_EventListener& listener) {
     this->removeDirectEventListener(listener);
     this->mEventListeners.push_back(listener);
 }
@@ -156,6 +151,6 @@ void fui::removeEventListenerForNode(FJ_FuiNode* node) {
     }
 }
 
-void fui::removeManagedTexture(fuiFile *file, fuiBitmap *texture) {
+void fui::removeManagedTexture(fuiFile* file, fuiBitmap* texture) {
     this->mTextureManager->removeManagedTexture(file, texture);
 }

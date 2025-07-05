@@ -1,10 +1,11 @@
 #pragma once
 
-#include "Minecraft.Core/BlockPos.h"
-#include "Minecraft.Network/protocol/Packet.h"
+#include "net/minecraft/core/BlockPos.h"
+#include "net/minecraft/network/protocol/Packet.h"
 
-class ClientboundBlockDestructionPacket : public Packet,
-                                       public std::enable_shared_from_this<ClientboundBlockDestructionPacket> {
+class ClientboundBlockDestructionPacket
+    : public Packet,
+      public std::enable_shared_from_this<ClientboundBlockDestructionPacket> {
 public:
     static std::shared_ptr<Packet> create();
 

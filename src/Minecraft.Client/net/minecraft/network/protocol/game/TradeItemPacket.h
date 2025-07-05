@@ -1,9 +1,8 @@
 #pragma once
 
-#include "Minecraft.Network/protocol/Packet.h"
+#include "net/minecraft/network/protocol/Packet.h"
 
-class TradeItemPacket : public Packet,
-                                       public std::enable_shared_from_this<TradeItemPacket> {
+class TradeItemPacket : public Packet, public std::enable_shared_from_this<TradeItemPacket> {
 public:
     static std::shared_ptr<Packet> create();
 

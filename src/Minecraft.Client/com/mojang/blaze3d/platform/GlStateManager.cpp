@@ -1,5 +1,5 @@
-#include "Minecraft.Client/renderer/GlStateManager.h"
-#include "Minecraft.Client/renderer/Renderer.h"
+#include "NX/Renderer.h"
+#include "com/mojang/blaze3d/platform/GlStateManager.h"
 
 /*
     A lot of names were taken from OpenGL docs

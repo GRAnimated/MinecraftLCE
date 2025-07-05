@@ -1,9 +1,9 @@
 #pragma once
-#include "Minecraft.World/level/biome/Biome.h"
+#include "net/minecraft/world/level/biome/Biome.h"
 
 class VoidBiome : public Biome {
 public:
-    VoidBiome(EBiomeIDs id, BiomeProperties *properties);
-    
+    VoidBiome(EBiomeIDs id, BiomeProperties* properties);
+
     int getBaseClass() override;
 };

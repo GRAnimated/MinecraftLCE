@@ -1,13 +1,13 @@
 #pragma once
 
-#include "Minecraft.Network/protocol/Packet.h"
-#include "Minecraft.World/entity/Entity.h"
-#include "Minecraft.World/level/Level.h"
-#include "Minecraft.World/phys/Vec3.h"
-#include "Minecraft.World/InteractionHand.h"
+#include "net/minecraft/network/protocol/Packet.h"
+#include "net/minecraft/world/InteractionHand.h"
+#include "net/minecraft/world/entity/Entity.h"
+#include "net/minecraft/world/level/Level.h"
+#include "net/minecraft/world/phys/Vec3.h"
 
 class ServerboundMovePlayerPacket : public Packet,
-                                       public std::enable_shared_from_this<ServerboundMovePlayerPacket> {
+                                    public std::enable_shared_from_this<ServerboundMovePlayerPacket> {
 public:
     static std::shared_ptr<Packet> create();
 

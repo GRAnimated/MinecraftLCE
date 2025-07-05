@@ -1,9 +1,10 @@
 #pragma once
 
-#include "Minecraft.Network/protocol/Packet.h"
+#include "net/minecraft/network/protocol/Packet.h"
 
-class ClientboundAddExperienceOrbPacket : public Packet,
-                                       public std::enable_shared_from_this<ClientboundAddExperienceOrbPacket> {
+class ClientboundAddExperienceOrbPacket
+    : public Packet,
+      public std::enable_shared_from_this<ClientboundAddExperienceOrbPacket> {
 public:
     static std::shared_ptr<Packet> create();
 

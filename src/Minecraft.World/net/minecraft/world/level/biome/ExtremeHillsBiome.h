@@ -1,15 +1,11 @@
 #pragma once
-#include "Minecraft.World/level/biome/Biome.h"
+#include "net/minecraft/world/level/biome/Biome.h"
 
 class ExtremeHillsBiome : public Biome {
 public:
-    enum EType {
-        DEFAULT = 0,
-        EDGE = 1,
-        M = 2
-    };
+    enum EType { DEFAULT = 0, EDGE = 1, M = 2 };
 
-    ExtremeHillsBiome(EBiomeIDs id, EType type, BiomeProperties *properties);
+    ExtremeHillsBiome(EBiomeIDs id, EType type, BiomeProperties* properties);
 
     int getBaseClass() override;
 

@@ -1,8 +1,8 @@
 #include "ServerboundPlayerActionPacket.h"
 
-#include "Minecraft.Core/io/DataInputStream.h"
-#include "Minecraft.Core/io/DataOutputStream.h"
-#include "Minecraft.Network/PacketListener.h"
+#include "java/io/DataInputStream.h"
+#include "java/io/DataOutputStream.h"
+#include "net/minecraft/network/PacketListener.h"
 
 std::shared_ptr<Packet> ServerboundPlayerActionPacket::create() {
     return std::shared_ptr<Packet>(new ServerboundPlayerActionPacket());
@@ -38,7 +38,6 @@ void ServerboundPlayerActionPacket::write(DataOutputStream* output) {
 void ServerboundPlayerActionPacket::handle(PacketListener* listener) {
     listener->handlePlayerAction(shared_from_this());
 }
-
 
 BlockPos ServerboundPlayerActionPacket::getPos() {
     return pos;

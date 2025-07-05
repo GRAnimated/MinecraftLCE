@@ -1,10 +1,9 @@
 #pragma once
 
-#include "Minecraft.Network/protocol/Packet.h"
+#include "net/minecraft/network/protocol/Packet.h"
 #include <string>
 
-class ServerboundChatPacket : public Packet,
-                                       public std::enable_shared_from_this<ServerboundChatPacket> {
+class ServerboundChatPacket : public Packet, public std::enable_shared_from_this<ServerboundChatPacket> {
 public:
     static std::shared_ptr<Packet> create();
 

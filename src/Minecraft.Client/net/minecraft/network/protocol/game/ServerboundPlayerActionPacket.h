@@ -1,11 +1,11 @@
 #pragma once
 
-#include "Minecraft.Core/BlockPos.h"
-#include "Minecraft.Core/Direction.h"
-#include "Minecraft.Network/protocol/Packet.h"
+#include "net/minecraft/core/BlockPos.h"
+#include "net/minecraft/core/Direction.h"
+#include "net/minecraft/network/protocol/Packet.h"
 
 class ServerboundPlayerActionPacket : public Packet,
-                                       public std::enable_shared_from_this<ServerboundPlayerActionPacket> {
+                                      public std::enable_shared_from_this<ServerboundPlayerActionPacket> {
 public:
     static std::shared_ptr<Packet> create();
 

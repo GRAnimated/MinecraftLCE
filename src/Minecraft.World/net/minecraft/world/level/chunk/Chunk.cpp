@@ -1,6 +1,7 @@
 #include "net/minecraft/world/level/chunk/Chunk.h"
 
 #include "NX/Platform.h"
+#include "NX/Renderer.h"
 #include "com/mojang/blaze3d/platform/GlStateManager.h"
 #include "com/mojang/blaze3d/vertex/BufferBuilder.h"
 #include "com/mojang/blaze3d/vertex/Tesselator.h"
@@ -8,7 +9,6 @@
 #include "net/minecraft/client/Minecraft.h"
 #include "net/minecraft/client/renderer/BlockRenderer.h"
 #include "net/minecraft/client/renderer/LevelRenderer.h"
-#include "net/minecraft/client/renderer/Renderer.h"
 #include "net/minecraft/client/renderer/blockentity/BlockEntityRenderDispatcher.h"
 #include "net/minecraft/world/ArrayWithLength.h"
 #include "net/minecraft/world/level/Level.h"

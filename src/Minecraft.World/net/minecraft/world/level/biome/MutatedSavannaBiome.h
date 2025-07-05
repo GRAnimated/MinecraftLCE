@@ -1,9 +1,9 @@
 #pragma once
-#include "Minecraft.World/level/biome/Biome.h"
+#include "net/minecraft/world/level/biome/Biome.h"
 
 class MutatedSavannaBiome : public Biome {
 public:
-    MutatedSavannaBiome(EBiomeIDs id, BiomeProperties *properties);
-    
+    MutatedSavannaBiome(EBiomeIDs id, BiomeProperties* properties);
+
     int getBaseClass() override;
 };

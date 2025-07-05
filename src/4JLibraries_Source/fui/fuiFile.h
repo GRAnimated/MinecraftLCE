@@ -1,8 +1,8 @@
 #pragma once
 
-#include "types.h"
 #include "fuiSymbol.h"
-#include "Minecraft.World/ArrayWithLength.h"
+#include "net/minecraft/world/ArrayWithLength.h"
+#include "types.h"
 
 // Most structs derived from
 // https://github.com/NessieHax/fui-research-repo/blob/main/DOCUMENTATION.md
@@ -17,14 +17,10 @@ public:
     float maxY;
 
     // getHeight?
-    float getHeight() {
-        return this->maxY - this->minY;
-    }
+    float getHeight() { return this->maxY - this->minY; }
 
     // getWidth?
-    float getWidth() {
-        return this->maxX - this->minX;
-    }
+    float getWidth() { return this->maxX - this->minX; }
 };
 struct fuiRGBA {
     int color;  // RGBA
@@ -39,14 +35,14 @@ struct fuiMatrix {
 
     // spent an hour trying to figure out what this was
     // finally thought of it being a built in C++ operator... which looks good to me.
-    fuiMatrix operator*(const fuiMatrix &rhs) const {
+    fuiMatrix operator*(const fuiMatrix& rhs) const {
         fuiMatrix out = {};
         mul(*this, rhs, out);
 
         return out;
     }
 
-    static void mul(const fuiMatrix &lhs, const fuiMatrix &rhs, fuiMatrix &out);
+    static void mul(const fuiMatrix& lhs, const fuiMatrix& rhs, fuiMatrix& out);
 };
 struct fuiColorTransform {
     float redMultTerm;
@@ -138,7 +134,7 @@ public:
     ~fuiFile();
     // NOTE: HAD TO CHANGE THE SIGNATURE BECAUSE OF THE METHOD BEING DIFFERENT
     // ORIG HAD A CALLBACK METHOD INSTEAD OF DATA
-    static uint64_t addDataRegion(uint a1, uint a2, uchar** ptr, uint64_t *callbackData);
+    static uint64_t addDataRegion(uint a1, uint a2, uchar** ptr, uint64_t* callbackData);
     void load(arrayWithLength<uchar>, int);
     bool resolveReferences(fuiFile*);
     void dumpUnresolvedReferences();
@@ -148,7 +144,7 @@ public:
     // findNode - doesn't exist in switch edition
     // setVisible - doesn't exist in switch edition
 
-    void setCustomDrawCallback(void (*)(void*, char const*, fuiRect*), void* node);
+    void setCustomDrawCallback(void (*)(void*, const char*, fuiRect*), void* node);
     float getStageWidth();
     float getStageHeight();
     void setIndex(int);

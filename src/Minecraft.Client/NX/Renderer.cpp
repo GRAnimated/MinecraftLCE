@@ -1,9 +1,9 @@
-#include "nn/os/os_MutexTypes.h"
-#include "Minecraft.Client/platform/NX/Platform.h"
-#include "Minecraft.Client/renderer/C4JRender.h"
-#include "Minecraft.Client/renderer/Renderer.h"
+#include "NX/Platform.h"
+#include "NX/Renderer.h"
 #include "UnknownRendererClasses.h"
+#include "net/minecraft/client/renderer/C4JRender.h"
 #include "nn/diag.h"
+#include "nn/os/os_MutexTypes.h"
 #include "nn/vi.h"
 #include "nv.h"
 #include "nvn/nvn.h"
@@ -394,7 +394,8 @@ void Renderer::InitialiseContext() {
 }
 
 void Renderer::vtbl_7101130608_func_19() {}
-void Renderer::CaptureScreen(ImageFileBuffer* image_file_buffer, _XSOCIAL_PREVIEWIMAGE* xsocial_previewimage) {}
+void Renderer::CaptureScreen(ImageFileBuffer* image_file_buffer,
+                             _XSOCIAL_PREVIEWIMAGE* xsocial_previewimage) {}
 void Renderer::BeginConditionalSurvey(int i) {}
 void Renderer::EndConditionalSurvey() {}
 void Renderer::BeginConditionalRendering(int i) {}
@@ -429,7 +430,6 @@ void Renderer::Tick() {
 float32x4_t Renderer::MatrixMult(float* matrix) {
     return this->MultWithStack((float (*)[4])matrix);
 }
-
 
 // broken since merge
 // used to match
