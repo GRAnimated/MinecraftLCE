@@ -18,6 +18,6 @@ public:
     virtual void getBiomeIndexBlock(arrayWithLength<unsigned char>&, int, int, int, int, bool) const;
     virtual void containsOnly(int, int, int, const std::vector<Biome*>&);
     virtual void findBiome(int, int, int, std::vector<Biome*>, Random*);
-    virtual void isFixedBiome();
-    virtual void getFixedBiome();
+    virtual bool isFixedBiome();
+    virtual void* getFixedBiome();
 };
