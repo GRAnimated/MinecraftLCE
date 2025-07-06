@@ -18,8 +18,6 @@ OreBlock::OreBlock(const MaterialColor* color) : Block(Material::STONE, color) {
     this->DerivedInit();
 }
 
-OreBlock::~OreBlock() {}
-
 int OreBlock::getResourceCount(Random* random) {
     return this == Blocks::LAPIS_ORE ? random->nextInt(5) + 4 : 1;
 }

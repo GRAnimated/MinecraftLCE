@@ -32,6 +32,8 @@ BlockEntity::BlockEntity() {
     mBlock = nullptr;
 }
 
+BlockEntity::~BlockEntity() {}
+
 Level* BlockEntity::getLevel() {
     return mLevel;
 }

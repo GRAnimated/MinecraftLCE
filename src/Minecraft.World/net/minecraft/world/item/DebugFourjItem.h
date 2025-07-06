@@ -6,7 +6,7 @@
 class DebugFourjItem : public Item {
     DebugFourjItem();
 
-    ~DebugFourjItem() override;
+    ~DebugFourjItem() override {}
     bool interactEnemy(not_null_ptr<ItemInstance>, std::shared_ptr<Player>, std::shared_ptr<LivingEntity>,
                        InteractionHand::EInteractionHand) override;
 };

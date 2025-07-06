@@ -28,8 +28,6 @@ void DiggerItem::_init(float attackDamage, float attackSpeed, arrayWithLength<Bl
     this->mAttackSpeed = attackSpeed;
 }
 
-DiggerItem::~DiggerItem() {}
-
 float DiggerItem::getDestroySpeed(not_null_ptr<ItemInstance> item, BlockState* state) {
     for (int i = 0; i < this->mBlocks.length; i++) {
         if (this->mBlocks[i] == state->getBlock()) {

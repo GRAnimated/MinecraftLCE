@@ -53,7 +53,7 @@ public:
     static GasMaterial* STRUCTURAL_AIR;
 
     Material(const MaterialColor* color);
-    virtual ~Material();
+    virtual ~Material() {}
     virtual bool isLiquid();
     virtual bool letsWaterThrough();
     virtual bool isSolid();

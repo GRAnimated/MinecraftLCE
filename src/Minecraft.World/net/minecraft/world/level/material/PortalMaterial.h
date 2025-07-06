@@ -5,7 +5,7 @@
 class PortalMaterial : public Material {
 public:
     PortalMaterial(const MaterialColor* color);
-    ~PortalMaterial() override;
+    ~PortalMaterial() override {}
     bool isSolid() override;
     bool blocksLight() override;
     bool blocksMotion() override;

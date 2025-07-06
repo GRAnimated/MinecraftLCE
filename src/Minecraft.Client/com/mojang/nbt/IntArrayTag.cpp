@@ -14,6 +14,10 @@ IntArrayTag::IntArrayTag(arrayWithLength<int> data) {
     mData = data;
 }
 
+IntArrayTag::~IntArrayTag() {
+    delete mData.data;
+}
+
 void IntArrayTag::write(DataOutput* outputStream) {
     outputStream->writeInt(mData.length);
     for (unsigned int i = 0; i < mData.length; i++) {

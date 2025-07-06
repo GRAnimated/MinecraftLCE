@@ -11,10 +11,17 @@ std::shared_ptr<Packet> ClientboundAwardStatPacket::create() {
 
 ClientboundAwardStatPacket::ClientboundAwardStatPacket() {}
 
+ClientboundAwardStatPacket::ClientboundAwardStatPacket(int stat, int unk) {
+    mStat = stat;
+    mData = arrayWithLength<unsigned char>(4, true);
+    int* data = (int*)mData.data;
+    *data = unk;
+}
+
 ClientboundAwardStatPacket::~ClientboundAwardStatPacket() {
-    if (data.data) {
-        delete[] data.data;
-        data.data = nullptr;
+    if (mData.data) {
+        delete[] mData.data;
+        mData.data = nullptr;
     }
 }
 
@@ -27,30 +34,34 @@ EPacketType ClientboundAwardStatPacket::getPacketId() {
 }
 
 void ClientboundAwardStatPacket::read(DataInputStream* input) {
-    stat = input->readInt();
+    mStat = input->readInt();
 
     int size = input->readInt();
     if (size < 1)
         return;
 
-    data = arrayWithLength<unsigned char>(size, true);
+    mData = arrayWithLength<unsigned char>(size, true);
 
-    input->readFully(data);
+    input->readFully(mData);
 }
 
 void ClientboundAwardStatPacket::write(DataOutputStream* output) {
-    output->writeInt(stat);
-    output->writeInt(data.length);
-    if (data.length > 0) {
-        output->writeBytes(data);
+    output->writeInt(mStat);
+    output->writeInt(mData.length);
+    if (mData.length > 0) {
+        output->writeBytes(mData);
     }
 }
 
 void ClientboundAwardStatPacket::handle(PacketListener* listener) {
     listener->handleAwardStat(shared_from_this());
-    data.data = nullptr;
+    mData.data = nullptr;
 }
 
 bool ClientboundAwardStatPacket::isAync() {
     return true;
+}
+
+arrayWithLength<unsigned char> ClientboundAwardStatPacket::getParamData() {
+    return mData;
 }

@@ -25,8 +25,6 @@ AxeItem::AxeItem(const Item::Tier* tier) : DiggerItem(tier, DIGGABLES) {
     this->mAttackDamage = tier->getAttackDamageBonus() + 3.0f;
 }
 
-AxeItem::~AxeItem() {}
-
 float AxeItem::getDestroySpeed(not_null_ptr<ItemInstance> instance, BlockState* state) {
     Material* material = state->getMaterial();
     return material != Material::WOOD && material != Material::PLANTS && material != Material::MOSS ?

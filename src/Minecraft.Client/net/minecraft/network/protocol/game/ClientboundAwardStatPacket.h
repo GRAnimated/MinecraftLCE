@@ -9,6 +9,7 @@ public:
     static std::shared_ptr<Packet> create();
 
     ClientboundAwardStatPacket();
+    ClientboundAwardStatPacket(int stat, int unk);
     ~ClientboundAwardStatPacket() override;
     int getEstimatedSize() override;
     EPacketType getPacketId() override;
@@ -17,7 +18,9 @@ public:
     void handle(PacketListener* listener) override;
     bool isAync() override;
 
+    arrayWithLength<unsigned char> getParamData();
+
 private:
-    int stat;
-    arrayWithLength<unsigned char> data;
+    int mStat;
+    arrayWithLength<unsigned char> mData;
 };

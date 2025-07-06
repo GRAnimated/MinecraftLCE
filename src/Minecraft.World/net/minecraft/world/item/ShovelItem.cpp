@@ -29,8 +29,6 @@ void ShovelItem::staticCtor() {
 
 ShovelItem::ShovelItem(const Item::Tier* tier) : DiggerItem(1, -3, tier, DIGGABLES) {}
 
-ShovelItem::~ShovelItem() {}
-
 // NON_MATCHING: ifs bullshit, function is weird overall, as doing the same thing as Java does, doesn't match
 // much
 ActionResultType ShovelItem::useOn(std::shared_ptr<Player> player, Level* level, const BlockPos& pos,
