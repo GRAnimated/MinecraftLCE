@@ -429,7 +429,7 @@ void Renderer::Tick() {
 // Not sure how to make it compile the 2 other instructions
 // also unsure what the return value is.
 float32x4_t Renderer::MatrixMult(float* matrix) {
-    return this->MultWithStack((float(*)[4])matrix);
+    return this->MultWithStack((float (*)[4])matrix);
 }
 
 // broken since merge
