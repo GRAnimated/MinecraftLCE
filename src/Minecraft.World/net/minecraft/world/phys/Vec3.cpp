@@ -1,5 +1,5 @@
-#include "AABB.h"
 #include "cmath"
+#include "net/minecraft/world/phys/AABB.h"
 
 double Vec3::dot(Vec3* rhs) {
     return this->x * rhs->x + this->y * rhs->y + this->z * rhs->z;

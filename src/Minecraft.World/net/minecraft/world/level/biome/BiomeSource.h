@@ -19,5 +19,5 @@ public:
     virtual void containsOnly(int, int, int, const std::vector<Biome*>&);
     virtual void findBiome(int, int, int, std::vector<Biome*>, Random*);
     virtual bool isFixedBiome();
-    virtual void *getFixedBiome();
+    virtual void* getFixedBiome();
 };

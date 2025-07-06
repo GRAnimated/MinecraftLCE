@@ -5,7 +5,7 @@ class Random;
 // Meth
 class Mth {
 public:
-    static float *SIN;
+    static float* SIN;
 
     static float sin(float);
     static float cos(float);
@@ -17,7 +17,7 @@ public:
     static float clamp(float, float, float);
     static int clamp(int, int, int);
     static double pct(double i, double j, double k);
-    static double asbMax(double i, double j); // asb
+    static double asbMax(double i, double j);  // asb
     static int abs(int i);
     static float abs(float i);
     static double abs(double i);

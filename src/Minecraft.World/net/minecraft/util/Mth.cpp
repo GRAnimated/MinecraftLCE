@@ -1,15 +1,18 @@
-#include "cmath"
 #include "net/minecraft/util/Mth.h"
+
+#include "cmath"
 #include "net/minecraft/world/Random.h"
 
 float Mth::sin(float v) {
-    if ( !Mth::SIN ) Mth::init();
+    if (!Mth::SIN)
+        Mth::init();
 
     return SIN[static_cast<int>(v * 10430.0F) & 0xFFFF];
 }
 
 float Mth::cos(float v) {
-    if ( !Mth::SIN ) Mth::init();
+    if (!Mth::SIN)
+        Mth::init();
 
     // original had 10430.3779296875 but .0 also matches
     return SIN[static_cast<int>(v * 10430.0f + 16384.0f) & 0xFFFF];
@@ -32,7 +35,7 @@ float Mth::sqrt(double v) {
 }
 
 double Mth::clamp(double i, double j, double k) {
-    return (i < j) ? j : (i > k) ? k : i; // gotta compress that math into one ternary :trol:
+    return (i < j) ? j : (i > k) ? k : i;  // gotta compress that math into one ternary :trol:
 }
 
 float Mth::clamp(float i, float j, float k) {
@@ -71,8 +74,10 @@ long Mth::lfloor(double value) {
 }
 
 double Mth::clampedLerp(double i, double j, double k) {
-    if (k < 0.0) return i;
-    if (1.0 < k) return j;
+    if (k < 0.0)
+        return i;
+    if (1.0 < k)
+        return j;
 
     return (j - i) * k + i;
 }

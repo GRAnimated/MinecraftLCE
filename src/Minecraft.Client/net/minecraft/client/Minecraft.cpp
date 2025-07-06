@@ -112,9 +112,7 @@ void Minecraft::init() {
 
     // this is cursed why would you do this
     MemSect(31);
-    {
-        std::wstring status(L"Pre startup");
-    }
+    { std::wstring status(L"Pre startup"); }
     MemSect(0);
 
     GlStateManager::enableTexture();
@@ -130,9 +128,7 @@ void Minecraft::init() {
     GlStateManager::matrixMode(0);
 
     MemSect(31);
-    {
-        std::wstring status(L"Startup");
-    }
+    { std::wstring status(L"Startup"); }
     MemSect(0);
 
     mLevelRenderer = new LevelRenderer(this, mTextures);
@@ -142,9 +138,7 @@ void Minecraft::init() {
     mParticleEngine = new ParticleEngine(mLevel, mTextures);
 
     MemSect(31);
-    {
-        std::wstring status(L"Post startup");
-    }
+    { std::wstring status(L"Post startup"); }
     MemSect(0);
 
     mGui = new Gui(this);
