@@ -183,7 +183,7 @@ public:
     virtual void checkInBlock(double, double, double);
     virtual void spawnEatParticles(const ItemInstance&, int);
     virtual void makeStuckInWeb();
-    virtual void getName();
+    virtual std::wstring getName();
     virtual bool isInvulnerableTo(DamageSource*);
     virtual bool isInvulnerable();
     virtual void setInvulnerable(bool);

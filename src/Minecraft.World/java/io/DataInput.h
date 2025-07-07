@@ -1,6 +1,7 @@
 #pragma once
 
 #include "net/minecraft/world/ArrayWithLength.h"
+#include "net/minecraft/world/PlayerUID.h"
 
 class DataInput {
 public:
@@ -19,8 +20,8 @@ public:
     virtual int readInt() = 0;
     virtual long readLong() = 0;
     virtual short readShort() = 0;
-    virtual void readUTF() = 0;
+    virtual std::wstring readUTF() = 0;
     virtual void readUTFChar() = 0;
-    virtual void readPlayerUID() = 0;
+    virtual PlayerUID readPlayerUID() = 0;
     virtual void skipBytes(long long) = 0;
 };

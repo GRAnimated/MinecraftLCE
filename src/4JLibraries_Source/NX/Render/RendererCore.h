@@ -14,6 +14,13 @@ class ImageFileBuffer;
 class D3DXIMAGE_INFO;
 class class_71007B7E78;
 
+typedef float mat4x4[4][4];  // this doesn't seem to exist on 4J base, but I think code will be a lot cleaner
+// if we use it
+
+struct MatrixStruct {
+    float32x4_t m[4];
+};
+
 class SomeData {  // this is probably class but who knows...
 public:
     SomeData();
@@ -51,6 +58,8 @@ public:
 
     virtual void Tick();
     virtual void UpdateGamma(unsigned short gamma);
+    // see OpenGL for more info (modes starts from 0 and ends in 2, they are in the same order as they are in
+    // OpenGL)
     virtual void MatrixMode(int);
     virtual void MatrixSetIdentity();
     virtual void MatrixTranslate(float, float, float);
@@ -167,7 +176,11 @@ public:
     virtual void BeginEvent(const wchar_t*);
     virtual void EndEvent();
 
-    float32x4_t MultWithStack(float (*)[4]);
+    static float32x4_t MultWithStack(
+        MatrixStruct);  // MatrixStruct is made up by me, WiiU does seem to have everything
+                        // completly different but they had to use float32x4_t so I think struct
+                        // like this may have been used here, also it may have been literally the same as wiiU
+                        // but just using float32x4_t (some arm optimized float crap)
 
     char gap8[16];
     NVNdevice* mNVNdevice;

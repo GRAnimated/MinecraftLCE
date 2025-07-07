@@ -11,8 +11,10 @@
 #include "nvn/nvn_FuncPtrBase.h"
 #include "nvn/nvn_FuncPtrImpl.h"
 #include "nvn/nvn_FuncPtrInline.h"
-#include <cstdint>
+#include <arm_neon.h>
+#include <array>
 #include <cstdlib>
+#include <cstring>
 
 __thread Renderer::Context* sContext;
 unsigned int textureWidths[6] = {1920, 1280, 512, 256, 128, 64};
@@ -64,8 +66,6 @@ void Renderer::SetupMemoryPools() {
     nvnMemoryPoolInitialize(&this->mNVNmemoryPool[2], &builder);
     this->mIdk3 = 0;
 }
-
-typedef float mat4x4[4][4];
 
 void Renderer::Initialise() {
     this->Initialise(0);
@@ -425,15 +425,11 @@ void Renderer::Tick() {
     this->CBuffTick();
 }
 
-// NON_MATCHING | Score: 205 (lower is better)
-// Not sure how to make it compile the 2 other instructions
-// also unsure what the return value is.
+// this would mean that they've changed function MulWithStack
 float32x4_t Renderer::MatrixMult(float* matrix) {
-    return this->MultWithStack((float (*)[4])matrix);
+    return this->MultWithStack(*reinterpret_cast<MatrixStruct*>(matrix));
 }
 
-// broken since merge
-// used to match
-// void Renderer::UpdateGamma(unsigned short gamma) {
-//     this->mGamma = gamma;
-// }
+void Renderer::UpdateGamma(unsigned short gamma) {
+    this->mGammaIntensity = gamma;
+}

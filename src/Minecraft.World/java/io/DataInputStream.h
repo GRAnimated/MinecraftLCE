@@ -28,9 +28,9 @@ public:
     virtual int readInt();
     virtual long readLong();
     virtual short readShort();
-    virtual void readUTF();
+    virtual std::wstring readUTF();
     virtual void readUTFChar();
-    virtual void readPlayerUID();
+    virtual PlayerUID readPlayerUID();
     virtual void skipBytes(long long);
 
     int readVarInt();

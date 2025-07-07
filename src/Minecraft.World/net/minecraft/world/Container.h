@@ -1,7 +1,9 @@
 #pragma once
 
 #include "net/minecraft/world/Nameable.h"
+#include "net/minecraft/world/entity/player/Player.h"
 #include "types.h"
+#include <memory>
 
 class Slot;
 class ItemInstance;
@@ -9,18 +11,20 @@ class ItemInstance;
 class Container : public Nameable {
 public:
     virtual ~Container();
-    virtual int getContainerSize() = 0;
-    virtual bool isEmpty() = 0;
-    virtual not_null_ptr<ItemInstance> getItem(int slot) = 0;
-    virtual std::shared_ptr<ItemInstance> removeItem(int slot, int n) = 0;
-    virtual void removeItemNoUpdate(int slot) = 0;
-    virtual void setItem(int slot, not_null_ptr<ItemInstance> item) = 0;
+    virtual void getContainerSize() = 0;
+    virtual void isEmpty() = 0;
+    virtual not_null_ptr<ItemInstance> getItem(unsigned int) = 0;
+    virtual not_null_ptr<ItemInstance> removeItem(unsigned int, int) = 0;
+    virtual void removeItemNoUpdate(int) = 0;
+    virtual void setItem(unsigned int, not_null_ptr<ItemInstance>) = 0;
     virtual int getMaxStackSize() = 0;
     virtual void setChanged() = 0;
-    virtual void pure_virtual14() = 0;
-    virtual void pure_virtual15() = 0;
-    virtual void pure_virtual16() = 0;
-    virtual void pure_virtual17() = 0;
-    virtual void pure_virtual18() = 0;
-    virtual void pure_virtual19() = 0;
+    virtual void stillValid(std::shared_ptr<Player>) = 0;
+    virtual void startOpen(std::shared_ptr<Player>) = 0;
+    virtual void stopOpen(std::shared_ptr<Player>) = 0;
+    virtual void canPlaceItem(int, not_null_ptr<ItemInstance>) = 0;
+    virtual void getContainerData(int) = 0;
+    virtual void setContainerData(int, int) = 0;
+    virtual void getContainerDataCount() = 0;
+    virtual void clearContent() = 0;
 };

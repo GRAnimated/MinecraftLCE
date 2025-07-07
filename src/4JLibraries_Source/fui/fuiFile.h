@@ -9,6 +9,8 @@
 
 class fuiRenderNode;
 class fuiBitmapFont;
+class fuiRenderNodeStage;
+class fuiRenderNodeTimeline;
 class fuiRect {
 public:
     float minX;
@@ -69,6 +71,7 @@ class fuiShapeComponent;
 class fuiVert;
 class fuiTimelineFrame;
 class fuiTimelineEvent;
+class timelineEventName;
 struct fuiReference {
     int symbolIndex;
     char name[64];
@@ -117,14 +120,13 @@ struct fuiData {
     fuiVert* vert;
     fuiTimelineFrame* timelineFrame;
     fuiTimelineEvent* timelineEvent;
-    void* size_0x40;
+    timelineEventName* timelineEventName;
     fuiReference* fuiReference;
     fuiEdittext* fuiEdittext;
-    _48* size_0x48;
-    fuiBitmapFont* fuiBitmap;
-    void* size_0x20;
-    fuiFontName* fuiFontName;
     fuiSymbol* fuiSymbol;
+    fuiBitmapFont* fuiBitmap;
+    void* imageMaybe;
+    fuiFontName* fuiFontName;
     fuiImportAsset* fuiImportAsset;
 };
 
@@ -150,12 +152,12 @@ public:
     void setIndex(int);
 
     fuiHeader mHeader;
-    int mIndex;
     int field_9C;
     fuiData mData;
-    FJ_FuiNode* mRootNode;
+    fuiRenderNodeStage* mRenderNodeStage;
+    fuiRenderNodeTimeline* mRenderNodeTimeline;
 
-    void (*mCallbackFunc)(void*, const char*, fuiRect*);
+    void(__fastcall* mCallbackFunc)(void*, const char*, fuiRect*);
     void* mCallbackData;
     void* field_138;
 };

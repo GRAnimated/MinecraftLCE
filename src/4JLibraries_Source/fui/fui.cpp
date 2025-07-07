@@ -54,20 +54,16 @@ int fui::getResolution() {
     return this->mResolution;
 }
 
-// NON_MATCHING | Score: 2521 (lower is better)
-// I think our mData struct is fucked since fuiSymbol has NO vftable...
-// and the pseudocode shows it trying to make calls to it's vftable.
 void fui::render(fuiFile* file, float a1, float a2, float a3, float a4) {
-    float unk1 = 1;
-    float unk2 = 1;
-    float unk3 = 1;
+    this->render(file, a1, a2, a3, a4, 1.0f, 1.0f);
+}
 
-    std::memset(this, 0, 0x40);  // what is this even doing???
-
-    this->mUnk1 = 1;
-    this->mUnk2 = 1;
-    this->mUnk3 = 1;
-    this->mUnk4 = 1;
+void fui::render(fuiFile* file, float a1, float a2, float a3, float a4, float a5, float a6) {
+    std::memset(this->matrix, 0, sizeof(mat4x4));  // what is this even doing???
+    this->matrix[0][0] = 1.0f;
+    this->matrix[1][1] = 1.0f;
+    this->matrix[2][2] = 1.0f;
+    this->matrix[3][3] = 1.0f;
 
     Renderer* renderer = Renderer::sInstance;
 
@@ -88,22 +84,15 @@ void fui::render(fuiFile* file, float a1, float a2, float a3, float a4) {
     renderer->MatrixMode(0);
     renderer->MatrixSetIdentity();
     renderer->MatrixTranslate(this->mUnk5 - a1, this->mUnk6 - a2, -2000.0f);
-    renderer->MatrixScale(unk3, unk2, 1.0f);
+    renderer->MatrixScale(a5, a6, 1);
 
     renderer->StateSetScissorRect(this->mUnk5, this->mUnk6, this->mUnk5 + a3, this->mUnk6 + a4);
 
-    //  (*(void (__fastcall **)(fuiSymbol *, _QWORD))(*(_QWORD *)file->mData.fuiSymbol + 24LL))(
-    // file->mData.fuiSymbol,
-    // (unsigned __int8)this->padding2[288]);
+    file->mRenderNodeStage->gather(this->mBoolIdk);
 
     this->preRender(file);
 
-    /*
-    (*(void (__fastcall **)(fuiSymbol *, _QWORD, _QWORD))(*(_QWORD *)file->mData.fuiSymbol + 40LL))(
-    file->mData.fuiSymbol,
-    0LL,
-    0LL);
-    */
+    file->mRenderNodeStage->render(nullptr, nullptr);
 }
 
 void fui::dispatchKeyboardEvent(fuiFile* file, bool state, int c) {
