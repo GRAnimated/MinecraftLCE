@@ -59,7 +59,7 @@ UIScene_DeathMenu::UIScene_DeathMenu(int padID, void* a2, UILayer* uiLayer) : UI
     std::wstring dupeczka = L"";
     if (Minecraft::InMiniGame(EMiniGameId::NORMAL_WORLD, true)) {
         if (Minecraft::GetInstance()->GetMiniGame()->GetLivesPerRound()) {
-            std::shared_ptr<Player> player = Minecraft::GetInstance()->mLocalPlayers[padID];
+            std::shared_ptr<MultiplayerLocalPlayer> player = Minecraft::GetInstance()->mLocalPlayers[padID];
             if (!player->isSpectator()) {
                 dupeczka = gui->sub_710054BD68(padID);
             }

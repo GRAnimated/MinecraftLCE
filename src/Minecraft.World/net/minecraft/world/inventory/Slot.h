@@ -27,7 +27,7 @@ public:
     virtual int getMaxStackSize();
     virtual int getMaxStackSize(not_null_ptr<ItemInstance> item);
     virtual std::wstring getNoItemIcon();
-    virtual std::shared_ptr<ItemInstance> remove(int count);
+    virtual not_null_ptr<ItemInstance> remove(int count);
     virtual bool isAt(std::shared_ptr<Container> container, int index);
     virtual bool mayPickup(std::shared_ptr<Player> player);
     virtual bool isActive();

@@ -62,7 +62,7 @@ std::wstring Slot::getNoItemIcon() {
     return nullptr;
 }
 
-std::shared_ptr<ItemInstance> Slot::remove(int count) {
+not_null_ptr<ItemInstance> Slot::remove(int count) {
     return mContainer->removeItem(mSlot, count);
 }
 

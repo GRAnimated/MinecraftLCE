@@ -5,7 +5,9 @@
 
 class GiveItemCommand : public Command {
 public:
-    ~GiveItemCommand() override;
+    GiveItemCommand();
+
+    //~GiveItemCommand() override;
     EGameCommand getId() override;
     int getPermissionLevel() override;
     void execute(std::shared_ptr<CommandSender>, arrayWithLength<uchar>) override;

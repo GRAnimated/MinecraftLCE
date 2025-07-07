@@ -6,6 +6,7 @@ class ByteArrayInputStream : public InputStream {
 public:
     ByteArrayInputStream(arrayWithLength<unsigned char> array, unsigned int start, unsigned int length);
     ByteArrayInputStream(arrayWithLength<unsigned char> array);
+    ByteArrayInputStream();
 
     ~ByteArrayInputStream() override;
     int read() override;

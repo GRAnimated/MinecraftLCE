@@ -30,6 +30,7 @@ class AbstractHorse;
 class Achievement;
 class GameType;
 class Inventory;
+class InventoryMenu;
 class PlayerEnderChestContainer;
 
 class Player : public LivingEntity {
@@ -73,7 +74,7 @@ public:
     void ShouldRenderShadow() override;
     void killed(std::shared_ptr<LivingEntity>) override;
     void makeStuckInWeb() override;
-    void getName() override;
+    std::wstring getName() override;
     bool isPushedByWater() override;
     std::wstring getDisplayName() override;
     void shouldShowName() override;
@@ -191,6 +192,7 @@ public:
     bool hasInvisiblePrivilege();
     int getPlayerGamePrivilege(EPlayerGamePrivileges);
     bool CheckPowerup(PowerupItems::eGlide_Timed_Powerup_ID);
+    std::shared_ptr<ItemEntity> drop(not_null_ptr<ItemInstance>, bool);
 
     // dunno the type
     static std::vector<void*> sSkins;
@@ -198,7 +200,7 @@ public:
     std::shared_ptr<Inventory> mInventory = nullptr;
     PlayerEnderChestContainer* mEnderChestInventory = nullptr;
     void* qword5C8 = nullptr;
-    void* mInventoryMenu;
+    InventoryMenu* mInventoryMenu;
     void* mContainerMenu;
     FoodData mFoodData;
     int align;

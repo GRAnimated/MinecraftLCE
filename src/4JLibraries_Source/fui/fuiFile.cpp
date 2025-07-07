@@ -21,7 +21,7 @@ fuiFile::fuiFile() {
     this->mHeader.index = 0;
     this->mData.fuiSymbol = nullptr;
     this->mData.fuiImportAsset = nullptr;
-    this->mRootNode = nullptr;
+    this->mRenderNodeStage = nullptr;
     this->mCallbackData = nullptr;
 }
 
@@ -37,7 +37,7 @@ uint64_t fuiFile::addDataRegion(uint a1, unsigned int size, unsigned char** data
 }
 
 fuiRenderNode* fuiFile::getRootNode() {
-    return (fuiRenderNode*)this->mData.fuiImportAsset;  // ??? (I think our structs are fucked)
+    return (fuiRenderNode*)this->mRenderNodeTimeline;  // ??? (I think our structs are fucked)
 }
 
 // NON_MATCHING | score: 10 (lower is better)
