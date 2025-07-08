@@ -7,7 +7,7 @@ class OreBlock : public Block {
     OreBlock();
     OreBlock(const MaterialColor*);
 
-    ~OreBlock() override;
+    ~OreBlock() override {}
     int getResourceCount(Random*) override;
     Item* getResource(const BlockState* blockState, Random*, int) override;
     void spawnResources(Level* level, const BlockPos& pos, const BlockState* blockState, float chance,

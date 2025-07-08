@@ -5,6 +5,6 @@
 class WebMaterial : public Material {
 public:
     WebMaterial(const MaterialColor* color);
-    ~WebMaterial() override;
+    ~WebMaterial() override {}
     bool blocksMotion() override;
 };

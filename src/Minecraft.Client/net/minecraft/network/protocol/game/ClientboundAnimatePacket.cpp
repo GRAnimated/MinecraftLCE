@@ -3,14 +3,20 @@
 #include "java/io/DataInputStream.h"
 #include "java/io/DataOutputStream.h"
 #include "net/minecraft/network/PacketListener.h"
+#include "net/minecraft/world/entity/Entity.h"
 
 std::shared_ptr<Packet> ClientboundAnimatePacket::create() {
     return std::shared_ptr<Packet>(new ClientboundAnimatePacket());
 }
 
 ClientboundAnimatePacket::ClientboundAnimatePacket() {
-    dword_28 = -1;
-    dword_2c = 0;
+    mId = -1;
+    mAction = 0;
+}
+
+ClientboundAnimatePacket::ClientboundAnimatePacket(std::shared_ptr<Entity> entity, int unk) {
+    mId = entity->getId();
+    mAction = unk;
 }
 
 int ClientboundAnimatePacket::getEstimatedSize() {
@@ -22,15 +28,23 @@ EPacketType ClientboundAnimatePacket::getPacketId() {
 }
 
 void ClientboundAnimatePacket::read(DataInputStream* input) {
-    dword_28 = input->readInt();
-    dword_2c = input->readByte();
+    mId = input->readInt();
+    mAction = input->readByte();
 }
 
 void ClientboundAnimatePacket::write(DataOutputStream* output) {
-    output->writeInt(dword_28);
-    output->writeByte(dword_2c);
+    output->writeInt(mId);
+    output->writeByte(mAction);
 }
 
 void ClientboundAnimatePacket::handle(PacketListener* listener) {
     listener->handleAnimate(shared_from_this());
+}
+
+int ClientboundAnimatePacket::getId() {
+    return mId;
+}
+
+int ClientboundAnimatePacket::getAction() {
+    return mAction;
 }

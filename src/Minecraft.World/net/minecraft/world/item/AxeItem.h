@@ -11,6 +11,6 @@ public:
 
     AxeItem(const Item::Tier*);
 
-    ~AxeItem() override;
+    ~AxeItem() override {}
     float getDestroySpeed(not_null_ptr<ItemInstance>, BlockState*) override;
 };

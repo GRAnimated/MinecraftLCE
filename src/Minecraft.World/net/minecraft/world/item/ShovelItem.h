@@ -13,7 +13,7 @@ public:
 
     ShovelItem(const Item::Tier*);
 
-    ~ShovelItem() override;
+    ~ShovelItem() override {}
     ActionResultType useOn(std::shared_ptr<Player>, Level*, const BlockPos&,
                            InteractionHand::EInteractionHand, const Direction*, float, float, float,
                            bool) override;

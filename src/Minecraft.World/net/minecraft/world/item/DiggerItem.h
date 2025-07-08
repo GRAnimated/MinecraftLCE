@@ -10,7 +10,7 @@ public:
 
     void _init(float attackDamage, float attackSpeed, arrayWithLength<Block*> blocks);
 
-    ~DiggerItem() override;
+    ~DiggerItem() override {}
     float getDestroySpeed(not_null_ptr<ItemInstance>, BlockState*) override;
     bool hurtEnemy(not_null_ptr<ItemInstance>, std::shared_ptr<LivingEntity> victim,
                    std::shared_ptr<LivingEntity> attacker) override;

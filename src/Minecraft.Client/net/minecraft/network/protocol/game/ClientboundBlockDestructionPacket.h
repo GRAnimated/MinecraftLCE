@@ -10,6 +10,7 @@ public:
     static std::shared_ptr<Packet> create();
 
     ClientboundBlockDestructionPacket();
+    ClientboundBlockDestructionPacket(int id, const BlockPos& pos, int progress);
     int getEstimatedSize() override;
     EPacketType getPacketId() override;
     void read(DataInputStream* input) override;
@@ -21,7 +22,7 @@ public:
     int getProgress();
 
 private:
-    int id;
-    BlockPos pos;
-    int progress;
+    int mId;
+    BlockPos mPos;
+    int mProgress;
 };

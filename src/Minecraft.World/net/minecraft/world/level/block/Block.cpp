@@ -83,6 +83,8 @@ Block::Block(Material* material, const MaterialColor* color) {
     init(material, color);
 }
 
+Block::~Block() {}
+
 const BlockState* Block::defaultBlockState() {
     return mBlockState;
 }
