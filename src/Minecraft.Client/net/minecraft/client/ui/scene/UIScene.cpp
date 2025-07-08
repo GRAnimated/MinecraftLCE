@@ -88,11 +88,11 @@ void UIScene::navigateBack() {
     gConsoleUIController.NavigateBack(this->mPadID, false, UIScene_DefaultMAYBE, (EUILayer)8);
 }
 
-// NON_MATCHING: it's creating temp instance of fui::sInstance, idk how to avoid that
 void UIScene::sendInputToMovie(int key, bool a3, bool a4, bool a5) {
-    if (!this->mFuiFile)
-        return;
-    fui::sInstance->dispatchKeyboardEvent(this->mFuiFile, !a4, this->convertGameActionToFuiKeycode(key));
+    if (this->mFuiFile) {
+        int elo = this->convertGameActionToFuiKeycode(key);
+        fui::sInstance->dispatchKeyboardEvent(this->mFuiFile, !a4, elo);
+    }
 }
 
 bool UIScene::controlHasFocus(UIControl_Base* control) {

@@ -207,7 +207,7 @@ extern "C" void nnMain() {
     nn::oe::SetPerformanceConfiguration(nn::oe::PerformanceMode_Normal, 0x20004);
     PERFORMANCE_MODE = nn::oe::GetPerformanceMode();
     nn::oe::SetPerformanceModeChangedNotificationEnabled(true);
-    nn::oe::SetFocusHandlingMode(nn::oe::FocusHandlingMode_SuspendHomeSleep);
+    nn::oe::SetFocusHandlingMode(nn::oe::FocusHandlingMode_NoSuspend);
     nn::oe::SetResumeNotificationEnabled(true);
     // nullsub_833();
     nn::nifm::Initialize();
