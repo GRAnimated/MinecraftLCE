@@ -59,7 +59,7 @@ void fui::render(fuiFile* file, float a1, float a2, float a3, float a4) {
 }
 
 void fui::render(fuiFile* file, float a1, float a2, float a3, float a4, float a5, float a6) {
-    std::memset(this->matrix, 0, sizeof(mat4x4));  // what is this even doing???
+    std::memset(this->matrix, 0, sizeof(mat4x4));
     this->matrix[0][0] = 1.0f;
     this->matrix[1][1] = 1.0f;
     this->matrix[2][2] = 1.0f;

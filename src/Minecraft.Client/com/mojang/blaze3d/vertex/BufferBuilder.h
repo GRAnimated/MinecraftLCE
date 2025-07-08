@@ -1,6 +1,6 @@
 #pragma once
 
-#include "net/minecraft/client/renderer/C4JRender.h"
+#include "NX/Render/C4JRender.h"
 #include "net/minecraft/world/ArrayWithLength.h"
 #include "types.h"
 

@@ -3,10 +3,10 @@
 #include <cstring>
 #include <new>
 
+#include "4JLibraries_Source/NX/Thread/C4JThreadImpl.h"
 #include "NX/Render/RendererCore.h"
 #include "com/mojang/blaze3d/vertex/Tesselator.h"
 #include "java/io/IntCache.h"
-#include "net/minecraft/client/C4JThreadImpl.h"
 #include "net/minecraft/client/CGameNetworkManager.h"
 #include "net/minecraft/client/CInput.h"
 #include "net/minecraft/client/CMinecraftApp.h"
@@ -207,7 +207,7 @@ extern "C" void nnMain() {
     nn::oe::SetPerformanceConfiguration(nn::oe::PerformanceMode_Normal, 0x20004);
     PERFORMANCE_MODE = nn::oe::GetPerformanceMode();
     nn::oe::SetPerformanceModeChangedNotificationEnabled(true);
-    nn::oe::SetFocusHandlingMode(nn::oe::FocusHandlingMode_SuspendHomeSleep);
+    nn::oe::SetFocusHandlingMode(nn::oe::FocusHandlingMode_NoSuspend);
     nn::oe::SetResumeNotificationEnabled(true);
     // nullsub_833();
     nn::nifm::Initialize();
