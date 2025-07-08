@@ -64,7 +64,7 @@ public:
     bool byte_148;
     int dword_14c;
     void* qword_150;
-    int field_158;
+    int mTicksSinceLastPacket;
     int mEstimatedSize;
     unsigned int field_160;
     unsigned int field_164;
