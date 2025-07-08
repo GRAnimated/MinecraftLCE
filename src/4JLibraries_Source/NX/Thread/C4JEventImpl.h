@@ -1,6 +1,6 @@
 #pragma once
 
-#include "4JLibraries_Source/NX/Thread/C4JEvent.h"
+#include "NX/Thread/C4JEvent.h"
 #include "nn/os.h"
 
 class C4JEventImpl : public C4JEvent {

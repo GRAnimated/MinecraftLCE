@@ -1,6 +1,6 @@
 #pragma once
 
-#include "4JLibraries_Source/NX/Render/C4JRender.h"
+#include "NX/Render/C4JRender.h"
 #include "net/minecraft/client/ui/scene/control/UIControl_Base.h"
 #include <cstdint>
 #include <string>

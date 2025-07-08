@@ -1,6 +1,6 @@
 #pragma once
 
-#include "4JLibraries_Source/NX/Render/C4JRender.h"
+#include "NX/Render/C4JRender.h"
 #include "nn/os/os_MutexTypes.h"
 #include "nn/vi.h"
 #include "nvn/nvn.h"
