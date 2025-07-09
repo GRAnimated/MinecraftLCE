@@ -2,10 +2,10 @@
 
 #include "net/minecraft/client/Minecraft.h"
 #include "net/minecraft/world/Difficulty.h"
-#include "net/minecraft/world/level/GameRules.h"
-#include "net/minecraft/world/level/Level.h"
 #include "net/minecraft/world/entity/player/Player.h"
 #include "net/minecraft/world/food/FoodConstants.h"
+#include "net/minecraft/world/level/GameRules.h"
+#include "net/minecraft/world/level/Level.h"
 
 FoodData::FoodData() {
     mExhaustionLevel = 0;
