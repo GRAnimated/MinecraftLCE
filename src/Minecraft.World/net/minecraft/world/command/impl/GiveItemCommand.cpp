@@ -36,8 +36,8 @@ void GiveItemCommand::execute(std::shared_ptr<CommandSender> sender, arrayWithLe
     int count = dataInputStream.readInt();
     int aux = dataInputStream.readInt();
     std::wstring name = dataInputStream.readUTF();
-    byteInputStream
-        = ByteArrayInputStream();  // this doesn't exist on WiiU, i'm just guessing it does this... why? idk
+    /*byteInputStream
+        = ByteArrayInputStream(); */ // this doesn't exist on WiiU, i'm just guessing it does this... why? idk
 
     std::shared_ptr<Player> player = this->getPlayer(playerUID);
     if (id < 1 || !player || !Item::byId(id))
@@ -53,22 +53,22 @@ void GiveItemCommand::execute(std::shared_ptr<CommandSender> sender, arrayWithLe
         player->mInventoryMenu->broadcastChanges();
     }
 
-    if (added && item->getCount() < 1) {
+    if (added && item->getCount() >= 1) {
+        item->setCount(1);
+        sender->setCommandStats((CommandStats::CommandStatType)3, count);
+        std::shared_ptr<ItemEntity> itemEnt = player->drop(item, false);
+        if (itemEnt)
+            itemEnt->makeFakeItem();
+    } else {
         sender->setCommandStats((CommandStats::CommandStatType)3, count - item->getCount());
         std::shared_ptr<ItemEntity> itemEnt = player->drop(item, false);
         if (itemEnt) {
             itemEnt->setNoPickUpDelay();
             itemEnt->setOwner(player->getName());
         }
-    } else {
-        item->setCount(1);
-        sender->setCommandStats((CommandStats::CommandStatType)3, count);
-        std::shared_ptr<ItemEntity> itemEnt = player->drop(item, false);
-        if (itemEnt)
-            itemEnt->makeFakeItem();
     }
 
-    std::wstring message(L"commands.give.success");
-    message.assign(player->getName());
+    std::wstring message;
+    message += (L"commands.give.success");
     Command::logAdminAction(sender, (ClientboundChatPacket::EChatPacketMessage)0, &id, 1, &message, 2);
 }

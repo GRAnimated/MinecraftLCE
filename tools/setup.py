@@ -12,14 +12,15 @@ import shutil
 
 TARGET_PATH = setup.get_target_path()
 TARGET_ELF_PATH = setup.get_target_elf_path()
+TARGET_UNCOMPRESSED_NSO_PATH = setup.config.get_versioned_data_path(setup.config.get_default_version()) / 'main.uncompressed.nso'
 
 def prepare_executable(original_nso: Optional[Path]):
     COMPRESSED_HASH = "63b7d29503400853c2cdb87a65d963cb9b5b934aea9d3d88b55764d33b13a722"
     UNCOMPRESSED_HASH = "f408dbfb901ab191fbcb7b5994580ed91812bafa90ae164796ae8a254e4dcef8"
 
-    TARGET_HASH = UNCOMPRESSED_HASH
+    target_hash = hashlib.sha256(TARGET_PATH.read_bytes()).hexdigest()
 
-    if TARGET_PATH.is_file() and hashlib.sha256(TARGET_PATH.read_bytes()).hexdigest() == TARGET_HASH and TARGET_ELF_PATH.is_file():
+    if TARGET_PATH.is_file() and target_hash == COMPRESSED_HASH or target_hash == UNCOMPRESSED_HASH and TARGET_ELF_PATH.is_file():
         print(">>> NSO is already set up")
         return
 
@@ -29,30 +30,31 @@ def prepare_executable(original_nso: Optional[Path]):
     if not original_nso.is_file():
         setup.fail(f"{original_nso} is not a file")
 
-    nso_data = original_nso.read_bytes()
-    nso_hash = hashlib.sha256(nso_data).hexdigest()
+    nso_hash = hashlib.sha256(original_nso.read_bytes()).hexdigest()
 
     if nso_hash == UNCOMPRESSED_HASH:
         print(">>> found uncompressed NSO")
-        TARGET_PATH.write_bytes(nso_data)
 
     elif nso_hash == COMPRESSED_HASH:
         print(">>> found compressed NSO")
-        setup._decompress_nso(original_nso, TARGET_PATH)
 
     else:
         setup.fail(f"unknown executable: {nso_hash}")
 
-    if not TARGET_PATH.is_file():
-        setup.fail("internal error while preparing executable (missing NSO); please report")
-    if hashlib.sha256(TARGET_PATH.read_bytes()).hexdigest() != TARGET_HASH:
-        setup.fail("internal error while preparing executable (wrong NSO hash); please report")
+    setup._convert_nso_to_elf(original_nso)
 
-    setup._convert_nso_to_elf(TARGET_PATH)
+    converted_elf_path = original_nso.with_suffix(".elf")
 
-    if not TARGET_ELF_PATH.is_file():
+    if not converted_elf_path.is_file():
         setup.fail("internal error while preparing executable (missing ELF); please report")
 
+    shutil.move(converted_elf_path, TARGET_ELF_PATH)
+
+    uncompressed_nso_path = original_nso.with_suffix(".uncompressed.nso")
+    shutil.move(uncompressed_nso_path, TARGET_UNCOMPRESSED_NSO_PATH)
+
+    if not TARGET_UNCOMPRESSED_NSO_PATH.is_file() or hashlib.sha256(TARGET_UNCOMPRESSED_NSO_PATH.read_bytes()).hexdigest() != UNCOMPRESSED_HASH:
+        setup.fail("Internal error while exporting uncompressed NSO (uncompressed NSO either doesn't exist or has an incorrect hash); please report")
 
 def get_build_dir():
     return setup.ROOT / "build"

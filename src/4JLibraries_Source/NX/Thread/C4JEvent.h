@@ -9,5 +9,5 @@ public:
     virtual ~C4JEvent();
     virtual void Set() = 0;
     virtual void Clear() = 0;
-    virtual bool WaitForSignal(int) = 0;
+    virtual int WaitForSignal(int) = 0;
 };

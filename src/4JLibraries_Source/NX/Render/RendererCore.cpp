@@ -2,7 +2,6 @@
 
 #include "NX/Platform.h"
 #include "NX/Render/UnknownRendererClasses.h"
-#include "net/minecraft/client/renderer/C4JRender.h"
 #include "nn/diag.h"
 #include "nn/os/os_MutexTypes.h"
 #include "nn/vi.h"

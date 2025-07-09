@@ -1,13 +1,13 @@
 #include "net/minecraft/network/Connection.h"
 
+#include "4JLibraries_Source/NX/Thread/C4JEventImpl.h"
+#include "4JLibraries_Source/NX/Thread/C4JThreadImpl.h"
 #include "NX/Platform.h"
 #include "java/io/BufferedOutputStream.h"
 #include "java/io/ByteArrayOutputStream.h"
 #include "java/io/DataInputStream.h"
 #include "java/io/DataOutputStream.h"
 #include "java/io/File.h"
-#include "net/minecraft/client/C4JEventImpl.h"
-#include "net/minecraft/client/C4JThreadImpl.h"
 #include "net/minecraft/client/CGameNetworkManager.h"
 #include "net/minecraft/client/Compression.h"
 #include "net/minecraft/client/ShutdownManager.h"
@@ -43,7 +43,7 @@ void Connection::_init() {
     mFakeLag = 0;
     mDelay = 50;
     qword_140 = nullptr;
-    field_158 = 0;
+    mTicksSinceLastPacket = 0;
     mEstimatedSize = 0;
     field_160 = 0;
     field_164 = 0;
@@ -155,7 +155,8 @@ int Connection::runRead(void* conn) {
     return 0;
 }
 
-// NON_MATCHING
+// NON_MATCHING: i've improved match within PULL_URL, it could be that it's just illusional improvement (as
+// those are if and while hell)
 int Connection::runWrite(void* conn) {
     Connection* connection = (Connection*)conn;
     ShutdownManager::HasStarted(ShutdownManager::EThreadId::_9);
@@ -167,9 +168,10 @@ int Connection::runWrite(void* conn) {
         LeaveCriticalSection(&connection->mCountMutex);
 
         if (connection->mIsRunning) {
-            int writeStatus;
-            while ((connection->mIsRunning || !writeStatus)
-                   && ShutdownManager::ShouldRun(ShutdownManager::EThreadId::_9)) {
+            int writeStatus = 0;
+            while (connection->mIsRunning || writeStatus) {  // issue is somewhere here
+                if (!ShutdownManager::ShouldRun(ShutdownManager::EThreadId::_9))
+                    break;
                 long long startTime = System::processTimeInMilliSecs();
 
                 bool writeSuccess = false;
@@ -178,8 +180,8 @@ int Connection::runWrite(void* conn) {
                 do {
                     writeSuccess = connection->writeTick();
                     currentTime = System::processTimeInMilliSecs();
-                } while (connection->mDataOutputStream->getSize() != 0x7FFFFFFF && writeSuccess
-                         && (currentTime - startTime) < 200);
+                } while (connection->mDataOutputStream->getSize() == 0x7fffffff
+                         && (writeSuccess | ((currentTime - startTime) > 199)));
 
                 writeStatus = connection->mC4JEventImpl2->WaitForSignal(100);
 
@@ -237,7 +239,6 @@ void Connection::queueSend(std::shared_ptr<Packet> packet) {
     }
 }
 
-// NON_MATCHING: Shared pointer stuff
 bool Connection::writeTick() {
     if (!mDataOutputStream || !mDataOutputStream2)
         return false;
@@ -270,11 +271,12 @@ bool Connection::writeTick() {
         return returnValue;
     }
 
+    std::shared_ptr<Packet> packet;
     EnterCriticalSection(&mOutgoingMutex);
-    std::shared_ptr<Packet> packet = mSlowOutgoingQueue.front();
+    packet = mSlowOutgoingQueue.front();
     mSlowOutgoingQueue.pop_front();
 
-    mEstimatedSize += ~packet->getEstimatedSize();
+    mEstimatedSize -= packet->getEstimatedSize() + 1;
     LeaveCriticalSection(&mOutgoingMutex);
 
     if (packet->mShouldDelay) {
@@ -352,23 +354,21 @@ void Connection::close(DisconnectPacket::eDisconnectReason reason) {
     }
 }
 
-// NON_MATCHING
 void Connection::tick() {
     if (field_119)
         close(DisconnectPacket::eDisconnectReason::_29);
     if (mEstimatedSize > 0x100000)  // 1MB
         close(DisconnectPacket::eDisconnectReason::Overflow);
     EnterCriticalSection(&mIncomingMutex);
-    long test = (reinterpret_cast<long*>(&mIncomingQueue)[5]);
+    long incomingQueueSize = mIncomingQueue.size();
     LeaveCriticalSection(&mIncomingMutex);
-    if (test)
-        field_158 = 0;
+    if (incomingQueueSize != 0)
+        mTicksSinceLastPacket = 0;
     else {
-        field_158++;
-        if (field_158 == 1200)
+        if (mTicksSinceLastPacket++ == 1200)
             close(DisconnectPacket::eDisconnectReason::Timeout);
     }
-    if (System::processTimeInNanoSecs() - mTimeInMs > 1000) {
+    if ((int)(System::processTimeInMilliSecs() - mTimeInMs) > 1000) {
         if (mPacketListener->isServerPacketListener()) {
             ClientboundKeepAlivePacket* packet = new ClientboundKeepAlivePacket();
             send(std::shared_ptr<Packet>(packet));
@@ -377,14 +377,16 @@ void Connection::tick() {
             send(std::shared_ptr<Packet>(packet));
         }
     }
+
     EnterCriticalSection(&mIncomingMutex);
+
     std::deque<std::shared_ptr<Packet>> queue;
     int maxIterations = 1000;
-    CGameNetworkManager inst = CGameNetworkManager::sInstance;
-    while (!inst.IsLeavingGame()) {
-        if (!inst.IsInSession())
+
+    while (!CGameNetworkManager::sInstance.IsLeavingGame()) {
+        if (!CGameNetworkManager::sInstance.IsInSession())
             break;
-        if (mIncomingQueue.size() == 0)
+        if (!mIncomingQueue.size())
             break;
         if (maxIterations-- < 0)
             break;
@@ -392,11 +394,10 @@ void Connection::tick() {
         std::shared_ptr<Packet> packet = mIncomingQueue.front();
         if (!byte_148) {
             if (packet->getPacketId() == _ServerboundPlayerActionPacket) {
-                auto actionPacket = std::shared_ptr<Packet>(packet);
-                int action = static_cast<ServerboundPlayerActionPacket*>(actionPacket.get())->getAction();
+                int action = std::static_pointer_cast<ServerboundPlayerActionPacket>(packet)->getAction();
 
-                if (action > 2 && action < 5) {
-                    queue.push_front(actionPacket);
+                if (action < 5 && action > 2) {
+                    queue.push_front(packet);
                 } else {
                     queue.push_back(packet);
                 }
@@ -408,10 +409,9 @@ void Connection::tick() {
     }
     LeaveCriticalSection(&mIncomingMutex);
 
-    for (auto it = queue.begin(); it != queue.end(); ++it) {
-        std::shared_ptr<Packet> packet = *it;
-        PIXBeginNamedEvent(0.0, "Handling packet %d\n", packet->getPacketId());
-        packet->handle(mPacketListener);
+    for (unsigned int i = 0; i < queue.size(); i++) {
+        PIXBeginNamedEvent(0.0, "Handling packet %d\n", queue[i]->getPacketId());
+        queue[i]->handle(mPacketListener);
         PIXEndNamedEvent();
     }
 
@@ -421,11 +421,12 @@ void Connection::tick() {
         close(DisconnectPacket::eDisconnectReason::Closed);
     if (byte_148) {
         EnterCriticalSection(&mIncomingMutex);
-        long test = (reinterpret_cast<long*>(&mIncomingQueue)[5]);
+        long incomingQueueSize = mIncomingQueue.size();
         LeaveCriticalSection(&mIncomingMutex);
-        if (!test)
+        if (incomingQueueSize == 0) {
             mPacketListener->onDisconnect((DisconnectPacket::eDisconnectReason)dword_14c, qword_150);
-        byte_148 = false;
+            byte_148 = false;
+        }
     }
 }
 
