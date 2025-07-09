@@ -17,7 +17,8 @@ MobEffectInstance::MobEffectInstance(MobEffect*, int duration, int amplifier) {
     init(mEffect, mDuration, mAmplifier, true);
 }
 
-MobEffectInstance::MobEffectInstance(MobEffect*, int duration, int amplifier, bool ambient, bool showParticles) {
+MobEffectInstance::MobEffectInstance(MobEffect*, int duration, int amplifier, bool ambient,
+                                     bool showParticles) {
     init(mEffect, mDuration, mAmplifier, showParticles);
     mAmbient = ambient;
 }
