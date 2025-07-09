@@ -87,4 +87,3 @@ bool MobEffectInstance::compareTo(MobEffectInstance* instance) {
 }
 
 void MobEffectInstance::applyEffect(std::shared_ptr<LivingEntity> entity) {}
-
