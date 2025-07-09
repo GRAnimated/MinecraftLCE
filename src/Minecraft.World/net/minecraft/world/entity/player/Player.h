@@ -203,7 +203,6 @@ public:
     InventoryMenu* mInventoryMenu;
     void* mContainerMenu;
     FoodData mFoodData;
-    int align;
     int mJumpTriggerTime;
     float mOBob;
     float mBob;
