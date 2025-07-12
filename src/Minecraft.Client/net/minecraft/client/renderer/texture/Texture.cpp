@@ -1,15 +1,15 @@
 #include "net/minecraft/client/renderer/texture/Texture.h"
 
 int Texture::crispBlend(int c0, int c1) {
-    int a0 = (c0 & -16777216) >> 24 & 255;
-    int a1 = (c1 & -16777216) >> 24 & 255;
+    int a0 = c0 >> 24 & 255;
+    int a1 = c1 >> 24 & 255;
     int a = 255;
     if (a0 + a1 < 255) {
         a0 = 1;
         a1 = 1;
         a = 0;
-    } else if (a1 < a0) {
-        a0 = 0xff;
+    } else if (a0 > a1) {
+        a0 = 255;
         a1 = 1;
     } else {
         a0 = 1;
@@ -25,6 +25,5 @@ int Texture::crispBlend(int c0, int c1) {
     int r = (r0 + r1) / (a0 + a1);
     int g = (g0 + g1) / (a0 + a1);
     int b = (b0 + b1) / (a0 + a1);
-
     return a << 24 | r << 16 | g << 8 | b;
 }
