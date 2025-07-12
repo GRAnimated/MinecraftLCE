@@ -18,7 +18,7 @@ public:
     void getData(u32);
     void getHeight();
     void getWidth();
-    static void crispBlend(int, int);
+    static int crispBlend(int c0, int c1);
     void getManagerId();
     void bind(int);
 
