@@ -23,6 +23,34 @@
 eINSTANCEOF LivingEntity::GetType() {
     return eLivingEntity;
 }
+void LivingEntity::setBoundingBox(AABB* box) {
+    const int newMinX = Mth::floor(box->min.x);
+    const int newMaxX = Mth::floor(box->max.x);
+    const int newMinY = Mth::floor(box->min.y);
+    const int newMaxY = Mth::floor(box->max.y);
+    const int newMinZ = Mth::floor(box->min.z);
+    const int newMaxZ = Mth::floor(box->max.z);
+
+    const int oldMinX = this->mMinX;
+    const int oldMaxX = this->mMaxX;
+    const int oldMinY = this->mMinY;
+    const int oldMaxY = this->mMaxY;
+    const int oldMinZ = this->mMinZ;
+    const int oldMaxZ = this->mMaxZ;
+
+    this->mMinX = newMinX;
+    this->mMaxX = newMaxX;
+    this->mMinY = newMinY;
+    this->mMaxY = newMaxY;
+    this->mMinZ = newMinZ;
+    this->mMaxZ = newMaxZ;
+
+    if (newMinX != oldMinX || newMaxX != oldMaxX || newMinY != oldMinY || newMaxY != oldMaxY
+        || newMinZ != oldMinZ || newMaxZ != oldMaxZ) {
+        ++this->dword50C;
+    }
+    this->Entity::setBoundingBox(box);
+}
 
 void LivingEntity::dropEquipment(bool, int) {}
 void LivingEntity::dropDeathLoot(bool, int) {}
