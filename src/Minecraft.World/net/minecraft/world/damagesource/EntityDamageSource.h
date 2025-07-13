@@ -1,7 +1,3 @@
-//
-// Created by danil on 13.07.2025.
-//
-
 #pragma once
 
 #include "net/minecraft/world/damagesource/DamageSource.h"

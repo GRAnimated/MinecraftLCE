@@ -1,8 +1,4 @@
-//
-// Created by danil on 13.07.2025.
-//
-
-#include "EntityDamageSource.h"
+#include "net/minecraft/world/damagesource/EntityDamageSource.h"
 
 // there's some wild shit going on with std::shared_ptr<Entity> mEntity
 // it's getting referenced by 0x28 instead of 0x20

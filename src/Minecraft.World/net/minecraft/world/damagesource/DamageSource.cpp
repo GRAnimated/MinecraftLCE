@@ -1,9 +1,4 @@
 #include "net/minecraft/world/damagesource/DamageSource.h"
-
-//
-// Created by danil on 13.07.2025.
-//
-
 #include "net/minecraft/world/food/FoodConstants.h"
 
 DamageSource::DamageSource(ClientboundChatPacket::EChatPacketMessage unk0,
