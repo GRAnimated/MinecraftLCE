@@ -276,7 +276,6 @@ public:
     int mMaxY;
     int mMinZ;
     int mMaxZ;
-    void* qword520;
     char gap528[128];
     char byte5A8;
     int dword5AC;
