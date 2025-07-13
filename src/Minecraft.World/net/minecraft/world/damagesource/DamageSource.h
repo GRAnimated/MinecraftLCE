@@ -39,10 +39,9 @@ protected:
     bool mIsFireSource;
     bool mIsExplosion;
     bool mScalesWithDifficulty;
-    bool mIsThorns;
+    bool mIsMagic;
     bool mIsProjectile;
     bool field_0x15;
     ClientboundChatPacket::EChatPacketMessage field_0x18;
-    ClientboundChatPacket::EChatPacketMessage field_0x1a;
-    bool mIsMagic;
+    ClientboundChatPacket::EChatPacketMessage field_0x1c;
 };

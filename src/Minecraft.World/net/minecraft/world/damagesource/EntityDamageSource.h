@@ -21,5 +21,5 @@ public:
 
 private:
     std::shared_ptr<Entity> mEntity;
-    bool field_0x30;
+    bool mIsThorns;
 };
