@@ -214,7 +214,7 @@ bool Item::hasMultipleSpriteLayers() {
     return false;
 }
 
-TextureAtlasSprite* Item::getLayerIcon(int a2, int, not_null_ptr<ItemInstance>) {
+TextureAtlasSprite* Item::getLayerIcon(int a2, int) {
     return this->getIcon(a2);
 }
 

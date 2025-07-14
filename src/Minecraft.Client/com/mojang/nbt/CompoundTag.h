@@ -20,6 +20,7 @@ public:
     CompoundTag* copy() override;
     void stripEmptyChildren() override;
     bool isEmpty() const override;
+    void remove(const std::wstring&);
 
     /** Gets a child `Compound Tag`
      *

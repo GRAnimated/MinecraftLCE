@@ -69,7 +69,7 @@ void ElytraItem::registerIcons(IconRegister* iconRegister) {
     this->mBrokenElytraIcon = iconRegister->registerIcon(L"broken_elytra");
 }
 
-TextureAtlasSprite* ElytraItem::getLayerIcon(int usage, int, not_null_ptr<ItemInstance>) {
+TextureAtlasSprite* ElytraItem::getLayerIcon(int usage, int) {
     if (this->getMaxDamage() - 1 > usage)
         return this->mDefaultIcon;
     else
