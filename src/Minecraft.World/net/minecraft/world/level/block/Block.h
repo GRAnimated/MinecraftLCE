@@ -167,7 +167,7 @@ public:
     virtual Block* setNameAndDescriptionId(int name, int desc);
     virtual bool isPossibleToRespawnInThis();
     virtual std::wstring getName();
-    virtual void getDescriptionId(int);
+    virtual int getDescriptionId(int);
     virtual void getUseDescriptionId();
     virtual void triggerEvent(const BlockState* blockState, Level* level, const BlockPos& pos, int, int);
     virtual bool isCollectStatistics();
@@ -188,7 +188,7 @@ public:
     virtual void hasAnalogOutputSignal(const BlockState* blockState);
     virtual void getAnalogOutputSignal(const BlockState* blockState, Level* level, const BlockPos& pos);
     virtual Block* setIconName(const std::wstring&);
-    virtual void getIconName();
+    virtual std::wstring getIconName();
     virtual void registerIcons(IconRegister*);
     virtual void getTileItemIconName();
     virtual void getIconTexture(const Direction* direction, const BlockState* blockState);
