@@ -7,9 +7,21 @@ public:
     Vec3 min;
     Vec3 max;
 
-    static void CreateNewThreadStorage();
+    class ThreadStorage {
+    public:
+        ThreadStorage();
+        ~ThreadStorage();
 
-    class ThreadStorage {};
+        AABB* mStorage;
+        unsigned int mUnk;
+    };
+    static ThreadStorage* sDefaultThreadStorage;
+    static int sThreadStorageIndex;
+    static void CreateNewThreadStorage();
+    static void UseDefaultThreadStorage();
+    static void ReleaseThreadStorage();
+
+    AABB() {}
 
     static AABB* newPermanent(double, double, double, double, double, double);
     static AABB* newTemp(double, double, double, double, double, double);
