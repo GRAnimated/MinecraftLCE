@@ -1,5 +1,6 @@
-#include "Minecraft.Client/net/minecraft/client/gui/MenuBuilder.h"
-#include "Minecraft.Client/net/minecraft/client/ui/scene/scenes/UIScene_CreativeMenu.h"
+#include "net/minecraft/client/ui/scene/scenes/UIScene_CreativeMenu.h"
+
+#include "net/minecraft/client/gui/MenuBuilder.h"
 
 #include "net/minecraft/world/item/Items.h"
 #include "net/minecraft/world/level/block/Blocks.h"

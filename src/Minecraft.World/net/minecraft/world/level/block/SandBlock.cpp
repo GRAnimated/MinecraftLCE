@@ -1,5 +1,6 @@
-#include "net/minecraft/client/renderer/texture/IconRegister.h"
 #include "net/minecraft/world/level/block/SandBlock.h"
+
+#include "net/minecraft/client/renderer/texture/IconRegister.h"
 #include "net/minecraft/world/level/block/state/BlockStateDefinition.h"
 #include "net/minecraft/world/level/material/MaterialColor.h"
 #include <cstring>

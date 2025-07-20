@@ -1,1 +1,1 @@
-#include "Minecraft.Client/net/minecraft/client/gui/MenuBuilder.h"
+#include "net/minecraft/client/gui/MenuBuilder.h"

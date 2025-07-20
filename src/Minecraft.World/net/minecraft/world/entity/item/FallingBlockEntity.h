@@ -1,4 +1,7 @@
+#pragma once
+
 #include "net/minecraft/world/entity/Entity.h"
+
 class FallingBlockEntity : public Entity {
 public:
     FallingBlockEntity(Level*, double, double, double, const BlockState*);

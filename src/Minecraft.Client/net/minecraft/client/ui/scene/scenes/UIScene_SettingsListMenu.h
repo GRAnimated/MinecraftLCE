@@ -1,3 +1,7 @@
+#pragma once
+
+#pragma once
+
 #include "net/minecraft/client/ui/scene/UIScene.h"
 #include "net/minecraft/client/ui/scene/control/UIControl_MultiList.h"
 

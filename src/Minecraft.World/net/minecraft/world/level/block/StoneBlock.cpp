@@ -1,8 +1,9 @@
+#include "net/minecraft/world/level/block/StoneBlock.h"
+
 #include "net/minecraft/client/renderer/texture/IconRegister.h"
 #include "net/minecraft/client/resources/L10N.h"
 #include "net/minecraft/world/item/Item.h"
 #include "net/minecraft/world/level/block/Blocks.h"
-#include "net/minecraft/world/level/block/StoneBlock.h"
 #include "net/minecraft/world/level/block/state/BlockStateDefinition.h"
 #include "net/minecraft/world/level/material/Material.h"
 #include "net/minecraft/world/level/material/MaterialColor.h"

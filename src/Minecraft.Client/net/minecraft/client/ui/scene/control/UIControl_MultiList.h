@@ -1,3 +1,5 @@
+#pragma once
+
 #include "net/minecraft/client/ui/scene/control/UIControl_List.h"
 
 class UIControl_MultiList : public UIControl_List {
