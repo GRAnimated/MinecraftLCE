@@ -61,12 +61,7 @@ void UIScene_CreativeMenu::staticCtor() {
     builder.ITEM_AUX(Blocks::PLANKS, PlanksBlock::VARIANT, PlanksBlock::Variant::JUNGLE);
     builder.ITEM_AUX(Blocks::PLANKS, PlanksBlock::VARIANT, PlanksBlock::Variant::ACACIA);
     builder.ITEM_AUX(Blocks::PLANKS, PlanksBlock::VARIANT, PlanksBlock::Variant::DARK_OAK);
-    // builder.ITEM_AUX(Blocks::LOG, qword_710178CB88, PlanksBlock::Variant::OAK);
-    // builder.ITEM_AUX(Blocks::LOG, qword_710178CB88, PlanksBlock::Variant::SPRUCE);
-    // builder.ITEM_AUX(Blocks::LOG, qword_710178CB88, PlanksBlock::Variant::BIRCH);
-    // builder.ITEM_AUX(Blocks::LOG, qword_710178CB88, PlanksBlock::Variant::JUNGLE);
-    // builder.ITEM_AUX(Blocks::LOG2, qword_710178CFC8, PlanksBlock::Variant::ACACIA);
-    // builder.ITEM_AUX(Blocks::LOG2, qword_710178CFC8, PlanksBlock::Variant::DARK_OAK);
+    // ...
     builder.ITEM_BLOCK(Blocks::GRAVEL);
     builder.ITEM_BLOCK(Blocks::BRICK_BLOCK);
     builder.ITEM_BLOCK(Blocks::MOSSY_COBBLESTONE);
@@ -80,9 +75,7 @@ void UIScene_CreativeMenu::staticCtor() {
     builder.ITEM_BLOCK(Blocks::GLOWSTONE);
     builder.ITEM_BLOCK(Blocks::MAGMA);
     builder.ITEM_BLOCK(Blocks::SEA_LANTERN);
-    // sub_710057C804(&builder, Blocks::PRISMARINE, qword_71017A1E70, qword_71017A1E98);
-    // sub_710057C804(&builder, Blocks::PRISMARINE, qword_71017A1E70, qword_71017A1EA8);
-    // sub_710057C804(&builder, Blocks::PRISMARINE, qword_71017A1E70, qword_71017A1EA0);
+    // ...
     builder.ITEM_BLOCK(Blocks::SLIME);
     builder.ITEM_BLOCK(Blocks::FENCE);
     builder.ITEM_BLOCK(Blocks::SPRUCE_FENCE);
@@ -92,19 +85,9 @@ void UIScene_CreativeMenu::staticCtor() {
     builder.ITEM_BLOCK(Blocks::DARK_OAK_FENCE);
     builder.ITEM_BLOCK(Blocks::NETHER_BRICK_FENCE);
     builder.ITEM_BLOCK(Blocks::IRON_BARS);
-    // sub_710057C84C(&builder, Blocks::STONEBRICK, qword_71017A4B40, qword_71017A4BD0);
-    // sub_710057C84C(&builder, Blocks::STONEBRICK, qword_71017A4B40, qword_71017A4BD8);
-    // sub_710057C84C(&builder, Blocks::STONEBRICK, qword_71017A4B40, qword_71017A4BE0);
-    // sub_710057C84C(&builder, Blocks::STONEBRICK, qword_71017A4B40, qword_71017A4BE8);
-    // sub_710057C894(&builder, Blocks::MONSTER_EGG, qword_710178CE68, qword_710178CEA8);
-    // sub_710057C894(&builder, Blocks::MONSTER_EGG, qword_710178CE68, qword_710178CEB0);
-    // sub_710057C894(&builder, Blocks::MONSTER_EGG, qword_710178CE68, qword_710178CEB8);
-    // sub_710057C894(&builder, Blocks::MONSTER_EGG, qword_710178CE68, qword_710178CEC0);
-    // sub_710057C894(&builder, Blocks::MONSTER_EGG, qword_710178CE68, qword_710178CEC8);
-    // sub_710057C894(&builder, Blocks::MONSTER_EGG, qword_710178CE68, qword_710178CED0);
+    // ...
     builder.ITEM_BLOCK(Blocks::MYCELIUM);
-    // sub_710057C8DC(&builder, Blocks::DIRT, qword_71017891F0, qword_7101789208);
-    // sub_710057C8DC(&builder, Blocks::DIRT, qword_71017891F0, qword_7101789210);
+    // ...
     builder.ITEM_BLOCK(Blocks::NETHER_BRICK);
     builder.ITEM_BLOCK(Blocks::RED_NETHER_BRICK);
     builder.ITEM_BLOCK(Blocks::END_STONE);
@@ -128,20 +111,7 @@ void UIScene_CreativeMenu::staticCtor() {
     builder.ITEM(Items::JUNGLE_DOOR);
     builder.ITEM(Items::ACACIA_DOOR);
     builder.ITEM(Items::DARK_OAK_DOOR);
-    // sub_710057C92C(&builder, Blocks::STONE_SLAB, qword_71017A4BF8, qword_71017A4C00);
-    // sub_710057C92C(&builder, Blocks::STONE_SLAB, qword_71017A4BF8, qword_71017A4C08);
-    // sub_710057C974(&builder, Blocks::STONE_SLAB2, qword_710178CFD8, qword_710178CFE0);
-    // builder.ITEM_AUX(Blocks::WOODEN_SLAB, qword_71017A5CD8, qword_71017A1930);
-    // builder.ITEM_AUX(Blocks::WOODEN_SLAB, qword_71017A5CD8, qword_71017A16F0);
-    // builder.ITEM_AUX(Blocks::WOODEN_SLAB, qword_71017A5CD8, qword_71017A1938);
-    // builder.ITEM_AUX(Blocks::WOODEN_SLAB, qword_71017A5CD8, qword_71017A1940);
-    // builder.ITEM_AUX(Blocks::WOODEN_SLAB, qword_71017A5CD8, qword_71017A1948);
-    // builder.ITEM_AUX(Blocks::WOODEN_SLAB, qword_71017A5CD8, qword_71017A1950);
-    // sub_710057C92C(&builder, Blocks::STONE_SLAB, qword_71017A4BF8, qword_71017A4C18);
-    // sub_710057C92C(&builder, Blocks::STONE_SLAB, qword_71017A4BF8, qword_71017A4C20);
-    // sub_710057C92C(&builder, Blocks::STONE_SLAB, qword_71017A4BF8, qword_71017A4C28);
-    // sub_710057C92C(&builder, Blocks::STONE_SLAB, qword_71017A4BF8, qword_71017A4C30);
-    // sub_710057C92C(&builder, Blocks::STONE_SLAB, qword_71017A4BF8, qword_71017A4C38);
+    // ...
     builder.ITEM_BLOCK(Blocks::PURPUR_SLAB);
     builder.ITEM_BLOCK(Blocks::OAK_STAIRS, 2);
     builder.ITEM_BLOCK(Blocks::SPRUCE_STAIRS, 2);
