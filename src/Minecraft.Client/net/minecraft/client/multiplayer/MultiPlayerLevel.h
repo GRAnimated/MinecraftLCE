@@ -29,7 +29,7 @@ public:
                    SoundSource::ESoundSource, float, float, float) override;
     void playLocalSound(double, double, double, const SoundEvent*, SoundSource::ESoundSource, float, float,
                         bool, float) override;
-    bool addEntity(const std::shared_ptr<Entity>&) override;
+    bool addEntity(std::shared_ptr<Entity>) override;
     void entityAdded(std::shared_ptr<Entity>) override;
     void entityRemoved(std::shared_ptr<Entity>) override;
     void removeEntity(std::shared_ptr<Entity>) override;

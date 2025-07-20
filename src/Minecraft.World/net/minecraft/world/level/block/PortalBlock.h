@@ -8,7 +8,7 @@ public:
 
     const BlockState* getBlockState(int) override;
     int convertBlockStateToLegacyData(const BlockState* blockState) override;
-    void rotate(const BlockState* blockState, Rotation*) override;
+    const BlockState* rotate(const BlockState* blockState, Rotation*) override;
     ~PortalBlock() override;
     bool isCubeShaped(const BlockState* blockState) override;
     AABB* getShape(const BlockState* blockState, LevelSource* levelSource, const BlockPos& pos) override;

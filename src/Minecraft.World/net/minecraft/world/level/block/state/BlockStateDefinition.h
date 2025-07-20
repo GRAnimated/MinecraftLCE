@@ -65,7 +65,7 @@ public:
     };
     BlockStateDefinition(Block* block);
 
-    template <int N>
+    template <int N>  // let's be real it's never going to be bigger than int, but symbol looks a lot better
     BlockStateDefinition(Block* block, const Property* (&properties_array)[N]) {
         _init(block, properties_array, N);
     }
@@ -74,11 +74,12 @@ public:
 
     Block* getBlock();
     const BlockState* any();
-    const BlockState* getPossibleBlockStates();
+    arrayWithLength<const BlockState*>* getPossibleBlockStates() { return &this->mStates; }
 
 private:
     Block* mBlock;
     std::vector<const Property*> mProperties;
     arrayWithLength<const BlockState*> mStates;
-    char filler[24];
+    void** properties;          // this is array
+    void** another_properties;  // this is also array
 };

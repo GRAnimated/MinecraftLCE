@@ -56,13 +56,13 @@ public:
     virtual void ParticlesSurviveWithin();
     virtual void GetInteractTooltip(const BlockTooltipDataHolder& blockTooltipDataHolder);
     virtual void GetHitTooltip(const BlockTooltipDataHolder& blockTooltipDataHolder);
-    virtual MaterialColor* getMapColor(const BlockState* blockState, LevelSource* levelSource,
-                                       const BlockPos& pos);
+    virtual const MaterialColor* getMapColor(const BlockState* blockState, LevelSource* levelSource,
+                                             const BlockPos& pos);
     virtual const BlockState* getBlockState(int);
     virtual int convertBlockStateToLegacyData(const BlockState* blockState);
     virtual const BlockState* fillVirtualBlockStateProperties(const BlockState* blockState,
                                                               LevelSource* levelSource, const BlockPos& pos);
-    virtual void rotate(const BlockState* blockState, Rotation*);
+    virtual const BlockState* rotate(const BlockState* blockState, Rotation*);
     virtual void mirror(const BlockState* blockState, Mirror*);
     virtual ~Block();
     virtual void DerivedInit();
@@ -110,7 +110,7 @@ public:
     virtual void animateTick(const BlockState* blockState, Level* level, const BlockPos& pos, Random*);
     virtual void destroy(Level* level, const BlockPos& pos, const BlockState* blockState);
     virtual void neighborChanged(const BlockState* blockState, Level* level, const BlockPos& pos, Block*,
-                                 const BlockPos& pos2);
+                                 const BlockPos& neighborPos);
     virtual void addLights(Level* level, const BlockPos& pos);
     virtual int getTickDelay(Level* level);
     virtual void onPlace(Level* level, const BlockPos& pos, const BlockState* blockState);
@@ -160,7 +160,7 @@ public:
                                const BlockState* blockState, std::shared_ptr<BlockEntity>,
                                not_null_ptr<ItemInstance>);
     virtual bool isSilkTouchable();
-    virtual void getSilkTouchItemInstance(const BlockState* blockState);
+    virtual not_null_ptr<ItemInstance> getSilkTouchItemInstance(const BlockState* blockState);
     virtual int getResourceCountForLootBonus(int, Random*);
     virtual void setPlacedBy(Level* level, const BlockPos& pos, const BlockState* blockState,
                              std::shared_ptr<LivingEntity>, not_null_ptr<ItemInstance>);
@@ -212,6 +212,7 @@ public:
 
     static Block* byId(int id);
     static void popResource(Level*, const BlockPos&, not_null_ptr<ItemInstance>);
+    static int getIdWithData(const BlockState*);
 
     static void CreateNewThreadStorage();
 

@@ -2,6 +2,9 @@
 
 #include <string>
 
+template <typename T>
+class TypedBoxed;
+
 class Boxed {
 public:
     Boxed(const std::type_info* typeInfo);
@@ -17,6 +20,15 @@ public:
     virtual void setValue(const Boxed* other) = 0;
     virtual std::wstring toString() const = 0;
 
-private:
+    /*template <typename T>
+    TypedBoxed<T>* tryGetType() {
+        return this->isA(typeid(T)) ? static_cast<TypedBoxed<T>*>(this) : nullptr;
+    }*/
+
+    template <typename T>
+    const TypedBoxed<T>* tryGetType() const {
+        return this->isA(typeid(T)) ? static_cast<const TypedBoxed<T>*>(this) : nullptr;
+    }
+
     const std::type_info* mTypeInfo;
 };
