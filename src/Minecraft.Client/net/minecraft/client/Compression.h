@@ -1,6 +1,7 @@
 #pragma once
 
 #include "net/minecraft/client/ESavePlatform.h"
+#include "net/minecraft/util/ThreadStorage.h"
 #include "types.h"
 #include <nn/os.h>
 
@@ -8,24 +9,11 @@ class Compression {
 public:
     enum ECompressionTypes : unsigned int { LZX = 2, ZLIB = 3, DEFLATE = 4 };
 
-    class ThreadStorage {
-    public:
-        Compression* compression;
-
-        ThreadStorage();
-        ~ThreadStorage();
-    };
+    DECLARE_THREAD_STORAGE_SINGLE(Compression)
 
     Compression();
     ~Compression();
 
-    // Thread Storage shit
-    static unsigned int sTlsIndex;
-    static Compression::ThreadStorage* sThreadStorage;
-
-    static void CreateNewThreadStorage();
-    static void ReleaseThreadStorage();
-    static void UseDefaultThreadStorage();
     static Compression* getCompression();
 
     void SetDecompressionType(ESavePlatform platform);

@@ -1,5 +1,9 @@
+#include "net/minecraft/world/phys/Vec3.h"
+
 #include "cmath"
 #include "net/minecraft/world/phys/AABB.h"
+
+DEFINE_THREAD_STORAGE(Vec3, 1024)
 
 double Vec3::dot(Vec3* rhs) {
     return this->x * rhs->x + this->y * rhs->y + this->z * rhs->z;

@@ -1,5 +1,9 @@
 #include "net/minecraft/world/phys/AABB.h"
 
+#include "net/minecraft/util/ThreadStorage.h"
+
+DEFINE_THREAD_STORAGE(AABB, 1024)
+
 Vec3* AABB::getCenter() {
     return Vec3::newTemp(this->min.x + (this->max.x - this->min.x) * 0.5,
                          this->min.y + (this->max.y - this->min.y) * 0.5,

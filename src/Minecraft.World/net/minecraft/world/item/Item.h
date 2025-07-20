@@ -57,15 +57,10 @@ public:
         }
 
         int getLevel() const { return this->mLevel; }
-
         int getUses() const { return this->mUses; }
-
         float getSpeed() const { return this->mSpeed; }
-
         float getAttackDamageBonus() const { return this->mDamage; }
-
         int getEnchantmentValue() const { return this->mEnchantmentValue; }
-
         Item* getTierItem() const;
 
     private:
@@ -81,6 +76,7 @@ public:
     void addProperty(ResourceLocation, const ItemPropertyFunction*);
     int getId();
     bool canBeDepleted();
+    std::wstring getIconName();
     void setIconName(const std::wstring&);
     void setMaxDamage(int);
     int getMaxDamage();
@@ -148,7 +144,7 @@ public:
     getDefaultAttributeModifiers(const EquipmentSlot* eqpSlot);
     virtual void registerIcons(IconRegister* iconRegister);
     virtual bool hasMultipleSpriteLayers();
-    virtual TextureAtlasSprite* getLayerIcon(int, int, not_null_ptr<ItemInstance> itemInstance);
+    virtual TextureAtlasSprite* getLayerIcon(int, int);
     virtual int getIconType();
     virtual TextureAtlasSprite* getIcon(int auxValue);
     virtual TextureAtlasSprite* getIcon(not_null_ptr<ItemInstance> itemInstance);

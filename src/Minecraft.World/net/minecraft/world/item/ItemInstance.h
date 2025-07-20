@@ -82,7 +82,7 @@ public:
     void sameItemWithTags(const not_null_ptr<ItemInstance>&, std::vector<std::wstring>*);
     void sameItem_not_shared(ItemInstance*);
     void getUseDescriptionId();
-    void getDescriptionId(int);
+    int getDescriptionId(int);
     void toString();
     void inventoryTick(Level*, std::shared_ptr<Entity>, int, bool);
     void onCraftedBy(Level*, std::shared_ptr<Player>, int);

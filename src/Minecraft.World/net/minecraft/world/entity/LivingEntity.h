@@ -54,7 +54,7 @@ public:
     void setYBodyRot(float) override;
     void shouldShowName() override;
     void onSyncedDataUpdated(const EntityDataAccessor_Base*) override;
-    void setBoundingBox(AABB*) override;
+    void setBoundingBox(AABB* box) override;
     void stopCurrentLerp() override;
     virtual void registerAttributes();
     virtual bool isWaterMob();
@@ -270,9 +270,12 @@ public:
     long mLastDamageStamp;
     char byte508;
     int dword50C;
-    void* qword510;
-    void* qword518;
-    void* qword520;
+    int mMinX;
+    int mMaxX;
+    int mMinY;
+    int mMaxY;
+    int mMinZ;
+    int mMaxZ;
     char gap528[128];
     char byte5A8;
     int dword5AC;
