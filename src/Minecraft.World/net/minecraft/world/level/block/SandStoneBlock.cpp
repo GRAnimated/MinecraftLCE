@@ -71,7 +71,7 @@ TextureAtlasSprite* SandStoneBlock::getTexture(const Direction* direction, const
         return this->mTopTexture;
     if (direction != Direction::DOWN)
         return this->mVariantsTextures[variant->getData()];
-    if (variant != Variant::SMOOTH && variant != Variant::CHISELED)
+    if (variant != Variant::CHISELED && variant != Variant::SMOOTH)
         return this->mBottomTexture;
 
     return this->mTopTexture;

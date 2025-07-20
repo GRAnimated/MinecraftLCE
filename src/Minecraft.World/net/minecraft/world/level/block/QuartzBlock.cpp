@@ -69,7 +69,7 @@ int QuartzBlock::convertBlockStateToLegacyData(const BlockState* state) {
 
 int QuartzBlock::getSpawnResourcesAuxValue(const BlockState* state) {
     Variant* variant = state->getValue<Variant*>(VARIANT);
-    if (variant == Variant::LINES_Z || variant == Variant::LINES_X)
+    if (variant == Variant::LINES_X || variant == Variant::LINES_Z)
         variant = Variant::LINES_Y;
 
     return variant->getData();
