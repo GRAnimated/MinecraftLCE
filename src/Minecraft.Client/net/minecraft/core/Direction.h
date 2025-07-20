@@ -23,6 +23,7 @@ public:
         static Axis* Z;
 
         bool isHorizontal();
+        int getId();
     };
 
     static const Direction* DOWN;

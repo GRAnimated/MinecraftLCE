@@ -56,11 +56,10 @@ void OreBlock::spawnResources(Level* level, const BlockPos& pos, const BlockStat
     }
 }
 
-// NON_MATCHING: figure out what BlockStateDefintion::getPossibleBlockStates() returns
 int OreBlock::getResourceCountForLootBonus(int fortuneLevel, Random* random) {
     if (fortuneLevel > 0
         && Item::byBlock(this)
-               != this->getResource(this->getBlockStateDefinition()->getPossibleBlockStates(), random,
+               != this->getResource(this->getBlockStateDefinition()->getPossibleBlockStates()->get(0), random,
                                     fortuneLevel)) {
         int i = random->nextInt(fortuneLevel + 2) - 1;
         if (i < 0) {

@@ -1,6 +1,8 @@
 #pragma once
 
+#include <string>
 class StringRepresentable {
 public:
-    virtual ~StringRepresentable() = 0;
+    virtual std::wstring toString() const;
+    virtual std::wstring getSerializedName() const;
 };

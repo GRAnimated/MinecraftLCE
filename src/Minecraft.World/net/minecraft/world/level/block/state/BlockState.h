@@ -35,7 +35,6 @@ public:
     virtual void equals(const BlockState*) = 0;
     virtual void hashCode() const = 0;
 
-    // NON_MATCHING: Decomp is using add sp, 0x8 instead of mov sp
     template <typename T>
     const BlockState* setValue(Property* property, T value) const {
         TypedBoxed<T> boxed(&value);
@@ -45,7 +44,6 @@ public:
     template <typename T>
     T getValue(Property* property) const {
         TypedBoxed<T>* typedBoxed = (TypedBoxed<T>*)getBoxedValue(property);
-        TypedBoxed<T>* type = typedBoxed->tryGetType();
-        return *type->getValue();
+        return *const_cast<TypedBoxed<T>*>(typedBoxed->template tryGetType<T>())->getValue();
     }
 };
