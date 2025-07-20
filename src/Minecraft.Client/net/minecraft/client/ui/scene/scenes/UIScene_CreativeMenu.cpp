@@ -12,6 +12,7 @@
 #include "net/minecraft/world/level/block/SandStoneBlock.h"
 #include "net/minecraft/world/level/block/StoneBlock.h"
 
+// NON_MATCHING: finish
 void UIScene_CreativeMenu::staticCtor() {
     nullsub_728();
     MenuBuilder builder;
@@ -148,4 +149,6 @@ void UIScene_CreativeMenu::staticCtor() {
     // Category: Decoration
 
     builder.setCategory(Decoration);
+
+    // TODO: finish
 }
