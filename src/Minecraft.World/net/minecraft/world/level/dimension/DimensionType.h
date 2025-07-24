@@ -13,5 +13,6 @@ public:
     static DimensionType* getById(int dimensionId);
 
     std::wstring getName() const;
+    char getId() const;
     Dimension* create() const;
 };

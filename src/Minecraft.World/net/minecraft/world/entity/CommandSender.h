@@ -10,7 +10,11 @@
 class Level;
 class CommandStats {
 public:
+    CommandStats();
+
     enum CommandStatType {};
+
+    void* padding[2];
 };
 
 class CommandSender {

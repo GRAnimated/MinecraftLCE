@@ -1,4 +1,5 @@
-#include "Minecraft.World/net/minecraft/world/level/block/PlanksBlock.h"
+#include "net/minecraft/world/level/block/PlanksBlock.h"
+
 #include "net/minecraft/client/renderer/texture/IconRegister.h"
 #include "net/minecraft/core/Direction.h"
 #include "net/minecraft/world/level/block/Block.h"

@@ -5,6 +5,8 @@
 #include "net/minecraft/world/ArrayWithLength.h"
 
 class BlockPos;
+class CompoundTag;
+class ItemInstance;
 
 class DataInputStream : public InputStream, public DataInput {
 public:
@@ -36,6 +38,9 @@ public:
     int readVarInt();
     long readVarLong();
     BlockPos readBlockPos();
+    BlockPos* readBlockPosPointer();
+    not_null_ptr<ItemInstance> readItem();
+    CompoundTag* readNbt();
 
     InputStream* mInputStream;
 };

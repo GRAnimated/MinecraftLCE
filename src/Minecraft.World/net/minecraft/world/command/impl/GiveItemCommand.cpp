@@ -1,4 +1,5 @@
-#include "Minecraft.World/net/minecraft/world/command/impl/GiveItemCommand.h"
+#include "net/minecraft/world/command/impl/GiveItemCommand.h"
+
 #include "java/io/ByteArrayInputStream.h"
 #include "java/io/DataInputStream.h"
 #include "net/minecraft/sounds/SoundEvent.h"

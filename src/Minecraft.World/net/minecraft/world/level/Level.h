@@ -190,7 +190,7 @@ public:
     int getHeight();
     int getFogDistance();
     int getSkyFlashTime();
-    std::vector<AABB> getCollisionAABBs(std::shared_ptr<Entity>, const AABB*, bool, bool, bool);
+    std::vector<AABB>* getCollisionAABBs(std::shared_ptr<Entity>, const AABB*, bool, bool, bool);
     void updateSkyBrightness();
     void prepareWeather();
     void setDayTime(long long);

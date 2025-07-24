@@ -2,17 +2,176 @@
 
 #include "NX/Platform.h"
 #include "net/minecraft/core/BlockPos.h"
+#include "net/minecraft/core/NonNullList.h"
+#include "net/minecraft/network/syncher/EntityDataSerializers.h"
+#include "net/minecraft/network/syncher/SynchedEntityData.h"
+#include "net/minecraft/util/Mth.h"
+#include "net/minecraft/world/Random.h"
 #include "net/minecraft/world/damagesource/DamageSource.h"
 #include "net/minecraft/world/eINSTANCEOF.h"
 #include "net/minecraft/world/enchantment/enchantments/ProtectionEnchantment.h"
+#include "net/minecraft/world/entity/CommandSender.h"
 #include "net/minecraft/world/entity/LivingEntity.h"
+#include "net/minecraft/world/item/ItemInstance.h"
 #include "net/minecraft/world/item/enchantment/Enchantment.h"
 #include "net/minecraft/world/level/Level.h"
 #include "net/minecraft/world/level/block/Block.h"
+#include "net/minecraft/world/level/dimension/Dimension.h"
+#include "net/minecraft/world/level/dimension/DimensionType.h"
 #include "net/minecraft/world/phys/AABB.h"
+#include "types.h"
 #include <memory>
 
-Entity::Entity(Level*, bool) {}
+int Entity::getId() {
+    return mId;
+}
+void Entity::setId(int id) {
+    mId = id;
+}
+
+void Entity::staticCtor() {
+    // TODO: Find names for these based on the places they are used
+    qword_7101789FA0 = SynchedEntityData::defineId(eSerializer, eSerializer,
+                                                   EntityDataSerializers::sINT_EntityDataSerializer);
+    qword_7101789FA8 = SynchedEntityData::defineId(eSerializer, eSerializer,
+                                                   EntityDataSerializers::sINT_EntityDataSerializer);
+    qword_7101789FB0 = SynchedEntityData::defineId(eSerializer, eSerializer,
+                                                   EntityDataSerializers::sSTRING_EntityDataSerializer);
+    qword_7101789FB8 = SynchedEntityData::defineId(eSerializer, eSerializer,
+                                                   EntityDataSerializers::sBOOLEAN_EntityDataSerializer);
+    qword_7101789FC0 = SynchedEntityData::defineId(eSerializer, eSerializer,
+                                                   EntityDataSerializers::sBOOLEAN_EntityDataSerializer);
+    qword_7101789FC8 = SynchedEntityData::defineId(eSerializer, eSerializer,
+                                                   EntityDataSerializers::sBOOLEAN_EntityDataSerializer);
+    qword_7101789FE0 = SynchedEntityData::defineId(eSerializer, eSerializer,
+                                                   EntityDataSerializers::sSTRING_EntityDataSerializer);
+    qword_7101789FD8 = SynchedEntityData::defineId(eSerializer, eSerializer,
+                                                   EntityDataSerializers::sBOOLEAN_EntityDataSerializer);
+    qword_7101789FD0 = SynchedEntityData::defineId(eSerializer, eSerializer,
+                                                   EntityDataSerializers::sBOOLEAN_EntityDataSerializer);
+}
+
+// NON_MATCHING: a couple things need to be moved around to move instructions into the right place
+void Entity::_init(bool synched, Level* level) {
+    if (synched && TlsGetValue(sTlsIndex)) {
+        mId = getSmallId();
+    } else {
+        mId = sEntityAmount++;
+        if (sEntityAmount == 0x7FFFFFF)
+            sEntityAmount = 2048;
+    }
+
+    sViewScale = 1.0;
+
+    mBlocksBuilding = false;
+    mVehicle = nullptr;
+    mBoardingCooldown = 0;
+    mForcedLoading = false;
+
+    mXo = mYo = mZo = 0.0;
+    mX = mY = mZ = 0.0;
+    mDeltaMovementX = mDeltaMovementY = mDeltaMovementZ = 0.0;
+    mXRot = mYRot = 0.0f;
+    mXRotO = mYRotO = 0.0f;
+
+    field_d8 = 0;
+    field_dc = 0;
+    field_e0 = 0;
+    field_e4 = 0;
+    mBoundingBox = AABB::newPermanent(0.0, 0.0, 0.0, 0.0, 0.0, 0.0);
+    mFallTicks = 0;
+    mHardLandingsCount = 0;
+    mWidth = 0.6f;
+    mHeight = 1.8f;
+    mOnGround = false;
+    mHasVerticalCollision = false;
+    mHasHorizontalCollision = false;
+    mHasCollision = false;
+    mIsHurtMarked = false;
+    mIsInWeb = false;
+    mCipa = true;
+    mIsRemoved = false;
+    mNextStep = 1;
+    mNextFlap = 1.0f;
+    mXOld = mYOld = mZOld = 0.0;
+    mMaxUpStep = 0.0f;
+    mHasNoPhysics = false;
+    mPushThrough = 0;
+    mWalkDistO = 0.0f;
+    mWalkDist = 0.0f;
+    mMoveDist = 0.0f;
+    mFallDistance = 0.0f;
+
+    Random* random = new Random();
+    mRand = random;
+    mTickCount = 0;
+    mWasInWater = false;
+    mInvulnerableTime = 0;
+    mIsFirstTick = true;
+    mIsImmuneToFire = false;
+    mIsInChunk = false;
+    mXChunk = mYChunk = mZChunk = 0;
+    mXP = mYP = mZP = 0;
+    field_190 = nullptr;
+    mHasNoCulling = false;
+    mHasImpulse = false;
+    mChangingDimensionDelay = 0;
+    mIsInsidePortal = false;
+    mPortalTime = 0;
+    mDimensionId = 0;
+    mIsGlowing = false;
+    mPortalEntranceOffset = nullptr;
+    mPortalEntranceForwards = nullptr;
+
+    if (synched)
+        mStringUUID = L"ent" + Mth::createInsecureUUID(random);
+
+    mCommandStats = new CommandStats();
+
+    mIsInvulnerable = false;
+    mHasTeleported = false;
+    mRemainingFireTicks = -getFireImmuneTicks();
+    mPistonDeltas = arrayWithLength<double>(3, true);
+    mPistonDeltasGameTime = 0;
+    mInventory = NonNullList<not_null_ptr<ItemInstance>>();
+
+    mType = 0;
+    field_cc = false;
+    field_d0 = -1;
+}
+
+Entity::Entity(Level* level, bool synched) {
+    mLevel = level;
+    MemSect(16);
+    _init(synched, level);
+    MemSect(0);
+
+    setPos(0.0, 0.0, 0.0);
+
+    if (level)
+        mDimensionId = level->mDimension->getType()->getId();
+
+    if (synched) {
+        SynchedEntityData* synchedEntityData = new SynchedEntityData(this);
+        mEntityData = std::shared_ptr<SynchedEntityData>(synchedEntityData);
+    } else {
+        mEntityData = nullptr;
+    }
+
+    if (mEntityData) {
+        mEntityData->createDateItem(qword_7101789FA0, 0);
+        mEntityData->createDateItem(qword_7101789FA8, 300);
+        mEntityData->createDateItem(qword_7101789FB8, false);
+        mEntityData->createDateItem(qword_7101789FB0, std::wstring(L""));
+        mEntityData->createDateItem(qword_7101789FC0, false);
+        mEntityData->createDateItem(qword_7101789FC8, false);
+        mEntityData->createDateItem(qword_7101789FD0, false);
+        mEntityData->createDateItem(qword_7101789FD8, false);
+        mEntityData->createDateItem(qword_7101789FE0, std::wstring(L""));
+    }
+
+    field_e8 = 0;
+}
 
 void Entity::fjDerivedCtorCalls() {
     this->mType = this->GetType();
@@ -23,27 +182,27 @@ void Entity::kill() {
     this->remove();
 }
 
-// NON_MATCHING: some shared_ptr crap
 void Entity::resetPos() {
-    if (this->mLevel) {
-        std::shared_ptr<Entity> ent = shared_from_this();
-        while (this->mY > 0.0 && this->mY < 256.0) {
-            this->setPos(this->mX, this->mY, this->mZ);
+    if (!this->mLevel)
+        return;
 
-            if (this->mLevel->getCollisionAABBs(ent, this->getBoundingBox(), false, false, false).empty()) {
-                break;
-            }
+    std::shared_ptr<Entity> ent = shared_from_this();
+    while (this->mY > 0.0 && this->mY < 256.0) {
+        this->setPos(this->mX, this->mY, this->mZ);
 
-            ++this->mY;
+        if (this->mLevel->getCollisionAABBs(ent, this->getBoundingBox(), false, false, false)->empty()) {
+            break;
         }
 
-        this->mDeltaMovement.x = this->mDeltaMovement.y = this->mDeltaMovement.z = 0.0;
-        this->mXRot = 0.0f;
+        ++this->mY;
     }
+
+    this->mDeltaMovementZ = this->mDeltaMovementY = this->mDeltaMovementX = 0.0;
+    this->mXRot = 0.0f;
 }
 
 void Entity::remove() {
-    this->mRemoved = true;
+    this->mIsRemoved = true;
     this->stopCurrentLerp();
 }
 
@@ -65,7 +224,7 @@ void Entity::setSize(float width, float height) {
         const AABB* aabb = this->getBoundingBox();
         this->setBoundingBox(AABB::newTemp(aabb->min.x, aabb->min.y, aabb->min.z, aabb->min.x + this->mWidth,
                                            aabb->min.y + this->mHeight, aabb->min.z + this->mWidth));
-        if (this->mWidth > widthBefore && !this->mFirstTick && !this->mLevel->mIsLocal) {
+        if (this->mWidth > widthBefore && !this->mIsFirstTick && !this->mLevel->mIsLocal) {
             this->move((MoverType)0, (widthBefore - this->mWidth), 0.0, (widthBefore - this->mWidth), false);
         }
     }
@@ -108,12 +267,12 @@ void Entity::setSecondsOnFire(int seconds) {
             std::static_pointer_cast<LivingEntity>(shared_from_this()), i);
     }
 
-    if (this->mFire < i)
-        this->mFire = i;
+    if (this->mRemainingFireTicks < i)
+        this->mRemainingFireTicks = i;
 }
 
 void Entity::clearFire() {
-    this->mFire = 0;
+    this->mRemainingFireTicks = 0;
 }
 
 void Entity::outOfWorld() {
@@ -125,9 +284,9 @@ void Entity::outOfWorld() {
 void Entity::updateDeltaAfterMove(Block* block, double oldX, double oldY, double oldZ, double& newX,
                                   double& newY, double& newZ) {
     if (newX != oldX)
-        this->mDeltaMovement.x = 0.0f;
+        this->mDeltaMovementX = 0.0f;
     if (newZ != oldZ)
-        this->mDeltaMovement.z = 0.0f;
+        this->mDeltaMovementZ = 0.0f;
     if (newY != oldY) {
         PIXBeginNamedEvent(0.0f, "Update entity after falling");
         block->updateEntityAfterFallOn(this->mLevel, shared_from_this());
@@ -184,14 +343,14 @@ void Entity::checkFallDamage(double fall, bool onGround, Block* block, const Blo
     if (onGround) {
         if (this->mFallDistance > 0.0f) {
             block->fallOn(this->mLevel, pos, shared_from_this(), this->mFallDistance);
-            ++this->mFallTicks2;
+            ++this->mHardLandingsCount;  // hard enough to take fall damage
         }
 
-        this->idk = 0;
+        this->mFallTicks = 0;
         this->mFallDistance = 0.0f;
     } else if (fall < 0.0) {
         this->mFallDistance -= (float)fall;
-        ++this->idk;
+        ++this->mFallTicks;
     }
 }
 

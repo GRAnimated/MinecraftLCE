@@ -1,5 +1,7 @@
 #pragma once
 
+#include <string>
+
 class Random;
 
 // Meth
@@ -31,4 +33,5 @@ public:
     static int nextInt(Random* random, int i, int j);
     static float nextFloat(Random* random, float i, float j);
     static double nextDouble(Random* random, double i, double j);
+    static std::wstring createInsecureUUID(Random* random);
 };

@@ -10,6 +10,7 @@
 #include "net/minecraft/client/renderer/BlockRenderer.h"
 #include "net/minecraft/client/renderer/LevelRenderer.h"
 #include "net/minecraft/client/renderer/blockentity/BlockEntityRenderDispatcher.h"
+#include "net/minecraft/core/MutableBlockPos.h"
 #include "net/minecraft/world/ArrayWithLength.h"
 #include "net/minecraft/world/level/Level.h"
 #include "net/minecraft/world/level/block/Block.h"

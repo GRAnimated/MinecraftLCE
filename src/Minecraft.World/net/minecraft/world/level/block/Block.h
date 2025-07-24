@@ -45,6 +45,7 @@ public:
     const BlockState* defaultBlockState();
     void registerDefaultState(const BlockState* blockState);
     static const BlockState* getStateByIdAndData(int, unsigned char);
+    static const BlockState* stateByIdWithData(int);
 
     static void registerBlock(int id, const std::wstring& name, Block* block);
     static void registerBlock(int id, const ResourceLocation& rLoc, Block* block);
