@@ -22,10 +22,13 @@ def compute_measures(version: str | None = None) -> Measures:
     matched_code = sizes[FunctionStatus.Matching]
     matched_functions = counts[FunctionStatus.Matching]
 
+    fuzzy_code = matched_code + sizes[FunctionStatus.NonMatching] + sizes[FunctionStatus.Equivalent]
+
     m = Measures()
     m.total_code = total_code
     m.matched_code = matched_code
     m.matched_code_percent = (matched_code / total_code * 100) if total_code else 0.0
+    m.fuzzy_match_percent = (fuzzy_code / total_code * 100) if total_code else 0.0
 
     m.total_functions = total_functions
     m.matched_functions = matched_functions
@@ -39,6 +42,7 @@ def compute_measures(version: str | None = None) -> Measures:
 
     m.total_units = 0
     m.complete_units = 0
+
 
     return m
 
