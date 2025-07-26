@@ -31,7 +31,7 @@ public:
     virtual long readLong();
     virtual short readShort();
     virtual std::wstring readUTF();
-    virtual void readUTFChar();
+    virtual int readUTFChar();
     virtual PlayerUID readPlayerUID();
     virtual void skipBytes(long long);
 

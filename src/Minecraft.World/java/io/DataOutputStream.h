@@ -30,7 +30,7 @@ public:
     void writeInt(int) override;
     void writeLong(long long) override;
     void writeShort(short) override;
-    void writeUnsignedShort(unsigned short) override;
+    virtual void writeUnsignedShort(unsigned short);
     void writeChar(wchar_t) override;
     void writeChars(const std::wstring& str) override;
     void writeBoolean(bool) override;

@@ -29,7 +29,6 @@ public:
     template <class T>
     static void deleteElements(const std::vector<T>&);
 
-protected:
     static const u8 TAG_End = 0;
     static const u8 TAG_Byte = 1;
     static const u8 TAG_Short = 2;
