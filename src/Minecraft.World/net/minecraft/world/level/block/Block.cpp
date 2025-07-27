@@ -1,3 +1,5 @@
+#include "net/minecraft/world/level/block/Block.h"
+
 #include "NX/Platform.h"
 #include "net/minecraft/client/Minecraft.h"
 #include "net/minecraft/core/BlockPos.h"
@@ -13,7 +15,6 @@
 #include "net/minecraft/world/item/InteractionResultHolder.h"
 #include "net/minecraft/world/item/ItemInstance.h"
 #include "net/minecraft/world/item/Items.h"
-#include "net/minecraft/world/level/block/Block.h"
 
 #include "net/minecraft/world/item/Item.h"
 #include "net/minecraft/world/item/LeadItem.h"

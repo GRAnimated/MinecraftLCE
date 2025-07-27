@@ -1,4 +1,4 @@
-#include "Minecraft.World/net/minecraft/world/level/block/boxed/Boxed.h"
+#include "net/minecraft/world/level/block/boxed/Boxed.h"
 
 Boxed::Boxed(const std::type_info* typeInfo) {
     this->mTypeInfo = typeInfo;

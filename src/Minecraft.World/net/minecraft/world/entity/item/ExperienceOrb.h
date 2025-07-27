@@ -1,5 +1,10 @@
+#pragma once
+
+#pragma once
+
 #include "net/minecraft/world/entity/Entity.h"
 #include <memory>
+
 class ExperienceOrb : public Entity {
 public:
     ExperienceOrb(Level*, double, double, double, int);
@@ -16,7 +21,7 @@ public:
     void hurt(DamageSource*, float) override;
     void shouldRender(double) override;
     void readAdditionalSaveData(CompoundTag*) override;
-    virtual void addAdditonalSaveData(CompoundTag*) override;
+    void addAdditonalSaveData(CompoundTag*) override;
     bool isAttackable() override;
 
     static int getExperienceValue(int);

@@ -2,6 +2,7 @@
 
 #include "net/minecraft/core/BlockPos.h"
 #include "net/minecraft/world/item/InteractionResultHolder.h"
+
 class ItemInstance;
 class MultiplayerLocalPlayer;
 class MultiPlayerLevel;
