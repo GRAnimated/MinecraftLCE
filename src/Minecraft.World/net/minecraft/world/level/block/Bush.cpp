@@ -8,7 +8,6 @@
 #include "net/minecraft/world/level/material/Material.h"
 #include "net/minecraft/world/phys/AABB.h"
 
-
 static float boundingSize = 0.2f;
 
 AABB* bushAABB = AABB::newPermanent(0.5 - boundingSize, 0.0f, 0.5 - boundingSize, boundingSize + 0.5,
