@@ -1,6 +1,6 @@
 #pragma once
 
-#include "net/minecraft/world/level/block/RenderShape.h"
+#include "net/minecraft/world/level/block/BlockShapes.h"
 #include "net/minecraft/world/level/block/boxed/TypedBoxed.h"
 #include "net/minecraft/world/level/block/state/BlockBehaviours.h"
 

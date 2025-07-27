@@ -32,6 +32,7 @@ class GameType;
 class Inventory;
 class InventoryMenu;
 class PlayerEnderChestContainer;
+class GameMode;
 
 class Player : public LivingEntity {
 public:
@@ -178,7 +179,7 @@ public:
     virtual void StopSpectatingPlayer();
     virtual bool IsSpectatingOtherPlayer();
     virtual void pure_virtual_12() = 0;
-    virtual void GetGameMode();
+    virtual GameMode* GetGameMode();
     virtual void AutoEquip(not_null_ptr<ItemInstance>, bool&);
     virtual void OnEquipArmor(not_null_ptr<ItemInstance>);
     virtual void OnTakeFromAnvil(not_null_ptr<ItemInstance>);
@@ -193,6 +194,8 @@ public:
     int getPlayerGamePrivilege(EPlayerGamePrivileges);
     bool CheckPowerup(PowerupItems::eGlide_Timed_Powerup_ID);
     std::shared_ptr<ItemEntity> drop(not_null_ptr<ItemInstance>, bool);
+    bool canDestroy(const BlockState*);
+    float getDestroySpeed(const BlockState*);
 
     // dunno the type
     static std::vector<void*> sSkins;

@@ -263,12 +263,14 @@ float LivingEntity::getAbsorptionAmount() {
     return this->mAbsorptionAmount;
 }
 
-// NON_MATCHING | Score: 805 (lower is better)
-// ???
-// some weird fmaxf issue
 void LivingEntity::setAbsorptionAmount(float amount) {
-    this->mAbsorptionAmount = fmaxf(amount, 0.0);
+    if (amount < 0.0F) {
+        amount = 0.0F;
+    }
+
+    this->mAbsorptionAmount = amount;
 }
+
 void LivingEntity::onEnterCombat() {}
 void LivingEntity::onLeaveCombat() {}
 void LivingEntity::setRecordPlayingNearby(const BlockPos&, bool) {}

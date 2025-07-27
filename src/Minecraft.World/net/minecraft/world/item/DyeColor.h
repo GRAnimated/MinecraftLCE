@@ -20,4 +20,7 @@ public:
     static const DyeColor* BLACK;
 
     int getItemData() const;
+    int getBlockData() const;
+
+    static DyeColor* byItemData(int data);
 };
