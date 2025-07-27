@@ -16,6 +16,7 @@ public:
     };
 
     DisconnectPacket();
+    DisconnectPacket(eDisconnectReason reason);
 
     void read(DataInputStream* input) override;
     void write(DataOutputStream* output) override;

@@ -45,7 +45,7 @@ public:
     not_null_ptr<ItemInstance> copy() const;
     void grow(int);
     void shrink(int);
-    void split(int);
+    not_null_ptr<ItemInstance> split(int);
     void useOn(std::shared_ptr<Player>, Level*, const BlockPos&, InteractionHand::EInteractionHand,
                const Direction*, float, float, float, bool);
     void getDestroySpeed(const BlockState*);
