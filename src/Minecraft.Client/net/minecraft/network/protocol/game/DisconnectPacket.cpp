@@ -12,6 +12,10 @@ DisconnectPacket::DisconnectPacket() : Packet() {
     mReason = eDisconnectReason::_0;
 }
 
+DisconnectPacket::DisconnectPacket(eDisconnectReason reason) : Packet() {
+    mReason = reason;
+}
+
 void DisconnectPacket::handle(PacketListener* listener) {
     listener->handleDisconnect(shared_from_this());
 }

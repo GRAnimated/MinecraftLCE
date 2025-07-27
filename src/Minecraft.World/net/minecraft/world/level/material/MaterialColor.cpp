@@ -1,5 +1,7 @@
 #include "net/minecraft/world/level/material/MaterialColor.h"
 
+#include "net/minecraft/world/item/DyeColor.h"
+
 MaterialColor::MaterialColor(int id, eMinecraftColour color) : mColor(color), mID(id) {
     MATERIAL_COLORS[id] = this;
 }
@@ -60,6 +62,27 @@ void MaterialColor::staticCtor() {
     TERRACOTTA_BLACK = new MaterialColor(51, eMinecraftColour::Material_Terracotta_Black);
 }
 
+void MaterialColor::staticCtorAfterDyeColor() {
+    DYE_COLORS = new MaterialColor*[16];
+
+    DYE_COLORS[DyeColor::WHITE->getBlockData()] = MaterialColor::SNOW;
+    DYE_COLORS[DyeColor::ORANGE->getBlockData()] = MaterialColor::COLOR_ORANGE;
+    DYE_COLORS[DyeColor::MAGENTA->getBlockData()] = MaterialColor::COLOR_MAGENTA;
+    DYE_COLORS[DyeColor::LIGHT_BLUE->getBlockData()] = MaterialColor::COLOR_LIGHT_BLUE;
+    DYE_COLORS[DyeColor::YELLOW->getBlockData()] = MaterialColor::COLOR_YELLOW;
+    DYE_COLORS[DyeColor::LIME->getBlockData()] = MaterialColor::COLOR_LIGHT_GREEN;
+    DYE_COLORS[DyeColor::PINK->getBlockData()] = MaterialColor::COLOR_PINK;
+    DYE_COLORS[DyeColor::GRAY->getBlockData()] = MaterialColor::COLOR_GRAY;
+    DYE_COLORS[DyeColor::SILVER->getBlockData()] = MaterialColor::COLOR_LIGHT_GRAY;
+    DYE_COLORS[DyeColor::CYAN->getBlockData()] = MaterialColor::COLOR_CYAN;
+    DYE_COLORS[DyeColor::PURPLE->getBlockData()] = MaterialColor::COLOR_PURPLE;
+    DYE_COLORS[DyeColor::BLUE->getBlockData()] = MaterialColor::COLOR_BLUE;
+    DYE_COLORS[DyeColor::BROWN->getBlockData()] = MaterialColor::COLOR_BROWN;
+    DYE_COLORS[DyeColor::GREEN->getBlockData()] = MaterialColor::COLOR_GREEN;
+    DYE_COLORS[DyeColor::RED->getBlockData()] = MaterialColor::COLOR_RED;
+    DYE_COLORS[DyeColor::BLACK->getBlockData()] = MaterialColor::COLOR_BLACK;
+}
+
 int MaterialColor::calculateRGBColor(int colorIntensity) const {
     int rgbIntensity = 220;
     if (colorIntensity == 3) {
@@ -77,4 +100,8 @@ int MaterialColor::calculateRGBColor(int colorIntensity) const {
 
     return 0xFF000000 | (((mColor & 0xFF0000) >> 16) * rgbIntensity / 255) << 16
            | (((mColor & 0xFF00) >> 8) * rgbIntensity / 255) << 8 | (mColor & 0xFF) * rgbIntensity / 255;
+}
+
+MaterialColor* MaterialColor::getDyeMaterial(const DyeColor* dyeColor) {
+    return DYE_COLORS[dyeColor->getBlockData()];
 }

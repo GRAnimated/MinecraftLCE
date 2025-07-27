@@ -547,12 +547,14 @@ public:
     static MaterialColor* TERRACOTTA_RED;
     static MaterialColor* TERRACOTTA_BLACK;
 
+    static MaterialColor** DYE_COLORS;
+
     static void staticCtor();
     static void staticCtorAfterDyeColor();
 
     MaterialColor(int, eMinecraftColour);
     int calculateRGBColor(int) const;
-    static void getDyeMaterial(const DyeColor*);
+    static MaterialColor* getDyeMaterial(const DyeColor*);
 
     eMinecraftColour mColor;
     int mID;
