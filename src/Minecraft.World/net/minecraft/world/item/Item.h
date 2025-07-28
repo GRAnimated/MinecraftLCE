@@ -81,6 +81,7 @@ public:
     void setMaxDamage(int);
     int getMaxDamage();
     void setStackedByData(bool);
+    bool isStackedByData();
 
     static Item* byId(int id);
     static void registerBlock(Block* block);

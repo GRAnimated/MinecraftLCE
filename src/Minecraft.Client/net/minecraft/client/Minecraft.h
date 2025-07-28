@@ -113,7 +113,7 @@ public:
     void* qword_40;
     Level* mLevel;
     LevelRenderer* mLevelRenderer;
-    std::shared_ptr<LocalPlayer> mLocalPlayer;
+    std::shared_ptr<MultiplayerLocalPlayer> mLocalPlayer;
     arrayWithLength<void*> array_68;  // unknown array type
     std::shared_ptr<MultiplayerLocalPlayer> mLocalPlayers[4];
     MultiPlayerGameMode* mGameModes[4];

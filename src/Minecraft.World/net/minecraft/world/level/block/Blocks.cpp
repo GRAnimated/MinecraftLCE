@@ -2,6 +2,7 @@
 
 #include "net/minecraft/resources/ResourceLocation.h"
 #include "net/minecraft/world/level/block/FireBlock.h"
+#include "net/minecraft/world/level/block/LeafBlock.h"
 #include "net/minecraft/world/level/block/WaterlilyBlock.h"
 
 Block* Blocks::get(const std::wstring& name) {
@@ -29,8 +30,8 @@ void Blocks::staticInit() {
     COAL_ORE = get(L"coal_ore");
     LOG = get(L"log");
     LOG2 = get(L"log2");
-    LEAVES = get(L"leaves");
-    LEAVES2 = get(L"leaves2");
+    LEAVES = (LeafBlock*)get(L"leaves");    // this is probably OldLeafBlock
+    LEAVES2 = (LeafBlock*)get(L"leaves2");  // this is probably NewLeafBlock
     SPONGE = get(L"sponge");
     GLASS = get(L"glass");
     LAPIS_ORE = get(L"lapis_ore");

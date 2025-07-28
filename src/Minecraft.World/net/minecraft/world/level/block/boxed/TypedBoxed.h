@@ -6,7 +6,6 @@ template <typename T>
 class TypedBoxed : public Boxed {
 public:
     TypedBoxed(T* value) : Boxed(&typeid(*value)) { this->mValue = *value; }
-    //~TypedBoxed() override;
 
     unsigned int hashOf() const override { return std::hash<T>{}(mValue); }
     bool operator==(const Boxed* compared) const override {

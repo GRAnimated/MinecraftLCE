@@ -93,3 +93,19 @@ public:                                                                         
         if (storage != sDefaultThreadStorage)                                                                \
             delete storage;                                                                                  \
     }
+
+#define START_DECLARE_THREAD_STORAGE()                                                                       \
+public:                                                                                                      \
+    class ThreadStorage {                                                                                    \
+    public:                                                                                                  \
+        ThreadStorage();                                                                                     \
+        ~ThreadStorage();
+
+#define END_DECLARE_THREAD_STORAGE()                                                                         \
+    }                                                                                                        \
+    ;                                                                                                        \
+    static ThreadStorage* sDefaultThreadStorage;                                                             \
+    static int sThreadStorageIndex;                                                                          \
+    static void CreateNewThreadStorage();                                                                    \
+    static void UseDefaultThreadStorage();                                                                   \
+    static void ReleaseThreadStorage();

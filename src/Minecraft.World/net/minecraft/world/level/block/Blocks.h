@@ -12,6 +12,7 @@
 #include "net/minecraft/world/level/block/WebBlock.h"
 
 class ResourceLocation;
+class LeafBlock;
 
 class Blocks {
 public:
@@ -39,8 +40,8 @@ public:
     static inline Block* COAL_ORE;
     static inline Block* LOG;
     static inline Block* LOG2;
-    static inline Block* LEAVES;
-    static inline Block* LEAVES2;
+    static inline LeafBlock* LEAVES;   // this is probably OldLeafBlock
+    static inline LeafBlock* LEAVES2;  // this is probably NewLeafBlock
     static inline Block* SPONGE;
     static inline Block* GLASS;
     static inline Block* LAPIS_ORE;

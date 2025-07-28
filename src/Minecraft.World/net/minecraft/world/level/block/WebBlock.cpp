@@ -7,7 +7,7 @@
 #include "net/minecraft/world/item/ItemInstance.h"
 #include "net/minecraft/world/item/Items.h"
 #include "net/minecraft/world/level/Level.h"
-#include "net/minecraft/world/level/block/RenderShape.h"
+#include "net/minecraft/world/level/block/BlockShapes.h"
 #include "net/minecraft/world/level/gamemode/minigames/MiniGameDef.h"
 #include "net/minecraft/world/level/material/Material.h"
 #include "net/minecraft/world/phys/AABB.h"

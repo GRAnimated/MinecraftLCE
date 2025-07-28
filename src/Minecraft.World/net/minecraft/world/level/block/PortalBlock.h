@@ -1,5 +1,6 @@
 #pragma once
 
+#include "net/minecraft/world/level/block/BlockShapes.h"
 #include "net/minecraft/world/level/block/HalfTransparentBlock.h"
 
 class PortalBlock : public HalfTransparentBlock {

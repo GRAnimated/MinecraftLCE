@@ -34,4 +34,5 @@ public:
     static float nextFloat(Random* random, float i, float j);
     static double nextDouble(Random* random, double i, double j);
     static std::wstring createInsecureUUID(Random* random);
+    static int64_t getSeed(int, int, int);
 };

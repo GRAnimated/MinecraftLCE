@@ -2,6 +2,9 @@
 
 #include "net/minecraft/world/phys/Vec3.h"
 
+class BlockPos;
+class HitResult;
+
 class AABB {
 public:
     Vec3 min;
@@ -36,6 +39,8 @@ public:
     bool contains(Vec3* vec);
     bool intersects(const AABB* rhs) const;
     void resetPool();
+    AABB* move(const BlockPos&) const;
+    HitResult* clip(Vec3*, Vec3*) const;
 
     static AABB* sCrossShape;  // .got:000000710176F5E0
 };

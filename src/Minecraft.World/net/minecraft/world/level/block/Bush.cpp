@@ -2,8 +2,8 @@
 
 #include "net/minecraft/core/BlockPos.h"
 #include "net/minecraft/world/level/Level.h"
+#include "net/minecraft/world/level/block/BlockShapes.h"
 #include "net/minecraft/world/level/block/Blocks.h"
-#include "net/minecraft/world/level/block/RenderShape.h"
 #include "net/minecraft/world/level/block/state/BlockState.h"
 #include "net/minecraft/world/level/material/Material.h"
 #include "net/minecraft/world/phys/AABB.h"

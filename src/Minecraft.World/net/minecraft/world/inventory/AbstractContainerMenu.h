@@ -4,10 +4,9 @@
 #include <cstdint>
 #include <memory>
 
-class net_minecraft_world_inventory {
-public:
-    class ContainerListener;
-};
+namespace net_minecraft_world_inventory {
+class ContainerListener;
+};  // namespace net_minecraft_world_inventory
 class Player;
 class Container;
 class ItemInstance;

@@ -10,6 +10,7 @@ class ChunkGenerator;
 class FlatLevelSource;
 class SuperflatConfig;
 class WorldBorder;
+class AABB;
 
 class Dimension {
 public:
@@ -39,8 +40,8 @@ public:
     virtual bool canUnloadChunk(int, int);
     virtual DimensionType* getType() = 0;
     virtual int getXZSize();
-    virtual void getPlayerConstraints(const BlockPos&);
-    virtual void inPlayerConstraints(const BlockPos&);
+    virtual AABB* getPlayerConstraints(const BlockPos&);
+    virtual bool inPlayerConstraints(const BlockPos&);
     virtual void containsChunk(int, int);
     virtual void getBlockLightColour();
 

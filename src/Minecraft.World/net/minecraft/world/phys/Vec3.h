@@ -36,6 +36,8 @@ public:
     void set(double x, double y, double z);
     void resetPool();
     double distanceTo(AABB* aabb);
+    Vec3* subtract(double, double, double);
+    Vec3* add(double, double, double);
 
     double x;
     double y;

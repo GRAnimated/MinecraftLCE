@@ -21,4 +21,6 @@ public:
 
     int getBlockData() const;
     int getItemData() const;
+
+    static DyeColor* byItemData(int data);
 };
