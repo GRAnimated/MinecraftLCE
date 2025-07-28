@@ -1,14 +1,19 @@
 #pragma once
 
+#include "net/minecraft/core/NonNullList.h"
+#include "net/minecraft/network/syncher/SynchedEntityData.h"
 #include "net/minecraft/sounds/SoundSource.h"
 #include "net/minecraft/world/ArrayWithLength.h"
 #include "net/minecraft/world/InteractionHand.h"
 #include "net/minecraft/world/eINSTANCEOF.h"
 #include "net/minecraft/world/entity/CommandSender.h"
 #include <cstdint>
+#include <map>
 #include <memory>
 #include <set>
+#include <unordered_map>
 
+#include "net/minecraft/world/entity/SkinAdjustments.h"
 #include "types.h"
 
 enum MoverType { SELF, PLAYER, PISTON, SHULKER_BOX, SHULKER };
@@ -41,7 +46,25 @@ class SynchedEntityData;
 
 class Entity : public std::enable_shared_from_this<Entity>, public CommandSender {
 public:
+    static EntityDataAccessor<int>* qword_7101789FA0;
+    static EntityDataAccessor<int>* qword_7101789FA8;
+    static EntityDataAccessor<std::wstring>* qword_7101789FB0;
+    static EntityDataAccessor<bool>* qword_7101789FB8;
+    static EntityDataAccessor<bool>* qword_7101789FC0;
+    static EntityDataAccessor<bool>* qword_7101789FC8;
+    static EntityDataAccessor<std::wstring>* qword_7101789FE0;
+    static EntityDataAccessor<bool>* qword_7101789FD8;
+    static EntityDataAccessor<bool>* qword_7101789FD0;
+
+    static int sEntityAmount;
+    static int sTlsIndex;
+    static double sViewScale;
+
+    static void staticCtor();
+    static int getSmallId();
+
     Entity(Level*, bool);
+    void _init(bool, Level*);
 
     void sendMessage(ClientboundChatPacket::EChatPacketMessage, int*, uint, std::wstring*, uint) override;
     bool hasPermission(EGameCommand) override;
@@ -85,7 +108,6 @@ public:
     virtual void setSilent(bool);
     virtual bool isNoGravity();
     virtual void setNoGravity(bool);
-    // more understandable would be "canMakeStepSound" or "shouldMakeStepSound"
     virtual bool makeStepSound();
     virtual void checkFallDamage(double, bool, Block*, const BlockPos&);
     virtual AABB* getCollideBox();
@@ -266,13 +288,14 @@ public:
     virtual void onLoadedFromSave_4();
     virtual bool isUsingItemFlag_4();
     virtual void setUsingItemFlag_4(bool);
-    virtual void getFireImmuneTicks();
+    virtual int getFireImmuneTicks();
 
     Vec3 getPos(float);
     bool isType(eINSTANCEOF);
     void setSharedFlag(int, bool);
     Vec3* calculateViewVector(float, float);
     int getId();
+    void setId(int id);
     bool isInLava();
     void moveRelative(float, float, float, float);
     bool isFree(double, double, double);
@@ -291,88 +314,85 @@ public:
     double mX;
     double mY;
     double mZ;
-    Vec3 mDeltaMovement;
+    double mDeltaMovementX;
+    double mDeltaMovementY;
+    double mDeltaMovementZ;
     float mYRot;
     float mXRot;
     float mYRotO;
     float mXRotO;
     AABB* mBoundingBox;
     bool mOnGround;
-    bool mHorizontalCollision;
-    bool mVerticalCollision;
-    bool mCollision;
-    bool mVelocityChanged;
-    int mFire;
-    void* mFillererek[2];
-    int dwordE0;
-    int dwordE4;
-    int dwordE8;
+    bool mHasHorizontalCollision;
+    bool mHasVerticalCollision;
+    bool mHasCollision;
+    bool mIsHurtMarked;
+    int mRemainingFireTicks;
+    bool field_cc;
+    int field_d0;
+    int field_d4;
+    int field_d8;
+    int field_dc;
+    int field_e0;
+    int field_e4;
+    int field_e8;
     bool mIsInWeb;
     bool mOutsideWorldBorder;
     bool mCipa;
-    bool mRemoved;
+    bool mIsRemoved;
     float mWidth;
     float mHeight;
     float mWalkDistO;
     float mWalkDist;
     float mMoveDist;
     float mFallDistance;
-    uint16_t idk;
-    uint16_t mFallTicks2;
-    float mNextStep;
+    short mFallTicks;
+    short mHardLandingsCount;
+    int mNextStep;
     float mNextFlap;
     double mXOld;
     double mYOld;
     double mZOld;
     float mMaxUpStep;
-    bool mNoPhysics;
-    void* mUnk138;
+    bool mHasNoPhysics;
+    int mPushThrough;
     Random* mRand;
     int mTickCount;
-    bool mInWater;
+    bool mWasInWater;
     int mInvulnerableTime;
-    bool mFirstTick;
+    bool mIsFirstTick;
     bool mIsImmuneToFire;
-    SynchedEntityData* mEntityData;
-    void* qword160;
-    char gap168[52];
+    std::shared_ptr<SynchedEntityData> mEntityData;
+    bool mIsInChunk;
+    int mXChunk;
+    int mYChunk;
+    int mZChunk;
+    long mXP;
+    long mYP;
+    long mZP;
+    void* field_190;
+    bool mHasNoCulling;
+    bool mHasImpulse;
     int mChangingDimensionDelay;
     bool mIsInsidePortal;
     int mPortalTime;
-    int mDimension;
+    int mDimensionId;
     BlockPos mPortalEntranceBlock;
     Vec3* mPortalEntranceOffset;
     Direction* mPortalEntranceForwards;
-    void* qword1C8;
-    char gap1D0[8];
-    void* qword1D8;
-    void* qword1E0;
-    void* qword1E8;
-    char gap1F0[8];
-    void* qword1F8;
-    void* qword200;
-    char gap208[8];
-    void* qword210;
-    int dword218;
-    char gap21C[4];
-    bool mGlowing;
-    void* qword228;
-    char gap230[8];
-    void* qword238;
-    void* qword240;
+    std::wstring mStringUUID;
+    std::wstring mCustomName;
+    CommandStats* mCommandStats;
+    NonNullList<not_null_ptr<ItemInstance>> mInventory;
+    bool mIsGlowing;
+    bool mIsInvulnerable;
+    bool mHasTeleported;
+    std::set<std::wstring> mTags;
+    void* field_240;
     arrayWithLength<double> mPistonDeltas;
     long mPistonDeltasGameTime;
     int mType;
-    void* qword268;
-    void* qword270;
-    void* qword278;
-    void* qword280;
-    void* qword288;
-    int dword290;
-    void* qword298;
-    void* qword2A0;
-    void* fillToSize0x2B8[2];  // I assume that Entity is 0x2B8 in size because if you look at typeinfo it
-                               // seems that second type is placed on 0x2B8 (idk how to put this in words)
+    _SkinAdjustments mSkinAdjustments;
 };
 
 ASSERT_SIZEOF(Entity, 0x2B8)

@@ -6,13 +6,13 @@
 
 #include "net/minecraft/client/model/ModelPartsSkinned.h"
 #include "net/minecraft/world/Random.h"
+#include "net/minecraft/world/entity/SkinAdjustments.h"
 
 class Entity;
 class LivingEntity;
 class TexOffs;
 class SKIN_BOX;
 class ModelPart;
-class _SkinAdjustments {};
 
 class Model {
 public:

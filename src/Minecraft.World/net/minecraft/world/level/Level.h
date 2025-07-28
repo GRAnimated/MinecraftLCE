@@ -86,7 +86,7 @@ public:
     virtual void playLocalSound(double, double, double, const SoundEvent*, SoundSource::ESoundSource, float,
                                 float, bool, float);
     virtual bool addGlobalEntity(std::shared_ptr<Entity>);
-    virtual bool addEntity(const std::shared_ptr<Entity>&);
+    virtual bool addEntity(std::shared_ptr<Entity>);
     virtual void entityAdded(std::shared_ptr<Entity>);
     virtual void entityRemoved(std::shared_ptr<Entity>);
     virtual void playerRemoved(std::shared_ptr<Entity>);
@@ -131,6 +131,7 @@ public:
 
     void _init();
     bool hasChunkAt(const BlockPos&, bool);
+    bool hasChunkAt(const BlockPos&, const BlockPos&);
     bool isOutsideBuildHeight(const BlockPos&);
     LevelChunk* getChunkAt(const BlockPos&);
     LevelChunk* getChunk(int, int);
@@ -189,7 +190,7 @@ public:
     int getHeight();
     int getFogDistance();
     int getSkyFlashTime();
-    std::vector<AABB> getCollisionAABBs(std::shared_ptr<Entity>, const AABB*, bool, bool, bool);
+    std::vector<AABB>* getCollisionAABBs(std::shared_ptr<Entity>, const AABB*, bool, bool, bool);
     void updateSkyBrightness();
     void prepareWeather();
     void setDayTime(long long);

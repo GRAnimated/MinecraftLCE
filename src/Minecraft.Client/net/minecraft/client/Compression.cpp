@@ -6,8 +6,7 @@
 #include <string.h>
 #include <types.h>
 
-unsigned int Compression::sTlsIndex;
-Compression::ThreadStorage* Compression::sThreadStorage;
+DEFINE_THREAD_STORAGE_SINGLE(Compression)
 
 Compression::Compression() {
     this->dcData = 0;
@@ -44,45 +43,8 @@ Compression::~Compression() {
     }
 }
 
-void Compression::CreateNewThreadStorage() {
-    Compression::ThreadStorage* ts = new ThreadStorage();
-    unsigned int alloc;
-
-    if (sThreadStorage == nullptr) {
-        alloc = TlsAlloc();
-
-        sTlsIndex = alloc;
-        sThreadStorage = ts;
-    } else {
-        alloc = sTlsIndex;
-    }
-
-    TlsSetValue(alloc, (void*)ts);
-}
-
-void Compression::ReleaseThreadStorage() {
-    Compression::ThreadStorage* ts = (Compression::ThreadStorage*)TlsGetValue(sTlsIndex);
-    // not sure what this is meant to be
-    bool tsStatus;
-
-    if (ts) {
-        tsStatus = (ts == sThreadStorage);
-    } else {
-        // return true????
-        tsStatus = true;
-    }
-
-    if (!tsStatus) {
-        delete ts;
-    }
-}
-
-void Compression::UseDefaultThreadStorage() {
-    TlsSetValue(sTlsIndex, sThreadStorage);
-}
-
 Compression* Compression::getCompression() {
-    return ((ThreadStorage*)TlsGetValue(sTlsIndex))->compression;
+    return ((ThreadStorage*)TlsGetValue(sThreadStorageIndex))->mStorage;
 }
 
 void Compression::SetDecompressionType(ESavePlatform platform) {
@@ -319,13 +281,4 @@ bool Compression::internalDecompressRle(void* dst, unsigned int* dstSize, void* 
     // thanks 4J for making this specific decompression function return bool, also it always returns false...
     // why?
     return false;
-}
-
-Compression::ThreadStorage::ThreadStorage() {
-    this->compression = new Compression();
-}
-
-Compression::ThreadStorage::~ThreadStorage() {
-    if (compression)
-        delete compression;
 }

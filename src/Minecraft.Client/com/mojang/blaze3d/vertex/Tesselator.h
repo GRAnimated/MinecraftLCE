@@ -6,6 +6,7 @@ class Tesselator {
 public:
     static Tesselator* getInstance();
 
+    static int sThreadStorageIndex;
     static void CreateNewThreadStorage(int);
 
     Tesselator(int);
@@ -14,4 +15,5 @@ public:
 
 private:
     BufferBuilder* builder;
+    void* padding;  // to match class size, may be an int
 };

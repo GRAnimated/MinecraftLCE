@@ -60,5 +60,5 @@ void Mob::init() {
     this->mArmorItems = NonNullList<not_null_ptr<ItemInstance>>::withSize(4, ItemInstance::EMPTY);
     this->mLeashInfoTag = nullptr;
     this->mLeashed = false;
-    this->dwordE8 = this->dwordE8 | 2;
+    this->field_e8 = this->field_e8 | 2;
 }

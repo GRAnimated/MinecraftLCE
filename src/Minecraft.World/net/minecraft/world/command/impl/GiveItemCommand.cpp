@@ -1,4 +1,5 @@
-#include "Minecraft.World/net/minecraft/world/command/impl/GiveItemCommand.h"
+#include "net/minecraft/world/command/impl/GiveItemCommand.h"
+
 #include "java/io/ByteArrayInputStream.h"
 #include "java/io/DataInputStream.h"
 #include "net/minecraft/sounds/SoundEvent.h"
@@ -7,8 +8,9 @@
 #include "net/minecraft/world/command/Command.h"
 #include "net/minecraft/world/command/EGameCommand.h"
 #include "net/minecraft/world/entity/CommandSender.h"
+#include "net/minecraft/world/entity/Entity.h"
 #include "net/minecraft/world/entity/item/ItemEntity.h"
-#include "net/minecraft/world/entity/player/Player.h"
+#include "net/minecraft/world/entity/player/ServerPlayer.h"
 #include "net/minecraft/world/inventory/Inventory.h"
 #include "net/minecraft/world/inventory/InventoryMenu.h"
 #include "net/minecraft/world/item/Item.h"
@@ -39,7 +41,7 @@ void GiveItemCommand::execute(std::shared_ptr<CommandSender> sender, arrayWithLe
     /*byteInputStream
         = ByteArrayInputStream(); */ // this doesn't exist on WiiU, i'm just guessing it does this... why? idk
 
-    std::shared_ptr<Player> player = this->getPlayer(playerUID);
+    std::shared_ptr<ServerPlayer> player = this->getPlayer(playerUID);
     if (id < 1 || !player || !Item::byId(id))
         return;
 

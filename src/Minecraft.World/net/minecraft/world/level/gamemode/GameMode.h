@@ -64,6 +64,7 @@ public:
     virtual void handleCustomCraftItem(std::vector<int>&, std::shared_ptr<Player>);
 
     bool isSpectator();
+    bool isCreative();
 
 private:
     Minecraft* mMinecraft;

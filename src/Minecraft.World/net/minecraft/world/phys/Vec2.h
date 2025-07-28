@@ -1,10 +1,15 @@
 #pragma once
 
+#include "net/minecraft/util/ThreadStorage.h"
+
 namespace phys {
 class Vec2 {
 public:
-    static void CreateNewThreadStorage();
+    DECLARE_THREAD_STORAGE(Vec2)
 
-    class ThreadStorage {};
+    Vec2() {}
+
+    float x;
+    float y;
 };
 }  // namespace phys

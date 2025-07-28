@@ -19,5 +19,8 @@ public:
     static const DyeColor* RED;
     static const DyeColor* BLACK;
 
+    int getBlockData() const;
     int getItemData() const;
+
+    static DyeColor* byItemData(int data);
 };

@@ -78,5 +78,3 @@ BlockPos BlockPos::east() const {
 BlockPos BlockPos::east(int amount) const {
     return relative(Direction::EAST, amount);
 }
-
-MutableBlockPos::MutableBlockPos(int x, int y, int z) : BlockPos(x, y, z) {};

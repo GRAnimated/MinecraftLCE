@@ -7,7 +7,7 @@
 #include "net/minecraft/world/item/ItemInstance.h"
 #include "net/minecraft/world/item/Items.h"
 #include "net/minecraft/world/level/Level.h"
-#include "net/minecraft/world/level/block/RenderShape.h"
+#include "net/minecraft/world/level/block/BlockShapes.h"
 #include "net/minecraft/world/level/gamemode/minigames/MiniGameDef.h"
 #include "net/minecraft/world/level/material/Material.h"
 #include "net/minecraft/world/phys/AABB.h"
@@ -49,8 +49,9 @@ void WebBlock::entityInside(Level* level, const BlockPos& pos, const BlockState*
                             const std::shared_ptr<Entity>& entity) {
     entity->makeStuckInWeb();
     if (entity->GetType() == eFireworksRocketEntity) {
-        if (Minecraft::GetInstance()->GetMiniGame()->HasFeatureDirectionalFireworks())
-            entity->mCollision = true;
+        if (Minecraft::GetInstance()->GetMiniGame()->HasFeatureDirectionalFireworks()) {
+            entity->mHasCollision = true;
+        }
     }
 }
 

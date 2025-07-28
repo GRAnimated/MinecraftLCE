@@ -7,8 +7,11 @@
 #include "java/io/types/Double.h"
 #include "java/io/types/Float.h"
 #include "net/minecraft/world/ArrayWithLength.h"
+#include "types.h"
 
 class BlockPos;
+class CompoundTag;
+class ItemInstance;
 
 class DataOutputStream : public OutputStream, public DataOutput {
 public:
@@ -27,7 +30,7 @@ public:
     void writeInt(int) override;
     void writeLong(long long) override;
     void writeShort(short) override;
-    void writeUnsignedShort(unsigned short) override;
+    virtual void writeUnsignedShort(unsigned short);
     void writeChar(wchar_t) override;
     void writeChars(const std::wstring& str) override;
     void writeBoolean(bool) override;
@@ -37,6 +40,8 @@ public:
     void writeVarInt(int);
     void writeVarLong(long);
     void writeBlockPos(const BlockPos&) const;
+    void writeItem(not_null_ptr<ItemInstance>);
+    void writeNbt(CompoundTag*);
 
     void deleteChildStream();
 

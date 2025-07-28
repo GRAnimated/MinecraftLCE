@@ -29,6 +29,7 @@ public:
     }
 
     T& operator[](unsigned int i) { return data[i]; }
+    T& get(unsigned int i) { return data[i]; }
 
     void resize(unsigned int newSize) {
         if (length == newSize) {

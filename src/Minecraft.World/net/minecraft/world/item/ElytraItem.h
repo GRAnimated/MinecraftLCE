@@ -18,7 +18,7 @@ class ElytraItem : public Item {
     InteractionResultHolder use(Level*, std::shared_ptr<Player>, InteractionHand::EInteractionHand) override;
     bool isValidRepairItem(not_null_ptr<ItemInstance>, not_null_ptr<ItemInstance>) override;
     void registerIcons(IconRegister*) override;
-    TextureAtlasSprite* getLayerIcon(int, int, not_null_ptr<ItemInstance>) override;
+    TextureAtlasSprite* getLayerIcon(int, int) override;
     TextureAtlasSprite* getIcon(not_null_ptr<ItemInstance>) override;
     int GetArmorType() override;
 

@@ -62,8 +62,8 @@ void FireBlock::staticCtor() {
     Blocks::FIRE->setFlammable(Blocks::DARK_OAK_STAIRS, 5, 20);
     Blocks::FIRE->setFlammable(Blocks::LOG, 5, 5);
     Blocks::FIRE->setFlammable(Blocks::LOG2, 5, 5);
-    Blocks::FIRE->setFlammable(Blocks::LEAVES, 30, 60);
-    Blocks::FIRE->setFlammable(Blocks::LEAVES2, 30, 60);
+    Blocks::FIRE->setFlammable((Block*)Blocks::LEAVES, 30, 60);
+    Blocks::FIRE->setFlammable((Block*)Blocks::LEAVES2, 30, 60);
     Blocks::FIRE->setFlammable(Blocks::BOOKSHELF, 30, 20);
     Blocks::FIRE->setFlammable(Blocks::TNT, 15, 100);
     Blocks::FIRE->setFlammable(Blocks::TALLGRASS, 60, 100);

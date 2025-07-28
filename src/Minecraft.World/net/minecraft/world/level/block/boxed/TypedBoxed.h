@@ -5,15 +5,21 @@
 template <typename T>
 class TypedBoxed : public Boxed {
 public:
-    TypedBoxed(T*);
-    ~TypedBoxed() override;
+    TypedBoxed(T* value) : Boxed(&typeid(*value)) { this->mValue = *value; }
 
-    unsigned int hashOf() const override;
-    bool operator==(const Boxed*) const override;
-    void setValue(const Boxed*) override;
-    std::wstring toString() const override;
+    unsigned int hashOf() const override { return std::hash<T>{}(mValue); }
+    bool operator==(const Boxed* compared) const override {
+        if (!compared->isA(this->mTypeInfo))
+            return false;
 
-    // Inlined, guessed name
-    TypedBoxed<T>* tryGetType() const;
-    T* getValue() const;
+        return this->mValue == const_cast<TypedBoxed<T>*>(compared->tryGetType<T>())->mValue;
+    }
+    void setValue(const Boxed* boxed) override {
+        this->mValue = *const_cast<TypedBoxed<T>*>(boxed->tryGetType<T>())->getValue();
+    }
+    std::wstring toString() const override;  // good luck
+
+    T* getValue() { return &this->mValue; }
+
+    T mValue;
 };

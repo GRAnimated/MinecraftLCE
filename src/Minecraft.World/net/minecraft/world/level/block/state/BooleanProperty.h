@@ -6,13 +6,13 @@ class BooleanProperty : public AbstractProperty<bool> {
 public:
     static BooleanProperty* create(const std::wstring&);
 
-    int getPossibleValues() const override;
+    const std::vector<Boxed*>& getPossibleValues() const override;
     bool equals(const Property*) const override;
     int hashCode() const override;
     int getValueCount() const override;
-    int getValueAtIndex(unsigned int) const override;
-    int getIndexForValue(Boxed*) const override;
-    std::wstring getName(const int&) const override;
-    int getUnboxedValue(const std::wstring&) const override;
+    Boxed* getValueAtIndex(unsigned int) const override;
+    unsigned int getIndexForValue(Boxed*) const override;
+    bool getUnboxedValue(const std::wstring&) const override;
+    std::wstring getName(const bool&) const override;
     ~BooleanProperty();
 };

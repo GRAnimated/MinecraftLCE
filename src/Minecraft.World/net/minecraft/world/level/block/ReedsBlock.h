@@ -12,7 +12,7 @@ public:
 
     ReedsBlock();
 
-    void GetInteractTooltip(const BlockTooltipDataHolder& blockTooltipDataHolder) override;
+    int GetInteractTooltip(const BlockTooltipDataHolder& blockTooltipDataHolder) override;
     const BlockState* getBlockState(int) override;
     int convertBlockStateToLegacyData(const BlockState* blockState) override;
     ~ReedsBlock() override;

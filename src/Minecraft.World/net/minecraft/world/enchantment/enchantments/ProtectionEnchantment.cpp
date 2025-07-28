@@ -44,10 +44,10 @@ int ProtectionEnchantment::getDamageProtection(int level, const DamageSource* so
         return level * 2;
     } else if (this->mType == FALL && source == DamageSource::BYPASS_ARMOUR) {
         return level * 3;
-    } else if (this->mType == EXPLOSION && source->isExplosion()) {
+    } else if (this->mType == PROJECTILE && source->isProjectile()) {
         return level * 2;
     } else {
-        return this->mType == PROJECTILE && source->isProjectile() ? level * 2 : 0;
+        return this->mType == EXPLOSION && source->isExplosion() ? level * 2 : 0;
     }
 }
 bool ProtectionEnchantment::checkCompatibility(const Enchantment* other) {

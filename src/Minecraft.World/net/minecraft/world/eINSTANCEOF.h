@@ -71,6 +71,7 @@ enum eINSTANCEOF {
     eHopperBlockEntity = 0x01E00205,
     eDispenserBlockEntity = 0x03C00200,
     eDropperBlockEntity = 0x03C00201,
+    eSerializer = 0x08000000,
     eExperienceOrb = 0x08000003,
     eDelayedRelease = 0x08000007,
     eBoat = 0x08000008,

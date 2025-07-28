@@ -2,14 +2,29 @@
 
 #include "net/minecraft/world/phys/Vec3.h"
 
+class BlockPos;
+class HitResult;
+
 class AABB {
 public:
     Vec3 min;
     Vec3 max;
 
-    static void CreateNewThreadStorage();
+    class ThreadStorage {
+    public:
+        ThreadStorage();
+        ~ThreadStorage();
 
-    class ThreadStorage {};
+        AABB* mStorage;
+        unsigned int mUnk;
+    };
+    static ThreadStorage* sDefaultThreadStorage;
+    static int sThreadStorageIndex;
+    static void CreateNewThreadStorage();
+    static void UseDefaultThreadStorage();
+    static void ReleaseThreadStorage();
+
+    AABB() {}
 
     static AABB* newPermanent(double, double, double, double, double, double);
     static AABB* newTemp(double, double, double, double, double, double);
@@ -24,6 +39,8 @@ public:
     bool contains(Vec3* vec);
     bool intersects(const AABB* rhs) const;
     void resetPool();
+    AABB* move(const BlockPos&) const;
+    HitResult* clip(Vec3*, Vec3*) const;
 
     static AABB* sCrossShape;  // .got:000000710176F5E0
 };

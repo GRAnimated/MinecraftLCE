@@ -154,9 +154,10 @@ void Player::staticCtor() {
 
 void Player::OnEquipArmor(not_null_ptr<ItemInstance>) {}
 void Player::OnTakeFromAnvil(not_null_ptr<ItemInstance>) {}
+
 // NON-MATCHING: some crap, logic should be the same though
 void Player::updatePlayerSize() {
-    float newHeight, newWidth;
+    float newWidth, newHeight;
 
     if (this->mSizeType == 2) {
         newHeight = 0.0f;
@@ -180,8 +181,8 @@ void Player::updatePlayerSize() {
 
     if (newWidth != this->mWidth || newHeight != this->mHeight) {
         const AABB* aabb = this->getBoundingBox();
-        aabb = aabb->newTemp(aabb->min.x, aabb->min.y, aabb->min.z, aabb->min.x + (double)newWidth,
-                             aabb->min.y + (double)newHeight, aabb->min.z + (double)newWidth);
+        aabb = aabb->newTemp(aabb->min.x, aabb->min.y, aabb->min.z, aabb->min.x + newWidth,
+                             aabb->min.y + newHeight, aabb->min.z + newWidth);
 
         if (!this->mLevel->hasBlockCubes(aabb) || this->isPassenger()) {
             this->setSize(newWidth, newHeight);
