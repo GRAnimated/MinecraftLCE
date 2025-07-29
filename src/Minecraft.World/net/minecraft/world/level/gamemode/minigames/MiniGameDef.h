@@ -30,5 +30,5 @@ public:
     float getStartSaturation(float);
     float getSprintLevel(float);
     int getStarveLevel(int);
-    int getPotionDuration();
+    int getPotionDuration(int, int) const;
 };

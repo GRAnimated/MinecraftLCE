@@ -1,32 +1,42 @@
 #pragma once
 
-#include "com/mojang/nbt/CompoundTag.h"
-#include "net/minecraft/world/effect/MobEffect.h"
-#include "net/minecraft/world/entity/LivingEntity.h"
-#include <cstdint>
+#include <memory>
+
+class CompoundTag;
+class MobEffect;
+class LivingEntity;
 
 class MobEffectInstance {
 public:
-    MobEffectInstance(MobEffectInstance* instance);
+    MobEffectInstance(MobEffectInstance* other);
     MobEffectInstance(MobEffect* effect);
-    MobEffectInstance(MobEffect*, int duration);
-    MobEffectInstance(MobEffect*, int duration, int amplifier);
-    MobEffectInstance(MobEffect*, int duration, int amplifier, bool ambient, bool showParticles);
+    MobEffectInstance(MobEffect* effect, int duration);
+    MobEffectInstance(MobEffect* effect, int duration, int amplifier);
+    MobEffectInstance(MobEffect* effect, int duration, int amplifier, bool ambient, bool showParticles);
+
     void init(MobEffect* effect, int duration, int amplifier, bool showParticles);
-    void update(MobEffectInstance* instance);
-    void tickDownDuration();
-    void tick(std::shared_ptr<LivingEntity> entity);
+    void update(MobEffectInstance* other);
+    int tickDownDuration();
+    bool tick(std::shared_ptr<LivingEntity> entity);
     void setNoCounter(bool noCounter);
-    void save(CompoundTag* tag);
+    void applyEffect(const std::shared_ptr<LivingEntity>& entity);
+
+    CompoundTag* save(CompoundTag* tag);
+    static MobEffectInstance* load(CompoundTag* tag);
+
     bool isVisible();
     bool isNoCounter();
     bool isAmbient();
+
+    static int getColorValue(const std::vector<MobEffectInstance*>* instance);
     MobEffect* getEffect();
     int getDuration();
     int getDescriptionId();
     int getAmplifier();
-    bool compareTo(MobEffectInstance* instance);
-    void applyEffect(std::shared_ptr<LivingEntity> entity);
+    // bool compareTo(MobEffectInstance* other); // unused
+
+    // TODO: Find name for this function
+    int get_14() { return dword14; }
 
     MobEffect* mEffect;
     int mDuration;

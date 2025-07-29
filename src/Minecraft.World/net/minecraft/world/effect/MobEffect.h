@@ -40,7 +40,7 @@ public:
         Unluck = 24
     };
 
-    virtual void applyEffectTick(std::shared_ptr<LivingEntity>, int);
+    virtual void applyEffectTick(const std::shared_ptr<LivingEntity>&, int);
     virtual void applyInstantenousEffect(std::shared_ptr<Entity>, std::shared_ptr<LivingEntity>, int, double);
     virtual bool isDurationEffectTick(int, int);
     virtual bool isInstantenous();
@@ -56,6 +56,7 @@ public:
     virtual ~MobEffect();
 
     static int getId(MobEffect*);
+    static MobEffect* byId(int id);
 
     MobEffect(bool harmful, eMinecraftColour color);
     void setIcon(EMobEffectIcon icon);
