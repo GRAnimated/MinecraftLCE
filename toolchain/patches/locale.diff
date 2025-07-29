@@ -1,0 +1,29 @@
+--- locale
++++ locale
+@@ -1,3 +1,8 @@
++/*
++Changes made:
++strtoll_l and strtoull_l aren't available, so we need to use strtoll and strtoull instead
++*/
++
+ // -*- C++ -*-
+ //===-------------------------- locale ------------------------------------===//
+ //
+@@ -695,7 +700,7 @@
+         typename remove_reference<decltype(errno)>::type __save_errno = errno;
+         errno = 0;
+         char *__p2;
+-        long long __ll = strtoll_l(__a, &__p2, __base, _LIBCPP_GET_C_LOCALE);
++        long long __ll = strtoll(__a, &__p2, __base);
+         typename remove_reference<decltype(errno)>::type __current_errno = errno;
+         if (__current_errno == 0)
+             errno = __save_errno;
+@@ -735,7 +740,7 @@
+         typename remove_reference<decltype(errno)>::type __save_errno = errno;
+         errno = 0;
+         char *__p2;
+-        unsigned long long __ll = strtoull_l(__a, &__p2, __base, _LIBCPP_GET_C_LOCALE);
++        unsigned long long __ll = strtoull(__a, &__p2, __base);
+         typename remove_reference<decltype(errno)>::type __current_errno = errno;
+         if (__current_errno == 0)
+             errno = __save_errno;

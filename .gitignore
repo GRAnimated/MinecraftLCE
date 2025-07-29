@@ -49,5 +49,8 @@ tools/check
 tools/listsym
 tools/decompme
 
+# Patched toolchain files
+toolchain/patches/generate/
+
 docs/build
 /.vs

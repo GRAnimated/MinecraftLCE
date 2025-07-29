@@ -8,6 +8,7 @@ import subprocess
 import os
 import time
 from common import setup_common as setup
+from setup import check_diff_applied_status
 
 project_root = setup.ROOT
 
@@ -27,7 +28,7 @@ def main():
     args = parser.parse_args()
 
     if not get_build_dir().is_dir():
-        print("Please run setup.py first.")
+        print("Please run tools/setup.py first.")
         exit(1)
 
     cmake_args = ['cmake', '--build', str(get_build_dir())]
@@ -35,6 +36,11 @@ def main():
         cmake_args.append('--clean-first')
     if args.verbose:
         os.environ['VERBOSE'] = '1'
+    
+    status = check_diff_applied_status()
+    if not all(status.values()):
+        print(">>> Some clang patches are not applied, please re-run tools/setup.py!")
+        exit(1)
 
     # Touch CMakeLists.txt if necessary, for reglobbing
 

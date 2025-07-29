@@ -1,0 +1,23 @@
+--- string
++++ string
+@@ -1,3 +1,8 @@
++/*
++Changes made:
++Removed a few inline attributes to match the game's behavior
++*/
++
+ // -*- C++ -*-
+ //===--------------------------- string -----------------------------------===//
+ //
+@@ -1325,11 +1330,8 @@
+                  __align_it<sizeof(value_type) < __alignment ?
+                             __alignment/sizeof(value_type) : 1 > (__s+1)) - 1;}
+ 
+-    inline _LIBCPP_EXTERN_TEMPLATE_INLINE_VISIBILITY
+     void __init(const value_type* __s, size_type __sz, size_type __reserve);
+-    inline _LIBCPP_EXTERN_TEMPLATE_INLINE_VISIBILITY
+     void __init(const value_type* __s, size_type __sz);
+-    inline _LIBCPP_EXTERN_TEMPLATE_INLINE_VISIBILITY
+     void __init(size_type __n, value_type __c);
+ 
+     template <class _InputIterator>

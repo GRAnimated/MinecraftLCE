@@ -10,13 +10,13 @@ void Sensing::tick() {
 
 bool Sensing::canSee(std::shared_ptr<Entity> entity) {
     for (auto it = mSeen.begin(); it != mSeen.end(); ++it) {
-        if (entity == (*it).lock()) {
+        if (!(entity != (*it).lock())) {
             return true;
         }
     }
 
     for (auto it = mUnseen.begin(); it != mUnseen.end(); ++it) {
-        if (entity == (*it).lock()) {
+        if (!(entity != (*it).lock())) {
             return false;
         }
     }

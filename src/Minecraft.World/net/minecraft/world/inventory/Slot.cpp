@@ -67,7 +67,7 @@ not_null_ptr<ItemInstance> Slot::remove(int count) {
 }
 
 bool Slot::isAt(std::shared_ptr<Container> container, int index) {
-    return container == mContainer && mSlot == index;
+    return container.get() == mContainer.get() && mSlot == index;
 }
 
 bool Slot::mayPickup(std::shared_ptr<Player> player) {
