@@ -1,3 +1,5 @@
+#include "net/minecraft/world/item/BowItem.h"
+
 #include "net/minecraft/client/Minecraft.h"
 #include "net/minecraft/client/renderer/texture/IconRegister.h"
 #include "net/minecraft/resources/ResourceLocation.h"
@@ -5,7 +7,6 @@
 #include "net/minecraft/world/entity/player/MultiplayerLocalPlayer.h"
 #include "net/minecraft/world/entity/player/Player.h"
 #include "net/minecraft/world/inventory/Inventory.h"
-#include "net/minecraft/world/item/BowItem.h"
 #include "net/minecraft/world/item/InteractionResultHolder.h"
 #include "net/minecraft/world/item/Item.h"
 #include "net/minecraft/world/item/ItemInstance.h"

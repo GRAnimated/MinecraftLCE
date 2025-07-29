@@ -31,5 +31,5 @@ public:
     float getSprintLevel(float) const;
     int getStarveLevel(int) const;
     int getPotionDuration(int, int) const;
-    bool HasFeatureArrowCanKnockback(void) const;
+    bool HasFeatureArrowCanKnockback() const;
 };
