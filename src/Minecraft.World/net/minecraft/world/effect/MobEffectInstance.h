@@ -1,5 +1,6 @@
 #pragma once
 
+#include "types.h"
 #include <memory>
 
 class CompoundTag;
@@ -47,3 +48,5 @@ public:
     bool mParticles;
     int dword14;
 };
+
+ASSERT_SIZEOF(MobEffectInstance, 0x18)

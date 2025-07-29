@@ -1,6 +1,18 @@
 #include "net/minecraft/world/effect/MobEffect.h"
 #include "net/minecraft/world/effect/MobEffects.h"
 
+MobEffect::MobEffect(bool harmful, eMinecraftColour color) {
+    mHarmful = harmful;
+    mColor = color;
+    mBeneficial = false;
+    mDescriptionId = -1;
+    mIcon = EMobEffectIcon::Unknown;
+    if (harmful)
+        mDurationModifier = 0.5;
+    else
+        mDurationModifier = 1.0;
+}
+
 bool MobEffect::isDurationEffectTick(int tick, int amplifier) {
     int interval;
 

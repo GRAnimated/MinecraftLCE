@@ -3,6 +3,7 @@
 #include "net/minecraft/world/entity/Entity.h"
 #include "net/minecraft/world/entity/LivingEntity.h"
 #include "net/minecraft/world/level/material/MaterialColor.h"
+#include "types.h"
 
 class Attribute;
 class AttributeModifier;
@@ -67,7 +68,7 @@ public:
     EMobEffectIcon getIcon();
     int getDescriptionId();
 
-    char unknown[40];
+    std::unordered_map<Attribute*, AttributeModifier*> mAttributeModifiers;
     int mDescriptionId;
     EMobEffectIcon mIcon;
     bool mHarmful;
@@ -75,3 +76,5 @@ public:
     bool mBeneficial;
     eMinecraftColour mColor;
 };
+
+ASSERT_SIZEOF(MobEffect, 0x50)
