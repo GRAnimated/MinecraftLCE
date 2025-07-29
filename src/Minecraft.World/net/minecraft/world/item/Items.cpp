@@ -13,7 +13,7 @@ void Items::staticCtor() {
     IRON_AXE = get(L"iron_axe");
     FLINT_AND_STEEL = get(L"flint_and_steel");
     APPLE = get(L"apple");
-    BOW = get(L"bow");
+    BOW = (BowItem*)get(L"bow");
     ARROW = get(L"arrow");
     SPECTRAL_ARROW = get(L"spectral_arrow");
     TIPPED_ARROW = get(L"tipped_arrow");

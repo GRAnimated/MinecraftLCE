@@ -12,11 +12,13 @@
 #include "net/minecraft/world/effect/MobEffects.h"
 #include "net/minecraft/world/entity/Entity.h"
 #include "net/minecraft/world/entity/player/Player.h"
+#include "net/minecraft/world/item/ItemInstance.h"
 #include "net/minecraft/world/item/enchantment/EnchantmentHelper.h"
 #include "net/minecraft/world/level/block/Blocks.h"
 #include "net/minecraft/world/level/block/state/BlockState.h"
 #include "net/minecraft/world/level/chunk/LevelChunk.h"
 #include "net/minecraft/world/level/gamemode/minigames/MiniGameDef.h"
+#include "types.h"
 #include <cmath>
 #include <memory>
 
@@ -274,3 +276,7 @@ void LivingEntity::setAbsorptionAmount(float amount) {
 void LivingEntity::onEnterCombat() {}
 void LivingEntity::onLeaveCombat() {}
 void LivingEntity::setRecordPlayingNearby(const BlockPos&, bool) {}
+
+not_null_ptr<ItemInstance> LivingEntity::getUseItem() {
+    return this->mUseItem;
+}

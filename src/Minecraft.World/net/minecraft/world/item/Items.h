@@ -5,6 +5,7 @@
 
 class ResourceLocation;
 class Item;
+class BowItem;
 
 class Items {
 public:
@@ -22,7 +23,7 @@ public:
     static inline Item* IRON_AXE;
     static inline Item* FLINT_AND_STEEL;
     static inline Item* APPLE;
-    static inline Item* BOW;
+    static inline BowItem* BOW;
     static inline Item* ARROW;
     static inline Item* SPECTRAL_ARROW;
     static inline Item* TIPPED_ARROW;
