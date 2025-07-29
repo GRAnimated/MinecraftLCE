@@ -184,6 +184,7 @@ public:
     void init();
     void CheckThermalAreas();
     void fallFlyingTravel(double&, double&, double&, Vec3*, float&, float&, double&, double);
+    not_null_ptr<ItemInstance> getUseItem();
 
     Attribute* mAttributes;
     CombatTracker* mCombatTracker;
@@ -262,7 +263,7 @@ public:
     float mSpeed;
     int mNoJumpDelay;
     float mAbsorptionAmount;
-    std::shared_ptr<ItemInstance> mUseItem;  // probably not_null_ptr
+    not_null_ptr<ItemInstance> mUseItem;
     int mUseItemRemaining;
     int mFallFlyTicks;
     BlockPos mLastPos;

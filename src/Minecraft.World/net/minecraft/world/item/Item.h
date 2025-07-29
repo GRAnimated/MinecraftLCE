@@ -5,6 +5,7 @@
 #include "net/minecraft/world/entity/EquipmentSlot.h"
 #include "net/minecraft/world/entity/ai/attributes/AttributeModifier.h"
 #include "net/minecraft/world/item/InteractionResultHolder.h"
+#include "net/minecraft/world/item/ItemTooltipDataHolder.h"
 #include "types.h"
 #include <memory>
 #include <string>
@@ -18,11 +19,6 @@ class Level;
 class Player;
 class BlockState;
 class CompoundTag;
-class ItemToolTipDataHolder {
-public:
-    char gap0[24];
-    int idk;
-};
 class Entity;
 class IconRegister;
 class BlockPos;
@@ -31,7 +27,7 @@ class TextureAtlasSprite;
 
 class ItemPropertyFunction {
 public:
-    virtual void call(not_null_ptr<ItemInstance>, Level*, std::shared_ptr<LivingEntity>);
+    virtual void call(not_null_ptr<ItemInstance>, Level*, std::shared_ptr<LivingEntity>) = 0;
 };
 
 // Don't know if this exists, it exists on Java

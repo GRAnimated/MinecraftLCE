@@ -7,6 +7,7 @@
 class Inventory : public Container {
 public:
     bool add(not_null_ptr<ItemInstance>);
+    bool hasResource(Item*);
 
     void getName() override;
     void getCustomName() override;
