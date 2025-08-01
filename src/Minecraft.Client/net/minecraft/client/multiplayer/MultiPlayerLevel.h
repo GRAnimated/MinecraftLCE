@@ -49,6 +49,7 @@ public:
     ChunkSource* getChunkSource();
     void unshareChunkAt(int, int);
     void shareChunkAt(int, int);
+    ClientScoreboard* GetClientScoreboard();
 
     std::vector<ResetInfo> field_2b0;
     bool byte_2c8;

@@ -15,11 +15,11 @@ public:
     virtual void onTeamAdded(PlayerTeam*);
     virtual void onTeamChanged(PlayerTeam*);
     virtual void onTeamRemoved(PlayerTeam*);
-    virtual void syncTeamChanges_0(PlayerTeam*);
-    virtual void GetLastCheckpointID(const StatsUID&, int);
-    virtual void GetLapsCompleted(const StatsUID&, int);
-    virtual void GetEndZoneEntered(const StatsUID&, int);
-    virtual void GetLastCheckpointSequenceID(const StatsUID&, int);
+    virtual void syncTeamChanges(PlayerTeam*);
+    virtual int GetLastCheckpointID(const StatsUID&, int);
+    virtual int GetLapsCompleted(const StatsUID&, int);
+    virtual bool GetEndZoneEntered(const StatsUID&, int);
+    virtual int GetLastCheckpointSequenceID(const StatsUID&, int);
 
     char size[0x54];
 };

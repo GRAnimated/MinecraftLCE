@@ -5,9 +5,13 @@
 
 class TargetAreaRuleDefinition : public NamedAreaRuleDefinition {
 public:
-    void getActionType() override;
-    void getBoundingVolume() override;
+    int getActionType() override;
+    const AABB* getBoundingVolume() override;
     void WriteAttributesAsXML(std::string&) override;
     virtual void getPointValue();
     virtual GlideRingGenerator::eGlideRingSize getSize();
+
+    bool get_90() { return field_90; }
+
+    bool field_90;
 };

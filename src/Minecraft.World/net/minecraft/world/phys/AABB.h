@@ -41,6 +41,7 @@ public:
     void resetPool();
     AABB* move(const BlockPos&) const;
     HitResult* clip(Vec3*, Vec3*) const;
+    void correctMinMax();
 
     static AABB* sCrossShape;  // .got:000000710176F5E0
 };

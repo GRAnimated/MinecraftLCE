@@ -196,6 +196,7 @@ public:
     std::shared_ptr<ItemEntity> drop(not_null_ptr<ItemInstance>, bool);
     bool canDestroy(const BlockState*);
     float getDestroySpeed(const BlockState*);
+    const StatsUID getSUID();
 
     // dunno the type
     static std::vector<void*> sSkins;

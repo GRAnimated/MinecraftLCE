@@ -39,6 +39,7 @@ public:
 
 std::wstring char16towstring(wchar_t*);
 const char* wstringtofilename(const std::wstring&, char (&)[256]);
+std::string formatstr(const char*, ...);
 bool CreateDirectoryA(const char*, void*);
 bool GetFileAttributesA(const char*);
 bool MoveFileA(const char*, const char*);

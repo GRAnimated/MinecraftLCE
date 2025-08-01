@@ -62,27 +62,36 @@ def is_diff_applied(original: Path, expected_hash: str) -> bool:
 
 def patch_clang(remake_diffs=False):
     redownloaded_clang = False
-    for src in PATCH_SOURCE_DIR.iterdir():
-        if not src.is_file():
-            continue
 
-        dst = TOOLCHAIN_DIR / src.name
-        diff_file = PATCH_DEST_DIR / f"{src.name}.diff"
-        checksum_file = PATCH_DEST_DIR / f"{src.name}.sha256"
+    if PATCH_SOURCE_DIR.exists():
+        for src in PATCH_SOURCE_DIR.iterdir():
+            if not src.is_file():
+                continue
 
-        if remake_diffs and redownloaded_clang == False:
-            clang_path = setup.ROOT / "toolchain/clang-4.0.1"
-            if clang_path.exists():
-                print(">>> Removing old clang toolchain")
-                shutil.rmtree(clang_path)
-            print(">>> Re-downloading clang toolchain")
-            setup.set_up_compiler("4.0.1")
-            redownloaded_clang = True
-            
-            generate_diff(dst, src, diff_file, checksum_file)
+            dst = TOOLCHAIN_DIR / src.name
+            diff_file = PATCH_DEST_DIR / f"{src.name}.diff"
+            checksum_file = PATCH_DEST_DIR / f"{src.name}.sha256"
 
-        print(f">>> Applying patch: {src.name}")
-        apply_diff(dst, diff_file)
+            if remake_diffs and not redownloaded_clang:
+                clang_path = setup.ROOT / "toolchain/clang-4.0.1"
+                if clang_path.exists():
+                    print(">>> Removing old clang toolchain")
+                    shutil.rmtree(clang_path)
+                print(">>> Re-downloading clang toolchain")
+                setup.set_up_compiler("4.0.1")
+                redownloaded_clang = True
+
+                generate_diff(dst, src, diff_file, checksum_file)
+
+            print(f">>> Applying patch: {src.name}")
+            apply_diff(dst, diff_file)
+
+    else:
+        for diff_file in PATCH_DEST_DIR.glob("*.diff"):
+            dst_name = diff_file.stem
+            dst = TOOLCHAIN_DIR / dst_name
+            print(f">>> Applying patch: {dst_name}")
+            apply_diff(dst, diff_file)
 
     print(">>> Clang patched successfully")
 
@@ -107,7 +116,7 @@ def prepare_executable(original_nso: Optional[Path]):
     COMPRESSED_HASH = "63b7d29503400853c2cdb87a65d963cb9b5b934aea9d3d88b55764d33b13a722"
     UNCOMPRESSED_HASH = "f408dbfb901ab191fbcb7b5994580ed91812bafa90ae164796ae8a254e4dcef8"
 
-    target_hash = file_sha256(TARGET_PATH)
+    target_hash = file_sha256(original_nso)
 
     if TARGET_PATH.is_file() and target_hash == COMPRESSED_HASH or target_hash == UNCOMPRESSED_HASH and TARGET_ELF_PATH.is_file():
         print(">>> NSO is already set up")

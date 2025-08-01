@@ -7,11 +7,17 @@ class BlockPos;
 
 class NamedAreaRuleDefinition : public GameRuleDefinition {
 public:
-    void getActionType() override;
-    void getBoundingVolume() override;
+    NamedAreaRuleDefinition();
+
+    ~NamedAreaRuleDefinition() override;
+    int getActionType() override;
+    const AABB* getBoundingVolume() override;
     void onAttributesAdded() override;
     void WriteAttributesAsXML(std::string&) override;
-    virtual void containsBlock(int, const BlockPos&);
+    virtual bool containsBlock(int, const BlockPos&);
 
     const AABB* getArea();
+
+    std::wstring mName;
+    AABB* mAABB;
 };
