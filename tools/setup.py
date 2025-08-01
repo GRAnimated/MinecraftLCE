@@ -98,17 +98,15 @@ def patch_clang(remake_diffs=False):
 
 def check_diff_applied_status():
     status = {}
-    for src in PATCH_SOURCE_DIR.iterdir():
-        if not src.is_file():
-            continue
-
-        target_file = TOOLCHAIN_DIR / src.name
-        checksum_file = PATCH_DEST_DIR / f"{src.name}.sha256"
+    for diff_file in PATCH_DEST_DIR.glob("*.diff"):
+        dst_name = diff_file.stem
+        target_file = TOOLCHAIN_DIR / dst_name
+        checksum_file = PATCH_DEST_DIR / f"{dst_name}.sha256"
         if not checksum_file.exists():
-            status[src.name] = False
+            status[dst_name] = False
             continue
         expected_hash = checksum_file.read_text().splitlines()[-1].split("after: ")[-1]
-        status[src.name] = is_diff_applied(target_file, expected_hash)
+        status[dst_name] = is_diff_applied(target_file, expected_hash)
     return status
 
 
