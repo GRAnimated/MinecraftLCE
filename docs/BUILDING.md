@@ -43,7 +43,7 @@ Additionally, you'll also need:
 
 3. Acquire the **original v1.0.17 `main` NSO executable**.
     1. Acquire an NSP dump of v1.0.17. [Dumping guide](https://zeldamods.org/wiki/Help:Dumping_games#Switch)
-    2. Setup [hactool](https://github.com/SciresM/hactool) and configure your dumped `title.keys`.
+    2. Setup [hactool](https://github.com/SciresM/hactool) and put your dumped `title.keys` in `$HOME/.switch`.
     3. Run `hactool [path to the NSP] -t pfs0 --outdir=extracted`.
     4. `cd` into `extracted`.
     5. Find the largest NCA.
