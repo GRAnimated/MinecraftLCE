@@ -32,7 +32,7 @@ RedSandStoneBlock::RedSandStoneBlock() : Block(Material::STONE, SandBlock::Varia
 void RedSandStoneBlock::blockStaticCtor() {
     RedSandStoneBlock::TYPE = EnumProperty<RedSandStoneBlock::Variant*>::create(
         L"type", typeid(RedSandStoneBlock::Variant), RedSandStoneBlock::Variant::VARIANTS,
-        (Predicates<RedSandStoneBlock::Variant*>*)RedSandStoneBlock::PREDICATE);
+        RedSandStoneBlock::PREDICATE);
 }
 
 const BlockState* RedSandStoneBlock::getBlockState(int data) {

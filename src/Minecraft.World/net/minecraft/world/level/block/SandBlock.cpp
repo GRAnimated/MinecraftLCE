@@ -18,9 +18,8 @@ void SandBlock::blockStaticCtor() {
     Variant::VARIANTS[0] = Variant::DEFAULT;
     Variant::VARIANTS[1] = Variant::RED;
 
-    VARIANT = EnumProperty<SandBlock::Variant*>::create(
-        L"type", typeid(SandBlock::Variant), SandBlock::Variant::VARIANTS,
-        (Predicates<SandBlock::Variant*>*)SandBlock::PREDICATE);
+    VARIANT = EnumProperty<SandBlock::Variant*>::create(L"type", typeid(SandBlock::Variant),
+                                                        SandBlock::Variant::VARIANTS, SandBlock::PREDICATE);
 }
 
 const MaterialColor* SandBlock::getMapColor(const BlockState* blockState, LevelSource* levelSource,

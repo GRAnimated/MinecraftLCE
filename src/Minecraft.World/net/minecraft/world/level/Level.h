@@ -194,6 +194,7 @@ public:
     void updateSkyBrightness();
     void prepareWeather();
     void setDayTime(long long);
+    bool hasChunksAt(const BlockPos&, const BlockPos&);
 
     int mSeaLevel = 63;
     nn::os::MutexType mEntityMutex;
