@@ -1,7 +1,8 @@
+#include "net/minecraft/world/level/block/NewLogBlock.h"
+
 #include "net/minecraft/world/item/Item.h"
 #include "net/minecraft/world/item/ItemInstance.h"
 #include "net/minecraft/world/level/block/LogBlock.h"
-#include "net/minecraft/world/level/block/NewLogBlock.h"
 #include "net/minecraft/world/level/block/PlanksBlock.h"
 #include "net/minecraft/world/level/block/state/BlockStateDefinition.h"
 #include "net/minecraft/world/level/block/state/EnumProperty.h"

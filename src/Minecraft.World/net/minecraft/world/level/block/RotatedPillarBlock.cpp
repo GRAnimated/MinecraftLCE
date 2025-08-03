@@ -1,9 +1,10 @@
+#include "net/minecraft/world/level/block/RotatedPillarBlock.h"
+
 #include "net/minecraft/core/Direction.h"
 #include "net/minecraft/world/item/Item.h"
 #include "net/minecraft/world/item/ItemInstance.h"
 #include "net/minecraft/world/level/block/Block.h"
 #include "net/minecraft/world/level/block/BlockShapes.h"
-#include "net/minecraft/world/level/block/RotatedPillarBlock.h"
 #include "net/minecraft/world/level/block/Rotation.h"
 #include "net/minecraft/world/level/block/state/BlockState.h"
 #include "net/minecraft/world/level/block/state/BlockStateDefinition.h"

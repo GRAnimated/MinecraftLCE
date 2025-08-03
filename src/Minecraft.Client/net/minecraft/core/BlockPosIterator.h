@@ -1,10 +1,12 @@
-#include "Iterator.h"
+#pragma once
+
 #include "net/minecraft/core/BlockPos.h"
+#include "net/minecraft/core/Iterator.h"
 
 class BlockPosIterator : public Iterator<BlockPos*> {
 public:
     BlockPosIterator(const BlockPos&, const BlockPos&);
 
-    virtual bool hasNext() override;
-    virtual BlockPos* next() override;
+    bool hasNext() override;
+    BlockPos* next() override;
 };
