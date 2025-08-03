@@ -96,14 +96,11 @@ arrayWithLength<uchar> ChunkPrimer::getBlockData() {
     return mBlockData;
 }
 
-// TODO: Find out what this function is
-Block* sub_7100029D84(unsigned char);
-
 int ChunkPrimer::getHighestNonAirPos(int x, int z) {
     int packedXZ = (x << 11) | (z << 7) | 1;
 
     for (int y = 127; y >= 0; y--) {
-        if (sub_7100029D84(mBlockIds[packedXZ + y + 126]) != Blocks::AIR) {
+        if (Block::byId(mBlockIds[packedXZ + y + 126]) != Blocks::AIR) {
             return y;
         }
     }

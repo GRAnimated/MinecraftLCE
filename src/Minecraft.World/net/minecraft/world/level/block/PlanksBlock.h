@@ -61,7 +61,7 @@ public:
     void registerIcons(IconRegister*) override;
     TextureAtlasSprite* getTexture(const Direction*, const BlockState*) override;
     BlockStateDefinition* createBlockStateDefinition() override;
-    int getDescriptionId(int) override;
+    unsigned int getDescriptionId(int) override;
 
     TextureAtlasSprite* mVariantsTextures[6];
 };

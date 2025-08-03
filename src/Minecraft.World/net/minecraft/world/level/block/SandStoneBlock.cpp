@@ -33,7 +33,7 @@ SandStoneBlock::SandStoneBlock() : Block(Material::STONE) {
 void SandStoneBlock::blockStaticCtor() {
     SandStoneBlock::TYPE = EnumProperty<SandStoneBlock::Variant*>::create(
         L"type", typeid(SandStoneBlock::Variant), SandStoneBlock::Variant::VARIANTS,
-        (Predicates<SandStoneBlock::Variant*>*)SandStoneBlock::PREDICATE);
+        SandStoneBlock::PREDICATE);
 }
 
 MaterialColor* SandStoneBlock::getMapColor(const BlockState*, LevelSource*, const BlockPos&) {

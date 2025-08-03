@@ -5,6 +5,8 @@
 #include "net/minecraft/world/item/Items.h"
 #include "net/minecraft/world/level/block/Blocks.h"
 
+#include "net/minecraft/world/level/block/NewLogBlock.h"
+#include "net/minecraft/world/level/block/OldLogBlock.h"
 #include "net/minecraft/world/level/block/PlanksBlock.h"
 #include "net/minecraft/world/level/block/QuartzBlock.h"
 #include "net/minecraft/world/level/block/RedSandStoneBlock.h"
@@ -62,7 +64,12 @@ void UIScene_CreativeMenu::staticCtor() {
     builder.ITEM_AUX(Blocks::PLANKS, PlanksBlock::VARIANT, PlanksBlock::Variant::JUNGLE);
     builder.ITEM_AUX(Blocks::PLANKS, PlanksBlock::VARIANT, PlanksBlock::Variant::ACACIA);
     builder.ITEM_AUX(Blocks::PLANKS, PlanksBlock::VARIANT, PlanksBlock::Variant::DARK_OAK);
-    // ...
+    builder.ITEM_AUX(Blocks::LOG, OldLogBlock::VARIANT, PlanksBlock::Variant::OAK);
+    builder.ITEM_AUX(Blocks::LOG, OldLogBlock::VARIANT, PlanksBlock::Variant::SPRUCE);
+    builder.ITEM_AUX(Blocks::LOG, OldLogBlock::VARIANT, PlanksBlock::Variant::BIRCH);
+    builder.ITEM_AUX(Blocks::LOG, OldLogBlock::VARIANT, PlanksBlock::Variant::JUNGLE);
+    builder.ITEM_AUX(Blocks::LOG2, NewLogBlock::VARIANT, PlanksBlock::Variant::ACACIA);
+    builder.ITEM_AUX(Blocks::LOG2, NewLogBlock::VARIANT, PlanksBlock::Variant::DARK_OAK);
     builder.ITEM_BLOCK(Blocks::GRAVEL);
     builder.ITEM_BLOCK(Blocks::BRICK_BLOCK);
     builder.ITEM_BLOCK(Blocks::MOSSY_COBBLESTONE);

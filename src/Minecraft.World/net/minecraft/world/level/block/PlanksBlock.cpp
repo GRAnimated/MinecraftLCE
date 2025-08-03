@@ -39,8 +39,7 @@ void PlanksBlock::blockStaticCtor() {
     PlanksBlock::Variant::VARIANTS[5] = PlanksBlock::Variant::DARK_OAK;
 
     PlanksBlock::VARIANT = EnumProperty<PlanksBlock::Variant*>::create(
-        L"variant", typeid(PlanksBlock::Variant), PlanksBlock::Variant::VARIANTS,
-        (Predicates<PlanksBlock::Variant*>*)PlanksBlock::PREDICATE);
+        L"variant", typeid(PlanksBlock::Variant), PlanksBlock::Variant::VARIANTS, PlanksBlock::PREDICATE);
 }
 
 const MaterialColor* PlanksBlock::getMapColor(const BlockState* state, LevelSource*, const BlockPos&) {
@@ -71,7 +70,7 @@ TextureAtlasSprite* PlanksBlock::getTexture(const Direction* direction, const Bl
 }
 
 unsigned int planks_block_desc_ids[6] = {0x13035FA5, 0x7A4DF272, 0x9BC6104A, 0x8CE369FC, 0x674A2380};
-int PlanksBlock::getDescriptionId(int data) {
+unsigned int PlanksBlock::getDescriptionId(int data) {
     return planks_block_desc_ids[data > (sizeof(planks_block_desc_ids) / sizeof(int)) - 1 ?
                                      0 :
                                      data];  // it became hard to match those lol

@@ -29,8 +29,7 @@ QuartzBlock::QuartzBlock() : Block(Material::STONE) {
 
 void QuartzBlock::blockStaticCtor() {
     VARIANT = EnumProperty<QuartzBlock::Variant*>::create(
-        L"variant", typeid(QuartzBlock::Variant), QuartzBlock::Variant::VARIANTS,
-        (Predicates<QuartzBlock::Variant*>*)QuartzBlock::PREDICATE);
+        L"variant", typeid(QuartzBlock::Variant), QuartzBlock::Variant::VARIANTS, QuartzBlock::PREDICATE);
 }
 
 const MaterialColor* QuartzBlock::getMapColor(const BlockState* blockState, LevelSource* levelSource,

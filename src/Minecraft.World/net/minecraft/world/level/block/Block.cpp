@@ -684,11 +684,11 @@ std::wstring Block::getName() {
     return L"";
 }
 
-int Block::getDescriptionId(int) {
+unsigned int Block::getDescriptionId(int) {
     return this->mDescriptionId;
 }
 
-int Block::getUseDescriptionId() {
+unsigned int Block::getUseDescriptionId() {
     return this->mUseDescriptionId;
 }
 
