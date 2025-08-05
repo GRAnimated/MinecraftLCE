@@ -30,21 +30,15 @@ public:
     bool setBoostMods(int&, int&);
     int getBoostDirection();
 
-    double getLaps() const {
-        if (mIsActive)
-            return mLaps;
-        return 0.0;
-    }
-
-    double getTargetHeight() const {
-        if (mIsActive)
-            return mTargetHeight;
-        return 0.0;
-    }
-
     double getLiftForceModifier() const {
         if (mIsActive)
             return mLiftForceModifier;
+        return 1.0;
+    }
+
+    double getSpeedBoost() const {
+        if (mIsActive)
+            return mSpeedBoost;
         return 0.0;
     }
 
@@ -54,16 +48,22 @@ public:
         return 0.0;
     }
 
+    double getTargetHeight() const {
+        if (mIsActive)
+            return mTargetHeight;
+        return 0.0;
+    }
+
     bool isActive() const { return mIsActive; }
 
-    double mLaps;
     double mLiftForceModifier;
     double mStaticLift;
     double mTargetHeight;
+    double mSpeedBoost;
     eDirection mBoostDirection;
-    int mBoostDirection2;
     int mConditionType;
-    int mConditionValue;
+    int mConditionValue0;
+    int mConditionValue1;
     bool mIsActive;
     int dword_c4;
 };

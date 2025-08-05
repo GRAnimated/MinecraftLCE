@@ -4,6 +4,7 @@
 #include <vector>
 
 class TargetAreaRuleDefinition;
+class ThermalAreaRuleDefinition;
 class StringTable;
 
 class LevelRuleset {
@@ -16,4 +17,5 @@ public:
     void getActiveChunkAreas(std::vector<AABB>* vector);
     void getRingsWithinArea(std::vector<TargetAreaRuleDefinition*>* vector, AABB* aabb);
     StringTable* getStringTable();
+    void getThermalAreas(std::vector<ThermalAreaRuleDefinition*>*);
 };
