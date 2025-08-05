@@ -4,6 +4,8 @@
 
 #include <string>
 
+Direction::Axis* Direction::Axis::VALUES[3] = {Direction::Axis::X, Direction::Axis::Y, Direction::Axis::Z};
+
 void Direction::staticCtor() {
     Axis::staticCtor();
 

@@ -18,6 +18,7 @@
 #include "net/minecraft/world/level/storage/LevelData.h"
 #include "net/minecraft/world/level/storage/LevelStorage.h"
 #include <memory>
+#include <utility>
 
 Level::Level(std::shared_ptr<LevelStorage> levelStorage, LevelData* levelData, Dimension* dimension,
              bool isLocal) {
@@ -209,7 +210,6 @@ void Level::sendBlockUpdated(const BlockPos& pos, const BlockState* state, const
     }
 }
 
-// NON_MATCHING
 void Level::lightColumnChanged(int x, int z, int y0, int y1) {
     PIXBeginNamedEvent(0.0f, "LightColumnChanged (%d,%d) %d to %d", x, z, y0, y1);
     if (y0 > y1) {
@@ -220,18 +220,12 @@ void Level::lightColumnChanged(int x, int z, int y0, int y1) {
 
     if (mDimension->isHasSkyLight()) {
         PIXBeginNamedEvent(0.0f, "Checking lights");
-        int v12;
-        if (y1 > y0)
-            v12 = y1;
-        else
-            v12 = y0;
-        int i = -2 - v12;
-        do {
-            PIXBeginNamedEvent(0.0f, "Checking light %d", ++i);
+        for (int i = y0; i <= y1; i++) {
+            PIXBeginNamedEvent(0.0f, "Checking light %d", i);
             BlockPos result = {x, i, z};
             checkLight(LightLayer::SKY, result, false, false);
             PIXEndNamedEvent();
-        } while (i < y1);
+        }
         PIXEndNamedEvent();
     }
     PIXBeginNamedEvent(0.0f, "Setting blocks dirty");

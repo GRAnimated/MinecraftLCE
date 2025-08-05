@@ -52,7 +52,7 @@ public:
     static void blockStaticCtor();
 
     static EnumProperty<Variant*>* VARIANT;
-    static const inline Predicates<Variant*>::ConstantPredicate*
+    static inline Predicates<Variant*>::ConstantPredicate*
         PREDICATE  // idk how to get same behaviour as 0x7100327C74
         = new Predicates<Variant*>::ConstantPredicate(true);
 

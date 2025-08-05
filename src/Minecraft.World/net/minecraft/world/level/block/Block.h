@@ -48,8 +48,8 @@ public:
 
     const BlockState* defaultBlockState();
     void registerDefaultState(const BlockState* state);
-    static const BlockState* getStateByIdAndData(int, unsigned char);
-    static const BlockState* stateByIdWithData(int);
+    static const BlockState* getStateByIdAndData(int id, uchar data);
+    static const BlockState* stateByIdWithData(int idWithData);
 
     static void registerBlock(int id, const std::wstring& name, Block* block);
     static void registerBlock(int id, const ResourceLocation& rLoc, Block* block);
@@ -63,19 +63,19 @@ public:
     virtual int GetHitTooltip(const BlockTooltipDataHolder& blockTooltipDataHolder);
     virtual const MaterialColor* getMapColor(const BlockState* state, LevelSource* levelSource,
                                              const BlockPos& pos);
-    virtual const BlockState* getBlockState(int);
+    virtual const BlockState* getBlockState(int data);
     virtual int convertBlockStateToLegacyData(const BlockState* state);
     virtual const BlockState* fillVirtualBlockStateProperties(const BlockState* state,
                                                               LevelSource* levelSource, const BlockPos& pos);
-    virtual const BlockState* rotate(const BlockState* state, Rotation*);
-    virtual const BlockState* mirror(const BlockState* state, Mirror*);
+    virtual const BlockState* rotate(const BlockState* state, Rotation* rotation);
+    virtual const BlockState* mirror(const BlockState* state, Mirror* mirror);
     virtual ~Block();
     virtual void DerivedInit();
-    virtual void sendBlockData(uchar);
-    virtual Block* setSoundType(const SoundType*);
-    virtual Block* setLightBlock(int);
-    virtual Block* setLightEmission(float);
-    virtual Block* setExplodeable(float);
+    virtual void sendBlockData(uchar data);
+    virtual Block* setSoundType(const SoundType* soundType);
+    virtual Block* setLightBlock(int lightBlock);
+    virtual Block* setLightEmission(float lightEmission);
+    virtual Block* setExplodeable(float explode);
     virtual bool isSolidBlockingCube(const BlockState* state);
     virtual bool isSolidBlockingCubeAndNotSignalSource(const BlockState* state);
     virtual bool isViewBlocking(const BlockState* state);
@@ -85,11 +85,11 @@ public:
     virtual RenderShape getRenderShape(const BlockState* state);
     virtual bool hasInHandRenderOffset();
     virtual bool mayReplaceWithPlace(LevelSource* levelSource, const BlockPos& pos);
-    virtual Block* setDestroyTime(float);
+    virtual Block* setDestroyTime(float destroyTime);
     virtual Block* setIndestructible();
     virtual bool isIndestructible();
     virtual float getDestroySpeed(const BlockState* state, Level* level, const BlockPos& pos);
-    virtual void setTicking(bool);
+    virtual void setTicking(bool ticking);
     virtual Block* disableMipmap();
     virtual Block* setSemiTransparent();
     virtual bool isTicking();
@@ -98,14 +98,16 @@ public:
     virtual bool shouldRenderFace(const BlockState* state, LevelSource* levelSource, const BlockPos& pos,
                                   const Direction* direction);
     virtual arrayWithLength<const AABB*>* getShapes(const BlockState* state, LevelSource* levelSource,
-                                                    const BlockPos&);
+                                                    const BlockPos& pos);
     virtual bool isSolidFace(LevelSource* levelSource, const BlockPos& pos, const Direction* direction);
     virtual int getBlockFaceShape(LevelSource* levelSource, const BlockState* state, const BlockPos& pos,
                                   const Direction* direction);
     virtual const AABB* getOutlineAABB(const BlockState* state, Level* level, const BlockPos& pos);
-    virtual void addCollisionAABBs(const BlockState* state, Level* level, const BlockPos& pos, AABB const*,
-                                   std::vector<AABB*>*, std::shared_ptr<Entity>, bool);
-    virtual void addCollisionAABB(const BlockPos& pos, AABB const*, std::vector<AABB*>*, AABB const*);
+    virtual void addCollisionAABBs(const BlockState* state, Level* level, const BlockPos& pos,
+                                   AABB const* aabb, std::vector<AABB*>* AABBs, std::shared_ptr<Entity> ent,
+                                   bool);
+    virtual void addCollisionAABB(const BlockPos& pos, AABB const* aabb, std::vector<AABB*>* AABBs,
+                                  AABB const* aabb2);
     virtual const AABB* getClipAABB(const BlockState* state, LevelSource* levelSource, const BlockPos& pos);
     virtual bool isSolidRender(const BlockState* state) const;
     virtual bool mayPick(const BlockState* state, bool);
@@ -172,8 +174,8 @@ public:
     virtual Block* setNameAndDescriptionId(int name, int desc);
     virtual bool isPossibleToRespawnInThis();
     virtual std::wstring getName();
-    virtual int getDescriptionId(int);
-    virtual int getUseDescriptionId();
+    virtual unsigned int getDescriptionId(int);
+    virtual unsigned int getUseDescriptionId();
     virtual bool triggerEvent(const BlockState* state, Level* level, const BlockPos& pos, int, int);
     virtual bool isCollectStatistics();
     virtual bool shouldBlockTick(Level* level, const BlockPos& pos, const BlockState* state);
@@ -271,8 +273,8 @@ public:
     float mFriction;
     BlockStateDefinition* mBlockStateDefinition;
     const BlockState* mBlockState;
-    int mDescriptionId;
-    int mUseDescriptionId;
+    unsigned int mDescriptionId;
+    unsigned int mUseDescriptionId;
     TextureAtlasSprite* mTexture;
     int field_A0;
 };

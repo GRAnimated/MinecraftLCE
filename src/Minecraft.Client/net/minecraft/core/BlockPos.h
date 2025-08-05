@@ -7,6 +7,7 @@
 class Direction;
 class Entity;
 class Vec3;
+class BlockPosIterator;
 
 class BlockPos : public Vec3i {
 public:
@@ -17,6 +18,8 @@ public:
     BlockPos(const std::shared_ptr<Entity>&);
     BlockPos(Vec3*);
     BlockPos(const Vec3i&);
+
+    static BlockPosIterator* between(const BlockPos&, const BlockPos&);
 
     bool equals(const BlockPos& pos) const;
     bool equals(const BlockPos* pos) const;

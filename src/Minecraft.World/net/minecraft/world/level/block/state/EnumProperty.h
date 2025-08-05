@@ -9,7 +9,7 @@ class EnumProperty : public AbstractProperty<T> {
 public:
     template <int N>
     static EnumProperty<T>* create(const std::wstring& name, const std::type_info& type_info,
-                                   T (&possible_values)[N], Predicates<T>* predicates);
+                                   T (&possible_values)[N], Predicate<T>* predicates);
 
     // int getPossibleValues() const override; // On WiiU it seems that EnumProperty overrides this but on
     // Switch it doesn't for whatever reason :skull:

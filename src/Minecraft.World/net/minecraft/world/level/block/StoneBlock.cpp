@@ -38,8 +38,7 @@ void StoneBlock::blockStaticCtor() {
     Variant::VARIANTS[6] = Variant::SMOOTH_ANDESITE;
 
     VARIANT = EnumProperty<StoneBlock::Variant*>::create(
-        L"variant", typeid(StoneBlock::Variant), StoneBlock::Variant::VARIANTS,
-        (Predicates<StoneBlock::Variant*>*)StoneBlock::PREDICATE);
+        L"variant", typeid(StoneBlock::Variant), StoneBlock::Variant::VARIANTS, StoneBlock::PREDICATE);
 }
 
 const MaterialColor* StoneBlock::getMapColor(const BlockState* blockState, LevelSource* levelSource,
