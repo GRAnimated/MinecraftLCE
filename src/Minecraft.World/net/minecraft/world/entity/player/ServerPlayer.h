@@ -6,6 +6,7 @@
 #include <memory>
 
 class ServerPlayer : public Player, net_minecraft_world_inventory::ContainerListener {
+public:
     ~ServerPlayer() override;
     void sendMessage(ClientboundChatPacket::EChatPacketMessage, int*, uint, std::wstring*, uint) override;
     bool hasPermission(EGameCommand) override;

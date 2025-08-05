@@ -10,26 +10,26 @@ NamedAreaRuleDefinition::NamedAreaRuleDefinition() {
     mAABB = AABB::newPermanent(0.0, 0.0, 0.0, 0.0, 0.0, 0.0);
     addStringAttribute(
 
-        ConsoleGameRules::EGameRuleAttr_slot, &mName);
+        ConsoleGameRules::EGameRuleAttr_name, &mName);
     addDoubleAttribute(
 
-        ConsoleGameRules::EGameRuleAttr_x, &mAABB->min.x);
+        ConsoleGameRules::EGameRuleAttr_x0, &mAABB->min.x);
     addDoubleAttribute(
 
-        ConsoleGameRules::EGameRuleAttr_y, &mAABB->min.y);
+        ConsoleGameRules::EGameRuleAttr_y0, &mAABB->min.y);
     addDoubleAttribute(
 
-        ConsoleGameRules::EGameRuleAttr_z, &mAABB->min.z);
+        ConsoleGameRules::EGameRuleAttr_z0, &mAABB->min.z);
     addDoubleAttribute(
 
-        ConsoleGameRules::EGameRuleAttr_x0, &mAABB->max.x);
+        ConsoleGameRules::EGameRuleAttr_x1, &mAABB->max.x);
     addDoubleAttribute(
 
-        ConsoleGameRules::EGameRuleAttr_y0, &mAABB->max.y);
+        ConsoleGameRules::EGameRuleAttr_y1, &mAABB->max.y);
     addDoubleAttribute(
 
-        ConsoleGameRules::EGameRuleAttr_z0, &mAABB->max.z);
-    addHexAttribute(ConsoleGameRules::EGameRuleAttr_promptName, &dword_40);
+        ConsoleGameRules::EGameRuleAttr_z1, &mAABB->max.z);
+    addHexAttribute(ConsoleGameRules::EGameRuleAttr_dataTag, &mDataTag);
 }
 
 NamedAreaRuleDefinition::~NamedAreaRuleDefinition() {
@@ -54,15 +54,15 @@ void NamedAreaRuleDefinition::onAttributesAdded() {
 
 void NamedAreaRuleDefinition::WriteAttributesAsXML(std::string& xml) {
     if (!mName.empty())
-        WriteAttributeAsXML(ConsoleGameRules::EGameRuleAttr_slot, xml);
-    WriteAttributeAsXML(ConsoleGameRules::EGameRuleAttr_x, xml);
-    WriteAttributeAsXML(ConsoleGameRules::EGameRuleAttr_y, xml);
-    WriteAttributeAsXML(ConsoleGameRules::EGameRuleAttr_z, xml);
+        WriteAttributeAsXML(ConsoleGameRules::EGameRuleAttr_name, xml);
     WriteAttributeAsXML(ConsoleGameRules::EGameRuleAttr_x0, xml);
     WriteAttributeAsXML(ConsoleGameRules::EGameRuleAttr_y0, xml);
     WriteAttributeAsXML(ConsoleGameRules::EGameRuleAttr_z0, xml);
-    if (dword_40)
-        WriteAttributeAsXML(ConsoleGameRules::EGameRuleAttr_promptName, xml);
+    WriteAttributeAsXML(ConsoleGameRules::EGameRuleAttr_x1, xml);
+    WriteAttributeAsXML(ConsoleGameRules::EGameRuleAttr_y1, xml);
+    WriteAttributeAsXML(ConsoleGameRules::EGameRuleAttr_z1, xml);
+    if (mDataTag)
+        WriteAttributeAsXML(ConsoleGameRules::EGameRuleAttr_dataTag, xml);
 }
 
 bool NamedAreaRuleDefinition::containsBlock(int i, const BlockPos& blockPos) {

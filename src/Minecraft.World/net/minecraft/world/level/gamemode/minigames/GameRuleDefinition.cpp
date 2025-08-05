@@ -84,12 +84,12 @@ const wchar_t* ruleNames[] = {L"",
                               L"ActiveViewArea"};
 
 GameRuleDefinition::GameRuleDefinition() {
-    field_10 = L"";
-    mDescriptionName = L"";
-    dword_40 = 0;
-    addStringAttribute(ConsoleGameRules::EGameRuleAttr_0, &field_10);
-    addStringAttribute(ConsoleGameRules::EGameRuleAttr_descriptionName, &mDescriptionName);
-    addIntAttribute(ConsoleGameRules::EGameRuleAttr_promptName, &dword_40);
+    mDescriptionName_ = L"";
+    mPromptName = L"";
+    mDataTag = 0;
+    addStringAttribute(ConsoleGameRules::EGameRuleAttr_descriptionName, &mDescriptionName_);
+    addStringAttribute(ConsoleGameRules::EGameRuleAttr_promptName, &mPromptName);
+    addIntAttribute(ConsoleGameRules::EGameRuleAttr_dataTag, &mDataTag);
 }
 
 const AABB* GameRuleDefinition::getBoundingVolume() {
@@ -101,7 +101,7 @@ void GameRuleDefinition::moveBoundingVolume(int, int, int) {}
 void GameRuleDefinition::writeAttributes(GameRuleSaveInterface* interface, unsigned int unk) {
     unsigned int count = 0;
 
-    for (const auto& pair : field_48) {
+    for (const auto& pair : mAttributeMap) {
         IGameRuleAttribute* attribute = pair.second;
         if (!attribute->isOptional() || attribute->hasValue()) {
             ++count;
@@ -110,7 +110,7 @@ void GameRuleDefinition::writeAttributes(GameRuleSaveInterface* interface, unsig
 
     interface->startAttributes(count + unk);
 
-    for (const auto& pair : field_48) {
+    for (const auto& pair : mAttributeMap) {
         IGameRuleAttribute* attribute = pair.second;
         if (!attribute->isOptional() || attribute->hasValue()) {
             attribute->save(pair.first, interface);
@@ -129,8 +129,8 @@ GameRuleDefinition* GameRuleDefinition::addChild(ConsoleGameRules::EGameRuleType
 void GameRuleDefinition::addAttribute(const std::wstring& str1, const std::wstring& str2) {
     ConsoleGameRules::EGameRuleAttr attrId = IGameRuleAttribute::attributeIdFromName(str1);
     if ((int)attrId != -1 && (int)attrId <= 90) {
-        if (field_48.find(attrId) != field_48.end()) {
-            auto& attribute = field_48[attrId];
+        if (mAttributeMap.find(attrId) != mAttributeMap.end()) {
+            auto& attribute = mAttributeMap[attrId];
             attribute->setValue(str2);
         }
     }
@@ -193,7 +193,7 @@ void GameRuleDefinition::WriteAttributesAsXML(std::string& str) {
 }
 
 void GameRuleDefinition::WriteAllAttributesAsXML(std::string& str) {
-    for (const auto& pair : field_48) {
+    for (const auto& pair : mAttributeMap) {
         IGameRuleAttribute* attribute = pair.second;
         if (!attribute->isOptional() || attribute->hasValue()) {
             attribute->writeAsXml(pair.first, str);

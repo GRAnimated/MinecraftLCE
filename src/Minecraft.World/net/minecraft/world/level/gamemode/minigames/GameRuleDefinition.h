@@ -53,8 +53,8 @@ public:
     void addHexAttribute(ConsoleGameRules::EGameRuleAttr, int*);
 
     void* field_8;
-    std::wstring field_10;
-    std::wstring mDescriptionName;
-    int dword_40;
-    std::unordered_map<ConsoleGameRules::EGameRuleAttr, IGameRuleAttribute*> field_48;
+    std::wstring mDescriptionName_;
+    std::wstring mPromptName;
+    int mDataTag;
+    std::unordered_map<ConsoleGameRules::EGameRuleAttr, IGameRuleAttribute*> mAttributeMap;
 };
