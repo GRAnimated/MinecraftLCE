@@ -47,7 +47,7 @@ public:
     int GetGameHostOption(eGameHostOption option);
     bool GetChangingSessionType();
     bool GetGameStarted();
-    static void* getSkinIdFromPath(const std::wstring& path);
+    static unsigned int getSkinIdFromPath(const std::wstring& path);
     bool isXuidNotch(PlayerUID* id);
     static void StaticCtor();
     void loadDefaultGameRules();  // is this virtual?

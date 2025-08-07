@@ -198,8 +198,7 @@ public:
     float getDestroySpeed(const BlockState*);
     const StatsUID getSUID();
 
-    // dunno the type
-    static std::vector<void*> sSkins;
+    static std::vector<unsigned int> sSkins;
 
     std::shared_ptr<Inventory> mInventory = nullptr;
     PlayerEnderChestContainer* mEnderChestInventory = nullptr;
