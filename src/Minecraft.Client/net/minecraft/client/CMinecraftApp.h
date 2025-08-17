@@ -65,7 +65,7 @@ public:
     EMiniGameId GetFirstMiniGameType();
     bool IsAppPaused();
     void SetAction(int, eXuiAction, void*);
-    void setLevelGenerationOptions(LevelGenerationOptions *options);
+    void setLevelGenerationOptions(LevelGenerationOptions* options);
 
     static int DefaultOptionsCallback(void*, C4JStorage::PROFILESETTINGS*, int);
     static int OptionsDataCallback(void*, int, unsigned short, C4JStorage::eOptionsCallback);
@@ -73,7 +73,7 @@ public:
     static void ProfileReadErrorCallback(void*);
     static void UpsellReturnedCallback(void*, eUpsellType, eUpsellResponse, int);
 
-    bool getSomething(); // dunno
+    bool getSomething();  // dunno
 
     // note to self: vftable pushes everything over by 8 inside decompiler view
     unsigned char padding[312];

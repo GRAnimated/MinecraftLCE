@@ -120,7 +120,7 @@ public:
     bool hasTimer(int);
     void* GetCallbackUniqueId();
 
-    void removeControl(UIControl_Base *control, bool);
+    void removeControl(UIControl_Base* control, bool);
 
     fuiFile* getFuiFile() { return this->mFuiFile; }
 

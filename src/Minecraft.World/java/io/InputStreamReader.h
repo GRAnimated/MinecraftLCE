@@ -1,10 +1,11 @@
 #pragma once
+
 #include "DataInputStream.h"
-#include "Reader.h"
+#include "java/io/Reader.h"
 
 class InputStreamReader : public Reader {
 public:
-    InputStreamReader(InputStream *stream);
+    InputStreamReader(InputStream* stream);
 
     virtual ~InputStreamReader();
     void close() override;
@@ -12,5 +13,5 @@ public:
     void read(wchar_t*, unsigned int, unsigned int) override;
 
 private:
-    DataInputStream *stream;
+    DataInputStream* stream;
 };

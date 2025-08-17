@@ -1,11 +1,12 @@
 #pragma once
+
 #include "net/minecraft/client/ui/scene/UIScene.h"
 #include "net/minecraft/client/ui/scene/control/UIControl_Button.h"
 #include "net/minecraft/core/storage/C4JStorage.h"
 
 class UIScene_MainMenu : public UIScene {
 public:
-    UIScene_MainMenu(int a1, void *a2, UILayer *layer);
+    UIScene_MainMenu(int a1, void* a2, UILayer* layer);
 
     bool mapElementsAndNames() override;
     void handleUnlockFullVersion() override;
@@ -19,9 +20,9 @@ public:
 
     void RunAction(int);
 
-    static int MustSignInReturned(void *, int, C4JStorage::EMessageResult);
+    static int MustSignInReturned(void*, int, C4JStorage::EMessageResult);
 
-    void *unk2;
+    void* unk2;
     UIControl_Button mButtons[8];
     UIControl mTimer;
     bool _4e8;

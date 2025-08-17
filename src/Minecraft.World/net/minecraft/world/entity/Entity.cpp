@@ -377,4 +377,4 @@ void Entity::SetGlideCollisionDamage(bool) {}
 void Entity::SetLiftForceModifier(double) {}
 void Entity::onLoadedFromSave() {}
 void Entity::setUsingItemFlag(bool) {}
-void Entity::fjDebugCheckSmallIdLeaks(){}
+void Entity::fjDebugCheckSmallIdLeaks() {}

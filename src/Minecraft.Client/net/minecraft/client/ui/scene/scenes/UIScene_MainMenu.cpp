@@ -1,3 +1,4 @@
+#include "NX/Render/RendererCore.h"
 #include "UIScene_MainMenu.h"
 #include "com/mojang/blaze3d/platform/GlStateManager.h"
 #include "fui/fuiFile.h"
@@ -10,21 +11,20 @@
 #include "net/minecraft/client/Minecraft.h"
 #include "net/minecraft/client/gui/Font.h"
 #include "net/minecraft/client/ui/ConsoleUIController.h"
+#include "net/minecraft/client/ui/StringIDs.h"
 #include "net/minecraft/client/ui/scene/UILayer.h"
 #include "net/minecraft/client/ui/screen/ScreenSizeCalculator.h"
 #include "net/minecraft/core/System.h"
 #include "net/minecraft/core/profile/CProfile.h"
+#include "net/minecraft/sounds/SoundEvent.h"
 #include "net/minecraft/util/Mth.h"
 #include "net/minecraft/world/entity/Entity.h"
-#include "NX/Render/RendererCore.h"
-#include "net/minecraft/client/ui/StringIDs.h"
-#include "net/minecraft/sounds/SoundEvent.h"
 
 #include <string>
 
 // thx GR for helping with the rest of this
 // https://decomp.me/scratch/HQRqo
-UIScene_MainMenu::UIScene_MainMenu(int a1, void* a2, UILayer* layer): UIScene(a1, layer) {
+UIScene_MainMenu::UIScene_MainMenu(int a1, void* a2, UILayer* layer) : UIScene(a1, layer) {
     Entity::fjDebugCheckSmallIdLeaks();
     gConsoleUIController.setUnk2(false);
     this->initialiseMovie();
@@ -42,10 +42,10 @@ UIScene_MainMenu::UIScene_MainMenu(int a1, void* a2, UILayer* layer): UIScene(a1
 
     if (CProfile::sInstance->IsFullVersion()) {
         this->mShowUnlockFullGame = false;
-        this->mButtons[5].init(UIString(StringIDs::MainMenu::MinecraftStore), 5); // show Minecraft Store
+        this->mButtons[5].init(UIString(StringIDs::MainMenu::MinecraftStore), 5);  // show Minecraft Store
     } else {
         this->mShowUnlockFullGame = true;
-        this->mButtons[5].init(UIString(StringIDs::MainMenu::UnlockFullGame), 5); // show Unlock full game
+        this->mButtons[5].init(UIString(StringIDs::MainMenu::UnlockFullGame), 5);  // show Unlock full game
     }
 
     this->mButtons[6].init(UIString(0x2686c8e5), 6);
@@ -67,7 +67,8 @@ UIScene_MainMenu::UIScene_MainMenu(int a1, void* a2, UILayer* layer): UIScene(a1
         while (!(line = br.readLine()).empty()) {
             line = trimString(line);
 
-            if (!line.empty()) mSplashes.push_back(line);
+            if (!line.empty())
+                mSplashes.push_back(line);
         }
 
         br.close();
@@ -79,7 +80,8 @@ UIScene_MainMenu::UIScene_MainMenu(int a1, void* a2, UILayer* layer): UIScene(a1
     this->_4ec = false;
 
     CConsoleMinecraftApp::sInstance.setLevelGenerationOptions(nullptr);
-    Minecraft::GetInstance()->SetupMiniGameInstance(MiniGameDef::GetCustomGameModeById(NORMAL_WORLD, true), 0);
+    Minecraft::GetInstance()->SetupMiniGameInstance(MiniGameDef::GetCustomGameModeById(NORMAL_WORLD, true),
+                                                    0);
     CGameNetworkManager::sInstance.ResetLeavingGame();
     gConsoleUIController.TouchBoxRebuild(this);
     gConsoleUIController.ResetSelectedItem();
@@ -88,7 +90,7 @@ UIScene_MainMenu::UIScene_MainMenu(int a1, void* a2, UILayer* layer): UIScene(a1
 bool UIScene_MainMenu::mapElementsAndNames() {
     UIScene::mapElementsAndNames();
 
-    fuiRenderNode *root = this->getFuiFile()->getRootNode();
+    fuiRenderNode* root = this->getFuiFile()->getRootNode();
 
     this->mButtons[0].setupControl(this, root, "Button1");
     this->mUIControls.push_back(&this->mButtons[0]);
@@ -141,20 +143,20 @@ void UIScene_MainMenu::updateComponents() {
 }
 
 // NON_MATCHING | Score: 4720 (lower is better)
-// Dunno what inWorldMenu is, and it's missing the atomic bullshit that comes at the bottom which isn't even present on Wii U
+// Dunno what inWorldMenu is, and it's missing the atomic bullshit that comes at the bottom which isn't even
+// present on Wii U
 void UIScene_MainMenu::tick() {
     UIScene::tick();
-    if (ConsoleUIController::sCurrentScene != UIScene_HowToPlay && !CConsoleMinecraftApp::sInstance.GetTMSAction(this->mPadID)) {
+    if (ConsoleUIController::sCurrentScene != UIScene_HowToPlay
+        && !CConsoleMinecraftApp::sInstance.GetTMSAction(this->mPadID)) {
         int lockedProfile = CProfile::sInstance->GetLockedProfile();
         if (CConsoleMinecraftApp::sInstance.getSomething()) {
-            void *inWorldMenu = (void*)(ConsoleUIController::sCurrentScene == UIScene_LoadCreateJoinMenu && this->_4eb); // ????
+            void* inWorldMenu = (void*)(ConsoleUIController::sCurrentScene == UIScene_LoadCreateJoinMenu
+                                        && this->_4eb);  // ????
 
-            gConsoleUIController.NavigateToScene(
-                lockedProfile,
-                ConsoleUIController::sCurrentScene,
-                inWorldMenu,
-                static_cast<EUILayer>(6),
-                static_cast<EUIGroup>(6));
+            gConsoleUIController.NavigateToScene(lockedProfile, ConsoleUIController::sCurrentScene,
+                                                 inWorldMenu, static_cast<EUILayer>(6),
+                                                 static_cast<EUIGroup>(6));
 
             ConsoleUIController::sCurrentScene = UIScene_HowToPlay;
         }
@@ -167,9 +169,10 @@ void UIScene_MainMenu::tick() {
 }
 
 void UIScene_MainMenu::customDrawSplash(fuiRect* rect) {
-    const Minecraft *minecraft = Minecraft::GetInstance();
+    const Minecraft* minecraft = Minecraft::GetInstance();
 
-    ScreenSizeCalculator calc = ScreenSizeCalculator(minecraft->mOptions, minecraft->mDisplayWidth, minecraft->mDisplayHeight, -1);
+    ScreenSizeCalculator calc
+        = ScreenSizeCalculator(minecraft->mOptions, minecraft->mDisplayWidth, minecraft->mDisplayHeight, -1);
 
     this->mWidth = minecraft->mDisplayWidth;
     this->mScaledWidth = calc.mScaledWidth;
@@ -178,7 +181,7 @@ void UIScene_MainMenu::customDrawSplash(fuiRect* rect) {
 
     Renderer::sInstance->TextureBindVertex(-1);
 
-    Font *font = minecraft->mFont;
+    Font* font = minecraft->mFont;
 
     GlStateManager::disableCull();
     GlStateManager::disableDepthTest();
@@ -198,7 +201,7 @@ void UIScene_MainMenu::customDrawSplash(fuiRect* rect) {
 
     int width = font->width(this->mSplashText);
     float scale = v13 / (width + 32);
-    GlStateManager::scalef(scale,scale,scale);
+    GlStateManager::scalef(scale, scale, scale);
 
     // GR had to step in and help with this part
     // see: https://decomp.me/scratch/8AotR

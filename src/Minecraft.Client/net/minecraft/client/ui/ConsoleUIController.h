@@ -2,10 +2,10 @@
 
 #include "NX/Render/C4JRender.h"
 #include "net/minecraft/client/ui/scene/UIScene.h"
+#include "net/minecraft/core/storage/C4JStorage.h"
 #include "net/minecraft/world/ArrayWithLength.h"
 #include "nn/os/os_MutexTypes.h"
 #include "types.h"
-#include "net/minecraft/core/storage/C4JStorage.h"
 
 #include <string>
 #include <unordered_map>
@@ -58,7 +58,8 @@ public:
     void* RegisterForCallbackId(UIScene*);
     void ResetSelectedItem();
 
-    void RequestErrorMessage(int, int, int *, unsigned int, unsigned int, int (*)(void *, int, C4JStorage::EMessageResult), void *, wchar_t *, bool);
+    void RequestErrorMessage(int, int, int*, unsigned int, unsigned int,
+                             int (*)(void*, int, C4JStorage::EMessageResult), void*, wchar_t*, bool);
 
     float getScreenWidth() { return this->mScreenWidth; }
 

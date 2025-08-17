@@ -99,7 +99,7 @@ public:
     void setScreen(Screen* screen);
     void SetGhostController(GhostController*);
 
-    void SetupMiniGameInstance(MiniGameDef &def, int i);
+    void SetupMiniGameInstance(MiniGameDef& def, int i);
 
     DataFixerUpper* mFixerUpper;
     MultiPlayerGameMode* mMultiPlayerGameMode;
@@ -174,7 +174,7 @@ public:
     void* qword_328;
     std::vector<void*> qword_330;
     std::vector<void*> qword_348;
-    MiniGameDef *mLobbyGameMode;
+    MiniGameDef* mLobbyGameMode;
     ClientMasterGameMode* mClientMasterGameMode;
     void* qword_370;
     GhostController* mGhostController;

@@ -1,10 +1,11 @@
 #pragma once
-#include "Reader.h"
+
+#include "java/io/Reader.h"
 #include <string>
 
 class BufferedReader : public Reader {
 public:
-    BufferedReader(Reader *reader);
+    BufferedReader(Reader* reader);
 
     virtual ~BufferedReader();
     void close() override;
@@ -15,8 +16,8 @@ public:
     void bufferMore();
 
 public:
-    Reader *mReader;
-    char *mBuffer;
-    void *mUnk2;
+    Reader* mReader;
+    char* mBuffer;
+    void* mUnk2;
     unsigned int mUnk4;
 };
