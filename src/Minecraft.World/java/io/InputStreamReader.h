@@ -13,5 +13,5 @@ public:
     void read(wchar_t*, unsigned int, unsigned int) override;
 
 private:
-    DataInputStream* stream;
+    DataInputStream* mStream;
 };

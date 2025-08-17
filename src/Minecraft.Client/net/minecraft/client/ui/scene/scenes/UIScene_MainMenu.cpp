@@ -22,8 +22,6 @@
 
 #include <string>
 
-// thx GR for helping with the rest of this
-// https://decomp.me/scratch/HQRqo
 UIScene_MainMenu::UIScene_MainMenu(int a1, void* a2, UILayer* layer) : UIScene(a1, layer) {
     Entity::fjDebugCheckSmallIdLeaks();
     gConsoleUIController.setUnk2(false);
@@ -203,8 +201,6 @@ void UIScene_MainMenu::customDrawSplash(fuiRect* rect) {
     float scale = v13 / (width + 32);
     GlStateManager::scalef(scale, scale, scale);
 
-    // GR had to step in and help with this part
-    // see: https://decomp.me/scratch/8AotR
     int splashWidth = 0 - font->width(this->mSplashText);
 
     font->drawShadow(mSplashText, splashWidth / 2, 0xfffffff8, 0xffffff00);
