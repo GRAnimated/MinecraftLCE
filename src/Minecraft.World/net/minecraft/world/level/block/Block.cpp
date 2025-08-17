@@ -3,6 +3,7 @@
 #include "NX/Platform.h"
 #include "net/minecraft/client/Minecraft.h"
 #include "net/minecraft/client/multiplayer/MultiPlayerLevel.h"
+#include "net/minecraft/client/ui/StringIDs.h"
 #include "net/minecraft/core/BlockPos.h"
 #include "net/minecraft/resources/ResourceLocation.h"
 #include "net/minecraft/util/Mth.h"
@@ -175,7 +176,7 @@ int Block::GetInteractTooltip(const BlockTooltipDataHolder& data) {
     case 0:
     case 126:
         if (data.mInteractionResult != InteractionResult::FAIL && data.mBelowBuildHeight)
-            return 0xA3BAC985;
+            return StringIDs::Ignite;
         return 0xFFFFFFFF;
     case 36:
     case 79:
@@ -186,43 +187,43 @@ int Block::GetInteractTooltip(const BlockTooltipDataHolder& data) {
     case 133:
     case 176:
         if (data.mInteractionResult != InteractionResult::FAIL)
-            return 0x512092D2;
+            return StringIDs::Plant;
         if (!data.mBelowBuildHeight)
             return 0xFFFFFFFF;
-        return 0x512092D2;
+        return StringIDs::Plant;
     case 62:
     case 130:
         if (data.mInteractionResult != InteractionResult::SUCCESS)
-            return 0xCE1819A5;
+            return StringIDs::Hang;
         return 0xFFFFFFFF;
     case 66:
         return 0xFFFFFFFF;
     case 67:
     case 68:
         if (!data.mInteractionResult && data.mBelowBuildHeight)
-            return 0xE80CCF48LL;
+            return StringIDs::Empty;
         return 0xFFFFFFFF;
     case 92:
         if (data.mInteractionResult != InteractionResult::FAIL
             && DyeColor::byItemData(data.mItemInstance->getAuxValue())->getBlockData() == 12)
-            return 0x512092D2LL;
+            return StringIDs::Plant;
         return 0xFFFFFFFF;
     case 142:
         if (data.mInteractionResult != InteractionResult::FAIL && data.mBelowBuildHeight)
-            return 0x568A07BE;
+            return StringIDs::Launch;
         return 0xFFFFFFFF;
     case 161:
         if (!data.mInteractionResult && data.mBelowBuildHeight) {
             if (LeadItem::bindPlayerMobsTest((std::shared_ptr<Player>)data.mPlayer, (Level*)data.mLevel,
                                              BlockPos((std::shared_ptr<Entity>)data.mPlayer))) {
-                return 0x7B938F36LL;
+                return StringIDs::Attach;
             }
         }
         return 0xFFFFFFFF;
     default:
         if (!data.mInteractionResult && data.mBelowBuildHeight)
-            return 0x4C36CD96LL;
-        return 0xFFFFFFFFLL;
+            return StringIDs::Place;
+        return 0xFFFFFFFF;
     }
 }
 
@@ -236,7 +237,7 @@ int Block::GetHitTooltip(const BlockTooltipDataHolder& data) {
         return 0xFFFFFFFF;
     }
 
-    return 0x5FB7A25A;
+    return StringIDs::Mine_1;
 }
 
 const MaterialColor* Block::getMapColor(const BlockState* state, LevelSource* levelSource,
@@ -956,7 +957,8 @@ void Block::staticCtor() {
                             ->setExplodeable(10.0)
                             ->setSoundType(SoundType::STONE)
                             ->setIconName(L"stone")
-                            ->setNameAndDescriptionId(0x8BAD4DAC, 0x46782239);
+                            ->setNameAndDescriptionId(StringIDs::Stone,
+                                                      StringIDs::CanBeMinedWithAPickaxeToCollectCobblestone);
 
     stoneBlock->setBaseItemTypeAndMaterial(14, 2);
     registerBlock(1, L"stone", stoneBlock);

@@ -1,11 +1,12 @@
 #include "net/minecraft/world/enchantment/enchantments/FireAspectEnchantment.h"
 
+#include "net/minecraft/client/ui/StringIDs.h"
 #include "net/minecraft/world/enchantment/categories/WeaponCategory.h"
 
 FireAspectEnchantment::FireAspectEnchantment(const Rarity* rarity,
                                              arrayWithLength<const EquipmentSlot*> equipmentSlots)
     : Enchantment(rarity, WeaponCategory::sWeaponCategory, equipmentSlots) {
-    this->setDescriptionId(0x96021422);
+    this->setDescriptionId(StringIDs::FireAspect);
 }
 
 int FireAspectEnchantment::getMaxLevel() {

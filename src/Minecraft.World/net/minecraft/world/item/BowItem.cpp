@@ -2,6 +2,7 @@
 
 #include "net/minecraft/client/Minecraft.h"
 #include "net/minecraft/client/renderer/texture/IconRegister.h"
+#include "net/minecraft/client/ui/StringIDs.h"
 #include "net/minecraft/resources/ResourceLocation.h"
 #include "net/minecraft/world/eINSTANCEOF.h"
 #include "net/minecraft/world/entity/player/MultiplayerLocalPlayer.h"
@@ -34,8 +35,8 @@ int BowItem::GetUseTooltip(const ItemToolTipDataHolder& data) {
         return 0xFFFFFFFF;
     }
     if (data.mPlayer->isUsingItem())
-        return 0xEC754EE9;
-    return 0x4381BCF0;
+        return StringIDs::Release;
+    return StringIDs::DrawDraw;
 }
 
 InteractionResultHolder BowItem::use(Level* level, std::shared_ptr<Player> player,

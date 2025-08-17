@@ -10,6 +10,7 @@
 #include "net/minecraft/client/resources/L10N.h"
 #include "net/minecraft/client/tutorial/Tutorial.h"
 #include "net/minecraft/client/ui/ConsoleUIController.h"
+#include "net/minecraft/client/ui/StringIDs.h"
 #include "net/minecraft/client/ui/scene/UIScene.h"
 #include "net/minecraft/client/ui/scene/control/UIString.h"
 #include "net/minecraft/client/ui/scene/scenes/UIScene_PauseMenu.h"
@@ -18,6 +19,7 @@
 #include "net/minecraft/world/level/gamemode/ClientMasterGameMode.h"
 #include "net/minecraft/world/level/gamemode/MultiPlayerGameMode.h"
 #include "net/minecraft/world/level/gamemode/minigames/MiniGameDef.h"
+
 #include <memory>
 #include <string>
 
@@ -35,17 +37,17 @@ UIScene_DeathMenu::UIScene_DeathMenu(int padID, void* a2, UILayer* uiLayer) : UI
             this->addTimer(0, 2000);
     } else {
         this->byte10C = false;
-        this->mExitGameButton.init(L10N::GetString(0x2686C8E5), 1);
-        this->mRespawnButton.init(L10N::GetString(0x52841E60), 0);
+        this->mExitGameButton.init(L10N::GetString(StringIDs::ExitGame), 1);
+        this->mRespawnButton.init(L10N::GetString(StringIDs::Respawn), 0);
         this->mExitGameButton.setEnable(false, true);
         this->mRespawnButton.setEnable(false, true);
         this->addTimer(1, 1000);
     }
 
     if (Minecraft::InMiniGame(EMiniGameId::GLIDE, true))
-        this->mTitleLabel.setLabel(L10N::GetString(0x7B5878DC), false, false);
+        this->mTitleLabel.setLabel(L10N::GetString(StringIDs::YouCrashed), false, false);
     else
-        this->mTitleLabel.setLabel(L10N::GetString(0x69C7EDA4), false, false);
+        this->mTitleLabel.setLabel(L10N::GetString(StringIDs::YouDied), false, false);
 
     Minecraft* mc = Minecraft::GetInstance();
     Gui* gui = Minecraft::GetInstance()->mGui;
@@ -133,8 +135,8 @@ void UIScene_DeathMenu::updateTooltips() {
         gConsoleUIController.SetTooltips(this->mPadID, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
                                          -1, -1, 0, 0);
     } else {
-        gConsoleUIController.SetTooltips(this->mPadID, 0x8D6323ED, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
-                                         -1, -1, -1, -1, 0, 0);
+        gConsoleUIController.SetTooltips(this->mPadID, StringIDs::Select, -1, -1, -1, -1, -1, -1, -1, -1, -1,
+                                         -1, -1, -1, -1, -1, -1, 0, 0);
     }
 }
 

@@ -1,5 +1,6 @@
 #include "net/minecraft/world/enchantment/enchantments/ThornsEnchantment.h"
 
+#include "net/minecraft/client/ui/StringIDs.h"
 #include "net/minecraft/sounds/SoundEvents.h"
 #include "net/minecraft/world/Random.h"
 #include "net/minecraft/world/damagesource/DamageSource.h"
@@ -16,7 +17,7 @@
 ThornsEnchantment::ThornsEnchantment(const Rarity* rarity,
                                      arrayWithLength<const EquipmentSlot*> equipmentSlots)
     : Enchantment(rarity, ChestArmorCategory::sChestArmorCategory, equipmentSlots) {
-    this->setDescriptionId(0x88507D2E);
+    this->setDescriptionId(StringIDs::Thorns);
 }
 
 int ThornsEnchantment::getMaxLevel() {

@@ -1,11 +1,12 @@
 #include "net/minecraft/world/enchantment/enchantments/MendingEnchantment.h"
 
+#include "net/minecraft/client/ui/StringIDs.h"
 #include "net/minecraft/world/enchantment/categories/BreakableCategory.h"
 
 MendingEnchantment::MendingEnchantment(const Rarity* rarity,
                                        arrayWithLength<const EquipmentSlot*> equipmentSlots)
     : Enchantment(rarity, BreakableCategory::sBreakableCategory, equipmentSlots) {
-    this->setDescriptionId(0x3BCC2150);
+    this->setDescriptionId(StringIDs::Mending);
 }
 
 int MendingEnchantment::getMaxLevel() {

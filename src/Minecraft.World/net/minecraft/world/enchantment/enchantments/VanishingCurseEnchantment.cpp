@@ -1,11 +1,12 @@
 #include "net/minecraft/world/enchantment/enchantments/VanishingCurseEnchantment.h"
 
+#include "net/minecraft/client/ui/StringIDs.h"
 #include "net/minecraft/world/enchantment/categories/AllCategory.h"
 
 VanishingCurseEnchantment::VanishingCurseEnchantment(const Rarity* rarity,
                                                      arrayWithLength<const EquipmentSlot*> equipmentSlots)
     : Enchantment(rarity, AllCategory::sAllCategory, equipmentSlots) {
-    this->setDescriptionId(0xC8D93E3A);
+    this->setDescriptionId(StringIDs::CurseOfVanishing);
 }
 
 int VanishingCurseEnchantment::getMaxLevel() {

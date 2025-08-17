@@ -290,6 +290,8 @@ public:
     virtual void setUsingItemFlag(bool);
     virtual int getFireImmuneTicks();
 
+    static void fjDebugCheckSmallIdLeaks();
+
     Vec3 getPos(float);
     bool isType(eINSTANCEOF);
     void setSharedFlag(int, bool);
