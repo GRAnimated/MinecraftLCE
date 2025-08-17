@@ -1,20 +1,34 @@
 #pragma once
 
 #include "net/minecraft/world/ArrayWithLength.h"
+#include "net/minecraft/world/Random.h"
 #include "net/minecraft/world/level/chunk/ChunkGenerator.h"
 #include "net/minecraft/world/level/levelgen/CustomizableSourceSettings.h"
 #include "net/minecraft/world/level/levelgen/GenericOverworldLevelSource.h"
+
+#include "types.h"
 
 class Biome;
 class ChunkPrimer;
 class SuperflatConfig;
 class LevelType;
 class BlockState;
+class LargeCaveFeature;
 class LargeFeature;
+class PerlinNoise;
+class PerlinSimplexNoise;
+class StrongholdFeature;
+class VillageFeature;
+class MineShaftFeature;
+class RandomScatteredLargeFeature;
+class CanyonFeature;
+class OceanMonumentFeature;
+class WoodlandMansionFeature;
 
 class OverworldLevelSource : public ChunkGenerator, public GenericOverworldLevelSource {
 public:
-    OverworldLevelSource(Level*, long long, bool, SuperflatConfig*);
+    OverworldLevelSource(Level* level, long long seed, bool generateStructures,
+                         SuperflatConfig* sourceSettings);
     ~OverworldLevelSource() override;
     LevelChunk* createChunk(int, int) override;
     void postProcess(int, int) override;
@@ -28,24 +42,33 @@ public:
     void getHeights(int, int, int, arrayWithLength<Biome*>&, arrayWithLength<double>&);
     void buildSurfaces(int, int, ChunkPrimer*, arrayWithLength<Biome*>);
 
-    char unk[0x90 - 0x8];
+    Random mRandom;
+    Random mRandom2;
+    PerlinNoise* mMinLimitPerlinNoise;
+    PerlinNoise* mMaxLimitPerlinNoise;
+    PerlinNoise* mMainNoise;
+    PerlinSimplexNoise* mSurfaceNoise;
+    PerlinNoise* field_68;
+    PerlinNoise* mDepthNoise;
+    void* qword_78;
+    void* qword_80;
+    PerlinNoise* field_88;
     Level* mLevel;
-    char byte_98;
-    LevelType* qword_a0;
+    bool mShouldGenerateStructures;
+    LevelType* mGeneratorType;
     float float_a8;
     char gap_AC[100];
-    CustomizableSourceSettings mSourceSettings;
-    const BlockState* field_118;
-    void* qword_120;
-    char gap_128[8];
-    LargeFeature* mCaveFeature;
-    void* field_138;
-    void* field_140;
-    void* field_148;
-    void* field_150;
-    LargeFeature* mRavineFeature;
-    void* field_160;
-    void* field_168;
-    void* field_170;
-    void* field_178;
+    CustomizableSourceSettings* mSourceSettings;
+    const BlockState* mOceanBlock;
+    arrayWithLength<float> qword_120;
+    LargeCaveFeature* mCaveFeature;
+    StrongholdFeature* mStrongholdFeature;
+    VillageFeature* mVillageFeature;
+    MineShaftFeature* mMineshaftFeature;
+    RandomScatteredLargeFeature* mRandomScatteredLargeFeature;
+    CanyonFeature* mCanyonFeature;
+    OceanMonumentFeature* mOceanMonumentFeature;
+    WoodlandMansionFeature* mWoodlandMansionFeature;
 };
+
+ASSERT_SIZEOF(OverworldLevelSource, 0x170)

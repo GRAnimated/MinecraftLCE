@@ -9,7 +9,7 @@ class Level;
 
 class ChunkGenerator {
 public:
-    ChunkGenerator();
+    ChunkGenerator() {}
     virtual ~ChunkGenerator();
     virtual LevelChunk* createChunk(int, int) = 0;
     virtual void postProcess(int, int) = 0;
@@ -21,4 +21,9 @@ public:
     virtual void lightChunk(LevelChunk*);
 
     static bool inPostProcessStep;
+
+    bool mIsClassicMoat;
+    bool mIsSmallMoat;
+    bool mIsMediumMoat;
+    int mXZSize2;
 };
