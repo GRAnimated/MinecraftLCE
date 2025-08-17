@@ -20,6 +20,8 @@ const std::wstring _toString(T type) {
     return ss.str();
 }
 
+std::wstring trimString(const std::wstring &str);
+
 class System {
 public:
     enum ETimeGranularity { MILLISECONDS, MICROSECONDS, NANOSECONDS };

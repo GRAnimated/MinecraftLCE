@@ -43,6 +43,8 @@ public:
     virtual void GetTMSXUIDsFileRead();
     virtual void GetFileFromTPD(eTPDFileType, unsigned char*, unsigned int, unsigned char**, unsigned int*);
 
+    unsigned int GetTMSAction(int);
+
     int GetGameHostOption(unsigned int, eGameHostOption option);
     int GetGameHostOption(eGameHostOption option);
     bool GetChangingSessionType();
@@ -63,12 +65,15 @@ public:
     EMiniGameId GetFirstMiniGameType();
     bool IsAppPaused();
     void SetAction(int, eXuiAction, void*);
+    void setLevelGenerationOptions(LevelGenerationOptions *options);
 
     static int DefaultOptionsCallback(void*, C4JStorage::PROFILESETTINGS*, int);
     static int OptionsDataCallback(void*, int, unsigned short, C4JStorage::eOptionsCallback);
     static void SignInChangeCallback(void*, bool, unsigned int);
     static void ProfileReadErrorCallback(void*);
     static void UpsellReturnedCallback(void*, eUpsellType, eUpsellResponse, int);
+
+    bool getSomething(); // dunno
 
     // note to self: vftable pushes everything over by 8 inside decompiler view
     unsigned char padding[312];
