@@ -32,22 +32,22 @@ UIScene_MainMenu::UIScene_MainMenu(int a1, void* a2, UILayer* layer) : UIScene(a
     this->_530 = 0;
     this->_4e8 = false;
 
-    this->mButtons[0].init(UIString(0xfe3af6d9), 0);
-    this->mButtons[1].init(UIString(0x3c6fa355), 1);
-    this->mButtons[2].init(UIString(0x15087ad6), 2);
-    this->mButtons[3].init(UIString(0x31dacd58), 3);
-    this->mButtons[4].init(UIString(0x2b1e9f0e), 4);
+    this->mButtons[0].init(UIString(StringIDs::PlayGame), 0);
+    this->mButtons[1].init(UIString(StringIDs::MiniGames), 1);
+    this->mButtons[2].init(UIString(StringIDs::Leaderboards), 2);
+    this->mButtons[3].init(UIString(StringIDs::Achievements), 3);
+    this->mButtons[4].init(UIString(StringIDs::HelpOptions), 4);
 
     if (CProfile::sInstance->IsFullVersion()) {
         this->mShowUnlockFullGame = false;
-        this->mButtons[5].init(UIString(StringIDs::MainMenu::MinecraftStore), 5);  // show Minecraft Store
+        this->mButtons[5].init(UIString(StringIDs::MinecraftStore), 5);  // show Minecraft Store
     } else {
         this->mShowUnlockFullGame = true;
-        this->mButtons[5].init(UIString(StringIDs::MainMenu::UnlockFullGame), 5);  // show Unlock full game
+        this->mButtons[5].init(UIString(StringIDs::UnlockFullGame_2), 5);  // show Unlock full game
     }
 
-    this->mButtons[6].init(UIString(0x2686c8e5), 6);
-    this->mButtons[7].init(UIString(0x64b1492f), 7);
+    this->mButtons[6].init(UIString(StringIDs::ExitGame), 6);
+    this->mButtons[7].init(UIString(StringIDs::DownloadLatestVersionOfMinecraftForFree), 7);
 
     this->handleReload();
     this->doHorizontalResizeCheck();
@@ -122,7 +122,7 @@ bool UIScene_MainMenu::mapElementsAndNames() {
 
 void UIScene_MainMenu::handleUnlockFullVersion() {
     // sets the button title to Minecraft Store
-    mButtons[5].setLabel(UIString(StringIDs::MainMenu::MinecraftStore), true, false);
+    mButtons[5].setLabel(UIString(StringIDs::MinecraftStore), true, false);
 }
 
 void UIScene_MainMenu::customDraw(const char* string, fuiRect* rect) {
@@ -161,7 +161,7 @@ void UIScene_MainMenu::tick() {
     }
     if (this->mShowUnlockFullGame != false && CProfile::sInstance->IsFullVersion()) {
         this->mShowUnlockFullGame = false;
-        mButtons[5].setLabel(UIString(StringIDs::MainMenu::MinecraftStore), true, false);
+        mButtons[5].setLabel(UIString(StringIDs::MinecraftStore), true, false);
     }
     // insert atomic bomb here
 }

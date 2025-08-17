@@ -6,6 +6,7 @@
 #include "net/minecraft/client/Minecraft.h"
 #include "net/minecraft/client/resources/L10N.h"
 #include "net/minecraft/client/ui/ConsoleUIController.h"
+#include "net/minecraft/client/ui/StringIDs.h"
 #include "net/minecraft/client/ui/scene/UILayer.h"
 #include "net/minecraft/client/ui/scene/UIScene.h"
 #include "net/minecraft/client/ui/scene/control/UIControl.h"
@@ -14,10 +15,21 @@
 #include <string>
 
 unsigned int dword_7101107860[30]{
-    0xAD78575,  0x4E09B239, 0xA1BFE39A, 0xFE7EBCC1, 0x665939C3, 0xF451CA88, 0x1A5444F1, 0x5D603CEB,
-    0xA89BCC3A, 0x9BFE8C42, 0xF8FE2A8A, 0xAE9EC2E0, 0xDC9BF801, 0x95EA9872, 0x6C8ABC81, 0x55175D0C,
-    0xC5E8DA45, 0x68B19531, 0xCCD04093, 0xB54D580,  0x74C4B1E7, 0xB9C0E92,  0xC48A1DCF, 0x97D17F3B,
-    0xD554B135, 0x7FF49BC,  0x90785456, 0x670457B6, 0x3FE78B47, 0xF3D9C148,
+    StringIDs::WhatSNew,        StringIDs::Basics,
+    StringIDs::Multiplayer,     StringIDs::Hud,
+    StringIDs::BattleMiniGame,  StringIDs::TumbleMiniGame,
+    StringIDs::GlideMiniGame_1, StringIDs::CreativeMode,
+    StringIDs::Inventory_1,     StringIDs::Chests,
+    StringIDs::Crafting_1,      StringIDs::Furnace_1,
+    StringIDs::Dispenser_1,     StringIDs::Brewing_2,
+    StringIDs::Enchantment,     StringIDs::Anvil,
+    StringIDs::FarmingAnimals,  StringIDs::BreedingAnimals,
+    StringIDs::Trading,         StringIDs::Horses,
+    StringIDs::Beacons,         StringIDs::Fireworks,
+    StringIDs::Banners,         StringIDs::Hoppers,
+    StringIDs::Droppers,        StringIDs::NetherPortal,
+    StringIDs::TheEnd_2,        StringIDs::EndCities,
+    StringIDs::Elytra,          StringIDs::HostAndPlayerOptions,
 };
 
 int dword_71011078D8[30]{0,    1,    2,    3,    4,    5,    6,    7,    8,    9,
@@ -47,8 +59,8 @@ std::wstring UIScene_HowToPlayMenu::getMoviePath() {
 }
 
 void UIScene_HowToPlayMenu::updateTooltips() {
-    gConsoleUIController.SetTooltips(this->mPadID, -1922882579, 1332465502, -1, -1, -1, -1, -1, -1, -1, -1,
-                                     -1, -1, -1, -1, -1, -1, 0, 0);
+    gConsoleUIController.SetTooltips(this->mPadID, StringIDs::Select, StringIDs::Back_1, -1, -1, -1, -1, -1,
+                                     -1, -1, -1, -1, -1, -1, -1, -1, -1, 0, 0);
 }
 
 void UIScene_HowToPlayMenu::updateComponents() {

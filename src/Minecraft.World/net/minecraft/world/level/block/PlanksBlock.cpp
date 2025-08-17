@@ -1,6 +1,7 @@
 #include "net/minecraft/world/level/block/PlanksBlock.h"
 
 #include "net/minecraft/client/renderer/texture/IconRegister.h"
+#include "net/minecraft/client/ui/StringIDs.h"
 #include "net/minecraft/core/Direction.h"
 #include "net/minecraft/world/level/block/Block.h"
 #include "net/minecraft/world/level/block/state/BlockState.h"
@@ -24,11 +25,11 @@ PlanksBlock::PlanksBlock() : Block(Material::WOOD) {
 }
 
 void PlanksBlock::blockStaticCtor() {
-    Variant::OAK = new Variant(0, L"oak", 0x13035FA5, MaterialColor::WOOD);
-    Variant::SPRUCE = new Variant(1, L"spruce", 0x7A4DF272, MaterialColor::PODZOL);
-    Variant::BIRCH = new Variant(2, L"birch", 0x9BC6104A, MaterialColor::SAND);
-    Variant::JUNGLE = new Variant(3, L"jungle", 0x8CE369FC, MaterialColor::DIRT);
-    Variant::ACACIA = new Variant(4, L"acacia", 0x674A2380, MaterialColor::COLOR_ORANGE);
+    Variant::OAK = new Variant(0, L"oak", StringIDs::OakPlanks, MaterialColor::WOOD);
+    Variant::SPRUCE = new Variant(1, L"spruce", StringIDs::SprucePlanks, MaterialColor::PODZOL);
+    Variant::BIRCH = new Variant(2, L"birch", StringIDs::BirchPlanks, MaterialColor::SAND);
+    Variant::JUNGLE = new Variant(3, L"jungle", StringIDs::JunglePlanks, MaterialColor::DIRT);
+    Variant::ACACIA = new Variant(4, L"acacia", StringIDs::AcaciaPlanks, MaterialColor::COLOR_ORANGE);
     Variant::DARK_OAK = new Variant(5, L"dark_oak", 0x458BC59, MaterialColor::COLOR_BROWN);
 
     PlanksBlock::Variant::VARIANTS[0] = PlanksBlock::Variant::OAK;
@@ -69,7 +70,9 @@ TextureAtlasSprite* PlanksBlock::getTexture(const Direction* direction, const Bl
     return this->mVariantsTextures[state->getValue<Variant*>(VARIANT)->getData()];
 }
 
-unsigned int planks_block_desc_ids[6] = {0x13035FA5, 0x7A4DF272, 0x9BC6104A, 0x8CE369FC, 0x674A2380};
+unsigned int planks_block_desc_ids[6]
+    = {StringIDs::OakPlanks, StringIDs::SprucePlanks, StringIDs::BirchPlanks, StringIDs::JunglePlanks,
+       StringIDs::AcaciaPlanks};
 unsigned int PlanksBlock::getDescriptionId(int data) {
     return planks_block_desc_ids[data > (sizeof(planks_block_desc_ids) / sizeof(int)) - 1 ?
                                      0 :

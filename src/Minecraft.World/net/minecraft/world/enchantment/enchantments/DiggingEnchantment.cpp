@@ -1,5 +1,6 @@
 #include "net/minecraft/world/enchantment/enchantments/DiggingEnchantment.h"
 
+#include "net/minecraft/client/ui/StringIDs.h"
 #include "net/minecraft/world/enchantment/categories/DiggerCategory.h"
 #include "net/minecraft/world/item/ItemInstance.h"
 #include "net/minecraft/world/item/Items.h"
@@ -9,7 +10,7 @@
 DiggingEnchantment::DiggingEnchantment(const Rarity* rarity,
                                        arrayWithLength<const EquipmentSlot*> equipmentSlots)
     : Enchantment(rarity, DiggerCategory::sDiggerCategory, equipmentSlots) {
-    this->setDescriptionId(0x7C8A12EF);
+    this->setDescriptionId(StringIDs::Efficiency);
 }
 
 int DiggingEnchantment::getMaxLevel() {

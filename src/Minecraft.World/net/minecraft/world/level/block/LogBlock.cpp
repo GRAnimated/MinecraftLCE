@@ -1,6 +1,7 @@
 #include "net/minecraft/world/level/block/LogBlock.h"
 
 #include "net/minecraft/client/renderer/texture/IconRegister.h"
+#include "net/minecraft/client/ui/StringIDs.h"
 #include "net/minecraft/core/BlockPos.h"
 #include "net/minecraft/core/BlockPosIterator.h"
 #include "net/minecraft/core/Direction.h"
@@ -19,7 +20,8 @@ LogBlock::LogAxis* NONE = new LogBlock::LogAxis(L"none");
 
 LogBlock::LogAxis* VALUES[4] = {X, Y, Z, NONE};
 
-const unsigned int LogBlock::DESCRIPTION_IDS[6] = {0xB851C01, 0x7D86FA86, 0xBB86EB26, 0x635D7533, 0xF11C45A4};
+const unsigned int LogBlock::DESCRIPTION_IDS[6]
+    = {0xB851C01, StringIDs::SpruceWood, StringIDs::BirchWood, StringIDs::JungleWood, StringIDs::AcaciaWood};
 
 LogBlock::LogBlock() : RotatedPillarBlock(Material::WOOD) {
     this->setDestroyTime(2.0f);

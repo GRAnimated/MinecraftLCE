@@ -1,6 +1,7 @@
 #include "net/minecraft/world/item/CoalItem.h"
 
 #include "net/minecraft/client/renderer/texture/IconRegister.h"
+#include "net/minecraft/client/ui/StringIDs.h"
 #include "net/minecraft/world/item/ItemInstance.h"
 
 CoalItem::CoalItem() {
@@ -10,9 +11,9 @@ CoalItem::CoalItem() {
 
 int CoalItem::getDescriptionId(not_null_ptr<ItemInstance> itemInstance) {
     if (itemInstance->getAuxValue() == 1)
-        return 0xF0997BAF;
+        return StringIDs::Charcoal;
     else
-        return 0x1EC60CB7;
+        return StringIDs::Coal;
 }
 
 void CoalItem::registerIcons(IconRegister* iconRegister) {
