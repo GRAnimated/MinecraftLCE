@@ -32,8 +32,8 @@ public:
     virtual void FriendRoomManagerGetCount() = 0;
     virtual void FriendRoomManagerGetRoomInfo(int, NQRNetworkManager::SessionSearchResult*) = 0;
     virtual void JoinRoom(NQRNetworkManager::SessionSearchResult*, int) = 0;
-    virtual void JoinRoom(unsigned int, int, NQRNetworkManager::PresenceSyncInfo const*) = 0;
-    virtual void JoinRoom(int, nn::friends::FriendPresence const*) = 0;
+    virtual void JoinRoom(unsigned int, int, const NQRNetworkManager::PresenceSyncInfo*) = 0;
+    virtual void JoinRoom(int, const nn::friends::FriendPresence*) = 0;
     virtual void FriendPresenceUpdatedRoomList() = 0;
     virtual void GetFriendRoomSearchResults(int*) = 0;
     virtual void GetExtDataForRoom(unsigned int, void*, void (*)(bool, void*), void*) = 0;
@@ -56,8 +56,8 @@ public:
     virtual void GetHostPlayer() = 0;
     virtual void SetPresenceDataStartHostingGame() = 0;
     virtual void GetJoiningReadyPercentage() = 0;
-    virtual void LocalDataSend(NQRNetworkPlayer*, NQRNetworkPlayer*, void const*, unsigned int) = 0;
-    virtual void RemoteDataSend(NQRNetworkPlayer*, NQRNetworkPlayer*, void const*, unsigned int) = 0;
+    virtual void LocalDataSend(NQRNetworkPlayer*, NQRNetworkPlayer*, const void*, unsigned int) = 0;
+    virtual void RemoteDataSend(NQRNetworkPlayer*, NQRNetworkPlayer*, const void*, unsigned int) = 0;
     virtual void GetSessionIndex(NQRNetworkPlayer*) = 0;
     virtual void TryToConnectOnline(int (*)(void*, bool, int), void*, bool) = 0;
     virtual void isAdhocConnected() = 0;

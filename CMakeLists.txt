@@ -38,89 +38,48 @@ set(NN_SDK_PATCH 1)
 set(NN_SDK_TYPE "Release")
 
 target_include_directories(mcswitch PRIVATE src)
+target_include_directories(mcswitch PRIVATE src/Minecraft.Client)
+target_include_directories(mcswitch PRIVATE src/Minecraft.World)
+target_include_directories(mcswitch PRIVATE src/4JLibraries_Source)
+target_include_directories(mcswitch PRIVATE src/PlatformLibraries_Source)
 target_include_directories(mcswitch PUBLIC lib/nnheaders/include)
 
 target_include_directories(mcswitch PUBLIC lib/stb_image)
 target_include_directories(mcswitch PUBLIC lib/libpng)
+target_include_directories(mcswitch PUBLIC lib/zlib)
 target_include_directories(mcswitch PUBLIC lib)
 
 target_compile_definitions(mcswitch PRIVATE NON_MATCHING)
+target_compile_definitions(mcswitch PRIVATE MATCHING_HACK)
 target_compile_options(mcswitch PRIVATE -fno-exceptions)
 target_compile_options(mcswitch PRIVATE -fno-strict-aliasing)
 target_compile_options(mcswitch PRIVATE -fsigned-char)
 target_compile_options(mcswitch PRIVATE -Wall -Wextra -Wdeprecated)
-target_compile_options(mcswitch PRIVATE -Wno-unused-parameter -Wno-unused-private-field)
-target_compile_options(mcswitch PRIVATE -Wno-invalid-offsetof)
 target_compile_options(mcswitch PRIVATE -Wextra-semi)
 target_compile_options(mcswitch PRIVATE -fno-inline -fno-inline-functions)
 target_compile_options(mcswitch PRIVATE -fno-builtin)
 
+# Disable some warnings that are unavoidable
+target_compile_options(mcswitch PRIVATE -Wno-unused-parameter -Wno-unused-private-field)
+target_compile_options(mcswitch PRIVATE -Wno-invalid-offsetof)
+# target_compile_options(mcswitch PRIVATE -Wno-delete-incomplete) # clangd warns about this one in MultiPlayerLevel.cpp
+target_compile_options(mcswitch PRIVATE -Wno-sign-compare)
+
 add_definitions(-D SAFETY_CHECKS)
 
-# Add zlib and libpng as subdirectories
-#add_subdirectory(lib/zlib)
-#add_subdirectory(lib/libpng)
+add_subdirectory(lib/zlib)
+target_include_directories(mcswitch PRIVATE ${CMAKE_CURRENT_BINARY_DIR}/lib/zlib) # for zconf.h
+target_link_libraries(mcswitch PRIVATE zlibstatic)
 
-# Include necessary directories from submodules
-#include_directories("${PROJECT_SOURCE_DIR}/lib/zlib" "${PROJECT_SOURCE_DIR}/lib/libpng")
-
-# Link with zlib and libpng libraries statically
-#target_link_libraries(mcswitch PRIVATE zlibstatic png)
-
-
-
-
-
-
-
-
-## include(FetchContent)
-## 
-## # zlib
-## FetchContent_Declare(
-##   zlib
-##   GIT_REPOSITORY https://github.com/madler/zlib.git
-##   GIT_TAG        9712272c78b9d9c93746d9c8e156a3728c65ca72
-## )
-## FetchContent_Populate(zlib)
-## list(FILTER zlib_POPULATED_INCLUDE_DIRS EXCLUDE REGEX ".*/zconf\\.h$")
-## 
-## # Specify the ZLIB_LIBRARY variable
-## set(ZLIB_LIBRARY ${zlib_POPULATED_LIBRARIES})
-## 
-## # libpng
-## FetchContent_Declare(
-##   libpng
-##   GIT_REPOSITORY https://github.com/pnggroup/libpng.git
-##   GIT_TAG        809355b4aa84ae06f9a4e063c7e9d22fd7930170
-## )
-## FetchContent_Populate(libpng)
-## 
-## # stb_image.h
-## FetchContent_Declare(
-##   stb_image
-##   GIT_REPOSITORY https://github.com/nothings/stb.git
-##   GIT_TAG        ec9db6f84b39988a6a3375058e97598fe63fca4e
-## )
-## FetchContent_MakeAvailable(stb_image)
-#
-## target_link_libraries(mcswitch PRIVATE zlib libpng16::libpng16)
-#
-## libpng configurable options
-#set(PNG_SHARED ON CACHE BOOL "" FORCE)
-#set(PNG_STATIC ON CACHE BOOL "" FORCE)
-#set(PNG_EXECUTABLES OFF CACHE BOOL "" FORCE) # we only want lib
-#set(PNG_TESTS OFF CACHE BOOL "" FORCE) # we only want lib
-#set(SKIP_INSTALL_ALL OFF CACHE BOOL "" FORCE) # we only want lib
-#
-#include_directories(${PROJECT_SOURCE_DIR}/lib/libpng)
-#
-## Find ZLIB using ZLIB_ROOT variable
-#find_package(ZLIB REQUIRED)
-#
-#if(ZLIB_FOUND)
-#    include_directories(${ZLIB_INCLUDE_DIRS})
-#endif()
-#
-#add_subdirectory(lib/zlib)
-#add_subdirectory(lib/libpng)
+add_subdirectory(lib/libpng)
+target_compile_options(libpng PRIVATE
+  -fno-inline
+  -fno-inline-functions
+  -fno-builtin
+)
+target_link_options(mcswitch PRIVATE
+    "SHELL:-Wl,--whole-archive"
+    "$<TARGET_FILE:libpng>"
+    "SHELL:-Wl,--no-whole-archive"
+)
+target_link_libraries(mcswitch PRIVATE libpng)

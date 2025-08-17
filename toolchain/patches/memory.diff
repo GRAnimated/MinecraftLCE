@@ -1,0 +1,30 @@
+--- memory
++++ memory
+@@ -1,3 +1,9 @@
++/*
++Changes made:
++_LIBCPP_INLINE_VISIBILITY removed from std::shared_ptr operator==
++Usage of operator== removed from std::shared_ptr operator!= as a workaround for functions that do inline the == check
++*/
++
+ // -*- C++ -*-
+ //===-------------------------- memory ------------------------------------===//
+ //
+@@ -4891,7 +4897,7 @@
+ #endif  // _LIBCPP_HAS_NO_VARIADICS
+ 
+ template<class _Tp, class _Up>
+-inline _LIBCPP_INLINE_VISIBILITY
++inline /*_LIBCPP_INLINE_VISIBILITY*/
+ bool
+ operator==(const shared_ptr<_Tp>& __x, const shared_ptr<_Up>& __y) _NOEXCEPT
+ {
+@@ -4903,7 +4909,7 @@
+ bool
+ operator!=(const shared_ptr<_Tp>& __x, const shared_ptr<_Up>& __y) _NOEXCEPT
+ {
+-    return !(__x == __y);
++    return !(__x.get() == __y.get());
+ }
+ 
+ template<class _Tp, class _Up>

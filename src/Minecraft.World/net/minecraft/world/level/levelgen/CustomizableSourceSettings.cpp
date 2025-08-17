@@ -1,0 +1,179 @@
+#include "net/minecraft/world/level/levelgen/CustomizableSourceSettings.h"
+
+CustomizableSourceSettings::Builder::Builder() {
+    setDefaults();
+}
+
+// NON_MATCHING: this is needed to be moved into header rather than here, then it will match
+void CustomizableSourceSettings::Builder::setDefaults() {
+    waterLakeChance = 4;
+    lavaLakeChance = 80;
+    fixedBiome = -1;
+    biomeSize = 4;
+    coordinateScale = 684.41;
+    heightScale = 684.41;
+    lowerLimitScale = 512.0;
+    upperLimitScale = 512.0;
+    depthNoiseScaleX = 200.0;
+    depthNoiseScaleZ = 200.0;
+    riverSize = 4;
+    dirtSize = 33;
+    dirtCount = 10;
+    dirtMinHeight = 0;
+    graniteCount = 10;
+    graniteMinHeight = 0;
+    dioriteCount = 10;
+    dioriteMinHeight = 0;
+    andesiteCount = 10;
+    andesiteMinHeight = 0;
+    depthNoiseScaleExponent = 0.5;
+    mainNoiseScaleX = 80.0;
+    andesiteMaxHeight = 80;
+    coalSize = 17;
+    mainNoiseScaleY = 160.0;
+    mainNoiseScaleZ = 80.0;
+    coalCount = 20;
+    coalMinHeight = 0;
+    ironCount = 20;
+    ironMinHeight = 0;
+    baseSize = 8.5;
+    stretchY = 12.0;
+    dirtMaxHeight = 128;
+    gravelSize = 33;
+    gravelMaxHeight = 128;
+    graniteSize = 33;
+    dungeonChance = 8;
+    gravelCount = 8;
+    gravelMinHeight = 0;
+    ironMaxHeight = 64;
+    goldSize = 9;
+    redstoneCount = 8;
+    redstoneMinHeight = 0;
+    biomeDepthWeight = 1.0;
+    biomeDepthOffset = 0.0;
+    biomeScaleWeight = 1.0;
+    biomeScaleOffset = 0.0;
+    graniteMaxHeight = 80;
+    dioriteSize = 33;
+    dioriteMaxHeight = 80;
+    andesiteSize = 33;
+    goldCount = 2;
+    goldMinHeight = 0;
+    seaLevel = 63;
+    redstoneMaxHeight = 16;
+    diamondSize = 8;
+    useCaves = 1;
+    useDungeons = 1;
+    byte_4C = 1;
+    byte_4D = 1;
+    byte_4E = 1;
+    byte_4F = 1;
+    byte_50 = 1;
+    byte_51 = 1;
+    byte_52 = 1;
+    useWaterLakes = 1;
+    useLavaLakes = 1;
+    useLavaOceans = 0;
+    coalMaxHeight = 128;
+    ironSize = 9;
+    goldMaxHeight = 32;
+    redstoneSize = 8;
+    diamondCount = 1;
+    diamondMinHeight = 0;
+    diamondMaxHeight = 16;
+    lapisSize = 7;
+    lapisCount = 1;
+    lapisCenterHeight = 16;
+    lapisSpread = 16;
+}
+
+CustomizableSourceSettings::Builder*
+CustomizableSourceSettings::Builder::fromString(SuperflatConfig* config) {
+    return new Builder();
+}
+
+CustomizableSourceSettings* CustomizableSourceSettings::Builder::build() {
+    return new CustomizableSourceSettings(this);
+}
+
+CustomizableSourceSettings::CustomizableSourceSettings(CustomizableSourceSettings::Builder* builder) {
+    this->coordinateScale = builder->coordinateScale;
+    this->heightScale = builder->heightScale;
+    this->lowerLimitScale = builder->lowerLimitScale;
+    this->upperLimitScale = builder->upperLimitScale;
+    this->depthNoiseScaleX = builder->depthNoiseScaleX;
+    this->depthNoiseScaleZ = builder->depthNoiseScaleZ;
+    this->depthNoiseScaleExponent = builder->depthNoiseScaleExponent;
+    this->mainNoiseScaleX = builder->mainNoiseScaleX;
+    this->mainNoiseScaleY = builder->mainNoiseScaleY;
+    this->mainNoiseScaleZ = builder->mainNoiseScaleZ;
+    this->baseSize = builder->baseSize;
+    this->stretchY = builder->stretchY;
+    this->biomeDepthWeight = builder->biomeDepthWeight;
+    this->biomeDepthOffset = builder->biomeDepthOffset;
+    this->biomeScaleWeight = builder->biomeScaleWeight;
+    this->biomeScaleOffset = builder->biomeScaleOffset;
+    this->seaLevel = builder->seaLevel;
+    this->useCaves = builder->useCaves;
+    this->useDungeons = builder->useDungeons;
+    this->dungeonChance = builder->dungeonChance;
+    this->byte_4C = builder->byte_4C;
+    this->byte_4D = builder->byte_4D;
+    this->byte_4E = builder->byte_4E;
+    this->byte_4F = builder->byte_4F;
+    this->byte_50 = builder->byte_50;
+    this->byte_51 = builder->byte_51;
+    this->byte_52 = builder->byte_52;
+    this->useWaterLakes = builder->useWaterLakes;
+    this->waterLakeChance = builder->waterLakeChance;
+    this->useLavaLakes = builder->useLavaLakes;
+    this->lavaLakeChance = builder->lavaLakeChance;
+    this->useLavaOceans = builder->useLavaOceans;
+    this->fixedBiome = builder->fixedBiome;
+    this->biomeSize = builder->biomeSize;
+    this->riverSize = builder->riverSize;
+    this->dirtSize = builder->dirtSize;
+    this->dirtCount = builder->dirtCount;
+    this->dirtMinHeight = builder->dirtMinHeight;
+    this->dirtMaxHeight = builder->dirtMaxHeight;
+    this->gravelSize = builder->gravelSize;
+    this->gravelCount = builder->gravelCount;
+    this->gravelMinHeight = builder->gravelMinHeight;
+    this->gravelMaxHeight = builder->gravelMaxHeight;
+    this->graniteSize = builder->graniteSize;
+    this->graniteCount = builder->graniteCount;
+    this->graniteMinHeight = builder->graniteMinHeight;
+    this->graniteMaxHeight = builder->graniteMaxHeight;
+    this->dioriteSize = builder->dioriteSize;
+    this->dioriteCount = builder->dioriteCount;
+    this->dioriteMinHeight = builder->dioriteMinHeight;
+    this->dioriteMaxHeight = builder->dioriteMaxHeight;
+    this->andesiteSize = builder->andesiteSize;
+    this->andesiteCount = builder->andesiteCount;
+    this->andesiteMinHeight = builder->andesiteMinHeight;
+    this->andesiteMaxHeight = builder->andesiteMaxHeight;
+    this->coalSize = builder->coalSize;
+    this->coalCount = builder->coalCount;
+    this->coalMinHeight = builder->coalMinHeight;
+    this->coalMaxHeight = builder->coalMaxHeight;
+    this->ironSize = builder->ironSize;
+    this->ironCount = builder->ironCount;
+    this->ironMinHeight = builder->ironMinHeight;
+    this->ironMaxHeight = builder->ironMaxHeight;
+    this->goldSize = builder->goldSize;
+    this->goldCount = builder->goldCount;
+    this->goldMinHeight = builder->goldMinHeight;
+    this->goldMaxHeight = builder->goldMaxHeight;
+    this->redstoneSize = builder->redstoneSize;
+    this->redstoneCount = builder->redstoneCount;
+    this->redstoneMinHeight = builder->redstoneMinHeight;
+    this->redstoneMaxHeight = builder->redstoneMaxHeight;
+    this->diamondSize = builder->diamondSize;
+    this->diamondCount = builder->diamondCount;
+    this->diamondMinHeight = builder->diamondMinHeight;
+    this->diamondMaxHeight = builder->diamondMaxHeight;
+    this->lapisSize = builder->lapisSize;
+    this->lapisCount = builder->lapisCount;
+    this->lapisCenterHeight = builder->lapisCenterHeight;
+    this->lapisSpread = builder->lapisSpread;
+}

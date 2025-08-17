@@ -1,0 +1,114 @@
+// From https://github.com/encounter/objdiff/blob/main/objdiff-core/protos/report.proto
+
+syntax = "proto3";
+
+package objdiff.report;
+
+// Project progress report
+message Report {
+  // Overall progress info
+  Measures measures = 1;
+  // Units within this report
+  repeated ReportUnit units = 2;
+  // Report version
+  uint32 version = 3;
+  // Progress categories
+  repeated ReportCategory categories = 4;
+}
+
+// Progress info for a report or unit
+message Measures {
+  // Overall match percent, including partially matched functions and data
+  float fuzzy_match_percent = 1;
+  // Total size of code in bytes
+  uint64 total_code = 2;
+  // Fully matched code size in bytes
+  uint64 matched_code = 3;
+  // Fully matched code percent
+  float matched_code_percent = 4;
+  // Total size of data in bytes
+  uint64 total_data = 5;
+  // Fully matched data size in bytes
+  uint64 matched_data = 6;
+  // Fully matched data percent
+  float matched_data_percent = 7;
+  // Total number of functions
+  uint32 total_functions = 8;
+  // Fully matched functions
+  uint32 matched_functions = 9;
+  // Fully matched functions percent
+  float matched_functions_percent = 10;
+  // Completed (or "linked") code size in bytes
+  uint64 complete_code = 11;
+  // Completed (or "linked") code percent
+  float complete_code_percent = 12;
+  // Completed (or "linked") data size in bytes
+  uint64 complete_data = 13;
+  // Completed (or "linked") data percent
+  float complete_data_percent = 14;
+  // Total number of units
+  uint32 total_units = 15;
+  // Completed (or "linked") units
+  uint32 complete_units = 16;
+}
+
+message ReportCategory {
+  // The ID of the category
+  string id = 1;
+  // The name of the category
+  string name = 2;
+  // Progress info for this category
+  Measures measures = 3;
+}
+
+// A unit of the report (usually a translation unit)
+message ReportUnit {
+  // The name of the unit
+  string name = 1;
+  // Progress info for this unit
+  Measures measures = 2;
+  // Sections within this unit
+  repeated ReportItem sections = 3;
+  // Functions within this unit
+  repeated ReportItem functions = 4;
+  // Extra metadata for this unit
+  optional ReportUnitMetadata metadata = 5;
+}
+
+// Extra metadata for a unit
+message ReportUnitMetadata {
+  // Whether this unit is marked as complete (or "linked")
+  optional bool complete = 1;
+  // The name of the module this unit belongs to
+  optional string module_name = 2;
+  // The ID of the module this unit belongs to
+  optional uint32 module_id = 3;
+  // The path to the source file of this unit
+  optional string source_path = 4;
+  // Progress categories for this unit
+  repeated string progress_categories = 5;
+  // Whether this unit is automatically generated (not user-provided)
+  optional bool auto_generated = 6;
+}
+
+// A section or function within a unit
+message ReportItem {
+  // The name of the item
+  string name = 1;
+  // The size of the item in bytes
+  uint64 size = 2;
+  // The overall match percent for this item
+  float fuzzy_match_percent = 3;
+  // Extra metadata for this item
+  optional ReportItemMetadata metadata = 4;
+  // Address of the item (section-relative offset)
+  optional uint64 address = 5;
+}
+
+// Extra metadata for an item
+message ReportItemMetadata {
+  // The demangled name of the function
+  optional string demangled_name = 1;
+  // The virtual address of the function or section
+  optional uint64 virtual_address = 2;
+}

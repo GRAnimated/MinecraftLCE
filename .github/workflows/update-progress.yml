@@ -7,25 +7,34 @@ on:
 
 jobs:
   update-progress:
-    if: github.repository == 'GRAnimated/MinecraftLCE'
     runs-on: ubuntu-latest
-    
+    strategy:
+      fail-fast: false
+      matrix:
+        version: [1.12.1920.0]
+
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           submodules: true
 
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
-          python-version: '3.x'
+          python-version: '3.11'
 
       - name: Install dependencies
-        run: pip install capstone colorama cxxfilt pyelftools ansiwrap watchdog python-Levenshtein toml gitpython
-        
+        run: |
+          python -m pip install --upgrade pip
+          pip install protobuf capstone colorama cxxfilt pyelftools ansiwrap watchdog python-Levenshtein toml gitpython
+
       - name: Generate progress CSV
         run: python tools/common/progress.py -c > progress.csv
+
+      - name: Generate report
+        run: |
+          PYTHONPATH="${PYTHONPATH}:${{ github.workspace }}/tools" python .github/scripts/gen_report.py -o report.json
 
       - name: Checkout progress repository
         uses: actions/checkout@v3
@@ -36,6 +45,12 @@ jobs:
 
       - name: Copy CSV to progress repository
         run: cp progress.csv MinecraftLCE-docs/
+
+      - name: Upload report
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.version }}_report
+          path: report.json
 
       - name: Update repository description
         run: |
