@@ -188,7 +188,7 @@ void Minecraft::main() {
     // and these
     CMinecraftApp::StaticCtor();
     MiniGameDef::StaticCtor();
-    Minecraft::GetInstance()->mLobbyGameMode = MiniGameDef::GetCustomGameModeById(LOBBY, true);
+    Minecraft::GetInstance()->mLobbyGameMode = &MiniGameDef::GetCustomGameModeById(LOBBY, true);
     ClientPacketListener::staticCtor();
 }
 

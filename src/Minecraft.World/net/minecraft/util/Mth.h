@@ -7,6 +7,8 @@ class Random;
 // Meth
 class Mth {
 public:
+    static constexpr float PI = 3.1415926;
+
     static float* SIN;
 
     static float sin(float);

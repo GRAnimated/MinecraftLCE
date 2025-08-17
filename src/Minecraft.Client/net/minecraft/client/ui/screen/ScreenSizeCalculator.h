@@ -10,7 +10,6 @@ public:
     int getWidth();
     int getHeight();
 
-private:
     int mWidth;
     int mHeight;
     double mScaledWidth;
