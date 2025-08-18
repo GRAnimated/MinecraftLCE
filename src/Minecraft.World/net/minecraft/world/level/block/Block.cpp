@@ -1055,7 +1055,7 @@ void Block::staticCtor() {
     ConcretePowderBlock::blockStaticCtor();
     StainedHardenedClayBlock::staticCtor();
 
-    Block* airBlock = (new AirBlock())->setNameAndDescriptionId(0xFFFFFFFFLL, 0xFFFFFFFFLL);
+    Block* airBlock = (new AirBlock())->setNameAndDescriptionId(0xFFFFFFFF, 0xFFFFFFFF);
     Block::registerBlock(0, *Blocks::AIR_RSRC, airBlock);
 
     // Size: 0xA8u
@@ -2168,7 +2168,7 @@ void Block::staticCtor() {
                                 ->setDestroyTime(0.0)
                                 ->setSoundType(SoundType::WOOD)
                                 ->sendBlockData(15)
-                                ->setNameAndDescriptionId(StringIDs::MelonStem, 0xFFFFFFFFLL)
+                                ->setNameAndDescriptionId(StringIDs::MelonStem, 0xFFFFFFFF)
                                 ->disableMipmap();
     Block::registerBlock(105, L"melon_stem", melonStemBlock);
 
@@ -3308,7 +3308,7 @@ void Block::staticCtor() {
     // Size: 0xA8u
     Block* structureVoidBlock = (new StructureVoidBlock())
                                     ->setIconName(L"structure_block")
-                                    ->setNameAndDescriptionId(0xFFFFFFFFLL, 0xFFFFFFFFLL);
+                                    ->setNameAndDescriptionId(0xFFFFFFFF, 0xFFFFFFFF);
     Block::registerBlock(217, L"structure_void", structureVoidBlock);
 
     // Size: 0xD0u
