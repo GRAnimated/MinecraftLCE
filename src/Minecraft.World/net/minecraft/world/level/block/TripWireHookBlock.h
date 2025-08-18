@@ -4,5 +4,7 @@
 
 class TripWireHookBlock : public Block {
 public:
+    TripWireHookBlock();
+
     static void blockStaticCtor();
 };

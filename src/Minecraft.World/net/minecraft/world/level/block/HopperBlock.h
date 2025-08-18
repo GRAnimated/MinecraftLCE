@@ -4,5 +4,7 @@
 
 class HopperBlock : public Block {
 public:
+    HopperBlock();
+
     static void blockStaticCtor();
 };

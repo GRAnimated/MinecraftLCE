@@ -4,5 +4,7 @@
 
 class WallBlock : public Block {
 public:
+    WallBlock(Block*);
+
     static void blockStaticCtor();
 };

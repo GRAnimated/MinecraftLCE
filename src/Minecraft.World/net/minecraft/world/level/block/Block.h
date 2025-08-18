@@ -71,7 +71,7 @@ public:
     virtual const BlockState* mirror(const BlockState* state, Mirror* mirror);
     virtual ~Block();
     virtual void DerivedInit();
-    virtual void sendBlockData(uchar data);
+    virtual Block* sendBlockData(uchar data);
     virtual Block* setSoundType(const SoundType* soundType);
     virtual Block* setLightBlock(int lightBlock);
     virtual Block* setLightEmission(float lightEmission);
@@ -226,7 +226,7 @@ public:
     static bool isExceptionBlockForAttachingPlusPiston(Block*);
 
     static void staticCtor();
-    void setBaseItemTypeAndMaterial(int, int);
+    Block* setBaseItemTypeAndMaterial(int, int);
 
     bool isBlockEntity() const {
         return mSilkTouchable;

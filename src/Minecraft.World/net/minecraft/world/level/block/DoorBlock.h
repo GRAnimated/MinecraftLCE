@@ -4,5 +4,7 @@
 
 class DoorBlock : public Block {
 public:
+    DoorBlock(Material*);
+
     static void blockStaticCtor();
 };

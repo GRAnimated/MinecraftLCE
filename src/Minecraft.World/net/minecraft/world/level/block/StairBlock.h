@@ -4,5 +4,7 @@
 
 class StairBlock : public Block {
 public:
+    StairBlock(const BlockState* state);
+
     static void blockStaticCtor();
 };
