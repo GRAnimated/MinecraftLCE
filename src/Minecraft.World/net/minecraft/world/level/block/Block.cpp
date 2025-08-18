@@ -983,8 +983,8 @@ bool Block::isExceptionBlockForAttachingPlusPiston(Block* block) {
 // someBlock->setBaseItemTypeAndMaterial(14, 2);
 // Block::registerBlock(1, L"some_block", someBlock);
 //
-// The size given in the comments above every block was from the `operator new` call to allocate space for the block
-// This gives us the class size of every block that is registered.
+// The size given in the comments above every block was from the `operator new` call to allocate space for the
+// block This gives us the class size of every block that is registered.
 void Block::staticCtor() {
     // some stuff happens up here btw
     // I think it sets some static DirectionProperty vars
