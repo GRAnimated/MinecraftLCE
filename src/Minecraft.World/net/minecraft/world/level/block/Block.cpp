@@ -1056,7 +1056,7 @@ void Block::staticCtor() {
     StainedHardenedClayBlock::staticCtor();
 
     Block* airBlock = (new AirBlock())->setNameAndDescriptionId(0xFFFFFFFFLL, 0xFFFFFFFFLL);
-    Block::registerBlock(0, L"air", airBlock);
+    Block::registerBlock(0, *Blocks::AIR_RSRC, airBlock);
 
     // Size: 0xA8u
     Block* stoneBlock = (new StoneBlock())
