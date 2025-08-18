@@ -1,6 +1,7 @@
 #include "net/minecraft/world/item/ElytraItem.h"
 
 #include "net/minecraft/client/renderer/texture/IconRegister.h"
+#include "net/minecraft/client/ui/StringIDs.h"
 #include "net/minecraft/resources/ResourceLocation.h"
 #include "net/minecraft/world/entity/EquipmentSlot.h"
 #include "net/minecraft/world/entity/mob/Mob.h"
@@ -31,7 +32,7 @@ int ElytraItem::GetUseTooltip(const ItemToolTipDataHolder& data) {
     if (data.idk == 2) {
         return 0xFFFFFFFF;
     } else {
-        return 0xAFD35F15;
+        return StringIDs::Equip;
     }
     // Wonder if that was one liner or not
 }

@@ -1,6 +1,7 @@
 #include "net/minecraft/world/level/block/SandBlock.h"
 
 #include "net/minecraft/client/renderer/texture/IconRegister.h"
+#include "net/minecraft/client/ui/StringIDs.h"
 #include "net/minecraft/world/level/block/state/BlockStateDefinition.h"
 #include "net/minecraft/world/level/material/MaterialColor.h"
 #include <cstring>
@@ -12,9 +13,11 @@ SandBlock::SandBlock() : FallingBlock() {
 }
 
 void SandBlock::blockStaticCtor() {
-    Variant::DEFAULT = new Variant(0, L"sand", 0xE477542F, 0x2C05FE82, MaterialColor::SAND, 0xFFDBD3A0);
-    Variant::RED
-        = new Variant(1, L"red_sand", 0xF6580C43, 0x115BCF8E, MaterialColor::COLOR_ORANGE, 0xFFA95821);
+    Variant::DEFAULT
+        = new Variant(0, L"sand", StringIDs::Sand, StringIDs::CollectedUsingAShovelCanBeSmeltedInto,
+                      MaterialColor::SAND, 0xFFDBD3A0);
+    Variant::RED = new Variant(1, L"red_sand", StringIDs::RedSand, StringIDs::ARedColoredSandThatCanBeFound,
+                               MaterialColor::COLOR_ORANGE, 0xFFA95821);
     Variant::VARIANTS[0] = Variant::DEFAULT;
     Variant::VARIANTS[1] = Variant::RED;
 

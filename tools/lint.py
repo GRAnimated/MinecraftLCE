@@ -25,7 +25,7 @@ def CHECK(cond, line, message, path):
     return False
 
 class CommonChecks:
-    def __init__(self, c, path, cpp_class_map, fix=False):
+    def __init__(self, c, path, cpp_class_map, fix=False, slow=False):
         self.c = c
         self.path = path
         self.fix = fix
@@ -146,7 +146,7 @@ class CommonChecks:
             self.c = "\n".join(new_lines)
 
 class HeaderChecks:
-    def __init__(self, c, path, cpp_class_map, fix=False):
+    def __init__(self, c, path, cpp_class_map, fix=False, slow=False):
         self.c = c
         self.path = path
         self.fix = fix
@@ -235,14 +235,18 @@ class HeaderChecks:
             self.c = "\n".join(new_lines)
 
 class SourceChecks:
-    def __init__(self, c, path, cpp_class_map, fix=False):
+    def __init__(self, c, path, cpp_class_map, fix=False, slow=False):
         self.c = c
         self.path = path
         self.fix = fix
         self.map = cpp_class_map
+        self.slow = slow
 
     def run(self):
         self.include_at_top()
+        if self.slow:
+            with open("src/Minecraft.Client/net/minecraft/client/ui/StringIDs.h", "r") as f:
+                self.string_ids(f.read())
         return self.c
 
     # checks if the include for the current file is at the top of the file with a newline after
@@ -272,6 +276,56 @@ class SourceChecks:
 
         if changed:
             self.c = "\n".join(new_lines)
+
+    def string_ids(self, id_file):
+        lines = self.c.splitlines()
+        new_lines = []
+        changed = False
+
+        for line in lines:
+            original_line = line
+
+            # 0xXXXXXXXX, signed, and unsigned ints
+            pattern = r'(0x[0-9A-Fa-f]{8}|\b-?\d+\b)'
+            matches = re.finditer(pattern, line)
+
+            for match in matches:
+                num_str = match.group(0)
+
+                if num_str.startswith("0x") or num_str.startswith("0X"):
+                    hex_id = num_str[2:].upper()
+                else:
+                    try:
+                        num = int(num_str)
+                        # handle signed wrapping if necessary
+                        if num < 0:
+                            num &= 0xFFFFFFFF
+                        hex_id = f"{num:08X}"
+                    except ValueError:
+                        continue
+
+                new_line, const_name, found = self.replace_id(id_file, line, hex_id, num_str)
+
+                if found:
+                    FAIL(f"{num_str} (0x{hex_id}) should be replaced with StringIDs::{const_name}!",
+                        original_line, self.path)
+                    if self.fix:
+                        changed = True
+                        line = new_line
+
+            new_lines.append(line)
+
+        if changed:
+            self.c = "\n".join(new_lines)
+
+
+    def replace_id(self, id_file, line, hex_id, num_str):
+        pattern = r'constexpr u32 (\w+) = 0x' + hex_id
+        match = re.search(pattern, id_file)
+        if match:
+            const_name = match.group(1)
+            return line.replace(num_str, "StringIDs::" + const_name), const_name, True
+        return line, "", False
 
 def run_clang_format(file_path):
     try:
@@ -364,6 +418,7 @@ def main():
     parser.add_argument('--fix', action='store_true', help='Try to fix the formatting issues automatically.')
     parser.add_argument('--format', action='store_true', help='Run clang-format before checks.')
     parser.add_argument('--find-unsorted', action='store_true', help='Find unsorted classes/enums in the source files.')
+    parser.add_argument('--slow', action='store_true', help='Run slow checks.')
 
     args = parser.parse_args()
 
@@ -411,9 +466,9 @@ def main():
         has_crlf = '\r\n' in original_content
         content_for_processing = original_content.replace('\r\n', '\n')
 
-        common_checks = CommonChecks(content_for_processing, cpp_path, cpp_class_map, fix=args.fix)
+        common_checks = CommonChecks(content_for_processing, cpp_path, cpp_class_map, fix=args.fix, slow=args.slow)
         modified_content = common_checks.run()
-        source_checks = SourceChecks(modified_content, cpp_path, cpp_class_map, fix=args.fix)
+        source_checks = SourceChecks(modified_content, cpp_path, cpp_class_map, fix=args.fix, slow=args.slow)
         modified_content = source_checks.run()
 
         # write fixes
@@ -433,9 +488,9 @@ def main():
         has_crlf = '\r\n' in original_content
         content_for_processing = original_content.replace('\r\n', '\n')
 
-        common_checks = CommonChecks(content_for_processing, h_path, cpp_class_map, fix=args.fix)
+        common_checks = CommonChecks(content_for_processing, h_path, cpp_class_map, fix=args.fix, slow=args.slow)
         modified_content = common_checks.run()
-        header_checks = HeaderChecks(modified_content, h_path, cpp_class_map, fix=args.fix)
+        header_checks = HeaderChecks(modified_content, h_path, cpp_class_map, fix=args.fix, slow=args.slow)
         modified_content = header_checks.run()
 
         # write fixes
@@ -444,7 +499,10 @@ def main():
     
     if args.fix:
         print("Automatic fixes completed. Please review the changes made.")
-    
+
+    if not args.slow:
+        print("WARNING: Slow checks were not run, make sure you run them!")
+
     if issueFound:
         print("Formatting issues found.")
         exit(1)

@@ -1,5 +1,6 @@
 #include "net/minecraft/world/enchantment/enchantments/DigDurabilityEnchantment.h"
 
+#include "net/minecraft/client/ui/StringIDs.h"
 #include "net/minecraft/world/enchantment/categories/BreakableCategory.h"
 #include "net/minecraft/world/item/ItemInstance.h"
 #include "net/minecraft/world/item/enchantment/Enchantment.h"
@@ -8,7 +9,7 @@
 DigDurabilityEnchantment::DigDurabilityEnchantment(const Rarity* rarity,
                                                    arrayWithLength<const EquipmentSlot*> equipmentSlots)
     : Enchantment(rarity, BreakableCategory::sBreakableCategory, equipmentSlots) {
-    this->setDescriptionId(0xF4AF0AC3);
+    this->setDescriptionId(StringIDs::Unbreaking);
 }
 
 int DigDurabilityEnchantment::getMaxLevel() {

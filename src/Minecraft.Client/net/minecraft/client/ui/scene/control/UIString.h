@@ -13,6 +13,7 @@ public:
     UIString();
     UIString(const wchar_t*);
     UIString(const std::wstring&);
+    UIString(int);
 
     bool needsUpdating();
     void setUpdated();

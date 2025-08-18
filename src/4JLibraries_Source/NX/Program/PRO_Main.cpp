@@ -15,6 +15,7 @@
 #include "net/minecraft/client/Minecraft.h"
 #include "net/minecraft/client/resources/L10N.h"
 #include "net/minecraft/client/ui/ConsoleUIController.h"
+#include "net/minecraft/client/ui/StringIDs.h"
 #include "net/minecraft/core/profile/CProfile.h"
 #include "net/minecraft/core/storage/CStorage.h"
 #include "net/minecraft/world/ArrayWithLength.h"
@@ -264,7 +265,7 @@ extern "C" void nnMain() {
     CProfile::sInstance->SetOnAwardHandler(PopupToast, nullptr);
     // It is unknown what the function provided at the end of this call is. Looks more like what a branch
     // would lead to as it's stored inside this method. It originally called for bool * in that area.
-    CStorage::sInstance->Init(0, L10N::GetString(0xC0B26BE6), "savegame.dat", 51000000,
+    CStorage::sInstance->Init(0, L10N::GetString(StringIDs::NewWorld), "savegame.dat", 51000000,
                               CConsoleMinecraftApp::DisplaySavingMessageNX, &CConsoleMinecraftApp::sInstance,
                               what, nullptr);
     CProfile::sInstance->SetSignInChangeCallback(CMinecraftApp::SignInChangeCallback,

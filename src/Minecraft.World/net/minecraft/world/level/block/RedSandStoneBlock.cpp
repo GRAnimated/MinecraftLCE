@@ -1,6 +1,7 @@
 #include "net/minecraft/world/level/block/RedSandStoneBlock.h"
 
 #include "net/minecraft/client/renderer/texture/IconRegister.h"
+#include "net/minecraft/client/ui/StringIDs.h"
 #include "net/minecraft/core/Direction.h"
 #include "net/minecraft/world/level/block/SandBlock.h"
 #include "net/minecraft/world/level/block/state/BlockStateDefinition.h"
@@ -11,11 +12,11 @@
 #include <string>
 
 RedSandStoneBlock::Variant* RedSandStoneBlock::Variant::DEFAULT
-    = new RedSandStoneBlock::Variant(0, L"red_sandstone", 0x70C0AD9F);
+    = new RedSandStoneBlock::Variant(0, L"red_sandstone", StringIDs::RedSandstone);
 RedSandStoneBlock::Variant* RedSandStoneBlock::Variant::CHISELED
-    = new RedSandStoneBlock::Variant(1, L"chiseled_red_sandstone", 0xD03F0851);
+    = new RedSandStoneBlock::Variant(1, L"chiseled_red_sandstone", StringIDs::ChiseledRedSandstone);
 RedSandStoneBlock::Variant* RedSandStoneBlock::Variant::SMOOTH
-    = new RedSandStoneBlock::Variant(2, L"smooth_red_sandstone", 0x40496822);
+    = new RedSandStoneBlock::Variant(2, L"smooth_red_sandstone", StringIDs::SmoothRedSandstone);
 
 RedSandStoneBlock::Variant* RedSandStoneBlock::Variant::VARIANTS[3]
     = {RedSandStoneBlock::Variant::DEFAULT, RedSandStoneBlock::Variant::CHISELED,

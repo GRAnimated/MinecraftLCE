@@ -1,5 +1,6 @@
 #include "net/minecraft/world/enchantment/enchantments/ArrowInfiniteEnchantment.h"
 
+#include "net/minecraft/client/ui/StringIDs.h"
 #include "net/minecraft/world/enchantment/categories/BowCategory.h"
 #include "net/minecraft/world/enchantment/enchantments/MendingEnchantment.h"
 #include "net/minecraft/world/item/enchantment/Enchantment.h"
@@ -7,7 +8,7 @@
 ArrowInfiniteEnchantment::ArrowInfiniteEnchantment(const Rarity* rarity,
                                                    arrayWithLength<const EquipmentSlot*> equipmentSlots)
     : Enchantment(rarity, BowCategory::sBowCategory, equipmentSlots) {
-    Enchantment::setDescriptionId(0xD251EC6A);
+    Enchantment::setDescriptionId(StringIDs::Infinity);
 }
 
 int ArrowInfiniteEnchantment::getMaxLevel() {

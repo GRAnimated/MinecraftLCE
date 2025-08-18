@@ -25,5 +25,6 @@ public:
     bool mIsClassicMoat;
     bool mIsSmallMoat;
     bool mIsMediumMoat;
+    bool mIsLargeMoat;
     int mXZSize2;
 };

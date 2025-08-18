@@ -2,6 +2,7 @@
 
 #include "net/minecraft/client/renderer/texture/IconRegister.h"
 #include "net/minecraft/client/resources/L10N.h"
+#include "net/minecraft/client/ui/StringIDs.h"
 #include "net/minecraft/world/item/Item.h"
 #include "net/minecraft/world/level/block/Blocks.h"
 #include "net/minecraft/world/level/block/state/BlockStateDefinition.h"
@@ -15,19 +16,24 @@ StoneBlock::StoneBlock() : Block(Material::STONE) {
 }
 
 void StoneBlock::blockStaticCtor() {
-    Variant::STONE = new Variant(0, MaterialColor::STONE, L"stone", 0x8BAD4DAC, 0x46782239, L"stone", true);
-    Variant::GRANITE
-        = new Variant(1, MaterialColor::DIRT, L"granite", 0x19244F91, 0x91114554, L"stone_granite", true);
-    Variant::SMOOTH_GRANITE = new Variant(2, MaterialColor::DIRT, L"smooth_granite", 0x567CEDEE, 0x25E3FDC3,
-                                          L"stone_smooth_granite", false);
-    Variant::DIORITE
-        = new Variant(3, MaterialColor::QUARTZ, L"diorite", 0x77F221B3, 0x5E93DB6, L"stone_diorite", true);
-    Variant::SMOOTH_DIORITE = new Variant(4, MaterialColor::QUARTZ, L"smooth_diorite", 0xF1C0B35C, 0x2A4CCCF1,
-                                          L"stone_diorite_smooth", false);
+    Variant::STONE = new Variant(0, MaterialColor::STONE, L"stone", StringIDs::Stone,
+                                 StringIDs::CanBeMinedWithAPickaxeToCollectCobblestone, L"stone", true);
+    Variant::GRANITE = new Variant(1, MaterialColor::DIRT, L"granite", StringIDs::Granite,
+                                   StringIDs::CanBeMinedWithAPickaxeToCollectGranite, L"stone_granite", true);
+    Variant::SMOOTH_GRANITE
+        = new Variant(2, MaterialColor::DIRT, L"smooth_granite", StringIDs::PolishedGranite,
+                      StringIDs::CanBeCraftedFromGraniteForAPolishedLook, L"stone_smooth_granite", false);
+    Variant::DIORITE = new Variant(3, MaterialColor::QUARTZ, L"diorite", StringIDs::Diorite, 0x5E93DB6,
+                                   L"stone_diorite", true);
+    Variant::SMOOTH_DIORITE
+        = new Variant(4, MaterialColor::QUARTZ, L"smooth_diorite", StringIDs::PolishedDiorite,
+                      StringIDs::CanBeCraftedFromDioriteForAPolishedLook, L"stone_diorite_smooth", false);
     Variant::ANDESITE
-        = new Variant(5, MaterialColor::STONE, L"andesite", 0xBD013DC6, 0xF2A753FB, L"stone_andesite", true);
-    Variant::SMOOTH_ANDESITE = new Variant(6, MaterialColor::STONE, L"smooth_andesite", 0x1BB05261,
-                                           0x47BE1614, L"stone_andesite_smooth", false);
+        = new Variant(5, MaterialColor::STONE, L"andesite", StringIDs::Andesite,
+                      StringIDs::CanBeMinedWithAPickaxeToCollectAndesite, L"stone_andesite", true);
+    Variant::SMOOTH_ANDESITE
+        = new Variant(6, MaterialColor::STONE, L"smooth_andesite", StringIDs::PolishedAndesite,
+                      StringIDs::CanBeCraftedFromAndesiteForAPolishedLook, L"stone_andesite_smooth", false);
 
     Variant::VARIANTS[0] = Variant::STONE;
     Variant::VARIANTS[1] = Variant::GRANITE;
@@ -74,7 +80,7 @@ BlockStateDefinition* StoneBlock::createBlockStateDefinition() {
 }
 
 std::wstring StoneBlock::getName() {
-    return L10N::GetString(0x8BAD4DAC);
+    return L10N::GetString(StringIDs::Stone);
 }
 
 Item* StoneBlock::getResource(const BlockState* state, Random*, int) {

@@ -41,6 +41,8 @@ public:
     void prepareHeights(int, int, ChunkPrimer*);
     void getHeights(int, int, int, arrayWithLength<Biome*>&, arrayWithLength<double>&);
     void buildSurfaces(int, int, ChunkPrimer*, arrayWithLength<Biome*>);
+    float getHeightFalloff(int x, int z, int* height);
+    static int unkMethod(float, OverworldLevelSource* src, int x, int z, int size);
 
     Random mRandom;
     Random mRandom2;

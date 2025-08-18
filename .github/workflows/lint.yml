@@ -23,4 +23,4 @@ jobs:
     - name: Set up python package dependencies
       run: pip install pyyaml
     - name: Run custom code styling checks
-      run: python3 tools/lint.py
+      run: python3 tools/lint.py --slow
