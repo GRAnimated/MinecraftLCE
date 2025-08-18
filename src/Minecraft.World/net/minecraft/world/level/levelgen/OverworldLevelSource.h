@@ -1,6 +1,7 @@
 #pragma once
 
 #include "net/minecraft/world/ArrayWithLength.h"
+#include "net/minecraft/world/Random.h"
 #include "net/minecraft/world/level/chunk/ChunkGenerator.h"
 #include "net/minecraft/world/level/levelgen/CustomizableSourceSettings.h"
 #include "net/minecraft/world/level/levelgen/GenericOverworldLevelSource.h"
@@ -27,8 +28,20 @@ public:
     void prepareHeights(int, int, ChunkPrimer*);
     void getHeights(int, int, int, arrayWithLength<Biome*>&, arrayWithLength<double>&);
     void buildSurfaces(int, int, ChunkPrimer*, arrayWithLength<Biome*>);
+    float getHeightFalloff(int x, int z, int* height);
+    static int unkMethod(float, OverworldLevelSource* src, int x, int z, int size);
 
-    char unk[0x90 - 0x8];
+    Random rand1;
+    Random rand2;
+    void* field_48;
+    void* field_50;
+    void* mMainNoise;
+    void* field_60;
+    void* field_68;
+    void* mDepthNoise;
+    long long qword_78;
+    long long qword_80;
+    void* field_88;
     Level* mLevel;
     char byte_98;
     LevelType* qword_a0;
