@@ -4,5 +4,7 @@
 
 class SaplingBlock : public Block {
 public:
+    SaplingBlock();
+
     static void blockStaticCtor();
 };

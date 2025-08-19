@@ -4,5 +4,7 @@
 
 class WoolCarpetBlock : public Block {
 public:
+    WoolCarpetBlock();
+
     static void blockStaticCtor();
 };

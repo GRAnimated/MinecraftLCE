@@ -4,5 +4,7 @@
 
 class DirtBlock : public Block {
 public:
+    DirtBlock();
+
     static void blockStaticCtor();
 };

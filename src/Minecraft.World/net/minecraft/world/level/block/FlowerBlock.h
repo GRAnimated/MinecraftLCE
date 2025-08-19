@@ -1,8 +1,10 @@
 #pragma once
 
+#include "Bush.h"
+#include "net/minecraft/world/level/block/BonemealableBlock.h"
 #include <string>
 
-class FlowerBlock {
+class FlowerBlock : public Bush, public BonemealableBlock {
 public:
     class FlowerCategory;
     class FlowerCategoryPredicate;
