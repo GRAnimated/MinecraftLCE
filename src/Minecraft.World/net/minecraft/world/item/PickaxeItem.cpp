@@ -37,7 +37,7 @@ void PickaxeItem::staticCtor() {
 }
 
 // NON_MATCHING | Score: ???
-PickaxeItem::PickaxeItem(const Item::Tier* tier) : DiggerItem(tier, DIGGABLES) {}
+PickaxeItem::PickaxeItem(const Item::Tier* tier) : DiggerItem(2.0f, -2.8f, tier, DIGGABLES) {}
 
 float PickaxeItem::getDestroySpeed(not_null_ptr<ItemInstance> instance, BlockState* state) {
     Material* material = state->getMaterial();
