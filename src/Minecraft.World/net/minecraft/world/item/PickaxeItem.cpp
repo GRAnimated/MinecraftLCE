@@ -25,7 +25,7 @@ void PickaxeItem::staticCtor() {
     DIGGABLES[18] = Blocks::PACKED_ICE;
     DIGGABLES[19] = Blocks::RAIL;
     DIGGABLES[20] = Blocks::REDSTONE_ORE;
-    
+
     // Block states maybe, since they are the same block id
     DIGGABLES[21] = Blocks::SANDSTONE;
     DIGGABLES[21] = Blocks::RED_SANDSTONE;
