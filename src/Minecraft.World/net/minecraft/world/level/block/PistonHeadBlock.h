@@ -4,5 +4,7 @@
 
 class PistonHeadBlock : public Block {
 public:
+    PistonHeadBlock();
+
     static void blockStaticCtor();
 };

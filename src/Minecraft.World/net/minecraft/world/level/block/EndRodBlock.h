@@ -4,5 +4,7 @@
 
 class EndRodBlock : public Block {
 public:
+    EndRodBlock();
+
     const AABB* getShapeRod(const BlockState*);
 };

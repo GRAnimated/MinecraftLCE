@@ -4,5 +4,7 @@
 
 class ChestBlock : public Block {
 public:
+    ChestBlock(bool trapped);
+
     static void blockStaticCtor();
 };

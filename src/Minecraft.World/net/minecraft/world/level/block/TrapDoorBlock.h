@@ -4,5 +4,7 @@
 
 class TrapDoorBlock : public Block {
 public:
+    TrapDoorBlock(Material*);
+
     static void blockStaticCtor();
 };

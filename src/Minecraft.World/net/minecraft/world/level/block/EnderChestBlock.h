@@ -4,5 +4,7 @@
 
 class EnderChestBlock : public Block {
 public:
+    EnderChestBlock();
+
     static void blockStaticCtor();
 };

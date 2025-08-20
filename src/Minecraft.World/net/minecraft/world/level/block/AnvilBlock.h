@@ -4,5 +4,7 @@
 
 class AnvilBlock : public Block {
 public:
+    AnvilBlock();
+
     static void blockStaticCtor();
 };

@@ -4,5 +4,7 @@
 
 class RedStoneWireBlock : public Block {
 public:
+    RedStoneWireBlock();
+
     static void blockStaticCtor();
 };

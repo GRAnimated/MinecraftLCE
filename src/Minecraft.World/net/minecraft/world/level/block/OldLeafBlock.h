@@ -4,5 +4,7 @@
 
 class OldLeafBlock : public LeafBlock {
 public:
+    OldLeafBlock();
+
     static void blockStaticCtor();
 };

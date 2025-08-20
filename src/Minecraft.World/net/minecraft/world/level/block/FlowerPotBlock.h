@@ -4,5 +4,7 @@
 
 class FlowerPotBlock : public Block {
 public:
+    FlowerPotBlock();
+
     static void blockStaticCtor();
 };

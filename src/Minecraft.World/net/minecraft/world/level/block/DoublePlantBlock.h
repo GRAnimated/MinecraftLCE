@@ -4,5 +4,7 @@
 
 class DoublePlantBlock : public Block {
 public:
+    DoublePlantBlock();
+
     static void blockStaticCtor();
 };

@@ -1,8 +1,10 @@
 #pragma once
 
-#include "net/minecraft/world/level/block/Block.h"
+#include "net/minecraft/world/level/block/BaseRailBlock.h"
 
-class PoweredRailBlock : public Block {
+class PoweredRailBlock : public BaseRailBlock {
 public:
+    PoweredRailBlock();
+
     static void blockStaticCtor();
 };

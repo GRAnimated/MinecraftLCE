@@ -4,5 +4,7 @@
 
 class StainedGlassBlock : public Block {
 public:
+    StainedGlassBlock(Material*);
+
     static void blockStaticCtor();
 };

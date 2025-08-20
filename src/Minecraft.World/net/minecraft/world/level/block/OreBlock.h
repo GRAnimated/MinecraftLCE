@@ -4,6 +4,7 @@
 #include "net/minecraft/world/level/material/MaterialColor.h"
 
 class OreBlock : public Block {
+public:
     OreBlock();
     OreBlock(const MaterialColor*);
 

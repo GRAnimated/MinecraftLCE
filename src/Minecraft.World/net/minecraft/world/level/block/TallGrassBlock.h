@@ -4,5 +4,7 @@
 
 class TallGrassBlock : public Block {
 public:
+    TallGrassBlock();
+
     static void blockStaticCtor();
 };
