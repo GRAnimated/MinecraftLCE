@@ -2,11 +2,13 @@
 
 #include "net/minecraft/network/protocol/Packet.h"
 
-class ClientboundChatPacket : public Packet, public std::enable_shared_from_this<ClientboundChatPacket> {
+// PACKET STUB
+class ClientboundPlayerPositionPacket : public Packet,
+                                        public std::enable_shared_from_this<ClientboundPlayerPositionPacket> {
 public:
     static std::shared_ptr<Packet> create();
 
-    enum EChatPacketMessage {};
+    // TODO: constructor(s)
 
     EPacketType getPacketId() override;
     void read(DataInputStream* input) override;

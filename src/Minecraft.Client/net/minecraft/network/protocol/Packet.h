@@ -35,6 +35,10 @@ public:
     static std::wstring readUtf(DataInputStream* in, int maxLength);
     static void writeUtf(const std::wstring& str, DataOutputStream* out);
 
+    static void staticCtor();
+    static void map(int, bool, bool, bool, bool, const std::type_info&, std::shared_ptr<Packet> (*)(),
+                    std::wstring);
+
     long mCreatedTime;
     bool mShouldDelay;
 };

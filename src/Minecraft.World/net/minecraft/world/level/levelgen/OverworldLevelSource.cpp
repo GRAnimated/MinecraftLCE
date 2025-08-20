@@ -1,4 +1,4 @@
-#include "net/minecraft/world/level/levelgen/GenericOverworldLevelSource.h"
+#include "net/minecraft/world/level/levelgen/OverworldLevelSource.h"
 
 // NON_MATCHING | Score: 2915 (lower is better)
 float OverworldLevelSource::getHeightFalloff(int x, int z, int* distance) {
