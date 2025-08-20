@@ -1,3 +1,5 @@
+#include "net/minecraft/world/level/levelgen/OverworldLevelSource.h"
+
 #include "net/minecraft/world/level/levelgen/GenericOverworldLevelSource.h"
 
 // NON_MATCHING | Score: 2915 (lower is better)

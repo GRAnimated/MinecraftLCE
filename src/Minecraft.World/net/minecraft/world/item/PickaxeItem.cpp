@@ -1,6 +1,8 @@
 #include "net/minecraft/world/item/PickaxeItem.h"
 #include "net/minecraft/world/level/block/Blocks.h"
 
+arrayWithLength<Block*> PickaxeItem::DIGGABLES = arrayWithLength<Block*>(26, true);
+
 void PickaxeItem::staticCtor() {
     DIGGABLES[0] = Blocks::ACTIVATOR_RAIL;
     DIGGABLES[1] = Blocks::COAL_ORE;
@@ -23,10 +25,12 @@ void PickaxeItem::staticCtor() {
     DIGGABLES[18] = Blocks::PACKED_ICE;
     DIGGABLES[19] = Blocks::RAIL;
     DIGGABLES[20] = Blocks::REDSTONE_ORE;
+    
+    // Block states maybe, since they are the same block id
     DIGGABLES[21] = Blocks::SANDSTONE;
-    DIGGABLES[22] = Blocks::RED_SANDSTONE;
-    DIGGABLES[23] = Blocks::STONE;
-    DIGGABLES[24] = Blocks::STONE_SLAB;
-    DIGGABLES[25] = Blocks::STONE_BUTTON;
-    DIGGABLES[26] = Blocks::STONE_PRESSURE_PLATE;
+    DIGGABLES[21] = Blocks::RED_SANDSTONE;
+    DIGGABLES[22] = Blocks::STONE;
+    DIGGABLES[23] = Blocks::STONE_SLAB;
+    DIGGABLES[24] = Blocks::STONE_BUTTON;
+    DIGGABLES[25] = Blocks::STONE_PRESSURE_PLATE;
 }

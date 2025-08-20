@@ -9,8 +9,10 @@ public:
 
     static void staticCtor();
 
-    AxeItem(const Item::Tier*);
+    PickaxeItem(const Item::Tier*);
 
-    ~AxeItem() override {}
+    ~PickaxeItem() override {}
+
     float getDestroySpeed(not_null_ptr<ItemInstance>, BlockState*) override;
+    bool canDestroySpecial(const BlockState* blockState) override;
 };
