@@ -1,5 +1,6 @@
 #include "net/minecraft/world/item/PickaxeItem.h"
 #include "net/minecraft/world/level/block/Blocks.h"
+#include "net/minecraft/world/level/material/Material.h"
 
 arrayWithLength<Block*> PickaxeItem::DIGGABLES = arrayWithLength<Block*>(26, true);
 
@@ -33,4 +34,53 @@ void PickaxeItem::staticCtor() {
     DIGGABLES[23] = Blocks::STONE_SLAB;
     DIGGABLES[24] = Blocks::STONE_BUTTON;
     DIGGABLES[25] = Blocks::STONE_PRESSURE_PLATE;
+}
+
+// NON_MATCHING | Score: ???
+PickaxeItem::PickaxeItem(const Item::Tier* tier) : DiggerItem(tier, DIGGABLES) {}
+
+float PickaxeItem::getDestroySpeed(not_null_ptr<ItemInstance> instance, BlockState* state) {
+    Material* material = state->getMaterial();
+    return material != Material::METAL && material != Material::HEAVY_METAL && material != Material::STONE ?
+               DiggerItem::getDestroySpeed(instance, state) :
+               this->mSpeed;
+}
+
+bool PickaxeItem::canDestroySpecial(const BlockState* state) {
+    Block* block = state->getBlock();
+
+    if (block == Blocks::OBSIDIAN) {
+        return this->mTier->getLevel() == 3;
+    }
+
+    if (block == Blocks::DIAMOND_BLOCK || block == Blocks::DIAMOND_ORE) {
+        return this->mTier->getLevel() >= 2;
+    }
+
+    if (block == Blocks::EMERALD_ORE || block == Blocks::EMERALD_BLOCK) {
+        return this->mTier->getLevel() >= 2;
+    }
+
+    if (block == Blocks::GOLD_BLOCK || block == Blocks::GOLD_ORE) {
+        return this->mTier->getLevel() >= 2;
+    }
+
+    if (block == Blocks::IRON_BLOCK || block == Blocks::IRON_ORE) {
+        return this->mTier->getLevel() >= 1;
+    }
+
+    if (block == Blocks::LAPIS_BLOCK || block == Blocks::LAPIS_ORE) {
+        return this->mTier->getLevel() >= 1;
+    }
+
+    if (block == Blocks::REDSTONE_ORE || block == Blocks::LIT_REDSTONE_ORE) {
+        return this->mTier->getLevel() >= 2;
+    }
+
+    Material* material = state->getMaterial();
+    if (material == Material::STONE) return true;
+    if (material == Material::METAL) return true;
+    if (material == Material::HEAVY_METAL) return true;
+
+    return false;
 }

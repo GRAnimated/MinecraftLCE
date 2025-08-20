@@ -9,10 +9,10 @@ public:
 
     static void staticCtor();
 
-    PickaxeItem(const Item::Tier*);
+    PickaxeItem(const Item::Tier* tier);
 
     ~PickaxeItem() override {}
 
-    float getDestroySpeed(not_null_ptr<ItemInstance>, BlockState*) override;
-    bool canDestroySpecial(const BlockState* blockState) override;
+    float getDestroySpeed(not_null_ptr<ItemInstance> itemInstance, BlockState* state) override;
+    bool canDestroySpecial(const BlockState* state) override;
 };
