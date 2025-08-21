@@ -1,9 +1,8 @@
 #pragma once
 
-#include "net/minecraft/world/level/saveddata/MapItemSavedData.h"
-
 #include "net/minecraft/world/ArrayWithLength.h"
-#include "net/minecraft/world/level/saveddata/MapDecoration.h"
+#include "net/minecraft/world/level/saveddata/SavedData.h"
+#include "net/minecraft/world/level/saveddata/maps/MapDecoration.h"
 #include "types.h"
 #include <memory>
 #include <string>

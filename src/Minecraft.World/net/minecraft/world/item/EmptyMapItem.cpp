@@ -1,5 +1,6 @@
 #include "EmptyMapItem.h"
 
+#include "net/minecraft/client/ui/StringIDs.h"
 #include "net/minecraft/world/entity/player/Player.h"
 #include "net/minecraft/world/inventory/Inventory.h"
 #include "net/minecraft/world/item/InteractionResultHolder.h"
@@ -30,5 +31,5 @@ InteractionResultHolder EmptyMapItem::use(Level* level, std::shared_ptr<Player> 
 }
 
 unsigned int EmptyMapItem::GetUseTooltip(const ItemToolTipDataHolder& toolTipDataHolder) {
-    return 0xEA4E897E;
+    return StringIDs::Use_1;
 }

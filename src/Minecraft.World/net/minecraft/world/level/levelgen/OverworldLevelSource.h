@@ -31,6 +31,11 @@ public:
     float getHeightFalloff(int x, int z, int* height);
     static int unkMethod(float, OverworldLevelSource* src, int x, int z, int size);
 
+    bool mIsLevelClassic;
+    bool mIsLevelSmall;
+    bool mIsLevelMedium;
+    char unknown;  // could be mIsLevelLarge
+    int mSize;
     Random rand1;
     Random rand2;
     void* field_48;
