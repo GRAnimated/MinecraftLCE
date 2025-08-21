@@ -141,7 +141,7 @@ public:
     virtual void repositionEntityAfterLoad();
     virtual void readAdditionalSaveData(CompoundTag*) = 0;
     virtual void addAdditonalSaveData(CompoundTag*) = 0;
-    virtual void readAdditionContructionTag_4(CompoundTag*);
+    virtual void readAdditionContructionTag(CompoundTag*);
     virtual void getAdditionContructionTag();
     virtual void spawnAtLocation(Item*, int);
     virtual void spawnAtLocation(Item*, int, float);
@@ -279,16 +279,18 @@ public:
     virtual void couldWander();
     virtual void canCreateParticles();
     virtual void stopCurrentLerp();
-    virtual bool PositionLocked_4();
-    virtual void SetPositionLocked_4(bool);
-    virtual void TakeGlideCollisionDamage_4();
-    virtual void SetGlideCollisionDamage_4(bool);
-    virtual double GetLiftForceModifier_4();
-    virtual void SetLiftForceModifier_4(double);
-    virtual void onLoadedFromSave_4();
-    virtual bool isUsingItemFlag_4();
-    virtual void setUsingItemFlag_4(bool);
+    virtual bool PositionLocked();
+    virtual void SetPositionLocked(bool);
+    virtual void TakeGlideCollisionDamage();
+    virtual void SetGlideCollisionDamage(bool);
+    virtual double GetLiftForceModifier();
+    virtual void SetLiftForceModifier(double);
+    virtual void onLoadedFromSave();
+    virtual bool isUsingItemFlag();
+    virtual void setUsingItemFlag(bool);
     virtual int getFireImmuneTicks();
+
+    static void fjDebugCheckSmallIdLeaks();
 
     Vec3 getPos(float);
     bool isType(eINSTANCEOF);

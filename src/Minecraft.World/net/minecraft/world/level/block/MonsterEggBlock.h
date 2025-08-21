@@ -4,5 +4,7 @@
 
 class MonsterEggBlock : public Block {
 public:
+    MonsterEggBlock();
+
     static void blockStaticCtor();
 };

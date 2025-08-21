@@ -1,8 +1,10 @@
 #pragma once
 
-#include "net/minecraft/world/level/block/Block.h"
+#include "net/minecraft/world/level/block/ThinFenceBlock.h"
 
-class StainedGlassPaneBlock : public Block {
+class StainedGlassPaneBlock : public ThinFenceBlock {
 public:
+    StainedGlassPaneBlock();
+
     static void blockStaticCtor();
 };

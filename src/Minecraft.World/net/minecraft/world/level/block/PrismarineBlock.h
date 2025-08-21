@@ -4,5 +4,7 @@
 
 class PrismarineBlock : public Block {
 public:
+    PrismarineBlock();
+
     static void blockStaticCtor();
 };

@@ -1,5 +1,6 @@
 #include "net/minecraft/world/enchantment/enchantments/WaterWalkerEnchantment.h"
 
+#include "net/minecraft/client/ui/StringIDs.h"
 #include "net/minecraft/world/enchantment/categories/FeetArmorCategory.h"
 #include "net/minecraft/world/item/enchantment/Enchantment.h"
 #include "net/minecraft/world/item/enchantment/Enchantments.h"
@@ -7,7 +8,7 @@
 WaterWalkerEnchantment::WaterWalkerEnchantment(const Rarity* rarity,
                                                arrayWithLength<const EquipmentSlot*> equipmentSlots)
     : Enchantment(rarity, FeetArmorCategory::sFeetArmorCategory, equipmentSlots) {
-    this->setDescriptionId(0xD41BAEBF);
+    this->setDescriptionId(StringIDs::DepthStrider);
 }
 
 int WaterWalkerEnchantment::getMaxLevel() {

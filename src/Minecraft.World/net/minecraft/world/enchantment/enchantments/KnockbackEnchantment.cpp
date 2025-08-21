@@ -1,11 +1,12 @@
 #include "net/minecraft/world/enchantment/enchantments/KnockbackEnchantment.h"
 
+#include "net/minecraft/client/ui/StringIDs.h"
 #include "net/minecraft/world/enchantment/categories/WeaponCategory.h"
 
 KnockbackEnchantment::KnockbackEnchantment(const Rarity* rarity,
                                            arrayWithLength<const EquipmentSlot*> equipmentSlots)
     : Enchantment(rarity, WeaponCategory::sWeaponCategory, equipmentSlots) {
-    this->setDescriptionId(0xC3755A5B);
+    this->setDescriptionId(StringIDs::Knockback);
 }
 
 int KnockbackEnchantment::getMaxLevel() {

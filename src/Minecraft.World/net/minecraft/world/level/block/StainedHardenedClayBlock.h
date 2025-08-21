@@ -5,6 +5,7 @@
 class StainedHardenedClayBlock : public Block {
 public:
     static MaterialColor* sTerracottaColors;
+    StainedHardenedClayBlock();
 
     static void staticCtor();
 };

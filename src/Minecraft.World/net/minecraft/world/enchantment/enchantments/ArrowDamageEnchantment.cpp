@@ -1,12 +1,13 @@
 #include "net/minecraft/world/enchantment/enchantments/ArrowDamageEnchantment.h"
 
+#include "net/minecraft/client/ui/StringIDs.h"
 #include "net/minecraft/world/enchantment/categories/BowCategory.h"
 #include "net/minecraft/world/item/enchantment/Enchantment.h"
 
 ArrowDamageEnchantment::ArrowDamageEnchantment(const Rarity* rarity,
                                                arrayWithLength<const EquipmentSlot*> equipmentSlots)
     : Enchantment(rarity, BowCategory::sBowCategory, equipmentSlots) {
-    Enchantment::setDescriptionId(0xD7F074AF);
+    Enchantment::setDescriptionId(StringIDs::Power);
 }
 
 int ArrowDamageEnchantment::getMaxLevel() {

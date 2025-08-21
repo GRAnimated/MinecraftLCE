@@ -4,5 +4,7 @@
 
 class LeverBlock : public Block {
 public:
+    LeverBlock();
+
     static void blockStaticCtor();
 };

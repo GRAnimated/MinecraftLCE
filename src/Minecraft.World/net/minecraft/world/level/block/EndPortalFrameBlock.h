@@ -4,5 +4,7 @@
 
 class EndPortalFrameBlock : public Block {
 public:
+    EndPortalFrameBlock();
+
     static void blockStaticCtor();
 };

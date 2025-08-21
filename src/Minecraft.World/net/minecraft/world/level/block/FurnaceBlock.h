@@ -4,5 +4,7 @@
 
 class FurnaceBlock : public Block {
 public:
+    FurnaceBlock(bool lit);
+
     static void blockStaticCtor();
 };

@@ -2,9 +2,11 @@
 
 #include "NX/Render/C4JRender.h"
 #include "net/minecraft/client/ui/scene/UIScene.h"
+#include "net/minecraft/core/storage/C4JStorage.h"
 #include "net/minecraft/world/ArrayWithLength.h"
 #include "nn/os/os_MutexTypes.h"
 #include "types.h"
+
 #include <string>
 #include <unordered_map>
 #include <vector>
@@ -22,6 +24,7 @@ public:
     static void* qword_71017BE950;
     static nn::os::MutexType unk_71017BE928;
     static bool unk_71017BE928_initalised;
+    static EUIScene sCurrentScene;
 
     class UICONTROL {};
     class TextureDetail {};
@@ -40,6 +43,7 @@ public:
     // I don't know what it sets, and it seems that there's no such a thing on WiiU (not that it's inlined or
     // something, it's just not there at all)
     void setUnk(bool);
+    void setUnk2(bool);
     void preInit(int screenWidth, int screenHeight);
     void init(int screenWidth, int screenHeight);
     void postInit();
@@ -52,6 +56,10 @@ public:
     void setupRenderPosition(C4JRender::eViewportType);
     void NavigateBack(int, bool, EUIScene, EUILayer);
     void* RegisterForCallbackId(UIScene*);
+    void ResetSelectedItem();
+
+    void RequestErrorMessage(int, int, int*, unsigned int, unsigned int,
+                             int (*)(void*, int, C4JStorage::EMessageResult), void*, wchar_t*, bool);
 
     float getScreenWidth() { return this->mScreenWidth; }
 

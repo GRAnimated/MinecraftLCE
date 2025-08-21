@@ -8,7 +8,7 @@ public:
     virtual int GetLockedProfile() = 0;
     virtual void SetLockedProfile(int)
         = 0;  // guessing int here is flags provided by the OS when getting the user
-    virtual bool IsSignedInt(int) = 0;
+    virtual bool IsSignedIn(int) = 0;
     virtual bool IsSignedInLive(int) = 0;
     virtual bool IsSigningIn(int) = 0;
     virtual bool IsGuest(int) = 0;

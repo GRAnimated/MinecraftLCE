@@ -371,9 +371,10 @@ Vec3* Entity::getViewVector(float partialTicks) {
                                          this->mYRotO + ((this->mYRot - this->mYRotO) * partialTicks));
     }
 }
-void Entity::readAdditionContructionTag_4(CompoundTag*) {}
-void Entity::SetPositionLocked_4(bool) {}
-void Entity::SetGlideCollisionDamage_4(bool) {}
-void Entity::SetLiftForceModifier_4(double) {}
-void Entity::onLoadedFromSave_4() {}
-void Entity::setUsingItemFlag_4(bool) {}
+void Entity::readAdditionContructionTag(CompoundTag*) {}
+void Entity::SetPositionLocked(bool) {}
+void Entity::SetGlideCollisionDamage(bool) {}
+void Entity::SetLiftForceModifier(double) {}
+void Entity::onLoadedFromSave() {}
+void Entity::setUsingItemFlag(bool) {}
+void Entity::fjDebugCheckSmallIdLeaks() {}

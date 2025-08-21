@@ -4,5 +4,7 @@
 
 class HugeMushroomBlock : public Block {
 public:
+    HugeMushroomBlock(Material*, const MaterialColor*, Block*);
+
     static void blockStaticCtor();
 };

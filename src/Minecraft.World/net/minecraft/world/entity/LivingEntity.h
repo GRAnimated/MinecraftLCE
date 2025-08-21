@@ -8,7 +8,6 @@
 #include "net/minecraft/world/item/enchantment/Enchantment.h"
 #include "net/minecraft/world/level/Level.h"
 #include "types.h"
-#include <cstdint>
 #include <unordered_map>
 
 class AttributeMap;
@@ -16,6 +15,7 @@ class Attribute;
 class MobEffect;
 class MobEffectInstance;
 class CombatTracker;
+class ThermalAreaRuleDefinition;
 
 class LivingEntity : public Entity {
 public:
@@ -155,7 +155,7 @@ public:
     virtual void take(std::shared_ptr<Entity>, int);
     virtual bool canSee(std::shared_ptr<Entity>);
     virtual float getAttackAnim(float a2);
-    virtual void getSweptVolume();
+    virtual const AABB* getSweptVolume();
     virtual bool isEffectiveAi();
     virtual float getAbsorptionAmount();
     virtual void setAbsorptionAmount(float amount);
@@ -185,13 +185,14 @@ public:
     void CheckThermalAreas();
     void fallFlyingTravel(double&, double&, double&, Vec3*, float&, float&, double&, double);
     not_null_ptr<ItemInstance> getUseItem();
+    void activateElytraSpeedBoost(double);
 
     Attribute* mAttributes;
     CombatTracker* mCombatTracker;
     std::unordered_map<MobEffect*, MobEffectInstance*> mActivePotionsMap;
     NonNullList<not_null_ptr<ItemInstance>> mLastHandItemStacks;
     NonNullList<not_null_ptr<ItemInstance>> mLastArmorItemStacks;
-    bool mSwinging;
+    bool mIsSwinging;
     InteractionHand::EInteractionHand mSwingingArm;
     int mSwingTime;
     int mSwingTime2;
@@ -206,7 +207,7 @@ public:
     float mAnimationSpeedOld;
     float mAnimationSpeed;
     float mAnimationPosition;
-    int dword36C;
+    int dword_36C;
     float mTilto;
     float mTilt;
     float mRandomUnused2;
@@ -214,25 +215,26 @@ public:
     float mYBodyRot;
     float mYBodyRotO;
     float mYHeadRot;
-    float mYHeadRot0;
+    float mYHeadRotO;
     float mFlyingSpeed;
-    double double398;
-    double double3A0;
-    char byte3A8;
-    int dword3AC;
-    void* qword3B0;
-    char byte3B8;
-    void* qword3C0;
-    uint16_t word3C8;
-    void* qword3D0;
-    void* qword3D8;
-    char gap3E0;
-    char byte3E1;
-    void* qword3E8;
-    char byte3F0;
+    double mAdditionalGlideVelocity;
+    double mAppliedLiftVelocity;
+    bool mIsApplyingLift;
+    int mLiftDurationTimer;
+    double mTargetLiftVelocity;
+    bool mIsUpdraft;
+    double mStaticLiftTargetHeight;
+    bool mIsApplyingStaticLift;
+    bool mIsSpeedBoosting;
+    double mTargetBoostSpeed;
+    ThermalAreaRuleDefinition* mThermalArea;
+    bool bool_3E0;
+    bool mHasPendingThermalEntry;
+    void* qword_3E8;
+    bool mIsInThermalArea;
     int dword3F4;
-    char gap3F8[24];
-    char byte410;
+    char gap_3F8[24];
+    bool bool_410;
     std::shared_ptr<Player> mLastHurtByPlayer;
     int mLastHurtByPlayerTime;
     int mIsDead;
@@ -244,7 +246,7 @@ public:
     float mRotOffs;
     int mDeathScore;
     float mLastHurt;
-    bool mJumping;
+    bool mIsJumping;
     float mXxa;
     float mYya;
     float mZza;
@@ -255,7 +257,7 @@ public:
     double mLerpZ;
     double mLerpYRot;
     double mLerpXRot;
-    bool mEffectsDirty;
+    bool mAreEffectsDirty;
     std::shared_ptr<LivingEntity> mLastHurtByMob;
     int mLastHurtByMobTimestamp;
     std::shared_ptr<LivingEntity> mLastHurtMob;
@@ -269,15 +271,15 @@ public:
     BlockPos mLastPos;
     DamageSource* mLastDamageSource;
     long mLastDamageStamp;
-    char byte508;
-    int dword50C;
+    bool bool_508;
+    int mBoundingBoxUpdateCount;
     int mMinX;
     int mMaxX;
     int mMinY;
     int mMaxY;
     int mMinZ;
     int mMaxZ;
-    char gap528[128];
-    char byte5A8;
-    int dword5AC;
+    char gap_528[128];
+    char bool_5A8;
+    int dword_5AC;
 };

@@ -9,4 +9,5 @@ public:
     void Initialise();
     void SetLocalGame(bool local);
     bool IsHost();
+    void ResetLeavingGame();
 };

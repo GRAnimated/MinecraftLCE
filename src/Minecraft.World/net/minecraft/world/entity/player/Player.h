@@ -84,12 +84,12 @@ public:
     void setSlot(int, const not_null_ptr<ItemInstance>&) override;
     SoundSource::ESoundSource getSoundSource() override;
     void canCreateParticles() override;
-    bool PositionLocked_4() override;
-    void SetPositionLocked_4(bool) override;
-    void TakeGlideCollisionDamage_4() override;
-    void SetGlideCollisionDamage_4(bool) override;
-    double GetLiftForceModifier_4() override;
-    void SetLiftForceModifier_4(double) override;
+    bool PositionLocked() override;
+    void SetPositionLocked(bool) override;
+    void TakeGlideCollisionDamage() override;
+    void SetGlideCollisionDamage(bool) override;
+    double GetLiftForceModifier() override;
+    void SetLiftForceModifier(double) override;
     void registerAttributes() override;
     void onChangedBlock(const BlockPos&) override;
     void getExperienceReward(std::shared_ptr<Player>) override;
@@ -199,8 +199,7 @@ public:
     const StatsUID getSUID();
     PlayerUID getPlayerUID() { return this->playerUID1; }  // guessed name
 
-    // dunno the type
-    static std::vector<void*> sSkins;
+    static std::vector<unsigned int> sSkins;
 
     std::shared_ptr<Inventory> mInventory = nullptr;
     PlayerEnderChestContainer* mEnderChestInventory = nullptr;

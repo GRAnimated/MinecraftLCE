@@ -1,11 +1,13 @@
 #include "net/minecraft/world/enchantment/enchantments/FishingSpeedEnchantment.h"
+
+#include "net/minecraft/client/ui/StringIDs.h"
 #include "net/minecraft/world/item/enchantment/Enchantment.h"
 #include "net/minecraft/world/item/enchantment/EnchantmentCategory.h"
 
 FishingSpeedEnchantment::FishingSpeedEnchantment(const Rarity* rarity, const EnchantmentCategory* category,
                                                  arrayWithLength<const EquipmentSlot*> equipmentSlots)
     : Enchantment(rarity, category, equipmentSlots) {
-    Enchantment::setDescriptionId(0xFC584B8E);
+    Enchantment::setDescriptionId(StringIDs::Lure);
 }
 
 int FishingSpeedEnchantment::getMaxLevel() {

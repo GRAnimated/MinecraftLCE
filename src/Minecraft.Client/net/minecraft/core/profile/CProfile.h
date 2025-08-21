@@ -18,7 +18,7 @@ public:
     int GetLockedProfile() override;
     void
     SetLockedProfile(int) override;  // guessing int here is flags provided by the OS when getting the user
-    bool IsSignedInt(int) override;
+    bool IsSignedIn(int) override;
     bool IsSignedInLive(int) override;
     bool IsSigningIn(int) override;
     bool IsGuest(int) override;
@@ -47,7 +47,7 @@ public:
     virtual void sub_7100791ECC();
     virtual void sub_7100791ED4();
     virtual void sub_7100791EDC();
-    virtual void sub_7100794B3C();
+    virtual int GetPrimaryPad();
     virtual void sub_7100794A3C();
     virtual void sub_7100794A78();
     virtual void sub_7100792A30();

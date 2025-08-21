@@ -4,5 +4,7 @@
 
 class ColoredBlock : public Block {
 public:
+    ColoredBlock(Material*);
+
     static void blockStaticCtor();
 };

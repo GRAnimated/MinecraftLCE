@@ -4,5 +4,7 @@
 
 class PistonMagicBlock : public Block {
 public:
+    PistonMagicBlock();
+
     static void blockStaticCtor();
 };
