@@ -16,11 +16,16 @@ MapItem::MapItem() : ComplexItem() {
     this->setStackedByData(true);
 }
 
+std::shared_ptr<MapItemSavedData> MapItem::getSavedData(not_null_ptr<ItemInstance> itemInstance,
+                                                        Level* level) {
+    return this->getSavedData(itemInstance->getAuxValue(), level);
+}
+
 // NON_MATCHING: the "map_" strings shit needs to get fixed
 std::shared_ptr<MapItemSavedData> MapItem::getSavedData(int mapAux, Level* level) {
     MemSect(31);  // are they fucking crazy?????????
-                  // this shit below is 99% wrong too but I don't have a damn clue what's that pile of crap is
-                  // supposed to be
+    // this shit below is 99% wrong too but I don't have a damn clue what's that pile of crap is
+    // supposed to be
     std::wstring mapId = L"map_";
     mapId += std::to_wstring(mapAux);
     MemSect(0);
@@ -49,12 +54,7 @@ std::shared_ptr<MapItemSavedData> MapItem::getSavedData(int mapAux, Level* level
     return savedData;
 }
 
-std::shared_ptr<MapItemSavedData> MapItem::getSavedData(not_null_ptr<ItemInstance> itemInstance,
-                                                        Level* level) {
-    return this->getSavedData(itemInstance->getAuxValue(), level);
-}
-
-// this is completly random shit just to make MapItem::inventoryTick match
+// NON_MATCHING: this is completly random shit just to make MapItem::inventoryTick match
 void MapItem::update(Level* level, std::shared_ptr<Entity> ent, std::shared_ptr<MapItemSavedData> savedData) {
     level->addEntity(ent);
     savedData = nullptr;
@@ -125,6 +125,8 @@ TextureAtlasSprite* MapItem::getLayerIcon(int a2, int layer) {
     return layer == 1 ? this->MAP_FILLED_MARKINGS : Item::getLayerIcon(a2, layer);
 }
 
+// NON_MATCHING: fix that MapItemSavedData::getUpdatePacket impl is skipped while "optimising" and doesn't
+// strip level arg being passed
 std::shared_ptr<Packet> MapItem::getUpdatePacket(not_null_ptr<ItemInstance> itemInstance, Level* level,
                                                  std::shared_ptr<Player> player) {
     return this->getSavedData(itemInstance, level)->getUpdatePacket(itemInstance, level, player);

@@ -34,7 +34,7 @@ public:
     bool mIsLevelClassic;
     bool mIsLevelSmall;
     bool mIsLevelMedium;
-    char unknown;  // could be mIsLevelLarge
+    bool mIsLevelLarge;
     int mSize;
     Random rand1;
     Random rand2;
