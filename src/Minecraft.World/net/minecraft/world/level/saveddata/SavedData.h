@@ -5,7 +5,7 @@
 
 class CompoundTag;
 
-class SavedData : std::enable_shared_from_this<SavedData> {
+class SavedData : public std::enable_shared_from_this<SavedData> {
 public:
     SavedData(const std::wstring&);
     virtual ~SavedData();

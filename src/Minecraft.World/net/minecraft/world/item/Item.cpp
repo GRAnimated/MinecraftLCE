@@ -71,7 +71,7 @@ bool Item::verifyTagAfterLoad(CompoundTag*) {
     return false;
 }
 
-int Item::GetUseTooltip(const ItemToolTipDataHolder&) {
+unsigned int Item::GetUseTooltip(const ItemToolTipDataHolder&) {
     return -1;
 }
 
@@ -137,19 +137,19 @@ bool Item::isMirroredArt() {
     return false;
 }
 
-int Item::getDescriptionId(int) {
+unsigned int Item::getDescriptionId(int) {
     return this->mDescriptionId;
 }
 
-int Item::getDescriptionId(not_null_ptr<ItemInstance>) {
+unsigned int Item::getDescriptionId(not_null_ptr<ItemInstance>) {
     return this->mDescriptionId;
 }
 
-int Item::getUseDescriptionId() {
+unsigned int Item::getUseDescriptionId() {
     return this->mUseDescriptionId;
 }
 
-int Item::getUseDescriptionId(not_null_ptr<ItemInstance>) {
+unsigned int Item::getUseDescriptionId(not_null_ptr<ItemInstance>) {
     return this->mUseDescriptionId;
 }
 

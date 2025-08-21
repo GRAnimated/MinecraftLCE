@@ -7,7 +7,7 @@ public:
     AirItem(Block* block);
     ~AirItem() override {}
 
-    int getDescriptionId(not_null_ptr<ItemInstance> itemInstance) override;
+    unsigned int getDescriptionId(not_null_ptr<ItemInstance> itemInstance) override;
     void appendHoverText(not_null_ptr<ItemInstance> itemInstance, std::shared_ptr<Player> player,
                          void* htmlString, bool) override;
 

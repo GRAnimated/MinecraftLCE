@@ -12,7 +12,7 @@ class ElytraItem : public Item {
 
     static bool isFlyEnabled(not_null_ptr<ItemInstance>);
 
-    int GetUseTooltip(const ItemToolTipDataHolder&) override;
+    unsigned int GetUseTooltip(const ItemToolTipDataHolder&) override;
     ~ElytraItem() override;
     bool TestUse(Level*, std::shared_ptr<Player>, InteractionHand::EInteractionHand) override;
     InteractionResultHolder use(Level*, std::shared_ptr<Player>, InteractionHand::EInteractionHand) override;
