@@ -4,7 +4,6 @@
 #include <new>
 
 #include "4JLibraries_Source/NX/Thread/C4JThreadImpl.h"
-#include "net/minecraft/world/level/newbiome/layer/IntCache.h"
 #include "NX/Render/RendererCore.h"
 #include "com/mojang/blaze3d/vertex/Tesselator.h"
 #include "net/minecraft/client/CGameNetworkManager.h"
@@ -24,6 +23,7 @@
 #include "net/minecraft/world/level/biome/Biome.h"
 #include "net/minecraft/world/level/block/Block.h"
 #include "net/minecraft/world/level/chunk/storage/OldChunkStorage.h"
+#include "net/minecraft/world/level/newbiome/layer/IntCache.h"
 #include "net/minecraft/world/phys/Vec2.h"
 #include "nn/fs.h"
 #include "nn/nifm.h"

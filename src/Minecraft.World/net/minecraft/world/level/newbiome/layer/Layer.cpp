@@ -84,8 +84,10 @@ int Layer::random(int i, int j, int k, int l) {
     int random = nextRandom(4);
 
     int ret = (random != 2 ? i : k);
-    if (random == 3) ret = l;
-    if (random == 1) ret = j;
+    if (random == 3)
+        ret = l;
+    if (random == 1)
+        ret = j;
     return ret;
 }
 

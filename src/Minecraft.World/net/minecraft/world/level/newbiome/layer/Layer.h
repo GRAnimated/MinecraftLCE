@@ -1,7 +1,7 @@
 #pragma once
 
-#include <memory>
 #include "net/minecraft/world/ArrayWithLength.h"
+#include <memory>
 
 class LevelType;
 class SuperflatConfig;
@@ -13,8 +13,9 @@ public:
 
 class Layer {
 public:
-    static arrayWithLength<std::shared_ptr<Layer>> getDefaultLayers(long long l, LevelType* levelType, SuperflatConfig* superflatConfig, LevelData* levelData,
-                                                                    BiomeSource::LayerOverrideSettings* layerOverrideSettings);
+    static arrayWithLength<std::shared_ptr<Layer>>
+    getDefaultLayers(long long l, LevelType* levelType, SuperflatConfig* superflatConfig,
+                     LevelData* levelData, BiomeSource::LayerOverrideSettings* layerOverrideSettings);
     Layer(long long seed);
 
     static bool isSame(int biomeIdA, int biomeIdB);

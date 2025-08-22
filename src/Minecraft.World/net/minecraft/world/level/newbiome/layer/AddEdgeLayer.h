@@ -4,11 +4,7 @@
 
 class AddEdgeLayer : public Layer {
 public:
-    enum Type : int {
-        COOL_WARM,
-        HEAT_ICE,
-        SPECIAL
-    };
+    enum Type : int { COOL_WARM, HEAT_ICE, SPECIAL };
 
     AddEdgeLayer(long long seed, std::shared_ptr<Layer> childLayer, Type type);
 

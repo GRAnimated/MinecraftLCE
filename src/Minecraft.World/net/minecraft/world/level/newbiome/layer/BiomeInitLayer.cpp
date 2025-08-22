@@ -1,11 +1,13 @@
-#include "net/minecraft/world/level/newbiome/layer/BiomeInitLayer.h"
-#include "net/minecraft/world/level/biome/Biome.h"
-#include "net/minecraft/world/level/LevelType.h"
-#include "net/minecraft/world/level/levelgen/CustomizableSourceSettings.h"
-#include "net/minecraft/world/level/newbiome/layer/IntCache.h"
 #include "NX/Platform.h"
+#include "net/minecraft/world/level/LevelType.h"
+#include "net/minecraft/world/level/biome/Biome.h"
+#include "net/minecraft/world/level/levelgen/CustomizableSourceSettings.h"
+#include "net/minecraft/world/level/newbiome/layer/BiomeInitLayer.h"
+#include "net/minecraft/world/level/newbiome/layer/IntCache.h"
 
-BiomeInitLayer::BiomeInitLayer(long long seed, std::shared_ptr<Layer> childLayer, LevelType* levelType, SuperflatConfig* superflatConfig) : Layer(seed) {
+BiomeInitLayer::BiomeInitLayer(long long seed, std::shared_ptr<Layer> childLayer, LevelType* levelType,
+                               SuperflatConfig* superflatConfig)
+    : Layer(seed) {
     mChildLayer = childLayer;
     if (levelType == LevelType::NORMAL_1_1) {
         mWarmBiomes = {6, true};
@@ -47,7 +49,8 @@ BiomeInitLayer::BiomeInitLayer(long long seed, std::shared_ptr<Layer> childLayer
 
     CustomizableSourceSettings* settings = nullptr;
     if (levelType != LevelType::NORMAL_1_1 && levelType == LevelType::CUSTOMIZED) {
-        CustomizableSourceSettings::Builder* builder = CustomizableSourceSettings::Builder::fromString(superflatConfig);
+        CustomizableSourceSettings::Builder* builder
+            = CustomizableSourceSettings::Builder::fromString(superflatConfig);
         settings = builder->build();
     }
 
@@ -59,8 +62,8 @@ arrayWithLength<int> BiomeInitLayer::getArea(int i, int j, int k, int l) {
     PIXBeginNamedEvent(0.0, "BiomeInitLayer::getArea");
     arrayWithLength<int> js = IntCache::allocate(k * l);
 
-    for(int m = 0; m < l; ++m) {
-        for(int n = 0; n < k; ++n) {
+    for (int m = 0; m < l; ++m) {
+        for (int n = 0; n < k; ++n) {
             initRandom(n + i, m + j);
             int o = is[n + m * k];
             int p = (o & 3840) >> 8;
