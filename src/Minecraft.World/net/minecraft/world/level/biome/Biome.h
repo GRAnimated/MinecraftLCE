@@ -245,7 +245,7 @@ public:
     virtual int getBaseClass() = 0;
     virtual int getTemperatureCategory();
     virtual bool isAlwaysValidSpawn();
-    virtual void getWaterColor();
+    virtual unsigned int getWaterColor();
     virtual Vec3* getFogColor(float, float) const;
     virtual bool isFoggy();
     virtual bool isNatural();
