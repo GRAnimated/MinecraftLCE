@@ -143,7 +143,8 @@ public:
     int zPos;
     char unk2[14];
     std::unordered_map<BlockPos, std::shared_ptr<BlockEntity>>* blockEntities;
-    char unk3[32];
+    char unk3[33];
+    char unkIsInhabited;
     short biomeCount;
     char unk4[42];
     long inhabitedTime;
