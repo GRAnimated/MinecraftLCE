@@ -1,6 +1,6 @@
 #pragma once
 
-#include "4JLibraries_Source/NX/Render/C4JRender.h"
+#include "NX/Render/C4JRender.h"
 #include "TextureAtlas.h"
 #include "net/minecraft/world/ArrayWithLength.h"
 #include <string>

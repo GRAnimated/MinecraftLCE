@@ -1,5 +1,6 @@
-#include "net/minecraft/util/Mth.h"
 #include "net/minecraft/world/level/saveddata/maps/MapDecoration.h"
+
+#include "net/minecraft/util/Mth.h"
 
 const MapDecoration::Type PLAYER_WHITE = MapDecoration::Type(0, 0, 1, -1);
 const MapDecoration::Type PLAYER_GREEN = MapDecoration::Type(1, 0, 1, -1);

@@ -1,7 +1,8 @@
+#include "net/minecraft/client/gui/MapRenderer.h"
+
 
 #include "net/minecraft/client/Minecraft.h"
 #include "net/minecraft/client/color/ColourTable.h"
-#include "net/minecraft/client/gui/MapRenderer.h"
 
 #include "NX/Render/C4JRender.h"
 #include "Utils.h"
