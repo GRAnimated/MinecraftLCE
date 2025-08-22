@@ -1,5 +1,11 @@
 #include "net/minecraft/world/level/chunk/LevelChunk.h"
 
+void LevelChunk::staticCtor() {
+    InitializeCriticalSection(&LevelChunk::mMutex_710178c150);
+    InitializeCriticalSection(&LevelChunk::mMutex_710178c170);
+    InitializeCriticalSection(&LevelChunk::mMutex_710178c190);
+}
+
 void LevelChunk::writeCompressedDataData(DataOutputStream* out) {
     mDataDataLower->write(out);
     mDataDataUpper->write(out);

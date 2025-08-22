@@ -73,6 +73,7 @@ TextureAtlasSprite* PlanksBlock::getTexture(const Direction* direction, const Bl
 unsigned int planks_block_desc_ids[6]
     = {StringIDs::OakPlanks, StringIDs::SprucePlanks, StringIDs::BirchPlanks, StringIDs::JunglePlanks,
        StringIDs::AcaciaPlanks};
+
 unsigned int PlanksBlock::getDescriptionId(int data) {
     return planks_block_desc_ids[data > (sizeof(planks_block_desc_ids) / sizeof(int)) - 1 ?
                                      0 :

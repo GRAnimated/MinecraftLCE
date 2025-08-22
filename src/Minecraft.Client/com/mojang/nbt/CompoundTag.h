@@ -92,12 +92,12 @@ public:
      */
     bool contains(const std::wstring& name);
 
-    /** Checks if a child with the provided name exists
+    /** Checks if a child with the provided name and type exists
      *
-     *  Dunno what the int is for
      *  @param name The name of the child tag
+     *  @param type Type of the child tag
      */
-    bool contains(const std::wstring& name, int);
+    bool contains(const std::wstring& name, int type);
 
     /** Adds a `Tag`
      *

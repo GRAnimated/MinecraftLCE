@@ -26,8 +26,8 @@ UIScene_MainMenu::UIScene_MainMenu(int a1, void* a2, UILayer* layer) : UIScene(a
     Entity::fjDebugCheckSmallIdLeaks();
     gConsoleUIController.setUnk2(false);
     this->initialiseMovie();
-    layer->addComponent(a1, UIComponent_Panorama, nullptr);
-    layer->addComponent(a1, UIComponent_Logo, nullptr);
+    layer->addComponent(a1, EUIComponent_Panorama, nullptr);
+    layer->addComponent(a1, EUIComponent_Logo, nullptr);
 
     this->_530 = 0;
     this->_4e8 = false;
@@ -136,8 +136,8 @@ void UIScene_MainMenu::handleReload() {
 }
 
 void UIScene_MainMenu::updateComponents() {
-    this->mUILayer->showComponent(this->mPadID, UIComponent_Panorama, true);
-    this->mUILayer->showComponent(this->mPadID, UIComponent_Logo, true);
+    this->mUILayer->showComponent(this->mPadID, EUIComponent_Panorama, true);
+    this->mUILayer->showComponent(this->mPadID, EUIComponent_Logo, true);
 }
 
 // NON_MATCHING | Score: 4720 (lower is better)
@@ -145,18 +145,18 @@ void UIScene_MainMenu::updateComponents() {
 // present on Wii U
 void UIScene_MainMenu::tick() {
     UIScene::tick();
-    if (ConsoleUIController::sCurrentScene != UIScene_HowToPlay
+    if (ConsoleUIController::sCurrentScene != EUIScene_HowToPlay
         && !CConsoleMinecraftApp::sInstance.GetTMSAction(this->mPadID)) {
         int lockedProfile = CProfile::sInstance->GetLockedProfile();
         if (CConsoleMinecraftApp::sInstance.getSomething()) {
-            void* inWorldMenu = (void*)(ConsoleUIController::sCurrentScene == UIScene_LoadCreateJoinMenu
+            void* inWorldMenu = (void*)(ConsoleUIController::sCurrentScene == EUIScene_LoadCreateJoinMenu
                                         && this->_4eb);  // ????
 
             gConsoleUIController.NavigateToScene(lockedProfile, ConsoleUIController::sCurrentScene,
                                                  inWorldMenu, static_cast<EUILayer>(6),
                                                  static_cast<EUIGroup>(6));
 
-            ConsoleUIController::sCurrentScene = UIScene_HowToPlay;
+            ConsoleUIController::sCurrentScene = EUIScene_HowToPlay;
         }
     }
     if (this->mShowUnlockFullGame != false && CProfile::sInstance->IsFullVersion()) {

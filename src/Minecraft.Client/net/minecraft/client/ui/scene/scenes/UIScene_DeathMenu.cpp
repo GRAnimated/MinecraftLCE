@@ -123,7 +123,7 @@ UIScene_DeathMenu::~UIScene_DeathMenu() {
 }
 
 EUIScene UIScene_DeathMenu::getSceneType() {
-    return EUIScene::UIScene_DeathMenu;
+    return EUIScene::EUIScene_DeathMenu;
 }
 
 void UIScene_DeathMenu::tick() {
