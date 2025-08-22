@@ -122,8 +122,8 @@ public:
 
     CompressedBlockStorage* getBlockDataStorage(int y) {
         CompressedBlockStorage* storage = this->mBlockDataLower;
-        
-        if(y > 127) {
+
+        if (y > 127) {
             storage = this->mBlockDataUpper;
         }
 
@@ -144,7 +144,7 @@ public:
     char unk2[14];
     std::unordered_map<BlockPos, std::shared_ptr<BlockEntity>>* blockEntities;
     char unk3[33];
-    char unkIsInhabited;
+    char unkIsTerrainPopulated;
     short biomeCount;
     char unk4[42];
     long inhabitedTime;

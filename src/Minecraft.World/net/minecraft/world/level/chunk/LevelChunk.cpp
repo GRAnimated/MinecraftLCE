@@ -11,7 +11,7 @@ int LevelChunk::getBlockId(int x, int y, int z) {
 }
 
 bool LevelChunk::isTerrainPopulated() {
-    return unkIsInhabited >> 2 & 1; //
+    return unkIsTerrainPopulated >> 2 & 1;
 }
 
 void LevelChunk::writeCompressedDataData(DataOutputStream* out) {
