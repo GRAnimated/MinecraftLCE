@@ -1,6 +1,7 @@
 #pragma once
 
 #include "net/minecraft/core/System.h"
+#include "net/minecraft/core/BlockPos.h"
 #include "net/minecraft/world/ArrayWithLength.h"
 #include "net/minecraft/world/level/LightLayer.h"
 #include "net/minecraft/world/level/chunk/ChunkPos.h"
@@ -15,7 +16,6 @@ template <typename T>
 class Predicate;
 
 class Block;
-class BlockPos;
 class BlockState;
 class BlockEntity;
 class Level;
@@ -75,7 +75,7 @@ public:
     virtual void addEntity(std::shared_ptr<Entity>);
     virtual void removeEntity(std::shared_ptr<Entity>);
     virtual void removeEntity(std::shared_ptr<Entity>, int);
-    virtual bool isSkyLit(const BlockPos&);
+    virtual bool isSkyLit(const BlockPos& block);
     virtual void getBlockEntity(const BlockPos&, LevelChunk::EntityCreationType);
     virtual void addBlockEntity(std::shared_ptr<BlockEntity>);
     virtual void setBlockEntity(const BlockPos&, std::shared_ptr<BlockEntity>);
@@ -94,7 +94,7 @@ public:
     virtual void getBlocksAndData(arrayWithLength<unsigned char>*, int, int, int, int, int, int, int, bool);
     virtual void setBlocksAndData(arrayWithLength<unsigned char>, int, int, int, int, int, int, int, bool);
     virtual void testSetBlocksAndData(arrayWithLength<unsigned char>, int, int, int, int, int, int, int);
-    virtual void getRandom(long long);
+    virtual Random* getRandom(long long t);
     virtual bool isEmpty();
     virtual Biome* getBiome(const BlockPos&, BiomeSource*);
     virtual void compressLighting();
