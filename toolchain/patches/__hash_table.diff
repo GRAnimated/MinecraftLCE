@@ -1,0 +1,10 @@
+--- __hash_table
++++ __hash_table
+@@ -2343,6 +2343,7 @@
+ 
+ template <class _Tp, class _Hash, class _Equal, class _Alloc>
+ template <class _Key>
++_LIBCPP_INLINE_VISIBILITY
+ typename __hash_table<_Tp, _Hash, _Equal, _Alloc>::size_type
+ __hash_table<_Tp, _Hash, _Equal, _Alloc>::__erase_unique(const _Key& __k)
+ {

@@ -248,7 +248,7 @@ public:
     virtual const AABB* getBoundingBox();
     virtual void getBoundingBoxForCulling();
     virtual void setBoundingBox(AABB*);
-    virtual void getEyeHeight();
+    virtual float getEyeHeight();
     virtual void setSlot(int, const not_null_ptr<ItemInstance>&);
     virtual void interactAt(const std::shared_ptr<Player>&, Vec3*, InteractionHand::EInteractionHand);
     virtual void ignoreExplosion();

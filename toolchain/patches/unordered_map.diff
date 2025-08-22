@@ -1,0 +1,11 @@
+--- unordered_map
++++ unordered_map
+@@ -1088,7 +1088,7 @@
+     iterator erase(const_iterator __p) {return __table_.erase(__p.__i_);}
+     _LIBCPP_INLINE_VISIBILITY
+     iterator erase(iterator __p)       {return __table_.erase(__p.__i_);}
+-    _LIBCPP_INLINE_VISIBILITY
++    //_LIBCPP_INLINE_VISIBILITY
+     size_type erase(const key_type& __k) {return __table_.__erase_unique(__k);}
+     _LIBCPP_INLINE_VISIBILITY
+     iterator erase(const_iterator __first, const_iterator __last)
