@@ -1,6 +1,5 @@
 #include "net/minecraft/client/gui/MapRenderer.h"
 
-
 #include "net/minecraft/client/Minecraft.h"
 #include "net/minecraft/client/color/ColourTable.h"
 
