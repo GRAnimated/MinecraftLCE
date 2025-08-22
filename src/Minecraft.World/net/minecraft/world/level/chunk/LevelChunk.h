@@ -1,5 +1,6 @@
 #pragma once
 
+#include "net/minecraft/core/System.h"
 #include "net/minecraft/world/ArrayWithLength.h"
 #include "net/minecraft/world/level/LightLayer.h"
 #include "net/minecraft/world/level/chunk/ChunkPos.h"
@@ -32,6 +33,12 @@ public:
     LevelChunk(Level*, ChunkPrimer*, int, int);
 
     enum EntityCreationType {};
+
+    void staticCtor();
+
+    static nn::os::MutexType mMutex_710178c150;
+    static nn::os::MutexType mMutex_710178c170;
+    static nn::os::MutexType mMutex_710178c190;
 
     virtual void setBlockData(arrayWithLength<unsigned char>);
     virtual void getBlockData(arrayWithLength<unsigned char>);
@@ -112,7 +119,9 @@ public:
     char padding_0[24];
     CompressedBlockStorage* mBlockDataLower;  // Y0-Y127
     CompressedBlockStorage* mBlockDataUpper;  // Y128-Y255
+
     char unk[400];
+
     SparseDataStorage* mDataDataLower;         // Y0-Y127
     SparseDataStorage* mDataDataUpper;         // Y128-Y255
     SparseLightStorage* mSkyLightDataLower;    // Y0-Y127
