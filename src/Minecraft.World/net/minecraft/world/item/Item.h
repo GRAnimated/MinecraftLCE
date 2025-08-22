@@ -79,6 +79,8 @@ public:
     void setStackedByData(bool);
     bool isStackedByData();
 
+    static int VALIDgetId(Item*);
+
     static Item* byId(int id);
     static void registerBlock(Block* block);
     static void registerBlock(Block* block, Item*);
@@ -89,7 +91,7 @@ public:
 
     virtual not_null_ptr<ItemInstance> getDefaultInstance();
     virtual bool verifyTagAfterLoad(CompoundTag* tag);
-    virtual int GetUseTooltip(const ItemToolTipDataHolder& toolTipDataHolder);
+    virtual unsigned int GetUseTooltip(const ItemToolTipDataHolder& toolTipDataHolder);
     virtual ~Item() {}
     virtual ActionResultType useOn(std::shared_ptr<Player> user, Level* level, const BlockPos& pos,
                                    InteractionHand::EInteractionHand hand, const Direction* direction,
@@ -113,10 +115,10 @@ public:
                                std::shared_ptr<LivingEntity> ent, InteractionHand::EInteractionHand);
     virtual bool isHandEquipped();
     virtual bool isMirroredArt();
-    virtual int getDescriptionId(int auxValue);
-    virtual int getDescriptionId(not_null_ptr<ItemInstance> itemInstance);
-    virtual int getUseDescriptionId();
-    virtual int getUseDescriptionId(not_null_ptr<ItemInstance> itemInstance);
+    virtual unsigned int getDescriptionId(int auxValue);
+    virtual unsigned int getDescriptionId(not_null_ptr<ItemInstance> itemInstance);
+    virtual unsigned int getUseDescriptionId();
+    virtual unsigned int getUseDescriptionId(not_null_ptr<ItemInstance> itemInstance);
     virtual bool shouldOverrideMultiplayerNBT();
     virtual int getColor(not_null_ptr<ItemInstance> itemInstance,
                          int auxValue);  // not sure about auxValue, pure guess

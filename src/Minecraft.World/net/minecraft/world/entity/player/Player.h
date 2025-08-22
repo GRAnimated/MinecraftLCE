@@ -197,6 +197,7 @@ public:
     bool canDestroy(const BlockState*);
     float getDestroySpeed(const BlockState*);
     const StatsUID getSUID();
+    PlayerUID getPlayerUID() { return this->playerUID1; }  // guessed name
 
     static std::vector<unsigned int> sSkins;
 
