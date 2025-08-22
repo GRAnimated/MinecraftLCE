@@ -113,12 +113,22 @@ public:
     ChunkPos getPos();
     bool isTerrainPopulated();
 
-    int getBlockId(int, int, int);
-    int getData(int, int, int);
+    int getBlockId(int x, int y, int z);
+    int getData(int x, int y, int z);
 
     char padding_0[24];
     CompressedBlockStorage* mBlockDataLower;  // Y0-Y127
     CompressedBlockStorage* mBlockDataUpper;  // Y128-Y255
+
+    CompressedBlockStorage* getBlockDataStorage(int y) {
+        CompressedBlockStorage* storage = this->mBlockDataLower;
+        
+        if(y > 127) {
+            storage = this->mBlockDataUpper;
+        }
+
+        return storage;
+    }
 
     char unk[400];
 
