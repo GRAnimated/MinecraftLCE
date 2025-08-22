@@ -1,8 +1,9 @@
+#include "net/minecraft/world/level/newbiome/layer/BiomeInitLayer.h"
+
 #include "NX/Platform.h"
 #include "net/minecraft/world/level/LevelType.h"
 #include "net/minecraft/world/level/biome/Biome.h"
 #include "net/minecraft/world/level/levelgen/CustomizableSourceSettings.h"
-#include "net/minecraft/world/level/newbiome/layer/BiomeInitLayer.h"
 #include "net/minecraft/world/level/newbiome/layer/IntCache.h"
 
 BiomeInitLayer::BiomeInitLayer(long long seed, std::shared_ptr<Layer> childLayer, LevelType* levelType,
