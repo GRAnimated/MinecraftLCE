@@ -4,9 +4,9 @@
 #include <new>
 
 #include "4JLibraries_Source/NX/Thread/C4JThreadImpl.h"
+#include "net/minecraft/world/level/newbiome/layer/IntCache.h"
 #include "NX/Render/RendererCore.h"
 #include "com/mojang/blaze3d/vertex/Tesselator.h"
-#include "java/io/IntCache.h"
 #include "net/minecraft/client/CGameNetworkManager.h"
 #include "net/minecraft/client/CInput.h"
 #include "net/minecraft/client/CMinecraftApp.h"

@@ -223,10 +223,10 @@ bool Biome::isAlwaysValidSpawn() {
     return false;
 }
 
-void Biome::getWaterColor() {
+unsigned int Biome::getWaterColor() {
     Minecraft* minecraft = Minecraft::GetInstance();
     ColourTable* colourTable = minecraft->getColourTable();
-    colourTable->getColour(mWaterColor);
+    return colourTable->getColour(mWaterColor);
 }
 
 Vec3* Biome::getFogColor(float a2, float a3) const {

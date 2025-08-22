@@ -65,14 +65,14 @@ void UIScene_HowToPlayMenu::updateTooltips() {
 
 void UIScene_HowToPlayMenu::updateComponents() {
     if (!Minecraft::GetInstance()->mLevel) {
-        this->mUILayer->showComponent(this->mPadID, EUIScene::UIComponent_Panorama, true);
-        this->mUILayer->showComponent(this->mPadID, EUIScene::UIComponent_Logo, true);
+        this->mUILayer->showComponent(this->mPadID, EUIScene::EUIComponent_Panorama, true);
+        this->mUILayer->showComponent(this->mPadID, EUIScene::EUIComponent_Logo, true);
     } else {
-        this->mUILayer->showComponent(this->mPadID, EUIScene::UIComponent_Panorama, false);
+        this->mUILayer->showComponent(this->mPadID, EUIScene::EUIComponent_Panorama, false);
         if (CConsoleMinecraftApp::sInstance.GetLocalPlayerCount() == 1)
-            this->mUILayer->showComponent(this->mPadID, EUIScene::UIComponent_Logo, true);
+            this->mUILayer->showComponent(this->mPadID, EUIScene::EUIComponent_Logo, true);
         else
-            this->mUILayer->showComponent(this->mPadID, EUIScene::UIComponent_Logo, false);
+            this->mUILayer->showComponent(this->mPadID, EUIScene::EUIComponent_Logo, false);
     }
 }
 
@@ -111,7 +111,7 @@ void UIScene_HowToPlayMenu::handlePress(int a2, int a3) {
         this->dword200 = a3;
         gConsoleUIController.PlayUISFX(SoundEvent::UI_PRESS);
         gConsoleUIController.NavigateToScene(
-            this->mPadID, EUIScene::UIScene_HowToPlay,
+            this->mPadID, EUIScene::EUIScene_HowToPlay,
             // idk why they do this int16_t cast, or maybe there's something wrong with my code but it
             //                                                                    matches so I'm happy
             (unsigned int*)(0x80000000 | ((dword_71011078D8[a3] << 16) | static_cast<int16_t>(this->mPadID))),
@@ -127,5 +127,5 @@ bool UIScene_HowToPlayMenu::mapElementsAndNames() {
 }
 
 EUIScene UIScene_HowToPlayMenu::getSceneType() {
-    return EUIScene::UIScene_HowToPlayMenu;
+    return EUIScene::EUIScene_HowToPlayMenu;
 }
