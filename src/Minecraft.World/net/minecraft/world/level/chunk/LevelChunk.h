@@ -62,7 +62,8 @@ public:
     virtual void recalcHeightmap();
     virtual void lightLava();
     virtual void getBlockLightBlock(const BlockPos&);
-    virtual Block* getBlock(const BlockPos&);
+    virtual Block* getChunkBlock(unsigned int x, unsigned int y, unsigned int z);
+    virtual Block* getBlock(const BlockPos& pos);
     virtual const BlockState* getBlockState(const BlockPos&);
     virtual void getData(const BlockPos&);
     virtual void setData(int, int, int, int, int, bool*);
