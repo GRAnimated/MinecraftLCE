@@ -6,6 +6,8 @@ class SoundEvent;
 
 class ClientboundSoundPacket : public Packet, public std::enable_shared_from_this<ClientboundSoundPacket> {
 public:
+    static std::shared_ptr<Packet> create();
+
     enum ESoundInstances {
         _0 = 0,
         _1 = 1,

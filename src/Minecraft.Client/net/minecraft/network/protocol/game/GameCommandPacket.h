@@ -6,6 +6,9 @@
 #include "types.h"
 
 class GameCommandPacket : public Packet, public std::enable_shared_from_this<GameCommandPacket> {
+public:
+    static std::shared_ptr<Packet> create();
+
     GameCommandPacket();
     GameCommandPacket(EGameCommand, arrayWithLength<uchar>);
 
