@@ -11,6 +11,7 @@ class PowerupRuleDefinition;
 class Player;
 
 class CommonMasterGameMode {
+public:
     virtual ~CommonMasterGameMode();
     virtual void Setup(EMiniGameId);
     virtual void Tick();

@@ -48,6 +48,13 @@ public:
     void addDecoration(const MapDecoration::Type*, Level*, int, double, double, double, double, bool);
     std::vector<MapDecoration> fjGetAllDecorations();
 
+    static void appendDecorations(std::vector<MapDecoration>* out,
+                                  std::unordered_map<int, MapDecoration>* in) {
+        for (auto& pair : *in) {
+            out->push_back(pair.second);
+        }
+    }
+
     int mXCenter;
     int mZCenter;
     char mDimension;

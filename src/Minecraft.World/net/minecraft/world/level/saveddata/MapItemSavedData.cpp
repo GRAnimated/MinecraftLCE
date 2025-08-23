@@ -1,13 +1,11 @@
 #include "net/minecraft/world/level/saveddata/MapItemSavedData.h"
 
 #include "NX/Platform.h"
-#include "Utils.h"
 #include "net/minecraft/util/Mth.h"
 #include "net/minecraft/world/level/Level.h"
 #include "net/minecraft/world/level/saveddata/maps/MapDecoration.h"
 #include "net/minecraft/world/level/storage/LevelData.h"
 
-#include <algorithm>
 #include <memory>
 #include <unordered_map>
 #include <vector>
@@ -96,7 +94,7 @@ void MapItemSavedData::addDecoration(const MapDecoration::Type* type, Level* lev
 
 std::vector<MapDecoration> MapItemSavedData::fjGetAllDecorations() {
     std::vector<MapDecoration> combined;
-    putMapValuesIntoVector(&combined, &this->mPlayerDecorations);
-    putMapValuesIntoVector(&combined, &this->mFrameDecorations);
+    appendDecorations(&combined, &this->mPlayerDecorations);
+    appendDecorations(&combined, &this->mFrameDecorations);
     return combined;
 }
