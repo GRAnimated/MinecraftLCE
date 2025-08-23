@@ -64,6 +64,8 @@ int MapDecoration::Type::getMapColor() const {
     return this->mColor;
 }
 
+MapDecoration::MapDecoration() {}
+
 MapDecoration::MapDecoration(const MapDecoration::Type* type, char x, char y, char rot, int icon, bool idk) {
     this->mX = x;
     this->mY = y;

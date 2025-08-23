@@ -61,10 +61,10 @@ public:
     char getRot() const;
     bool isIdk() const { return this->mIdk; }  // const prob ?
 
-    const MapDecoration::Type* mType;
-    int mX;
-    int mY;
-    char mRot;
-    int mIcon;
-    bool mIdk;
+    const MapDecoration::Type* mType = nullptr;
+    int mX = 0;
+    int mY = 0;
+    char mRot = 0;
+    int mIcon = 0;
+    bool mIdk = 0;
 };
