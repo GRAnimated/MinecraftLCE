@@ -49,8 +49,7 @@ bool sortByTexture(const MapDecoration& a, const MapDecoration& b) {
 // NON_MATCHING: stack issues, also don't know how to replicate that map destruction being earlier
 void MapRenderer::MapInstance::draw(const std::shared_ptr<Player>& _player) {
     this->fjUpdateWithRenderContext();
-
-    Player* player = _player.get();
+    Player* player = _player.get();  // why?
 
     Tesselator* tesselator = Tesselator::getInstance();
     BufferBuilder* bufferBuilder = tesselator->getBuilder();
@@ -70,65 +69,70 @@ void MapRenderer::MapInstance::draw(const std::shared_ptr<Player>& _player) {
     std::vector<MapDecoration> decorations = this->mSavedData->fjGetAllDecorations();
     std::sort(decorations.begin(), decorations.end(), sortByTexture);
 
-    std::unordered_map<int, int> map;
+    {
+        std::unordered_map<int, int> map;
 
-    float b = -0.04f;
-    unsigned int a = 0;
-    int lastDecorTexId = -1;  // do this as decor imgs are split to two
+        unsigned int a = 0;
+        int lastDecorTexId = -1;  // do this as decor imgs are split to two
+        float b = -0.04f;
 
-    for (auto decor = decorations.begin(); decor != decorations.end(); ++decor) {
-        if ((player || decor->renderOnFrame()) && decor->isIdk()
-            && (!player || decor->getType() != &MapDecoration::Type::MANSION)) {
-            int img = decor->getImg();
-            int hashCode = decor->hashCode();
-            if (map.find(hashCode) == map.end() || map.at(hashCode) <= 2) {
-                int tempTexId = img > 15 ? 120 : 14;
-                if (lastDecorTexId != tempTexId) {
-                    this->mMapRenderer->mTextures->bind(
-                        this->mMapRenderer->mTextures->loadTexture(tempTexId));
+        for (auto decor = decorations.begin(); decor != decorations.end(); ++decor) {
+            if ((player || decor->renderOnFrame()) && decor->isIdk()
+                && (!player || decor->getType() != &MapDecoration::Type::MANSION)) {
+                byte img = decor->getImg();
+                int hashCode = decor->hashCode();
+                if (map.find(hashCode) == map.end() || map.at(hashCode) <= 2) {
+                    int tempTexId = img > 15 ? 120 : 14;
+                    if (lastDecorTexId != tempTexId) {
+                        this->mMapRenderer->mTextures->bind(
+                            this->mMapRenderer->mTextures->loadTexture(tempTexId));
 
-                    lastDecorTexId = tempTexId;
+                        lastDecorTexId = tempTexId;
+                    }
+
+                    GlStateManager::pushMatrix();
+                    GlStateManager::translatef(0.0f + decor->getX() / 2.0f + 64.0f,
+                                               0.0f + decor->getY() / 2.0f + 64.0f, b);
+                    GlStateManager::rotatef((decor->getRot() * 360) / 16.0f, 0.0f, 0.0f, 1.0f);
+                    GlStateManager::scalef(4.0f, 4.0f, 3.0f);
+                    GlStateManager::translatef(-0.125F, 0.125F, 0.0f);
+                    float u = (float)(img % 4 + 0) / 4.0f;
+                    float v = (float)(img / 4 + 0) / 4.0f;
+                    float u1 = (float)(img % 4 + 1) / 4.0f;
+                    float v1 = (float)(img / 4 + 1) / 4.0f;
+                    bufferBuilder->begin();
+                    bufferBuilder->vertexUV(-1.0, 1.0, a * -0.001f, u, v);
+                    bufferBuilder->vertexUV(1.0, 1.0, a * -0.001f, u1, v);
+                    bufferBuilder->vertexUV(1.0, -1.0, a * -0.001f, u1, v1);
+                    bufferBuilder->vertexUV(-1.0, -1.0, a * -0.001f, u, v1);
+                    tesselator->end();
+                    GlStateManager::popMatrix();
+
+                    ++a;
+                    map[hashCode]++;
+                    b -= 0.01f;
                 }
-
-                GlStateManager::pushMatrix();
-                GlStateManager::translatef(0.0f + decor->getX() / 2.0f + 64.0f,
-                                           0.0f + decor->getY() / 2.0f + 64.0f, b);
-                GlStateManager::rotatef((decor->getRot() * 360) / 16.0f, 0.0f, 0.0f, 1.0f);
-                GlStateManager::scalef(4.0f, 4.0f, 3.0f);
-                GlStateManager::translatef(-0.125F, 0.125F, 0.0f);
-                float u = (float)(img % 4 + 0) / 4.0f;
-                float v = (float)(img / 4 + 0) / 4.0f;
-                float u1 = (float)(img % 4 + 1) / 4.0f;
-                float v1 = (float)(img / 4 + 1) / 4.0f;
-                bufferBuilder->begin();
-                bufferBuilder->vertexUV(-1.0, 1.0, a * -0.001f, u, v);
-                bufferBuilder->vertexUV(1.0, 1.0, a * -0.001f, u1, v);
-                bufferBuilder->vertexUV(1.0, -1.0, a * -0.001f, u1, v1);
-                bufferBuilder->vertexUV(-1.0, -1.0, a * -0.001f, u, v1);
-                tesselator->end();
-                GlStateManager::popMatrix();
-
-                a++;
-                map[hashCode]++;
-                b -= 0.01f;
             }
         }
     }
 
-    GlStateManager::pushMatrix();
-    GlStateManager::translatef(0.0f, 0.0f, -0.06f);
-    GlStateManager::scalef(1.0f, 1.0f, 1.0f);
+    {
+        Player* player_ = _player.get();
+        GlStateManager::pushMatrix();
+        GlStateManager::translatef(0.0f, 0.0f, -0.06f);
+        GlStateManager::scalef(1.0f, 1.0f, 1.0f);
 
-    if (player) {
-        int x = floor(player->mX);
-        int y = floor(player->mY + player->getEyeHeight());
-        int z = floor(player->mZ);
-        std::wstring cords = formatwstr(L"X: %d, Y: %d, Z: %d", x, y, z);
-        this->mMapRenderer->mFont->draw(cords, 0, 0,
-                                        Minecraft::GetInstance()->getColourTable()->getColour(Map_Text));
+        if (_player) {
+            int x = floor(_player->mX);
+            int y = floor(_player->mY + _player->getEyeHeight());
+            int z = floor(_player->mZ);
+            std::wstring cords = formatwstr(L"X: %d, Y: %d, Z: %d", x, y, z);
+            this->mMapRenderer->mFont->draw(cords, 0, 0,
+                                            Minecraft::GetInstance()->getColourTable()->getColour(Map_Text));
+        }
+
+        GlStateManager::popMatrix();
     }
-
-    GlStateManager::popMatrix();
 }
 
 MapRenderer::MapRenderer(Font* font, Options* options, Textures* textures) {
