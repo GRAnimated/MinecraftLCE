@@ -31,7 +31,8 @@ public:
     MapInstance* getMapInstance(const std::shared_ptr<MapItemSavedData>& savedData);
     void render(const std::shared_ptr<MapItemSavedData>& savedData, const std::shared_ptr<Player>& player);
 
-    static bool coloursNeedReload;
+    static int sMaterialColorPalette[256];
+    static bool sColoursNeedReload;
     static void reloadColours();
 
     Textures* mTextures;

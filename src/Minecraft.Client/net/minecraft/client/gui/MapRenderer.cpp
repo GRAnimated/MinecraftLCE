@@ -18,7 +18,7 @@
 #include <unordered_map>
 #include <vector>
 
-bool MapRenderer::coloursNeedReload = true;
+bool MapRenderer::sColoursNeedReload = true;
 
 MapRenderer::MapInstance::MapInstance(MapRenderer* holder, const std::shared_ptr<MapItemSavedData>& savedData)
     : mMapRenderer(holder), mSavedData(savedData) {
@@ -26,7 +26,7 @@ MapRenderer::MapInstance::MapInstance(MapRenderer* holder, const std::shared_ptr
     for (int i = 0; i != 0x4000; i++) {
         this->mMapPixels[i] = 0;
     }
-    if (MapRenderer::coloursNeedReload)
+    if (MapRenderer::sColoursNeedReload)
         MapRenderer::reloadColours();
 }
 
@@ -150,4 +150,37 @@ MapRenderer::MapInstance* MapRenderer::getMapInstance(const std::shared_ptr<MapI
 void MapRenderer::render(const std::shared_ptr<MapItemSavedData>& savedData,
                          const std::shared_ptr<Player>& player) {
     this->getMapInstance(savedData)->draw(player);
+}
+
+void MapRenderer::reloadColours() {
+    ColourTable* colourTable = Minecraft::GetInstance()->getColourTable();
+
+    for (int i = 0; i < 208; i++) {
+        int finalColor;
+        if (i / 4 == 0) {
+            finalColor = (8 * ((i + i / 128) & 1)) | 0x10;
+        } else {
+            int baseColor = colourTable->getColour(MaterialColor::MATERIAL_COLORS[i / 4]->mColor);
+
+            int brightness = 220;
+
+            if ((i & 3) == 2) {
+                brightness = 255;
+            }
+
+            if ((i & 3) == 0) {
+                brightness = 180;
+            }
+
+            int r = (baseColor >> 16 & 0xFF) * brightness / 255;
+            int g = (baseColor >> 8 & 0xFF) * brightness / 255;
+            int b = (baseColor & 0xFF) * brightness / 255;
+
+            finalColor = (0xFF << 24) | (b << 16) | (g << 8) | r;
+        }
+
+        sMaterialColorPalette[i] = finalColor;
+    }
+
+    sColoursNeedReload = false;
 }
