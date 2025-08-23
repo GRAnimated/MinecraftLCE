@@ -27,9 +27,10 @@ void MapItemSavedData::addDecoration(const MapDecoration::Type* type, Level* lev
     float relX = (float)(worldX - this->mXCenter) / (float)scaleFactor;
     float relZ = (float)(worldZ - this->mZCenter) / (float)scaleFactor;
 
-    int posX = (relX * 2.0f) + 0.5;
-    int posZ = (relZ * 2.0f) + 0.5;
-    int rot;
+    char posX = (relX * 2.0f) + 0.5;
+    char posZ = (relZ * 2.0f) + 0.5;
+    char rot;
+    char eee = 63;  // wtf? without this it won't match (won't produce the ifs as I want)
 
     bool isPlayer = type->isPlayer();
     std::unordered_map<int, MapDecoration>* targetMap
@@ -44,7 +45,6 @@ void MapItemSavedData::addDecoration(const MapDecoration::Type* type, Level* lev
         }
     } else {
         if (isPlayer) {
-            rot = 0;
             if (Mth::abs(relX) < 320.0f && Mth::abs(relZ) < 320.0f) {
                 type = &(
                     &MapDecoration::Type::PLAYER_WHITE)[type->getIcon() + 16];  // jump to OFF_LIMITS colors
@@ -65,10 +65,11 @@ void MapItemSavedData::addDecoration(const MapDecoration::Type* type, Level* lev
             if (relZ >= 63.0f) {
                 posZ = 127;
             }
-        } else if (type == &(&MapDecoration::Type::PLAYER_WHITE)[4]) {
             rot = 0;
+        } else if (type == &(&MapDecoration::Type::PLAYER_WHITE)[4]) {
             type = &(&MapDecoration::Type::PLAYER_WHITE)[4];
 
+            rot = 0;
             if (relX <= -63.0f) {
                 posX = -128;
             }
