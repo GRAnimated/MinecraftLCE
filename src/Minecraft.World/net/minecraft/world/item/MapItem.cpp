@@ -1,6 +1,5 @@
 #include "MapItem.h"
 #include "NX/Platform.h"
-#include "com/mojang/nbt/Tag.h"
 #include "net/minecraft/client/renderer/texture/IconRegister.h"
 #include "net/minecraft/world/entity/Entity.h"
 #include "net/minecraft/world/entity/player/Player.h"

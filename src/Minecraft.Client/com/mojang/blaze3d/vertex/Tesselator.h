@@ -12,6 +12,7 @@ public:
     Tesselator(int);
 
     BufferBuilder* getBuilder() const;
+    void end();
 
 private:
     BufferBuilder* builder;
