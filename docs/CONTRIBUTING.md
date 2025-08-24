@@ -10,6 +10,14 @@ Linter arguments:
 
 GitHub Actions will run on your PR to verify that your code has been linted and clang formatted.
 
+It is *recommended* that you name your PR in this fashion:
+
+- Matching implementation of a class or method: "Implement `Name`"
+- Non-matching / incomplete implementation of a class or method: "Work on `Name`"
+- Completion of a class or method: "Complete `Name`"
+
+You can add anything you want after the message. Your pull request will be squashed and merged, so don't stress too much about the makeup of the individual commits.
+
 ### Warning: Make sure to backup your changes before running an automatic fix! The linter is experimental and could break your files.
 
 ## Info

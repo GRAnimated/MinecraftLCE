@@ -4,5 +4,7 @@
 
 class SkullBlock : public Block {
 public:
+    SkullBlock();
+
     static void blockStaticCtor();
 };

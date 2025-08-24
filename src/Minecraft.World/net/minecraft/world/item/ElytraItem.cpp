@@ -28,7 +28,7 @@ bool ElytraItem::isFlyEnabled(not_null_ptr<ItemInstance> item) {
     return item->getDamageValue() < item->getMaxDamage() - 1;
 }
 
-int ElytraItem::GetUseTooltip(const ItemToolTipDataHolder& data) {
+unsigned int ElytraItem::GetUseTooltip(const ItemToolTipDataHolder& data) {
     if (data.idk == 2) {
         return 0xFFFFFFFF;
     } else {

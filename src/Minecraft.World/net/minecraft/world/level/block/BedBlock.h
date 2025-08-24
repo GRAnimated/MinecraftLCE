@@ -4,5 +4,7 @@
 
 class BedBlock : public Block {
 public:
+    BedBlock();
+
     static void blockStaticCtor();
 };

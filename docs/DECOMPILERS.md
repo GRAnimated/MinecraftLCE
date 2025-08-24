@@ -10,7 +10,7 @@
 
 ### Setup Instructions
 
-1. . Setup [Ghidrathon](https://github.com/mandiant/Ghidrathon). Make sure `Ghidrathon` has access to the `toml` package.
+1. Setup [Ghidrathon](https://github.com/mandiant/Ghidrathon). Make sure `Ghidrathon` has access to the `toml` package.
 2. Setup [Ghidra Switch Loader](https://github.com/Adubbz/Ghidra-Switch-Loader).
 3. Create a new project. When importing `main.nso`, click `Options`. Then set `Base Address` to `0x7100000000`.
 4. Open the `Script Manager` (green play icon) from Ghidra's toolbar.

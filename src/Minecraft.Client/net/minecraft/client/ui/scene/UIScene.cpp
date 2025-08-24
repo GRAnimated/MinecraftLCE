@@ -85,7 +85,7 @@ void UIScene::loadMovie() {
 
 void UIScene::navigateBack() {
     gConsoleUIController.PlayUISFX(SoundEvents::BACK);
-    gConsoleUIController.NavigateBack(this->mPadID, false, UIScene_DefaultMAYBE, (EUILayer)8);
+    gConsoleUIController.NavigateBack(this->mPadID, false, EUIScene_DefaultMAYBE, (EUILayer)8);
 }
 
 void UIScene::sendInputToMovie(int key, bool a3, bool a4, bool a5) {

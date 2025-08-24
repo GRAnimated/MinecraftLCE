@@ -4,5 +4,7 @@
 
 class TorchBlock : public Block {
 public:
+    TorchBlock();
+
     static void blockStaticCtor();
 };

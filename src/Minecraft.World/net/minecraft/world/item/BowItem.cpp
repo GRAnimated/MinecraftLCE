@@ -29,7 +29,7 @@ BowItem::BowItem() : Item() {
                       (const ItemPropertyFunction*)new BowItem_Pulling_ItemPropertyFunction());
 }
 
-int BowItem::GetUseTooltip(const ItemToolTipDataHolder& data) {
+unsigned int BowItem::GetUseTooltip(const ItemToolTipDataHolder& data) {
     if (!data.mPlayer->mAbilities.mIsInstabuild && !data.mPlayer->mInventory->hasResource(Items::ARROW)
         && !data.mPlayer->mInventory->hasResource(Items::TIPPED_ARROW)) {
         return 0xFFFFFFFF;

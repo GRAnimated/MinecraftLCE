@@ -5,7 +5,7 @@ AirItem::AirItem(Block* block) : Item() {
     mBlock = block;
 }
 
-int AirItem::getDescriptionId(not_null_ptr<ItemInstance> itemInstance) {
+unsigned int AirItem::getDescriptionId(not_null_ptr<ItemInstance> itemInstance) {
     return mBlock->getDescriptionId(-1);
 }
 

@@ -24,7 +24,7 @@ public:
 
     static int GetMaxBowDuration();
 
-    int GetUseTooltip(const ItemToolTipDataHolder&) override;
+    unsigned int GetUseTooltip(const ItemToolTipDataHolder&) override;
     InteractionResultHolder use(Level*, std::shared_ptr<Player>, InteractionHand::EInteractionHand) override;
     int getUseAnimation(not_null_ptr<ItemInstance>) override;
     int getUseDuration(not_null_ptr<ItemInstance>) override;

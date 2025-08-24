@@ -4,5 +4,7 @@
 
 class ComparatorBlock : public Block {
 public:
+    ComparatorBlock(bool on);
+
     static void blockStaticCtor();
 };

@@ -1,5 +1,6 @@
 #pragma once
 
+#include "net/minecraft/world/item/Item.h"
 #include "types.h"
 #include <memory>
 
@@ -12,6 +13,7 @@ class ItemInstance;
 class Mob;
 class Player;
 class Stat;
+class Item;
 
 class GenericStats {
 public:
@@ -52,9 +54,9 @@ public:
     virtual Stat* get_blocksPlaced(int);
     virtual Stat* get_blocksMined(int);
     virtual Stat* get_itemsCollected(int, int);
-    virtual Stat* get_itemsCrafted(int);
-    virtual Stat* get_itemsSmelted(int);
-    virtual Stat* get_itemsUsed(int);
+    virtual Stat* get_itemsCrafted(int itemId);
+    virtual Stat* get_itemsSmelted(int itemId);
+    virtual Stat* get_itemsUsed(int itemId);
     virtual Stat* get_itemsBought(int);
     virtual Stat* get_armourDyed(int);
     virtual Stat* get_killsEnderdragon();
@@ -205,6 +207,11 @@ public:
     static Stat* soIGotThatGoingForMe();
     static Stat* feelingIll();
 
+    static Stat* getItemsUsedStat(Item* item) {  // guessed, this shouldn't be part of upper ones as the
+                                                 // uppers ones aren't inlined on WiiU
+        return GenericStats::sInstance->get_itemsUsed(Item::VALIDgetId(item));
+    }
+
     static arrayWithLength<unsigned char> param_openInventory();
     static arrayWithLength<unsigned char> param_buildWorkbench();
     static arrayWithLength<unsigned char> param_buildPickaxe();
@@ -248,4 +255,6 @@ public:
     static arrayWithLength<unsigned char> param_stayinFrosty();
     static arrayWithLength<unsigned char> param_ironMan();
     static arrayWithLength<unsigned char> param_zombieDoctor();
+    static arrayWithLength<unsigned char> param_itemsUsed(std::shared_ptr<Player>,
+                                                          not_null_ptr<ItemInstance>);
 };

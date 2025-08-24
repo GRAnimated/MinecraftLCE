@@ -2,7 +2,9 @@
 
 #include "net/minecraft/world/level/block/Block.h"
 
-class PistonBaseBlock : public Block {
+class PistonBaseBlock : public DirectionalBlock {
 public:
+    PistonBaseBlock(bool sticky);
+
     static void blockStaticCtor();
 };

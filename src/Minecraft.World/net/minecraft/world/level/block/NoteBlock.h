@@ -4,5 +4,7 @@
 
 class NoteBlock : public Block {
 public:
+    NoteBlock();
+
     static void blockStaticCtor();
 };

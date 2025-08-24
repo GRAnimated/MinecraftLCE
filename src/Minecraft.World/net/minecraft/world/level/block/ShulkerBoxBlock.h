@@ -4,4 +4,5 @@
 
 class ShulkerBoxBlock : public BaseEntityBlock {
 public:
+    ShulkerBoxBlock(const DyeColor*);
 };

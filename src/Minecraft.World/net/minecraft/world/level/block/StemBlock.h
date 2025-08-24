@@ -4,5 +4,7 @@
 
 class StemBlock : public Block {
 public:
+    StemBlock(Block*);
+
     static void blockStaticCtor();
 };

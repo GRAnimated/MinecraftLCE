@@ -4,5 +4,7 @@
 
 class LadderBlock : public Block {
 public:
+    LadderBlock();
+
     static void blockStaticCtor();
 };
