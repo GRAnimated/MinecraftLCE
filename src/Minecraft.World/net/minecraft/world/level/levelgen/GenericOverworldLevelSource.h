@@ -4,5 +4,5 @@ class GenericOverworldLevelSource {
 public:
     GenericOverworldLevelSource() {}
 
-    virtual ~GenericOverworldLevelSource();
+    virtual ~GenericOverworldLevelSource() = 0;
 };

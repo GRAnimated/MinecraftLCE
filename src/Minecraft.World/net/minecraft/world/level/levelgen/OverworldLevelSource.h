@@ -38,11 +38,12 @@ public:
     void recreateLogicStructuresForChunk(LevelChunk*, int, int) override;
     bool isPosInFeature(Level*, const std::wstring&, const BlockPos&) override;
     void lightChunk(LevelChunk*) override;
-    void prepareHeights(int, int, ChunkPrimer*);
+    virtual void prepareHeights(int, int, ChunkPrimer*);
+
     void getHeights(int, int, int, arrayWithLength<Biome*>&, arrayWithLength<double>&);
     void buildSurfaces(int, int, ChunkPrimer*, arrayWithLength<Biome*>);
     float getHeightFalloff(int x, int z, int* height);
-    static int unkMethod(float, OverworldLevelSource* src, int x, int z, int size);
+    static int unkMethod(float, int, int x, int z, int size);
 
     Random mRandom;
     Random mRandom2;
@@ -50,7 +51,7 @@ public:
     PerlinNoise* mMaxLimitPerlinNoise;
     PerlinNoise* mMainNoise;
     PerlinSimplexNoise* mSurfaceNoise;
-    PerlinNoise* field_68;
+    PerlinNoise* mScaleNoise;
     PerlinNoise* mDepthNoise;
     void* qword_78;
     void* qword_80;
@@ -58,8 +59,7 @@ public:
     Level* mLevel;
     bool mShouldGenerateStructures;
     LevelType* mGeneratorType;
-    float float_a8;
-    char gap_AC[100];
+    float mBiomeWeights[25];
     CustomizableSourceSettings* mSourceSettings;
     const BlockState* mOceanBlock;
     arrayWithLength<float> qword_120;

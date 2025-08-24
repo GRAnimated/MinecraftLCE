@@ -16,7 +16,7 @@
 NetherFlatLevelSource::NetherFlatLevelSource(Level* level, bool isGenerateMapFeatures, long long seed) {
     int xzSize = level->getLevelData()->getXZSize();
     int hellScale = level->getLevelData()->getHellScale();
-    mXZSize2 = ceil((float)xzSize / hellScale);
+    mSize = ceil((float)xzSize / hellScale);
     mLevel = level;
     mIsGenerateMapFeatures = isGenerateMapFeatures;
     mSeed = new Random(seed);
@@ -53,28 +53,28 @@ void NetherFlatLevelSource::buildSurfaces(int x, int z, ChunkPrimer* primer) {
                 bool unk = false;
 
                 if (chunkX <= -adjusted / 2) {
-                    if (chunkX > mRandom->nextInt(4) && x < -mXZSize2 / 2) {
+                    if (chunkX > mRandom->nextInt(4) && x < -mSize / 2) {
                         primer->setState((y << 11) | (chunkX << 7) | chunkZ, bedrock);
                         unk = true;
                     }
                 }
 
                 if (chunkZ <= -adjusted / 2) {
-                    if (chunkX - mRandom->nextInt(4) <= 0 || z < -mXZSize2 / 2) {
+                    if (chunkX - mRandom->nextInt(4) <= 0 || z < -mSize / 2) {
                         primer->setState((y << 11) | (chunkX << 7) | chunkZ, bedrock);
                         unk = true;
                     }
                 }
 
                 if (chunkX <= -adjusted / 2 - 1) {
-                    if (mRandom->nextInt(4) + chunkX > 14 || x > mXZSize2 / 2) {
+                    if (mRandom->nextInt(4) + chunkX > 14 || x > mSize / 2) {
                         primer->setState((y << 11) | (chunkX << 7) | chunkZ, bedrock);
                         unk = true;
                     }
                 }
 
                 if (chunkZ <= -adjusted / 2 - 1) {
-                    if (mRandom->nextInt(4) + chunkX > 14 || z > mXZSize2 / 2) {
+                    if (mRandom->nextInt(4) + chunkX > 14 || z > mSize / 2) {
                         primer->setState((y << 11) | (chunkX << 7) | chunkZ, bedrock);
                         unk = true;
                     }

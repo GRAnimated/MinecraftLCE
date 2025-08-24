@@ -3,6 +3,7 @@
 #include "net/minecraft/world/level/levelgen/feature/StructureFeature.h"
 
 class StrongholdFeature : public StructureFeature {
+public:
     StrongholdFeature();
 
     char filler[0x48];
