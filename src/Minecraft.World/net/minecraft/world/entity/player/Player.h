@@ -80,7 +80,7 @@ public:
     std::wstring getDisplayName() override;
     void shouldShowName() override;
     void onSyncedDataUpdated(const EntityDataAccessor_Base*) override;
-    void getEyeHeight() override;
+    float getEyeHeight() override;
     void setSlot(int, const not_null_ptr<ItemInstance>&) override;
     SoundSource::ESoundSource getSoundSource() override;
     void canCreateParticles() override;

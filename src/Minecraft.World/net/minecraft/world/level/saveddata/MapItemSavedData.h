@@ -46,6 +46,14 @@ public:
                                             std::shared_ptr<Player> player);
     std::shared_ptr<HoldingPlayer> getHoldingPlayer(std::shared_ptr<Player>);
     void addDecoration(const MapDecoration::Type*, Level*, int, double, double, double, double, bool);
+    std::vector<MapDecoration> fjGetAllDecorations();
+
+    static void appendDecorations(std::vector<MapDecoration>* out,
+                                  std::unordered_map<int, MapDecoration>* in) {
+        for (auto& pair : *in) {
+            out->push_back(pair.second);
+        }
+    }
 
     int mXCenter;
     int mZCenter;
@@ -56,7 +64,7 @@ public:
     arrayWithLength<uchar> mColors;
     std::vector<std::shared_ptr<HoldingPlayer>> mCarriedBy;
     std::unordered_map<std::shared_ptr<Player>, std::shared_ptr<HoldingPlayer>> mCarriedByPlayers;
-    std::unordered_map<int, MapDecoration> mDecorations;
+    std::unordered_map<int, MapDecoration> mPlayerDecorations;
     long mLastTick;
-    std::unordered_map<int, MapDecoration> mDecorations1;
+    std::unordered_map<int, MapDecoration> mFrameDecorations;
 };
