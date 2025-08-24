@@ -33,7 +33,7 @@ public:
     LevelChunk* createChunk(int, int) override;
     void postProcess(int, int) override;
     bool postProcessLoadedChunk(LevelChunk*, int, int) override;
-    void getMobsAt(MobCategory*, const BlockPos&) override;
+    std::vector<Biome::MobSpawnerData>* getMobsAt(MobCategory*, const BlockPos&) override;
     void* findNearestMapFeature(Level*, const std::wstring&, const BlockPos&, bool) override;
     void recreateLogicStructuresForChunk(LevelChunk*, int, int) override;
     bool isPosInFeature(Level*, const std::wstring&, const BlockPos&) override;
@@ -43,7 +43,7 @@ public:
     void getHeights(int, int, int, arrayWithLength<Biome*>&, arrayWithLength<double>&);
     void buildSurfaces(int, int, ChunkPrimer*, arrayWithLength<Biome*>);
     float getHeightFalloff(int x, int z, int* height);
-    static int unkMethod(float, int, int x, int z, int size);
+    static int distanceToEdge(float, int, int x, int z, int size);  // made up name
 
     Random mRandom;
     Random mRandom2;

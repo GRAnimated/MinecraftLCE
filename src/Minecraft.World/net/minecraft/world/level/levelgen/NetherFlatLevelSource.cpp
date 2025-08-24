@@ -172,10 +172,13 @@ bool NetherFlatLevelSource::postProcessLoadedChunk(LevelChunk* chunk, int x, int
     return false;
 }
 
-void NetherFlatLevelSource::getMobsAt(MobCategory* category, const BlockPos& pos) {
+std::vector<Biome::MobSpawnerData>* NetherFlatLevelSource::getMobsAt(MobCategory* category,
+                                                                     const BlockPos& pos) {
     Biome* biome = mLevel->getBiome(pos);
     if (biome)
-        biome->getMobs(category);
+        return biome->getMobs(category);
+
+    return nullptr;
 }
 
 void* NetherFlatLevelSource::findNearestMapFeature(Level* level, const std::wstring& name,

@@ -12,7 +12,7 @@ public:
     LevelChunk* createChunk(int, int) override;
     void postProcess(int, int) override;
     bool postProcessLoadedChunk(LevelChunk*, int, int) override;
-    void getMobsAt(MobCategory*, const BlockPos&) override;
+    std::vector<Biome::MobSpawnerData>* getMobsAt(MobCategory*, const BlockPos&) override;
     void* findNearestMapFeature(Level*, const std::wstring&, const BlockPos&, bool) override;
     void recreateLogicStructuresForChunk(LevelChunk*, int, int) override;
     bool isPosInFeature(Level*, const std::wstring&, const BlockPos&) override;

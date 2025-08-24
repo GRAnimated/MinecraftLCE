@@ -1,4 +1,5 @@
 #include "NX/Platform.h"
+#include "net/minecraft/world/entity/MobCategory.h"
 #include "net/minecraft/world/level/Level.h"
 #include "net/minecraft/world/level/biome/Biome.h"
 #include "net/minecraft/world/level/biome/BiomeSource.h"
@@ -78,29 +79,29 @@ OverworldLevelSource::OverworldLevelSource(Level* level, long long seed, bool ge
 }
 
 // NON_MATCHING | Score: 1668 (lower is better)
-float OverworldLevelSource::getHeightFalloff(int x, int z, int* distance) {
+float OverworldLevelSource::getHeightFalloff(int chunkX, int chunkZ, int* distance) {
     bool isClassicMoat = mIsClassicMoat;
     bool isSmallMoat = mIsSmallMoat;
     bool isMediumMoat = mIsMediumMoat;
 
     int size = 16 * mSize;
-    int res = unkMethod(32.0f, 0, x, z, size);
+    int res = distanceToEdge(32.0f, 0, chunkX, chunkZ, size);
     int t = res;
 
     if (isClassicMoat && size > 864) {
-        int n = unkMethod(32.0f, res, x, z, 864);
+        int n = distanceToEdge(32.0f, res, chunkX, chunkZ, 864);
         if (n < t)
             t = n;
     }
 
     if (isSmallMoat && size > 1024) {
-        int n = unkMethod(32.0f, res, x, z, 1024);
+        int n = distanceToEdge(32.0f, res, chunkX, chunkZ, 1024);
         if (n < t)
             t = n;
     }
 
     if (isMediumMoat && size > 3072) {
-        int n = unkMethod(32.0f, res, x, z, 3072);
+        int n = distanceToEdge(32.0f, res, chunkX, chunkZ, 3072);
         if (n < t)
             t = n;
     }
@@ -115,8 +116,54 @@ float OverworldLevelSource::getHeightFalloff(int x, int z, int* distance) {
     return result;
 }
 
-int OverworldLevelSource::unkMethod(float a, int b, int x, int z, int size) {
-    return (int)(a * (float)(x * x + z * z) / (float)size);
+// NON_MATCHING | Score: 2640 (lower is better)
+int OverworldLevelSource::distanceToEdge(float a, int, int x, int z, int size) {
+    int v5 = (size >= 0) ? size : (size + 1);
+    int v6 = v5 >> 1;
+    int v7 = -v6;
+    int v11 = v6 - 1;
+
+    Vec3* v12 = Vec3::newTemp(v7, 0.0, v7);
+    Vec3* v13 = Vec3::newTemp(v11, 0.0, v7);
+    Vec3* v14 = Vec3::newTemp(v7, 0.0, v11);
+    Vec3* v15 = Vec3::newTemp(v11, 0.0, v11);
+
+    float v16 = v7 - a;
+    float v17 = x;
+    float v18 = v7 + a;
+
+    float v22 = a;
+
+    bool inLeftBand = (v17 > v16) && (v17 < v18);
+    bool inRightBand = false;
+    if (!inLeftBand) {
+        if (v17 > ((float)v11 - a)) {
+            inRightBand = (v17 < ((float)v11 + a));
+        }
+    }
+
+    if (inLeftBand || inRightBand) {
+        Vec3* p = Vec3::newTemp(x, 0.0, z);
+        Vec3* s0 = (x < 1) ? v12 : v13;
+        Vec3* s1 = (x < 1) ? v14 : v15;
+        v22 = p->distanceToSegment(s0, s1);
+    }
+
+    float v26 = (float)z;
+
+    if (((z <= (int)v16) || (v26 >= v18)) && ((v26 <= ((float)v11 - a)) || (v26 >= ((float)v11 + a)))) {
+        return (int)v22;
+    }
+
+    Vec3* p2 = Vec3::newTemp(x, 0.0, z);
+    Vec3* t0 = (z < 1) ? v12 : v14;
+    Vec3* t1 = (z < 1) ? v13 : v15;
+
+    float v32 = p2->distanceToSegment(t0, t1);
+    if (v32 < v22) {
+        return (int)v32;
+    }
+    return (int)v22;
 }
 
 void OverworldLevelSource::buildSurfaces(int chunkX, int chunkZ, ChunkPrimer* primer,
@@ -189,32 +236,32 @@ LevelChunk* OverworldLevelSource::createChunk(int chunkX, int chunkZ) {
     }
 
     if (mShouldGenerateStructures) {
-        if (mSourceSettings->byte_4E) {
+        if (mSourceSettings->useMineshafts) {
             PIXBeginNamedEvent(0.0, "Applying mineshafts");
             mMineshaftFeature->apply(mLevel, chunkX, chunkZ, &primer);
             PIXEndNamedEvent();
         }
-        if (mSourceSettings->byte_4D) {
+        if (mSourceSettings->useVillages) {
             PIXBeginNamedEvent(0.0, "Applying villages");
             mVillageFeature->apply(mLevel, chunkX, chunkZ, &primer);
             PIXEndNamedEvent();
         }
-        if (mSourceSettings->byte_4C) {
+        if (mSourceSettings->useStrongholds) {
             PIXBeginNamedEvent(0.0, "Applying strongholds");
             mStrongholdFeature->apply(mLevel, chunkX, chunkZ, &primer);
             PIXEndNamedEvent();
         }
-        if (mSourceSettings->byte_4F) {
+        if (mSourceSettings->useScatteredFeatures) {
             PIXBeginNamedEvent(0.0, "Applying scatterd features");
             mRandomScatteredLargeFeature->apply(mLevel, chunkX, chunkZ, &primer);
             PIXEndNamedEvent();
         }
-        if (mSourceSettings->byte_50) {
+        if (mSourceSettings->useOceanMonuments) {
             PIXBeginNamedEvent(0.0, "Applying ocean monuments");
             mOceanMonumentFeature->apply(mLevel, chunkX, chunkZ, &primer);
             PIXEndNamedEvent();
         }
-        if (mSourceSettings->byte_51) {
+        if (mSourceSettings->useWoodlandMansions) {
             PIXBeginNamedEvent(0.0, "Applying woodland mansions");
             mWoodlandMansionFeature->apply(mLevel, chunkX, chunkZ, &primer);
             PIXEndNamedEvent();
@@ -239,6 +286,7 @@ bool OverworldLevelSource::postProcessLoadedChunk(LevelChunk*, int, int) {
     return false;
 }
 
+// NON_MATCHING | Score: 5336 (lower is better)
 void OverworldLevelSource::prepareHeights(int chunkX, int chunkZ, ChunkPrimer* primer) {
     // These variables are made into constants by the compiler
     int width = 4;   // every 4th block is sampled in the chunk
@@ -338,4 +386,49 @@ void OverworldLevelSource::prepareHeights(int chunkX, int chunkZ, ChunkPrimer* p
 
     delete[] heights.data;
     delete[] biomes.data;
+}
+
+std::vector<Biome::MobSpawnerData>* OverworldLevelSource::getMobsAt(MobCategory* category,
+                                                                    const BlockPos& pos) {
+    Biome* biome = mLevel->getBiome(pos);
+
+    if (mShouldGenerateStructures) {
+        if (MobCategory::MONSTER == category || MobCategory::SLIME == category) {
+            if (mRandomScatteredLargeFeature->isSwamphut(pos))
+                return mRandomScatteredLargeFeature->getSwamphutEnemies();
+        }
+
+        if (MobCategory::GUARDIAN == category && mSourceSettings->useOceanMonuments) {
+            if (mOceanMonumentFeature->isInsideBoundingFeature(mLevel, pos)) {
+                // This seems to inline on Switch Edition?
+                // return mOceanMonumentFeature->getEnemies();
+                return &mOceanMonumentFeature->MOB_SPAWNERS;
+            }
+        }
+    }
+
+    return biome->getMobs(category);
+}
+
+void OverworldLevelSource::recreateLogicStructuresForChunk(LevelChunk* chunk, int chunkX, int chunkZ) {
+    if (mShouldGenerateStructures) {
+        if (mSourceSettings->useMineshafts) {
+            mMineshaftFeature->apply(mLevel, chunkX, chunkZ, nullptr);
+        }
+        if (mSourceSettings->useVillages) {
+            mVillageFeature->apply(mLevel, chunkX, chunkZ, nullptr);
+        }
+        if (mSourceSettings->useStrongholds) {
+            mStrongholdFeature->apply(mLevel, chunkX, chunkZ, nullptr);
+        }
+        if (mSourceSettings->useScatteredFeatures) {
+            mRandomScatteredLargeFeature->apply(mLevel, chunkX, chunkZ, nullptr);
+        }
+        if (mSourceSettings->useOceanMonuments) {
+            mOceanMonumentFeature->apply(mLevel, chunkX, chunkZ, nullptr);
+        }
+        if (mSourceSettings->useWoodlandMansions) {
+            mWoodlandMansionFeature->apply(mLevel, chunkX, chunkZ, nullptr);
+        }
+    }
 }
