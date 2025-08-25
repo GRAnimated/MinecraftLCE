@@ -1,15 +1,12 @@
 #pragma once
 
 #include "net/minecraft/world/ArrayWithLength.h"
+#include "net/minecraft/world/level/biome/BiomeSource.h"
 #include <memory>
 
 class LevelType;
 class SuperflatConfig;
 class LevelData;
-class BiomeSource {
-public:
-    class LayerOverrideSettings;
-};
 
 class Layer {
 public:

@@ -1,3 +1,5 @@
+#include "net/minecraft/world/level/levelgen/OverworldLevelSource.h"
+
 #include "NX/Platform.h"
 #include "net/minecraft/util/Mth.h"
 #include "net/minecraft/world/entity/MobCategory.h"
@@ -8,7 +10,6 @@
 #include "net/minecraft/world/level/chunk/LevelChunk.h"
 #include "net/minecraft/world/level/levelgen/ChunkPrimer.h"
 #include "net/minecraft/world/level/levelgen/CustomizableSourceSettings.h"
-#include "net/minecraft/world/level/levelgen/OverworldLevelSource.h"
 #include "net/minecraft/world/level/levelgen/feature/CanyonFeature.h"
 #include "net/minecraft/world/level/levelgen/feature/LakeFeature.h"
 #include "net/minecraft/world/level/levelgen/feature/LargeCaveFeature.h"
