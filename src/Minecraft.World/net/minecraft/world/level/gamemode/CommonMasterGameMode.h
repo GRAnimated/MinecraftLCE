@@ -2,6 +2,7 @@
 
 #include "net/minecraft/world/entity/player/StatsUID.h"
 #include "net/minecraft/world/level/gamemode/minigames/EMiniGameId.h"
+#include "net/minecraft/world/phys/AABB.h"
 #include <memory>
 #include <vector>
 
@@ -9,6 +10,8 @@ class CheckpointRuleDefinition;
 class TargetAreaRuleDefinition;
 class PowerupRuleDefinition;
 class Player;
+class MiniGameDef;
+class Team;
 
 class CommonMasterGameMode {
 public:
@@ -35,4 +38,13 @@ public:
     virtual void OnPowerupEnter(const std::shared_ptr<Player>&, unsigned int, PowerupRuleDefinition*);
 
     void CheckPowerups(const std::vector<std::shared_ptr<Player>>&);
+    void setCheckpoints(std::vector<CheckpointRuleDefinition*>);
+    const AABB* GetTeamArea(Team*) const;
+
+    static const MiniGameDef* GetMiniGame();
+
+    char fill[272 - 8];
+    std::vector<AABB*> mGlideTargets;
+    std::vector<CheckpointRuleDefinition*> mGlideCheckpoints;
+    void* filler[8];
 };

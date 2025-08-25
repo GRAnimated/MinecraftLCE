@@ -173,8 +173,11 @@ std::wstring Packet::readUtf(DataInputStream* in, int maxLength) {
     return str;
 }
 
-// NON_MATCHING | Score: 51665 (lower is better)
-// I think the class sizes are wrong or something, dunno.
+void Packet::map(int a1, bool a2, bool a3, bool a4, bool a5, const std::type_info& a6,
+                 std::shared_ptr<Packet> (*a7)(), std::wstring a8) {
+    map(a1, a2, a3, a4, a5, typeid(ClientboundKeepAlivePacket), a7, L"");
+}
+
 void Packet::staticCtor() {
     map(0, true, true, true, false, typeid(ClientboundKeepAlivePacket), ClientboundKeepAlivePacket::create,
         L"KeepAlive");

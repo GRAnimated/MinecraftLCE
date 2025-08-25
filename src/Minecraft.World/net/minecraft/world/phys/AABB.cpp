@@ -4,7 +4,7 @@
 
 DEFINE_THREAD_STORAGE(AABB, 1024)
 
-Vec3* AABB::getCenter() {
+Vec3* AABB::getCenter() const {
     return Vec3::newTemp(this->min.x + (this->max.x - this->min.x) * 0.5,
                          this->min.y + (this->max.y - this->min.y) * 0.5,
                          this->min.z + (this->max.z - this->min.z) * 0.5);

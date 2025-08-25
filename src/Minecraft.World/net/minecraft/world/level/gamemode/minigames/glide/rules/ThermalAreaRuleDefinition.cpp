@@ -1,4 +1,4 @@
-#include "net/minecraft/world/level/gamemode/minigames/glide/ThermalAreaRuleDefinition.h"
+#include "net/minecraft/world/level/gamemode/minigames/glide/rules/ThermalAreaRuleDefinition.h"
 
 #include "java/io/File.h"
 #include "net/minecraft/client/Minecraft.h"
@@ -34,8 +34,8 @@ ThermalAreaRuleDefinition::ThermalAreaRuleDefinition() {
     dword_c4 = 0;
 }
 
-int ThermalAreaRuleDefinition::getActionType() {
-    return 21;
+ConsoleGameRules::EGameRuleType ThermalAreaRuleDefinition::getActionType() {
+    return ConsoleGameRules::EGameRuleType_ThermalArea;
 }
 
 void ThermalAreaRuleDefinition::addAttribute(const std::wstring& name, const std::wstring& value) {

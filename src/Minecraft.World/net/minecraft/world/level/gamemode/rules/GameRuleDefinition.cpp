@@ -1,9 +1,9 @@
-#include "net/minecraft/world/level/gamemode/minigames/GameRuleDefinition.h"
+#include "net/minecraft/world/level/gamemode/rules/GameRuleDefinition.h"
 
 #include "java/io/File.h"
 #include "net/minecraft/world/level/GameRule.h"
 #include "net/minecraft/world/level/gamemode/GameRuleSaveInterface.h"
-#include "net/minecraft/world/level/gamemode/minigames/TargetAreaRuleDefinition.h"
+#include "net/minecraft/world/level/gamemode/minigames/glide/rules/TargetAreaRuleDefinition.h"
 
 const wchar_t* ruleNames[] = {L"",
                               L"MapOptions",
@@ -178,7 +178,7 @@ void GameRuleDefinition::postProcessPlayer(std::shared_ptr<Player>) {}
 void GameRuleDefinition::WriteXMLData(std::string& str) {
     int actionType = getActionType();
     if (actionType == 19) {
-        if (((TargetAreaRuleDefinition*)this)->get_90())
+        if (((TargetAreaRuleDefinition*)this)->isPrimary())
             actionType = 19;
         else
             actionType = 20;

@@ -20,7 +20,6 @@ std::shared_ptr<Packet> MapItemSavedData::getUpdatePacket(not_null_ptr<ItemInsta
     return nullptr;
 }
 
-// NON_MATCHING: really minor thing with clamping posX, posZ near the bottom
 void MapItemSavedData::addDecoration(const MapDecoration::Type* type, Level* level, int id, double worldX,
                                      double worldY, double worldZ, double rotation, bool idk) {
     int scaleFactor = 1 << this->mScale;

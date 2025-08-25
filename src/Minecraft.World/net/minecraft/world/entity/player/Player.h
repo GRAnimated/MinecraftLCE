@@ -70,7 +70,7 @@ public:
     void getArmorSlots() override;
     void setItemSlot(const EquipmentSlot*, not_null_ptr<ItemInstance>) override;
     bool isInvisibleTo(std::shared_ptr<Player>) override;
-    void getTeam() override;
+    Team* getTeam() override;
     void setInvisible(bool) override;
     void ShouldRenderShadow() override;
     void killed(std::shared_ptr<LivingEntity>) override;
