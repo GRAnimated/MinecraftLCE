@@ -1,6 +1,5 @@
 #pragma once
 
-
 #include "net/minecraft/world/level/gamemode/rules/NamedAreaRuleDefinition.h"
 
 class ServerLevel;
