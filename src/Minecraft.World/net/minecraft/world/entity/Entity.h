@@ -194,7 +194,7 @@ public:
     virtual void setGlowing(bool);
     virtual bool isInvisible();
     virtual bool isInvisibleTo(std::shared_ptr<Player>);
-    virtual void getTeam();
+    virtual Team* getTeam();
     virtual bool isAlliedTo(std::shared_ptr<Entity>);
     virtual bool isAlliedTo(Team*);
     virtual void setInvisible(bool);
@@ -292,7 +292,7 @@ public:
 
     static void fjDebugCheckSmallIdLeaks();
 
-    Vec3 getPos(float);
+    Vec3* getPos(float);
     bool isType(eINSTANCEOF);
     void setSharedFlag(int, bool);
     Vec3* calculateViewVector(float, float);

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "net/minecraft/world/level/gamemode/minigames/GameRuleDefinition.h"
+#include "net/minecraft/world/level/gamemode/rules/GameRuleDefinition.h"
 
 class AABB;
 class BlockPos;
@@ -10,13 +10,13 @@ public:
     NamedAreaRuleDefinition();
 
     ~NamedAreaRuleDefinition() override;
-    int getActionType() override;
+    ConsoleGameRules::EGameRuleType getActionType() override;
     const AABB* getBoundingVolume() override;
     void onAttributesAdded() override;
     void WriteAttributesAsXML(std::string&) override;
     virtual bool containsBlock(int, const BlockPos&);
 
-    const AABB* getArea();
+    AABB* getArea();
 
     std::wstring mName;
     AABB* mAABB;

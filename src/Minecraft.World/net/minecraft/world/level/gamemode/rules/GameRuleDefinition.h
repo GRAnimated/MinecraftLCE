@@ -23,7 +23,7 @@ public:
     GameRuleDefinition();
 
     virtual ~GameRuleDefinition();
-    virtual int getActionType() = 0;
+    virtual ConsoleGameRules::EGameRuleType getActionType() = 0;
     virtual const AABB* getBoundingVolume();
     virtual void moveBoundingVolume(int, int, int);
     virtual void writeAttributes(GameRuleSaveInterface*, unsigned int);

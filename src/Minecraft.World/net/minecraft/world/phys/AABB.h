@@ -31,7 +31,7 @@ public:
     bool containsIncludingLowerBound(Vec3*) const;
 
     void set(double, double, double, double, double, double);
-    Vec3* getCenter();
+    Vec3* getCenter() const;
     AABB* divideInternalsBy(double);
     double getSize() const;
     AABB* grow(double multiplier) const;

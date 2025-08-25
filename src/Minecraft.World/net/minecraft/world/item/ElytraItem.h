@@ -8,6 +8,7 @@ class ElytraItem_ItemPropertyFunction : public ItemPropertyFunction {
 };
 
 class ElytraItem : public Item {
+public:
     ElytraItem();
 
     static bool isFlyEnabled(not_null_ptr<ItemInstance>);

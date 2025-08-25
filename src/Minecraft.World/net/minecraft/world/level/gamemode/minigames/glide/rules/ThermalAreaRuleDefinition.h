@@ -1,6 +1,6 @@
 #pragma once
 
-#include "net/minecraft/world/level/gamemode/minigames/NamedAreaRuleDefinition.h"
+#include "net/minecraft/world/level/gamemode/rules/NamedAreaRuleDefinition.h"
 
 class ThermalAreaRuleDefinition : public NamedAreaRuleDefinition {
 public:
@@ -20,7 +20,7 @@ public:
 
     ThermalAreaRuleDefinition();
 
-    int getActionType() override;
+    ConsoleGameRules::EGameRuleType getActionType() override;
     void addAttribute(const std::wstring&, const std::wstring&) override;
     void WriteAttributesAsXML(std::string&) override;
 

@@ -32,4 +32,6 @@ public:
     int getStarveLevel(int) const;
     int getPotionDuration(int, int) const;
     bool HasFeatureArrowCanKnockback() const;
+    bool ArePowerupsActive() const;
+    int GetId() const;
 };

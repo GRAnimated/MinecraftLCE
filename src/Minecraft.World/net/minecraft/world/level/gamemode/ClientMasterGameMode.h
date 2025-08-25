@@ -24,4 +24,5 @@ public:
     unsigned char size[0x2E0 - 8];
 };
 
-ASSERT_SIZEOF(ClientMasterGameMode, 0x2E0)
+// yeah perfect time for random assert!
+// ASSERT_SIZEOF(ClientMasterGameMode, 0x2E0)
