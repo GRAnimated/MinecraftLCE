@@ -26,7 +26,7 @@
 #include "net/minecraft/world/level/chunk/LevelChunk.h"
 #include "net/minecraft/world/level/gamemode/GameMode.h"
 #include "net/minecraft/world/level/gamemode/minigames/MiniGameDef.h"
-#include "net/minecraft/world/level/gamemode/minigames/glide/ThermalAreaRuleDefinition.h"
+#include "net/minecraft/world/level/gamemode/minigames/glide/rules/ThermalAreaRuleDefinition.h"
 #include "types.h"
 #include <cmath>
 #include <memory>

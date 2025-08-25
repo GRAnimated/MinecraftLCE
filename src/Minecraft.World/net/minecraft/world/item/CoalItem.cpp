@@ -9,7 +9,7 @@ CoalItem::CoalItem() {
     this->setMaxDamage(0);
 }
 
-int CoalItem::getDescriptionId(not_null_ptr<ItemInstance> itemInstance) {
+unsigned int CoalItem::getDescriptionId(not_null_ptr<ItemInstance> itemInstance) {
     if (itemInstance->getAuxValue() == 1)
         return StringIDs::Charcoal;
     else

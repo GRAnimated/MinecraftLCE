@@ -1,5 +1,7 @@
 #pragma once
 
+#include "net/minecraft/world/PlayerUID.h"
+#include "net/minecraft/world/level/saveddata/SavedData.h"
 #include "nn/os/os_MutexTypes.h"
 #include "types.h"
 #include <memory>
@@ -195,6 +197,12 @@ public:
     void prepareWeather();
     void setDayTime(long long);
     bool hasChunksAt(const BlockPos&, const BlockPos&);
+    int getAuxValueForMap(PlayerUID, int, int, int, int);
+    std::shared_ptr<SavedData> getSavedData(const std::type_info&, const std::wstring&);
+    void setSavedData(const std::wstring&, std::shared_ptr<SavedData>);
+    std::vector<std::shared_ptr<Entity>>* getEntitiesOfClass(const std::type_info&, AABB const*);
+    bool shouldFreezeIgnoreNeighbors(const BlockPos&);
+    bool shouldSnow(const BlockPos&, bool);
 
     int mSeaLevel = 63;
     nn::os::MutexType mEntityMutex;

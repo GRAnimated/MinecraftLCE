@@ -1,4 +1,4 @@
-#include "net/minecraft/world/level/gamemode/minigames/NamedAreaRuleDefinition.h"
+#include "net/minecraft/world/level/gamemode/rules/NamedAreaRuleDefinition.h"
 
 #include "net/minecraft/core/BlockPos.h"
 
@@ -36,15 +36,15 @@ NamedAreaRuleDefinition::~NamedAreaRuleDefinition() {
     delete mAABB;
 }
 
-int NamedAreaRuleDefinition::getActionType() {
-    return 17;
+ConsoleGameRules::EGameRuleType NamedAreaRuleDefinition::getActionType() {
+    return ConsoleGameRules::EGameRuleType_NamedArea;
 }
 
 const AABB* NamedAreaRuleDefinition::getBoundingVolume() {
     return getArea();
 }
 
-const AABB* NamedAreaRuleDefinition::getArea() {
+AABB* NamedAreaRuleDefinition::getArea() {
     return mAABB;
 }
 

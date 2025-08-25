@@ -43,6 +43,8 @@ protected:
 
 class ServerboundMovePlayerPacket::Pos : public ServerboundMovePlayerPacket {
 public:
+    static std::shared_ptr<Packet> create();
+
     Pos();
     int getEstimatedSize() override;
     EPacketType getPacketId() override;
@@ -52,6 +54,8 @@ public:
 
 class ServerboundMovePlayerPacket::Rot : public ServerboundMovePlayerPacket {
 public:
+    static std::shared_ptr<Packet> create();
+
     Rot();
     int getEstimatedSize() override;
     EPacketType getPacketId() override;
@@ -61,6 +65,8 @@ public:
 
 class ServerboundMovePlayerPacket::PosRot : public ServerboundMovePlayerPacket {
 public:
+    static std::shared_ptr<Packet> create();
+
     PosRot();
     int getEstimatedSize() override;
     EPacketType getPacketId() override;

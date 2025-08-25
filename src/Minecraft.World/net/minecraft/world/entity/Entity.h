@@ -194,7 +194,7 @@ public:
     virtual void setGlowing(bool);
     virtual bool isInvisible();
     virtual bool isInvisibleTo(std::shared_ptr<Player>);
-    virtual void getTeam();
+    virtual Team* getTeam();
     virtual bool isAlliedTo(std::shared_ptr<Entity>);
     virtual bool isAlliedTo(Team*);
     virtual void setInvisible(bool);
@@ -248,7 +248,7 @@ public:
     virtual const AABB* getBoundingBox();
     virtual void getBoundingBoxForCulling();
     virtual void setBoundingBox(AABB*);
-    virtual void getEyeHeight();
+    virtual float getEyeHeight();
     virtual void setSlot(int, const not_null_ptr<ItemInstance>&);
     virtual void interactAt(const std::shared_ptr<Player>&, Vec3*, InteractionHand::EInteractionHand);
     virtual void ignoreExplosion();
@@ -292,7 +292,7 @@ public:
 
     static void fjDebugCheckSmallIdLeaks();
 
-    Vec3 getPos(float);
+    Vec3* getPos(float);
     bool isType(eINSTANCEOF);
     void setSharedFlag(int, bool);
     Vec3* calculateViewVector(float, float);

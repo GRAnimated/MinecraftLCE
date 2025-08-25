@@ -47,7 +47,7 @@ public:
     void handleEntityEvent(unsigned char, int) override;
     void animateHurt() override;
     void setSprinting(bool) override;
-    void getTeam() override;
+    Team* getTeam() override;
     void spawnEatParticles(const ItemInstance&, int) override;
     void getYHeadRot() override;
     void setYHeadRot(float) override;
@@ -124,8 +124,8 @@ public:
     virtual Attribute* getAttribute(Attribute* attribute);
     virtual AttributeMap* getAttributes();
     virtual MobType getMobType();
-    virtual void getMainHandItem();
-    virtual void getOffhandItem();
+    virtual not_null_ptr<ItemInstance> getMainHandItem();
+    virtual not_null_ptr<ItemInstance> getOffhandItem();
     virtual not_null_ptr<ItemInstance> getItemInHand(InteractionHand::EInteractionHand);
     virtual void setItemInHand(InteractionHand::EInteractionHand, not_null_ptr<ItemInstance>);
     virtual bool hasItemInSlot(const EquipmentSlot*);

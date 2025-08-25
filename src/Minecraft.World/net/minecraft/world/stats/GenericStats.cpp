@@ -128,11 +128,11 @@ Stat* GenericStats::get_itemsCrafted(int) {
     return nullptr;
 }
 
-Stat* GenericStats::get_itemsSmelted(int id) {
-    return get_itemsCrafted(id);
+Stat* GenericStats::get_itemsSmelted(int itemId) {
+    return get_itemsCrafted(itemId);
 }
 
-Stat* GenericStats::get_itemsUsed(int) {
+Stat* GenericStats::get_itemsUsed(int itemId) {
     return nullptr;
 }
 

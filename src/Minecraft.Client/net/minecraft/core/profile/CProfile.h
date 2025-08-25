@@ -22,8 +22,8 @@ public:
     bool IsSignedInLive(int) override;
     bool IsSigningIn(int) override;
     bool IsGuest(int) override;
-    virtual void sub_710079238C();  // Wii U says CProfile::RequestSignInUI
-    void SignInUser(void*, int);    // void * used to be MiiDataEntry
+    virtual void sub_710079238C();         // Wii U says CProfile::RequestSignInUI
+    void SignInUser(void*, int) override;  // void * used to be MiiDataEntry
     virtual void sub_710079239C();
     virtual void sub_71007923AC();
     virtual void sub_71007923C0();

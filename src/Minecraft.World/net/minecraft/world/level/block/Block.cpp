@@ -193,6 +193,7 @@
 #include "net/minecraft/world/phys/AABB.h"
 #include "net/minecraft/world/phys/HitResult.h"
 
+#include <cfloat>
 #include <cstdint>
 #include <memory>
 #include <string>
@@ -441,12 +442,12 @@ Block* Block::setDestroyTime(float time) {
 }
 
 Block* Block::setIndestructible() {
-    this->setDestroyTime(340282350000000000000000000000000000000.0f);  // wtf is that magic number
+    this->setDestroyTime(FLT_MAX);
     return this;
 }
 
 bool Block::isIndestructible() {
-    return this->mDestroyTime == 340282350000000000000000000000000000000.0f;
+    return this->mDestroyTime == FLT_MAX;
 }
 
 float Block::getDestroySpeed(const BlockState* state, Level* level, const BlockPos& pos) {

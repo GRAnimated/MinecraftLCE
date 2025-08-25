@@ -24,7 +24,7 @@ Legacy Console Edition released for the Xbox 360, PS3, PS Vita, Wii U, Xbox One,
 
 Wii U Edition is the only edition to contain function symbols. The decomp would work off of that version of the game, if it weren't for the compiler toolchain GHS being abysmal. The chance that we find a matching compiler version is next to none, so our assembly wouldn't be matching either way.
 
-Nintendo Switch Edition on the other hand was compiled with Clang where it's easy enough to find the compiler version just by the release date of the game. The advantage here is that we're able to match the assembly 1:1, but Clang is also *much* more lenient compared to GHS. LCE used `boost` throughout the code pretty heavily, and while its asserts are visible in the Wii U release, they are nonexistent in the Switch release. We can still match the code without using the library's functions, but it wouldn't be a 1:1 match on most other platforms.
+Nintendo Switch Edition on the other hand was compiled with Clang where it's easy enough to find the compiler version just by the release date of the game. The advantage here is that we're able to match the assembly 1:1, but Clang is also *much* more lenient compared to GHS. On old-gen platforms, LCE relied heavily on Boost, while on new-gen platforms it got replaced with standard library. We can still match the code without using the library's functions, but it wouldn't be a 1:1 match on most other platforms.
 
 Without any symbols at all, this would make the Switch Edition pretty worthless on its own. With both editions of LCE open in IDA/Ghidra though, porting symbols is just a bad chore. Additionally, the Switch Edition does contain typeinfo, so vtables are already located for us.
 
