@@ -103,7 +103,7 @@ public:
     virtual void setDimensionData(const DimensionType*, CompoundTag*);
     virtual int getXZSize();
     virtual int getCurrentXZSize();
-    virtual void func_710021221C();
+    virtual void fillMoatValues(bool* isClassicMoat, bool* isSmallMoat, bool* isMediumMoat);  // made up name
     virtual void func_7100212238();
     virtual int getHellScale();
     virtual void setModernEnd();

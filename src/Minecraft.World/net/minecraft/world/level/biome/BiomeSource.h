@@ -8,6 +8,8 @@ class Random;
 
 class BiomeSource {
 public:
+    class LayerOverrideSettings;
+
     virtual ~BiomeSource();
     virtual Biome* getBiome(const BlockPos&);
     virtual Biome* getBiome(const BlockPos&, Biome*);

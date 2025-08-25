@@ -1,6 +1,11 @@
 #pragma once
 
+class ChunkPrimer;
+
 class GenericOverworldLevelSource {
 public:
-    virtual ~GenericOverworldLevelSource();
+    GenericOverworldLevelSource() {}
+
+    virtual void prepareHeights(int, int, ChunkPrimer*);
+    // missing a second unknown virtual function
 };

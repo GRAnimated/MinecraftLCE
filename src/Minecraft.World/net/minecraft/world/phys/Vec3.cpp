@@ -46,3 +46,26 @@ double Vec3::distanceTo(AABB* aabb) {
 
     return std::sqrt(dX * dX + dY * dY + dZ * dZ);
 }
+
+Vec3* Vec3::closestPointOnSegment(Vec3* segStart, Vec3* segEnd) {
+    Vec3* v1 = newTemp(this->x - segStart->x, this->y - segStart->y, this->z - segStart->z);
+    Vec3* v2 = newTemp(segEnd->x - segStart->x, segEnd->y - segStart->y, segEnd->z - segStart->z);
+
+    double dot = v1->dot(v2);
+    if (dot <= 0.0) {
+        return segStart;
+    }
+
+    double len2 = v2->dot(v2);
+    if (len2 <= dot)
+        return segEnd;
+
+    double t = dot / len2;
+    return newTemp(segStart->x + t * v2->x, segStart->y + t * v2->y, segStart->z + t * v2->z);
+}
+
+double Vec3::distanceToSegment(Vec3* segStart, Vec3* segEnd) {
+    Vec3* closest = closestPointOnSegment(segStart, segEnd);
+    Vec3* diff = newTemp(this->x - closest->x, this->y - closest->y, this->z - closest->z);
+    return diff->length();
+}
