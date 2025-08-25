@@ -412,14 +412,10 @@ void OverworldLevelSource::getHeights(int posX, int posY, int posZ, arrayWithLen
     delete[] unk2.data;
 }
 
-// NON_MATCHING | Score: 922 (lower is better)
 void OverworldLevelSource::postProcess(int chunkX, int chunkZ) {
-    int blockX = chunkX * 16;
-    int blockZ = chunkZ * 16;
-
     ChunkGenerator::inPostProcessStep = true;
 
-    BlockPos origin(blockX, 0, blockZ);
+    BlockPos origin(chunkX * 16, 0, chunkZ * 16);
     Biome* biome = mLevel->getBiome(origin.offset(16, 0, 16));
 
     mRandom2.setSeed(mLevel->getSeed());
@@ -509,7 +505,7 @@ void OverworldLevelSource::postProcess(int chunkX, int chunkZ) {
     PIXEndNamedEvent();
 
     PIXBeginNamedEvent(0.0, "Biome decorate");
-    biome->decorate(mLevel, mRandom2, BlockPos(blockX, 0, blockZ));
+    biome->decorate(mLevel, mRandom2, BlockPos(chunkX * 16, 0, chunkZ * 16));
     PIXEndNamedEvent();
 
     PIXBeginNamedEvent(0.0, "Post process mobs");
@@ -517,10 +513,10 @@ void OverworldLevelSource::postProcess(int chunkX, int chunkZ) {
 
     PIXBeginNamedEvent(0.0, "Update ice and snow");
 
-    BlockPos checkOrigin = origin.offset(8, 0, 8);
+    origin = origin.offset(8, 0, 8);
     for (int x = 0; x < 16; x++) {
         for (int z = 0; z < 16; z++) {
-            BlockPos top = mLevel->getTopRainBlockPos(checkOrigin.offset(x, 0, z));
+            BlockPos top = mLevel->getTopRainBlockPos(origin.offset(x, 0, z));
             BlockPos below = top.below();
 
             if (mLevel->shouldFreezeIgnoreNeighbors(below)) {
@@ -689,35 +685,30 @@ void OverworldLevelSource::recreateLogicStructuresForChunk(LevelChunk* chunk, in
     }
 }
 
-// NON_MATCHING | Score: 3363 (lower is better)
+// NON_MATCHING | Score: 860- (lower is better)
 bool OverworldLevelSource::isPosInFeature(Level* level, const std::wstring& featureName,
                                           const BlockPos& pos) {
     if (!mShouldGenerateStructures) {
         return false;
     }
 
-    if (ChunkGenerator::STRONGHOLD_NAME.compare(featureName) && mStrongholdFeature) {
-        return mStrongholdFeature->isInsideFeature(pos);
+    if (ChunkGenerator::STRONGHOLD_NAME.compare(featureName) == 0) {
+        return mStrongholdFeature && mStrongholdFeature->isInsideFeature(pos);
     }
-
-    if (ChunkGenerator::MANSION_NAME.compare(featureName) && mWoodlandMansionFeature) {
-        return mWoodlandMansionFeature->isInsideFeature(pos);
+    if (ChunkGenerator::MANSION_NAME.compare(featureName) == 0) {
+        return mWoodlandMansionFeature && mWoodlandMansionFeature->isInsideFeature(pos);
     }
-
-    if (ChunkGenerator::MONUMENT_NAME.compare(featureName) && mOceanMonumentFeature) {
-        return mOceanMonumentFeature->isInsideFeature(pos);
+    if (ChunkGenerator::MONUMENT_NAME.compare(featureName) == 0) {
+        return mOceanMonumentFeature && mOceanMonumentFeature->isInsideFeature(pos);
     }
-
-    if (ChunkGenerator::VILLAGE_NAME.compare(featureName) && mVillageFeature) {
-        return mVillageFeature->isInsideFeature(pos);
+    if (ChunkGenerator::VILLAGE_NAME.compare(featureName) == 0) {
+        return mVillageFeature && mVillageFeature->isInsideFeature(pos);
     }
-
-    if (ChunkGenerator::MINESHAFT_NAME.compare(featureName) && mMineshaftFeature) {
-        return mMineshaftFeature->isInsideFeature(pos);
+    if (ChunkGenerator::MINESHAFT_NAME.compare(featureName) == 0) {
+        return mMineshaftFeature && mMineshaftFeature->isInsideFeature(pos);
     }
-
-    if (ChunkGenerator::TEMPLE_NAME.compare(featureName) && mRandomScatteredLargeFeature) {
-        return mRandomScatteredLargeFeature->isInsideFeature(pos);
+    if (ChunkGenerator::TEMPLE_NAME.compare(featureName) == 0) {
+        return mRandomScatteredLargeFeature && mRandomScatteredLargeFeature->isInsideFeature(pos);
     }
 
     return false;
