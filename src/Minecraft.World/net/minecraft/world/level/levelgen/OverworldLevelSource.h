@@ -27,6 +27,11 @@ class WoodlandMansionFeature;
 
 class OverworldLevelSource : public ChunkGenerator, public GenericOverworldLevelSource {
 public:
+    struct MoatCheck {
+        bool enabled;
+        int limit;
+    };
+
     OverworldLevelSource(Level* level, long long seed, bool generateStructures,
                          SuperflatConfig* sourceSettings);
     ~OverworldLevelSource() override;
@@ -34,11 +39,11 @@ public:
     void postProcess(int, int) override;
     bool postProcessLoadedChunk(LevelChunk*, int, int) override;
     std::vector<Biome::MobSpawnerData>* getMobsAt(MobCategory*, const BlockPos&) override;
-    void* findNearestMapFeature(Level*, const std::wstring&, const BlockPos&, bool) override;
+    BlockPos* findNearestMapFeature(Level*, const std::wstring&, const BlockPos&, bool) override;
     void recreateLogicStructuresForChunk(LevelChunk*, int, int) override;
     bool isPosInFeature(Level*, const std::wstring&, const BlockPos&) override;
     void lightChunk(LevelChunk*) override;
-    virtual void prepareHeights(int, int, ChunkPrimer*);
+    void prepareHeights(int, int, ChunkPrimer*) override;
 
     void getHeights(int, int, int, arrayWithLength<Biome*>&, arrayWithLength<double>&);
     void buildSurfaces(int, int, ChunkPrimer*, arrayWithLength<Biome*>);
@@ -53,8 +58,8 @@ public:
     PerlinSimplexNoise* mSurfaceNoise;
     PerlinNoise* mScaleNoise;
     PerlinNoise* mDepthNoise;
-    void* qword_78;
-    void* qword_80;
+    PerlinNoise* qword_78;  // unknown type
+    PerlinNoise* qword_80;  // unknown type
     PerlinNoise* field_88;
     Level* mLevel;
     bool mShouldGenerateStructures;

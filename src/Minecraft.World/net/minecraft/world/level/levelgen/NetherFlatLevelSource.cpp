@@ -181,8 +181,8 @@ std::vector<Biome::MobSpawnerData>* NetherFlatLevelSource::getMobsAt(MobCategory
     return nullptr;
 }
 
-void* NetherFlatLevelSource::findNearestMapFeature(Level* level, const std::wstring& name,
-                                                   const BlockPos& pos, bool flag) {
+BlockPos* NetherFlatLevelSource::findNearestMapFeature(Level* level, const std::wstring& name,
+                                                       const BlockPos& pos, bool flag) {
     return nullptr;
 }
 
