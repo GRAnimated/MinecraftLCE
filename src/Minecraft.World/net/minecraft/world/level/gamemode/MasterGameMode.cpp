@@ -19,6 +19,7 @@
 #include "net/minecraft/world/level/gamemode/CommonMasterGameMode.h"
 #include "net/minecraft/world/level/gamemode/ConsoleGameRules.h"
 #include "net/minecraft/world/level/gamemode/GameStats.h"
+#include "net/minecraft/world/level/gamemode/minigames/EMiniGameId.h"
 #include "net/minecraft/world/level/gamemode/minigames/MiniGameDef.h"
 #include "net/minecraft/world/level/gamemode/minigames/glide/rules/CheckpointRuleDefinition.h"
 #include "net/minecraft/world/level/gamemode/minigames/glide/rules/PowerupRuleDefinition.h"
@@ -96,7 +97,7 @@ void MasterGameMode::OnGameStart(MasterGameMode* _this, void*) {
 
     _this->PopulateChests();
 
-    if (CommonMasterGameMode::GetMiniGame()->GetId() == 3) {
+    if (CommonMasterGameMode::GetMiniGame()->GetId() == EMiniGameId::GLIDE) {
         ServerLevel* level = MinecraftServer::getInstance()->getLevel(0);
         if (minigame->ArePowerupsActive()) {
             std::vector<PowerupRuleDefinition*> powerupRules;
@@ -159,7 +160,7 @@ void MasterGameMode::OnGameStart(MasterGameMode* _this, void*) {
             player->mConnection->send(GameModePacket::Create((GameModePacket::EMessage)0xF, emptyData));
 
             Team* team = player->getTeam();
-            if (minigame->GetId() == 4 && team) {
+            if (minigame->GetId() == EMiniGameId::BUILD_OFF && team) {
                 const AABB* teamArea = _this->GetTeamArea(team);
                 if (teamArea) {
                     teamArea = teamArea->grow(0, 1, 0);
@@ -188,7 +189,7 @@ void MasterGameMode::OnGameStart(MasterGameMode* _this, void*) {
     _this->SetState((MasterGameMode::EInternalGameModeState)10);
     _this->sendTutorialUpdate((eTutorial_GameMode)3);
 
-    if (minigame->GetId() == 1) {
+    if (minigame->GetId() == EMiniGameId::BATTLE) {
         CountdownInfo* chestRefilTimer = new CountdownInfo();
         chestRefilTimer->mInt_0 = 0;
         chestRefilTimer->mOnTimerFunc1 = MasterGameMode::OnRefillChestTimer;

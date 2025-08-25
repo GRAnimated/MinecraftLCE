@@ -33,5 +33,5 @@ public:
     int getPotionDuration(int, int) const;
     bool HasFeatureArrowCanKnockback() const;
     bool ArePowerupsActive() const;
-    int GetId() const;
+    EMiniGameId GetId() const;
 };
