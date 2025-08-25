@@ -6,6 +6,14 @@ void LevelChunk::staticCtor() {
     InitializeCriticalSection(&LevelChunk::mMutex_710178c190);
 }
 
+int LevelChunk::getBlockId(int x, int y, int z) {
+    return getBlockDataStorage(y)->get(x, y % 128, z);
+}
+
+bool LevelChunk::isTerrainPopulated() {
+    return unkIsTerrainPopulated >> 2 & 1;
+}
+
 void LevelChunk::writeCompressedDataData(DataOutputStream* out) {
     mDataDataLower->write(out);
     mDataDataUpper->write(out);

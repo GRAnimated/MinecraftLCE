@@ -1,5 +1,6 @@
 #pragma once
 
+#include "net/minecraft/core/BlockPos.h"
 #include "net/minecraft/core/System.h"
 #include "net/minecraft/world/ArrayWithLength.h"
 #include "net/minecraft/world/level/LightLayer.h"
@@ -15,7 +16,6 @@ template <typename T>
 class Predicate;
 
 class Block;
-class BlockPos;
 class BlockState;
 class BlockEntity;
 class Level;
@@ -62,7 +62,8 @@ public:
     virtual void recalcHeightmap();
     virtual void lightLava();
     virtual void getBlockLightBlock(const BlockPos&);
-    virtual Block* getBlock(const BlockPos&);
+    virtual Block* getChunkBlock(unsigned int x, unsigned int y, unsigned int z);
+    virtual Block* getBlock(const BlockPos& pos);
     virtual const BlockState* getBlockState(const BlockPos&);
     virtual void getData(const BlockPos&);
     virtual void setData(int, int, int, int, int, bool*);
@@ -75,7 +76,7 @@ public:
     virtual void addEntity(std::shared_ptr<Entity>);
     virtual void removeEntity(std::shared_ptr<Entity>);
     virtual void removeEntity(std::shared_ptr<Entity>, int);
-    virtual bool isSkyLit(const BlockPos&);
+    virtual bool isSkyLit(const BlockPos& block);
     virtual void getBlockEntity(const BlockPos&, LevelChunk::EntityCreationType);
     virtual void addBlockEntity(std::shared_ptr<BlockEntity>);
     virtual void setBlockEntity(const BlockPos&, std::shared_ptr<BlockEntity>);
@@ -94,7 +95,7 @@ public:
     virtual void getBlocksAndData(arrayWithLength<unsigned char>*, int, int, int, int, int, int, int, bool);
     virtual void setBlocksAndData(arrayWithLength<unsigned char>, int, int, int, int, int, int, int, bool);
     virtual void testSetBlocksAndData(arrayWithLength<unsigned char>, int, int, int, int, int, int, int);
-    virtual void getRandom(long long);
+    virtual Random* getRandom(long long t);
     virtual bool isEmpty();
     virtual Biome* getBiome(const BlockPos&, BiomeSource*);
     virtual void compressLighting();
@@ -113,12 +114,22 @@ public:
     ChunkPos getPos();
     bool isTerrainPopulated();
 
-    int getBlockId(int, int, int);
-    int getData(int, int, int);
+    int getBlockId(int x, int y, int z);
+    int getData(int x, int y, int z);
 
     char padding_0[24];
     CompressedBlockStorage* mBlockDataLower;  // Y0-Y127
     CompressedBlockStorage* mBlockDataUpper;  // Y128-Y255
+
+    CompressedBlockStorage* getBlockDataStorage(int y) {
+        CompressedBlockStorage* storage = this->mBlockDataLower;
+
+        if (y > 127) {
+            storage = this->mBlockDataUpper;
+        }
+
+        return storage;
+    }
 
     char unk[400];
 
@@ -133,7 +144,8 @@ public:
     int zPos;
     char unk2[14];
     std::unordered_map<BlockPos, std::shared_ptr<BlockEntity>>* blockEntities;
-    char unk3[32];
+    char unk3[33];
+    char unkIsTerrainPopulated;
     short biomeCount;
     char unk4[42];
     long inhabitedTime;
