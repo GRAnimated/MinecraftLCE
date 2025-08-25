@@ -1,4 +1,7 @@
+#pragma once
+
 #include "net/minecraft/world/level/gamemode/rules/GameRuleDefinition.h"
+
 class CompoundGameRuleDefinition : public GameRuleDefinition {
 public:
     ~CompoundGameRuleDefinition() override;

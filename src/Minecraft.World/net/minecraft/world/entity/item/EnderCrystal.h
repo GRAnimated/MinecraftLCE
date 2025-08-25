@@ -1,4 +1,7 @@
+#pragma once
+
 #include "net/minecraft/world/entity/Entity.h"
+
 class EnderCrystal : public Entity {
 public:
     EnderCrystal(Level* level, double x, double y, double z);

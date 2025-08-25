@@ -1,3 +1,5 @@
+#include "net/minecraft/world/level/gamemode/MasterGameMode.h"
+
 #include "net/minecraft/client/CMinecraftApp.h"
 #include "net/minecraft/client/Minecraft.h"
 #include "net/minecraft/client/multiplayer/ServerGamePacketListenerImpl.h"
@@ -17,7 +19,6 @@
 #include "net/minecraft/world/level/gamemode/CommonMasterGameMode.h"
 #include "net/minecraft/world/level/gamemode/ConsoleGameRules.h"
 #include "net/minecraft/world/level/gamemode/GameStats.h"
-#include "net/minecraft/world/level/gamemode/MasterGameMode.h"
 #include "net/minecraft/world/level/gamemode/minigames/MiniGameDef.h"
 #include "net/minecraft/world/level/gamemode/minigames/glide/rules/CheckpointRuleDefinition.h"
 #include "net/minecraft/world/level/gamemode/minigames/glide/rules/PowerupRuleDefinition.h"

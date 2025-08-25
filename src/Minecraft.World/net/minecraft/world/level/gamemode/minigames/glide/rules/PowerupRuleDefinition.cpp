@@ -1,5 +1,6 @@
-#include "net/minecraft/world/level/gamemode/ConsoleGameRules.h"
 #include "net/minecraft/world/level/gamemode/minigames/glide/rules/PowerupRuleDefinition.h"
+
+#include "net/minecraft/world/level/gamemode/ConsoleGameRules.h"
 #include "net/minecraft/world/level/gamemode/rules/AddItemRuleDefinition.h"
 #include "net/minecraft/world/level/gamemode/rules/GameRuleDefinition.h"
 
