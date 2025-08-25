@@ -4,5 +4,7 @@
 
 class FuzzyZoomLayer : public ZoomLayer {
 public:
-    FuzzyZoomLayer(long long seed, std::shared_ptr<Layer> childLayer);
+    FuzzyZoomLayer(long long seed, std::shared_ptr<Layer> parent);
+
+    int modeOrRandom(int x, int y, int width, int height) override;
 };

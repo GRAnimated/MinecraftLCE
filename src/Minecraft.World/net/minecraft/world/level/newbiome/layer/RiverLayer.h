@@ -4,7 +4,9 @@
 
 class RiverLayer : public Layer {
 public:
-    RiverLayer(long long seed, std::shared_ptr<Layer> childLayer);
+    RiverLayer(long long seed, std::shared_ptr<Layer> parent);
 
-    arrayWithLength<int> getArea(int i, int j, int k, int l) override;
+    int riverFilter(int id);
+
+    arrayWithLength<int> getArea(int x, int y, int width, int height) override;
 };
