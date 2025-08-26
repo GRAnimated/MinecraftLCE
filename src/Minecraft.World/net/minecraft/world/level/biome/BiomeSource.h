@@ -22,4 +22,11 @@ public:
     virtual void findBiome(int, int, int, std::vector<Biome*>, Random*);
     virtual bool isFixedBiome();
     virtual void* getFixedBiome();
+
+    class LayerOverrideSettings {
+    public:
+        bool GetBiomeScale();
+        int GetCentreXChunk();
+        int GetCentreZChunk();
+    };
 };

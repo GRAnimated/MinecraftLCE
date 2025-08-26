@@ -6,10 +6,10 @@
 #include "net/minecraft/world/level/levelgen/CustomizableSourceSettings.h"
 #include "net/minecraft/world/level/newbiome/layer/IntCache.h"
 
-BiomeInitLayer::BiomeInitLayer(long long seed, std::shared_ptr<Layer> childLayer, LevelType* levelType,
+BiomeInitLayer::BiomeInitLayer(long long seed, std::shared_ptr<Layer> parent, LevelType* levelType,
                                SuperflatConfig* superflatConfig)
     : Layer(seed) {
-    mChildLayer = childLayer;
+    mParent = parent;
     if (levelType == LevelType::NORMAL_1_1) {
         mWarmBiomes = {6, true};
         mWarmBiomes[0] = Biome::DESERT;
@@ -58,53 +58,53 @@ BiomeInitLayer::BiomeInitLayer(long long seed, std::shared_ptr<Layer> childLayer
     mSettings = settings;
 }
 
-arrayWithLength<int> BiomeInitLayer::getArea(int i, int j, int k, int l) {
-    arrayWithLength<int> is = mChildLayer->getArea(i, j, k, l);
+arrayWithLength<int> BiomeInitLayer::getArea(int x, int y, int width, int height) {
+    arrayWithLength<int> parentArea = mParent->getArea(x, y, width, height);
     PIXBeginNamedEvent(0.0, "BiomeInitLayer::getArea");
-    arrayWithLength<int> js = IntCache::allocate(k * l);
+    arrayWithLength<int> area = IntCache::allocate(width * height);
 
-    for (int m = 0; m < l; ++m) {
-        for (int n = 0; n < k; ++n) {
-            initRandom(n + i, m + j);
-            int o = is[n + m * k];
+    for (int m = 0; m < height; m++) {
+        for (int n = 0; n < width; n++) {
+            initRandom(n + x, m + y);
+            int o = parentArea[n + m * width];
             int p = (o & 3840) >> 8;
             o &= -3841;
             if (mSettings != nullptr && mSettings->fixedBiome >= 0) {
-                js[n + m * k] = mSettings->fixedBiome;
+                area[n + m * width] = mSettings->fixedBiome;
             } else if (isOcean(o)) {
-                js[n + m * k] = o;
+                area[n + m * width] = o;
             } else if (o == Biome::MUSHROOM_ISLAND->mBiomeID) {
-                js[n + m * k] = o;
+                area[n + m * width] = o;
             } else if (o == 1) {
                 if (p > 0) {
                     if (nextRandom(3) == 0) {
-                        js[n + m * k] = Biome::MESA_PLATEAU_F->mBiomeID;
+                        area[n + m * width] = Biome::MESA_PLATEAU_F->mBiomeID;
                     } else {
-                        js[n + m * k] = Biome::MESA_PLATEAU->mBiomeID;
+                        area[n + m * width] = Biome::MESA_PLATEAU->mBiomeID;
                     }
                 } else {
-                    js[n + m * k] = mWarmBiomes[nextRandom(mWarmBiomes.length)]->mBiomeID;
+                    area[n + m * width] = mWarmBiomes[nextRandom(mWarmBiomes.length)]->mBiomeID;
                 }
             } else if (o == 2) {
                 if (p > 0) {
-                    js[n + m * k] = Biome::JUNGLE->mBiomeID;
+                    area[n + m * width] = Biome::JUNGLE->mBiomeID;
                 } else {
-                    js[n + m * k] = mMediumBiomes[nextRandom(mMediumBiomes.length)]->mBiomeID;
+                    area[n + m * width] = mMediumBiomes[nextRandom(mMediumBiomes.length)]->mBiomeID;
                 }
             } else if (o == 3) {
                 if (p > 0) {
-                    js[n + m * k] = Biome::MEGA_TAIGA->mBiomeID;
+                    area[n + m * width] = Biome::MEGA_TAIGA->mBiomeID;
                 } else {
-                    js[n + m * k] = mColdBiomes[nextRandom(mColdBiomes.length)]->mBiomeID;
+                    area[n + m * width] = mColdBiomes[nextRandom(mColdBiomes.length)]->mBiomeID;
                 }
             } else if (o == 4) {
-                js[n + m * k] = mIceBiomes[nextRandom(mIceBiomes.length)]->mBiomeID;
+                area[n + m * width] = mIceBiomes[nextRandom(mIceBiomes.length)]->mBiomeID;
             } else {
-                js[n + m * k] = Biome::MUSHROOM_ISLAND->mBiomeID;
+                area[n + m * width] = Biome::MUSHROOM_ISLAND->mBiomeID;
             }
         }
     }
 
     PIXEndNamedEvent();
-    return js;
+    return area;
 }

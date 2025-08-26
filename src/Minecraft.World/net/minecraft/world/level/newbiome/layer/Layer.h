@@ -11,7 +11,7 @@ class LevelData;
 class Layer {
 public:
     static arrayWithLength<std::shared_ptr<Layer>>
-    getDefaultLayers(long long l, LevelType* levelType, SuperflatConfig* superflatConfig,
+    getDefaultLayers(long long seed, LevelType* levelType, SuperflatConfig* superflatConfig,
                      LevelData* levelData, BiomeSource::LayerOverrideSettings* layerOverrideSettings);
     Layer(long long seed);
 
@@ -25,11 +25,11 @@ public:
     virtual ~Layer();
     virtual void init(long long l);
     virtual void initRandom(long long l, long long m);
-    virtual arrayWithLength<int> getArea(int i, int j, int k, int l) = 0;
+    virtual arrayWithLength<int> getArea(int x, int y, int width, int height) = 0;
     virtual int modeOrRandom(int i, int j, int k, int l);
 
     long long mMixedSeed;
-    std::shared_ptr<Layer> mChildLayer;
+    std::shared_ptr<Layer> mParent;
     long long mRandom;
     long long mSeed;
 };

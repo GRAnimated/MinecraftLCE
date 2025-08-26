@@ -4,8 +4,13 @@
 
 class BiomeCacheLayer : public Layer {
 public:
-    BiomeCacheLayer(long long seed, std::shared_ptr<Layer> childLayer, int, unsigned int biomeScale, int,
-                    int);
+    BiomeCacheLayer(long long seed, std::shared_ptr<Layer> parent, int xzSize, unsigned char biomeScale,
+                    int centreXChunk, int centreZChunk);
 
-    arrayWithLength<int> getArea(int i, int j, int k, int l) override;
+    arrayWithLength<int> getArea(int x, int y, int width, int height) override;
+
+    int mXScale;
+    int mYScale;
+    int mWorldSize;
+    arrayWithLength<unsigned char> mParentArea;
 };
