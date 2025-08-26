@@ -7,10 +7,6 @@
 class LevelType;
 class SuperflatConfig;
 class LevelData;
-// class BiomeSource {
-// public:
-//     class LayerOverrideSettings;
-// };
 
 class Layer {
 public:

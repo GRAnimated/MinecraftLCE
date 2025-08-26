@@ -9,7 +9,7 @@ std::shared_ptr<Layer> ZoomLayer::zoom(long long seed, std::shared_ptr<Layer> la
 
     for (int j = 0; j < i; ++j) {
         finalLayer = static_cast<std::shared_ptr<Layer>>(
-            new ZoomLayer(seed + j, finalLayer));  // new class_84(l + (long)j, layer2);
+            new ZoomLayer(seed + j, finalLayer));
     }
 
     return finalLayer;
