@@ -2,7 +2,7 @@
 
 #include <string>
 
-class Level;
+class ServerLevel;
 class LevelStorageSource;
 class LevelType;
 class _NetworkGameInitData;
@@ -25,7 +25,7 @@ public:
                    LevelType* type, _NetworkGameInitData* initData);
     void saveGameRules();
 
-    Level* getLevel(int);
+    ServerLevel* getLevel(int);
 
     PlayerList* getPlayers();
 

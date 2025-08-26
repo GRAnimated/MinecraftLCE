@@ -200,6 +200,9 @@ public:
     int getAuxValueForMap(PlayerUID, int, int, int, int);
     std::shared_ptr<SavedData> getSavedData(const std::type_info&, const std::wstring&);
     void setSavedData(const std::wstring&, std::shared_ptr<SavedData>);
+    std::vector<std::shared_ptr<Entity>>* getEntitiesOfClass(const std::type_info&, AABB const*);
+    bool shouldFreezeIgnoreNeighbors(const BlockPos&);
+    bool shouldSnow(const BlockPos&, bool);
 
     int mSeaLevel = 63;
     nn::os::MutexType mEntityMutex;

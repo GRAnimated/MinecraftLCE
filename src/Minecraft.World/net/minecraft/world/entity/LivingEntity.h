@@ -47,7 +47,7 @@ public:
     void handleEntityEvent(unsigned char, int) override;
     void animateHurt() override;
     void setSprinting(bool) override;
-    void getTeam() override;
+    Team* getTeam() override;
     void spawnEatParticles(const ItemInstance&, int) override;
     void getYHeadRot() override;
     void setYHeadRot(float) override;

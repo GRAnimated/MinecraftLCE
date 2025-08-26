@@ -1,5 +1,6 @@
 #pragma once
 
+#include "net/minecraft/client/multiplayer/ServerGamePacketListenerImpl.h"
 #include "net/minecraft/world/entity/Entity.h"
 #include "net/minecraft/world/entity/player/Player.h"
 #include "net/minecraft/world/inventory/ContainerListener.h"
@@ -72,4 +73,9 @@ public:
     void setAllContainerData(AbstractContainerMenu*, std::shared_ptr<Container>) override;
     virtual void restoreFrom(std::shared_ptr<Player>, bool);
     virtual void teleportTo(double, double, double, float, float);
+
+    void startFallFlying();
+
+    // void* fill;
+    std::shared_ptr<ServerGamePacketListenerImpl> mConnection;
 };
