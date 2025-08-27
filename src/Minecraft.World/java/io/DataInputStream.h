@@ -12,28 +12,30 @@ class DataInputStream : public InputStream, public DataInput {
 public:
     DataInputStream(InputStream*);
     virtual ~DataInputStream();
-    virtual int read();
-    virtual int read(arrayWithLength<unsigned char>);
-    virtual int read(arrayWithLength<unsigned char>, unsigned int, unsigned int);
-    virtual void close();
-    virtual long long skip(long long);
-    virtual bool readBoolean();
-    virtual unsigned char readByte();
-    virtual unsigned char readUnsignedByte();
-    virtual int readUnsignedShort();
-    virtual wchar_t readChar();
-    virtual void readFully(arrayWithLength<char>);
-    virtual void readFully(arrayWithLength<unsigned char>);
-    virtual void readBytes(arrayWithLength<unsigned char>);
-    virtual double readDouble();
-    virtual float readFloat();
-    virtual int readInt();
-    virtual long readLong();
-    virtual short readShort();
-    virtual std::wstring readUTF();
-    virtual int readUTFChar();
-    virtual PlayerUID readPlayerUID();
-    virtual void skipBytes(long long);
+
+    int read() override;
+    int read(arrayWithLength<unsigned char>) override;
+    int read(arrayWithLength<unsigned char>, unsigned int, unsigned int) override;
+    void close() override;
+    long long skip(long long) override;
+
+    bool readBoolean() override;
+    unsigned char readByte() override;
+    unsigned char readUnsignedByte() override;
+    int readUnsignedShort() override;
+    wchar_t readChar() override;
+    void readFully(arrayWithLength<unsigned char>) override;
+    void readFully(arrayWithLength<char>) override;
+    void readBytes(arrayWithLength<unsigned char>) override;
+    double readDouble() override;
+    float readFloat() override;
+    int readInt() override;
+    long readLong() override;
+    short readShort() override;
+    std::wstring readUTF() override;
+    int readUTFChar() override;
+    PlayerUID readPlayerUID() override;
+    void skipBytes(long long) override;
 
     int readVarInt();
     long readVarLong();
