@@ -2,6 +2,7 @@
 
 #include "net/minecraft/world/level/chunk/ChunkSource.h"
 #include "nn/os/os_MutexTypes.h"
+#include "types.h"
 #include <vector>
 
 class ChunkGenerator;
@@ -35,14 +36,14 @@ public:
     void getLoadedChunks() override;
     void recreateLogicStructuresForChunk(LevelChunk*, int, int) override;
 
-    LevelChunk* field_10;
-    ChunkGenerator* field_18;
-    ChunkStorage* field_20;
+    LevelChunk* mBorderChunk;
+    ChunkGenerator* mChunkGenerator;
+    ChunkStorage* mChunkStorage;
     bool byte_28;
     LevelChunk** field_30;
     std::vector<LevelChunk*> field_38;
-    Level* field_50;
-    Dimension* field_58;
+    Level* mLevel;
+    Dimension* mDimension;
     void* qword_60;
     void* qword_68;
     void* qword_70;
@@ -50,9 +51,11 @@ public:
     void* qword_80;
     void* qword_88;
     void* field_90;
-    nn::os::MutexType field_98;
+    nn::os::MutexType mMutex;
     int dword_b8;
     int dword_bc;
     void* qword_c0;
     void* qword_c8;
 };
+
+ASSERT_SIZEOF(ServerChunkCache, 0xD0)
