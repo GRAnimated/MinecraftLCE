@@ -9,6 +9,7 @@ AddEdgeLayer::AddEdgeLayer(long long seed, std::shared_ptr<Layer> parent, AddEdg
     mMode = mode;
 }
 
+// NON_MATCHING
 arrayWithLength<int> AddEdgeLayer::coolWarm(int x, int y, int width, int height) {
     int m = x - 1;
     int n = y - 1;
@@ -42,6 +43,7 @@ arrayWithLength<int> AddEdgeLayer::coolWarm(int x, int y, int width, int height)
     return area;
 }
 
+// NON_MATCHING
 arrayWithLength<int> AddEdgeLayer::heatIce(int x, int y, int width, int height) {
     int m = x - 1;
     int n = y - 1;
