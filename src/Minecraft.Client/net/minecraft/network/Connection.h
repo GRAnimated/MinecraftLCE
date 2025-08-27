@@ -17,8 +17,8 @@ class Packet;
 
 class Connection {
 public:
-    static int dword_7101786598;  // runRead
-    static int dword_710178659C;  // runWrite
+    static int mReadConnections;   // runRead
+    static int mWriteConnections;  // runWrite
 
     static int dword_71017865A0[256];  // read
     static int dword_71017869A0[256];  // write
