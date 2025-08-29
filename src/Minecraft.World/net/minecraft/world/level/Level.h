@@ -203,6 +203,7 @@ public:
     std::vector<std::shared_ptr<Entity>>* getEntitiesOfClass(const std::type_info&, AABB const*);
     bool shouldFreezeIgnoreNeighbors(const BlockPos&);
     bool shouldSnow(const BlockPos&, bool);
+    bool isFindingSpawn();
 
     int mSeaLevel = 63;
     nn::os::MutexType mEntityMutex;

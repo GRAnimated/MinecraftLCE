@@ -19,7 +19,7 @@ public:
     McRegionChunkStorage(ConsoleSaveFile* sf, const std::wstring& unk, DataFixerUpper* dfu);
     ~McRegionChunkStorage();
     // params guessed, I assume that's normal around here.
-    void load(Level* level, int x, int z, LevelChunk* chunk) override;
+    LevelChunk* load(Level* level, int x, int z, LevelChunk* chunk) override;
     void save(Level* level, LevelChunk* chunk) override;
     // blank on Wii U Edition, probably because of entities.dat not existing.
     // but under Switch, there is a string: "Saving entities..."

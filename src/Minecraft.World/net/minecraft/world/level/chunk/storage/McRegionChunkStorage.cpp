@@ -10,7 +10,7 @@ void McRegionChunkStorage::save(Level* level, LevelChunk* chunk) {
     MemSect(30);
     PIXBeginNamedEvent(0.0, "Getting output stream\n");
     DataOutputStream* chunkOutputStream = RegionFileCache::getChunkDataOutputStream(
-        this->mSaveFile, this->unk2, chunk->xPos, chunk->zPos, false);
+        this->mSaveFile, this->unk2, chunk->mXPos, chunk->mZPos, false);
     PIXEndNamedEvent();
 
     if (this->mSaveFile->getOriginalSaveVersion() > 7) {

@@ -9,7 +9,7 @@ public:
     ChunkStorage();
 
     virtual ~ChunkStorage() {}
-    virtual void load(Level*, int, int, LevelChunk*) = 0;
+    virtual LevelChunk* load(Level*, int, int, LevelChunk*) = 0;
     virtual void save(Level*, LevelChunk*) = 0;
     virtual void saveEntities(Level*, LevelChunk*) = 0;
     virtual void tick() = 0;
