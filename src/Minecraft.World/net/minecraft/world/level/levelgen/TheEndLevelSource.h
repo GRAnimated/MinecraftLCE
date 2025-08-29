@@ -1,6 +1,6 @@
 #pragma once
 
-#include "net/minecraft/world/level/levelgen/ChunkGenerator.h"
+#include "net/minecraft/world/level/chunk/ChunkGenerator.h"
 
 class TheEndLevelSource : public ChunkGenerator {
 public:
@@ -9,8 +9,8 @@ public:
     LevelChunk* createChunk(int, int) override;
     void postProcess(int, int) override;
     bool postProcessLoadedChunk(LevelChunk*, int, int) override;
-    void getMobsAt(MobCategory*, const BlockPos&) override;
-    void* findNearestMapFeature(Level*, const std::wstring&, const BlockPos&, bool) override;
+    std::vector<Biome::MobSpawnerData>* getMobsAt(MobCategory*, const BlockPos&) override;
+    BlockPos* findNearestMapFeature(Level*, const std::wstring&, const BlockPos&, bool) override;
     void recreateLogicStructuresForChunk(LevelChunk*, int, int) override;
     bool isPosInFeature(Level*, const std::wstring&, const BlockPos&) override;
 };

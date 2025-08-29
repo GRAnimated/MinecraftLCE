@@ -3,6 +3,7 @@
 #include "net/minecraft/world/level/chunk/ChunkSource.h"
 #include "nn/os/os_MutexTypes.h"
 #include "types.h"
+#include <deque>
 #include <vector>
 
 class ChunkGenerator;
@@ -12,50 +13,58 @@ class Dimension;
 
 class ServerChunkCache : public ChunkSource {
 public:
-    ServerChunkCache(ServerLevel*, ChunkStorage*, ChunkGenerator*);
+    ServerChunkCache(ServerLevel* level, ChunkStorage* storage, ChunkGenerator* generator);
 
     ~ServerChunkCache() override;
-    void getChunkIfLoaded(int, int) override;
-    LevelChunk* getOrCreateChunk(int, int, bool) override;
+    LevelChunk* getChunkIfLoaded(int chunkX, int chunkZ) override;
+    LevelChunk* getOrCreateChunk(int chunkX, int chunkZ, bool unk) override;
     void tick() override;
-    void gatherStats() override;
-    void getLoadedChunksCount() override;
-    void flagPostProcessComplete(short, int, int) override;
-    bool isChunkGeneratedAt(int, int) override;
-    bool hasChunk(int, int) override;
-    LevelChunk* getChunk(int, int) override;
+    std::wstring gatherStats() override;
+    int getLoadedChunksCount() override;
+    void flagPostProcessComplete(short unk, int chunkX, int chunkZ) override;
+    bool isChunkGeneratedAt(int chunkX, int chunkZ) override;
+    bool hasChunk(int chunkX, int chunkZ) override;
+    LevelChunk* getChunk(int chunkX, int chunkZ) override;
     LevelChunk* getChunkAt(const BlockPos&) override;
-    LevelChunk* getChunkLoadedOrUnloaded(int, int) override;
-    void create(int, int) override;
+    LevelChunk* getChunkLoadedOrUnloaded(int chunkX, int chunkZ) override;
+    LevelChunk* create(int chunkX, int chunkZ) override;
+    LevelChunk* create(int chunkX, int chunkZ, bool unk);
     bool saveAllEntities() override;
     void save(bool, ProgressListener*) override;
-    void shouldSave() override;
+    bool shouldSave() override;
     ChunkSource* getCache() override;
-    void getMobsAt(MobCategory*, const BlockPos&) override;
-    void findNearestMapFeature(Level*, const std::wstring&, const BlockPos&, bool) override;
-    void getLoadedChunks() override;
-    void recreateLogicStructuresForChunk(LevelChunk*, int, int) override;
+    std::vector<Biome::MobSpawnerData>* getMobsAt(MobCategory* category, const BlockPos& pos) override;
+    void findNearestMapFeature(Level* level, const std::wstring& name, const BlockPos& pos,
+                               bool unk) override;
+    int getLoadedChunks() override;
+    void recreateLogicStructuresForChunk(LevelChunk* chunk, int chunkX, int chunkZ) override;
 
-    LevelChunk* mBorderChunk;
+    int inBounds(int chunkX, int chunkZ);
+    int computeIdx(int chunkX, int chunkZ);
+    LevelChunk* getChunkIfGenerated(int chunkX, int chunkZ, bool unk);
+    LevelChunk* load(int chunkX, int chunkZ, LevelChunk* chunk);
+    LevelChunk* updateCacheAndPostProcess(int chunkX, int chunkZ, LevelChunk* newChunk, LevelChunk* oldChunk,
+                                          bool unk);
+    std::vector<LevelChunk*>* getLoadedChunkList();
+    void updatePostProcessFlag(short flag, int baseX, int baseZ, int offsetX, int offsetZ, LevelChunk* chunk);
+    void updatePostProcessFlags(int chunkX, int chunkZ);
+    LevelChunk* getChunkIfLoadedOrInvalid(int chunkX, int chunkZ);
+
+    LevelChunk* mEmptyChunk;
     ChunkGenerator* mChunkGenerator;
     ChunkStorage* mChunkStorage;
     bool byte_28;
-    LevelChunk** field_30;
-    std::vector<LevelChunk*> field_38;
-    Level* mLevel;
+    LevelChunk** mChunks;
+    std::vector<LevelChunk*> mChunkList;
+    ServerLevel* mLevel;
     Dimension* mDimension;
-    void* qword_60;
-    void* qword_68;
-    void* qword_70;
-    void* qword_78;
-    void* qword_80;
-    void* qword_88;
-    void* field_90;
+    std::deque<LevelChunk*> mDeque;  // sizeof(std::deque<LevelChunk*>) == 0x30
+    LevelChunk** mUnloadedChunks;
     nn::os::MutexType mMutex;
     int dword_b8;
     int dword_bc;
-    void* qword_c0;
-    void* qword_c8;
+    bool (*mContainsChunkFunc)(Dimension*, int, int);
+    Dimension* qword_c8;
 };
 
 ASSERT_SIZEOF(ServerChunkCache, 0xD0)

@@ -25,6 +25,8 @@ class Biome;
 class Entity;
 class ChunkPrimer;
 class DataOutputStream;
+class ChunkSource;
+class ChunkGenerator;
 
 class LevelChunk {
 public:
@@ -90,7 +92,7 @@ public:
     virtual void getEntitiesOfClass(const std::type_info&, AABB const*, std::vector<std::shared_ptr<Entity>>&,
                                     const Predicate<std::shared_ptr<Entity>>*, bool);
     virtual void countEntities();
-    virtual void shouldSave(bool);
+    virtual bool shouldSave(bool);
     virtual void getBlocksAndData(arrayWithLength<unsigned char>*, int, int, int, int, int, int, int, bool);
     virtual void setBlocksAndData(arrayWithLength<unsigned char>, int, int, int, int, int, int, int, bool);
     virtual void testSetBlocksAndData(arrayWithLength<unsigned char>, int, int, int, int, int, int, int);
@@ -112,6 +114,11 @@ public:
     void writeCompressedBlockLightData(DataOutputStream* out);
     ChunkPos getPos();
     bool isTerrainPopulated();
+    bool IsInvalid();
+    void flagPostProcessComplete(short);
+    void checkPostProcess(ChunkSource*, ChunkGenerator*);
+    void checkChests(ChunkSource*, int, int);
+    void setLastSaveTime(long long);
 
     int getBlockId(int, int, int);
     int getData(int, int, int);
@@ -129,13 +136,13 @@ public:
     SparseLightStorage* mBlockLightDataLower;  // Y0-Y127
     SparseLightStorage* mBlockLightDataUpper;  // Y128-Y255
     char padding_480[24];
-    int xPos;
-    int zPos;
+    int mXPos;
+    int mZPos;
     char unk2[14];
-    std::unordered_map<BlockPos, std::shared_ptr<BlockEntity>>* blockEntities;
+    std::unordered_map<BlockPos, std::shared_ptr<BlockEntity>>* mBlockEntities;
     char unk3[32];
-    short biomeCount;
+    short mPopulatedFlags;
     char unk4[42];
-    long inhabitedTime;
+    long mInhabitedTime;
     char unk5[86];
 };

@@ -27,5 +27,5 @@ void LevelChunk::writeCompressedBlockLightData(DataOutputStream* out) {
 }
 
 ChunkPos LevelChunk::getPos() {
-    return ChunkPos(this->xPos, this->zPos);
+    return ChunkPos(this->mXPos, this->mZPos);
 }
