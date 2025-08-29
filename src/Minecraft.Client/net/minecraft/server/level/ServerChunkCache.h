@@ -11,6 +11,10 @@ class ChunkStorage;
 class ServerLevel;
 class Dimension;
 
+/* NOTE:
+ * Several functions in this class are quite different than Wii U Edition, with the inclusion of a
+ * mUnloadedChunks array containing chunks that are likely to be reloaded.
+ */
 class ServerChunkCache : public ChunkSource {
 public:
     ServerChunkCache(ServerLevel* level, ChunkStorage* storage, ChunkGenerator* generator);
@@ -58,7 +62,7 @@ public:
     std::vector<LevelChunk*> mChunkList;
     ServerLevel* mLevel;
     Dimension* mDimension;
-    std::deque<LevelChunk*> mDeque;  // sizeof(std::deque<LevelChunk*>) == 0x30
+    std::deque<LevelChunk*> mDeque;
     LevelChunk** mUnloadedChunks;
     nn::os::MutexType mMutex;
     int dword_b8;
