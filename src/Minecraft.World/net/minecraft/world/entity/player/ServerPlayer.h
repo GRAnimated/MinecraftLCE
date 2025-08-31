@@ -1,6 +1,6 @@
 #pragma once
 
-#include "net/minecraft/client/multiplayer/ServerGamePacketListenerImpl.h"
+#include "net/minecraft/server/network/ServerGamePacketListenerImpl.h"
 #include "net/minecraft/world/entity/Entity.h"
 #include "net/minecraft/world/entity/player/Player.h"
 #include "net/minecraft/world/inventory/ContainerListener.h"

@@ -9,10 +9,10 @@
 
 class Node;
 
-// TODO: Find location
+// TODO: Find locations
 void InitializeCriticalSection(nn::os::MutexType* mutexType);
 void InitializeCriticalSectionAndSpinCount(nn::os::MutexType* mutexType, unsigned long spinCount);
-// TODO: Find location
+long InterlockedCompareExchangeRelease(volatile long*, long, long);
 template <typename T>
 const std::wstring _toString(T type) {
     std::wstringstream ss;
@@ -35,19 +35,11 @@ public:
     static long processTimeInMicroSecs();
     static long processTime(System::ETimeGranularity);
 
-    static void arraycopy(arrayWithLength<u8>, unsigned int, arrayWithLength<u8>*, unsigned int,
-                          unsigned int);
-
-    static void arraycopy(arrayWithLength<int>, unsigned int, arrayWithLength<int>*, unsigned int,
-                          unsigned int);
-
-    static void arraycopy(arrayWithLength<Biome*>, unsigned int, arrayWithLength<Biome*>*, unsigned int,
-                          unsigned int);
-
-    static void arraycopy(arrayWithLength<Node*>, unsigned int, arrayWithLength<Node*>*, unsigned int,
-                          unsigned int);
-
-    // template for arraycopy here
+    template <typename T>
+    static void arraycopy(arrayWithLength<T> src, unsigned int srcOff, arrayWithLength<T>* dest,
+                          unsigned int destOff, unsigned int size) {
+        memcpy((*dest).data + destOff, src.data + srcOff, (uint64_t)size << 2);
+    }
 
     /** Reverses an in-place Short value */
     static void ReverseSHORT(short* v);

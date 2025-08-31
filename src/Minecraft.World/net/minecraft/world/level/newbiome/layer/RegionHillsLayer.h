@@ -4,7 +4,9 @@
 
 class RegionHillsLayer : public Layer {
 public:
-    RegionHillsLayer(long long seed, std::shared_ptr<Layer> childLayer, std::shared_ptr<Layer> childLayer2);
+    RegionHillsLayer(long long seed, std::shared_ptr<Layer> parent, std::shared_ptr<Layer> secondParent);
 
-    arrayWithLength<int> getArea(int i, int j, int k, int l) override;
+    arrayWithLength<int> getArea(int x, int y, int width, int height) override;
+
+    std::shared_ptr<Layer> mSecondParent;
 };
