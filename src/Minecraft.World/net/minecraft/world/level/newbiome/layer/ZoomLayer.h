@@ -6,7 +6,7 @@ class ZoomLayer : public Layer {
 public:
     static std::shared_ptr<Layer> zoom(long long seed, std::shared_ptr<Layer> layer, int i);
 
-    ZoomLayer(long long seed, std::shared_ptr<Layer> childLayer);
+    ZoomLayer(long long seed, std::shared_ptr<Layer> parent);
 
-    arrayWithLength<int> getArea(int i, int j, int k, int l) override;
+    arrayWithLength<int> getArea(int x, int y, int width, int height) override;
 };

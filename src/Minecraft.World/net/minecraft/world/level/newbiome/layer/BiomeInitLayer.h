@@ -9,10 +9,10 @@ class SuperflatConfig;
 
 class BiomeInitLayer : public Layer {
 public:
-    BiomeInitLayer(long long seed, std::shared_ptr<Layer> childLayer, LevelType* levelType,
+    BiomeInitLayer(long long seed, std::shared_ptr<Layer> parent, LevelType* levelType,
                    SuperflatConfig* superflatConfig);
 
-    arrayWithLength<int> getArea(int i, int j, int k, int l) override;
+    arrayWithLength<int> getArea(int x, int y, int width, int height) override;
 
     arrayWithLength<Biome*> mWarmBiomes;
     arrayWithLength<Biome*> mMediumBiomes;

@@ -4,11 +4,11 @@
 
 #include "net/minecraft/client/CMinecraftApp.h"
 #include "net/minecraft/client/Minecraft.h"
-#include "net/minecraft/client/multiplayer/ServerGamePacketListenerImpl.h"
 #include "net/minecraft/network/protocol/game/ClientboundChatPacket.h"
 #include "net/minecraft/network/protocol/game/GameModePacket.h"
 #include "net/minecraft/server/MinecraftServer.h"
 #include "net/minecraft/server/ServerLevel.h"
+#include "net/minecraft/server/network/ServerGamePacketListenerImpl.h"
 #include "net/minecraft/server/players/PlayerList.h"
 #include "net/minecraft/world/entity/EquipmentSlot.h"
 #include "net/minecraft/world/entity/item/EnderCrystal.h"

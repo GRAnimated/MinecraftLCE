@@ -10,22 +10,22 @@ public:
     ClientChunkCache(Level*, ChunkStorage*);
 
     ~ClientChunkCache() override;
-    void getChunkIfLoaded(int, int) override;
+    LevelChunk* getChunkIfLoaded(int, int) override;
     LevelChunk* getOrCreateChunk(int, int, bool) override;
     void tick() override;
-    void gatherStats() override;
-    void getLoadedChunksCount() override;
+    std::wstring gatherStats() override;
+    int getLoadedChunksCount() override;
     bool isChunkGeneratedAt(int, int) override;
     bool hasChunk(int, int) override;
     LevelChunk* getChunk(int, int) override;
     LevelChunk* getChunkAt(const BlockPos&) override;
-    void create(int, int) override;
+    LevelChunk* create(int, int) override;
     void save(bool, ProgressListener*) override;
-    void shouldSave() override;
+    bool shouldSave() override;
     ChunkSource* getCache() override;
-    void getMobsAt(MobCategory*, const BlockPos&) override;
+    std::vector<Biome::MobSpawnerData>* getMobsAt(MobCategory*, const BlockPos&) override;
     void findNearestMapFeature(Level*, const std::wstring&, const BlockPos&, bool) override;
-    void getLoadedChunks() override;
+    int getLoadedChunks() override;
     void recreateLogicStructuresForChunk(LevelChunk*, int, int) override;
 
 private:

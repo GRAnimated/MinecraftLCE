@@ -7,6 +7,8 @@ class LevelStorageSource;
 class LevelType;
 class _NetworkGameInitData;
 class PlayerList;
+class ChunkSource;
+class ChunkGenerator;
 
 class MinecraftServer {
 public:
@@ -25,9 +27,9 @@ public:
                    LevelType* type, _NetworkGameInitData* initData);
     void saveGameRules();
     void setPvpAllowed(bool);
+    void addPostProcessRequest(ChunkSource*, ChunkGenerator*, int, int);
 
     ServerLevel* getLevel(int);
-
     PlayerList* getPlayers();
 
     void* padding[5];

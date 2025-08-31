@@ -6,5 +6,5 @@ class IslandLayer : public Layer {
 public:
     IslandLayer(long long seed);
 
-    arrayWithLength<int> getArea(int i, int j, int k, int l) override;
+    arrayWithLength<int> getArea(int x, int y, int width, int height) override;
 };

@@ -4,9 +4,15 @@
 
 class AddEdgeLayer : public Layer {
 public:
-    enum Type : int { COOL_WARM, HEAT_ICE, SPECIAL };
+    enum Mode : int { COOL_WARM, HEAT_ICE, SPECIAL };
 
-    AddEdgeLayer(long long seed, std::shared_ptr<Layer> childLayer, Type type);
+    AddEdgeLayer(long long seed, std::shared_ptr<Layer> parent, Mode mode);
 
-    arrayWithLength<int> getArea(int i, int j, int k, int l) override;
+    arrayWithLength<int> coolWarm(int x, int y, int width, int height);
+    arrayWithLength<int> heatIce(int x, int y, int width, int height);
+    arrayWithLength<int> introduceSpecial(int x, int y, int width, int height);
+
+    arrayWithLength<int> getArea(int x, int y, int width, int height) override;
+
+    Mode mMode;
 };
