@@ -3,7 +3,11 @@
 // WallGenerator::WallGenerator(Random random, std::vector<AABB*>* walls, std::vector<AABB*>*) :
 // MapGenerator(random) {}
 
-WallGenerator::~WallGenerator() {}
+WallGenerator::~WallGenerator() {
+    for (auto it = this->mWalls.begin(); it != this->mWalls.end(); it++) {
+        delete *it;
+    }
+}
 
 // void WallGenerator::StartGeneration(Level* level) {}
 

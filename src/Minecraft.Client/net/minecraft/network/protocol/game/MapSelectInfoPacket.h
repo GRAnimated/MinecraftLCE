@@ -8,7 +8,6 @@ public:
     static std::shared_ptr<Packet> create();
 
     MapSelectInfoPacket(arrayWithLength<uchar>, bool);
-    // TODO: constructor(s)
 
     EPacketType getPacketId() override;
     void read(DataInputStream* input) override;

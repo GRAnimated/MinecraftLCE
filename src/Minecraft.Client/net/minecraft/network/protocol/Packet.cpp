@@ -173,15 +173,15 @@ std::wstring Packet::readUtf(DataInputStream* in, int maxLength) {
     return str;
 }
 
-void Packet::map(int a1, bool a2, bool a3, bool a4, bool a5, const std::type_info& a6,
-                 std::shared_ptr<Packet> (*a7)(), std::wstring a8) {
-    sPacketsMap.emplace(std::make_pair(a1, a7));
+void Packet::map(int id, bool a2, bool a3, bool a4, bool a5, const std::type_info& typeinfo,
+                 std::shared_ptr<Packet> (*creationFunc)(), std::wstring packetName) {
+    sPacketsMap.emplace(std::make_pair(id, creationFunc));
     if (a2)
-        sPacketsMap1.emplace(a1);
+        sPacketsMap1.emplace(id);
     if (a3)
-        sPacketsMap2.emplace(a1);
+        sPacketsMap2.emplace(id);
     if (a4)
-        sPacketsMap3.emplace(a1);
+        sPacketsMap3.emplace(id);
 }
 
 void Packet::staticCtor() {

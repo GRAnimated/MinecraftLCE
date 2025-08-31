@@ -94,4 +94,4 @@ public:
     void* qword178;
 };
 
-ASSERT_SIZEOF(CommonMasterGameMode, 384)
+ASSERT_SIZEOF(CommonMasterGameMode, 0x180)

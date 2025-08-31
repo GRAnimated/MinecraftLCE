@@ -2,6 +2,7 @@
 
 #include "net/minecraft/world/level/gamemode/minigames/EMiniGameId.h"
 #include "xml/XmlConstruct.h"
+#include <cstddef>
 
 class MiniGameDef {
 public:
@@ -35,7 +36,7 @@ public:
     bool HasFeatureArrowCanKnockback() const;
     bool ArePowerupsActive() const;
     EMiniGameId GetId() const;
-    long long GetLayerCount() const;  // why 64-bit??? where ususally they used unsigned int
+    size_t GetLayerCount() const;  // why 64-bit??? where ususally they used unsigned int
     void SetLootSet(int lootSetId) const;
     bool AllowPvp() const;
     XmlInt getDifficulty() const;

@@ -7,6 +7,7 @@ public:
     class Wall {
     public:
         Wall(AABB* boundaries, bool, bool);
+        ~Wall();
 
         AABB* mBoundaries;
         bool mUnk_8;

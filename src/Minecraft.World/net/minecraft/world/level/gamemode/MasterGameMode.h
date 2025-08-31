@@ -71,4 +71,4 @@ public:
     char fill120[120];
 };
 
-ASSERT_SIZEOF(MasterGameMode, 1136)
+ASSERT_SIZEOF(MasterGameMode, 0x470)

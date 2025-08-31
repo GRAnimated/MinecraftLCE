@@ -1,6 +1,6 @@
 #pragma once
 
-// this is completly guessed, as everything there seems to be inlined on WiiU
+// this is completely guessed, as everything there seems to be inlined on WiiU
 class XmlInt {
 public:
     bool hasValue() { return this->mHasValue; }
