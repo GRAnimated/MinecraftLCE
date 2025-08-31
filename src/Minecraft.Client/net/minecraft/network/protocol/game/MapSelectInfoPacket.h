@@ -7,10 +7,13 @@ class MapSelectInfoPacket : public Packet, public std::enable_shared_from_this<M
 public:
     static std::shared_ptr<Packet> create();
 
+    MapSelectInfoPacket(arrayWithLength<uchar>, bool);
     // TODO: constructor(s)
 
     EPacketType getPacketId() override;
     void read(DataInputStream* input) override;
     void write(DataOutputStream* output) override;
     void handle(PacketListener* listener) override;
+
+    char fill[0x18];
 };

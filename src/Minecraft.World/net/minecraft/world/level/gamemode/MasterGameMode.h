@@ -1,7 +1,9 @@
 #pragma once
 
 #include "net/minecraft/client/tutorial/Tutorial.h"
+#include "net/minecraft/world/ArrayWithLength.h"
 #include "net/minecraft/world/level/gamemode/CommonMasterGameMode.h"
+#include "types.h"
 
 class BlockDegradeRoutine;
 class GameStats;
@@ -25,9 +27,9 @@ public:
 
     ~MasterGameMode() override;
     void Tick() override;
-    void RestartMapGenerator() override;
+    long long RestartMapGenerator() override;
     void GetGameModeState() const override;
-    void GeneratorTargetLevel() const override;
+    ServerLevel* GeneratorTargetLevel() const override;
     void setChosenThemeWordId(int) override;
     void IsRoundPlaying() const override;
     void getScoreboard() const override;
@@ -48,6 +50,11 @@ public:
     int GetTimerRemainingTime(MasterGameMode::ETimerID);
     void SetPlayersInvulnerable(bool);
     GameStats* GetGameStats();
+    void SelectNewGameRules();
+    void ChooseNextGameRules(bool);
+    int ChooseItemSet(const MiniGameDef&, bool);
+    void SetupTeams();
+    void GeneratePlaylistSyncInfo();
 
     static void StaticCtor();
     static void OnGameStart(MasterGameMode* _this, void*);
@@ -55,6 +62,13 @@ public:
     static void OnRefillChestTimer(MasterGameMode*, void*);
     static void OnGracePeriodEnd(MasterGameMode*, void*);
 
-    void* fill78[78];
+    char fill49[49];
+    bool mPlayersInvulnerable;
+    char fill624[198];
+    arrayWithLength<unsigned char> mArrayWithLength;
+    char fill371[360];
     BlockDegradeRoutine* mDegradeRoutine;
+    char fill120[120];
 };
+
+ASSERT_SIZEOF(MasterGameMode, 1136)

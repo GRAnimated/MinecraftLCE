@@ -66,6 +66,7 @@ public:
     bool IsAppPaused();
     void SetAction(int, eXuiAction, void*);
     void setLevelGenerationOptions(LevelGenerationOptions* options);
+    void SetGameHostOption(eGameHostOption option, unsigned int value);
 
     static int DefaultOptionsCallback(void*, C4JStorage::PROFILESETTINGS*, int);
     static int OptionsDataCallback(void*, int, unsigned short, C4JStorage::eOptionsCallback);

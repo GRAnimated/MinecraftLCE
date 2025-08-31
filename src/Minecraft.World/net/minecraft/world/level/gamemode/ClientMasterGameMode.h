@@ -1,7 +1,17 @@
 #pragma once
 
 #include "net/minecraft/world/level/gamemode/CommonMasterGameMode.h"
-#include "types.h"
+
+enum EGameModeState {
+    Init = 0,
+    RoundEndingToLobby = 2,
+    FinishVoting = 3,  // not sure about this one
+    RoundWaitingToStart = 5,
+    RoundStart = 6,
+    RoundPlay = 7,
+    RoundEnding = 9,
+    NextRound = 10  // this or finish game, unsure
+};
 
 class ClientMasterGameMode : public CommonMasterGameMode {
 public:
@@ -11,7 +21,7 @@ public:
     void Tick() override;
     void OnExitedGame() override;
     void GetGameModeState() const override;
-    void GeneratorTargetLevel() const override;
+    ServerLevel* GeneratorTargetLevel() const override;
     void IsRoundPlaying() const override;
     void getScoreboard() const override;
     void ResetMapDistances() override;

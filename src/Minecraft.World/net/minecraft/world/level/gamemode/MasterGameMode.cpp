@@ -1,5 +1,7 @@
 #include "net/minecraft/world/level/gamemode/MasterGameMode.h"
 
+#include "net/minecraft/network/protocol/game/MapSelectInfoPacket.h"
+
 #include "net/minecraft/client/CMinecraftApp.h"
 #include "net/minecraft/client/Minecraft.h"
 #include "net/minecraft/client/multiplayer/ServerGamePacketListenerImpl.h"
@@ -21,6 +23,7 @@
 #include "net/minecraft/world/level/gamemode/GameStats.h"
 #include "net/minecraft/world/level/gamemode/minigames/EMiniGameId.h"
 #include "net/minecraft/world/level/gamemode/minigames/MiniGameDef.h"
+#include "net/minecraft/world/level/gamemode/minigames/Voteable.h"
 #include "net/minecraft/world/level/gamemode/minigames/glide/rules/CheckpointRuleDefinition.h"
 #include "net/minecraft/world/level/gamemode/minigames/glide/rules/PowerupRuleDefinition.h"
 #include "net/minecraft/world/level/gamemode/minigames/glide/rules/TargetAreaRuleDefinition.h"
@@ -79,13 +82,36 @@ void MasterGameMode::SetLockPlayerPositions(bool lock) {
     }
 }
 
-Team* teamek;
+void MasterGameMode::SelectNewGameRules() {
+    this->ChooseNextGameRules(false);
+    if (this->mGenerationOptions) {
+        mGenerationOptions->loadBaseSaveData();
+        const MiniGameDef& miniGame = MiniGameDef::GetCustomGameModeById(
+            this->mGenerationOptions->getRequiredGameRules()->getRuleType(), false);
+        miniGame.SetLootSet(this->ChooseItemSet(miniGame, true));
 
-// TODO: implement this (this is random shit to match other functions), this have to be implemented here
-// until we introduce Unity builds
-const AABB* CommonMasterGameMode::GetTeamArea(Team* team) const {
-    teamek = team;
-    return AABB::newTemp(0, 0, 0, 0, 0, 0);
+        this->SetupMiniGameInstance(miniGame, 0);
+        this->SetupTeams();
+
+        if (miniGame.GetId() == BUILD_OFF) {
+            int votes = 0;  // I think this is votes number on specific build
+            int bestBuild = this->mVoteables->getVoteable(3)->getWinningVote(votes);
+            if (bestBuild == -1) {
+                bestBuild
+                    = this->GetPossibleVotes()->at(Random().nextInt(this->GetPossibleVotes()->size() - 1));
+            }
+
+            // they using same packet and shit for buildoff voting result
+            this->setChosenThemeWordId(bestBuild);
+
+            this->clearBuildOffVotes();
+            this->GeneratePlaylistSyncInfo();
+
+            PlayerList* playerList = MinecraftServer::getInstance()->tryGetPlayers();
+            playerList->broadcastAll(
+                std::shared_ptr<Packet>(new MapSelectInfoPacket(this->mArrayWithLength, 0)));
+        }
+    }
 }
 
 void MasterGameMode::OnGameStart(MasterGameMode* _this, void*) {

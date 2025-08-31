@@ -175,7 +175,13 @@ std::wstring Packet::readUtf(DataInputStream* in, int maxLength) {
 
 void Packet::map(int a1, bool a2, bool a3, bool a4, bool a5, const std::type_info& a6,
                  std::shared_ptr<Packet> (*a7)(), std::wstring a8) {
-    map(a1, a2, a3, a4, a5, typeid(ClientboundKeepAlivePacket), a7, L"");
+    sPacketsMap.emplace(std::make_pair(a1, a7));
+    if (a2)
+        sPacketsMap1.emplace(a1);
+    if (a3)
+        sPacketsMap2.emplace(a1);
+    if (a4)
+        sPacketsMap3.emplace(a1);
 }
 
 void Packet::staticCtor() {
