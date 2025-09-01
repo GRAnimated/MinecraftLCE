@@ -20,7 +20,33 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 
 file(GLOB_RECURSE SOURCES_GAME ${PROJECT_SOURCE_DIR}/src/*.cpp ${PROJECT_SOURCE_DIR}/src/*.c ${PROJECT_SOURCE_DIR}/src/*.hpp ${PROJECT_SOURCE_DIR}/src/*.h ${PROJECT_SOURCE_DIR}/lib/windows.cpp)
 
-add_executable(mcswitch ${SOURCES_GAME})
+file(GLOB_RECURSE UNITY_SOURCES
+    ${PROJECT_SOURCE_DIR}/src/Minecraft.World/UnityWorld*.cpp
+    ${PROJECT_SOURCE_DIR}/src/Minecraft.Client/UnityClient*.cpp
+)
+
+set(FINAL_SOURCES ${SOURCES_GAME})
+
+foreach(UNITY_FILE ${UNITY_SOURCES})
+    file(READ ${UNITY_FILE} CONTENTS)
+
+    string(REGEX MATCHALL "#include +\"[^\"]+\\.cpp\"" INCLUDES "${CONTENTS}")
+
+    foreach(INC ${INCLUDES})
+        string(REGEX REPLACE "#include +\"" "" INC "${INC}")
+        string(REGEX REPLACE "\"" "" INC "${INC}")
+
+        foreach(SRC ${SOURCES_GAME})
+            if(SRC MATCHES "${INC}$")
+                list(REMOVE_ITEM FINAL_SOURCES "${SRC}")
+            endif()
+        endforeach()
+    endforeach()
+endforeach()
+
+list(APPEND FINAL_SOURCES ${UNITY_SOURCES})
+
+add_executable(mcswitch ${FINAL_SOURCES})
 
 # Writing sources to a file so build.py script knows the sources
 set(SOURCES_OUTPUT_FILE "${CMAKE_BINARY_DIR}/.build_sources")

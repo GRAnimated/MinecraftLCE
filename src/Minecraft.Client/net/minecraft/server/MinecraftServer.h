@@ -26,6 +26,7 @@ public:
     void loadLevel(LevelStorageSource* source, const std::wstring& param_2, long long param_3,
                    LevelType* type, _NetworkGameInitData* initData);
     void saveGameRules();
+    void setPvpAllowed(bool);
     void addPostProcessRequest(ChunkSource*, ChunkGenerator*, int, int);
 
     ServerLevel* getLevel(int);
