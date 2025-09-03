@@ -12,9 +12,7 @@
 #include "net/minecraft/world/level/material/Material.h"
 #include "net/minecraft/world/phys/AABB.h"
 
-static std::atomic_bool hasCreatedDefinition;
-std::vector<const Property*> sAgeProperties;
-IntegerProperty* ReedsBlock::sAgeProperty = IntegerProperty::create(L"age", 0, 15);
+IntegerProperty* sAgeProperty = IntegerProperty::create(L"age", 0, 15);
 
 const f32 size = 6.0f / 16.0f;  // 0.375f
 
@@ -114,14 +112,10 @@ int ReedsBlock::convertBlockStateToLegacyData(const BlockState* blockState) {
     return blockState->getValue<int>(sAgeProperty);
 }
 
-// NON_MATCHING: Original does some weird atomic stuff, i think hasCreatedDefinition is fake
+// NON_MATCHING: sAgeProperty is being loaded incorrectly
 BlockStateDefinition* ReedsBlock::createBlockStateDefinition() {
-    if (hasCreatedDefinition == false) {
-        hasCreatedDefinition = true;
-        sAgeProperties[0] = sAgeProperty;
-    }
-    // removed as this needs to be reworked :skull:
-    // return new BlockStateDefinition(this, sAgeProperties.data());
+    static const Property* properties[] = {sAgeProperty};
+    return new BlockStateDefinition(this, properties);
 }
 
 int ReedsBlock::getBlockFaceShape(LevelSource* levelSource, const BlockState* blockState, const BlockPos& pos,

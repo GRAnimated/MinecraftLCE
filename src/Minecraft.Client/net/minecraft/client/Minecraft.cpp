@@ -2,7 +2,6 @@
 
 #include "NX/Platform.h"
 #include "NX/Render/RendererCore.h"
-#include "com/mojang/blaze3d/platform/GlStateManager.h"
 #include "java/io/File.h"
 #include "net/minecraft/client/CMinecraftApp.h"
 #include "net/minecraft/client/GhostController.h"
@@ -27,6 +26,7 @@
 #include "net/minecraft/client/renderer/entity/EntityRenderDispatcher.h"
 #include "net/minecraft/client/renderer/entity/ItemRenderer.h"
 #include "net/minecraft/client/renderer/item/ItemInHandRenderer.h"
+#include "net/minecraft/client/renderer/platform/GlStateManager.h"
 #include "net/minecraft/client/renderer/texture/TextureManager.h"
 #include "net/minecraft/client/renderer/texture/Textures.h"
 #include "net/minecraft/client/resources/TexturePackRepository.h"

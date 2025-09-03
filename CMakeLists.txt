@@ -86,8 +86,9 @@ target_compile_options(mcswitch PRIVATE -fno-inline -fno-inline-functions)
 target_compile_options(mcswitch PRIVATE -fno-builtin)
 
 # Disable some warnings that are unavoidable
-target_compile_options(mcswitch PRIVATE -Wno-unused-parameter -Wno-unused-private-field)
+target_compile_options(mcswitch PRIVATE -Wno-unused-parameter -Wno-unused-private-field -Wno-unused-variable)
 target_compile_options(mcswitch PRIVATE -Wno-invalid-offsetof)
+target_compile_options(mcswitch PRIVATE -Wno-deprecated)
 # target_compile_options(mcswitch PRIVATE -Wno-delete-incomplete) # clangd warns about this one in MultiPlayerLevel.cpp
 target_compile_options(mcswitch PRIVATE -Wno-sign-compare)
 

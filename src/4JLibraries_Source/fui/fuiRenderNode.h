@@ -2,21 +2,20 @@
 
 #include "fui/fuiFile.h"
 
-class fuiRenderNodeTimeline;
 class FJ_FuiNodeStage;
-class fuiMatrix;
-class fuiObject;
-class fuiRect;
-class fuiRGBA;
-enum eFuiObjectType { RENDER_NODE_STAGE = 0 };
+struct fuiRenderNodeTimeline;
+struct fuiMatrix;
+struct fuiObject;
+struct fuiRect;
+struct fuiRGBA;
+enum eFuiObjectType { RENDER_NODE_STAGE = 0, eFuiObjectType_1 = 1, eFuiObjectType_2 = 2 };
 
 // weird flag thing
 constexpr uint32_t FLAG_CTOR_ENABLED = 0x1;
 constexpr uint32_t FLAG_NODE_VISIBLE = 0x8;
 constexpr const char* DEFAULT_PATH = "?";
 
-class fuiRenderNode {
-public:
+struct fuiRenderNode {
     fuiRenderNode(fuiRenderNode*, fuiRenderNode*, fuiObject*, unsigned int, eFuiObjectType, unsigned char,
                   fuiRGBA*, unsigned char, bool, fuiFile*);
 

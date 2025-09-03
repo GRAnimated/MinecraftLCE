@@ -44,6 +44,9 @@ set(ZLIB_SRCS
     zutil.c
 )
 
+# zlib has lots of warnings that we don't care about
+add_compile_options(-w)
+
 # parse the full version number from zlib.h and include in ZLIB_FULL_VERSION
 file(READ ${CMAKE_CURRENT_SOURCE_DIR}/zlib.h _zlib_h_contents)
 string(REGEX REPLACE ".*#define[ \t]+ZLIB_VERSION[ \t]+\"([-0-9A-Za-z.]+)\".*"

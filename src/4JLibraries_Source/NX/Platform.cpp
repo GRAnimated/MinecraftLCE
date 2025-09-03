@@ -57,5 +57,5 @@ void gfx_free(void* ptr, void*) {
 }
 
 void* gfx_realloc(void* ptr, ulong size, void*) {
-    realloc(ptr, size);
+    return realloc(ptr, size);
 }

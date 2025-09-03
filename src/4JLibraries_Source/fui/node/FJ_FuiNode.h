@@ -5,7 +5,7 @@
 #include "../fuiRenderNodeStage.h"
 #include <vector>
 
-class fuiRenderNode;
+struct fuiRenderNode;
 class FJ_FuiNodeStage;
 class UIScene;
 class FJ_Base;

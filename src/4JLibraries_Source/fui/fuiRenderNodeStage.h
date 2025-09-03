@@ -2,8 +2,7 @@
 
 #include "fui/fuiRenderNode.h"
 
-class fuiRenderNodeStage : public fuiRenderNode {
-public:
+struct fuiRenderNodeStage : public fuiRenderNode {
     explicit fuiRenderNodeStage(fuiFile* file);
     float getStageHeight();
     float getStageWidth();

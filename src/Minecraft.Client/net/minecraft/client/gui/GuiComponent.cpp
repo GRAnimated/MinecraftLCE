@@ -3,10 +3,10 @@
 #include "net/minecraft/client/Minecraft.h"
 #include "net/minecraft/client/gui/Gui.h"
 
-#include "com/mojang/blaze3d/platform/GlStateManager.h"
-#include "com/mojang/blaze3d/vertex/BufferBuilder.h"
-#include "com/mojang/blaze3d/vertex/Tesselator.h"
 #include "net/minecraft/client/gui/Font.h"
+#include "net/minecraft/client/renderer/platform/GlStateManager.h"
+#include "net/minecraft/client/renderer/vertex/BufferBuilder.h"
+#include "net/minecraft/client/renderer/vertex/Tesselator.h"
 #include <cmath>
 
 GuiComponent::GuiComponent() {}

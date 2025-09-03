@@ -187,7 +187,7 @@ int Compression::DecompressLZXRLE(void* dst, unsigned int* dstSize, void* src, u
             delete[] temp;
     } else {
         if (!this->dcData) {
-            this->dcData = operator new[](0x32000);
+            this->dcData = new unsigned char[0x32000];
         }
 
         Compression::Decompress(this->dcData, &initDstSize, src, srcSize);

@@ -19,7 +19,7 @@ int CMinecraftApp::GetGameHostOption(unsigned int unk, eGameHostOption option) {
         return unk & 8;
         break;
     case 5:
-        return unk & 8 | (16 * (GameType::SURVIVAL->getId() & 3)) | 0x3C81;
+        return (unk & 8) | (16 * (GameType::SURVIVAL->getId() & 3)) | 0x3C81;
         break;
     case 6:
         return (unk >> 4) & 3;

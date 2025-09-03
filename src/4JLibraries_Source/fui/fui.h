@@ -4,19 +4,18 @@
 
 #include "nn/os.h"
 
-class fuiBitmap;
-class fuiFile;
+struct fuiBitmap;
+struct fuiFile;
 class FJ_FuiNode;
 class FJ_EventListener;
-class fuiTextureManager;
+struct fuiTextureManager;
 
 constexpr int FUI_RESOLUTION_1080 = 1;
 constexpr int FUI_RESOLUTION_720 = 0;
 
 typedef float mat4x4[4][4];
 
-class fui {
-public:
+struct fui {
     static fui* sInstance;
 
     fui();

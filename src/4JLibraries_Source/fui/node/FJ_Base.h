@@ -3,7 +3,7 @@
 #include "fui/node/FJ_FuiNode.h"
 #include "types.h"
 
-class fuiRenderNodeEditText;
+struct fuiRenderNodeEditText;
 
 class FJ_Base : public FJ_FuiNode {
 public:

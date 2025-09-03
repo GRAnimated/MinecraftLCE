@@ -1,4 +1,4 @@
-#include "com/mojang/blaze3d/vertex/Tesselator.h"
+#include "net/minecraft/client/renderer/vertex/Tesselator.h"
 
 #include "NX/Platform.h"
 

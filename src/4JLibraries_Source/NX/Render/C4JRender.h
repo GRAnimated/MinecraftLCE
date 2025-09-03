@@ -14,7 +14,18 @@ public:
     enum ePrimitiveType {};
     enum ePixelShaderType {};
     enum eTextureFormat {};
-    enum eViewportType {};
+    enum eViewportType {
+        eViewportType_None = 0,
+        eViewportType_Top = 1,
+        eViewportType_Bottom = 2,
+        eViewportType_Left = 3,
+        eViewportType_Right = 4,
+        eViewportType_TopLeft = 5,
+        eViewportType_TopRight = 6,
+        eViewportType_BottomLeft = 7,
+        eViewportType_BottomRight = 8,
+        eViewportType_Full = 9
+    };
 
     virtual void Tick() = 0;
     virtual void UpdateGamma(unsigned short) = 0;

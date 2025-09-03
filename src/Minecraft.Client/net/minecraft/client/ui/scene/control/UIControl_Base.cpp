@@ -11,7 +11,7 @@ UIControl_Base::UIControl_Base() : UIControl() {
 UIControl_Base::~UIControl_Base() {}
 
 bool UIControl_Base::setupControl(UIScene* scene, fuiRenderNode* renderNode, const std::string& name) {
-    UIControl::setupControl(scene, renderNode, name);
+    return UIControl::setupControl(scene, renderNode, name);
 }
 
 void UIControl_Base::tick() {

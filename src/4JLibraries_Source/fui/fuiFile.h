@@ -7,12 +7,11 @@
 // Most structs derived from
 // https://github.com/NessieHax/fui-research-repo/blob/main/DOCUMENTATION.md
 
-class fuiRenderNode;
-class fuiBitmapFont;
-class fuiRenderNodeStage;
-class fuiRenderNodeTimeline;
-class fuiRect {
-public:
+struct fuiRenderNode;
+struct fuiBitmapFont;
+struct fuiRenderNodeStage;
+struct fuiRenderNodeTimeline;
+struct fuiRect {
     float minX;
     float maxX;
     float minY;
@@ -65,22 +64,22 @@ struct fuiTimeline {
     short actionCount;
     fuiRect rect;
 };
-class fuiTimelineAction;
-class fuiShape;
-class fuiShapeComponent;
-class fuiVert;
-class fuiTimelineFrame;
-class fuiTimelineEvent;
-class timelineEventName;
+struct fuiTimelineAction;
+struct fuiShape;
+struct fuiShapeComponent;
+struct fuiVert;
+struct fuiTimelineFrame;
+struct fuiTimelineEvent;
+struct timelineEventName;
 struct fuiReference {
     int symbolIndex;
     char name[64];
     int index;
 };
-class fuiEdittext;
-class fuiBitmap;
-class fuiFontName;
-class fuiImportAsset;
+struct fuiEdittext;
+struct fuiBitmap;
+struct fuiFontName;
+struct fuiImportAsset;
 class FJ_FuiNode;
 
 struct fuiHeader {
@@ -130,8 +129,7 @@ struct fuiData {
     fuiImportAsset* fuiImportAsset;
 };
 
-class fuiFile {
-public:
+struct fuiFile {
     fuiFile();
     ~fuiFile();
     // NOTE: HAD TO CHANGE THE SIGNATURE BECAUSE OF THE METHOD BEING DIFFERENT
@@ -157,7 +155,7 @@ public:
     fuiRenderNodeStage* mRenderNodeStage;
     fuiRenderNodeTimeline* mRenderNodeTimeline;
 
-    void(__fastcall* mCallbackFunc)(void*, const char*, fuiRect*);
+    void (*mCallbackFunc)(void*, const char*, fuiRect*);
     void* mCallbackData;
     void* field_138;
 };

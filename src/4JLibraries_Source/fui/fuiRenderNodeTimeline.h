@@ -2,8 +2,7 @@
 
 #include "fui/fuiRenderNode.h"
 
-class fuiRenderNodeTimeline : public fuiRenderNode {
-public:
+struct fuiRenderNodeTimeline : public fuiRenderNode {
     void progogateBoundsFromChild();
     void updateBoundsLocal();
 };
