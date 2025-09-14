@@ -5,5 +5,5 @@
 class LocalPlayer : public AbstractClientPlayer {
 public:
     char fill[160];
-    unsigned int mItemRendererThingy;
+    int mItemRendererThingy;
 };
