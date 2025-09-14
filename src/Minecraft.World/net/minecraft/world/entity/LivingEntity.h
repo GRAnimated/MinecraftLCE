@@ -16,6 +16,7 @@ class MobEffect;
 class MobEffectInstance;
 class CombatTracker;
 class ThermalAreaRuleDefinition;
+class HumanoidArm;
 
 class LivingEntity : public Entity {
 public:
@@ -162,9 +163,9 @@ public:
     virtual void onEnterCombat();
     virtual void onLeaveCombat();
     virtual void updateEffectVisibility();
-    virtual void getMainArm() = 0;
+    virtual HumanoidArm* getMainArm() = 0;
     virtual bool isUsingItem();
-    virtual void getUsedItemHand();
+    virtual InteractionHand::EInteractionHand getUsedItemHand();
     virtual void updatingUsingItem();
     virtual void startUsingItem(InteractionHand::EInteractionHand);
     virtual void spawnItemUseParticles(not_null_ptr<ItemInstance>, int);

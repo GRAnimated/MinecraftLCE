@@ -33,6 +33,7 @@ class Inventory;
 class InventoryMenu;
 class PlayerEnderChestContainer;
 class GameMode;
+class ItemCooldowns;
 
 class Player : public LivingEntity {
 public:
@@ -114,7 +115,7 @@ public:
     void pushEntities() override;
     float getAbsorptionAmount() override;
     void setAbsorptionAmount(float) override;
-    void getMainArm() override;
+    HumanoidArm* getMainArm() override;
     bool IsCreativeFlying() override;
     virtual void updateFrameTick();
     virtual void closeContainer();
@@ -210,7 +211,7 @@ public:
     int mJumpTriggerTime;
     float mOBob;
     float mBob;
-    int dword600;
+    int mTakeXpDelay;
     int dword604;
     std::wstring mCustomSkinName;
     std::wstring mCustomCapeName;
@@ -248,7 +249,7 @@ public:
     void* qword718 = nullptr;
     int mEnchantmentSeed;
     int mDefaultFlySpeed;
-    void* qword728;
+    ItemCooldowns* mItemCooldowns;
     int mLastLevelUpTime;
     int dword734;
     std::wstring mGameProfile;
