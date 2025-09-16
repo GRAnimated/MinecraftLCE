@@ -1,8 +1,8 @@
 #include "net/minecraft/client/renderer/item/ItemInHandRenderer.h"
 
 #include "NX/Render/RendererCore.h"
-#include "com/mojang/blaze3d/platform/GlStateManager.h"
 #include "net/minecraft/client/Minecraft.h"
+#include "net/minecraft/client/renderer/platform/GlStateManager.h"
 #include "net/minecraft/util/HumanoidArm.h"
 #include "net/minecraft/util/Mth.h"
 #include "net/minecraft/world/InteractionHand.h"

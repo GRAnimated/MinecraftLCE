@@ -18,6 +18,9 @@ class Model {
 public:
     Model();
 
+    void compileSkinnedDrawlist();
+    void callSkinnedDrawlist();
+
     virtual ~Model();
     virtual void render(std::shared_ptr<Entity>&, float, float, float, float, float, float, bool);
     virtual void setupAnim(float, float, float, float, float, float, std::shared_ptr<Entity>,
