@@ -80,8 +80,8 @@ void Minecraft::init() {
     mAltFont = new Font(mOptions, L"font/alternate", mTextures, 0, &Font::sAlternateFontRsrc, 16, 16, 8, 8,
                         nullptr);
 
-    GrassColor::init(mTextures->loadTexturePixels(_TEXTURE_NAME::GRASS_COLOR, L"misc/grasscolor"));
-    FoliageColor::init(mTextures->loadTexturePixels(_TEXTURE_NAME::FOLIAGE_COLOR, L"misc/foliagecolor"));
+    GrassColor::init(mTextures->loadTexturePixels(_TEXTURE_NAME::GRASSCOLOR, L"misc/grasscolor"));
+    FoliageColor::init(mTextures->loadTexturePixels(_TEXTURE_NAME::FOLIAGECOLOR, L"misc/foliagecolor"));
 
     Biome::generateColoursDebugOutput();
 
