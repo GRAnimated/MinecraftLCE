@@ -15,8 +15,8 @@ class Textures {
 public:
     Textures(TexturePackRepository*, Options*);
 
-    static const wchar_t* _TEXTURE_PATHS[SIZE_OF__TEXTURE_NAME];
-    static int _TEXTURE_IDS[SIZE_OF__TEXTURE_NAME];
+    static const wchar_t* _TEXTURE_PATHS[eTextureName_SIZE_OF_ENUM];
+    static int _TEXTURE_IDS[eTextureName_SIZE_OF_ENUM];
     static int LEGACY_TEXTURES[158];
 
     void stitch();

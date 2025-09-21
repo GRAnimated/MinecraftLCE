@@ -1,7 +1,7 @@
 #include "net/minecraft/client/renderer/texture/Textures.h"
 
 // clang-format off
-const wchar_t* Textures::_TEXTURE_PATHS[SIZE_OF__TEXTURE_NAME] = {L"misc/grasscolor",L"misc/foliagecolor",L"%blur%misc/pumpkinblur",L"%clamp%misc/shadow",L"art/kz",L"environment/clouds",L"environment/rain",L"environment/snow",
+const wchar_t* Textures::_TEXTURE_PATHS[eTextureName_SIZE_OF_ENUM] = {L"misc/grasscolor",L"misc/foliagecolor",L"%blur%misc/pumpkinblur",L"%clamp%misc/shadow",L"art/kz",L"environment/clouds",L"environment/rain",L"environment/snow",
 L"gui/gui",L"gui/icons",L"item/arrows",L"item/cart",L"item/sign",L"misc/mapbg",L"misc/mapicons",L"misc/water",L"misc/footprint",L"mob/saddle",L"mob/sheep_fur",
 L"mob/spider_eyes",L"particles",L"mob/chicken",L"mob/cow",L"mob/pig",L"mob/sheep",L"mob/squid",L"mob/wolf",L"mob/wolf_tame",L"mob/wolf_angry",L"mob/creeper",
 L"mob/ghast",L"mob/ghast_fire",L"mob/zombie",L"mob/pigzombie",L"mob/skeleton",L"mob/slime",L"mob/spider",L"mob/steve",L"mob/char1",L"mob/char2",L"mob/char3",
@@ -33,24 +33,24 @@ L"mob/parrot/parrot_blue",L"mob/parrot/parrot_green",L"mob/parrot/parrot_yellow_
 L"mob/horse/armor/horse_armor_leather_1_b",L"gui/items",L"terrain"};
 
 int Textures::LEGACY_TEXTURES[158] = {
-POWER, ENDERMAN_EYES, EXPLOSION, ZOMBIE, FOOTPRINT, REDCOW, SNOWMAN, ENDER, VILLAGER, FARMER, LIBRARIAN, PRIEST, SMITH,
-BUTCHER, ENDER_EYES, GLINT, BOOK, PARTICLEFIELD, TUNNEL, BEAM, ITEMS, TERRAIN, MAPICONS, SKELETON_WITHER, ENDERCHEST, KZ,
-WOLF_TAME, WOLF_COLLAR, PARTICLES, ZOMBIE_VILLAGER, LEAD_KNOT, BEACON_BEAM, BAT, DONKEY, HORSE_BLACK, HORSE_BROWN, HORSE_CHESTNUT, HORSE_CREAMY, HORSE_DARKBROWN,
-HORSE_GRAY, HORSE_MARKINGS_BLACKDOTS, HORSE_MARKINGS_WHITE, HORSE_MARKINGS_WHITEDOTS, HORSE_MARKINGS_WHITEFIELD, HORSE_SKELETON, HORSE_WHITE, HORSE_ZOMBIE, MULE, HORSE_ARMOR_DIAMOND, HORSE_ARMOR_GOLD, HORSE_ARMOR_IRON,
-WITCH, WITHER, WITHER_ARMOR, WITHER_INVULNERABLE, TRAPPED, TRAPPED_DOUBLE, STEVE, ALEX, ALEX1, ALEX2, ALEX3,
-ALEX4, ALEX5, ALEX6, ALEX7, ADDITIONALMAPICONS, DEFAULT, WOOD, ENDERMITE, GUARDIAN, GUARDIAN_ELDER, GUARDIAN_BEAM,
-BROWN, WHITE, BLACK, GOLD, SALT, WHITE_SPLOTCHED, TOAST, CAERBANNOG, DESTROY_STAGE_0, DESTROY_STAGE_1, DESTROY_STAGE_2,
-DESTROY_STAGE_3, DESTROY_STAGE_4, DESTROY_STAGE_5, DESTROY_STAGE_6, DESTROY_STAGE_7, DESTROY_STAGE_8, DESTROY_STAGE_9, BANNER_BASE, BANNER_ATLAS, POLARBEAR, BOAT_OAK,
-BOAT_SPRUCE, BOAT_BIRCH, BOAT_JUNGLE, BOAT_ACACIA, BOAT_DARKOAK, SKELETON, STRAY, STRAY_OVERLAY, ZOMBIE_FARMER, ZOMBIE_LIBRARIAN, ZOMBIE_PRIEST,
-ZOMBIE_SMITH, ZOMBIE_BUTCHER, HUSK, DRAGON_FIREBALL, ENDERGOLEM, SPARK, SPECTRAL_ARROW, TIPPED_ARROW, ELYTRA, DEVSTEVE, DEVALEX,
-THERMAL_1, THERMAL_2, BOOSTARROW, GLIDE_GHOST, DECOR_WHITE, DECOR_ORANGE, DECOR_MAGENTA, DECOR_LIGHT_BLUE, DECOR_YELLOW, DECOR_LIME, DECOR_PINK,
-DECOR_GRAY, DECOR_SILVER, DECOR_CYAN, DECOR_PURPLE, DECOR_BLUE, DECOR_BROWN, DECOR_GREEN, DECOR_RED, DECOR_BLACK, LLAMA_CREAMY, LLAMA_WHITE,
-LLAMA_BROWN, LLAMA_GRAY, SPIT, EVOKER, FANGS, VINDICATOR, VEX, VEX_CHARGING, ILLUSIONIST, PARROT_RED_BLUE, PARROT_BLUE,
-PARROT_GREEN, PARROT_YELLOW_BLUE, PARROT_GREY, BED, FIREWORK, HORSE_ARMOR_LEATHER_1, HORSE_ARMOR_LEATHER_1_B, SIZE_OF__TEXTURE_NAME
+eTextureName_POWER, eTextureName_ENDERMAN_EYES, eTextureName_EXPLOSION, eTextureName_ZOMBIE, eTextureName_FOOTPRINT, eTextureName_REDCOW, eTextureName_SNOWMAN, eTextureName_ENDER, eTextureName_VILLAGER, eTextureName_FARMER, eTextureName_LIBRARIAN, eTextureName_PRIEST, eTextureName_SMITH,
+eTextureName_BUTCHER, eTextureName_ENDER_EYES, eTextureName_GLINT, eTextureName_BOOK, eTextureName_PARTICLEFIELD, eTextureName_TUNNEL, eTextureName_BEAM, eTextureName_ITEMS, eTextureName_TERRAIN, eTextureName_MAPICONS, eTextureName_SKELETON_WITHER, eTextureName_ENDERCHEST, eTextureName_KZ,
+eTextureName_WOLF_TAME, eTextureName_WOLF_COLLAR, eTextureName_PARTICLES, eTextureName_ZOMBIE_VILLAGER, eTextureName_LEAD_KNOT, eTextureName_BEACON_BEAM, eTextureName_BAT, eTextureName_DONKEY, eTextureName_HORSE_BLACK, eTextureName_HORSE_BROWN, eTextureName_HORSE_CHESTNUT, eTextureName_HORSE_CREAMY, eTextureName_HORSE_DARKBROWN,
+eTextureName_HORSE_GRAY, eTextureName_HORSE_MARKINGS_BLACKDOTS, eTextureName_HORSE_MARKINGS_WHITE, eTextureName_HORSE_MARKINGS_WHITEDOTS, eTextureName_HORSE_MARKINGS_WHITEFIELD, eTextureName_HORSE_SKELETON, eTextureName_HORSE_WHITE, eTextureName_HORSE_ZOMBIE, eTextureName_MULE, eTextureName_HORSE_ARMOR_DIAMOND, eTextureName_HORSE_ARMOR_GOLD, eTextureName_HORSE_ARMOR_IRON,
+eTextureName_WITCH, eTextureName_WITHER, eTextureName_WITHER_ARMOR, eTextureName_WITHER_INVULNERABLE, eTextureName_TRAPPED, eTextureName_TRAPPED_DOUBLE, eTextureName_STEVE, eTextureName_ALEX, eTextureName_ALEX1, eTextureName_ALEX2, eTextureName_ALEX3,
+eTextureName_ALEX4, eTextureName_ALEX5, eTextureName_ALEX6, eTextureName_ALEX7, eTextureName_ADDITIONALMAPICONS, eTextureName_DEFAULT, eTextureName_WOOD, eTextureName_ENDERMITE, eTextureName_GUARDIAN, eTextureName_GUARDIAN_ELDER, eTextureName_GUARDIAN_BEAM,
+eTextureName_BROWN, eTextureName_WHITE, eTextureName_BLACK, eTextureName_GOLD, eTextureName_SALT, eTextureName_WHITE_SPLOTCHED, eTextureName_TOAST, eTextureName_CAERBANNOG, eTextureName_DESTROY_STAGE_0, eTextureName_DESTROY_STAGE_1, eTextureName_DESTROY_STAGE_2,
+eTextureName_DESTROY_STAGE_3, eTextureName_DESTROY_STAGE_4, eTextureName_DESTROY_STAGE_5, eTextureName_DESTROY_STAGE_6, eTextureName_DESTROY_STAGE_7, eTextureName_DESTROY_STAGE_8, eTextureName_DESTROY_STAGE_9, eTextureName_BANNER_BASE, eTextureName_BANNER_ATLAS, eTextureName_POLARBEAR, eTextureName_BOAT_OAK,
+eTextureName_BOAT_SPRUCE, eTextureName_BOAT_BIRCH, eTextureName_BOAT_JUNGLE, eTextureName_BOAT_ACACIA, eTextureName_BOAT_DARKOAK, eTextureName_SKELETON, eTextureName_STRAY, eTextureName_STRAY_OVERLAY, eTextureName_ZOMBIE_FARMER, eTextureName_ZOMBIE_LIBRARIAN, eTextureName_ZOMBIE_PRIEST,
+eTextureName_ZOMBIE_SMITH, eTextureName_ZOMBIE_BUTCHER, eTextureName_HUSK, eTextureName_DRAGON_FIREBALL, eTextureName_ENDERGOLEM, eTextureName_SPARK, eTextureName_SPECTRAL_ARROW, eTextureName_TIPPED_ARROW, eTextureName_ELYTRA, eTextureName_DEVSTEVE, eTextureName_DEVALEX,
+eTextureName_THERMAL_1, eTextureName_THERMAL_2, eTextureName_BOOSTARROW, eTextureName_GLIDE_GHOST, eTextureName_DECOR_WHITE, eTextureName_DECOR_ORANGE, eTextureName_DECOR_MAGENTA, eTextureName_DECOR_LIGHT_BLUE, eTextureName_DECOR_YELLOW, eTextureName_DECOR_LIME, eTextureName_DECOR_PINK,
+eTextureName_DECOR_GRAY, eTextureName_DECOR_SILVER, eTextureName_DECOR_CYAN, eTextureName_DECOR_PURPLE, eTextureName_DECOR_BLUE, eTextureName_DECOR_BROWN, eTextureName_DECOR_GREEN, eTextureName_DECOR_RED, eTextureName_DECOR_BLACK, eTextureName_LLAMA_CREAMY, eTextureName_LLAMA_WHITE,
+eTextureName_LLAMA_BROWN, eTextureName_LLAMA_GRAY, eTextureName_SPIT, eTextureName_EVOKER, eTextureName_FANGS, eTextureName_VINDICATOR, eTextureName_VEX, eTextureName_VEX_CHARGING, eTextureName_ILLUSIONIST, eTextureName_PARROT_RED_BLUE, eTextureName_PARROT_BLUE,
+eTextureName_PARROT_GREEN, eTextureName_PARROT_YELLOW_BLUE, eTextureName_PARROT_GREY, eTextureName_BED, eTextureName_FIREWORK, eTextureName_HORSE_ARMOR_LEATHER_1, eTextureName_HORSE_ARMOR_LEATHER_1_B, eTextureName_SIZE_OF_ENUM
 };
 // clang-format on
 
-int Textures::_TEXTURE_IDS[SIZE_OF__TEXTURE_NAME];
+int Textures::_TEXTURE_IDS[eTextureName_SIZE_OF_ENUM];
 
 void Textures::stitch() {
     this->atlas->stitch();
@@ -65,8 +65,8 @@ void Textures::loadIndexedTextures() {
 
 bool Textures::IsTUImage(_TEXTURE_NAME textureID, const std::wstring& textureName) {
     // checks if texture is part of known textures
-    if (textureID < SIZE_OF__TEXTURE_NAME) {
-        for (int i = 0; Textures::LEGACY_TEXTURES[i] < SIZE_OF__TEXTURE_NAME; ++i) {
+    if (textureID < eTextureName_SIZE_OF_ENUM) {
+        for (int i = 0; Textures::LEGACY_TEXTURES[i] < eTextureName_SIZE_OF_ENUM; ++i) {
             if (Textures::LEGACY_TEXTURES[i] == textureID) {
                 return true;
             }
