@@ -18,6 +18,7 @@ public:
     void renderStatic(const not_null_ptr<ItemInstance>&, std::shared_ptr<LivingEntity>,
                       ItemTransforms::TransformType, float, bool, TextureAtlasSprite*);
 
-    char padding[80];
+    char padding80[80];
     bool mBool;
+    char padding7[7];
 };
