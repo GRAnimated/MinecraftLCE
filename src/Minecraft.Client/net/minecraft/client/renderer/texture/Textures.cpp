@@ -58,7 +58,8 @@ void Textures::stitch() {
 }
 
 void Textures::loadIndexedTextures() {
-    for (int i = 0; i < 211; i++) {
+    // the last 2 textures, are not indexed, and they should not be loaded here
+    for (int i = 0; i < eTextureName_SIZE_OF_ENUM - 2; i++) {
         Textures::_TEXTURE_IDS[i] = this->loadTexture((_TEXTURE_NAME)i, _TEXTURE_PATHS[i]);
     }
 }
