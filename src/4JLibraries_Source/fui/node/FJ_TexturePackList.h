@@ -6,5 +6,5 @@ class fuiRenderNode;
 // STUB CLASS
 class FJ_TexturePackList {
 public:
-    static FJ_FuiNode* Create(fuiRenderNode *);
+    static FJ_FuiNode* Create(fuiRenderNode*);
 };

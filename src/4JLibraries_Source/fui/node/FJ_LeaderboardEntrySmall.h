@@ -6,5 +6,5 @@ class fuiRenderNode;
 // STUB CLASS
 class FJ_LeaderboardEntrySmall {
 public:
-    static FJ_FuiNode* Create(fuiRenderNode *);
+    static FJ_FuiNode* Create(fuiRenderNode*);
 };

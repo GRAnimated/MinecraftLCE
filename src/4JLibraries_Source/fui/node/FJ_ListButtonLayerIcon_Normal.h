@@ -6,5 +6,5 @@ class fuiRenderNode;
 // STUB CLASS
 class FJ_ListButtonLayerIcon_Normal {
 public:
-    static FJ_FuiNode* Create(fuiRenderNode *);
+    static FJ_FuiNode* Create(fuiRenderNode*);
 };

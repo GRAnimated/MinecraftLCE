@@ -6,5 +6,5 @@ class fuiRenderNode;
 // STUB CLASS
 class FJ_ProgressBar_Loading {
 public:
-    static FJ_FuiNode* Create(fuiRenderNode *);
+    static FJ_FuiNode* Create(fuiRenderNode*);
 };

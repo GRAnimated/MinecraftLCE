@@ -6,5 +6,5 @@ class fuiRenderNode;
 // STUB CLASS
 class FJ_ControlsMenu {
 public:
-    static FJ_FuiNode* Create(fuiRenderNode *);
+    static FJ_FuiNode* Create(fuiRenderNode*);
 };
