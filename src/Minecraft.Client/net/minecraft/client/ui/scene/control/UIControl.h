@@ -3,7 +3,7 @@
 #include <string>
 
 class UIScene;
-struct fuiRenderNode;
+class fuiRenderNode;
 
 class UIControl {
 public:
