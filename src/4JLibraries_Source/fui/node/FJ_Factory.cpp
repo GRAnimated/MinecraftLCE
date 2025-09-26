@@ -1,3 +1,5 @@
+#include "fui/node/FJ_Factory.h"
+
 #include "fui/node/FJ_AchievementsMenu.h"
 #include "fui/node/FJ_AnvilMenu.h"
 #include "fui/node/FJ_AttackIndicatorCrosshair.h"
@@ -59,7 +61,6 @@
 #include "fui/node/FJ_Eula.h"
 #include "fui/node/FJ_ExlamationMark.h"
 #include "fui/node/FJ_ExperienceBar.h"
-#include "fui/node/FJ_Factory.h"
 #include "fui/node/FJ_FuiNode.h"
 #include "fui/node/FJ_FullscreenProgress.h"
 #include "fui/node/FJ_FurnaceArrow.h"

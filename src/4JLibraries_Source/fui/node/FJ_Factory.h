@@ -1,7 +1,9 @@
+#pragma once
+
 #include "fui/node/FJ_FuiNode.h"
 #include <string>
 #include <unordered_map>
-#include <utility>
+
 class FJ_Factory {
 public:
     void initialise();
