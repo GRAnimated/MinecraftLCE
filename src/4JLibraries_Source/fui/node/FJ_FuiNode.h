@@ -5,7 +5,7 @@
 #include "../fuiRenderNodeStage.h"
 #include <vector>
 
-struct fuiRenderNode;
+class fuiRenderNode;
 class FJ_FuiNodeStage;
 class UIScene;
 class FJ_Base;
@@ -19,6 +19,8 @@ class FJ_Document;
 class FJ_FuiNode {
 public:
     FJ_FuiNode(fuiRenderNode* renderNode);
+
+    static FJ_FuiNode* Create(fuiRenderNode*);
 
     virtual ~FJ_FuiNode();
     virtual void ASConstructor();

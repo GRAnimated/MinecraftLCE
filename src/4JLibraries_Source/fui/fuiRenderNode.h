@@ -15,7 +15,8 @@ constexpr uint32_t FLAG_CTOR_ENABLED = 0x1;
 constexpr uint32_t FLAG_NODE_VISIBLE = 0x8;
 constexpr const char* DEFAULT_PATH = "?";
 
-struct fuiRenderNode {
+class fuiRenderNode {
+public:
     fuiRenderNode(fuiRenderNode*, fuiRenderNode*, fuiObject*, unsigned int, eFuiObjectType, unsigned char,
                   fuiRGBA*, unsigned char, bool, fuiFile*);
 

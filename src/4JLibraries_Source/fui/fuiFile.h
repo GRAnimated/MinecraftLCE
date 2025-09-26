@@ -7,7 +7,7 @@
 // Most structs derived from
 // https://github.com/NessieHax/fui-research-repo/blob/main/DOCUMENTATION.md
 
-struct fuiRenderNode;
+class fuiRenderNode;
 struct fuiBitmapFont;
 struct fuiRenderNodeStage;
 struct fuiRenderNodeTimeline;
