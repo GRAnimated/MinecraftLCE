@@ -1,5 +1,6 @@
-#include "net/minecraft/network/syncher/EntityDataSerializers.h"
 #include "net/minecraft/world/entity/mob/Animal.h"
+
+#include "net/minecraft/network/syncher/EntityDataSerializers.h"
 
 void Animal::staticCtor() {
     sAccessor
