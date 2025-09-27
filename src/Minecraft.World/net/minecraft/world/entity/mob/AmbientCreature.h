@@ -1,6 +1,7 @@
 #pragma once
-#include "Creature.h"
-#include "Mob.h"
+
+#include "net/minecraft/world/entity/mob/Creature.h"
+#include "net/minecraft/world/entity/mob/RangedAttackMob.h"
 
 // ENTITY STUB
 class AmbientCreature : public Mob, public Creature {

@@ -1,3 +1,3 @@
-#include "FJ_DebugOptions.h"
+#include "fui/node/control/debug/FJ_DebugOptions.h"
 
 std::string FJ_DebugOptions::sName = "DebugOptions";

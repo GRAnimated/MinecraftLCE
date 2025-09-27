@@ -1,3 +1,3 @@
-#include "FJ_Label_SkinSelectCenter_Small.h"
+#include "fui/node/control/label/FJ_Label_SkinSelectCenter_Small.h"
 
 std::string FJ_Label_SkinSelectCenter_Small::sName = "FJ_Label_SkinSelectCenter_Small";

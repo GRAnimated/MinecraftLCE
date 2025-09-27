@@ -1,4 +1,5 @@
 #pragma once
+
 #include "HangingEntity.h"
 
 // ENTITY STUB

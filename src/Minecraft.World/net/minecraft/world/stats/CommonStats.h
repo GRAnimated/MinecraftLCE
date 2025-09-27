@@ -1,5 +1,6 @@
 #pragma once
-#include "GenericStats.h"
+
+#include "net/minecraft/world/stats/GenericStats.h"
 
 // STUB
 class CommonStats : public GenericStats {

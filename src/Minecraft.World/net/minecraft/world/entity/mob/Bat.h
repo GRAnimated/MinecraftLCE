@@ -1,4 +1,5 @@
 #pragma once
+
 #include "AmbientCreature.h"
 
 // ENTITY STUB

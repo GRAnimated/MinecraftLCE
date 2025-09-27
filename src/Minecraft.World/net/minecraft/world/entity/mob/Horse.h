@@ -1,4 +1,5 @@
 #pragma once
+
 #include "abstract/AbstractHorse.h"
 
 // ENTITY STUB

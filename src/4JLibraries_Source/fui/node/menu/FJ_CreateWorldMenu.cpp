@@ -1,3 +1,3 @@
-#include "FJ_CreateWorldMenu.h"
+#include "fui/node/menu/FJ_CreateWorldMenu.h"
 
 std::string FJ_CreateWorldMenu::sName = "CreateWorldMenu";

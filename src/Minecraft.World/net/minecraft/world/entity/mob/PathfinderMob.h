@@ -1,5 +1,5 @@
 #pragma once
 
-#include "Mob.h"
+#include "net/minecraft/world/entity/mob/RangedAttackMob.h"
 
 class PathfinderMob : public Mob {};

@@ -1,5 +1,6 @@
+#include "net/minecraft/world/DispenserBootstrap.h"
+
 #include "AbstractProjectileDispenseBehavior.h"
-#include "DispenserBootstrap.h"
 
 // STUB
 void DispenserBootstrap::StaticCtor() {

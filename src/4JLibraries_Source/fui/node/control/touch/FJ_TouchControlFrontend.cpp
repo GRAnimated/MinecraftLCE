@@ -1,3 +1,3 @@
-#include "FJ_TouchControlFrontend.h"
+#include "fui/node/control/touch/FJ_TouchControlFrontend.h"
 
 std::string FJ_TouchControlFrontend::sName = "FJ_TouchControlFrontend";

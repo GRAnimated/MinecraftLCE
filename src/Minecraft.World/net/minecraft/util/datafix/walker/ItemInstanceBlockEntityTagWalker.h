@@ -1,5 +1,6 @@
 #pragma once
-#include "DataWalker.h"
+
+#include "net/minecraft/util/datafix/walker/DataWalker.h"
 
 // STUB
 class ItemInstanceBlockEntityTagWalker : public DataWalker {

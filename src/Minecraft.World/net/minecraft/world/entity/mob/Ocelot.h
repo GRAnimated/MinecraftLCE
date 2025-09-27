@@ -1,4 +1,5 @@
 #pragma once
+
 #include "TamableAnimal.h"
 
 // ENTITY STUB

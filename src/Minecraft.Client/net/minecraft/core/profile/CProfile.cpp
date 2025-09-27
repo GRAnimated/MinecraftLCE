@@ -1,5 +1,6 @@
-#include "net/minecraft/client/resources/L10N.h"
 #include "net/minecraft/core/profile/CProfile.h"
+
+#include "net/minecraft/client/resources/L10N.h"
 
 // NON_MATCHING | Score: 10 (Lower is better)
 // Randomly unmatched, also I think the method was broken to begin with...

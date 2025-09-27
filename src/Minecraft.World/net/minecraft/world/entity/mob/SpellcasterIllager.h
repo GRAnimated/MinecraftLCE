@@ -1,4 +1,5 @@
 #pragma once
+
 #include "abstract/AbstractIllager.h"
 
 // ENTITY STUB

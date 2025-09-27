@@ -1,4 +1,4 @@
-#include "SharedConstants.h"
+#include "net/minecraft/SharedConstants.h"
 #include "net/minecraft/util/Calendar.h"
 
 std::wstring SharedConstants::sVersionString = L"1.12";

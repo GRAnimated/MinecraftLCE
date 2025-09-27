@@ -1,5 +1,6 @@
 #pragma once
-#include "Mob.h"
+
+#include "net/minecraft/world/entity/mob/RangedAttackMob.h"
 
 // ENTITY STUB
 // Flying Lawnmower

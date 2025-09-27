@@ -3,7 +3,7 @@
 #include "../event/FJ_Event.h"
 #include "../event/FJ_EventListener.h"
 #include "../fuiRenderNodeStage.h"
-#include "FuiNode.h"
+#include "fui/node/FJ_FuiNode.h"
 #include <vector>
 #include <string>
 

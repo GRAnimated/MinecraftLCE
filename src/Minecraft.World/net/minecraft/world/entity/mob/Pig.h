@@ -1,5 +1,6 @@
 #pragma once
-#include "Animal.h"
+
+#include "net/minecraft/world/entity/mob/FlyingAnimal.h"
 
 // ENTITY STUB
 class Pig : public Animal {

@@ -1,5 +1,6 @@
 #pragma once
-#include "Creature.h"
+
+#include "net/minecraft/world/entity/mob/Creature.h"
 #include "PathfinderMob.h"
 
 // ENTITY STUB

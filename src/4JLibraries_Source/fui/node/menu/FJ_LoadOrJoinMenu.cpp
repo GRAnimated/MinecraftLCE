@@ -1,3 +1,3 @@
-#include "FJ_LoadOrJoinMenu.h"
+#include "fui/node/menu/FJ_LoadOrJoinMenu.h"
 
 std::string FJ_LoadOrJoinMenu::sName = "LoadOrJoinMenu";

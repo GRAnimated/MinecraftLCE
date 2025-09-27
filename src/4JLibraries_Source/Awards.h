@@ -1,4 +1,5 @@
 #pragma once
+
 #include "net/minecraft/client/ui/StringIDs.h"
 
 void RegisterAwardsWithProfileManager();

@@ -1,5 +1,6 @@
-#include "net/minecraft/world/level/block/Block.h"
 #include "net/minecraft/world/level/chunk/LevelChunk.h"
+
+#include "net/minecraft/world/level/block/Block.h"
 
 void LevelChunk::staticCtor() {
     InitializeCriticalSection(&LevelChunk::mMutex_710178c150);

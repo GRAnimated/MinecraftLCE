@@ -1,4 +1,5 @@
 #pragma once
+
 #include "Golem.h"
 
 // ENTITY STUB

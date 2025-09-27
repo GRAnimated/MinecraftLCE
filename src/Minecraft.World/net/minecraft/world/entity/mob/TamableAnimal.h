@@ -1,5 +1,6 @@
 #pragma once
-#include "Animal.h"
+
+#include "net/minecraft/world/entity/mob/FlyingAnimal.h"
 #include "net/minecraft/world/entity/OwnableEntity.h"
 
 // ENTITY STUB
