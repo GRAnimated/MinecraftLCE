@@ -1,12 +1,14 @@
 #pragma once
 
+#include "FJ_Cursor.h"
+
 #include <string>
 
 class fuiRenderNode;
 class FJ_FuiNode;
 
 /// STUB CLASS FOR FJ_Factory::initialise
-class FJ_Cursor_Small {
+class FJ_Cursor_Small : public FJ_Cursor {
 public:
     static std::string sName;
 

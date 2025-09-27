@@ -2,7 +2,7 @@
 
 #include "fui/node/FJ_FuiNode.h"
 
-class FJ_List_ListButton : public FJ_FuiNode {
+class FJ_List_ListButton : public FJ_List {
 public:
     static std::string sName;
 

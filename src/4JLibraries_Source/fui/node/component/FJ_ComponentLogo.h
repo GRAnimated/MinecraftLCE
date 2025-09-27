@@ -1,12 +1,14 @@
 #pragma once
 
+#include "fui/node/document/FJ_Document.h"
+
 #include <string>
 
 class fuiRenderNode;
 class FJ_FuiNode;
 
 /// STUB CLASS FOR FJ_Factory::initialise
-class FJ_ComponentLogo {
+class FJ_ComponentLogo : public FJ_Document {
 public:
     static std::string sName;
 
