@@ -5,7 +5,7 @@
 
 class UIScene_Intro : public UIScene {
 public:
-    UIScene_Intro(int a1, void *a2, UILayer *layer);
+    UIScene_Intro(int a1, void* a2, UILayer* layer);
 
     std::wstring getMoviePath() override;
     bool mapElementsAndNames() override;
@@ -23,5 +23,5 @@ public:
     int mPadding;
     bool mUnk;
     bool mSkippable;
-    UIControl_Touch *mTouchToSkip;
+    UIControl_Touch* mTouchToSkip;
 };

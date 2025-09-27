@@ -3,5 +3,4 @@
 #include "net/minecraft/world/Nameable.h"
 
 // STUB
-class InteractionObject : public Nameable {
-};
+class InteractionObject : public Nameable {};

@@ -5,6 +5,7 @@
 #include <new>
 
 #include "4JLibraries_Source/NX/Thread/C4JThreadImpl.h"
+#include "Awards.h"
 #include "NX/Render/RendererCore.h"
 #include "java/io/IntCache.h"
 #include "net/minecraft/client/CGameNetworkManager.h"
@@ -34,7 +35,6 @@
 #include "nn/oe.h"
 #include "nn/os.h"
 #include "nn/time.h"
-#include "Awards.h"
 
 static nn::oe::PerformanceMode PERFORMANCE_MODE;
 static nn::os::MessageQueueType* MESSAGE_QUEUE;
@@ -249,8 +249,8 @@ extern "C" void nnMain() {
 
     L10N::loadStringTable();
     CInput::sInstance->SetCircleCrossSwapped(true);
-    int screenType = 1;  // TODO: shove function that gets screenType, haven't done it so far because i'm unsure
-                         // on how to name that func
+    int screenType = 1;  // TODO: shove function that gets screenType, haven't done it so far because i'm
+                         // unsure on how to name that func
     gConsoleUIController.setResolutionChangeDisableFlag(IUIController::eRESOLUTION_DISABLE_FLAG::FLAG_0);
 
     int screenWidth, screenHeight;

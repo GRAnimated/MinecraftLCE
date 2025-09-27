@@ -3,6 +3,4 @@
 #include "net/minecraft/core/dispenser/DefaultDispenseItemBehavior.h"
 
 // STUB
-class AbstractProjectileDispenseBehavior : public DefaultDispenseItemBehavior {
-
-};
+class AbstractProjectileDispenseBehavior : public DefaultDispenseItemBehavior {};

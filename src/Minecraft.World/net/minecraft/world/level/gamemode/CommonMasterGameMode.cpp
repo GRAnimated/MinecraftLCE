@@ -1,5 +1,6 @@
 #include "net/minecraft/world/level/gamemode/CommonMasterGameMode.h"
 
+#include "../../scores/Team.h"
 #include "NX/Platform.h"
 #include "net/minecraft/client/CMinecraftApp.h"
 #include "net/minecraft/client/Minecraft.h"
@@ -7,7 +8,6 @@
 #include "net/minecraft/server/MinecraftServer.h"
 #include "net/minecraft/world/level/LevelRuleset.h"
 #include "net/minecraft/world/level/gamemode/ConsoleGameRules.h"
-#include "net/minecraft/world/level/gamemode/Team.h"
 #include "net/minecraft/world/level/gamemode/minigames/EMiniGameId.h"
 #include "net/minecraft/world/level/gamemode/minigames/MiniGameDef.h"
 #include "net/minecraft/world/level/gamemode/minigames/buildoff/WallGenerator.h"

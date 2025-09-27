@@ -330,7 +330,7 @@ class SourceChecks:
 def run_clang_format(file_path):
     try:
         print(f"Formatting {file_path}...")
-        subprocess.run(['clang-format', '-i', file_path], check=True)
+        subprocess.run(['clang-format-20', '-i', file_path], check=True)
     except FileNotFoundError:
         print("Error: clang-format not found. Please install it or add it to your PATH.")
         exit(1)

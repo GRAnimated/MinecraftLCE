@@ -3,5 +3,4 @@
 #include "TamableAnimal.h"
 
 // ENTITY STUB
-class ShoulderRidingEntity : public TamableAnimal {
-};
+class ShoulderRidingEntity : public TamableAnimal {};

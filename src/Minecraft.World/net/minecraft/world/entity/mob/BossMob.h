@@ -2,5 +2,4 @@
 
 // ENTITY STUB
 // hello boss,
-class BossMob {
-};
+class BossMob {};

@@ -131,8 +131,7 @@ Packet::Packet() {
     mShouldDelay = false;
 }
 
-void Packet::handle(PacketListener* listener) {
-}
+void Packet::handle(PacketListener* listener) {}
 
 int Packet::getEstimatedSize() {
     return 8;

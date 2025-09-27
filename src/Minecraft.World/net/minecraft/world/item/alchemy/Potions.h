@@ -1,6 +1,6 @@
 #pragma once
 
 class Potions {
-    public:
+public:
     static void StaticCtor();
 };

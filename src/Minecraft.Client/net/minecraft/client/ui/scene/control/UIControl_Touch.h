@@ -6,5 +6,5 @@ class UIControl_Touch : public UIControl_Base {
 public:
     void init(int);
 
-    bool setupControl(UIScene *scene, fuiRenderNode *node, const std::string &name) override;
+    bool setupControl(UIScene* scene, fuiRenderNode* node, const std::string& name) override;
 };

@@ -5,7 +5,7 @@
 
 // ENTITY STUB
 // why the fuck is this a golem
-class Shulker : public Golem, public Enemy{
+class Shulker : public Golem, public Enemy {
 public:
     static void staticCtor();
 };

@@ -4,8 +4,8 @@
 #include "../event/FJ_EventListener.h"
 #include "../fuiRenderNodeStage.h"
 #include "fui/node/FJ_FuiNode.h"
-#include <vector>
 #include <string>
+#include <vector>
 
 class fuiRenderNode;
 class FJ_FuiNodeStage;
@@ -47,8 +47,6 @@ public:
 
     void setCallbackScene(UIScene*);
     void dispatchEvent(FJ_Event* event);
-
-    static FJ_FuiNode* Create(fuiRenderNode*);
 
     FJ_Base* asFJ_Base();
     FJ_List* asFJ_List();

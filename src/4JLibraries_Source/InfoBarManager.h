@@ -1,6 +1,6 @@
 #pragma once
 
-#include "com/mojang/blaze3d/vertex/BufferBuilder.h"
+#include "net/minecraft/client/renderer/vertex/BufferBuilder.h"
 
 class InfoBarManager {
 public:

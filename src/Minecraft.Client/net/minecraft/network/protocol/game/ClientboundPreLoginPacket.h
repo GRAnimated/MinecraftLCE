@@ -15,11 +15,11 @@ public:
     void write(DataOutputStream* output) override;
     void handle(PacketListener* listener) override;
 
-    PlayerUID *mPlayers;
+    PlayerUID* mPlayers;
     int mPlayerCount;
     char mUnk1;
     int mUnk2;
-    char mMapName; // not to be confused with world name, which I don't think is written here
+    char mMapName;  // not to be confused with world name, which I don't think is written here
     char mUnk3;
     char mUnk4;
     char mUnk5;

@@ -3,5 +3,4 @@
 #include "AbstractTreeFeature.h"
 
 // STUB
-class MegaTreeFeature : public AbstractTreeFeature {
-};
+class MegaTreeFeature : public AbstractTreeFeature {};

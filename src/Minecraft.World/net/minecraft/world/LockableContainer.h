@@ -4,6 +4,4 @@
 #include "net/minecraft/world/Container.h"
 
 // STUB
-class LockableContainer : public Container, public InteractionObject {
-
-};
+class LockableContainer : public Container, public InteractionObject {};

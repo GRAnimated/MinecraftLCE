@@ -13,7 +13,7 @@ ClientboundPreLoginPacket::ClientboundPreLoginPacket() {
     this->mPlayerCount = 0;
     this->mUnk1 = 0;
     this->mUnk2 = 0;
-    this->mMapName = 0; // not to be confused with world name, which I don't think is written here
+    this->mMapName = 0;  // not to be confused with world name, which I don't think is written here
     this->mUnk3 = 0;
     this->mUnk4 = 0;
     this->mUnk5 = 0;
@@ -47,7 +47,7 @@ void ClientboundPreLoginPacket::read(DataInputStream* input) {
 
     this->mPlayerCount = input->readByte();
     if (this->mPlayerCount) {
-        this->mPlayers = new PlayerUID[this->mPlayerCount]; // see note in PlayerUID
+        this->mPlayers = new PlayerUID[this->mPlayerCount];  // see note in PlayerUID
 
         for (int i = 0; i < this->mPlayerCount; i++) {
             this->mPlayers[i] = input->readPlayerUID();

@@ -15,7 +15,7 @@ public:
     virtual bool IsSignedInLive(int) = 0;
     virtual bool IsSigningIn(int) = 0;
     virtual bool IsGuest(int) = 0;
-    virtual void sub_710079238C() = 0;               // Wii U says CProfile::RequestSignInUI
+    virtual void sub_710079238C() = 0;        // Wii U says CProfile::RequestSignInUI
     virtual void SignInUser(void*, int) = 0;  // void * used to be MiiDataEntry
     virtual void sub_710079239C() = 0;
     virtual void sub_71007923AC() = 0;

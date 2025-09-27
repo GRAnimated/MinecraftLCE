@@ -5,5 +5,5 @@
 
 class UIScene_AchievementsMenu : public UIScene {
 public:
-    static const AwardInfo *GetInfo(int idx);
+    static const AwardInfo* GetInfo(int idx);
 };

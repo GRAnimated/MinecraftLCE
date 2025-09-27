@@ -1,6 +1,4 @@
 #pragma once
 
 // STUB
-class DataWalker {
-
-};
+class DataWalker {};

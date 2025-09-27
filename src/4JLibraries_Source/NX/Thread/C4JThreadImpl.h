@@ -1,7 +1,7 @@
 #pragma once
 
-#include "nn/os/os_ThreadTypes.h"
 #include "NX/Thread/C4JThread.h"
+#include "nn/os/os_ThreadTypes.h"
 
 constexpr long sCores[4] = {1, 2, 4, 0};
 
@@ -27,14 +27,14 @@ public:
 
     void* unknown2[6];
     int mUnk;
-    int mProcessor; // which core to use ig
-    void *unk;
+    int mProcessor;  // which core to use ig
+    void* unk;
     bool mIsRunning;
     bool mHasStarted;
     long mStartTime;
     void* unknown[2];
     int mPriority;
     int mUnk23;
-    nn::os::ThreadType *mThread;
+    nn::os::ThreadType* mThread;
     // void* unknown[14];
 };

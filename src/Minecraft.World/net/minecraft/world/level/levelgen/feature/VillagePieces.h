@@ -3,7 +3,7 @@
 class VillagePieces {
 public:
     class Smithy {
-        public:
+    public:
         static void staticCtor();
     };
 };

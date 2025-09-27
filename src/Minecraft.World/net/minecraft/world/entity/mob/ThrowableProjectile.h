@@ -4,5 +4,4 @@
 #include "net/minecraft/world/entity/projectile/Projectile.h"
 
 // ENTITY STUB
-class ThrowableProjectile : public Entity, public Projectile {
-};
+class ThrowableProjectile : public Entity, public Projectile {};

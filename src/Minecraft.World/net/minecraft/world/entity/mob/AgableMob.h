@@ -2,4 +2,7 @@
 
 #include "PathfinderMob.h"
 
-class AgableMob : public PathfinderMob {};
+class AgableMob : public PathfinderMob {
+public:
+    static void staticCtor();
+};

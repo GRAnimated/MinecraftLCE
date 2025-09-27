@@ -3,6 +3,4 @@
 #include "Container.h"
 
 // STUB
-class WorldlyContainer : virtual public Container {
-
-};
+class WorldlyContainer : virtual public Container {};

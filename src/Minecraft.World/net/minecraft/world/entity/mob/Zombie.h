@@ -2,7 +2,7 @@
 
 #include "net/minecraft/world/entity/mob/Monster.h"
 
-    // ENTITY STUB
+// ENTITY STUB
 class Zombie : public Monster {
 public:
     static void staticCtor();

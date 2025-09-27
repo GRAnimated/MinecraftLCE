@@ -2,9 +2,12 @@
 
 #include "fui/node/FJ_Base.h"
 
+class FuiNode;
 class FJ_Button : public FJ_Base {
 public:
     static std::string sName;
+
+    static fuiRenderNode* Create(FuiNode*);
 
     ~FJ_Button() override;
     void SetLabel(const std::wstring&) override;
@@ -14,5 +17,4 @@ public:
     virtual void UpdateLabel();
     virtual void EnableButton(bool);
 
-    static fuiRenderNode *Create(FuiNode*);
 };

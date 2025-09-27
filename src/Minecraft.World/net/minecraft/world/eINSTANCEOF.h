@@ -2,22 +2,21 @@
 
 /* Dexrn says:
  * TODO: we need to switch this to using flags instead of magic values
- * I've been able to pretty much prove that these were actually constructed by one or more flags (per value), e.g:
- * constexpr unsigned int PARTICLE = 0x00080000;
- * then:
- * eChestRefillParticle = PARTICLE | 0x00000201
+ * I've been able to pretty much prove that these were actually constructed by one or more flags (per value),
+ * e.g: constexpr unsigned int PARTICLE = 0x00080000; then: eChestRefillParticle = PARTICLE | 0x00000201
  *
  * and here there looks to be a missing flag in the leftover hex, that 0x00000200...
- * I've tried this on basically all values and it matches up properly, the only hard part is figuring out what each flag corresponds to
- * For the majority of them, it's the parent class's flag (which you can get by finding the base in the enum, e.g eMob)
- * but for some, they're made up values for groups they've categorized themselves.
+ * I've tried this on basically all values and it matches up properly, the only hard part is figuring out what
+ * each flag corresponds to For the majority of them, it's the parent class's flag (which you can get by
+ * finding the base in the enum, e.g eMob) but for some, they're made up values for groups they've categorized
+ * themselves.
  *
  * I believe the format is 0xVVVVVVII
  *                           TYPES|ID
  *                           3B    1B
  *
  * I request that this also be documented (likely by me) on team-lodestone.github.io/Documentation
-*/
+ */
 
 enum eINSTANCEOF {
     eChestRefillParticle = 0x00080201,
@@ -129,7 +128,7 @@ enum eINSTANCEOF {
     eWaterCreature = 0x0D102000,
     eSquid = 0x0D102001,
     eUnknownMob = 0x0D400000,
-    eGolem = 0x0D580000, // GUESSED
+    eGolem = 0x0D580000,  // GUESSED
     eVillagerGolem = 0x0D580002,
     eAgableMob = 0x0D600000,
     eVillager = 0x0D600001,
@@ -158,7 +157,7 @@ enum eINSTANCEOF {
     eParrot = 0x2D6C0003,
     eMonster = 0x4D540000,
     eAbstractIllager = 0x4D541000,
-    eSpellcasterIllager = 0x4D541800, // GUESSED
+    eSpellcasterIllager = 0x4D541800,  // GUESSED
     eEndermite = 0x4D54000B,
     eAbstractSkeleton = 0x4D540400,
     eShulker = 0x4D580003,
@@ -194,7 +193,7 @@ enum eINSTANCEOF {
     eArrow = 0x8A020000,
     eSpectralArrow = 0x8A020001,
     eTippableArrow = 0x8A020002,
-    eThrowableProjectile = 0x8A200000, // GUESSED
+    eThrowableProjectile = 0x8A200000,  // GUESSED
     eSnowball = 0x8A200001,
     eThrownEgg = 0x8A200002,
     eThrownEnderpearl = 0x8A200003,

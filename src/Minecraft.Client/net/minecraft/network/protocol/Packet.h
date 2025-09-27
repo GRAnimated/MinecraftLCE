@@ -17,7 +17,7 @@ class PacketListener;
 
 class Packet {
 public:
-    static std::unordered_map<int, std::shared_ptr<Packet>(*)()> sPackets;
+    static std::unordered_map<int, std::shared_ptr<Packet> (*)()> sPackets;
     static std::unordered_set<int> sPackets1;
     static std::unordered_set<int> sPackets2;
     static std::unordered_set<int> sPackets3;
@@ -53,7 +53,7 @@ public:
     static void map(int, bool, bool, bool, bool, const std::type_info&, std::shared_ptr<Packet> (*)(),
                     std::wstring);
 
-    long long mCreatedTime; // seems to be longlong judging by class size on wii u
+    long long mCreatedTime;  // seems to be longlong judging by class size on wii u
     bool mShouldDelay;
 };
 

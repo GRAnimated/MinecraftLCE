@@ -9,7 +9,7 @@ class ServerboundPreLoginPacket : public Packet,
 public:
     static std::shared_ptr<Packet> create();
 
-    ServerboundPreLoginPacket(const std::wstring &name);
+    ServerboundPreLoginPacket(const std::wstring& name);
     ServerboundPreLoginPacket();
 
     EPacketType getPacketId() override;

@@ -1,6 +1,6 @@
 #pragma once
 
 class EntityIO {
-    public:
+public:
     static void bootStrap();
 };

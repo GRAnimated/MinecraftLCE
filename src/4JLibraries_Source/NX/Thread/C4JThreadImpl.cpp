@@ -33,10 +33,9 @@ void C4JThreadImpl::SetPriority(int priority) {
     unsigned p = priority - 14;
 
     mPriority = 16;
-    if (p < 5) mPriority = priority;
+    if (p < 5)
+        mPriority = priority;
     nn::os::ChangeThreadPriority(this->mThread, mPriority);
 }
 
-bool C4JThreadImpl::WaitForCompletion(int i) {
-
-}
+bool C4JThreadImpl::WaitForCompletion(int i) {}

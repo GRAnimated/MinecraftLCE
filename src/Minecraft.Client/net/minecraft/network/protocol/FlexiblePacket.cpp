@@ -31,10 +31,8 @@ void FlexiblePacket::read(DataInputStream* input) {
 }
 
 void FlexiblePacket::write(DataOutputStream* output) {
-    const int p = (mStrings.size() & 0xFF)
-                   | (mVarints.size() & 0xFFF) << 8
-                   | (mBools.size() & 0xFF) << 20
-                   | mFloats.size() << 28;
+    const int p = (mStrings.size() & 0xFF) | (mVarints.size() & 0xFFF) << 8 | (mBools.size() & 0xFF) << 20
+                  | mFloats.size() << 28;
 
     output->writeInt(p);
 
@@ -47,7 +45,8 @@ void FlexiblePacket::write(DataOutputStream* output) {
     if (mBools.size()) {
         char b = 0;
         for (int i = 0; i < mBools.size(); i++) {
-            if (mBools[i]) b |= (1 << i);
+            if (mBools[i])
+                b |= (1 << i);
         }
 
         output->writeByte(b);
@@ -64,9 +63,9 @@ int FlexiblePacket::getEstimatedSize() {
         strings += (int)mStrings[i].length();
     }
 
-    return sizeof(int) // 4 byte packed header
-            + (sizeof(int) * mVarints.size() // varints
-            + strings // strings (why not size * 2 + 2?)
-            + (!mBools.empty()) // bool
-            + sizeof(float) * mFloats.size()); // floats
+    return sizeof(int)                            // 4 byte packed header
+           + (sizeof(int) * mVarints.size()       // varints
+              + strings                           // strings (why not size * 2 + 2?)
+              + (!mBools.empty())                 // bool
+              + sizeof(float) * mFloats.size());  // floats
 }

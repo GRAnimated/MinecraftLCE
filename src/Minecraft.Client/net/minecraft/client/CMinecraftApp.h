@@ -46,7 +46,7 @@ public:
     virtual void GetFileFromTPD(eTPDFileType, unsigned char*, unsigned int, unsigned char**, unsigned int*);
 
     unsigned int GetTMSAction(int);
-    void SetUniqueMapName(char *);
+    void SetUniqueMapName(char*);
 
     void HandleXuiActions();
 

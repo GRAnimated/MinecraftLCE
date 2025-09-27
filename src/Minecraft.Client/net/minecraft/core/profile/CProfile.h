@@ -20,8 +20,8 @@ public:
     bool IsSignedInLive(int) override;
     bool IsSigningIn(int) override;
     bool IsGuest(int) override;
-    void sub_710079238C() override;  // Wii U says CProfile::RequestSignInUI
-    void SignInUser(void*, int) override;    // void * used to be MiiDataEntry
+    void sub_710079238C() override;        // Wii U says CProfile::RequestSignInUI
+    void SignInUser(void*, int) override;  // void * used to be MiiDataEntry
     void sub_710079239C() override;
     void sub_71007923AC() override;
     void sub_71007923C0() override;
@@ -288,7 +288,7 @@ public:
     std::unordered_map<int, int> mapB20;
     std::unordered_map<int, int> mapB48;
     std::unordered_map<int, int> mapB70;
-    char gapB98[40]; // another map?
+    char gapB98[40];  // another map?
     void (*mOnAwardHandler)();
     void* mAwardHandlerVar;
     void* qwordBD0;

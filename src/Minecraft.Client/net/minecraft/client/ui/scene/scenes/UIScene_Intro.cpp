@@ -3,7 +3,7 @@
 #include "net/minecraft/client/ui/ConsoleUIController.h"
 #include "net/minecraft/client/ui/scene/control/UIControl_Touch.h"
 
-UIScene_Intro::UIScene_Intro(int a1, void *a2, UILayer *layer) : UIScene(a1, layer) {
+UIScene_Intro::UIScene_Intro(int a1, void* a2, UILayer* layer) : UIScene(a1, layer) {
     this->initialiseMovie();
     this->mUnk = false;
     this->mSkippable = false;
@@ -33,7 +33,8 @@ bool UIScene_Intro::hasFocus(int i) {
 
 void UIScene_Intro::handleGainFocus(bool focused) {
     if (this->mSkippable)
-        gConsoleUIController.NavigateToScene(0, EUIScene_MainMenu, nullptr, static_cast<EUILayer>(6), static_cast<EUIGroup>(6));
+        gConsoleUIController.NavigateToScene(0, EUIScene_MainMenu, nullptr, static_cast<EUILayer>(6),
+                                             static_cast<EUIGroup>(6));
 }
 
 void UIScene_Intro::handleReload() {

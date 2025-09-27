@@ -1,5 +1,4 @@
 #pragma once
 
 // ENTITY STUB
-class MultiEntityMob {
-};
+class MultiEntityMob {};

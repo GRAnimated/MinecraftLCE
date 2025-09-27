@@ -15,13 +15,11 @@ class SoundEvent;
 enum EUILayer {};
 enum EUIGroup {};
 enum EControllerActions {};
-class _TutorialPopupInfo {}; // TODO: define somewhere else
+class _TutorialPopupInfo {};  // TODO: define somewhere else
 
 class IUIController {
 public:
-    enum eRESOLUTION_DISABLE_FLAG {
-        FLAG_0
-    };
+    enum eRESOLUTION_DISABLE_FLAG { FLAG_0 };
 
     // nullsub here, although it's probs just the second destructor
     virtual ~IUIController();
@@ -33,7 +31,7 @@ public:
     virtual void StartReloadSkinThread() = 0;
     virtual bool IsReloadingSkin() = 0;
     virtual void CleanUpSkinReload() = 0;
-    virtual void NavigateToScene(int, EUIScene, void *, EUILayer, EUIGroup) = 0;
+    virtual void NavigateToScene(int, EUIScene, void*, EUILayer, EUIGroup) = 0;
     virtual void NavigateBack(int, bool, EUIScene, EUILayer) = 0;
     virtual void CloseUIScenes(int, bool) = 0;
     virtual void CloseAllPlayersScenes(bool) = 0;
@@ -43,19 +41,21 @@ public:
     virtual bool IsIgnoreAutosaveMenuDisplayed(int) = 0;
     virtual void SetIgnoreAutosaveMenuDisplayed(int, bool) = 0;
     virtual bool IsSceneInStack(int, EUIScene) = 0;
-    virtual void *GetMenuDisplayed(int) = 0; // unk return type
+    virtual void* GetMenuDisplayed(int) = 0;  // unk return type
     virtual void CheckMenuDisplayed() = 0;
     virtual void SetTooltipText(unsigned int, unsigned int, int) = 0;
     virtual void SetEnableTooltips(unsigned int, bool) = 0;
     virtual void ShowTooltip(unsigned int, unsigned int, bool) = 0;
-    virtual int SetTooltips(unsigned int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, bool, bool) = 0; // how many params holy fuck
+    virtual int SetTooltips(unsigned int, int, int, int, int, int, int, int, int, int, int, int, int, int,
+                            int, int, int, bool, bool)
+        = 0;  // how many params holy fuck
     virtual void EnableTooltip(unsigned int, unsigned int, bool) = 0;
     virtual void RefreshTooltips(unsigned int) = 0;
-    virtual void PlayUISFX(const SoundEvent *) = 0;
+    virtual void PlayUISFX(const SoundEvent*) = 0;
     virtual void ShowUIDebugConsole(bool) {};
     virtual void ShowUIDebugMarketingGuide(bool) {};
     virtual void DisplayGamertag(unsigned int, bool) = 0;
-    virtual void SetSelectedItem(unsigned int, const std::wstring &, const std::wstring &) = 0;
+    virtual void SetSelectedItem(unsigned int, const std::wstring&, const std::wstring&) = 0;
     virtual void ResetSelectedItem() = 0;
     virtual void UpdateSelectedItemPos(unsigned int) = 0;
     virtual void HandleDLCMountingComplete() = 0;
@@ -66,7 +66,7 @@ public:
     virtual void HandleInventoryUpdated(int) = 0;
     virtual void HandleGameTick() = 0;
     virtual void HandleSaveDeviceRemoved(int) = 0;
-    virtual void SetTutorialDescription(int, _TutorialPopupInfo *) = 0;
+    virtual void SetTutorialDescription(int, _TutorialPopupInfo*) = 0;
     virtual void SetTutorialVisible(int, bool) = 0;
     virtual bool IsTutorialVisible(int) = 0;
     virtual void UpdatePlayerBasePositions() = 0;
@@ -83,29 +83,38 @@ public:
     virtual void PressStartPlaying(unsigned int) = 0;
     virtual void ShowPressStart(unsigned int) = 0;
     virtual void ShowChestRefillAnimation(bool) = 0;
-    virtual void SetWinUserIndex(unsigned int) = 0; // windows mentioned again
-    virtual void ShowTimedSplash(unsigned int, const std::wstring &, unsigned int) = 0;
+    virtual void SetWinUserIndex(unsigned int) = 0;  // windows mentioned again
+    virtual void ShowTimedSplash(unsigned int, const std::wstring&, unsigned int) = 0;
     virtual bool IsShowingErrorMessage(int) = 0;
     virtual bool IsShowingAlertMessage(int) = 0;
     virtual bool getCleanupOnReload() = 0;
     virtual bool setCleanupOnReload(bool) = 0;
     virtual bool IsExpectingOrReloadingSkin() = 0;
-    virtual void SetTooltips(unsigned int, int *, bool, bool) = 0;
-    virtual bool IsToolTipDynamic(unsigned int, unsigned int, EControllerActions &) = 0;
-    virtual int GetHotBarX(unsigned int) = 0; // could return float too
-    virtual int GetHotBarY(unsigned int) = 0; // could return float too
-    virtual int GetHotBarWidth(unsigned int) = 0; // could return float too
-    virtual int GetHotBarHeight(unsigned int) = 0; // could return float too
+    virtual void SetTooltips(unsigned int, int*, bool, bool) = 0;
+    virtual bool IsToolTipDynamic(unsigned int, unsigned int, EControllerActions&) = 0;
+    virtual int GetHotBarX(unsigned int) = 0;       // could return float too
+    virtual int GetHotBarY(unsigned int) = 0;       // could return float too
+    virtual int GetHotBarWidth(unsigned int) = 0;   // could return float too
+    virtual int GetHotBarHeight(unsigned int) = 0;  // could return float too
     virtual bool GetQuickSelectVisible(unsigned int) = 0;
     virtual void sub_71005300EC() = 0;
-    virtual void RemoveInteractSceneReference(int, UIScene *) = 0;
+    virtual void RemoveInteractSceneReference(int, UIScene*) = 0;
     virtual void HideChestRefillAnimation() = 0;
     virtual void ShowPlayerDisplayname(bool) = 0;
     virtual void HidePressStart() = 0;
-    virtual void RequestProfileSignInMenu(int, int, wchar_t **, unsigned int, unsigned int, int (*)(void *, int, int), void *, wchar_t *, unsigned int) = 0;
-    virtual void RequestAlertMessage(int, int, int *, unsigned int, unsigned int, int (*)(void *, int, C4JStorage::EMessageResult), void *, wchar_t *, bool) = 0;
-    virtual void RequestErrorMessage(int, int, int *, unsigned int, unsigned int, int (*)(void *, int, C4JStorage::EMessageResult), void *, wchar_t *, bool) = 0;
-    virtual void RequestMessageBox(int, int, int *, unsigned int, unsigned int, int (*)(void *, int, C4JStorage::EMessageResult), void *, wchar_t *, unsigned int, bool, bool) = 0;
+    virtual void RequestProfileSignInMenu(int, int, wchar_t**, unsigned int, unsigned int,
+                                          int (*)(void*, int, int), void*, wchar_t*, unsigned int)
+        = 0;
+    virtual void RequestAlertMessage(int, int, int*, unsigned int, unsigned int,
+                                     int (*)(void*, int, C4JStorage::EMessageResult), void*, wchar_t*, bool)
+        = 0;
+    virtual void RequestErrorMessage(int, int, int*, unsigned int, unsigned int,
+                                     int (*)(void*, int, C4JStorage::EMessageResult), void*, wchar_t*, bool)
+        = 0;
+    virtual void RequestMessageBox(int, int, int*, unsigned int, unsigned int,
+                                   int (*)(void*, int, C4JStorage::EMessageResult), void*, wchar_t*,
+                                   unsigned int, bool, bool)
+        = 0;
 };
 
 class ConsoleUIController : public IUIController {
@@ -128,7 +137,8 @@ public:
     virtual ~ConsoleUIController();
     void updateViewportTouchOffset(C4JRender::eViewportType);
     bool IsReloadingSkin() override;
-    int SetTooltips(unsigned int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, bool, bool) override;
+    int SetTooltips(unsigned int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int,
+                    int, bool, bool) override;
     void setResolutionChangeDisableFlag(IUIController::eRESOLUTION_DISABLE_FLAG) override;
     void setUnk2(bool);
     void preInit(int screenWidth, int screenHeight);
@@ -219,12 +229,13 @@ public:
     void HideChestRefillAnimation() override;
     void ShowPlayerDisplayname(bool) override;
     void HidePressStart() override;
-    void RequestProfileSignInMenu(int, int, wchar_t**, unsigned, unsigned, int(*)(void*, int, int), void*,
-        wchar_t*, unsigned) override;
+    void RequestProfileSignInMenu(int, int, wchar_t**, unsigned, unsigned, int (*)(void*, int, int), void*,
+                                  wchar_t*, unsigned) override;
     void RequestAlertMessage(int, int, int*, unsigned, unsigned,
-        int(*)(void*, int, C4JStorage::EMessageResult), void*, wchar_t*, bool) override;
-    void RequestMessageBox(int, int, int*, unsigned, unsigned, int(*)(void*, int, C4JStorage::EMessageResult),
-        void*, wchar_t*, unsigned, bool, bool) override;
+                             int (*)(void*, int, C4JStorage::EMessageResult), void*, wchar_t*, bool) override;
+    void RequestMessageBox(int, int, int*, unsigned, unsigned,
+                           int (*)(void*, int, C4JStorage::EMessageResult), void*, wchar_t*, unsigned, bool,
+                           bool) override;
 
     void* qword8;
     void* qword10;

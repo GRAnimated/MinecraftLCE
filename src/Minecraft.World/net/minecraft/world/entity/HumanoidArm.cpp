@@ -1,4 +1,4 @@
-#include "net/minecraft/util/HumanoidArm.h"
+#include "net/minecraft/world/entity/HumanoidArm.h"
 
 const HumanoidArm* HumanoidArm::LEFT = new HumanoidArm();
 const HumanoidArm* HumanoidArm::RIGHT = new HumanoidArm();
