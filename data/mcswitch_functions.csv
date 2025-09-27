@@ -45828,7 +45828,7 @@ Address,Quality,Size,Name
 0x00000071007814d0,U,000004,GetFileSize
 0x00000071007814d4,U,000188,ProcessLoadedTextureData
 0x0000007100781590,U,000020,CloseHandle_thunk
-0x00000071007815a4,U,000076,
+0x00000071007815a4,U,000076,TextureUtil::LoadTextureData
 0x00000071007815f0,O,000660,_ZL15stbi__load_mainP13stbi__contextPiS1_S1_iP17stbi__result_infoi
 0x0000007100781884,O,000184,_ZL21stbi__convert_16_to_8Ptiii
 0x000000710078193c,O,000092,_ZL15stbi__jpeg_testP13stbi__context
@@ -45855,7 +45855,7 @@ Address,Quality,Size,Name
 0x0000007100784420,O,000964,_ZL16stbi__idct_blockPhiPs
 0x00000071007847e4,O,000200,_ZL22stbi__YCbCr_to_RGB_rowPhPKhS1_S1_ii
 0x00000071007848ac,O,000180,_ZL23stbi__resample_row_hv_2PhS_S_ii
-0x0000007100784960,U,000020,
+0x0000007100784960,U,000020,_ZL11stbi__clampi
 0x0000007100784974,O,000108,_ZL16stbi__get_markerP10stbi__jpeg
 0x00000071007849e0,O,000996,_ZL20stbi__process_markerP10stbi__jpegi
 0x0000007100784dc4,O,000076,_ZL12stbi__at_eofP13stbi__context

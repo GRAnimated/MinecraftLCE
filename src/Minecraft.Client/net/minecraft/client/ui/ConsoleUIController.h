@@ -52,8 +52,8 @@ public:
     virtual void EnableTooltip(unsigned int, unsigned int, bool) = 0;
     virtual void RefreshTooltips(unsigned int) = 0;
     virtual void PlayUISFX(const SoundEvent*) = 0;
-    virtual void ShowUIDebugConsole(bool) {};
-    virtual void ShowUIDebugMarketingGuide(bool) {};
+    virtual void ShowUIDebugConsole(bool) {}
+    virtual void ShowUIDebugMarketingGuide(bool) {}
     virtual void DisplayGamertag(unsigned int, bool) = 0;
     virtual void SetSelectedItem(unsigned int, const std::wstring&, const std::wstring&) = 0;
     virtual void ResetSelectedItem() = 0;
