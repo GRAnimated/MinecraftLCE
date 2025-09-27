@@ -5,6 +5,7 @@
 class fuiRenderNode;
 class FJ_FuiNode;
 
+// no typeinfo?????
 class FJ_MCBREUpSell {
 public:
     static std::string sName;

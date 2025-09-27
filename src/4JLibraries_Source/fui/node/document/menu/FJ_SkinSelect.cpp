@@ -1,3 +1,3 @@
-#include "fui/node/menu/FJ_SkinSelect.h"
+#include "FJ_SkinSelect.h"
 
 std::string FJ_SkinSelect::sName = "SkinSelect";

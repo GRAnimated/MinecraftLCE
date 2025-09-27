@@ -1,6 +1,6 @@
 #pragma once
 
-#include "fui/node/FJ_FuiNode.h"
+#include "fui/node/control/list/FJ_List.h"
 
 class FJ_List_ListButtonPlayerList : public FJ_List {
 public:

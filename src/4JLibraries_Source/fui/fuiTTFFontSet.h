@@ -1,4 +1,5 @@
 #pragma once
-#include "fuiFontSet.h"
+
+#include "fui/fuiFontSet.h"
 
 class fuiTTFFontSet : public fuiFontSet {};

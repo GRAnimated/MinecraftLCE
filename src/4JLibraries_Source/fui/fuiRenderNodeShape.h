@@ -1,4 +1,5 @@
 #pragma once
-#include "fuiRenderNode.h"
+
+#include "fui/fuiRenderNode.h"
 
 class fuiRenderNodeShape : public fuiRenderNode {};

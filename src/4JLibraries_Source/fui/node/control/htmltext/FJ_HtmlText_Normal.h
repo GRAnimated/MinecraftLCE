@@ -1,12 +1,14 @@
 #pragma once
 
+#include "FJ_HtmlText.h"
+
 #include <string>
 
 class fuiRenderNode;
 class FJ_FuiNode;
 
 /// STUB CLASS FOR FJ_Factory::initialise
-class FJ_HtmlText_Normal {
+class FJ_HtmlText_Normal : public FJ_HtmlText {
 public:
     static std::string sName;
 

@@ -1,5 +1,6 @@
 #pragma once
 
+#include "FJ_MenuButton.h"
 #include "string"
 
 class fuiRenderNode;

@@ -1,3 +1,3 @@
-#include "fui/node/menu/ingame/FJ_InGameInfoMenu.h"
+#include "FJ_InGameInfoMenu.h"
 
 std::string FJ_InGameInfoMenu::sName = "InGameInfoMenu";

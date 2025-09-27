@@ -1,5 +1,7 @@
 #pragma once
 
+#include "fui/node/control/label/FJ_Label.h"
+
 #include <string>
 
 class fuiRenderNode;
