@@ -68,6 +68,8 @@ public:
     EMobEffectIcon getIcon();
     int getDescriptionId();
 
+    static void staticCtor();
+
     std::unordered_map<Attribute*, AttributeModifier*> mAttributeModifiers;
     int mDescriptionId;
     EMobEffectIcon mIcon;

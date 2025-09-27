@@ -1,0 +1,16 @@
+#pragma once
+
+#include "FJ_KeyboardButtons.h"
+
+#include <string>
+
+class fuiRenderNode;
+class FJ_FuiNode;
+
+/// STUB CLASS FOR FJ_Factory::initialise
+class FJ_KeyboardButtons_Keys_Normal : public FJ_KeyboardButtons {
+public:
+    static std::string sName;
+
+    static FJ_FuiNode* Create(fuiRenderNode*);
+};

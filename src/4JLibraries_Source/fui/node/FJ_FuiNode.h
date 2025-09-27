@@ -3,6 +3,8 @@
 #include "../event/FJ_Event.h"
 #include "../event/FJ_EventListener.h"
 #include "../fuiRenderNodeStage.h"
+#include "fui/node/FJ_FuiNode.h"
+#include <string>
 #include <vector>
 
 class fuiRenderNode;
@@ -18,6 +20,8 @@ class FJ_Document;
 
 class FJ_FuiNode {
 public:
+    static std::string sName;
+
     FJ_FuiNode(fuiRenderNode* renderNode);
 
     static FJ_FuiNode* Create(fuiRenderNode*);

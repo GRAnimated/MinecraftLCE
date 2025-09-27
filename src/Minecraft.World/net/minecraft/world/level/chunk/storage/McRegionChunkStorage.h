@@ -38,6 +38,8 @@ public:
     // same with this
     // void WaitForSaves();
 
+    static void staticCtor();
+
     static std::deque<DataOutputStream*> sDeque;
     static nn::os::MutexType sMutex;
 

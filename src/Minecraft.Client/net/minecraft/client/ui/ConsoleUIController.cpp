@@ -71,7 +71,7 @@ ConsoleUIController::ConsoleUIController() {
     this->mViewportTouchOffset1 = 0;
     this->mViewportTouchOffset2 = 0;
 
-    this->dword440 = 0;
+    this->mFlags = 0;
 }
 
 // NON_MATCHING: WiiU pseudocode looks completly different than Switch one, also pseudocode is 2 simple lines
@@ -98,6 +98,14 @@ arrayWithLength<uchar> ConsoleUIController::getMovieData(const std::wstring& nam
     }
 }
 
+void ConsoleUIController::clearResolutionChangeDisableFlag(eRESOLUTION_DISABLE_FLAG flag) {
+    this->mFlags &= ~(1 << flag);
+}
+
+void ConsoleUIController::setResolutionChangeDisableFlag(IUIController::eRESOLUTION_DISABLE_FLAG flag) {
+    this->mFlags |= 1 << flag;
+}
+
 void ConsoleUIController::preInit(int screenWidth, int screenHeight) {
     this->mScreenWidth = screenWidth;
     this->mScreenHeight = screenHeight;
@@ -112,3 +120,13 @@ void ConsoleUIController::init(int screenWidth, int screenHeight) {
     this->preInit(screenWidth, screenHeight);
     this->postInit();
 }
+
+void ConsoleUIController::ShowUIDebugMarketingGuide(bool) {}
+void ConsoleUIController::SetIgnoreAutosaveMenuDisplayed(int, bool) {}
+void ConsoleUIController::RefreshTooltips(unsigned) {}
+void ConsoleUIController::UpdateSelectedItemPos(unsigned) {}
+void ConsoleUIController::HandleTMSDLCFileRetrieved(int) {}
+void ConsoleUIController::SetEmptyQuadrantLogo(int) {}
+void ConsoleUIController::ShowOtherPlayersBaseScene(unsigned, bool) {}
+void ConsoleUIController::ShowAutosaveCountdownTimer(bool shown) {}
+void ConsoleUIController::UpdateAutosaveCountdownTimer(unsigned) {}

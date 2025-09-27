@@ -27,6 +27,7 @@ public:
     int getTexture(BufferedImage* image, C4JRender::eTextureFormat format, bool);
     void replaceTextureDirect(arrayWithLength<int> pixels, int width, int height, int textureId);
     void bind(int textureId);
+    void tick(bool, bool, bool);
     void bindTexture(const ResourceLocation*);
     int loadTexture(_TEXTURE_NAME, const std::wstring&);
     void loadIndexedTextures();

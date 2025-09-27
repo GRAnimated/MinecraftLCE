@@ -24,7 +24,7 @@
 
 UIScene_MainMenu::UIScene_MainMenu(int a1, void* a2, UILayer* layer) : UIScene(a1, layer) {
     Entity::fjDebugCheckSmallIdLeaks();
-    gConsoleUIController.setUnk2(false);
+    gConsoleUIController.clearResolutionChangeDisableFlag(IUIController::FLAG_0);
     this->initialiseMovie();
     layer->addComponent(a1, EUIComponent_Panorama, nullptr);
     layer->addComponent(a1, EUIComponent_Logo, nullptr);

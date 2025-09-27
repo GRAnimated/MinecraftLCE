@@ -1,5 +1,7 @@
 #include "net/minecraft/world/level/chunk/LevelChunk.h"
 
+#include "net/minecraft/world/level/block/Block.h"
+
 void LevelChunk::staticCtor() {
     InitializeCriticalSection(&LevelChunk::mMutex_710178c150);
     InitializeCriticalSection(&LevelChunk::mMutex_710178c170);
@@ -28,4 +30,9 @@ void LevelChunk::writeCompressedBlockLightData(DataOutputStream* out) {
 
 ChunkPos LevelChunk::getPos() {
     return ChunkPos(this->mXPos, this->mZPos);
+}
+
+Block* LevelChunk::GetBlock(CompressedBlockStorage* storage, int x, int y, int z) {
+    const int y0 = y < 0 ? y + 127 : y;
+    return Block::byId(storage->get(x, y - (y0 & 0xFFFFFF80), z) & 0xFF);
 }

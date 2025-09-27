@@ -8,4 +8,6 @@ public:
     static EquipmentSlot* LEGS;
     static EquipmentSlot* CHEST;
     static EquipmentSlot* HEAD;
+
+    static void staticCtor();
 };

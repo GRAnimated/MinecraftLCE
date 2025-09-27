@@ -175,7 +175,7 @@ public:
     virtual void HandleSaveDeviceRemoved(int);
     virtual void handleUnlockFullVersion();
     virtual void handleTouchInput(unsigned int, int, int, int, bool, bool, bool);
-    virtual void isReadyToDelete();
+    virtual bool isReadyToDelete();
 
     static void customDrawFui(void*, const char*, fuiRect*);
 

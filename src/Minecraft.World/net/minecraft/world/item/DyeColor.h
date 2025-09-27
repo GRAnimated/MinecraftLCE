@@ -23,4 +23,6 @@ public:
     int getItemData() const;
 
     static DyeColor* byItemData(int data);
+
+    static void staticCtor();
 };
