@@ -143,39 +143,39 @@ void UIScene::updateSafeZone() {
     double v1 = 0.0, v2 = 0.0, v4 = 0.0, v5 = 0.0;
 
     switch (this->mUILayer->getViewPort()) {
-    case 1:
+    case C4JRender::eViewportType_Top:
         v1 = this->getSafeZoneHalfHeight();
         v4 = v5 = v2;
         break;
-    case 2:
+    case C4JRender::eViewportType_Bottom:
         v2 = this->getSafeZoneHalfHeight();
         v4 = v5 = v1;
         break;
-    case 3:
+    case C4JRender::eViewportType_Left:
         v4 = this->getSafeZoneHalfWidth();
         v2 = v5 = v1;
         break;
-    case 4:
+    case C4JRender::eViewportType_Right:
         v5 = this->getSafeZoneHalfWidth();
         v2 = v1;
         v4 = v1;
         break;
-    case 5:
+    case C4JRender::eViewportType_TopLeft:
         v1 = this->getSafeZoneHalfHeight();
         v4 = this->getSafeZoneHalfWidth();
         v5 = v2;
         break;
-    case 6:
+    case C4JRender::eViewportType_TopRight:
         v1 = this->getSafeZoneHalfHeight();
         v5 = this->getSafeZoneHalfWidth();
         v4 = v2;
         break;
-    case 7:
+    case C4JRender::eViewportType_BottomLeft:
         v2 = this->getSafeZoneHalfHeight();
         v4 = this->getSafeZoneHalfWidth();
         v5 = v1;
         break;
-    case 8:
+    case C4JRender::eViewportType_BottomRight:
         v2 = this->getSafeZoneHalfHeight();
         v5 = this->getSafeZoneHalfWidth();
         v4 = v1;

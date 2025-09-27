@@ -2,13 +2,13 @@
 
 #include "fui/fuiFile.h"
 
-class fuiRenderNodeTimeline;
 class FJ_FuiNodeStage;
-class fuiMatrix;
-class fuiObject;
-class fuiRect;
-class fuiRGBA;
-enum eFuiObjectType { RENDER_NODE_STAGE = 0 };
+struct fuiRenderNodeTimeline;
+struct fuiMatrix;
+struct fuiObject;
+struct fuiRect;
+struct fuiRGBA;
+enum eFuiObjectType { RENDER_NODE_STAGE = 0, eFuiObjectType_1 = 1, eFuiObjectType_2 = 2 };
 
 // weird flag thing
 constexpr uint32_t FLAG_CTOR_ENABLED = 0x1;

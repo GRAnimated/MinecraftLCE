@@ -4,13 +4,6 @@
 # and java-only classes have been removed.
 com:
   mojang:
-    blaze3d:
-      platform:
-        _classes: [GlStateManager]
-      shaders:
-        _classes: [Effect, Program, ProgramManager, Uniform]
-      vertex:
-        _classes: [BufferBuilder, Tesselator, VertexFormat, VertexFormatElement]
     nbt:
       _classes:
         - ByteArrayTag
@@ -315,6 +308,10 @@ net:
               - WolfCollarLayer
           player:
             _classes: [PlayerRenderer]
+        platform:
+          _classes: [GlStateManager]
+        shaders:
+          _classes: [Effect, Program, ProgramManager, Uniform]
         texture:
           _classes:
             - AbstractTexture
@@ -323,6 +320,8 @@ net:
             - TextureAtlas
             - TextureAtlasSprite
             - TextureManager
+        vertex:
+          _classes: [BufferBuilder, Tesselator, VertexFormat, VertexFormatElement]
       resources:
         model:
           _classes: [ModelResourceLocation]

@@ -1,6 +1,7 @@
 #pragma once
 
 #include "net/minecraft/world/level/gamemode/ConsoleGameRules.h"
+#include "net/minecraft/world/level/gamemode/minigames/EMiniGameId.h"
 #include "net/minecraft/world/phys/AABB.h"
 #include <string>
 #include <vector>
@@ -19,7 +20,7 @@ protected:
     StringTable* stringTable;
 
 public:
-    void getNamedAreas(int type, std::vector<AABB>* out);
+    void getNamedAreas(int type, std::vector<AABB*>* out);
     void getActiveChunkAreas(std::vector<AABB>* out);
     void getRingsWithinArea(std::vector<TargetAreaRuleDefinition*>* out, AABB* aabb);
     StringTable* getStringTable();
@@ -30,4 +31,5 @@ public:
     std::vector<CheckpointRuleDefinition*>* getCheckpoints();
     void getPlayerBoundsVolumes(std::vector<NamedAreaRuleDefinition*>* out);
     GameRuleDefinition* getRuleByType(ConsoleGameRules::EGameRuleType);
+    EMiniGameId getRuleType();
 };

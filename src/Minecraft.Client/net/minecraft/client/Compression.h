@@ -60,7 +60,7 @@ private:
     nn::os::MutexType cMutex;   // compression mutex
     nn::os::MutexType dcMutex;  // decompression mutex
     unsigned char cData[0x40000];
-    void* dcData;  // devs only allocate 0x32000 for this, why?
+    unsigned char* dcData;  // devs only allocate 0x32000 for this, why?
     ECompressionTypes type;
     ECompressionTypes unk2;  // set same as type initially, also compared against it. Could be something like
                              // initType or whatever.

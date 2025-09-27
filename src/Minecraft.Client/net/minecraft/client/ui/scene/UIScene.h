@@ -8,8 +8,8 @@
 #include <vector>
 
 enum EUIMessage {};
-class fuiFile;
-class fuiRect;
+struct fuiFile;
+struct fuiRect;
 class UILayer;
 class UIControl;
 

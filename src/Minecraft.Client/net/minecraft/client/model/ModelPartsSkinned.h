@@ -2,9 +2,7 @@
 
 #include <vector>
 
-#include "net/minecraft/client/model/geom/ModelPart.h"
-
-class ModelPartSkin : public ModelPart {};
+#include "net/minecraft/client/model/geom/ModelPartSkin.h"
 
 class ModelPartsSkinned {
 public:

@@ -125,8 +125,6 @@ void MultiPlayerLevel::playSound(std::shared_ptr<Player> player, double a3, doub
 }
 */
 
-bool MultiPlayerLevel::addEntity(std::shared_ptr<Entity>) {}
-
 void MultiPlayerLevel::tickWeather(bool) {}
 
 int MultiPlayerLevel::getChunkPollRange() {

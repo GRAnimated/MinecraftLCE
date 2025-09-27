@@ -1,9 +1,8 @@
 #pragma once
 
-class fuiBitmap;
-class fuiFile;
+struct fuiBitmap;
+struct fuiFile;
 
-class fuiTextureManager {
-public:
+struct fuiTextureManager {
     void removeManagedTexture(fuiFile* file, fuiBitmap* texture);
 };

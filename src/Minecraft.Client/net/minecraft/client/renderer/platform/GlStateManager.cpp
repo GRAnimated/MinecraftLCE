@@ -1,4 +1,4 @@
-#include "com/mojang/blaze3d/platform/GlStateManager.h"
+#include "net/minecraft/client/renderer/platform/GlStateManager.h"
 
 #include "NX/Render/RendererCore.h"
 

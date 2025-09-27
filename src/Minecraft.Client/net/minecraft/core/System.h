@@ -9,10 +9,10 @@
 
 class Node;
 
-// TODO: Find location
+// TODO: Find locations
 void InitializeCriticalSection(nn::os::MutexType* mutexType);
 void InitializeCriticalSectionAndSpinCount(nn::os::MutexType* mutexType, unsigned long spinCount);
-// TODO: Find location
+long InterlockedCompareExchangeRelease(volatile long*, long, long);
 template <typename T>
 const std::wstring _toString(T type) {
     std::wstringstream ss;

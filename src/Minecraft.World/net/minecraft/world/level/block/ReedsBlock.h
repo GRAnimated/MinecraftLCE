@@ -7,7 +7,6 @@
 
 class ReedsBlock : public Block, public BonemealableBlock {
 public:
-    static IntegerProperty* sAgeProperty;
     static AABB* sAABB;
 
     ReedsBlock();

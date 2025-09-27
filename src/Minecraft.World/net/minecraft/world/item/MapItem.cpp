@@ -124,8 +124,6 @@ TextureAtlasSprite* MapItem::getLayerIcon(int a2, int layer) {
     return layer == 1 ? this->MAP_FILLED_MARKINGS : Item::getLayerIcon(a2, layer);
 }
 
-// NON_MATCHING: fix that MapItemSavedData::getUpdatePacket impl is skipped while "optimising" and doesn't
-// strip level arg being passed
 std::shared_ptr<Packet> MapItem::getUpdatePacket(not_null_ptr<ItemInstance> itemInstance, Level* level,
                                                  std::shared_ptr<Player> player) {
     return this->getSavedData(itemInstance, level)->getUpdatePacket(itemInstance, level, player);

@@ -4,6 +4,8 @@
 #include "types.h"
 #include <deque>
 #include <memory>
+#include <unordered_map>
+#include <unordered_set>
 // #include <iostream>
 #include "java/io/DataInputStream.h"
 #include "unordered_map"
@@ -41,6 +43,11 @@ public:
      */
     static std::wstring readUtf(DataInputStream* in, int maxLength);
     static void writeUtf(const std::wstring& str, DataOutputStream* out);
+
+    static std::unordered_map<int, std::shared_ptr<Packet> (*)()> sPacketsMap;
+    static std::unordered_set<int> sPacketsMap1;
+    static std::unordered_set<int> sPacketsMap2;
+    static std::unordered_set<int> sPacketsMap3;
 
     static void staticCtor();
     static void map(int, bool, bool, bool, bool, const std::type_info&, std::shared_ptr<Packet> (*)(),

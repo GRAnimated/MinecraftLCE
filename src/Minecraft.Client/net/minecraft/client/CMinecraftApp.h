@@ -71,6 +71,7 @@ public:
     bool IsAppPaused();
     void SetAction(int, eXuiAction, void*);
     void setLevelGenerationOptions(LevelGenerationOptions* options);
+    void SetGameHostOption(eGameHostOption option, unsigned int value);
 
     void UpdateTrialPausedTimer();
     void UpdateTime();

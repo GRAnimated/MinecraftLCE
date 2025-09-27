@@ -24,6 +24,8 @@ public:
 
     FJ_FuiNode(fuiRenderNode* renderNode);
 
+    static FJ_FuiNode* Create(fuiRenderNode*);
+
     virtual ~FJ_FuiNode();
     virtual void ASConstructor();
     virtual void setX(float x);

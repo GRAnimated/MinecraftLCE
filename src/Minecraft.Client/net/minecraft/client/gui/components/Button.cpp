@@ -1,7 +1,7 @@
 #include "net/minecraft/client/gui/components/Button.h"
 
-#include "com/mojang/blaze3d/platform/GlStateManager.h"
 #include "net/minecraft/client/Minecraft.h"
+#include "net/minecraft/client/renderer/platform/GlStateManager.h"
 #include "net/minecraft/client/renderer/texture/Textures.h"
 
 Button::Button(int id, int x, int y, const std::wstring& name) {

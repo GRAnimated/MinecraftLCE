@@ -8,6 +8,7 @@ BiomeEdgeLayer::BiomeEdgeLayer(long long seed, std::shared_ptr<Layer> parent) : 
     mParent = parent;
 }
 
+// NON_MATCHING
 arrayWithLength<int> BiomeEdgeLayer::getArea(int x, int y, int width, int height) {
     arrayWithLength<int> parentArea = mParent->getArea(x - 1, y - 1, width + 2, height + 2);
     PIXBeginNamedEvent(0.0, "BiomeEdgeLayer::getArea");

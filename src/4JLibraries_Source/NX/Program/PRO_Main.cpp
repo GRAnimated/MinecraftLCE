@@ -6,7 +6,6 @@
 
 #include "4JLibraries_Source/NX/Thread/C4JThreadImpl.h"
 #include "NX/Render/RendererCore.h"
-#include "com/mojang/blaze3d/vertex/Tesselator.h"
 #include "java/io/IntCache.h"
 #include "net/minecraft/client/CGameNetworkManager.h"
 #include "net/minecraft/client/CInput.h"
@@ -15,6 +14,7 @@
 #include "net/minecraft/client/GameSettings.h"
 #include "net/minecraft/client/Minecraft.h"
 #include "net/minecraft/client/renderer/texture/Textures.h"
+#include "net/minecraft/client/renderer/vertex/Tesselator.h"
 #include "net/minecraft/client/resources/L10N.h"
 #include "net/minecraft/client/sounds/SoundEngine.h"
 #include "net/minecraft/client/ui/ConsoleUIController.h"

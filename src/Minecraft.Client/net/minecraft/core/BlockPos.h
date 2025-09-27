@@ -18,6 +18,7 @@ public:
     BlockPos(const std::shared_ptr<Entity>&);
     BlockPos(Vec3*);
     BlockPos(const Vec3i&);
+    BlockPos(double x, double y, double z);
 
     static BlockPosIterator* between(const BlockPos&, const BlockPos&);
 

@@ -14,7 +14,7 @@ enum ETelemetryChallenges {};
 enum TelemetryJoinMethod {};
 
 class LaunchMoreOptionsMenuInitData;
-class SAVE_DETAILS;
+struct SAVE_DETAILS;
 
 class CTelemetryManager {
 public:

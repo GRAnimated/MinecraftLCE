@@ -29,6 +29,8 @@ public:
     virtual bool isPosInFeature(Level*, const std::wstring&, const BlockPos&) = 0;
     virtual void lightChunk(LevelChunk*);
 
+    int getSize() { return mSize; }
+
     static bool inPostProcessStep;
 
     bool mIsClassicMoat;

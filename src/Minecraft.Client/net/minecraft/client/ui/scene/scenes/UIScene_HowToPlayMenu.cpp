@@ -112,9 +112,8 @@ void UIScene_HowToPlayMenu::handlePress(int a2, int a3) {
         gConsoleUIController.PlayUISFX(SoundEvent::UI_PRESS);
         gConsoleUIController.NavigateToScene(
             this->mPadID, EUIScene::EUIScene_HowToPlay,
-            // idk why they do this int16_t cast, or maybe there's something wrong with my code but it
-            //                                                                    matches so I'm happy
-            (unsigned int*)(0x80000000 | ((dword_71011078D8[a3] << 16) | static_cast<int16_t>(this->mPadID))),
+            reinterpret_cast<unsigned int*>(static_cast<uintptr_t>(
+                0x80000000 | ((dword_71011078D8[a3] << 16) | static_cast<int16_t>(this->mPadID)))),
             (EUILayer)6, (EUIGroup)6);
     }
 }

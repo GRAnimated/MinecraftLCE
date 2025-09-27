@@ -7,6 +7,7 @@ AddSnowLayer::AddSnowLayer(long long seed, std::shared_ptr<Layer> parent) : Laye
     mParent = parent;
 }
 
+// NON_MATCHING
 arrayWithLength<int> AddSnowLayer::getArea(int x, int y, int width, int height) {
     int m = x - 1;
     int n = y - 1;
