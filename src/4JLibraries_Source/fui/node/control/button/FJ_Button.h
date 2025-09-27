@@ -16,5 +16,4 @@ public:
     virtual void ChangeState(int);
     virtual void UpdateLabel();
     virtual void EnableButton(bool);
-
 };
