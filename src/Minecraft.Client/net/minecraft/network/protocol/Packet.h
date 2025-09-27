@@ -6,6 +6,8 @@
 #include <memory>
 // #include <iostream>
 #include "java/io/DataInputStream.h"
+#include "unordered_map"
+#include "unordered_set"
 
 class DataInputStream;
 class DataOutputStream;
@@ -13,6 +15,11 @@ class PacketListener;
 
 class Packet {
 public:
+    static std::unordered_map<int, std::shared_ptr<Packet>(*)()> sPackets;
+    static std::unordered_set<int> sPackets1;
+    static std::unordered_set<int> sPackets2;
+    static std::unordered_set<int> sPackets3;
+
     static std::shared_ptr<Packet> readPacket(DataInputStream*, bool, unsigned int&, bool&);
     static void writePacket(std::shared_ptr<Packet>, DataOutputStream*, bool, unsigned int&);
 
@@ -39,7 +46,7 @@ public:
     static void map(int, bool, bool, bool, bool, const std::type_info&, std::shared_ptr<Packet> (*)(),
                     std::wstring);
 
-    long mCreatedTime;
+    long long mCreatedTime; // seems to be longlong judging by class size on wii u
     bool mShouldDelay;
 };
 

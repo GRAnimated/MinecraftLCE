@@ -18,6 +18,8 @@ void* XPhysicalAlloc(unsigned long, unsigned long, unsigned long, unsigned int);
 void XMemSet128(void*, int, unsigned int);
 void XPhysicalFree(void*);
 
+void __debugbreak();
+
 void MemSect(int);
 
 void PIXBeginNamedEvent(float, const char*, ...);
@@ -50,8 +52,8 @@ void* TlsGetValue(unsigned int index);
 int TlsSetValue(unsigned int index, void* value);
 
 int OpenDir(const char*, int*);
-int ReadDir(int*, struct FSDirEntry*);  // TODO: what is FSDirEntry?
-int CloseDir(int*);
+int ReadDir(int* handle, struct FSDirEntry*);  // TODO: what is FSDirEntry?
+int CloseDir(int* handle);
 
 void* gfx_aligned_alloc(ulong a1, ulong a2, void*);
 void gfx_free(void* ptr, void*);

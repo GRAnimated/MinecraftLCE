@@ -1,9 +1,9 @@
 #include "net/minecraft/util/Calendar.h"
 
-int Calendar::GetMonth() {
+unsigned int Calendar::GetMonth() {
     return Calendar::GetCalenderTime().month;
 }
 
-int Calendar::GetDayOfMonth() {
+unsigned int Calendar::GetDayOfMonth() {
     return Calendar::GetCalenderTime().day;
 }

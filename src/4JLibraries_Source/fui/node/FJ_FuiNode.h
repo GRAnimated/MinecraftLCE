@@ -3,7 +3,9 @@
 #include "../event/FJ_Event.h"
 #include "../event/FJ_EventListener.h"
 #include "../fuiRenderNodeStage.h"
+#include "FuiNode.h"
 #include <vector>
+#include <string>
 
 class fuiRenderNode;
 class FJ_FuiNodeStage;
@@ -18,6 +20,8 @@ class FJ_Document;
 
 class FJ_FuiNode {
 public:
+    static std::string sName;
+
     FJ_FuiNode(fuiRenderNode* renderNode);
 
     virtual ~FJ_FuiNode();
@@ -41,6 +45,8 @@ public:
 
     void setCallbackScene(UIScene*);
     void dispatchEvent(FJ_Event* event);
+
+    static FJ_FuiNode* Create(fuiRenderNode*);
 
     FJ_Base* asFJ_Base();
     FJ_List* asFJ_List();

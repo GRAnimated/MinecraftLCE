@@ -1,6 +1,6 @@
 #include "ServerboundPreLoginPacket.h"
-#include "SharedConstants.h"
 #include "java/io/DataOutputStream.h"
+#include "net/minecraft/SharedConstants.h"
 #include "net/minecraft/network/PacketListener.h"
 
 std::shared_ptr<Packet> ServerboundPreLoginPacket::create() {

@@ -24,6 +24,7 @@ public:
     int getTexture(BufferedImage* image, C4JRender::eTextureFormat format, bool);
     void replaceTextureDirect(arrayWithLength<int> pixels, int width, int height, int textureId);
     void bind(int textureId);
+    void tick(bool, bool, bool);
 
     unsigned char padding[256];
     TextureAtlas* atlas;

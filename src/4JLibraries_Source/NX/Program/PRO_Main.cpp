@@ -1,3 +1,4 @@
+#include "InfoBarManager.h"
 #include "NX/Platform.h"
 #include "net/minecraft/core/System.h"
 #include <cstring>
@@ -6,15 +7,19 @@
 #include "4JLibraries_Source/NX/Thread/C4JThreadImpl.h"
 #include "NX/Render/RendererCore.h"
 #include "com/mojang/blaze3d/vertex/Tesselator.h"
+#include "java/io/IntCache.h"
 #include "net/minecraft/client/CGameNetworkManager.h"
 #include "net/minecraft/client/CInput.h"
 #include "net/minecraft/client/CMinecraftApp.h"
 #include "net/minecraft/client/Compression.h"
 #include "net/minecraft/client/GameSettings.h"
 #include "net/minecraft/client/Minecraft.h"
+#include "net/minecraft/client/renderer/texture/Textures.h"
 #include "net/minecraft/client/resources/L10N.h"
+#include "net/minecraft/client/sounds/SoundEngine.h"
 #include "net/minecraft/client/ui/ConsoleUIController.h"
 #include "net/minecraft/client/ui/StringIDs.h"
+#include "net/minecraft/client/ui/scene/scenes/UIScene_AchievementsMenu.h"
 #include "net/minecraft/core/profile/CProfile.h"
 #include "net/minecraft/core/storage/CStorage.h"
 #include "net/minecraft/world/ArrayWithLength.h"
@@ -23,13 +28,13 @@
 #include "net/minecraft/world/level/biome/Biome.h"
 #include "net/minecraft/world/level/block/Block.h"
 #include "net/minecraft/world/level/chunk/storage/OldChunkStorage.h"
-#include "net/minecraft/world/level/newbiome/layer/IntCache.h"
 #include "net/minecraft/world/phys/Vec2.h"
 #include "nn/fs.h"
 #include "nn/nifm.h"
 #include "nn/oe.h"
 #include "nn/os.h"
 #include "nn/time.h"
+#include "Awards.h"
 
 static nn::oe::PerformanceMode PERFORMANCE_MODE;
 static nn::os::MessageQueueType* MESSAGE_QUEUE;
@@ -202,6 +207,8 @@ int dword_7100D6B4AC;
 unsigned int dword_71017C0AB0;
 unsigned int unk_71017C17BC;
 
+void nullsub_833() {}
+
 // NON_MATCHING: Incomplete
 extern "C" void nnMain() {
     sub_7100607FBC();
@@ -210,7 +217,7 @@ extern "C" void nnMain() {
     nn::oe::SetPerformanceModeChangedNotificationEnabled(true);
     nn::oe::SetFocusHandlingMode(nn::oe::FocusHandlingMode_NoSuspend);
     nn::oe::SetResumeNotificationEnabled(true);
-    // nullsub_833();
+    nullsub_833();
     nn::nifm::Initialize();
     nn::time::Initialize();
     nn::oe::Initialize();
@@ -242,9 +249,9 @@ extern "C" void nnMain() {
 
     L10N::loadStringTable();
     CInput::sInstance->SetCircleCrossSwapped(true);
-    int screenType = 1;  // shove function that gets screenType, haven't done it so far because i'm unsure
+    int screenType = 1;  // TODO: shove function that gets screenType, haven't done it so far because i'm unsure
                          // on how to name that func
-    gConsoleUIController.setUnk(false);
+    gConsoleUIController.setResolutionChangeDisableFlag(IUIController::eRESOLUTION_DISABLE_FLAG::FLAG_0);
 
     int screenWidth, screenHeight;
     if (screenType == 1) {
@@ -263,6 +270,7 @@ extern "C" void nnMain() {
     CProfile::sInstance->Initialise(L"", L"", 33, 5, 4, &unk_71017C17BC, 7776, &dword_71017C0AB0);
     CProfile::sInstance->SetSignInChoicesCallback(CConsoleMinecraftApp::RequestSignInUIChoices);
     CProfile::sInstance->SetOnAwardHandler(PopupToast, nullptr);
+    RegisterAwardsWithProfileManager();
     // It is unknown what the function provided at the end of this call is. Looks more like what a branch
     // would lead to as it's stored inside this method. It originally called for bool * in that area.
     CStorage::sInstance->Init(0, L10N::GetString(StringIDs::NewWorld), "savegame.dat", 51000000,
@@ -320,4 +328,117 @@ extern "C" void nnMain() {
     CConsoleMinecraftApp::sInstance.InitialiseTips();
     CGameNetworkManager::sInstance.Initialise();
     CGameNetworkManager::sInstance.SetLocalGame(true);
+    // 3 unk methods go here
+    // TODO: some weird notification stuff
+
+    Renderer::sInstance->StartFrame();
+    CConsoleMinecraftApp::sInstance.UpdateTime();
+    PIXBeginNamedEvent(0, "Input manager tick");
+    CInput::sInstance->Tick();
+    PIXEndNamedEvent();
+    PIXBeginNamedEvent(0.0, "Profile manager tick");
+    CProfile::sInstance->Tick();
+    PIXEndNamedEvent();
+    PIXBeginNamedEvent(0.0, "Storage manager tick");
+    CStorage::sInstance->Tick();
+    PIXEndNamedEvent();
+    PIXBeginNamedEvent(0.0, "Render manager tick");
+    Renderer::sInstance->Tick();
+    PIXEndNamedEvent();
+    PIXBeginNamedEvent(0.0, "Sentient tick");
+    PIXEndNamedEvent();
+    PIXBeginNamedEvent(0.0, "Network manager do work #1");
+    CGameNetworkManager::sInstance.DoWork();
+    PIXEndNamedEvent();
+
+    int primaryPad;
+    bool isPaused;
+    if (CConsoleMinecraftApp::sInstance.GetGameStarted()) {
+        Minecraft::GetInstance()->run_middle();
+        if (CGameNetworkManager::sInstance.IsLocalGame()
+            && CGameNetworkManager::sInstance.GetPlayerCount() == 1) {
+            primaryPad = CProfile::sInstance->GetPrimaryPad();
+            isPaused = gConsoleUIController.IsPauseMenuDisplayed(primaryPad);
+        } else {
+            isPaused = false;
+        }
+        CConsoleMinecraftApp::sInstance.SetAppPaused(isPaused);
+    } else {
+        Renderer::sInstance->SetClearColour(new float[2]);
+        Renderer::sInstance->Clear(2);
+        Minecraft::GetInstance()->mSoundEngine->tick(nullptr, 0);
+        Minecraft::GetInstance()->mTextures->tick(true, false, false);
+        IntCache::Reset();
+        if (CConsoleMinecraftApp::sInstance.GetReallyChangingSessionType())
+            Minecraft::sInstance->tickAllConnections();
+    }
+    Minecraft::sInstance->mSoundEngine->playMusicTick();
+    CConsoleMinecraftApp::sInstance.GetCommerceInstance()->tick();
+    InfoBarManager::StartTimingCategory(InfoBarManager::eTimingCagegory::ConsoleUIControllerTick);
+    gConsoleUIController.tick();
+    InfoBarManager::EndTimingCategory(InfoBarManager::eTimingCagegory::ConsoleUIControllerTick);
+    Renderer::sInstance->vtbl_7101130608_func_17();
+    InfoBarManager::StartTimingCategory(InfoBarManager::eTimingCagegory::ConsoleUIControllerRender);
+    gConsoleUIController.render();
+    InfoBarManager::EndTimingCategory(InfoBarManager::eTimingCagegory::ConsoleUIControllerRender);
+    InfoBarManager::EndTimingCategory(InfoBarManager::eTimingCagegory::InitTicking);
+    PIXBeginNamedEvent(0.0, "Frame present");
+    Renderer::sInstance->Present();
+    PIXEndNamedEvent();
+    Renderer::sInstance->Set_matrixDirty();
+    gConsoleUIController.CheckMenuDisplayed();
+
+    PIXBeginNamedEvent(0.0, "Profile load check");
+    if (CInput::sControllers) {
+        if (CInput::sControllers & 1) {
+            void* padData = CStorage::sInstance->GetGameDefinedProfileData(0);
+            GameSettings::ClearGameSettingsChangedFlag(0);
+            GameSettings::ApplyGameSettingsChanged(0);
+            Minecraft::GetInstance()->mStatsCounters[0]->clear();
+            Minecraft::GetInstance()->mStatsCounters[0]->parse(padData);
+        }
+        if (CInput::sControllers & 2) {
+            void* padData = CStorage::sInstance->GetGameDefinedProfileData(1);
+            GameSettings::ClearGameSettingsChangedFlag(1);
+            GameSettings::ApplyGameSettingsChanged(1);
+            Minecraft::GetInstance()->mStatsCounters[1]->clear();
+            Minecraft::GetInstance()->mStatsCounters[1]->parse(padData);
+        }
+        if (CInput::sControllers & 4) {
+            void* padData = CStorage::sInstance->GetGameDefinedProfileData(2);
+            GameSettings::ClearGameSettingsChangedFlag(2);
+            GameSettings::ApplyGameSettingsChanged(2);
+            Minecraft::GetInstance()->mStatsCounters[2]->clear();
+            Minecraft::GetInstance()->mStatsCounters[2]->parse(padData);
+        }
+        if (CInput::sControllers & 8) {
+            void* padData = CStorage::sInstance->GetGameDefinedProfileData(3);
+            GameSettings::ClearGameSettingsChangedFlag(3);
+            GameSettings::ApplyGameSettingsChanged(3);
+            Minecraft::GetInstance()->mStatsCounters[3]->clear();
+            Minecraft::GetInstance()->mStatsCounters[3]->parse(padData);
+        }
+    }
+    PIXEndNamedEvent();
+
+    PIXBeginNamedEvent(0.0, "Network manager do work #2");
+    CGameNetworkManager::sInstance.DoWork();
+    PIXEndNamedEvent();
+
+    CConsoleMinecraftApp::sInstance.HandleXuiActions();
+    if (CProfile::sInstance->IsFullVersion()) {
+        if (!CConsoleMinecraftApp::sHideTrialTimer) {
+            gConsoleUIController.ShowTrialTimer(false);
+            CConsoleMinecraftApp::sHideTrialTimer = true;
+        }
+        Vec3::resetPool();
+    } else {
+        if (!CConsoleMinecraftApp::sInstance.GetGameStarted())
+            Vec3::resetPool();
+        if (CConsoleMinecraftApp::sInstance.IsAppPaused())
+            CConsoleMinecraftApp::sInstance.UpdateTrialPausedTimer();
+        primaryPad = CProfile::sInstance->GetPrimaryPad();
+        gConsoleUIController.UpdateTrialTimer(primaryPad);
+        Vec3::resetPool();
+    }
 }

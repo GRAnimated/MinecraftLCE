@@ -8,7 +8,7 @@
 class Slot;
 class ItemInstance;
 
-class Container : public Nameable {
+class Container : virtual public Nameable {
 public:
     virtual ~Container();
     virtual void getContainerSize() = 0;

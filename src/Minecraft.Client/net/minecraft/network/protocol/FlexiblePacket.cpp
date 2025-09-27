@@ -57,15 +57,15 @@ void FlexiblePacket::write(DataOutputStream* output) {
 }
 
 int FlexiblePacket::getEstimatedSize() {
-    int size = 0;
+    int strings = 0;
 
     for (int i = 0; i < mStrings.size(); i++) {
-        size += (int)mStrings[i].length();
+        strings += (int)mStrings[i].length();
     }
 
     return sizeof(int) // 4 byte packed header
             + (sizeof(int) * mVarints.size() // varints
-            + size // strings (why not size * 2 + 2?)
+            + strings // strings (why not size * 2 + 2?)
             + (!mBools.empty()) // bool
             + sizeof(float) * mFloats.size()); // floats
 }

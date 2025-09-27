@@ -1,15 +1,15 @@
 #include "fui/node/FJ_FuiNode.h"
 
-#include "control/FJ_List.h"
+#include "control/button/FJ_Button.h"
+#include "control/list/FJ_List.h"
+#include "control/list/button/FJ_List_ListButton.h"
+#include "control/list/button/FJ_List_ListButtonPlayerList.h"
 #include "fui/fui.h"
 #include "fui/fuiRenderNode.h"
 #include "fui/node/FJ_Base.h"
 #include "fui/node/FJ_Document.h"
 #include "fui/node/FJ_FuiNodeStage.h"
-#include "fui/node/control/FJ_Button.h"
-#include "fui/node/control/FJ_List_ListButton.h"
-#include "fui/node/control/FJ_List_ListButtonPlayerList.h"
-#include "fui/node/control/FJ_List_MenuButton.h"
+#include "fui/node/control/list/button/FJ_List_MenuButton.h"
 
 FJ_FuiNode::FJ_FuiNode(fuiRenderNode* renderNode) {
     mTabIndex = -1;

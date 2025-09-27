@@ -132,7 +132,6 @@ Packet::Packet() {
 }
 
 void Packet::handle(PacketListener* listener) {
-    return;
 }
 
 int Packet::getEstimatedSize() {
@@ -165,7 +164,7 @@ std::wstring Packet::readUtf(DataInputStream* in, int maxLength) {
                 << L")";
     }
 
-    std::wstring str = L"";
+    std::wstring str;
     for (int i = 0; i < length; ++i) {
         str.push_back(in->readChar());
     }
@@ -174,10 +173,13 @@ std::wstring Packet::readUtf(DataInputStream* in, int maxLength) {
 }
 
 // NON_MATCHING
-void Packet::map(int a1, bool a2, bool a3, bool a4, bool a5, const std::type_info& a6,
-                 std::shared_ptr<Packet> (*a7)(), std::wstring a8) {
-    // THIS IS JUST TO MAKE staticCtor MATCH!!!
-    map(a1, a2, a3, a4, a5, typeid(ClientboundKeepAlivePacket), a7, L"");
+void Packet::map(int id, bool a2, bool a3, bool a4, bool a5, const std::type_info& typeInfo,
+                 std::shared_ptr<Packet> (*creator)(), std::wstring name) {
+    sPackets.emplace(std::make_pair(id, creator));
+
+    if (a2) sPackets1.emplace(id);
+    if (a3) sPackets2.emplace(id);
+    if (a4) sPackets3.emplace(id);
 }
 
 void Packet::staticCtor() {
