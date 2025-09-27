@@ -34,7 +34,7 @@ void CompressedBlockStorage::read(DataInputStream* s) {
     const arrayWithLength<unsigned char> arr = arrayWithLength<unsigned char>(this->mData, i);
     this->mLength = i;
 
-    s->readFully(arr);
+    s->readBytes(arr);
     this->compress(-1);
 }
 

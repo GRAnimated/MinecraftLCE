@@ -288,7 +288,7 @@ public:
     std::unordered_map<int, int> mapB20;
     std::unordered_map<int, int> mapB48;
     std::unordered_map<int, int> mapB70;
-    char gapB98[40];  // another map?
+    char gapB98[32];  // another map?
     void (*mOnAwardHandler)();
     void* mAwardHandlerVar;
     void* qwordBD0;

@@ -24,9 +24,10 @@ public:
     unsigned char readUnsignedByte() override;
     int readUnsignedShort() override;
     wchar_t readChar() override;
+    // todo: wrong order likely, need to maintain matching tho
+    void readBytes(arrayWithLength<unsigned char>) override;
     void readFully(arrayWithLength<unsigned char>) override;
     void readFully(arrayWithLength<char>) override;
-    void readBytes(arrayWithLength<unsigned char>) override;
     double readDouble() override;
     float readFloat() override;
     int readInt() override;

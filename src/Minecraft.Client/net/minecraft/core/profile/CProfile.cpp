@@ -2,8 +2,6 @@
 
 #include "net/minecraft/client/resources/L10N.h"
 
-// NON_MATCHING | Score: 10 (Lower is better)
-// Randomly unmatched, also I think the method was broken to begin with...
 void CProfile::SetOnAwardHandler(void (*func)(), void* somePtr) {
     this->mOnAwardHandler = func;
     this->mAwardHandlerVar = somePtr;
