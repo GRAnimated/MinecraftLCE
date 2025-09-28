@@ -274,6 +274,8 @@
 #include "fui/node/document/menu/superflat/FJ_SuperFlatEditLayerMenu.h"
 #include "fui/node/document/menu/superflat/FJ_SuperFlatMenu.h"
 
+#define ADD_NODE(n) sNodes.emplace(std::make_pair(std::string(n::sName), &n::Create))
+
 void FJ_Factory::initialise() {
     ADD_NODE(FJ_FuiNode);
     ADD_NODE(FJ_MenuButton_Normal);
