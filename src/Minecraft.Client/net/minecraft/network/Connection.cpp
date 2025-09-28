@@ -137,7 +137,7 @@ int Connection::runRead(void* conn) {
     if (connection) {
         Compression::CreateNewThreadStorage();
         EnterCriticalSection(&connection->mCountMutex);
-        ++mReadConnections;
+        ++sReadConnections;
         LeaveCriticalSection(&connection->mCountMutex);
         MemSect(19);
         while (connection->mIsRunning) {
@@ -164,7 +164,7 @@ int Connection::runWrite(void* conn) {
         Compression::CreateNewThreadStorage();
 
         EnterCriticalSection(&connection->mCountMutex);
-        ++mWriteConnections;
+        ++sWriteConnections;
         LeaveCriticalSection(&connection->mCountMutex);
 
         if (connection->mIsRunning) {
@@ -194,7 +194,7 @@ int Connection::runWrite(void* conn) {
         }
 
         EnterCriticalSection(&connection->mCountMutex);
-        --mWriteConnections;
+        --sWriteConnections;
         LeaveCriticalSection(&connection->mCountMutex);
 
         Compression::ReleaseThreadStorage();
