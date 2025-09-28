@@ -7,6 +7,8 @@ std::shared_ptr<Packet> ClientboundPreLoginPacket::create() {
     return std::shared_ptr<Packet>(new ClientboundPreLoginPacket());
 }
 
+// NON_MATCHING | Score: 1110 (lower is better)
+// Can't get it to emit memset over sturh spam
 ClientboundPreLoginPacket::ClientboundPreLoginPacket() {
     this->mName = L"";
     this->mPlayers = nullptr;
@@ -39,9 +41,11 @@ EPacketType ClientboundPreLoginPacket::getPacketId() {
     return _ClientboundPreLoginPacket;
 }
 
+// NON_MATCHING | Score: 1115 (lower is better)
+// Just a few mismatched instructions
 void ClientboundPreLoginPacket::read(DataInputStream* input) {
     this->mProtocolVersion = input->readShort();
-    this->mName = this->readUtf(input, 0x20);
+    this->mName = ClientboundPreLoginPacket::readUtf(input, 0x20);
     this->mUnk1 = input->readByte();
     this->mUnk2 = input->readInt();
 
@@ -76,6 +80,8 @@ void ClientboundPreLoginPacket::read(DataInputStream* input) {
     CConsoleMinecraftApp::sInstance.SetUniqueMapName(&this->mMapName);
 }
 
+// NON_MATCHING | Score: 1466 (lower is better)
+// Again just a few mismatched instructions
 void ClientboundPreLoginPacket::write(DataOutputStream* output) {
     output->writeShort(SharedConstants::NETWORK_PROTOCOL_VERSION);
     this->writeUtf(this->mName, output);

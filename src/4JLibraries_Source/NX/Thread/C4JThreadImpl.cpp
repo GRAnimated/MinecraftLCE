@@ -16,6 +16,8 @@ bool C4JThreadImpl::hasStarted() {
     return this->mHasStarted;
 }
 
+// NON_MATCHING | Score: 10 (lower is better)
+// there's uxtw instead of original sxtw
 void C4JThreadImpl::SetProcessor(int core) {
     this->mProcessor = core;
 

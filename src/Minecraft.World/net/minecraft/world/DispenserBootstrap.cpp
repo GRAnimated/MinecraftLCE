@@ -2,7 +2,9 @@
 
 #include "AbstractProjectileDispenseBehavior.h"
 
-// STUB
+// NON_MATCHING STUB
+// You can create classes under a function which is what 4J seemingly did
+// ex: ZN18DispenserBootstrap10StaticCtorEvE21ArrowDispenseBehavior
 void DispenserBootstrap::StaticCtor() {
     // WHY CAN YOU DO THIS WHAT THE FUCK
     // STUB

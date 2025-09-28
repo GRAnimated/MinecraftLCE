@@ -3,6 +3,7 @@
 #include "net/minecraft/client/ui/ConsoleUIController.h"
 #include "net/minecraft/client/ui/scene/control/UIControl_Touch.h"
 
+// NON_MATCHING | Score: 935 (lower is better)
 UIScene_Intro::UIScene_Intro(int a1, void* a2, UILayer* layer) : UIScene(a1, layer) {
     this->initialiseMovie();
     this->mUnk = false;
@@ -14,6 +15,8 @@ UIScene_Intro::UIScene_Intro(int a1, void* a2, UILayer* layer) : UIScene(a1, lay
 std::wstring UIScene_Intro::getMoviePath() {
     return L"Intro";
 }
+
+// NON_MATCHING | Score: 1139 (lower is better)
 bool UIScene_Intro::mapElementsAndNames() {
     UIScene::mapElementsAndNames();
 
