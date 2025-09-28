@@ -2,6 +2,7 @@
 
 #include "NX/Platform.h"
 #include "nn/os/os_MutexTypes.h"
+#include "types.h"
 
 #include <vector>
 
@@ -18,4 +19,4 @@ public:
     nn::os::MutexType mMutex;
 };
 
-static_assert(sizeof(XLockFreeStack<unsigned char>) == 0x38);
+ASSERT_SIZEOF(XLockFreeStack<unsigned char>, 0x38)
