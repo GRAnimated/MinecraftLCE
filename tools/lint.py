@@ -327,15 +327,20 @@ class SourceChecks:
             return line.replace(num_str, "StringIDs::" + const_name), const_name, True
         return line, "", False
 
-def run_clang_format(file_path):
+def run_clang_format(file_path, version):
+    # so debian based distro users can just pass --version {ver}
+    cf = 'clang-format'
+    if isinstance(version, str):
+        cf = f'clang-format-{version}'
+
     try:
         print(f"Formatting {file_path}...")
-        subprocess.run(['clang-format-20', '-i', file_path], check=True)
+        subprocess.run([cf, '-i', file_path], check=True)
     except FileNotFoundError:
-        print("Error: clang-format not found. Please install it or add it to your PATH.")
+        print(f"Error: {cf} not found. Please install it or add it to your PATH.")
         exit(1)
     except subprocess.CalledProcessError:
-        print(f"Error: clang-format failed on {file_path}")
+        print(f"Error: {cf} failed on {file_path}")
 
 SRC_DIR = "src"
 CLASS_PATTERN = re.compile(r'^\s*(class|struct|enum)\s+(\w+) \{', re.MULTILINE)
@@ -419,6 +424,7 @@ def main():
     parser.add_argument('--format', action='store_true', help='Run clang-format before checks.')
     parser.add_argument('--find-unsorted', action='store_true', help='Find unsorted classes/enums in the source files.')
     parser.add_argument('--slow', action='store_true', help='Run slow checks.')
+    parser.add_argument('--version', help='Use a specific version of clang-format for formatting.')
 
     args = parser.parse_args()
 
@@ -457,7 +463,7 @@ def main():
 
     for cpp_path in cpp_files:
         if args.format:
-            run_clang_format(cpp_path)
+            run_clang_format(cpp_path, args.version)
 
         with open(cpp_path, 'r', encoding='utf-8', errors='ignore') as f:
             original_content = f.read()
@@ -479,7 +485,7 @@ def main():
 
     for h_path in h_files:
         if args.format:
-            run_clang_format(h_path)
+            run_clang_format(h_path, args.version)
 
         with open(h_path, 'r', encoding='utf-8', errors='ignore') as f:
             original_content = f.read()
