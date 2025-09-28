@@ -68,7 +68,7 @@ public:
 class CInput : public C_4JInput {
 public:
     static CInput* sInstance;
-    static unsigned int sControllers;  // seems like a good place
+    static unsigned int sControllers;
 
     void Initialise(int, uchar, uchar);
     void Tick();
