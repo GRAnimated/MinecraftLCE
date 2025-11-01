@@ -14,7 +14,7 @@ public:
 
     _UIVec2D& operator+=(const _UIVec2D& b) {
         this->x += b.x;
-        this->x += b.x;
+        this->y += b.y;
         return *this;
     }
 };
