@@ -106,7 +106,7 @@ FJ_Button* FJ_FuiNode::asFJ_Button() {
 }
 
 void* FJ_FuiNode::asMovieClip() {
-    if (this->mRenderNode->field_20 != eFuiObjectType_2)
+    if (this->mRenderNode->mFuiObjectType != eFuiObjectType_Timeline)
         return nullptr;
 
     return this;

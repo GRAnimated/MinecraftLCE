@@ -57,6 +57,8 @@ public:
     void NavigateBack(int, bool, EUIScene, EUILayer);
     void* RegisterForCallbackId(UIScene*);
     void ResetSelectedItem();
+    // guessed names
+    void OverrideSFX(int padID, int soundID, bool override);
 
     void RequestErrorMessage(int, int, int*, unsigned int, unsigned int,
                              int (*)(void*, int, C4JStorage::EMessageResult), void*, wchar_t*, bool);

@@ -1,16 +1,21 @@
 #pragma once
 
+#include "net/minecraft/core/BlockPos.h"
+#include <memory>
+
 class Vec3;
 class Direction;
-class BlockPos;
+class Entity;
 
 class HitResult {
 public:
     ~HitResult();
     HitResult(Vec3*, const Direction*, const BlockPos&);
 
-    void* fill[2];
+    const BlockPos& getBlockPos() const;
+
+    BlockPos mBlockPos;
     const Direction* mDirection;
     Vec3* mHitVector;
-    void* anotherFiller[2];
+    std::shared_ptr<Entity> mEntity;
 };

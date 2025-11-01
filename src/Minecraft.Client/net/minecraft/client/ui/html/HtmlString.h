@@ -1,8 +1,9 @@
 #pragma once
 
+#include <string>
 #include <vector>
 
 class HtmlString {
 public:
-    static void Compose(std::vector<HtmlString>*);
+    static std::wstring Compose(std::vector<HtmlString>*);
 };
