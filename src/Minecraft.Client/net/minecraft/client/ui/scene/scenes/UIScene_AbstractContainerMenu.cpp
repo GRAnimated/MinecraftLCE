@@ -1,3 +1,5 @@
+#include "net/minecraft/client/ui/scene/scenes/UIScene_AbstractContainerMenu.h"
+
 #include "NX/Render/RendererCore.h"
 #include "fui/fui.h"
 #include "fui/fuiFile.h"
@@ -15,7 +17,6 @@
 #include "net/minecraft/client/ui/scene/UIScene.h"
 #include "net/minecraft/client/ui/scene/control/UIControl.h"
 #include "net/minecraft/client/ui/scene/scenes/IUIScene_AbstractContainerMenu.h"
-#include "net/minecraft/client/ui/scene/scenes/UIScene_AbstractContainerMenu.h"
 #include "net/minecraft/world/entity/player/MultiplayerLocalPlayer.h"
 #include "net/minecraft/world/inventory/AbstractContainerMenu.h"
 #include "net/minecraft/world/inventory/Inventory.h"
