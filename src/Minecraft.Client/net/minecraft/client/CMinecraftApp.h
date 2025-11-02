@@ -2,12 +2,14 @@
 
 #include "types.h"
 
+#include "NX/Commerce/cCommerceNintendo.h"
 #include "net/minecraft/client/eGameHostOption.h"
 #include "net/minecraft/core/profile/CProfile.h"
 #include "net/minecraft/core/storage/C4JStorage.h"
 #include "net/minecraft/world/ArrayWithLength.h"
 #include "net/minecraft/world/level/gamemode/minigames/MiniGameDef.h"
 #include "net/minecraft/world/level/levelgen/LevelGenerationOptions.h"
+
 #include <string>
 
 enum eTMSAction {};
@@ -44,6 +46,9 @@ public:
     virtual void GetFileFromTPD(eTPDFileType, unsigned char*, unsigned int, unsigned char**, unsigned int*);
 
     unsigned int GetTMSAction(int);
+    void SetUniqueMapName(char*);
+
+    void HandleXuiActions();
 
     int GetGameHostOption(unsigned int, eGameHostOption option);
     int GetGameHostOption(eGameHostOption option);
@@ -68,6 +73,10 @@ public:
     void setLevelGenerationOptions(LevelGenerationOptions* options);
     void SetGameHostOption(eGameHostOption option, unsigned int value);
 
+    void UpdateTrialPausedTimer();
+    void UpdateTime();
+    void SetAppPaused(bool paused);
+
     static int DefaultOptionsCallback(void*, C4JStorage::PROFILESETTINGS*, int);
     static int OptionsDataCallback(void*, int, unsigned short, C4JStorage::eOptionsCallback);
     static void SignInChangeCallback(void*, bool, unsigned int);
@@ -75,6 +84,8 @@ public:
     static void UpsellReturnedCallback(void*, eUpsellType, eUpsellResponse, int);
 
     bool getSomething();  // dunno
+
+    bool GetReallyChangingSessionType();
 
     // note to self: vftable pushes everything over by 8 inside decompiler view
     unsigned char padding[312];
@@ -89,6 +100,8 @@ public:
 class CConsoleMinecraftApp : public CMinecraftApp {
 public:
     static CConsoleMinecraftApp sInstance;
+
+    static bool sHideTrialTimer;
 
     CConsoleMinecraftApp();
     virtual ~CConsoleMinecraftApp();
@@ -113,6 +126,8 @@ public:
     bool ReadProductCodes();
     void CommerceInit();
     int GetLocalPlayerCount();
+
+    cCommerceNintendo* GetCommerceInstance();
 
     static int RequestSignInUIChoices(int);
 };

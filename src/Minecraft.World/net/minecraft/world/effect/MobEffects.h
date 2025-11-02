@@ -31,4 +31,6 @@ public:
     static MobEffect* LEVITATION;
     static MobEffect* LUCK;
     static MobEffect* UNLUCK;
+
+    static void staticCtor();
 };

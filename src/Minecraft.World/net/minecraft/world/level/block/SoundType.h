@@ -14,4 +14,6 @@ public:
     static const SoundType* SNOW;
     static const SoundType* SLIME_BLOCK;
     static const SoundType* ANVIL;
+
+    static void staticCtor();
 };

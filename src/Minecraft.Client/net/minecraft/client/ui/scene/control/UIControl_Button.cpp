@@ -2,7 +2,7 @@
 
 #include "fui/fuiRenderNode.h"
 #include "fui/node/FJ_FuiNodeStage.h"
-#include "fui/node/control/FJ_Button.h"
+#include "fui/node/control/button/FJ_Button.h"
 #include "net/minecraft/client/ui/scene/control/UIControl.h"
 #include "net/minecraft/client/ui/scene/control/UIControl_Base.h"
 

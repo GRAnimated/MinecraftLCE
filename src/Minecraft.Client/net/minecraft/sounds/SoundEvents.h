@@ -9,4 +9,6 @@ public:
     static SoundEvent* ENCHANT_THORNS_HIT;
     static SoundEvent* RANDOM_CLICK;
     static SoundEvent* SHOVEL_FLATTEN;
+
+    static void staticCtor();
 };

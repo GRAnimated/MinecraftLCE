@@ -137,7 +137,7 @@ int Connection::runRead(void* conn) {
     if (connection) {
         Compression::CreateNewThreadStorage();
         EnterCriticalSection(&connection->mCountMutex);
-        ++dword_7101786598;
+        ++sReadConnections;
         LeaveCriticalSection(&connection->mCountMutex);
         MemSect(19);
         while (connection->mIsRunning) {
@@ -164,7 +164,7 @@ int Connection::runWrite(void* conn) {
         Compression::CreateNewThreadStorage();
 
         EnterCriticalSection(&connection->mCountMutex);
-        ++dword_710178659C;
+        ++sWriteConnections;
         LeaveCriticalSection(&connection->mCountMutex);
 
         if (connection->mIsRunning) {
@@ -172,6 +172,7 @@ int Connection::runWrite(void* conn) {
             while (connection->mIsRunning || writeStatus) {  // issue is somewhere here
                 if (!ShutdownManager::ShouldRun(ShutdownManager::EThreadId::_9))
                     break;
+
                 long long startTime = System::processTimeInMilliSecs();
 
                 bool writeSuccess = false;
@@ -180,8 +181,10 @@ int Connection::runWrite(void* conn) {
                 do {
                     writeSuccess = connection->writeTick();
                     currentTime = System::processTimeInMilliSecs();
-                } while (connection->mDataOutputStream->getSize() == 0x7fffffff
-                         && (writeSuccess | ((currentTime - startTime) > 199)));
+
+                    if (connection->mDataOutputStream->getSize() == 0x7fffffff)
+                        break;
+                } while (writeSuccess | ((currentTime - startTime) > 199));
 
                 writeStatus = connection->mC4JEventImpl2->WaitForSignal(100);
 
@@ -191,7 +194,7 @@ int Connection::runWrite(void* conn) {
         }
 
         EnterCriticalSection(&connection->mCountMutex);
-        --dword_710178659C;
+        --sWriteConnections;
         LeaveCriticalSection(&connection->mCountMutex);
 
         Compression::ReleaseThreadStorage();

@@ -16,5 +16,7 @@ public:
     void setOwner(const std::wstring&);
     void makeFakeItem();
 
+    static void staticCtor();
+
     void* padding[8];
 };

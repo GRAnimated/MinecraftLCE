@@ -68,7 +68,7 @@ public:
         = 0;
     virtual void SetOldProfileVersionCallback(int (*)(void*, unsigned char*, unsigned short, int), void*) = 0;
     virtual void field_168() = 0;
-    virtual void field_170() = 0;
+    virtual void* GetGameDefinedProfileData(int) = 0;
     virtual void ReadFromProfile(int, int) = 0;
     virtual void field_180() = 0;
     virtual void nullsub_1022() = 0;

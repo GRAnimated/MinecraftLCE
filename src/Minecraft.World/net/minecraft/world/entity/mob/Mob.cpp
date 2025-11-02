@@ -1,4 +1,4 @@
-#include "Mob.h"
+#include "net/minecraft/world/entity/mob/Mob.h"
 
 #include "NX/Platform.h"
 #include "net/minecraft/world/ArrayWithLength.h"

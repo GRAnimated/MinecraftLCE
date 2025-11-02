@@ -130,5 +130,5 @@ public:
     void write(DataOutputStream* output) override;
     void handle(PacketListener* listener) override;
 
-    char fill[2];
+    EChatPacketMessage mType;
 };

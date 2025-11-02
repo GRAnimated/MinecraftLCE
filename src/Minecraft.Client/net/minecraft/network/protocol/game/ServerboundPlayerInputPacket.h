@@ -1,6 +1,7 @@
 #pragma once
 
 #include "net/minecraft/network/protocol/Packet.h"
+#include "types.h"
 
 class ServerboundPlayerInputPacket : public Packet,
                                      public std::enable_shared_from_this<ServerboundPlayerInputPacket> {
@@ -22,4 +23,4 @@ private:
     bool isSneaking;
 };
 
-static_assert(sizeof(ServerboundPlayerInputPacket) == 0x38);
+ASSERT_SIZEOF(ServerboundPlayerInputPacket, 0x38)

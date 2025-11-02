@@ -13,6 +13,8 @@ public:
 
     std::vector<Biome::MobSpawnerData>* getEnemies();
 
+    static void staticCtor();
+
     char filler[0x38];
 };
 

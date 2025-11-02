@@ -4,15 +4,15 @@
 #include "net/minecraft/world/Random.h"
 
 float Mth::sin(float v) {
-    if (!Mth::SIN)
-        Mth::init();
+    if (!SIN)
+        init();
 
     return SIN[static_cast<int>(v * 10430.0F) & 0xFFFF];
 }
 
 float Mth::cos(float v) {
-    if (!Mth::SIN)
-        Mth::init();
+    if (!SIN)
+        init();
 
     // original had 10430.3779296875 but .0 also matches
     return SIN[static_cast<int>(v * 10430.0f + 16384.0f) & 0xFFFF];

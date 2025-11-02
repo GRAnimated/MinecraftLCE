@@ -61,6 +61,8 @@ public:
     void setRenderRemoveStage(unsigned char);
     bool shouldRemoveForRender() const { return mRenderFlag == 2; }
 
+    static void staticCtor();
+
     bool mIsRemoved;
     bool field_19;
     u8 mRenderFlag;

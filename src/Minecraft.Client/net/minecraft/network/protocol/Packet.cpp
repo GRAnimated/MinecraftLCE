@@ -131,9 +131,7 @@ Packet::Packet() {
     mShouldDelay = false;
 }
 
-void Packet::handle(PacketListener* listener) {
-    return;
-}
+void Packet::handle(PacketListener* listener) {}
 
 int Packet::getEstimatedSize() {
     return 8;
@@ -165,7 +163,7 @@ std::wstring Packet::readUtf(DataInputStream* in, int maxLength) {
                 << L")";
     }
 
-    std::wstring str = L"";
+    std::wstring str;
     for (int i = 0; i < length; ++i) {
         str.push_back(in->readChar());
     }

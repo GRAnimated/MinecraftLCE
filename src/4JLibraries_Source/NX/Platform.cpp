@@ -1,5 +1,8 @@
 #include "NX/Platform.h"
 
+#include "nn/fs/fs_bcat.h"
+#include "nn/fs/fs_directories.h"
+
 #include <cstdlib>
 #include <cstring>
 
@@ -14,6 +17,8 @@ void XMemSet128(void* ptr, int a2, unsigned int a3) {
 void XPhysicalFree(void* ptr) {
     free(ptr);
 }
+
+void __debugbreak() {}  // I assume this just calls compiler intrinsic on x86
 
 void MemSect(int) {}
 
