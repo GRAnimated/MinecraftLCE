@@ -40,4 +40,5 @@ void C4JThreadImpl::SetPriority(int priority) {
     nn::os::ChangeThreadPriority(this->mThread, mPriority);
 }
 
+// NON_MATCHING
 bool C4JThreadImpl::WaitForCompletion(int i) {}
