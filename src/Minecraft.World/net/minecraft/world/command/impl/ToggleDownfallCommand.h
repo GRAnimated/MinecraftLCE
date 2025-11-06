@@ -9,7 +9,7 @@ public:
 
     EGameCommand getId() override;
     int getPermissionLevel() override;
-    void execute(std::shared_ptr<CommandSender>, arrayWithLength<uchar>) override;
+    void execute(std::shared_ptr<CommandSender>, arrayWithLength<unsigned char>) override;
 
     void doToggleDownfall();
 };
