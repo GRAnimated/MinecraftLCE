@@ -20,6 +20,7 @@ int ToggleDownfallCommand::getPermissionLevel() {
     return 2;
 }
 
+ // NON_MATCHING: unknown function within ServerLevel should get called to retrieve the proper level pointer
 void ToggleDownfallCommand::doToggleDownfall() {
     MinecraftServer* server = MinecraftServer::getInstance();
     ServerLevel* level = server->level;
