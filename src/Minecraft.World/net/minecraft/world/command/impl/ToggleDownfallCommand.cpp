@@ -1,4 +1,5 @@
 #include "net/minecraft/world/command/impl/ToggleDownfallCommand.h"
+
 #include "net/minecraft/server/MinecraftServer.h"
 #include "net/minecraft/server/ServerLevel.h"
 #include "net/minecraft/world/command/Command.h"
@@ -19,24 +20,22 @@ int ToggleDownfallCommand::getPermissionLevel() {
     return 2;
 }
 
-void toggleDownfall() {
-  MinecraftServer* server = MinecraftServer::getInstance();
-  ServerLevel* level = server->level;
-  
-  LevelData* data = level->getLevelData();
+void ToggleDownfallCommand::doToggleDownfall() {
+    MinecraftServer* server = MinecraftServer::getInstance();
+    ServerLevel* level = server->level;
 
-  bool isRaining = data->isRaining();
-  data->setRaining(!isRaining);
-  
-  return;
+    LevelData* data = level->getLevelData();
+
+    bool isRaining = data->isRaining();
+    data->setRaining(!isRaining);
 }
 
-void ToggleDownfallCommand::execute(std::shared_ptr<CommandSender> sender, arrayWithLength<uchar> input) {  
-  toggleDownfall();
+void ToggleDownfallCommand::execute(std::shared_ptr<CommandSender> sender,
+                                    arrayWithLength<unsigned char> input) {
+    doToggleDownfall();
 
-  std::wstring message;
-  message += (L"commands.downfall.success");
-  
-  Command::logAdminAction(sender, (ClientboundChatPacket::EChatPacketMessage)0, 0, 0, &message, 1);
-  return;
+    std::wstring message;
+    message += (L"commands.downfall.success");
+
+    Command::logAdminAction(sender, (ClientboundChatPacket::EChatPacketMessage)0, 0, 0, &message, 1);
 }
