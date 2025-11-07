@@ -6,7 +6,6 @@
 #include "net/minecraft/world/command/EGameCommand.h"
 #include "net/minecraft/world/entity/CommandSender.h"
 #include "net/minecraft/world/level/storage/LevelData.h"
-#include "types.h"
 #include <memory>
 #include <string>
 
@@ -20,7 +19,7 @@ int ToggleDownfallCommand::getPermissionLevel() {
     return 2;
 }
 
- // NON_MATCHING: unknown function within ServerLevel should get called to retrieve the proper level pointer
+// NON_MATCHING: unknown function within ServerLevel should get called to retrieve the proper level pointer
 void ToggleDownfallCommand::doToggleDownfall() {
     MinecraftServer* server = MinecraftServer::getInstance();
     ServerLevel* level = server->level;
