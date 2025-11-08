@@ -32,6 +32,8 @@ public:
     ServerLevel* getLevel(int);
     PlayerList* getPlayers();
 
-    void* padding[5];
+    void* padding[2];
+    ServerLevel* level;
+    void* padding2[2];
     PlayerList* mPlayers;
 };
