@@ -265,7 +265,11 @@ void UIScene_AbstractContainerMenu::PlatformInitialize(bool a2, int a3, int flag
 
 void UIScene_AbstractContainerMenu::InitDataAssociations(int, AbstractContainerMenu*, int) {}
 
-bool UIScene_AbstractContainerMenu::doesSectionTreeHaveFocus(IUIScene_AbstractContainerMenu::ESceneSection) {
+// NON_MATCHING: this function as is matches, but thunk of it doesn't as instead of call to this function it
+// does "inline" and returns false directly that's why I suspect that there was some check with this but it
+// got optimised as it was always false
+bool UIScene_AbstractContainerMenu::doesSectionTreeHaveFocus(
+    IUIScene_AbstractContainerMenu::ESceneSection a2) {
     return false;
 }
 

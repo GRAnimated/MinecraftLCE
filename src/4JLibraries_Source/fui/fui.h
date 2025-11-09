@@ -17,7 +17,6 @@ typedef float mat4x4[4][4];
 
 struct fui {
     static fui* sInstance;
-    static fui dInstance;
 
     fui();
     void setScreenSize(float width, float height);

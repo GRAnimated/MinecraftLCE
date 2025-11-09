@@ -1,5 +1,6 @@
 #pragma once
 
+#include <string>
 class SoundEvent;
 
 class SoundEvents {
@@ -9,4 +10,6 @@ public:
     static SoundEvent* ENCHANT_THORNS_HIT;
     static SoundEvent* RANDOM_CLICK;
     static SoundEvent* SHOVEL_FLATTEN;
+
+    static SoundEvent* registerSound(const std::wstring&);
 };
