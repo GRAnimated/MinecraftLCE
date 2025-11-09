@@ -72,7 +72,7 @@ public:
     void interactEnemy(std::shared_ptr<Player>, std::shared_ptr<LivingEntity>,
                        InteractionHand::EInteractionHand);
     void copy_not_shared() const;
-    static void tagMatches(const not_null_ptr<ItemInstance>&, const not_null_ptr<ItemInstance>&);
+    static bool tagMatches(const not_null_ptr<ItemInstance>&, const not_null_ptr<ItemInstance>&);
     void matches(const not_null_ptr<ItemInstance>&, bool);
     static void matches(const not_null_ptr<ItemInstance>&, const not_null_ptr<ItemInstance>&, bool);
     void sameItem(const not_null_ptr<ItemInstance>&);

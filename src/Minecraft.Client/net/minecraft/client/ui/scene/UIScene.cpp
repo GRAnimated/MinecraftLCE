@@ -127,6 +127,17 @@ void* UIScene::GetCallbackUniqueId() {
     return ret;
 }
 
+// NON_MATCHING: this is junk impl just to match other func
+void UIScene::customDrawSlotControlFui(fuiRect* rect, int, not_null_ptr<ItemInstance> item, float f, bool a,
+                                       bool b, bool c) {
+    rect->getHeight();
+    item.reset();
+    this->mStageHeight = f;
+    this->byte_e9 = a;
+    this->byte_e9 = b;
+    this->byte_e9 = c;
+}
+
 int UIScene::convertGameActionToFuiKeycode(int gameAction) {
     return (unsigned int)gameAction <= 0x15 ? dword_7100E23090[gameAction] : 100;
 }

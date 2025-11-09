@@ -8,6 +8,7 @@ class Inventory : public Container {
 public:
     bool add(not_null_ptr<ItemInstance>);
     bool hasResource(Item*);
+    not_null_ptr<ItemInstance> getCarried();
 
     void getName() override;
     void getCustomName() override;
