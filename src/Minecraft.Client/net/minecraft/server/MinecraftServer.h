@@ -19,6 +19,9 @@ public:
     static MinecraftServer* sInstance;
     static MinecraftServer* getInstance();
 
+    // Indexes (add more for each dim)
+    static constexpr int OVERWORLD_LEVEL_IDX = 0;
+
     // unknown name & location
     static PlayerList* tryGetPlayers() {
         if (sInstance) {
