@@ -15,7 +15,9 @@ bool DAT_71017c2159;
 
 // TODO: implement, this is an hack to match stuff
 void* MemoryTracker::createIntBuffer(int size) {
+#ifdef MATCHING_HACK
     asm volatile ("" ::: "memory");
+#endif
     return (void*)(long)size; // yea i know. this is a stub anyway lol
 }
 
@@ -93,7 +95,11 @@ BufferBuilder::BufferBuilder(int bufSize) {
 }
 
 
-void BufferBuilder::sub_710063830c() { asm volatile ("" ::: "memory"); }
+void BufferBuilder::sub_710063830c() {
+#ifdef MATCHING_HACK 
+    asm volatile ("" ::: "memory"); 
+#endif
+}
 
 void BufferBuilder::clear() {
     mVertexCount = 0;
