@@ -287,7 +287,6 @@ LevelChunk* ServerChunkCache::create(int chunkX, int chunkZ) {
     return create(chunkX, chunkZ, false);
 }
 
-// NON_MATCHING: Missing a cbnz and cbz
 LevelChunk* ServerChunkCache::create(int chunkX, int chunkZ, bool unk) {
     if (!inBounds(chunkX, chunkZ))
         return mEmptyChunk;
@@ -304,13 +303,17 @@ LevelChunk* ServerChunkCache::create(int chunkX, int chunkZ, bool unk) {
     LevelChunk* loadedChunk = load(chunkX, chunkZ, chunk);
     PIXEndNamedEvent();
 
-    if (!loadedChunk && mChunkGenerator) {
+    if(!loadedChunk && !mChunkGenerator) {
+        loadedChunk = mEmptyChunk;
+    }
+    else if(!loadedChunk && mChunkGenerator) {
         PIXBeginNamedEvent(0.0, "Getting chunk from source");
         loadedChunk = mChunkGenerator->createChunk(chunkX, chunkZ);
         PIXEndNamedEvent();
     }
-
-    loadedChunk->load(false);
+    
+    if(loadedChunk)
+        loadedChunk->load(false);
 
     LeaveCriticalSection(&mMutex);
     return updateCacheAndPostProcess(chunkX, chunkZ, loadedChunk, chunk, unk);

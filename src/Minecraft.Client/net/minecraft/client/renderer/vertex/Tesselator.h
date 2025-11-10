@@ -9,7 +9,7 @@ public:
     static int sThreadStorageIndex;
     static void CreateNewThreadStorage(int);
 
-    Tesselator(int);
+    Tesselator(int); // this int is likely some buffer size, as it is passed to the builder
 
     BufferBuilder* getBuilder() const;
     void end();

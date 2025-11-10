@@ -9,11 +9,11 @@ std::shared_ptr<Packet> ClientboundSetHealthPacket::create() {
 }
 
 ClientboundSetHealthPacket::ClientboundSetHealthPacket() {
-    food = 0;
-    dword18 = 0;
-    dword1C = 0;
     health = 0.0;
+    food = 0.0;
     saturation = 0.0;
+    dword18 = 0;
+    dword1C = -1;
 }
 
 int ClientboundSetHealthPacket::getEstimatedSize() {
