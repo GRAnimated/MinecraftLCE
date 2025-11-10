@@ -12,7 +12,7 @@ public:
 
     enum eVertexType {};
     enum ePrimitiveType {
-        eViewportType_Quad = 3, // not sure
+        eViewportType_Quad = 3,  // not sure
     };
     enum ePixelShaderType {};
     enum eTextureFormat {};

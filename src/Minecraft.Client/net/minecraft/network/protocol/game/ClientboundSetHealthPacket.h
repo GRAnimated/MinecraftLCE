@@ -21,10 +21,10 @@ public:
     float getSaturation();
 
 private:
-    int dword18; // 0x28
-    int dword1C; // 0x2c
-    int dword20; // 0x30
-    float health; // 0x34
-    int food; // 0x38
-    float saturation; // 0x3c
+    int dword18;       // 0x28
+    int dword1C;       // 0x2c
+    int dword20;       // 0x30
+    float health;      // 0x34
+    int food;          // 0x38
+    float saturation;  // 0x3c
 };

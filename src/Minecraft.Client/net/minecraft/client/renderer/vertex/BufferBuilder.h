@@ -7,7 +7,7 @@
 class VertexFormat;
 
 // TODO: figure those out
-extern "C" bool globalEnableFlag; // DAT_71017c2158 not sure what this is
+extern "C" bool globalEnableFlag;  // DAT_71017c2158 not sure what this is
 extern "C" bool DAT_71017c2159;
 
 
@@ -21,7 +21,7 @@ public:
 class BufferBuilder {
 public:
     struct Bounds {
-        void initBounds(); // on WII U this code is inlined so we have no symbol, this is my guess
+        void initBounds();  // on WII U this code is inlined so we have no symbol, this is my guess
 
         void addBounds(BufferBuilder::Bounds&);
         void addVert(float, float, float);
@@ -43,7 +43,7 @@ public:
     void vertexUV(float, float, float, float, float);
     void useCompactVertices(bool);
     void useProjectedTexture(bool);
-    void setVertexAndPixelShader(C4JRender::eVertexType, C4JRender::ePixelShaderType); 
+    void setVertexAndPixelShader(C4JRender::eVertexType, C4JRender::ePixelShaderType);
     void useDefaultShaders();
     void tex2(int);
     void color(int, int, int, int);
@@ -71,7 +71,7 @@ public:
     int mVertexCount;
     float mTexU;
     float mTexV;
-    union { // yea i know, i also hate this
+    union {  // yea i know, i also hate this
         int dword_1c;
         struct {
             short short_1c;
@@ -88,7 +88,8 @@ public:
     bool mUseProjectedTex;
     char gap_2E[2];
     int dword_30;
-    C4JRender::eVertexType mVertType; // i suspect this is used as size in bytes of a vertex, beacuse it's used often with useCompactVerts 
+    C4JRender::eVertexType mVertType;  // i suspect this is used as size in bytes of a vertex, beacuse it's
+                                       // used often with useCompactVerts
     bool mHasBoneIndex;
     char byte_39;
     char gap_3A[2];
@@ -105,7 +106,7 @@ public:
     uint32_t mPackedNormal;
     int mBoneIndex;
     int mBucket;
-    bool mHasBegun; // meh name
+    bool mHasBegun;  // meh name
     bool mIsMipmapEnabled;
     char byte_6e;
     char gap_6F;
