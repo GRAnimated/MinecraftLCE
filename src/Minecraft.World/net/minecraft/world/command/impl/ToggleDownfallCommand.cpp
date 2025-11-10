@@ -21,7 +21,7 @@ int ToggleDownfallCommand::getPermissionLevel() {
 
 void ToggleDownfallCommand::doToggleDownfall() {
     MinecraftServer* server = MinecraftServer::getInstance();
-    ServerLevel* overworldLevel = server->mLevels[0];
+    ServerLevel* overworldLevel = server->mLevels[MinecraftServer::OVERWORLD_LEVEL_IDX];
 
     LevelData data = overworldLevel->getLevelData();
 
