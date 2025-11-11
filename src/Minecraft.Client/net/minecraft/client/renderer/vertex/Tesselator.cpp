@@ -1,6 +1,7 @@
+#include "net/minecraft/client/renderer/vertex/Tesselator.h"
+
 #include "NX/Platform.h"
 #include "net/minecraft/client/renderer/vertex/BufferBuilder.h"
-#include "net/minecraft/client/renderer/vertex/Tesselator.h"
 
 Tesselator* Tesselator::getInstance() {
     return static_cast<Tesselator*>(TlsGetValue(sThreadStorageIndex));

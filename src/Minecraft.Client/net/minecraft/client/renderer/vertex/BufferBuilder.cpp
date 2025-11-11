@@ -1,7 +1,8 @@
+#include "net/minecraft/client/renderer/vertex/BufferBuilder.h"
+
 #include "NX/Platform.h"
 #include "NX/Render/RendererCore.h"
 #include "net/minecraft/client/renderer/platform/GlStateManager.h"
-#include "net/minecraft/client/renderer/vertex/BufferBuilder.h"
 #include "net/minecraft/client/renderer/vertex/Tesselator.h"
 #include <cstddef>
 
