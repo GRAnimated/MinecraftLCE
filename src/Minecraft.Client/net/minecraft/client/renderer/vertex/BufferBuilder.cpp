@@ -2,30 +2,19 @@
 
 #include "NX/Platform.h"
 #include "NX/Render/RendererCore.h"
+#include "net/minecraft/client/renderer/MemoryTracker.h"
 #include "net/minecraft/client/renderer/platform/GlStateManager.h"
 #include "net/minecraft/client/renderer/vertex/Tesselator.h"
+#include <cfloat>
 #include <cstddef>
 
-// TODO: figure those out
-bool globalEnableFlag;
-bool DAT_71017c2159;
-
-// TODO: implement, this is an hack to match stuff
-void* MemoryTracker::createIntBuffer(int size) {
-#ifdef MATCHING_HACK
-    asm volatile("" ::: "memory");
-#endif
-    return (void*)(long)size;  // yea i know. this is a stub anyway lol
-}
-
-// idk why those float numbers (maybe default hex values) but this gets it to 100%
 void BufferBuilder::Bounds::initBounds() {
-    bounds[0] = 3.4028235e+38;
-    bounds[1] = 3.4028235e+38;
-    bounds[2] = 3.4028235e+38;
-    bounds[3] = -3.4028235e+38;
-    bounds[4] = -3.4028235e+38;
-    bounds[5] = -3.4028235e+38;
+    bounds[0] = FLT_MAX;
+    bounds[1] = FLT_MAX;
+    bounds[2] = FLT_MAX;
+    bounds[3] = -FLT_MAX;
+    bounds[4] = -FLT_MAX;
+    bounds[5] = -FLT_MAX;
 }
 
 void BufferBuilder::Bounds::addBounds(BufferBuilder::Bounds& other) {
@@ -58,6 +47,7 @@ void BufferBuilder::Bounds::addVert(float x, float y, float z) {
         bounds[5] = z;
 }
 
+// NON_MATCHING probably some ordering thing, i have no idea
 BufferBuilder::BufferBuilder(int bufSize) {
     mHasColor = false;
     mHasTex = false;
@@ -93,8 +83,8 @@ BufferBuilder::BufferBuilder(int bufSize) {
     mVertexData = new arrayWithLength<int>(bufSize, true);
     field_8 = new arrayWithLength<uchar>((0 > bufSize ? bufSize + 7 : bufSize) >> 3, true);
 
-    byte_6e = DAT_71017c2159;
-    if (DAT_71017c2159) {
+    byte_6e = BufferBuilder::VBO_MODE;
+    if (BufferBuilder::VBO_MODE) {
         field_70 = MemoryTracker::createIntBuffer(field_7c);
         sub_710063830c();
     }
@@ -102,6 +92,7 @@ BufferBuilder::BufferBuilder(int bufSize) {
     byte_39 = false;
 }
 
+// NON_MATCHING just random to make other things match
 void BufferBuilder::sub_710063830c() {
 #ifdef MATCHING_HACK
     asm volatile("" ::: "memory");
@@ -148,7 +139,7 @@ void BufferBuilder::tex(float u, float v) {
 void BufferBuilder::finaliseShaders() {
     dword_30 = 0;
     mVertType = (C4JRender::eVertexType)0;
-    if (mPrimitiveMode == 3 && globalEnableFlag) {
+    if (mPrimitiveMode == 3 && BufferBuilder::TRIANGLE_MODE) {
         if (mHasBoneIndex) {
             this->mVertType = (C4JRender::eVertexType)8;
         } else if (this->mUseCompactVerts) {
@@ -183,7 +174,7 @@ void BufferBuilder::end() {
             }
         }
 
-        if (this->mPrimitiveMode == 3 && globalEnableFlag) {
+        if (this->mPrimitiveMode == 3 && BufferBuilder::TRIANGLE_MODE) {
             Renderer::sInstance->DrawVertices((C4JRender::ePrimitiveType)0, mVertexCount, mVertexData->data,
                                               this->mVertType, (Renderer::ePixelShaderType)this->dword_30,
                                               nullptr);
@@ -211,12 +202,13 @@ void BufferBuilder::end() {
     clear();
 }
 
+// NON_MATCHING i have no idea, i'm tired of this function
 void BufferBuilder::vertexNoBounds(float x, float y, float z) {
     mVertexCount++;
     float finalTexU = !mIsMipmapEnabled ? mTexU + 1.0f : mTexU;
 
     if (!mUseCompactVerts) {
-        if ((mVertexCount & 3) == 0 && mPrimitiveMode == 3 && globalEnableFlag) {
+        if ((mVertexCount & 3) == 0 && mPrimitiveMode == 3 && BufferBuilder::TRIANGLE_MODE) {
             if (mHasTex) {
                 mVertexData->data[(int)(mBufferIndex + 3)] = mVertexData->data[(int)(mBufferIndex - 21)];
                 mVertexData->data[(int)(mBufferIndex + 4)] = mVertexData->data[(int)(mBufferIndex - 20)];

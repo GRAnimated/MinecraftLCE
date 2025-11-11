@@ -6,16 +6,6 @@
 
 class VertexFormat;
 
-// TODO: figure those out
-extern "C" bool globalEnableFlag;  // DAT_71017c2158 not sure what this is
-extern "C" bool DAT_71017c2159;
-
-// TODO: this is a placeHolder, move this to somewhere else, and implement it
-class MemoryTracker {
-public:
-    static void* createIntBuffer(int size);
-};
-
 class BufferBuilder {
 public:
     struct Bounds {
@@ -115,6 +105,9 @@ public:
     void* gap[13];
     int unk;
     Bounds mBounds;
+
+    static bool TRIANGLE_MODE;
+    static bool VBO_MODE;
 };
 
 ASSERT_SIZEOF(BufferBuilder, 0x110)
