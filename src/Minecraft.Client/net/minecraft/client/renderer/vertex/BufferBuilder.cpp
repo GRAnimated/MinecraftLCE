@@ -383,19 +383,17 @@ void BufferBuilder::color(int r, int g, int b) {
 }
 
 void BufferBuilder::color(float r, float g, float b) {
-    int ri = static_cast<int>(r * 255.0f);
-    int gi = static_cast<int>(g * 255.0f);
-    int bi = static_cast<int>(b * 255.0f);
-
+    int ri = r * 255.0f;
+    int gi = g * 255.0f;
+    int bi = b * 255.0f;
     color(ri, gi, bi);
 }
 
 void BufferBuilder::color(float r, float g, float b, float a) {
-    int ri = static_cast<int>(r * 255.0f);
-    int gi = static_cast<int>(g * 255.0f);
-    int bi = static_cast<int>(b * 255.0f);
-    int ai = static_cast<int>(a * 255.0f);
-
+    int ri = r * 255.0f;
+    int gi = g * 255.0f;
+    int bi = b * 255.0f;
+    int ai = a * 255.0f;
     color(ri, gi, bi, ai);
 }
 
