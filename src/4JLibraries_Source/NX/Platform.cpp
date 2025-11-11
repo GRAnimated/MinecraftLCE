@@ -7,7 +7,6 @@ void* XPhysicalAlloc(unsigned long a1, unsigned long a2, unsigned long a3, unsig
     return malloc(a1);
 }
 
-
 void XMemSet128(void* ptr, int a2, size_t a3) {
     memset(ptr, a2, a3);
 }

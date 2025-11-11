@@ -5,11 +5,9 @@
 #include "net/minecraft/client/renderer/vertex/Tesselator.h"
 #include <cstddef>
 
-
 // TODO: figure those out
 bool globalEnableFlag;
 bool DAT_71017c2159;
-
 
 // TODO: implement, this is an hack to match stuff
 void* MemoryTracker::createIntBuffer(int size) {
@@ -91,7 +89,6 @@ BufferBuilder::BufferBuilder(int bufSize) {
     mPackedNormal = 0;
     mBoneIndex = 0;
 
-
     mVertexData = new arrayWithLength<int>(bufSize, true);
     field_8 = new arrayWithLength<uchar>((0 > bufSize ? bufSize + 7 : bufSize) >> 3, true);
 
@@ -101,12 +98,11 @@ BufferBuilder::BufferBuilder(int bufSize) {
         sub_710063830c();
     }
 
-
     byte_39 = false;
 }
 
 void BufferBuilder::sub_710063830c() {
-#ifdef MATCHING_HACK 
+#ifdef MATCHING_HACK
     asm volatile("" ::: "memory");
 #endif
 }
@@ -157,7 +153,7 @@ void BufferBuilder::finaliseShaders() {
         } else if (this->mUseCompactVerts) {
             this->mVertType = (C4JRender::eVertexType)1;
         }
-        
+
         if (this->mUseProjectedTex)
             this->dword_30 = 4;
     } else {
@@ -185,7 +181,7 @@ void BufferBuilder::end() {
                 p += 8;
             }
         }
-    
+
         if (this->mPrimitiveMode == 3 && globalEnableFlag) {
             Renderer::sInstance->DrawVertices((C4JRender::ePrimitiveType)0, mVertexCount, mVertexData->data,
                                               this->mVertType, (Renderer::ePixelShaderType)this->dword_30,
@@ -200,8 +196,8 @@ void BufferBuilder::end() {
                                                   this->mVertType, (Renderer::ePixelShaderType)this->dword_30,
                                                   nullptr);
             }
-        }  
-        
+        }
+
         GlStateManager::disableClientState(0);
         if (mHasTex)
             GlStateManager::disableClientState(0);
@@ -219,28 +215,24 @@ void BufferBuilder::vertexNoBounds(float x, float y, float z) {
     float finalTexU = !mIsMipmapEnabled ? mTexU + 1.0f : mTexU;
 
     if (!mUseCompactVerts) {
-        
         if ((mVertexCount & 3) == 0 && mPrimitiveMode == 3 && globalEnableFlag) {
-
             if (mHasTex) {
                 mVertexData->data[(int)(mBufferIndex + 3)] = mVertexData->data[(int)(mBufferIndex - 21)];
                 mVertexData->data[(int)(mBufferIndex + 4)] = mVertexData->data[(int)(mBufferIndex - 20)];
             }
-            
+
             if (mHasColor) {
                 mVertexData->data[(int)(mBufferIndex + 5)] = mVertexData->data[(int)(mBufferIndex - 19)];
             }
 
-          
             int* ptr = mVertexData->data + (int)mBufferIndex;
             *ptr = *(ptr - 24);
             mVertexData->data[(int)(mBufferIndex + 1)] = mVertexData->data[(int)(mBufferIndex - 23)];
             mVertexData->data[(int)(mBufferIndex + 2)] = mVertexData->data[(int)(mBufferIndex - 22)];
-            
+
             mVertexCount++;
             mBufferIndex += 8;
 
-            
             if (mHasTex) {
                 mVertexData->data[(int)(mBufferIndex + 11)] = mVertexData->data[(int)(mBufferIndex - 5)];
                 mVertexData->data[(int)(mBufferIndex + 4)] = mVertexData->data[(int)(mBufferIndex - 12)];
@@ -249,12 +241,11 @@ void BufferBuilder::vertexNoBounds(float x, float y, float z) {
                 mVertexData->data[(int)(mBufferIndex + 5)] = mVertexData->data[(int)(mBufferIndex - 11)];
             }
 
-            
             ptr = mVertexData->data + (int)mBufferIndex;
             *ptr = *(ptr - 16);
             mVertexData->data[(int)(mBufferIndex + 1)] = mVertexData->data[(int)(mBufferIndex - 15)];
             mVertexData->data[(int)(mBufferIndex + 2)] = mVertexData->data[(int)(mBufferIndex - 14)];
-            
+
             mVertexCount++;
             mBufferIndex += 8;
         }
@@ -277,10 +268,10 @@ void BufferBuilder::vertexNoBounds(float x, float y, float z) {
         if (mHasBoneIndex) {
             mVertexData->data[(int)mBufferIndex + 7] = (int)mBoneIndex;
         }
-       
+
         int col = byte_26 ? *(int*)(&dword_1c) : 0xFE00FE00;
         mVertexData->data[(int)mBufferIndex + 7] = col;
-        
+
         float* data = (float*)mVertexData->data + (int)mBufferIndex;
         int idx = (int)mBufferIndex;
         data[0] = mXo + x;
@@ -289,7 +280,6 @@ void BufferBuilder::vertexNoBounds(float x, float y, float z) {
 
         mBufferIndex += 8;
         mVertexCount++;
-        
 
         if ((mVertexCount & 3) == 0 && (int)mBufferIndex >= (mBufferSize - 32)) {
             end();
@@ -311,7 +301,7 @@ void BufferBuilder::vertexNoBounds(float x, float y, float z) {
 
         vertexPtr[6] = (short_1c << 8) | short_1e;
         vertexPtr[7] = (short)(-dword_54);
-        
+
         mBufferIndex += 4;
         mVertexCount++;
 
@@ -328,7 +318,7 @@ void BufferBuilder::vertexNoBounds(float x, float y, float z) {
                 mBucket = 0;
             }
             uchar* pack = field_8->data;
-            
+
             int vertIndex = mVertexCount;
             if ((int)vertIndex < 0) {
                 vertIndex += 3;
@@ -339,34 +329,28 @@ void BufferBuilder::vertexNoBounds(float x, float y, float z) {
     }
 }
 
-
 void BufferBuilder::vertex(float x, float y, float z) {
     mBounds.addVert(mXo + x, mYo + y, mZo + z);
     vertexNoBounds(x, y, z);
 }
-
 
 void BufferBuilder::vertexUV(float x, float y, float z, float u, float v) {
     tex(u, v);
     vertex(x, y, z);
 }
 
-
 void BufferBuilder::useCompactVertices(bool value) {
     mUseCompactVerts = value & 1;
 }
-
 
 void BufferBuilder::useProjectedTexture(bool value) {
     mUseProjectedTex = value & 1;
 }
 
-
 void BufferBuilder::tex2(int value) {
     byte_26 = 1;
     dword_1c = value;
 }
-
 
 void BufferBuilder::color(int r, int g, int b, int a) {
     if (mNoColor == false) {
@@ -389,7 +373,7 @@ void BufferBuilder::color(int r, int g, int b, int a) {
             b = 0;
 
         mHasColor = true;
-        mPackedColor = r << 24 | g << 16 | b << 8 | a;        
+        mPackedColor = r << 24 | g << 16 | b << 8 | a;
     }
 }
 
@@ -401,7 +385,7 @@ void BufferBuilder::color(float r, float g, float b) {
     int ri = static_cast<int>(r * 255.0f);
     int gi = static_cast<int>(g * 255.0f);
     int bi = static_cast<int>(b * 255.0f);
-    
+
     color(ri, gi, bi);
 }
 
@@ -486,22 +470,22 @@ void BufferBuilder::blockRainQuad(float x1, float y1, float z1, float u1, float 
     float stack_g2 = g2;
     float stack_b2 = b2;
     float stack_a2 = a2;
-    
+
     byte_26 = true;
     mHasColor = true;
     mHasTex = true;
-    
+
     float* vertexPtr = (float*)&mVertexData->data[(int)mBufferIndex];
-    
+
     dword_3c += 4;
     mBufferIndex += 32;
     mVertexCount += 4;
-    
+
     const float colorScale = 255.0f;
 
     int packedColor1 = ((int)(r1 * colorScale) << 24) | ((int)(g1 * colorScale) << 16)
                        | ((int)(b1 * colorScale) << 8) | (int)(a1 * colorScale);
-    
+
     mBounds.addVert(mXo + x1, mYo + y1, mZo + z1);
     vertexPtr[0] = mXo + x1;
     vertexPtr[1] = mYo + y1;
@@ -510,7 +494,7 @@ void BufferBuilder::blockRainQuad(float x1, float y1, float z1, float u1, float 
     vertexPtr[4] = stack_v1;
     *(int*)&vertexPtr[5] = packedColor1;
     *(int*)&vertexPtr[7] = texture;
-    
+
     mBounds.addVert(mXo + x2, mYo + y2, mZo + z2);
     vertexPtr[8] = mXo + x2;
     vertexPtr[9] = mYo + y2;
@@ -519,7 +503,7 @@ void BufferBuilder::blockRainQuad(float x1, float y1, float z1, float u1, float 
     vertexPtr[12] = stack_v2;
     *(int*)&vertexPtr[13] = packedColor1;
     *(int*)&vertexPtr[15] = texture;
-    
+
     int packedColor2 = ((int)(stack_r2 * colorScale) << 24) | ((int)(stack_g2 * colorScale) << 16)
                        | ((int)(stack_b2 * colorScale) << 8) | (int)(stack_a2 * colorScale);
 

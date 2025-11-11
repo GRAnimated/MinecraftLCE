@@ -310,7 +310,7 @@ LevelChunk* ServerChunkCache::create(int chunkX, int chunkZ, bool unk) {
         loadedChunk = mChunkGenerator->createChunk(chunkX, chunkZ);
         PIXEndNamedEvent();
     }
-    
+
     if (loadedChunk)
         loadedChunk->load(false);
 
