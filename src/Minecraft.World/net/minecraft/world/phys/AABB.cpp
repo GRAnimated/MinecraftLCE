@@ -1,4 +1,3 @@
-#include "net/minecraft/util/Mth.h"
 #include "net/minecraft/world/phys/AABB.h"
 
 #include "net/minecraft/util/ThreadStorage.h"
