@@ -68,12 +68,12 @@ void Chunk::setPos(int x, int y, int z) {
         if (!aabb) {
             mAABB = AABB::newPermanent(-6.0, -6.0, -6.0, 22.0, 22.0, 22.0);
         }
-        mClipChunk->mWorldAabbMinX = mAABB->min.x + x;
-        mClipChunk->mWorldAabbMinY = mAABB->min.y + y;
-        mClipChunk->mWorldAabbMinZ = mAABB->min.z + z;
-        mClipChunk->mWorldAabbMaxX = mAABB->max.x + x;
-        mClipChunk->mWorldAabbMaxY = mAABB->max.y + y;
-        mClipChunk->mWorldAabbMaxZ = mAABB->max.z + z;
+        mClipChunk->mWorldAabbMinX = mAABB->minX + x;
+        mClipChunk->mWorldAabbMinY = mAABB->minY + y;
+        mClipChunk->mWorldAabbMinZ = mAABB->minZ + z;
+        mClipChunk->mWorldAabbMaxX = mAABB->maxX + x;
+        mClipChunk->mWorldAabbMaxY = mAABB->maxY + y;
+        mClipChunk->mWorldAabbMaxZ = mAABB->maxZ + z;
 
         mIsPositionSet = true;
 

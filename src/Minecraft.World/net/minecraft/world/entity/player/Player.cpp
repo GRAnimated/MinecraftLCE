@@ -181,8 +181,8 @@ void Player::updatePlayerSize() {
 
     if (newWidth != this->mWidth || newHeight != this->mHeight) {
         const AABB* aabb = this->getBoundingBox();
-        aabb = aabb->newTemp(aabb->min.x, aabb->min.y, aabb->min.z, aabb->min.x + newWidth,
-                             aabb->min.y + newHeight, aabb->min.z + newWidth);
+        aabb = aabb->newTemp(aabb->minX, aabb->minY, aabb->minZ, aabb->minX + newWidth,
+                             aabb->minY + newHeight, aabb->minZ + newWidth);
 
         if (!this->mLevel->hasBlockCubes(aabb) || this->isPassenger()) {
             this->setSize(newWidth, newHeight);

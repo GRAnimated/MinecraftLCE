@@ -35,12 +35,12 @@ eINSTANCEOF LivingEntity::GetType() {
     return eLivingEntity;
 }
 void LivingEntity::setBoundingBox(AABB* box) {
-    const int newMinX = Mth::floor(box->min.x);
-    const int newMaxX = Mth::floor(box->max.x);
-    const int newMinY = Mth::floor(box->min.y);
-    const int newMaxY = Mth::floor(box->max.y);
-    const int newMinZ = Mth::floor(box->min.z);
-    const int newMaxZ = Mth::floor(box->max.z);
+    const int newMinX = Mth::floor(box->minX);
+    const int newMaxX = Mth::floor(box->maxX);
+    const int newMinY = Mth::floor(box->minY);
+    const int newMaxY = Mth::floor(box->maxY);
+    const int newMinZ = Mth::floor(box->minZ);
+    const int newMaxZ = Mth::floor(box->maxZ);
 
     const int oldMinX = this->mMinX;
     const int oldMaxX = this->mMaxX;
@@ -106,9 +106,9 @@ void LivingEntity::travel(float x, float y, float z) {
                             this->mDeltaMovementY = 0.0f;
                     }
                 } else {
-                    MutableBlockPos blockPos = MutableBlockPos(
-                        Mth::floor(this->mX), Mth::floor(this->getBoundingBox()->min.y - 1.0),
-                        Mth::floor(this->mZ));
+                    MutableBlockPos blockPos = MutableBlockPos(Mth::floor(this->mX),
+                                                               Mth::floor(this->getBoundingBox()->minY - 1.0),
+                                                               Mth::floor(this->mZ));
                     float finalFriction = 0.91f;
                     if (this->mOnGround) {
                         PIXBeginNamedEvent(0.0, "Get friction 1");
@@ -141,7 +141,7 @@ void LivingEntity::travel(float x, float y, float z) {
                     finalFriction = 0.91f;
                     if (this->mOnGround) {
                         PIXBeginNamedEvent(0.0, "Get friction 2");
-                        blockPos.set(Mth::floor(this->mX), Mth::floor(this->getBoundingBox()->min.y - 1.0),
+                        blockPos.set(Mth::floor(this->mX), Mth::floor(this->getBoundingBox()->minY - 1.0),
                                      Mth::floor(this->mZ));
                         Block* block = this->mLevel->getBlockState(blockPos)->getBlock();
                         block = this->IsCreativeFlying()
