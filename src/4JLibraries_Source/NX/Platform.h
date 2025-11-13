@@ -15,7 +15,7 @@ typedef long long LARGE_INTEGER;
 BOOL QueryPerformanceCounter(LARGE_INTEGER* lpPerformanceCount);
 
 void* XPhysicalAlloc(unsigned long, unsigned long, unsigned long, unsigned int);
-void XMemSet128(void*, int, unsigned int);
+void XMemSet128(void*, int, size_t);
 void XPhysicalFree(void*);
 
 void MemSect(int);

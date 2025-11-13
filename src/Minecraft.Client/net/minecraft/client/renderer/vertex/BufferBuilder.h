@@ -9,19 +9,21 @@ class VertexFormat;
 class BufferBuilder {
 public:
     struct Bounds {
-        void addBounds(BufferBuilder::Bounds&);
+        void initBounds();  // on WII U this code is inlined so we have no symbol, this is my guess
 
+        void addBounds(BufferBuilder::Bounds&);
+        void addVert(float, float, float);
         float bounds[6];
     };
 
     BufferBuilder(int);
 
+    void sub_710063830c();
     void clear();
-    void begin(int);
+    void begin(int type);
     void begin();
     void normal(float, float, float);
     void tex(float, float);
-    // void Bounds::addVert(float, float, float);
     void finaliseShaders();
     void end();
     void vertexNoBounds(float, float, float);
@@ -44,44 +46,68 @@ public:
     void noColor();
     void offset(float, float, float);
     void addOffset(float, float, float);
-    void setMipmapEnable(bool);
+    bool setMipmapEnable(bool);
     void bucket(int);
-    void hasMaxVertices();
+    int hasMaxVertices();
     void setVertexFormat(const VertexFormat*);
     void blockRainQuad(float, float, float, float, float, float, float, float, float, float, float, float,
                        float, float, float, float, float, float, float, float, float, float, float, float,
                        float, float, float, float, int);
 
-    arrayWithLength<int> field_0;
-    arrayWithLength<int> field_10;
-    int dword_20;
-    short word_24;
-    short word_26;
-    int dword_28;
-    short word_2c;
+    arrayWithLength<int>* mVertexData;
+    arrayWithLength<uchar>* field_8;
+    int mVertexCount;
+    float mTexU;
+    float mTexV;
+    union {  // yea i know, i also hate this
+        int dword_1c;
+        struct {
+            short short_1c;
+            short short_1e;
+        };
+    };
+    int mPackedColor;
+    bool mHasColor;
+    bool mHasTex;
+    char byte_26;
+    bool mHasNormal;
+    uint32_t mBufferIndex;
+    bool mUseCompactVerts;
+    bool mUseProjectedTex;
     char gap_2E[2];
-    void* qword_30;
-    char byte_38;
+    int dword_30;
+    C4JRender::eVertexType mVertType;  // i suspect this is used as size in bytes of a vertex, beacuse it's
+                                       // used often with useCompactVerts
+    bool mHasBoneIndex;
     char byte_39;
     char gap_3A[2];
-    int dword_3c;
-    char byte_40;
+    uint32_t dword_3c;
+    bool mNoColor;
     char gap_41[3];
-    int dword_44;
-    void* qword_48;
-    void* qword_50;
-    void* qword_58;
-    void* qword_60;
-    int dword_68;
-    char byte_6c;
-    char byte_6d;
+    C4JRender::ePrimitiveType mPrimitiveMode;
+    float mXo;  // i'm not sure but i assume those are offsets !?
+    float mYo;
+    float mZo;
+    float dword_54;
+    float dword_58;
+    float dword_5c;
+    uint32_t mPackedNormal;
+    int mBoneIndex;
+    int mBucket;
+    bool mHasBegun;  // meh name
+    bool mIsMipmapEnabled;
     char byte_6e;
     char gap_6F;
-    arrayWithLength<int> field_70;
-    int dword_80;
+    void* field_70;
+    int field_78;
+    int field_7c;
+    int mBufferSize;
     void* gap[13];
     int unk;
     Bounds mBounds;
+
+    static bool TRIANGLE_MODE;
+    static bool VBO_MODE;
 };
 
 ASSERT_SIZEOF(BufferBuilder, 0x110)

@@ -21,9 +21,9 @@ public:
     float getSaturation();
 
 private:
-    int dword18;
-    int dword1C;
-    int dword20;
+    int dword_28;
+    int dword_2C;
+    int dword_30;
     float health;
     int food;
     float saturation;
