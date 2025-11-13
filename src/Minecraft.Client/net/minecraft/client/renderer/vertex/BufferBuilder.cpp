@@ -94,9 +94,7 @@ BufferBuilder::BufferBuilder(int bufSize) {
 
 // NON_MATCHING just random to make other things match
 void BufferBuilder::sub_710063830c() {
-#ifdef MATCHING_HACK
     asm volatile("" ::: "memory");
-#endif
 }
 
 void BufferBuilder::clear() {
