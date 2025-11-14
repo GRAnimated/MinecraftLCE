@@ -191,9 +191,8 @@ void MasterGameMode::OnGameStart(MasterGameMode* _this, void*) {
                 if (teamArea) {
                     teamArea = teamArea->grow(0, 1, 0);
                     const GameModePacket::AddAreaBoundsData areaBoundsData
-                        = GameModePacket::AddAreaBoundsData(teamArea->min.x, teamArea->min.y, teamArea->min.z,
-                                                            teamArea->max.x, teamArea->max.y,
-                                                            teamArea->max.z);
+                        = GameModePacket::AddAreaBoundsData(teamArea->minX, teamArea->minY, teamArea->minZ,
+                                                            teamArea->maxX, teamArea->maxY, teamArea->maxZ);
                     player->mConnection->send(
                         GameModePacket::Create((GameModePacket::EMessage)0xD, areaBoundsData));
                 }
@@ -202,8 +201,8 @@ void MasterGameMode::OnGameStart(MasterGameMode* _this, void*) {
                 for (auto it = playerBounds.begin(); it != playerBounds.end(); it++) {
                     const AABB* area = (*it)->getArea();
                     const GameModePacket::AddAreaBoundsData areaBoundsData
-                        = GameModePacket::AddAreaBoundsData(area->min.x, area->min.y, area->min.z,
-                                                            area->max.x, area->max.y, area->max.z);
+                        = GameModePacket::AddAreaBoundsData(area->minX, area->minY, area->minZ, area->maxX,
+                                                            area->maxY, area->maxZ);
 
                     player->mConnection->send(
                         GameModePacket::Create((GameModePacket::EMessage)0xD, areaBoundsData));

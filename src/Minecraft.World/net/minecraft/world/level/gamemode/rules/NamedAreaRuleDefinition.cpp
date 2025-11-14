@@ -13,22 +13,22 @@ NamedAreaRuleDefinition::NamedAreaRuleDefinition() {
         ConsoleGameRules::EGameRuleAttr_name, &mName);
     addDoubleAttribute(
 
-        ConsoleGameRules::EGameRuleAttr_x0, &mAABB->min.x);
+        ConsoleGameRules::EGameRuleAttr_x0, &mAABB->minX);
     addDoubleAttribute(
 
-        ConsoleGameRules::EGameRuleAttr_y0, &mAABB->min.y);
+        ConsoleGameRules::EGameRuleAttr_y0, &mAABB->minY);
     addDoubleAttribute(
 
-        ConsoleGameRules::EGameRuleAttr_z0, &mAABB->min.z);
+        ConsoleGameRules::EGameRuleAttr_z0, &mAABB->minZ);
     addDoubleAttribute(
 
-        ConsoleGameRules::EGameRuleAttr_x1, &mAABB->max.x);
+        ConsoleGameRules::EGameRuleAttr_x1, &mAABB->maxX);
     addDoubleAttribute(
 
-        ConsoleGameRules::EGameRuleAttr_y1, &mAABB->max.y);
+        ConsoleGameRules::EGameRuleAttr_y1, &mAABB->maxY);
     addDoubleAttribute(
 
-        ConsoleGameRules::EGameRuleAttr_z1, &mAABB->max.z);
+        ConsoleGameRules::EGameRuleAttr_z1, &mAABB->maxZ);
     addHexAttribute(ConsoleGameRules::EGameRuleAttr_dataTag, &mDataTag);
 }
 
@@ -66,7 +66,7 @@ void NamedAreaRuleDefinition::WriteAttributesAsXML(std::string& xml) {
 }
 
 bool NamedAreaRuleDefinition::containsBlock(int i, const BlockPos& blockPos) {
-    return (mAABB->min.x <= blockPos.getX() && blockPos.getX() <= mAABB->max.x
-            && mAABB->min.y <= blockPos.getY() && blockPos.getY() <= mAABB->max.y
-            && mAABB->min.z <= blockPos.getZ() && blockPos.getZ() <= mAABB->max.z);
+    return (mAABB->minX <= blockPos.getX() && blockPos.getX() <= mAABB->maxX && mAABB->minY <= blockPos.getY()
+            && blockPos.getY() <= mAABB->maxY && mAABB->minZ <= blockPos.getZ()
+            && blockPos.getZ() <= mAABB->maxZ);
 }
