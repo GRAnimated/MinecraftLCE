@@ -7,13 +7,13 @@
 #include "net/minecraft/server/MinecraftServer.h"
 #include "net/minecraft/world/level/LevelRuleset.h"
 #include "net/minecraft/world/level/gamemode/ConsoleGameRules.h"
-#include "net/minecraft/world/level/gamemode/Team.h"
 #include "net/minecraft/world/level/gamemode/minigames/EMiniGameId.h"
 #include "net/minecraft/world/level/gamemode/minigames/MiniGameDef.h"
 #include "net/minecraft/world/level/gamemode/minigames/buildoff/WallGenerator.h"
 #include "net/minecraft/world/level/gamemode/minigames/tumble/LayerGenerationRuleDefinition.h"
 #include "net/minecraft/world/level/gamemode/minigames/tumble/TumbleGenerator.h"
 #include "net/minecraft/world/level/levelgen/LevelGenerationOptions.h"
+#include "net/minecraft/world/scores/Team.h"
 #include <vector>
 
 long long CommonMasterGameMode::RestartMapGenerator() {
