@@ -1,3 +1,3 @@
-#include "4JLibraries_Source/fui/node/control/label/skinselect/FJ_Label_SkinSelect_Off.h"
+#include "fui/node/control/label/skinselect/FJ_Label_SkinSelect_Off.h"
 
 std::string FJ_Label_SkinSelect_Off::sName = "FJ_Label_SkinSelect_Off";

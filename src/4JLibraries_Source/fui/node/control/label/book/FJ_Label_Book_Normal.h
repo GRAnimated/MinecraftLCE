@@ -1,6 +1,6 @@
 #pragma once
 
-#include "4JLibraries_Source/fui/node/control/label/book/FJ_Label_Book.h"
+#include "fui/node/control/label/book/FJ_Label_Book.h"
 
 #include <string>
 

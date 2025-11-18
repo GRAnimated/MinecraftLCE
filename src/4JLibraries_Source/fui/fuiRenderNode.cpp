@@ -1,7 +1,7 @@
-#include "4JLibraries_Source/fui/fuiRenderNode.h"
+#include "fui/fuiRenderNode.h"
 
-#include "4JLibraries_Source/fui/fuiRenderNodeTimeline.h"
-#include "4JLibraries_Source/fui/node/FJ_FuiNodeStage.h"
+#include "fui/fuiRenderNodeTimeline.h"
+#include "fui/node/FJ_FuiNodeStage.h"
 #include <cmath>
 
 fuiMatrix fuiRenderNode::GLOBAL_MATRIX = {1.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f};

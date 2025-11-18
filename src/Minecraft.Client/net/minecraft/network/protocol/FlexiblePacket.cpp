@@ -1,4 +1,5 @@
 #include "net/minecraft/network/protocol/FlexiblePacket.h"
+
 #include "java/io/DataOutputStream.h"
 #include <string>
 

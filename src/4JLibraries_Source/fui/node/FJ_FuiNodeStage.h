@@ -1,6 +1,6 @@
 #pragma once
 
-#include "4JLibraries_Source/fui/node/FJ_FuiNode.h"
+#include "fui/node/FJ_FuiNode.h"
 
 class FJ_FuiNodeStage : public FJ_FuiNode {
 public:

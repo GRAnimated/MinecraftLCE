@@ -1,6 +1,5 @@
 #include "net/minecraft/world/level/gamemode/CommonMasterGameMode.h"
 
-#include "net/minecraft/world/scores/Team.h"
 #include "NX/Platform.h"
 #include "net/minecraft/client/CMinecraftApp.h"
 #include "net/minecraft/client/Minecraft.h"

@@ -1,6 +1,6 @@
 #include "net/minecraft/client/ui/scene/control/UIControl.h"
 
-#include "4JLibraries_Source/fui/fuiRenderNode.h"
+#include "fui/fuiRenderNode.h"
 
 UIControl::UIControl() {
     this->mParentUIScene = nullptr;

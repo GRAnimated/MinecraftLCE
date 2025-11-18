@@ -1,14 +1,14 @@
-#include "4JLibraries_Source/fui/fui.h"
+#include "fui/fui.h"
 
 #include "NX/Platform.h"
 #include "NX/Render/RendererCore.h"
 
-#include "4JLibraries_Source/fui/event/FJ_KeyboardEvent.h"
-#include "4JLibraries_Source/fui/event/FJ_MouseMoveEvent.h"
-#include "4JLibraries_Source/fui/fuiFile.h"
-#include "4JLibraries_Source/fui/fuiTextureManager.h"
-#include "4JLibraries_Source/fui/node/FJ_FuiNode.h"
-#include "4JLibraries_Source/fui/node/FJ_FuiNodeStage.h"
+#include "fui/event/FJ_KeyboardEvent.h"
+#include "fui/event/FJ_MouseMoveEvent.h"
+#include "fui/fuiFile.h"
+#include "fui/fuiTextureManager.h"
+#include "fui/node/FJ_FuiNode.h"
+#include "fui/node/FJ_FuiNodeStage.h"
 #include <cstring>
 
 fui* fui::sInstance;

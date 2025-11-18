@@ -1,6 +1,6 @@
 #pragma once
 
-#include "4JLibraries_Source/fui/fuiFile.h"
+#include "fui/fuiFile.h"
 
 class FJ_FuiNodeStage;
 struct fuiRenderNodeTimeline;

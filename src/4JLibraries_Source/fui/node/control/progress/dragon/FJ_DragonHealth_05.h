@@ -1,6 +1,6 @@
 #pragma once
 
-#include "4JLibraries_Source/fui/node/control/progress/dragon/FJ_DragonHealth.h"
+#include "fui/node/control/progress/dragon/FJ_DragonHealth.h"
 
 #include <string>
 

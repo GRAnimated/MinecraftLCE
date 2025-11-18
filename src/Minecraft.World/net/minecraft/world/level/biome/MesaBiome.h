@@ -1,7 +1,7 @@
 #pragma once
 
-#include "types.h"
 #include "net/minecraft/world/level/biome/Biome.h"
+#include "types.h"
 
 class MesaBiome : public Biome {
 public:

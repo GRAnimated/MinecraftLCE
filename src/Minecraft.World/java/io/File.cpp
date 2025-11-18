@@ -1,6 +1,6 @@
 #include "java/io/File.h"
 
-#include "4JLibraries_Source/fui/fuiFile.h"
+#include "fui/fuiFile.h"
 
 File::File() {
     this->name = L"";

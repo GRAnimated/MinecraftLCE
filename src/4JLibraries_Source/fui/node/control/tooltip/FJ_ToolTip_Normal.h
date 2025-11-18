@@ -1,6 +1,6 @@
 #pragma once
 
-#include "4JLibraries_Source/fui/node/control/tooltip/FJ_ToolTip.h"
+#include "fui/node/control/tooltip/FJ_ToolTip.h"
 
 #include <string>
 

@@ -1,4 +1,4 @@
-#include "4JLibraries_Source/fui/event/FJ_Event.h"
+#include "fui/event/FJ_Event.h"
 
 FJ_Event::FJ_Event(eFJEventType type, bool a2, bool a3) {
     this->mEventType = type;

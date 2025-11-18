@@ -1,6 +1,6 @@
 #pragma once
 
-#include "4JLibraries_Source/fui/node/control/button/list/playerlist/FJ_ListButtonPlayerList.h"
+#include "fui/node/control/button/list/playerlist/FJ_ListButtonPlayerList.h"
 
 #include <string>
 

@@ -1,4 +1,4 @@
-#include "4JLibraries_Source/NX/Thread/C4JThreadImpl.h"
+#include "NX/Thread/C4JThreadImpl.h"
 #include "net/minecraft/core/System.h"
 
 void C4JThreadImpl::Run() {

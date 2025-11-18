@@ -1,6 +1,6 @@
 #pragma once
 
-#include "4JLibraries_Source/fui/fuiRenderNode.h"
+#include "fui/fuiRenderNode.h"
 
 struct fuiRenderNodeStage : public fuiRenderNode {
     explicit fuiRenderNodeStage(fuiFile* file);

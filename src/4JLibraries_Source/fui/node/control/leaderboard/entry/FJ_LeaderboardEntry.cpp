@@ -1,1 +1,1 @@
-#include "4JLibraries_Source/fui/node/control/leaderboard/entry/FJ_LeaderboardEntry.h"
+#include "fui/node/control/leaderboard/entry/FJ_LeaderboardEntry.h"

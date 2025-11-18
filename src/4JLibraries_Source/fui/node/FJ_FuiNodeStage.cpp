@@ -1,7 +1,7 @@
-#include "4JLibraries_Source/fui/node/FJ_FuiNodeStage.h"
+#include "fui/node/FJ_FuiNodeStage.h"
 
-#include "4JLibraries_Source/fui/event/FJ_FocusEvent.h"
-#include "4JLibraries_Source/fui/fuiRenderNodeStage.h"
+#include "fui/event/FJ_FocusEvent.h"
+#include "fui/fuiRenderNodeStage.h"
 
 float FJ_FuiNodeStage::getStageWidth() {
     return static_cast<fuiRenderNodeStage*>(this->mRenderNode)->getStageWidth();

@@ -1,5 +1,5 @@
 #pragma once
 
-#include "4JLibraries_Source/fui/fuiFontSet.h"
+#include "fui/fuiFontSet.h"
 
 struct fuiBitmapFont : public fuiFontSet {};

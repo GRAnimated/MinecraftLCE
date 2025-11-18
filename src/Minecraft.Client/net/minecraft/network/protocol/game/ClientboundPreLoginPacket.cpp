@@ -1,4 +1,5 @@
 #include "net/minecraft/network/protocol/game/ClientboundPreLoginPacket.h"
+
 #include "java/io/DataOutputStream.h"
 #include "net/minecraft/SharedConstants.h"
 #include "net/minecraft/client/CMinecraftApp.h"

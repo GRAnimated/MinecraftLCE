@@ -1,4 +1,4 @@
-#include "4JLibraries_Source/fui/node/FJ_FuiNode.h"
+#include "fui/node/FJ_FuiNode.h"
 
 #include "control/button/FJ_Button.h"
 #include "control/list/FJ_List.h"
@@ -6,10 +6,10 @@
 #include "control/list/button/menubutton/FJ_List_MenuButton.h"
 #include "control/list/button/playerlist/FJ_List_ListButtonPlayerList.h"
 #include "document/FJ_Document.h"
-#include "4JLibraries_Source/fui/fui.h"
-#include "4JLibraries_Source/fui/fuiRenderNode.h"
-#include "4JLibraries_Source/fui/node/FJ_Base.h"
-#include "4JLibraries_Source/fui/node/FJ_FuiNodeStage.h"
+#include "fui/fui.h"
+#include "fui/fuiRenderNode.h"
+#include "fui/node/FJ_Base.h"
+#include "fui/node/FJ_FuiNodeStage.h"
 
 ADD_CREATOR(FJ_FuiNode)
 

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "4JLibraries_Source/fui/node/control/list/FJ_List.h"
+#include "fui/node/control/list/FJ_List.h"
 
 class FJ_List_ListButtonPlayerList : public FJ_List {
 public:

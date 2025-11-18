@@ -4,9 +4,9 @@
 #include <cstring>
 #include <new>
 
-#include "4JLibraries_Source/NX/Thread/C4JThreadImpl.h"
 #include "Awards.h"
 #include "NX/Render/RendererCore.h"
+#include "NX/Thread/C4JThreadImpl.h"
 #include "java/io/IntCache.h"
 #include "net/minecraft/client/CGameNetworkManager.h"
 #include "net/minecraft/client/CInput.h"
