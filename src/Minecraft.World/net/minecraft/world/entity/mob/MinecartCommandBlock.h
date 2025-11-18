@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Minecart.h"
+#include "net/minecraft/world/entity/mob/Minecart.h"
 
 // ENTITY STUB
 class MinecartCommandBlock : public Minecart {

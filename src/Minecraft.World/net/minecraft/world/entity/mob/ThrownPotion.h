@@ -1,6 +1,6 @@
 #pragma once
 
-#include "ThrowableProjectile.h"
+#include "net/minecraft/world/entity/mob/ThrowableProjectile.h"
 
 // ENTITY STUB
 class ThrownPotion : public ThrowableProjectile {

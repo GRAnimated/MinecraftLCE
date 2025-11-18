@@ -1,7 +1,7 @@
-#include "fui/fuiRenderNode.h"
+#include "4JLibraries_Source/fui/fuiRenderNode.h"
 
-#include "fuiRenderNodeTimeline.h"
-#include "node/FJ_FuiNodeStage.h"
+#include "4JLibraries_Source/fui/fuiRenderNodeTimeline.h"
+#include "4JLibraries_Source/fui/node/FJ_FuiNodeStage.h"
 #include <cmath>
 
 void fuiRenderNode::setScaleX(float sX) {

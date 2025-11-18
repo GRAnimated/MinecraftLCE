@@ -1,5 +1,5 @@
-#include "fui/fuiFile.h"
-#include "fui/node/FJ_FuiNode.h"
+#include "4JLibraries_Source/fui/fuiFile.h"
+#include "4JLibraries_Source/fui/node/FJ_FuiNode.h"
 
 // NON_MATCHING | Score: 550 (lower is better)
 // Meth. Dunno what to do here...

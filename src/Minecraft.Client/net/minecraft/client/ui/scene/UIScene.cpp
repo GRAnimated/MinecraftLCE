@@ -2,9 +2,9 @@
 
 #include "4JLibraries_Source/fui/node/FJ_FuiNodeStage.h"
 #include "NX/Platform.h"
-#include "fui/fui.h"
-#include "fui/fuiFile.h"
-#include "fui/fuiRenderNode.h"
+#include "4JLibraries_Source/fui/fui.h"
+#include "4JLibraries_Source/fui/fuiFile.h"
+#include "4JLibraries_Source/fui/fuiRenderNode.h"
 #include "net/minecraft/client/ui/ConsoleUIController.h"
 #include "net/minecraft/client/ui/scene/UILayer.h"
 #include "net/minecraft/client/ui/scene/control/UIControl.h"

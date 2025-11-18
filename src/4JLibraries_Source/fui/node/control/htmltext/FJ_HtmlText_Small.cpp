@@ -1,3 +1,3 @@
-#include "FJ_HtmlText_Small.h"
+#include "4JLibraries_Source/fui/node/control/htmltext/FJ_HtmlText_Small.h"
 
 std::string FJ_HtmlText_Small::sName = "FJ_HtmlText_Small";

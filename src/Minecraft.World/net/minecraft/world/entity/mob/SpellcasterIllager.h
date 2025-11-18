@@ -1,6 +1,6 @@
 #pragma once
 
-#include "abstract/AbstractIllager.h"
+#include "net/minecraft/world/entity/mob/abstract/AbstractIllager.h"
 
 // ENTITY STUB
 class SpellcasterIllager : public AbstractIllager {

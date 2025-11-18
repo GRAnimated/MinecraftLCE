@@ -1,9 +1,9 @@
 #pragma once
 
-#include "../event/FJ_Event.h"
-#include "../event/FJ_EventListener.h"
-#include "../fuiRenderNodeStage.h"
-#include "fui/node/FJ_FuiNode.h"
+#include "4JLibraries_Source/fui/event/FJ_Event.h"
+#include "4JLibraries_Source/fui/event/FJ_EventListener.h"
+#include "4JLibraries_Source/fui/fuiRenderNodeStage.h"
+#include "4JLibraries_Source/fui/node/FJ_FuiNode.h"
 #include <string>
 #include <vector>
 
@@ -20,6 +20,11 @@ class FJ_Document;
 
 class FJ_FuiNode {
 public:
+#define ADD_CREATOR(c)                              \
+    FJ_FuiNode* c::Create(fuiRenderNode* node) {  \
+        return new c(node);                         \
+    }
+
     static std::string sName;
 
     FJ_FuiNode(fuiRenderNode* renderNode);

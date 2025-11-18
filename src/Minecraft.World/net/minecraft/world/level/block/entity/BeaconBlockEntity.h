@@ -1,6 +1,6 @@
 #pragma once
 
-#include "LockableContainerBlockEntity.h"
+#include "net/minecraft/world/level/block/entity/LockableContainerBlockEntity.h"
 #include "net/minecraft/world/WorldlyContainer.h"
 
 // BLOCK STUB

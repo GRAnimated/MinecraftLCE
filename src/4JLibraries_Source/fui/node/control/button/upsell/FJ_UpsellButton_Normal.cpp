@@ -1,3 +1,3 @@
-#include "FJ_UpsellButton_Normal.h"
+#include "4JLibraries_Source/fui/node/control/button/upsell/FJ_UpsellButton_Normal.h"
 
 std::string FJ_UpsellButton_Normal::sName = "FJ_UpsellButton_Normal";

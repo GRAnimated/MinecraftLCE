@@ -1,6 +1,6 @@
 #pragma once
 
-#include "FJ_HtmlText.h"
+#include "4JLibraries_Source/fui/node/control/htmltext/FJ_HtmlText.h"
 
 #include <string>
 

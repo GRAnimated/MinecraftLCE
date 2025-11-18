@@ -1,6 +1,6 @@
 #pragma once
 
-#include "FJ_Cursor.h"
+#include "4JLibraries_Source/fui/node/control/cursor/FJ_Cursor.h"
 
 #include <string>
 

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "abstract/AbstractHorse.h"
+#include "net/minecraft/world/entity/mob/abstract/AbstractHorse.h"
 
 // ENTITY STUB
 class Horse : public AbstractHorse {

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "TamableAnimal.h"
+#include "net/minecraft/world/entity/mob/TamableAnimal.h"
 
 // ENTITY STUB
 class Ocelot : public TamableAnimal {

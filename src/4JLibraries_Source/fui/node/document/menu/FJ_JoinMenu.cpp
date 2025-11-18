@@ -1,3 +1,3 @@
-#include "FJ_JoinMenu.h"
+#include "4JLibraries_Source/fui/node/document/menu/FJ_JoinMenu.h"
 
 std::string FJ_JoinMenu::sName = "JoinMenu";

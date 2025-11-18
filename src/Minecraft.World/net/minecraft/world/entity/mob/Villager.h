@@ -1,6 +1,6 @@
 #pragma once
 
-#include "AgableMob.h"
+#include "net/minecraft/world/entity/mob/AgableMob.h"
 #include "net/minecraft/world/entity/NPC.h"
 #include "net/minecraft/world/item/trading/Merchant.h"
 

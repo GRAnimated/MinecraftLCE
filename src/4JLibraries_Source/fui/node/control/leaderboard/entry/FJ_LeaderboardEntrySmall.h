@@ -1,6 +1,6 @@
 #pragma once
 
-#include "FJ_LeaderboardEntry.h"
+#include "4JLibraries_Source/fui/node/control/leaderboard/entry/FJ_LeaderboardEntry.h"
 
 #include <string>
 

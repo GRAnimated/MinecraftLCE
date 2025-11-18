@@ -1,3 +1,3 @@
-#include "FJ_LeaderboardHeaderSmall.h"
+#include "4JLibraries_Source/fui/node/control/leaderboard/header/FJ_LeaderboardHeaderSmall.h"
 
 std::string FJ_LeaderboardHeaderSmall::sName = "FJ_LeaderboardHeaderSmall";

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "AmbientCreature.h"
+#include "net/minecraft/world/entity/mob/AmbientCreature.h"
 
 // ENTITY STUB
 class Bat : public AmbientCreature {

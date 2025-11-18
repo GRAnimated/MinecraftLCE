@@ -1,6 +1,6 @@
 #pragma once
 
-#include "fui/node/FJ_FuiNode.h"
+#include "4JLibraries_Source/fui/node/FJ_FuiNode.h"
 #include "types.h"
 
 struct fuiRenderNodeEditText;

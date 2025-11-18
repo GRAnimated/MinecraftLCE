@@ -1,6 +1,6 @@
 #pragma once
 
-#include "FJ_DynamicHtmlText.h"
+#include "4JLibraries_Source/fui/node/control/htmltext/dynamic/FJ_DynamicHtmlText.h"
 
 #include <string>
 

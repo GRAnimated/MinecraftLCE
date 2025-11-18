@@ -1,6 +1,6 @@
 #pragma once
 
-#include "MegaTreeFeature.h"
+#include "net/minecraft/world/level/levelgen/feature/MegaTreeFeature.h"
 
 // STUB
 class MegaPineTreeFeature : public MegaTreeFeature {

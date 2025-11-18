@@ -1,6 +1,6 @@
 #pragma once
 
-#include "FJ_UpsellButton.h"
+#include "4JLibraries_Source/fui/node/control/button/upsell/FJ_UpsellButton.h"
 
 #include <string>
 

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "HangingEntity.h"
+#include "net/minecraft/world/entity/mob/HangingEntity.h"
 
 // ENTITY STUB
 class ItemFrame : public HangingEntity {

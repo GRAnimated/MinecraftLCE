@@ -1,4 +1,4 @@
-#include "C4JEventImpl.h"
+#include "4JLibraries_Source/NX/Thread/C4JEventImpl.h"
 
 void C4JEventImpl::Set() {
     nn::os::SignalEvent(&this->mEventType);

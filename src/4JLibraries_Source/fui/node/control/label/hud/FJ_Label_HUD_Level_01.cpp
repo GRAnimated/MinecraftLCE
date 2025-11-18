@@ -1,3 +1,3 @@
-#include "FJ_Label_HUD_Level_01.h"
+#include "4JLibraries_Source/fui/node/control/label/hud/FJ_Label_HUD_Level_01.h"
 
 std::string FJ_Label_HUD_Level_01::sName = "FJ_Label_HUD_Level_01";

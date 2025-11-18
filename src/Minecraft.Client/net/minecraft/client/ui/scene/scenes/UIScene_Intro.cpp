@@ -1,5 +1,5 @@
-#include "UIScene_Intro.h"
-#include "fui/fuiFile.h"
+#include "net/minecraft/client/ui/scene/scenes/UIScene_Intro.h"
+#include "4JLibraries_Source/fui/fuiFile.h"
 #include "net/minecraft/client/ui/ConsoleUIController.h"
 #include "net/minecraft/client/ui/scene/control/UIControl_Touch.h"
 

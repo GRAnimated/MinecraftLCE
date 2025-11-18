@@ -1,6 +1,6 @@
 #pragma once
 
-#include "fui/event/FJ_Event.h"
+#include "4JLibraries_Source/fui/event/FJ_Event.h"
 
 class FJ_MouseMoveEvent : public FJ_Event {
 public:

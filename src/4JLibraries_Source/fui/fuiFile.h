@@ -1,6 +1,6 @@
 #pragma once
 
-#include "fui/fuiSymbol.h"
+#include "4JLibraries_Source/fui/fuiSymbol.h"
 #include "net/minecraft/world/ArrayWithLength.h"
 #include "types.h"
 

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "UIControl_Base.h"
+#include "net/minecraft/client/ui/scene/control/UIControl_Base.h"
 
 class UIControl_Touch : public UIControl_Base {
 public:

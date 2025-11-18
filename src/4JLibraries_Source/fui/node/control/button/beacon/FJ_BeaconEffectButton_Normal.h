@@ -1,6 +1,6 @@
 #pragma once
 
-#include "FJ_BeaconEffectButton.h"
+#include "4JLibraries_Source/fui/node/control/button/beacon/FJ_BeaconEffectButton.h"
 
 #include <string>
 

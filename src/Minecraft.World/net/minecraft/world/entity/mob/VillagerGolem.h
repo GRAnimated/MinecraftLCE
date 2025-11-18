@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Golem.h"
+#include "net/minecraft/world/entity/mob/Golem.h"
 
 // ENTITY STUB
 class VillagerGolem : public Golem {

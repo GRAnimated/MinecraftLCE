@@ -1,7 +1,7 @@
 #pragma once
 
-#include "Enemy.h"
-#include "PathfinderMob.h"
+#include "net/minecraft/world/entity/mob/Enemy.h"
+#include "net/minecraft/world/entity/mob/PathfinderMob.h"
 #include "net/minecraft/world/entity/Entity.h"
 
 class Monster : public Enemy, public PathfinderMob {

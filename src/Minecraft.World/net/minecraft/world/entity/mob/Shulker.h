@@ -1,7 +1,7 @@
 #pragma once
 
-#include "Enemy.h"
-#include "Golem.h"
+#include "net/minecraft/world/entity/mob/Enemy.h"
+#include "net/minecraft/world/entity/mob/Golem.h"
 
 // ENTITY STUB
 // why the fuck is this a golem

@@ -1,3 +1,3 @@
-#include "FJ_HtmlTextPanelLarge.h"
+#include "4JLibraries_Source/fui/node/control/htmltext/panel/FJ_HtmlTextPanelLarge.h"
 
 std::string FJ_HtmlTextPanelLarge::sName = "FJ_HtmlTextPanelLarge";

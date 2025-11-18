@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Enemy.h"
+#include "net/minecraft/world/entity/mob/Enemy.h"
 #include "FlyingMob.h"
 
 // ENTITY STUB

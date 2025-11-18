@@ -1,6 +1,6 @@
 #include "net/minecraft/world/DispenserBootstrap.h"
 
-#include "AbstractProjectileDispenseBehavior.h"
+#include "net/minecraft/world/AbstractProjectileDispenseBehavior.h"
 
 // NON_MATCHING STUB
 // You can create classes under a function which is what 4J seemingly did

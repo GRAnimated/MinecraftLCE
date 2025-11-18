@@ -1,7 +1,7 @@
 #include "net/minecraft/client/ui/scene/scenes/UIScene_HowToPlayMenu.h"
 
-#include "fui/fuiFile.h"
-#include "fui/fuiRenderNode.h"
+#include "4JLibraries_Source/fui/fuiFile.h"
+#include "4JLibraries_Source/fui/fuiRenderNode.h"
 #include "net/minecraft/client/CMinecraftApp.h"
 #include "net/minecraft/client/Minecraft.h"
 #include "net/minecraft/client/resources/L10N.h"
