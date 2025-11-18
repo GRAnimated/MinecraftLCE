@@ -8,15 +8,31 @@ struct fuiMatrix;
 struct fuiObject;
 struct fuiRect;
 struct fuiRGBA;
-enum eFuiObjectType { RENDER_NODE_STAGE = 0, eFuiObjectType_1 = 1, eFuiObjectType_2 = 2 };
+enum eFuiObjectType {
+    eFuiObjectType_Stage,
+    eFuiObjectType_Shape,
+    eFuiObjectType_Timeline,
+    eFuiObjectType_Bitmap,
+    eFuiObjectType_Unknown,
+    eFuiObjectType_EditText
+};
 
 // weird flag thing
 constexpr uint32_t FLAG_CTOR_ENABLED = 0x1;
 constexpr uint32_t FLAG_NODE_VISIBLE = 0x8;
 constexpr const char* DEFAULT_PATH = "?";
 
+struct fuiRenderNodeColor {  // made up struct
+    float r, g, b, a;
+};
+
 class fuiRenderNode {
 public:
+    // could be part of fui, or anything else, but let's leave it here
+    // TLDR: unknown location
+    static fuiMatrix GLOBAL_MATRIX;
+    static fuiRenderNodeColor DEFAULT_COLORS[2];
+
     fuiRenderNode(fuiRenderNode*, fuiRenderNode*, fuiObject*, unsigned int, eFuiObjectType, unsigned char,
                   fuiRGBA*, unsigned char, bool, fuiFile*);
 
@@ -47,6 +63,8 @@ public:
     void disableCtor();
     void setAlpha(float a);
     void progogateBounds();  // english 100
+    void pushMatrix();
+    void pushMatrix(fuiMatrix&);
 
     void setScaleX(float sX);
     void setScaleY(float sY);
@@ -59,27 +77,24 @@ public:
     fuiRenderNodeTimeline* asTimeline();
 
     int mFlags;
-    bool byte_c;
-    bool byte_d;
+    char byte_c;
+    char byte_d;
     unsigned int dword_10;
     int dword_14;
-    fuiObject* field_18;
-    eFuiObjectType field_20;
+    fuiObject* mFuiObject;
+    eFuiObjectType mFuiObjectType;
     fuiMatrix mMatrix;
     fuiMatrix mMatrix2;
     int unk;
-    fuiFile* field_58;
-    void* qword_60;
-    void* qword_68;
-    void* qword_70;
-    int dword78;
-    float mAlpha;
+    fuiFile* mFuiFile;
+    fuiRenderNodeColor mRenderColor2;
+    fuiRenderNodeColor mRenderColor;
     fuiRect mRect;
     char mPath[64];
     void* qword_d0;
     void* qword_d8;
-    int dword_e0;
-    bool byte_e4;
+    int mColor;
+    char byte_e4;
     fuiRenderNode* mStage;
     fuiRenderNodeTimeline* mTimeline;
     FJ_FuiNodeStage* mFuiNodeStage;

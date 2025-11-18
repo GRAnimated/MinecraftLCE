@@ -1,8 +1,10 @@
 #pragma once
 
 #include "net/minecraft/world/item/ItemInstance.h"
+#include "types.h"
 #include <cstdint>
 #include <memory>
+#include <vector>
 
 namespace net_minecraft_world_inventory {
 class ContainerListener;
@@ -18,6 +20,8 @@ class Slot;
 
 class AbstractContainerMenu {
 public:
+    not_null_ptr<ItemInstance> GetQuickCraftItem(int, int);
+
     virtual ~AbstractContainerMenu();
     virtual void addSlotListener(net_minecraft_world_inventory::ContainerListener*);
     virtual void removeSlotListener(net_minecraft_world_inventory::ContainerListener*);
@@ -26,8 +30,8 @@ public:
     virtual void broadcastChanges();
     virtual void needsRendered();
     virtual void clickMenuButton(std::shared_ptr<Player>, int);
-    virtual void getSlotFor(std::shared_ptr<Container>, int);
-    virtual void getSlot(int);
+    virtual Slot* getSlotFor(std::shared_ptr<Container>, int);
+    virtual Slot* getSlot(int);
     virtual void getAllItems(int, int);
     virtual void takeAll(std::shared_ptr<Player>, int, int, int);
     virtual void quickMoveStack(std::shared_ptr<Player>, int);
@@ -41,15 +45,13 @@ public:
     virtual void setData(int, int);
     virtual void stillValid(std::shared_ptr<Player>) = 0;
     virtual void isOverrideResultClick(int, int);
-    virtual void isValidIngredient(not_null_ptr<ItemInstance>, int);
+    virtual bool isValidIngredient(not_null_ptr<ItemInstance>, int);
 
-    void* qword8;
-    void* qword10;
-    void* qword18;
-    void* qword20;
-    void* qword28;
-    void* qword30;
-    int dword38;
+    int getSlotsCount() { return this->mSlots.size(); }
+
+    std::vector<not_null_ptr<ItemInstance>> mItems;
+    std::vector<Slot*> mSlots;
+    int someValue;
     uint16_t word3C;
     __attribute__((aligned(4))) void* qword40;
     void* qword48;

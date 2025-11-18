@@ -4,6 +4,49 @@
 #include "4JLibraries_Source/fui/node/FJ_FuiNodeStage.h"
 #include <cmath>
 
+fuiMatrix fuiRenderNode::GLOBAL_MATRIX = {1.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f};
+fuiRenderNodeColor fuiRenderNode::DEFAULT_COLORS[2] = {{1.0f, 1.0f, 1.0f, 1.0f}, {0.0f, 0.0f, 0.0f, 0.0f}};
+
+fuiRenderNode::fuiRenderNode(fuiRenderNode* stage, fuiRenderNode* timeline, fuiObject* fuiObject,
+                             unsigned int a5, eFuiObjectType fuiObjectType, unsigned char a7, fuiRGBA* color,
+                             unsigned char a9, bool a10, fuiFile* fuiFile) {
+    this->mStage = stage;
+    this->mTimeline = (fuiRenderNodeTimeline*)timeline;
+    this->mFuiObject = fuiObject;
+    this->mFuiObjectType = fuiObjectType;
+    this->dword_10 = a5;
+    this->mFuiFile = fuiFile;
+    this->mMatrix = GLOBAL_MATRIX;
+    this->generateGlobalMatrix();
+    this->mRenderColor = DEFAULT_COLORS[1];
+    this->mRenderColor2 = DEFAULT_COLORS[0];
+    this->mFlags = 75;
+
+    this->byte_c = a7 & 3;
+
+    if (color) {
+        this->mColor = color->color;
+#ifdef MATCHING_HACK
+        asm("");
+#endif
+    } else {
+        this->mColor = 0;
+    }
+
+    this->byte_e4 = a9 ? a9 : 1;
+
+    if (a10)
+        this->mFlags = 0x14B;
+
+    this->mPath[0] = '\0';  // null termination, I don't like that
+    this->mFuiNodeStage = nullptr;
+    this->byte_d = a7 & 0xF0;
+    this->dword_14 = 0;
+    this->mRect = {0.0f, 0.0f, 0.0f, 0.0f};
+    this->qword_d0 = nullptr;
+    this->qword_d8 = nullptr;
+}
+
 void fuiRenderNode::setScaleX(float sX) {
     float scaleX = sX / this->getScaleX();
 
@@ -48,7 +91,7 @@ float fuiRenderNode::getScaleY() {
 }
 
 fuiRenderNodeTimeline* fuiRenderNode::asTimeline() {
-    if (this->field_20 != 2)  // is field_20 type?
+    if (this->mFuiObjectType != eFuiObjectType_Timeline)
         return nullptr;
 
     return reinterpret_cast<fuiRenderNodeTimeline*>(this);
@@ -86,7 +129,7 @@ void fuiRenderNode::disableCtor() {
 }
 
 void fuiRenderNode::setAlpha(float a) {
-    this->mAlpha = a;
+    this->mRenderColor.a = a;
 }
 
 void fuiRenderNode::setVisibility(bool visible) {

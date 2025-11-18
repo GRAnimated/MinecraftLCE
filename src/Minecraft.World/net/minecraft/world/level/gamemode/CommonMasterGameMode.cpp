@@ -14,6 +14,7 @@
 #include "net/minecraft/world/level/gamemode/minigames/tumble/LayerGenerationRuleDefinition.h"
 #include "net/minecraft/world/level/gamemode/minigames/tumble/TumbleGenerator.h"
 #include "net/minecraft/world/level/levelgen/LevelGenerationOptions.h"
+#include "net/minecraft/world/scores/Team.h"
 #include <vector>
 
 long long CommonMasterGameMode::RestartMapGenerator() {

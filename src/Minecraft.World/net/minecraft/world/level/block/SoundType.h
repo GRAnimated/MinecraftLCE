@@ -1,5 +1,7 @@
 #pragma once
 
+class SoundEvent;
+
 class SoundType {
 public:
     static const SoundType* STONE;
@@ -14,6 +16,9 @@ public:
     static const SoundType* SNOW;
     static const SoundType* SLIME_BLOCK;
     static const SoundType* ANVIL;
+
+    SoundType(float volume, float pitch, const SoundEvent* dig, const SoundEvent* step,
+              const SoundEvent* place, const SoundEvent* hit, const SoundEvent* fall);
 
     static void staticCtor();
 };

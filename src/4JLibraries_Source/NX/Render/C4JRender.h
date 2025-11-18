@@ -11,7 +11,9 @@ public:
     C4JRender();
 
     enum eVertexType {};
-    enum ePrimitiveType {};
+    enum ePrimitiveType {
+        eViewportType_Quad = 3,  // not sure
+    };
     enum ePixelShaderType {};
     enum eTextureFormat {};
     enum eViewportType {

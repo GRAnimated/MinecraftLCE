@@ -222,8 +222,8 @@ void Entity::setSize(float width, float height) {
         }
 
         const AABB* aabb = this->getBoundingBox();
-        this->setBoundingBox(AABB::newTemp(aabb->min.x, aabb->min.y, aabb->min.z, aabb->min.x + this->mWidth,
-                                           aabb->min.y + this->mHeight, aabb->min.z + this->mWidth));
+        this->setBoundingBox(AABB::newTemp(aabb->minX, aabb->minY, aabb->minZ, aabb->minX + this->mWidth,
+                                           aabb->minY + this->mHeight, aabb->minZ + this->mWidth));
         if (this->mWidth > widthBefore && !this->mIsFirstTick && !this->mLevel->mIsLocal) {
             this->move((MoverType)0, (widthBefore - this->mWidth), 0.0, (widthBefore - this->mWidth), false);
         }
@@ -296,9 +296,9 @@ void Entity::updateDeltaAfterMove(Block* block, double oldX, double oldY, double
 
 void Entity::setLocationFromBoundingbox() {
     const AABB* tempAABB = this->getBoundingBox();
-    this->mX = (tempAABB->min.x + tempAABB->max.x) / 2.0;
-    this->mY = tempAABB->min.y;
-    this->mZ = (tempAABB->min.z + tempAABB->max.z) / 2.0;
+    this->mX = (tempAABB->minX + tempAABB->maxX) / 2.0;
+    this->mY = tempAABB->minY;
+    this->mZ = (tempAABB->minZ + tempAABB->maxZ) / 2.0;
 }
 
 /* TOO LAZY TO DO SOUNDEVENTS

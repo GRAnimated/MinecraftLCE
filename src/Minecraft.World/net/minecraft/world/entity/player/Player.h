@@ -9,6 +9,7 @@
 #include "net/minecraft/world/entity/player/Abilities.h"
 #include "net/minecraft/world/entity/player/StatsUID.h"
 #include "net/minecraft/world/food/FoodData.h"
+#include "net/minecraft/world/inventory/AbstractContainerMenu.h"
 #include "net/minecraft/world/item/ItemInstance.h"
 #include "net/minecraft/world/level/gamemode/minigames/glide/PowerupItems.h"
 #include "types.h"
@@ -206,7 +207,7 @@ public:
     PlayerEnderChestContainer* mEnderChestInventory = nullptr;
     void* qword5C8 = nullptr;
     InventoryMenu* mInventoryMenu;
-    void* mContainerMenu;
+    AbstractContainerMenu* mContainerMenu;
     FoodData mFoodData;
     int mJumpTriggerTime;
     float mOBob;

@@ -12,8 +12,10 @@ class Player;
 class Slot {
 public:
     Slot(std::shared_ptr<Container> container, int index, int x, int y);
-    virtual ~Slot();
+
     void onQuickCraft(not_null_ptr<ItemInstance> item, not_null_ptr<ItemInstance> item2);
+
+    virtual ~Slot();
     virtual void onQuickCraft(not_null_ptr<ItemInstance> item, int count);
     virtual void onSwapCraft(int count);
     virtual void checkTakeAchievements(not_null_ptr<ItemInstance> item);
@@ -34,7 +36,6 @@ public:
     virtual bool mayCombine(not_null_ptr<ItemInstance> item);
     virtual void combine(not_null_ptr<ItemInstance> item);
 
-private:
     int mSlot = 0;
     std::shared_ptr<Container> mContainer = nullptr;
     int mIndex = 0;

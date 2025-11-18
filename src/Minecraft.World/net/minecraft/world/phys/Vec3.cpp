@@ -29,20 +29,20 @@ double Vec3::distanceTo(AABB* aabb) {
     double dY = 0.0;
     double dZ = 0.0;
 
-    if (this->x < aabb->min.x)
-        dX = aabb->min.x - this->x;
-    else if (this->x > aabb->max.x)
-        dX = this->x - aabb->max.x;
+    if (this->x < aabb->minX)
+        dX = aabb->minX - this->x;
+    else if (this->x > aabb->maxX)
+        dX = this->x - aabb->maxX;
 
-    if (this->y < aabb->min.y)
-        dY = aabb->min.y - this->y;
-    else if (this->y > aabb->max.y)
-        dY = this->y - aabb->max.y;
+    if (this->y < aabb->minY)
+        dY = aabb->minY - this->y;
+    else if (this->y > aabb->maxY)
+        dY = this->y - aabb->maxY;
 
-    if (this->z < aabb->min.z)
-        dZ = aabb->min.z - this->z;
-    else if (this->z > aabb->max.z)
-        dZ = this->z - aabb->max.z;
+    if (this->z < aabb->minZ)
+        dZ = aabb->minZ - this->z;
+    else if (this->z > aabb->maxZ)
+        dZ = this->z - aabb->maxZ;
 
     return std::sqrt(dX * dX + dY * dY + dZ * dZ);
 }

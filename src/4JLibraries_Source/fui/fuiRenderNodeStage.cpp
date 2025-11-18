@@ -1,11 +1,11 @@
 #include "4JLibraries_Source/fui/fuiRenderNodeStage.h"
 
 float fuiRenderNodeStage::getStageHeight() {
-    return this->field_58->getStageHeight();
+    return this->mFuiFile->getStageHeight();
 }
 
 float fuiRenderNodeStage::getStageWidth() {
-    return this->field_58->getStageWidth();
+    return this->mFuiFile->getStageWidth();
 }
 
 void fuiRenderNodeStage::addChild(fuiRenderNode* node) {
@@ -13,6 +13,6 @@ void fuiRenderNodeStage::addChild(fuiRenderNode* node) {
 }
 
 fuiRenderNodeStage::fuiRenderNodeStage(fuiFile* file)
-    : fuiRenderNode(nullptr, nullptr, nullptr, 0, RENDER_NODE_STAGE, 0, nullptr, 0, false, file) {
+    : fuiRenderNode(nullptr, nullptr, nullptr, 0, eFuiObjectType_Stage, 0, nullptr, 0, false, file) {
     this->child = nullptr;
 }

@@ -159,6 +159,9 @@ public:
     void render() override;
     void CheckMenuDisplayed() override;
 
+    // guessed names
+    void OverrideSFX(int padID, int soundID, bool override);
+
     void RequestErrorMessage(int, int, int*, unsigned int, unsigned int,
                              int (*)(void*, int, C4JStorage::EMessageResult), void*, wchar_t*, bool) override;
     float getScreenWidth() { return this->mScreenWidth; }

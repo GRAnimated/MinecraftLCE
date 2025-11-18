@@ -7,8 +7,12 @@ class HitResult;
 
 class AABB {
 public:
-    Vec3 min;
-    Vec3 max;
+    double minX;
+    double minY;
+    double minZ;
+    double maxX;
+    double maxY;
+    double maxZ;
 
     class ThreadStorage {
     public:
@@ -25,8 +29,10 @@ public:
     static void ReleaseThreadStorage();
 
     AABB() {}
+    AABB(double, double, double, double, double, double);
 
     static AABB* newPermanent(double, double, double, double, double, double);
+    static AABB* newPermanent(const AABB*);
     static AABB* newTemp(double, double, double, double, double, double);
     bool containsIncludingLowerBound(Vec3*) const;
 
@@ -38,6 +44,7 @@ public:
     AABB* grow(double x, double y, double z) const;
     bool contains(Vec3* vec);
     bool intersects(const AABB* rhs) const;
+    bool intersects(double, double, double, double, double, double) const;
     void resetPool();
     AABB* move(const BlockPos&) const;
     HitResult* clip(Vec3*, Vec3*) const;

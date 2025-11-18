@@ -12,6 +12,7 @@ struct fuiFile;
 struct fuiRect;
 class UILayer;
 class UIControl;
+class ItemInstance;
 
 enum EUIScene {
     EUIScene_Intro = 1,
@@ -119,6 +120,7 @@ public:
     void killTimer(int);
     bool hasTimer(int);
     void* GetCallbackUniqueId();
+    void customDrawSlotControlFui(fuiRect*, int, not_null_ptr<ItemInstance>, float, bool, bool, bool);
 
     void removeControl(UIControl_Base* control, bool);
 

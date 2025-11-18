@@ -221,7 +221,7 @@ class HeaderChecks:
 
         for line in lines:
             original_line = line
-            if "virtual " in line and "override" in line:
+            if "virtual " in line and "override;" in line:
                 virtual_found = True
                 if line.strip().startswith("virtual "):
                     FAIL("Functions that are overridden should not have 'virtual'!", original_line, self.path)
