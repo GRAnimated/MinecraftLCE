@@ -26,8 +26,8 @@ public:
     virtual std::wstring toString() const;
 
     char gap8[16];
-    const std::wstring mPath;
-    const std::wstring mNamespace;
+    std::wstring mPath;
+    std::wstring mNamespace;
     char byte48;
 };
 

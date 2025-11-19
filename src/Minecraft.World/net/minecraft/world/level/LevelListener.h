@@ -11,7 +11,23 @@ class BlockPos;
 class BlockState;
 class SoundEvent;
 class Entity;
-enum ePARTICLE_TYPE {};  // TODO: Move this
+enum ePARTICLE_TYPE {
+    ePARTICLE_TYPE_TrackingEmitter = 0x80224,
+    ePARTICLE_TYPE_Explode = 5,
+    ePARTICLE_TYPE_Splash = 9,
+    ePARTICLE_TYPE_Spit = 0x33,
+    ePARTICLE_TYPE_Wake = 0x22,
+    ePARTICLE_TYPE_Droplet = 0x29,
+    ePARTICLE_TYPE_Suspended = 16,
+    ePARTICLE_TYPE_Depthsuspend = 0x11,
+    ePARTICLE_TYPE_Crit = 0x12,
+    ePARTICLE_TYPE_MagicCrit = 0x23,
+    ePARTICLE_TYPE_Bubble = 0,
+    ePARTICLE_TYPE_Smoke = 1,
+    ePARTICLE_TYPE_LargeSmoke = 10,
+    ePARTICLE_TYPE_Spell = 0x16,
+    ePARTICLE_TYPE_InstantSpell = 0x24,
+};  // TODO: Move this
 
 class LevelListener {
 public:
