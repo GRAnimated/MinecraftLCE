@@ -1,0 +1,23 @@
+---
+Checks: >
+  -*,
+  readability-identifier-naming
+CheckOptions:
+  # struct fields
+  readability-identifier-naming.ClassConstantCase: UPPER_CASE
+  readability-identifier-naming.PublicMemberCase: CamelCase
+  readability-identifier-naming.PublicMemberPrefix: m
+  readability-identifier-naming.ProtectedMemberCase: CamelCase
+  readability-identifier-naming.ProtectedMemberPrefix: m
+  readability-identifier-naming.PrivateMemberCase: CamelCase
+  readability-identifier-naming.PrivateMemberPrefix: m
+  # statics
+  readability-identifier-naming.StaticVariableCase: CamelCase
+  readability-identifier-naming.StaticVariablePrefix: s
+  readability-identifier-naming.ClassMemberCase: CamelCase
+  readability-identifier-naming.ClassMemberPrefix: s
+  # constants
+  readability-identifier-naming.GlobalConstantCase: UPPER_CASE
+  # globals
+  readability-identifier-naming.GlobalVariableCase: CamelCase
+  readability-identifier-naming.GlobalVariablePrefix: g
