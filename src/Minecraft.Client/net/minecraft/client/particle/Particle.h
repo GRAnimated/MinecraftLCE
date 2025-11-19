@@ -19,7 +19,7 @@ public:
     virtual void render(BufferBuilder*, std::shared_ptr<Entity>&, float, float, float, float, float, float);
     virtual int getParticleTexture();
     virtual void setSprite(TextureAtlasSprite*);
-    virtual void fun9();
+    virtual void setMiscTex(int);
     virtual std::wstring toString() const;
     virtual bool isSemiTransparent();
     virtual bool isTransparent();

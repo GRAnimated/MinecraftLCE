@@ -153,6 +153,14 @@ void Particle::setSprite(TextureAtlasSprite* newSprite) {
         mSpriteAtlas = newSprite;
 }
 
+// NON_MATCHING | score 415, idk.
+void Particle::setMiscTex(int miscTex) {
+    if (getParticleTexture() == 0 || getParticleTexture() == 4) {
+        TextureUVCoordinateSet tex = TextureUVCoordinateSet(TextureUVCoordinateSet::fromOldSystem(miscTex));
+        mUVSet = tex;
+    }
+}
+
 std::wstring Particle::toString() const {
     return L"A particle";
 }

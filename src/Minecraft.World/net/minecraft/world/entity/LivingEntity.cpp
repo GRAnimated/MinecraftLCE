@@ -468,3 +468,43 @@ void LivingEntity::CheckThermalAreas() {
         }
     }
 }
+
+// NON_MATCHING | score 580, i have no idea, maybe some ordering idk
+void LivingEntity::fallFlyingTravel(double& motionX, double& motionY, double& motionZ, Vec3* viewAngle,
+                                    float& xRot, float& fallDistance, double& idk, double liftForce) {
+    if (-0.5 < motionY) {
+        fallDistance = 1.0;
+    }
+    float pitchRad = xRot * 0.017453292f;
+    double horizontalLookLen = std::sqrt((viewAngle->x * viewAngle->x) + (viewAngle->z * viewAngle->z));
+
+    idk = std::sqrt((motionX * motionX) + (motionZ * motionZ));
+    double lenView = viewAngle->length();
+    double verticalBoost = std::cos(pitchRad) * std::min(lenView / 0.4, 1.0);
+    verticalBoost *= liftForce * verticalBoost;
+    motionY += verticalBoost * 0.06 - 0.08;
+
+    if (horizontalLookLen > 0.0 && motionY < 0.0) {
+        double d = verticalBoost * -0.1 * motionY;
+        motionY += d;
+        motionX += (d * viewAngle->x) / horizontalLookLen;
+        motionZ += (d * viewAngle->z) / horizontalLookLen;
+    }
+
+    if (pitchRad < 0.0 && horizontalLookLen > 0.0) {
+        double d = idk * std::sin(pitchRad) * -0.04;
+
+        motionY += d * 3.2;
+        motionX -= (viewAngle->x * d) / horizontalLookLen;
+        motionZ -= (viewAngle->z * d) / horizontalLookLen;
+    }
+
+    if (horizontalLookLen > 0.0) {
+        motionX += ((viewAngle->x / horizontalLookLen) * idk - motionX) * 0.1;
+        motionZ += ((viewAngle->z / horizontalLookLen) * idk - motionZ) * 0.1;
+    }
+
+    motionX *= 0.99;
+    motionY *= 0.98;
+    motionZ *= 0.99;
+}
