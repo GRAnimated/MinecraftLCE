@@ -4,7 +4,7 @@
 
 class Calendar {
 public:
-    static int GetMonth();
-    static int GetDayOfMonth();
+    static unsigned int GetMonth();
+    static unsigned int GetDayOfMonth();
     static nn::time::CalendarTime GetCalenderTime();  // Misspelling by 4J
 };

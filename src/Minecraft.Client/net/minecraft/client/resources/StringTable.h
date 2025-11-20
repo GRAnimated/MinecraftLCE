@@ -25,7 +25,7 @@ public:
     int getRandomStringIds(int count, Random* random);
 
     const wchar_t* getString(const std::wstring& str);
-    const wchar_t* getString(int id);
+    wchar_t* getString(int id);
 
     void ProcessStringTableData();
 

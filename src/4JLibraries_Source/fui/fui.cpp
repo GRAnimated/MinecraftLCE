@@ -3,12 +3,12 @@
 #include "NX/Platform.h"
 #include "NX/Render/RendererCore.h"
 
-#include "event/FJ_KeyboardEvent.h"
-#include "event/FJ_MouseMoveEvent.h"
+#include "fui/event/FJ_KeyboardEvent.h"
+#include "fui/event/FJ_MouseMoveEvent.h"
 #include "fui/fuiFile.h"
 #include "fui/fuiTextureManager.h"
 #include "fui/node/FJ_FuiNode.h"
-#include "node/FJ_FuiNodeStage.h"
+#include "fui/node/FJ_FuiNodeStage.h"
 #include <cstring>
 
 fui* fui::sInstance;

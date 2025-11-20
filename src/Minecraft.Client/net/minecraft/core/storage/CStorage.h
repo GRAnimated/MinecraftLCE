@@ -57,7 +57,7 @@ public:
                                 void*) override;
     void SetOldProfileVersionCallback(int (*)(void*, unsigned char*, unsigned short, int), void*) override;
     void field_168() override;
-    void field_170() override;
+    void* GetGameDefinedProfileData(int) override;
     void ReadFromProfile(int, int) override;
     void field_180() override;
     void nullsub_1022() override;

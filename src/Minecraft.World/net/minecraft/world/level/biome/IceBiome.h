@@ -13,4 +13,4 @@ public:
     char padding[0x10];
 };
 
-static_assert(sizeof(IceBiome) == 0x158);
+ASSERT_SIZEOF(IceBiome, 0x158)

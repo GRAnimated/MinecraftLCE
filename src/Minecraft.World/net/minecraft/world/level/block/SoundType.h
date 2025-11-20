@@ -19,4 +19,6 @@ public:
 
     SoundType(float volume, float pitch, const SoundEvent* dig, const SoundEvent* step,
               const SoundEvent* place, const SoundEvent* hit, const SoundEvent* fall);
+
+    static void staticCtor();
 };

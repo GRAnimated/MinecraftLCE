@@ -5,6 +5,7 @@
 #include <nn/os/os_MutexTypes.h>
 
 #include "java/io/File.h"
+#include "net/minecraft/stats/StatsCounter.h"
 #include "net/minecraft/util/FrameTimer.h"
 #include "net/minecraft/world/ArrayWithLength.h"
 #include "net/minecraft/world/level/gamemode/minigames/MiniGameDef.h"
@@ -48,7 +49,6 @@ class Gui;
 class Options;
 class TexturePackRepository;
 class McRegionLevelStorageSource;
-class StatsCounter;
 class FrameTimer;
 class HitResult;
 class Mob;
@@ -70,6 +70,7 @@ public:
     Minecraft(Component*, Canvas*, MinecraftApplet*, int width, int height, bool);
 
     void run();
+    void run_middle();
     void init();
     static void main();
 
@@ -83,6 +84,8 @@ public:
     static bool InMiniGame(EMiniGameId, bool);
     static int getAverageFps();
     static bool useFancyGraphics();
+
+    void tickAllConnections();
 
     BlockRenderDispatcher* getBlockRenderer();
     std::shared_ptr<Entity> getCameraEntity();

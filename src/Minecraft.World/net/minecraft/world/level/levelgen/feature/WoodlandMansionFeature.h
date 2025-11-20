@@ -8,6 +8,8 @@ class WoodlandMansionFeature : public StructureFeature {
 public:
     WoodlandMansionFeature(GenericOverworldLevelSource*);
 
+    static void staticCtor();
+
     char filler[0x40];
 };
 

@@ -6,6 +6,8 @@ class VillageFeature : public StructureFeature {
 public:
     VillageFeature(int);
 
+    static void staticCtor();
+
     char filler[0x10];
 };
 

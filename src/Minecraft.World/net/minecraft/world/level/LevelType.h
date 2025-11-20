@@ -13,4 +13,6 @@ public:
 
     std::wstring getGeneratorName();
     int getVersion();
+
+    static void staticCtor();
 };

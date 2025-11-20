@@ -152,6 +152,9 @@ public:
     virtual int GetOverrideCountColour();
     virtual TextureAtlasSprite* GetOverrideCountIcon(not_null_ptr<ItemInstance> itemInstance);
 
+    static void staticCtor();
+    static void staticInit();
+
     void* qword8;
     SimpleRegistry<ResourceLocation, const ItemPropertyFunction*>* mSimpleRegistry;
     int mMaxStackSize;

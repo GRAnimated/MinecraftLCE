@@ -8,4 +8,6 @@ public:
     void addShapedRecipe(ItemInstance*, ...);
     void addShapelessRecipe(ItemInstance*, ...);
     void buildRecipeIngredientsArray();
+
+    static void staticCtor();
 };

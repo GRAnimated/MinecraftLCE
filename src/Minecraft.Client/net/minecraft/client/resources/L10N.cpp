@@ -5,7 +5,7 @@
 #include "net/minecraft/world/ArrayWithLength.h"
 #include <string>
 
-const wchar_t* L10N::GetString(int id) {
+wchar_t* L10N::GetString(int id) {
     if (StringTable::instance)
         return StringTable::instance->getString(id);
     else
