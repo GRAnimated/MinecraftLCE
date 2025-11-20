@@ -16,19 +16,22 @@ Particle::Particle(Level* level, double posX, double posY, double posZ, double s
                    double speedZ)
     : field_0x8(0), field_0x10(0), mRandom(), mUVSet() {
     _init(level, posX, posY, posZ);
-    mVelX = ((Random::random() * 2) - 1) * 0.4 + speedX;
-    mVelY = ((Random::random() * 2) - 1) * 0.4 + speedY;
-    mVelZ = ((Random::random() * 2) - 1) * 0.4 + speedZ;
 
-    double len = Mth::sqrt((mVelX * mVelX) + (mVelY * mVelY) + (mVelZ * mVelZ));
-    double norm = (Random::random() + Random::random() + 1.0) * 0.15;
+    mVelX = speedX + ((Random::random() * 2.0) - 1.0) * 0.4;
+    mVelY = speedY + ((Random::random() * 2.0) - 1.0) * 0.4;
+    mVelZ = speedZ + ((Random::random() * 2.0) - 1.0) * 0.4;
 
-    mVelX = (norm * mVelX) / len * 0.4;
-    mVelY = (norm * mVelY) / len * 0.4;
-    mVelZ = (norm * mVelZ) / len * 0.4;
+    float norm = (float)(Random::random() + Random::random() + 1.0f) * 0.15f;
+    float len = Mth::sqrt(mVelX * mVelX + mVelY * mVelY + mVelZ * mVelZ);
+
+    mVelX = mVelX / len * norm * 0.4;
+    mVelY = mVelY / len * norm * 0.4 + 0.1;
+    mVelZ = mVelZ / len * norm * 0.4;
 }
 
-Particle::Particle(Level*, double, double, double) {}
+Particle::Particle(Level* level, double posX, double posY, double posZ) : field_0x8(0), field_0x10(0) {
+    _init(level, posX, posY, posZ);
+}
 
 // NON_MATCHING Score: 520
 void Particle::_init(Level* level, double posX, double posY, double posZ) {
@@ -44,12 +47,12 @@ void Particle::_init(Level* level, double posX, double posY, double posZ) {
     mIsOnGround = false;
     mIsRemoved = false;
     mSpriteAtlas = nullptr;
-    mGravityScale = 0;
+    mGravityScale = 0.0f;
     field_0x108 = 1.0f;
     field_0x10c = 1.0f;
     mTexJitterX = mRandom.nextFloat() * 3.0f;
     mTexJitterY = mRandom.nextFloat() * 3.0f;
-    mScale = (mRandom.nextFloat() * 0.5F + 0.5F) * 2.0F;
+    mScale = (mRandom.nextFloat() * 0.5f + 0.5f) * 2.0f;
     mMaxAge = (int)(4.0F / (mRandom.nextFloat() * 0.9F + 0.1F));
     mAge = 0;
 

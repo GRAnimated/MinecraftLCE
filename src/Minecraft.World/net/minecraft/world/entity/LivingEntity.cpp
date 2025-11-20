@@ -507,7 +507,7 @@ void LivingEntity::fallFlyingTravel(double& motionX, double& motionY, double& mo
         motionZ += ((viewAngle->z / horizontalViewLength) * speed - motionZ) * 0.1;
     }
 
-    motionX *= 0.9900000095367432;
-    motionY *= 0.9800000190734863;
-    motionZ *= 0.9900000095367432;
+    motionX *= 0.99;
+    motionY *= 0.98;
+    motionZ *= 0.99;
 }

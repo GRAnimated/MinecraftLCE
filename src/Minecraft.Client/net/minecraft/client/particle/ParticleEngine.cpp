@@ -50,14 +50,11 @@ ParticleEngine::ParticleEngine(Level* level, Textures* textures) {
     field_0x24c = 0;
 }
 
-void ParticleEngine::registerProviders() {
-    printf("", mLevel);
-}
-
 void ParticleEngine::registerParticle(ePARTICLE_TYPE type, ParticleProvider* provider) {
     mProviderMap[type] = provider;
 }
 
+// NON_MATCHING incomplete
 void ParticleEngine::setLevel(Level* newLevel) {
     mLevel = newLevel;
     if (!newLevel) {
@@ -170,8 +167,6 @@ void ParticleEngine::add(Particle* part) {
     list->push_back(part);
 }
 
-void ParticleEngine::crack(const BlockPos&, const Direction*) {}
-
 void ParticleEngine::createTrackingEmitter(std::shared_ptr<Entity> entity, const ParticleType* type) {
     mPartVec.push_back(new TrackingEmitter(mLevel, entity, type, 3));
 }
@@ -213,9 +208,6 @@ void ParticleEngine::render(std::shared_ptr<Entity> entity, float partialTicks, 
         }
     }
 }
-
-// NON_MATCHING incomplete, todo
-void ParticleEngine::renderLit(std::shared_ptr<Entity>, float, int) {}
 
 void ParticleEngine::tick() {
     for (int i = 0; i < 5; ++i) {
