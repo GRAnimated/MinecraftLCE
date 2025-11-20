@@ -38,10 +38,6 @@ void CompressedBlockStorage::read(DataInputStream* s) {
     this->compress(-1);
 }
 
-void CompressedBlockStorage::compress(int i) {
-    get(i, i, i);  // STUB!
-}
-
 int CompressedBlockStorage::get(int x, int y, int z) {
     if (!this->mData)
         return 0;
