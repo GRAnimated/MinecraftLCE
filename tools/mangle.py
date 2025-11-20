@@ -13,6 +13,7 @@ parser.add_argument("-d", "--decl", help = "Mangle a function declaration")
 parser.add_argument("-g", "--gvar", help = "Mangle a global variable declaration") # bruh global is reserved in python
 parser.add_argument("-i", "--imports", nargs='+', type=str, help = "Import a file")
 parser.add_argument("-fwd", "--forwards", nargs='+', type=str, help = "Forward classes")
+parser.add_argument("-s", "--static", type=bool, help = "Mark a declaration as static")
 args = parser.parse_args()
 
 if len(sys.argv) == 1:
@@ -92,7 +93,11 @@ if args.decl:
                 parent = node
 
         t.write("__attribute__((used))\n")
-        t.write(f" {"DEFAULT_TYPE " if p[-2] != n else ""}{n}{args.decl[args.decl.find('('):]} {{}}")
+        if args.static:
+            t.write(f" {"static DEFAULT_TYPE " if p[-2] != n else ""}{n}{args.decl[args.decl.find('('):]} {{}}")
+        else:
+            t.write(f" {"DEFAULT_TYPE " if p[-2] != n else ""}{n}{args.decl[args.decl.find('('):]} {{}}")
+
 
         for cl in cls:
             if cl not in [f.name for f in found]:
@@ -137,7 +142,7 @@ elif args.gvar:
         t.write("\n__attribute__((used))\n")
         t.write(f"DEFAULT_TYPE {args.gvar} = {dv};")
 
-c = subprocess.run([os.path.join(sd, "../toolchain/clang-4.0.1/bin/clang++"), "-stdlib=libc++", "-O3", "-g2", "-std=c++1z", "-fno-rtti", "-fno-exceptions", "-fno-strict-aliasing", "-c", "-Wno-return-type", f, "-o", o],
+c = subprocess.run([os.path.join(sd, "../toolchain/clang-4.0.1/bin/clang++"), f"-I{os.path.join(sd, '../src')}", f"-I{os.path.join(sd, '../src/Minecraft.World')}", f"-I{os.path.join(sd, '../src/4JLibraries_Source')}", f"-I{os.path.join(sd, '../src/Minecraft.Client')}", f"-I{os.path.join(sd, '../src/PlatformLibraries_Source')}", f"-I{os.path.join(sd, '../lib/nnheaders/include')}", "-stdlib=libc++", "-O3", "-g2", "-std=c++1z", "-fno-rtti", "-fno-exceptions", "-fno-strict-aliasing", "-c", "-Wno-return-type", f, "-o", o],
                 capture_output=True, text=True)
 
 if (c.stderr):
