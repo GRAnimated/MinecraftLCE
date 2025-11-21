@@ -1,8 +1,9 @@
+#include "net/minecraft/world/level/block/Block.h"
+
 #include "net/minecraft/client/resources/IdMapper.h"
 #include "net/minecraft/core/Direction.h"
 #include "net/minecraft/stats/Stats.h"
 #include "net/minecraft/world/ArrayWithLength.h"
-#include "net/minecraft/world/level/block/Block.h"
 
 #include "NX/Platform.h"
 #include "net/minecraft/client/Minecraft.h"

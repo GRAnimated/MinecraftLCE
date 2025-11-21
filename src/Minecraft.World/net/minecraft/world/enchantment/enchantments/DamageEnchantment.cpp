@@ -1,5 +1,6 @@
-#include "DecompUtils.h"
 #include "net/minecraft/world/enchantment/enchantments/DamageEnchantment.h"
+
+#include "DecompUtils.h"
 
 #include "net/minecraft/world/eINSTANCEOF.h"
 #include "net/minecraft/world/effect/MobEffectInstance.h"

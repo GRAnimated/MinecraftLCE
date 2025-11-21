@@ -1,5 +1,6 @@
-#include "DecompUtils.h"
 #include "NX/Render/TextureUtil.h"
+
+#include "DecompUtils.h"
 #include "java/io/File.h"
 #include "zlib.h"
 #include <cstring>

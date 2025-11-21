@@ -1,3 +1,5 @@
+#pragma once
+
 #include "net/minecraft/core/Direction.h"
 #include "net/minecraft/world/level/block/state/properties/AbstractProperty.h"
 
