@@ -978,7 +978,7 @@ bool Block::isExceptionBlockForAttachingPlusPiston(Block* block) {
     return Block::isExceptionBlockForAttaching(block);
 }
 
-// NON_MATCHING | Score: 385975 (lower is better)
+// NON_MATCHING | Score: 333111 (lower is better)
 // This is the second-largest method in the entire executable
 // I (Dexrn) automated the block registry code, but I'm not sure how well it worked
 // Also, there's stuff missing at both the header and the footer... so it won't match until that's done.
