@@ -1,9 +1,7 @@
 #include "fui/fuiRenderNode.h"
 
-#include "fui/fuiFile.h"
-
-#include "fuiRenderNodeTimeline.h"
-#include "node/FJ_FuiNodeStage.h"
+#include "fui/fuiRenderNodeTimeline.h"
+#include "fui/node/FJ_FuiNodeStage.h"
 #include <cmath>
 
 fuiMatrix fuiRenderNode::GLOBAL_MATRIX = {1.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f};

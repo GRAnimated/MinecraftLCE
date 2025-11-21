@@ -8,6 +8,10 @@ void InitializeCriticalSection(nn::os::MutexType* mutex) {
     nn::os::UnlockMutex(mutex);
 }
 
+void InitializeCriticalSectionAndSpinCount(nn::os::MutexType* mutexType, unsigned long spinCount) {
+    InitializeCriticalSection(mutexType);
+}
+
 long System::currentRealTimeMillis() {
     nn::time::PosixTime t;
     nn::time::StandardUserSystemClock::GetCurrentTime(&t);

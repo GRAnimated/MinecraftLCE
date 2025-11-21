@@ -21,4 +21,6 @@ public:
     static ResourceLocation* VILLAGE_BLACKSMITH;
     static ResourceLocation* VILLAGE_TWO_ROOM_HOUSE;
     static ResourceLocation* WOODLAND_MANSION;
+
+    static void staticCtor();
 };

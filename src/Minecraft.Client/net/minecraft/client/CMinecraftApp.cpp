@@ -3,7 +3,7 @@
 #include "net/minecraft/world/level/gamemode/GameType.h"
 
 bool CMinecraftApp::isXuidNotch(PlayerUID* id) {
-    return 0;
+    return false;
 }
 
 int CMinecraftApp::GetGameHostOption(unsigned int unk, eGameHostOption option) {

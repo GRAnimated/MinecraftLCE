@@ -1,6 +1,7 @@
 #pragma once
 
 #include "net/minecraft/world/level/biome/Biome.h"
+#include "types.h"
 
 class MesaBiome : public Biome {
 public:
@@ -11,4 +12,4 @@ public:
     char padding[0x30];
 };
 
-static_assert(sizeof(MesaBiome) == 0x178);
+ASSERT_SIZEOF(MesaBiome, 0x178)

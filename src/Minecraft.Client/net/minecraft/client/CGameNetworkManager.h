@@ -10,4 +10,7 @@ public:
     void SetLocalGame(bool local);
     bool IsHost();
     void ResetLeavingGame();
+    void DoWork();
+    bool IsLocalGame();
+    int GetPlayerCount();
 };

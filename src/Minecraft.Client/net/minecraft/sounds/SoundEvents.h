@@ -13,4 +13,6 @@ public:
     static SoundEvent* SHOVEL_FLATTEN;
 
     static SoundEvent* registerSound(const std::wstring&);
+
+    static void staticCtor();
 };

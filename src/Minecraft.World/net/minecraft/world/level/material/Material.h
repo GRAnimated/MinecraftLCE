@@ -14,7 +14,7 @@ class WebMaterial;
 // these names have a couple guessed names.
 class Material {
 public:
-    void staticCtor();
+    static void staticCtor();
     static GasMaterial* AIR;
     static Material* GRASS;
     static Material* DIRT;

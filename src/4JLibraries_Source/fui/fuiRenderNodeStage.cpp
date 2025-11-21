@@ -1,4 +1,4 @@
-#include "fuiRenderNodeStage.h"
+#include "fui/fuiRenderNodeStage.h"
 
 float fuiRenderNodeStage::getStageHeight() {
     return this->mFuiFile->getStageHeight();

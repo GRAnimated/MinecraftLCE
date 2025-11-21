@@ -12,6 +12,8 @@ public:
     bool isSwamphut(const BlockPos&);
     std::vector<Biome::MobSpawnerData>* getSwamphutEnemies();
 
+    static void staticCtor();
+
     char filler[0x20];
 };
 

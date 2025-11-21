@@ -14,6 +14,8 @@ public:
     ~InventoryMenu() override;
     void stillValid(std::shared_ptr<Player>) override;
 
+    static void staticCtor();
+
     void* qwordE8;
     void* qwordF0;
     void* qwordF8;

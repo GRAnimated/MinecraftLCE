@@ -5,4 +5,6 @@
 class SparseLightStorage {
 public:
     void write(DataOutputStream* out);
+
+    static void staticCtor();
 };

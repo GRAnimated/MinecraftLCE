@@ -26,4 +26,4 @@ public:
     uint8_t skip[0x20];
 };
 
-static_assert(sizeof(BiomeCache) == 0x70);
+ASSERT_SIZEOF(BiomeCache, 0x70)

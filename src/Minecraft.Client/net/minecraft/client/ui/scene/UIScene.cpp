@@ -22,24 +22,24 @@ UIScene::UIScene(int padID, UILayer* uiLayer) {
     this->mPadID = padID;
     this->qword30 = nullptr;
     this->mFuiFile = nullptr;
-    this->mFocusRelated = 0;
-    this->mHideLowerScenes = 0;
-    this->byte_e9 = 0;
-    this->mHidden = 0;
-    this->bool_ad = 0;
-    this->mVisible = 1;
-    this->byte_96 = 0;
+    this->mFocusRelated = false;
+    this->mHideLowerScenes = false;
+    this->byte_e9 = false;
+    this->mHidden = false;
+    this->bool_ad = false;
+    this->mVisible = true;
+    this->byte_96 = false;
     this->mControlFocused = -1;
     this->mControlChildFocus = 0;
     this->mOpacity = 1.0;
-    this->mIsInitializedMovie = 0;
-    this->byte_ea = 1;
+    this->mIsInitializedMovie = false;
+    this->byte_ea = true;
     this->dwordF8 = 0;
     this->mUILayer = uiLayer;
     this->mBackScene = nullptr;
     this->mCallbackUniqueId = nullptr;
     this->wstring_8 = L"";
-    this->bool_28 = 0;
+    this->bool_28 = false;
 }
 
 void UIScene::customDrawFui(void* a1, const char* a2, fuiRect* a3) {
@@ -299,3 +299,7 @@ void UIScene::HandleMessage(EUIMessage, void*) {}
 void UIScene::HandleSaveDeviceRemoved(int) {}
 void UIScene::handleUnlockFullVersion() {}
 void UIScene::handleTouchInput(unsigned int, int, int, int, bool, bool, bool) {}
+
+bool UIScene::isReadyToDelete() {
+    return true;
+}

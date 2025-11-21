@@ -7,6 +7,8 @@ class ServerLevel : public Level {
 public:
     std::vector<TickNextTickData*>* fetchTicksInChunk(LevelChunk*, bool) override;
 
+    static void staticCtor();
+
     void* size[27];
     int field_388;
     bool field_38C;
