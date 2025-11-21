@@ -1,3 +1,4 @@
+#include "DecompUtils.h"
 #include "net/minecraft/world/enchantment/enchantments/DamageEnchantment.h"
 
 #include "net/minecraft/world/eINSTANCEOF.h"
@@ -27,18 +28,11 @@ int DamageEnchantment::getMaxCost(int a2) {
     return this->getMinCost(a2) + LEVEL_COST_2[this->mDamageType];
 }
 
-__attribute__((__always_inline__)) float my_fmax(float x, float y) {
-    __asm__("fmaxnm %s0, %s1, %s2" : "=w"(x) : "w"(x), "w"(y));
-    return x;
-}
-
 // down here was enum but I don't even care about it now
 float DamageEnchantment::getDamageBonus(int a2, MobType mobType) {
     if (this->mDamageType == 0) {
-#ifdef MATCHING_HACK
-        float result = my_fmax(a2 - 1.0f, 0.0f);
+        float result = decomp_fmax(a2 - 1.0f, 0.0f);
         return result * 0.5f + 1.0f;
-#endif
     } else if (this->mDamageType == 1 && mobType == 1) {  // enum here
         return (float)a2 * 2.5f;
     } else {

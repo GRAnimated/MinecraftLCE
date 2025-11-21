@@ -3,4 +3,5 @@
 class Stats {
 public:
     static void init();
+    static void buildItemStats();
 };
