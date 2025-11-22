@@ -184,7 +184,7 @@ public:
 
     void init();
     void CheckThermalAreas();
-    void fallFlyingTravel(double&, double&, double&, Vec3*, float&, float&, double&, double);
+    static void fallFlyingTravel(double&, double&, double&, Vec3*, float&, float&, double&, double);
     not_null_ptr<ItemInstance> getUseItem();
     void activateElytraSpeedBoost(double);
 

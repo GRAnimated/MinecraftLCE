@@ -468,3 +468,46 @@ void LivingEntity::CheckThermalAreas() {
         }
     }
 }
+
+void LivingEntity::fallFlyingTravel(double& motionX, double& motionY, double& motionZ, Vec3* viewAngle,
+                                    float& xRot, float& fallDistance, double& speed, double liftForce) {
+    if (-0.5 < motionY) {
+        fallDistance = 1.0;
+    }
+    float pitchRad = xRot * 0.017453292f;
+    double horizontalViewLength = std::sqrt(viewAngle->x * viewAngle->x + viewAngle->z * viewAngle->z);
+
+    speed = std::sqrt((motionX * motionX) + (motionZ * motionZ));
+    double lenView = viewAngle->length();
+
+    float verticalBoost = std::cos(pitchRad);
+    float scale = (lenView / 0.4f < 1.0f) ? (lenView / 0.4f) : 1.0f;
+    verticalBoost *= verticalBoost * scale;
+
+    verticalBoost *= (float)liftForce;
+
+    motionY += verticalBoost * 0.06 - 0.08;
+
+    if (horizontalViewLength > 0.0 && motionY < 0.0) {
+        double d = -0.1 * motionY * verticalBoost;
+        motionY += d;
+        motionX += (d * viewAngle->x) / horizontalViewLength;
+        motionZ += (d * viewAngle->z) / horizontalViewLength;
+    }
+
+    if (pitchRad < 0.0 && horizontalViewLength > 0.0) {
+        double d = speed * -std::sin(pitchRad) * 0.04;
+        motionY += d * 3.2;
+        motionX -= (viewAngle->x * d) / horizontalViewLength;
+        motionZ -= (viewAngle->z * d) / horizontalViewLength;
+    }
+
+    if (horizontalViewLength > 0.0) {
+        motionX += ((viewAngle->x / horizontalViewLength) * speed - motionX) * 0.1;
+        motionZ += ((viewAngle->z / horizontalViewLength) * speed - motionZ) * 0.1;
+    }
+
+    motionX *= 0.99;
+    motionY *= 0.98;
+    motionZ *= 0.99;
+}
