@@ -1,5 +1,6 @@
 #pragma once
 
+#include "nn/fs/fs_types.h"
 #include <string>
 #include <vector>
 
@@ -50,7 +51,9 @@ bool isDirectory(const std::wstring&);
 bool FindFirstFileA(const char*, _WIN32_FIND_DATAA*);
 std::wstring filenametowstring(const char*);
 bool FindNextFileA(int, _WIN32_FIND_DATAA*);
-bool CloseHandle(int);
-bool CreateFileA(const char*, unsigned int, unsigned int, void*, unsigned int, unsigned int, int);
-bool GetFileSize(int, unsigned int*);
-bool ReadFile(int, void*, unsigned int, unsigned int*, _OVERLAPPED*);
+bool CloseHandle(nn::fs::FileHandle*);
+// NOTE: this function declaration may be wrong as it seems that last argument differs with WiiU declaration
+nn::fs::FileHandle* CreateFileA(const char*, unsigned int, unsigned int, void*, unsigned int, unsigned int,
+                                void*);
+int GetFileSize(nn::fs::FileHandle*, unsigned int*);
+int ReadFile(nn::fs::FileHandle*, void*, unsigned int, unsigned int*, _OVERLAPPED*);

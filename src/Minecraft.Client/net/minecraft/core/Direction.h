@@ -10,6 +10,13 @@ class Vec3i;
 
 class Direction : public StringRepresentable {
 public:
+    class Plane : public Predicate<const Direction*> {
+    public:
+        static Plane* HORIZONTAL;
+        static Plane* VERTICAL;
+
+        Plane();
+    };
     class AxisDirection {
     public:
         static AxisDirection* POSITIVE;
