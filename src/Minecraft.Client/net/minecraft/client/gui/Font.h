@@ -25,7 +25,7 @@ public:
     int width(const std::wstring&);
 
     void* font0;
-    void* mChachedCharacters;
+    void* mCachedCharacters;
     char gap10[8];
     Random* mRandom;
     char gap20[128];
