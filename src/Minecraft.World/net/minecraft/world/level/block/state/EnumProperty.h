@@ -20,9 +20,21 @@ public:
         return create(name, typeInfo, states, predicates);
     }
 
+    // NON_MATCHING: I suspect apply function signature being wrong...
     static EnumProperty<T>* create(const std::wstring& name, const std::type_info& typeInfo,
                                    const std::unordered_set<T>& possibleValues,
-                                   const Predicate<T>* predicates);
+                                   const Predicate<T>* predicates) {
+        std::unordered_set<T> values;
+
+        for (auto it = possibleValues.begin(); it != possibleValues.end(); it++) {
+            if (predicates->apply(*it))
+                values.emplace(*it);
+        }
+
+        return new EnumProperty<T>(name, typeInfo, values);
+    }
+
+    EnumProperty(const std::wstring&, const std::type_info&, const std::unordered_set<T>&);
 
     // int getPossibleValues() const override; // On WiiU it seems that EnumProperty overrides this but on
     // Switch it doesn't for whatever reason :skull:
@@ -34,4 +46,6 @@ public:
     std::wstring getName(const T&) const override;
     T getUnboxedValue(const std::wstring&) const override;
     virtual ~EnumProperty();
+
+    char filler[0x70 - 0x8];
 };

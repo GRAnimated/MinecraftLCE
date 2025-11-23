@@ -104,27 +104,30 @@ void MonsterEggBlock::registerIcons(IconRegister* iconReg) {
     // wow
 }
 
-// NON_MATCHING: logic should be the same, but this function is optimised as hell
 TextureAtlasSprite* MonsterEggBlock::getTexture(const Direction* dir, const BlockState* state) {
-    Variant* variant = state->getValue<Variant*>(VARIANT);  // why not switch statement with datas
+    const Variant* variant = state->getValue<Variant*>(VARIANT);
+
     if (variant == Variant::STONE) {
-        return Blocks::STONE->getTexture(dir, state);
+        Block* block = Blocks::STONE;
+        return block->getTexture(dir);
     } else if (variant == Variant::COBBLESTONE) {
-        return Blocks::COBBLESTONE->getTexture(dir, state);
+        Block* block = Blocks::COBBLESTONE;
+        return block->getTexture(dir);
     } else if (variant == Variant::STONE_BRICK) {
-        return Blocks::STONEBRICK->getTexture(dir, state);
+        Block* block = Blocks::STONEBRICK;
+        return block->getTexture(dir);
     } else if (variant == Variant::MOSSY_BRICK) {
-        return Blocks::STONEBRICK->getTexture(
-            dir, Blocks::STONEBRICK->defaultBlockState()->setValue(StoneBrickBlock::VARIANT,
-                                                                   StoneBrickBlock::Variant::MOSSY));
+        const BlockState* modifiedState = Blocks::STONEBRICK->defaultBlockState()->setValue(
+            StoneBrickBlock::VARIANT, StoneBrickBlock::Variant::MOSSY);
+        return Blocks::STONEBRICK->getTexture(dir, modifiedState);
     } else if (variant == Variant::CRACKED_BRICK) {
-        return Blocks::STONEBRICK->getTexture(
-            dir, Blocks::STONEBRICK->defaultBlockState()->setValue(StoneBrickBlock::VARIANT,
-                                                                   StoneBrickBlock::Variant::CRACKED));
+        const BlockState* modifiedState = Blocks::STONEBRICK->defaultBlockState()->setValue(
+            StoneBrickBlock::VARIANT, StoneBrickBlock::Variant::CRACKED);
+        return Blocks::STONEBRICK->getTexture(dir, modifiedState);
     } else if (variant == Variant::CHISELED_BRICK) {
-        return Blocks::STONEBRICK->getTexture(
-            dir, Blocks::STONEBRICK->defaultBlockState()->setValue(StoneBrickBlock::VARIANT,
-                                                                   StoneBrickBlock::Variant::CHISELED));
+        const BlockState* modifiedState = Blocks::STONEBRICK->defaultBlockState()->setValue(
+            StoneBrickBlock::VARIANT, StoneBrickBlock::Variant::CHISELED);
+        return Blocks::STONEBRICK->getTexture(dir, modifiedState);
     }
     return nullptr;
 }

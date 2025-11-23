@@ -16,6 +16,8 @@ public:
         static Plane* VERTICAL;
 
         Plane();
+
+        bool apply(const Direction*) const override;
     };
     class AxisDirection {
     public:
