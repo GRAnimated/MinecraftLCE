@@ -5,14 +5,17 @@
 #include "net/minecraft/world/item/Items.h"
 #include "net/minecraft/world/level/block/Blocks.h"
 
+#include "net/minecraft/world/level/block/MonsterEggBlock.h"
 #include "net/minecraft/world/level/block/NewLogBlock.h"
 #include "net/minecraft/world/level/block/OldLogBlock.h"
 #include "net/minecraft/world/level/block/PlanksBlock.h"
+#include "net/minecraft/world/level/block/PrismarineBlock.h"
 #include "net/minecraft/world/level/block/QuartzBlock.h"
 #include "net/minecraft/world/level/block/RedSandStoneBlock.h"
 #include "net/minecraft/world/level/block/SandBlock.h"
 #include "net/minecraft/world/level/block/SandStoneBlock.h"
 #include "net/minecraft/world/level/block/StoneBlock.h"
+#include "net/minecraft/world/level/block/StoneBrickBlock.h"
 
 // NON_MATCHING: finish
 void UIScene_CreativeMenu::staticCtor() {
@@ -83,7 +86,9 @@ void UIScene_CreativeMenu::staticCtor() {
     builder.ITEM_BLOCK(Blocks::GLOWSTONE);
     builder.ITEM_BLOCK(Blocks::MAGMA);
     builder.ITEM_BLOCK(Blocks::SEA_LANTERN);
-    // ...
+    builder.ITEM_AUX(Blocks::PRISMARINE, PrismarineBlock::VARIANT, PrismarineBlock::Variant::ROUGH);
+    builder.ITEM_AUX(Blocks::PRISMARINE, PrismarineBlock::VARIANT, PrismarineBlock::Variant::DARK);
+    builder.ITEM_AUX(Blocks::PRISMARINE, PrismarineBlock::VARIANT, PrismarineBlock::Variant::BRICKS);
     builder.ITEM_BLOCK(Blocks::SLIME);
     builder.ITEM_BLOCK(Blocks::FENCE);
     builder.ITEM_BLOCK(Blocks::SPRUCE_FENCE);
@@ -93,7 +98,16 @@ void UIScene_CreativeMenu::staticCtor() {
     builder.ITEM_BLOCK(Blocks::DARK_OAK_FENCE);
     builder.ITEM_BLOCK(Blocks::NETHER_BRICK_FENCE);
     builder.ITEM_BLOCK(Blocks::IRON_BARS);
-    // ...
+    builder.ITEM_AUX(Blocks::STONEBRICK, StoneBrickBlock::VARIANT, StoneBrickBlock::Variant::DEFAULT);
+    builder.ITEM_AUX(Blocks::STONEBRICK, StoneBrickBlock::VARIANT, StoneBrickBlock::Variant::MOSSY);
+    builder.ITEM_AUX(Blocks::STONEBRICK, StoneBrickBlock::VARIANT, StoneBrickBlock::Variant::CRACKED);
+    builder.ITEM_AUX(Blocks::STONEBRICK, StoneBrickBlock::VARIANT, StoneBrickBlock::Variant::CHISELED);
+    builder.ITEM_AUX(Blocks::MONSTER_EGG, MonsterEggBlock::VARIANT, MonsterEggBlock::Variant::STONE);
+    builder.ITEM_AUX(Blocks::MONSTER_EGG, MonsterEggBlock::VARIANT, MonsterEggBlock::Variant::COBBLESTONE);
+    builder.ITEM_AUX(Blocks::MONSTER_EGG, MonsterEggBlock::VARIANT, MonsterEggBlock::Variant::STONE_BRICK);
+    builder.ITEM_AUX(Blocks::MONSTER_EGG, MonsterEggBlock::VARIANT, MonsterEggBlock::Variant::MOSSY_BRICK);
+    builder.ITEM_AUX(Blocks::MONSTER_EGG, MonsterEggBlock::VARIANT, MonsterEggBlock::Variant::CRACKED_BRICK);
+    builder.ITEM_AUX(Blocks::MONSTER_EGG, MonsterEggBlock::VARIANT, MonsterEggBlock::Variant::CHISELED_BRICK);
     builder.ITEM_BLOCK(Blocks::MYCELIUM);
     // ...
     builder.ITEM_BLOCK(Blocks::NETHER_BRICK);
