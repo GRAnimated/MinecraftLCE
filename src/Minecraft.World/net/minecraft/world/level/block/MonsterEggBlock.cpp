@@ -65,7 +65,7 @@ void MonsterEggBlock::spawnResources(Level* level, const BlockPos& pos, const Bl
         }
 
         std::shared_ptr<Silverfish> silverfish = std::shared_ptr<Silverfish>(new Silverfish(level));
-        silverfish->moveTo(pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5, 0.0F, 0.0F);
+        silverfish->moveTo(pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5, 0.0f, 0.0f);
         level->addEntity(silverfish);
         silverfish->spawnAnim();
     }
