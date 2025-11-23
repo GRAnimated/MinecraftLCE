@@ -6,9 +6,14 @@ class Options;
 class Textures;
 class ResourceLocation;
 class BufferBuilder;
+class Random;
 
 class Font {
 public:
+    static ResourceLocation sDefaultFontRsrc;
+    static ResourceLocation sAlternateFontRsrc;
+    static unsigned short sDefaultText[644];
+
     Font(Options*, const std::wstring&, Textures*, bool, ResourceLocation*, int, int, int, int,
          unsigned short* renderList);
     void cacheCharacter(int);
@@ -19,8 +24,18 @@ public:
     std::wstring sanitize(const std::wstring&, bool);
     int width(const std::wstring&);
 
-    static ResourceLocation sDefaultFontRsrc;
-    static ResourceLocation sAlternateFontRsrc;
-    unsigned char padding[0xE8];
-    static unsigned short sDefaultText[644];
+    void* font0;
+    void* mCachedCharacters;
+    char gap10[8];
+    Random* mRandom;
+    char gap20[128];
+    Textures* mTextures;
+    void* qwordA8;
+    uint16_t wordB0;
+    int mHorizontalCharsCount;
+    int mVerticalCharsCount;
+    int mCharWidth;
+    int mCharHeight;
+    ResourceLocation* mFontTextureResourceLoc;
+    char filler[22];
 };

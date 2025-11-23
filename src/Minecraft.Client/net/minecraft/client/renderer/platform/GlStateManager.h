@@ -196,4 +196,6 @@ public:
     static void disableState(int state);
     static void enableState(int state);
     static TexGenCoord* getTexGen(GlStateManager::TexGen coord);
+    static int genTexture();
+    static void deleteTexture(int texture);
 };

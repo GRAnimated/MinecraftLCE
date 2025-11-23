@@ -17,8 +17,16 @@ public:
     static const SoundType* SLIME_BLOCK;
     static const SoundType* ANVIL;
 
+    static void staticCtor();
+
     SoundType(float volume, float pitch, const SoundEvent* dig, const SoundEvent* step,
               const SoundEvent* place, const SoundEvent* hit, const SoundEvent* fall);
 
-    static void staticCtor();
+    float mVolume;
+    float mPitch;
+    SoundEvent* mDigSound;
+    SoundEvent* mStepSound;
+    SoundEvent* mPlaceSound;
+    SoundEvent* mHitSound;
+    SoundEvent* mFallSound;
 };

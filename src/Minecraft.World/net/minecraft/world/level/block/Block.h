@@ -38,6 +38,7 @@ class SoundType;
 class TextureAtlasSprite;
 class Vec3;
 class Item;
+class DirectionProperty;
 class ResourceLocation;
 class HitResult;
 
@@ -239,6 +240,9 @@ public:
     bool fill2;
     arrayWithLength<const AABB*> mAABBs;
     END_DECLARE_THREAD_STORAGE()
+
+    static DirectionProperty* DEFAULT_FACING;     // completly shitty names if got better idea change it asap
+    static DirectionProperty* HORIZONTAL_FACING;  // same as up
 
 private:
     static const AABB* defaultBlockShape;
