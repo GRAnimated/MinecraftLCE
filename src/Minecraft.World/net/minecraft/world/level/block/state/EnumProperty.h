@@ -1,6 +1,5 @@
 #pragma once
 
-#include "net/minecraft/core/Iterator.h"
 #include "net/minecraft/world/level/block/state/properties/AbstractProperty.h"
 #include <string>
 #include <typeinfo>
@@ -21,7 +20,6 @@ public:
         return create(name, typeInfo, states, predicates);
     }
 
-    // NON_MATCHING: I suspect apply function signature being wrong...
     static EnumProperty<T>* create(const std::wstring& name, const std::type_info& typeInfo,
                                    const std::unordered_set<T>& possibleValues,
                                    const Predicate<T>* predicates) {
