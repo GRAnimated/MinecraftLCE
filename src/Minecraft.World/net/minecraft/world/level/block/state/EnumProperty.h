@@ -1,5 +1,6 @@
 #pragma once
 
+#include "net/minecraft/core/Iterator.h"
 #include "net/minecraft/world/level/block/state/properties/AbstractProperty.h"
 #include <string>
 #include <typeinfo>
@@ -26,9 +27,9 @@ public:
                                    const Predicate<T>* predicates) {
         std::unordered_set<T> values;
 
-        for (auto it = possibleValues.begin(); it != possibleValues.end(); it++) {
+        for (auto it = possibleValues.begin(); it != possibleValues.end(); ++it) {
             if (predicates->apply(*it))
-                values.emplace(*it);
+                values.emplace((T&)*it);  // there's probably better way to do this but idk
         }
 
         return new EnumProperty<T>(name, typeInfo, values);
