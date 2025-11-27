@@ -6,15 +6,18 @@
 
 template <typename T>
 class Predicate {
-    bool apply(T) const;
-    Predicate<T>* copy() const;
+public:
+    virtual bool apply(T) const = 0;
+    virtual Predicate<T>* copy() const;
 };
 
 template <typename T>
 class Predicates {
 public:
     // TODO: impl those, and check if those below are correctly declared
-    class ConnectivePredicate : public Predicate<T> {};
+    class ConnectivePredicate : public Predicate<T> {
+        bool apply(T) const override;
+    };
     class FunctionPredicate : public Predicate<T> {
     public:
         FunctionPredicate(bool (*predicate)(T)) { this->mPredicate = predicate; }
@@ -23,13 +26,19 @@ public:
             return new FunctionPredicate(predicate);
         }
 
+        bool apply(T) const override;
+
         bool (*mPredicate)(T);
     };
     class ConstantPredicate : public Predicate<T> {
     public:
         ConstantPredicate(bool);
+
+        bool apply(T) const override;
     };
-    class EqualToValuePredicate : public Predicate<T> {};
+    class EqualToValuePredicate : public Predicate<T> {
+        bool apply(T) const override;
+    };
 };
 
 class Boxed;

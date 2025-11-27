@@ -1,6 +1,7 @@
 #pragma once
 
 #include "net/minecraft/world/PlayerUID.h"
+#include "net/minecraft/world/eINSTANCEOF.h"
 #include "net/minecraft/world/level/saveddata/SavedData.h"
 #include "nn/os/os_MutexTypes.h"
 #include "types.h"
@@ -204,6 +205,7 @@ public:
     bool shouldFreezeIgnoreNeighbors(const BlockPos&);
     bool shouldSnow(const BlockPos&, bool);
     bool isFindingSpawn();
+    unsigned int countInstanceOf(eINSTANCEOF, bool, unsigned int*, unsigned int*);
 
     int mSeaLevel = 63;
     nn::os::MutexType mEntityMutex;
