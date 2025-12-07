@@ -25,7 +25,7 @@ public:
         static AxisDirection* NEGATIVE;
     };
 
-    class Axis {
+    class Axis : public Predicate<const Direction*>, public StringRepresentable {
     public:
         static void staticCtor();
         static Axis* X;
@@ -39,6 +39,9 @@ public:
 
         static inline Predicates<Axis*>::ConstantPredicate* PREDICATE
             = new Predicates<Axis*>::ConstantPredicate(true);
+
+        std::wstring toString() const override;
+        std::wstring getSerializedName() const override;
     };
 
     static const Direction* DOWN;

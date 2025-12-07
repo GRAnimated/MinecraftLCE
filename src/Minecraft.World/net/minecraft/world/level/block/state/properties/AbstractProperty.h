@@ -43,6 +43,10 @@ public:
 
 class Boxed;
 class Property {
+public:
+    Property();
+    void updateCachedHashCode();
+
     virtual std::wstring getName() const = 0;
     virtual std::wstring getName(const Boxed*) const = 0;
     virtual const std::vector<Boxed*>& getPossibleValues() const = 0;
@@ -59,6 +63,9 @@ class Property {
 template <typename T>
 class AbstractProperty : public Property {
 public:
+    AbstractProperty(const std::wstring& name, const std::type_info& typeInfo)
+        : Property(), mTypeInfo(typeInfo), mName(name) {}
+
     std::wstring getName() const override;
     std::wstring getName(const Boxed*) const override;
     const std::vector<Boxed*>& getPossibleValues() const override;
@@ -69,4 +76,8 @@ public:
     int hashCode() const override;
     virtual std::wstring getName(const T&) const = 0;  // ?
     virtual T getUnboxedValue(const std::wstring&) const = 0;
+
+    void* fill;
+    const std::type_info& mTypeInfo;
+    std::wstring mName;
 };
