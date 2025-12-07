@@ -7,8 +7,11 @@
 template <typename T>
 class Predicate {
 public:
+    Predicate() {}
+
     virtual bool apply(T) const = 0;
-    virtual Predicate<T>* copy() const;
+    virtual Predicate<T>* copy() const { return nullptr; }
+    virtual ~Predicate() {}
 };
 
 template <typename T>
@@ -26,15 +29,18 @@ public:
             return new FunctionPredicate(predicate);
         }
 
-        bool apply(T) const override;
+        bool apply(T a) const override { return this->mPredicate(a); }
 
         bool (*mPredicate)(T);
     };
     class ConstantPredicate : public Predicate<T> {
     public:
-        ConstantPredicate(bool);
+        ConstantPredicate(bool constValue) { this->mConstValue = constValue; }
 
-        bool apply(T) const override;
+        bool apply(T) const override { return this->mConstValue; }
+        Predicate<T>* copy() const override { return new ConstantPredicate(this->mConstValue); }
+
+        bool mConstValue;  // I guess it's bool, could be union; if you find possiblity of it, do it
     };
     class EqualToValuePredicate : public Predicate<T> {
         bool apply(T) const override;
