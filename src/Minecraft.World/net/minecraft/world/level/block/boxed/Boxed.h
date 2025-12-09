@@ -8,8 +8,8 @@ class TypedBoxed;
 class Boxed {
 public:
     Boxed(const std::type_info* typeInfo);
-    virtual ~Boxed();
 
+    virtual ~Boxed();
     virtual bool isA(const std::type_info* type) const;
     virtual bool isA(const std::type_info& type) const;
     virtual unsigned int hashOf() const = 0;

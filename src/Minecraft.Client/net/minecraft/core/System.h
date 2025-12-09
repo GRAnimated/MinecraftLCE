@@ -20,7 +20,11 @@ const std::wstring _toString(T type) {
     return ss.str();
 }
 
+template <typename T>
+T _fromString(const std::wstring&);
+
 std::wstring trimString(const std::wstring& str);
+size_t javaStringHashCode(const std::wstring& str);
 
 class System {
 public:

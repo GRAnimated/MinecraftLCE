@@ -48,16 +48,56 @@ public:
         this->updateCachedHashCode();
     }
 
-    // int getPossibleValues() const override; // On WiiU it seems that EnumProperty overrides this but on
-    // Switch it doesn't for whatever reason :skull:
-    bool equals(const Property*) const override;
-    int hashCode() const override;
-    int getValueCount() const override;
-    Boxed* getValueAtIndex(unsigned int) const override;
-    unsigned int getIndexForValue(Boxed*) const override;
-    std::wstring getName(const T&) const override;
-    T getUnboxedValue(const std::wstring&) const override;
-    virtual ~EnumProperty();
+    const std::vector<Boxed*>& getPossibleValues() const override { return this->mAllowedValues; }
+    // NON_MATCHING: logic should be the same :)
+    bool equals(const Property* other) const override {
+        if (this == other)
+            return true;
+
+        const EnumProperty<T>* otherCasted = dynamic_cast<const EnumProperty<T>*>(other);
+
+        if (otherCasted && AbstractProperty<T>::equals(otherCasted)) {
+            if (this->mAllowedValues == otherCasted->mAllowedValues) {
+                return this->mValues == otherCasted->mValues;
+            }
+        }
+
+        return false;
+    }
+    int hashCode() const override {
+        return 31 * AbstractProperty<T>::hashCode() + AbstractProperty<T>::hashBoxedSet(this->mAllowedValues);
+    }
+    int getValueCount() const override { return this->mAllowedValues.size(); }
+    Boxed* getValueAtIndex(unsigned int index) const override { return this->mAllowedValues.at(index); }
+    // this function looks realllllllly bad, and it's mostly unlikely that's how it looked
+    unsigned int getIndexForValue(Boxed* value) const override {
+        Boxed& valueUn = *value;
+        auto it = this->mAllowedValues.begin();
+        if (it == this->mAllowedValues.end())
+            return 0;
+
+        int count = 0;
+        for (it; it != this->mAllowedValues.end(); it++) {
+            if (valueUn != (const Boxed*)*it) {
+                return count;
+            } else {
+                count++;
+            }
+        }
+        return 0;
+    }
+    T getUnboxedValue(const std::wstring& key) const override {
+        auto it = this->mValues.find(key);
+        if (it != this->mValues.end())
+            return it->second;
+        return nullptr;
+    }
+    std::wstring getName(const T& val) const override { return val->getSerializedName(); }
+    virtual ~EnumProperty() {
+        for (auto it = mAllowedValues.begin(); it != mAllowedValues.end(); it++) {
+            delete *it;
+        }
+    }
 
     std::vector<Boxed*> mAllowedValues;
     std::unordered_map<std::wstring, T> mValues;
