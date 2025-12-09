@@ -1,5 +1,7 @@
 #pragma once
 
+#include "net/minecraft/core/System.h"
+#include "net/minecraft/world/level/block/boxed/TypedBoxed.h"
 #include <string>
 #include <typeinfo>
 #include <vector>
@@ -54,10 +56,10 @@ public:
     void updateCachedHashCode();
 
     virtual std::wstring getName() const = 0;
-    virtual std::wstring getName(const Boxed*) const = 0;
     virtual const std::vector<Boxed*>& getPossibleValues() const = 0;
-    virtual const std::type_info& getValueClass() const = 0;
+    virtual const std::type_info* getValueClass() const = 0;
     virtual Boxed* getValue(const std::wstring&) const = 0;
+    virtual std::wstring getName(const Boxed*) const = 0;
     virtual std::wstring toString() const = 0;
     virtual bool equals(const Property*) const = 0;
     virtual int hashCode() const = 0;
@@ -70,20 +72,42 @@ template <typename T>
 class AbstractProperty : public Property {
 public:
     AbstractProperty(const std::wstring& name, const std::type_info& typeInfo)
-        : Property(), mTypeInfo(typeInfo), mName(name) {}
+        : Property(), mTypeInfo(&typeInfo), mName(name) {}
 
-    std::wstring getName() const override;
-    std::wstring getName(const Boxed*) const override;
-    const std::vector<Boxed*>& getPossibleValues() const override;
-    const std::type_info& getValueClass() const override;
-    Boxed* getValue(const std::wstring&) const override;
-    std::wstring toString() const override;
-    bool equals(const Property*) const override;
-    int hashCode() const override;
-    virtual std::wstring getName(const T&) const = 0;  // ?
+    static int hashBoxedSet(const std::vector<Boxed*>&);
+
+    std::wstring getName() const override { return this->mName; }
+    const std::type_info* getValueClass() const override { return this->mTypeInfo; }
+    // NON_MATCHING: I'm dumb, impossible to match :), fix the structure
+    Boxed* getValue(const std::wstring& name) const override {
+        // they just get ptr to whatever getUnboxedValue returns, I'm 95% sure that getUnboxedValue returns
+        // just T type, not reference, so yyou can't just get ptr of it directly so you have to create that
+        // temp obj
+        T retVal = this->getUnboxedValue(name);
+        return new TypedBoxed<T>(&retVal);
+    }
+    std::wstring getName(const Boxed* boxedValue) const override {
+        return this->getName(*const_cast<TypedBoxed<T>*>(boxedValue->tryGetType<T>())->getValue());
+    }
+    std::wstring toString() const override { return L""; }
+    bool equals(const Property* other) const override {
+        if (this == other)
+            return true;
+
+        const AbstractProperty<T>* otherCasted = dynamic_cast<const AbstractProperty<T>*>(other);
+
+        if (!otherCasted || this->mTypeInfo != otherCasted->mTypeInfo) {
+            return false;
+        }
+
+        return this->mName == otherCasted->mName;
+    }
+    // TODO: this is wrong as hell btw !!!!!
+    int hashCode() const override { return 31 * (size_t)this->mTypeInfo + javaStringHashCode(this->mName); }
     virtual T getUnboxedValue(const std::wstring&) const = 0;
+    virtual std::wstring getName(const T&) const = 0;
 
     void* fill;
-    const std::type_info& mTypeInfo;
+    const std::type_info* mTypeInfo;
     std::wstring mName;
 };

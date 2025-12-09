@@ -1,5 +1,6 @@
 #pragma once
 
+#include "NX/Platform.h"
 #include "net/minecraft/world/level/block/state/properties/AbstractProperty.h"
 
 class IntegerProperty : public AbstractProperty<int> {
@@ -13,6 +14,8 @@ public:
     Boxed* getValueAtIndex(unsigned int) const override;
     unsigned int getIndexForValue(Boxed*) const override;
     std::wstring getName(const int&) const override;
-    int getUnboxedValue(const std::wstring&) const override;
+    int getUnboxedValue(const std::wstring& key) const override;
     ~IntegerProperty();
+
+    std::vector<Boxed*> mAllowedValues;
 };
