@@ -5,6 +5,7 @@
 #include "net/minecraft/world/item/Items.h"
 #include "net/minecraft/world/level/block/Blocks.h"
 
+#include "net/minecraft/world/level/block/DirtBlock.h"
 #include "net/minecraft/world/level/block/MonsterEggBlock.h"
 #include "net/minecraft/world/level/block/NewLogBlock.h"
 #include "net/minecraft/world/level/block/OldLogBlock.h"
@@ -109,7 +110,8 @@ void UIScene_CreativeMenu::staticCtor() {
     builder.ITEM_AUX(Blocks::MONSTER_EGG, MonsterEggBlock::VARIANT, MonsterEggBlock::Variant::CRACKED_BRICK);
     builder.ITEM_AUX(Blocks::MONSTER_EGG, MonsterEggBlock::VARIANT, MonsterEggBlock::Variant::CHISELED_BRICK);
     builder.ITEM_BLOCK(Blocks::MYCELIUM);
-    // ...
+    builder.ITEM_AUX(Blocks::DIRT, DirtBlock::VARIANT, DirtBlock::Variant::COARSE);
+    builder.ITEM_AUX(Blocks::DIRT, DirtBlock::VARIANT, DirtBlock::Variant::PODZOL);
     builder.ITEM_BLOCK(Blocks::NETHER_BRICK);
     builder.ITEM_BLOCK(Blocks::RED_NETHER_BRICK);
     builder.ITEM_BLOCK(Blocks::END_STONE);
