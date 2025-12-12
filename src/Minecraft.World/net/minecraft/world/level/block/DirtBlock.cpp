@@ -45,7 +45,7 @@ int DirtBlock::GetInteractTooltip(const BlockTooltipDataHolder& dataHolder) {
         || dataHolder.mBlockState->getValue<Variant*>(VARIANT) == Variant::PODZOL) {
         return Block::GetInteractTooltip(dataHolder);
     } else {
-        return 0x70889480;
+        return StringIDs::Till;
     }
 }
 
