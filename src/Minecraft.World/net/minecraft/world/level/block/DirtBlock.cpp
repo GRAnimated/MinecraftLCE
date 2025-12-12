@@ -95,6 +95,7 @@ TextureAtlasSprite* DirtBlock::getTexture(const Direction* dir, const BlockState
     return state->getValue<Variant*>(VARIANT)->getTexture(dir);
 }
 
+// NON_MATCHING: static code gen to be fixed
 BlockStateDefinition* DirtBlock::createBlockStateDefinition() {
     static const Property* properties[2]{VARIANT, SNOWY};
     return new BlockStateDefinition(this, properties);

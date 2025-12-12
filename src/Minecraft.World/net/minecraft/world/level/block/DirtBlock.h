@@ -26,7 +26,7 @@ public:
             return VARIANTS[data > (sizeof(VARIANTS) / sizeof(Variant*)) - 1 ? 0 : data];
         }
 
-        // NON_MATCHING: idk
+        // NON_MATCHING: reg swap, idk
         Variant(int data, const std::wstring& name, int nameId, int descriptionId,
                 const MaterialColor* materialColor, const std::wstring& texName, const std::wstring& sideTex,
                 const std::wstring& topTex) {
