@@ -1,4 +1,5 @@
 #include "DirtBlock.h"
+#include "net/minecraft/client/ui/StringIDs.h"
 #include "net/minecraft/world/item/InteractionResultHolder.h"
 #include "net/minecraft/world/item/Item.h"
 #include "net/minecraft/world/item/ItemInstance.h"
@@ -22,11 +23,14 @@ DirtBlock::DirtBlock() : Block(Material::DIRT) {
 }
 
 void DirtBlock::blockStaticCtor() {
-    Variant::DIRT = new Variant(0, L"dirt", 0x672CD46C, 0x5437FAF1, MaterialColor::DIRT, L"dirt", L"", L"");
-    Variant::COARSE = new Variant(1, L"coarse_dirt", 0xC79DB172, 0x935970C7, MaterialColor::DIRT,
+    Variant::DIRT = new Variant(0, L"dirt", StringIDs::Dirt, StringIDs::CollectedUsingAShovelCanBeUsedFor,
+                                MaterialColor::DIRT, L"dirt", L"", L"");
+    Variant::COARSE = new Variant(1, L"coarse_dirt", StringIDs::CoarseDirt,
+                                  StringIDs::ASpecialTypeOfDirtThatDoesNotGrowGrass, MaterialColor::DIRT,
                                   L"coarse_dirt", L"", L"");
-    Variant::PODZOL = new Variant(2, L"podzol", 0x64186D51, 0x8FB42134, MaterialColor::PODZOL, L"dirt",
-                                  L"dirt_podzol_top", L"dirt_podzol_side");
+    Variant::PODZOL
+        = new Variant(2, L"podzol", StringIDs::Podzol, StringIDs::SimilarToDirtBlocksButVeryGoodFor,
+                      MaterialColor::PODZOL, L"dirt", L"dirt_podzol_top", L"dirt_podzol_side");
 
     Variant::VARIANTS[0] = Variant::DIRT;
     Variant::VARIANTS[1] = Variant::COARSE;
