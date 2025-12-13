@@ -2,6 +2,7 @@
 
 #include "net/minecraft/core/System.h"
 #include "net/minecraft/world/level/block/boxed/TypedBoxed.h"
+#include <functional>
 #include <string>
 #include <typeinfo>
 #include <vector>
@@ -74,7 +75,15 @@ public:
     AbstractProperty(const std::wstring& name, const std::type_info& typeInfo)
         : Property(), mTypeInfo(&typeInfo), mName(name) {}
 
-    static int hashBoxedSet(const std::vector<Boxed*>&);
+    // why truncate it to int??
+    // NON_MATCHING: TypedBoxed shit... const | non-const typeshit
+    static int hashBoxedSet(const std::vector<Boxed*>& values) {
+        size_t hash = 0;
+        for (const auto& boxed : values) {
+            hash += std::hash<T>{}(*const_cast<TypedBoxed<T>*>(boxed->tryGetType<T>())->getValue());
+        }
+        return hash;
+    }
 
     std::wstring getName() const override { return this->mName; }
     const std::type_info* getValueClass() const override { return this->mTypeInfo; }
