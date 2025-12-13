@@ -1,7 +1,8 @@
+#include "net/minecraft/world/level/block/HalfSlabBlock.h"
+
 #include "net/minecraft/core/Direction.h"
 #include "net/minecraft/world/level/block/Block.h"
 #include "net/minecraft/world/level/block/Blocks.h"
-#include "net/minecraft/world/level/block/HalfSlabBlock.h"
 #include "net/minecraft/world/level/block/state/EnumProperty.h"
 #include "net/minecraft/world/level/storage/LevelSource.h"
 #include "net/minecraft/world/phys/AABB.h"
