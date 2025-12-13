@@ -244,7 +244,7 @@ public:
     static DirectionProperty* DEFAULT_FACING;     // completly shitty names if got better idea change it asap
     static DirectionProperty* HORIZONTAL_FACING;  // same as up
 
-private:
+protected:
     static const AABB* defaultBlockShape;
     static int sDefaultDirectSignal;
 
