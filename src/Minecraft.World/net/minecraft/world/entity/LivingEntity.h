@@ -47,6 +47,8 @@ public:
     void lerpTo(double, double, double, float, float, int, bool) override;
     void handleEntityEvent(unsigned char, int) override;
     void animateHurt() override;
+    virtual NonNullList<not_null_ptr<ItemInstance>> getArmorSlots() = 0;
+    virtual void setItemSlot(const EquipmentSlot*, not_null_ptr<ItemInstance>) = 0;
     void setSprinting(bool) override;
     Team* getTeam() override;
     void spawnEatParticles(const ItemInstance&, int) override;

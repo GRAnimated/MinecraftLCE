@@ -178,8 +178,8 @@ public:
     virtual void handleEntityEvent(unsigned char, int);
     virtual void animateHurt();
     virtual void getHandSlots();
-    virtual void getArmorSlots();
-    virtual void getAllSlots();
+    virtual NonNullList<not_null_ptr<ItemInstance>> getArmorSlots();
+    virtual NonNullList<not_null_ptr<ItemInstance>> getAllSlots();
     virtual void setItemSlot(const EquipmentSlot*, not_null_ptr<ItemInstance>);
     virtual bool isOnFire();
     virtual bool isPassenger();
@@ -276,7 +276,7 @@ public:
     virtual bool isCreative();
     virtual bool isDespawnProtected();
     virtual void setDespawnProtected();
-    virtual void couldWander();
+    virtual bool couldWander();
     virtual void canCreateParticles();
     virtual void stopCurrentLerp();
     virtual bool PositionLocked();
@@ -302,6 +302,8 @@ public:
     void moveRelative(float, float, float, float);
     bool isFree(double, double, double);
     void fjCheckDerivedConstruction();
+    bool isExtraWanderingEnabled();
+    float distanceTo(std::shared_ptr<Entity>);
 
     int mId;
     bool mBlocksBuilding;

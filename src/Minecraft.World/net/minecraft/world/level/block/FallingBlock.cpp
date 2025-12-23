@@ -1,6 +1,6 @@
 #include "net/minecraft/world/level/block/FallingBlock.h"
 
-#include "net/minecraft/core/particles/ParticleTypes.h"
+#include "net/minecraft/client/particle/ParticleTypes.h"
 #include "net/minecraft/world/ArrayWithLength.h"
 #include "net/minecraft/world/entity/item/FallingBlockEntity.h"
 #include "net/minecraft/world/level/Level.h"

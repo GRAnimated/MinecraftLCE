@@ -38,6 +38,8 @@ public:
     double distanceTo(AABB* aabb);
     Vec3* subtract(double, double, double);
     Vec3* add(double, double, double);
+    Vec3* normalize();
+    Vec3* scale(double);
 
     Vec3* closestPointOnSegment(Vec3* segStart, Vec3* segEnd);  // made up name
     double distanceToSegment(Vec3* segStart, Vec3* segEnd);     // made up name

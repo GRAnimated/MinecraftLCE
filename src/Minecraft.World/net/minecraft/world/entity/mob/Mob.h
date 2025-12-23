@@ -28,6 +28,10 @@ public:
 
     static EquipmentSlot* getEquipmentSlotForItem(not_null_ptr<ItemInstance>);
 
+    NonNullList<not_null_ptr<ItemInstance>> getArmorSlots() override;
+    void setItemSlot(const EquipmentSlot*, not_null_ptr<ItemInstance>) override;
+    not_null_ptr<ItemInstance> getItemSlot(const EquipmentSlot*) override;
+    HumanoidArm* getMainArm() override;
     virtual void registerGoals();
     virtual void createNavigation(Level*);
     virtual void getPathfindingMalus(const BlockPathTypes*);
@@ -36,7 +40,7 @@ public:
     virtual void getLookControl();
     virtual void getMoveControl();
     virtual void getJumpControl();
-    virtual void getNavigation();
+    virtual PathNavigation* getNavigation();
     virtual void getSensing();
     virtual void getTarget();
     virtual void setTarget(std::shared_ptr<LivingEntity>);
@@ -59,7 +63,7 @@ public:
     virtual void customServerAiStep();
     virtual void getMaxHeadXRot();
     virtual void getMaxHeadYRot();
-    virtual void checkSpawnRules();
+    virtual bool checkSpawnRules();
     virtual void checkSpawnObstruction();
     virtual void getSizeScale();
     virtual void getHeadSizeScale();
@@ -73,12 +77,12 @@ public:
     virtual void canPickUpLoot();
     virtual void setCanPickUpLoot(bool);
     virtual bool isPersistenceRequired();
-    virtual void mobInteract(const std::shared_ptr<Player>&, InteractionHand::EInteractionHand);
+    virtual bool mobInteract(const std::shared_ptr<Player>&, InteractionHand::EInteractionHand);
     virtual void tickLeash();
     virtual void dropLeash(bool, bool);
     virtual void canBeLeashed(const std::shared_ptr<Player>&);
-    virtual void isLeashed();
-    virtual void getLeashHolder();
+    virtual bool isLeashed();
+    virtual std::shared_ptr<Entity> getLeashHolder();
     virtual void isLeashedToPlayer(const std::shared_ptr<Player>&);
     virtual void setLeashedTo(std::shared_ptr<Entity>, bool);
     virtual void restoreLeashFromSave();
