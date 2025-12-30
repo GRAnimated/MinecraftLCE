@@ -21,7 +21,7 @@ public:
     float float38;
     float float3C;
     float float40;
-    int dword44;
+    int mANIM;
     int dword48;
     int dword4C;
 };

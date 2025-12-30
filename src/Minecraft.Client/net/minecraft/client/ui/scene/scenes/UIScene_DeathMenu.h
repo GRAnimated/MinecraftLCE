@@ -19,10 +19,6 @@ public:
     void handleInput(int, int, bool, bool, bool, bool&) override;
     void handlePress(int, int) override;
 
-    char gap108[4];
-    bool byte10C;
-    bool bool10D;
-    bool bool10E;
     UIControl_Button mRespawnButton;
     UIControl_Button mExitGameButton;
     UIControl_Label mTitleLabel;

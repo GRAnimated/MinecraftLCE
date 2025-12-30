@@ -184,7 +184,6 @@ public:
     std::wstring wstring_8;
     fuiFile* mFuiFile;
     bool bool_28;
-    char gap_29[3];
     void* qword30;
     std::unordered_map<std::wstring, bool> map1;
     std::unordered_map<int, UIScene::_TimerInfo> mTimersMap;
@@ -214,4 +213,13 @@ public:
     bool byte_eb;
     int dwordF8;
     std::vector<UIScene::_CachedSlotDrawData*> mCachedSlotDrawData;
+    int fill;  // 8
+    union {
+        int mFocusedSection;
+        union {
+            bool byte10C;
+            bool bool10D;
+            bool bool10E;
+        };
+    };
 };

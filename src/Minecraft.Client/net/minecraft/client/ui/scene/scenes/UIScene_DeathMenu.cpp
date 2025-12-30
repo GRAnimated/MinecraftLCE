@@ -27,7 +27,7 @@
 UIScene_DeathMenu::UIScene_DeathMenu(int padID, void* a2, UILayer* uiLayer) : UIScene(padID, uiLayer) {
     this->initialiseMovie();
 
-    if (CConsoleMinecraftApp::sInstance.GetGameHostOption((eGameHostOption)0x1Fu)) {
+    if (CConsoleMinecraftApp::sInstance.GetGameHostOption((eGameHostOption)0x1F)) {
         this->byte10C = true;
         this->mExitGameButton.setVisible(false);
         this->mRespawnButton.setVisible(false);

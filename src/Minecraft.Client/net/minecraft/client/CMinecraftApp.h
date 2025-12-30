@@ -1,5 +1,7 @@
 #pragma once
 
+#include "net/minecraft/client/model/geom/ModelPart.h"
+#include "net/minecraft/world/entity/SkinAdjustments.h"
 #include "types.h"
 
 #include "NX/Commerce/cCommerceNintendo.h"
@@ -72,6 +74,7 @@ public:
     void SetAction(int, eXuiAction, void*);
     void setLevelGenerationOptions(LevelGenerationOptions* options);
     void SetGameHostOption(eGameHostOption option, unsigned int value);
+    std::vector<ModelPart>* GetAdditionalModelParts(unsigned int);
 
     void UpdateTrialPausedTimer();
     void UpdateTime();

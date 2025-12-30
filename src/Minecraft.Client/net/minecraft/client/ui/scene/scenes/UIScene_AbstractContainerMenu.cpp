@@ -280,7 +280,7 @@ void UIScene_AbstractContainerMenu::setSectionFocus(IUIScene_AbstractContainerMe
         sectionBefore->setFocus(true);
 
     if (this->mFocusedSection != ESceneSection_NONE) {
-        UIControl_SlotList* sectionAfter = this->getSection(this->mFocusedSection);
+        UIControl_SlotList* sectionAfter = this->getSection((ESceneSection)this->mFocusedSection);
         if (sectionAfter != sectionBefore && sectionAfter != nullptr)
             sectionAfter->setFocus(false);
     }
@@ -290,7 +290,7 @@ void UIScene_AbstractContainerMenu::setSectionFocus(IUIScene_AbstractContainerMe
 
 void UIScene_AbstractContainerMenu::setFocusToPointer(int) {
     if (this->mFocusedSection != ESceneSection_NONE) {
-        UIControl_SlotList* section = this->getSection(this->mFocusedSection);
+        UIControl_SlotList* section = this->getSection((ESceneSection)this->mFocusedSection);
         if (section) {
             section->setFocus(false);
         }
