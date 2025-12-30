@@ -13,6 +13,7 @@
 #include "net/minecraft/util/datafix/walker/ItemInstanceBlockEntityTagWalker.h"
 #include "net/minecraft/world/DefaultVertexFormat.h"
 #include "net/minecraft/world/DispenserBootstrap.h"
+#include "net/minecraft/world/eINSTANCEOF.h"
 #include "net/minecraft/world/effect/MobEffect.h"
 #include "net/minecraft/world/effect/MobEffects.h"
 #include "net/minecraft/world/entity/EntityIO.h"
@@ -177,7 +178,8 @@ void MinecraftWorld_RunStaticCtors() {
     LivingEntity::staticCtor();
     ArmorStand::staticCtor();
     Mob::staticCtor();
-    SynchedEntityData::defineId(eMob, eUnknownMob);  // I wonder if these just register categories or whatever
+    SynchedEntityData::defineId(eMob,
+                                ePathfinderMob);  // I wonder if these just register categories or whatever
     AgableMob::staticCtor();
     Animal::staticCtor();
     Villager::staticCtor();
@@ -190,18 +192,18 @@ void MinecraftWorld_RunStaticCtors() {
     AbstractChestedHorse::staticCtor();
     Horse::staticCtor();
     Llama::staticCtor();
-    SynchedEntityData::defineId(eAnimal, eUnknownAnimal);
+    SynchedEntityData::defineId(eAnimal, eTamableAnimal);
     Parrot::staticCtor();
     Sheep::staticCtor();
     Pig::staticCtor();
     Chicken::staticCtor();
     Rabbit::staticCtor();
     PolarBear::staticCtor();
-    SynchedEntityData::defineId(eUnknownMob, eGolem);
+    SynchedEntityData::defineId(ePathfinderMob, eGolem);
     SnowMan::staticCtor();
     VillagerGolem::staticCtor();
     Shulker::staticCtor();
-    SynchedEntityData::defineId(eUnknownMob, eMonster);
+    SynchedEntityData::defineId(ePathfinderMob, eMonster);
     Spider::staticCtor();
     Zombie::staticCtor();
     ZombieVillager::staticCtor();

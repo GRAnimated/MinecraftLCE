@@ -69,7 +69,7 @@ public:
     void getDimensionChangingDelay() override;
     void handleEntityEvent(unsigned char, int) override;
     void getHandSlots() override;
-    void getArmorSlots() override;
+    NonNullList<not_null_ptr<ItemInstance>> getArmorSlots() override;
     void setItemSlot(const EquipmentSlot*, not_null_ptr<ItemInstance>) override;
     bool isInvisibleTo(std::shared_ptr<Player>) override;
     Team* getTeam() override;

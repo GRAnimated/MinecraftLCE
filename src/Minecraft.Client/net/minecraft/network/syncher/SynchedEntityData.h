@@ -39,5 +39,11 @@ public:
         // defineId<bool>(a1, a2, nullptr);
     }
 
+    template <typename T>
+    void set(const EntityDataAccessor<T>*, T, bool);
+
+    template <typename T>
+    T get(const EntityDataAccessor<T>*);
+
     void* padding[0x101];
 };

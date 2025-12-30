@@ -127,8 +127,8 @@ enum eINSTANCEOF {
     eAmbientCreature = 0x0D004000,
     eWaterCreature = 0x0D102000,
     eSquid = 0x0D102001,
-    eUnknownMob = 0x0D400000,
-    eGolem = 0x0D580000,  // GUESSED
+    ePathfinderMob = 0x0D400000,  // GUESSED
+    eGolem = 0x0D580000,          // GUESSED
     eVillagerGolem = 0x0D580002,
     eAgableMob = 0x0D600000,
     eVillager = 0x0D600001,
@@ -136,7 +136,7 @@ enum eINSTANCEOF {
     eChicken = 0x0D680004,
     eAbstractHorse = 0x0D690000,
     eAbstractChestedHorse = 0x0D698000,
-    eUnknownAnimal = 0x0D6C0000,
+    eTamableAnimal = 0x0D6C0000,
     eWolf = 0x0D6C0002,
     eBat = 0x1D004001,
     eCreature = 0x20000000,
