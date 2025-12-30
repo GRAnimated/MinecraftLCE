@@ -51,16 +51,16 @@ public:
     void* qwordEA0;
     int mSkinID;
     int mSelectedSkinID;
-    std::wstring mSelectedSkinName;
+    std::wstring mSelectedSkinName;  // that's wrong for sure
     std::wstring mSkinName;
     std::wstring mSkinCapePath;
     std::vector<SKIN_BOX>* mAdditionalBoxes;
-    _WORD wordF00;
-    _BYTE byteF02;
-    _BYTE byteF03;
-    _BYTE byteF04;
-    _WORD wordF05;
-    __attribute__((aligned(2))) _DWORD dwordF08;
-    _BYTE gapF0C[5];
-    _BYTE byteF11;
+    uint16_t wordF00;
+    char byteF02;
+    char byteF03;
+    char byteF04;
+    uint16_t wordF05;
+    uint16_t dwordF08;
+    char gapF0C[5];
+    char byteF11;
 };
