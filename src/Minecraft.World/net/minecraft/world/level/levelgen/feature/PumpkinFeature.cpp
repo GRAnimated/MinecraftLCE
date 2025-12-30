@@ -1,3 +1,5 @@
+#include "net/minecraft/world/level/levelgen/feature/PumpkinFeature.h"
+
 #include "net/minecraft/core/BlockPos.h"
 #include "net/minecraft/core/Direction.h"
 #include "net/minecraft/world/Random.h"
@@ -6,7 +8,6 @@
 #include "net/minecraft/world/level/block/PumpkinBlock.h"
 #include "net/minecraft/world/level/block/state/BlockState.h"
 #include "net/minecraft/world/level/levelgen/feature/Feature.h"
-#include "net/minecraft/world/level/levelgen/feature/PumpkinFeature.h"
 
 PumpkinFeature::PumpkinFeature() : Feature(false) {}
 
