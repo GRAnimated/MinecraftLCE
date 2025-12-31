@@ -18,6 +18,8 @@ public:
         Plane();
 
         bool apply(const Direction*) const override;
+
+        const Direction* getRandomDirection(Random&);
     };
     class AxisDirection {
     public:
