@@ -1,5 +1,6 @@
 #pragma once
-#include "LevelChunk.h"
+
+#include "net/minecraft/world/level/chunk/LevelChunk.h"
 
 class WaterLevelChunk : public LevelChunk {
 public:
