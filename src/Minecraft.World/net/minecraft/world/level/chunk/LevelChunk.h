@@ -68,7 +68,7 @@ public:
     virtual const BlockState* getBlockState(const BlockPos&);
     virtual void getData(const BlockPos&);
     virtual bool setData(int, int, int, int, int, bool*);
-    virtual const BlockState *setBlock(const BlockPos&, const BlockState*);
+    virtual const BlockState* setBlock(const BlockPos&, const BlockState*);
     virtual bool setBlockAndData(int, int, int, int, int, bool);
     virtual int getBrightness(LightLayer::variety, const BlockPos&);
     virtual void getNeighbourBrightnesses(int*, LightLayer::variety, int, int, int);

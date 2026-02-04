@@ -1,4 +1,5 @@
 #include "Minecraft.World/net/minecraft/world/level/chunk/WaterLevelChunk.h"
+#include "net/minecraft/core/BlockPos.h"
 
 void WaterLevelChunk::reSyncLighting() {}
 void WaterLevelChunk::dropLighting() {}
@@ -43,4 +44,9 @@ int WaterLevelChunk::countEntities() {
 
 bool WaterLevelChunk::shouldSave(bool) {
     return false;
+}
+
+void WaterLevelChunk::setLevelChunkBrightness(LightLayer::variety variety, int x, int y, int z,
+                                              int brightness) {
+    LevelChunk::setBrightness(variety, BlockPos(x, y, z), brightness);
 }

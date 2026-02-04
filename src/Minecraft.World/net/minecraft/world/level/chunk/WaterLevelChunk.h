@@ -2,8 +2,11 @@
 
 #include "net/minecraft/world/level/chunk/LevelChunk.h"
 
+/** Immutable chunk holding only layers of air, water, and stone, */
 class WaterLevelChunk : public LevelChunk {
 public:
+    WaterLevelChunk(Level*, ChunkPrimer*, int, int);
+
     void reSyncLighting() override;
     void dropLighting() override;
     void recalcBlockLights() override;
@@ -11,7 +14,7 @@ public:
     void recalcHeightmap() override;
     void lightLava() override;
     bool setData(int, int, int, int, int, bool*) override;
-    const BlockState *setBlock(const BlockPos&, const BlockState*) override;
+    const BlockState* setBlock(const BlockPos&, const BlockState*) override;
     bool setBlockAndData(int, int, int, int, int, bool) override;
     void setBrightness(LightLayer::variety, const BlockPos&, int) override;
     void addEntity(std::shared_ptr<Entity>) override;
@@ -25,12 +28,16 @@ public:
     void unload(bool, bool) override;
     bool containsPlayer() override;
     void markUnsaved() override;
-    void getEntities(std::shared_ptr<Entity>, AABB const*, std::vector<std::shared_ptr<Entity>>&, const Predicate<std::shared_ptr<Entity>>*) override;
-    void getEntitiesOfClass(const std::type_info&, AABB const*, std::vector<std::shared_ptr<Entity>>&, const Predicate<std::shared_ptr<Entity>>*, bool) override;
+    void getEntities(std::shared_ptr<Entity>, AABB const*, std::vector<std::shared_ptr<Entity>>&,
+                     const Predicate<std::shared_ptr<Entity>>*) override;
+    void getEntitiesOfClass(const std::type_info&, AABB const*, std::vector<std::shared_ptr<Entity>>&,
+                            const Predicate<std::shared_ptr<Entity>>*, bool) override;
     int countEntities() override;
     bool shouldSave(bool) override;
     void setBlocksAndData(arrayWithLength<unsigned char>, int, int, int, int, int, int, int, bool) override;
     void testSetBlocksAndData(arrayWithLength<unsigned char>, int, int, int, int, int, int, int) override;
     void getRandom(long long) override;
     Biome* getBiome(const BlockPos&, BiomeSource*) override;
+
+    void setLevelChunkBrightness(LightLayer::variety, int x, int y, int z, int brightness);
 };
