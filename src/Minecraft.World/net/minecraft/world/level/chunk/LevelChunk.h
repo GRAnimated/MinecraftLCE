@@ -67,9 +67,9 @@ public:
     virtual Block* getBlock(const BlockPos&);
     virtual const BlockState* getBlockState(const BlockPos&);
     virtual void getData(const BlockPos&);
-    virtual void setData(int, int, int, int, int, bool*);
-    virtual void setBlock(const BlockPos&, const BlockState*);
-    virtual void setBlockAndData(int, int, int, int, int, bool);
+    virtual bool setData(int, int, int, int, int, bool*);
+    virtual const BlockState *setBlock(const BlockPos&, const BlockState*);
+    virtual bool setBlockAndData(int, int, int, int, int, bool);
     virtual int getBrightness(LightLayer::variety, const BlockPos&);
     virtual void getNeighbourBrightnesses(int*, LightLayer::variety, int, int, int);
     virtual void setBrightness(LightLayer::variety, const BlockPos&, int);
@@ -84,14 +84,14 @@ public:
     virtual void removeBlockEntity(const BlockPos&);
     virtual void load(bool);
     virtual void unload(bool, bool);
-    virtual void containsPlayer();
+    virtual bool containsPlayer();
     virtual void field_160();
     virtual void markUnsaved();
     virtual void getEntities(std::shared_ptr<Entity>, AABB const*, std::vector<std::shared_ptr<Entity>>&,
                              const Predicate<std::shared_ptr<Entity>>*);
     virtual void getEntitiesOfClass(const std::type_info&, AABB const*, std::vector<std::shared_ptr<Entity>>&,
                                     const Predicate<std::shared_ptr<Entity>>*, bool);
-    virtual void countEntities();
+    virtual int countEntities();
     virtual bool shouldSave(bool);
     virtual void getBlocksAndData(arrayWithLength<unsigned char>*, int, int, int, int, int, int, int, bool);
     virtual void setBlocksAndData(arrayWithLength<unsigned char>, int, int, int, int, int, int, int, bool);
