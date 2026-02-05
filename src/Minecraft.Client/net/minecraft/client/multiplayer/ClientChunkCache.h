@@ -19,7 +19,7 @@ public:
     ~ClientChunkCache() override;
 
     /** Returns a pointer to a loaded chunk at a given location, if one doesn't exist, returns m_waterChunk,
-     * if m_waterChunk doesn't exist, returns m_chunkStorage(?!?!?!?) */
+     * if m_waterChunk doesn't exist, returns m_emptyChunk */
     LevelChunk* getChunkIfLoaded(int x, int z) override;
     LevelChunk* getOrCreateChunk(int x, int z, bool) override;
     void tick() override;

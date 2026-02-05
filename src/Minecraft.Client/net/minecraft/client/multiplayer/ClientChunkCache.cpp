@@ -193,27 +193,17 @@ void ClientChunkCache::MultiPlayerChunkCacheInit(Level* lvl, ChunkStorage* stora
 }
 
 LevelChunk* ClientChunkCache::getChunkIfLoaded(int x, int z) {
-    // this better be a fucking decompiler moment
-    // I can't get any sensible variation of this function to match,
-    // but I can get this monstrosity to match...
-    // this code makes me want to violently throw up all over my keyboard
-
-    // I seriously hope that I just haven't tried enough ways, and that this was implemented in a somewhat
-    // sound way.
-
-    LevelChunk** c;                        // pointer to pointer to chunk
-    if (inBounds(x, z)) {                  // if xz in bounds
-        const int idx = computeIdx(x, z);  // get idx (must be separate var???)
-
-        c = m_cache + idx;             // set to chunk in cache at idx
-    } else if (!this->m_waterChunk) {  // otherwise, if we don't have a water chunk
-        c = reinterpret_cast<LevelChunk**>(&this->m_waterChunk)
-            - 1;  // it falls into m_chunkStorage, and sets it to that, what the fuck!?!?!?
-    } else {      // otherwise, if we have a water chunk
-        c = reinterpret_cast<LevelChunk**>(&this->m_waterChunk);  // set to water chunk
+    if (inBounds(x, z)) {                  // if in bounds
+        const int idx = computeIdx(x, z);  // get idx
+        return m_cache[idx];               // return chunk in cache at idx
     }
 
-    return *c;  // deref and return
+    // since not in bounds, check if m_waterChunk is nullptr, if so, return empty chunk, otherwise return the
+    // water chunk
+    return !this->m_waterChunk ? *reinterpret_cast<LevelChunk**>(
+                                     &this->m_emptyChunk)  // why do we need this reinterpret ptrptr junk
+                                 :
+                                 *reinterpret_cast<LevelChunk**>(&this->m_waterChunk);
 }
 
 LevelChunk* ClientChunkCache::getOrCreateChunk(int x, int z, bool unk) {
@@ -257,26 +247,22 @@ bool ClientChunkCache::reallyHasChunk(int x, int z) {
 }
 
 LevelChunk* ClientChunkCache::getChunk(int x, int z) {
-    // Remember the comment at getChunkIfLoaded? Yeah, I wrote that when I didn't think it could get any
-    // worse... It got Worse.
+    if (inBounds(x, z)) {                  // if in bounds
+        const int idx = computeIdx(x, z);  // get idx
 
-    LevelChunk** c;                        // pointer to pointer to chunk
-    if (inBounds(x, z)) {                  // if xz in bounds
-        const int idx = computeIdx(x, z);  // get idx (must be separate var???)
+        LevelChunk* c = m_cache[idx];   // get chunk in cache at idx
+        if (!c)                         // if nullptr
+            return this->m_emptyChunk;  // return empty chunk
 
-        LevelChunk* h = m_cache[idx];  // set to chunk in cache at idx
-        if (h)
-            return h;  // return chunk
-
-        c = reinterpret_cast<LevelChunk**>(&this->m_emptyChunk);  // return empty chunk
-    } else if (!this->m_waterChunk) {                             // otherwise, if we don't have a water chunk
-        c = reinterpret_cast<LevelChunk**>(&this->m_waterChunk)
-            - 1;  // it falls into m_chunkStorage, and sets it to that, what the fuck!?!?!?
-    } else {      // otherwise, if we have a water chunk
-        c = reinterpret_cast<LevelChunk**>(&this->m_waterChunk);  // set to water chunk
+        return c;  // otherwise return the chunk we fetched
     }
 
-    return *c;  // deref and return
+    // if not in bounds
+    // check if m_waterChunk is nullptr, if so, return empty chunk, otherwise return the water chunk
+    return !this->m_waterChunk ? *reinterpret_cast<LevelChunk**>(
+                                     &this->m_emptyChunk)  // why do we need this reinterpret ptrptr junk
+                                 :
+                                 *reinterpret_cast<LevelChunk**>(&this->m_waterChunk);
 }
 
 LevelChunk* ClientChunkCache::getChunkAt(const BlockPos& pos) {
