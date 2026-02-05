@@ -7,10 +7,17 @@
 #include "net/minecraft/world/level/chunk/WaterLevelChunk.h"
 #include "net/minecraft/world/level/dimension/Dimension.h"
 
+class ClientboundBlockEntityDataPacket;
 class ChunkStorage;
 
 class ClientChunkCache : public ChunkSource {
 public:
+    class QueuedAction {
+    public:
+        QueuedAction(int x, int z, const std::vector<LevelChunk::BlockChange>* changes);
+        QueuedAction(const std::shared_ptr<ClientboundBlockEntityDataPacket>& packet);
+    };
+
     ClientChunkCache(Level* lvl);
     ClientChunkCache(Level* lvl, ChunkStorage* storage);
 
@@ -33,13 +40,27 @@ public:
     LevelChunk* create(int x, int z) override;
     bool save(bool, ProgressListener*) override;
     bool shouldSave() override;
+    void load(int x, int z, LevelChunk* chunk);
     LevelChunk** getCache() override;  // TODO this might have been implemented in the header due to it's
                                        // appearance being elsewhere in memory
-    void dataReceived(int, int) override;
+    void dataReceived(int x, int z) override;
     std::vector<Biome::MobSpawnerData>* getMobsAt(MobCategory* category, const BlockPos& pos) override;
     BlockPos* findNearestMapFeature(Level*, const std::wstring&, const BlockPos&, bool) override;
     int getLoadedChunks() override;
-    void recreateLogicStructuresForChunk(LevelChunk*, int, int) override;
+    void recreateLogicStructuresForChunk(LevelChunk* chunk, int x, int z) override;
+
+    bool mustQueueBlockEntityDataPackets();
+    void queueBlockEntityDataPacket(const std::shared_ptr<ClientboundBlockEntityDataPacket>& packet);
+
+    // reLoad
+    void reLoad(int x, int z, const std::vector<LevelChunk::BlockChange>* changes);
+    void unqueueForReLoad(int x, int z);
+    void queueForReLoad(int x, int z, const std::vector<LevelChunk::BlockChange>* changes, bool);
+
+    void BlockUntilSafeToChangeSaveData(bool);
+
+    void dropOutsideArea(int, int, int, int, bool);
+    void drop(int x, int z, bool);
 
     int inBounds(int x, int z);
     int computeIdx(int x, int z);

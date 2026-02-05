@@ -1,4 +1,4 @@
-#include "Minecraft.Client/net/minecraft/client/multiplayer/ClientChunkCache.h"
+#include "net/minecraft/client/multiplayer/ClientChunkCache.h"
 #include "NX/Thread/C4JThreadImpl.h"
 #include "net/minecraft/client/Compression.h"
 #include "net/minecraft/world/level/Level.h"
@@ -279,6 +279,13 @@ bool ClientChunkCache::shouldSave() {
 
 LevelChunk** ClientChunkCache::getCache() {
     return this->m_cache;
+}
+void ClientChunkCache::dataReceived(int x, int z) {
+    if (!inBounds(x, z))  // if not in bounds
+        return;           // return, don't use this chunk ig?
+
+    int idx = computeIdx(x, z);  // get idx
+    this->unk28[idx] = 1;        // set in unk28 at idx to one? Could be a bool array
 }
 
 std::vector<Biome::MobSpawnerData>* ClientChunkCache::getMobsAt(MobCategory* category, const BlockPos& pos) {

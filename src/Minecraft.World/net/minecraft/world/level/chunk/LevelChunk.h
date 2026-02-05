@@ -35,6 +35,8 @@ public:
     // TODO put this somewhere better, maybe CompressedBlockStorage if used there
 #define INDEX_BLOCK_ARRAY(x, y, z) y | (x << 11) | (z << 7)
 
+    class BlockChange {};
+
     LevelChunk(Level*, ChunkPrimer*, int, int);
     LevelChunk(Level*, int, int);
 
