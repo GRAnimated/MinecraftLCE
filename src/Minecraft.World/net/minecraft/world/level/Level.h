@@ -252,7 +252,7 @@ public:
     std::vector<void*> qword_240;
     void* qword_258;
     std::vector<void*> qword_260;
-    ChunkSource* mChunkCache;
+    LevelChunk** mChunkCache;
     int mXZSize;
     nn::os::MutexType mUnkMutex;
     int dword_2a8;

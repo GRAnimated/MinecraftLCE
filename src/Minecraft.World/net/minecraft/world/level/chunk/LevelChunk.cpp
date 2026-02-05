@@ -13,6 +13,10 @@ void LevelChunk::writeCompressedDataData(DataOutputStream* out) {
     mDataDataUpper->write(out);
 }
 
+bool LevelChunk::DECOMP_getUnknownField() {
+    return unk8;
+}
+
 void LevelChunk::writeCompressedBlockData(DataOutputStream* out) {
     mBlockDataLower->write(out);
     mBlockDataUpper->write(out);
@@ -30,6 +34,10 @@ void LevelChunk::writeCompressedBlockLightData(DataOutputStream* out) {
 
 ChunkPos LevelChunk::getPos() {
     return ChunkPos(this->mXPos, this->mZPos);
+}
+
+bool LevelChunk::isTerrainPopulated() {
+    return (this->mPopulatedFlags >> 8 & 0xFF) >> 2 & 1;
 }
 
 Block* LevelChunk::GetBlock(CompressedBlockStorage* storage, int x, int y, int z) {

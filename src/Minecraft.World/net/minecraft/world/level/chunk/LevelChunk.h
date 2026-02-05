@@ -32,7 +32,11 @@ class LevelChunk {
 public:
     static bool touchedSky;  // Name from b1.2_02
 
+    // TODO put this somewhere better, maybe CompressedBlockStorage if used there
+#define INDEX_BLOCK_ARRAY(x, y, z) y | (x << 11) | (z << 7)
+
     LevelChunk(Level*, ChunkPrimer*, int, int);
+    LevelChunk(Level*, int, int);
 
     enum EntityCreationType {};
 
@@ -78,14 +82,14 @@ public:
     virtual void removeEntity(std::shared_ptr<Entity>);
     virtual void removeEntity(std::shared_ptr<Entity>, int);
     virtual bool isSkyLit(const BlockPos&);
-    virtual void getBlockEntity(const BlockPos&, LevelChunk::EntityCreationType);
+    virtual std::shared_ptr<BlockEntity> getBlockEntity(const BlockPos&, LevelChunk::EntityCreationType);
     virtual void addBlockEntity(std::shared_ptr<BlockEntity>);
     virtual void setBlockEntity(const BlockPos&, std::shared_ptr<BlockEntity>);
     virtual void removeBlockEntity(const BlockPos&);
     virtual void load(bool);
     virtual void unload(bool, bool);
     virtual bool containsPlayer();
-    virtual void field_160();
+    virtual bool DECOMP_getUnknownField(); // NAME NOT KNOWN, don't want it to appear like it is in IDA either
     virtual void markUnsaved();
     virtual void getEntities(std::shared_ptr<Entity>, AABB const*, std::vector<std::shared_ptr<Entity>>&,
                              const Predicate<std::shared_ptr<Entity>>*);
@@ -95,8 +99,8 @@ public:
     virtual bool shouldSave(bool);
     virtual void getBlocksAndData(arrayWithLength<unsigned char>*, int, int, int, int, int, int, int, bool);
     virtual void setBlocksAndData(arrayWithLength<unsigned char>, int, int, int, int, int, int, int, bool);
-    virtual void testSetBlocksAndData(arrayWithLength<unsigned char>, int, int, int, int, int, int, int);
-    virtual void getRandom(long long);
+    virtual bool testSetBlocksAndData(arrayWithLength<unsigned char>, int, int, int, int, int, int, int);
+    virtual Random *getRandom(long long);
     virtual bool isEmpty();
     virtual Biome* getBiome(const BlockPos&, BiomeSource*);
     virtual void compressLighting();
@@ -128,7 +132,8 @@ public:
     CompressedBlockStorage* mBlockDataLower;  // Y0-Y127
     CompressedBlockStorage* mBlockDataUpper;  // Y128-Y255
 
-    char unk[400];
+    char unk[391];
+    Level *m_level;
 
     SparseDataStorage* mDataDataLower;         // Y0-Y127
     SparseDataStorage* mDataDataUpper;         // Y128-Y255
@@ -143,7 +148,10 @@ public:
     std::unordered_map<BlockPos, std::shared_ptr<BlockEntity>>* mBlockEntities;
     char unk3[32];
     short mPopulatedFlags;
-    char unk4[42];
+    char unk4[17];
+    bool unk6; // likely m_populated
+    char unk7[25];
     long mInhabitedTime;
-    char unk5[86];
+    bool unk8;
+    char unk5[85];
 };

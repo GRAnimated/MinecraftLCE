@@ -9,7 +9,7 @@ class C4JThreadImpl : public C4JThread {
 public:
     static unsigned long sMask;
 
-    C4JThreadImpl(int (*)(void*), void*, const char*, int);
+    C4JThreadImpl(int (*threadProc)(void *), void*, const char*, int);
 
     static void SetMainThreadID();
 

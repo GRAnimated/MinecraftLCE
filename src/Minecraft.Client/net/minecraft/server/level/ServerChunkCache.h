@@ -34,11 +34,11 @@ public:
     LevelChunk* create(int chunkX, int chunkZ) override;
     LevelChunk* create(int chunkX, int chunkZ, bool unk);
     bool saveAllEntities() override;
-    void save(bool, ProgressListener*) override;
+    bool save(bool, ProgressListener*) override;
     bool shouldSave() override;
-    ChunkSource* getCache() override;
+    LevelChunk** getCache() override;
     std::vector<Biome::MobSpawnerData>* getMobsAt(MobCategory* category, const BlockPos& pos) override;
-    void findNearestMapFeature(Level* level, const std::wstring& name, const BlockPos& pos,
+    BlockPos *findNearestMapFeature(Level* level, const std::wstring& name, const BlockPos& pos,
                                bool unk) override;
     int getLoadedChunks() override;
     void recreateLogicStructuresForChunk(LevelChunk* chunk, int chunkX, int chunkZ) override;
@@ -58,7 +58,7 @@ public:
     ChunkGenerator* mChunkGenerator;
     ChunkStorage* mChunkStorage;
     bool byte_28;
-    LevelChunk** mChunks;
+    LevelChunk** m_cache;
     std::vector<LevelChunk*> mChunkList;
     ServerLevel* mLevel;
     Dimension* mDimension;

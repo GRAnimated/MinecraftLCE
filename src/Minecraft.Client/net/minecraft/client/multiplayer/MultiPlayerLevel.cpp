@@ -36,7 +36,7 @@ void MultiPlayerLevel::MultiPlayerLevelInit(ClientPacketListener* packetListener
     mDimension->init(this);
     mChunkSource = createChunkSource();
     mChunkCache = mChunkSource->getCache();
-    mXZSize = mChunkSource->mXZSize;
+    mXZSize = mChunkSource->m_xzSize;
     if (!mLevelData->isInitialized()) {
         initializeLevel(levelSettings);
         mLevelData->setInitialized(true);
