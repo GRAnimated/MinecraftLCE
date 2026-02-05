@@ -38,8 +38,8 @@ public:
     bool shouldSave() override;
     LevelChunk** getCache() override;
     std::vector<Biome::MobSpawnerData>* getMobsAt(MobCategory* category, const BlockPos& pos) override;
-    BlockPos *findNearestMapFeature(Level* level, const std::wstring& name, const BlockPos& pos,
-                               bool unk) override;
+    BlockPos* findNearestMapFeature(Level* level, const std::wstring& name, const BlockPos& pos,
+                                    bool unk) override;
     int getLoadedChunks() override;
     void recreateLogicStructuresForChunk(LevelChunk* chunk, int chunkX, int chunkZ) override;
 

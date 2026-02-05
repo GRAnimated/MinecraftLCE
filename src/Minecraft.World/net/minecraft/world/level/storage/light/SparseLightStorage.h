@@ -23,10 +23,10 @@ public:
 
     // 0x710035BC18
     // do they just keep copying these 2 methods everywhere???
-    static void *alloc(int len) {
+    static void* alloc(int len) {
         sLength += len;
         return malloc(len);
     }
 
-    std::atomic<unsigned long *> m_light;
+    std::atomic<unsigned long*> m_light;
 };

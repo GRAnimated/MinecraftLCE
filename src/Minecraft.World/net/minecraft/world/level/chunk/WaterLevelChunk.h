@@ -8,7 +8,7 @@
  */
 class WaterLevelChunk : public LevelChunk {
 public:
-    WaterLevelChunk(Level *lvl, ChunkPrimer *primer, int x, int z);
+    WaterLevelChunk(Level* lvl, ChunkPrimer* primer, int x, int z);
 
     void reSyncLighting() override;
     void dropLighting() override;
@@ -17,7 +17,7 @@ public:
     void recalcHeightmap() override;
     void lightLava() override;
     bool setData(int, int, int, int, int, bool*) override;
-    const BlockState* setBlock(const BlockPos &pos, const BlockState* state) override;
+    const BlockState* setBlock(const BlockPos& pos, const BlockState* state) override;
     bool setBlockAndData(int, int, int, int, int, bool) override;
     void setBrightness(LightLayer::variety layer, const BlockPos& pos, int brightness) override;
     void addEntity(std::shared_ptr<Entity>) override;
@@ -39,7 +39,7 @@ public:
     bool shouldSave(bool) override;
     void setBlocksAndData(arrayWithLength<unsigned char>, int, int, int, int, int, int, int, bool) override;
     bool testSetBlocksAndData(arrayWithLength<unsigned char>, int, int, int, int, int, int, int) override;
-    Random *getRandom(long long) override;
+    Random* getRandom(long long) override;
     Biome* getBiome(const BlockPos&, BiomeSource*) override;
 
     void setLevelChunkBrightness(LightLayer::variety, int x, int y, int z, int brightness);

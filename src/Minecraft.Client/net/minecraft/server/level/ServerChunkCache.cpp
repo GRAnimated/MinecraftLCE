@@ -444,8 +444,8 @@ std::vector<Biome::MobSpawnerData>* ServerChunkCache::getMobsAt(MobCategory* cat
     return mChunkGenerator->getMobsAt(category, pos);
 }
 
-BlockPos *ServerChunkCache::findNearestMapFeature(Level* level, const std::wstring& name, const BlockPos& pos,
-                                             bool unk) {
+BlockPos* ServerChunkCache::findNearestMapFeature(Level* level, const std::wstring& name, const BlockPos& pos,
+                                                  bool unk) {
     return mChunkGenerator->findNearestMapFeature(level, name, pos, unk);
 }
 

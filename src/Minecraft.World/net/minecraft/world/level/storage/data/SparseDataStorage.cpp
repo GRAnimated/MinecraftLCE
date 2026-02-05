@@ -1,4 +1,4 @@
-#include "Minecraft.World/net/minecraft/world/level/storage/data/SparseDataStorage.h"
+#include "net/minecraft/world/level/storage/data/SparseDataStorage.h"
 
 // NON_MATCHING | Difference: 1830
 // The pseudocode is the same as CompressedBlockStorage, what's up with this?

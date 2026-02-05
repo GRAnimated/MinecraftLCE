@@ -89,7 +89,8 @@ public:
     virtual void load(bool);
     virtual void unload(bool, bool);
     virtual bool containsPlayer();
-    virtual bool DECOMP_getUnknownField(); // NAME NOT KNOWN, don't want it to appear like it is in IDA either
+    virtual bool
+    DECOMP_getUnknownField();  // NAME NOT KNOWN, don't want it to appear like it is in IDA either
     virtual void markUnsaved();
     virtual void getEntities(std::shared_ptr<Entity>, AABB const*, std::vector<std::shared_ptr<Entity>>&,
                              const Predicate<std::shared_ptr<Entity>>*);
@@ -100,7 +101,7 @@ public:
     virtual void getBlocksAndData(arrayWithLength<unsigned char>*, int, int, int, int, int, int, int, bool);
     virtual void setBlocksAndData(arrayWithLength<unsigned char>, int, int, int, int, int, int, int, bool);
     virtual bool testSetBlocksAndData(arrayWithLength<unsigned char>, int, int, int, int, int, int, int);
-    virtual Random *getRandom(long long);
+    virtual Random* getRandom(long long);
     virtual bool isEmpty();
     virtual Biome* getBiome(const BlockPos&, BiomeSource*);
     virtual void compressLighting();
@@ -133,7 +134,7 @@ public:
     CompressedBlockStorage* mBlockDataUpper;  // Y128-Y255
 
     char unk[391];
-    Level *m_level;
+    Level* m_level;
 
     SparseDataStorage* mDataDataLower;         // Y0-Y127
     SparseDataStorage* mDataDataUpper;         // Y128-Y255
@@ -149,7 +150,7 @@ public:
     char unk3[32];
     short mPopulatedFlags;
     char unk4[17];
-    bool unk6; // likely m_populated
+    bool unk6;  // likely m_populated
     char unk7[25];
     long mInhabitedTime;
     bool unk8;

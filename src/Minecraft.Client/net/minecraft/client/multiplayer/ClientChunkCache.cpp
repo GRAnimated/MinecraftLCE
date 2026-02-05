@@ -48,7 +48,7 @@ ClientChunkCache::ClientChunkCache(Level* lvl, ChunkStorage* storage) : m_chunkP
 // I completely missed the branch out to this, only noticed once I tried matching the second constructor
 // Wii U Edition didn't do a jumpout, so the symbol and function exists
 // NON_MATCHING | Difference: 11775
-void ClientChunkCache::MultiPlayerChunkCacheInit(Level *lvl, ChunkStorage *storage) {
+void ClientChunkCache::MultiPlayerChunkCacheInit(Level* lvl, ChunkStorage* storage) {
     int bounds;
 
     int xzSize = lvl->mDimension->getXZSize();
@@ -94,7 +94,8 @@ void ClientChunkCache::MultiPlayerChunkCacheInit(Level *lvl, ChunkStorage *stora
                     if (y == 3) {
                         // from 0 to 16 chunk coords z
                         for (int z = 0; z != 16; z++) {
-                            blocks[INDEX_BLOCK_ARRAY(x, y, z)] = Blocks::GRASS->getId();  // place a grass block
+                            blocks[INDEX_BLOCK_ARRAY(x, y, z)]
+                                = Blocks::GRASS->getId();  // place a grass block
                         }
                     } else if (y > 2) {
                         // if y is larger than 2, but not 3, we are above the topmost layer of
@@ -153,7 +154,8 @@ void ClientChunkCache::MultiPlayerChunkCacheInit(Level *lvl, ChunkStorage *stora
         if (dat->getGeneratorType() == LevelType::FLAT) {
             for (int x = 0; x != 16; x++) {       // from 0 to 16 chunk coords x
                 for (int y = 0; y != 128; y++) {  // from 0 to 128 chunk coords y (old world height)
-                    if (y >= 3) {  // if y is bigger or equal to 3, which is any block at or above the top block
+                    if (y
+                        >= 3) {  // if y is bigger or equal to 3, which is any block at or above the top block
                         for (int z = 0; z != 16; z++) {  // from 0 to 16 chunk coords z
                             m_waterChunk->setLevelChunkBrightness(LightLayer::SKY, x, y, z,
                                                                   15);  // set light level to 15
@@ -196,33 +198,36 @@ LevelChunk* ClientChunkCache::getChunkIfLoaded(int x, int z) {
     // but I can get this monstrosity to match...
     // this code makes me want to violently throw up all over my keyboard
 
-    // I seriously hope that I just haven't tried enough ways, and that this was implemented in a somewhat sound way.
+    // I seriously hope that I just haven't tried enough ways, and that this was implemented in a somewhat
+    // sound way.
 
-    LevelChunk **c; // pointer to pointer to chunk
-    if (inBounds(x, z)) { // if xz in bounds
-        const int idx = computeIdx(x, z); // get idx (must be separate var???)
+    LevelChunk** c;                        // pointer to pointer to chunk
+    if (inBounds(x, z)) {                  // if xz in bounds
+        const int idx = computeIdx(x, z);  // get idx (must be separate var???)
 
-        c = m_cache + idx; // set to chunk in cache at idx
-    } else if (!this->m_waterChunk) { // otherwise, if we don't have a water chunk
-        c = reinterpret_cast<LevelChunk**>(&this->m_waterChunk) - 1; // it falls into m_chunkStorage, and sets it to that, what the fuck!?!?!?
-    } else { // otherwise, if we have a water chunk
-        c = reinterpret_cast<LevelChunk**>(&this->m_waterChunk); // set to water chunk
+        c = m_cache + idx;             // set to chunk in cache at idx
+    } else if (!this->m_waterChunk) {  // otherwise, if we don't have a water chunk
+        c = reinterpret_cast<LevelChunk**>(&this->m_waterChunk)
+            - 1;  // it falls into m_chunkStorage, and sets it to that, what the fuck!?!?!?
+    } else {      // otherwise, if we have a water chunk
+        c = reinterpret_cast<LevelChunk**>(&this->m_waterChunk);  // set to water chunk
     }
 
-    return *c; // deref and return
+    return *c;  // deref and return
 }
 
 LevelChunk* ClientChunkCache::getOrCreateChunk(int x, int z, bool unk) {
-    LevelChunk *c = this->getChunkIfLoaded(x, z); // get chunk
-    if (!c) // if null, return empty chunk inst
+    LevelChunk* c = this->getChunkIfLoaded(x, z);  // get chunk
+    if (!c)                                        // if null, return empty chunk inst
         return this->m_emptyChunk;
 
-    return c; // return chunk otherwise since not null
+    return c;  // return chunk otherwise since not null
 }
 
 std::wstring ClientChunkCache::gatherStats() {
     EnterCriticalSection(&this->m_mutex);
-    const int u = (this->m_loadedChunksSize1 - this->m_loadedChunksSize2) >> 3; // maybe this is some vector or map?
+    const int u
+        = (this->m_loadedChunksSize1 - this->m_loadedChunksSize2) >> 3;  // maybe this is some vector or map?
     LeaveCriticalSection(&this->m_mutex);
 
     return L"MultiplayerChunkCache: " + std::to_wstring(u);
@@ -241,7 +246,8 @@ bool ClientChunkCache::hasChunk(int x, int z) {
 }
 bool ClientChunkCache::reallyHasChunk(int x, int z) {
     if (!inBounds(x, z))
-        return true; // if out of bounds, it returns true because the client will then fetch a WaterLevelChunk
+        return true;  // if out of bounds, it returns true because the client will then fetch a
+                      // WaterLevelChunk
 
     int idx = computeIdx(x, z);
     if (this->m_cache[idx])
@@ -251,25 +257,26 @@ bool ClientChunkCache::reallyHasChunk(int x, int z) {
 }
 
 LevelChunk* ClientChunkCache::getChunk(int x, int z) {
-    // Remember the comment at getChunkIfLoaded? Yeah, I wrote that when I didn't think it could get any worse...
-    // It got Worse.
+    // Remember the comment at getChunkIfLoaded? Yeah, I wrote that when I didn't think it could get any
+    // worse... It got Worse.
 
-    LevelChunk **c; // pointer to pointer to chunk
-    if (inBounds(x, z)) { // if xz in bounds
-        const int idx = computeIdx(x, z); // get idx (must be separate var???)
+    LevelChunk** c;                        // pointer to pointer to chunk
+    if (inBounds(x, z)) {                  // if xz in bounds
+        const int idx = computeIdx(x, z);  // get idx (must be separate var???)
 
-        LevelChunk *h = m_cache[idx]; // set to chunk in cache at idx
+        LevelChunk* h = m_cache[idx];  // set to chunk in cache at idx
         if (h)
-            return h; // return chunk
+            return h;  // return chunk
 
-        c = reinterpret_cast<LevelChunk**>(&this->m_emptyChunk); //return empty chunk
-    } else if (!this->m_waterChunk) { // otherwise, if we don't have a water chunk
-        c = reinterpret_cast<LevelChunk**>(&this->m_waterChunk) - 1; // it falls into m_chunkStorage, and sets it to that, what the fuck!?!?!?
-    } else { // otherwise, if we have a water chunk
-        c = reinterpret_cast<LevelChunk**>(&this->m_waterChunk); // set to water chunk
+        c = reinterpret_cast<LevelChunk**>(&this->m_emptyChunk);  // return empty chunk
+    } else if (!this->m_waterChunk) {                             // otherwise, if we don't have a water chunk
+        c = reinterpret_cast<LevelChunk**>(&this->m_waterChunk)
+            - 1;  // it falls into m_chunkStorage, and sets it to that, what the fuck!?!?!?
+    } else {      // otherwise, if we have a water chunk
+        c = reinterpret_cast<LevelChunk**>(&this->m_waterChunk);  // set to water chunk
     }
 
-    return *c; // deref and return
+    return *c;  // deref and return
 }
 
 LevelChunk* ClientChunkCache::getChunkAt(const BlockPos& pos) {

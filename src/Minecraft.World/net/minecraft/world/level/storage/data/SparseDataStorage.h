@@ -22,7 +22,7 @@ public:
 
     // 0x7100359E44
     // do they just keep copying these 2 methods everywhere???
-    void *alloc(int len) {
+    void* alloc(int len) {
         sLength += len;
         return malloc(len);
     }
