@@ -93,6 +93,7 @@ target_compile_options(mcswitch PRIVATE -Wno-deprecated)
 target_compile_options(mcswitch PRIVATE -Wno-sign-compare)
 
 add_definitions(-D SAFETY_CHECKS)
+add_definitions(-D UNUSED_DELETE)
 
 add_subdirectory(lib/zlib)
 target_include_directories(mcswitch PRIVATE ${CMAKE_CURRENT_BINARY_DIR}/lib/zlib) # for zconf.h

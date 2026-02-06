@@ -9,6 +9,9 @@
 #include "net/minecraft/world/level/block/entity/BlockEntity.h"
 #include "net/minecraft/world/level/tick/TickNextTickData.h"
 
+// TODO OldChunkStorage::ThreadStorage constructor is not the same as expected
+DEFINE_THREAD_STORAGE_SINGLE(OldChunkStorage)
+
 // NON_MATCHING | Score: 42929 (lower is better)
 void OldChunkStorage::save(LevelChunk* chunk, Level* lvl, CompoundTag* tag) {
     lvl->checkSession();
@@ -52,7 +55,7 @@ void OldChunkStorage::save(LevelChunk* chunk, Level* lvl, DataOutputStream* out)
     // write heightmap
     out->write(chunk->getHeightmap());
 
-    out->writeShort(chunk->mPopulatedFlags);
+    out->writeShort(chunk->m_populatedFlags);
 
     // write biomes
     out->write(chunk->getBiomes());

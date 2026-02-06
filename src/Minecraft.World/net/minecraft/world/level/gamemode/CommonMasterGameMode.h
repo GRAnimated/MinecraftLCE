@@ -89,7 +89,8 @@ public:
     void* qword150;
     void* qword158;
     void* qword160;
-    void* qword168;
+    int unk;
+    bool m_hasPendingLevelData;
     void* qword170;
     void* qword178;
 };

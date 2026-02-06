@@ -293,7 +293,7 @@ void Chunk::rebuild() {
     std::vector<GlideRingGenerator::eGlideRingSize> glideRingSizes;
 
     // The Glide minigame has boost areas where the game creates fake blocks to cover them.
-    if (Minecraft::InMiniGame(EMiniGameId::GLIDE, 0)) {
+    if (Minecraft::InMiniGame(EMiniGameId::GLIDE, false)) {
         LevelRuleset* gameRules = CConsoleMinecraftApp::sInstance.getGameRuleDefinitions();
         std::vector<TargetAreaRuleDefinition*> ringsInArea;
 

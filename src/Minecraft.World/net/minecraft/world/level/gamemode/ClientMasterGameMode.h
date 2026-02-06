@@ -29,6 +29,8 @@ public:
     void GetLastCheckpointID(const StatsUID&) override;
     void OnProgressMade(const std::shared_ptr<Player>&, double) override;
 
+    bool isNewLevelDataPending();
+
     bool IsRoundRestarting();
 
     unsigned char size[0x2E0 - 8];

@@ -20,9 +20,16 @@ AABB::AABB(double x1, double y1, double z1, double x2, double y2, double z2) {
 AABB* AABB::newPermanent(double x1, double y1, double z1, double x2, double y2, double z2) {
     return new AABB(x1, y1, z1, x2, y2, z2);
 }
+AABB* AABB::newPermanent(const BlockPos& pos) {
+    return newPermanent(pos.getX(), pos.getY(), pos.getZ(), pos.getX() + 1, pos.getY() + 1, pos.getZ() + 1);
+}
 
 AABB* AABB::newPermanent(const AABB* other) {
     return newPermanent(other->minX, other->minY, other->minZ, other->maxX, other->maxY, other->maxZ);
+}
+
+AABB* AABB::newPermanent(const BlockPos& lhs, const BlockPos& rhs) {
+    return newPermanent(lhs.getX(), lhs.getY(), lhs.getZ(), rhs.getX(), rhs.getY(), rhs.getZ());
 }
 
 AABB* AABB::newTemp(double x1, double y1, double z1, double x2, double y2, double z2) {
@@ -34,6 +41,18 @@ AABB* AABB::newTemp(double x1, double y1, double z1, double x2, double y2, doubl
     ts->mUnk++;
     ts->mUnk &= 0x3ff;
     return temp;
+}
+
+AABB* AABB::newTemp(const BlockPos& pos) {
+    return newTemp(pos.getX(), pos.getY(), pos.getZ(), pos.getX() + 1, pos.getY() + 1, pos.getZ() + 1);
+}
+
+AABB* AABB::newTemp(const BlockPos& lhs, const BlockPos& rhs) {
+    return newTemp(lhs.getX(), lhs.getY(), lhs.getZ(), rhs.getX(), rhs.getY(), rhs.getZ());
+}
+
+AABB* AABB::newTemp(const AABB* aabb) {
+    return newTemp(aabb->minX, aabb->minY, aabb->minZ, aabb->maxX, aabb->maxY, aabb->maxZ);
 }
 
 AABB* AABB::set(double x1, double y1, double z1, double x2, double y2, double z2) {

@@ -18,7 +18,7 @@ ServerChunkCache::ServerChunkCache(ServerLevel* level, ChunkStorage* storage, Ch
     int size = generator->getSize();
     dword_bc = size / 2;
     dword_b8 = size;
-    mXZSize = size;
+    m_xzSize = size;
     byte_28 = false;
 
     mEmptyChunk = new EmptyLevelChunk(level, 0, 0);
@@ -28,8 +28,8 @@ ServerChunkCache::ServerChunkCache(ServerLevel* level, ChunkStorage* storage, Ch
     mChunkGenerator = generator;
     mChunkStorage = storage;
 
-    mChunks = new LevelChunk*[dword_b8 * dword_b8];
-    memset(mChunks, 0, dword_b8 * dword_b8 * sizeof(LevelChunk*));
+    m_cache = new LevelChunk*[dword_b8 * dword_b8];
+    memset(m_cache, 0, dword_b8 * dword_b8 * sizeof(LevelChunk*));
 
     mUnloadedChunks = new LevelChunk*[dword_b8 * dword_b8];
     memset(mUnloadedChunks, 0, dword_b8 * dword_b8 * sizeof(LevelChunk*));
@@ -45,7 +45,7 @@ ServerChunkCache::~ServerChunkCache() {
 
     delete mChunkStorage;
     delete mEmptyChunk;
-    delete mChunks;
+    delete m_cache;
     delete mChunkGenerator;
 
     for (int i = 0; i < dword_b8 * dword_b8; ++i) {
@@ -64,7 +64,7 @@ ServerChunkCache::~ServerChunkCache() {
 LevelChunk* ServerChunkCache::getChunkIfLoaded(int chunkX, int chunkZ) {
     if (inBounds(chunkX, chunkZ)) {
         int idx = computeIdx(chunkX, chunkZ);
-        return mChunks[idx];
+        return m_cache[idx];
     }
     return mEmptyChunk;
 }
@@ -84,7 +84,7 @@ int ServerChunkCache::computeIdx(int chunkX, int chunkZ) {
 LevelChunk* ServerChunkCache::getChunkIfLoadedOrInvalid(int chunkX, int chunkZ) {
     if (inBounds(chunkX, chunkZ)) {
         int idx = computeIdx(chunkX, chunkZ);
-        return mChunks[idx];
+        return m_cache[idx];
     }
 
     return mEmptyChunk;
@@ -95,7 +95,7 @@ LevelChunk* ServerChunkCache::getChunkIfGenerated(int chunkX, int chunkZ, bool u
         return mEmptyChunk;
 
     int idx = computeIdx(chunkX, chunkZ);
-    LevelChunk* chunk = mChunks[idx];
+    LevelChunk* chunk = m_cache[idx];
     LevelChunk* loadedOrInvalid = getChunkIfLoadedOrInvalid(chunkX, chunkZ);
 
     if (loadedOrInvalid && loadedOrInvalid != mEmptyChunk && !loadedOrInvalid->IsInvalid())
@@ -154,7 +154,7 @@ LevelChunk* ServerChunkCache::updateCacheAndPostProcess(int chunkX, int chunkZ, 
 
     int idx = computeIdx(chunkX, chunkZ);
 
-    if (InterlockedCompareExchangeRelease((volatile long*)&mChunks[idx], (long)newChunk, (long)oldChunk)
+    if (InterlockedCompareExchangeRelease((volatile long*)&m_cache[idx], (long)newChunk, (long)oldChunk)
         == (long)oldChunk) {
         EnterCriticalSection(&mMutex);
 
@@ -170,21 +170,21 @@ LevelChunk* ServerChunkCache::updateCacheAndPostProcess(int chunkX, int chunkZ, 
         }
 
         if (unk) {
-            if ((newChunk->mPopulatedFlags & 2) == 0 && hasChunk(chunkX + 1, chunkZ + 1)
+            if ((newChunk->m_populatedFlags & 2) == 0 && hasChunk(chunkX + 1, chunkZ + 1)
                 && hasChunk(chunkX, chunkZ + 1) && hasChunk(chunkX + 1, chunkZ))
                 MinecraftServer::getInstance()->addPostProcessRequest(this, mChunkGenerator, chunkX, chunkZ);
-            if (hasChunk(chunkX - 1, chunkZ) && ((getChunk(chunkX - 1, chunkZ)->mPopulatedFlags & 2) == 0)
+            if (hasChunk(chunkX - 1, chunkZ) && ((getChunk(chunkX - 1, chunkZ)->m_populatedFlags & 2) == 0)
                 && hasChunk(chunkX - 1, chunkZ + 1) && hasChunk(chunkX, chunkZ + 1)
                 && hasChunk(chunkX - 1, chunkZ))
                 MinecraftServer::getInstance()->addPostProcessRequest(this, mChunkGenerator, chunkX - 1,
                                                                       chunkZ);
-            if (hasChunk(chunkX, chunkZ - 1) && ((getChunk(chunkX, chunkZ - 1)->mPopulatedFlags & 2) == 0)
+            if (hasChunk(chunkX, chunkZ - 1) && ((getChunk(chunkX, chunkZ - 1)->m_populatedFlags & 2) == 0)
                 && hasChunk(chunkX + 1, chunkZ - 1) && hasChunk(chunkX, chunkZ - 1)
                 && hasChunk(chunkX + 1, chunkZ))
                 MinecraftServer::getInstance()->addPostProcessRequest(this, mChunkGenerator, chunkX,
                                                                       chunkZ - 1);
             if (hasChunk(chunkX - 1, chunkZ - 1)
-                && ((getChunk(chunkX - 1, chunkZ - 1)->mPopulatedFlags & 2) == 0)
+                && ((getChunk(chunkX - 1, chunkZ - 1)->m_populatedFlags & 2) == 0)
                 && hasChunk(chunkX - 1, chunkZ - 1) && hasChunk(chunkX, chunkZ - 1)
                 && hasChunk(chunkX - 1, chunkZ))
                 MinecraftServer::getInstance()->addPostProcessRequest(this, mChunkGenerator, chunkX - 1,
@@ -225,7 +225,7 @@ LevelChunk* ServerChunkCache::updateCacheAndPostProcess(int chunkX, int chunkZ, 
             newChunk->unload(true, true);
             delete newChunk;
         }
-        return mChunks[idx];
+        return m_cache[idx];
     }
     return newChunk;
 }
@@ -235,7 +235,7 @@ LevelChunk* ServerChunkCache::getOrCreateChunk(int chunkX, int chunkZ, bool unk)
         return mEmptyChunk;
 
     int idx = computeIdx(chunkX, chunkZ);
-    LevelChunk* chunk = mChunks[idx];
+    LevelChunk* chunk = m_cache[idx];
     LevelChunk* generatedChunk = getChunkIfGenerated(chunkX, chunkZ, unk);
     if (generatedChunk)
         return generatedChunk;
@@ -258,7 +258,7 @@ bool ServerChunkCache::hasChunk(int chunkX, int chunkZ) {
         return true;
 
     int idx = computeIdx(chunkX, chunkZ);
-    LevelChunk* chunk = mChunks[idx];
+    LevelChunk* chunk = m_cache[idx];
     if (chunk == nullptr || chunk->IsInvalid())
         return false;
 
@@ -266,7 +266,7 @@ bool ServerChunkCache::hasChunk(int chunkX, int chunkZ) {
 }
 
 bool ServerChunkCache::isChunkGeneratedAt(int chunkX, int chunkZ) {
-    LevelChunk* chunk = mChunks[computeIdx(chunkX, chunkZ)];
+    LevelChunk* chunk = m_cache[computeIdx(chunkX, chunkZ)];
 
     if (!inBounds(chunkX, chunkZ)) {
         return false;
@@ -292,7 +292,7 @@ LevelChunk* ServerChunkCache::create(int chunkX, int chunkZ, bool unk) {
         return mEmptyChunk;
 
     int idx = computeIdx(chunkX, chunkZ);
-    LevelChunk* chunk = mChunks[idx];
+    LevelChunk* chunk = m_cache[idx];
 
     if (chunk && chunk->mXPos == chunkX && chunk->mZPos == chunkZ && !chunk->IsInvalid()) {
         return chunk;
@@ -335,7 +335,7 @@ void ServerChunkCache::updatePostProcessFlags(int chunkX, int chunkZ) {
     updatePostProcessFlag(0x100, chunkX, chunkZ, 1, 0, chunk);
     updatePostProcessFlag(0x200, chunkX, chunkZ, 1, -1, chunk);
 
-    if ((chunk->mPopulatedFlags & 2)) {
+    if ((chunk->m_populatedFlags & 2)) {
         flagPostProcessComplete(4, chunkX + 1, chunkZ);
         flagPostProcessComplete(0x10, chunkX + 1, chunkZ + 1);
         flagPostProcessComplete(8, chunkX, chunkZ + 1);
@@ -355,7 +355,7 @@ LevelChunk* ServerChunkCache::getChunk(int chunkX, int chunkZ) {
         return mEmptyChunk;
 
     int idx = computeIdx(chunkX, chunkZ);
-    LevelChunk* chunk = mChunks[idx];
+    LevelChunk* chunk = m_cache[idx];
 
     if (chunk && !chunk->IsInvalid())
         return chunk;
@@ -371,7 +371,7 @@ LevelChunk* ServerChunkCache::getChunkLoadedOrUnloaded(int chunkX, int chunkZ) {
         return mEmptyChunk;
 
     int idx = computeIdx(chunkX, chunkZ);
-    LevelChunk* chunk = mChunks[idx];
+    LevelChunk* chunk = m_cache[idx];
 
     if (!chunk) {
         chunk = mUnloadedChunks[idx];
@@ -393,8 +393,8 @@ void ServerChunkCache::updatePostProcessFlag(short flag, int baseX, int baseZ, i
     int chunkZ = baseZ + offsetZ;
     if (hasChunk(chunkX, chunkZ)) {
         LevelChunk* targetChunk = getChunk(chunkX, chunkZ);
-        if (targetChunk == mEmptyChunk || (targetChunk->mPopulatedFlags & 2) != 0) {
-            chunk->mPopulatedFlags |= flag;
+        if (targetChunk == mEmptyChunk || (targetChunk->m_populatedFlags & 2) != 0) {
+            chunk->m_populatedFlags |= flag;
         }
     }
 }
@@ -444,9 +444,9 @@ std::vector<Biome::MobSpawnerData>* ServerChunkCache::getMobsAt(MobCategory* cat
     return mChunkGenerator->getMobsAt(category, pos);
 }
 
-void ServerChunkCache::findNearestMapFeature(Level* level, const std::wstring& name, const BlockPos& pos,
-                                             bool unk) {
-    mChunkGenerator->findNearestMapFeature(level, name, pos, unk);
+BlockPos* ServerChunkCache::findNearestMapFeature(Level* level, const std::wstring& name, const BlockPos& pos,
+                                                  bool unk) {
+    return mChunkGenerator->findNearestMapFeature(level, name, pos, unk);
 }
 
 void ServerChunkCache::recreateLogicStructuresForChunk(LevelChunk* chunk, int chunkX, int chunkZ) {}
@@ -460,7 +460,6 @@ int ServerChunkCache::getLoadedChunks() {
     return list->size();
 }
 
-ChunkSource* ServerChunkCache::getCache() {
-    // likely wrong, but other classes require this function to return ChunkSource*
-    return (ChunkSource*)mChunks;
+LevelChunk** ServerChunkCache::getCache() {
+    return m_cache;
 }

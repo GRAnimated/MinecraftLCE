@@ -207,6 +207,8 @@ public:
     bool isFindingSpawn();
     unsigned int countInstanceOf(eINSTANCEOF, bool, unsigned int*, unsigned int*);
 
+    void setBlockEntity(const BlockPos& pos, std::shared_ptr<BlockEntity> blockEntity);
+
     int mSeaLevel = 63;
     nn::os::MutexType mEntityMutex;
     std::vector<std::shared_ptr<Entity>> mEntities;
@@ -252,7 +254,7 @@ public:
     std::vector<void*> qword_240;
     void* qword_258;
     std::vector<void*> qword_260;
-    ChunkSource* mChunkCache;
+    LevelChunk** mChunkCache;
     int mXZSize;
     nn::os::MutexType mUnkMutex;
     int dword_2a8;
