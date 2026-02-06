@@ -8,19 +8,19 @@ Checks: >
 CheckOptions:
   # struct fields
   readability-identifier-naming.ClassConstantCase: UPPER_CASE
-  readability-identifier-naming.PublicMemberCase: CamelCase
-  readability-identifier-naming.PublicMemberPrefix: m
-  readability-identifier-naming.ProtectedMemberCase: CamelCase
-  readability-identifier-naming.ProtectedMemberPrefix: m
-  readability-identifier-naming.PrivateMemberCase: CamelCase
-  readability-identifier-naming.PrivateMemberPrefix: m
+  readability-identifier-naming.PublicMemberCase: camelBack
+  readability-identifier-naming.PublicMemberPrefix: m_
+  readability-identifier-naming.ProtectedMemberCase: camelBack
+  readability-identifier-naming.ProtectedMemberPrefix: m_
+  readability-identifier-naming.PrivateMemberCase: camelBack
+  readability-identifier-naming.PrivateMemberPrefix: m_
   # statics
-  readability-identifier-naming.StaticVariableCase: CamelCase
-  readability-identifier-naming.StaticVariablePrefix: s
-  readability-identifier-naming.ClassMemberCase: CamelCase
-  readability-identifier-naming.ClassMemberPrefix: s
+  readability-identifier-naming.StaticVariableCase: camelBack
+  readability-identifier-naming.StaticVariablePrefix: s_
+  readability-identifier-naming.ClassMemberCase: camelBack
+  readability-identifier-naming.ClassMemberPrefix: s_
   # constants
   readability-identifier-naming.GlobalConstantCase: UPPER_CASE
   # globals
-  readability-identifier-naming.GlobalVariableCase: CamelCase
-  readability-identifier-naming.GlobalVariablePrefix: g
+  readability-identifier-naming.GlobalVariableCase: camelBack
+  readability-identifier-naming.GlobalVariablePrefix: g_
