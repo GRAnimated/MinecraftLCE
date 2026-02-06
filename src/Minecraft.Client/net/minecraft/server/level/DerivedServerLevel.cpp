@@ -1,7 +1,9 @@
 #include "DerivedServerLevel.h"
 #include "net/minecraft/world/level/border/WorldBorder.h"
 
-DerivedServerLevel::DerivedLevelBorderChangeListener::DerivedLevelBorderChangeListener(DerivedServerLevel* level) : BorderChangeListener() {
+DerivedServerLevel::DerivedLevelBorderChangeListener::DerivedLevelBorderChangeListener(
+    DerivedServerLevel* level)
+    : BorderChangeListener() {
     this->m_level = level;
 }
 
@@ -9,7 +11,9 @@ void DerivedServerLevel::DerivedLevelBorderChangeListener::onBorderSizeSet(World
                                                                            double newSize) {
     this->m_level->getWorldBorder()->setSize(newSize);
 }
-void DerivedServerLevel::DerivedLevelBorderChangeListener::onBorderSizeLerping(WorldBorder *border, double from, double to, long long lerpTime) {
+void DerivedServerLevel::DerivedLevelBorderChangeListener::onBorderSizeLerping(WorldBorder* border,
+                                                                               double from, double to,
+                                                                               long long lerpTime) {
     this->m_level->getWorldBorder()->lerpSizeBetween(from, to, lerpTime);
 }
 

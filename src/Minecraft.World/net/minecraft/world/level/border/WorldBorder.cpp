@@ -1,5 +1,6 @@
-#include "net/minecraft/core/BlockPos.h"
 #include "net/minecraft/world/level/border/WorldBorder.h"
+
+#include "net/minecraft/core/BlockPos.h"
 
 #include "net/minecraft/core/System.h"
 #include "net/minecraft/util/Mth.h"
@@ -46,18 +47,14 @@ double WorldBorder::getMaxZ() {
 
     return max;
 }
-bool WorldBorder::isWithinBounds(const BlockPos &pos) {
-    return pos.getX() + 1 > this->getMinX()
-        && pos.getX()     < this->getMaxX()
-        && pos.getZ() + 1 > this->getMinZ()
-        && pos.getZ()     < this->getMaxZ();
+bool WorldBorder::isWithinBounds(const BlockPos& pos) {
+    return pos.getX() + 1 > this->getMinX() && pos.getX() < this->getMaxX()
+           && pos.getZ() + 1 > this->getMinZ() && pos.getZ() < this->getMaxZ();
 }
 
-bool WorldBorder::isWithinBounds(AABB *aabb) {
-    return aabb->maxX > this->getMinX()
-        && aabb->minX < this->getMaxX()
-        && aabb->maxZ > this->getMinZ()
-        && aabb->minZ < this->getMaxZ();
+bool WorldBorder::isWithinBounds(AABB* aabb) {
+    return aabb->maxX > this->getMinX() && aabb->minX < this->getMaxX() && aabb->maxZ > this->getMinZ()
+           && aabb->minZ < this->getMaxZ();
 }
 
 double WorldBorder::getDistanceToBorder(std::shared_ptr<Entity> entity) {
@@ -93,7 +90,8 @@ BorderStatus* WorldBorder::getStatus() {
 
 double WorldBorder::getSize() {
     if (getStatus() != gBorderStatusStationary) {
-        double time = (float)(System::processTimeInMilliSecs() - m_startTime) / (float)(m_finishTime - m_startTime);
+        double time
+            = (float)(System::processTimeInMilliSecs() - m_startTime) / (float)(m_finishTime - m_startTime);
 
         if (!(time >= 1.0f))
             return m_currentSize + (time * (m_nextSize - m_currentSize));

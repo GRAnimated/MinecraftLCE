@@ -32,12 +32,12 @@ public:
     AABB(double x1, double y1, double z1, double x2, double y2, double z2);
 
     static AABB* newPermanent(double x1, double y1, double z1, double x2, double y2, double z2);
-    static AABB* newPermanent(const BlockPos &pos);
+    static AABB* newPermanent(const BlockPos& pos);
     static AABB* newPermanent(const AABB* aabb);
-    static AABB* newPermanent(const BlockPos& lhs, const BlockPos &rhs);
+    static AABB* newPermanent(const BlockPos& lhs, const BlockPos& rhs);
     static AABB* newTemp(double x1, double y1, double z1, double x2, double y2, double z2);
-    static AABB* newTemp(const BlockPos &pos);
-    static AABB* newTemp(const BlockPos &lhs, const BlockPos &rhs);
+    static AABB* newTemp(const BlockPos& pos);
+    static AABB* newTemp(const BlockPos& lhs, const BlockPos& rhs);
     static AABB* newTemp(const AABB* aabb);
     bool containsIncludingLowerBound(Vec3*) const;
 

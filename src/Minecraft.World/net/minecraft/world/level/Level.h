@@ -207,7 +207,7 @@ public:
     bool isFindingSpawn();
     unsigned int countInstanceOf(eINSTANCEOF, bool, unsigned int*, unsigned int*);
 
-    void setBlockEntity(const BlockPos &pos, std::shared_ptr<BlockEntity> blockEntity);
+    void setBlockEntity(const BlockPos& pos, std::shared_ptr<BlockEntity> blockEntity);
 
     int mSeaLevel = 63;
     nn::os::MutexType mEntityMutex;

@@ -1,7 +1,8 @@
+#include "net/minecraft/client/multiplayer/ClientChunkCache.h"
+
 #include "NX/Thread/C4JThreadImpl.h"
 #include "net/minecraft/client/Compression.h"
 #include "net/minecraft/client/Minecraft.h"
-#include "net/minecraft/client/multiplayer/ClientChunkCache.h"
 #include "net/minecraft/world/level/Level.h"
 #include "net/minecraft/world/level/block/Blocks.h"
 #include "net/minecraft/world/level/chunk/storage/OldChunkStorage.h"
@@ -221,10 +222,10 @@ void ClientChunkCache::tick() {
     EnterCriticalSection(&this->m_mutex);
 
     if (this->m_chunkStorage) {
-        ClientMasterGameMode *gm = Minecraft::GetInstance()->GetClientMasterGameMode();
+        ClientMasterGameMode* gm = Minecraft::GetInstance()->GetClientMasterGameMode();
 
         if (!gm->isNewLevelDataPending()) {
-        // TODO I'm not decompiling this garbage atm jfc
+            // TODO I'm not decompiling this garbage atm jfc
         }
     }
 

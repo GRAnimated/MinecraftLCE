@@ -1,5 +1,6 @@
-#include "net/minecraft/world/level/Level.h"
 #include "net/minecraft/world/level/chunk/LevelChunk.h"
+
+#include "net/minecraft/world/level/Level.h"
 
 #include "net/minecraft/world/level/block/Block.h"
 #include "net/minecraft/world/level/block/entity/BlockEntity.h"
@@ -31,7 +32,8 @@ void LevelChunk::tick(bool skipRecheckGaps) {
         BlockPos pos = this->m_blockEntityPosTickQueue.front();
         this->m_blockEntityPosTickQueue.pop_front();
 
-        if (this->getBlockEntity(pos, static_cast<EntityCreationType>(2)) == nullptr && this->getBlock(pos)->isBlockEntity()) {
+        if (this->getBlockEntity(pos, static_cast<EntityCreationType>(2)) == nullptr
+            && this->getBlock(pos)->isBlockEntity()) {
             std::shared_ptr<BlockEntity> bl = this->createBlockEntity(pos);
             this->m_level->setBlockEntity(pos, bl);
             this->m_level->setBlocksDirty(pos, pos);

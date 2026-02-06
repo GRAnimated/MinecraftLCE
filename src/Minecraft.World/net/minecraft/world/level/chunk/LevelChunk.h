@@ -1,6 +1,7 @@
 #pragma once
 
 #include "deque"
+#include "net/minecraft/core/BlockPos.h"
 #include "net/minecraft/core/System.h"
 #include "net/minecraft/world/ArrayWithLength.h"
 #include "net/minecraft/world/level/LightLayer.h"
@@ -8,7 +9,6 @@
 #include "net/minecraft/world/level/storage/block/CompressedBlockStorage.h"
 #include "net/minecraft/world/level/storage/data/SparseDataStorage.h"
 #include "net/minecraft/world/level/storage/light/SparseLightStorage.h"
-#include "net/minecraft/core/BlockPos.h"
 
 #include <memory>
 #include <unordered_map>
@@ -39,9 +39,7 @@ public:
 
     class BlockChange {};
 
-    enum DECOMP_HELPER PopulationFlags : int {
-        FLAG_TERRAIN_POPULATED = 0x400
-    };
+    enum DECOMP_HELPER PopulationFlags : int { FLAG_TERRAIN_POPULATED = 0x400 };
 
     LevelChunk(Level*, ChunkPrimer*, int, int);
     LevelChunk(Level*, int, int);
@@ -54,7 +52,7 @@ public:
     void recheckGaps(bool local);
     void postProcess();
 
-    std::shared_ptr<BlockEntity> createBlockEntity(const BlockPos &pos);
+    std::shared_ptr<BlockEntity> createBlockEntity(const BlockPos& pos);
 
     static nn::os::MutexType mMutex_710178c150;
     static nn::os::MutexType mMutex_710178c170;
@@ -159,7 +157,7 @@ public:
     char padding_480[24];
     int mXPos;
     int mZPos;
-    bool m_tickSkylight; // guessed, could be skylightDirty maybe?
+    bool m_tickSkylight;  // guessed, could be skylightDirty maybe?
     char unk2[13];
     std::unordered_map<BlockPos, std::shared_ptr<BlockEntity>>* mBlockEntities;
     char unk3[32];

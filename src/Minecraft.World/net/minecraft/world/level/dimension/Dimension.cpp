@@ -60,8 +60,7 @@ bool Dimension::isFoggyAt(int x, int z) {
 bool Dimension::containsChunk(int x, int z) {
     const int xzAxis = this->getXZSize() / 2;
 
-    return (-xzAxis <= x && x < xzAxis)
-        && (-xzAxis <= z && z < xzAxis);
+    return (-xzAxis <= x && x < xzAxis) && (-xzAxis <= z && z < xzAxis);
 }
 
 BiomeSource* Dimension::getBiomeSource() {

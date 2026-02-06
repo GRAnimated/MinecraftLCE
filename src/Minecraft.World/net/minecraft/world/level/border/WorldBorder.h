@@ -40,7 +40,7 @@ public:
     BorderStatus* getStatus();
 
     bool isWithinBounds(AABB* aabb);
-    bool isWithinBounds(ChunkPos *pos) DELETE_EXTERNAL;
+    bool isWithinBounds(ChunkPos* pos) DELETE_EXTERNAL;
     bool isWithinBounds(const BlockPos& pos);
     bool isWithinBounds(double x, double z) DELETE_EXTERNAL;
 
@@ -57,9 +57,9 @@ public:
     double getDistanceToBorder(std::shared_ptr<Entity> entity);
     double getDistanceToBorder(double x, double z);
 
-    void addListener(BorderChangeListener *listener);
+    void addListener(BorderChangeListener* listener);
     std::vector<BorderChangeListener*>& getListeners();
-    void removeListener(BorderChangeListener *listener) DELETE_EXTERNAL;
+    void removeListener(BorderChangeListener* listener) DELETE_EXTERNAL;
 
     void setSize(double size);
     void setCenter(double x, double z);
