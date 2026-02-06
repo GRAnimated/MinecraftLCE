@@ -55,7 +55,7 @@ void OldChunkStorage::save(LevelChunk* chunk, Level* lvl, DataOutputStream* out)
     // write heightmap
     out->write(chunk->getHeightmap());
 
-    out->writeShort(chunk->mPopulatedFlags);
+    out->writeShort(chunk->m_populatedFlags);
 
     // write biomes
     out->write(chunk->getBiomes());

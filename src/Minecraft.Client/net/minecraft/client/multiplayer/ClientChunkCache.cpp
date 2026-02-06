@@ -1,11 +1,13 @@
-#include "net/minecraft/client/multiplayer/ClientChunkCache.h"
 #include "NX/Thread/C4JThreadImpl.h"
 #include "net/minecraft/client/Compression.h"
+#include "net/minecraft/client/Minecraft.h"
+#include "net/minecraft/client/multiplayer/ClientChunkCache.h"
 #include "net/minecraft/world/level/Level.h"
 #include "net/minecraft/world/level/block/Blocks.h"
 #include "net/minecraft/world/level/chunk/storage/OldChunkStorage.h"
 #include "net/minecraft/world/level/dimension/Dimension.h"
 #include "net/minecraft/world/level/dimension/DimensionType.h"
+#include "net/minecraft/world/level/gamemode/ClientMasterGameMode.h"
 #include "net/minecraft/world/level/levelgen/ChunkPrimer.h"
 #include "net/minecraft/world/level/storage/LevelData.h"
 
@@ -47,7 +49,7 @@ ClientChunkCache::ClientChunkCache(Level* lvl, ChunkStorage* storage) : m_chunkP
 
 // I completely missed the branch out to this, only noticed once I tried matching the second constructor
 // Wii U Edition didn't do a jumpout, so the symbol and function exists
-// NON_MATCHING | Difference: 11775
+// NON_MATCHING | Difference: 11585
 void ClientChunkCache::MultiPlayerChunkCacheInit(Level* lvl, ChunkStorage* storage) {
     int bounds;
 
@@ -58,7 +60,7 @@ void ClientChunkCache::MultiPlayerChunkCacheInit(Level* lvl, ChunkStorage* stora
         bounds = xzSize + 1;
 
     this->m_xzBounds = xzSize;
-    this->m_xzCenter = bounds >> 1;
+    this->m_xzApo = bounds / 2;
     this->m_xzSize = xzSize;
 
     this->unk28 = new char[this->m_xzBounds * this->m_xzBounds];
@@ -214,6 +216,21 @@ LevelChunk* ClientChunkCache::getOrCreateChunk(int x, int z, bool unk) {
     return c;  // return chunk otherwise since not null
 }
 
+// NON_MATCHING | Difference: 24096
+void ClientChunkCache::tick() {
+    EnterCriticalSection(&this->m_mutex);
+
+    if (this->m_chunkStorage) {
+        ClientMasterGameMode *gm = Minecraft::GetInstance()->GetClientMasterGameMode();
+
+        if (!gm->isNewLevelDataPending()) {
+        // TODO I'm not decompiling this garbage atm jfc
+        }
+    }
+
+    LeaveCriticalSection(&this->m_mutex);
+}
+
 std::wstring ClientChunkCache::gatherStats() {
     EnterCriticalSection(&this->m_mutex);
     const int u
@@ -308,7 +325,7 @@ int ClientChunkCache::inBounds(int x, int z) {
 }
 
 int ClientChunkCache::computeIdx(int x, int z) {
-    return (this->m_xzCenter + x) * this->m_xzBounds + (this->m_xzCenter + z);
+    return (this->m_xzApo + x) * this->m_xzBounds + (this->m_xzApo + z);
 }
 
 // NON_MATCHING | Difference: 4252

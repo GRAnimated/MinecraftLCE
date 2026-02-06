@@ -29,15 +29,20 @@ public:
     static void ReleaseThreadStorage();
 
     AABB() {}
-    AABB(double, double, double, double, double, double);
+    AABB(double x1, double y1, double z1, double x2, double y2, double z2);
 
-    static AABB* newPermanent(double, double, double, double, double, double);
-    static AABB* newPermanent(const AABB*);
-    static AABB* newTemp(double, double, double, double, double, double);
+    static AABB* newPermanent(double x1, double y1, double z1, double x2, double y2, double z2);
+    static AABB* newPermanent(const BlockPos &pos);
+    static AABB* newPermanent(const AABB* aabb);
+    static AABB* newPermanent(const BlockPos& lhs, const BlockPos &rhs);
+    static AABB* newTemp(double x1, double y1, double z1, double x2, double y2, double z2);
+    static AABB* newTemp(const BlockPos &pos);
+    static AABB* newTemp(const BlockPos &lhs, const BlockPos &rhs);
+    static AABB* newTemp(const AABB* aabb);
     bool containsIncludingLowerBound(Vec3*) const;
 
     AABB* set(const AABB*);
-    AABB* set(double, double, double, double, double, double);
+    AABB* set(double x1, double y1, double z1, double x2, double y2, double z2);
     Vec3* getCenter() const;
     AABB* divideInternalsBy(double);
     double getSize() const;
@@ -46,7 +51,7 @@ public:
     AABB* expand(double x, double y, double z) const;
     bool contains(Vec3* vec);
     bool intersects(const AABB* rhs) const;
-    bool intersects(double, double, double, double, double, double) const;
+    bool intersects(double x1, double y1, double z1, double x2, double y2, double z2) const;
     void resetPool();
     AABB* move(const BlockPos&) const;
     AABB* move(double, double, double) const;

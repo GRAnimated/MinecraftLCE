@@ -170,21 +170,21 @@ LevelChunk* ServerChunkCache::updateCacheAndPostProcess(int chunkX, int chunkZ, 
         }
 
         if (unk) {
-            if ((newChunk->mPopulatedFlags & 2) == 0 && hasChunk(chunkX + 1, chunkZ + 1)
+            if ((newChunk->m_populatedFlags & 2) == 0 && hasChunk(chunkX + 1, chunkZ + 1)
                 && hasChunk(chunkX, chunkZ + 1) && hasChunk(chunkX + 1, chunkZ))
                 MinecraftServer::getInstance()->addPostProcessRequest(this, mChunkGenerator, chunkX, chunkZ);
-            if (hasChunk(chunkX - 1, chunkZ) && ((getChunk(chunkX - 1, chunkZ)->mPopulatedFlags & 2) == 0)
+            if (hasChunk(chunkX - 1, chunkZ) && ((getChunk(chunkX - 1, chunkZ)->m_populatedFlags & 2) == 0)
                 && hasChunk(chunkX - 1, chunkZ + 1) && hasChunk(chunkX, chunkZ + 1)
                 && hasChunk(chunkX - 1, chunkZ))
                 MinecraftServer::getInstance()->addPostProcessRequest(this, mChunkGenerator, chunkX - 1,
                                                                       chunkZ);
-            if (hasChunk(chunkX, chunkZ - 1) && ((getChunk(chunkX, chunkZ - 1)->mPopulatedFlags & 2) == 0)
+            if (hasChunk(chunkX, chunkZ - 1) && ((getChunk(chunkX, chunkZ - 1)->m_populatedFlags & 2) == 0)
                 && hasChunk(chunkX + 1, chunkZ - 1) && hasChunk(chunkX, chunkZ - 1)
                 && hasChunk(chunkX + 1, chunkZ))
                 MinecraftServer::getInstance()->addPostProcessRequest(this, mChunkGenerator, chunkX,
                                                                       chunkZ - 1);
             if (hasChunk(chunkX - 1, chunkZ - 1)
-                && ((getChunk(chunkX - 1, chunkZ - 1)->mPopulatedFlags & 2) == 0)
+                && ((getChunk(chunkX - 1, chunkZ - 1)->m_populatedFlags & 2) == 0)
                 && hasChunk(chunkX - 1, chunkZ - 1) && hasChunk(chunkX, chunkZ - 1)
                 && hasChunk(chunkX - 1, chunkZ))
                 MinecraftServer::getInstance()->addPostProcessRequest(this, mChunkGenerator, chunkX - 1,
@@ -335,7 +335,7 @@ void ServerChunkCache::updatePostProcessFlags(int chunkX, int chunkZ) {
     updatePostProcessFlag(0x100, chunkX, chunkZ, 1, 0, chunk);
     updatePostProcessFlag(0x200, chunkX, chunkZ, 1, -1, chunk);
 
-    if ((chunk->mPopulatedFlags & 2)) {
+    if ((chunk->m_populatedFlags & 2)) {
         flagPostProcessComplete(4, chunkX + 1, chunkZ);
         flagPostProcessComplete(0x10, chunkX + 1, chunkZ + 1);
         flagPostProcessComplete(8, chunkX, chunkZ + 1);
@@ -393,8 +393,8 @@ void ServerChunkCache::updatePostProcessFlag(short flag, int baseX, int baseZ, i
     int chunkZ = baseZ + offsetZ;
     if (hasChunk(chunkX, chunkZ)) {
         LevelChunk* targetChunk = getChunk(chunkX, chunkZ);
-        if (targetChunk == mEmptyChunk || (targetChunk->mPopulatedFlags & 2) != 0) {
-            chunk->mPopulatedFlags |= flag;
+        if (targetChunk == mEmptyChunk || (targetChunk->m_populatedFlags & 2) != 0) {
+            chunk->m_populatedFlags |= flag;
         }
     }
 }

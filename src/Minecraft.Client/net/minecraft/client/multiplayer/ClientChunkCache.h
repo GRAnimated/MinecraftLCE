@@ -94,7 +94,7 @@ public:
     void* unk21;
     nn::os::MutexType m_mutex;
     int m_xzBounds;
-    int m_xzCenter;
+    int m_xzApo;
     char* unk28;
     Level* m_level;
     Dimension* m_dimension;

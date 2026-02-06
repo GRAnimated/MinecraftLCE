@@ -6,7 +6,7 @@
 WaterLevelChunk::WaterLevelChunk(Level* lvl, ChunkPrimer* primer, int x, int z)
     : LevelChunk(lvl, primer, x, z) {
     this->unk6 = true;  // if I had to guess, it's m_populated
-    this->mPopulatedFlags = 0b0000011111111110;
+    this->m_populatedFlags = 0b0000011111111110;
 }
 
 void WaterLevelChunk::reSyncLighting() {}

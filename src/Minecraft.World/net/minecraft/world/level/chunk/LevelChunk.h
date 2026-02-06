@@ -1,5 +1,6 @@
 #pragma once
 
+#include "deque"
 #include "net/minecraft/core/System.h"
 #include "net/minecraft/world/ArrayWithLength.h"
 #include "net/minecraft/world/level/LightLayer.h"
@@ -7,6 +8,7 @@
 #include "net/minecraft/world/level/storage/block/CompressedBlockStorage.h"
 #include "net/minecraft/world/level/storage/data/SparseDataStorage.h"
 #include "net/minecraft/world/level/storage/light/SparseLightStorage.h"
+#include "net/minecraft/core/BlockPos.h"
 
 #include <memory>
 #include <unordered_map>
@@ -37,12 +39,22 @@ public:
 
     class BlockChange {};
 
+    enum DECOMP_HELPER PopulationFlags : int {
+        FLAG_TERRAIN_POPULATED = 0x400
+    };
+
     LevelChunk(Level*, ChunkPrimer*, int, int);
     LevelChunk(Level*, int, int);
 
     enum EntityCreationType {};
 
     static void staticCtor();
+
+    void tick(bool);
+    void recheckGaps(bool local);
+    void postProcess();
+
+    std::shared_ptr<BlockEntity> createBlockEntity(const BlockPos &pos);
 
     static nn::os::MutexType mMutex_710178c150;
     static nn::os::MutexType mMutex_710178c170;
@@ -147,14 +159,22 @@ public:
     char padding_480[24];
     int mXPos;
     int mZPos;
-    char unk2[14];
+    bool m_tickSkylight; // guessed, could be skylightDirty maybe?
+    char unk2[13];
     std::unordered_map<BlockPos, std::shared_ptr<BlockEntity>>* mBlockEntities;
     char unk3[32];
-    short mPopulatedFlags;
-    char unk4[17];
-    bool unk6;  // likely m_populated
+    short m_populatedFlags;
+    char unk4[13];
+    bool unk9;
+    bool m_hasPostProcessed;
+    bool unk11;
+    bool unk12;
+    bool unk6;
     char unk7[25];
     long mInhabitedTime;
     bool unk8;
-    char unk5[85];
+    // char unk5[85]; // 728 with 85
+    char unk5[30];
+    std::deque<BlockPos> m_blockEntityPosTickQueue;
+    char unk13[8];
 };
