@@ -198,4 +198,5 @@ public:
     static TexGenCoord* getTexGen(GlStateManager::TexGen coord);
     static int genTexture();
     static void deleteTexture(int texture);
+    static void enableCull();
 };

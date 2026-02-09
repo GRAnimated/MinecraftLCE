@@ -11,6 +11,7 @@ class BlockPos;
 class TexturePack;
 class ModelDefinition;
 class EntityRenderDispatcher;
+class Model;
 
 class EntityRenderer {
 public:
@@ -40,7 +41,7 @@ public:
     virtual void renderSecondPass(SharedEntity&, double, double, double, float, float);
     virtual void setupForTexturePack(TexturePack*);
     virtual void SetItemFrame(bool);
-    virtual void getModel();
+    virtual Model* getModel();
     virtual void getModelName();
     virtual void createModel(const ModelDefinition&);
 

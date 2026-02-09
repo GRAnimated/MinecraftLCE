@@ -55,6 +55,8 @@ public:
     void LoadShaders();
     void SetupShaders();
     void Initialise(bool);
+    void GammaCorrect();
+    void BindShaderUniformData(NVNshaderStage stage, int index, void* buffer, size_t bufferSize);
 
     virtual void Tick();
     virtual void UpdateGamma(unsigned short gamma);
@@ -260,21 +262,22 @@ public:
         mBuffers[2];  // it could be that one is FHD one is HD, but until ik that let's keep them in array
     int dword28E8;
     int dword28EC;
-    NVNprogram* shaders1;
-    NVNprogram* shaders2;
-    NVNprogram* shaders3;
-    NVNprogram* shaders4;
-    NVNprogram* shaders5;
-    NVNprogram* shaders6;
-    NVNprogram* shaders7;
-    NVNprogram* shaders8;
-    NVNprogram* shaders9;
-    NVNprogram* shaders10;
-    NVNprogram* shaders11;
-    NVNprogram* shaders12;
-    NVNprogram* shaders13;
-    NVNprogram* shaders14;
-    char gap2960[48];
+    const NVNprogram* shaders1;
+    const NVNprogram* shaders2;
+    const NVNprogram* shaders3;
+    const NVNprogram* shaders4;
+    const NVNprogram* shaders5;
+    const NVNprogram* shaders6;
+    const NVNprogram* shaders7;
+    const NVNprogram* shaders8;
+    const NVNprogram* shaders9;
+    const NVNprogram* shaders10;
+    const NVNprogram* shaders11;
+    const NVNprogram* shaders12;
+    const NVNprogram* shaders13;
+    const NVNprogram* shaders14;
+    const NVNprogram* shaders15;
+    char gap2960[40];
     int mTextureID_1;
     unsigned short mGammaIntensity;
     int dword2998;

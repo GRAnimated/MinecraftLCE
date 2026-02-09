@@ -31,6 +31,47 @@ Renderer::Renderer() : C4JRender() {
     Renderer::sInstance = this;
 }
 
+// NON_MATCHING: define some of the nvn functions and finish properly last but one call
+void Renderer::GammaCorrect() {
+    NVNdepthStencilState _depthStencil;
+    NVNpolygonState _polygon;
+    NVNcolorState _color;
+
+    nvnCommandBufferBindProgram(&this->mNVNcommandBuffer, this->shaders8, 1);
+    nvnCommandBufferBindProgram(&this->mNVNcommandBuffer, this->shaders15, 2);
+
+    nvnDepthStencilStateSetDefaults(&_depthStencil);
+    nvnCommandBufferBindDepthStencilState(&this->mNVNcommandBuffer, &_depthStencil);
+
+    nvnPolygonStateSetDefaults(&_polygon);
+    nvnCommandBufferBindPolygonState(&this->mNVNcommandBuffer, &_polygon);
+
+    nvnColorStateSetDefaults(&_color);
+    nvnCommandBufferBindColorState(&this->mNVNcommandBuffer, &_color);
+
+    float buf[4] = {0.0f, 0.0f, 1.0f, 1.0f};
+    this->BindShaderUniformData(NVN_SHADER_STAGE_VERTEX, 9, buf, sizeof(buf));
+
+    float buf2[4] = {1.0f / (mGammaIntensity * 1.5f + 0.5f), 0.0f, 0.0f, 0.0f};
+    this->BindShaderUniformData(NVN_SHADER_STAGE_FRAGMENT, 5, buf2, sizeof(buf2));
+
+    // those functions aren't called directly, they instead call some function that isn't defined by
+    // nnheaders, would have to dig through games with symbols that also call that function to grab
+    // signature... blahblah
+    nvnCommandBufferSetViewport(&this->mNVNcommandBuffer, 0, 0, textureWidths[this->dword28E8],
+                                textureHeights[this->dword28E8]);
+    nvnCommandBufferSetScissor(&this->mNVNcommandBuffer, 0, 0, textureWidths[this->dword28E8],
+                               textureHeights[this->dword28E8]);
+    nvnCommandBufferBindTexture(&this->mNVNcommandBuffer, NVN_SHADER_STAGE_FRAGMENT, 0,
+                                this->gap2858[8 * this->dword28E8]);
+    nvnCommandBufferBarrier(&this->mNVNcommandBuffer, 18);
+
+    // this is poorly *decompiled* as I didn't care later as I got sidetracked
+    /* nvnCommandBufferSetRenderTargets(&this->mNVNcommandBuffer, 1, this->qword26E0 +
+     *(int*)&this->gap2708[24], nullptr, nullptr, nullptr);*/
+    nvnCommandBufferDrawArrays(&this->mNVNcommandBuffer, NVN_DRAW_PRIMITIVE_TRIANGLE_STRIP, 0, 4);
+}
+
 // NON_MATCHING: inline the tls offset getter, could be some compiler flag
 void Renderer::InitialiseContext(bool idk) {
     sContext = new Renderer::Context(this, idk);

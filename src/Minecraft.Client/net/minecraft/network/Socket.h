@@ -4,6 +4,7 @@
 #include "net/minecraft/world/ArrayWithLength.h"
 
 class InputStream;
+class C4JEventImpl;
 
 class Socket {
 public:
@@ -44,6 +45,8 @@ public:
         Socket* mSocket;
     };
 
+    ~Socket();
+
     long getRemoteSocketAddress();
 
     void setSoTimeout(int);
@@ -54,4 +57,7 @@ public:
     void close(bool);
 
     bool sub_71000EA668();
+
+    char fill[208];
+    C4JEventImpl* mEvent;
 };

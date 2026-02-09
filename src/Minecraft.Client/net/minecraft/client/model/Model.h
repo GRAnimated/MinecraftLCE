@@ -42,4 +42,5 @@ public:
     int mTexHeight;
     ModelPartsSkinned mModelPartsSkinned;
     bool byte88;
+    bool byte89;
 };

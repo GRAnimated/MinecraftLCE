@@ -5,6 +5,9 @@
 #include "net/minecraft/world/entity/SkinAdjustments.h"
 #include <vector>
 
+class EntityRenderer;
+struct fuiRect;
+
 class UIControl_PlayerSkinPreview : public UIControl {
 public:
     enum ESkinPreviewFacing { FRONT, LEFT, RIGHT };
@@ -13,6 +16,10 @@ public:
     ~UIControl_PlayerSkinPreview() override;
     void tick() override;
 
+    bool bindTexture(const std::wstring&, int);
+    bool bindTexture(const std::wstring&, const std::wstring&);
+    void render(EntityRenderer*, double, double, double, float, float);
+    void render(fuiRect*);
     void SetTexture(const std::wstring& skinTexPath, _TEXTURE_NAME texId);
     void SetFacing(UIControl_PlayerSkinPreview::ESkinPreviewFacing, bool);
     void sub_710055F360();
@@ -25,26 +32,28 @@ public:
     float float60;
     std::wstring mSkinTexturePath;
     _TEXTURE_NAME mTextureId;
-    std::wstring mSkinTextureName;
+    std::wstring mSkinCapePath;
     _SkinAdjustments mSkinAdjustments;
     float mDisplayWidth;
     float mDisplayHeight;
     float mScaleWidth;
     float mScaledHeight;
-    int dword100;
+    int mModelYRotation;
     int dword104;
-    int dword108;
-    int dowrd10C;
-    void* qword110;
-    void* qword118;
+    int mStartYRotation;
+    int mTargetYRotation;
+    float float110;
+    float float114;
+    float float118;
+    float float11C;
     bool bool120;
     bool bool121;
     char char122;
-    int dword124;
-    char byte128;
-    int dword12C;
-    int dword130;
-    std::vector<ModelPart>* mAdditionalModelParts;
+    int mSkinChangeFrame;
+    bool mIsChangingSkin;
+    float mArmSwingProgress;
+    int mPlayerAnimation;
+    std::vector<ModelPart*>* mAdditionalModelParts;
     bool bool140;
     bool bool141;
     bool bool142;

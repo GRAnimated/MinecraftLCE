@@ -1,5 +1,6 @@
 #pragma once
 
+#include "net/minecraft/client/model/models/PlayerModel.h"
 #include "net/minecraft/sounds/SoundSource.h"
 #include "net/minecraft/world/ArrayWithLength.h"
 #include "net/minecraft/world/PlayerUID.h"
@@ -203,6 +204,8 @@ public:
     PlayerUID getPlayerUID() { return this->playerUID1; }  // guessed name
 
     static _SkinAdjustments getSkinAdjustmentsById(int id);
+    static EPlayerModelType GetModelTypeFromAnimBitmask(int anim);
+    static EPlayerModelType GetModelTypeFromTextureId(int textureId);
 
     static std::vector<unsigned int> sSkins;
 

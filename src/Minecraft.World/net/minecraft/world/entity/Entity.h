@@ -62,6 +62,7 @@ public:
 
     static void staticCtor();
     static int getSmallId();
+    static bool instanceof(const std::shared_ptr<Entity>&, eINSTANCEOF);
 
     Entity(Level*, bool);
     void _init(bool, Level*);

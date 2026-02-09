@@ -16,7 +16,7 @@ public:
     const std::wstring UuidString() const;
     const std::wstring toString() const;
 
-    long gap_0;
+    unsigned int gap_0;
     long mMostSigBits;  // grabbed from JDK, doubt those are correct but yeah, pure guess
     long mLeastSigBits;
     char byte18;
