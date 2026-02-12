@@ -59,7 +59,6 @@ int CPlatformNetworkManagerNintendo::CorrectErrorIDS(int errorIDS) {
     return errorIDS;
 }
 
-// NON_MATCHING: fix vtable of `this` and get back to this
 void CPlatformNetworkManagerNintendo::DoWork() {
     this->TickSearch();
 
@@ -241,6 +240,7 @@ int CPlatformNetworkManagerNintendo::JoinGame(FriendSessionInfo* info, int joini
     return 2;
 }
 
+// NON_MATCHING: logic should be the same though
 bool CPlatformNetworkManagerNintendo::FindAndJoinGame(int joiningPlayers, int a3, EMiniGameId miniGameId,
                                                       unsigned int a5, unsigned int* a6, unsigned int* a7) {
     CMatchMakeSearchParam searchParams;
@@ -268,23 +268,39 @@ bool CPlatformNetworkManagerNintendo::FindAndJoinGame(int joiningPlayers, int a3
 
 void CPlatformNetworkManagerNintendo::CancelJoinGame() {}
 
-void CPlatformNetworkManagerNintendo::SetLocalGame(bool) {}
+bool CPlatformNetworkManagerNintendo::SetLocalGame(bool localGame) {
+    if (this->mNQRNetworkManager->GetState() == 2)
+        this->mLocalGame = localGame;
+    return true;
+}
 
-bool CPlatformNetworkManagerNintendo::IsLocalGame() {}
+bool CPlatformNetworkManagerNintendo::IsLocalGame() {
+    return this->mLocalGame;
+}
 
-void CPlatformNetworkManagerNintendo::SetPrivateGame(bool) {}
+bool CPlatformNetworkManagerNintendo::SetPrivateGame(bool privateGame) {
+    return this->mPrivateGame = privateGame;
+}
 
-bool CPlatformNetworkManagerNintendo::IsPrivateGame() {}
+bool CPlatformNetworkManagerNintendo::IsPrivateGame() {
+    return this->mPrivateGame;
+}
 
-bool CPlatformNetworkManagerNintendo::IsLeavingGame() {}
+bool CPlatformNetworkManagerNintendo::IsLeavingGame() {
+    return this->mLeavingGame;
+}
 
-void CPlatformNetworkManagerNintendo::ResetLeavingGame() {}
+void CPlatformNetworkManagerNintendo::ResetLeavingGame() {
+    this->mLeavingGame = false;
+}
 
-void CPlatformNetworkManagerNintendo::RegisterPlayerChangedCallback(int,
+void CPlatformNetworkManagerNintendo::RegisterPlayerChangedCallback(int playerId,
                                                                     void (*)(void*, INetworkPlayer*, bool),
-                                                                    void*) {}
+                                                                    void*) {
+    // array stuff, but got really weak so gonnna leav it for futurte me
+}
 
-void CPlatformNetworkManagerNintendo::UnRegisterPlayerChangedCallback(int,
+void CPlatformNetworkManagerNintendo::UnRegisterPlayerChangedCallback(int playerId,
                                                                       void (*)(void*, INetworkPlayer*, bool),
                                                                       void*) {}
 

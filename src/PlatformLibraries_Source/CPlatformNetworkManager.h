@@ -58,9 +58,9 @@ public:
     virtual int JoinGame(FriendSessionInfo*, int, int, bool) = 0;
     virtual bool FindAndJoinGame(int, int, EMiniGameId, unsigned int, unsigned int*, unsigned int*) = 0;
     virtual void CancelJoinGame() = 0;
-    virtual void SetLocalGame(bool) = 0;
+    virtual bool SetLocalGame(bool) = 0;
     virtual bool IsLocalGame() = 0;
-    virtual void SetPrivateGame(bool) = 0;
+    virtual bool SetPrivateGame(bool) = 0;
     virtual bool IsPrivateGame() = 0;
     virtual bool IsLeavingGame() = 0;
     virtual void ResetLeavingGame() = 0;

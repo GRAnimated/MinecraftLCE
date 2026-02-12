@@ -46,9 +46,9 @@ public:
     int JoinGame(FriendSessionInfo*, int, int, bool) override;
     bool FindAndJoinGame(int, int, EMiniGameId, unsigned int, unsigned int*, unsigned int*) override;
     void CancelJoinGame() override;
-    void SetLocalGame(bool) override;
+    bool SetLocalGame(bool) override;
     bool IsLocalGame() override;
-    void SetPrivateGame(bool) override;
+    bool SetPrivateGame(bool) override;
     bool IsPrivateGame() override;
     bool IsLeavingGame() override;
     void ResetLeavingGame() override;
@@ -120,7 +120,8 @@ public:
     char gap52;
     bool byte53;
     bool byte54;
-    char byte55;
+    bool mLocalGame;
+    bool mPrivateGame;
     int dword58;
     bool bool5C;
     char gap5C[387];
