@@ -81,7 +81,8 @@ unsigned int LogBlock::getDescriptionId(int data) {
 void LogBlock::registerIcons(IconRegister* iconReg) {
     for (int i = 0; i < 6; ++i) {
         this->m_typeTextures[i] = iconReg->registerIcon(this->getIconName() + L"_" + LOG_VARIANTS[i]);
-        this->m_topTextures[i] = iconReg->registerIcon(this->getIconName() + L"_" + LOG_VARIANTS[i] + L"_top");
+        this->m_topTextures[i]
+            = iconReg->registerIcon(this->getIconName() + L"_" + LOG_VARIANTS[i] + L"_top");
     }
 }
 

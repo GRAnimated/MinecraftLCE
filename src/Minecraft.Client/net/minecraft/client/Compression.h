@@ -62,6 +62,6 @@ private:
     unsigned char m_cData[0x40000];
     unsigned char* m_dcData;  // devs only allocate 0x32000 for this, why?
     ECompressionTypes m_type;
-    ECompressionTypes m_unk2;  // set same as type initially, also compared against it. Could be something like
-                             // initType or whatever.
+    ECompressionTypes m_unk2;  // set same as type initially, also compared against it. Could be something
+                               // like initType or whatever.
 };
