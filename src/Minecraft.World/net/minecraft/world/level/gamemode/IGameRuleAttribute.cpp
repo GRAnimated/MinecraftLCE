@@ -100,15 +100,15 @@ IGameRuleAttribute::IGameRuleAttribute() {}
 IGameRuleAttribute::~IGameRuleAttribute() {}
 
 void IGameRuleAttribute::setOptional(bool optional) {
-    mIsOptional = optional;
+    m_isOptional = optional;
 }
 
 bool IGameRuleAttribute::isOptional() {
-    return mIsOptional;
+    return m_isOptional;
 }
 
 bool IGameRuleAttribute::hasValue() {
-    return mHasValue;
+    return m_hasValue;
 }
 
 ConsoleGameRules::EGameRuleAttr IGameRuleAttribute::attributeIdFromName(const std::wstring& str) {

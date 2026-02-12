@@ -15,6 +15,6 @@ public:
     arrayWithLength<double> getRegion(arrayWithLength<double>, double, double, int, int, double, double,
                                       double);
 
-    ImprovedNoise** mNoiseLevels;
-    int mMaxOctaves;
+    ImprovedNoise** m_noiseLevels;
+    int m_maxOctaves;
 };

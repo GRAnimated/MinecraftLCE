@@ -15,11 +15,11 @@ EPacketType ClientboundOpenSignEditorPacket::getPacketId() {
 }
 
 void ClientboundOpenSignEditorPacket::read(DataInputStream* input) {
-    pos = input->readBlockPos();
+    m_pos = input->readBlockPos();
 }
 
 void ClientboundOpenSignEditorPacket::write(DataOutputStream* output) {
-    output->writeBlockPos(pos);
+    output->writeBlockPos(m_pos);
 }
 
 void ClientboundOpenSignEditorPacket::handle(PacketListener* listener) {

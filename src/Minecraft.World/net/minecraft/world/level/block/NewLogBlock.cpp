@@ -20,7 +20,7 @@ void NewLogBlock::blockStaticCtor() {
 
 NewLogBlock::NewLogBlock() : LogBlock() {
     Block::DerivedInit();
-    const BlockState* defaultState = this->mBlockStateDefinition->any()
+    const BlockState* defaultState = this->m_blockStateDefinition->any()
                                          ->setValue(NewLogBlock::VARIANT, PlanksBlock::Variant::ACACIA)
                                          ->setValue(LogBlock::LOG_AXIS, LogBlock::LogAxis::Y);
     this->registerDefaultState(defaultState);

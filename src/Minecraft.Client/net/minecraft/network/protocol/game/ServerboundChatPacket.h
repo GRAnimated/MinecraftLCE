@@ -15,5 +15,5 @@ public:
     void handle(PacketListener* listener) override;
 
 private:
-    std::wstring message;
+    std::wstring m_essage;
 };

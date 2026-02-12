@@ -14,14 +14,14 @@
 ADD_CREATOR(FJ_FuiNode)
 
 FJ_FuiNode::FJ_FuiNode(fuiRenderNode* renderNode) {
-    mTabIndex = -1;
-    mRenderNode = renderNode;
-    mCallbackScene = nullptr;
+    m_tabIndex = -1;
+    m_renderNode = renderNode;
+    m_callbackScene = nullptr;
 }
 
 FJ_FuiNode::~FJ_FuiNode() {
     fui::sInstance->removeEventListenerForNode(this);
-    if (mRenderNode && mRenderNode->mStage) {
+    if (m_renderNode && m_renderNode->m_stage) {
         getStage()->removeFocus(this);
     }
 }
@@ -29,19 +29,19 @@ FJ_FuiNode::~FJ_FuiNode() {
 void FJ_FuiNode::ASConstructor() {}
 
 void FJ_FuiNode::setX(float x) {
-    this->mRenderNode->setX(x);
+    this->m_renderNode->setX(x);
 }
 
 void FJ_FuiNode::setY(float y) {
-    this->mRenderNode->setY(y);
+    this->m_renderNode->setY(y);
 }
 
 void FJ_FuiNode::setHeight(float height) {
-    this->mRenderNode->setHeight(height);
+    this->m_renderNode->setHeight(height);
 }
 
 void FJ_FuiNode::setVisible(bool visible) {
-    this->mRenderNode->setVisibility(visible);
+    this->m_renderNode->setVisibility(visible);
 }
 
 int FJ_FuiNode::getType() {
@@ -49,34 +49,34 @@ int FJ_FuiNode::getType() {
 }
 
 void FJ_FuiNode::setScaleX(float sX) {
-    this->mRenderNode->setScaleX(sX);
+    this->m_renderNode->setScaleX(sX);
 }
 
 void FJ_FuiNode::setScaleY(float sY) {
-    this->mRenderNode->setScaleY(sY);
+    this->m_renderNode->setScaleY(sY);
 }
 float FJ_FuiNode::getWidth() {
-    return this->mRenderNode->getWidth();
+    return this->m_renderNode->getWidth();
 }
 
 float FJ_FuiNode::getHeight() {
-    return this->mRenderNode->getHeight();
+    return this->m_renderNode->getHeight();
 }
 
 void FJ_FuiNode::setWidth(float width) {
-    this->mRenderNode->setWidth(width);
+    this->m_renderNode->setWidth(width);
 }
 
 int FJ_FuiNode::getTabIndex() {
-    return mTabIndex;
+    return m_tabIndex;
 }
 
 FJ_FuiNodeStage* FJ_FuiNode::getStage() {
-    return mRenderNode->getStage()->mFuiNodeStage;
+    return m_renderNode->getStage()->m_fuiNodeStage;
 }
 
 void FJ_FuiNode::setCallbackScene(UIScene* scene) {
-    mCallbackScene = scene;
+    m_callbackScene = scene;
 }
 
 FJ_Base* FJ_FuiNode::asFJ_Base() {
@@ -108,7 +108,7 @@ FJ_Button* FJ_FuiNode::asFJ_Button() {
 }
 
 void* FJ_FuiNode::asMovieClip() {
-    if (this->mRenderNode->mFuiObjectType != eFuiObjectType_Timeline)
+    if (this->m_renderNode->m_fuiObjectType != eFuiObjectType_Timeline)
         return nullptr;
 
     return this;

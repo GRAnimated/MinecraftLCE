@@ -12,10 +12,10 @@ public:
 
     static ByteOrder getEndian(ESavePlatform platform);
 
-    std::vector<FileEntry*> files;
-    ESavePlatform platform;
-    ByteOrder endian;
-    short originalVersion;
-    short version;
-    void* unk2;
+    std::vector<FileEntry*> m_files;
+    ESavePlatform m_platform;
+    ByteOrder m_endian;
+    short m_originalVersion;
+    short m_version;
+    void* m_unk2;
 };

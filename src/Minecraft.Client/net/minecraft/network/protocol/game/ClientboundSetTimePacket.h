@@ -23,6 +23,6 @@ public:
     bool isAync() override;
 
 private:
-    long long mGameTime;
-    long long mDayTime;
+    long long m_gameTime;
+    long long m_dayTime;
 };

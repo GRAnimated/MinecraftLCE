@@ -19,18 +19,18 @@ public:
     public:
         std::shared_ptr<Packet> nextUpdatePacket(not_null_ptr<ItemInstance>);
 
-        std::shared_ptr<Player> mPlayer;
-        bool mDirty;
-        int mMinDirtyX;
-        int mMinDirtyY;
-        int mMaxDirtyX;
-        int mMaxDirtyY;
-        int mTick;
-        int dword28;
-        char gap2C[20];
-        int mStep;
-        bool byte44;
-        MapItemSavedData* mSavedData;
+        std::shared_ptr<Player> m_player;
+        bool m_dirty;
+        int m_minDirtyX;
+        int m_minDirtyY;
+        int m_maxDirtyX;
+        int m_maxDirtyY;
+        int m_tick;
+        int m_dword28;
+        char m_gap2C[20];
+        int m_step;
+        bool m_byte44;
+        MapItemSavedData* m_savedData;
     };
 
     MapItemSavedData(const std::wstring&);
@@ -55,16 +55,16 @@ public:
         }
     }
 
-    int mXCenter;
-    int mZCenter;
-    char mDimension;
-    bool mTrackingPosition;
-    bool mUnlimitedTracking;
-    unsigned char mScale;
-    arrayWithLength<uchar> mColors;
-    std::vector<std::shared_ptr<HoldingPlayer>> mCarriedBy;
-    std::unordered_map<std::shared_ptr<Player>, std::shared_ptr<HoldingPlayer>> mCarriedByPlayers;
-    std::unordered_map<int, MapDecoration> mPlayerDecorations;
-    long mLastTick;
-    std::unordered_map<int, MapDecoration> mFrameDecorations;
+    int m_xCenter;
+    int m_zCenter;
+    char m_dimension;
+    bool m_trackingPosition;
+    bool m_unlimitedTracking;
+    unsigned char m_scale;
+    arrayWithLength<uchar> m_colors;
+    std::vector<std::shared_ptr<HoldingPlayer>> m_carriedBy;
+    std::unordered_map<std::shared_ptr<Player>, std::shared_ptr<HoldingPlayer>> m_carriedByPlayers;
+    std::unordered_map<int, MapDecoration> m_playerDecorations;
+    long m_lastTick;
+    std::unordered_map<int, MapDecoration> m_frameDecorations;
 };

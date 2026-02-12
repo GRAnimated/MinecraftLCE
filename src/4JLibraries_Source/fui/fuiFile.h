@@ -12,27 +12,27 @@ struct fuiBitmapFont;
 struct fuiRenderNodeStage;
 struct fuiRenderNodeTimeline;
 struct fuiRect {
-    float minX;
-    float maxX;
-    float minY;
-    float maxY;
+    float m_inX;
+    float m_axX;
+    float m_inY;
+    float m_axY;
 
     // getHeight?
-    float getHeight() { return this->maxY - this->minY; }
+    float getHeight() { return this->m_axY - this->m_inY; }
 
     // getWidth?
-    float getWidth() { return this->maxX - this->minX; }
+    float getWidth() { return this->m_axX - this->m_inX; }
 };
 struct fuiRGBA {
-    int color;  // RGBA
+    int m_color;  // RGBA
 };
 struct fuiMatrix {
-    float mScaleX;
-    float mScaleY;
-    float mRotSkewX;
-    float mRotSkewY;
-    float mPosX;
-    float mPosY;
+    float m_scaleX;
+    float m_scaleY;
+    float m_rotSkewX;
+    float m_rotSkewY;
+    float m_posX;
+    float m_posY;
 
     // spent an hour trying to figure out what this was
     // finally thought of it being a built in C++ operator... which looks good to me.
@@ -46,23 +46,23 @@ struct fuiMatrix {
     static void mul(const fuiMatrix& lhs, const fuiMatrix& rhs, fuiMatrix& out);
 };
 struct fuiColorTransform {
-    float redMultTerm;
-    float greenMultTerm;
-    float blueMultTerm;
-    float alphaMultTerm;
-    float redAddTerm;
-    float greenAddTerm;
-    float blueAddTerm;
-    float alphaAddTerm;
+    float m_redMultTerm;
+    float m_greenMultTerm;
+    float m_blueMultTerm;
+    float m_alphaMultTerm;
+    float m_redAddTerm;
+    float m_greenAddTerm;
+    float m_blueAddTerm;
+    float m_alphaAddTerm;
 };
 
 struct fuiTimeline {
-    int symbolIndex;
-    short frameIndex;
-    short frameCount;
-    short actionIndex;
-    short actionCount;
-    fuiRect rect;
+    int m_symbolIndex;
+    short m_frameIndex;
+    short m_frameCount;
+    short m_actionIndex;
+    short m_actionCount;
+    fuiRect m_rect;
 };
 struct fuiTimelineAction;
 struct fuiShape;
@@ -72,9 +72,9 @@ struct fuiTimelineFrame;
 struct fuiTimelineEvent;
 struct timelineEventName;
 struct fuiReference {
-    int symbolIndex;
-    char name[64];
-    int index;
+    int m_symbolIndex;
+    char m_name[64];
+    int m_index;
 };
 struct fuiEdittext;
 struct fuiBitmap;
@@ -83,50 +83,50 @@ struct fuiImportAsset;
 class FJ_FuiNode;
 
 struct fuiHeader {
-    bool field_0;
-    int contentSize;
-    int field_8;
-    char fileName[60];
-    int timelineCount;
-    int timelineEventNameCount;
-    int timelineActionCount;
-    int shapeCount;
-    int shapeComponentCount;
-    int vertCount;
-    int timelineFrameCount;
-    int timelineEventCount;
-    int referenceCount;
-    int editTextCount;
-    int bitmapCount;
-    int imagesSize;
-    int field_7C;
-    int fontNameCount;
-    int importAssetCount;
-    int mUnk;
-    fuiRect stageSize;
-    int index;
+    bool m_field0;
+    int m_contentSize;
+    int m_field8;
+    char m_fileName[60];
+    int m_timelineCount;
+    int m_timelineEventNameCount;
+    int m_timelineActionCount;
+    int m_shapeCount;
+    int m_shapeComponentCount;
+    int m_vertCount;
+    int m_timelineFrameCount;
+    int m_timelineEventCount;
+    int m_referenceCount;
+    int m_editTextCount;
+    int m_bitmapCount;
+    int m_imagesSize;
+    int m_field7C;
+    int m_fontNameCount;
+    int m_importAssetCount;
+    int m_unk;
+    fuiRect m_stageSize;
+    int m_index;
 };
 
 struct _48 {
-    const char** name;
+    const char** m_name;
 };
 
 struct fuiData {
-    fuiTimeline* timeline;
-    fuiTimelineAction* timelineAction;
-    fuiShape* shape;
-    fuiShapeComponent* shapeComponent;
-    fuiVert* vert;
-    fuiTimelineFrame* timelineFrame;
-    fuiTimelineEvent* timelineEvent;
-    timelineEventName* timelineEventName;
-    fuiReference* fuiReference;
-    fuiEdittext* fuiEdittext;
-    fuiSymbol* fuiSymbol;
-    fuiBitmapFont* fuiBitmap;
-    void* imageMaybe;
-    fuiFontName* fuiFontName;
-    fuiImportAsset* fuiImportAsset;
+    fuiTimeline* m_timeline;
+    fuiTimelineAction* m_timelineAction;
+    fuiShape* m_shape;
+    fuiShapeComponent* m_shapeComponent;
+    fuiVert* m_vert;
+    fuiTimelineFrame* m_timelineFrame;
+    fuiTimelineEvent* m_timelineEvent;
+    timelineEventName* m_timelineEventName;
+    fuiReference* m_fuiReference;
+    fuiEdittext* m_fuiEdittext;
+    fuiSymbol* m_fuiSymbol;
+    fuiBitmapFont* m_fuiBitmap;
+    void* m_imageMaybe;
+    fuiFontName* m_fuiFontName;
+    fuiImportAsset* m_fuiImportAsset;
 };
 
 struct fuiFile {
@@ -149,13 +149,13 @@ struct fuiFile {
     float getStageHeight();
     void setIndex(int);
 
-    fuiHeader mHeader;
-    int field_9C;
-    fuiData mData;
-    fuiRenderNodeStage* mRenderNodeStage;
-    fuiRenderNodeTimeline* mRenderNodeTimeline;
+    fuiHeader m_header;
+    int m_field9C;
+    fuiData m_data;
+    fuiRenderNodeStage* m_renderNodeStage;
+    fuiRenderNodeTimeline* m_renderNodeTimeline;
 
-    void (*mCallbackFunc)(void*, const char*, fuiRect*);
-    void* mCallbackData;
-    void* field_138;
+    void (*m_callbackFunc)(void*, const char*, fuiRect*);
+    void* m_callbackData;
+    void* m_field138;
 };

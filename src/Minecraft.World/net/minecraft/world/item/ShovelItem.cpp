@@ -43,7 +43,7 @@ ActionResultType ShovelItem::useOn(std::shared_ptr<Player> player, Level* level,
                 if (block == Blocks::GRASS && !idk) {
                     level->playSound(player, pos, SoundEvents::SHOVEL_FLATTEN, SoundSource::BLOCKS, 1.0f,
                                      1.0f, 16.0f);
-                    if (!level->mIsLocal) {
+                    if (!level->m_isLocal) {
                         level->setBlock(pos, Blocks::GRASS_PATH->defaultBlockState(), 11, false);
                         shovel->hurtAndBreak(1, player);
                     }

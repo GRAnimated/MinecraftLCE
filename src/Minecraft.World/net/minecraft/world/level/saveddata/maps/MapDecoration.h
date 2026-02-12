@@ -43,10 +43,10 @@ public:
         bool hasMapColor() const;
         int getMapColor() const;
 
-        unsigned char mIcon;
-        bool mRenderOnFrame;
-        bool mPlayer;
-        int mColor;
+        unsigned char m_icon;
+        bool m_renderOnFrame;
+        bool m_player;
+        int m_color;
     };
 
     MapDecoration();
@@ -59,12 +59,12 @@ public:
     const Type* getType() const;
     int hashCode() const;
     char getRot() const;
-    bool isIdk() const { return this->mIdk; }  // const prob ?
+    bool isIdk() const { return this->m_idk; }  // const prob ?
 
-    const MapDecoration::Type* mType = nullptr;
-    int mX = 0;
-    int mY = 0;
-    char mRot = 0;
-    int mIcon = 0;
-    bool mIdk = 0;
+    const MapDecoration::Type* m_type = nullptr;
+    int m_x = 0;
+    int m_y = 0;
+    char m_rot = 0;
+    int m_icon = 0;
+    bool m_idk = 0;
 };

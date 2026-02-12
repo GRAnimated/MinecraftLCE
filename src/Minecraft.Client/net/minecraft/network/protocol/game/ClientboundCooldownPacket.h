@@ -16,6 +16,6 @@ public:
     void handle(PacketListener* listener) override;
 
 private:
-    Item* item;
-    int cooldown;
+    Item* m_item;
+    int m_cooldown;
 };

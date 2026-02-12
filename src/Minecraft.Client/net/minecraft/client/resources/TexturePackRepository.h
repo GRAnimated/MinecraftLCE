@@ -16,23 +16,23 @@ public:
 
     static DefaultTexturePack* sDefaultTexturePack;
 
-    void* unk1;
-    void* unk2;
-    Minecraft* mMinecraft;
-    File mFile;
-    File mFile2;
-    std::vector<TexturePack>* mTexturePacks;
-    void* unk_80d;
-    void* unk_88d;
-    void* unk_96d;
-    std::unordered_map<unsigned int, TexturePack>* mTexturePackMap;
-    void* unk8;
-    void* unk9;
-    void* unk10;
-    float unk11;
-    DefaultTexturePack* mDefaultTexturePack;
-    void* unk12;
+    void* m_unk1;
+    void* m_unk2;
+    Minecraft* m_minecraft;
+    File m_file;
+    File m_file2;
+    std::vector<TexturePack>* m_texturePacks;
+    void* m_unk80d;
+    void* m_unk88d;
+    void* m_unk96d;
+    std::unordered_map<unsigned int, TexturePack>* m_texturePackMap;
+    void* m_unk8;
+    void* m_unk9;
+    void* m_unk10;
+    float m_unk11;
+    DefaultTexturePack* m_defaultTexturePack;
+    void* m_unk12;
     // unknown if this is meant to be here
-    bool unk13;
+    bool m_unk13;
     // unsigned char padding[0xA8];
 };

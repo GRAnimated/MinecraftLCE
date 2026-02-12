@@ -9,17 +9,17 @@ template <typename Key, typename Value, typename Hash = std::hash<Key>,
           typename KeyEqual = std::equal_to<Key>>
 class SimpleRegistry : public Registry<Key, Value> {
 public:
-    Value get(Key key) override { return this->mMap.at(key); }
+    Value get(Key key) override { return this->m_map.at(key); }
     void registerKey(Key key, Value value) override {
-        this->mMap[key] = value;
-        this->set.insert(value);
+        this->m_map[key] = value;
+        this->m_set.insert(value);
     }
-    std::unordered_map<Key, Value>* keySet() override { return &this->mMap; }
+    std::unordered_map<Key, Value>* keySet() override { return &this->m_map; }
     Value* getRandom(Random* random) override;
-    virtual bool containsKey(Key key) { return this->mMap.find(key) != this->mMap.end(); }
+    virtual bool containsKey(Key key) { return this->m_map.find(key) != this->m_map.end(); }
 
     // char filler[0x50 - 0x8];
-    void* qword8;
-    std::unordered_map<Key, Value> mMap;
-    std::set<Value> set;
+    void* m_qword8;
+    std::unordered_map<Key, Value> m_map;
+    std::set<Value> m_set;
 };

@@ -9,7 +9,7 @@ std::shared_ptr<Packet> ClientboundSetCarriedItemPacket::create() {
 }
 
 ClientboundSetCarriedItemPacket::ClientboundSetCarriedItemPacket() {
-    itemId = 0;
+    m_itemId = 0;
 }
 
 int ClientboundSetCarriedItemPacket::getEstimatedSize() {
@@ -21,11 +21,11 @@ EPacketType ClientboundSetCarriedItemPacket::getPacketId() {
 }
 
 void ClientboundSetCarriedItemPacket::read(DataInputStream* input) {
-    itemId = input->readByte();
+    m_itemId = input->readByte();
 }
 
 void ClientboundSetCarriedItemPacket::write(DataOutputStream* output) {
-    output->writeByte(itemId);
+    output->writeByte(m_itemId);
 }
 
 void ClientboundSetCarriedItemPacket::handle(PacketListener* listener) {

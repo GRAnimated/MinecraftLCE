@@ -7,5 +7,5 @@ class BlockDegradeRoutine {
 public:
     BlockDegradeRoutine(ServerLevel*, DegradationSequenceRuleDefinition*);
 
-    char eloo[0x70];
+    char m_eloo[0x70];
 };

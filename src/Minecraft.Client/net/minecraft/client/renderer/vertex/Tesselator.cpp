@@ -13,14 +13,14 @@ void Tesselator::CreateNewThreadStorage(int unk) {
 }
 
 Tesselator::Tesselator(int unk) {
-    padding = ::operator new(1);  // idk a better way, padding is probably a class/struct with no fields
-    builder = new BufferBuilder(unk);
+    m_padding = ::operator new(1);  // idk a better way, padding is probably a class/struct with no fields
+    m_builder = new BufferBuilder(unk);
 }
 
 BufferBuilder* Tesselator::getBuilder() const {
-    return builder;
+    return m_builder;
 }
 
 void Tesselator::end() {
-    builder->end();
+    m_builder->end();
 }

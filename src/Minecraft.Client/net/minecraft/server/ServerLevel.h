@@ -9,11 +9,11 @@ public:
 
     static void staticCtor();
 
-    void* size[27];
-    int field_388;
-    bool field_38C;
-    bool mShouldSave;
-    void* size2[43];
+    void* m_size[27];
+    int m_field388;
+    bool m_field38C;
+    bool m_shouldSave;
+    void* m_size2[43];
 };
 
 static_assert(sizeof(ServerLevel));

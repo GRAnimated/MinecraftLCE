@@ -16,8 +16,8 @@ public:
     EPacketType getPacketId() override;
 
 private:
-    int field_28 = -1;
-    unsigned char field_2C = -1;
-    int field_30 = -1;
-    int field_34 = -1;
+    int m_field28 = -1;
+    unsigned char m_field2C = -1;
+    int m_field30 = -1;
+    int m_field34 = -1;
 };

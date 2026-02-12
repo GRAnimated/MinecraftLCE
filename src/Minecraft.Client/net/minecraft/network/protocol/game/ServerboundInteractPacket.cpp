@@ -9,33 +9,33 @@ std::shared_ptr<Packet> ServerboundInteractPacket::create() {
 }
 
 ServerboundInteractPacket::ServerboundInteractPacket() {
-    mTarget = 0;
-    mAction = eAction::Attack;
-    mHand = InteractionHand::MAIN_HAND;
-    mLocation = 0;
+    m_target = 0;
+    m_action = eAction::Attack;
+    m_hand = InteractionHand::MAIN_HAND;
+    m_location = 0;
 }
 
 ServerboundInteractPacket::ServerboundInteractPacket(std::shared_ptr<Entity> target) {
-    mTarget = target->getId();
-    mAction = eAction::Attack;
-    mHand = InteractionHand::MAIN_HAND;
-    mLocation = 0;
+    m_target = target->getId();
+    m_action = eAction::Attack;
+    m_hand = InteractionHand::MAIN_HAND;
+    m_location = 0;
 }
 
 ServerboundInteractPacket::ServerboundInteractPacket(std::shared_ptr<Entity> target,
                                                      InteractionHand::EInteractionHand hand) {
-    mTarget = target->getId();
-    mAction = eAction::Interact;
-    mHand = hand;
-    mLocation = 0;
+    m_target = target->getId();
+    m_action = eAction::Interact;
+    m_hand = hand;
+    m_location = 0;
 }
 
 ServerboundInteractPacket::ServerboundInteractPacket(std::shared_ptr<Entity> target,
                                                      InteractionHand::EInteractionHand hand, Vec3* location) {
-    mTarget = target->getId();
-    mAction = eAction::InteractAt;
-    mHand = hand;
-    mLocation = Vec3::newPermanent(location->x, location->y, location->z);
+    m_target = target->getId();
+    m_action = eAction::InteractAt;
+    m_hand = hand;
+    m_location = Vec3::newPermanent(location->m_x, location->m_y, location->m_z);
 }
 
 int ServerboundInteractPacket::getEstimatedSize() {
@@ -47,29 +47,29 @@ EPacketType ServerboundInteractPacket::getPacketId() {
 }
 
 void ServerboundInteractPacket::read(DataInputStream* input) {
-    mTarget = input->readVarInt();
-    mAction = static_cast<eAction>(input->readInt());
-    if (mAction == eAction::InteractAt) {
+    m_target = input->readVarInt();
+    m_action = static_cast<eAction>(input->readInt());
+    if (m_action == eAction::InteractAt) {
         float x = input->readFloat();
         float y = input->readFloat();
         float z = input->readFloat();
-        mLocation = Vec3::newPermanent(x, y, z);
+        m_location = Vec3::newPermanent(x, y, z);
     }
-    if (mAction == eAction::Interact || mAction == eAction::InteractAt) {
-        mHand = static_cast<InteractionHand::EInteractionHand>(input->readByte());
+    if (m_action == eAction::Interact || m_action == eAction::InteractAt) {
+        m_hand = static_cast<InteractionHand::EInteractionHand>(input->readByte());
     }
 }
 
 void ServerboundInteractPacket::write(DataOutputStream* output) {
-    output->writeVarInt(mTarget);
-    output->writeInt(static_cast<int>(mAction));
-    if (mAction == eAction::InteractAt) {
-        output->writeFloat(mLocation->x);
-        output->writeFloat(mLocation->y);
-        output->writeFloat(mLocation->z);
+    output->writeVarInt(m_target);
+    output->writeInt(static_cast<int>(m_action));
+    if (m_action == eAction::InteractAt) {
+        output->writeFloat(m_location->m_x);
+        output->writeFloat(m_location->m_y);
+        output->writeFloat(m_location->m_z);
     }
-    if (mAction == eAction::Interact || mAction == eAction::InteractAt) {
-        output->writeByte(static_cast<unsigned char>(mHand));
+    if (m_action == eAction::Interact || m_action == eAction::InteractAt) {
+        output->writeByte(static_cast<unsigned char>(m_hand));
     }
 }
 
@@ -78,17 +78,17 @@ void ServerboundInteractPacket::handle(PacketListener* listener) {
 }
 
 std::shared_ptr<Entity> ServerboundInteractPacket::getTarget(Level* level) {
-    return level->getEntity(mTarget);
+    return level->getEntity(m_target);
 }
 
 ServerboundInteractPacket::eAction ServerboundInteractPacket::getAction() {
-    return mAction;
+    return m_action;
 }
 
 InteractionHand::EInteractionHand ServerboundInteractPacket::getHand() {
-    return mHand;
+    return m_hand;
 }
 
 Vec3* ServerboundInteractPacket::getLocation() {
-    return Vec3::newTemp(mLocation);
+    return Vec3::newTemp(m_location);
 }

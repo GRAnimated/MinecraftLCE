@@ -1,20 +1,20 @@
 #include "net/minecraft/world/entity/ai/control/LookControl.h"
 
-LookControl::LookControl(Mob* mob) : mMob(mob) {
-    mYMaxRotSpeed = 0.0f;
-    mXMaxRotAngle = 0.0f;
-    mIsHasWanted = false;
-    mWantedX = mWantedY = mWantedZ = 0.0;
+LookControl::LookControl(Mob* mob) : m_mob(mob) {
+    m_yMaxRotSpeed = 0.0f;
+    m_xMaxRotAngle = 0.0f;
+    m_isHasWanted = false;
+    m_wantedX = m_wantedY = m_wantedZ = 0.0;
 }
 
 void LookControl::setLookAt(double wantedX, double wantedY, double wantedZ, float yMaxRotSpeed,
                             float xMaxRotAngle) {
-    mWantedX = wantedX;
-    mWantedY = wantedY;
-    mWantedZ = wantedZ;
-    mYMaxRotSpeed = yMaxRotSpeed;
-    mXMaxRotAngle = xMaxRotAngle;
-    mIsHasWanted = true;
+    m_wantedX = wantedX;
+    m_wantedY = wantedY;
+    m_wantedZ = wantedZ;
+    m_yMaxRotSpeed = yMaxRotSpeed;
+    m_xMaxRotAngle = xMaxRotAngle;
+    m_isHasWanted = true;
 }
 
 float LookControl::rotlerp(float curAngle, float targetAngle, float maxRot) {
@@ -34,17 +34,17 @@ float LookControl::rotlerp(float curAngle, float targetAngle, float maxRot) {
 }
 
 bool LookControl::isHasWanted() {
-    return mIsHasWanted;
+    return m_isHasWanted;
 }
 
 double LookControl::getWantedX() {
-    return mWantedX;
+    return m_wantedX;
 }
 
 double LookControl::getWantedY() {
-    return mWantedY;
+    return m_wantedY;
 }
 
 double LookControl::getWantedZ() {
-    return mWantedZ;
+    return m_wantedZ;
 }

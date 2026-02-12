@@ -16,6 +16,6 @@ public:
     Rotation* fjRotate(const Vec3i&) const;
     eTYPE getType() const;  // most likely const
 
-    std::wstring mName;
-    eTYPE mType;
+    std::wstring m_name;
+    eTYPE m_type;
 };

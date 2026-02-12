@@ -14,9 +14,9 @@ void CompressedBlockStorage::staticCtor() {
 }
 
 void CompressedBlockStorage::write(DataOutputStream* out) {
-    out->writeInt(this->mLength);
-    if (this->mData) {
-        const arrayWithLength<unsigned char> a = arrayWithLength<unsigned char>(this->mData, this->mLength);
+    out->writeInt(this->m_length);
+    if (this->m_data) {
+        const arrayWithLength<unsigned char> a = arrayWithLength<unsigned char>(this->m_data, this->m_length);
         out->write(a);
     }
 }
@@ -27,23 +27,23 @@ void CompressedBlockStorage::read(DataInputStream* s) {
     if (i <= 0)
         return;
 
-    if (this->mData)
-        free(this->mData, this->mLength);
+    if (this->m_data)
+        free(this->m_data, this->m_length);
 
-    this->mData = create(i, 0);
-    const arrayWithLength<unsigned char> arr = arrayWithLength<unsigned char>(this->mData, i);
-    this->mLength = i;
+    this->m_data = create(i, 0);
+    const arrayWithLength<unsigned char> arr = arrayWithLength<unsigned char>(this->m_data, i);
+    this->m_length = i;
 
     s->readBytes(arr);
     this->compress(-1);
 }
 
 int CompressedBlockStorage::get(int x, int y, int z) {
-    if (!this->mData)
+    if (!this->m_data)
         return 0;
 
-    unsigned char* data = this->mData + 1024;
-    unsigned short* unk = (unsigned short*)this->mData;
+    unsigned char* data = this->m_data + 1024;
+    unsigned short* unk = (unsigned short*)this->m_data;
 
     int block;
     int blockData;
@@ -93,5 +93,5 @@ void CompressedBlockStorage::tick() {
 }
 
 bool CompressedBlockStorage::isCompressed() {
-    return this->mLength != 0x8400;
+    return this->m_length != 0x8400;
 }

@@ -28,8 +28,8 @@ public:
     virtual arrayWithLength<int> getArea(int x, int y, int width, int height) = 0;
     virtual int modeOrRandom(int i, int j, int k, int l);
 
-    long long mMixedSeed;
-    std::shared_ptr<Layer> mParent;
-    long long mRandom;
-    long long mSeed;
+    long long m_mixedSeed;
+    std::shared_ptr<Layer> m_parent;
+    long long m_random;
+    long long m_seed;
 };

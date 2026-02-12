@@ -29,38 +29,38 @@ public:
 
         Variant(int data, const MaterialColor* materialColor, const std::wstring& name, int name_id,
                 int desc_id, const std::wstring& textureName, bool natural) {
-            this->mData = data;
-            this->mName = name;
-            this->mMaterialColor = materialColor;
-            this->mName_id = name_id;
-            this->mDesc_id = desc_id;
-            this->mTextureName = textureName;
-            this->mNatural = natural;
+            this->m_data = data;
+            this->m_name = name;
+            this->m_materialColor = materialColor;
+            this->m_nameId = name_id;
+            this->m_descId = desc_id;
+            this->m_textureName = textureName;
+            this->m_natural = natural;
         }
 
         void registerIcons(IconRegister* iconReg) {
-            this->mTexture = iconReg->registerIcon(this->mTextureName);
+            this->m_texture = iconReg->registerIcon(this->m_textureName);
         }
 
-        int getData() { return this->mData; }
-        std::wstring getName() { return this->mName; }
-        int getNameId() { return this->mName_id; }
-        int getDescriptionId() { return this->mDesc_id; }
-        const MaterialColor* getMaterialColor() { return this->mMaterialColor; }
-        bool isNatural() { return this->mNatural; }
-        TextureAtlasSprite* getTexture() { return this->mTexture; }
+        int getData() { return this->m_data; }
+        std::wstring getName() { return this->m_name; }
+        int getNameId() { return this->m_nameId; }
+        int getDescriptionId() { return this->m_descId; }
+        const MaterialColor* getMaterialColor() { return this->m_materialColor; }
+        bool isNatural() { return this->m_natural; }
+        TextureAtlasSprite* getTexture() { return this->m_texture; }
 
-        std::wstring toString() const override { return this->mName; }
-        std::wstring getSerializedName() const override { return this->mName; }
+        std::wstring toString() const override { return this->m_name; }
+        std::wstring getSerializedName() const override { return this->m_name; }
 
-        int mData;
-        std::wstring mName;
-        int mName_id;
-        int mDesc_id;
-        const MaterialColor* mMaterialColor;
-        bool mNatural;
-        std::wstring mTextureName;
-        TextureAtlasSprite* mTexture;
+        int m_data;
+        std::wstring m_name;
+        int m_nameId;
+        int m_descId;
+        const MaterialColor* m_materialColor;
+        bool m_natural;
+        std::wstring m_textureName;
+        TextureAtlasSprite* m_texture;
     };
 
     StoneBlock();

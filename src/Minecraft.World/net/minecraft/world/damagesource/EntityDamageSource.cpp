@@ -4,22 +4,22 @@ EntityDamageSource::EntityDamageSource(ClientboundChatPacket::EChatPacketMessage
                                        ClientboundChatPacket::EChatPacketMessage unk1,
                                        std::shared_ptr<Entity> entity)
     : DamageSource(unk0, unk1) {
-    this->mEntity = entity;
-    this->mIsThorns = false;
+    this->m_entity = entity;
+    this->m_isThorns = false;
 }
 
 EntityDamageSource::~EntityDamageSource() {}
 
 std::shared_ptr<Entity> EntityDamageSource::getEntity() {
-    return this->mEntity;
+    return this->m_entity;
 }
 
 bool EntityDamageSource::scalesWithDifficulty() {
-    return this->mEntity && this->mEntity->isType(eLivingEntity) && !this->mEntity->isType(ePlayer);
+    return this->m_entity && this->m_entity->isType(eLivingEntity) && !this->m_entity->isType(ePlayer);
 }
 
 Vec3* EntityDamageSource::getSourcePosition() {
-    return Vec3::newTemp(this->mEntity->mX, this->mEntity->mY, this->mEntity->mZ);
+    return Vec3::newTemp(this->m_entity->m_x, this->m_entity->m_y, this->m_entity->m_z);
 }
 
 DamageSource* EntityDamageSource::copy() {
@@ -27,6 +27,6 @@ DamageSource* EntityDamageSource::copy() {
 }
 
 EntityDamageSource* EntityDamageSource::setThorns() {
-    this->mIsThorns = true;
+    this->m_isThorns = true;
     return this;
 }

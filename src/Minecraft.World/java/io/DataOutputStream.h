@@ -45,8 +45,8 @@ public:
 
     void deleteChildStream();
 
-    int getSize() const { return mSize; }
+    int getSize() const { return m_size; }
 
-    OutputStream* mOutputStream;
-    int mSize;
+    OutputStream* m_outputStream;
+    int m_size;
 };

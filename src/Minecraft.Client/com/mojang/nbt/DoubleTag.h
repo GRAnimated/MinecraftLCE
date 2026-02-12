@@ -20,5 +20,5 @@ public:
     float getAsFloat() override;
     Tag* copy() override;
 
-    double mData;
+    double m_data;
 };

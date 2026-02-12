@@ -11,7 +11,7 @@ public:
     virtual void apply(Level*, int, int, ChunkPrimer*);
     virtual void addFeature(Level*, int, int, int, int, ChunkPrimer*);
 
-    int mRadius;
-    Random mRandom;
-    void* unused;
+    int m_radius;
+    Random m_random;
+    void* m_unused;
 };

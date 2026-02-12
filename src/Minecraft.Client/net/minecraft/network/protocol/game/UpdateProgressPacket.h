@@ -15,5 +15,5 @@ public:
     void handle(PacketListener* listener) override;
     int getEstimatedSize() override;
 
-    int mProgress;
+    int m_progress;
 };

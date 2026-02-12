@@ -62,8 +62,8 @@ public:
 
     bool isFJ_Document();
 
-    fuiRenderNode* mRenderNode;
-    int mTabIndex;
-    std::vector<FJ_EventListener> mEventListeners;
-    UIScene* mCallbackScene;
+    fuiRenderNode* m_renderNode;
+    int m_tabIndex;
+    std::vector<FJ_EventListener> m_eventListeners;
+    UIScene* m_callbackScene;
 };

@@ -16,11 +16,11 @@ EPacketType ClientboundChangeDifficultyPacket::getPacketId() {
 }
 
 void ClientboundChangeDifficultyPacket::read(DataInputStream* input) {
-    difficulty = Difficulty::byId(input->readUnsignedByte());
+    m_difficulty = Difficulty::byId(input->readUnsignedByte());
 }
 
 void ClientboundChangeDifficultyPacket::write(DataOutputStream* output) {
-    output->writeByte(difficulty->getId());
+    output->writeByte(m_difficulty->getId());
 }
 
 void ClientboundChangeDifficultyPacket::handle(PacketListener* listener) {

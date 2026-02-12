@@ -7,5 +7,5 @@ public:
     bool setupControl(UIScene*, fuiRenderNode*, const std::string&) override;
     void addSlots(uint id, int count);
 
-    int dword68;
+    int m_dword68;
 };

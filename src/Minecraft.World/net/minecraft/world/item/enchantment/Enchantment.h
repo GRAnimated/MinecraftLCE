@@ -39,8 +39,8 @@ public:
     virtual bool isCurse();
     virtual ~Enchantment();
 
-    const EnchantmentCategory* mEnchantmentCategory;
-    int mDescriptionId;
-    arrayWithLength<const EquipmentSlot*> mSlots;
-    const Rarity* mRarity;
+    const EnchantmentCategory* m_enchantmentCategory;
+    int m_descriptionId;
+    arrayWithLength<const EquipmentSlot*> m_slots;
+    const Rarity* m_rarity;
 };

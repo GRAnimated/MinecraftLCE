@@ -9,7 +9,7 @@ public:
 
     int getBaseClass() override;
 
-    char padding[0x30];
+    char m_padding[0x30];
 };
 
 ASSERT_SIZEOF(MesaBiome, 0x178)

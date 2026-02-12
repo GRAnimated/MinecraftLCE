@@ -45,15 +45,15 @@ public:
     ~StringTable();
 
     static StringTable* instance;
-    bool bool0;
-    bool bool1;
-    char char2;
-    char gap3[5];
-    std::unordered_map<std::wstring, StringTable::_LanguageData> map;
-    std::vector<int> vector1;
-    std::vector<std::wstring> vector2;
-    std::vector<std::pair<std::wstring, int>> vector3;  // this is kinda guessed but should be correct
-    void* qword78;
-    void* qword80;
-    arrayWithLength<uchar> languagesLocArchiveFile;
+    bool m_bool0;
+    bool m_bool1;
+    char m_char2;
+    char m_gap3[5];
+    std::unordered_map<std::wstring, StringTable::_LanguageData> m_ap;
+    std::vector<int> m_vector1;
+    std::vector<std::wstring> m_vector2;
+    std::vector<std::pair<std::wstring, int>> m_vector3;  // this is kinda guessed but should be correct
+    void* m_qword78;
+    void* m_qword80;
+    arrayWithLength<uchar> m_languagesLocArchiveFile;
 };

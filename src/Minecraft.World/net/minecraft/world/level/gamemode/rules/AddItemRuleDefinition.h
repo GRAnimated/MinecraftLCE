@@ -13,10 +13,10 @@ public:
     void getChildren(std::vector<GameRuleDefinition*>*) override;
     GameRuleDefinition* addChild(ConsoleGameRules::EGameRuleType) override;
 
-    int mItemId;
-    int mQuantity;
-    int mAuxValue;
-    int mDataTag;
-    int mSlot;
-    std::vector<AddEnchantmentRuleDefinition*> mAddEnchantmentRules;
+    int m_itemId;
+    int m_quantity;
+    int m_auxValue;
+    int m_dataTag;
+    int m_slot;
+    std::vector<AddEnchantmentRuleDefinition*> m_addEnchantmentRules;
 };

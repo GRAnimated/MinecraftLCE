@@ -18,5 +18,5 @@ public:
     int getCameraId();
 
 private:
-    int cameraId;
+    int m_cameraId;
 };

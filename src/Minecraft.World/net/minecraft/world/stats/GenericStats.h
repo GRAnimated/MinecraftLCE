@@ -72,7 +72,7 @@ public:
     virtual arrayWithLength<unsigned char> getParam_swimOneM(int);
     virtual arrayWithLength<unsigned char> getParam_fallOneM(int);
     virtual arrayWithLength<unsigned char> getParam_climbOneM(int);
-    virtual arrayWithLength<unsigned char> getParam_minecartOneM(int);
+    virtual arrayWithLength<unsigned char> getParam_inecartOneM(int);
     virtual arrayWithLength<unsigned char> getParam_boatOneM(int);
     virtual arrayWithLength<unsigned char> getParam_pigOneM(int);
     virtual arrayWithLength<unsigned char> getParam_cowsMilked();
@@ -84,8 +84,8 @@ public:
     virtual arrayWithLength<unsigned char> getParam_itemsUsed(std::shared_ptr<Player>,
                                                               not_null_ptr<ItemInstance>);
     virtual arrayWithLength<unsigned char> getParam_itemsBought(int, int, int);
-    virtual arrayWithLength<unsigned char> getParam_mobKill(std::shared_ptr<Player>, std::shared_ptr<Mob>,
-                                                            DamageSource*);
+    virtual arrayWithLength<unsigned char> getParam_obKill(std::shared_ptr<Player>, std::shared_ptr<Mob>,
+                                                           DamageSource*);
     virtual arrayWithLength<unsigned char> getParam_breedEntity(eINSTANCEOF);
     virtual arrayWithLength<unsigned char> getParam_tamedEntity(eINSTANCEOF);
     virtual arrayWithLength<unsigned char> getParam_curedEntity(eINSTANCEOF);
@@ -99,7 +99,7 @@ public:
     virtual arrayWithLength<unsigned char> getParam_overkill(int);
     virtual arrayWithLength<unsigned char> getParam_openInventory(int);
     virtual arrayWithLength<unsigned char> getParam_chestfulOfCobblestone(int);
-    virtual arrayWithLength<unsigned char> getParam_musicToMyEars(int);
+    virtual arrayWithLength<unsigned char> getParam_usicToMyEars(int);
     virtual arrayWithLength<unsigned char> getParam_MG03Score(int);
     virtual arrayWithLength<unsigned char> getParam_MG03RingCount(int);
     virtual arrayWithLength<unsigned char> getParam_MG03BestTime(unsigned int);
@@ -117,11 +117,11 @@ public:
     virtual arrayWithLength<unsigned char> getParam_tisButAScratch();
     virtual arrayWithLength<unsigned char> getParam_cupid();
     virtual arrayWithLength<unsigned char> getParam_youWontLikeMeWhenImHungry();
-    virtual arrayWithLength<unsigned char> getParam_mine();
+    virtual arrayWithLength<unsigned char> getParam_ine();
     virtual arrayWithLength<unsigned char> getParam_superSonic(int);
     virtual arrayWithLength<unsigned char> getParam_freeDiver(int);
     virtual arrayWithLength<unsigned char> getParam_beamMeUp(int);
-    virtual arrayWithLength<unsigned char> getParam_mapRoom(int);
+    virtual arrayWithLength<unsigned char> getParam_apRoom(int);
     virtual arrayWithLength<unsigned char> getParam_tenaciousBall(int);
     virtual arrayWithLength<unsigned char> getParam_suckMySnowballs(int);
     virtual arrayWithLength<unsigned char> getParam_greatViewFromUpHere(int);
@@ -217,7 +217,7 @@ public:
     static arrayWithLength<unsigned char> param_buildPickaxe();
     static arrayWithLength<unsigned char> param_buildFurnace();
     static arrayWithLength<unsigned char> param_buildHoe();
-    static arrayWithLength<unsigned char> param_makeBread();
+    static arrayWithLength<unsigned char> param_akeBread();
     static arrayWithLength<unsigned char> param_bakeCake();
     static arrayWithLength<unsigned char> param_buildBetterPickaxe();
     static arrayWithLength<unsigned char> param_onARail(int);
@@ -240,7 +240,7 @@ public:
     static arrayWithLength<unsigned char> param_backFromTheDead();
     static arrayWithLength<unsigned char> param_equipYourFists();
     static arrayWithLength<unsigned char> param_deadshot();
-    static arrayWithLength<unsigned char> param_mountainTop();
+    static arrayWithLength<unsigned char> param_ountainTop();
     static arrayWithLength<unsigned char> param_willLikeNoOther();
     static arrayWithLength<unsigned char> param_changeOfSheets();
     static arrayWithLength<unsigned char> param_adventuringTime();

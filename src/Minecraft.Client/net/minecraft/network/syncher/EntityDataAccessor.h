@@ -13,5 +13,5 @@ class EntityDataAccessor : public EntityDataAccessor_Base {
 public:
     EntityDataAccessor(int id, EntityDataSerializer<T>* serializer);
 
-    void* padding[2];
+    void* m_padding[2];
 };

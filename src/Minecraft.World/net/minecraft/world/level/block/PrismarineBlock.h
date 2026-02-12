@@ -24,31 +24,31 @@ public:
 
         Variant(int data, const std::wstring& name, int nameId, int descriptionId,
                 const std::wstring& textureName) {
-            this->mData = data;
-            this->mName = name;
-            this->mNameId = nameId;
-            this->mDescriptionId = descriptionId;
-            this->mTextureName = textureName;
+            this->m_data = data;
+            this->m_name = name;
+            this->m_nameId = nameId;
+            this->m_descriptionId = descriptionId;
+            this->m_textureName = textureName;
         }
 
-        int getData() { return this->mData; }
-        TextureAtlasSprite* getTexture() { return this->mTexture; }
-        int getNameId() { return this->mNameId; }
-        int getDescriptionId() { return this->mDescriptionId; }
+        int getData() { return this->m_data; }
+        TextureAtlasSprite* getTexture() { return this->m_texture; }
+        int getNameId() { return this->m_nameId; }
+        int getDescriptionId() { return this->m_descriptionId; }
 
         void registerIcons(IconRegister* iconReg) {
-            this->mTexture = iconReg->registerIcon(this->mTextureName);
+            this->m_texture = iconReg->registerIcon(this->m_textureName);
         }
 
-        std::wstring toString() const override { return this->mName; }
-        std::wstring getSerializedName() const override { return this->mName; }
+        std::wstring toString() const override { return this->m_name; }
+        std::wstring getSerializedName() const override { return this->m_name; }
 
-        int mData;
-        std::wstring mName;
-        int mNameId;
-        int mDescriptionId;
-        std::wstring mTextureName;
-        TextureAtlasSprite* mTexture;
+        int m_data;
+        std::wstring m_name;
+        int m_nameId;
+        int m_descriptionId;
+        std::wstring m_textureName;
+        TextureAtlasSprite* m_texture;
     };
 
     static int ROUGH_DATA;

@@ -2,25 +2,25 @@
 #include "net/minecraft/util/Mth.h"
 
 Vec3i::Vec3i(int x, int y, int z) {
-    this->x = x;
-    this->y = y;
-    this->z = z;
+    this->m_x = x;
+    this->m_y = y;
+    this->m_z = z;
 }
 
 Vec3i::Vec3i(double x, double y, double z) {
-    this->x = Mth::floor(x);
-    this->y = Mth::floor(y);
-    this->z = Mth::floor(z);
+    this->m_x = Mth::floor(x);
+    this->m_y = Mth::floor(y);
+    this->m_z = Mth::floor(z);
 }
 
 int Vec3i::getX() const {
-    return x;
+    return m_x;
 }
 
 int Vec3i::getY() const {
-    return y;
+    return m_y;
 }
 
 int Vec3i::getZ() const {
-    return z;
+    return m_z;
 }

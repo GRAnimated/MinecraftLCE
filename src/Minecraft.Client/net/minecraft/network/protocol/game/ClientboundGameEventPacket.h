@@ -20,7 +20,7 @@ public:
     int getPlayerIndex();
 
 private:
-    int mEvent;
-    float mParam;
-    int mPlayerIndex;
+    int m_event;
+    float m_param;
+    int m_playerIndex;
 };

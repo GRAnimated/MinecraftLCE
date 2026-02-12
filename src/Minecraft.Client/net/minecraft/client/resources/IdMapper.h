@@ -12,7 +12,7 @@ public:
     T byId(int id) override;
 
 private:
-    void* filler[7];
+    void* m_filler[7];
 };
 
 // TODO: Unknown location for this variable

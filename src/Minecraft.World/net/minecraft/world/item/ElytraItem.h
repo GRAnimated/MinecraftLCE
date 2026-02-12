@@ -23,5 +23,5 @@ public:
     TextureAtlasSprite* getIcon(not_null_ptr<ItemInstance>) override;
     int GetArmorType() override;
 
-    TextureAtlasSprite* mBrokenElytraIcon;
+    TextureAtlasSprite* m_brokenElytraIcon;
 };

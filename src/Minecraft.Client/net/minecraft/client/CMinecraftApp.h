@@ -88,13 +88,13 @@ public:
     bool GetReallyChangingSessionType();
 
     // note to self: vftable pushes everything over by 8 inside decompiler view
-    unsigned char padding[312];
-    int mAutosaveTimerTime;
-    unsigned char padding2[144];
-    bool mGameStarted;
-    char padding3;
-    char padding4;
-    bool mChangingSessionType;
+    unsigned char m_padding[312];
+    int m_autosaveTimerTime;
+    unsigned char m_padding2[144];
+    bool m_gameStarted;
+    char m_padding3;
+    char m_padding4;
+    bool m_changingSessionType;
 };
 
 class CConsoleMinecraftApp : public CMinecraftApp {

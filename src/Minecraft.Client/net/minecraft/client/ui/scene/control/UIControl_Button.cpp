@@ -7,7 +7,7 @@
 #include "net/minecraft/client/ui/scene/control/UIControl_Base.h"
 
 UIControl_Button::UIControl_Button() : UIControl_Base() {
-    this->mEnabled = true;
+    this->m_enabled = true;
 }
 
 bool UIControl_Button::setupControl(UIScene* scene, fuiRenderNode* renderNode, const std::string& name) {
@@ -17,19 +17,19 @@ bool UIControl_Button::setupControl(UIScene* scene, fuiRenderNode* renderNode, c
 
 void UIControl_Button::tick() {
     UIControl_Base::tick();
-    if (this->mCouldBeEnabled)
-        this->setEnable(this->mEnabled, 1);
+    if (this->m_couldBeEnabled)
+        this->setEnable(this->m_enabled, 1);
 }
 
 void UIControl_Button::ReInit() {
     UIControl::ReInit();
-    this->init(this->mUIString, this->mControlID);
+    this->init(this->m_uiString, this->m_controlId);
 }
 
 void UIControl_Button::setFocus(bool focus) {
-    if (this->mFocused != focus) {
-        this->mFocused = focus;
+    if (this->m_focused != focus) {
+        this->m_focused = focus;
 
-        this->mFuiRenderNode->mFuiNodeStage->asFJ_Button()->ChangeState(focus ? 1 : 2);
+        this->m_fuiRenderNode->m_fuiNodeStage->asFJ_Button()->ChangeState(focus ? 1 : 2);
     }
 }

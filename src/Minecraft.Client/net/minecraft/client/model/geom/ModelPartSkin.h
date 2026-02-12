@@ -12,5 +12,5 @@ public:
     ModelPartSkin(Model*, int xTexOffs, int yTexOffs);
     ModelPartSkin(Model*, int xTexOffs, int yTexOffs, ModelPartsSkinned*);
 
-    char fill[0x10];
+    char m_fill[0x10];
 };

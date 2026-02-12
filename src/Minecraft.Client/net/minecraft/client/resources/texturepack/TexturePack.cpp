@@ -1,10 +1,10 @@
 #include "net/minecraft/client/resources/texturepack/TexturePack.h"
 
 bool TexturePack::hasAudio() {
-    return this->mHasAudio;
+    return this->m_hasAudio;
 }
 void TexturePack::setHasAudio(bool hasAudio) {
-    this->mHasAudio = hasAudio;
+    this->m_hasAudio = hasAudio;
 }
 
 void TexturePack::loadData() {}

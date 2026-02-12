@@ -20,7 +20,7 @@ public:
     virtual bool isFeatureChunk(int, int, bool);
     virtual void createStructureStart(int, int);
 
-    char filler[0x38];
+    char m_filler[0x38];
 
     bool isInsideBoundingFeature(Level*, const BlockPos&);
 };

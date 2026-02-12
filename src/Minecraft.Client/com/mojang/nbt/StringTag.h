@@ -16,5 +16,5 @@ public:
     bool isEmpty() const override;
     std::wstring getAsString() override;
 
-    std::wstring mData;
+    std::wstring m_data;
 };

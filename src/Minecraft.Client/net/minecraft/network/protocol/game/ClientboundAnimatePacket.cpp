@@ -10,13 +10,13 @@ std::shared_ptr<Packet> ClientboundAnimatePacket::create() {
 }
 
 ClientboundAnimatePacket::ClientboundAnimatePacket() {
-    mId = -1;
-    mAction = 0;
+    m_id = -1;
+    m_action = 0;
 }
 
 ClientboundAnimatePacket::ClientboundAnimatePacket(std::shared_ptr<Entity> entity, int unk) {
-    mId = entity->getId();
-    mAction = unk;
+    m_id = entity->getId();
+    m_action = unk;
 }
 
 int ClientboundAnimatePacket::getEstimatedSize() {
@@ -28,13 +28,13 @@ EPacketType ClientboundAnimatePacket::getPacketId() {
 }
 
 void ClientboundAnimatePacket::read(DataInputStream* input) {
-    mId = input->readInt();
-    mAction = input->readByte();
+    m_id = input->readInt();
+    m_action = input->readByte();
 }
 
 void ClientboundAnimatePacket::write(DataOutputStream* output) {
-    output->writeInt(mId);
-    output->writeByte(mAction);
+    output->writeInt(m_id);
+    output->writeByte(m_action);
 }
 
 void ClientboundAnimatePacket::handle(PacketListener* listener) {
@@ -42,9 +42,9 @@ void ClientboundAnimatePacket::handle(PacketListener* listener) {
 }
 
 int ClientboundAnimatePacket::getId() {
-    return mId;
+    return m_id;
 }
 
 int ClientboundAnimatePacket::getAction() {
-    return mAction;
+    return m_action;
 }

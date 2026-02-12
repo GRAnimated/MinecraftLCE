@@ -15,5 +15,5 @@ public:
     void handle(PacketListener* listener) override;
 
 private:
-    int dword18;
+    int m_dword18;
 };

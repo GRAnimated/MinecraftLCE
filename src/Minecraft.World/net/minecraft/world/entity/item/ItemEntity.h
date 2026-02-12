@@ -18,5 +18,5 @@ public:
 
     static void staticCtor();
 
-    void* padding[8];
+    void* m_padding[8];
 };

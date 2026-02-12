@@ -20,6 +20,6 @@ public:
     virtual void GetLayerExtents(unsigned int layer, float*, float*) = 0;
     virtual int GetBlockCountOnLayer(unsigned int layer);
 
-    Random mRandom;
-    std::vector<GenerationWriteTask*> mGenTasks;
+    Random m_random;
+    std::vector<GenerationWriteTask*> m_genTasks;
 };

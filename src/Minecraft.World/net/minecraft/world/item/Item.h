@@ -44,28 +44,28 @@ public:
         static const Tier* GOLD;
 
         Tier(int level, int uses, float speed, float damage, int enchantmentValue, int id) {
-            this->mLevel = level;
-            this->mUses = uses;
-            this->mSpeed = speed;
-            this->mDamage = damage;
-            this->mEnchantmentValue = enchantmentValue;
-            this->mId = id;
+            this->m_level = level;
+            this->m_uses = uses;
+            this->m_speed = speed;
+            this->m_damage = damage;
+            this->m_enchantmentValue = enchantmentValue;
+            this->m_id = id;
         }
 
-        int getLevel() const { return this->mLevel; }
-        int getUses() const { return this->mUses; }
-        float getSpeed() const { return this->mSpeed; }
-        float getAttackDamageBonus() const { return this->mDamage; }
-        int getEnchantmentValue() const { return this->mEnchantmentValue; }
+        int getLevel() const { return this->m_level; }
+        int getUses() const { return this->m_uses; }
+        float getSpeed() const { return this->m_speed; }
+        float getAttackDamageBonus() const { return this->m_damage; }
+        int getEnchantmentValue() const { return this->m_enchantmentValue; }
         Item* getTierItem() const;
 
     private:
-        int mLevel;
-        int mUses;
-        float mSpeed;
-        float mDamage;
-        int mEnchantmentValue;
-        int mId;  // pure guess
+        int m_level;
+        int m_uses;
+        float m_speed;
+        float m_damage;
+        int m_enchantmentValue;
+        int m_id;  // pure guess
     };
 
     Item();
@@ -155,19 +155,19 @@ public:
     static void staticCtor();
     static void staticInit();
 
-    void* qword8;
-    SimpleRegistry<ResourceLocation, const ItemPropertyFunction*>* mSimpleRegistry;
-    int mMaxStackSize;
-    int mMaxDamage;
-    TextureAtlasSprite* mDefaultIcon;
-    int mBaseItemType;
-    int mMaterial;
-    bool mHandEquipped;
-    bool mStackedByData;
-    void* mCraftingRemainingItem;
-    std::wstring wstring_1;
-    int mDescriptionId;
-    int mUseDescriptionId;
-    std::wstring mIconName;
-    char byte78;  // probably bool but idk
+    void* m_qword8;
+    SimpleRegistry<ResourceLocation, const ItemPropertyFunction*>* m_simpleRegistry;
+    int m_maxStackSize;
+    int m_maxDamage;
+    TextureAtlasSprite* m_defaultIcon;
+    int m_baseItemType;
+    int m_material;
+    bool m_handEquipped;
+    bool m_stackedByData;
+    void* m_craftingRemainingItem;
+    std::wstring m_wstring1;
+    int m_descriptionId;
+    int m_useDescriptionId;
+    std::wstring m_iconName;
+    char m_byte78;  // probably bool but idk
 };

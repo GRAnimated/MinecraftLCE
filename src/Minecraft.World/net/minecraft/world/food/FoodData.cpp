@@ -8,57 +8,57 @@
 #include "net/minecraft/world/level/Level.h"
 
 FoodData::FoodData() {
-    mExhaustionLevel = 0;
-    mTickTimer = 0;
-    mFoodLevel = FoodConstants::MaxFood();
-    mLastFoodLevel = FoodConstants::MaxFood();
-    mSaturationLevel = FoodConstants::StartSaturation();
+    m_exhaustionLevel = 0;
+    m_tickTimer = 0;
+    m_foodLevel = FoodConstants::MaxFood();
+    m_lastFoodLevel = FoodConstants::MaxFood();
+    m_saturationLevel = FoodConstants::StartSaturation();
 }
 
 void FoodData::readAdditionalSaveData(CompoundTag* tag) {
     if (tag->contains(L"foodLevel", 99)) {
-        mFoodLevel = tag->getInt(L"foodLevel");
-        mTickTimer = tag->getInt(L"foodTickTimer");
-        mSaturationLevel = tag->getFloat(L"foodSaturationLevel");
-        mExhaustionLevel = tag->getFloat(L"foodExhaustionLevel");
+        m_foodLevel = tag->getInt(L"foodLevel");
+        m_tickTimer = tag->getInt(L"foodTickTimer");
+        m_saturationLevel = tag->getFloat(L"foodSaturationLevel");
+        m_exhaustionLevel = tag->getFloat(L"foodExhaustionLevel");
     }
 }
 
 void FoodData::addAdditionalSaveData(CompoundTag* tag) {
-    tag->putInt(L"foodLevel", mFoodLevel);
-    tag->putInt(L"foodTickTimer", mTickTimer);
-    tag->putFloat(L"foodSaturationLevel", mSaturationLevel);
-    tag->putFloat(L"foodExhaustionLevel", mExhaustionLevel);
+    tag->putInt(L"foodLevel", m_foodLevel);
+    tag->putInt(L"foodTickTimer", m_tickTimer);
+    tag->putFloat(L"foodSaturationLevel", m_saturationLevel);
+    tag->putFloat(L"foodExhaustionLevel", m_exhaustionLevel);
 }
 
 int FoodData::getFoodLevel() {
-    return mFoodLevel;
+    return m_foodLevel;
 }
 
 int FoodData::getLastFoodLevel() {
-    return mLastFoodLevel;
+    return m_lastFoodLevel;
 }
 
 bool FoodData::needsFood() {
-    return mFoodLevel < FoodConstants::MaxFood();
+    return m_foodLevel < FoodConstants::MaxFood();
 }
 
 bool FoodData::isStarving() {
-    return mFoodLevel <= FoodConstants::StarveLevel();
+    return m_foodLevel <= FoodConstants::StarveLevel();
 }
 
 float FoodData::getSaturationLevel() {
-    return mSaturationLevel;
+    return m_saturationLevel;
 }
 
 void FoodData::setFoodLevel(int foodLevel) {
-    mFoodLevel = foodLevel;
+    m_foodLevel = foodLevel;
 }
 
 void FoodData::setSaturation(float saturationLevel) {
-    mSaturationLevel = saturationLevel;
+    m_saturationLevel = saturationLevel;
 }
 
 void FoodData::setExhaustion(float exhaustionLevel) {
-    mExhaustionLevel = exhaustionLevel;
+    m_exhaustionLevel = exhaustionLevel;
 }

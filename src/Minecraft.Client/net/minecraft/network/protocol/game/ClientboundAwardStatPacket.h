@@ -21,6 +21,6 @@ public:
     arrayWithLength<unsigned char> getParamData();
 
 private:
-    int mStat;
-    arrayWithLength<unsigned char> mData;
+    int m_stat;
+    arrayWithLength<unsigned char> m_data;
 };

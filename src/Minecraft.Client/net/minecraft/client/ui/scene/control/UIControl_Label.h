@@ -11,5 +11,5 @@ public:
 
     bool setupControl(UIScene*, fuiRenderNode*, const std::string&) override;
 
-    bool byte68;
+    bool m_byte68;
 };

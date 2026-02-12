@@ -6,5 +6,5 @@ class ProgressRenderer {
 public:
     ProgressRenderer(Minecraft* mc);
 
-    unsigned char padding[0x60];
+    unsigned char m_padding[0x60];
 };

@@ -28,5 +28,5 @@ public:
     std::shared_ptr<Packet> getUpdatePacket(not_null_ptr<ItemInstance>, Level*,
                                             std::shared_ptr<Player>) override;
 
-    TextureAtlasSprite* MAP_FILLED_MARKINGS;
+    TextureAtlasSprite* m_apFilledMarkings;
 };

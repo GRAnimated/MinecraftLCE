@@ -22,7 +22,7 @@ public:
     int getValue();
 
 private:
-    int containerId;
-    int id;
-    int value;
+    int m_containerId;
+    int m_id;
+    int m_value;
 };

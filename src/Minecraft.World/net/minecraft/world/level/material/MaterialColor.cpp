@@ -2,7 +2,7 @@
 
 #include "net/minecraft/world/item/DyeColor.h"
 
-MaterialColor::MaterialColor(int id, eMinecraftColour color) : mColor(color), mID(id) {
+MaterialColor::MaterialColor(int id, eMinecraftColour color) : m_color(color), m_id(id) {
     MATERIAL_COLORS[id] = this;
 }
 
@@ -98,8 +98,8 @@ int MaterialColor::calculateRGBColor(int colorIntensity) const {
         rgbIntensity = 180;
     }
 
-    return 0xFF000000 | (((mColor & 0xFF0000) >> 16) * rgbIntensity / 255) << 16
-           | (((mColor & 0xFF00) >> 8) * rgbIntensity / 255) << 8 | (mColor & 0xFF) * rgbIntensity / 255;
+    return 0xFF000000 | (((m_color & 0xFF0000) >> 16) * rgbIntensity / 255) << 16
+           | (((m_color & 0xFF00) >> 8) * rgbIntensity / 255) << 8 | (m_color & 0xFF) * rgbIntensity / 255;
 }
 
 MaterialColor* MaterialColor::getDyeMaterial(const DyeColor* dyeColor) {

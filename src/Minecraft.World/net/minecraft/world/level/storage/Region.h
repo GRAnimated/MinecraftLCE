@@ -30,13 +30,13 @@ public:
 
     void setCachedBlocksAndData(unsigned char*, unsigned char*, int, int, int, const BlockState**);
 
-    int x;
-    int y;
-    array2DWithLength<LevelChunk*>* chunks;
-    Level* level;
-    bool allEmpty;
-    int dword_24;
-    int dword_28;
-    int dword_2c;
-    void* field_30;
+    int m_x;
+    int m_y;
+    array2DWithLength<LevelChunk*>* m_chunks;
+    Level* m_level;
+    bool m_allEmpty;
+    int m_dword24;
+    int m_dword28;
+    int m_dword2c;
+    void* m_field30;
 };

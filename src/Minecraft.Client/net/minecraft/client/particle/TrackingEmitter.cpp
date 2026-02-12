@@ -7,11 +7,11 @@
 
 TrackingEmitter::TrackingEmitter(Level* level, std::shared_ptr<Entity> entity, const ParticleType* type,
                                  int maxAge)
-    : Particle(level, entity->mX, entity->getBoundingBox()->minY + (entity->mHeight / 2), entity->mZ,
-               entity->mDeltaMovementX, entity->mDeltaMovementY, entity->mDeltaMovementZ) {
-    mTarget = entity;
-    mMaxAge = maxAge;
-    mType = type;
+    : Particle(level, entity->m_x, entity->getBoundingBox()->m_inY + (entity->m_height / 2), entity->m_z,
+               entity->m_deltaMovementX, entity->m_deltaMovementY, entity->m_deltaMovementZ) {
+    m_target = entity;
+    m_maxAge = maxAge;
+    m_type = type;
     tick();
 }
 
@@ -31,19 +31,19 @@ void TrackingEmitter::render(BufferBuilder*, std::shared_ptr<Entity>&, float, fl
 // NON_MATCHING | score 1225
 void TrackingEmitter::tick() {
     for (int i = 0; i < 16; i++) {
-        double f1 = (mRandom.nextFloat() * 2) - 1.0;
-        double f2 = (mRandom.nextFloat() * 2) - 1.0;
-        double f3 = (mRandom.nextFloat() * 2) - 1.0;
+        double f1 = (m_random.nextFloat() * 2) - 1.0;
+        double f2 = (m_random.nextFloat() * 2) - 1.0;
+        double f3 = (m_random.nextFloat() * 2) - 1.0;
         double expr = (f1 * f1 + f2 * f2 + f3 * f3);
         if (expr <= 1.0f) {
-            mLevel->addParticle(
-                mType, mTarget->mX + f1 * mTarget->mWidth / 4,
-                mTarget->getBoundingBox()->minY + (mTarget->mHeight * 0.5) + f2 * mTarget->mHeight / 4,
-                mTarget->mZ + f3 * mTarget->mWidth / 4, f1, f2 + 0.2, f3, arrayWithLength<int>());
+            m_level->addParticle(
+                m_type, m_target->m_x + f1 * m_target->m_width / 4,
+                m_target->getBoundingBox()->m_inY + (m_target->m_height * 0.5) + f2 * m_target->m_height / 4,
+                m_target->m_z + f3 * m_target->m_width / 4, f1, f2 + 0.2, f3, arrayWithLength<int>());
         }
     }
 
-    mAge++;
-    if (mAge >= mMaxAge)
+    m_age++;
+    if (m_age >= m_maxAge)
         remove();
 }

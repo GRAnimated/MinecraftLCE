@@ -17,10 +17,10 @@ public:
     int getEstimatedSize() override;
 
 private:
-    float xxa;
-    float zza;
-    bool isJumping;
-    bool isSneaking;
+    float m_xxa;
+    float m_zza;
+    bool m_isJumping;
+    bool m_isSneaking;
 };
 
 ASSERT_SIZEOF(ServerboundPlayerInputPacket, 0x38)

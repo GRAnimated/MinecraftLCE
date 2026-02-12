@@ -1,17 +1,17 @@
 #include "net/minecraft/world/level/block/boxed/Boxed.h"
 
 Boxed::Boxed(const std::type_info* typeInfo) {
-    this->mTypeInfo = typeInfo;
+    this->m_typeInfo = typeInfo;
 }
 
 Boxed::~Boxed() = default;
 
 bool Boxed::isA(const std::type_info* type) const {
-    return mTypeInfo->hash_code() == type->hash_code();
+    return m_typeInfo->hash_code() == type->hash_code();
 }
 
 bool Boxed::isA(const std::type_info& type) const {
-    return mTypeInfo->hash_code() == type.hash_code();
+    return m_typeInfo->hash_code() == type.hash_code();
 }
 
 bool Boxed::operator==(Boxed* other) const {

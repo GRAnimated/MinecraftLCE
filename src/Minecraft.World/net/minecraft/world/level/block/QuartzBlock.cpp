@@ -24,7 +24,7 @@ QuartzBlock::Variant* QuartzBlock::Variant::VARIANTS[5]{
 
 QuartzBlock::QuartzBlock() : Block(Material::STONE) {
     Block::DerivedInit();
-    this->registerDefaultState(this->mBlockStateDefinition->any()->setValue(VARIANT, Variant::DEFAULT));
+    this->registerDefaultState(this->m_blockStateDefinition->any()->setValue(VARIANT, Variant::DEFAULT));
 }
 
 void QuartzBlock::blockStaticCtor() {
@@ -83,16 +83,16 @@ std::wstring QuartzBlock::TEXTURE_NAMES[5] = {L"side", L"chiseled", L"lines", L"
 void QuartzBlock::registerIcons(IconRegister* iconRegister) {
     for (int i = 0; i < 5; i++) {
         if (!TEXTURE_NAMES[i].empty()) {
-            mTextures[i] = iconRegister->registerIcon(getIconName() + L"_" + TEXTURE_NAMES[i]);
+            m_textures[i] = iconRegister->registerIcon(getIconName() + L"_" + TEXTURE_NAMES[i]);
         } else {
-            mTextures[i] = mTextures[i - 1];
+            m_textures[i] = m_textures[i - 1];
         }
     }
 
-    mTextureTop = iconRegister->registerIcon(getIconName() + L"_" + TEXTURE_NAME_TOP);
-    mTextureChiseledTop = iconRegister->registerIcon(getIconName() + L"_" + TEXTURE_NAME_CHISELED_TOP);
-    mTextureLinesTop = iconRegister->registerIcon(getIconName() + L"_" + TEXTURE_NAME_LINES_TOP);
-    mTextureBottom = iconRegister->registerIcon(getIconName() + L"_" + TEXTURE_NAME_BOTTOM);
+    m_textureTop = iconRegister->registerIcon(getIconName() + L"_" + TEXTURE_NAME_TOP);
+    m_textureChiseledTop = iconRegister->registerIcon(getIconName() + L"_" + TEXTURE_NAME_CHISELED_TOP);
+    m_textureLinesTop = iconRegister->registerIcon(getIconName() + L"_" + TEXTURE_NAME_LINES_TOP);
+    m_textureBottom = iconRegister->registerIcon(getIconName() + L"_" + TEXTURE_NAME_BOTTOM);
 }
 
 // TODO: do this

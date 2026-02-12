@@ -9,8 +9,8 @@ std::shared_ptr<Packet> ServerboundPlayerActionPacket::create() {
 }
 
 ServerboundPlayerActionPacket::ServerboundPlayerActionPacket() {
-    direction = 0;
-    useTime = 0;
+    m_direction = 0;
+    m_useTime = 0;
 }
 
 int ServerboundPlayerActionPacket::getEstimatedSize() {
@@ -22,17 +22,17 @@ EPacketType ServerboundPlayerActionPacket::getPacketId() {
 }
 
 void ServerboundPlayerActionPacket::read(DataInputStream* input) {
-    action = input->readInt();
-    pos = input->readBlockPos();
-    direction = Direction::from3DDataValue(input->readUnsignedByte());
-    useTime = input->readInt();
+    m_action = input->readInt();
+    m_pos = input->readBlockPos();
+    m_direction = Direction::from3DDataValue(input->readUnsignedByte());
+    m_useTime = input->readInt();
 }
 
 void ServerboundPlayerActionPacket::write(DataOutputStream* output) {
-    output->writeInt(action);
-    output->writeBlockPos(pos);
-    output->writeByte(direction->get3DDataValue());
-    output->writeInt(useTime);
+    output->writeInt(m_action);
+    output->writeBlockPos(m_pos);
+    output->writeByte(m_direction->get3DDataValue());
+    output->writeInt(m_useTime);
 }
 
 void ServerboundPlayerActionPacket::handle(PacketListener* listener) {
@@ -40,17 +40,17 @@ void ServerboundPlayerActionPacket::handle(PacketListener* listener) {
 }
 
 BlockPos ServerboundPlayerActionPacket::getPos() {
-    return pos;
+    return m_pos;
 }
 
 const Direction* ServerboundPlayerActionPacket::getDirection() {
-    return direction;
+    return m_direction;
 }
 
 int ServerboundPlayerActionPacket::getAction() {
-    return action;
+    return m_action;
 }
 
 int ServerboundPlayerActionPacket::getUseTime() {
-    return useTime;
+    return m_useTime;
 }

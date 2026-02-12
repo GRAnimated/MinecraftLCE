@@ -26,9 +26,9 @@ public:
     void clearColor(const not_null_ptr<ItemInstance>& itemInstance);
     void setColor(const not_null_ptr<ItemInstance>& itemInstance, int color);
 
-    TextureAtlasSprite* mBaseTierIcon;
-    int mTier;
-    std::vector<int> mTextureIds;
-    std::wstring mHashName;
-    int mProtection;
+    TextureAtlasSprite* m_baseTierIcon;
+    int m_tier;
+    std::vector<int> m_textureIds;
+    std::wstring m_hashName;
+    int m_protection;
 };

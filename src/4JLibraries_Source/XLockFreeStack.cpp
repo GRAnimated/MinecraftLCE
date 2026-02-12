@@ -3,22 +3,22 @@
 
 template <typename T>
 XLockFreeStack<T>::XLockFreeStack() {
-    this->mVector = new std::vector<T>();
-    InitializeCriticalSectionAndSpinCount(&mMutex, 0x1400);
+    this->m_vector = new std::vector<T>();
+    InitializeCriticalSectionAndSpinCount(&m_mutex, 0x1400);
 }
 
 template <typename T>
 T* XLockFreeStack<T>::Pop() {
-    EnterCriticalSection(&this->mMutex);
-    if (mVector.empty()) {
-        LeaveCriticalSection(&this->mMutex);
+    EnterCriticalSection(&this->m_mutex);
+    if (m_vector.empty()) {
+        LeaveCriticalSection(&this->m_mutex);
         return nullptr;
     }
 
-    T* a = mVector.back();
-    mVector.pop_back();
+    T* a = m_vector.back();
+    m_vector.pop_back();
 
-    LeaveCriticalSection(&this->mMutex);
+    LeaveCriticalSection(&this->m_mutex);
 
     return a;
 }

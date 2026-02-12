@@ -186,35 +186,35 @@ public:
         BiomeProperties* temperature(float temp);
         BiomeProperties* waterColor(int color);
 
-        std::wstring mBiomeName;
-        float mDepth;
-        float mScale;
-        float mTemperature;
-        float mDownfall;
-        int mWaterColor;
-        bool mIsSnow;
-        bool mIsNotDry;
-        std::wstring mMutatedBiomeName;
+        std::wstring m_biomeName;
+        float m_depth;
+        float m_scale;
+        float m_temperature;
+        float m_downfall;
+        int m_waterColor;
+        bool m_isSnow;
+        bool m_isNotDry;
+        std::wstring m_mutatedBiomeName;
     };
 
     class MobSpawnerData : public WeighedRandomItem {
     public:
         MobSpawnerData(int instanceType, int weight, int unk, int unk2) : WeighedRandomItem(weight) {
-            mInstanceType = instanceType;
-            _10 = unk;
-            _14 = unk2;
+            m_instanceType = instanceType;
+            m_10 = unk;
+            m_14 = unk2;
         }
 
     private:
-        int mInstanceType;
-        int _10;
-        int _14;
+        int m_instanceType;
+        int m_10;
+        int m_14;
     };
 
     struct LegacyBlockData {  // Guessed name
-        LegacyBlockData(int blockId = 0, int blockData = 0) : id(blockId), data(blockData) {}
-        int id = 0;
-        int data = 0;
+        LegacyBlockData(int blockId = 0, int blockData = 0) : m_id(blockId), m_data(blockData) {}
+        int m_id = 0;
+        int m_data = 0;
     };
 
     Biome(Biome::EBiomeIDs, Biome::BiomeProperties*);
@@ -270,29 +270,29 @@ public:
 
     static void staticCtor();
 
-    int mNameId;
-    int mDescriptionId;
-    float mDepth;
-    float mScale;
-    float mTemperature;
-    float mDownfall;
-    bool mIsSnow;
-    bool mIsDry;
-    std::wstring mMutatedBiomeName;
-    std::wstring mBiomeName;
-    LegacyBlockData mGrass;
-    LegacyBlockData mDirt;
-    BiomeDecorator* mBiomeDecorator;
-    int mBiomeID;
-    std::vector<Biome::MobSpawnerData*> mHostileMobs;
-    std::vector<Biome::MobSpawnerData*> mPassiveMobs;
-    std::vector<Biome::MobSpawnerData*> mAquaticMobs;
-    std::vector<Biome::MobSpawnerData*> mChickens;
-    std::vector<Biome::MobSpawnerData*> field_d8;
-    std::vector<Biome::MobSpawnerData*> field_f0;
-    std::vector<Biome::MobSpawnerData*> mNeutralMobs;
-    std::vector<Biome::MobSpawnerData*> mAmbientMobs;
-    eMinecraftColour mWaterColor;
-    eMinecraftColour mSkyColor;
-    eMinecraftColour mPreviewColor;
+    int m_nameId;
+    int m_descriptionId;
+    float m_depth;
+    float m_scale;
+    float m_temperature;
+    float m_downfall;
+    bool m_isSnow;
+    bool m_isDry;
+    std::wstring m_mutatedBiomeName;
+    std::wstring m_biomeName;
+    LegacyBlockData m_grass;
+    LegacyBlockData m_dirt;
+    BiomeDecorator* m_biomeDecorator;
+    int m_biomeId;
+    std::vector<Biome::MobSpawnerData*> m_hostileMobs;
+    std::vector<Biome::MobSpawnerData*> m_passiveMobs;
+    std::vector<Biome::MobSpawnerData*> m_aquaticMobs;
+    std::vector<Biome::MobSpawnerData*> m_chickens;
+    std::vector<Biome::MobSpawnerData*> m_fieldD8;
+    std::vector<Biome::MobSpawnerData*> m_fieldF0;
+    std::vector<Biome::MobSpawnerData*> m_neutralMobs;
+    std::vector<Biome::MobSpawnerData*> m_ambientMobs;
+    eMinecraftColour m_waterColor;
+    eMinecraftColour m_skyColor;
+    eMinecraftColour m_previewColor;
 };

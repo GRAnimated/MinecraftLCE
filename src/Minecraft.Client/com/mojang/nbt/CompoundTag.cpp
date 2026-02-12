@@ -15,6 +15,6 @@ void erease_if_exists(const std::unordered_map<std::wstring, Tag*>& map, const s
 }
 
 void CompoundTag::putByte(const std::wstring& name, byte value) {
-    erease_if_exists(this->childTags, name, this->get(name));
-    childTags[name] = new ByteTag(value);
+    erease_if_exists(this->m_childTags, name, this->get(name));
+    m_childTags[name] = new ByteTag(value);
 }

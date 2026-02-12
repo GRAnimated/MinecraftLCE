@@ -9,6 +9,6 @@ public:
     arrayWithLength<int> getArea(int x, int y, int width, int height) override;
     void init(long long l) override;
 
-    std::shared_ptr<Layer> mParent1;
-    std::shared_ptr<Layer> mSecondParent;
+    std::shared_ptr<Layer> m_parent1;
+    std::shared_ptr<Layer> m_secondParent;
 };

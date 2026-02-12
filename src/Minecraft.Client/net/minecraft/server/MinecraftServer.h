@@ -25,7 +25,7 @@ public:
     // unknown name & location
     static PlayerList* tryGetPlayers() {
         if (sInstance) {
-            return sInstance->mPlayers;
+            return sInstance->m_players;
         }
         return nullptr;
     }
@@ -43,8 +43,8 @@ public:
     void warn(const std::wstring&) override;
     std::wstring getConsoleName() override;
 
-    ServerConnection* mConnection;
-    Settings* mSettings;
-    arrayWithLength<ServerLevel*> mLevels;
-    PlayerList* mPlayers;
+    ServerConnection* m_connection;
+    Settings* m_settings;
+    arrayWithLength<ServerLevel*> m_levels;
+    PlayerList* m_players;
 };

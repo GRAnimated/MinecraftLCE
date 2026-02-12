@@ -80,17 +80,17 @@ unsigned int LogBlock::getDescriptionId(int data) {
 
 void LogBlock::registerIcons(IconRegister* iconReg) {
     for (int i = 0; i < 6; ++i) {
-        this->type_textures[i] = iconReg->registerIcon(this->getIconName() + L"_" + LOG_VARIANTS[i]);
-        this->top_textures[i] = iconReg->registerIcon(this->getIconName() + L"_" + LOG_VARIANTS[i] + L"_top");
+        this->m_typeTextures[i] = iconReg->registerIcon(this->getIconName() + L"_" + LOG_VARIANTS[i]);
+        this->m_topTextures[i] = iconReg->registerIcon(this->getIconName() + L"_" + LOG_VARIANTS[i] + L"_top");
     }
 }
 
 TextureAtlasSprite* LogBlock::getTypeTexture(const BlockState* state) {
-    return type_textures[this->getWoodType(state)];
+    return m_typeTextures[this->getWoodType(state)];
 }
 
 TextureAtlasSprite* LogBlock::getTopTexture(const BlockState* state) {
-    return top_textures[this->getWoodType(state)];
+    return m_topTextures[this->getWoodType(state)];
 }
 
 // NON_MATCHING

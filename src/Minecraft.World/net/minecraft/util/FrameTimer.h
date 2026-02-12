@@ -4,5 +4,5 @@ class FrameTimer {
 public:
     FrameTimer();
 
-    unsigned char padding[0x790];
+    unsigned char m_padding[0x790];
 };

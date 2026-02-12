@@ -9,7 +9,7 @@ std::shared_ptr<Packet> DebugOptionsPacket::create() {
 }
 
 DebugOptionsPacket::DebugOptionsPacket() {
-    dword18 = 0;
+    m_dword18 = 0;
 }
 
 // DebugOptionsPacket::DebugOptionsPacket(unsigned int unk1) {
@@ -25,11 +25,11 @@ EPacketType DebugOptionsPacket::getPacketId() {
 }
 
 void DebugOptionsPacket::read(DataInputStream* input) {
-    dword18 = input->readInt();
+    m_dword18 = input->readInt();
 }
 
 void DebugOptionsPacket::write(DataOutputStream* output) {
-    output->writeInt(dword18);
+    output->writeInt(m_dword18);
 }
 
 void DebugOptionsPacket::handle(PacketListener* listener) {

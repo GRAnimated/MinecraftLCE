@@ -9,7 +9,7 @@ std::shared_ptr<Packet> ServerboundKeepAlivePacket::create() {
 }
 
 ServerboundKeepAlivePacket::ServerboundKeepAlivePacket() : Packet() {
-    mId = 0;
+    m_id = 0;
 }
 
 void ServerboundKeepAlivePacket::handle(PacketListener* listener) {
@@ -17,11 +17,11 @@ void ServerboundKeepAlivePacket::handle(PacketListener* listener) {
 }
 
 void ServerboundKeepAlivePacket::read(DataInputStream* input) {
-    mId = input->readVarInt();
+    m_id = input->readVarInt();
 }
 
 void ServerboundKeepAlivePacket::write(DataOutputStream* output) {
-    output->writeVarInt(mId);
+    output->writeVarInt(m_id);
 }
 
 EPacketType ServerboundKeepAlivePacket::getPacketId() {

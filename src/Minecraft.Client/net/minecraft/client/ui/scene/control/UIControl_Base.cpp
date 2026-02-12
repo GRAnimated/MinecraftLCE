@@ -4,8 +4,8 @@
 #include "net/minecraft/client/ui/scene/control/UIControl.h"
 
 UIControl_Base::UIControl_Base() : UIControl() {
-    this->mBoolIdk2 = false;
-    this->mControlID = 0;
+    this->m_boolIdk2 = false;
+    this->m_controlId = 0;
 }
 
 UIControl_Base::~UIControl_Base() {}
@@ -16,14 +16,14 @@ bool UIControl_Base::setupControl(UIScene* scene, fuiRenderNode* renderNode, con
 
 void UIControl_Base::tick() {
     UIControl::tick();
-    if (this->mUIString.needsUpdating() || this->mBoolIdk2) {
-        this->setLabel(this->mUIString, true, true);
-        this->mUIString.setUpdated();
+    if (this->m_uiString.needsUpdating() || this->m_boolIdk2) {
+        this->setLabel(this->m_uiString, true, true);
+        this->m_uiString.setUpdated();
     }
 }
 
 bool UIControl_Base::hasFocus() {
-    return this->mParentUIScene->controlHasFocus(this);
+    return this->m_parentUiScene->controlHasFocus(this);
 }
 
 // uhhh, maybe not

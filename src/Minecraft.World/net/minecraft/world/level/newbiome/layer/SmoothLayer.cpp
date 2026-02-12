@@ -4,7 +4,7 @@
 #include "net/minecraft/world/level/newbiome/layer/IntCache.h"
 
 SmoothLayer::SmoothLayer(long long seed, std::shared_ptr<Layer> parent) : Layer(seed) {
-    mParent = parent;
+    m_parent = parent;
 }
 
 arrayWithLength<int> SmoothLayer::getArea(int x, int y, int width, int height) {
@@ -12,7 +12,7 @@ arrayWithLength<int> SmoothLayer::getArea(int x, int y, int width, int height) {
     int n = y - 1;
     int o = width + 2;
     int p = height + 2;
-    arrayWithLength<int> parentArea = mParent->getArea(m, n, o, p);
+    arrayWithLength<int> parentArea = m_parent->getArea(m, n, o, p);
     PIXBeginNamedEvent(0.0, "SmoothLayer::getArea");
     arrayWithLength<int> area = IntCache::allocate(width * height);
 

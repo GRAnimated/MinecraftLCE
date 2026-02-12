@@ -9,11 +9,11 @@ std::shared_ptr<Packet> ServerboundSwingPacket::create() {
 }
 
 ServerboundSwingPacket::ServerboundSwingPacket() : Packet() {
-    mInteractionHand = (InteractionHand::EInteractionHand)0;
+    m_interactionHand = (InteractionHand::EInteractionHand)0;
 }
 
 ServerboundSwingPacket::ServerboundSwingPacket(InteractionHand::EInteractionHand interactionHand) : Packet() {
-    mInteractionHand = interactionHand;
+    m_interactionHand = interactionHand;
 }
 
 EPacketType ServerboundSwingPacket::getPacketId() {
@@ -21,11 +21,11 @@ EPacketType ServerboundSwingPacket::getPacketId() {
 }
 
 void ServerboundSwingPacket::read(DataInputStream* input) {
-    mInteractionHand = (InteractionHand::EInteractionHand)input->read();
+    m_interactionHand = (InteractionHand::EInteractionHand)input->read();
 }
 
 void ServerboundSwingPacket::write(DataOutputStream* output) {
-    output->write((unsigned char)mInteractionHand);
+    output->write((unsigned char)m_interactionHand);
 }
 
 void ServerboundSwingPacket::handle(PacketListener* listener) {
@@ -33,5 +33,5 @@ void ServerboundSwingPacket::handle(PacketListener* listener) {
 }
 
 InteractionHand::EInteractionHand ServerboundSwingPacket::getHand() {
-    return mInteractionHand;
+    return m_interactionHand;
 }

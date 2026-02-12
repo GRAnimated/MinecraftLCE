@@ -21,14 +21,14 @@ public:
     static const BlockPathTypes* DOOR_IRON_CLOSED;
 
     BlockPathTypes(int ordinal, float maulus) {
-        this->mOrdinal = ordinal;
-        this->mMaulus = maulus;
+        this->m_ordinal = ordinal;
+        this->m_maulus = maulus;
     }
 
-    int ordinal() const { return this->mOrdinal; }
-    int getFlag() const { return 1 << this->mOrdinal; }
-    float getMaulus() const { return this->mMaulus; }
+    int ordinal() const { return this->m_ordinal; }
+    int getFlag() const { return 1 << this->m_ordinal; }
+    float getMaulus() const { return this->m_maulus; }
 
-    int mOrdinal;
-    float mMaulus;
+    int m_ordinal;
+    float m_maulus;
 };

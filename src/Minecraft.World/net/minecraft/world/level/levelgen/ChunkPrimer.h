@@ -20,8 +20,8 @@ public:
     int getHighestNonAirPos(int, int);
 
 private:
-    arrayWithLength<uchar> mBlockIds;
-    arrayWithLength<uchar> mBlockData;
-    const BlockState* mAirBlock;
-    bool byte_28;
+    arrayWithLength<uchar> m_blockIds;
+    arrayWithLength<uchar> m_blockData;
+    const BlockState* m_airBlock;
+    bool m_byte28;
 };

@@ -26,93 +26,93 @@
 
 OverworldLevelSource::OverworldLevelSource(Level* level, long long seed, bool generateStructures,
                                            SuperflatConfig* sourceSettings) {
-    mSize = level->getLevelData()->getXZSize();
-    level->getLevelData()->fillMoatValues(&mIsClassicMoat, &mIsSmallMoat, &mIsMediumMoat);
+    m_size = level->getLevelData()->getXZSize();
+    level->getLevelData()->fillMoatValues(&m_isClassicMoat, &m_isSmallMoat, &m_isMediumMoat);
 
-    mLevel = level;
-    mShouldGenerateStructures = generateStructures;
-    mGeneratorType = level->getLevelData()->getGeneratorType();
+    m_level = level;
+    m_shouldGenerateStructures = generateStructures;
+    m_generatorType = level->getLevelData()->getGeneratorType();
 
-    mCaveFeature = new LargeCaveFeature();
-    mStrongholdFeature = new StrongholdFeature();
-    mVillageFeature = new VillageFeature(level->getLevelData()->getXZSize());
-    mMineshaftFeature = new MineShaftFeature();
-    mRandomScatteredLargeFeature = new RandomScatteredLargeFeature();
-    mCanyonFeature = new CanyonFeature();
-    mOceanMonumentFeature = new OceanMonumentFeature();
-    mWoodlandMansionFeature = new WoodlandMansionFeature(this);
-    mRandom = Random(seed);
-    mRandom2 = Random(seed);
-    mMinLimitPerlinNoise = new PerlinNoise(&mRandom, 16);
-    mMaxLimitPerlinNoise = new PerlinNoise(&mRandom, 16);
-    mMainNoise = new PerlinNoise(&mRandom, 8);
-    mSurfaceNoise = new PerlinSimplexNoise(&mRandom, 4);
-    mScaleNoise = new PerlinNoise(&mRandom, 10);
-    mDepthNoise = new PerlinNoise(&mRandom, 16);
-    qword_78 = nullptr;
-    qword_80 = nullptr;
-    field_88 = new PerlinNoise(&mRandom, 8);
+    m_caveFeature = new LargeCaveFeature();
+    m_strongholdFeature = new StrongholdFeature();
+    m_villageFeature = new VillageFeature(level->getLevelData()->getXZSize());
+    m_mineshaftFeature = new MineShaftFeature();
+    m_randomScatteredLargeFeature = new RandomScatteredLargeFeature();
+    m_canyonFeature = new CanyonFeature();
+    m_oceanMonumentFeature = new OceanMonumentFeature();
+    m_woodlandMansionFeature = new WoodlandMansionFeature(this);
+    m_random = Random(seed);
+    m_random2 = Random(seed);
+    m_minLimitPerlinNoise = new PerlinNoise(&m_random, 16);
+    m_maxLimitPerlinNoise = new PerlinNoise(&m_random, 16);
+    m_mainNoise = new PerlinNoise(&m_random, 8);
+    m_surfaceNoise = new PerlinSimplexNoise(&m_random, 4);
+    m_scaleNoise = new PerlinNoise(&m_random, 10);
+    m_depthNoise = new PerlinNoise(&m_random, 16);
+    m_qword78 = nullptr;
+    m_qword80 = nullptr;
+    m_field88 = new PerlinNoise(&m_random, 8);
 
     for (int i = -2; i <= 2; ++i) {
         for (int j = -2; j <= 2; ++j) {
             float f = 10.0f / sqrtf((float)(i * i + j * j) + 0.2f);
-            mBiomeWeights[i + 2 + (j + 2) * 5] = f;
+            m_biomeWeights[i + 2 + (j + 2) * 5] = f;
         }
     }
 
-    mOceanBlock = Blocks::WATER->defaultBlockState();
+    m_oceanBlock = Blocks::WATER->defaultBlockState();
 
     CustomizableSourceSettings::Builder* builder;
 
     if (!sourceSettings) {
         builder = new CustomizableSourceSettings::Builder();
-        mSourceSettings = new CustomizableSourceSettings(builder);
+        m_sourceSettings = new CustomizableSourceSettings(builder);
 
     } else {
         builder = CustomizableSourceSettings::Builder::fromString(sourceSettings);
-        mSourceSettings = builder->build();
-        if (mSourceSettings->useLavaOceans)
-            mOceanBlock = Blocks::LAVA->defaultBlockState();
+        m_sourceSettings = builder->build();
+        if (m_sourceSettings->m_useLavaOceans)
+            m_oceanBlock = Blocks::LAVA->defaultBlockState();
         else
-            mOceanBlock = Blocks::WATER->defaultBlockState();
+            m_oceanBlock = Blocks::WATER->defaultBlockState();
 
-        level->setSeaLevel(mSourceSettings->seaLevel);
+        level->setSeaLevel(m_sourceSettings->m_seaLevel);
     }
 
     delete builder;
 }
 
 OverworldLevelSource::~OverworldLevelSource() {
-    delete mCaveFeature;
-    delete mStrongholdFeature;
-    delete mVillageFeature;
-    delete mMineshaftFeature;
-    delete mRandomScatteredLargeFeature;
-    delete mCanyonFeature;
-    delete mOceanMonumentFeature;
-    delete mWoodlandMansionFeature;
-    delete mMinLimitPerlinNoise;
-    delete mMaxLimitPerlinNoise;
-    delete mMainNoise;
-    delete mSurfaceNoise;
-    delete mScaleNoise;
-    delete mDepthNoise;
-    delete qword_78;
-    delete qword_80;
-    delete field_88;
-    delete mSourceSettings;
-    delete qword_120.data;
+    delete m_caveFeature;
+    delete m_strongholdFeature;
+    delete m_villageFeature;
+    delete m_mineshaftFeature;
+    delete m_randomScatteredLargeFeature;
+    delete m_canyonFeature;
+    delete m_oceanMonumentFeature;
+    delete m_woodlandMansionFeature;
+    delete m_minLimitPerlinNoise;
+    delete m_maxLimitPerlinNoise;
+    delete m_mainNoise;
+    delete m_surfaceNoise;
+    delete m_scaleNoise;
+    delete m_depthNoise;
+    delete m_qword78;
+    delete m_qword80;
+    delete m_field88;
+    delete m_sourceSettings;
+    delete m_qword120.m_data;
 }
 
 float OverworldLevelSource::getHeightFalloff(int chunkX, int chunkZ, int* distance) {
-    int size = mSize * 16;
+    int size = m_size * 16;
     int nearestDist = distanceToEdge(32.0f, 0, chunkX, chunkZ, size);
 
-    MoatCheck moatChecks[] = {{mIsClassicMoat, 864}, {mIsSmallMoat, 1024}, {mIsMediumMoat, 3072}};
+    MoatCheck moatChecks[] = {{m_isClassicMoat, 864}, {m_isSmallMoat, 1024}, {m_isMediumMoat, 3072}};
 
     for (auto& check : moatChecks) {
-        if (check.enabled && size > check.limit) {
-            int d = distanceToEdge(32.0f, nearestDist, chunkX, chunkZ, check.limit);
+        if (check.m_enabled && size > check.m_limit) {
+            int d = distanceToEdge(32.0f, nearestDist, chunkX, chunkZ, check.m_limit);
             if (d < nearestDist) {
                 nearestDist = d;
             }
@@ -178,7 +178,7 @@ void OverworldLevelSource::buildSurfaces(int chunkX, int chunkZ, ChunkPrimer* pr
     PIXBeginNamedEvent(0.0, "Getting noise region");
 
     noiseRegion
-        = mSurfaceNoise->getRegion(noiseRegion, chunkX * 16, chunkZ * 16, 16, 16, 0.0625, 0.0625, 1.0);
+        = m_surfaceNoise->getRegion(noiseRegion, chunkX * 16, chunkZ * 16, 16, 16, 0.0625, 0.0625, 1.0);
 
     PIXEndNamedEvent();
 
@@ -190,18 +190,18 @@ void OverworldLevelSource::buildSurfaces(int chunkX, int chunkZ, ChunkPrimer* pr
                 PIXBeginNamedEvent(0.0, "Building surface for biome %ls", biomeName.c_str());
             }
 
-            biome->buildSurfaceAt(mLevel, mRandom, primer, chunkX * 16 + x, chunkZ * 16 + z,
+            biome->buildSurfaceAt(m_level, m_random, primer, chunkX * 16 + x, chunkZ * 16 + z,
                                   noiseRegion[z + x * 16]);
 
             PIXEndNamedEvent();
         }
     }
 
-    delete noiseRegion.data;
+    delete noiseRegion.m_data;
 }
 
 LevelChunk* OverworldLevelSource::createChunk(int chunkX, int chunkZ) {
-    mRandom.setSeed(341873128712 * chunkX + 132897987541 * chunkZ);
+    m_random.setSeed(341873128712 * chunkX + 132897987541 * chunkZ);
 
     PIXBeginNamedEvent(0.0, "Setting up primer");
     void* ids = XPhysicalAlloc(0x8000, 0xFFFFFFFFFFFFFFFF, 0x1000, 4);
@@ -219,62 +219,62 @@ LevelChunk* OverworldLevelSource::createChunk(int chunkX, int chunkZ) {
 
     PIXBeginNamedEvent(0.0, "Getting biome block");
     arrayWithLength<Biome*> biomes;
-    mLevel->getBiomeSource()->getBiomeBlock(biomes, 16 * chunkX, 16 * chunkZ, 16, 16, true);
+    m_level->getBiomeSource()->getBiomeBlock(biomes, 16 * chunkX, 16 * chunkZ, 16, 16, true);
     PIXEndNamedEvent();
 
     PIXBeginNamedEvent(0.0, "Building surfaces");
     buildSurfaces(chunkX, chunkZ, &primer, biomes);
     PIXEndNamedEvent();
 
-    delete biomes.data;
+    delete biomes.m_data;
 
-    if (mSourceSettings->useCaves) {
+    if (m_sourceSettings->m_useCaves) {
         PIXBeginNamedEvent(0.0, "Applying caves");
-        mCaveFeature->apply(mLevel, chunkX, chunkZ, &primer);
+        m_caveFeature->apply(m_level, chunkX, chunkZ, &primer);
         PIXEndNamedEvent();
     }
 
-    if (mSourceSettings->byte_52) {
+    if (m_sourceSettings->m_byte52) {
         PIXBeginNamedEvent(0.0, "Applying ravines");
-        mCanyonFeature->apply(mLevel, chunkX, chunkZ, &primer);
+        m_canyonFeature->apply(m_level, chunkX, chunkZ, &primer);
         PIXEndNamedEvent();
     }
 
-    if (mShouldGenerateStructures) {
-        if (mSourceSettings->useMineshafts) {
+    if (m_shouldGenerateStructures) {
+        if (m_sourceSettings->m_useMineshafts) {
             PIXBeginNamedEvent(0.0, "Applying mineshafts");
-            mMineshaftFeature->apply(mLevel, chunkX, chunkZ, &primer);
+            m_mineshaftFeature->apply(m_level, chunkX, chunkZ, &primer);
             PIXEndNamedEvent();
         }
-        if (mSourceSettings->useVillages) {
+        if (m_sourceSettings->m_useVillages) {
             PIXBeginNamedEvent(0.0, "Applying villages");
-            mVillageFeature->apply(mLevel, chunkX, chunkZ, &primer);
+            m_villageFeature->apply(m_level, chunkX, chunkZ, &primer);
             PIXEndNamedEvent();
         }
-        if (mSourceSettings->useStrongholds) {
+        if (m_sourceSettings->m_useStrongholds) {
             PIXBeginNamedEvent(0.0, "Applying strongholds");
-            mStrongholdFeature->apply(mLevel, chunkX, chunkZ, &primer);
+            m_strongholdFeature->apply(m_level, chunkX, chunkZ, &primer);
             PIXEndNamedEvent();
         }
-        if (mSourceSettings->useScatteredFeatures) {
+        if (m_sourceSettings->m_useScatteredFeatures) {
             PIXBeginNamedEvent(0.0, "Applying scatterd features");
-            mRandomScatteredLargeFeature->apply(mLevel, chunkX, chunkZ, &primer);
+            m_randomScatteredLargeFeature->apply(m_level, chunkX, chunkZ, &primer);
             PIXEndNamedEvent();
         }
-        if (mSourceSettings->useOceanMonuments) {
+        if (m_sourceSettings->m_useOceanMonuments) {
             PIXBeginNamedEvent(0.0, "Applying ocean monuments");
-            mOceanMonumentFeature->apply(mLevel, chunkX, chunkZ, &primer);
+            m_oceanMonumentFeature->apply(m_level, chunkX, chunkZ, &primer);
             PIXEndNamedEvent();
         }
-        if (mSourceSettings->useWoodlandMansions) {
+        if (m_sourceSettings->m_useWoodlandMansions) {
             PIXBeginNamedEvent(0.0, "Applying woodland mansions");
-            mWoodlandMansionFeature->apply(mLevel, chunkX, chunkZ, &primer);
+            m_woodlandMansionFeature->apply(m_level, chunkX, chunkZ, &primer);
             PIXEndNamedEvent();
         }
     }
 
     PIXBeginNamedEvent(0.0, "Creating chunk");
-    LevelChunk* chunk = new LevelChunk(mLevel, &primer, chunkX, chunkZ);
+    LevelChunk* chunk = new LevelChunk(m_level, &primer, chunkX, chunkZ);
     PIXEndNamedEvent();
 
     XPhysicalFree(ids);
@@ -296,22 +296,23 @@ void OverworldLevelSource::getHeights(int posX, int posY, int posZ, arrayWithLen
     arrayWithLength<double> unk;
     arrayWithLength<double> unk2;
 
-    float coordinateScale = mSourceSettings->coordinateScale;
-    float heightScale = mSourceSettings->heightScale;
+    float coordinateScale = m_sourceSettings->m_coordinateScale;
+    float heightScale = m_sourceSettings->m_heightScale;
 
-    depthNoise
-        = mDepthNoise->getRegion(depthNoise, posX, posZ, 5, 5, mSourceSettings->depthNoiseScaleX,
-                                 mSourceSettings->depthNoiseScaleZ, mSourceSettings->depthNoiseScaleExponent);
+    depthNoise = m_depthNoise->getRegion(depthNoise, posX, posZ, 5, 5, m_sourceSettings->m_depthNoiseScaleX,
+                                         m_sourceSettings->m_depthNoiseScaleZ,
+                                         m_sourceSettings->m_depthNoiseScaleExponent);
 
-    mainNoise = mMainNoise->getRegion(
-        mainNoise, posX, posY, posZ, 5, 17, 5, coordinateScale / mSourceSettings->mainNoiseScaleX,
-        heightScale / mSourceSettings->mainNoiseScaleY, coordinateScale / mSourceSettings->mainNoiseScaleZ);
+    mainNoise = m_mainNoise->getRegion(mainNoise, posX, posY, posZ, 5, 17, 5,
+                                       coordinateScale / m_sourceSettings->m_ainNoiseScaleX,
+                                       heightScale / m_sourceSettings->m_ainNoiseScaleY,
+                                       coordinateScale / m_sourceSettings->m_ainNoiseScaleZ);
 
-    minLimitNoise = mMinLimitPerlinNoise->getRegion(minLimitNoise, posX, posY, posZ, 5, 17, 5,
-                                                    coordinateScale, heightScale, coordinateScale);
+    minLimitNoise = m_minLimitPerlinNoise->getRegion(minLimitNoise, posX, posY, posZ, 5, 17, 5,
+                                                     coordinateScale, heightScale, coordinateScale);
 
-    maxLimitNoise = mMaxLimitPerlinNoise->getRegion(maxLimitNoise, posX, posY, posZ, 5, 17, 5,
-                                                    coordinateScale, heightScale, coordinateScale);
+    maxLimitNoise = m_maxLimitPerlinNoise->getRegion(maxLimitNoise, posX, posY, posZ, 5, 17, 5,
+                                                     coordinateScale, heightScale, coordinateScale);
 
     int i = 0;
     int j = 0;
@@ -327,18 +328,18 @@ void OverworldLevelSource::getHeights(int posX, int posY, int posZ, arrayWithLen
                 for (int zo = -2; zo <= 2; ++zo) {
                     Biome* b2 = biomes[x + xo + 2 + (z + zo + 2) * 10];
 
-                    float depth = mSourceSettings->biomeDepthOffset
-                                  + (b2->getDepth() * mSourceSettings->biomeDepthWeight);
+                    float depth = m_sourceSettings->m_biomeDepthOffset
+                                  + (b2->getDepth() * m_sourceSettings->m_biomeDepthWeight);
 
-                    float scale = mSourceSettings->biomeScaleOffset
-                                  + (b2->getScale() * mSourceSettings->biomeScaleWeight);
+                    float scale = m_sourceSettings->m_biomeScaleOffset
+                                  + (b2->getScale() * m_sourceSettings->m_biomeScaleWeight);
 
-                    if (mGeneratorType == LevelType::AMPLIFIED && depth > 0.0f) {
+                    if (m_generatorType == LevelType::AMPLIFIED && depth > 0.0f) {
                         depth = depth * 2.0f + 1.0f;
                         scale = scale * 4.0f + 1.0f;
                     }
 
-                    float weight = mBiomeWeights[(xo + 2) + (zo + 2) * 5] / (depth + 2.0f);
+                    float weight = m_biomeWeights[(xo + 2) + (zo + 2) * 5] / (depth + 2.0f);
                     if (b2->getDepth() > b->getDepth()) {
                         weight *= 0.5f;
                     }
@@ -378,18 +379,18 @@ void OverworldLevelSource::getHeights(int posX, int posY, int posZ, arrayWithLen
             double baseSize = weightedDepth;
             double d9 = weightedScale;
             baseSize = baseSize + dn * 0.2;
-            baseSize = baseSize * mSourceSettings->baseSize / 8.0;
-            double baseHeight = mSourceSettings->baseSize + baseSize * 4.0;
+            baseSize = baseSize * m_sourceSettings->m_baseSize / 8.0;
+            double baseHeight = m_sourceSettings->m_baseSize + baseSize * 4.0;
 
             for (int y = 0; y < 17; ++y) {
-                double yOffset = (y - baseHeight) * mSourceSettings->stretchY * 128.0 / 128.0 / d9;
+                double yOffset = (y - baseHeight) * m_sourceSettings->m_stretchY * 128.0 / 128.0 / d9;
 
                 if (yOffset < 0.0) {
                     yOffset *= 4.0;
                 }
 
-                double minNoiseVal = minLimitNoise[i] / mSourceSettings->upperLimitScale;
-                double maxNoiseVal = maxLimitNoise[i] / mSourceSettings->lowerLimitScale;
+                double minNoiseVal = minLimitNoise[i] / m_sourceSettings->m_upperLimitScale;
+                double maxNoiseVal = maxLimitNoise[i] / m_sourceSettings->m_lowerLimitScale;
                 double mainNoiseVal = mainNoise[i] / 10.0 + 1.0;
 
                 double lerped = Mth::clampedLerp(minNoiseVal, maxNoiseVal, mainNoiseVal * 0.5) - yOffset;
@@ -405,27 +406,27 @@ void OverworldLevelSource::getHeights(int posX, int posY, int posZ, arrayWithLen
         }
     }
 
-    delete[] mainNoise.data;
-    delete[] minLimitNoise.data;
-    delete[] maxLimitNoise.data;
-    delete[] depthNoise.data;
-    delete[] unk.data;
-    delete[] unk2.data;
+    delete[] mainNoise.m_data;
+    delete[] minLimitNoise.m_data;
+    delete[] maxLimitNoise.m_data;
+    delete[] depthNoise.m_data;
+    delete[] unk.m_data;
+    delete[] unk2.m_data;
 }
 
 void OverworldLevelSource::postProcess(int chunkX, int chunkZ) {
     ChunkGenerator::inPostProcessStep = true;
 
     BlockPos origin(chunkX * 16, 0, chunkZ * 16);
-    Biome* biome = mLevel->getBiome(origin.offset(16, 0, 16));
+    Biome* biome = m_level->getBiome(origin.offset(16, 0, 16));
 
-    mRandom2.setSeed(mLevel->getSeed());
+    m_random2.setSeed(m_level->getSeed());
 
-    long long t1 = mRandom2.nextLong() / 2 * 2 + 1;
-    long long t2 = mRandom2.nextLong() / 2 * 2 + 1;
+    long long t1 = m_random2.nextLong() / 2 * 2 + 1;
+    long long t2 = m_random2.nextLong() / 2 * 2 + 1;
 
     long long mixed = t1 * chunkX + t2 * chunkZ;
-    mRandom2.setSeed(mixed ^ mLevel->getSeed());
+    m_random2.setSeed(mixed ^ m_level->getSeed());
 
     ChunkPos chunkPos(chunkX, chunkZ);
 
@@ -433,29 +434,29 @@ void OverworldLevelSource::postProcess(int chunkX, int chunkZ) {
 
     bool villageFlag = false;
 
-    if (mShouldGenerateStructures) {
-        if (mSourceSettings->useMineshafts) {
-            mMineshaftFeature->postProcess(mLevel, mRandom2, &chunkPos);
+    if (m_shouldGenerateStructures) {
+        if (m_sourceSettings->m_useMineshafts) {
+            m_mineshaftFeature->postProcess(m_level, m_random2, &chunkPos);
         }
 
-        if (mSourceSettings->useVillages) {
-            villageFlag = mVillageFeature->postProcess(mLevel, mRandom2, &chunkPos);
+        if (m_sourceSettings->m_useVillages) {
+            villageFlag = m_villageFeature->postProcess(m_level, m_random2, &chunkPos);
         }
 
-        if (mSourceSettings->useStrongholds) {
-            mStrongholdFeature->postProcess(mLevel, mRandom2, &chunkPos);
+        if (m_sourceSettings->m_useStrongholds) {
+            m_strongholdFeature->postProcess(m_level, m_random2, &chunkPos);
         }
 
-        if (mSourceSettings->useScatteredFeatures) {
-            mRandomScatteredLargeFeature->postProcess(mLevel, mRandom2, &chunkPos);
+        if (m_sourceSettings->m_useScatteredFeatures) {
+            m_randomScatteredLargeFeature->postProcess(m_level, m_random2, &chunkPos);
         }
 
-        if (mSourceSettings->useOceanMonuments) {
-            mOceanMonumentFeature->postProcess(mLevel, mRandom2, &chunkPos);
+        if (m_sourceSettings->m_useOceanMonuments) {
+            m_oceanMonumentFeature->postProcess(m_level, m_random2, &chunkPos);
         }
 
-        if (mSourceSettings->useWoodlandMansions) {
-            mWoodlandMansionFeature->postProcess(mLevel, mRandom2, &chunkPos);
+        if (m_sourceSettings->m_useWoodlandMansions) {
+            m_woodlandMansionFeature->postProcess(m_level, m_random2, &chunkPos);
         }
     }
 
@@ -464,49 +465,49 @@ void OverworldLevelSource::postProcess(int chunkX, int chunkZ) {
     PIXBeginNamedEvent(0.0, "Lakes");
 
     if (biome != Biome::DESERT && biome != Biome::DESERT_HILLS) {
-        if (mSourceSettings->useWaterLakes) {
-            if (!villageFlag && mRandom2.nextInt(mSourceSettings->waterLakeChance) == 0) {
-                int rx = mRandom2.nextInt(16) + 8;
-                int ry = mRandom2.nextInt(128);
-                int rz = mRandom2.nextInt(16) + 8;
+        if (m_sourceSettings->m_useWaterLakes) {
+            if (!villageFlag && m_random2.nextInt(m_sourceSettings->m_waterLakeChance) == 0) {
+                int rx = m_random2.nextInt(16) + 8;
+                int ry = m_random2.nextInt(128);
+                int rz = m_random2.nextInt(16) + 8;
 
-                LakeFeature(Blocks::WATER).place(mLevel, mRandom2, origin.offset(rx, ry, rz));
+                LakeFeature(Blocks::WATER).place(m_level, m_random2, origin.offset(rx, ry, rz));
             }
         }
     }
     PIXEndNamedEvent();
 
     PIXBeginNamedEvent(0.0, "Lava");
-    if (!villageFlag && mRandom2.nextInt(mSourceSettings->lavaLakeChance / 10) == 0
-        && mSourceSettings->useLavaLakes) {
-        int rx = mRandom2.nextInt(16) + 8;
-        int maxY = mRandom2.nextInt(120);
-        int ry = mRandom2.nextInt(maxY + 8);
-        int rz = mRandom2.nextInt(16) + 8;
+    if (!villageFlag && m_random2.nextInt(m_sourceSettings->m_lavaLakeChance / 10) == 0
+        && m_sourceSettings->m_useLavaLakes) {
+        int rx = m_random2.nextInt(16) + 8;
+        int maxY = m_random2.nextInt(120);
+        int ry = m_random2.nextInt(maxY + 8);
+        int rz = m_random2.nextInt(16) + 8;
 
-        if (ry < mLevel->getSeaLevel() || mRandom2.nextInt(mSourceSettings->lavaLakeChance / 8) == 0) {
-            LakeFeature(Blocks::LAVA).place(mLevel, mRandom2, origin.offset(rx, ry, rz));
+        if (ry < m_level->getSeaLevel() || m_random2.nextInt(m_sourceSettings->m_lavaLakeChance / 8) == 0) {
+            LakeFeature(Blocks::LAVA).place(m_level, m_random2, origin.offset(rx, ry, rz));
         }
     }
 
     PIXEndNamedEvent();
 
     PIXBeginNamedEvent(0.0, "Monster rooms");
-    if (mSourceSettings->useDungeons) {
+    if (m_sourceSettings->m_useDungeons) {
         MonsterRoomFeature dungeonGen;
-        if (mSourceSettings->dungeonChance >= 1) {
-            for (int i = 0; i < mSourceSettings->dungeonChance; ++i) {
-                int rx = mRandom2.nextInt(16) + 8;
-                int ry = mRandom2.nextInt(128);
-                int rz = mRandom2.nextInt(16) + 8;
-                dungeonGen.place(mLevel, mRandom2, origin.offset(rx, ry, rz));
+        if (m_sourceSettings->m_dungeonChance >= 1) {
+            for (int i = 0; i < m_sourceSettings->m_dungeonChance; ++i) {
+                int rx = m_random2.nextInt(16) + 8;
+                int ry = m_random2.nextInt(128);
+                int rz = m_random2.nextInt(16) + 8;
+                dungeonGen.place(m_level, m_random2, origin.offset(rx, ry, rz));
             }
         }
     }
     PIXEndNamedEvent();
 
     PIXBeginNamedEvent(0.0, "Biome decorate");
-    biome->decorate(mLevel, mRandom2, BlockPos(chunkX * 16, 0, chunkZ * 16));
+    biome->decorate(m_level, m_random2, BlockPos(chunkX * 16, 0, chunkZ * 16));
     PIXEndNamedEvent();
 
     PIXBeginNamedEvent(0.0, "Post process mobs");
@@ -517,15 +518,15 @@ void OverworldLevelSource::postProcess(int chunkX, int chunkZ) {
     origin = origin.offset(8, 0, 8);
     for (int x = 0; x < 16; x++) {
         for (int z = 0; z < 16; z++) {
-            BlockPos top = mLevel->getTopRainBlockPos(origin.offset(x, 0, z));
+            BlockPos top = m_level->getTopRainBlockPos(origin.offset(x, 0, z));
             BlockPos below = top.below();
 
-            if (mLevel->shouldFreezeIgnoreNeighbors(below)) {
-                mLevel->setBlock(below, Blocks::ICE->defaultBlockState(), 2, 0);
+            if (m_level->shouldFreezeIgnoreNeighbors(below)) {
+                m_level->setBlock(below, Blocks::ICE->defaultBlockState(), 2, 0);
             }
 
-            if (mLevel->shouldSnow(top, true)) {
-                mLevel->setBlock(top, Blocks::SNOW_LAYER->defaultBlockState(), 2, 0);
+            if (m_level->shouldSnow(top, true)) {
+                m_level->setBlock(top, Blocks::SNOW_LAYER->defaultBlockState(), 2, 0);
             }
         }
     }
@@ -548,11 +549,11 @@ void OverworldLevelSource::prepareHeights(int chunkX, int chunkZ, ChunkPrimer* p
     int zSize = width + 1;  // looks nicer to have a separate z size for the heights initializer
     int ySize = height * 2 + 1;
 
-    int seaLevel = mLevel->mSeaLevel;
+    int seaLevel = m_level->m_seaLevel;
     arrayWithLength<Biome*> biomes;
 
     PIXBeginNamedEvent(0.0, "Getting raw biome block");
-    mLevel->getBiomeSource()->getRawBiomeBlock(biomes, chunkX * 4 - 2, chunkZ * 4 - 2, 10, 10);
+    m_level->getBiomeSource()->getRawBiomeBlock(biomes, chunkX * 4 - 2, chunkZ * 4 - 2, 10, 10);
     PIXEndNamedEvent();
 
     PIXBeginNamedEvent(0.0, "Get heights");
@@ -609,7 +610,7 @@ void OverworldLevelSource::prepareHeights(int chunkX, int chunkZ, ChunkPrimer* p
                             }
 
                             if (distance == 0) {
-                                int seaLevel = mLevel->getSeaLevel();
+                                int seaLevel = m_level->getSeaLevel();
                                 if (y <= seaLevel - 10)
                                     blockId = 1;
                                 else if (y < seaLevel)
@@ -637,25 +638,25 @@ void OverworldLevelSource::prepareHeights(int chunkX, int chunkZ, ChunkPrimer* p
 
     PIXEndNamedEvent();
 
-    delete[] heights.data;
-    delete[] biomes.data;
+    delete[] heights.m_data;
+    delete[] biomes.m_data;
 }
 
 std::vector<Biome::MobSpawnerData>* OverworldLevelSource::getMobsAt(MobCategory* category,
                                                                     const BlockPos& pos) {
-    Biome* biome = mLevel->getBiome(pos);
+    Biome* biome = m_level->getBiome(pos);
 
-    if (mShouldGenerateStructures) {
+    if (m_shouldGenerateStructures) {
         if (MobCategory::MONSTER == category || MobCategory::SLIME == category) {
-            if (mRandomScatteredLargeFeature->isSwamphut(pos))
-                return mRandomScatteredLargeFeature->getSwamphutEnemies();
+            if (m_randomScatteredLargeFeature->isSwamphut(pos))
+                return m_randomScatteredLargeFeature->getSwamphutEnemies();
         }
 
-        if (MobCategory::GUARDIAN == category && mSourceSettings->useOceanMonuments) {
-            if (mOceanMonumentFeature->isInsideBoundingFeature(mLevel, pos)) {
+        if (MobCategory::GUARDIAN == category && m_sourceSettings->m_useOceanMonuments) {
+            if (m_oceanMonumentFeature->isInsideBoundingFeature(m_level, pos)) {
                 // This seems to inline on Switch Edition?
                 // return mOceanMonumentFeature->getEnemies();
-                return &mOceanMonumentFeature->MOB_SPAWNERS;
+                return &m_oceanMonumentFeature->MOB_SPAWNERS;
             }
         }
     }
@@ -664,24 +665,24 @@ std::vector<Biome::MobSpawnerData>* OverworldLevelSource::getMobsAt(MobCategory*
 }
 
 void OverworldLevelSource::recreateLogicStructuresForChunk(LevelChunk* chunk, int chunkX, int chunkZ) {
-    if (mShouldGenerateStructures) {
-        if (mSourceSettings->useMineshafts) {
-            mMineshaftFeature->apply(mLevel, chunkX, chunkZ, nullptr);
+    if (m_shouldGenerateStructures) {
+        if (m_sourceSettings->m_useMineshafts) {
+            m_mineshaftFeature->apply(m_level, chunkX, chunkZ, nullptr);
         }
-        if (mSourceSettings->useVillages) {
-            mVillageFeature->apply(mLevel, chunkX, chunkZ, nullptr);
+        if (m_sourceSettings->m_useVillages) {
+            m_villageFeature->apply(m_level, chunkX, chunkZ, nullptr);
         }
-        if (mSourceSettings->useStrongholds) {
-            mStrongholdFeature->apply(mLevel, chunkX, chunkZ, nullptr);
+        if (m_sourceSettings->m_useStrongholds) {
+            m_strongholdFeature->apply(m_level, chunkX, chunkZ, nullptr);
         }
-        if (mSourceSettings->useScatteredFeatures) {
-            mRandomScatteredLargeFeature->apply(mLevel, chunkX, chunkZ, nullptr);
+        if (m_sourceSettings->m_useScatteredFeatures) {
+            m_randomScatteredLargeFeature->apply(m_level, chunkX, chunkZ, nullptr);
         }
-        if (mSourceSettings->useOceanMonuments) {
-            mOceanMonumentFeature->apply(mLevel, chunkX, chunkZ, nullptr);
+        if (m_sourceSettings->m_useOceanMonuments) {
+            m_oceanMonumentFeature->apply(m_level, chunkX, chunkZ, nullptr);
         }
-        if (mSourceSettings->useWoodlandMansions) {
-            mWoodlandMansionFeature->apply(mLevel, chunkX, chunkZ, nullptr);
+        if (m_sourceSettings->m_useWoodlandMansions) {
+            m_woodlandMansionFeature->apply(m_level, chunkX, chunkZ, nullptr);
         }
     }
 }
@@ -689,27 +690,27 @@ void OverworldLevelSource::recreateLogicStructuresForChunk(LevelChunk* chunk, in
 // NON_MATCHING | Score: 860- (lower is better)
 bool OverworldLevelSource::isPosInFeature(Level* level, const std::wstring& featureName,
                                           const BlockPos& pos) {
-    if (!mShouldGenerateStructures) {
+    if (!m_shouldGenerateStructures) {
         return false;
     }
 
     if (ChunkGenerator::STRONGHOLD_NAME.compare(featureName) == 0) {
-        return mStrongholdFeature && mStrongholdFeature->isInsideFeature(pos);
+        return m_strongholdFeature && m_strongholdFeature->isInsideFeature(pos);
     }
     if (ChunkGenerator::MANSION_NAME.compare(featureName) == 0) {
-        return mWoodlandMansionFeature && mWoodlandMansionFeature->isInsideFeature(pos);
+        return m_woodlandMansionFeature && m_woodlandMansionFeature->isInsideFeature(pos);
     }
     if (ChunkGenerator::MONUMENT_NAME.compare(featureName) == 0) {
-        return mOceanMonumentFeature && mOceanMonumentFeature->isInsideFeature(pos);
+        return m_oceanMonumentFeature && m_oceanMonumentFeature->isInsideFeature(pos);
     }
     if (ChunkGenerator::VILLAGE_NAME.compare(featureName) == 0) {
-        return mVillageFeature && mVillageFeature->isInsideFeature(pos);
+        return m_villageFeature && m_villageFeature->isInsideFeature(pos);
     }
     if (ChunkGenerator::MINESHAFT_NAME.compare(featureName) == 0) {
-        return mMineshaftFeature && mMineshaftFeature->isInsideFeature(pos);
+        return m_mineshaftFeature && m_mineshaftFeature->isInsideFeature(pos);
     }
     if (ChunkGenerator::TEMPLE_NAME.compare(featureName) == 0) {
-        return mRandomScatteredLargeFeature && mRandomScatteredLargeFeature->isInsideFeature(pos);
+        return m_randomScatteredLargeFeature && m_randomScatteredLargeFeature->isInsideFeature(pos);
     }
 
     return false;
@@ -717,26 +718,26 @@ bool OverworldLevelSource::isPosInFeature(Level* level, const std::wstring& feat
 
 BlockPos* OverworldLevelSource::findNearestMapFeature(Level* level, const std::wstring& featureName,
                                                       const BlockPos& pos, bool unk) {
-    if (!mShouldGenerateStructures)
+    if (!m_shouldGenerateStructures)
         return nullptr;
 
-    if (ChunkGenerator::STRONGHOLD_NAME == featureName && mStrongholdFeature)
-        return mStrongholdFeature->getNearestGeneratedFeature(level, pos, unk);
+    if (ChunkGenerator::STRONGHOLD_NAME == featureName && m_strongholdFeature)
+        return m_strongholdFeature->getNearestGeneratedFeature(level, pos, unk);
 
-    if (ChunkGenerator::MANSION_NAME == featureName && mWoodlandMansionFeature)
-        return mWoodlandMansionFeature->getNearestGeneratedFeature(level, pos, unk);
+    if (ChunkGenerator::MANSION_NAME == featureName && m_woodlandMansionFeature)
+        return m_woodlandMansionFeature->getNearestGeneratedFeature(level, pos, unk);
 
-    if (ChunkGenerator::MONUMENT_NAME == featureName && mOceanMonumentFeature)
-        return mOceanMonumentFeature->getNearestGeneratedFeature(level, pos, unk);
+    if (ChunkGenerator::MONUMENT_NAME == featureName && m_oceanMonumentFeature)
+        return m_oceanMonumentFeature->getNearestGeneratedFeature(level, pos, unk);
 
-    if (ChunkGenerator::VILLAGE_NAME == featureName && mVillageFeature)
-        return mVillageFeature->getNearestGeneratedFeature(level, pos, unk);
+    if (ChunkGenerator::VILLAGE_NAME == featureName && m_villageFeature)
+        return m_villageFeature->getNearestGeneratedFeature(level, pos, unk);
 
-    if (ChunkGenerator::MINESHAFT_NAME == featureName && mMineshaftFeature)
-        return mMineshaftFeature->getNearestGeneratedFeature(level, pos, unk);
+    if (ChunkGenerator::MINESHAFT_NAME == featureName && m_mineshaftFeature)
+        return m_mineshaftFeature->getNearestGeneratedFeature(level, pos, unk);
 
-    if (ChunkGenerator::TEMPLE_NAME == featureName && mRandomScatteredLargeFeature)
-        return mRandomScatteredLargeFeature->getNearestGeneratedFeature(level, pos, unk);
+    if (ChunkGenerator::TEMPLE_NAME == featureName && m_randomScatteredLargeFeature)
+        return m_randomScatteredLargeFeature->getNearestGeneratedFeature(level, pos, unk);
 
     return nullptr;
 }

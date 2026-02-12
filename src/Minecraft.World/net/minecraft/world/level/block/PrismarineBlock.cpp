@@ -25,7 +25,7 @@ PrismarineBlock::Variant* PrismarineBlock::Variant::VARIANTS[3]{
 
 PrismarineBlock::PrismarineBlock() : Block(Material::STONE) {
     this->DerivedInit();
-    this->registerDefaultState(this->mBlockStateDefinition->any()->setValue(VARIANT, Variant::ROUGH));
+    this->registerDefaultState(this->m_blockStateDefinition->any()->setValue(VARIANT, Variant::ROUGH));
 }
 
 void PrismarineBlock::blockStaticCtor() {

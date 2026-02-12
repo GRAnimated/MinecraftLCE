@@ -3,18 +3,18 @@
 
 DamageSource::DamageSource(ClientboundChatPacket::EChatPacketMessage unk0,
                            ClientboundChatPacket::EChatPacketMessage unk1) {
-    this->field_0xa = false;
-    this->mBypassInvul = false;
-    this->mBypassArmour = false;
-    this->mExhaustion = FoodConstants::ExhaustionAttack();
-    this->mIsFireSource = false;
-    this->mIsExplosion = false;
-    this->mScalesWithDifficulty = false;
-    this->mIsMagic = false;
-    this->mIsProjectile = false;
-    this->field_0x15 = false;
-    this->field_0x18 = unk0;
-    this->field_0x1c = unk1;
+    this->m_field0xa = false;
+    this->m_bypassInvul = false;
+    this->m_bypassArmour = false;
+    this->m_exhaustion = FoodConstants::ExhaustionAttack();
+    this->m_isFireSource = false;
+    this->m_isExplosion = false;
+    this->m_scalesWithDifficulty = false;
+    this->m_isMagic = false;
+    this->m_isProjectile = false;
+    this->m_field0x15 = false;
+    this->m_field0x18 = unk0;
+    this->m_field0x1c = unk1;
 }
 
 std::shared_ptr<Entity> DamageSource::getDirectEntity() {
@@ -26,7 +26,7 @@ std::shared_ptr<Entity> DamageSource::getEntity() {
 }
 
 bool DamageSource::scalesWithDifficulty() {
-    return this->mScalesWithDifficulty;
+    return this->m_scalesWithDifficulty;
 }
 
 Vec3* DamageSource::getSourcePosition() {
@@ -38,22 +38,22 @@ DamageSource* DamageSource::copy() {
 }
 
 DamageSource* DamageSource::setMagic() {
-    this->mIsMagic = true;
+    this->m_isMagic = true;
     return this;
 }
 
 bool DamageSource::isBypassInvul() const {
-    return this->mBypassInvul;
+    return this->m_bypassInvul;
 }
 
 bool DamageSource::isFire() const {
-    return this->mIsFireSource;
+    return this->m_isFireSource;
 }
 
 bool DamageSource::isProjectile() const {
-    return this->mIsProjectile;
+    return this->m_isProjectile;
 }
 
 bool DamageSource::isExplosion() const {
-    return this->mIsExplosion;
+    return this->m_isExplosion;
 }

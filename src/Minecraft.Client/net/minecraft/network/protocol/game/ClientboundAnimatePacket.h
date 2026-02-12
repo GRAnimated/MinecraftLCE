@@ -19,6 +19,6 @@ public:
     int getAction();
 
 private:
-    int mId;
-    int mAction;
+    int m_id;
+    int m_action;
 };

@@ -16,7 +16,7 @@ public:
     void ReInit() override;
     void setFocus(bool) override;
 
-    bool mFocused = 0;
-    bool mCouldBeEnabled = 0;
-    bool mEnabled;
+    bool m_focused = 0;
+    bool m_couldBeEnabled = 0;
+    bool m_enabled;
 };

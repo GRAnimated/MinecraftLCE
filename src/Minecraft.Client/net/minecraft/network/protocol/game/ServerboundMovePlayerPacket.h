@@ -30,15 +30,15 @@ public:
     class PosRot;
 
 protected:
-    double mX;
-    double mY;
-    double mZ;
-    float mYRot;
-    float mXRot;
-    bool onGround;
-    bool hasPos;
-    bool hasRot;
-    bool bool3B;
+    double m_x;
+    double m_y;
+    double m_z;
+    float m_yRot;
+    float m_xRot;
+    bool m_onGround;
+    bool m_hasPos;
+    bool m_hasRot;
+    bool m_bool3B;
 };
 
 class ServerboundMovePlayerPacket::Pos : public ServerboundMovePlayerPacket {

@@ -2,15 +2,15 @@
 #include "net/minecraft/world/effect/MobEffects.h"
 
 MobEffect::MobEffect(bool harmful, eMinecraftColour color) {
-    mHarmful = harmful;
-    mColor = color;
-    mBeneficial = false;
-    mDescriptionId = -1;
-    mIcon = EMobEffectIcon::Unknown;
+    m_harmful = harmful;
+    m_color = color;
+    m_beneficial = false;
+    m_descriptionId = -1;
+    m_icon = EMobEffectIcon::Unknown;
     if (harmful)
-        mDurationModifier = 0.5;
+        m_durationModifier = 0.5;
     else
-        mDurationModifier = 1.0;
+        m_durationModifier = 1.0;
 }
 
 bool MobEffect::isDurationEffectTick(int tick, int amplifier) {
@@ -44,19 +44,19 @@ bool MobEffect::isDurationEffectTick(int tick, int amplifier) {
 }
 
 void MobEffect::setIcon(EMobEffectIcon icon) {
-    mIcon = icon;
+    m_icon = icon;
 }
 
 void MobEffect::setDurationModifier(double durationModifier) {
-    mDurationModifier = durationModifier;
+    m_durationModifier = durationModifier;
 }
 
 void MobEffect::setDescriptionId(int descriptionId) {
-    mDescriptionId = descriptionId;
+    m_descriptionId = descriptionId;
 }
 
 void MobEffect::setBeneficial() {
-    mBeneficial = true;
+    m_beneficial = true;
 }
 
 bool MobEffect::isInstantenous() {
@@ -64,29 +64,29 @@ bool MobEffect::isInstantenous() {
 }
 
 bool MobEffect::isHarmful() {
-    return mHarmful;
+    return m_harmful;
 }
 
 bool MobEffect::isBeneficial() const {
-    return mBeneficial;
+    return m_beneficial;
 }
 
 bool MobEffect::hasIcon() {
-    return mIcon != MobEffect::EMobEffectIcon::Unknown;
+    return m_icon != MobEffect::EMobEffectIcon::Unknown;
 }
 
 MobEffect::EMobEffectIcon MobEffect::getIcon() {
-    return mIcon;
+    return m_icon;
 }
 
 double MobEffect::getDurationModifier() const {
-    return mDurationModifier;
+    return m_durationModifier;
 }
 
 int MobEffect::getDescriptionId() {
-    return mDescriptionId;
+    return m_descriptionId;
 }
 
 eMinecraftColour MobEffect::getColor() const {
-    return mColor;
+    return m_color;
 }

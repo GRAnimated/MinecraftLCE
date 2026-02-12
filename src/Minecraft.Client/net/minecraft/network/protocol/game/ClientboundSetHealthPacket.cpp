@@ -9,11 +9,11 @@ std::shared_ptr<Packet> ClientboundSetHealthPacket::create() {
 }
 
 ClientboundSetHealthPacket::ClientboundSetHealthPacket() {
-    health = 0.0;
-    food = 0.0;
-    saturation = 0.0;
-    dword_28 = 0;
-    dword_2C = -1;
+    m_health = 0.0;
+    m_food = 0.0;
+    m_saturation = 0.0;
+    m_dword28 = 0;
+    m_dword2C = -1;
 }
 
 int ClientboundSetHealthPacket::getEstimatedSize() {
@@ -25,21 +25,21 @@ EPacketType ClientboundSetHealthPacket::getPacketId() {
 }
 
 void ClientboundSetHealthPacket::read(DataInputStream* input) {
-    health = input->readFloat();
-    food = input->readVarInt();
-    saturation = input->readFloat();
-    dword_28 = input->readByte() & 0xFF;
-    dword_2C = input->readVarInt();
-    dword_30 = input->readVarInt();
+    m_health = input->readFloat();
+    m_food = input->readVarInt();
+    m_saturation = input->readFloat();
+    m_dword28 = input->readByte() & 0xFF;
+    m_dword2C = input->readVarInt();
+    m_dword30 = input->readVarInt();
 }
 
 void ClientboundSetHealthPacket::write(DataOutputStream* output) {
-    output->writeFloat(health);
-    output->writeVarInt(food);
-    output->writeFloat(saturation);
-    output->writeByte(dword_28);
-    output->writeVarInt(dword_2C);
-    output->writeVarInt(dword_30);
+    output->writeFloat(m_health);
+    output->writeVarInt(m_food);
+    output->writeFloat(m_saturation);
+    output->writeByte(m_dword28);
+    output->writeVarInt(m_dword2C);
+    output->writeVarInt(m_dword30);
 }
 
 void ClientboundSetHealthPacket::handle(PacketListener* listener) {
@@ -55,13 +55,13 @@ bool ClientboundSetHealthPacket::isInvalidatedBy(std::shared_ptr<Packet> packet)
 }
 
 float ClientboundSetHealthPacket::getHealth() {
-    return health;
+    return m_health;
 }
 
 int ClientboundSetHealthPacket::getFood() {
-    return food;
+    return m_food;
 }
 
 float ClientboundSetHealthPacket::getSaturation() {
-    return saturation;
+    return m_saturation;
 }

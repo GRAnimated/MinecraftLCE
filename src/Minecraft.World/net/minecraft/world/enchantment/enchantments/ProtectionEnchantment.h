@@ -9,9 +9,9 @@ public:
     public:
         Type(int mNameId, int mMinCost, int mLevelCost, int dwordC);
 
-        int getMinCost() const { return this->mMinCost; }
-        int getLevelCost() const { return this->mLevelCost; }
-        int getName() const { return this->mNameId; }
+        int getMinCost() const { return this->m_minCost; }
+        int getLevelCost() const { return this->m_levelCost; }
+        int getName() const { return this->m_nameId; }
 
         static const ProtectionEnchantment::Type* ALL;
         static const ProtectionEnchantment::Type* FIRE;
@@ -19,10 +19,10 @@ public:
         static const ProtectionEnchantment::Type* EXPLOSION;
         static const ProtectionEnchantment::Type* PROJECTILE;
 
-        int mNameId;
-        int mMinCost;
-        int mLevelCost;
-        int dwordC;
+        int m_nameId;
+        int m_minCost;
+        int m_levelCost;
+        int m_dwordC;
     };
     ProtectionEnchantment(const Rarity* rarity, const Type* type,
                           arrayWithLength<const EquipmentSlot*> array);
@@ -36,5 +36,5 @@ public:
 
     static int getFireAfterDampener(const std::shared_ptr<LivingEntity>&, int);
 
-    const Type* mType;
+    const Type* m_type;
 };

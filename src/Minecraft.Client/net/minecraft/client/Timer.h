@@ -4,5 +4,5 @@ class Timer {
 public:
     Timer(float tps);
 
-    unsigned char padding[0x40];
+    unsigned char m_padding[0x40];
 };

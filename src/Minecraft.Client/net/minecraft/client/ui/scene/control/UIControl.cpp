@@ -3,45 +3,45 @@
 #include "fui/fuiRenderNode.h"
 
 UIControl::UIControl() {
-    this->mParentUIScene = nullptr;
-    this->mOpacity = 1.0f;
-    this->mName = "";
-    this->mVisible = true;
-    this->mBoolIdk = 0;
-    this->mSettedUp = 0;
-    this->mFuiRenderNode = nullptr;
+    this->m_parentUiScene = nullptr;
+    this->m_opacity = 1.0f;
+    this->m_name = "";
+    this->m_visible = true;
+    this->m_boolIdk = 0;
+    this->m_settedUp = 0;
+    this->m_fuiRenderNode = nullptr;
 }
 
 bool UIControl::setupControl(UIScene* parentUIScene, fuiRenderNode* renderNode, const std::string& name) {
-    this->mParentUIScene = parentUIScene;
-    this->mName = name;
-    this->mFuiRenderNode = renderNode->findNode(name.c_str());
+    this->m_parentUiScene = parentUIScene;
+    this->m_name = name;
+    this->m_fuiRenderNode = renderNode->findNode(name.c_str());
 
-    if (this->mFuiRenderNode) {
-        this->mPosX = this->mFuiRenderNode->getX();
-        this->mPosY = this->mFuiRenderNode->getY();
-        this->mWidth = this->mFuiRenderNode->getWidth();
-        this->mHeight = this->mFuiRenderNode->getHeight();
+    if (this->m_fuiRenderNode) {
+        this->m_posX = this->m_fuiRenderNode->getX();
+        this->m_posY = this->m_fuiRenderNode->getY();
+        this->m_width = this->m_fuiRenderNode->getWidth();
+        this->m_height = this->m_fuiRenderNode->getHeight();
     }
 
-    return this->mFuiRenderNode != nullptr;
+    return this->m_fuiRenderNode != nullptr;
 }
 
 void UIControl::UpdateControl() {
-    if (this->mFuiRenderNode) {
-        this->mPosX = this->mFuiRenderNode->getX();
-        this->mPosY = this->mFuiRenderNode->getY();
-        this->mWidth = this->mFuiRenderNode->getWidth();
-        this->mHeight = this->mFuiRenderNode->getHeight();
+    if (this->m_fuiRenderNode) {
+        this->m_posX = this->m_fuiRenderNode->getX();
+        this->m_posY = this->m_fuiRenderNode->getY();
+        this->m_width = this->m_fuiRenderNode->getWidth();
+        this->m_height = this->m_fuiRenderNode->getHeight();
     }
 }
 
 void UIControl::tick() {}
 
 void UIControl::ReInit() {
-    if (this->mFuiRenderNode) {
-        this->mFuiRenderNode->setAlpha(this->mOpacity);
-        this->mFuiRenderNode->setVisibility(this->mVisible);
+    if (this->m_fuiRenderNode) {
+        this->m_fuiRenderNode->setAlpha(this->m_opacity);
+        this->m_fuiRenderNode->setVisibility(this->m_visible);
     }
 }
 

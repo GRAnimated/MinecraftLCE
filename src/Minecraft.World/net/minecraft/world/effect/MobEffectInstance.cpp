@@ -8,14 +8,14 @@
 #include "net/minecraft/world/level/material/MaterialColor.h"
 
 MobEffectInstance::MobEffectInstance(MobEffectInstance* other) {
-    mEffect = other->mEffect;
-    mDuration = other->mDuration;
-    mAmplifier = other->mAmplifier;
-    bool10 = other->bool10;
-    mAmbient = other->mAmbient;
-    mParticles = other->mParticles;
-    mNoCounter = other->mNoCounter;
-    dword14 = other->get_14();
+    m_effect = other->m_effect;
+    m_duration = other->m_duration;
+    m_amplifier = other->m_amplifier;
+    m_bool10 = other->m_bool10;
+    m_ambient = other->m_ambient;
+    m_particles = other->m_particles;
+    m_noCounter = other->m_noCounter;
+    m_dword14 = other->get_14();
 }
 
 MobEffectInstance::MobEffectInstance(MobEffect* effect) {
@@ -33,57 +33,57 @@ MobEffectInstance::MobEffectInstance(MobEffect* effect, int duration, int amplif
 MobEffectInstance::MobEffectInstance(MobEffect* effect, int duration, int amplifier, bool ambient,
                                      bool showParticles) {
     init(effect, duration, amplifier, showParticles);
-    mAmbient = ambient;
+    m_ambient = ambient;
 }
 
 void MobEffectInstance::init(MobEffect* effect, int duration, int amplifier, bool showParticles) {
-    mParticles = showParticles;
-    mEffect = effect;
-    mDuration = duration;
-    mAmplifier = amplifier;
-    bool10 = false;
-    mAmbient = false;
-    mNoCounter = false;
-    dword14 = -1;
+    m_particles = showParticles;
+    m_effect = effect;
+    m_duration = duration;
+    m_amplifier = amplifier;
+    m_bool10 = false;
+    m_ambient = false;
+    m_noCounter = false;
+    m_dword14 = -1;
 }
 
 void MobEffectInstance::update(MobEffectInstance* other) {
-    if (other->mAmplifier > mAmplifier) {
-        mAmplifier = other->mAmplifier;
-        mDuration = other->mDuration;
-    } else if (other->mAmplifier == mAmplifier && (mDuration < other->mDuration)) {
-        mDuration = other->mDuration;
-    } else if (other->mAmbient == false && mAmbient == true) {
-        mAmbient = false;
+    if (other->m_amplifier > m_amplifier) {
+        m_amplifier = other->m_amplifier;
+        m_duration = other->m_duration;
+    } else if (other->m_amplifier == m_amplifier && (m_duration < other->m_duration)) {
+        m_duration = other->m_duration;
+    } else if (other->m_ambient == false && m_ambient == true) {
+        m_ambient = false;
     }
-    mParticles = other->mParticles;
+    m_particles = other->m_particles;
 }
 
 int MobEffectInstance::tickDownDuration() {
-    return --mDuration;
+    return --m_duration;
 }
 
 bool MobEffectInstance::tick(std::shared_ptr<LivingEntity> entity) {
     getDuration();  // unused call
 
-    if (mDuration < 1) {
-        return mDuration > 0;
+    if (m_duration < 1) {
+        return m_duration > 0;
     }
 
-    if (mEffect->isDurationEffectTick(mDuration, mAmplifier)) {
+    if (m_effect->isDurationEffectTick(m_duration, m_amplifier)) {
         applyEffect(entity);
     }
 
     tickDownDuration();
-    return mDuration > 0;
+    return m_duration > 0;
 }
 
 void MobEffectInstance::setNoCounter(bool noCounter) {
-    mNoCounter = noCounter;
+    m_noCounter = noCounter;
 }
 
 CompoundTag* MobEffectInstance::save(CompoundTag* tag) {
-    tag->putByte(L"Id", MobEffect::getId(mEffect));
+    tag->putByte(L"Id", MobEffect::getId(m_effect));
     tag->putByte(L"Amplifier", getAmplifier());
     tag->putInt(L"Duration", getDuration());
     tag->putBoolean(L"Ambient", isAmbient());
@@ -92,36 +92,36 @@ CompoundTag* MobEffectInstance::save(CompoundTag* tag) {
 }
 
 bool MobEffectInstance::isVisible() {
-    return mParticles;
+    return m_particles;
 }
 
 bool MobEffectInstance::isNoCounter() {
-    return mNoCounter;
+    return m_noCounter;
 }
 
 bool MobEffectInstance::isAmbient() {
-    return mAmbient;
+    return m_ambient;
 }
 
 MobEffect* MobEffectInstance::getEffect() {
-    return mEffect;
+    return m_effect;
 }
 
 int MobEffectInstance::getDuration() {
-    if (dword14 == -1) {
-        return mDuration;
+    if (m_dword14 == -1) {
+        return m_duration;
     }
     Minecraft* minecraft = Minecraft::GetInstance();
     MiniGameDef* miniGame = minecraft->GetMiniGame();
-    return miniGame->getPotionDuration(dword14, mDuration);
+    return miniGame->getPotionDuration(m_dword14, m_duration);
 }
 
 int MobEffectInstance::getDescriptionId() {
-    return mEffect->getDescriptionId();
+    return m_effect->getDescriptionId();
 }
 
 int MobEffectInstance::getAmplifier() {
-    return mAmplifier;
+    return m_amplifier;
 }
 
 /* unused
@@ -130,8 +130,8 @@ bool MobEffectInstance::compareTo(MobEffectInstance* other) {
 } */
 
 void MobEffectInstance::applyEffect(const std::shared_ptr<LivingEntity>& entity) {
-    if (mDuration > 0) {
-        mEffect->applyEffectTick(entity, mAmplifier);
+    if (m_duration > 0) {
+        m_effect->applyEffectTick(entity, m_amplifier);
     }
 }
 

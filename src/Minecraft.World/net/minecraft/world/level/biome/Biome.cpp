@@ -35,98 +35,98 @@
 #include "net/minecraft/world/level/material/MaterialColor.h"
 
 Biome::BiomeProperties::BiomeProperties(const std::wstring& name) {
-    mBiomeName = name;
-    mDepth = 0.1f;
-    mScale = 0.2f;
-    mTemperature = 0.5f;
-    mDownfall = 0.5f;
-    mWaterColor = 0xFFFFFF;
-    mIsSnow = false;
-    mIsNotDry = true;
-    mMutatedBiomeName = L"";
+    m_biomeName = name;
+    m_depth = 0.1f;
+    m_scale = 0.2f;
+    m_temperature = 0.5f;
+    m_downfall = 0.5f;
+    m_waterColor = 0xFFFFFF;
+    m_isSnow = false;
+    m_isNotDry = true;
+    m_mutatedBiomeName = L"";
 }
 
 Biome::BiomeProperties* Biome::BiomeProperties::depth(float depth) {
-    mDepth = depth;
+    m_depth = depth;
     return this;
 }
 
 Biome::BiomeProperties* Biome::BiomeProperties::downfall(float downfall) {
-    mDownfall = downfall;
+    m_downfall = downfall;
     return this;
 }
 
 Biome::BiomeProperties* Biome::BiomeProperties::dry() {
-    mIsNotDry = false;
+    m_isNotDry = false;
     return this;
 }
 
 Biome::BiomeProperties* Biome::BiomeProperties::mutated(const std::wstring& mutatedName) {
-    mMutatedBiomeName = mutatedName;
+    m_mutatedBiomeName = mutatedName;
     return this;
 }
 
 Biome::BiomeProperties* Biome::BiomeProperties::scale(float scale) {
-    mScale = scale;
+    m_scale = scale;
     return this;
 }
 
 Biome::BiomeProperties* Biome::BiomeProperties::snow() {
-    mIsSnow = true;
+    m_isSnow = true;
     return this;
 }
 
 Biome::BiomeProperties* Biome::BiomeProperties::temperature(float temperature) {
-    mTemperature = temperature;
+    m_temperature = temperature;
     return this;
 }
 
 Biome::BiomeProperties* Biome::BiomeProperties::waterColor(int waterColor) {
-    mWaterColor = waterColor;
+    m_waterColor = waterColor;
     return this;
 }
 
-Biome::Biome(Biome::EBiomeIDs biomeID, Biome::BiomeProperties* biomeProperties) : mBiomeID(biomeID) {
-    mPreviewColor = Preview_Plains;
+Biome::Biome(Biome::EBiomeIDs biomeID, Biome::BiomeProperties* biomeProperties) : m_biomeId(biomeID) {
+    m_previewColor = Preview_Plains;
 
-    mGrass.id = Blocks::GRASS->getId();
-    mGrass.data = Blocks::GRASS->convertBlockStateToLegacyData(Blocks::GRASS->defaultBlockState());
+    m_grass.m_id = Blocks::GRASS->getId();
+    m_grass.m_data = Blocks::GRASS->convertBlockStateToLegacyData(Blocks::GRASS->defaultBlockState());
 
-    mDirt.id = Blocks::DIRT->getId();
-    mDirt.data = Blocks::DIRT->convertBlockStateToLegacyData(Blocks::DIRT->defaultBlockState());
+    m_dirt.m_id = Blocks::DIRT->getId();
+    m_dirt.m_data = Blocks::DIRT->convertBlockStateToLegacyData(Blocks::DIRT->defaultBlockState());
 
-    mBiomeName = biomeProperties->mBiomeName;
-    mDepth = biomeProperties->mDepth;
-    mScale = biomeProperties->mScale;
-    mTemperature = biomeProperties->mTemperature;
-    mDownfall = biomeProperties->mDownfall;
-    mIsSnow = biomeProperties->mIsSnow;
-    mIsDry = biomeProperties->mIsNotDry;
-    mMutatedBiomeName = biomeProperties->mMutatedBiomeName;
+    m_biomeName = biomeProperties->m_biomeName;
+    m_depth = biomeProperties->m_depth;
+    m_scale = biomeProperties->m_scale;
+    m_temperature = biomeProperties->m_temperature;
+    m_downfall = biomeProperties->m_downfall;
+    m_isSnow = biomeProperties->m_isSnow;
+    m_isDry = biomeProperties->m_isNotDry;
+    m_mutatedBiomeName = biomeProperties->m_mutatedBiomeName;
 
     delete biomeProperties;
 
-    mWaterColor = NOTSET;
+    m_waterColor = NOTSET;
     Biome::BIOMES[biomeID] = this;
-    mBiomeDecorator = createDecorator();
+    m_biomeDecorator = createDecorator();
 
-    mPassiveMobs.push_back(new Biome::MobSpawnerData(eSheep, 12, 4, 4));
-    mPassiveMobs.push_back(new Biome::MobSpawnerData(ePig, 10, 4, 4));
-    mChickens.push_back(new Biome::MobSpawnerData(eChicken, 10, 4, 4));
-    mPassiveMobs.push_back(new Biome::MobSpawnerData(eCow, 8, 4, 4));
-    mHostileMobs.push_back(new Biome::MobSpawnerData(eSpider, 100, 4, 4));
-    mHostileMobs.push_back(new Biome::MobSpawnerData(eZombie, 95, 4, 4));
-    mHostileMobs.push_back(new Biome::MobSpawnerData(eZombieVillager, 5, 1, 1));
-    mHostileMobs.push_back(new Biome::MobSpawnerData(eSkeleton, 100, 4, 4));
-    mHostileMobs.push_back(new Biome::MobSpawnerData(eCreeper, 100, 4, 4));
+    m_passiveMobs.push_back(new Biome::MobSpawnerData(eSheep, 12, 4, 4));
+    m_passiveMobs.push_back(new Biome::MobSpawnerData(ePig, 10, 4, 4));
+    m_chickens.push_back(new Biome::MobSpawnerData(eChicken, 10, 4, 4));
+    m_passiveMobs.push_back(new Biome::MobSpawnerData(eCow, 8, 4, 4));
+    m_hostileMobs.push_back(new Biome::MobSpawnerData(eSpider, 100, 4, 4));
+    m_hostileMobs.push_back(new Biome::MobSpawnerData(eZombie, 95, 4, 4));
+    m_hostileMobs.push_back(new Biome::MobSpawnerData(eZombieVillager, 5, 1, 1));
+    m_hostileMobs.push_back(new Biome::MobSpawnerData(eSkeleton, 100, 4, 4));
+    m_hostileMobs.push_back(new Biome::MobSpawnerData(eCreeper, 100, 4, 4));
     if (biomeID != BiomeID_HELL && biomeID != BiomeID_THE_END)
-        mNeutralMobs.push_back(new Biome::MobSpawnerData(eSlime, 100, 4, 4));
-    mHostileMobs.push_back(new Biome::MobSpawnerData(eEnderMan, 10, 1, 4));
-    mHostileMobs.push_back(new Biome::MobSpawnerData(eWitch, 5, 1, 1));
-    mAquaticMobs.push_back(new Biome::MobSpawnerData(eSquid, 10, 4, 4));
-    mAmbientMobs.push_back(new Biome::MobSpawnerData(eBat, 10, 8, 8));
+        m_neutralMobs.push_back(new Biome::MobSpawnerData(eSlime, 100, 4, 4));
+    m_hostileMobs.push_back(new Biome::MobSpawnerData(eEnderMan, 10, 1, 4));
+    m_hostileMobs.push_back(new Biome::MobSpawnerData(eWitch, 5, 1, 1));
+    m_aquaticMobs.push_back(new Biome::MobSpawnerData(eSquid, 10, 4, 4));
+    m_ambientMobs.push_back(new Biome::MobSpawnerData(eBat, 10, 8, 8));
 
-    mNameId = -1;
+    m_nameId = -1;
 }
 
 Biome** Biome::getBiomes() {
@@ -157,7 +157,7 @@ unsigned int Biome::getSkyColor(float timeOfDay) {
         return Mth::hsvToRgb((f1 * -0.05f) + 0.62222f, (f1 * 0.1f) + 0.5f, 1.0f);
     }
     ColourTable* colourTable = Minecraft::GetInstance()->getColourTable();
-    return colourTable->getColour(mSkyColor);
+    return colourTable->getColour(m_skyColor);
 }
 
 Biome* Biome::byId(int id) {
@@ -169,7 +169,7 @@ bool Biome::hasSnow() {
 }
 
 bool Biome::hasRain() {
-    return !isSnowCovered() && mIsDry;
+    return !isSnowCovered() && m_isDry;
 }
 
 bool Biome::isHumid() {
@@ -226,7 +226,7 @@ bool Biome::isAlwaysValidSpawn() {
 unsigned int Biome::getWaterColor() {
     Minecraft* minecraft = Minecraft::GetInstance();
     ColourTable* colourTable = minecraft->getColourTable();
-    return colourTable->getColour(mWaterColor);
+    return colourTable->getColour(m_waterColor);
 }
 
 Vec3* Biome::getFogColor(float a2, float a3) const {
@@ -255,12 +255,12 @@ bool Biome::isNatural() {
 }
 
 bool Biome::isSnowCovered() {
-    return mIsSnow;
+    return m_isSnow;
 }
 
 Biome* Biome::setNameAndDescription(int name, int desc) {
-    this->mNameId = name;
-    this->mDescriptionId = desc;
+    this->m_nameId = name;
+    this->m_descriptionId = desc;
     return this;
 }
 

@@ -43,7 +43,7 @@ public:
     static std::deque<DataOutputStream*> sDeque;
     static nn::os::MutexType sMutex;
 
-    char unk[8];
-    std::wstring unk2;
-    ConsoleSaveFileCommon* mSaveFile;
+    char m_unk[8];
+    std::wstring m_unk2;
+    ConsoleSaveFileCommon* m_saveFile;
 };

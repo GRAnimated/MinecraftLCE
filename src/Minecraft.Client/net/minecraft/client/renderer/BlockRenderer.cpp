@@ -49,44 +49,44 @@ void BlockRenderer::renderWest(const BlockState* blockState, double x, double y,
 
     BufferBuilder* builder = Tesselator::getInstance()->getBuilder();
 
-    if (mIsFlippedTexture) {
+    if (m_isFlippedTexture) {
         std::swap(u0, u1);
     }
 
-    if (this->_30 < 0.0f || this->_34 > 1.0f) {
+    if (this->m_30 < 0.0f || this->m_34 > 1.0f) {
         u0 = sprite->getU0(true);
         u1 = sprite->getU1(true);
     }
 
-    if (this->_28 < 0.0f || this->_2C > 1.0f) {
+    if (this->m_28 < 0.0f || this->m_2C > 1.0f) {
         v0 = sprite->getV0(true);
         v1 = sprite->getV1(true);
     }
 
-    if (this->dwordA4 == 1) {
-        u0 = sprite->getU(this->_28 * 16.0f);
-        v0 = sprite->getV(16.0f - (this->_34 * 16.0f));
-        u1 = sprite->getU(this->_2C * 16.0f);
-        v1 = sprite->getV(16.0f - (this->_30 * 16.0f));
+    if (this->m_dwordA4 == 1) {
+        u0 = sprite->getU(this->m_28 * 16.0f);
+        v0 = sprite->getV(16.0f - (this->m_34 * 16.0f));
+        u1 = sprite->getU(this->m_2C * 16.0f);
+        v1 = sprite->getV(16.0f - (this->m_30 * 16.0f));
         sprite->adjustUV(u0, u1);
         sprite->adjustUV(v0, v1);
-    } else if (this->dwordA4 == 2) {
-        u0 = sprite->getU(16.0f - (this->_2C * 16.0f));
-        v0 = sprite->getV(this->_30 * 16.0f);
-        u1 = sprite->getU(16.0f - (this->_28 * 16.0f));
-        v1 = sprite->getV(this->_34 * 16.0f);
+    } else if (this->m_dwordA4 == 2) {
+        u0 = sprite->getU(16.0f - (this->m_2C * 16.0f));
+        v0 = sprite->getV(this->m_30 * 16.0f);
+        u1 = sprite->getU(16.0f - (this->m_28 * 16.0f));
+        v1 = sprite->getV(this->m_34 * 16.0f);
         sprite->adjustUV(u0, u1);
         sprite->adjustUV(v0, v1);
-    } else if (this->dwordA4 == 3) {
-        u0 = sprite->getU(16.0f - (this->_30 * 16.0f));
-        u1 = sprite->getU(16.0f - (this->_34 * 16.0f));
-        v0 = sprite->getV(this->_2C * 16.0f);
-        v1 = sprite->getV(this->_28 * 16.0f);
+    } else if (this->m_dwordA4 == 3) {
+        u0 = sprite->getU(16.0f - (this->m_30 * 16.0f));
+        u1 = sprite->getU(16.0f - (this->m_34 * 16.0f));
+        v0 = sprite->getV(this->m_2C * 16.0f);
+        v1 = sprite->getV(this->m_28 * 16.0f);
         sprite->adjustUV(u0, u1);
         sprite->adjustUV(v0, v1);
     }
 
-    int uvLockMode = this->dwordC0;
+    int uvLockMode = this->m_dwordC0;
     if (uvLockMode == 3) {
         std::swap(u0, u1);
     } else if (uvLockMode == 2) {
@@ -100,7 +100,7 @@ void BlockRenderer::renderWest(const BlockState* blockState, double x, double y,
     float uv3_u, uv3_v;
     float uv4_u, uv4_v;
 
-    switch (this->dwordA4) {
+    switch (this->m_dwordA4) {
     case 1:
     case 4:
         uv1_u = u0;
@@ -135,29 +135,29 @@ void BlockRenderer::renderWest(const BlockState* blockState, double x, double y,
         break;
     }
 
-    double x0 = this->_20 + x;
-    double y0 = this->_28 + y;
-    double y1 = this->_2C + y;
-    double z0 = this->_30 + z;
-    double z1 = this->_34 + z;
+    double x0 = this->m_20 + x;
+    double y0 = this->m_28 + y;
+    double y1 = this->m_2C + y;
+    double z0 = this->m_30 + z;
+    double z1 = this->m_34 + z;
 
     builder->bucket(5);
 
-    if (this->mIsEnableAO) {
-        builder->color(mColorR_TL, mColorG_TL, mColorB_TL);
-        builder->tex2(mBrightness_TL);
+    if (this->m_isEnableAo) {
+        builder->color(m_colorRTl, m_colorGTl, m_colorBTl);
+        builder->tex2(m_brightnessTl);
         builder->vertexUV(x0, y1, z1, uv1_u, uv1_v);
 
-        builder->color(mColorR_BL, mColorG_BL, mColorB_BL);
-        builder->tex2(mBrightness_BL);
+        builder->color(m_colorRBl, m_colorGBl, m_colorBBl);
+        builder->tex2(m_brightnessBl);
         builder->vertexUV(x0, y1, z0, uv2_u, uv2_v);
 
-        builder->color(mColorR_BR, mColorG_BR, mColorB_BR);
-        builder->tex2(mBrightness_BR);
+        builder->color(m_colorRBr, m_colorGBr, m_colorBBr);
+        builder->tex2(m_brightnessBr);
         builder->vertexUV(x0, y0, z0, uv3_u, uv3_v);
 
-        builder->color(mColorR_TR, mColorG_TR, mColorB_TR);
-        builder->tex2(mBrightness_TR);
+        builder->color(m_colorRTr, m_colorGTr, m_colorBTr);
+        builder->tex2(m_brightnessTr);
         builder->vertexUV(x0, y0, z1, uv4_u, uv4_v);
     } else {
         builder->vertexUV(x0, y1, z1, uv1_u, uv1_v);
@@ -217,8 +217,8 @@ void BlockRenderer::tesselateEndRodCenter(const BlockState* state, float x, floa
         break;
     }
     case 2: {
-        this->dwordA0 = 5;
-        this->dwordA4 = 5;
+        this->m_dwordA0 = 5;
+        this->m_dwordA4 = 5;
 
         builder->color(1.0f, 1.0f, 1.0f, 1.0f);
         this->renderFaceUp(state, x, y, z, sprite, startRodU, startRodV, endRodU, endRodV);
@@ -236,8 +236,8 @@ void BlockRenderer::tesselateEndRodCenter(const BlockState* state, float x, floa
         break;
     }
     case 3: {
-        this->dwordA0 = 4;
-        this->dwordA4 = 4;
+        this->m_dwordA0 = 4;
+        this->m_dwordA4 = 4;
 
         builder->color(1.0f, 1.0f, 1.0f, 1.0f);
         this->renderFaceUp(state, x, y, z, sprite, endRodU, endRodV, startRodU, startRodV);
@@ -255,10 +255,10 @@ void BlockRenderer::tesselateEndRodCenter(const BlockState* state, float x, floa
         break;
     }
     case 4: {
-        this->dword98 = 5;
-        this->dword9C = 5;
-        this->dwordA8 = 5;
-        this->dwordAC = 4;
+        this->m_dword98 = 5;
+        this->m_dword9C = 5;
+        this->m_dwordA8 = 5;
+        this->m_dwordAc = 4;
 
         builder->color(1.0f, 1.0f, 1.0f, 1.0f);
         this->renderFaceUp(state, x, y, z, sprite, startRodU, startRodV, endRodU, endRodV);
@@ -276,10 +276,10 @@ void BlockRenderer::tesselateEndRodCenter(const BlockState* state, float x, floa
         break;
     }
     case 5: {
-        this->dword98 = 4;
-        this->dword9C = 4;
-        this->dwordA8 = 4;
-        this->dwordAC = 5;
+        this->m_dword98 = 4;
+        this->m_dword9C = 4;
+        this->m_dwordA8 = 4;
+        this->m_dwordAc = 5;
 
         builder->color(1.0f, 1.0f, 1.0f, 1.0f);
         this->renderFaceUp(state, x, y, z, sprite, startRodU, startRodV, endRodU, endRodV);
@@ -314,25 +314,25 @@ void BlockRenderer::tesselateEndRodCenter(const BlockState* state, float x, floa
         break;
     }
     }
-    this->dword98 = 0;
-    this->dword9C = 0;
-    this->dwordA0 = 0;
-    this->dwordA4 = 0;
-    this->dwordA8 = 0;
-    this->dwordAC = 0;
-    this->dwordB4 = 0;
-    this->dwordB8 = 0;
-    this->dwordBC = 0;
-    this->dwordC0 = 0;
-    this->dwordC4 = 0;
-    this->dwordC8 = 0;
+    this->m_dword98 = 0;
+    this->m_dword9C = 0;
+    this->m_dwordA0 = 0;
+    this->m_dwordA4 = 0;
+    this->m_dwordA8 = 0;
+    this->m_dwordAc = 0;
+    this->m_dwordB4 = 0;
+    this->m_dwordB8 = 0;
+    this->m_dwordBc = 0;
+    this->m_dwordC0 = 0;
+    this->m_dwordC4 = 0;
+    this->m_dwordC8 = 0;
 }
 
 void BlockRenderer::tesselateCrossTexture(const BlockState* state, float x, float y, float z, float unk) {
     BufferBuilder* builder = Tesselator::getInstance()->getBuilder();
     TextureAtlasSprite* sprite = this->getTexture(state, Direction::UP);
     if (this->hasFixedTexture())
-        sprite = this->mFixedTexture;
+        sprite = this->m_fixedTexture;
 
     float U0 = sprite->getU0(1.0f);
     float V0 = sprite->getV0(1.0f);

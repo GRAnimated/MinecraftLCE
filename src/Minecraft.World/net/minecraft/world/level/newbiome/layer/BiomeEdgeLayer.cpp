@@ -5,12 +5,12 @@
 #include "net/minecraft/world/level/newbiome/layer/IntCache.h"
 
 BiomeEdgeLayer::BiomeEdgeLayer(long long seed, std::shared_ptr<Layer> parent) : Layer(seed) {
-    mParent = parent;
+    m_parent = parent;
 }
 
 // NON_MATCHING
 arrayWithLength<int> BiomeEdgeLayer::getArea(int x, int y, int width, int height) {
-    arrayWithLength<int> parentArea = mParent->getArea(x - 1, y - 1, width + 2, height + 2);
+    arrayWithLength<int> parentArea = m_parent->getArea(x - 1, y - 1, width + 2, height + 2);
     PIXBeginNamedEvent(0.0, "BiomeEdgeLayer::getArea");
     arrayWithLength<int> area = IntCache::allocate(width * height);
 
@@ -18,44 +18,44 @@ arrayWithLength<int> BiomeEdgeLayer::getArea(int x, int y, int width, int height
         for (int n = 0; n < width; n++) {
             initRandom(n + x, m + y);
             int o = parentArea[n + 1 + (m + 1) * (width + 2)];
-            if (!checkEdge(parentArea, area, n, m, width, o, Biome::EXTREME_HILLS->mBiomeID,
-                           Biome::EXTREME_HILLS_EDGE->mBiomeID)
-                && !checkEdgeStrict(parentArea, area, n, m, height, o, Biome::MESA_PLATEAU_F->mBiomeID,
-                                    Biome::MESA->mBiomeID)
-                && !checkEdgeStrict(parentArea, area, n, m, height, o, Biome::MESA_PLATEAU->mBiomeID,
-                                    Biome::MESA->mBiomeID)
-                && !checkEdgeStrict(parentArea, area, n, m, height, o, Biome::MEGA_TAIGA->mBiomeID,
-                                    Biome::TAIGA->mBiomeID)) {
-                if (o == Biome::DESERT->mBiomeID) {
+            if (!checkEdge(parentArea, area, n, m, width, o, Biome::EXTREME_HILLS->m_biomeId,
+                           Biome::EXTREME_HILLS_EDGE->m_biomeId)
+                && !checkEdgeStrict(parentArea, area, n, m, height, o, Biome::MESA_PLATEAU_F->m_biomeId,
+                                    Biome::MESA->m_biomeId)
+                && !checkEdgeStrict(parentArea, area, n, m, height, o, Biome::MESA_PLATEAU->m_biomeId,
+                                    Biome::MESA->m_biomeId)
+                && !checkEdgeStrict(parentArea, area, n, m, height, o, Biome::MEGA_TAIGA->m_biomeId,
+                                    Biome::TAIGA->m_biomeId)) {
+                if (o == Biome::DESERT->m_biomeId) {
                     int p = parentArea[n + 1 + (m + 1 - 1) * (width + 2)];
                     int q = parentArea[n + 1 + 1 + (m + 1) * (width + 2)];
                     int r = parentArea[n + 1 - 1 + (m + 1) * (width + 2)];
                     int s = parentArea[n + 1 + (m + 1 + 1) * (width + 2)];
-                    if (p != Biome::ICE_PLAINS->mBiomeID && q != Biome::ICE_PLAINS->mBiomeID
-                        && r != Biome::ICE_PLAINS->mBiomeID && s != Biome::ICE_PLAINS->mBiomeID) {
+                    if (p != Biome::ICE_PLAINS->m_biomeId && q != Biome::ICE_PLAINS->m_biomeId
+                        && r != Biome::ICE_PLAINS->m_biomeId && s != Biome::ICE_PLAINS->m_biomeId) {
                         area[n + m * width] = o;
                     } else {
-                        area[n + m * width] = Biome::EXTREME_HILLS_PLUS->mBiomeID;
+                        area[n + m * width] = Biome::EXTREME_HILLS_PLUS->m_biomeId;
                     }
-                } else if (o == Biome::SWAMP->mBiomeID) {
+                } else if (o == Biome::SWAMP->m_biomeId) {
                     int p = parentArea[n + 1 + (m + 1 - 1) * (width + 2)];
                     int q = parentArea[n + 1 + 1 + (m + 1) * (width + 2)];
                     int r = parentArea[n + 1 - 1 + (m + 1) * (width + 2)];
                     int s = parentArea[n + 1 + (m + 1 + 1) * (width + 2)];
-                    if (p != Biome::DESERT->mBiomeID && q != Biome::DESERT->mBiomeID
-                        && r != Biome::DESERT->mBiomeID && s != Biome::DESERT->mBiomeID
-                        && p != Biome::COLD_TAIGA->mBiomeID && q != Biome::COLD_TAIGA->mBiomeID
-                        && r != Biome::COLD_TAIGA->mBiomeID && s != Biome::COLD_TAIGA->mBiomeID
-                        && p != Biome::ICE_PLAINS->mBiomeID && q != Biome::ICE_PLAINS->mBiomeID
-                        && r != Biome::ICE_PLAINS->mBiomeID && s != Biome::ICE_PLAINS->mBiomeID) {
-                        if (p != Biome::JUNGLE->mBiomeID && s != Biome::JUNGLE->mBiomeID
-                            && q != Biome::JUNGLE->mBiomeID && r != Biome::JUNGLE->mBiomeID) {
+                    if (p != Biome::DESERT->m_biomeId && q != Biome::DESERT->m_biomeId
+                        && r != Biome::DESERT->m_biomeId && s != Biome::DESERT->m_biomeId
+                        && p != Biome::COLD_TAIGA->m_biomeId && q != Biome::COLD_TAIGA->m_biomeId
+                        && r != Biome::COLD_TAIGA->m_biomeId && s != Biome::COLD_TAIGA->m_biomeId
+                        && p != Biome::ICE_PLAINS->m_biomeId && q != Biome::ICE_PLAINS->m_biomeId
+                        && r != Biome::ICE_PLAINS->m_biomeId && s != Biome::ICE_PLAINS->m_biomeId) {
+                        if (p != Biome::JUNGLE->m_biomeId && s != Biome::JUNGLE->m_biomeId
+                            && q != Biome::JUNGLE->m_biomeId && r != Biome::JUNGLE->m_biomeId) {
                             area[n + m * width] = o;
                         } else {
-                            area[n + m * width] = Biome::JUNGLE_EDGE->mBiomeID;
+                            area[n + m * width] = Biome::JUNGLE_EDGE->m_biomeId;
                         }
                     } else {
-                        area[n + m * width] = Biome::PLAINS->mBiomeID;
+                        area[n + m * width] = Biome::PLAINS->m_biomeId;
                     }
                 } else {
                     area[n + m * width] = o;

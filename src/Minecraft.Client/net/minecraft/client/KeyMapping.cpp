@@ -2,6 +2,6 @@
 #include <string>
 
 KeyMapping::KeyMapping(const std::wstring& name, int key) {
-    mKeyDescription = name;
-    mKeyCode = key;
+    m_keyDescription = name;
+    m_keyCode = key;
 }

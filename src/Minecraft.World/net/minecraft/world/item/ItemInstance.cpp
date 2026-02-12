@@ -30,22 +30,22 @@ ItemInstance::ItemInstance(Item* item, int count, int aux) {
 
 ItemInstance::ItemInstance(CompoundTag* compoundTag) {
     this->init(nullptr, 0, 0);
-    this->mItem = Item::byString(compoundTag->getString(L"id"));
-    this->dword_14 = 0;
-    this->mCount = compoundTag->getByte(L"Count");
-    this->mDamage = compoundTag->getShort(L"Damage");
+    this->m_item = Item::byString(compoundTag->getString(L"id"));
+    this->m_dword14 = 0;
+    this->m_count = compoundTag->getByte(L"Count");
+    this->m_damage = compoundTag->getShort(L"Damage");
 
-    if ((this->mDamage & 0x80000000) != 0)
-        this->mDamage = 0;
+    if ((this->m_damage & 0x80000000) != 0)
+        this->m_damage = 0;
 
     if (compoundTag->contains(L"tag", 10)) {
-        if (this->mTag)
-            delete this->mTag;
+        if (this->m_tag)
+            delete this->m_tag;
 
-        this->mTag = compoundTag->getCompound(L"tag")->copy();
+        this->m_tag = compoundTag->getCompound(L"tag")->copy();
 
-        if (this->mItem)
-            this->mItem->verifyTagAfterLoad(this->mTag);
+        if (this->m_item)
+            this->m_item->verifyTagAfterLoad(this->m_tag);
     }
     this->updateEmptyCacheFlag();
 }

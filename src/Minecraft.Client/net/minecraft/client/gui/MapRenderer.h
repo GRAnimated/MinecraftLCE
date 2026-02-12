@@ -19,11 +19,11 @@ public:
         void fjUpdateWithRenderContext();
         void draw(const std::shared_ptr<Player>& player);
 
-        MapRenderer* mMapRenderer;
-        std::shared_ptr<MapItemSavedData> mSavedData;
-        int mMapTextureId = -1;
-        arrayWithLength<int> mMapPixels;
-        bool mCreatedTexture = 0;
+        MapRenderer* m_mapRenderer;
+        std::shared_ptr<MapItemSavedData> m_savedData;
+        int m_mapTextureId = -1;
+        arrayWithLength<int> m_mapPixels;
+        bool m_createdTexture = 0;
     };
 
     MapRenderer(Font*, Options*, Textures*);
@@ -35,8 +35,8 @@ public:
     static bool sColoursNeedReload;
     static void reloadColours();
 
-    Textures* mTextures;
-    std::unordered_map<std::wstring, MapInstance*> mMaps;
-    Options* mOptions;
-    Font* mFont;
+    Textures* m_textures;
+    std::unordered_map<std::wstring, MapInstance*> m_maps;
+    Options* m_options;
+    Font* m_font;
 };

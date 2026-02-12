@@ -20,6 +20,6 @@ public:
     unsigned int size();
     void clear();
 
-    arrayWithLength<unsigned char> mBuffer;
-    unsigned int mSize;
+    arrayWithLength<unsigned char> m_buffer;
+    unsigned int m_size;
 };

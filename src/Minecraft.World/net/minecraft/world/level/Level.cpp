@@ -23,58 +23,58 @@
 Level::Level(std::shared_ptr<LevelStorage> levelStorage, LevelData* levelData, Dimension* dimension,
              bool isLocal) {
     _init();
-    mLevelStorage = levelStorage;
-    mLevelData = levelData;
-    mDimension = dimension;
-    mIsLocal = isLocal;
-    mWorldBorder = dimension->createWorldBorder(this);
-    if (!mLevelData->useNewSeaLevel())
-        mSeaLevel = 64;
+    m_levelStorage = levelStorage;
+    m_levelData = levelData;
+    m_dimension = dimension;
+    m_isLocal = isLocal;
+    m_worldBorder = dimension->createWorldBorder(this);
+    if (!m_levelData->useNewSeaLevel())
+        m_seaLevel = 64;
 }
 
 // NON_MATCHING
 void Level::_init() {
-    mCloudColor = 0xFFFFFF;
-    mSkyDarken = 0;
+    m_cloudColor = 0xFFFFFF;
+    m_skyDarken = 0;
     Random rand;
-    dword_14c = rand.nextInt();
-    dword_158 = 0x3C6EF35F;
+    m_dword14c = rand.nextInt();
+    m_dword158 = 0x3C6EF35F;
 
-    mPathNavigationListener = new PathNavigationListener();
-    mLevelListeners.push_back((LevelListener*)mPathNavigationListener);
+    m_pathNavigationListener = new PathNavigationListener();
+    m_levelListeners.push_back((LevelListener*)m_pathNavigationListener);
 
-    dword_160 = 0;
-    dword_164 = 0;
-    dword_168 = 0;
-    mSkyFlashTime = 0;
-    dword_15c = 0;
-    mRandom = new Random();
-    byte_178 = false;
+    m_dword160 = 0;
+    m_dword164 = 0;
+    m_dword168 = 0;
+    m_skyFlashTime = 0;
+    m_dword15c = 0;
+    m_random = new Random();
+    m_byte178 = false;
 
-    mDimension = nullptr;
-    mChunkSource = nullptr;
-    mLevelStorage = nullptr;
-    mLevelData = nullptr;
-    byte_1c8 = false;
-    mSavedDataStorage = nullptr;
-    byte_210 = true;
-    byte_211 = true;
+    m_dimension = nullptr;
+    m_chunkSource = nullptr;
+    m_levelStorage = nullptr;
+    m_levelData = nullptr;
+    m_byte1c8 = false;
+    m_savedDataStorage = nullptr;
+    m_byte210 = true;
+    m_byte211 = true;
 
-    mIsLocal = false;
+    m_isLocal = false;
 
-    InitializeCriticalSection(&mEntityMutex);
-    InitializeCriticalSection(&mBlockEntityMutex);
+    InitializeCriticalSection(&m_entityMutex);
+    InitializeCriticalSection(&m_blockEntityMutex);
 
-    byte_212 = false;
+    m_byte212 = false;
 
-    qword_258 = new unsigned char[0x20000];
+    m_qword258 = new unsigned char[0x20000];
 
-    InitializeCriticalSectionAndSpinCount(&mUnkMutex, 0x1400);
-    byte_60 = false;
-    dword_2a8 = 0;
-    mFogDistance = -1;
-    byte_148 = 0;
-    qword_150 = nullptr;
+    InitializeCriticalSectionAndSpinCount(&m_unkMutex, 0x1400);
+    m_byte60 = false;
+    m_dword2a8 = 0;
+    m_fogDistance = -1;
+    m_byte148 = 0;
+    m_qword150 = nullptr;
 }
 
 const BlockState* Level::getBlockState(const BlockPos& pos) {
@@ -84,11 +84,11 @@ const BlockState* Level::getBlockState(const BlockPos& pos) {
 }
 
 long long Level::getSeed() {
-    return mLevelData->getSeed();
+    return m_levelData->getSeed();
 }
 
 GameRules* Level::getGameRules() {
-    return mLevelData->getGameRules();
+    return m_levelData->getGameRules();
 }
 
 const Difficulty* Level::getDifficulty() {
@@ -96,7 +96,7 @@ const Difficulty* Level::getDifficulty() {
 }
 
 LevelData* Level::getLevelData() {
-    return mLevelData;
+    return m_levelData;
 }
 
 void Level::postConstruct() {}
@@ -104,9 +104,9 @@ void Level::postConstruct() {}
 Biome* Level::getBiome(const BlockPos& pos) {
     if (hasChunkAt(pos)) {
         LevelChunk* chunkAt = getChunkAt(pos);
-        return chunkAt->getBiome(pos, mDimension->getBiomeSource());
+        return chunkAt->getBiome(pos, m_dimension->getBiomeSource());
     } else {
-        return mDimension->getBiomeSource()->getBiome(pos, Biome::PLAINS);
+        return m_dimension->getBiomeSource()->getBiome(pos, Biome::PLAINS);
     }
 }
 
@@ -119,11 +119,11 @@ LevelChunk* Level::getChunkAt(const BlockPos& pos) {
 }
 
 BiomeSource* Level::getBiomeSource() {
-    return mDimension->getBiomeSource();
+    return m_dimension->getBiomeSource();
 }
 
 void Level::initializeLevel(LevelSettings*) {
-    mLevelData->setInitialized(true);
+    m_levelData->setInitialized(true);
 }
 
 MinecraftServer* Level::getServer() {
@@ -136,7 +136,7 @@ void Level::validateSpawn() {
 }
 
 const BlockState* Level::getTopBlockState(const BlockPos& pos) {
-    if (mLevelData->getGeneratorType() == LevelType::FLAT)
+    if (m_levelData->getGeneratorType() == LevelType::FLAT)
         return Blocks::GRASS->defaultBlockState();
 
     BlockPos blockPos = {pos.getX(), getSeaLevel(), pos.getZ()};
@@ -149,7 +149,7 @@ const BlockState* Level::getTopBlockState(const BlockPos& pos) {
 }
 
 int Level::getSeaLevel() {
-    return mSeaLevel;
+    return m_seaLevel;
 }
 
 bool Level::isInWorldBounds(const BlockPos& pos) {
@@ -194,7 +194,7 @@ void Level::levelEvent(int eventType, const BlockPos& pos, int data) {
 }
 
 void Level::levelEvent(std::shared_ptr<Player> player, int eventType, const BlockPos& pos, int data) {
-    for (LevelListener* listener : this->mLevelListeners) {
+    for (LevelListener* listener : this->m_levelListeners) {
         listener->levelEvent(player, eventType, pos, data);
     }
 }
@@ -205,7 +205,7 @@ void Level::setBlockAndUpdate(const BlockPos& pos, const BlockState* state) {
 
 void Level::sendBlockUpdated(const BlockPos& pos, const BlockState* state, const BlockState* state2, int id,
                              bool unk) {
-    for (LevelListener* listener : this->mLevelListeners) {
+    for (LevelListener* listener : this->m_levelListeners) {
         listener->blockChanged(this, pos, state, state2, id, unk);
     }
 }
@@ -218,7 +218,7 @@ void Level::lightColumnChanged(int x, int z, int y0, int y1) {
         y0 = temp;
     }
 
-    if (mDimension->isHasSkyLight()) {
+    if (m_dimension->isHasSkyLight()) {
         PIXBeginNamedEvent(0.0f, "Checking lights");
         for (int i = y0; i <= y1; i++) {
             PIXBeginNamedEvent(0.0f, "Checking light %d", i);
@@ -237,7 +237,7 @@ void Level::lightColumnChanged(int x, int z, int y0, int y1) {
 }
 
 void Level::neighborChanged(const BlockPos& pos, Block* block, const BlockPos& neighborPos) {
-    if (!mIsLocal) {
+    if (!m_isLocal) {
         getBlockState(pos)->neighborChanged(this, pos, block, neighborPos);
     }
 }
@@ -307,7 +307,7 @@ int Level::getRawBrightness(const BlockPos& pos, bool unk) {
         adjustedPos = BlockPos(pos.getX(), HEIGHT_LIMIT - 1, pos.getZ());
 
     LevelChunk* chunkAt = getChunkAt(adjustedPos);
-    return chunkAt->getRawBrightness(adjustedPos, mSkyDarken);
+    return chunkAt->getRawBrightness(adjustedPos, m_skyDarken);
 }
 
 BlockPos Level::getHeightmapPos(const BlockPos& pos) {
@@ -337,7 +337,7 @@ int Level::getHeightmap(int x, int z) {
 }
 
 int Level::getBrightnessPropagate(LightLayer::variety layer, const BlockPos& pos) {
-    if (!mDimension->isHasSkyLight() && layer == LightLayer::variety::SKY) {
+    if (!m_dimension->isHasSkyLight() && layer == LightLayer::variety::SKY) {
         return 0;
     }
 
@@ -386,11 +386,11 @@ float Level::getBrightness(const BlockPos& pos, int brightness) {
     int rawBrightness = getRawBrightness(pos);
     if (rawBrightness >= brightness)
         brightness = rawBrightness;
-    return mDimension->getBrightnessRamp()[brightness];
+    return m_dimension->getBrightnessRamp()[brightness];
 }
 
 float Level::getBrightness(const BlockPos& pos) {
-    return mDimension->getBrightnessRamp()[getRawBrightness(pos)];
+    return m_dimension->getBrightnessRamp()[getRawBrightness(pos)];
 }
 
 int Level::getBlockId(int x, int y, int z) {
@@ -417,36 +417,36 @@ void Level::playLocalSound(double, double, double, const SoundEvent*, SoundSourc
                            bool, float) {}
 
 bool Level::addGlobalEntity(std::shared_ptr<Entity> entity) {
-    mGlobalEntities.push_back(entity);
+    m_globalEntities.push_back(entity);
     return true;
 }
 
 void Level::entityAdded(std::shared_ptr<Entity> entity) {
-    for (LevelListener* listener : this->mLevelListeners) {
+    for (LevelListener* listener : this->m_levelListeners) {
         listener->entityAdded(entity);
     }
 }
 
 void Level::entityRemoved(std::shared_ptr<Entity> entity) {
-    for (LevelListener* listener : this->mLevelListeners) {
+    for (LevelListener* listener : this->m_levelListeners) {
         listener->entityRemoved(entity);
     }
 }
 
 void Level::playerRemoved(std::shared_ptr<Entity> entity) {
-    for (LevelListener* listener : this->mLevelListeners) {
+    for (LevelListener* listener : this->m_levelListeners) {
         listener->playerRemoved(entity);
     }
 }
 
 void Level::addListener(LevelListener* listener) {
-    mLevelListeners.push_back(listener);
+    m_levelListeners.push_back(listener);
 }
 
 void Level::removeListener(LevelListener* listener) {
-    for (auto it = this->mLevelListeners.begin(); it != this->mLevelListeners.end(); it++) {
+    for (auto it = this->m_levelListeners.begin(); it != this->m_levelListeners.end(); it++) {
         if (listener == *it) {
-            this->mLevelListeners.erase(it);
+            this->m_levelListeners.erase(it);
             return;
         }
     }
@@ -495,15 +495,15 @@ std::vector<TickNextTickData*>* Level::fetchTicksInArea(BoundingBox*, bool) {
 }
 
 std::shared_ptr<Entity> Level::getEntity(int id) {
-    auto it = mEntityIdMap.find(id);
-    if (it != mEntityIdMap.end()) {
+    auto it = m_entityIdMap.find(id);
+    if (it != m_entityIdMap.end()) {
         return it->second;
     }
     return nullptr;
 }
 
 void Level::setSeaLevel(int seaLevel) {
-    mSeaLevel = seaLevel;
+    m_seaLevel = seaLevel;
 }
 
 int Level::getDirectSignal(const BlockPos& pos, const Direction* direction) {
@@ -511,25 +511,25 @@ int Level::getDirectSignal(const BlockPos& pos, const Direction* direction) {
 }
 
 LevelType* Level::getGeneratorType() {
-    return mLevelData->getGeneratorType();
+    return m_levelData->getGeneratorType();
 }
 
 void Level::disconnect(bool) {}
 
 void Level::checkSession() {
-    mLevelStorage->checkSession();
+    m_levelStorage->checkSession();
 }
 
 long Level::getGameTime() {
-    return mLevelData->getGameTime();
+    return m_levelData->getGameTime();
 }
 
 long Level::getDayTime() {
-    return mLevelData->getDayTime();
+    return m_levelData->getDayTime();
 }
 
 BlockPos Level::getSharedSpawnPos() {
-    BlockPos spawnPos = {mLevelData->getXSpawn(), mLevelData->getYSpawn(), mLevelData->getZSpawn()};
+    BlockPos spawnPos = {m_levelData->getXSpawn(), m_levelData->getYSpawn(), m_levelData->getZSpawn()};
     if (!getWorldBorder()->isWithinBounds(spawnPos)) {
         return getHeightmapPos({(int)getWorldBorder()->getCenterX(), 0, (int)getWorldBorder()->getCenterZ()});
     }
@@ -537,7 +537,7 @@ BlockPos Level::getSharedSpawnPos() {
 }
 
 WorldBorder* Level::getWorldBorder() {
-    return mWorldBorder;
+    return m_worldBorder;
 }
 
 bool Level::mayInteract(std::shared_ptr<Player>, const BlockPos&, Block*) {
@@ -547,7 +547,7 @@ bool Level::mayInteract(std::shared_ptr<Player>, const BlockPos&, Block*) {
 void Level::broadcastEntityEvent(std::shared_ptr<Entity>, unsigned int, int) {}
 
 ChunkSource* Level::getChunkSource() {
-    return mChunkSource;
+    return m_chunkSource;
 }
 
 void Level::updateSleepingPlayerList() {}
@@ -565,7 +565,7 @@ int Level::getMaxBuildHeight() {
 }
 
 int Level::getHeight() {
-    if (mDimension->isUltraWarm())
+    if (m_dimension->isUltraWarm())
         return 128;
     else
         return HEIGHT_LIMIT;
@@ -578,11 +578,11 @@ bool Level::isAllEmpty() {
 void Level::createFireworks(double, double, double, double, double, double, CompoundTag*) {}
 
 int Level::getFogDistance() {
-    return mFogDistance;
+    return m_fogDistance;
 }
 
 int Level::getSkyFlashTime() {
-    return mSkyFlashTime;
+    return m_skyFlashTime;
 }
 
 void Level::sendPacketToServer(std::shared_ptr<Packet>) {}

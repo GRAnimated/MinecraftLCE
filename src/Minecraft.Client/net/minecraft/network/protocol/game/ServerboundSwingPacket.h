@@ -18,5 +18,5 @@ public:
     InteractionHand::EInteractionHand getHand();
 
 private:
-    InteractionHand::EInteractionHand mInteractionHand;
+    InteractionHand::EInteractionHand m_interactionHand;
 };

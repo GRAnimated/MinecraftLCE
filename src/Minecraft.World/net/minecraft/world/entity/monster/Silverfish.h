@@ -11,5 +11,5 @@ public:
     not_null_ptr<ItemInstance> getItemSlot(const EquipmentSlot*) override;
     HumanoidArm* getMainArm() override;
 
-    char fill[0x24];  // correct that in the future as part of this probably should go to Monster
+    char m_fill[0x24];  // correct that in the future as part of this probably should go to Monster
 };

@@ -15,13 +15,13 @@ EPacketType ServerboundPaddleBoatPacket::getPacketId() {
 }
 
 void ServerboundPaddleBoatPacket::read(DataInputStream* input) {
-    left = input->readBoolean();
-    right = input->readBoolean();
+    m_left = input->readBoolean();
+    m_right = input->readBoolean();
 }
 
 void ServerboundPaddleBoatPacket::write(DataOutputStream* output) {
-    output->writeBoolean(left);
-    output->writeBoolean(right);
+    output->writeBoolean(m_left);
+    output->writeBoolean(m_right);
 }
 
 void ServerboundPaddleBoatPacket::handle(PacketListener* listener) {
@@ -29,9 +29,9 @@ void ServerboundPaddleBoatPacket::handle(PacketListener* listener) {
 }
 
 bool ServerboundPaddleBoatPacket::getLeft() {
-    return left;
+    return m_left;
 }
 
 bool ServerboundPaddleBoatPacket::getRight() {
-    return right;
+    return m_right;
 }

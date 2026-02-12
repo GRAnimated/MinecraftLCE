@@ -31,39 +31,39 @@ public:
     int getBoostDirection();
 
     double getLiftForceModifier() const {
-        if (mIsActive)
-            return mLiftForceModifier;
+        if (m_isActive)
+            return m_liftForceModifier;
         return 1.0;
     }
 
     double getSpeedBoost() const {
-        if (mIsActive)
-            return mSpeedBoost;
+        if (m_isActive)
+            return m_speedBoost;
         return 0.0;
     }
 
     double getStaticLift() const {
-        if (mIsActive)
-            return mStaticLift;
+        if (m_isActive)
+            return m_staticLift;
         return 0.0;
     }
 
     double getTargetHeight() const {
-        if (mIsActive)
-            return mTargetHeight;
+        if (m_isActive)
+            return m_targetHeight;
         return 0.0;
     }
 
-    bool isActive() const { return mIsActive; }
+    bool isActive() const { return m_isActive; }
 
-    double mLiftForceModifier;
-    double mStaticLift;
-    double mTargetHeight;
-    double mSpeedBoost;
-    eDirection mBoostDirection;
-    int mConditionType;
-    int mConditionValue0;
-    int mConditionValue1;
-    bool mIsActive;
-    int dword_c4;
+    double m_liftForceModifier;
+    double m_staticLift;
+    double m_targetHeight;
+    double m_speedBoost;
+    eDirection m_boostDirection;
+    int m_conditionType;
+    int m_conditionValue0;
+    int m_conditionValue1;
+    bool m_isActive;
+    int m_dwordC4;
 };

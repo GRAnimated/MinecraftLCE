@@ -8,9 +8,9 @@ class AttributeModifier {
 public:
     AttributeModifier(eATTRIBUTE_ID, double, int);
 
-    double mAmount;
-    int mOperation;
-    std::wstring mName;
-    eATTRIBUTE_ID mId;
-    bool mSerialize;
+    double m_amount;
+    int m_operation;
+    std::wstring m_name;
+    eATTRIBUTE_ID m_id;
+    bool m_serialize;
 };

@@ -64,51 +64,52 @@ Minecraft* Minecraft::GetInstance() {
 }
 
 void Minecraft::init() {
-    mWorkingDirectory = File(L"");
+    m_workingDirectory = File(L"");
 
-    mLevelStorageSource = new McRegionLevelStorageSource(File(mWorkingDirectory, L"saves"), getFixerUpper());
+    m_levelStorageSource
+        = new McRegionLevelStorageSource(File(m_workingDirectory, L"saves"), getFixerUpper());
 
-    mOptions = new Options(this, mWorkingDirectory);
+    m_options = new Options(this, m_workingDirectory);
 
-    mTexturePackRepository = new TexturePackRepository(File(mWorkingDirectory), this);
-    mTexturePackRepository->addDebugPacks();
+    m_texturePackRepository = new TexturePackRepository(File(m_workingDirectory), this);
+    m_texturePackRepository->addDebugPacks();
 
-    mTextures = new Textures(mTexturePackRepository, mOptions);
+    m_textures = new Textures(m_texturePackRepository, m_options);
 
-    mFont = new Font(mOptions, L"font/Default", mTextures, 0, &Font::sDefaultFontRsrc, 23, 28, 16, 16,
-                     Font::sDefaultText);
-    mAltFont = new Font(mOptions, L"font/alternate", mTextures, 0, &Font::sAlternateFontRsrc, 16, 16, 8, 8,
-                        nullptr);
+    m_font = new Font(m_options, L"font/Default", m_textures, 0, &Font::sDefaultFontRsrc, 23, 28, 16, 16,
+                      Font::sDefaultText);
+    m_altFont = new Font(m_options, L"font/alternate", m_textures, 0, &Font::sAlternateFontRsrc, 16, 16, 8, 8,
+                         nullptr);
 
     GrassColor::init(
-        mTextures->loadTexturePixels(_TEXTURE_NAME::eTextureName_GRASSCOLOR, L"misc/grasscolor"));
+        m_textures->loadTexturePixels(_TEXTURE_NAME::eTextureName_GRASSCOLOR, L"misc/grasscolor"));
     FoliageColor::init(
-        mTextures->loadTexturePixels(_TEXTURE_NAME::eTextureName_FOLIAGECOLOR, L"misc/foliagecolor"));
+        m_textures->loadTexturePixels(_TEXTURE_NAME::eTextureName_FOLIAGECOLOR, L"misc/foliagecolor"));
 
     Biome::generateColoursDebugOutput();
 
-    mBlockAtlas = new TextureAtlas(0, L"terrain", L"textures/blocks/", 0, true);
+    m_blockAtlas = new TextureAtlas(0, L"terrain", L"textures/blocks/", 0, true);
 
-    mBlockColors = BlockColors::createDefault();
-    mItemColors = ItemColors::createDefault(mBlockColors);
+    m_blockColors = BlockColors::createDefault();
+    m_itemColors = ItemColors::createDefault(m_blockColors);
 
-    mItemRenderer = new ItemRenderer(mEntityRenderDispatcher, mTextures, mItemColors);
-    mEntityRenderDispatcher = new EntityRenderDispatcher(mTextures, mItemRenderer);
+    m_itemRenderer = new ItemRenderer(m_entityRenderDispatcher, m_textures, m_itemColors);
+    m_entityRenderDispatcher = new EntityRenderDispatcher(m_textures, m_itemRenderer);
 
     GlStateManager::enableLighting();
-    mItemInHandRenderer = new ItemInHandRenderer(this);
+    m_itemInHandRenderer = new ItemInHandRenderer(this);
     GlStateManager::disableLighting();
 
-    mGameRenderer = new GameRenderer(this, 0);
-    mBlockRenderDispatcher = new BlockRenderDispatcher(mBlockColors);
+    m_gameRenderer = new GameRenderer(this, 0);
+    m_blockRenderDispatcher = new BlockRenderDispatcher(m_blockColors);
     // static shit
-    BlockEntityRenderDispatcher::sInstance->mTextures = mTextures;
+    BlockEntityRenderDispatcher::sInstance->m_textures = m_textures;
     sEntityBlockRenderer = new EntityBlockRenderer();
 
-    mStatsCounters[0] = new StatsCounter();
-    mStatsCounters[1] = new StatsCounter();
-    mStatsCounters[2] = new StatsCounter();
-    mStatsCounters[3] = new StatsCounter();
+    m_statsCounters[0] = new StatsCounter();
+    m_statsCounters[1] = new StatsCounter();
+    m_statsCounters[2] = new StatsCounter();
+    m_statsCounters[3] = new StatsCounter();
 
     _71006D7E4C();
 
@@ -137,11 +138,11 @@ void Minecraft::init() {
     }
     MemSect(0);
 
-    mLevelRenderer = new LevelRenderer(this, mTextures);
+    m_levelRenderer = new LevelRenderer(this, m_textures);
 
-    mTextures->stitch();
+    m_textures->stitch();
 
-    mParticleEngine = new ParticleEngine(mLevel, mTextures);
+    m_particleEngine = new ParticleEngine(m_level, m_textures);
 
     MemSect(31);
     {
@@ -149,13 +150,13 @@ void Minecraft::init() {
     }
     MemSect(0);
 
-    mGui = new Gui(this);
+    m_gui = new Gui(this);
 
-    if (mConnectToIp == L"") {
+    if (m_connectToIp == L"") {
         setScreen(new TitleScreen());
     }
 
-    mProgressRenderer = new ProgressRenderer(this);
+    m_progressRenderer = new ProgressRenderer(this);
     Renderer::sInstance->CBuffLockStaticCreations();
 }
 
@@ -190,7 +191,7 @@ void Minecraft::main() {
     // and these
     CMinecraftApp::StaticCtor();
     MiniGameDef::StaticCtor();
-    Minecraft::GetInstance()->mLobbyGameMode = &MiniGameDef::GetCustomGameModeById(LOBBY, true);
+    Minecraft::GetInstance()->m_lobbyGameMode = &MiniGameDef::GetCustomGameModeById(LOBBY, true);
     ClientPacketListener::staticCtor();
 }
 
@@ -200,99 +201,99 @@ void Minecraft::start(const std::wstring& str1, const std::wstring& str2) {
 
 Minecraft::Minecraft(Component* component, Canvas* canvas, MinecraftApplet* minecraftApplet, int width,
                      int height, bool fullscreen) {
-    mFixerUpper = DataFixers::createFixerUpper();
-    mMultiPlayerGameMode = nullptr;
-    bool_11 = false;
-    mTimer = new Timer(20.0f);
-    qword_40 = nullptr;
-    mLevel = nullptr;
-    array_68 = arrayWithLength<void*>(3, true);
-    mLevelRenderer = nullptr;
-    mLocalPlayer = nullptr;
-    ptr_150 = nullptr;
-    mParticleEngine = nullptr;
-    mUser = nullptr;
-    mIsPaused = false;
-    mScreen = nullptr;
-    dword_d8 = 0;
-    mTextures = nullptr;
-    mFont = nullptr;
+    m_fixerUpper = DataFixers::createFixerUpper();
+    m_multiPlayerGameMode = nullptr;
+    m_bool11 = false;
+    m_timer = new Timer(20.0f);
+    m_qword40 = nullptr;
+    m_level = nullptr;
+    m_array68 = arrayWithLength<void*>(3, true);
+    m_levelRenderer = nullptr;
+    m_localPlayer = nullptr;
+    m_ptr150 = nullptr;
+    m_particleEngine = nullptr;
+    m_user = nullptr;
+    m_isPaused = false;
+    m_screen = nullptr;
+    m_dwordD8 = 0;
+    m_textures = nullptr;
+    m_font = nullptr;
     InitializeCriticalSection(&unk_71017C65F0);
-    InitializeCriticalSection(&mCriticalSection);
-    mProgressRenderer = nullptr;
-    mGameRenderer = nullptr;
-    qword_210 = nullptr;
-    qword_218 = nullptr;
-    mOrigHeight = 0;
-    mGui = nullptr;
-    mIsNoRender = false;
-    mHitResult = nullptr;
-    mOptions = nullptr;
-    mSoundEngine = new SoundEngine();
-    qword_258 = nullptr;
-    mTexturePackRepository = nullptr;
-    mWorkingDirectory = File(L"");
-    mLevelStorageSource = nullptr;
+    InitializeCriticalSection(&m_criticalSection);
+    m_progressRenderer = nullptr;
+    m_gameRenderer = nullptr;
+    m_qword210 = nullptr;
+    m_qword218 = nullptr;
+    m_origHeight = 0;
+    m_gui = nullptr;
+    m_isNoRender = false;
+    m_hitResult = nullptr;
+    m_options = nullptr;
+    m_soundEngine = new SoundEngine();
+    m_qword258 = nullptr;
+    m_texturePackRepository = nullptr;
+    m_workingDirectory = File(L"");
+    m_levelStorageSource = nullptr;
 
     for (int i = 0; i < 4; i++) {
-        mStatsCounters[i] = nullptr;
+        m_statsCounters[i] = nullptr;
     }
 
-    mConnectToPort = 0;
+    m_connectToPort = 0;
     sUnkFile = File(L"");
-    mLastTimer = -1;
-    dword_2e8 = 0;
-    mIsRunning = true;
-    dword_148 = -1;
+    m_lastTimer = -1;
+    m_dword2e8 = 0;
+    m_isRunning = true;
+    m_dword148 = -1;
     Stats::init();
-    mOrigHeight = height;
-    mIsFullscreen = fullscreen;
-    mMinecraftApplet = nullptr;
-    mParent = nullptr;
-    mBlockColors = nullptr;
-    mItemColors = nullptr;
+    m_origHeight = height;
+    m_isFullscreen = fullscreen;
+    m_minecraftApplet = nullptr;
+    m_parent = nullptr;
+    m_blockColors = nullptr;
+    m_itemColors = nullptr;
 
     bool isWidescreen = Renderer::sInstance->IsWidescreen();
     int curWidth = width;
     if (!isWidescreen)
         curWidth = 3 * width / 4;
-    mWidth = curWidth;
-    mHeight = height;
-    mDisplayWidth = width;
-    mDisplayHeight = height;
+    m_width = curWidth;
+    m_height = height;
+    m_displayWidth = width;
+    m_displayHeight = height;
 
-    mIsFullscreen = fullscreen;  // this is set twice
-    mIsAppletMode = false;
+    m_isFullscreen = fullscreen;  // this is set twice
+    m_isAppletMode = false;
 
     sInstance = this;
 
     TextureManager::createInstance();
 
     for (int i = 0; i < 4; i++) {
-        array_110[i] = 0;
-        arr_128[i] = nullptr;
-        mGameModes[i] = nullptr;
+        m_array110[i] = 0;
+        m_arr128[i] = nullptr;
+        m_gameModes[i] = nullptr;
     }
 
-    qword_328 = nullptr;
-    mTutorialFlags = 0;
-    byte_38 = false;
-    mSoundEngine->init(nullptr);
-    mClientMasterGameMode = new ClientMasterGameMode();
-    mGhostController = nullptr;
-    mLobbyGameMode = nullptr;
+    m_qword328 = nullptr;
+    m_tutorialFlags = 0;
+    m_byte38 = false;
+    m_soundEngine->init(nullptr);
+    m_clientMasterGameMode = new ClientMasterGameMode();
+    m_ghostController = nullptr;
+    m_lobbyGameMode = nullptr;
 }
 
 void Minecraft::startAndConnectTo(const std::wstring& name, const std::wstring& session,
                                   const std::wstring& arg3) {
     std::wstring copy_name = name;  // why? you literally could make it not pass ptr to string
     Minecraft* mc = new Minecraft(nullptr, nullptr, nullptr, 1280, 720, false);
-    mc->mServerDomain = L"www.minecraft.net";
+    mc->m_serverDomain = L"www.minecraft.net";
 
     if (copy_name != L"" && session != L"") {
-        mc->mUser = new User(copy_name, session);
+        mc->m_user = new User(copy_name, session);
     } else {
-        mc->mUser
+        mc->m_user
             = new User(L"Player" + std::to_wstring((int)(System::processTimeInMilliSecs() % 1000)), L"");
     }
 
@@ -300,23 +301,23 @@ void Minecraft::startAndConnectTo(const std::wstring& name, const std::wstring& 
 }
 
 BlockRenderDispatcher* Minecraft::getBlockRenderer() {
-    return mBlockRenderDispatcher;
+    return m_blockRenderDispatcher;
 }
 
 EntityRenderDispatcher* Minecraft::getEntityRenderDispatcher() {
-    return mEntityRenderDispatcher;
+    return m_entityRenderDispatcher;
 }
 
 DataFixerUpper* Minecraft::getFixerUpper() {
-    return mFixerUpper;
+    return m_fixerUpper;
 }
 
 ItemInHandRenderer* Minecraft::getItemInHandRenderer() {
-    return mItemInHandRenderer;
+    return m_itemInHandRenderer;
 }
 
 ItemRenderer* Minecraft::getItemRenderer() {
-    return mItemRenderer;
+    return m_itemRenderer;
 }
 
 int Minecraft::getAverageFps() {
@@ -324,26 +325,26 @@ int Minecraft::getAverageFps() {
 }
 
 bool Minecraft::isUsingDefaultSkin() {
-    return GetInstance()->mTexturePackRepository->getSelected();
+    return GetInstance()->m_texturePackRepository->getSelected();
 }
 
 bool Minecraft::isTutorial() {
-    return mTutorialFlags != 0;
+    return m_tutorialFlags != 0;
 }
 
 bool Minecraft::useFancyGraphics() {
-    return Minecraft::sInstance && Minecraft::sInstance->mOptions->mIsFancyGraphics;
+    return Minecraft::sInstance && Minecraft::sInstance->m_options->m_isFancyGraphics;
 }
 
 void Minecraft::run() {
-    mIsRunning = true;
+    m_isRunning = true;
     init();
 }
 
 void Minecraft::SetGhostController(GhostController* ghostController) {
-    if (mGhostController) {
-        mGhostController->setDone();
-        mGhostControllers.push_back(mGhostController);
+    if (m_ghostController) {
+        m_ghostController->setDone();
+        m_ghostControllers.push_back(m_ghostController);
     }
-    mGhostController = ghostController;
+    m_ghostController = ghostController;
 }

@@ -14,6 +14,6 @@ public:
     void registerIcons(IconRegister*) override;
 
 private:
-    bool bool_a4;
-    std::wstring mTextureName;
+    bool m_boolA4;
+    std::wstring m_textureName;
 };

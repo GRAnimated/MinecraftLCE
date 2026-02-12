@@ -53,8 +53,8 @@ eTextureName_PARROT_GREEN, eTextureName_PARROT_YELLOW_BLUE, eTextureName_PARROT_
 int Textures::_TEXTURE_IDS[eTextureName_SIZE_OF_ENUM];
 
 void Textures::stitch() {
-    this->atlas->stitch();
-    this->atlas2->stitch();
+    this->m_atlas->stitch();
+    this->m_atlas2->stitch();
 }
 
 void Textures::loadIndexedTextures() {

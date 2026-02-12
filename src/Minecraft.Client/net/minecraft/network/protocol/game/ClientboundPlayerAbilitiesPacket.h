@@ -37,12 +37,12 @@ public:
     float getWalkingSpeed();
     int getPlayerId();
 
-    bool mIsInvulnerable;
-    bool mIsFlying;
-    bool mIsEnableFly;
-    bool mIsInstabuild;
-    float mFlyingSpeed;
-    float mWalkingSpeed;
-    bool mIsEnableBuild;
-    int mPlayerId;
+    bool m_isInvulnerable;
+    bool m_isFlying;
+    bool m_isEnableFly;
+    bool m_isInstabuild;
+    float m_flyingSpeed;
+    float m_walkingSpeed;
+    bool m_isEnableBuild;
+    int m_playerId;
 };

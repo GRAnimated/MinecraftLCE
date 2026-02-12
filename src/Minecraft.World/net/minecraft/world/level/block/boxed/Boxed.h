@@ -25,5 +25,5 @@ public:
         return this->isA(typeid(T)) ? static_cast<const TypedBoxed<T>*>(this) : nullptr;
     }
 
-    const std::type_info* mTypeInfo;
+    const std::type_info* m_typeInfo;
 };

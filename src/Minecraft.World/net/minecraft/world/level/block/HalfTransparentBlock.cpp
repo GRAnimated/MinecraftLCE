@@ -8,15 +8,15 @@
 
 HalfTransparentBlock::HalfTransparentBlock(const std::wstring& textureName, Material* material, bool unk)
     : Block(material, material->getColor()) {
-    bool_a4 = unk;
-    mTextureName = textureName;
+    m_boolA4 = unk;
+    m_textureName = textureName;
 }
 
 HalfTransparentBlock::HalfTransparentBlock(const std::wstring& textureName, Material* material, bool unk,
                                            const MaterialColor* color)
     : Block(material, color) {
-    bool_a4 = unk;
-    mTextureName = textureName;
+    m_boolA4 = unk;
+    m_textureName = textureName;
 }
 
 bool HalfTransparentBlock::shouldRenderFace(const BlockState* blockState, LevelSource* levelSource,
@@ -32,7 +32,7 @@ bool HalfTransparentBlock::shouldRenderFace(const BlockState* blockState, LevelS
             return false;
     }
 
-    if (!bool_a4 && relativeBlock == this)
+    if (!m_boolA4 && relativeBlock == this)
         return false;
 
     return Block::shouldRenderFace(blockState, levelSource, pos, direction);
@@ -43,5 +43,5 @@ bool HalfTransparentBlock::isSolidRender(const BlockState* blockState) const {
 }
 
 void HalfTransparentBlock::registerIcons(IconRegister* iconRegister) {
-    mTexture = iconRegister->registerIcon(mTextureName);
+    m_texture = iconRegister->registerIcon(m_textureName);
 }

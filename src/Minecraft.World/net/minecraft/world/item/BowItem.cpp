@@ -17,10 +17,10 @@
 #include <memory>
 
 BowItem::BowItem() : Item() {
-    this->mMaxStackSize = 1;
+    this->m_maxStackSize = 1;
     this->setMaxDamage(384);
 
-    memset(this->mBowIcons, 0, 3 * sizeof(TextureAtlasSprite*));  // sizeof because readability
+    memset(this->m_bowIcons, 0, 3 * sizeof(TextureAtlasSprite*));  // sizeof because readability
 
     this->addProperty(ResourceLocation(L"pull"),
                       (const ItemPropertyFunction*)new BowItem_Pull_ItemPropertyFunction());
@@ -30,11 +30,11 @@ BowItem::BowItem() : Item() {
 }
 
 unsigned int BowItem::GetUseTooltip(const ItemToolTipDataHolder& data) {
-    if (!data.mPlayer->mAbilities.mIsInstabuild && !data.mPlayer->mInventory->hasResource(Items::ARROW)
-        && !data.mPlayer->mInventory->hasResource(Items::TIPPED_ARROW)) {
+    if (!data.m_player->m_abilities.m_isInstabuild && !data.m_player->m_inventory->hasResource(Items::ARROW)
+        && !data.m_player->m_inventory->hasResource(Items::TIPPED_ARROW)) {
         return 0xFFFFFFFF;
     }
-    if (data.mPlayer->isUsingItem())
+    if (data.m_player->isUsingItem())
         return StringIDs::Release;
     return StringIDs::DrawDraw;
 }
@@ -70,9 +70,9 @@ std::wstring BowItem::BOW_ICON_NAMES[3] = {L"bow_pull_0", L"bow_pull_1", L"bow_p
 void BowItem::registerIcons(IconRegister* iconReg) {
     Item::registerIcons(iconReg);
 
-    this->mBowIcons[0] = iconReg->registerIcon(BOW_ICON_NAMES[0]);
-    this->mBowIcons[1] = iconReg->registerIcon(BOW_ICON_NAMES[1]);
-    this->mBowIcons[2] = iconReg->registerIcon(BOW_ICON_NAMES[2]);
+    this->m_bowIcons[0] = iconReg->registerIcon(BOW_ICON_NAMES[0]);
+    this->m_bowIcons[1] = iconReg->registerIcon(BOW_ICON_NAMES[1]);
+    this->m_bowIcons[2] = iconReg->registerIcon(BOW_ICON_NAMES[2]);
 }
 
 int BowItem::GetOverrideCount() {
@@ -84,8 +84,8 @@ int BowItem::GetOverrideCountColour() {
 }
 
 TextureAtlasSprite* BowItem::GetOverrideCountIcon(not_null_ptr<ItemInstance> item) {
-    if (Minecraft::GetInstance()->mLocalPlayer->getUseItem() == item) {
-        int ticksUsingItem = Minecraft::GetInstance()->mLocalPlayer->getTicksUsingItem();
+    if (Minecraft::GetInstance()->m_localPlayer->getUseItem() == item) {
+        int ticksUsingItem = Minecraft::GetInstance()->m_localPlayer->getTicksUsingItem();
         if (ticksUsingItem >= BowItem::GetMaxBowDuration() - 2)
             return Items::BOW->getDrawnIcon(2);
 
@@ -104,7 +104,7 @@ InteractionResultHolder BowItem::fjUseWithProjectile(Level* level, std::shared_p
                                                      not_null_ptr<ItemInstance> item) {
     not_null_ptr<ItemInstance> itemInHand = player->getItemInHand(hand);
     bool isEmpty = item->isEmpty();
-    if (player->mAbilities.mIsInstabuild || !isEmpty) {
+    if (player->m_abilities.m_isInstabuild || !isEmpty) {
         player->startUsingItem(hand);
         return InteractionResultHolder(InteractionResult::SUCCESS, itemInHand);
     } else {
@@ -115,7 +115,7 @@ InteractionResultHolder BowItem::fjUseWithProjectile(Level* level, std::shared_p
 }
 
 TextureAtlasSprite* BowItem::getDrawnIcon(int id) {
-    return this->mBowIcons[id];
+    return this->m_bowIcons[id];
 }
 
 int BowItem::GetMaxBowDuration() {

@@ -9,11 +9,11 @@ std::shared_ptr<Packet> DisconnectPacket::create() {
 }
 
 DisconnectPacket::DisconnectPacket() : Packet() {
-    mReason = eDisconnectReason::_0;
+    m_reason = eDisconnectReason::_0;
 }
 
 DisconnectPacket::DisconnectPacket(eDisconnectReason reason) : Packet() {
-    mReason = reason;
+    m_reason = reason;
 }
 
 void DisconnectPacket::handle(PacketListener* listener) {
@@ -21,11 +21,11 @@ void DisconnectPacket::handle(PacketListener* listener) {
 }
 
 void DisconnectPacket::read(DataInputStream* input) {
-    mReason = static_cast<eDisconnectReason>(input->readInt());
+    m_reason = static_cast<eDisconnectReason>(input->readInt());
 }
 
 void DisconnectPacket::write(DataOutputStream* output) {
-    output->writeInt(static_cast<int>(mReason));
+    output->writeInt(static_cast<int>(m_reason));
 }
 
 EPacketType DisconnectPacket::getPacketId() {

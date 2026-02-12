@@ -4,7 +4,7 @@
 // MapGenerator(random) {}
 
 WallGenerator::~WallGenerator() {
-    for (auto it = this->mWalls.begin(); it != this->mWalls.end(); it++) {
+    for (auto it = this->m_walls.begin(); it != this->m_walls.end(); it++) {
         delete *it;
     }
 }
@@ -12,10 +12,10 @@ WallGenerator::~WallGenerator() {
 // void WallGenerator::StartGeneration(Level* level) {}
 
 const AABB* WallGenerator::GetSpawnArea() const {
-    if (mWallsAreas.size() == 0)
+    if (m_wallsAreas.size() == 0)
         return nullptr;
 
-    return *mWallsAreas.begin();
+    return *m_wallsAreas.begin();
 }
 
 void WallGenerator::CleanUp(Level* level) {}

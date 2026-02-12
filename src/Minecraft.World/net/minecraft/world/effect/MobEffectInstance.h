@@ -37,16 +37,16 @@ public:
     // bool compareTo(MobEffectInstance* other); // unused
 
     // TODO: Find name for this function
-    int get_14() { return dword14; }
+    int get_14() { return m_dword14; }
 
-    MobEffect* mEffect;
-    int mDuration;
-    int mAmplifier;
-    bool bool10;
-    bool mAmbient;
-    bool mNoCounter;
-    bool mParticles;
-    int dword14;
+    MobEffect* m_effect;
+    int m_duration;
+    int m_amplifier;
+    bool m_bool10;
+    bool m_ambient;
+    bool m_noCounter;
+    bool m_particles;
+    int m_dword14;
 };
 
 ASSERT_SIZEOF(MobEffectInstance, 0x18)

@@ -4,7 +4,7 @@
 
 class AbstractClientPlayer : public Player {
 public:
-    float mElytraRotX;
-    float mElytraRotY;
-    float mElytraRotZ;
+    float m_elytraRotX;
+    float m_elytraRotY;
+    float m_elytraRotZ;
 };

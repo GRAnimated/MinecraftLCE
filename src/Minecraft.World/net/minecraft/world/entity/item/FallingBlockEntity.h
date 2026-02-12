@@ -11,5 +11,5 @@ public:
     void readAdditionalSaveData(CompoundTag*) override;
     void addAdditonalSaveData(CompoundTag*) override;
 
-    char filler[0x20];
+    char m_filler[0x20];
 };

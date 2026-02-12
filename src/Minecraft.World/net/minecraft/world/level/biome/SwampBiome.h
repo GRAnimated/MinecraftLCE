@@ -8,5 +8,5 @@ public:
 
     int getBaseClass() override;
 
-    void* padding;
+    void* m_padding;
 };

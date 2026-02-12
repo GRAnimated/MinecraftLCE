@@ -16,10 +16,10 @@ public:
 
     static void staticCtor();
 
-    void* qwordE8;
-    void* qwordF0;
-    void* qwordF8;
-    void* qword100;
-    void* qword108;
-    void* qword110;
+    void* m_qwordE8;
+    void* m_qwordF0;
+    void* m_qwordF8;
+    void* m_qword100;
+    void* m_qword108;
+    void* m_qword110;
 };

@@ -19,27 +19,27 @@ const int dword_7100E23090[22]
 
 // It's matching but... some of those variable inits should be moved to header
 UIScene::UIScene(int padID, UILayer* uiLayer) {
-    this->mPadID = padID;
-    this->qword30 = nullptr;
-    this->mFuiFile = nullptr;
-    this->mFocusRelated = false;
-    this->mHideLowerScenes = false;
-    this->byte_e9 = false;
-    this->mHidden = false;
-    this->bool_ad = false;
-    this->mVisible = true;
-    this->byte_96 = false;
-    this->mControlFocused = -1;
-    this->mControlChildFocus = 0;
-    this->mOpacity = 1.0;
-    this->mIsInitializedMovie = false;
-    this->byte_ea = true;
-    this->dwordF8 = 0;
-    this->mUILayer = uiLayer;
-    this->mBackScene = nullptr;
-    this->mCallbackUniqueId = nullptr;
-    this->wstring_8 = L"";
-    this->bool_28 = false;
+    this->m_padId = padID;
+    this->m_qword30 = nullptr;
+    this->m_fuiFile = nullptr;
+    this->m_focusRelated = false;
+    this->m_hideLowerScenes = false;
+    this->m_byteE9 = false;
+    this->m_hidden = false;
+    this->m_boolAd = false;
+    this->m_visible = true;
+    this->m_byte96 = false;
+    this->m_controlFocused = -1;
+    this->m_controlChildFocus = 0;
+    this->m_opacity = 1.0;
+    this->m_isInitializedMovie = false;
+    this->m_byteEa = true;
+    this->m_dwordF8 = 0;
+    this->m_uiLayer = uiLayer;
+    this->m_backScene = nullptr;
+    this->m_callbackUniqueId = nullptr;
+    this->m_wstring8 = L"";
+    this->m_bool28 = false;
 }
 
 void UIScene::customDrawFui(void* a1, const char* a2, fuiRect* a3) {
@@ -51,7 +51,7 @@ void UIScene::initialiseMovie() {
     this->mapElementsAndNames();
     this->updateSafeZone();
 
-    this->mIsInitializedMovie = true;
+    this->m_isInitializedMovie = true;
 }
 
 void UIScene::loadMovie() {
@@ -68,30 +68,30 @@ void UIScene::loadMovie() {
         moviePath.append(L"720.fui");
         v3 = 1;
     }
-    this->mResType = v3;
+    this->m_resType = v3;
     arrayWithLength<uchar> movieData = gConsoleUIController.getMovieData(moviePath.c_str());
-    this->mFuiFile = fui->load(movieData, true, fui->getResolution());
+    this->m_fuiFile = fui->load(movieData, true, fui->getResolution());
 
-    this->mFuiFile->getRootNode()->mFuiNodeStage->setCallbackScene(this);
-    this->mFuiFile->setCustomDrawCallback(UIScene::customDrawFui, this);
+    this->m_fuiFile->getRootNode()->m_fuiNodeStage->setCallbackScene(this);
+    this->m_fuiFile->setCustomDrawCallback(UIScene::customDrawFui, this);
 
-    this->mStageWidth = this->mFuiFile->getStageWidth();
-    this->mStageHeight = this->mFuiFile->getStageHeight();
-    this->mStageWidth2 = this->mStageWidth;
-    this->mStageHeight2 = this->mStageHeight;
+    this->m_stageWidth = this->m_fuiFile->getStageWidth();
+    this->m_stageHeight = this->m_fuiFile->getStageHeight();
+    this->m_stageWidth2 = this->m_stageWidth;
+    this->m_stageHeight2 = this->m_stageHeight;
 
     LeaveCriticalSection(&ConsoleUIController::unk_71017BE928);
 }
 
 void UIScene::navigateBack() {
     gConsoleUIController.PlayUISFX(SoundEvents::BACK);
-    gConsoleUIController.NavigateBack(this->mPadID, false, EUIScene_DefaultMAYBE, (EUILayer)8);
+    gConsoleUIController.NavigateBack(this->m_padId, false, EUIScene_DefaultMAYBE, (EUILayer)8);
 }
 
 void UIScene::sendInputToMovie(int key, bool a3, bool a4, bool a5) {
-    if (this->mFuiFile) {
+    if (this->m_fuiFile) {
         int elo = this->convertGameActionToFuiKeycode(key);
-        fui::sInstance->dispatchKeyboardEvent(this->mFuiFile, !a4, elo);
+        fui::sInstance->dispatchKeyboardEvent(this->m_fuiFile, !a4, elo);
     }
 }
 
@@ -100,29 +100,29 @@ bool UIScene::controlHasFocus(UIControl_Base* control) {
 }
 
 bool UIScene::controlHasFocus(int controlID) {
-    return this->mControlFocused == controlID;
+    return this->m_controlFocused == controlID;
 }
 
 void UIScene::addTimer(int id, int time) {
-    this->mTimersMap[id] = _TimerInfo{time, (int)System::processTimeInMilliSecs() + time, true};
+    this->m_timersMap[id] = _TimerInfo{time, (int)System::processTimeInMilliSecs() + time, true};
 }
 
 void UIScene::killTimer(int id) {
-    if (auto elo = this->mTimersMap.find(id); elo != this->mTimersMap.end())
-        elo->second.mEnabled = false;
+    if (auto elo = this->m_timersMap.find(id); elo != this->m_timersMap.end())
+        elo->second.m_enabled = false;
 }
 
 bool UIScene::hasTimer(int id) {
-    auto elo = this->mTimersMap.find(id);
-    return elo != this->mTimersMap.end() && elo->second.mEnabled;
+    auto elo = this->m_timersMap.find(id);
+    return elo != this->m_timersMap.end() && elo->second.m_enabled;
 }
 
 // Probably better way to do this but I'm lazy
 void* UIScene::GetCallbackUniqueId() {
-    void* ret = this->mCallbackUniqueId;
+    void* ret = this->m_callbackUniqueId;
     if (!ret) {
         ret = gConsoleUIController.RegisterForCallbackId(this);
-        this->mCallbackUniqueId = ret;
+        this->m_callbackUniqueId = ret;
     }
     return ret;
 }
@@ -132,10 +132,10 @@ void UIScene::customDrawSlotControlFui(fuiRect* rect, int, not_null_ptr<ItemInst
                                        bool b, bool c) {
     rect->getHeight();
     item.reset();
-    this->mStageHeight = f;
-    this->byte_e9 = a;
-    this->byte_e9 = b;
-    this->byte_e9 = c;
+    this->m_stageHeight = f;
+    this->m_byteE9 = a;
+    this->m_byteE9 = b;
+    this->m_byteE9 = c;
 }
 
 int UIScene::convertGameActionToFuiKeycode(int gameAction) {
@@ -143,17 +143,17 @@ int UIScene::convertGameActionToFuiKeycode(int gameAction) {
 }
 
 bool UIScene::needsReloaded() {
-    return !this->mFuiFile && (!this->stealsFocus() || this->mFocusRelated);
+    return !this->m_fuiFile && (!this->stealsFocus() || this->m_focusRelated);
 }
 
 bool UIScene::hasMovie() {
-    return this->mFuiFile != nullptr;
+    return this->m_fuiFile != nullptr;
 }
 
 void UIScene::updateSafeZone() {
     double v1 = 0.0, v2 = 0.0, v4 = 0.0, v5 = 0.0;
 
-    switch (this->mUILayer->getViewPort()) {
+    switch (this->m_uiLayer->getViewPort()) {
     case C4JRender::eViewportType_Top:
         v1 = this->getSafeZoneHalfHeight();
         v4 = v5 = v2;
@@ -203,7 +203,7 @@ void UIScene::updateSafeZone() {
 }
 
 void UIScene::updateViewportTouchOffset() {
-    C4JRender::eViewportType viewPortType = this->mUILayer->getViewPort();
+    C4JRender::eViewportType viewPortType = this->m_uiLayer->getViewPort();
     gConsoleUIController.updateViewportTouchOffset(viewPortType);
 }
 
@@ -216,20 +216,20 @@ int UIScene::getSubSceneType() const {
 }
 
 void UIScene::tick() {
-    if (!this->mHidden) {
-        if (this->mHideLowerScenes)
-            this->byte_96 = 1;
+    if (!this->m_hidden) {
+        if (this->m_hideLowerScenes)
+            this->m_byte96 = 1;
 
         this->tickTimers();
 
         // had to do it hacky way as idk how to force compiler to output same thing it does in target, unless
         // that's how it looked in source
-        for (auto i = this->mUIControls.begin(); i != this->mUIControls.end(); ++i) {
+        for (auto i = this->m_uiControls.begin(); i != this->m_uiControls.end(); ++i) {
             UIControl* uiControl = *i;
             uiControl->tick();
         }
 
-        this->mHideLowerScenes = true;
+        this->m_hideLowerScenes = true;
     }
 }
 
@@ -240,13 +240,13 @@ bool UIScene::stealsFocus() {
 }
 
 bool UIScene::hasFocus(int padID) {
-    return this->mFocusRelated && this->mPadID == padID;
+    return this->m_focusRelated && this->m_padId == padID;
 }
 
 void UIScene::updateTooltips() {
     if (!gConsoleUIController.IsReloadingSkin()) {
-        gConsoleUIController.SetTooltips(this->mPadID, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
-                                         -1, -1, 0, 0);
+        gConsoleUIController.SetTooltips(this->m_padId, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
+                                         -1, -1, -1, 0, 0);
     }
 }
 
@@ -255,7 +255,7 @@ void UIScene::handleGainFocus(bool) {}
 void UIScene::handleLoseFocus() {}
 
 bool UIScene::hidesLowerScenes() {
-    return this->mHideLowerScenes;
+    return this->m_hideLowerScenes;
 }
 
 bool UIScene::blocksInput() {
@@ -267,10 +267,10 @@ void* UIScene::GetMainPanel() {
 }
 
 void UIScene::render(int a2, int a3, C4JRender::eViewportType viewPortType) {
-    if (!this->mHidden && this->mHideLowerScenes) {
-        if (this->mFuiFile) {
+    if (!this->m_hidden && this->m_hideLowerScenes) {
+        if (this->m_fuiFile) {
             gConsoleUIController.setupRenderPosition(viewPortType);
-            fui::sInstance->render(this->mFuiFile, 0.0f, 0.0f, a2, a3);
+            fui::sInstance->render(this->m_fuiFile, 0.0f, 0.0f, a2, a3);
         }
     }
 }

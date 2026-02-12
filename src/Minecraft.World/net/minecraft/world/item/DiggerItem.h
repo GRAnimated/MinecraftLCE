@@ -22,9 +22,9 @@ public:
     std::unordered_map<eATTRIBUTE_ID, AttributeModifier*>*
     getDefaultAttributeModifiers(const EquipmentSlot*) override;
 
-    arrayWithLength<Block*> mBlocks = arrayWithLength<Block*>();
-    float mSpeed;
-    float mAttackDamage;
-    float mAttackSpeed;
-    const Item::Tier* mTier;
+    arrayWithLength<Block*> m_blocks = arrayWithLength<Block*>();
+    float m_speed;
+    float m_attackDamage;
+    float m_attackSpeed;
+    const Item::Tier* m_tier;
 };

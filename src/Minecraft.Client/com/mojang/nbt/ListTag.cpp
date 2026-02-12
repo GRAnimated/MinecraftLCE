@@ -7,41 +7,41 @@
 
 ListTag::ListTag() {}
 
-ListTag::ListTag(int id) : mTagId(id) {}
+ListTag::ListTag(int id) : m_tagId(id) {}
 
 void ListTag::write(DataOutput* outputStream) {
-    if (mData.empty()) {
-        mTagId = TAG_End;
+    if (m_data.empty()) {
+        m_tagId = TAG_End;
     } else {
-        mTagId = mData[0]->getId();
+        m_tagId = m_data[0]->getId();
     }
 
-    outputStream->writeByte(mTagId);
-    outputStream->writeInt(this->mData.size());
+    outputStream->writeByte(m_tagId);
+    outputStream->writeInt(this->m_data.size());
 
-    for (auto tag : mData) {
+    for (auto tag : m_data) {
         tag->write(outputStream);
     }
 }
 
 void ListTag::load(DataInput* inputStream, int inputSize) {
     if (inputSize <= 512) {
-        mTagId = inputStream->readChar();
+        m_tagId = inputStream->readChar();
         int size = inputStream->readInt();
-        Tag::deleteElements(mData);
-        mData.clear();
+        Tag::deleteElements(m_data);
+        m_data.clear();
 
         for (int i = 0; i < size; ++i) {
-            Tag* tag = Tag::newTag(mTagId);
+            Tag* tag = Tag::newTag(m_tagId);
             tag->load(inputStream, inputSize);
-            mData.push_back(tag);
+            m_data.push_back(tag);
         }
     }
 }
 
 std::wstring ListTag::toString() {
     static wchar_t buffer[64];
-    swprintf(buffer, 64, L"%zd entries of type %ls", mData.size(), Tag::getTagTypeName(mTagId));
+    swprintf(buffer, 64, L"%zd entries of type %ls", m_data.size(), Tag::getTagTypeName(m_tagId));
     return buffer;
 }
 
@@ -64,14 +64,14 @@ bool ListTag::equals(Tag* other) {
         return false;
 
     ListTag* otherCasted = (ListTag*)other;
-    if (this->mTagId != otherCasted->mTagId)
+    if (this->m_tagId != otherCasted->m_tagId)
         return false;
 
-    if (this->mData.size() != otherCasted->mData.size())
+    if (this->m_data.size() != otherCasted->m_data.size())
         return false;
 
-    for (size_t i = 0; i < mData.size(); ++i) {
-        if (!mData[i]->equals(otherCasted->mData[i]))
+    for (size_t i = 0; i < m_data.size(); ++i) {
+        if (!m_data[i]->equals(otherCasted->m_data[i]))
             return false;
     }
 
@@ -80,12 +80,12 @@ bool ListTag::equals(Tag* other) {
 
 Tag* ListTag::copy() {
     ListTag* copy = new ListTag(0);
-    copy->mTagId = mTagId;
+    copy->m_tagId = m_tagId;
 
-    for (auto&& tag : mData) {
+    for (auto&& tag : m_data) {
         Tag* copied = tag->copy();  // you either do this or modify vector code, because for whatever
                                     // reason push_back(value_type&& __x) has different comparision
-        copy->mData.push_back(copied);
+        copy->m_data.push_back(copied);
     }
 
     return copy;

@@ -80,7 +80,7 @@ void FireBlock::staticCtor() {
 
 FireBlock::FireBlock() : Block(Material::FIRE) {
     DerivedInit();
-    const BlockState* state = mBlockStateDefinition->any()
+    const BlockState* state = m_blockStateDefinition->any()
                                   ->setValue(AGE, 0)
                                   ->setValue(NORTH, false)
                                   ->setValue(EAST, false)
@@ -91,7 +91,7 @@ FireBlock::FireBlock() : Block(Material::FIRE) {
     registerDefaultState(state);
     setTicking(true);
 
-    memset(&mTexture, 0, 0x10);
+    memset(&m_texture, 0, 0x10);
 }
 
 MaterialColor* FireBlock::getMapColor(const BlockState* blockState, LevelSource* levelSource,
@@ -153,8 +153,8 @@ void FireBlock::tick(Level* level, const BlockPos& pos, const BlockState* blockS
     if (!level->getGameRules()->getBoolean(0))
         return;
 
-    if (!level->mIsLocal) {
-        if (!MinecraftServer::getInstance()->getPlayers()->isTrackingBlock(pos, level->mDimension)) {
+    if (!level->m_isLocal) {
+        if (!MinecraftServer::getInstance()->getPlayers()->isTrackingBlock(pos, level->m_dimension)) {
             level->addToTickNextTick(pos, this, 5 * getTickDelay(level));
             return;
         }
@@ -166,7 +166,7 @@ void FireBlock::tick(Level* level, const BlockPos& pos, const BlockState* blockS
 
     Block* belowBlock = level->getBlockState(pos.below())->getBlock();
     bool neverBurn = belowBlock == Blocks::NETHERRACK || belowBlock == Blocks::MAGMA;
-    bool isEnd = dynamic_cast<TheEndDimension*>(level->mDimension);
+    bool isEnd = dynamic_cast<TheEndDimension*>(level->m_dimension);
     neverBurn = neverBurn && belowBlock == Blocks::BEDROCK && isEnd;
 
     int age = blockState->getValue<int>(AGE);
@@ -319,14 +319,14 @@ int FireBlock::getTickDelay(Level* level) {
 }
 
 void FireBlock::onPlace(Level* level, const BlockPos& pos, const BlockState* blockState) {
-    if (level->mDimension->getType() == DimensionType::OVERWORLD
-        || level->mDimension->getType() == DimensionType::NETHER) {
+    if (level->m_dimension->getType() == DimensionType::OVERWORLD
+        || level->m_dimension->getType() == DimensionType::NETHER) {
         if (static_cast<PortalBlock*>(Blocks::PORTAL)->trySpawnPortal(level, pos, true))
             return;
     }
 
     if (level->getBlockState(pos.below())->isTopSolidBlocking() || isValidFireLocation(level, pos)) {
-        level->addToTickNextTick(pos, this, getTickDelay(level) + level->mRandom->nextInt(10));
+        level->addToTickNextTick(pos, this, getTickDelay(level) + level->m_random->nextInt(10));
     } else {
         level->removeBlock(pos);
     }
@@ -353,12 +353,12 @@ bool FireBlock::canInstantlyTick() {
 }
 
 void FireBlock::registerIcons(IconRegister* iconRegister) {
-    mTexture[0] = iconRegister->registerIcon(fire_0);
-    mTexture[1] = iconRegister->registerIcon(fire_1);
+    m_texture[0] = iconRegister->registerIcon(fire_0);
+    m_texture[1] = iconRegister->registerIcon(fire_1);
 }
 
 TextureAtlasSprite* FireBlock::getTexture(const Direction* direction, const BlockState* blockState) {
-    return mTexture[0];
+    return m_texture[0];
 }
 
 // NON_MATCHING: There should be a central static array variable that gets overwritten by each of these
@@ -371,8 +371,8 @@ BlockStateDefinition* FireBlock::createBlockStateDefinition() {
 }
 
 void FireBlock::setFlammable(Block* block, int a3, int a4) {
-    mFlameOdds[block] = a3;
-    mBurnOdds[block] = a4;
+    m_flameOdds[block] = a3;
+    m_burnOdds[block] = a4;
 }
 
 bool FireBlock::canBurn(LevelSource* level, const BlockPos& pos) {
@@ -430,21 +430,21 @@ int FireBlock::getFireOdds(Level* level, const BlockPos& pos) {
 }
 
 int FireBlock::getFlameOdds(Block* block) {
-    auto it = mFlameOdds.find(block);
-    if (it != mFlameOdds.end())
+    auto it = m_flameOdds.find(block);
+    if (it != m_flameOdds.end())
         return it->second;
 
     return 0;
 }
 
 int FireBlock::getBurnOdd(Block* block) {
-    auto it = mBurnOdds.find(block);
-    if (it != mBurnOdds.end())
+    auto it = m_burnOdds.find(block);
+    if (it != m_burnOdds.end())
         return it->second;
 
     return 0;
 }
 
 TextureAtlasSprite* FireBlock::getTextureLayer(int offset) {
-    return mTexture[offset];
+    return m_texture[offset];
 }

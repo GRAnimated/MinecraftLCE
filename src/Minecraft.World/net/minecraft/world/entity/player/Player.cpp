@@ -14,41 +14,41 @@
 
 Player::Player(Level* level, const std::wstring& a3) : LivingEntity(level) {
     this->init();
-    this->mGameProfile = a3;
+    this->m_gameProfile = a3;
     MemSect(11);
-    this->mInventoryMenu = new InventoryMenu(this->mInventory, !level->mIsLocal, this);
+    this->m_inventoryMenu = new InventoryMenu(this->m_inventory, !level->m_isLocal, this);
     MemSect(0);
-    this->mContainerMenu = this->mInventoryMenu;
+    this->m_containerMenu = this->m_inventoryMenu;
     BlockPos sharedSpawnPos = level->getSharedSpawnPos();
     this->moveTo((double)sharedSpawnPos.getX() + 0.5, (double)(sharedSpawnPos.getY() + 1),
                  (double)sharedSpawnPos.getZ() + 0.5, 0.0f, 0.0f);
-    this->mRotOffs = 180.0f;
-    this->dword820 = 1;
-    this->mSkinCapeId = 0;
-    this->dword82C = 0;
-    this->mSkinId = 0;
-    this->bool834 = 0;
-    this->qword838 = 0LL;
-    this->bool840 = 0;
+    this->m_rotOffs = 180.0f;
+    this->m_dword820 = 1;
+    this->m_skinCapeId = 0;
+    this->m_dword82C = 0;
+    this->m_skinId = 0;
+    this->m_bool834 = 0;
+    this->m_qword838 = 0LL;
+    this->m_bool840 = 0;
     this->SetPowerupTicks((PowerupItems::eGlide_Timed_Powerup_ID)0, 0);
     this->SetPowerupTicks((PowerupItems::eGlide_Timed_Powerup_ID)1, 0);
     this->SetPowerupTicks((PowerupItems::eGlide_Timed_Powerup_ID)2, 0);
-    playerUID1 = PlayerUID(0);
-    playerUID2 = PlayerUID(0);
-    statsUID = StatsUID::EMPTY_SUID();
+    m_playerUiD1 = PlayerUID(0);
+    m_playerUiD2 = PlayerUID(0);
+    m_statsUid = StatsUID::EMPTY_SUID();
     this->setBool7FC(CConsoleMinecraftApp::sInstance.GetGameHostOption((eGameHostOption)4));
-    this->bool7FD = false;
+    this->m_bool7Fd = false;
 }
 
 void Player::hurtCurrentlyUsedShield(float x) {}
 bool Player::IsCreativeFlying() {
-    return this->mAbilities.mIsFlying;
+    return this->m_abilities.m_isFlying;
 }
 
 // void Player::updateFrameTick() {}
 
 void Player::closeContainer() {
-    this->mContainerMenu = this->mInventoryMenu;
+    this->m_containerMenu = this->m_inventoryMenu;
 }
 
 void Player::touch(std::shared_ptr<Entity> entToTouch) {
@@ -75,23 +75,23 @@ bool Player::CanChangeThirdPersonView() {
 }
 
 CameraController* Player::GetCameraController() {
-    return this->mCameraController;
+    return this->m_cameraController;
 }
 
 void Player::SetCameraController(CameraController* newCameraController, bool v5) {
-    if (this->byte790)
-        if (this->mCameraController)
-            delete this->mCameraController;
+    if (this->m_byte790)
+        if (this->m_cameraController)
+            delete this->m_cameraController;
 
-    this->byte790 = v5;
-    this->mCameraController = newCameraController;
+    this->m_byte790 = v5;
+    this->m_cameraController = newCameraController;
     if (newCameraController) {
         this->SetThirdPersonView(newCameraController->getCameraMode());
     }
 }
 
 void Player::SetPowerupTicks(PowerupItems::eGlide_Timed_Powerup_ID id, int ticks) {
-    this->mGlidepowerUpTicks[id] = ticks;
+    this->m_glidepowerUpTicks[id] = ticks;
 }
 
 /// bool Player::canHarmPlayer(std::shared_ptr<Player>) {}
@@ -159,10 +159,10 @@ void Player::OnTakeFromAnvil(not_null_ptr<ItemInstance>) {}
 void Player::updatePlayerSize() {
     float newWidth, newHeight;
 
-    if (this->mSizeType == 2) {
+    if (this->m_sizeType == 2) {
         newHeight = 0.0f;
         newWidth = 0.0f;
-    } else if (this->mSizeType == 1) {
+    } else if (this->m_sizeType == 1) {
         newHeight = 0.3f;
         newWidth = 0.3f;
     } else if (this->isFallFlying()) {
@@ -179,12 +179,12 @@ void Player::updatePlayerSize() {
         newWidth = 0.6f;
     }
 
-    if (newWidth != this->mWidth || newHeight != this->mHeight) {
+    if (newWidth != this->m_width || newHeight != this->m_height) {
         const AABB* aabb = this->getBoundingBox();
-        aabb = aabb->newTemp(aabb->minX, aabb->minY, aabb->minZ, aabb->minX + newWidth,
-                             aabb->minY + newHeight, aabb->minZ + newWidth);
+        aabb = aabb->newTemp(aabb->m_inX, aabb->m_inY, aabb->m_inZ, aabb->m_inX + newWidth,
+                             aabb->m_inY + newHeight, aabb->m_inZ + newWidth);
 
-        if (!this->mLevel->hasBlockCubes(aabb) || this->isPassenger()) {
+        if (!this->m_level->hasBlockCubes(aabb) || this->isPassenger()) {
             this->setSize(newWidth, newHeight);
         }
     }

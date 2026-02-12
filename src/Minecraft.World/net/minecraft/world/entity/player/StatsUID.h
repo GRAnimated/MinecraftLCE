@@ -8,5 +8,5 @@ public:
 
     static StatsUID EMPTY_SUID();
 
-    int unk;
+    int m_unk;
 };

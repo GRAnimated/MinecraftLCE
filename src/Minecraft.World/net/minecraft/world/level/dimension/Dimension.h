@@ -51,15 +51,15 @@ public:
     bool isHasSkyLight();
     bool isUltraWarm();
 
-    Level* mLevel;
-    LevelType* mLevelType;
-    SuperflatConfig* mGeneratorOptions;
-    BiomeSource* mBiomeSource;
-    bool field_28;
-    bool mIsHasCeiling;
-    bool mIsHasSkyLight;
-    float* mBrightnessRamp;
-    void* field_30;
-    void* field_38;
-    int mXZSize;
+    Level* m_level;
+    LevelType* m_levelType;
+    SuperflatConfig* m_generatorOptions;
+    BiomeSource* m_biomeSource;
+    bool m_field28;
+    bool m_isHasCeiling;
+    bool m_isHasSkyLight;
+    float* m_brightnessRamp;
+    void* m_field30;
+    void* m_field38;
+    int m_xzSize;
 };

@@ -11,7 +11,7 @@ public:
     void Clear() override;
     int WaitForSignal(int time) override;
 
-    bool field_8;
-    int mWaiting;  // seems to be like waiting count or something
-    nn::os::EventType mEventType;
+    bool m_field8;
+    int m_waiting;  // seems to be like waiting count or something
+    nn::os::EventType m_eventType;
 };

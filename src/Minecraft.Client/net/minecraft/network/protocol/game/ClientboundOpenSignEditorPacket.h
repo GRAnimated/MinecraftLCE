@@ -15,5 +15,5 @@ public:
     void handle(PacketListener* listener) override;
 
 private:
-    BlockPos pos;
+    BlockPos m_pos;
 };

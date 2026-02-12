@@ -22,9 +22,9 @@ public:
     int getValue();
 
 private:
-    int id;
-    int x;
-    int y;
-    int z;
-    int value;
+    int m_id;
+    int m_x;
+    int m_y;
+    int m_z;
+    int m_value;
 };

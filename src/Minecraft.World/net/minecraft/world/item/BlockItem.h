@@ -8,5 +8,5 @@ public:
 
     Block* getBlock();
 
-    void* filler[2];
+    void* m_filler[2];
 };

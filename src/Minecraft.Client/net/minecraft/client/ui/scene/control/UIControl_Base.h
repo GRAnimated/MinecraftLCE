@@ -15,5 +15,5 @@ public:
     virtual void setLabel(UIString, bool, bool);
     virtual void setAllPossibleLabels(int, uint, wchar_t* [256]);
 
-    UIString mUIString;
+    UIString m_uiString;
 };

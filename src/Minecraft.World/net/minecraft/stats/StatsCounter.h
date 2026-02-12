@@ -7,5 +7,5 @@ public:
     void clear();
     void parse(void*);
 
-    unsigned char padding[0x60];
+    unsigned char m_padding[0x60];
 };

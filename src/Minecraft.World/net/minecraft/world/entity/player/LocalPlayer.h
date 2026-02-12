@@ -4,6 +4,6 @@
 
 class LocalPlayer : public AbstractClientPlayer {
 public:
-    char fill[160];
-    int mItemRendererThingy;
+    char m_fill[160];
+    int m_itemRendererThingy;
 };
