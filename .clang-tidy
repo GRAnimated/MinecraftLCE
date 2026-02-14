@@ -15,10 +15,10 @@ CheckOptions:
   readability-identifier-naming.PrivateMemberCase: camelBack
   readability-identifier-naming.PrivateMemberPrefix: m_
   # statics
-  readability-identifier-naming.StaticVariableCase: camelBack
-  readability-identifier-naming.StaticVariablePrefix: s_
-  readability-identifier-naming.ClassMemberCase: camelBack
-  readability-identifier-naming.ClassMemberPrefix: s_
+  readability-identifier-naming.StaticVariableCase: CamelCase
+  readability-identifier-naming.StaticVariablePrefix: s
+  readability-identifier-naming.ClassMemberCase: CamelCase
+  readability-identifier-naming.ClassMemberPrefix: s
   # constants
   readability-identifier-naming.GlobalConstantCase: UPPER_CASE
   # globals
