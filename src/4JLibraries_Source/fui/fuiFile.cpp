@@ -2,24 +2,24 @@
 #include "fui/node/FJ_FuiNode.h"
 
 void fuiMatrix::mul(const fuiMatrix& lhs, const fuiMatrix& rhs, fuiMatrix& out) {
-    out.mScaleX
-        = lhs.mScaleX * rhs.mScaleX + lhs.mScaleY * rhs.mRotSkewX + static_cast<float>(rhs.mPosX * 0.0);
-    out.mScaleY
-        = lhs.mScaleX * rhs.mScaleY + lhs.mScaleY * rhs.mRotSkewY + static_cast<float>(rhs.mPosY * 0.0);
-    out.mRotSkewX
-        = lhs.mRotSkewX * rhs.mScaleX + lhs.mRotSkewY * rhs.mRotSkewX + static_cast<float>(rhs.mPosX * 0.0);
-    out.mRotSkewY
-        = lhs.mRotSkewX * rhs.mScaleY + lhs.mRotSkewY * rhs.mRotSkewY + static_cast<float>(rhs.mPosY * 0.0);
-    out.mPosX = lhs.mPosX * rhs.mScaleX + lhs.mPosY * rhs.mRotSkewX + rhs.mPosX;
-    out.mPosY = lhs.mPosX * rhs.mScaleY + lhs.mPosY * rhs.mRotSkewY + rhs.mPosY;
+    out.m_scaleX
+        = lhs.m_scaleX * rhs.m_scaleX + lhs.m_scaleY * rhs.m_rotSkewX + static_cast<float>(rhs.m_posX * 0.0);
+    out.m_scaleY
+        = lhs.m_scaleX * rhs.m_scaleY + lhs.m_scaleY * rhs.m_rotSkewY + static_cast<float>(rhs.m_posY * 0.0);
+    out.m_rotSkewX = lhs.m_rotSkewX * rhs.m_scaleX + lhs.m_rotSkewY * rhs.m_rotSkewX
+                     + static_cast<float>(rhs.m_posX * 0.0);
+    out.m_rotSkewY = lhs.m_rotSkewX * rhs.m_scaleY + lhs.m_rotSkewY * rhs.m_rotSkewY
+                     + static_cast<float>(rhs.m_posY * 0.0);
+    out.m_posX = lhs.m_posX * rhs.m_scaleX + lhs.m_posY * rhs.m_rotSkewX + rhs.m_posX;
+    out.m_posY = lhs.m_posX * rhs.m_scaleY + lhs.m_posY * rhs.m_rotSkewY + rhs.m_posY;
 }
 
 fuiFile::fuiFile() {
-    this->mHeader.index = 0;
-    this->mData.fuiSymbol = nullptr;
-    this->mData.fuiImportAsset = nullptr;
-    this->mRenderNodeStage = nullptr;
-    this->mCallbackData = nullptr;
+    this->m_header.m_index = 0;
+    this->m_data.m_fuiSymbol = nullptr;
+    this->m_data.m_fuiImportAsset = nullptr;
+    this->m_renderNodeStage = nullptr;
+    this->m_callbackData = nullptr;
 }
 
 // NON_MATCHING | Score: 10 (lower is better)
@@ -34,25 +34,25 @@ uint64_t fuiFile::addDataRegion(uint a1, unsigned int size, unsigned char** data
 }
 
 fuiRenderNode* fuiFile::getRootNode() {
-    return (fuiRenderNode*)this->mRenderNodeTimeline;  // ??? (I think our structs are fucked)
+    return (fuiRenderNode*)this->m_renderNodeTimeline;  // ??? (I think our structs are fucked)
 }
 
 // NON_MATCHING | score: 10 (lower is better)
 // can also get it to match by swapping the params and using mRootNode in place of mCallbackData, but that's
 // not correct surely
 void fuiFile::setCustomDrawCallback(void (*callback)(void*, const char*, fuiRect*), void* data) {
-    this->mCallbackData = data;
-    this->mCallbackFunc = callback;
+    this->m_callbackData = data;
+    this->m_callbackFunc = callback;
 }
 
 float fuiFile::getStageWidth() {
-    return this->mHeader.stageSize.getWidth();
+    return this->m_header.m_stageSize.getWidth();
 }
 
 float fuiFile::getStageHeight() {
-    return this->mHeader.stageSize.getHeight();
+    return this->m_header.m_stageSize.getHeight();
 }
 
 void fuiFile::setIndex(int index) {
-    this->mHeader.index = index;
+    this->m_header.m_index = index;
 }

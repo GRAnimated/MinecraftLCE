@@ -6,7 +6,7 @@ void fuiRenderNodeTimeline::progogateBoundsFromChild() {
     do {
         cur->updateBoundsLocal();
 
-        fuiRenderNode* tl = cur->mTimeline;
+        fuiRenderNode* tl = cur->m_timeline;
 
         if (!tl)
             break;

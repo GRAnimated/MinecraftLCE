@@ -32,21 +32,21 @@ std::shared_ptr<MapItemSavedData> MapItem::getSavedData(int mapAux, Level* level
     std::shared_ptr<MapItemSavedData> savedData
         = std::static_pointer_cast<MapItemSavedData>(level->getSavedData(typeid(MapItemSavedData), mapId));
 
-    if (!savedData && !level->mIsLocal) {
+    if (!savedData && !level->m_isLocal) {
         mapId = L"map_" + std::to_wstring(mapAux);
 
         savedData = std::shared_ptr<MapItemSavedData>(new MapItemSavedData(mapId));
-        savedData->mScale = 3;
+        savedData->m_scale = 3;
         savedData->setOrigin(level->getLevelData()->getXSpawn(), level->getLevelData()->getZSpawn(),
-                             savedData->mScale);
-        savedData->mDimension = level->mDimension->getType()->getId();
+                             savedData->m_scale);
+        savedData->m_dimension = level->m_dimension->getType()->getId();
         savedData->setDirty();
         level->setSavedData(mapId, savedData);
     }
 
     if (savedData) {
-        if (savedData->mScale >= 5) {
-            savedData->mScale = 4;
+        if (savedData->m_scale >= 5) {
+            savedData->m_scale = 4;
         }
     }
 
@@ -61,28 +61,28 @@ void MapItem::update(Level* level, std::shared_ptr<Entity> ent, std::shared_ptr<
 
 void MapItem::inventoryTick(not_null_ptr<ItemInstance> itemInstance, Level* level,
                             std::shared_ptr<Entity> ent, int slot, bool inHand) {
-    if (!level->mIsLocal) {
+    if (!level->m_isLocal) {
         std::shared_ptr<MapItemSavedData> mapSavedData = this->getSavedData(itemInstance, level);
         if (ent->isType(ePlayer)) {
             std::shared_ptr<Player> player = std::static_pointer_cast<Player>(ent);
-            int aux = level->getAuxValueForMap(player->getPlayerUID(), mapSavedData->mDimension,
-                                               mapSavedData->mXCenter, mapSavedData->mZCenter,
-                                               mapSavedData->mScale);
+            int aux = level->getAuxValueForMap(player->getPlayerUID(), mapSavedData->m_dimension,
+                                               mapSavedData->m_xCenter, mapSavedData->m_zCenter,
+                                               mapSavedData->m_scale);
             if (aux != itemInstance->getAuxValue()) {
                 std::shared_ptr<MapItemSavedData> mapDataAux = this->getSavedData(aux, level);
 
-                mapDataAux->mXCenter = mapSavedData->mXCenter;
-                mapDataAux->mZCenter = mapSavedData->mZCenter;
-                mapDataAux->mScale = mapSavedData->mScale;
-                mapDataAux->mDimension = mapSavedData->mDimension;
-                mapDataAux->mTrackingPosition
-                    = mapDataAux->mTrackingPosition ? true : mapSavedData->mTrackingPosition;
+                mapDataAux->m_xCenter = mapSavedData->m_xCenter;
+                mapDataAux->m_zCenter = mapSavedData->m_zCenter;
+                mapDataAux->m_scale = mapSavedData->m_scale;
+                mapDataAux->m_dimension = mapSavedData->m_dimension;
+                mapDataAux->m_trackingPosition
+                    = mapDataAux->m_trackingPosition ? true : mapSavedData->m_trackingPosition;
 
                 itemInstance->setAuxValue(aux);
 
                 mapDataAux->tickCarriedBy(player, itemInstance);
                 mapDataAux->mergeInMapData(mapSavedData);
-                player->mInventoryMenu->broadcastChanges();
+                player->m_inventoryMenu->broadcastChanges();
 
                 mapSavedData = mapDataAux;
             } else {
@@ -113,7 +113,7 @@ void MapItem::onCraftedBy(not_null_ptr<ItemInstance> itemInstance, Level* level,
 }
 
 void MapItem::registerIcons(IconRegister* iconReg) {
-    this->MAP_FILLED_MARKINGS = iconReg->registerIcon(L"map_filled_markings");
+    this->m_apFilledMarkings = iconReg->registerIcon(L"map_filled_markings");
 }
 
 bool MapItem::hasMultipleSpriteLayers() {
@@ -121,7 +121,7 @@ bool MapItem::hasMultipleSpriteLayers() {
 }
 
 TextureAtlasSprite* MapItem::getLayerIcon(int a2, int layer) {
-    return layer == 1 ? this->MAP_FILLED_MARKINGS : Item::getLayerIcon(a2, layer);
+    return layer == 1 ? this->m_apFilledMarkings : Item::getLayerIcon(a2, layer);
 }
 
 std::shared_ptr<Packet> MapItem::getUpdatePacket(not_null_ptr<ItemInstance> itemInstance, Level* level,

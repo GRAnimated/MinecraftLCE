@@ -21,7 +21,7 @@ public:
     int getData();
 
 private:
-    int mEntityId;
-    unsigned char mEventId;
-    int mData;
+    int m_entityId;
+    unsigned char m_eventId;
+    int m_data;
 };

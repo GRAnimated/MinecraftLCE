@@ -9,15 +9,15 @@ std::shared_ptr<Packet> ClientboundSetSpawnPositionPacket::create() {
 }
 
 ClientboundSetSpawnPositionPacket::ClientboundSetSpawnPositionPacket() : Packet() {
-    mPos = BlockPos();
+    m_pos = BlockPos();
 }
 
 ClientboundSetSpawnPositionPacket::ClientboundSetSpawnPositionPacket(int x, int y, int z) : Packet() {
-    mPos = BlockPos(x, y, z);
+    m_pos = BlockPos(x, y, z);
 }
 
 ClientboundSetSpawnPositionPacket::ClientboundSetSpawnPositionPacket(const BlockPos& pos) : Packet() {
-    mPos = pos;
+    m_pos = pos;
 }
 
 EPacketType ClientboundSetSpawnPositionPacket::getPacketId() {
@@ -25,11 +25,11 @@ EPacketType ClientboundSetSpawnPositionPacket::getPacketId() {
 }
 
 void ClientboundSetSpawnPositionPacket::read(DataInputStream* input) {
-    mPos = input->readBlockPos();
+    m_pos = input->readBlockPos();
 }
 
 void ClientboundSetSpawnPositionPacket::write(DataOutputStream* output) {
-    output->writeBlockPos(mPos);
+    output->writeBlockPos(m_pos);
 }
 
 void ClientboundSetSpawnPositionPacket::handle(PacketListener* listener) {

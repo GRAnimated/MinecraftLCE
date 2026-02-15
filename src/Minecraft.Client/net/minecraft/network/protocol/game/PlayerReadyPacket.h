@@ -15,6 +15,6 @@ public:
     void handle(PacketListener* listener) override;
 
 private:
-    unsigned int mPlayerId;
-    bool mReady;
+    unsigned int m_playerId;
+    bool m_ready;
 };

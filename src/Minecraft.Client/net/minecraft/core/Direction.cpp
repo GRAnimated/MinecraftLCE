@@ -19,10 +19,10 @@ void Direction::staticCtor() {
     for (auto it = VALUES.begin(); it != VALUES.end(); ++it) {
         const Direction* dir = *it;
 
-        BY_3D_DATA[dir->mDirX] = dir;
+        BY_3D_DATA[dir->m_dirX] = dir;
 
         if (dir->getAxis()->isHorizontal())
-            BY_2D_DATA[dir->mDirZ] = dir;
+            BY_2D_DATA[dir->m_dirZ] = dir;
 
         std::wstring name = dir->getName();
         BY_NAME[name] = dir;
@@ -32,20 +32,20 @@ void Direction::staticCtor() {
 Direction::Direction(int dirX, int dirY, int dirZ, const std::wstring& name,
                      Direction::AxisDirection* axisDirection, Direction::Axis* axis, Vec3i* pos,
                      unsigned char index) {
-    mDirZ = dirZ;
-    mDirY = dirY;
-    mDirX = dirX;
-    mName = name;
-    mAxis = axis;
-    mAxisDirection = axisDirection;
-    mPos = new Vec3i(*pos);
-    mIndex = index;
+    m_dirZ = dirZ;
+    m_dirY = dirY;
+    m_dirX = dirX;
+    m_name = name;
+    m_axis = axis;
+    m_axisDirection = axisDirection;
+    m_pos = new Vec3i(*pos);
+    m_index = index;
 
     VALUES.push_back(this);
 
-    mX = pos->getX();
-    mY = pos->getY();
-    mZ = pos->getZ();
+    m_x = pos->getX();
+    m_y = pos->getY();
+    m_z = pos->getZ();
 }
 
 const Direction* Direction::from3DDataValue(int value) {
@@ -53,17 +53,17 @@ const Direction* Direction::from3DDataValue(int value) {
 }
 
 unsigned int Direction::get3DDataValue() const {
-    return mDirX;
+    return m_dirX;
 }
 
 int Direction::get2DDataValue() const {
-    return mDirZ;
+    return m_dirZ;
 }
 
 Direction::Axis* Direction::getAxis() const {
-    return mAxis;
+    return m_axis;
 }
 
 std::wstring Direction::getName() const {
-    return mName;
+    return m_name;
 }

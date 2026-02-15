@@ -16,5 +16,5 @@ public:
     void handle(PacketListener* listener) override;
     int getEstimatedSize() override;
 
-    InteractionHand::EInteractionHand mHand = InteractionHand::MAIN_HAND;
+    InteractionHand::EInteractionHand m_hand = InteractionHand::MAIN_HAND;
 };

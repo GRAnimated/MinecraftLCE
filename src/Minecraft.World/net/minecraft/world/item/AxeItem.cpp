@@ -22,12 +22,12 @@ void AxeItem::staticCtor() {
 }
 
 AxeItem::AxeItem(const Item::Tier* tier) : DiggerItem(tier, DIGGABLES) {
-    this->mAttackDamage = tier->getAttackDamageBonus() + 3.0f;
+    this->m_attackDamage = tier->getAttackDamageBonus() + 3.0f;
 }
 
 float AxeItem::getDestroySpeed(not_null_ptr<ItemInstance> instance, BlockState* state) {
     Material* material = state->getMaterial();
     return material != Material::WOOD && material != Material::PLANTS && material != Material::MOSS ?
                DiggerItem::getDestroySpeed(instance, state) :
-               this->mSpeed;
+               this->m_speed;
 }

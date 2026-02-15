@@ -1,11 +1,11 @@
 #include "net/minecraft/client/model/Model.h"
 
 Model::Model() {
-    this->mRiding = false;
-    this->mIsYoung = true;
-    this->mTexWidth = 64;
-    this->mTexHeight = 32;
-    this->byte88 = 0;
+    this->m_riding = false;
+    this->m_isYoung = true;
+    this->m_texWidth = 64;
+    this->m_texHeight = 32;
+    this->m_byte88 = 0;
 }
 
 Model::~Model() {}
@@ -15,7 +15,7 @@ void Model::setupAnim(float, float, float, float, float, float, std::shared_ptr<
 void Model::prepareMobModel(std::shared_ptr<LivingEntity>&, float, float, float) {}
 
 ModelPart* Model::getRandomModelPart(Random random) {
-    return this->mModelParts.at(random.nextInt(this->mModelParts.size()));
+    return this->m_modelParts.at(random.nextInt(this->m_modelParts.size()));
 }
 
 ModelPart* Model::AddOrRetrievePart(SKIN_BOX*, unsigned int) {
@@ -23,10 +23,10 @@ ModelPart* Model::AddOrRetrievePart(SKIN_BOX*, unsigned int) {
 }
 
 void Model::copyPropertiesFrom(Model* source) {
-    this->mAttackTime = source->mAttackTime;
-    this->mRiding = source->mRiding;
-    this->mIsYoung = source->mIsYoung;
-    this->byte88 = source->byte88;
+    this->m_attackTime = source->m_attackTime;
+    this->m_riding = source->m_riding;
+    this->m_isYoung = source->m_isYoung;
+    this->m_byte88 = source->m_byte88;
 }
 
 void Model::clearAllOffsets() {}

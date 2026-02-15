@@ -28,9 +28,9 @@ public:
     static const GameType* byId(int);
 
 private:
-    int mId;
-    std::wstring mLabel;
-    std::wstring mSliderLabel;
-    int field_38;
-    int field_3C;
+    int m_id;
+    std::wstring m_label;
+    std::wstring m_sliderLabel;
+    int m_field38;
+    int m_field3C;
 };

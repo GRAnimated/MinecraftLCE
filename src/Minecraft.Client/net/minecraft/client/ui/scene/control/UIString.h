@@ -18,5 +18,5 @@ public:
     bool needsUpdating();
     void setUpdated();
 
-    std::shared_ptr<UIStringCore*> text;
+    std::shared_ptr<UIStringCore*> m_text;
 };

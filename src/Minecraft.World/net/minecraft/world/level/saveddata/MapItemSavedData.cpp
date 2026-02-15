@@ -12,7 +12,7 @@
 
 std::shared_ptr<Packet> MapItemSavedData::getUpdatePacket(not_null_ptr<ItemInstance> item, Level* level,
                                                           std::shared_ptr<Player> player) {
-    if (auto it = this->mCarriedByPlayers.find(player); it != this->mCarriedByPlayers.end()) {
+    if (auto it = this->m_carriedByPlayers.find(player); it != this->m_carriedByPlayers.end()) {
         std::shared_ptr<HoldingPlayer> holdingPlayer = it->second;
         return holdingPlayer->nextUpdatePacket(item);
     }
@@ -22,9 +22,9 @@ std::shared_ptr<Packet> MapItemSavedData::getUpdatePacket(not_null_ptr<ItemInsta
 
 void MapItemSavedData::addDecoration(const MapDecoration::Type* type, Level* level, int id, double worldX,
                                      double worldY, double worldZ, double rotation, bool idk) {
-    int scaleFactor = 1 << this->mScale;
-    float relX = (float)(worldX - this->mXCenter) / (float)scaleFactor;
-    float relZ = (float)(worldZ - this->mZCenter) / (float)scaleFactor;
+    int scaleFactor = 1 << this->m_scale;
+    float relX = (float)(worldX - this->m_xCenter) / (float)scaleFactor;
+    float relZ = (float)(worldZ - this->m_zCenter) / (float)scaleFactor;
 
     char posX = (relX * 2.0f) + 0.5;
     char posZ = (relZ * 2.0f) + 0.5;
@@ -33,12 +33,12 @@ void MapItemSavedData::addDecoration(const MapDecoration::Type* type, Level* lev
 
     bool isPlayer = type->isPlayer();
     std::unordered_map<int, MapDecoration>* targetMap
-        = isPlayer ? &this->mPlayerDecorations : &this->mFrameDecorations;
+        = isPlayer ? &this->m_playerDecorations : &this->m_frameDecorations;
 
     if (relX >= -63.0f && relZ >= -63.0f && relX <= 63.0f && relZ <= 63.0f) {
         rotation = rotation + (rotation < 0.0 ? -8.0 : 8.0);
         rot = rotation * 16.0 / 360.0;
-        if (this->mDimension < 0) {
+        if (this->m_dimension < 0) {
             int dayTicks = level->getLevelData()->getDayTime() / 10;
             rot = ((dayTicks * dayTicks * 34187121 + dayTicks * 121) >> 15) & 15;
         }
@@ -47,7 +47,7 @@ void MapItemSavedData::addDecoration(const MapDecoration::Type* type, Level* lev
             if (Mth::abs(relX) < 320.0f && Mth::abs(relZ) < 320.0f) {
                 type = &(
                     &MapDecoration::Type::PLAYER_WHITE)[type->getIcon() + 16];  // jump to OFF_LIMITS colors
-            } else if (!this->mUnlimitedTracking) {
+            } else if (!this->m_unlimitedTracking) {
                 targetMap->erase(id);
                 return;
             }
@@ -94,7 +94,7 @@ void MapItemSavedData::addDecoration(const MapDecoration::Type* type, Level* lev
 
 std::vector<MapDecoration> MapItemSavedData::fjGetAllDecorations() {
     std::vector<MapDecoration> combined;
-    appendDecorations(&combined, &this->mPlayerDecorations);
-    appendDecorations(&combined, &this->mFrameDecorations);
+    appendDecorations(&combined, &this->m_playerDecorations);
+    appendDecorations(&combined, &this->m_frameDecorations);
     return combined;
 }

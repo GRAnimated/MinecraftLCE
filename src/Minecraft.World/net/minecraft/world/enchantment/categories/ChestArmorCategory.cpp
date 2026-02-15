@@ -6,5 +6,5 @@ const ChestArmorCategory* ChestArmorCategory::sChestArmorCategory = new ChestArm
 
 bool ChestArmorCategory::canEnchant(Item* item) const {
     ArmorItem* armorItem = dynamic_cast<ArmorItem*>(item);
-    return armorItem && armorItem->mEquipmentSlot == EquipmentSlot::CHEST;
+    return armorItem && armorItem->m_equipmentSlot == EquipmentSlot::CHEST;
 }

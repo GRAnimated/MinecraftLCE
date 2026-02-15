@@ -9,11 +9,11 @@ std::shared_ptr<Packet> UpdateProgressPacket::create() {
 }
 
 UpdateProgressPacket::UpdateProgressPacket() : Packet() {
-    mProgress = 0;
+    m_progress = 0;
 }
 
 UpdateProgressPacket::UpdateProgressPacket(int progress) : Packet() {
-    mProgress = progress;
+    m_progress = progress;
 }
 
 EPacketType UpdateProgressPacket::getPacketId() {
@@ -21,11 +21,11 @@ EPacketType UpdateProgressPacket::getPacketId() {
 }
 
 void UpdateProgressPacket::read(DataInputStream* input) {
-    mProgress = input->readByte();
+    m_progress = input->readByte();
 }
 
 void UpdateProgressPacket::write(DataOutputStream* output) {
-    output->writeByte(mProgress);
+    output->writeByte(m_progress);
 }
 
 void UpdateProgressPacket::handle(PacketListener* listener) {

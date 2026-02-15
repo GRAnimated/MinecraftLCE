@@ -11,6 +11,6 @@ public:
     bool place(Level* level, Random& random, const BlockPos& pos) override;
 
 private:
-    Block* mBlock;
-    int field_18;
+    Block* m_block;
+    int m_field18;
 };

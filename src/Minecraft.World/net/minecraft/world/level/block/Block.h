@@ -230,15 +230,15 @@ public:
     Block* setBaseItemTypeAndMaterial(int, int);
 
     bool isBlockEntity() const {
-        return mSilkTouchable;
+        return m_silkTouchable;
     }  // I think we have this one wrong... also guessed name
 
-    int getLightEmission(const BlockState* state) const { return this->mLightEmission; }
+    int getLightEmission(const BlockState* state) const { return this->m_lightEmission; }
 
     START_DECLARE_THREAD_STORAGE()
-    void* fill;
-    bool fill2;
-    arrayWithLength<const AABB*> mAABBs;
+    void* m_fill;
+    bool m_fill2;
+    arrayWithLength<const AABB*> m_aabBs;
     END_DECLARE_THREAD_STORAGE()
 
     static DirectionProperty* DEFAULT_FACING;     // completly shitty names if got better idea change it asap
@@ -249,38 +249,38 @@ protected:
     static int sDefaultDirectSignal;
 
 public:
-    int field_8;
-    bool field_C;
-    std::wstring mIconName;
-    int mId;
-    bool field_28;
-    int mLightBlock;
-    bool isBlocksLight;
-    int mLightEmission;
-    bool field_3C;
-    bool mMipmapEnabled;
-    uchar mSendBlockData;
-    bool mSemiTransparent;
-    float mDestroyTime;
-    float mExplosionResistance;
-    bool mCollectStatistics;
-    bool mTicking;
-    bool mSilkTouchable;
-    bool field_4B;
-    int mMaterialType;
-    int mBaseItemType;
-    char isInited;
-    const SoundType* mSoundType;
-    float field_60;
-    Material* mMaterial;
-    const MaterialColor* mMapColor;
-    float mFriction;
-    BlockStateDefinition* mBlockStateDefinition;
-    const BlockState* mBlockState;
-    unsigned int mDescriptionId;
-    unsigned int mUseDescriptionId;
-    TextureAtlasSprite* mTexture;
-    int field_A0;
+    int m_field8;
+    bool m_fieldC;
+    std::wstring m_iconName;
+    int m_id;
+    bool m_field28;
+    int m_lightBlock;
+    bool m_isBlocksLight;
+    int m_lightEmission;
+    bool m_field3C;
+    bool m_mipmapEnabled;
+    uchar m_sendBlockData;
+    bool m_semiTransparent;
+    float m_destroyTime;
+    float m_explosionResistance;
+    bool m_collectStatistics;
+    bool m_ticking;
+    bool m_silkTouchable;
+    bool m_field4B;
+    int m_materialType;
+    int m_baseItemType;
+    char m_isInited;
+    const SoundType* m_soundType;
+    float m_field60;
+    Material* m_material;
+    const MaterialColor* m_mapColor;
+    float m_friction;
+    BlockStateDefinition* m_blockStateDefinition;
+    const BlockState* m_blockState;
+    unsigned int m_descriptionId;
+    unsigned int m_useDescriptionId;
+    TextureAtlasSprite* m_texture;
+    int m_fieldA0;
 };
 
 ASSERT_SIZEOF(Block, 0xA8)

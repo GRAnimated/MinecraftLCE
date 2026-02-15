@@ -5,21 +5,21 @@
 #include "net/minecraft/util/Mth.h"
 #include <cmath>
 
-DoubleTag::DoubleTag() : mData(0.0f) {}
+DoubleTag::DoubleTag() : m_data(0.0f) {}
 
-DoubleTag::DoubleTag(double data) : mData(data) {}
+DoubleTag::DoubleTag(double data) : m_data(data) {}
 
 void DoubleTag::write(DataOutput* outputStream) {
-    outputStream->writeDouble(mData);
+    outputStream->writeDouble(m_data);
 }
 
 void DoubleTag::load(DataInput* inputStream, int) {
-    mData = inputStream->readDouble();
+    m_data = inputStream->readDouble();
 }
 
 std::wstring DoubleTag::toString() {
     static wchar_t buffer[32];
-    swprintf(buffer, 32, L"%f", mData);
+    swprintf(buffer, 32, L"%f", m_data);
     return buffer;
 }
 
@@ -29,33 +29,33 @@ u8 DoubleTag::getId() {
 
 bool DoubleTag::equals(Tag* other) {
     DoubleTag* otherCasted = (DoubleTag*)other;
-    return Tag::equals(other) && mData == otherCasted->mData;
+    return Tag::equals(other) && m_data == otherCasted->m_data;
 }
 
 long DoubleTag::getAsLong() {
-    return floor(mData);
+    return floor(m_data);
 }
 
 int DoubleTag::getAsInt() {
-    return Mth::floor(mData);
+    return Mth::floor(m_data);
 }
 
 short DoubleTag::getAsShort() {
-    return Mth::floor(mData);
+    return Mth::floor(m_data);
 }
 
 u8 DoubleTag::getAsByte() {
-    return Mth::floor(mData);
+    return Mth::floor(m_data);
 }
 
 double DoubleTag::getAsDouble() {
-    return mData;
+    return m_data;
 }
 
 float DoubleTag::getAsFloat() {
-    return mData;
+    return m_data;
 }
 
 Tag* DoubleTag::copy() {
-    return new DoubleTag(mData);
+    return new DoubleTag(m_data);
 }

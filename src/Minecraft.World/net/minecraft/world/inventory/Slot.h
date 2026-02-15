@@ -36,9 +36,9 @@ public:
     virtual bool mayCombine(not_null_ptr<ItemInstance> item);
     virtual void combine(not_null_ptr<ItemInstance> item);
 
-    int mSlot = 0;
-    std::shared_ptr<Container> mContainer = nullptr;
-    int mIndex = 0;
-    int mX = 0;
-    int mY = 0;
+    int m_slot = 0;
+    std::shared_ptr<Container> m_container = nullptr;
+    int m_index = 0;
+    int m_x = 0;
+    int m_y = 0;
 };

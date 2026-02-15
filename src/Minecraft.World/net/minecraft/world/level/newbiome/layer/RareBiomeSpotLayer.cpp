@@ -5,11 +5,11 @@
 #include "net/minecraft/world/level/newbiome/layer/IntCache.h"
 
 RareBiomeSpotLayer::RareBiomeSpotLayer(long long seed, std::shared_ptr<Layer> parent) : Layer(seed) {
-    mParent = parent;
+    m_parent = parent;
 }
 
 arrayWithLength<int> RareBiomeSpotLayer::getArea(int x, int y, int width, int height) {
-    arrayWithLength<int> parentArea = mParent->getArea(x - 1, y - 1, width + 2, height + 2);
+    arrayWithLength<int> parentArea = m_parent->getArea(x - 1, y - 1, width + 2, height + 2);
     PIXBeginNamedEvent(0.0, "RareBiomeSpotLayer::getArea");
     arrayWithLength<int> area = IntCache::allocate(width * height);
 
@@ -18,8 +18,8 @@ arrayWithLength<int> RareBiomeSpotLayer::getArea(int x, int y, int width, int he
             initRandom(n + x, m + y);
             int o = parentArea[n + 1 + (m + 1) * (width + 2)];
             if (nextRandom(57) == 0) {
-                if (o == Biome::PLAINS->mBiomeID) {
-                    area[n + m * width] = Biome::SUNFLOWER_PLAINS->mBiomeID;
+                if (o == Biome::PLAINS->m_biomeId) {
+                    area[n + m * width] = Biome::SUNFLOWER_PLAINS->m_biomeId;
                 } else {
                     area[n + m * width] = o;
                 }

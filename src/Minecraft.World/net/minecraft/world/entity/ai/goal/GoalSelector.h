@@ -9,8 +9,8 @@ public:
     void disableControlFlag(int);
     void enableControlFlag(int);
 
-    std::vector<GoalSelector::InternalGoal> internalGoals1;
-    std::vector<GoalSelector::InternalGoal> internalGoals2;
-    void* qword30;
-    int dword38;
+    std::vector<GoalSelector::InternalGoal> m_internalGoals1;
+    std::vector<GoalSelector::InternalGoal> m_internalGoals2;
+    void* m_qword30;
+    int m_dword38;
 };

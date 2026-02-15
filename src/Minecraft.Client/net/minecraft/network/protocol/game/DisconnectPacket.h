@@ -26,5 +26,5 @@ public:
     bool canBeInvalidated() override;
     bool isInvalidatedBy(std::shared_ptr<Packet> packet) override;
 
-    eDisconnectReason mReason;
+    eDisconnectReason m_reason;
 };

@@ -8,8 +8,8 @@ public:                                                                         
     public:                                                                                                  \
         ThreadStorage();                                                                                     \
         ~ThreadStorage();                                                                                    \
-        Class* mStorage;                                                                                     \
-        unsigned int mUnk;                                                                                   \
+        Class* m_storage;                                                                                    \
+        unsigned int m_unk;                                                                                  \
     };                                                                                                       \
     static ThreadStorage* sDefaultThreadStorage;                                                             \
     static int sThreadStorageIndex;                                                                          \
@@ -22,12 +22,12 @@ public:                                                                         
     int Class::sThreadStorageIndex;                                                                          \
                                                                                                              \
     Class::ThreadStorage::ThreadStorage() {                                                                  \
-        mStorage = new Class[PoolSize];                                                                      \
-        mUnk = 0;                                                                                            \
+        m_storage = new Class[PoolSize];                                                                     \
+        m_unk = 0;                                                                                           \
     }                                                                                                        \
                                                                                                              \
     Class::ThreadStorage::~ThreadStorage() {                                                                 \
-        delete[] mStorage;                                                                                   \
+        delete[] m_storage;                                                                                  \
     }                                                                                                        \
                                                                                                              \
     void Class::CreateNewThreadStorage() {                                                                   \
@@ -55,7 +55,7 @@ public:                                                                         
     public:                                                                                                  \
         ThreadStorage();                                                                                     \
         ~ThreadStorage();                                                                                    \
-        Class* mStorage;                                                                                     \
+        Class* m_storage;                                                                                    \
     };                                                                                                       \
     static ThreadStorage* sDefaultThreadStorage;                                                             \
     static int sThreadStorageIndex;                                                                          \
@@ -68,11 +68,11 @@ public:                                                                         
     int Class::sThreadStorageIndex;                                                                          \
                                                                                                              \
     Class::ThreadStorage::ThreadStorage() {                                                                  \
-        mStorage = new Class();                                                                              \
+        m_storage = new Class();                                                                             \
     }                                                                                                        \
                                                                                                              \
     Class::ThreadStorage::~ThreadStorage() {                                                                 \
-        delete mStorage;                                                                                     \
+        delete m_storage;                                                                                    \
     }                                                                                                        \
                                                                                                              \
     void Class::CreateNewThreadStorage() {                                                                   \

@@ -23,9 +23,9 @@ public:
     float getXRot();
 
 private:
-    double x;
-    double y;
-    double z;
-    float yRot;
-    float xRot;
+    double m_x;
+    double m_y;
+    double m_z;
+    float m_yRot;
+    float m_xRot;
 };

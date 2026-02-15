@@ -10,5 +10,5 @@ public:
 
     void loadDefaultColourTable();
 
-    char padding[0xC8];
+    char m_padding[0xC8];
 };

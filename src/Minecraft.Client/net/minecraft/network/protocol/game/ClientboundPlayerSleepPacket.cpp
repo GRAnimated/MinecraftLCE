@@ -10,15 +10,15 @@ std::shared_ptr<Packet> ClientboundPlayerSleepPacket::create() {
 }
 
 ClientboundPlayerSleepPacket::ClientboundPlayerSleepPacket() : Packet() {
-    mPlayerId = 0;
-    mPos = BlockPos();
+    m_playerId = 0;
+    m_pos = BlockPos();
 }
 
 ClientboundPlayerSleepPacket::ClientboundPlayerSleepPacket(std::shared_ptr<Player> player,
                                                            const BlockPos& pos)
     : Packet() {
-    mPlayerId = player->getId();
-    mPos = pos;
+    m_playerId = player->getId();
+    m_pos = pos;
 }
 
 EPacketType ClientboundPlayerSleepPacket::getPacketId() {
@@ -26,13 +26,13 @@ EPacketType ClientboundPlayerSleepPacket::getPacketId() {
 }
 
 void ClientboundPlayerSleepPacket::read(DataInputStream* input) {
-    mPlayerId = input->readVarInt();
-    mPos = input->readBlockPos();
+    m_playerId = input->readVarInt();
+    m_pos = input->readBlockPos();
 }
 
 void ClientboundPlayerSleepPacket::write(DataOutputStream* output) {
-    output->writeVarInt(mPlayerId);
-    output->writeBlockPos(mPos);
+    output->writeVarInt(m_playerId);
+    output->writeBlockPos(m_pos);
 }
 
 void ClientboundPlayerSleepPacket::handle(PacketListener* listener) {
@@ -40,9 +40,9 @@ void ClientboundPlayerSleepPacket::handle(PacketListener* listener) {
 }
 
 int ClientboundPlayerSleepPacket::getPlayerId() {
-    return mPlayerId;
+    return m_playerId;
 }
 
 BlockPos ClientboundPlayerSleepPacket::getPos() {
-    return mPos;
+    return m_pos;
 }

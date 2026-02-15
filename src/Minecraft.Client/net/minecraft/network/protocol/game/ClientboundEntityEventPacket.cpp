@@ -10,15 +10,15 @@ std::shared_ptr<Packet> ClientboundEntityEventPacket::create() {
 
 ClientboundEntityEventPacket::ClientboundEntityEventPacket(std::shared_ptr<Entity> entity,
                                                            unsigned char eventId, int data) {
-    mEntityId = entity->getId();
-    mEventId = eventId;
-    mData = data;
+    m_entityId = entity->getId();
+    m_eventId = eventId;
+    m_data = data;
 }
 
 ClientboundEntityEventPacket::ClientboundEntityEventPacket() {
-    mEntityId = 0;
-    mEventId = 0;
-    mData = 0;
+    m_entityId = 0;
+    m_eventId = 0;
+    m_data = 0;
 }
 
 int ClientboundEntityEventPacket::getEstimatedSize() {
@@ -30,15 +30,15 @@ EPacketType ClientboundEntityEventPacket::getPacketId() {
 }
 
 void ClientboundEntityEventPacket::read(DataInputStream* input) {
-    mEntityId = input->readInt();
-    mEventId = input->readByte();
-    mData = input->readInt();
+    m_entityId = input->readInt();
+    m_eventId = input->readByte();
+    m_data = input->readInt();
 }
 
 void ClientboundEntityEventPacket::write(DataOutputStream* output) {
-    output->writeInt(mEntityId);
-    output->writeByte(mEventId);
-    output->writeInt(mData);
+    output->writeInt(m_entityId);
+    output->writeByte(m_eventId);
+    output->writeInt(m_data);
 }
 
 void ClientboundEntityEventPacket::handle(PacketListener* listener) {
@@ -46,13 +46,13 @@ void ClientboundEntityEventPacket::handle(PacketListener* listener) {
 }
 
 int ClientboundEntityEventPacket::getEntityId() {
-    return mEntityId;
+    return m_entityId;
 }
 
 unsigned char ClientboundEntityEventPacket::getEventId() {
-    return mEventId;
+    return m_eventId;
 }
 
 int ClientboundEntityEventPacket::getData() {
-    return mData;
+    return m_data;
 }

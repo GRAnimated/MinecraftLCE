@@ -15,7 +15,7 @@ std::shared_ptr<Layer> ZoomLayer::zoom(long long seed, std::shared_ptr<Layer> la
 }
 
 ZoomLayer::ZoomLayer(long long seed, std::shared_ptr<Layer> parent) : Layer(seed) {
-    mParent = parent;
+    m_parent = parent;
 }
 
 // NON_MATCHING | Score: 995 (Lower is better)
@@ -27,7 +27,7 @@ arrayWithLength<int> ZoomLayer::getArea(int x, int y, int width, int height) {
     int n = y >> 1;
     int o = (width >> 1) + 2;
     int p = (height >> 1) + 2;
-    arrayWithLength<int> parentArea = mParent->getArea(m, n, o, p);
+    arrayWithLength<int> parentArea = m_parent->getArea(m, n, o, p);
     PIXBeginNamedEvent(0.0, "ZoomLayer::getArea");
     int q = (o - 1) << 1;
     int r = (p - 1) << 1;

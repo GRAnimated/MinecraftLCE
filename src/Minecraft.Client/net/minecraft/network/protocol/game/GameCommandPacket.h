@@ -12,7 +12,7 @@ public:
     GameCommandPacket();
     GameCommandPacket(EGameCommand, arrayWithLength<uchar>);
 
-    EGameCommand mCommand;
-    int mArgsCount;
-    arrayWithLength<uchar> mCommandArguments;
+    EGameCommand m_command;
+    int m_argsCount;
+    arrayWithLength<uchar> m_commandArguments;
 };

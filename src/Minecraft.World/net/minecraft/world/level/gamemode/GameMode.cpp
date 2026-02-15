@@ -4,14 +4,14 @@
 #include "net/minecraft/client/Minecraft.h"
 
 GameMode::GameMode() {
-    mGameType = nullptr;
-    mMinecraft = Minecraft::GetInstance();
+    m_gameType = nullptr;
+    m_minecraft = Minecraft::GetInstance();
 }
 
 GameMode::~GameMode() {}
 
 bool GameMode::CanRecordStatsAndAchievements() {
-    return mGameType != GameType::CREATIVE && !isSpectator();
+    return m_gameType != GameType::CREATIVE && !isSpectator();
 }
 
 void GameMode::RecordDamage(std::shared_ptr<Entity>, CombatEntry*, std::shared_ptr<ClientboundChatPacket>) {}
@@ -73,5 +73,5 @@ void GameMode::RecordLanding(const BlockPos&) {}
 void GameMode::OnMouseDown() {}
 
 bool GameMode::isSpectator() {
-    return mGameType == GameType::SPECTATOR;
+    return m_gameType == GameType::SPECTATOR;
 }

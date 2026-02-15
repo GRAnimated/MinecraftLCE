@@ -12,6 +12,6 @@ public:
     FJ_FuiNode* getFocus();
     void removeFocus(FJ_FuiNode* node);
 
-    FJ_FuiNode* mFocusedNode;
-    void* mIdk;
+    FJ_FuiNode* m_focusedNode;
+    void* m_idk;
 };

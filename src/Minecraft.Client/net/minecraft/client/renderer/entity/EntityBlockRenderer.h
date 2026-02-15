@@ -4,5 +4,5 @@ class EntityBlockRenderer {
 public:
     EntityBlockRenderer();
 
-    unsigned char padding[0x70];
+    unsigned char m_padding[0x70];
 };

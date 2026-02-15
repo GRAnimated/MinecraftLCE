@@ -34,8 +34,8 @@ public:
     Vec3* getLocation();
 
 private:
-    int mTarget;
-    eAction mAction;
-    Vec3* mLocation;
-    InteractionHand::EInteractionHand mHand;
+    int m_target;
+    eAction m_action;
+    Vec3* m_location;
+    InteractionHand::EInteractionHand m_hand;
 };

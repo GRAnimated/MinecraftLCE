@@ -25,7 +25,7 @@
 #include "net/minecraft/world/level/storage/LevelData.h"
 
 Layer::Layer(long long seed) {
-    this->mParent = nullptr;
+    this->m_parent = nullptr;
 
     long long n = seed;
     for (int i = 0; i < 3; i++) {
@@ -33,8 +33,8 @@ Layer::Layer(long long seed) {
         n += seed;
     }
 
-    this->mMixedSeed = 0;
-    this->mSeed = n;
+    this->m_mixedSeed = 0;
+    this->m_seed = n;
 }
 
 Layer::~Layer() {}
@@ -88,8 +88,8 @@ Layer::getDefaultLayers(long long seed, LevelType* levelType, SuperflatConfig* s
             CustomizableSourceSettings::Builder* builder
                 = CustomizableSourceSettings::Builder::fromString(superflatConfig);
             settings = builder->build();
-            biomeScale = settings->biomeSize;
-            riverScale = settings->riverSize;
+            biomeScale = settings->m_biomeSize;
+            riverScale = settings->m_riverSize;
             if (builder != nullptr) {
                 delete builder;
             }
@@ -161,39 +161,39 @@ Layer::getDefaultLayers(long long seed, LevelType* levelType, SuperflatConfig* s
 }
 
 void Layer::init(long long l) {
-    mMixedSeed = l;
-    if (mParent != nullptr) {
-        mParent->init(l);
+    m_mixedSeed = l;
+    if (m_parent != nullptr) {
+        m_parent->init(l);
     }
 
-    mMixedSeed *= mMixedSeed * 6364136223846793005L + 1442695040888963407L;
-    mMixedSeed += mSeed;
-    mMixedSeed *= mMixedSeed * 6364136223846793005L + 1442695040888963407L;
-    mMixedSeed += mSeed;
-    mMixedSeed *= mMixedSeed * 6364136223846793005L + 1442695040888963407L;
-    mMixedSeed += mSeed;
+    m_mixedSeed *= m_mixedSeed * 6364136223846793005L + 1442695040888963407L;
+    m_mixedSeed += m_seed;
+    m_mixedSeed *= m_mixedSeed * 6364136223846793005L + 1442695040888963407L;
+    m_mixedSeed += m_seed;
+    m_mixedSeed *= m_mixedSeed * 6364136223846793005L + 1442695040888963407L;
+    m_mixedSeed += m_seed;
 }
 
 void Layer::initRandom(long long l, long long m) {
-    mRandom = mMixedSeed;
-    mRandom *= mRandom * 6364136223846793005L + 1442695040888963407L;
-    mRandom += l;
-    mRandom *= mRandom * 6364136223846793005L + 1442695040888963407L;
-    mRandom += m;
-    mRandom *= mRandom * 6364136223846793005L + 1442695040888963407L;
-    mRandom += l;
-    mRandom *= mRandom * 6364136223846793005L + 1442695040888963407L;
-    mRandom += m;
+    m_random = m_mixedSeed;
+    m_random *= m_random * 6364136223846793005L + 1442695040888963407L;
+    m_random += l;
+    m_random *= m_random * 6364136223846793005L + 1442695040888963407L;
+    m_random += m;
+    m_random *= m_random * 6364136223846793005L + 1442695040888963407L;
+    m_random += l;
+    m_random *= m_random * 6364136223846793005L + 1442695040888963407L;
+    m_random += m;
 }
 
 int Layer::nextRandom(int i) {
-    int j = (int)((mRandom >> 24) % i);
+    int j = (int)((m_random >> 24) % i);
     if (j < 0) {
         j += i;
     }
 
-    mRandom *= mRandom * 6364136223846793005L + 1442695040888963407L;
-    mRandom += mMixedSeed;
+    m_random *= m_random * 6364136223846793005L + 1442695040888963407L;
+    m_random += m_mixedSeed;
     return j;
 }
 
@@ -216,13 +216,13 @@ bool Layer::isSame(int biomeIdA, int biomeIdB) {
 }
 
 bool Layer::isOcean(int biomeId) {
-    if (Biome::OCEAN->mBiomeID == biomeId) {
+    if (Biome::OCEAN->m_biomeId == biomeId) {
         return true;
-    } else if (Biome::DEEP_OCEAN->mBiomeID == biomeId) {
+    } else if (Biome::DEEP_OCEAN->m_biomeId == biomeId) {
         return true;
     }
 
-    return Biome::FROZEN_OCEAN->mBiomeID == biomeId;
+    return Biome::FROZEN_OCEAN->m_biomeId == biomeId;
 }
 
 int Layer::random(int i, int j, int k, int l) {

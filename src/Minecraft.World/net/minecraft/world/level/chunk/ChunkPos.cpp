@@ -7,26 +7,26 @@ long long ChunkPos::asLong(int x, int z) {
 }
 
 bool ChunkPos::eq_test(const ChunkPos& pos0, const ChunkPos& pos1) {
-    return pos0.mX == pos1.mX && pos0.mZ == pos1.mZ;
+    return pos0.m_x == pos1.m_x && pos0.m_z == pos1.m_z;
 }
 
 ChunkPos::ChunkPos(int x, int z) {
-    mX = x;
-    mZ = z;
+    m_x = x;
+    m_z = z;
 }
 
 ChunkPos::ChunkPos(const BlockPos& blockPos) {
-    mX = blockPos.getX() >> 4;
-    mZ = blockPos.getZ() >> 4;
+    m_x = blockPos.getX() >> 4;
+    m_z = blockPos.getZ() >> 4;
 }
 
 long long ChunkPos::toLong() const {
-    return asLong(mX, mZ);
+    return asLong(m_x, m_z);
 }
 
 double ChunkPos::distanceToSqr(double x, double z) {
-    auto blockX = (double)(mX * 16 + 8);
-    auto blockZ = (double)(mZ * 16 + 8);
+    auto blockX = (double)(m_x * 16 + 8);
+    auto blockZ = (double)(m_z * 16 + 8);
 
     double newX = blockX - x;
     double newZ = blockZ - z;
@@ -35,11 +35,11 @@ double ChunkPos::distanceToSqr(double x, double z) {
 }
 
 int ChunkPos::getMiddleBlockX() {
-    return (mX << 4) + 8;
+    return (m_x << 4) + 8;
 }
 
 int ChunkPos::getMiddleBlockZ() {
-    return (mZ << 4) + 8;
+    return (m_z << 4) + 8;
 }
 
 BlockPos ChunkPos::getMiddleBlockPosition(int y) {
@@ -50,21 +50,21 @@ BlockPos ChunkPos::getMiddleBlockPosition(int y) {
 }
 
 int ChunkPos::getMinBlockX() const {
-    return mX << 4;
+    return m_x << 4;
 }
 
 int ChunkPos::getMinBlockZ() const {
-    return mZ << 4;
+    return m_z << 4;
 }
 
 int ChunkPos::getMaxBlockX() const {
-    return (mX << 4) + 15;
+    return (m_x << 4) + 15;
 }
 
 int ChunkPos::getMaxBlockZ() const {
-    return (mZ << 4) + 15;
+    return (m_z << 4) + 15;
 }
 
 BlockPos ChunkPos::getWorldPosition() const {
-    return {mX << 4, 0, mZ << 4};
+    return {m_x << 4, 0, m_z << 4};
 }

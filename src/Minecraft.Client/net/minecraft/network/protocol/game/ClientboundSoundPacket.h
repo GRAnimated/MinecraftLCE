@@ -22,5 +22,5 @@ public:
     void handle(PacketListener* listener) override;
     int getEstimatedSize() override;
 
-    void* size[6];
+    void* m_size[6];
 };

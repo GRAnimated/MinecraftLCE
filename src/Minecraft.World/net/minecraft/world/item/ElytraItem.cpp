@@ -16,7 +16,7 @@ DispenseItemBehavior* elytraDispenseBehavior
     = nullptr;  // TODO: replace that with correct dispense behavior later
 
 ElytraItem::ElytraItem() {
-    this->mMaxStackSize = 1;
+    this->m_maxStackSize = 1;
     this->setMaxDamage(432);
 
     this->addProperty(ResourceLocation(L"broken"), new ElytraItem_ItemPropertyFunction());
@@ -29,7 +29,7 @@ bool ElytraItem::isFlyEnabled(not_null_ptr<ItemInstance> item) {
 }
 
 unsigned int ElytraItem::GetUseTooltip(const ItemToolTipDataHolder& data) {
-    if (data.idk == 2) {
+    if (data.m_idk == 2) {
         return 0xFFFFFFFF;
     } else {
         return StringIDs::Equip;
@@ -67,21 +67,21 @@ bool ElytraItem::isValidRepairItem(not_null_ptr<ItemInstance> source, not_null_p
 void ElytraItem::registerIcons(IconRegister* iconRegister) {
     Item::registerIcons(iconRegister);
 
-    this->mBrokenElytraIcon = iconRegister->registerIcon(L"broken_elytra");
+    this->m_brokenElytraIcon = iconRegister->registerIcon(L"broken_elytra");
 }
 
 TextureAtlasSprite* ElytraItem::getLayerIcon(int usage, int) {
     if (this->getMaxDamage() - 1 > usage)
-        return this->mDefaultIcon;
+        return this->m_defaultIcon;
     else
-        return this->mBrokenElytraIcon;
+        return this->m_brokenElytraIcon;
 }
 
 TextureAtlasSprite* ElytraItem::getIcon(not_null_ptr<ItemInstance> item) {
     if (this->isFlyEnabled(item))
-        return this->mDefaultIcon;
+        return this->m_defaultIcon;
     else
-        return this->mBrokenElytraIcon;
+        return this->m_brokenElytraIcon;
 }
 
 int ElytraItem::GetArmorType() {

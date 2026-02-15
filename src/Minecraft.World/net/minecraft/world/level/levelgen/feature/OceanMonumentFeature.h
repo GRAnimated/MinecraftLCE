@@ -15,7 +15,7 @@ public:
 
     static void staticCtor();
 
-    char filler[0x38];
+    char m_filler[0x38];
 };
 
 ASSERT_SIZEOF(OceanMonumentFeature, 0xA0)

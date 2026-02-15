@@ -11,11 +11,11 @@ public:
     static Rotations* copy(const Rotations* rotations) {
         if (!rotations)
             return nullptr;
-        return new Rotations(rotations->x, rotations->y, rotations->z);
+        return new Rotations(rotations->m_x, rotations->m_y, rotations->m_z);
     }
 
 private:
-    float x;
-    float y;
-    float z;
+    float m_x;
+    float m_y;
+    float m_z;
 };

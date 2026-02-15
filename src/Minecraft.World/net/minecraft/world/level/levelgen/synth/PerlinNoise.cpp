@@ -10,21 +10,21 @@ PerlinNoise::PerlinNoise(Random* random, int maxOctaves) {
 }
 
 PerlinNoise::~PerlinNoise() {
-    for (int i = 0; i < mMaxOctaves; i++) {
-        delete mNoiseLevels[i];
+    for (int i = 0; i < m_maxOctaves; i++) {
+        delete m_noiseLevels[i];
     }
-    delete[] mNoiseLevels;
+    delete[] m_noiseLevels;
 }
 
 double PerlinNoise::getValue(double d1, double d2) {
-    if (mMaxOctaves < 1)
+    if (m_maxOctaves < 1)
         return 0.0;
 
     double value = 0.0;
     double currentSize = 1.0;
 
-    for (int i = 0; i < mMaxOctaves; i++) {
-        ImprovedNoise* noise = mNoiseLevels[i];
+    for (int i = 0; i < m_maxOctaves; i++) {
+        ImprovedNoise* noise = m_noiseLevels[i];
         value += noise->getValue(d1 * currentSize, d2 * currentSize) / currentSize;
         currentSize *= 0.5;
     }
@@ -35,12 +35,12 @@ double PerlinNoise::getValue(double d1, double d2) {
 void PerlinNoise::init(Random* random, int maxOctaves) {
     MemSect(2);
 
-    mMaxOctaves = maxOctaves;
-    mNoiseLevels = new ImprovedNoise*[maxOctaves];
+    m_maxOctaves = maxOctaves;
+    m_noiseLevels = new ImprovedNoise*[maxOctaves];
 
     if (maxOctaves >= 1) {
         for (int i = 0; i < maxOctaves; i++) {
-            mNoiseLevels[i] = new ImprovedNoise(random);
+            m_noiseLevels[i] = new ImprovedNoise(random);
         }
     }
 
@@ -50,8 +50,8 @@ void PerlinNoise::init(Random* random, int maxOctaves) {
 arrayWithLength<double> PerlinNoise::getRegion(arrayWithLength<double> noise, int posX, int posY, int posZ,
                                                int width, int depth, int length, double scaleX, double scaleY,
                                                double scaleZ) {
-    if (noise.data) {
-        for (unsigned int i = 0; i < noise.length; i++) {
+    if (noise.m_data) {
+        for (unsigned int i = 0; i < noise.m_length; i++) {
             noise[i] = 0;
         }
     } else {
@@ -60,7 +60,7 @@ arrayWithLength<double> PerlinNoise::getRegion(arrayWithLength<double> noise, in
 
     double currentSize = 1.0;
 
-    for (int i = 0; i < mMaxOctaves; i++) {
+    for (int i = 0; i < m_maxOctaves; i++) {
         double scaledX = posX * currentSize * scaleX;
         double scaledY = posY * currentSize * scaleY;
         double scaledZ = posZ * currentSize * scaleZ;
@@ -75,8 +75,8 @@ arrayWithLength<double> PerlinNoise::getRegion(arrayWithLength<double> noise, in
         scaledX += floorX;
         scaledZ += floorZ;
 
-        mNoiseLevels[i]->add(noise, scaledX, scaledY, scaledZ, width, depth, length, currentSize * scaleX,
-                             currentSize * scaleY, currentSize * scaleZ, currentSize);
+        m_noiseLevels[i]->add(noise, scaledX, scaledY, scaledZ, width, depth, length, currentSize * scaleX,
+                              currentSize * scaleY, currentSize * scaleZ, currentSize);
 
         currentSize *= 0.5;
     }

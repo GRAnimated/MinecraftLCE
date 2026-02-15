@@ -62,25 +62,25 @@ public:
         int GetCentreZChunk();
         Biome* GetBiomeAt(float x, float z);
 
-        Random* mRandom;
-        long long mSeed;
-        int mXZSize;
-        int mImageWidth;
-        int field_18;
-        int field_1C;
-        int mBiomeSectionWidth;
-        int field_24;
-        arrayWithLength<Biome*> mBiomes;
-        unsigned char field_38;
-        eBiomeGenerationScale mGenScale;
-        int field_40;
-        int mBiomeScale;
-        int mCentreXChunk;
-        int mCentreZChunk;
-        unsigned char mZoomLevel;
-        int mZoomX;
-        int mZoomZ;
-        nn::os::MutexType mMutexType;
+        Random* m_random;
+        long long m_seed;
+        int m_xzSize;
+        int m_imageWidth;
+        int m_field18;
+        int m_field1C;
+        int m_biomeSectionWidth;
+        int m_field24;
+        arrayWithLength<Biome*> m_biomes;
+        unsigned char m_field38;
+        eBiomeGenerationScale m_genScale;
+        int m_field40;
+        int m_biomeScale;
+        int m_centreXChunk;
+        int m_centreZChunk;
+        unsigned char m_zoomLevel;
+        int m_zoomX;
+        int m_zoomZ;
+        nn::os::MutexType m_mutexType;
     };
 
     class CouldSpawnCache {
@@ -90,9 +90,9 @@ public:
 
         bool couldSpawn(int x, int z);
 
-        std::unordered_map<ChunkPos, bool, ChunkPosKeyHash, ChunkPosKeyEq> mChunkPositions;
-        BiomeSource* mBiomeSource;
-        const FjFeatureBiomeRequirements* mFeatureBiomeRequirements;
+        std::unordered_map<ChunkPos, bool, ChunkPosKeyHash, ChunkPosKeyEq> m_chunkPositions;
+        BiomeSource* m_biomeSource;
+        const FjFeatureBiomeRequirements* m_featureBiomeRequirements;
     };
 
     static long long findSeed(LevelType* levelType);
@@ -126,10 +126,10 @@ public:
     virtual bool isFixedBiome();
     virtual Biome* getFixedBiome();
 
-    std::shared_ptr<Layer> mNoiseBiomeLayer;
-    std::shared_ptr<Layer> mBlockBiomeLayer;
-    BiomeCache* mBiomeCache;
-    std::vector<Biome*> mPossibleBiomes;
-    nn::os::MutexType mMutexType;
-    std::vector<CouldSpawnCache> mCouldSpawnCaches;
+    std::shared_ptr<Layer> m_noiseBiomeLayer;
+    std::shared_ptr<Layer> m_blockBiomeLayer;
+    BiomeCache* m_biomeCache;
+    std::vector<Biome*> m_possibleBiomes;
+    nn::os::MutexType m_mutexType;
+    std::vector<CouldSpawnCache> m_couldSpawnCaches;
 };

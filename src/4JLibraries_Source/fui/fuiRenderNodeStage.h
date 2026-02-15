@@ -8,5 +8,5 @@ struct fuiRenderNodeStage : public fuiRenderNode {
     float getStageWidth();
     void addChild(fuiRenderNode* node);
 
-    fuiRenderNode* child;
+    fuiRenderNode* m_child;
 };

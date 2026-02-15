@@ -24,11 +24,11 @@ public:
     virtual void onLeashDistance(float);
     virtual double followLeashSpeed();
 
-    Path* mPath;
-    std::shared_ptr<Entity> someEnt;
-    char byte790;
-    int dword794;
-    BlockPos mRestrictCenter;
-    float mRestrictRadius;
-    float mPathfindingMalus;
+    Path* m_path;
+    std::shared_ptr<Entity> m_someEnt;
+    char m_byte790;
+    int m_dword794;
+    BlockPos m_restrictCenter;
+    float m_restrictRadius;
+    float m_pathfindingMalus;
 };

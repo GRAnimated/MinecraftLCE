@@ -10,9 +10,9 @@ public:
     int getWidth();
     int getHeight();
 
-    int mWidth;
-    int mHeight;
-    double mScaledWidth;
-    double mScaledHeight;
-    int mScale;
+    int m_width;
+    int m_height;
+    double m_scaledWidth;
+    double m_scaledHeight;
+    int m_scale;
 };

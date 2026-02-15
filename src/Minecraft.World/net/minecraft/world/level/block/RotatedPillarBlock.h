@@ -29,5 +29,5 @@ public:
 
     static inline EnumProperty<Direction::Axis*>* AXIS;
 
-    TextureAtlasSprite* mTopTexture;
+    TextureAtlasSprite* m_topTexture;
 };

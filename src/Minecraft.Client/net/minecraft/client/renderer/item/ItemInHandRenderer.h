@@ -31,8 +31,8 @@ public:
     void applyEatTransform(float, const HumanoidArm*, not_null_ptr<ItemInstance>);
     void applyItemArmAttackTransform(const HumanoidArm*, float);
 
-    Minecraft* mMinecraft;
-    not_null_ptr<ItemInstance> mMainHandItem;
-    not_null_ptr<ItemInstance> mOffHandItem;
-    char filler[40];
+    Minecraft* m_minecraft;
+    not_null_ptr<ItemInstance> m_mainHandItem;
+    not_null_ptr<ItemInstance> m_offHandItem;
+    char m_filler[40];
 };

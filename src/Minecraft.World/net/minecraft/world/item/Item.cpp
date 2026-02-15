@@ -27,19 +27,19 @@ const Item::Tier* Item::Tier::DIAMOND = new Item::Tier(3, 1561, 8.0, 3.0, 10, 3)
 const Item::Tier* Item::Tier::GOLD = new Item::Tier(0, 32, 12.0, 0.0, 22, 4);
 
 Item::Item() {
-    this->mMaxStackSize = 64;
-    this->mMaxDamage = 0;
-    this->mHandEquipped = false;
-    this->mStackedByData = 0;
-    this->mCraftingRemainingItem = nullptr;
-    this->wstring_1 = L"";
-    this->mBaseItemType = 0;
-    this->mMaterial = 0;
-    this->mIconName = L"";
-    this->mDefaultIcon = nullptr;
-    this->byte78 = 0;
+    this->m_maxStackSize = 64;
+    this->m_maxDamage = 0;
+    this->m_handEquipped = false;
+    this->m_stackedByData = 0;
+    this->m_craftingRemainingItem = nullptr;
+    this->m_wstring1 = L"";
+    this->m_baseItemType = 0;
+    this->m_material = 0;
+    this->m_iconName = L"";
+    this->m_defaultIcon = nullptr;
+    this->m_byte78 = 0;
 
-    this->mSimpleRegistry = new SimpleRegistry<ResourceLocation, const ItemPropertyFunction*>();
+    this->m_simpleRegistry = new SimpleRegistry<ResourceLocation, const ItemPropertyFunction*>();
 
     this->addProperty(ResourceLocation(L"lefthanded"), lefthandedFunction);
 
@@ -56,11 +56,11 @@ void Item::registerBlock(Block* block, Item* item) {
 }
 
 bool Item::canBeDepleted() {
-    return this->mMaxDamage > 0 && (!this->mStackedByData || this->mMaxStackSize == 1);
+    return this->m_maxDamage > 0 && (!this->m_stackedByData || this->m_maxStackSize == 1);
 }
 
 void Item::setIconName(const std::wstring& iconName) {
-    this->mIconName = iconName;
+    this->m_iconName = iconName;
 }
 
 not_null_ptr<ItemInstance> Item::getDefaultInstance() {
@@ -99,7 +99,7 @@ not_null_ptr<ItemInstance> Item::finishUsingItem(not_null_ptr<ItemInstance> item
 }
 
 int Item::getMaxStackSize() {
-    return this->mMaxStackSize;
+    return this->m_maxStackSize;
 }
 
 int Item::getLevelDataForAuxValue(int) {
@@ -130,7 +130,7 @@ bool Item::interactEnemy(not_null_ptr<ItemInstance>, std::shared_ptr<Player>, st
 }
 
 bool Item::isHandEquipped() {
-    return this->mHandEquipped;
+    return this->m_handEquipped;
 }
 
 bool Item::isMirroredArt() {
@@ -138,19 +138,19 @@ bool Item::isMirroredArt() {
 }
 
 unsigned int Item::getDescriptionId(int) {
-    return this->mDescriptionId;
+    return this->m_descriptionId;
 }
 
 unsigned int Item::getDescriptionId(not_null_ptr<ItemInstance>) {
-    return this->mDescriptionId;
+    return this->m_descriptionId;
 }
 
 unsigned int Item::getUseDescriptionId() {
-    return this->mUseDescriptionId;
+    return this->m_useDescriptionId;
 }
 
 unsigned int Item::getUseDescriptionId(not_null_ptr<ItemInstance>) {
-    return this->mUseDescriptionId;
+    return this->m_useDescriptionId;
 }
 
 bool Item::shouldOverrideMultiplayerNBT() {
@@ -207,7 +207,7 @@ Item::getDefaultAttributeModifiers(const EquipmentSlot*) {
 }
 
 void Item::registerIcons(IconRegister* iconRegister) {
-    this->mDefaultIcon = iconRegister->registerIcon(this->mIconName);
+    this->m_defaultIcon = iconRegister->registerIcon(this->m_iconName);
 }
 
 bool Item::hasMultipleSpriteLayers() {
@@ -223,7 +223,7 @@ int Item::getIconType() {
 }
 
 TextureAtlasSprite* Item::getIcon(int) {
-    return this->mDefaultIcon;
+    return this->m_defaultIcon;
 }
 
 TextureAtlasSprite* Item::getIcon(not_null_ptr<ItemInstance> item) {

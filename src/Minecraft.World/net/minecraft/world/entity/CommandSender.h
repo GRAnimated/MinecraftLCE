@@ -14,7 +14,7 @@ public:
 
     enum CommandStatType {};
 
-    void* padding[2];
+    void* m_padding[2];
 };
 
 class CommandSender {

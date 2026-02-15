@@ -11,6 +11,6 @@ public:
     virtual int getId(T object);
     virtual T byId(int id);
 
-    std::unordered_map<T, int> map;
-    std::vector<T> vector;
+    std::unordered_map<T, int> m_ap;
+    std::vector<T> m_vector;
 };

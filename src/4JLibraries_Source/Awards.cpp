@@ -7,7 +7,7 @@ void RegisterAwardsWithProfileManager() {
 
     for (int i = 0; i < 87; ++i) {
         const AwardInfo* info = UIScene_AchievementsMenu::GetInfo(Awards::sAchievementSlots[i]);
-        instance->RegisterAward(info->mIdx, info->mIdx2, _0, info->mName, info->mDesc);
+        instance->RegisterAward(info->m_idx, info->m_idx2, _0, info->m_name, info->m_desc);
     }
 
     instance->RichPresenceInit(-1, -1);

@@ -15,34 +15,34 @@ EPacketType ClientboundPlayerCombatPacket::getPacketId() {
 }
 
 void ClientboundPlayerCombatPacket::read(DataInputStream* input) {
-    event = input->readInt();
+    m_event = input->readInt();
 
-    if (event == 1) {
-        duration = input->readVarInt();
-        killerId = input->readInt();
+    if (m_event == 1) {
+        m_duration = input->readVarInt();
+        m_killerId = input->readInt();
         return;
     }
 
-    if (event == 2) {
-        playerId = input->readVarInt();
-        killerId = input->readInt();
-        message = readUtf(input, 0x7FFF);
+    if (m_event == 2) {
+        m_playerId = input->readVarInt();
+        m_killerId = input->readInt();
+        m_essage = readUtf(input, 0x7FFF);
     }
 }
 
 void ClientboundPlayerCombatPacket::write(DataOutputStream* output) {
-    output->writeInt(event);
+    output->writeInt(m_event);
 
-    if (event == 1) {
-        output->writeVarInt(duration);
-        output->writeInt(killerId);
+    if (m_event == 1) {
+        output->writeVarInt(m_duration);
+        output->writeInt(m_killerId);
         return;
     }
 
-    if (event == 2) {
-        output->writeVarInt(playerId);
-        output->writeInt(killerId);
-        writeUtf(message, output);
+    if (m_event == 2) {
+        output->writeVarInt(m_playerId);
+        output->writeInt(m_killerId);
+        writeUtf(m_essage, output);
     }
 }
 

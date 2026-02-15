@@ -59,17 +59,17 @@ public:
     CompoundTag* saveMetadata(CompoundTag*);
 
     void setRenderRemoveStage(unsigned char);
-    bool shouldRemoveForRender() const { return mRenderFlag == 2; }
+    bool shouldRemoveForRender() const { return m_renderFlag == 2; }
 
     static void staticCtor();
 
-    bool mIsRemoved;
-    bool field_19;
-    u8 mRenderFlag;
-    Level* mLevel;
-    BlockPos mPos;
-    int mData;
-    Block* mBlock;
+    bool m_isRemoved;
+    bool m_field19;
+    u8 m_renderFlag;
+    Level* m_level;
+    BlockPos m_pos;
+    int m_data;
+    Block* m_block;
 };
 
 ASSERT_SIZEOF(BlockEntity, 0x40)

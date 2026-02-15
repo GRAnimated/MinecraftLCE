@@ -15,5 +15,5 @@ public:
     void close() override;
     void flush() override;
 
-    void* field_8;
+    void* m_field8;
 };

@@ -13,7 +13,7 @@ public:
 
         void addBounds(BufferBuilder::Bounds&);
         void addVert(float, float, float);
-        float bounds[6];
+        float m_bounds[6];
     };
 
     BufferBuilder(int);
@@ -54,57 +54,57 @@ public:
                        float, float, float, float, float, float, float, float, float, float, float, float,
                        float, float, float, float, int);
 
-    arrayWithLength<int>* mVertexData;
-    arrayWithLength<uchar>* field_8;
-    int mVertexCount;
-    float mTexU;
-    float mTexV;
+    arrayWithLength<int>* m_vertexData;
+    arrayWithLength<uchar>* m_field8;
+    int m_vertexCount;
+    float m_texU;
+    float m_texV;
     union {  // yea i know, i also hate this
-        int dword_1c;
+        int m_dword1c;
         struct {
-            short short_1c;
-            short short_1e;
+            short m_short1c;
+            short m_short1e;
         };
     };
-    int mPackedColor;
-    bool mHasColor;
-    bool mHasTex;
-    char byte_26;
-    bool mHasNormal;
-    uint32_t mBufferIndex;
-    bool mUseCompactVerts;
-    bool mUseProjectedTex;
-    char gap_2E[2];
-    int dword_30;
-    C4JRender::eVertexType mVertType;  // i suspect this is used as size in bytes of a vertex, beacuse it's
-                                       // used often with useCompactVerts
-    bool mHasBoneIndex;
-    char byte_39;
-    char gap_3A[2];
-    uint32_t dword_3c;
-    bool mNoColor;
-    char gap_41[3];
-    C4JRender::ePrimitiveType mPrimitiveMode;
-    float mXo;  // i'm not sure but i assume those are offsets !?
-    float mYo;
-    float mZo;
-    float dword_54;
-    float dword_58;
-    float dword_5c;
-    uint32_t mPackedNormal;
-    int mBoneIndex;
-    int mBucket;
-    bool mHasBegun;  // meh name
-    bool mIsMipmapEnabled;
-    char byte_6e;
-    char gap_6F;
-    void* field_70;
-    int field_78;
-    int field_7c;
-    int mBufferSize;
-    void* gap[13];
-    int unk;
-    Bounds mBounds;
+    int m_packedColor;
+    bool m_hasColor;
+    bool m_hasTex;
+    char m_byte26;
+    bool m_hasNormal;
+    uint32_t m_bufferIndex;
+    bool m_useCompactVerts;
+    bool m_useProjectedTex;
+    char m_gap2E[2];
+    int m_dword30;
+    C4JRender::eVertexType m_vertType;  // i suspect this is used as size in bytes of a vertex, beacuse it's
+                                        // used often with useCompactVerts
+    bool m_hasBoneIndex;
+    char m_byte39;
+    char m_gap3A[2];
+    uint32_t m_dword3c;
+    bool m_noColor;
+    char m_gap41[3];
+    C4JRender::ePrimitiveType m_primitiveMode;
+    float m_xo;  // i'm not sure but i assume those are offsets !?
+    float m_yo;
+    float m_zo;
+    float m_dword54;
+    float m_dword58;
+    float m_dword5c;
+    uint32_t m_packedNormal;
+    int m_boneIndex;
+    int m_bucket;
+    bool m_hasBegun;  // meh name
+    bool m_isMipmapEnabled;
+    char m_byte6e;
+    char m_gap6F;
+    void* m_field70;
+    int m_field78;
+    int m_field7c;
+    int m_bufferSize;
+    void* m_gap[13];
+    int m_unk;
+    Bounds m_bounds;
 
     static bool TRIANGLE_MODE;
     static bool VBO_MODE;

@@ -9,9 +9,9 @@ public:
 
     static void staticCtor();
 
-    const EquipmentSlot* mEquipmentSlot;
-    int mDefenseForSlot;
-    float mToughness;
-    int dword90;
-    const ArmorMaterial* mArmorMaterial;
+    const EquipmentSlot* m_equipmentSlot;
+    int m_defenseForSlot;
+    float m_toughness;
+    int m_dword90;
+    const ArmorMaterial* m_armorMaterial;
 };

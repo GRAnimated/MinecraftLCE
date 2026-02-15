@@ -18,5 +18,5 @@ public:
     int getCarriedItem();
 
 private:
-    int mCarriedItem;
+    int m_carriedItem;
 };

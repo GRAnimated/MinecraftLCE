@@ -6,7 +6,7 @@
 #include <cmath>
 
 ScreenSizeCalculator::ScreenSizeCalculator(Options* options, int scale) {
-    init(options, Minecraft::GetInstance()->mWidth, Minecraft::GetInstance()->mHeight, scale);
+    init(options, Minecraft::GetInstance()->m_width, Minecraft::GetInstance()->m_height, scale);
 }
 
 ScreenSizeCalculator::ScreenSizeCalculator(Options* options, int width, int height, int scale) {
@@ -14,14 +14,14 @@ ScreenSizeCalculator::ScreenSizeCalculator(Options* options, int width, int heig
 }
 
 void ScreenSizeCalculator::init(Options* options, int width, int height, int scale) {
-    mWidth = width;
-    mHeight = height;
+    m_width = width;
+    m_height = height;
 
     if (scale == -1) {
         scale = 1;
-        mScale = 1;
+        m_scale = 1;
 
-        int maxScreenScale = options->mGuiScale;
+        int maxScreenScale = options->m_guiScale;
         if (maxScreenScale == 0)
             maxScreenScale = 1000;
 
@@ -30,24 +30,24 @@ void ScreenSizeCalculator::init(Options* options, int width, int height, int sca
                 if (width / (scale + 1) < 320 || height / (scale + 1) < 240)
                     break;
                 ++scale;
-                mScale = scale;
+                m_scale = scale;
             }
         }
     } else {
-        mScale = scale;
+        m_scale = scale;
     }
 
-    mScaledWidth = (double)width / scale;
-    mScaledHeight = (double)height / scale;
+    m_scaledWidth = (double)width / scale;
+    m_scaledHeight = (double)height / scale;
 
-    mWidth = ceil(mScaledWidth);
-    mHeight = ceil(mScaledHeight);
+    m_width = ceil(m_scaledWidth);
+    m_height = ceil(m_scaledHeight);
 }
 
 int ScreenSizeCalculator::getWidth() {
-    return mWidth;
+    return m_width;
 }
 
 int ScreenSizeCalculator::getHeight() {
-    return mHeight;
+    return m_height;
 }

@@ -33,18 +33,18 @@ public:
     double getDamageSafeZone();
     double getDamagePerBlock();
 
-    std::vector<BorderChangeListener*> mListeners;
-    double mCenterX = 0.0;
-    double mCenterZ = 0.0;
-    double mCurrentSize = 60000000.0;
-    double mNextSize = 60000000.0;
-    long mTime1 = 0;
-    long mTime2 = 0;
-    int mWorldSize = 30000000;
-    double mDamageAmount = 0.2;
-    double mDamageSafeZone = 5.0;
-    int mWarningTime = 15;
-    int mWarningDistance = 5;
+    std::vector<BorderChangeListener*> m_listeners;
+    double m_centerX = 0.0;
+    double m_centerZ = 0.0;
+    double m_currentSize = 60000000.0;
+    double m_nextSize = 60000000.0;
+    long m_time1 = 0;
+    long m_time2 = 0;
+    int m_worldSize = 30000000;
+    double m_damageAmount = 0.2;
+    double m_damageSafeZone = 5.0;
+    int m_warningTime = 15;
+    int m_warningDistance = 5;
 };
 
 ASSERT_SIZEOF(WorldBorder, 0x70)

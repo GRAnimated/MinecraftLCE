@@ -24,9 +24,9 @@ public:
     int getType();
 
 private:
-    int id;
-    int x;
-    int y;
-    int z;
-    int type;
+    int m_id;
+    int m_x;
+    int m_y;
+    int m_z;
+    int m_type;
 };

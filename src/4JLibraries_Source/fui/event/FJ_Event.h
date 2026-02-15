@@ -8,8 +8,8 @@ class FJ_Event {
 public:
     FJ_Event(eFJEventType type, bool, bool);
 
-    void* mUnk;
-    uint32_t mEventType;
-    bool mUnk2;
-    bool mUnk3;
+    void* m_unk;
+    uint32_t m_eventType;
+    bool m_unk2;
+    bool m_unk3;
 };

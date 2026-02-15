@@ -21,8 +21,8 @@ public:
     bool isGlobalEvent();
 
 private:
-    int type;
-    int data;
-    BlockPos pos;
-    bool globalEvent;
+    int m_type;
+    int m_data;
+    BlockPos m_pos;
+    bool m_globalEvent;
 };

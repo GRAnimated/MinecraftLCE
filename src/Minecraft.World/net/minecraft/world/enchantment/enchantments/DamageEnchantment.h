@@ -15,7 +15,7 @@ public:
     bool canEnchant(const not_null_ptr<ItemInstance>&) override;
     void doPostAttack(const std::shared_ptr<LivingEntity>&, const std::shared_ptr<Entity>&, int) override;
 
-    int mDamageType;
+    int m_damageType;
 
 private:
     static constexpr int MIN_COST[3] = {1, 5, 5};

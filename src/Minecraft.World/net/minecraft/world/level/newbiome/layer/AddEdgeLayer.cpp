@@ -5,8 +5,8 @@
 
 AddEdgeLayer::AddEdgeLayer(long long seed, std::shared_ptr<Layer> parent, AddEdgeLayer::Mode mode)
     : Layer(seed) {
-    mParent = parent;
-    mMode = mode;
+    m_parent = parent;
+    m_mode = mode;
 }
 
 // NON_MATCHING
@@ -15,7 +15,7 @@ arrayWithLength<int> AddEdgeLayer::coolWarm(int x, int y, int width, int height)
     int n = y - 1;
     int o = 1 + width + 1;
     int p = 1 + height + 1;
-    arrayWithLength<int> parentArea = mParent->getArea(m, n, o, p);
+    arrayWithLength<int> parentArea = m_parent->getArea(m, n, o, p);
     PIXBeginNamedEvent(0.0, "AddEdgeLayer::getArea");
     arrayWithLength<int> area = IntCache::allocate(width * height);
 
@@ -49,7 +49,7 @@ arrayWithLength<int> AddEdgeLayer::heatIce(int x, int y, int width, int height) 
     int n = y - 1;
     int o = 1 + width + 1;
     int p = 1 + height + 1;
-    arrayWithLength<int> parentArea = mParent->getArea(m, n, o, p);
+    arrayWithLength<int> parentArea = m_parent->getArea(m, n, o, p);
     arrayWithLength<int> area = IntCache::allocate(width * height);
 
     for (int q = 0; q < height; q++) {
@@ -75,7 +75,7 @@ arrayWithLength<int> AddEdgeLayer::heatIce(int x, int y, int width, int height) 
 }
 
 arrayWithLength<int> AddEdgeLayer::introduceSpecial(int x, int y, int width, int height) {
-    arrayWithLength<int> parentArea = mParent->getArea(x, y, width, height);
+    arrayWithLength<int> parentArea = m_parent->getArea(x, y, width, height);
     arrayWithLength<int> area = IntCache::allocate(width * height);
 
     for (int m = 0; m < height; m++) {
@@ -94,7 +94,7 @@ arrayWithLength<int> AddEdgeLayer::introduceSpecial(int x, int y, int width, int
 }
 
 arrayWithLength<int> AddEdgeLayer::getArea(int i, int j, int k, int l) {
-    switch (mMode) {
+    switch (m_mode) {
     case COOL_WARM:
     default:
         return coolWarm(i, j, k, l);

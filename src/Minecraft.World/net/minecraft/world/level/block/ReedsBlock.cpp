@@ -20,7 +20,7 @@ AABB* ReedsBlock::sAABB = AABB::newPermanent(0.5f - size, 0.0f, 0.5f - size, siz
 
 ReedsBlock::ReedsBlock() : Block(Material::PLANTS) {
     Block::DerivedInit();
-    const BlockState* propertyState = mBlockStateDefinition->any()->setValue(sAgeProperty, 0);
+    const BlockState* propertyState = m_blockStateDefinition->any()->setValue(sAgeProperty, 0);
     registerDefaultState(propertyState);
     setTicking(true);
 }

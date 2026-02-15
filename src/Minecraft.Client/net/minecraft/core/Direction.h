@@ -67,9 +67,9 @@ public:
               unsigned char);
     virtual ~Direction();
 
-    int getX() const { return mX; }
-    int getY() const { return mY; }
-    int getZ() const { return mZ; }
+    int getX() const { return m_x; }
+    int getY() const { return m_y; }
+    int getZ() const { return m_z; }
 
     unsigned int get3DDataValue() const;
     int get2DDataValue() const;
@@ -81,15 +81,15 @@ public:
     const Direction* getOpposite() const;
 
 private:
-    int mDirX;
-    int mDirY;
-    int mDirZ;
-    std::wstring mName;
-    Direction::Axis* mAxis;
-    Direction::AxisDirection* mAxisDirection;
-    Vec3i* mPos;
-    unsigned char mIndex;
-    int mX;
-    int mY;
-    int mZ;
+    int m_dirX;
+    int m_dirY;
+    int m_dirZ;
+    std::wstring m_name;
+    Direction::Axis* m_axis;
+    Direction::AxisDirection* m_axisDirection;
+    Vec3i* m_pos;
+    unsigned char m_index;
+    int m_x;
+    int m_y;
+    int m_z;
 };

@@ -20,11 +20,11 @@ public:
     void setGlobalChunkFlags(int, int, int, Level*, unsigned char);
     void clearGlobalChunkFlag(int, int, int, Level*, unsigned char, unsigned char);
 
-    void* filler[32];
-    int _100;
-    void* filler2[61];
-    nn::os::MutexType mMutex;
-    void* filler3[13];
+    void* m_filler[32];
+    int m_100;
+    void* m_filler2[61];
+    nn::os::MutexType m_mutex;
+    void* m_filler3[13];
 };
 
 ASSERT_SIZEOF(LevelRenderer, 0x378)

@@ -11,6 +11,6 @@ public:
     GuiParticles(Minecraft* minecraft);
     void tick();
 
-    std::vector<GuiParticle*> mParticles;
-    Minecraft* mMinecraft;
+    std::vector<GuiParticle*> m_particles;
+    Minecraft* m_minecraft;
 };

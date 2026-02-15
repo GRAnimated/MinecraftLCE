@@ -5,15 +5,15 @@ ESavePlatform ConsoleSaveFileCommon::getSavePlatform() {
 }
 
 void ConsoleSaveFileCommon::setLocalPlatform() {
-    this->header.platform = Switch;
+    this->m_header.m_platform = Switch;
 }
 
 void ConsoleSaveFileCommon::setPlatform(ESavePlatform platform) {
-    this->header.platform = platform;
+    this->m_header.m_platform = platform;
 }
 
 ByteOrder ConsoleSaveFileCommon::getSaveEndian() {
-    return this->header.endian;
+    return this->m_header.m_endian;
 }
 
 ByteOrder ConsoleSaveFileCommon::getLocalEndian() {
@@ -21,5 +21,5 @@ ByteOrder ConsoleSaveFileCommon::getLocalEndian() {
 }
 
 void ConsoleSaveFileCommon::setEndian(ByteOrder order) {
-    this->header.endian = order;
+    this->m_header.m_endian = order;
 }

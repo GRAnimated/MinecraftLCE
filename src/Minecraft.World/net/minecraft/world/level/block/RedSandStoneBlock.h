@@ -22,19 +22,19 @@ public:
         }
 
         Variant(int data, const std::wstring& name, unsigned int loc_id) {
-            this->mData = data;
-            this->mName = name;
-            this->mName_id = loc_id;
+            this->m_data = data;
+            this->m_name = name;
+            this->m_nameId = loc_id;
         }
 
-        int getData() { return this->mData; }
+        int getData() { return this->m_data; }
 
-        std::wstring toString() const override { return this->mName; }
-        std::wstring getSerializedName() const override { return this->mName; }
+        std::wstring toString() const override { return this->m_name; }
+        std::wstring getSerializedName() const override { return this->m_name; }
 
-        int mData;  // I would have named it id but they use data over and over again
-        std::wstring mName;
-        unsigned int mName_id;
+        int m_data;  // I would have named it id but they use data over and over again
+        std::wstring m_name;
+        unsigned int m_nameId;
     };
 
     RedSandStoneBlock();
@@ -56,7 +56,7 @@ public:
     TextureAtlasSprite* getTexture(const Direction*, const BlockState*) override;
     BlockStateDefinition* createBlockStateDefinition() override;
 
-    TextureAtlasSprite* mVariantsTextures[3];
-    TextureAtlasSprite* mTopTexture;
-    TextureAtlasSprite* mBottomTexture;
+    TextureAtlasSprite* m_variantsTextures[3];
+    TextureAtlasSprite* m_topTexture;
+    TextureAtlasSprite* m_bottomTexture;
 };

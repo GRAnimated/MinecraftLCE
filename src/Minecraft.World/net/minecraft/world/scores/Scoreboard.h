@@ -21,7 +21,7 @@ public:
     virtual bool GetEndZoneEntered(const StatsUID&, int);
     virtual int GetLastCheckpointSequenceID(const StatsUID&, int);
 
-    char size[0x54];
+    char m_size[0x54];
 };
 
 ASSERT_SIZEOF(Scoreboard, 0x60)

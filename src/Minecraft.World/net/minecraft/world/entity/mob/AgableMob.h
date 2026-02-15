@@ -30,9 +30,9 @@ public:
 
     void internalSetSize(float scale);
 
-    int mAge;
-    int mForcedAge;
-    int mForcedAgeTimer;
-    float mWidthRatio;
-    float mHeightRatio;
+    int m_age;
+    int m_forcedAge;
+    int m_forcedAgeTimer;
+    float m_widthRatio;
+    float m_heightRatio;
 };

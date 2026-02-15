@@ -9,87 +9,87 @@
 #include <cstddef>
 
 void BufferBuilder::Bounds::initBounds() {
-    bounds[0] = FLT_MAX;
-    bounds[1] = FLT_MAX;
-    bounds[2] = FLT_MAX;
-    bounds[3] = -FLT_MAX;
-    bounds[4] = -FLT_MAX;
-    bounds[5] = -FLT_MAX;
+    m_bounds[0] = FLT_MAX;
+    m_bounds[1] = FLT_MAX;
+    m_bounds[2] = FLT_MAX;
+    m_bounds[3] = -FLT_MAX;
+    m_bounds[4] = -FLT_MAX;
+    m_bounds[5] = -FLT_MAX;
 }
 
 void BufferBuilder::Bounds::addBounds(BufferBuilder::Bounds& other) {
-    if (other.bounds[0] < bounds[0])
-        bounds[0] = other.bounds[0];
-    if (other.bounds[1] < bounds[1])
-        bounds[1] = other.bounds[1];
-    if (other.bounds[2] < bounds[2])
-        bounds[2] = other.bounds[2];
-    if (other.bounds[3] > bounds[3])
-        bounds[3] = other.bounds[3];
-    if (other.bounds[4] > bounds[4])
-        bounds[4] = other.bounds[4];
-    if (other.bounds[5] > bounds[5])
-        bounds[5] = other.bounds[5];
+    if (other.m_bounds[0] < m_bounds[0])
+        m_bounds[0] = other.m_bounds[0];
+    if (other.m_bounds[1] < m_bounds[1])
+        m_bounds[1] = other.m_bounds[1];
+    if (other.m_bounds[2] < m_bounds[2])
+        m_bounds[2] = other.m_bounds[2];
+    if (other.m_bounds[3] > m_bounds[3])
+        m_bounds[3] = other.m_bounds[3];
+    if (other.m_bounds[4] > m_bounds[4])
+        m_bounds[4] = other.m_bounds[4];
+    if (other.m_bounds[5] > m_bounds[5])
+        m_bounds[5] = other.m_bounds[5];
 }
 
 void BufferBuilder::Bounds::addVert(float x, float y, float z) {
-    if (x < bounds[0])
-        bounds[0] = x;
-    if (y < bounds[1])
-        bounds[1] = y;
-    if (z < bounds[2])
-        bounds[2] = z;
-    if (x > bounds[3])
-        bounds[3] = x;
-    if (y > bounds[4])
-        bounds[4] = y;
-    if (z > bounds[5])
-        bounds[5] = z;
+    if (x < m_bounds[0])
+        m_bounds[0] = x;
+    if (y < m_bounds[1])
+        m_bounds[1] = y;
+    if (z < m_bounds[2])
+        m_bounds[2] = z;
+    if (x > m_bounds[3])
+        m_bounds[3] = x;
+    if (y > m_bounds[4])
+        m_bounds[4] = y;
+    if (z > m_bounds[5])
+        m_bounds[5] = z;
 }
 
 // NON_MATCHING probably some ordering thing, i have no idea
 BufferBuilder::BufferBuilder(int bufSize) {
-    mHasColor = false;
-    mHasTex = false;
-    byte_26 = false;
-    mHasNormal = false;
-    mBufferIndex = 0;
-    dword_3c = 0;
-    mNoColor = false;
-    mHasBegun = false;
-    byte_6e = false;
-    mHasBoneIndex = false;
-    mTexV = 0;
-    mTexU = 0;
-    mVertexCount = 0;
-    mPackedColor = 0;
-    mPrimitiveMode = (C4JRender::ePrimitiveType)0;
-    mBucket = 0;
-    mUseCompactVerts = false;
-    mUseProjectedTex = false;
-    mIsMipmapEnabled = true;
-    dword_30 = 0;
-    mVertType = (C4JRender::eVertexType)0;
-    mBufferSize = bufSize;
-    mXo = 0;
-    mYo = 0;
-    mZo = 0;
-    dword_54 = 0;
-    dword_58 = 0;
-    dword_5c = 0;
-    mPackedNormal = 0;
-    mBoneIndex = 0;
+    m_hasColor = false;
+    m_hasTex = false;
+    m_byte26 = false;
+    m_hasNormal = false;
+    m_bufferIndex = 0;
+    m_dword3c = 0;
+    m_noColor = false;
+    m_hasBegun = false;
+    m_byte6e = false;
+    m_hasBoneIndex = false;
+    m_texV = 0;
+    m_texU = 0;
+    m_vertexCount = 0;
+    m_packedColor = 0;
+    m_primitiveMode = (C4JRender::ePrimitiveType)0;
+    m_bucket = 0;
+    m_useCompactVerts = false;
+    m_useProjectedTex = false;
+    m_isMipmapEnabled = true;
+    m_dword30 = 0;
+    m_vertType = (C4JRender::eVertexType)0;
+    m_bufferSize = bufSize;
+    m_xo = 0;
+    m_yo = 0;
+    m_zo = 0;
+    m_dword54 = 0;
+    m_dword58 = 0;
+    m_dword5c = 0;
+    m_packedNormal = 0;
+    m_boneIndex = 0;
 
-    mVertexData = new arrayWithLength<int>(bufSize, true);
-    field_8 = new arrayWithLength<uchar>((0 > bufSize ? bufSize + 7 : bufSize) >> 3, true);
+    m_vertexData = new arrayWithLength<int>(bufSize, true);
+    m_field8 = new arrayWithLength<uchar>((0 > bufSize ? bufSize + 7 : bufSize) >> 3, true);
 
-    byte_6e = BufferBuilder::VBO_MODE;
+    m_byte6e = BufferBuilder::VBO_MODE;
     if (BufferBuilder::VBO_MODE) {
-        field_70 = MemoryTracker::createIntBuffer(field_7c);
+        m_field70 = MemoryTracker::createIntBuffer(m_field7c);
         sub_710063830c();
     }
 
-    byte_39 = false;
+    m_byte39 = false;
 }
 
 // NON_MATCHING just random to make other things match
@@ -98,102 +98,102 @@ void BufferBuilder::sub_710063830c() {
 }
 
 void BufferBuilder::clear() {
-    mVertexCount = 0;
-    mBufferIndex = 0;
-    dword_3c = 0;
+    m_vertexCount = 0;
+    m_bufferIndex = 0;
+    m_dword3c = 0;
 }
 
 void BufferBuilder::begin(int type) {
-    mHasBegun = true;
+    m_hasBegun = true;
     clear();
-    mPrimitiveMode = (C4JRender::ePrimitiveType)type;
-    mHasColor = false;
-    mHasTex = false;
-    byte_26 = 0;
-    mHasNormal = false;
-    mNoColor = false;
-    mHasBoneIndex = false;
+    m_primitiveMode = (C4JRender::ePrimitiveType)type;
+    m_hasColor = false;
+    m_hasTex = false;
+    m_byte26 = 0;
+    m_hasNormal = false;
+    m_noColor = false;
+    m_hasBoneIndex = false;
 }
 
 void BufferBuilder::begin() {
     begin(C4JRender::ePrimitiveType::eViewportType_Quad);
-    mBounds.initBounds();
+    m_bounds.initBounds();
 }
 
 void BufferBuilder::normal(float x, float y, float z) {
-    mHasNormal = true;
+    m_hasNormal = true;
     uint8_t nx = (uint8_t)(x * 127.0f) & 0xFF;
     uint8_t ny = (uint8_t)(y * 127.0f) & 0xFF;
     uint8_t nz = (uint8_t)(z * 127.0f) & 0xFF;
-    mPackedNormal = (nx) | ((ny) << 8) | ((nz) << 16);
+    m_packedNormal = (nx) | ((ny) << 8) | ((nz) << 16);
 }
 
 void BufferBuilder::tex(float u, float v) {
-    mHasTex = true;
-    mTexU = u;
-    mTexV = v;
+    m_hasTex = true;
+    m_texU = u;
+    m_texV = v;
 }
 
 void BufferBuilder::finaliseShaders() {
-    dword_30 = 0;
-    mVertType = (C4JRender::eVertexType)0;
-    if (mPrimitiveMode == 3 && BufferBuilder::TRIANGLE_MODE) {
-        if (mHasBoneIndex) {
-            this->mVertType = (C4JRender::eVertexType)8;
-        } else if (this->mUseCompactVerts) {
-            this->mVertType = (C4JRender::eVertexType)1;
+    m_dword30 = 0;
+    m_vertType = (C4JRender::eVertexType)0;
+    if (m_primitiveMode == 3 && BufferBuilder::TRIANGLE_MODE) {
+        if (m_hasBoneIndex) {
+            this->m_vertType = (C4JRender::eVertexType)8;
+        } else if (this->m_useCompactVerts) {
+            this->m_vertType = (C4JRender::eVertexType)1;
         }
 
-        if (this->mUseProjectedTex)
-            this->dword_30 = 4;
+        if (this->m_useProjectedTex)
+            this->m_dword30 = 4;
     } else {
-        if (mUseCompactVerts) {
-            mVertType = (C4JRender::eVertexType)1;
-        } else if (mHasBoneIndex) {
-            mVertType = (C4JRender::eVertexType)8;
-        } else if (mUseProjectedTex) {
-            dword_30 = 4;
-            mVertType = (C4JRender::eVertexType)3;
+        if (m_useCompactVerts) {
+            m_vertType = (C4JRender::eVertexType)1;
+        } else if (m_hasBoneIndex) {
+            m_vertType = (C4JRender::eVertexType)8;
+        } else if (m_useProjectedTex) {
+            m_dword30 = 4;
+            m_vertType = (C4JRender::eVertexType)3;
         }
     }
 }
 
 void BufferBuilder::end() {
-    mHasBegun = false;
-    if (!byte_39)
+    m_hasBegun = false;
+    if (!m_byte39)
         finaliseShaders();
 
-    if (mVertexCount >= 1) {
-        if (!mHasColor) {
-            int* p = mVertexData->data + 5;
-            for (int i = 0; i < this->mVertexCount; i++) {
+    if (m_vertexCount >= 1) {
+        if (!m_hasColor) {
+            int* p = m_vertexData->m_data + 5;
+            for (int i = 0; i < this->m_vertexCount; i++) {
                 *p = 0xFFFFFFFF;
                 p += 8;
             }
         }
 
-        if (this->mPrimitiveMode == 3 && BufferBuilder::TRIANGLE_MODE) {
-            Renderer::sInstance->DrawVertices((C4JRender::ePrimitiveType)0, mVertexCount, mVertexData->data,
-                                              this->mVertType, (Renderer::ePixelShaderType)this->dword_30,
-                                              nullptr);
+        if (this->m_primitiveMode == 3 && BufferBuilder::TRIANGLE_MODE) {
+            Renderer::sInstance->DrawVertices((C4JRender::ePrimitiveType)0, m_vertexCount,
+                                              m_vertexData->m_data, this->m_vertType,
+                                              (Renderer::ePixelShaderType)this->m_dword30, nullptr);
         } else {
-            if (this->mUseCompactVerts) {
-                Renderer::sInstance->DrawVertices(this->mPrimitiveMode, mVertexCount, mVertexData->data,
-                                                  this->mVertType, (Renderer::ePixelShaderType)this->dword_30,
-                                                  field_8->data);
+            if (this->m_useCompactVerts) {
+                Renderer::sInstance->DrawVertices(
+                    this->m_primitiveMode, m_vertexCount, m_vertexData->m_data, this->m_vertType,
+                    (Renderer::ePixelShaderType)this->m_dword30, m_field8->m_data);
             } else {
-                Renderer::sInstance->DrawVertices(this->mPrimitiveMode, mVertexCount, mVertexData->data,
-                                                  this->mVertType, (Renderer::ePixelShaderType)this->dword_30,
-                                                  nullptr);
+                Renderer::sInstance->DrawVertices(this->m_primitiveMode, m_vertexCount, m_vertexData->m_data,
+                                                  this->m_vertType,
+                                                  (Renderer::ePixelShaderType)this->m_dword30, nullptr);
             }
         }
 
         GlStateManager::disableClientState(0);
-        if (mHasTex)
+        if (m_hasTex)
             GlStateManager::disableClientState(0);
-        if (mHasColor)
+        if (m_hasColor)
             GlStateManager::disableClientState(0);
-        if (mHasNormal)
+        if (m_hasNormal)
             GlStateManager::disableClientState(0);
     }
 
@@ -202,126 +202,132 @@ void BufferBuilder::end() {
 
 // NON_MATCHING i have no idea, i'm tired of this function
 void BufferBuilder::vertexNoBounds(float x, float y, float z) {
-    mVertexCount++;
-    float finalTexU = !mIsMipmapEnabled ? mTexU + 1.0f : mTexU;
+    m_vertexCount++;
+    float finalTexU = !m_isMipmapEnabled ? m_texU + 1.0f : m_texU;
 
-    if (!mUseCompactVerts) {
-        if ((mVertexCount & 3) == 0 && mPrimitiveMode == 3 && BufferBuilder::TRIANGLE_MODE) {
-            if (mHasTex) {
-                mVertexData->data[(int)(mBufferIndex + 3)] = mVertexData->data[(int)(mBufferIndex - 21)];
-                mVertexData->data[(int)(mBufferIndex + 4)] = mVertexData->data[(int)(mBufferIndex - 20)];
+    if (!m_useCompactVerts) {
+        if ((m_vertexCount & 3) == 0 && m_primitiveMode == 3 && BufferBuilder::TRIANGLE_MODE) {
+            if (m_hasTex) {
+                m_vertexData->m_data[(int)(m_bufferIndex + 3)]
+                    = m_vertexData->m_data[(int)(m_bufferIndex - 21)];
+                m_vertexData->m_data[(int)(m_bufferIndex + 4)]
+                    = m_vertexData->m_data[(int)(m_bufferIndex - 20)];
             }
 
-            if (mHasColor) {
-                mVertexData->data[(int)(mBufferIndex + 5)] = mVertexData->data[(int)(mBufferIndex - 19)];
+            if (m_hasColor) {
+                m_vertexData->m_data[(int)(m_bufferIndex + 5)]
+                    = m_vertexData->m_data[(int)(m_bufferIndex - 19)];
             }
 
-            int* ptr = mVertexData->data + (int)mBufferIndex;
+            int* ptr = m_vertexData->m_data + (int)m_bufferIndex;
             *ptr = *(ptr - 24);
-            mVertexData->data[(int)(mBufferIndex + 1)] = mVertexData->data[(int)(mBufferIndex - 23)];
-            mVertexData->data[(int)(mBufferIndex + 2)] = mVertexData->data[(int)(mBufferIndex - 22)];
+            m_vertexData->m_data[(int)(m_bufferIndex + 1)] = m_vertexData->m_data[(int)(m_bufferIndex - 23)];
+            m_vertexData->m_data[(int)(m_bufferIndex + 2)] = m_vertexData->m_data[(int)(m_bufferIndex - 22)];
 
-            mVertexCount++;
-            mBufferIndex += 8;
+            m_vertexCount++;
+            m_bufferIndex += 8;
 
-            if (mHasTex) {
-                mVertexData->data[(int)(mBufferIndex + 11)] = mVertexData->data[(int)(mBufferIndex - 5)];
-                mVertexData->data[(int)(mBufferIndex + 4)] = mVertexData->data[(int)(mBufferIndex - 12)];
+            if (m_hasTex) {
+                m_vertexData->m_data[(int)(m_bufferIndex + 11)]
+                    = m_vertexData->m_data[(int)(m_bufferIndex - 5)];
+                m_vertexData->m_data[(int)(m_bufferIndex + 4)]
+                    = m_vertexData->m_data[(int)(m_bufferIndex - 12)];
             }
-            if (mHasColor) {
-                mVertexData->data[(int)(mBufferIndex + 5)] = mVertexData->data[(int)(mBufferIndex - 11)];
+            if (m_hasColor) {
+                m_vertexData->m_data[(int)(m_bufferIndex + 5)]
+                    = m_vertexData->m_data[(int)(m_bufferIndex - 11)];
             }
 
-            ptr = mVertexData->data + (int)mBufferIndex;
+            ptr = m_vertexData->m_data + (int)m_bufferIndex;
             *ptr = *(ptr - 16);
-            mVertexData->data[(int)(mBufferIndex + 1)] = mVertexData->data[(int)(mBufferIndex - 15)];
-            mVertexData->data[(int)(mBufferIndex + 2)] = mVertexData->data[(int)(mBufferIndex - 14)];
+            m_vertexData->m_data[(int)(m_bufferIndex + 1)] = m_vertexData->m_data[(int)(m_bufferIndex - 15)];
+            m_vertexData->m_data[(int)(m_bufferIndex + 2)] = m_vertexData->m_data[(int)(m_bufferIndex - 14)];
 
-            mVertexCount++;
-            mBufferIndex += 8;
+            m_vertexCount++;
+            m_bufferIndex += 8;
         }
 
-        if (mHasTex) {
-            float* data = (float*)mVertexData->data;
-            int idx = mBufferIndex;
+        if (m_hasTex) {
+            float* data = (float*)m_vertexData->m_data;
+            int idx = m_bufferIndex;
             data[idx + 3] = finalTexU;
-            data[idx + 4] = mTexV;
+            data[idx + 4] = m_texV;
         }
 
-        if (mHasColor) {
-            mVertexData->data[(int)mBufferIndex + 5] = mPackedColor;
+        if (m_hasColor) {
+            m_vertexData->m_data[(int)m_bufferIndex + 5] = m_packedColor;
         }
 
-        if (mHasNormal) {
-            mVertexData->data[(int)mBufferIndex + 6] = mPackedNormal;
+        if (m_hasNormal) {
+            m_vertexData->m_data[(int)m_bufferIndex + 6] = m_packedNormal;
         }
 
-        if (mHasBoneIndex) {
-            mVertexData->data[(int)mBufferIndex + 7] = (int)mBoneIndex;
+        if (m_hasBoneIndex) {
+            m_vertexData->m_data[(int)m_bufferIndex + 7] = (int)m_boneIndex;
         }
 
-        int col = byte_26 ? *(int*)(&dword_1c) : 0xFE00FE00;
-        mVertexData->data[(int)mBufferIndex + 7] = col;
+        int col = m_byte26 ? *(int*)(&m_dword1c) : 0xFE00FE00;
+        m_vertexData->m_data[(int)m_bufferIndex + 7] = col;
 
-        float* data = (float*)mVertexData->data + (int)mBufferIndex;
-        int idx = (int)mBufferIndex;
-        data[0] = mXo + x;
-        data[1] = mYo + y;
-        data[2] = mZo + z;
+        float* data = (float*)m_vertexData->m_data + (int)m_bufferIndex;
+        int idx = (int)m_bufferIndex;
+        data[0] = m_xo + x;
+        data[1] = m_yo + y;
+        data[2] = m_zo + z;
 
-        mBufferIndex += 8;
-        mVertexCount++;
+        m_bufferIndex += 8;
+        m_vertexCount++;
 
-        if ((mVertexCount & 3) == 0 && (int)mBufferIndex >= (mBufferSize - 32)) {
+        if ((m_vertexCount & 3) == 0 && (int)m_bufferIndex >= (m_bufferSize - 32)) {
             end();
-            mHasBegun = true;
+            m_hasBegun = true;
         }
     } else {
-        short* vertexPtr = (short*)(mVertexData->data + ((int)mBufferIndex));
-        int color = mPackedColor;
+        short* vertexPtr = (short*)(m_vertexData->m_data + ((int)m_bufferIndex));
+        int color = m_packedColor;
 
-        vertexPtr[0] = ((mXo + x) * 1024.0f);
-        vertexPtr[1] = ((mYo + y) * 1024.0f);
-        vertexPtr[2] = ((mZo + z) * 1024.0f);
+        vertexPtr[0] = ((m_xo + x) * 1024.0f);
+        vertexPtr[1] = ((m_yo + y) * 1024.0f);
+        vertexPtr[2] = ((m_zo + z) * 1024.0f);
 
         vertexPtr[3]
             = (((color >> 16) & 0xF800) | ((color >> 13) & 0x07E0) | ((color >> 11) & 0x001F)) + 0x8000;
 
         vertexPtr[4] = (finalTexU * 8192.0f);
-        vertexPtr[5] = (mTexV * 8192.0f);
+        vertexPtr[5] = (m_texV * 8192.0f);
 
-        vertexPtr[6] = (short_1c << 8) | short_1e;
-        vertexPtr[7] = (short)(-dword_54);
+        vertexPtr[6] = (m_short1c << 8) | m_short1e;
+        vertexPtr[7] = (short)(-m_dword54);
 
-        mBufferIndex += 4;
-        mVertexCount++;
+        m_bufferIndex += 4;
+        m_vertexCount++;
 
-        if ((mVertexCount & 3) == 0) {
-            if ((int)mBufferIndex > 0x3FFEF || (int)mBufferIndex >= (mBufferSize - 16)) {
+        if ((m_vertexCount & 3) == 0) {
+            if ((int)m_bufferIndex > 0x3FFEF || (int)m_bufferIndex >= (m_bufferSize - 16)) {
                 end();
-                mHasBegun = true;
+                m_hasBegun = true;
             }
         }
 
-        if ((mVertexCount & 3) == 0) {
-            int paddingValue = mBucket;
+        if ((m_vertexCount & 3) == 0) {
+            int paddingValue = m_bucket;
             if (paddingValue == 0) {
-                mBucket = 0;
+                m_bucket = 0;
             }
-            uchar* pack = field_8->data;
+            uchar* pack = m_field8->m_data;
 
-            int vertIndex = mVertexCount;
+            int vertIndex = m_vertexCount;
             if ((int)vertIndex < 0) {
                 vertIndex += 3;
             }
             pack[(vertIndex >> 2) - 1] = (char)paddingValue;
-            mBucket = 0;
+            m_bucket = 0;
         }
     }
 }
 
 void BufferBuilder::vertex(float x, float y, float z) {
-    mBounds.addVert(mXo + x, mYo + y, mZo + z);
+    m_bounds.addVert(m_xo + x, m_yo + y, m_zo + z);
     vertexNoBounds(x, y, z);
 }
 
@@ -331,20 +337,20 @@ void BufferBuilder::vertexUV(float x, float y, float z, float u, float v) {
 }
 
 void BufferBuilder::useCompactVertices(bool value) {
-    mUseCompactVerts = value & 1;
+    m_useCompactVerts = value & 1;
 }
 
 void BufferBuilder::useProjectedTexture(bool value) {
-    mUseProjectedTex = value & 1;
+    m_useProjectedTex = value & 1;
 }
 
 void BufferBuilder::tex2(int value) {
-    byte_26 = 1;
-    dword_1c = value;
+    m_byte26 = 1;
+    m_dword1c = value;
 }
 
 void BufferBuilder::color(int r, int g, int b, int a) {
-    if (mNoColor == false) {
+    if (m_noColor == false) {
         if (r > 0xFE)
             r = 0xFF;
         if (g > 0xFE)
@@ -363,8 +369,8 @@ void BufferBuilder::color(int r, int g, int b, int a) {
         if (b < 1)
             b = 0;
 
-        mHasColor = true;
-        mPackedColor = r << 24 | g << 16 | b << 8 | a;
+        m_hasColor = true;
+        m_packedColor = r << 24 | g << 16 | b << 8 | a;
     }
 }
 
@@ -388,8 +394,8 @@ void BufferBuilder::color(float r, float g, float b, float a) {
 }
 
 void BufferBuilder::boneIndex(int index) {
-    mHasBoneIndex = true;
-    mBoneIndex = index;
+    m_hasBoneIndex = true;
+    m_boneIndex = index;
 }
 
 void BufferBuilder::vertexUVSkinned(float x, float y, float z, float u, float v, int index) {
@@ -407,32 +413,32 @@ void BufferBuilder::color(int rgb, int alpha) {
 }
 
 void BufferBuilder::noColor() {
-    mNoColor = true;
+    m_noColor = true;
 }
 
 void BufferBuilder::offset(float xo, float yo, float zo) {
-    mXo = xo;
-    mYo = yo;
-    mZo = zo;
-    dword_54 = xo;
-    dword_58 = yo;
-    dword_5c = zo;
+    m_xo = xo;
+    m_yo = yo;
+    m_zo = zo;
+    m_dword54 = xo;
+    m_dword58 = yo;
+    m_dword5c = zo;
 }
 
 void BufferBuilder::addOffset(float xo, float yo, float zo) {
-    mXo += xo;
-    mYo += yo;
-    mZo += zo;
+    m_xo += xo;
+    m_yo += yo;
+    m_zo += zo;
 }
 
 bool BufferBuilder::setMipmapEnable(bool value) {
-    bool old = mIsMipmapEnabled;
-    mIsMipmapEnabled = value;
+    bool old = m_isMipmapEnabled;
+    m_isMipmapEnabled = value;
     return old;
 }
 
 void BufferBuilder::bucket(int value) {
-    mBucket = value;
+    m_bucket = value;
 }
 
 int BufferBuilder::hasMaxVertices() {
@@ -460,34 +466,34 @@ void BufferBuilder::blockRainQuad(float x1, float y1, float z1, float u1, float 
     float stack_b2 = b2;
     float stack_a2 = a2;
 
-    byte_26 = true;
-    mHasColor = true;
-    mHasTex = true;
+    m_byte26 = true;
+    m_hasColor = true;
+    m_hasTex = true;
 
-    float* vertexPtr = (float*)&mVertexData->data[(int)mBufferIndex];
+    float* vertexPtr = (float*)&m_vertexData->m_data[(int)m_bufferIndex];
 
-    dword_3c += 4;
-    mBufferIndex += 32;
-    mVertexCount += 4;
+    m_dword3c += 4;
+    m_bufferIndex += 32;
+    m_vertexCount += 4;
 
     const float colorScale = 255.0f;
 
     int packedColor1 = ((int)(r1 * colorScale) << 24) | ((int)(g1 * colorScale) << 16)
                        | ((int)(b1 * colorScale) << 8) | (int)(a1 * colorScale);
 
-    mBounds.addVert(mXo + x1, mYo + y1, mZo + z1);
-    vertexPtr[0] = mXo + x1;
-    vertexPtr[1] = mYo + y1;
-    vertexPtr[2] = mZo + z1;
+    m_bounds.addVert(m_xo + x1, m_yo + y1, m_zo + z1);
+    vertexPtr[0] = m_xo + x1;
+    vertexPtr[1] = m_yo + y1;
+    vertexPtr[2] = m_zo + z1;
     vertexPtr[3] = stack_u1;
     vertexPtr[4] = stack_v1;
     *(int*)&vertexPtr[5] = packedColor1;
     *(int*)&vertexPtr[7] = texture;
 
-    mBounds.addVert(mXo + x2, mYo + y2, mZo + z2);
-    vertexPtr[8] = mXo + x2;
-    vertexPtr[9] = mYo + y2;
-    vertexPtr[10] = mZo + z2;
+    m_bounds.addVert(m_xo + x2, m_yo + y2, m_zo + z2);
+    vertexPtr[8] = m_xo + x2;
+    vertexPtr[9] = m_yo + y2;
+    vertexPtr[10] = m_zo + z2;
     vertexPtr[11] = stack_u2;
     vertexPtr[12] = stack_v2;
     *(int*)&vertexPtr[13] = packedColor1;
@@ -496,26 +502,26 @@ void BufferBuilder::blockRainQuad(float x1, float y1, float z1, float u1, float 
     int packedColor2 = ((int)(stack_r2 * colorScale) << 24) | ((int)(stack_g2 * colorScale) << 16)
                        | ((int)(stack_b2 * colorScale) << 8) | (int)(stack_a2 * colorScale);
 
-    mBounds.addVert(mXo + x3, mYo + y3, mZo + z3);
-    vertexPtr[16] = mXo + x3;
-    vertexPtr[17] = mYo + y3;
-    vertexPtr[18] = mZo + z3;
+    m_bounds.addVert(m_xo + x3, m_yo + y3, m_zo + z3);
+    vertexPtr[16] = m_xo + x3;
+    vertexPtr[17] = m_yo + y3;
+    vertexPtr[18] = m_zo + z3;
     vertexPtr[19] = stack_u3;
     vertexPtr[20] = stack_v3;
     *(int*)&vertexPtr[21] = packedColor2;
     *(int*)&vertexPtr[23] = texture;
 
-    mBounds.addVert(mXo + x4, mYo + y4, mZo + z4);
-    vertexPtr[24] = mXo + x4;
-    vertexPtr[25] = mYo + y4;
-    vertexPtr[26] = mZo + z4;
+    m_bounds.addVert(m_xo + x4, m_yo + y4, m_zo + z4);
+    vertexPtr[24] = m_xo + x4;
+    vertexPtr[25] = m_yo + y4;
+    vertexPtr[26] = m_zo + z4;
     vertexPtr[27] = stack_u4;
     vertexPtr[28] = stack_v4;
     *(int*)&vertexPtr[29] = packedColor2;
     *(int*)&vertexPtr[31] = texture;
 
-    if ((mVertexCount & 3) == 0 && (int)mBufferIndex >= mBufferSize - 0x20) {
+    if ((m_vertexCount & 3) == 0 && (int)m_bufferIndex >= m_bufferSize - 0x20) {
         end();
-        mHasBegun = 1;
+        m_hasBegun = 1;
     }
 }

@@ -15,7 +15,7 @@ public:
     int next(int bits);
     double nextGaussian();
 
-    long val;
-    bool field_8;
-    double seed3;
+    long m_val;
+    bool m_field8;
+    double m_seed3;
 };

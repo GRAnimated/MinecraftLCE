@@ -13,5 +13,5 @@ public:
     void fillGradient(int, int, int, int, int, int);
     void blit(int, int, int, int, int, int);
 
-    float field_0 = 0.0f;
+    float m_field0 = 0.0f;
 };

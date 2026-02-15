@@ -6,113 +6,113 @@
 #include "net/minecraft/locale/Language.h"
 
 Options::Option::Option(const std::wstring& a2, bool isProgress, bool a4)
-    : mIsProgress(isProgress), field_1(a4), mOptionName(a2) {}
+    : m_isProgress(isProgress), m_field1(a4), m_optionName(a2) {}
 
 bool Options::Option::isProgress() const {
-    return mIsProgress;
+    return m_isProgress;
 }
 
 std::wstring Options::Option::getCaptionId() const {
-    return mOptionName;
+    return m_optionName;
 }
 
 Options::Options(Minecraft* minecraft, File file) {
     init();
-    mMinecraft = minecraft;
-    mOptionsFile = File(file, L"options.txt");
+    m_minecraft = minecraft;
+    m_optionsFile = File(file, L"options.txt");
 }
 
 void Options::init() {
-    mMusicVolume = 1.0;
-    mSoundVolume = 1.0;
-    mMouseSensitivity = 0.5;
-    mInvertYMouse = false;
-    mViewDistance = false;
-    mIsBobView = true;
-    mIsAnaglyph3d = false;
-    mIsAdvancedOpengl = false;
-    mFpsLimit = 2;
-    mIsFancyGraphics = true;
-    mIsEnableAo = true;
-    mIsEnableClouds = true;
-    mSkin = L"Default";
+    m_musicVolume = 1.0;
+    m_soundVolume = 1.0;
+    m_mouseSensitivity = 0.5;
+    m_invertYMouse = false;
+    m_viewDistance = false;
+    m_isBobView = true;
+    m_isAnaglyph3d = false;
+    m_isAdvancedOpengl = false;
+    m_fpsLimit = 2;
+    m_isFancyGraphics = true;
+    m_isEnableAo = true;
+    m_isEnableClouds = true;
+    m_skin = L"Default";
 
-    mKeyForward = new KeyMapping(L"key.forward", 22);
-    mKeyLeft = new KeyMapping(L"key.left", 0);
-    mKeyBack = new KeyMapping(L"key.back", 18);
-    mKeyRight = new KeyMapping(L"key.right", 3);
-    mKeyJump = new KeyMapping(L"key.jump", 26);
-    mKeyInventory = new KeyMapping(L"key.inventory", 4);
-    mKeyDrop = new KeyMapping(L"key.drop", 16);
-    mKeyChat = new KeyMapping(L"key.chat", 19);
-    mKeySneak = new KeyMapping(L"key.sneak", 27);
-    mKeyAttack = new KeyMapping(L"key.attack", -100);
-    mKeyUse = new KeyMapping(L"key.use", -99);
-    mKeyPlayerList = new KeyMapping(L"key.playerlist", 34);
-    mKeyPickItem = new KeyMapping(L"key.pickItem", -98);
-    mKeyFog = new KeyMapping(L"key.fog", 5);
+    m_keyForward = new KeyMapping(L"key.forward", 22);
+    m_keyLeft = new KeyMapping(L"key.left", 0);
+    m_keyBack = new KeyMapping(L"key.back", 18);
+    m_keyRight = new KeyMapping(L"key.right", 3);
+    m_keyJump = new KeyMapping(L"key.jump", 26);
+    m_keyInventory = new KeyMapping(L"key.inventory", 4);
+    m_keyDrop = new KeyMapping(L"key.drop", 16);
+    m_keyChat = new KeyMapping(L"key.chat", 19);
+    m_keySneak = new KeyMapping(L"key.sneak", 27);
+    m_keyAttack = new KeyMapping(L"key.attack", -100);
+    m_keyUse = new KeyMapping(L"key.use", -99);
+    m_keyPlayerList = new KeyMapping(L"key.playerlist", 34);
+    m_keyPickItem = new KeyMapping(L"key.pickItem", -98);
+    m_keyFog = new KeyMapping(L"key.fog", 5);
 
-    mKeyMappings[0] = mKeyAttack;
-    mKeyMappings[1] = mKeyUse;
-    mKeyMappings[2] = mKeyForward;
-    mKeyMappings[3] = mKeyLeft;
-    mKeyMappings[4] = mKeyBack;
-    mKeyMappings[5] = mKeyRight;
-    mKeyMappings[6] = mKeyJump;
-    mKeyMappings[7] = mKeySneak;
-    mKeyMappings[8] = mKeyDrop;
-    mKeyMappings[9] = mKeyInventory;
-    mKeyMappings[10] = mKeyChat;
-    mKeyMappings[11] = mKeyPlayerList;
-    mKeyMappings[12] = mKeyPickItem;
-    mKeyMappings[13] = mKeyFog;
+    m_keyMappings[0] = m_keyAttack;
+    m_keyMappings[1] = m_keyUse;
+    m_keyMappings[2] = m_keyForward;
+    m_keyMappings[3] = m_keyLeft;
+    m_keyMappings[4] = m_keyBack;
+    m_keyMappings[5] = m_keyRight;
+    m_keyMappings[6] = m_keyJump;
+    m_keyMappings[7] = m_keySneak;
+    m_keyMappings[8] = m_keyDrop;
+    m_keyMappings[9] = m_keyInventory;
+    m_keyMappings[10] = m_keyChat;
+    m_keyMappings[11] = m_keyPlayerList;
+    m_keyMappings[12] = m_keyPickItem;
+    m_keyMappings[13] = m_keyFog;
 
-    mMinecraft = nullptr;
-    mDifficulty = 2;
-    byte_13c = false;
-    qword_140 = nullptr;
-    byte_148 = false;
-    dword_14c = 0;
-    mLastServer = L"";
-    byte_168 = false;
-    byte_169 = false;
-    byte_16a = false;
-    dword_16c = 1.0;
-    dword_170 = 1.0;
-    mGuiScale = 0;
-    mParticles = 0;
-    mFov = 0;
-    mGamma = 0;
-    byte_184 = true;
-    byte_1f = true;
+    m_minecraft = nullptr;
+    m_difficulty = 2;
+    m_byte13c = false;
+    m_qword140 = nullptr;
+    m_byte148 = false;
+    m_dword14c = 0;
+    m_lastServer = L"";
+    m_byte168 = false;
+    m_byte169 = false;
+    m_byte16a = false;
+    m_dword16c = 1.0;
+    m_dword170 = 1.0;
+    m_guiScale = 0;
+    m_particles = 0;
+    m_fov = 0;
+    m_gamma = 0;
+    m_byte184 = true;
+    m_byte1f = true;
 }
 
 void Options::save() {
-    FileOutputStream output = FileOutputStream(mOptionsFile);
+    FileOutputStream output = FileOutputStream(m_optionsFile);
     DataOutputStream dataOutput = DataOutputStream(&output);
 
-    dataOutput.writeChars(L"music:" + std::to_wstring(mMusicVolume) + L"\n");
-    dataOutput.writeChars(L"sound:" + std::to_wstring(mSoundVolume) + L"\n");
-    dataOutput.writeChars(L"invertYMouse:" + std::wstring(mInvertYMouse ? L"true" : L"false") + L"\n");
-    dataOutput.writeChars(L"mouseSensitivity:" + std::to_wstring(mMouseSensitivity));
-    dataOutput.writeChars(L"fov:" + std::to_wstring(mFov));
-    dataOutput.writeChars(L"gamma:" + std::to_wstring(mGamma));
-    dataOutput.writeChars(L"viewDistance:" + std::to_wstring(mViewDistance));
-    dataOutput.writeChars(L"guiScale:" + std::to_wstring(mGuiScale));
-    dataOutput.writeChars(L"particles:" + std::to_wstring(mParticles));
-    dataOutput.writeChars(L"bobView:" + std::wstring(mIsBobView ? L"true" : L"false"));
-    dataOutput.writeChars(L"anaglyph3d:" + std::wstring(mIsAnaglyph3d ? L"true" : L"false"));
-    dataOutput.writeChars(L"advancedOpengl:" + std::wstring(mIsAdvancedOpengl ? L"true" : L"false"));
-    dataOutput.writeChars(L"fpsLimit:" + std::to_wstring(mFpsLimit));
-    dataOutput.writeChars(L"difficulty:" + std::to_wstring(mDifficulty));
-    dataOutput.writeChars(L"fancyGraphics:" + std::wstring(mIsFancyGraphics ? L"true" : L"false"));
-    dataOutput.writeChars(L"ao:" + std::wstring(mIsEnableAo ? L"true" : L"false"));
-    dataOutput.writeChars(L"clouds:" + std::wstring(std::to_wstring(mIsEnableClouds)));
-    dataOutput.writeChars(L"skin:" + mSkin);
-    dataOutput.writeChars(L"lastServer:" + mLastServer);
+    dataOutput.writeChars(L"music:" + std::to_wstring(m_musicVolume) + L"\n");
+    dataOutput.writeChars(L"sound:" + std::to_wstring(m_soundVolume) + L"\n");
+    dataOutput.writeChars(L"invertYMouse:" + std::wstring(m_invertYMouse ? L"true" : L"false") + L"\n");
+    dataOutput.writeChars(L"mouseSensitivity:" + std::to_wstring(m_mouseSensitivity));
+    dataOutput.writeChars(L"fov:" + std::to_wstring(m_fov));
+    dataOutput.writeChars(L"gamma:" + std::to_wstring(m_gamma));
+    dataOutput.writeChars(L"viewDistance:" + std::to_wstring(m_viewDistance));
+    dataOutput.writeChars(L"guiScale:" + std::to_wstring(m_guiScale));
+    dataOutput.writeChars(L"particles:" + std::to_wstring(m_particles));
+    dataOutput.writeChars(L"bobView:" + std::wstring(m_isBobView ? L"true" : L"false"));
+    dataOutput.writeChars(L"anaglyph3d:" + std::wstring(m_isAnaglyph3d ? L"true" : L"false"));
+    dataOutput.writeChars(L"advancedOpengl:" + std::wstring(m_isAdvancedOpengl ? L"true" : L"false"));
+    dataOutput.writeChars(L"fpsLimit:" + std::to_wstring(m_fpsLimit));
+    dataOutput.writeChars(L"difficulty:" + std::to_wstring(m_difficulty));
+    dataOutput.writeChars(L"fancyGraphics:" + std::wstring(m_isFancyGraphics ? L"true" : L"false"));
+    dataOutput.writeChars(L"ao:" + std::wstring(m_isEnableAo ? L"true" : L"false"));
+    dataOutput.writeChars(L"clouds:" + std::wstring(std::to_wstring(m_isEnableClouds)));
+    dataOutput.writeChars(L"skin:" + m_skin);
+    dataOutput.writeChars(L"lastServer:" + m_lastServer);
     for (int i = 0; i < 14; i++) {
-        dataOutput.writeChars(L"key_" + mKeyMappings[i]->mKeyDescription + L":"
-                              + std::to_wstring(mKeyMappings[i]->mKeyCode));
+        dataOutput.writeChars(L"key_" + m_keyMappings[i]->m_keyDescription + L":"
+                              + std::to_wstring(m_keyMappings[i]->m_keyCode));
     }
 
     dataOutput.close();

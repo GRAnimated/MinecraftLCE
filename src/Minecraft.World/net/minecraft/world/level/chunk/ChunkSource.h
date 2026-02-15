@@ -37,5 +37,5 @@ public:
     virtual int getLoadedChunks() = 0;
     virtual void recreateLogicStructuresForChunk(LevelChunk*, int, int) = 0;
 
-    int mXZSize;
+    int m_xzSize;
 };

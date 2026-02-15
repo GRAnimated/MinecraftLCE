@@ -23,10 +23,10 @@
 #include <memory>
 
 int Entity::getId() {
-    return mId;
+    return m_id;
 }
 void Entity::setId(int id) {
-    mId = id;
+    m_id = id;
 }
 
 void Entity::staticCtor() {
@@ -54,94 +54,94 @@ void Entity::staticCtor() {
 // NON_MATCHING: a couple things need to be moved around to move instructions into the right place
 void Entity::_init(bool synched, Level* level) {
     if (synched && TlsGetValue(sTlsIndex)) {
-        mId = getSmallId();
+        m_id = getSmallId();
     } else {
-        mId = sEntityAmount++;
+        m_id = sEntityAmount++;
         if (sEntityAmount == 0x7FFFFFF)
             sEntityAmount = 2048;
     }
 
     sViewScale = 1.0;
 
-    mBlocksBuilding = false;
-    mVehicle = nullptr;
-    mBoardingCooldown = 0;
-    mForcedLoading = false;
+    m_blocksBuilding = false;
+    m_vehicle = nullptr;
+    m_boardingCooldown = 0;
+    m_forcedLoading = false;
 
-    mXo = mYo = mZo = 0.0;
-    mX = mY = mZ = 0.0;
-    mDeltaMovementX = mDeltaMovementY = mDeltaMovementZ = 0.0;
-    mXRot = mYRot = 0.0f;
-    mXRotO = mYRotO = 0.0f;
+    m_xo = m_yo = m_zo = 0.0;
+    m_x = m_y = m_z = 0.0;
+    m_deltaMovementX = m_deltaMovementY = m_deltaMovementZ = 0.0;
+    m_xRot = m_yRot = 0.0f;
+    m_xRotO = m_yRotO = 0.0f;
 
-    field_d8 = 0;
-    field_dc = 0;
-    field_e0 = 0;
-    field_e4 = 0;
-    mBoundingBox = AABB::newPermanent(0.0, 0.0, 0.0, 0.0, 0.0, 0.0);
-    mFallTicks = 0;
-    mHardLandingsCount = 0;
-    mWidth = 0.6f;
-    mHeight = 1.8f;
-    mOnGround = false;
-    mHasVerticalCollision = false;
-    mHasHorizontalCollision = false;
-    mHasCollision = false;
-    mIsHurtMarked = false;
-    mIsInWeb = false;
-    mCipa = true;
-    mIsRemoved = false;
-    mNextStep = 1;
-    mNextFlap = 1.0f;
-    mXOld = mYOld = mZOld = 0.0;
-    mMaxUpStep = 0.0f;
-    mHasNoPhysics = false;
-    mPushThrough = 0;
-    mWalkDistO = 0.0f;
-    mWalkDist = 0.0f;
-    mMoveDist = 0.0f;
-    mFallDistance = 0.0f;
+    m_fieldD8 = 0;
+    m_fieldDc = 0;
+    m_fieldE0 = 0;
+    m_fieldE4 = 0;
+    m_boundingBox = AABB::newPermanent(0.0, 0.0, 0.0, 0.0, 0.0, 0.0);
+    m_fallTicks = 0;
+    m_hardLandingsCount = 0;
+    m_width = 0.6f;
+    m_height = 1.8f;
+    m_onGround = false;
+    m_hasVerticalCollision = false;
+    m_hasHorizontalCollision = false;
+    m_hasCollision = false;
+    m_isHurtMarked = false;
+    m_isInWeb = false;
+    m_cipa = true;
+    m_isRemoved = false;
+    m_nextStep = 1;
+    m_nextFlap = 1.0f;
+    m_xOld = m_yOld = m_zOld = 0.0;
+    m_maxUpStep = 0.0f;
+    m_hasNoPhysics = false;
+    m_pushThrough = 0;
+    m_walkDistO = 0.0f;
+    m_walkDist = 0.0f;
+    m_moveDist = 0.0f;
+    m_fallDistance = 0.0f;
 
     Random* random = new Random();
-    mRand = random;
-    mTickCount = 0;
-    mWasInWater = false;
-    mInvulnerableTime = 0;
-    mIsFirstTick = true;
-    mIsImmuneToFire = false;
-    mIsInChunk = false;
-    mXChunk = mYChunk = mZChunk = 0;
-    mXP = mYP = mZP = 0;
-    field_190 = nullptr;
-    mHasNoCulling = false;
-    mHasImpulse = false;
-    mChangingDimensionDelay = 0;
-    mIsInsidePortal = false;
-    mPortalTime = 0;
-    mDimensionId = 0;
-    mIsGlowing = false;
-    mPortalEntranceOffset = nullptr;
-    mPortalEntranceForwards = nullptr;
+    m_rand = random;
+    m_tickCount = 0;
+    m_wasInWater = false;
+    m_invulnerableTime = 0;
+    m_isFirstTick = true;
+    m_isImmuneToFire = false;
+    m_isInChunk = false;
+    m_xChunk = m_yChunk = m_zChunk = 0;
+    m_xp = m_yp = m_zp = 0;
+    m_field190 = nullptr;
+    m_hasNoCulling = false;
+    m_hasImpulse = false;
+    m_changingDimensionDelay = 0;
+    m_isInsidePortal = false;
+    m_portalTime = 0;
+    m_dimensionId = 0;
+    m_isGlowing = false;
+    m_portalEntranceOffset = nullptr;
+    m_portalEntranceForwards = nullptr;
 
     if (synched)
-        mStringUUID = L"ent" + Mth::createInsecureUUID(random);
+        m_stringUuid = L"ent" + Mth::createInsecureUUID(random);
 
-    mCommandStats = new CommandStats();
+    m_commandStats = new CommandStats();
 
-    mIsInvulnerable = false;
-    mHasTeleported = false;
-    mRemainingFireTicks = -getFireImmuneTicks();
-    mPistonDeltas = arrayWithLength<double>(3, true);
-    mPistonDeltasGameTime = 0;
-    mInventory = NonNullList<not_null_ptr<ItemInstance>>();
+    m_isInvulnerable = false;
+    m_hasTeleported = false;
+    m_remainingFireTicks = -getFireImmuneTicks();
+    m_pistonDeltas = arrayWithLength<double>(3, true);
+    m_pistonDeltasGameTime = 0;
+    m_inventory = NonNullList<not_null_ptr<ItemInstance>>();
 
-    mType = 0;
-    field_cc = false;
-    field_d0 = -1;
+    m_type = 0;
+    m_fieldCc = false;
+    m_fieldD0 = -1;
 }
 
 Entity::Entity(Level* level, bool synched) {
-    mLevel = level;
+    m_level = level;
     MemSect(16);
     _init(synched, level);
     MemSect(0);
@@ -149,32 +149,32 @@ Entity::Entity(Level* level, bool synched) {
     setPos(0.0, 0.0, 0.0);
 
     if (level)
-        mDimensionId = level->mDimension->getType()->getId();
+        m_dimensionId = level->m_dimension->getType()->getId();
 
     if (synched) {
         SynchedEntityData* synchedEntityData = new SynchedEntityData(this);
-        mEntityData = std::shared_ptr<SynchedEntityData>(synchedEntityData);
+        m_entityData = std::shared_ptr<SynchedEntityData>(synchedEntityData);
     } else {
-        mEntityData = nullptr;
+        m_entityData = nullptr;
     }
 
-    if (mEntityData) {
-        mEntityData->createDateItem(qword_7101789FA0, 0);
-        mEntityData->createDateItem(qword_7101789FA8, 300);
-        mEntityData->createDateItem(qword_7101789FB8, false);
-        mEntityData->createDateItem(qword_7101789FB0, std::wstring(L""));
-        mEntityData->createDateItem(qword_7101789FC0, false);
-        mEntityData->createDateItem(qword_7101789FC8, false);
-        mEntityData->createDateItem(qword_7101789FD0, false);
-        mEntityData->createDateItem(qword_7101789FD8, false);
-        mEntityData->createDateItem(qword_7101789FE0, std::wstring(L""));
+    if (m_entityData) {
+        m_entityData->createDateItem(qword_7101789FA0, 0);
+        m_entityData->createDateItem(qword_7101789FA8, 300);
+        m_entityData->createDateItem(qword_7101789FB8, false);
+        m_entityData->createDateItem(qword_7101789FB0, std::wstring(L""));
+        m_entityData->createDateItem(qword_7101789FC0, false);
+        m_entityData->createDateItem(qword_7101789FC8, false);
+        m_entityData->createDateItem(qword_7101789FD0, false);
+        m_entityData->createDateItem(qword_7101789FD8, false);
+        m_entityData->createDateItem(qword_7101789FE0, std::wstring(L""));
     }
 
-    field_e8 = 0;
+    m_fieldE8 = 0;
 }
 
 void Entity::fjDerivedCtorCalls() {
-    this->mType = this->GetType();
+    this->m_type = this->GetType();
     this->defineSynchedData();
 }
 
@@ -183,64 +183,65 @@ void Entity::kill() {
 }
 
 void Entity::resetPos() {
-    if (!this->mLevel)
+    if (!this->m_level)
         return;
 
     std::shared_ptr<Entity> ent = shared_from_this();
-    while (this->mY > 0.0 && this->mY < 256.0) {
-        this->setPos(this->mX, this->mY, this->mZ);
+    while (this->m_y > 0.0 && this->m_y < 256.0) {
+        this->setPos(this->m_x, this->m_y, this->m_z);
 
-        if (this->mLevel->getCollisionAABBs(ent, this->getBoundingBox(), false, false, false)->empty()) {
+        if (this->m_level->getCollisionAABBs(ent, this->getBoundingBox(), false, false, false)->empty()) {
             break;
         }
 
-        ++this->mY;
+        ++this->m_y;
     }
 
-    this->mDeltaMovementZ = this->mDeltaMovementY = this->mDeltaMovementX = 0.0;
-    this->mXRot = 0.0f;
+    this->m_deltaMovementZ = this->m_deltaMovementY = this->m_deltaMovementX = 0.0;
+    this->m_xRot = 0.0f;
 }
 
 void Entity::remove() {
-    this->mIsRemoved = true;
+    this->m_isRemoved = true;
     this->stopCurrentLerp();
 }
 
 void Entity::setDropContainerContent(bool) {}
 
 void Entity::setSize(float width, float height) {
-    if (width != this->mWidth || height != this->mHeight) {
-        float widthBefore = this->mWidth;
-        this->mWidth = width;
-        this->mHeight = height;
-        if (this->mWidth < widthBefore) {
+    if (width != this->m_width || height != this->m_height) {
+        float widthBefore = this->m_width;
+        this->m_width = width;
+        this->m_height = height;
+        if (this->m_width < widthBefore) {
             double halfWidth = width / 2.0;
-            this->setBoundingBox(AABB::newTemp(this->mX - halfWidth, this->mY, this->mZ - halfWidth,
-                                               this->mX + halfWidth, this->mY + this->mHeight,
-                                               this->mZ + halfWidth));
+            this->setBoundingBox(AABB::newTemp(this->m_x - halfWidth, this->m_y, this->m_z - halfWidth,
+                                               this->m_x + halfWidth, this->m_y + this->m_height,
+                                               this->m_z + halfWidth));
             return;
         }
 
         const AABB* aabb = this->getBoundingBox();
-        this->setBoundingBox(AABB::newTemp(aabb->minX, aabb->minY, aabb->minZ, aabb->minX + this->mWidth,
-                                           aabb->minY + this->mHeight, aabb->minZ + this->mWidth));
-        if (this->mWidth > widthBefore && !this->mIsFirstTick && !this->mLevel->mIsLocal) {
-            this->move((MoverType)0, (widthBefore - this->mWidth), 0.0, (widthBefore - this->mWidth), false);
+        this->setBoundingBox(AABB::newTemp(aabb->m_inX, aabb->m_inY, aabb->m_inZ, aabb->m_inX + this->m_width,
+                                           aabb->m_inY + this->m_height, aabb->m_inZ + this->m_width));
+        if (this->m_width > widthBefore && !this->m_isFirstTick && !this->m_level->m_isLocal) {
+            this->move((MoverType)0, (widthBefore - this->m_width), 0.0, (widthBefore - this->m_width),
+                       false);
         }
     }
 }
 
 void Entity::setPos(double x, double y, double z) {
-    this->mX = x;
-    this->mY = y;
-    this->mZ = z;
-    float halfWidth = this->mWidth / 2.0f;
+    this->m_x = x;
+    this->m_y = y;
+    this->m_z = z;
+    float halfWidth = this->m_width / 2.0f;
     this->setBoundingBox(
-        AABB::newTemp(x - halfWidth, y, z - halfWidth, x + halfWidth, y + this->mHeight, z + halfWidth));
+        AABB::newTemp(x - halfWidth, y, z - halfWidth, x + halfWidth, y + this->m_height, z + halfWidth));
 }
 
 void Entity::tick() {
-    if (!this->mLevel->mIsLocal) {
+    if (!this->m_level->m_isLocal) {
         this->setSharedFlag(8, this->isGlowing());
     }
 
@@ -252,8 +253,8 @@ void Entity::tick() {
 // void baseTick() {} // don't care about this rn
 
 void Entity::processDimensionDelay() {
-    if (this->mChangingDimensionDelay > 0)
-        --this->mChangingDimensionDelay;
+    if (this->m_changingDimensionDelay > 0)
+        --this->m_changingDimensionDelay;
 }
 
 int Entity::getPortalWaitTime() {
@@ -267,12 +268,12 @@ void Entity::setSecondsOnFire(int seconds) {
             std::static_pointer_cast<LivingEntity>(shared_from_this()), i);
     }
 
-    if (this->mRemainingFireTicks < i)
-        this->mRemainingFireTicks = i;
+    if (this->m_remainingFireTicks < i)
+        this->m_remainingFireTicks = i;
 }
 
 void Entity::clearFire() {
-    this->mRemainingFireTicks = 0;
+    this->m_remainingFireTicks = 0;
 }
 
 void Entity::outOfWorld() {
@@ -284,21 +285,21 @@ void Entity::outOfWorld() {
 void Entity::updateDeltaAfterMove(Block* block, double oldX, double oldY, double oldZ, double& newX,
                                   double& newY, double& newZ) {
     if (newX != oldX)
-        this->mDeltaMovementX = 0.0f;
+        this->m_deltaMovementX = 0.0f;
     if (newZ != oldZ)
-        this->mDeltaMovementZ = 0.0f;
+        this->m_deltaMovementZ = 0.0f;
     if (newY != oldY) {
         PIXBeginNamedEvent(0.0f, "Update entity after falling");
-        block->updateEntityAfterFallOn(this->mLevel, shared_from_this());
+        block->updateEntityAfterFallOn(this->m_level, shared_from_this());
         PIXEndNamedEvent();
     }
 }
 
 void Entity::setLocationFromBoundingbox() {
     const AABB* tempAABB = this->getBoundingBox();
-    this->mX = (tempAABB->minX + tempAABB->maxX) / 2.0;
-    this->mY = tempAABB->minY;
-    this->mZ = (tempAABB->minZ + tempAABB->maxZ) / 2.0;
+    this->m_x = (tempAABB->m_inX + tempAABB->m_axX) / 2.0;
+    this->m_y = tempAABB->m_inY;
+    this->m_z = (tempAABB->m_inZ + tempAABB->m_axZ) / 2.0;
 }
 
 /* TOO LAZY TO DO SOUNDEVENTS
@@ -323,8 +324,8 @@ bool Entity::makeFlySound() {
 
 void Entity::playSound(const SoundEvent* sound, float volume, float pitch) {
     if (!this->isSilent()) {
-        this->mLevel->playSound(nullptr, this->mX, this->mY, this->mZ, sound, this->getSoundSource(), volume,
-                                pitch, 16.0f);
+        this->m_level->playSound(nullptr, this->m_x, this->m_y, this->m_z, sound, this->getSoundSource(),
+                                 volume, pitch, 16.0f);
     }
 }
 
@@ -341,16 +342,16 @@ bool Entity::makeStepSound() {
 
 void Entity::checkFallDamage(double fall, bool onGround, Block* block, const BlockPos& pos) {
     if (onGround) {
-        if (this->mFallDistance > 0.0f) {
-            block->fallOn(this->mLevel, pos, shared_from_this(), this->mFallDistance);
-            ++this->mHardLandingsCount;  // hard enough to take fall damage
+        if (this->m_fallDistance > 0.0f) {
+            block->fallOn(this->m_level, pos, shared_from_this(), this->m_fallDistance);
+            ++this->m_hardLandingsCount;  // hard enough to take fall damage
         }
 
-        this->mFallTicks = 0;
-        this->mFallDistance = 0.0f;
+        this->m_fallTicks = 0;
+        this->m_fallDistance = 0.0f;
     } else if (fall < 0.0) {
-        this->mFallDistance -= (float)fall;
-        ++this->mFallTicks;
+        this->m_fallDistance -= (float)fall;
+        ++this->m_fallTicks;
     }
 }
 
@@ -359,16 +360,16 @@ AABB* Entity::getCollideBox() {
 }
 
 void Entity::burn(int howMuch) {
-    if (!this->mIsImmuneToFire)
+    if (!this->m_isImmuneToFire)
         this->hurt(DamageSource::IN_FIRE, howMuch);
 }
 
 Vec3* Entity::getViewVector(float partialTicks) {
     if (partialTicks == 1.0f) {
-        return this->calculateViewVector(this->mXRot, this->mYRot);
+        return this->calculateViewVector(this->m_xRot, this->m_yRot);
     } else {
-        return this->calculateViewVector(this->mXRotO + ((this->mXRot - this->mXRotO) * partialTicks),
-                                         this->mYRotO + ((this->mYRot - this->mYRotO) * partialTicks));
+        return this->calculateViewVector(this->m_xRotO + ((this->m_xRot - this->m_xRotO) * partialTicks),
+                                         this->m_yRotO + ((this->m_yRot - this->m_yRotO) * partialTicks));
     }
 }
 void Entity::readAdditionContructionTag(CompoundTag*) {}

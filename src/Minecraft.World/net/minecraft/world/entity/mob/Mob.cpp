@@ -23,42 +23,42 @@ Mob::Mob(Level* level) : LivingEntity(level) {
     this->registerAttributes();
     MemSect(0);
 
-    this->mLookControl = new LookControl(this);
-    this->mMoveControl = new MoveControl(this);
-    this->mJumpControl = new JumpControl(this);
-    this->mBodyRotationControl = nullptr;
-    this->mPathNavigation = nullptr;
-    this->mSensing = new Sensing(this);
+    this->m_lookControl = new LookControl(this);
+    this->m_moveControl = new MoveControl(this);
+    this->m_jumpControl = new JumpControl(this);
+    this->m_bodyRotationControl = nullptr;
+    this->m_pathNavigation = nullptr;
+    this->m_sensing = new Sensing(this);
 
-    this->mHandDropChances[0] = 0.085f;
-    this->mHandDropChances[1] = 0.085f;
-    this->mArmorDropChances[0] = 0.085f;
-    this->mArmorDropChances[1] = 0.085f;
-    this->mArmorDropChances[2] = 0.085f;
-    this->mArmorDropChances[3] = 0.085f;
+    this->m_handDropChances[0] = 0.085f;
+    this->m_handDropChances[1] = 0.085f;
+    this->m_armorDropChances[0] = 0.085f;
+    this->m_armorDropChances[1] = 0.085f;
+    this->m_armorDropChances[2] = 0.085f;
+    this->m_armorDropChances[3] = 0.085f;
 }
 
 void Mob::init() {
-    this->mAmbientSoundTime = 0;
-    this->mXpReward = 0;
-    this->dword760 = 0;
-    this->mTarget.reset();
-    this->mSensing = nullptr;
-    this->mNonNullListIdk = NonNullList<not_null_ptr<ItemInstance>>::withSize(5, ItemInstance::EMPTY);
-    this->mArrayOfFloats = arrayWithLength<float>(5, true);
-    this->mArrayOfFloats[0] = 0.0f;
-    this->mArrayOfFloats[1] = 0.0f;
-    this->mArrayOfFloats[2] = 0.0f;
-    this->mArrayOfFloats[3] = 0.0f;
-    this->mArrayOfFloats[4] = 0.0f;
-    this->mCanPickUpLoot = false;
-    this->mPersistenceRequired = false;
-    this->mCensoredString = std::shared_ptr<CensoredString>(new CensoredString());
-    this->mLootTable = nullptr;
-    this->mLootTableSeed = 0;
-    this->mHandItems = NonNullList<not_null_ptr<ItemInstance>>::withSize(2, ItemInstance::EMPTY);
-    this->mArmorItems = NonNullList<not_null_ptr<ItemInstance>>::withSize(4, ItemInstance::EMPTY);
-    this->mLeashInfoTag = nullptr;
-    this->mLeashed = false;
-    this->field_e8 = this->field_e8 | 2;
+    this->m_ambientSoundTime = 0;
+    this->m_xpReward = 0;
+    this->m_dword760 = 0;
+    this->m_target.reset();
+    this->m_sensing = nullptr;
+    this->m_nonNullListIdk = NonNullList<not_null_ptr<ItemInstance>>::withSize(5, ItemInstance::EMPTY);
+    this->m_arrayOfFloats = arrayWithLength<float>(5, true);
+    this->m_arrayOfFloats[0] = 0.0f;
+    this->m_arrayOfFloats[1] = 0.0f;
+    this->m_arrayOfFloats[2] = 0.0f;
+    this->m_arrayOfFloats[3] = 0.0f;
+    this->m_arrayOfFloats[4] = 0.0f;
+    this->m_canPickUpLoot = false;
+    this->m_persistenceRequired = false;
+    this->m_censoredString = std::shared_ptr<CensoredString>(new CensoredString());
+    this->m_lootTable = nullptr;
+    this->m_lootTableSeed = 0;
+    this->m_handItems = NonNullList<not_null_ptr<ItemInstance>>::withSize(2, ItemInstance::EMPTY);
+    this->m_armorItems = NonNullList<not_null_ptr<ItemInstance>>::withSize(4, ItemInstance::EMPTY);
+    this->m_leashInfoTag = nullptr;
+    this->m_leashed = false;
+    this->m_fieldE8 = this->m_fieldE8 | 2;
 }

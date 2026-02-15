@@ -21,25 +21,26 @@
 bool MapRenderer::sColoursNeedReload = true;
 
 MapRenderer::MapInstance::MapInstance(MapRenderer* holder, const std::shared_ptr<MapItemSavedData>& savedData)
-    : mMapRenderer(holder), mSavedData(savedData) {
-    this->mMapPixels = arrayWithLength<int>(0x4000LL, true);
+    : m_mapRenderer(holder), m_savedData(savedData) {
+    this->m_mapPixels = arrayWithLength<int>(0x4000LL, true);
     for (int i = 0; i != 0x4000; i++) {
-        this->mMapPixels[i] = 0;
+        this->m_mapPixels[i] = 0;
     }
     if (MapRenderer::sColoursNeedReload)
         MapRenderer::reloadColours();
 }
 
 void MapRenderer::MapInstance::fjUpdateWithRenderContext() {
-    if (this->mMapTextureId == -1) {
+    if (this->m_mapTextureId == -1) {
         BufferedImage image(128, 128, 0);
-        this->mMapTextureId
-            = this->mMapRenderer->mTextures->getTexture(&image, (C4JRender::eTextureFormat)0, 0);
-        this->mCreatedTexture = true;
+        this->m_mapTextureId
+            = this->m_mapRenderer->m_textures->getTexture(&image, (C4JRender::eTextureFormat)0, 0);
+        this->m_createdTexture = true;
     }
 
-    if (this->mCreatedTexture)
-        this->mMapRenderer->mTextures->replaceTextureDirect(this->mMapPixels, 128, 128, this->mMapTextureId);
+    if (this->m_createdTexture)
+        this->m_mapRenderer->m_textures->replaceTextureDirect(this->m_mapPixels, 128, 128,
+                                                              this->m_mapTextureId);
 }
 
 bool sortByTexture(const MapDecoration& a, const MapDecoration& b) {
@@ -53,7 +54,7 @@ void MapRenderer::MapInstance::draw(const std::shared_ptr<Player>& _player) {
 
     Tesselator* tesselator = Tesselator::getInstance();
     BufferBuilder* bufferBuilder = tesselator->getBuilder();
-    GlStateManager::bindTexture(this->mMapTextureId);
+    GlStateManager::bindTexture(this->m_mapTextureId);
     GlStateManager::enableBlend();
     GlStateManager::blendFunc(2, 6);
     GlStateManager::disableAlphaTest();
@@ -66,7 +67,7 @@ void MapRenderer::MapInstance::draw(const std::shared_ptr<Player>& _player) {
     GlStateManager::enableAlphaTest();
     GlStateManager::disableBlend();
 
-    std::vector<MapDecoration> decorations = this->mSavedData->fjGetAllDecorations();
+    std::vector<MapDecoration> decorations = this->m_savedData->fjGetAllDecorations();
     std::sort(decorations.begin(), decorations.end(), sortByTexture);
 
     {
@@ -84,8 +85,8 @@ void MapRenderer::MapInstance::draw(const std::shared_ptr<Player>& _player) {
                 if (map.find(hashCode) == map.end() || map.at(hashCode) <= 2) {
                     int tempTexId = img > 15 ? 120 : 14;
                     if (lastDecorTexId != tempTexId) {
-                        this->mMapRenderer->mTextures->bind(
-                            this->mMapRenderer->mTextures->loadTexture(tempTexId));
+                        this->m_mapRenderer->m_textures->bind(
+                            this->m_mapRenderer->m_textures->loadTexture(tempTexId));
 
                         lastDecorTexId = tempTexId;
                     }
@@ -123,12 +124,12 @@ void MapRenderer::MapInstance::draw(const std::shared_ptr<Player>& _player) {
         GlStateManager::scalef(1.0f, 1.0f, 1.0f);
 
         if (_player) {
-            int x = floor(_player->mX);
-            int y = floor(_player->mY + _player->getEyeHeight());
-            int z = floor(_player->mZ);
+            int x = floor(_player->m_x);
+            int y = floor(_player->m_y + _player->getEyeHeight());
+            int z = floor(_player->m_z);
             std::wstring cords = formatwstr(L"X: %d, Y: %d, Z: %d", x, y, z);
-            this->mMapRenderer->mFont->draw(cords, 0, 0,
-                                            Minecraft::GetInstance()->getColourTable()->getColour(Map_Text));
+            this->m_mapRenderer->m_font->draw(
+                cords, 0, 0, Minecraft::GetInstance()->getColourTable()->getColour(Map_Text));
         }
 
         GlStateManager::popMatrix();
@@ -136,16 +137,16 @@ void MapRenderer::MapInstance::draw(const std::shared_ptr<Player>& _player) {
 }
 
 MapRenderer::MapRenderer(Font* font, Options* options, Textures* textures) {
-    this->mTextures = textures;
-    this->mOptions = options;
-    this->mFont = font;
+    this->m_textures = textures;
+    this->m_options = options;
+    this->m_font = font;
 }
 
 MapRenderer::MapInstance* MapRenderer::getMapInstance(const std::shared_ptr<MapItemSavedData>& savedData) {
-    auto map = this->mMaps.find(savedData->mPath);
-    if (map == this->mMaps.end()) {
-        this->mMaps[savedData->mPath] = new MapInstance(this, savedData);
-        map = this->mMaps.find(savedData->mPath);
+    auto map = this->m_maps.find(savedData->m_path);
+    if (map == this->m_maps.end()) {
+        this->m_maps[savedData->m_path] = new MapInstance(this, savedData);
+        map = this->m_maps.find(savedData->m_path);
     }
 
     return map->second;
@@ -164,7 +165,7 @@ void MapRenderer::reloadColours() {
         if (i / 4 == 0) {
             finalColor = (8 * ((i + i / 128) & 1)) | 0x10;
         } else {
-            int baseColor = colourTable->getColour(MaterialColor::MATERIAL_COLORS[i / 4]->mColor);
+            int baseColor = colourTable->getColour(MaterialColor::MATERIAL_COLORS[i / 4]->m_color);
 
             int brightness = 220;
 

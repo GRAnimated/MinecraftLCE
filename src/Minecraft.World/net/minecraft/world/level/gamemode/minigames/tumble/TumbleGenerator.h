@@ -17,5 +17,5 @@ public:
     void GetLayerExtents(unsigned int layer, float*, float*) override;
     int GetBlockCountOnLayer(unsigned int layer) override;
 
-    char fill0x48[0x48];
+    char m_fill0x48[0x48];
 };

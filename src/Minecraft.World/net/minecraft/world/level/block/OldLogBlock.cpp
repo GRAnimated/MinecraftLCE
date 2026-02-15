@@ -20,7 +20,7 @@ void OldLogBlock::blockStaticCtor() {
 
 OldLogBlock::OldLogBlock() : LogBlock() {
     Block::DerivedInit();
-    const BlockState* defaultState = this->mBlockStateDefinition->any()
+    const BlockState* defaultState = this->m_blockStateDefinition->any()
                                          ->setValue(OldLogBlock::VARIANT, PlanksBlock::Variant::OAK)
                                          ->setValue(LogBlock::LOG_AXIS, LogBlock::LogAxis::Y);
     this->registerDefaultState(defaultState);

@@ -15,11 +15,11 @@ EPacketType ServerboundChatPacket::getPacketId() {
 }
 
 void ServerboundChatPacket::read(DataInputStream* input) {
-    message = Packet::readUtf(input, 256);
+    m_essage = Packet::readUtf(input, 256);
 }
 
 void ServerboundChatPacket::write(DataOutputStream* output) {
-    Packet::writeUtf(message, output);
+    Packet::writeUtf(m_essage, output);
 }
 
 void ServerboundChatPacket::handle(PacketListener* listener) {

@@ -10,7 +10,7 @@ public:
 
     int getBaseClass() override;
 
-    char padding[0x10];
+    char m_padding[0x10];
 };
 
 ASSERT_SIZEOF(IceBiome, 0x158)

@@ -33,13 +33,13 @@ public:
     virtual void SetSkinAdjustments(_SkinAdjustments);
     virtual std::wstring getName();
 
-    float mAttackTime;
-    bool mRiding;
-    std::vector<ModelPart*> mModelParts;
-    bool mIsYoung;
-    std::unordered_map<std::wstring, TexOffs*> mTexOffs;
-    int mTexWidth;
-    int mTexHeight;
-    ModelPartsSkinned mModelPartsSkinned;
-    bool byte88;
+    float m_attackTime;
+    bool m_riding;
+    std::vector<ModelPart*> m_modelParts;
+    bool m_isYoung;
+    std::unordered_map<std::wstring, TexOffs*> m_texOffs;
+    int m_texWidth;
+    int m_texHeight;
+    ModelPartsSkinned m_modelPartsSkinned;
+    bool m_byte88;
 };

@@ -22,12 +22,12 @@ ParticleType* ParticleTypes::INSTANT_SPELL
     = new ParticleType("instantSpell", ePARTICLE_TYPE_InstantSpell, false, 0);
 
 ParticleType::ParticleType(const std::string name, ePARTICLE_TYPE id, bool unk1, int unk2) {
-    this->mName = name;
-    this->mId = id;
-    this->mUnk1 = unk1;
-    this->mUnk2 = unk2;
+    this->m_name = name;
+    this->m_id = id;
+    this->m_unk1 = unk1;
+    this->m_unk2 = unk2;
 }
 
 ePARTICLE_TYPE ParticleType::getId() const {
-    return this->mId;
+    return this->m_id;
 }

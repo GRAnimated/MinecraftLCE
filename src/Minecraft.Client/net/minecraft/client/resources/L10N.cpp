@@ -23,7 +23,7 @@ void L10N::loadStringTable() {
 
         // it seems that they didn't have destructor for arrayWithLength for some reason and just handled it
         //                                                                                          manually
-        delete archive.data;
+        delete archive.m_data;
     } else {
         StringTable::instance = nullptr;
     }

@@ -14,24 +14,26 @@ const wchar_t* ThermalAreaRuleDefinition::DIRECTION_NAMES[8] = {
 };
 
 ThermalAreaRuleDefinition::ThermalAreaRuleDefinition() {
-    mLiftForceModifier = 1.0;
-    mStaticLift = 0.0;
-    mTargetHeight = 0.0;
-    mSpeedBoost = 0.0;
-    mIsActive = true;
-    mBoostDirection = DIRECTION_OMNI_PLUS_X;
-    mConditionType = DIRECTION_PLUS_X;
-    mConditionValue0 = 0;
-    mConditionValue1 = 0;
+    m_liftForceModifier = 1.0;
+    m_staticLift = 0.0;
+    m_targetHeight = 0.0;
+    m_speedBoost = 0.0;
+    m_isActive = true;
+    m_boostDirection = DIRECTION_OMNI_PLUS_X;
+    m_conditionType = DIRECTION_PLUS_X;
+    m_conditionValue0 = 0;
+    m_conditionValue1 = 0;
     GameRuleDefinition::addDoubleAttribute((ConsoleGameRules::EGameRuleAttr_liftForceModifier),
-                                           &mLiftForceModifier);
-    GameRuleDefinition::addDoubleAttribute(ConsoleGameRules::EGameRuleAttr_staticLift, &mStaticLift);
-    GameRuleDefinition::addDoubleAttribute(ConsoleGameRules::EGameRuleAttr_targetHeight, &mTargetHeight);
-    GameRuleDefinition::addDoubleAttribute(ConsoleGameRules::EGameRuleAttr_speedBoost, &mSpeedBoost);
-    GameRuleDefinition::addIntAttribute(ConsoleGameRules::EGameRuleAttr_condition_type, &mConditionType);
-    GameRuleDefinition::addIntAttribute(ConsoleGameRules::EGameRuleAttr_condition_value_0, &mConditionValue0);
-    GameRuleDefinition::addIntAttribute(ConsoleGameRules::EGameRuleAttr_condition_value_1, &mConditionValue1);
-    dword_c4 = 0;
+                                           &m_liftForceModifier);
+    GameRuleDefinition::addDoubleAttribute(ConsoleGameRules::EGameRuleAttr_staticLift, &m_staticLift);
+    GameRuleDefinition::addDoubleAttribute(ConsoleGameRules::EGameRuleAttr_targetHeight, &m_targetHeight);
+    GameRuleDefinition::addDoubleAttribute(ConsoleGameRules::EGameRuleAttr_speedBoost, &m_speedBoost);
+    GameRuleDefinition::addIntAttribute(ConsoleGameRules::EGameRuleAttr_condition_type, &m_conditionType);
+    GameRuleDefinition::addIntAttribute(ConsoleGameRules::EGameRuleAttr_condition_value_0,
+                                        &m_conditionValue0);
+    GameRuleDefinition::addIntAttribute(ConsoleGameRules::EGameRuleAttr_condition_value_1,
+                                        &m_conditionValue1);
+    m_dwordC4 = 0;
 }
 
 ConsoleGameRules::EGameRuleType ThermalAreaRuleDefinition::getActionType() {
@@ -53,32 +55,32 @@ void ThermalAreaRuleDefinition::addAttribute(const std::wstring& name, const std
     }
 
     if (direction != DIRECTION_UNDEFINED) {
-        mBoostDirection = (eDirection)direction;
+        m_boostDirection = (eDirection)direction;
     }
 }
 
 void ThermalAreaRuleDefinition::WriteAttributesAsXML(std::string& xml) {
-    if (!mName.empty())
+    if (!m_name.empty())
         GameRuleDefinition::WriteAttributeAsXML(ConsoleGameRules::EGameRuleAttr_name, xml);
 
-    if (mLiftForceModifier != 1.0)
+    if (m_liftForceModifier != 1.0)
         GameRuleDefinition::WriteAttributeAsXML(ConsoleGameRules::EGameRuleAttr_liftForceModifier, xml);
 
-    if (mStaticLift != 0.0)
+    if (m_staticLift != 0.0)
         GameRuleDefinition::WriteAttributeAsXML(ConsoleGameRules::EGameRuleAttr_staticLift, xml);
 
-    if (mTargetHeight != 0.0)
+    if (m_targetHeight != 0.0)
         GameRuleDefinition::WriteAttributeAsXML(ConsoleGameRules::EGameRuleAttr_targetHeight, xml);
 
-    if (mSpeedBoost != 0.0) {
+    if (m_speedBoost != 0.0) {
         GameRuleDefinition::WriteAttributeAsXML(ConsoleGameRules::EGameRuleAttr_speedBoost, xml);
         std::string str
             = formatstr(" boostDirection=\"%ls\"",
-                        ThermalAreaRuleDefinition::DIRECTION_NAMES[(unsigned int)mBoostDirection]);
+                        ThermalAreaRuleDefinition::DIRECTION_NAMES[(unsigned int)m_boostDirection]);
         xml.append(str);
     }
 
-    if (mConditionType) {
+    if (m_conditionType) {
         GameRuleDefinition::WriteAttributeAsXML(ConsoleGameRules::EGameRuleAttr_condition_type, xml);
         GameRuleDefinition::WriteAttributeAsXML(ConsoleGameRules::EGameRuleAttr_condition_value_0, xml);
         GameRuleDefinition::WriteAttributeAsXML(ConsoleGameRules::EGameRuleAttr_condition_value_1, xml);
@@ -91,29 +93,29 @@ void ThermalAreaRuleDefinition::WriteAttributesAsXML(std::string& xml) {
     GameRuleDefinition::WriteAttributeAsXML(ConsoleGameRules::EGameRuleAttr_y1, xml);
     GameRuleDefinition::WriteAttributeAsXML(ConsoleGameRules::EGameRuleAttr_z1, xml);
 
-    if (mDataTag)
+    if (m_dataTag)
         GameRuleDefinition::WriteAttributeAsXML(ConsoleGameRules::EGameRuleAttr_dataTag, xml);
 }
 
 // NON_MATCHING: The branch for the first return true gets optimized
 bool ThermalAreaRuleDefinition::getConditionsMet(std::shared_ptr<Entity> entity) {
-    if (mConditionType == 0)
+    if (m_conditionType == 0)
         return true;
 
-    if (mConditionType == 1) {
-        if (dword_c4 >= mConditionValue0)
+    if (m_conditionType == 1) {
+        if (m_dwordC4 >= m_conditionValue0)
             return false;
         return true;
     }
 
-    if (mConditionType == 2) {
+    if (m_conditionType == 2) {
         if (entity->isType(ePlayer)) {
-            MultiPlayerLevel* level = (MultiPlayerLevel*)(Minecraft::GetInstance()->mLevel);
+            MultiPlayerLevel* level = (MultiPlayerLevel*)(Minecraft::GetInstance()->m_level);
             ClientScoreboard* scoreboard = level->GetClientScoreboard();
             std::shared_ptr<Player> player = std::static_pointer_cast<Player>(entity);
 
             int lapsCompleted = scoreboard->GetLapsCompleted(player->getSUID(), -1);
-            if (lapsCompleted < mConditionValue0 || lapsCompleted > mConditionValue1)
+            if (lapsCompleted < m_conditionValue0 || lapsCompleted > m_conditionValue1)
                 return false;
         }
     }
@@ -122,18 +124,18 @@ bool ThermalAreaRuleDefinition::getConditionsMet(std::shared_ptr<Entity> entity)
 }
 
 void ThermalAreaRuleDefinition::resetConditions() {
-    dword_c4 = 0;
+    m_dwordC4 = 0;
 }
 
 void ThermalAreaRuleDefinition::updateUseCount() {
-    ++dword_c4;
+    ++m_dwordC4;
 }
 
 const int cDirectionX[4] = {1, -1, 0, 0};
 const int cDirectionZ[4] = {0, 0, 1, -1};
 
 bool ThermalAreaRuleDefinition::setBoostMods(int& xMultiplier, int& zMultiplier) {
-    int dir = mBoostDirection;
+    int dir = m_boostDirection;
 
     if (dir < (unsigned int)4) {
         xMultiplier = cDirectionX[dir];
@@ -145,5 +147,5 @@ bool ThermalAreaRuleDefinition::setBoostMods(int& xMultiplier, int& zMultiplier)
 }
 
 int ThermalAreaRuleDefinition::getBoostDirection() {
-    return mBoostDirection;
+    return m_boostDirection;
 }

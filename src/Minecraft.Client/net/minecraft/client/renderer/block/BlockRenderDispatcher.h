@@ -6,5 +6,5 @@ class BlockRenderDispatcher {
 public:
     BlockRenderDispatcher(BlockColors*);
 
-    void* padding;
+    void* m_padding;
 };

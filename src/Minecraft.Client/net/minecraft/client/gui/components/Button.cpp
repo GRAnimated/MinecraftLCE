@@ -13,19 +13,19 @@ Button::Button(int id, int x, int y, int width, int height, const std::wstring& 
 }
 
 void Button::init(int id, int x, int y, int width, int height, const std::wstring& name) {
-    mIsActive = true;
-    mIsVisible = true;
-    mId = id;
-    mX = x;
-    mY = y;
-    mWidth = width;
-    mHeight = height;
-    mButtonText = name;
+    m_isActive = true;
+    m_isVisible = true;
+    m_id = id;
+    m_x = x;
+    m_y = y;
+    m_width = width;
+    m_height = height;
+    m_buttonText = name;
 }
 
 int Button::getYImage(bool isHovered) {
     int res = 1;
-    if (!mIsActive) {
+    if (!m_isActive) {
         res = 0;
     } else if (isHovered) {
         res = 2;
@@ -34,28 +34,28 @@ int Button::getYImage(bool isHovered) {
 }
 
 void Button::render(Minecraft* minecraft, int x, int y) {
-    if (!mIsVisible)
+    if (!m_isVisible)
         return;
 
-    Font* font = minecraft->mFont;
-    int texture = minecraft->mTextures->loadTexture(8);
+    Font* font = minecraft->m_font;
+    int texture = minecraft->m_textures->loadTexture(8);
     GlStateManager::bindTexture(texture);
     GlStateManager::color4f(1.0f, 1.0f, 1.0f, 1.0f);
 
-    bool hovered = (x >= mX && y >= mY && x < mX + mWidth && y < mY + mHeight);
+    bool hovered = (x >= m_x && y >= m_y && x < m_x + m_width && y < m_y + m_height);
     int yImage = getYImage(hovered);
 
-    blit(mX, mY, 0, 46 + yImage * 20, mWidth / 2, mHeight);
-    blit(mX + mWidth / 2, mY, 200 - mWidth / 2, 46 + yImage * 20, mWidth / 2, mHeight);
+    blit(m_x, m_y, 0, 46 + yImage * 20, m_width / 2, m_height);
+    blit(m_x + m_width / 2, m_y, 200 - m_width / 2, 46 + yImage * 20, m_width / 2, m_height);
 
     renderBg(minecraft, x, y);
 
-    if (!this->mIsActive) {
-        drawCenteredString(font, mButtonText, mX + mWidth / 2, mY + (mHeight - 8) / 2, -6250336);
+    if (!this->m_isActive) {
+        drawCenteredString(font, m_buttonText, m_x + m_width / 2, m_y + (m_height - 8) / 2, -6250336);
     } else if (hovered) {
-        drawCenteredString(font, mButtonText, mX + mWidth / 2, mY + (mHeight - 8) / 2, 16777120);
+        drawCenteredString(font, m_buttonText, m_x + m_width / 2, m_y + (m_height - 8) / 2, 16777120);
     } else {
-        drawCenteredString(font, mButtonText, mX + mWidth / 2, mY + (mHeight - 8) / 2, 14737632);
+        drawCenteredString(font, m_buttonText, m_x + m_width / 2, m_y + (m_height - 8) / 2, 14737632);
     }
 }
 
@@ -64,13 +64,13 @@ void Button::renderBg(Minecraft*, int, int) {}
 void Button::released(int, int) {}
 
 bool Button::clicked(Minecraft*, int x, int y) {
-    if (!mIsActive)
+    if (!m_isActive)
         return false;
-    if (mX > x)
+    if (m_x > x)
         return false;
-    if (mY > y)
+    if (m_y > y)
         return false;
-    if (mWidth + mX <= x)
+    if (m_width + m_x <= x)
         return false;
-    return mHeight + mY > y;
+    return m_height + m_y > y;
 }

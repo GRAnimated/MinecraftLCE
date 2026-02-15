@@ -5,11 +5,11 @@
 void RegisterAwardsWithProfileManager();
 
 struct AwardInfo {
-    long mIdx;  // 64 bit sized on NX but only 32 bit sized on wiiu
-    const wchar_t* mId;
-    int mIdx2;
-    unsigned int mName;  // TODO: are these meant to be unsigned? It throws errors if not.
-    unsigned int mDesc;
+    long m_idx;  // 64 bit sized on NX but only 32 bit sized on wiiu
+    const wchar_t* m_id;
+    int m_idx2;
+    unsigned int m_name;  // TODO: are these meant to be unsigned? It throws errors if not.
+    unsigned int m_desc;
 };
 
 enum eAwardType { _0 = 0 };

@@ -8,7 +8,7 @@ BarrierBlock::BarrierBlock() : Block(Material::BARRIER) {
     setIndestructible();
     setExplodeable(6000000.0f);
     setNotCollectStatistics();
-    isBlocksLight = true;
+    m_isBlocksLight = true;
 }
 
 RenderShape BarrierBlock::getRenderShape(const BlockState* blockState) {

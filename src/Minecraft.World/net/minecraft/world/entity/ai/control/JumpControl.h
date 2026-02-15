@@ -9,6 +9,6 @@ public:
     virtual ~JumpControl();
     virtual void tick();
 
-    Mob* mMob;
-    bool mJumping = false;
+    Mob* m_mob;
+    bool m_jumping = false;
 };

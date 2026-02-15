@@ -7,14 +7,14 @@
 #include "net/minecraft/world/level/block/state/BlockState.h"
 #include "net/minecraft/world/level/material/Material.h"
 
-ClayFeature::ClayFeature(int unk) : Feature(false), mBlock(Blocks::CLAY), field_18(unk) {}
+ClayFeature::ClayFeature(int unk) : Feature(false), m_block(Blocks::CLAY), m_field18(unk) {}
 
 bool ClayFeature::place(Level* level, Random& random, const BlockPos& pos) {
     if (level->getBlockState(pos)->getBlock()->getMaterial() != (Material*)Material::WATER) {
         return false;
     }
 
-    int radius = random.nextInt(field_18 - 2) + 2;
+    int radius = random.nextInt(m_field18 - 2) + 2;
     for (int x = pos.getX() - radius; x <= pos.getX() + radius; ++x) {
         for (int z = pos.getZ() - radius; z <= pos.getZ() + radius; ++z) {
             int deltaX = x - pos.getX();
@@ -27,7 +27,7 @@ bool ClayFeature::place(Level* level, Random& random, const BlockPos& pos) {
                     Block* block = level->getBlockState(result)->getBlock();
 
                     if (block == Blocks::DIRT || block == Blocks::CLAY)
-                        level->setBlock(result, mBlock->defaultBlockState(), 2, false);
+                        level->setBlock(result, m_block->defaultBlockState(), 2, false);
                 }
             }
         }

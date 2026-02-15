@@ -9,7 +9,7 @@ std::shared_ptr<Packet> ClientboundContainerClosePacket::create() {
 }
 
 ClientboundContainerClosePacket::ClientboundContainerClosePacket() {
-    containerId = 0;
+    m_containerId = 0;
 }
 
 int ClientboundContainerClosePacket::getEstimatedSize() {
@@ -21,11 +21,11 @@ EPacketType ClientboundContainerClosePacket::getPacketId() {
 }
 
 void ClientboundContainerClosePacket::read(DataInputStream* input) {
-    containerId = input->readByte();
+    m_containerId = input->readByte();
 }
 
 void ClientboundContainerClosePacket::write(DataOutputStream* output) {
-    output->writeByte(containerId);
+    output->writeByte(m_containerId);
 }
 
 void ClientboundContainerClosePacket::handle(PacketListener* listener) {

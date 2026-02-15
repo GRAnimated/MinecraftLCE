@@ -20,23 +20,23 @@ void GameType::staticCtor() {
 }
 
 GameType::GameType(int id, const std::wstring& label, const std::wstring& sliderLabel, int a5, int a6) {
-    mId = id;
-    mLabel = label;
-    mSliderLabel = sliderLabel;
-    field_38 = a5;
-    field_3C = a6;
+    m_id = id;
+    m_label = label;
+    m_sliderLabel = sliderLabel;
+    m_field38 = a5;
+    m_field3C = a6;
 }
 
 int GameType::getId() const {
-    return mId;
+    return m_id;
 }
 
 int GameType::getLabel() const {
-    return field_38;
+    return m_field38;
 }
 
 int GameType::getSliderLabel() const {
-    return field_3C;
+    return m_field3C;
 }
 
 bool GameType::isBlockPlacingRestricted() const {
@@ -46,32 +46,32 @@ bool GameType::isBlockPlacingRestricted() const {
 // NON_MATCHING: aaaaahahahaha this is so fucked
 void GameType::updatePlayerAbilities(Abilities* abilities) const {
     if (CREATIVE == this) {
-        abilities->mIsEnableFly = true;
-        abilities->mIsInstabuild = true;
-        abilities->mIsInvulnerable = true;
+        abilities->m_isEnableFly = true;
+        abilities->m_isInstabuild = true;
+        abilities->m_isInvulnerable = true;
     } else {
         bool test;
         if (SPECTATOR == this) {
             test = true;
-            abilities->mIsEnableFly = true;
-            abilities->mIsInstabuild = false;
-            abilities->mIsInvulnerable = true;
+            abilities->m_isEnableFly = true;
+            abilities->m_isInstabuild = false;
+            abilities->m_isInvulnerable = true;
         } else {
             GameType* lobbyType = LOBBY;
-            abilities->mIsEnableFly = false;
-            abilities->mIsInstabuild = false;
+            abilities->m_isEnableFly = false;
+            abilities->m_isInstabuild = false;
             if (lobbyType == this) {
                 test = false;
-                abilities->mIsInvulnerable = true;
+                abilities->m_isInvulnerable = true;
             } else {
                 test = false;
-                abilities->mIsFlying = false;
-                abilities->mIsInvulnerable = false;
+                abilities->m_isFlying = false;
+                abilities->m_isInvulnerable = false;
             }
-            abilities->mIsFlying = test;
+            abilities->m_isFlying = test;
         }
     }
-    abilities->mIsEnableBuild = !isBlockPlacingRestricted();
+    abilities->m_isEnableBuild = !isBlockPlacingRestricted();
 }
 
 bool GameType::isCreative() const {
@@ -83,17 +83,17 @@ bool GameType::isSurvival() const {
 }
 
 const GameType* GameType::byId(int id, const GameType* gameType) {
-    if (NOT_SET->mId == id)
+    if (NOT_SET->m_id == id)
         return NOT_SET;
-    if (SURVIVAL->mId == id)
+    if (SURVIVAL->m_id == id)
         return SURVIVAL;
-    if (CREATIVE->mId == id)
+    if (CREATIVE->m_id == id)
         return CREATIVE;
-    if (ADVENTURE->mId == id)
+    if (ADVENTURE->m_id == id)
         return ADVENTURE;
-    if (SPECTATOR->mId == id)
+    if (SPECTATOR->m_id == id)
         return SPECTATOR;
-    if (LOBBY->mId == id)
+    if (LOBBY->m_id == id)
         return LOBBY;
     return gameType;
 }

@@ -22,7 +22,7 @@ public:
     int getProgress();
 
 private:
-    int mId;
-    BlockPos mPos;
-    int mProgress;
+    int m_id;
+    BlockPos m_pos;
+    int m_progress;
 };

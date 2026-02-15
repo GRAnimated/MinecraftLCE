@@ -9,8 +9,8 @@ std::shared_ptr<Packet> ClientboundPowerupPacket::create() {
 }
 
 ClientboundPowerupPacket::ClientboundPowerupPacket() {
-    powerupID = -1;
-    powerupTime = -1;
+    m_powerupId = -1;
+    m_powerupTime = -1;
 }
 
 int ClientboundPowerupPacket::getEstimatedSize() {
@@ -22,13 +22,13 @@ EPacketType ClientboundPowerupPacket::getPacketId() {
 }
 
 void ClientboundPowerupPacket::read(DataInputStream* input) {
-    powerupID = input->readInt();
-    powerupTime = input->readInt();
+    m_powerupId = input->readInt();
+    m_powerupTime = input->readInt();
 }
 
 void ClientboundPowerupPacket::write(DataOutputStream* output) {
-    output->writeInt(powerupID);
-    output->writeInt(powerupTime);
+    output->writeInt(m_powerupId);
+    output->writeInt(m_powerupTime);
 }
 
 void ClientboundPowerupPacket::handle(PacketListener* listener) {
@@ -36,9 +36,9 @@ void ClientboundPowerupPacket::handle(PacketListener* listener) {
 }
 
 int ClientboundPowerupPacket::getPowerupID() {
-    return powerupID;
+    return m_powerupId;
 }
 
 int ClientboundPowerupPacket::getPowerupTime() {
-    return powerupTime;
+    return m_powerupTime;
 }

@@ -7,5 +7,5 @@ class McRegionLevelStorageSource {
 public:
     McRegionLevelStorageSource(File file, DataFixerUpper* dfu);
 
-    unsigned char padding[40];
+    unsigned char m_padding[40];
 };

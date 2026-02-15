@@ -158,5 +158,5 @@ public:
     void putByteArray(const std::wstring&, arrayWithLength<u8>);
     arrayWithLength<u8> getByteArray(const std::wstring&);
 
-    std::unordered_map<std::wstring, Tag*> childTags;
+    std::unordered_map<std::wstring, Tag*> m_childTags;
 };

@@ -37,7 +37,7 @@ HalfSlabBlock::HalfSlabBlock(Material* material, const MaterialColor* materialCo
 }
 
 void HalfSlabBlock::_init() {
-    this->field_A0 = 8;
+    this->m_fieldA0 = 8;
     this->setLightBlock(255);
 }
 
@@ -50,7 +50,7 @@ bool HalfSlabBlock::isTopSolidBlocking(const BlockState* state) {
 
 void HalfSlabBlock::DerivedInit() {
     Block::DerivedInit();
-    this->field_28 = this->isFullSize();
+    this->m_field28 = this->isFullSize();
     this->setLightBlock(255);
 }
 

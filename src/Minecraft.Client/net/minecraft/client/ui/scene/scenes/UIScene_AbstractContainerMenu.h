@@ -38,16 +38,16 @@ public:
     virtual UIControl_SlotList* getSection(IUIScene_AbstractContainerMenu::ESceneSection);
     virtual int GetBaseSlotCount();
 
-    int fill;                       // 8
-    ESceneSection mFocusedSection;  // 12
-    bool byte110;                   // 17
-    int dword114;
-    int dword118;
-    UIControl mMainPanel;  // 288
-    UIControl_SlotList mHotbarList;
-    UIControl_SlotList mInventoryList;
-    UIControl_Cursor mCursor;
-    UIControl_Label mInventoryLabel;
-    UIControl_Label uicontrol_label330;
-    UIControl mBackgroundPanel;
+    int m_fill;                      // 8
+    ESceneSection m_focusedSection;  // 12
+    bool m_byte110;                  // 17
+    int m_dword114;
+    int m_dword118;
+    UIControl m_mainPanel;  // 288
+    UIControl_SlotList m_hotbarList;
+    UIControl_SlotList m_inventoryList;
+    UIControl_Cursor m_cursor;
+    UIControl_Label m_inventoryLabel;
+    UIControl_Label m_uicontrolLabel330;
+    UIControl m_backgroundPanel;
 };

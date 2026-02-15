@@ -5,7 +5,7 @@
 #include "net/minecraft/world/level/newbiome/layer/IntCache.h"
 
 AddMushroomIslandLayer::AddMushroomIslandLayer(long long seed, std::shared_ptr<Layer> parent) : Layer(seed) {
-    mParent = parent;
+    m_parent = parent;
 }
 
 arrayWithLength<int> AddMushroomIslandLayer::getArea(int x, int y, int width, int height) {
@@ -13,7 +13,7 @@ arrayWithLength<int> AddMushroomIslandLayer::getArea(int x, int y, int width, in
     int n = y - 1;
     int o = width + 2;
     int p = height + 2;
-    arrayWithLength<int> parentArea = mParent->getArea(m, n, o, p);
+    arrayWithLength<int> parentArea = m_parent->getArea(m, n, o, p);
     PIXBeginNamedEvent(0.0, "AddMushroomIslandLayer::getArea");
     arrayWithLength<int> area = IntCache::allocate(width * height);
 
@@ -26,7 +26,7 @@ arrayWithLength<int> AddMushroomIslandLayer::getArea(int x, int y, int width, in
             int w = parentArea[r + 1 + (q + 1) * o];
             initRandom(r + x, q + y);
             if (w == 0 && s == 0 && t == 0 && u == 0 && v == 0 && nextRandom(100) == 0) {
-                area[r + q * width] = Biome::MUSHROOM_ISLAND->mBiomeID;
+                area[r + q * width] = Biome::MUSHROOM_ISLAND->m_biomeId;
             } else {
                 area[r + q * width] = w;
             }

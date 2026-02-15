@@ -20,6 +20,6 @@ public:
     EntityDamageSource* setThorns();
 
 private:
-    std::shared_ptr<Entity> mEntity;
-    bool mIsThorns;
+    std::shared_ptr<Entity> m_entity;
+    bool m_isThorns;
 };

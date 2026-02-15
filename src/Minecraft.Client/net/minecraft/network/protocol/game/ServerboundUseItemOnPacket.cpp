@@ -15,21 +15,21 @@ EPacketType ServerboundUseItemOnPacket::getPacketId() {
 }
 
 void ServerboundUseItemOnPacket::read(DataInputStream* input) {
-    pos = input->readBlockPos();
-    face = Direction::from3DDataValue(input->readByte());
-    hand = static_cast<InteractionHand::EInteractionHand>(input->readByte());
-    clickX = input->readFloat();
-    clickY = input->readFloat();
-    clickZ = input->readFloat();
+    m_pos = input->readBlockPos();
+    m_face = Direction::from3DDataValue(input->readByte());
+    m_hand = static_cast<InteractionHand::EInteractionHand>(input->readByte());
+    m_clickX = input->readFloat();
+    m_clickY = input->readFloat();
+    m_clickZ = input->readFloat();
 }
 
 void ServerboundUseItemOnPacket::write(DataOutputStream* output) {
-    output->writeBlockPos(pos);
-    output->writeByte(face->get3DDataValue());
-    output->writeByte(hand);
-    output->writeFloat(clickX);
-    output->writeFloat(clickY);
-    output->writeFloat(clickZ);
+    output->writeBlockPos(m_pos);
+    output->writeByte(m_face->get3DDataValue());
+    output->writeByte(m_hand);
+    output->writeFloat(m_clickX);
+    output->writeFloat(m_clickY);
+    output->writeFloat(m_clickZ);
 }
 
 void ServerboundUseItemOnPacket::handle(PacketListener* listener) {
@@ -37,25 +37,25 @@ void ServerboundUseItemOnPacket::handle(PacketListener* listener) {
 }
 
 BlockPos ServerboundUseItemOnPacket::getPos() {
-    return pos;
+    return m_pos;
 }
 
 const Direction* ServerboundUseItemOnPacket::getFace() {
-    return face;
+    return m_face;
 }
 
 InteractionHand::EInteractionHand ServerboundUseItemOnPacket::getHand() {
-    return hand;
+    return m_hand;
 }
 
 float ServerboundUseItemOnPacket::getClickX() {
-    return clickX;
+    return m_clickX;
 }
 
 float ServerboundUseItemOnPacket::getClickY() {
-    return clickY;
+    return m_clickY;
 }
 
 float ServerboundUseItemOnPacket::getClickZ() {
-    return clickZ;
+    return m_clickZ;
 }

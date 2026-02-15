@@ -10,11 +10,11 @@
 #include <memory>
 
 FallingBlock::FallingBlock() : Block(Material::SAND) {
-    this->field_A0 = 11;
+    this->m_fieldA0 = 11;
 }
 
 FallingBlock::FallingBlock(Material* material) : Block(material) {
-    this->field_A0 = 11;
+    this->m_fieldA0 = 11;
 }
 
 bool FallingBlock::isFree(const BlockState* state) {
@@ -37,7 +37,7 @@ void FallingBlock::checkSlide(Level* level, const BlockPos& pos) {
             if (tempPos.getY() > 0) {
                 level->setBlockAndUpdate(tempPos.above(), this->defaultBlockState());
             }
-        } else if (!level->mIsLocal) {
+        } else if (!level->m_isLocal) {
             if (level->newFallingBlockAllowed()) {
                 std::shared_ptr<FallingBlockEntity> blockEnt
                     = std::shared_ptr<FallingBlockEntity>(new FallingBlockEntity(
@@ -52,7 +52,7 @@ void FallingBlock::checkSlide(Level* level, const BlockPos& pos) {
 }
 
 void FallingBlock::tick(Level* level, const BlockPos& pos, const BlockState* blockState, Random*) {
-    if (!level->mIsLocal)
+    if (!level->m_isLocal)
         this->checkSlide(level, pos);
 }
 
@@ -68,7 +68,7 @@ void FallingBlock::animateTick(const BlockState* blockState, Level* level, const
             arrayWithLength<int> blockData(1, true);
             blockData[0] = Block::getIdWithData(blockState);
             level->addParticle(ParticleTypes::FALLING_DUST, x, y, z, 0.0, 0.0, 0.0, blockData);
-            delete blockData.data;
+            delete blockData.m_data;
         }
     }
 }

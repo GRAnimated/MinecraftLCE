@@ -16,16 +16,16 @@
 NetherFlatLevelSource::NetherFlatLevelSource(Level* level, bool isGenerateMapFeatures, long long seed) {
     int xzSize = level->getLevelData()->getXZSize();
     int hellScale = level->getLevelData()->getHellScale();
-    mSize = ceil((float)xzSize / hellScale);
-    mLevel = level;
-    mIsGenerateMapFeatures = isGenerateMapFeatures;
-    mSeed = new Random(seed);
-    mRandom = new Random(seed);
+    m_size = ceil((float)xzSize / hellScale);
+    m_level = level;
+    m_isGenerateMapFeatures = isGenerateMapFeatures;
+    m_seed = new Random(seed);
+    m_random = new Random(seed);
 }
 
 NetherFlatLevelSource::~NetherFlatLevelSource() {
-    delete mSeed;
-    delete mRandom;
+    delete m_seed;
+    delete m_random;
 }
 
 void NetherFlatLevelSource::prepareHeights(int x, int z, ChunkPrimer* primer) {
@@ -53,37 +53,37 @@ void NetherFlatLevelSource::buildSurfaces(int x, int z, ChunkPrimer* primer) {
                 bool unk = false;
 
                 if (chunkX <= -adjusted / 2) {
-                    if (chunkX > mRandom->nextInt(4) && x < -mSize / 2) {
+                    if (chunkX > m_random->nextInt(4) && x < -m_size / 2) {
                         primer->setState((y << 11) | (chunkX << 7) | chunkZ, bedrock);
                         unk = true;
                     }
                 }
 
                 if (chunkZ <= -adjusted / 2) {
-                    if (chunkX - mRandom->nextInt(4) <= 0 || z < -mSize / 2) {
+                    if (chunkX - m_random->nextInt(4) <= 0 || z < -m_size / 2) {
                         primer->setState((y << 11) | (chunkX << 7) | chunkZ, bedrock);
                         unk = true;
                     }
                 }
 
                 if (chunkX <= -adjusted / 2 - 1) {
-                    if (mRandom->nextInt(4) + chunkX > 14 || x > mSize / 2) {
+                    if (m_random->nextInt(4) + chunkX > 14 || x > m_size / 2) {
                         primer->setState((y << 11) | (chunkX << 7) | chunkZ, bedrock);
                         unk = true;
                     }
                 }
 
                 if (chunkZ <= -adjusted / 2 - 1) {
-                    if (mRandom->nextInt(4) + chunkX > 14 || z > mSize / 2) {
+                    if (m_random->nextInt(4) + chunkX > 14 || z > m_size / 2) {
                         primer->setState((y << 11) | (chunkX << 7) | chunkZ, bedrock);
                         unk = true;
                     }
                 }
 
                 if (!unk) {
-                    if (y >= 127 - mRandom->nextInt(5)) {
+                    if (y >= 127 - m_random->nextInt(5)) {
                         primer->setState((y << 11) | (chunkX << 7) | chunkZ, bedrock);
-                    } else if (y <= 0 + mRandom->nextInt(5)) {
+                    } else if (y <= 0 + m_random->nextInt(5)) {
                         primer->setState((y << 11) | (chunkX << 7) | chunkZ, bedrock);
                     }
                 }
@@ -93,7 +93,7 @@ void NetherFlatLevelSource::buildSurfaces(int x, int z, ChunkPrimer* primer) {
 }
 
 LevelChunk* NetherFlatLevelSource::createChunk(int x, int z) {
-    mSeed->setSeed(0x4F9939F508LL * x + 0x1EF1565BD5LL * z);
+    m_seed->setSeed(0x4F9939F508LL * x + 0x1EF1565BD5LL * z);
 
     void* ids = XPhysicalAlloc(0x8000, 0xFFFFFFFFFFFFFFFFLL, 0x1000uLL, 4u);
     XMemSet128(ids, 0, 0x8000u);
@@ -107,7 +107,7 @@ LevelChunk* NetherFlatLevelSource::createChunk(int x, int z) {
     prepareHeights(x, z, &primer);
     buildSurfaces(x, z, &primer);
 
-    LevelChunk* chunk = new LevelChunk(mLevel, &primer, x, z);
+    LevelChunk* chunk = new LevelChunk(m_level, &primer, x, z);
 
     XPhysicalFree(ids);
     XPhysicalFree(data);
@@ -119,8 +119,8 @@ LevelChunk* NetherFlatLevelSource::createChunk(int x, int z) {
 void NetherFlatLevelSource::postProcess(int x, int z) {
     inPostProcessStep = true;
 
-    Random* r = mRandom;
-    Level* l = mLevel;
+    Random* r = m_random;
+    Level* l = m_level;
 
     int testX = 16 * x;
     int testZ = 16 * z;
@@ -128,40 +128,40 @@ void NetherFlatLevelSource::postProcess(int x, int z) {
     long long seed = l->getSeed();
     r->setSeed(seed);
 
-    long seed1 = mRandom->nextLong() | 1;
-    long seed2 = mRandom->nextLong() | 1;
+    long seed1 = m_random->nextLong() | 1;
+    long seed2 = m_random->nextLong() | 1;
 
     long long v16 = x * seed1 + z * seed2 ^ seed;
 
-    mRandom->setSeed(v16);
+    m_random->setSeed(v16);
 
-    int v11 = mRandom->nextInt(10);
-    int v12 = mRandom->nextInt(v11 + 1) + 1;
+    int v11 = m_random->nextInt(10);
+    int v12 = m_random->nextInt(v11 + 1) + 1;
 
     if (v12 > 0) {
         for (int i = 0; i < v12; ++i) {
-            int posX = mRandom->nextInt(16) + (testX | 8);
-            int posY = mRandom->nextInt(120) + 4;
-            int posZ = mRandom->nextInt(16) + (testZ | 8);
+            int posX = m_random->nextInt(16) + (testX | 8);
+            int posY = m_random->nextInt(120) + 4;
+            int posZ = m_random->nextInt(16) + (testZ | 8);
 
             HellFireFeature feature;
-            feature.place(mLevel, *mRandom, BlockPos(posX, posY, posZ));
+            feature.place(m_level, *m_random, BlockPos(posX, posY, posZ));
         }
     }
 
-    int v31 = mRandom->nextInt(mRandom->nextInt(10) + 1);
+    int v31 = m_random->nextInt(m_random->nextInt(10) + 1);
 
     for (int i = 0; i < v31; i++) {
-        int posX = mRandom->nextInt(16) + (testX | 8);
-        int posY = mRandom->nextInt(120) + 4;
-        int posZ = mRandom->nextInt(16) + (testZ | 8);
+        int posX = m_random->nextInt(16) + (testX | 8);
+        int posY = m_random->nextInt(120) + 4;
+        int posZ = m_random->nextInt(16) + (testZ | 8);
 
         LightGemFeature feature;
-        feature.place(mLevel, *mRandom, BlockPos(posX, posY, posZ));
+        feature.place(m_level, *m_random, BlockPos(posX, posY, posZ));
     }
 
     inPostProcessStep = false;
-    CConsoleMinecraftApp::sInstance.processSchematics(mLevel->getChunk(x, z));
+    CConsoleMinecraftApp::sInstance.processSchematics(m_level->getChunk(x, z));
 }
 
 void NetherFlatLevelSource::lightChunk(LevelChunk* chunk) {
@@ -174,7 +174,7 @@ bool NetherFlatLevelSource::postProcessLoadedChunk(LevelChunk* chunk, int x, int
 
 std::vector<Biome::MobSpawnerData>* NetherFlatLevelSource::getMobsAt(MobCategory* category,
                                                                      const BlockPos& pos) {
-    Biome* biome = mLevel->getBiome(pos);
+    Biome* biome = m_level->getBiome(pos);
     if (biome)
         return biome->getMobs(category);
 

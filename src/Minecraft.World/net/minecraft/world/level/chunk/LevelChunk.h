@@ -124,26 +124,26 @@ public:
     int getBlockId(int, int, int);
     int getData(int, int, int);
 
-    char padding_0[24];
-    CompressedBlockStorage* mBlockDataLower;  // Y0-Y127
-    CompressedBlockStorage* mBlockDataUpper;  // Y128-Y255
+    char m_padding0[24];
+    CompressedBlockStorage* m_blockDataLower;  // Y0-Y127
+    CompressedBlockStorage* m_blockDataUpper;  // Y128-Y255
 
-    char unk[400];
+    char m_unk[400];
 
-    SparseDataStorage* mDataDataLower;         // Y0-Y127
-    SparseDataStorage* mDataDataUpper;         // Y128-Y255
-    SparseLightStorage* mSkyLightDataLower;    // Y0-Y127
-    SparseLightStorage* mSkyLightDataUpper;    // Y128-Y255
-    SparseLightStorage* mBlockLightDataLower;  // Y0-Y127
-    SparseLightStorage* mBlockLightDataUpper;  // Y128-Y255
-    char padding_480[24];
-    int mXPos;
-    int mZPos;
-    char unk2[14];
-    std::unordered_map<BlockPos, std::shared_ptr<BlockEntity>>* mBlockEntities;
-    char unk3[32];
-    short mPopulatedFlags;
-    char unk4[42];
-    long mInhabitedTime;
-    char unk5[86];
+    SparseDataStorage* m_dataDataLower;         // Y0-Y127
+    SparseDataStorage* m_dataDataUpper;         // Y128-Y255
+    SparseLightStorage* m_skyLightDataLower;    // Y0-Y127
+    SparseLightStorage* m_skyLightDataUpper;    // Y128-Y255
+    SparseLightStorage* m_blockLightDataLower;  // Y0-Y127
+    SparseLightStorage* m_blockLightDataUpper;  // Y128-Y255
+    char m_padding480[24];
+    int m_xPos;
+    int m_zPos;
+    char m_unk2[14];
+    std::unordered_map<BlockPos, std::shared_ptr<BlockEntity>>* m_blockEntities;
+    char m_unk3[32];
+    short m_populatedFlags;
+    char m_unk4[42];
+    long m_inhabitedTime;
+    char m_unk5[86];
 };

@@ -19,11 +19,11 @@ public:
     Area* getBlockAt(int, int);
     void update();
 
-    BiomeSource* mBiomeSource;
-    long long field_8;
-    std::unordered_map<long long, Area*> field_10;
-    std::vector<Area*> mSlots;
-    uint8_t skip[0x20];
+    BiomeSource* m_biomeSource;
+    long long m_field8;
+    std::unordered_map<long long, Area*> m_field10;
+    std::vector<Area*> m_slots;
+    uint8_t m_skip[0x20];
 };
 
 ASSERT_SIZEOF(BiomeCache, 0x70)

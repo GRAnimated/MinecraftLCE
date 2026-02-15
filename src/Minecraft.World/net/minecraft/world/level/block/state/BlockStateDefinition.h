@@ -74,12 +74,12 @@ public:
 
     Block* getBlock();
     const BlockState* any();
-    arrayWithLength<const BlockState*>* getPossibleBlockStates() { return &this->mStates; }
+    arrayWithLength<const BlockState*>* getPossibleBlockStates() { return &this->m_states; }
 
 private:
-    Block* mBlock;
-    std::vector<const Property*> mProperties;
-    arrayWithLength<const BlockState*> mStates;
-    void** properties;          // this is array
-    void** another_properties;  // this is also array
+    Block* m_block;
+    std::vector<const Property*> m_properties;
+    arrayWithLength<const BlockState*> m_states;
+    void** m_propertiesArr;      // this is array
+    void** m_anotherProperties;  // this is also array
 };
