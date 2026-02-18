@@ -1,4 +1,5 @@
 functions_csv = "data/mcswitch_functions.csv"
+data_csv = "data/data_symbols.csv"
 build_target = "mcswitch"
 
 [decomp_me]
