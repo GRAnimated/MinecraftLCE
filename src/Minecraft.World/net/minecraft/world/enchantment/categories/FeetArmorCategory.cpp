@@ -6,5 +6,5 @@ const FeetArmorCategory* FeetArmorCategory::sFeetArmorCategory = new FeetArmorCa
 
 bool FeetArmorCategory::canEnchant(Item* item) const {
     ArmorItem* armorItem = dynamic_cast<ArmorItem*>(item);
-    return armorItem && armorItem->mEquipmentSlot == EquipmentSlot::FEET;
+    return armorItem && armorItem->m_equipmentSlot == EquipmentSlot::FEET;
 }

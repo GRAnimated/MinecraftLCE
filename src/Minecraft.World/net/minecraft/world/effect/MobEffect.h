@@ -70,13 +70,13 @@ public:
 
     static void staticCtor();
 
-    std::unordered_map<Attribute*, AttributeModifier*> mAttributeModifiers;
-    int mDescriptionId;
-    EMobEffectIcon mIcon;
-    bool mHarmful;
-    double mDurationModifier;
-    bool mBeneficial;
-    eMinecraftColour mColor;
+    std::unordered_map<Attribute*, AttributeModifier*> m_attributeModifiers;
+    int m_descriptionId;
+    EMobEffectIcon m_icon;
+    bool m_harmful;
+    double m_durationModifier;
+    bool m_beneficial;
+    eMinecraftColour m_color;
 };
 
 ASSERT_SIZEOF(MobEffect, 0x50)

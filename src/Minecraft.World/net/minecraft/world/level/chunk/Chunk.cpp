@@ -26,112 +26,112 @@
 
 Chunk::Chunk(Level* level, BlockEntityMap& map, nn::os::MutexType& mutex, int x, int y, int z,
              ClipChunk* clipChunk) {
-    mBlockEntityMap = &map;
-    mMutex = &mutex;
-    clipChunk->mNeedsUpdate = false;
-    mLevel = level;
-    mAABB = nullptr;
-    dword_50 = 0;
-    mIsPositionSet = false;
-    mClipChunk = clipChunk;
-    clipChunk->mChunk = this;
+    m_blockEntityMap = &map;
+    m_mutex = &mutex;
+    clipChunk->m_needsUpdate = false;
+    m_level = level;
+    m_aabb = nullptr;
+    m_dword50 = 0;
+    m_isPositionSet = false;
+    m_clipChunk = clipChunk;
+    clipChunk->m_chunk = this;
 
     setPos(x, y, z);
-    mIsInitalized = true;
+    m_isInitalized = true;
 }
 
 Chunk::Chunk() {
-    mIsInitalized = false;
+    m_isInitalized = false;
 }
 
 void Chunk::setPos(int x, int y, int z) {
-    if (!mIsPositionSet || mX != x || mY != y || mZ != z) {
+    if (!m_isPositionSet || m_x != x || m_y != y || m_z != z) {
         reset();
 
-        mX = x;
-        mY = y;
-        mZ = z;
-        mCenterX = x + 8;
-        mCenterY = y + 8;
-        mCenterZ = z + 8;
-        mClipChunk->mCenterX = mCenterX;
-        mClipChunk->mCenterY = mCenterY;
-        mClipChunk->mCenterZ = mCenterZ;
-        mClipChunk->mGlobalIndex = LevelRenderer::getGlobalIndexForChunk(x, y, z, mLevel);
-        AABB* aabb = mAABB;
-        _1c = 0;
-        mRenderX = x;
-        mRenderY = y;
-        mRenderZ = z;
-        _14 = 0;
-        _18 = 0;
+        m_x = x;
+        m_y = y;
+        m_z = z;
+        m_centerX = x + 8;
+        m_centerY = y + 8;
+        m_centerZ = z + 8;
+        m_clipChunk->m_centerX = m_centerX;
+        m_clipChunk->m_centerY = m_centerY;
+        m_clipChunk->m_centerZ = m_centerZ;
+        m_clipChunk->m_globalIndex = LevelRenderer::getGlobalIndexForChunk(x, y, z, m_level);
+        AABB* aabb = m_aabb;
+        m_1c = 0;
+        m_renderX = x;
+        m_renderY = y;
+        m_renderZ = z;
+        m_14 = 0;
+        m_18 = 0;
         if (!aabb) {
-            mAABB = AABB::newPermanent(-6.0, -6.0, -6.0, 22.0, 22.0, 22.0);
+            m_aabb = AABB::newPermanent(-6.0, -6.0, -6.0, 22.0, 22.0, 22.0);
         }
-        mClipChunk->mWorldAabbMinX = mAABB->minX + x;
-        mClipChunk->mWorldAabbMinY = mAABB->minY + y;
-        mClipChunk->mWorldAabbMinZ = mAABB->minZ + z;
-        mClipChunk->mWorldAabbMaxX = mAABB->maxX + x;
-        mClipChunk->mWorldAabbMaxY = mAABB->maxY + y;
-        mClipChunk->mWorldAabbMaxZ = mAABB->maxZ + z;
+        m_clipChunk->m_worldAabbMinX = m_aabb->m_inX + x;
+        m_clipChunk->m_worldAabbMinY = m_aabb->m_inY + y;
+        m_clipChunk->m_worldAabbMinZ = m_aabb->m_inZ + z;
+        m_clipChunk->m_worldAabbMaxX = m_aabb->m_axX + x;
+        m_clipChunk->m_worldAabbMaxY = m_aabb->m_axY + y;
+        m_clipChunk->m_worldAabbMaxZ = m_aabb->m_axZ + z;
 
-        mIsPositionSet = true;
+        m_isPositionSet = true;
 
-        EnterCriticalSection(&LevelRenderer::sInstance->mMutex);
+        EnterCriticalSection(&LevelRenderer::sInstance->m_mutex);
 
-        if (LevelRenderer::sInstance->incGlobalChunkRefCount(x, y, z, mLevel) == 1) {
-            LevelRenderer::sInstance->setGlobalChunkFlag(x, y, z, mLevel, 2, 0);
+        if (LevelRenderer::sInstance->incGlobalChunkRefCount(x, y, z, m_level) == 1) {
+            LevelRenderer::sInstance->setGlobalChunkFlag(x, y, z, m_level, 2, 0);
             PIXSetMarkerDeprecated(0.0f, "Non-stack event pushed");
         }
 
-        LeaveCriticalSection(&LevelRenderer::sInstance->mMutex);
+        LeaveCriticalSection(&LevelRenderer::sInstance->m_mutex);
     }
 }
 
 void Chunk::reset() {
-    if (mIsPositionSet) {
-        EnterCriticalSection(&LevelRenderer::sInstance->mMutex);
-        unsigned char dec = LevelRenderer::sInstance->decGlobalChunkRefCount(mX, mY, mZ, mLevel);
-        mIsPositionSet = false;
+    if (m_isPositionSet) {
+        EnterCriticalSection(&LevelRenderer::sInstance->m_mutex);
+        unsigned char dec = LevelRenderer::sInstance->decGlobalChunkRefCount(m_x, m_y, m_z, m_level);
+        m_isPositionSet = false;
         if (!dec) {
-            int index = LevelRenderer::sInstance->getGlobalIndexForChunk(mX, mY, mZ, mLevel);
+            int index = LevelRenderer::sInstance->getGlobalIndexForChunk(m_x, m_y, m_z, m_level);
             if (index >= 0) {
-                int offset = 3 * index + LevelRenderer::sInstance->_100;
+                int offset = 3 * index + LevelRenderer::sInstance->m_100;
                 Renderer* renderer = Renderer::sInstance;
                 renderer->CBuffClear(offset);
                 renderer->CBuffClear(offset + 1);
                 renderer->CBuffClear(offset + 2);
-                LevelRenderer::sInstance->setGlobalChunkFlags(mX, mY, mZ, mLevel, 0);
+                LevelRenderer::sInstance->setGlobalChunkFlags(m_x, m_y, m_z, m_level, 0);
             }
         }
-        LeaveCriticalSection(&LevelRenderer::sInstance->mMutex);
+        LeaveCriticalSection(&LevelRenderer::sInstance->m_mutex);
     }
-    mClipChunk->mNeedsUpdate = 0;
+    m_clipChunk->m_needsUpdate = 0;
 }
 
 void Chunk::translateToPos() {
-    GlStateManager::translatef(mRenderX, mRenderY, mRenderZ);
+    GlStateManager::translatef(m_renderX, m_renderY, m_renderZ);
 }
 
 void Chunk::makeCopyForRebuild(Chunk* chunk) {
-    mLevel = chunk->mLevel;
-    mX = chunk->mX;
-    mY = chunk->mY;
-    mZ = chunk->mZ;
-    _14 = chunk->_14;
-    _18 = chunk->_18;
-    _1c = chunk->_1c;
-    mRenderX = chunk->mRenderX;
-    mRenderY = chunk->mRenderY;
-    mRenderZ = chunk->mRenderZ;
-    mCenterX = chunk->mCenterX;
-    mCenterY = chunk->mCenterY;
-    mCenterZ = chunk->mCenterZ;
-    mAABB = chunk->mAABB;
-    mClipChunk = chunk->mClipChunk;
-    dword_50 = chunk->dword_50;
-    mBlockEntityMap = chunk->mBlockEntityMap;
-    mMutex = chunk->mMutex;
+    m_level = chunk->m_level;
+    m_x = chunk->m_x;
+    m_y = chunk->m_y;
+    m_z = chunk->m_z;
+    m_14 = chunk->m_14;
+    m_18 = chunk->m_18;
+    m_1c = chunk->m_1c;
+    m_renderX = chunk->m_renderX;
+    m_renderY = chunk->m_renderY;
+    m_renderZ = chunk->m_renderZ;
+    m_centerX = chunk->m_centerX;
+    m_centerY = chunk->m_centerY;
+    m_centerZ = chunk->m_centerZ;
+    m_aabb = chunk->m_aabb;
+    m_clipChunk = chunk->m_clipChunk;
+    m_dword50 = chunk->m_dword50;
+    m_blockEntityMap = chunk->m_blockEntityMap;
+    m_mutex = chunk->m_mutex;
 }
 
 // The game stores blocks in two arrays, one for Y0-127 and one for Y128-255
@@ -147,16 +147,16 @@ const int SKIP = 255;
 
 // NON_MATCHING: 93.43%, https://decomp.me/scratch/Kc2zB
 void Chunk::rebuild() {
-    PIXBeginNamedEvent(0.0f, "Rebuilding chunk %d, %d, %d", mX, mY, mZ);
+    PIXBeginNamedEvent(0.0f, "Rebuilding chunk %d, %d, %d", m_x, m_y, m_z);
     PIXBeginNamedEvent(0.0f, "Rebuild section A");
 
     BufferBuilder* builder = Tesselator::getInstance()->getBuilder();
 
     updates++;  // Name from b1.2_02
 
-    int x0 = mX;
-    int y0 = mY;
-    int z0 = mZ;
+    int x0 = m_x;
+    int y0 = m_y;
+    int z0 = m_z;
     int x1 = x0 + CHUNK_SIZE;
     int y1 = y0 + CHUNK_SIZE;
     int z1 = z0 + CHUNK_SIZE;
@@ -165,11 +165,11 @@ void Chunk::rebuild() {
 
     std::vector<std::shared_ptr<BlockEntity>> currentBlockEntities;
 
-    int globalIndex = LevelRenderer::sInstance->getGlobalIndexForChunk(mX, mY, mZ, mLevel);
+    int globalIndex = LevelRenderer::sInstance->getGlobalIndexForChunk(m_x, m_y, m_z, m_level);
     if (globalIndex < 0)
         return;
 
-    int unk = LevelRenderer::sInstance->_100;
+    int unk = LevelRenderer::sInstance->m_100;
 
     PIXEndNamedEvent();
     PIXBeginNamedEvent(0.0f, "Rebuild section B");
@@ -186,7 +186,7 @@ void Chunk::rebuild() {
     arrayWithLength<unsigned char> blockData(blockDataMemory, 0x8000);
 
     // Position of the chunk
-    BlockPos origin(mX, mY, mZ);
+    BlockPos origin(m_x, m_y, m_z);
 
     int start = y0 / 4;
     int end_start = y1 / 4;
@@ -195,19 +195,20 @@ void Chunk::rebuild() {
     int endIndexY = y1 > WORLD_HEIGHT - 1 ? WORLD_HEIGHT / 4 : end_start + 1;
 
     // Gets the correct 16x16x16 region of blocks from the chunk
-    mLevel->getChunkAt(origin)->getBlockDataRange(blocks, startIndexY, endIndexY);
+    m_level->getChunkAt(origin)->getBlockDataRange(blocks, startIndexY, endIndexY);
 
     int startY_data = y0 <= 0 ? 0 : y0 - 1;
     int endY_Data = y1 + 1 < WORLD_HEIGHT ? y1 + 1 : WORLD_HEIGHT;
 
     // Gets the correct 16x16x16 region of metadata from the chunk
-    mLevel->getChunkAt(origin)->getDataDataRange(blockData, startY_data, endY_Data);
+    m_level->getChunkAt(origin)->getDataDataRange(blockData, startY_data, endY_Data);
 
-    Region* region = new Region(mLevel, {x0 - 1, y0 - 1, z0 - 1}, {x1 + 1, y1 + 1, z1 + 1}, true);
-    region->setCachedBlocksAndData(blockMemory, blockDataMemory, mX >> 4, mY >> 4, mZ >> 4, blockStateMemory);
+    Region* region = new Region(m_level, {x0 - 1, y0 - 1, z0 - 1}, {x1 + 1, y1 + 1, z1 + 1}, true);
+    region->setCachedBlocksAndData(blockMemory, blockDataMemory, m_x >> 4, m_y >> 4, m_z >> 4,
+                                   blockStateMemory);
 
     PIXBeginNamedEvent(0.0f, "Creating BlockRenderer\n");
-    BlockRenderer* blockRenderer = new BlockRenderer(region, mX, mY, mZ, blockMemory);
+    BlockRenderer* blockRenderer = new BlockRenderer(region, m_x, m_y, m_z, blockMemory);
     PIXEndNamedEvent();
 
     bool isEmpty = true;
@@ -350,23 +351,23 @@ void Chunk::rebuild() {
         Renderer* renderer = Renderer::sInstance;
 
         for (int i = 0; i < 3; i++) {
-            LevelRenderer::sInstance->setGlobalChunkFlag(mX, mY, mZ, mLevel, 4, i);
+            LevelRenderer::sInstance->setGlobalChunkFlag(m_x, m_y, m_z, m_level, 4, i);
             renderer->CBuffClear(baseRenderLayerIdx + i);
         }
 
-        int globalChunkIndex = LevelRenderer::sInstance->getGlobalIndexForChunk(mX, mY, mZ, mLevel);
+        int globalChunkIndex = LevelRenderer::sInstance->getGlobalIndexForChunk(m_x, m_y, m_z, m_level);
 
-        EnterCriticalSection(mMutex);
-        auto it = mBlockEntityMap->find(globalChunkIndex);
+        EnterCriticalSection(m_mutex);
+        auto it = m_blockEntityMap->find(globalChunkIndex);
 
-        if (it != mBlockEntityMap->end()) {
+        if (it != m_blockEntityMap->end()) {
             for (auto entityIterator = it->second.begin(); entityIterator != it->second.end();
                  entityIterator++) {
                 (*entityIterator)->setRenderRemoveStage(1);
             }
         }
 
-        LeaveCriticalSection(mMutex);
+        LeaveCriticalSection(m_mutex);
 
         delete region;
         delete blockRenderer;
@@ -380,12 +381,12 @@ void Chunk::rebuild() {
 
     // TODO: Find out how to create these magic numbers
     BufferBuilder::Bounds bounds;
-    bounds.bounds[0] = -6.0f;
-    bounds.bounds[1] = -6.0f;
-    bounds.bounds[2] = -6.0f;
-    bounds.bounds[3] = 22.0f;
-    bounds.bounds[4] = 22.0f;
-    bounds.bounds[5] = 22.0f;
+    bounds.m_bounds[0] = -6.0f;
+    bounds.m_bounds[1] = -6.0f;
+    bounds.m_bounds[2] = -6.0f;
+    bounds.m_bounds[3] = 22.0f;
+    bounds.m_bounds[4] = 22.0f;
+    bounds.m_bounds[5] = 22.0f;
 
     MutableBlockPos currentPos(0, 0, 0);
 
@@ -407,7 +408,7 @@ void Chunk::rebuild() {
             builder->useCompactVertices(true);
             translateToPos();
             builder->begin();
-            builder->offset(-mX, -mY, -mZ);
+            builder->offset(-m_x, -m_y, -m_z);
 
             for (size_t i = 0; i < glideRingPositions.size(); i++) {
                 PIXBeginNamedEvent(0.0f, "Tesselate in world");
@@ -449,7 +450,7 @@ void Chunk::rebuild() {
                         builder->useCompactVertices(true);
                         translateToPos();
                         builder->begin();
-                        builder->offset(-mX, -mY, -mZ);
+                        builder->offset(-m_x, -m_y, -m_z);
                     }
 
                     currentPos.set(curX, curY, curZ);
@@ -481,7 +482,7 @@ void Chunk::rebuild() {
 
         if (started) {
             builder->end();
-            bounds.addBounds(builder->mBounds);
+            bounds.addBounds(builder->m_bounds);
             GlStateManager::popMatrix();
             GlStateManager::endList(0);
             builder->useCompactVertices(false);
@@ -493,29 +494,29 @@ void Chunk::rebuild() {
         // If the chunk is done rendering, we can clear its global chunk flag, otherwise set it and clear the
         // layer.
         if (rendered) {
-            LevelRenderer::sInstance->clearGlobalChunkFlag(mX, mY, mZ, mLevel, 4, layer);
+            LevelRenderer::sInstance->clearGlobalChunkFlag(m_x, m_y, m_z, m_level, 4, layer);
         } else {
-            LevelRenderer::sInstance->setGlobalChunkFlag(mX, mY, mZ, mLevel, 4, layer);
+            LevelRenderer::sInstance->setGlobalChunkFlag(m_x, m_y, m_z, m_level, 4, layer);
             renderer->CBuffClear(baseRenderLayerIdx + layer);
         }
 
         if (layer == 0 && !renderNextLayer) {
-            LevelRenderer::sInstance->setGlobalChunkFlag(mX, mY, mZ, mLevel, 24, 0);
+            LevelRenderer::sInstance->setGlobalChunkFlag(m_x, m_y, m_z, m_level, 24, 0);
             renderer->CBuffClear(baseRenderLayerIdx + 1);
             renderer->CBuffClear(baseRenderLayerIdx + 2);
             break;
         }
 
         if (layer == 1 && !renderNextLayer) {
-            LevelRenderer::sInstance->setGlobalChunkFlag(mX, mY, mZ, mLevel, 16, 0);
+            LevelRenderer::sInstance->setGlobalChunkFlag(m_x, m_y, m_z, m_level, 16, 0);
             renderer->CBuffClear(baseRenderLayerIdx + 2);
             break;
         }
     }
 
-    if (mAABB) {
-        mAABB->set(bounds.bounds[0], bounds.bounds[1], bounds.bounds[2], bounds.bounds[3], bounds.bounds[4],
-                   bounds.bounds[5]);
+    if (m_aabb) {
+        m_aabb->set(bounds.m_bounds[0], bounds.m_bounds[1], bounds.m_bounds[2], bounds.m_bounds[3],
+                    bounds.m_bounds[4], bounds.m_bounds[5]);
     }
 
     delete blockRenderer;
@@ -525,17 +526,17 @@ void Chunk::rebuild() {
 
     PIXBeginNamedEvent(0.0f, "Rebuild section D");
 
-    int index = LevelRenderer::sInstance->getGlobalIndexForChunk(mX, mY, mZ, mLevel);
+    int index = LevelRenderer::sInstance->getGlobalIndexForChunk(m_x, m_y, m_z, m_level);
 
-    EnterCriticalSection(mMutex);
+    EnterCriticalSection(m_mutex);
 
     // Render block entities
     if (currentBlockEntities.size()) {
-        auto it = mBlockEntityMap->find(index);
-        if (it == mBlockEntityMap->end()) {
+        auto it = m_blockEntityMap->find(index);
+        if (it == m_blockEntityMap->end()) {
             for (size_t i = 0; i < currentBlockEntities.size(); i++) {
                 currentBlockEntities[i]->shouldRemoveForRender();  // Unused check
-                (*mBlockEntityMap)[index].push_back(currentBlockEntities[i]);
+                (*m_blockEntityMap)[index].push_back(currentBlockEntities[i]);
             }
         } else {
             auto& blockEntities = it->second;
@@ -547,16 +548,16 @@ void Chunk::rebuild() {
             for (size_t i = 0; i < currentBlockEntities.size(); i++) {
                 auto entity = std::find(blockEntities.begin(), blockEntities.end(), currentBlockEntities[i]);
                 if (entity == blockEntities.end()) {
-                    (*mBlockEntityMap)[index].push_back(currentBlockEntities[i]);
+                    (*m_blockEntityMap)[index].push_back(currentBlockEntities[i]);
                 } else {
                     (*entity)->setRenderRemoveStage(0);
                 }
             }
         }
     } else {
-        auto it = mBlockEntityMap->find(index);
+        auto it = m_blockEntityMap->find(index);
 
-        if (it != mBlockEntityMap->end()) {
+        if (it != m_blockEntityMap->end()) {
             for (auto entityIterator = it->second.begin(); entityIterator != it->second.end();
                  entityIterator++) {
                 (*entityIterator)->setRenderRemoveStage(1);
@@ -564,20 +565,20 @@ void Chunk::rebuild() {
         }
     }
 
-    LeaveCriticalSection(mMutex);
+    LeaveCriticalSection(m_mutex);
     PIXEndNamedEvent();
 
     // Mark the chunk ready to rebuild again
-    LevelRenderer::sInstance->setGlobalChunkFlag(mX, mY, mZ, mLevel, 1, 0);
+    LevelRenderer::sInstance->setGlobalChunkFlag(m_x, m_y, m_z, m_level, 1, 0);
 
     PIXEndNamedEvent();
 }
 
 void Chunk::_delete() {
     reset();
-    mLevel = nullptr;
+    m_level = nullptr;
 }
 
 void Chunk::clearDirty() {
-    LevelRenderer::sInstance->clearGlobalChunkFlag(mX, mY, mZ, mLevel, 2, 0);
+    LevelRenderer::sInstance->clearGlobalChunkFlag(m_x, m_y, m_z, m_level, 2, 0);
 }

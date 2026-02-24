@@ -7,5 +7,5 @@ public:
     CompassAtlasSprite();
     CompassAtlasSprite(int, CompassAtlasSprite*);
 
-    char filler[0x20];
+    char m_filler[0x20];
 };

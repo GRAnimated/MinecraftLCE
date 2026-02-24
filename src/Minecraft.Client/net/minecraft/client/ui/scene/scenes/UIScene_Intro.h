@@ -20,5 +20,5 @@ public:
 
     void setIntroPlatform();
 
-    UIControl_Touch* mTouchToSkip;
+    UIControl_Touch* m_touchToSkip;
 };

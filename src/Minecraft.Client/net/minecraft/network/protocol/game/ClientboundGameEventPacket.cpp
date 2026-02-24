@@ -9,9 +9,9 @@ std::shared_ptr<Packet> ClientboundGameEventPacket::create() {
 }
 
 ClientboundGameEventPacket::ClientboundGameEventPacket() {
-    mEvent = 0;
-    mParam = 0.0;
-    mPlayerIndex = -1;
+    m_event = 0;
+    m_param = 0.0;
+    m_playerIndex = -1;
 }
 
 int ClientboundGameEventPacket::getEstimatedSize() {
@@ -23,15 +23,15 @@ EPacketType ClientboundGameEventPacket::getPacketId() {
 }
 
 void ClientboundGameEventPacket::read(DataInputStream* input) {
-    mEvent = static_cast<int>(input->readUnsignedByte());
-    mParam = input->readFloat();
-    mPlayerIndex = input->readInt();
+    m_event = static_cast<int>(input->readUnsignedByte());
+    m_param = input->readFloat();
+    m_playerIndex = input->readInt();
 }
 
 void ClientboundGameEventPacket::write(DataOutputStream* output) {
-    output->writeByte(mEvent);
-    output->writeFloat(mParam);
-    output->writeInt(mPlayerIndex);
+    output->writeByte(m_event);
+    output->writeFloat(m_param);
+    output->writeInt(m_playerIndex);
 }
 
 void ClientboundGameEventPacket::handle(PacketListener* listener) {
@@ -39,13 +39,13 @@ void ClientboundGameEventPacket::handle(PacketListener* listener) {
 }
 
 int ClientboundGameEventPacket::getEvent() {
-    return mEvent;
+    return m_event;
 }
 
 float ClientboundGameEventPacket::getParam() {
-    return mParam;
+    return m_param;
 }
 
 int ClientboundGameEventPacket::getPlayerIndex() {
-    return mPlayerIndex;
+    return m_playerIndex;
 }

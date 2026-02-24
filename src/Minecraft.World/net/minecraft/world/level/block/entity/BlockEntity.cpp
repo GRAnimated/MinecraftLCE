@@ -24,30 +24,30 @@ void BlockEntity::Register(int id, BlockEntityFunctor functor, eINSTANCEOF type,
 }
 
 BlockEntity::BlockEntity() {
-    mLevel = nullptr;
-    mPos = BlockPos::zero;
-    mIsRemoved = false;
-    mData = -1;
-    field_19 = false;
-    mBlock = nullptr;
+    m_level = nullptr;
+    m_pos = BlockPos::zero;
+    m_isRemoved = false;
+    m_data = -1;
+    m_field19 = false;
+    m_block = nullptr;
 }
 
 BlockEntity::~BlockEntity() {}
 
 Level* BlockEntity::getLevel() {
-    return mLevel;
+    return m_level;
 }
 
 void BlockEntity::setLevel(Level* level) {
-    mLevel = level;
+    m_level = level;
 }
 
 bool BlockEntity::hasLevel() {
-    return mLevel != nullptr;
+    return m_level != nullptr;
 }
 
 void BlockEntity::load(CompoundTag* tag) {
-    mPos = BlockPos(tag->getInt(L"x"), tag->getInt(L"y"), tag->getInt(L"z"));
+    m_pos = BlockPos(tag->getInt(L"x"), tag->getInt(L"y"), tag->getInt(L"z"));
 }
 
 void BlockEntity::save(CompoundTag* tag) {
@@ -58,9 +58,9 @@ CompoundTag* BlockEntity::saveMetadata(CompoundTag* tag) {
     ResourceLocation location = ResourceLocation::Registry.getKey(GetType());
 
     tag->putString(L"id", location.toString());
-    tag->putInt(L"x", mPos.getX());
-    tag->putInt(L"y", mPos.getY());
-    tag->putInt(L"z", mPos.getZ());
+    tag->putInt(L"x", m_pos.getX());
+    tag->putInt(L"y", m_pos.getY());
+    tag->putInt(L"z", m_pos.getZ());
 
     return tag;
 }
@@ -70,39 +70,39 @@ void BlockEntity::tick() {}
 void BlockEntity::setLevelForLoading(Level*) {}
 
 int BlockEntity::getData() {
-    int data = mData;
+    int data = m_data;
     if (data != -1)
         return data;
 
-    const BlockState* state = mLevel->getBlockState(mPos);
+    const BlockState* state = m_level->getBlockState(m_pos);
     Block* block = state->getBlock();
-    mData = block->convertBlockStateToLegacyData(state);
-    return mData;
+    m_data = block->convertBlockStateToLegacyData(state);
+    return m_data;
 }
 
 void BlockEntity::setData(int data) {
-    mData = data;
+    m_data = data;
 }
 
 void BlockEntity::setChanged() {
-    if (!mLevel)
+    if (!m_level)
         return;
 
-    const BlockState* state = mLevel->getBlockState(mPos);
+    const BlockState* state = m_level->getBlockState(m_pos);
     Block* block = state->getBlock();
-    mData = block->convertBlockStateToLegacyData(state);
+    m_data = block->convertBlockStateToLegacyData(state);
 
-    mLevel->blockEntityChanged(mPos, std::enable_shared_from_this<BlockEntity>::shared_from_this());
+    m_level->blockEntityChanged(m_pos, std::enable_shared_from_this<BlockEntity>::shared_from_this());
 
     if (getBlock() != Blocks::AIR) {
-        mLevel->updateNeighbourForOutputSignal(mPos, getBlock());
+        m_level->updateNeighbourForOutputSignal(m_pos, getBlock());
     }
 }
 
 double BlockEntity::distanceToSqr(double x, double y, double z) {
-    double distX = mPos.getX() + 0.5 - x;
-    double distY = mPos.getY() + 0.5 - y;
-    double distZ = mPos.getZ() + 0.5 - z;
+    double distX = m_pos.getX() + 0.5 - x;
+    double distY = m_pos.getY() + 0.5 - y;
+    double distZ = m_pos.getZ() + 0.5 - z;
     return (distX * distX) + (distY * distY) + (distZ * distZ);
 }
 
@@ -111,19 +111,19 @@ double BlockEntity::getViewDistance() {
 }
 
 BlockPos BlockEntity::getBlockPos() {
-    return mPos;
+    return m_pos;
 }
 
 Block* BlockEntity::getBlock() {
-    if (mBlock)
-        return mBlock;
+    if (m_block)
+        return m_block;
 
-    if (!mLevel)
+    if (!m_level)
         return nullptr;
 
-    const BlockState* state = mLevel->getBlockState(mPos);
-    mBlock = state->getBlock();
-    return mBlock;
+    const BlockState* state = m_level->getBlockState(m_pos);
+    m_block = state->getBlock();
+    return m_block;
 }
 
 std::shared_ptr<Packet> BlockEntity::getUpdatePacket() {
@@ -140,24 +140,24 @@ CompoundTag* BlockEntity::getUpdateTagForPistonMovement() {
 }
 
 bool BlockEntity::isRemoved() {
-    return mIsRemoved;
+    return m_isRemoved;
 }
 
 void BlockEntity::setRemoved() {
-    mIsRemoved = true;
+    m_isRemoved = true;
 }
 
 void BlockEntity::clearRemoved() {
-    mIsRemoved = false;
+    m_isRemoved = false;
 }
 
 void BlockEntity::clearCache() {
-    mBlock = nullptr;
-    mData = -1;
+    m_block = nullptr;
+    m_data = -1;
 }
 
 void BlockEntity::setPosition(const BlockPos& pos) {
-    mPos = pos;
+    m_pos = pos;
 }
 
 bool BlockEntity::onlyOpCanSetNbt() {

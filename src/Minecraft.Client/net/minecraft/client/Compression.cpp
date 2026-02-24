@@ -9,42 +9,42 @@
 DEFINE_THREAD_STORAGE_SINGLE(Compression)
 
 Compression::Compression() {
-    this->dcData = 0;
+    this->m_dcData = 0;
 
     // set up flags (guessing)
     struct {
-        uint64_t unk;
-        uint32_t unk2;
+        uint64_t m_unk;
+        uint32_t m_unk2;
     } XMemFlags;
 
-    XMemFlags.unk = 0x2000000000000;
-    XMemFlags.unk2 = 0x20000;
+    XMemFlags.m_unk = 0x2000000000000;
+    XMemFlags.m_unk2 = 0x20000;
 
     // IDA wouldn't show this in it's pseudocode... Ghidra did though.
-    XMemCreateCompressionContext(PLACEHOLDER, &XMemFlags, 0, &this->XMemCompressionContext);
-    XMemCreateDecompressionContext(PLACEHOLDER, &XMemFlags, 0, &this->XMemDecompressionContext);
+    XMemCreateCompressionContext(PLACEHOLDER, &XMemFlags, 0, &this->m_xMemCompressionContext);
+    XMemCreateDecompressionContext(PLACEHOLDER, &XMemFlags, 0, &this->m_xMemDecompressionContext);
 
-    this->type = ZLIB;
-    this->unk2 = ZLIB;
+    this->m_type = ZLIB;
+    this->m_unk2 = ZLIB;
 
-    InitializeCriticalSection(&this->cMutex);
-    InitializeCriticalSection(&this->dcMutex);
+    InitializeCriticalSection(&this->m_cMutex);
+    InitializeCriticalSection(&this->m_dcMutex);
 }
 
 Compression::~Compression() {
-    XMemDestroyCompressionContext(this->XMemCompressionContext);
-    XMemDestroyDecompressionContext(this->XMemDecompressionContext);
+    XMemDestroyCompressionContext(this->m_xMemCompressionContext);
+    XMemDestroyDecompressionContext(this->m_xMemDecompressionContext);
 
-    nn::os::FinalizeMutex(&this->cMutex);
-    nn::os::FinalizeMutex(&this->dcMutex);
+    nn::os::FinalizeMutex(&this->m_cMutex);
+    nn::os::FinalizeMutex(&this->m_dcMutex);
 
-    if (this->dcData) {
-        delete this->dcData;
+    if (this->m_dcData) {
+        delete this->m_dcData;
     }
 }
 
 Compression* Compression::getCompression() {
-    return ((ThreadStorage*)TlsGetValue(sThreadStorageIndex))->mStorage;
+    return ((ThreadStorage*)TlsGetValue(sThreadStorageIndex))->m_storage;
 }
 
 void Compression::SetDecompressionType(ESavePlatform platform) {
@@ -127,11 +127,11 @@ int Compression::Compress(void* dst, unsigned int* dstSize, void* src, unsigned 
 int Compression::CompressLZXRLE(void* dst, unsigned int* dstSize, void* src, unsigned int srcSize) {
     int res;
 
-    nn::os::MutexType* mtx = &this->cMutex;
+    nn::os::MutexType* mtx = &this->m_cMutex;
 
-    EnterCriticalSection(&this->cMutex);
+    EnterCriticalSection(&this->m_cMutex);
 
-    unsigned char* buf = this->cData;
+    unsigned char* buf = this->m_cData;
     unsigned int initDstSize = 0x40000;
 
     res = internalCompressRle(buf, &initDstSize, src, srcSize);
@@ -149,17 +149,17 @@ int Compression::CompressLZXRLE(void* dst, unsigned int* dstSize, void* src, uns
 int Compression::Decompress(void* dst, unsigned int* dstSize, void* src, unsigned int srcSize) {
     int res;
 
-    if (this->type != this->unk2)
+    if (this->m_type != this->m_unk2)
         return DecompressWithType(dst, dstSize, src, srcSize);
 
-    EnterCriticalSection(&this->dcMutex);
+    EnterCriticalSection(&this->m_dcMutex);
 
     unsigned long ulDestSize = *dstSize;
     res = uncompress((unsigned char*)dst, &ulDestSize, (unsigned char*)src, srcSize);
 
     *dstSize = ulDestSize;
 
-    LeaveCriticalSection(&this->dcMutex);
+    LeaveCriticalSection(&this->m_dcMutex);
 
     // if not Z_OK, we know there's an error
     if (res)
@@ -169,7 +169,7 @@ int Compression::Decompress(void* dst, unsigned int* dstSize, void* src, unsigne
 }
 
 int Compression::DecompressLZXRLE(void* dst, unsigned int* dstSize, void* src, unsigned int srcSize) {
-    EnterCriticalSection(&this->dcMutex);
+    EnterCriticalSection(&this->m_dcMutex);
 
     unsigned char* temp;
     unsigned long ulDestSize;
@@ -186,21 +186,21 @@ int Compression::DecompressLZXRLE(void* dst, unsigned int* dstSize, void* src, u
         if (temp)
             delete[] temp;
     } else {
-        if (!this->dcData) {
-            this->dcData = new unsigned char[0x32000];
+        if (!this->m_dcData) {
+            this->m_dcData = new unsigned char[0x32000];
         }
 
-        Compression::Decompress(this->dcData, &initDstSize, src, srcSize);
-        Compression::internalDecompressRle(dst, dstSize, this->dcData, initDstSize);
+        Compression::Decompress(this->m_dcData, &initDstSize, src, srcSize);
+        Compression::internalDecompressRle(dst, dstSize, this->m_dcData, initDstSize);
     }
-    LeaveCriticalSection(&this->dcMutex);
+    LeaveCriticalSection(&this->m_dcMutex);
     return 0;
 }
 
 int Compression::DecompressWithType(void* dst, unsigned int* dstSize, void* src, unsigned int srcSize) {
     // I'm confused... how does this decompress?
     // unless it got ifdef'd out
-    if (this->type < 2) {
+    if (this->m_type < 2) {
         memcpy(dst, src, srcSize);
         *dstSize = srcSize;
         return 0;

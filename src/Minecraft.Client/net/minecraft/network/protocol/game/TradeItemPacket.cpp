@@ -9,8 +9,8 @@ std::shared_ptr<Packet> TradeItemPacket::create() {
 }
 
 TradeItemPacket::TradeItemPacket() {
-    dword18 = 0;
-    dword1C = 0;
+    m_dword18 = 0;
+    m_dword1C = 0;
 }
 
 EPacketType TradeItemPacket::getPacketId() {
@@ -18,13 +18,13 @@ EPacketType TradeItemPacket::getPacketId() {
 }
 
 void TradeItemPacket::read(DataInputStream* input) {
-    dword18 = input->readInt();
-    dword1C = input->readInt();
+    m_dword18 = input->readInt();
+    m_dword1C = input->readInt();
 }
 
 void TradeItemPacket::write(DataOutputStream* output) {
-    output->writeInt(dword18);
-    output->writeInt(dword1C);
+    output->writeInt(m_dword18);
+    output->writeInt(m_dword1C);
 }
 
 void TradeItemPacket::handle(PacketListener* listener) {

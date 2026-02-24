@@ -1,12 +1,12 @@
 #include "net/minecraft/world/level/material/Material.h"
 
-Material::Material(const MaterialColor* color) : mColor(color) {
-    mIsFlammable = false;
-    mIsReplaceable = false;
-    mIsNeverBuildable = false;
-    mIsAlwaysDestroyable = true;
-    mPushReaction = NORMAL;
-    mIsDestroyedByHand = false;
+Material::Material(const MaterialColor* color) : m_color(color) {
+    m_isFlammable = false;
+    m_isReplaceable = false;
+    m_isNeverBuildable = false;
+    m_isAlwaysDestroyable = true;
+    m_pushReaction = NORMAL;
+    m_isDestroyedByHand = false;
 }
 
 void Material::staticCtor() {
@@ -78,66 +78,66 @@ bool Material::blocksMotion() {
 }
 
 Material* Material::neverBuildable() {
-    mIsNeverBuildable = true;
+    m_isNeverBuildable = true;
     return this;
 }
 
 Material* Material::notAlwaysDestroyable() {
-    mIsAlwaysDestroyable = false;
+    m_isAlwaysDestroyable = false;
     return this;
 }
 
 Material* Material::flammable() {
-    mIsFlammable = true;
+    m_isFlammable = true;
     return this;
 }
 
 bool Material::isFlammable() {
-    return mIsFlammable;
+    return m_isFlammable;
 }
 
 Material* Material::replaceable() {
-    mIsReplaceable = true;
+    m_isReplaceable = true;
     return this;
 }
 
 bool Material::isReplaceable() {
-    return mIsReplaceable;
+    return m_isReplaceable;
 }
 
 bool Material::isSolidBlocking() {
-    if (mIsNeverBuildable)
+    if (m_isNeverBuildable)
         return false;
     return blocksMotion();
 }
 
 bool Material::isAlwaysDestroyable() {
-    return mIsAlwaysDestroyable;
+    return m_isAlwaysDestroyable;
 }
 
 PushReaction Material::getPushReaction() {
-    return mPushReaction;
+    return m_pushReaction;
 }
 
 bool Material::isDestroyedByHand() {
-    return mIsDestroyedByHand;
+    return m_isDestroyedByHand;
 }
 
 Material* Material::notPushable() {
-    mPushReaction = BLOCK;
+    m_pushReaction = BLOCK;
     return this;
 }
 
 Material* Material::destroyOnPush() {
-    mPushReaction = DESTROY;
+    m_pushReaction = DESTROY;
     return this;
 }
 
 Material* Material::makeDestroyedByHand() {
-    mIsDestroyedByHand = true;
+    m_isDestroyedByHand = true;
     return this;
 }
 
 const MaterialColor* Material::getColor() const {
-    return mColor;
+    return m_color;
 }

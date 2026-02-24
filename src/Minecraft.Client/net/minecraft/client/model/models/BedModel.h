@@ -11,6 +11,6 @@ public:
 
     std::wstring getName() override;
 
-    ModelPartSkin* mBedPart;
-    ModelPartSkin* mLegPart;
+    ModelPartSkin* m_bedPart;
+    ModelPartSkin* m_legPart;
 };

@@ -32,12 +32,12 @@ public:
     virtual void confirmResult(bool, int);
     virtual void tabPressed();
 
-    Minecraft* mMinecraft;
-    int mWidth;
-    int mHeight;
-    std::vector<Button*> mButtons;
-    bool byte_38;
-    Font* mFont;
-    GuiParticles* mGuiParticles;
-    Button* mCurrentButton;
+    Minecraft* m_minecraft;
+    int m_width;
+    int m_height;
+    std::vector<Button*> m_buttons;
+    bool m_byte38;
+    Font* m_font;
+    GuiParticles* m_guiParticles;
+    Button* m_currentButton;
 };

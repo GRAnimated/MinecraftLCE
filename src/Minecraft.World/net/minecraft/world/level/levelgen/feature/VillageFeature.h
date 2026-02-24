@@ -8,7 +8,7 @@ public:
 
     static void staticCtor();
 
-    char filler[0x10];
+    char m_filler[0x10];
 };
 
 ASSERT_SIZEOF(VillageFeature, 0x78)

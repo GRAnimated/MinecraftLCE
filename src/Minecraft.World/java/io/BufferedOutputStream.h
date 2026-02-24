@@ -13,7 +13,7 @@ public:
     void close() override;
     void flush() override;
 
-    OutputStream* mOutputStream;
-    arrayWithLength<unsigned char> mBuffer;
-    unsigned int mSize;
+    OutputStream* m_outputStream;
+    arrayWithLength<unsigned char> m_buffer;
+    unsigned int m_size;
 };

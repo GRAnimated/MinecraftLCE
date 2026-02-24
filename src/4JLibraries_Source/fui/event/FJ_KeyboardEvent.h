@@ -6,5 +6,5 @@ class FJ_KeyboardEvent : public FJ_Event {
 public:
     FJ_KeyboardEvent(bool, int, bool, bool);
 
-    int mChar;
+    int m_char;
 };

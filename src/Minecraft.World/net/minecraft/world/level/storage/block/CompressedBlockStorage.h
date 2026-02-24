@@ -78,8 +78,8 @@ public:
         *blockIdx = bY | bX | bZ;
     }
 
-    unsigned char* mData;
-    int mLength;
+    unsigned char* m_data;
+    int m_length;
 
     static nn::os::MutexType sMutex;
 };

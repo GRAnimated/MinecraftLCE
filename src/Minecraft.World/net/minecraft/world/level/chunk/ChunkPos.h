@@ -6,8 +6,8 @@ class BlockPos;
 
 class ChunkPos {
 public:
-    int mX;
-    int mZ;
+    int m_x;
+    int m_z;
 
     static long long asLong(int x, int z);
     static bool eq_test(const ChunkPos& pos0, const ChunkPos& pos1);

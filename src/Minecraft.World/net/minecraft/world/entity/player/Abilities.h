@@ -18,11 +18,11 @@ public:
     void write(DataOutputStream* dataOutputStream);
     void read(DataInputStream* dataInputStream);
 
-    bool mIsInvulnerable = false;
-    bool mIsFlying = false;
-    bool mIsEnableFly = false;
-    bool mIsInstabuild = false;
-    bool mIsEnableBuild = true;
-    float mFlySpeed = 0.05f;
-    float mWalkSpeed = 0.1f;
+    bool m_isInvulnerable = false;
+    bool m_isFlying = false;
+    bool m_isEnableFly = false;
+    bool m_isInstabuild = false;
+    bool m_isEnableBuild = true;
+    float m_flySpeed = 0.05f;
+    float m_walkSpeed = 0.1f;
 };

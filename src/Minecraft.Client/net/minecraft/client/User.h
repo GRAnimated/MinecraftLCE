@@ -8,7 +8,7 @@ public:
 
     User(const std::wstring& name, const std::wstring& session);
 
-    std::wstring mName;
-    std::wstring mSession;
-    std::wstring unk;
+    std::wstring m_name;
+    std::wstring m_session;
+    std::wstring m_unk;
 };

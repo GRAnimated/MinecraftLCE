@@ -21,7 +21,7 @@ public:
     int getExperienceLevel();
 
 private:
-    float experienceProgress;
-    int experienceLevel;
-    int totalExperience;
+    float m_experienceProgress;
+    int m_experienceLevel;
+    int m_totalExperience;
 };

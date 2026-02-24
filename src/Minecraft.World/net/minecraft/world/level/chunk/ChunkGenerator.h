@@ -29,13 +29,13 @@ public:
     virtual bool isPosInFeature(Level*, const std::wstring&, const BlockPos&) = 0;
     virtual void lightChunk(LevelChunk*);
 
-    int getSize() { return mSize; }
+    int getSize() { return m_size; }
 
     static bool inPostProcessStep;
 
-    bool mIsClassicMoat;
-    bool mIsSmallMoat;
-    bool mIsMediumMoat;
-    bool mIsLargeMoat;
-    int mSize;
+    bool m_isClassicMoat;
+    bool m_isSmallMoat;
+    bool m_isMediumMoat;
+    bool m_isLargeMoat;
+    int m_size;
 };

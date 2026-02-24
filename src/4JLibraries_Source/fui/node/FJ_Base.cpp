@@ -5,7 +5,7 @@ int FJ_Base::getType() {
 }
 
 bool FJ_Base::getLabelTooWide() {
-    return this->mLabelTooWide;
+    return this->m_labelTooWide;
 }
 
 int FJ_Base::getOldWidth() {
@@ -15,9 +15,9 @@ int FJ_Base::getOldWidth() {
 void FJ_Base::HandleCharInput(uint) {}
 
 void* FJ_Base::getObjListParent() {
-    return this->mObjListParent;
+    return this->m_objListParent;
 }
 
 int FJ_Base::getId() {
-    return this->mId;
+    return this->m_id;
 }

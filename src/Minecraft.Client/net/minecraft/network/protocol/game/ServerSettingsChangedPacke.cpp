@@ -9,13 +9,13 @@ std::shared_ptr<Packet> ServerSettingsChangedPacket::create() {
 }
 
 ServerSettingsChangedPacket::ServerSettingsChangedPacket() {
-    dword18 = 0;
-    dword1C = 1;
+    m_dword18 = 0;
+    m_dword1C = 1;
 }
 
 ServerSettingsChangedPacket::ServerSettingsChangedPacket(char unk1, unsigned int unk2) {
-    dword18 = unk1;
-    dword1C = unk2;
+    m_dword18 = unk1;
+    m_dword1C = unk2;
 }
 
 int ServerSettingsChangedPacket::getEstimatedSize() {
@@ -27,13 +27,13 @@ EPacketType ServerSettingsChangedPacket::getPacketId() {
 }
 
 void ServerSettingsChangedPacket::read(DataInputStream* input) {
-    dword18 = input->readByte();
-    dword1C = input->readInt();
+    m_dword18 = input->readByte();
+    m_dword1C = input->readInt();
 }
 
 void ServerSettingsChangedPacket::write(DataOutputStream* output) {
-    output->writeByte(dword18);
-    output->writeInt(dword1C);
+    output->writeByte(m_dword18);
+    output->writeInt(m_dword1C);
 }
 
 void ServerSettingsChangedPacket::handle(PacketListener* listener) {

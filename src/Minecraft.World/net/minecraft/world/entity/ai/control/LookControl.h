@@ -17,11 +17,11 @@ public:
     double getWantedY();
     double getWantedZ();
 
-    Mob* mMob;
-    float mYMaxRotSpeed;
-    float mXMaxRotAngle;
-    bool mIsHasWanted;
-    double mWantedX;
-    double mWantedY;
-    double mWantedZ;
+    Mob* m_mob;
+    float m_yMaxRotSpeed;
+    float m_xMaxRotAngle;
+    bool m_isHasWanted;
+    double m_wantedX;
+    double m_wantedY;
+    double m_wantedZ;
 };

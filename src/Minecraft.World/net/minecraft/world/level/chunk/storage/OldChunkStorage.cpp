@@ -13,10 +13,10 @@
 void OldChunkStorage::save(LevelChunk* chunk, Level* lvl, CompoundTag* tag) {
     lvl->checkSession();
     tag->putShort(L"version", CHUNK_VERSION);
-    tag->putInt(L"xPos", chunk->mXPos);
-    tag->putInt(L"zPos", chunk->mZPos);
+    tag->putInt(L"xPos", chunk->m_xPos);
+    tag->putInt(L"zPos", chunk->m_zPos);
     tag->putLong(L"LastUpdate", lvl->getGameTime());
-    tag->putLong(L"InhabitedTime", chunk->mInhabitedTime);
+    tag->putLong(L"InhabitedTime", chunk->m_inhabitedTime);
     // void *blocks = TlsGetValue()
     PIXBeginNamedEvent(0.0, "Getting block data");
     // function here that I don't know the purpose of
@@ -26,11 +26,11 @@ void OldChunkStorage::save(LevelChunk* chunk, Level* lvl, CompoundTag* tag) {
 // NON_MATCHING | Score: 7824 (lower is better)
 void OldChunkStorage::save(LevelChunk* chunk, Level* lvl, DataOutputStream* out) {
     // write header
-    out->writeShort(CHUNK_VERSION);         // chunk ver
-    out->writeInt(chunk->mXPos);            // chunk x pos
-    out->writeInt(chunk->mZPos);            // chunk z pos
-    out->writeLong(lvl->getGameTime());     // lastModified (write current in-game time)
-    out->writeLong(chunk->mInhabitedTime);  // inhabitedTime
+    out->writeShort(CHUNK_VERSION);          // chunk ver
+    out->writeInt(chunk->m_xPos);            // chunk x pos
+    out->writeInt(chunk->m_zPos);            // chunk z pos
+    out->writeLong(lvl->getGameTime());      // lastModified (write current in-game time)
+    out->writeLong(chunk->m_inhabitedTime);  // inhabitedTime
 
     // write blocks
     PIXBeginNamedEvent(0.0, "Getting block data");
@@ -52,7 +52,7 @@ void OldChunkStorage::save(LevelChunk* chunk, Level* lvl, DataOutputStream* out)
     // write heightmap
     out->write(chunk->getHeightmap());
 
-    out->writeShort(chunk->mPopulatedFlags);
+    out->writeShort(chunk->m_populatedFlags);
 
     // write biomes
     out->write(chunk->getBiomes());
@@ -66,7 +66,7 @@ void OldChunkStorage::save(LevelChunk* chunk, Level* lvl, DataOutputStream* out)
     // NON_MATCHING | At 0x71002326BC
     // Weird for loop
     // love resharper unknown type
-    for (std::pair<const BlockPos, std::shared_ptr<BlockEntity>>& entity : *chunk->mBlockEntities) {
+    for (std::pair<const BlockPos, std::shared_ptr<BlockEntity>>& entity : *chunk->m_blockEntities) {
         CompoundTag* tileEntity = new CompoundTag();
         entity.second->save(tileEntity);  // guessed
         tileEntitiesList->add(tileEntity);
@@ -84,10 +84,10 @@ void OldChunkStorage::save(LevelChunk* chunk, Level* lvl, DataOutputStream* out)
         // ((__int64)(v20[1] - *v20) >> 4) ))
         for (TickNextTickData* tick : *ticks) {
             CompoundTag* tickTag = new CompoundTag();
-            tickTag->putInt(L"i", tick->block->getId());
-            tickTag->putInt(L"x", tick->pos->getX());
-            tickTag->putInt(L"y", tick->pos->getY());
-            tickTag->putInt(L"z", tick->pos->getZ());
+            tickTag->putInt(L"i", tick->m_block->getId());
+            tickTag->putInt(L"x", tick->m_pos->getX());
+            tickTag->putInt(L"y", tick->m_pos->getY());
+            tickTag->putInt(L"z", tick->m_pos->getZ());
             tickTag->putInt(L"t", saveTime);  // something - saveTime
             ticksList->add(tickTag);
         }

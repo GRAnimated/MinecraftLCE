@@ -50,7 +50,7 @@ void WebBlock::entityInside(Level* level, const BlockPos& pos, const BlockState*
     entity->makeStuckInWeb();
     if (entity->GetType() == eFireworksRocketEntity) {
         if (Minecraft::GetInstance()->GetMiniGame()->HasFeatureDirectionalFireworks()) {
-            entity->mHasCollision = true;
+            entity->m_hasCollision = true;
         }
     }
 }
@@ -58,7 +58,7 @@ void WebBlock::entityInside(Level* level, const BlockPos& pos, const BlockState*
 void WebBlock::playerDestroy(Level* level, std::shared_ptr<Player> player, const BlockPos& pos,
                              const BlockState* blockState, std::shared_ptr<BlockEntity> blockEntity,
                              not_null_ptr<ItemInstance> itemInstance) {
-    if (!level->mIsLocal && itemInstance->getItem() == Items::SHEARS) {
+    if (!level->m_isLocal && itemInstance->getItem() == Items::SHEARS) {
         ItemInstance* drop = new ItemInstance(Item::byBlock(this), true);
         popResource(level, pos, drop);
     } else {

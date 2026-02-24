@@ -23,95 +23,95 @@
 #include <memory>
 
 bool Connection::getAndSetRunning(bool running) {
-    EnterCriticalSection(&mIsRunningMutex);
-    bool prevIsRunning = mIsRunning;
-    mIsRunning = running;
-    LeaveCriticalSection(&mIsRunningMutex);
+    EnterCriticalSection(&m_isRunningMutex);
+    bool prevIsRunning = m_isRunning;
+    m_isRunning = running;
+    LeaveCriticalSection(&m_isRunningMutex);
     return prevIsRunning;
 }
 
 void Connection::_init() {
-    InitializeCriticalSection(&mOutgoingMutex);
-    InitializeCriticalSection(&mCountMutex);
-    InitializeCriticalSection(&mIncomingMutex);
-    mIsRunning = true;
-    InitializeCriticalSection(&mIsRunningMutex);
-    mIsDisconnecting = false;
-    field_119 = false;
-    byte_148 = false;
-    dword_14c = 0;
-    mFakeLag = 0;
-    mDelay = 50;
-    qword_140 = nullptr;
-    mTicksSinceLastPacket = 0;
-    mEstimatedSize = 0;
-    field_160 = 0;
-    field_164 = 0;
+    InitializeCriticalSection(&m_outgoingMutex);
+    InitializeCriticalSection(&m_countMutex);
+    InitializeCriticalSection(&m_incomingMutex);
+    m_isRunning = true;
+    InitializeCriticalSection(&m_isRunningMutex);
+    m_isDisconnecting = false;
+    m_field119 = false;
+    m_byte148 = false;
+    m_dword14c = 0;
+    m_fakeLag = 0;
+    m_delay = 50;
+    m_qword140 = nullptr;
+    m_ticksSinceLastPacket = 0;
+    m_estimatedSize = 0;
+    m_field160 = 0;
+    m_field164 = 0;
 }
 
 Connection::~Connection() {
-    mIsRunning = false;
+    m_isRunning = false;
 
-    nn::os::FinalizeMutex(&mIsRunningMutex);
+    nn::os::FinalizeMutex(&m_isRunningMutex);
 
-    if (mDataInputStream)
-        mDataInputStream->close();
-    mRunReadThread->WaitForCompletion(0xFFFFFFFF);
-    mRunWriteThread->WaitForCompletion(0xFFFFFFFF);
+    if (m_dataInputStream)
+        m_dataInputStream->close();
+    m_runReadThread->WaitForCompletion(0xFFFFFFFF);
+    m_runWriteThread->WaitForCompletion(0xFFFFFFFF);
 
-    nn::os::FinalizeMutex(&mOutgoingMutex);
-    nn::os::FinalizeMutex(&mCountMutex);
-    nn::os::FinalizeMutex(&mIncomingMutex);
+    nn::os::FinalizeMutex(&m_outgoingMutex);
+    nn::os::FinalizeMutex(&m_countMutex);
+    nn::os::FinalizeMutex(&m_incomingMutex);
 
-    delete mC4JEventImpl1;
-    delete mC4JEventImpl2;
+    delete m_c4JEventImpl1;
+    delete m_c4JEventImpl2;
 
-    delete mDataOutputStream2;
-    mDataOutputStream2 = nullptr;
+    delete m_dataOutputStream2;
+    m_dataOutputStream2 = nullptr;
 
-    delete mByteArrayOutputStream;
-    mByteArrayOutputStream = nullptr;
+    delete m_byteArrayOutputStream;
+    m_byteArrayOutputStream = nullptr;
 
-    if (mDataOutputStream) {
-        mDataOutputStream->deleteChildStream();
-        delete mDataOutputStream;
-        mDataOutputStream = nullptr;
+    if (m_dataOutputStream) {
+        m_dataOutputStream->deleteChildStream();
+        delete m_dataOutputStream;
+        m_dataOutputStream = nullptr;
     }
 
-    delete mDataInputStream;
-    mDataInputStream = nullptr;
+    delete m_dataInputStream;
+    m_dataInputStream = nullptr;
 
-    delete mRunReadThread;
-    mRunReadThread = nullptr;
+    delete m_runReadThread;
+    m_runReadThread = nullptr;
 
-    delete mRunWriteThread;
-    mRunWriteThread = nullptr;
+    delete m_runWriteThread;
+    m_runWriteThread = nullptr;
 }
 
 static char filename[0x100] = {};
 
 Connection::Connection(Socket* socket, const std::wstring& type, PacketListener* packetListener)
-    : mIncomingQueue(std::deque<std::shared_ptr<Packet>>()),
-      mOutgoingQueue(std::deque<std::shared_ptr<Packet>>()),
-      mSlowOutgoingQueue(std::deque<std::shared_ptr<Packet>>()) {
+    : m_incomingQueue(std::deque<std::shared_ptr<Packet>>()),
+      m_outgoingQueue(std::deque<std::shared_ptr<Packet>>()),
+      m_slowOutgoingQueue(std::deque<std::shared_ptr<Packet>>()) {
     _init();
-    mSocket = socket;
-    mRemoteSocketAddress = socket->getRemoteSocketAddress();
-    mPacketListener = packetListener;
+    m_socket = socket;
+    m_remoteSocketAddress = socket->getRemoteSocketAddress();
+    m_packetListener = packetListener;
 
     socket->setSoTimeout(30000);
     socket->setTrafficClass(24);
 
-    mDataInputStream = new DataInputStream(socket->getInputStream(packetListener->isServerPacketListener()));
+    m_dataInputStream = new DataInputStream(socket->getInputStream(packetListener->isServerPacketListener()));
 
-    mSocketOutputStream = socket->getOutputStream(packetListener->isServerPacketListener());
-    mDataOutputStream = new DataOutputStream(new BufferedOutputStream(mSocketOutputStream, 0x1400));
+    m_socketOutputStream = socket->getOutputStream(packetListener->isServerPacketListener());
+    m_dataOutputStream = new DataOutputStream(new BufferedOutputStream(m_socketOutputStream, 0x1400));
 
-    mByteArrayOutputStream = new ByteArrayOutputStream(0x1400);
-    mDataOutputStream2 = new DataOutputStream(mByteArrayOutputStream);
+    m_byteArrayOutputStream = new ByteArrayOutputStream(0x1400);
+    m_dataOutputStream2 = new DataOutputStream(m_byteArrayOutputStream);
 
-    mC4JEventImpl1 = new C4JEventImpl(C4JEvent::EMode::_0);
-    mC4JEventImpl2 = new C4JEventImpl(C4JEvent::EMode::_0);
+    m_c4JEventImpl1 = new C4JEventImpl(C4JEvent::EMode::_0);
+    m_c4JEventImpl2 = new C4JEventImpl(C4JEvent::EMode::_0);
 
     const char* name = wstringtofilename(type, filename);
 
@@ -120,15 +120,15 @@ Connection::Connection(Socket* socket, const std::wstring& type, PacketListener*
     sprintf(readName, "%s read\n", name);
     sprintf(writeName, "%s write\n", name);
 
-    mRunReadThread = new C4JThreadImpl(Connection::runRead, this, readName, 0);
-    mRunWriteThread = new C4JThreadImpl(Connection::runWrite, this, writeName, 0);
+    m_runReadThread = new C4JThreadImpl(Connection::runRead, this, readName, 0);
+    m_runWriteThread = new C4JThreadImpl(Connection::runWrite, this, writeName, 0);
 
-    mRunReadThread->SetProcessor(2);
-    mRunWriteThread->SetProcessor(2);
-    mRunReadThread->Run();
-    mRunWriteThread->Run();
+    m_runReadThread->SetProcessor(2);
+    m_runWriteThread->SetProcessor(2);
+    m_runReadThread->Run();
+    m_runWriteThread->Run();
 
-    mTimeInMs = 0;
+    m_timeInMs = 0;
 }
 
 int Connection::runRead(void* conn) {
@@ -136,16 +136,16 @@ int Connection::runRead(void* conn) {
     ShutdownManager::HasStarted(ShutdownManager::EThreadId::_8);
     if (connection) {
         Compression::CreateNewThreadStorage();
-        EnterCriticalSection(&connection->mCountMutex);
+        EnterCriticalSection(&connection->m_countMutex);
         ++sReadConnections;
-        LeaveCriticalSection(&connection->mCountMutex);
+        LeaveCriticalSection(&connection->m_countMutex);
         MemSect(19);
-        while (connection->mIsRunning) {
-            if (connection->mIsDisconnecting || !ShutdownManager::ShouldRun(ShutdownManager::EThreadId::_8))
+        while (connection->m_isRunning) {
+            if (connection->m_isDisconnecting || !ShutdownManager::ShouldRun(ShutdownManager::EThreadId::_8))
                 break;
             while (connection->readTick() != 0)
                 ;
-            connection->mC4JEventImpl1->WaitForSignal(100);
+            connection->m_c4JEventImpl1->WaitForSignal(100);
         }
         MemSect(0);
         Compression::ReleaseThreadStorage();
@@ -163,13 +163,13 @@ int Connection::runWrite(void* conn) {
     if (connection) {
         Compression::CreateNewThreadStorage();
 
-        EnterCriticalSection(&connection->mCountMutex);
+        EnterCriticalSection(&connection->m_countMutex);
         ++sWriteConnections;
-        LeaveCriticalSection(&connection->mCountMutex);
+        LeaveCriticalSection(&connection->m_countMutex);
 
-        if (connection->mIsRunning) {
+        if (connection->m_isRunning) {
             int writeStatus = 0;
-            while (connection->mIsRunning || writeStatus) {  // issue is somewhere here
+            while (connection->m_isRunning || writeStatus) {  // issue is somewhere here
                 if (!ShutdownManager::ShouldRun(ShutdownManager::EThreadId::_9))
                     break;
 
@@ -182,20 +182,20 @@ int Connection::runWrite(void* conn) {
                     writeSuccess = connection->writeTick();
                     currentTime = System::processTimeInMilliSecs();
 
-                    if (connection->mDataOutputStream->getSize() == 0x7fffffff)
+                    if (connection->m_dataOutputStream->getSize() == 0x7fffffff)
                         break;
                 } while (writeSuccess | ((currentTime - startTime) > 199));
 
-                writeStatus = connection->mC4JEventImpl2->WaitForSignal(100);
+                writeStatus = connection->m_c4JEventImpl2->WaitForSignal(100);
 
-                if (connection->mDataOutputStream)
-                    connection->mDataOutputStream->flush();
+                if (connection->m_dataOutputStream)
+                    connection->m_dataOutputStream->flush();
             }
         }
 
-        EnterCriticalSection(&connection->mCountMutex);
+        EnterCriticalSection(&connection->m_countMutex);
         --sWriteConnections;
-        LeaveCriticalSection(&connection->mCountMutex);
+        LeaveCriticalSection(&connection->m_countMutex);
 
         Compression::ReleaseThreadStorage();
     }
@@ -205,61 +205,62 @@ int Connection::runWrite(void* conn) {
 }
 
 void Connection::setListener(PacketListener* listener) {
-    mPacketListener = listener;
+    m_packetListener = listener;
 }
 
 void Connection::send(std::shared_ptr<Packet> packet) {
-    if (!mIsDisconnecting) {
-        mTimeInMs = System::processTimeInMilliSecs();
+    if (!m_isDisconnecting) {
+        m_timeInMs = System::processTimeInMilliSecs();
         MemSect(15);
-        EnterCriticalSection(&mOutgoingMutex);
-        mEstimatedSize += packet->getEstimatedSize() + 1;
-        if (packet->mShouldDelay) {
-            packet->mShouldDelay = false;
-            mSlowOutgoingQueue.push_back(packet);
+        EnterCriticalSection(&m_outgoingMutex);
+        m_estimatedSize += packet->getEstimatedSize() + 1;
+        if (packet->m_shouldDelay) {
+            packet->m_shouldDelay = false;
+            m_slowOutgoingQueue.push_back(packet);
         } else {
             if (packet->getPacketId() == _ClientboundMapItemDataPacket)
-                if (packet->tryReplaceDuplicatePacket(&mOutgoingQueue)) {
+                if (packet->tryReplaceDuplicatePacket(&m_outgoingQueue)) {
                     // TODO: Remove early return
-                    LeaveCriticalSection(&mOutgoingMutex);
+                    LeaveCriticalSection(&m_outgoingMutex);
                     MemSect(0);
                     return;
                 }
 
-            mOutgoingQueue.push_back(packet);
+            m_outgoingQueue.push_back(packet);
         }
-        LeaveCriticalSection(&mOutgoingMutex);
+        LeaveCriticalSection(&m_outgoingMutex);
         MemSect(0);
     }
 }
 
 void Connection::queueSend(std::shared_ptr<Packet> packet) {
-    if (!mIsDisconnecting) {
-        EnterCriticalSection(&mOutgoingMutex);
-        mEstimatedSize += packet->getEstimatedSize() + 1;
-        mSlowOutgoingQueue.push_back(packet);
-        LeaveCriticalSection(&mOutgoingMutex);
+    if (!m_isDisconnecting) {
+        EnterCriticalSection(&m_outgoingMutex);
+        m_estimatedSize += packet->getEstimatedSize() + 1;
+        m_slowOutgoingQueue.push_back(packet);
+        LeaveCriticalSection(&m_outgoingMutex);
     }
 }
 
 bool Connection::writeTick() {
-    if (!mDataOutputStream || !mDataOutputStream2)
+    if (!m_dataOutputStream || !m_dataOutputStream2)
         return false;
 
     bool returnValue;
-    if (!mOutgoingQueue.empty()
-        && (!mFakeLag
-            || (System::processTimeInMilliSecs() - mOutgoingQueue.front()->mCreatedTime >= mFakeLag))) {
+    if (!m_outgoingQueue.empty()
+        && (!m_fakeLag
+            || (System::processTimeInMilliSecs() - m_outgoingQueue.front()->m_createdTime >= m_fakeLag))) {
         std::shared_ptr<Packet> packet;
-        EnterCriticalSection(&mOutgoingMutex);
+        EnterCriticalSection(&m_outgoingMutex);
 
-        packet = mOutgoingQueue.front();
-        mOutgoingQueue.pop_front();
+        packet = m_outgoingQueue.front();
+        m_outgoingQueue.pop_front();
 
-        mEstimatedSize -= packet->getEstimatedSize() + 1;
-        LeaveCriticalSection(&mOutgoingMutex);
+        m_estimatedSize -= packet->getEstimatedSize() + 1;
+        LeaveCriticalSection(&m_outgoingMutex);
 
-        Packet::writePacket(packet, mDataOutputStream, mPacketListener->isServerPacketListener(), field_164);
+        Packet::writePacket(packet, m_dataOutputStream, m_packetListener->isServerPacketListener(),
+                            m_field164);
 
         dword_71017869A0[packet->getPacketId()] += packet->getEstimatedSize() + 1;
 
@@ -268,53 +269,55 @@ bool Connection::writeTick() {
         returnValue = false;
     }
 
-    if (mDelay-- > 0 || mSlowOutgoingQueue.empty()
-        || (mFakeLag
-            && System::processTimeInMilliSecs() - mSlowOutgoingQueue.front()->mCreatedTime < mFakeLag)) {
+    if (m_delay-- > 0 || m_slowOutgoingQueue.empty()
+        || (m_fakeLag
+            && System::processTimeInMilliSecs() - m_slowOutgoingQueue.front()->m_createdTime < m_fakeLag)) {
         return returnValue;
     }
 
     std::shared_ptr<Packet> packet;
-    EnterCriticalSection(&mOutgoingMutex);
-    packet = mSlowOutgoingQueue.front();
-    mSlowOutgoingQueue.pop_front();
+    EnterCriticalSection(&m_outgoingMutex);
+    packet = m_slowOutgoingQueue.front();
+    m_slowOutgoingQueue.pop_front();
 
-    mEstimatedSize -= packet->getEstimatedSize() + 1;
-    LeaveCriticalSection(&mOutgoingMutex);
+    m_estimatedSize -= packet->getEstimatedSize() + 1;
+    LeaveCriticalSection(&m_outgoingMutex);
 
-    if (packet->mShouldDelay) {
-        Packet::writePacket(packet, mDataOutputStream2, mPacketListener->isServerPacketListener(), field_164);
+    if (packet->m_shouldDelay) {
+        Packet::writePacket(packet, m_dataOutputStream2, m_packetListener->isServerPacketListener(),
+                            m_field164);
 
-        if (mDataOutputStream)
-            mDataOutputStream->flush();
-        mSocketOutputStream->writeWithFlags(mByteArrayOutputStream->mBuffer, 0,
-                                            mByteArrayOutputStream->size(), 1);
-        mByteArrayOutputStream->clear();
+        if (m_dataOutputStream)
+            m_dataOutputStream->flush();
+        m_socketOutputStream->writeWithFlags(m_byteArrayOutputStream->m_buffer, 0,
+                                             m_byteArrayOutputStream->size(), 1);
+        m_byteArrayOutputStream->clear();
     } else {
-        Packet::writePacket(packet, mDataOutputStream, mPacketListener->isServerPacketListener(), field_164);
+        Packet::writePacket(packet, m_dataOutputStream, m_packetListener->isServerPacketListener(),
+                            m_field164);
     }
 
     dword_71017869A0[packet->getPacketId()] += packet->getEstimatedSize() + 1;
 
-    mDelay = 0;
+    m_delay = 0;
     return true;
 }
 
 void Connection::flush() {
-    mC4JEventImpl1->Set();
-    mC4JEventImpl2->Set();
+    m_c4JEventImpl1->Set();
+    m_c4JEventImpl2->Set();
 }
 
 bool Connection::readTick() {
-    if (mDataInputStream && !field_119) {
+    if (m_dataInputStream && !m_field119) {
         std::shared_ptr<Packet> packet = Packet::readPacket(
-            mDataInputStream, mPacketListener->isServerPacketListener(), field_160, field_119);
+            m_dataInputStream, m_packetListener->isServerPacketListener(), m_field160, m_field119);
         if (packet) {
             dword_71017865A0[packet->getPacketId()] += packet->getEstimatedSize() + 1;
-            EnterCriticalSection(&mIncomingMutex);
-            if (!mIsDisconnecting)
-                mIncomingQueue.push_back(packet);
-            LeaveCriticalSection(&mIncomingMutex);
+            EnterCriticalSection(&m_incomingMutex);
+            if (!m_isDisconnecting)
+                m_incomingQueue.push_back(packet);
+            LeaveCriticalSection(&m_incomingMutex);
             return true;
         }
         return false;
@@ -325,54 +328,54 @@ bool Connection::readTick() {
 void Connection::close(DisconnectPacket::eDisconnectReason reason) {
     if (!getAndSetRunning(false))
         return;
-    byte_148 = true;
-    dword_14c = reason;
-    qword_150 = nullptr;
+    m_byte148 = true;
+    m_dword14c = reason;
+    m_qword150 = nullptr;
 
-    if (mDataInputStream)
-        mDataInputStream->close();
+    if (m_dataInputStream)
+        m_dataInputStream->close();
 
-    mRunReadThread->WaitForCompletion(0xFFFFFFFF);
-    mRunWriteThread->WaitForCompletion(0xFFFFFFFF);
+    m_runReadThread->WaitForCompletion(0xFFFFFFFF);
+    m_runWriteThread->WaitForCompletion(0xFFFFFFFF);
 
-    delete mDataInputStream;
-    mDataInputStream = nullptr;
+    delete m_dataInputStream;
+    m_dataInputStream = nullptr;
 
-    if (mDataOutputStream) {
-        mDataOutputStream->close();
-        mDataOutputStream->deleteChildStream();
-        delete mDataOutputStream;
-        mDataOutputStream = nullptr;
+    if (m_dataOutputStream) {
+        m_dataOutputStream->close();
+        m_dataOutputStream->deleteChildStream();
+        delete m_dataOutputStream;
+        m_dataOutputStream = nullptr;
     }
 
-    if (mDataOutputStream2) {
-        mDataOutputStream2->close();
-        delete mDataOutputStream2;
-        mDataOutputStream2 = nullptr;
+    if (m_dataOutputStream2) {
+        m_dataOutputStream2->close();
+        delete m_dataOutputStream2;
+        m_dataOutputStream2 = nullptr;
     }
 
-    if (mSocket) {
-        mSocket->close(mPacketListener->isServerPacketListener());
-        mSocket = nullptr;
+    if (m_socket) {
+        m_socket->close(m_packetListener->isServerPacketListener());
+        m_socket = nullptr;
     }
 }
 
 void Connection::tick() {
-    if (field_119)
+    if (m_field119)
         close(DisconnectPacket::eDisconnectReason::_29);
-    if (mEstimatedSize > 0x100000)  // 1MB
+    if (m_estimatedSize > 0x100000)  // 1MB
         close(DisconnectPacket::eDisconnectReason::Overflow);
-    EnterCriticalSection(&mIncomingMutex);
-    long incomingQueueSize = mIncomingQueue.size();
-    LeaveCriticalSection(&mIncomingMutex);
+    EnterCriticalSection(&m_incomingMutex);
+    long incomingQueueSize = m_incomingQueue.size();
+    LeaveCriticalSection(&m_incomingMutex);
     if (incomingQueueSize != 0)
-        mTicksSinceLastPacket = 0;
+        m_ticksSinceLastPacket = 0;
     else {
-        if (mTicksSinceLastPacket++ == 1200)
+        if (m_ticksSinceLastPacket++ == 1200)
             close(DisconnectPacket::eDisconnectReason::Timeout);
     }
-    if ((int)(System::processTimeInMilliSecs() - mTimeInMs) > 1000) {
-        if (mPacketListener->isServerPacketListener()) {
+    if ((int)(System::processTimeInMilliSecs() - m_timeInMs) > 1000) {
+        if (m_packetListener->isServerPacketListener()) {
             ClientboundKeepAlivePacket* packet = new ClientboundKeepAlivePacket();
             send(std::shared_ptr<Packet>(packet));
         } else {
@@ -381,7 +384,7 @@ void Connection::tick() {
         }
     }
 
-    EnterCriticalSection(&mIncomingMutex);
+    EnterCriticalSection(&m_incomingMutex);
 
     std::deque<std::shared_ptr<Packet>> queue;
     int maxIterations = 1000;
@@ -389,13 +392,13 @@ void Connection::tick() {
     while (!CGameNetworkManager::sInstance.IsLeavingGame()) {
         if (!CGameNetworkManager::sInstance.IsInSession())
             break;
-        if (!mIncomingQueue.size())
+        if (!m_incomingQueue.size())
             break;
         if (maxIterations-- < 0)
             break;
 
-        std::shared_ptr<Packet> packet = mIncomingQueue.front();
-        if (!byte_148) {
+        std::shared_ptr<Packet> packet = m_incomingQueue.front();
+        if (!m_byte148) {
             if (packet->getPacketId() == _ServerboundPlayerActionPacket) {
                 int action = std::static_pointer_cast<ServerboundPlayerActionPacket>(packet)->getAction();
 
@@ -408,35 +411,35 @@ void Connection::tick() {
                 queue.push_back(packet);
             }
         }
-        mIncomingQueue.pop_front();
+        m_incomingQueue.pop_front();
     }
-    LeaveCriticalSection(&mIncomingMutex);
+    LeaveCriticalSection(&m_incomingMutex);
 
     for (unsigned int i = 0; i < queue.size(); i++) {
         PIXBeginNamedEvent(0.0, "Handling packet %d\n", queue[i]->getPacketId());
-        queue[i]->handle(mPacketListener);
+        queue[i]->handle(m_packetListener);
         PIXEndNamedEvent();
     }
 
     flush();
 
-    if (mSocket && mSocket->sub_71000EA668())
+    if (m_socket && m_socket->sub_71000EA668())
         close(DisconnectPacket::eDisconnectReason::Closed);
-    if (byte_148) {
-        EnterCriticalSection(&mIncomingMutex);
-        long incomingQueueSize = mIncomingQueue.size();
-        LeaveCriticalSection(&mIncomingMutex);
+    if (m_byte148) {
+        EnterCriticalSection(&m_incomingMutex);
+        long incomingQueueSize = m_incomingQueue.size();
+        LeaveCriticalSection(&m_incomingMutex);
         if (incomingQueueSize == 0) {
-            mPacketListener->onDisconnect((DisconnectPacket::eDisconnectReason)dword_14c, qword_150);
-            byte_148 = false;
+            m_packetListener->onDisconnect((DisconnectPacket::eDisconnectReason)m_dword14c, m_qword150);
+            m_byte148 = false;
         }
     }
 }
 
 void Connection::sendAndQuit() {
-    if (!mIsDisconnecting) {
+    if (!m_isDisconnecting) {
         flush();
-        mIsDisconnecting = true;
+        m_isDisconnecting = true;
         close(DisconnectPacket::eDisconnectReason::Closed);
     }
 }

@@ -15,13 +15,13 @@ EPacketType ClientboundTabListPacket::getPacketId() {
 }
 
 void ClientboundTabListPacket::read(DataInputStream* input) {
-    str18 = Packet::readUtf(input, 0x7FFF);
-    str38 = Packet::readUtf(input, 0x7FFF);
+    m_str18 = Packet::readUtf(input, 0x7FFF);
+    m_str38 = Packet::readUtf(input, 0x7FFF);
 }
 
 void ClientboundTabListPacket::write(DataOutputStream* output) {
-    Packet::writeUtf(str18, output);
-    Packet::writeUtf(str38, output);
+    Packet::writeUtf(m_str18, output);
+    Packet::writeUtf(m_str38, output);
 }
 
 void ClientboundTabListPacket::handle(PacketListener* listener) {}

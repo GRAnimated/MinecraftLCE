@@ -16,6 +16,6 @@ public:
     void setDirty();
     bool isDirty();
 
-    std::wstring mPath;
-    bool mIsDirty = false;
+    std::wstring m_path;
+    bool m_isDirty = false;
 };

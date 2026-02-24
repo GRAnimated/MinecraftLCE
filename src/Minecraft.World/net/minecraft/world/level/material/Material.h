@@ -74,13 +74,13 @@ public:
     Material* makeDestroyedByHand();
     const MaterialColor* getColor() const;
 
-    bool mIsFlammable;
-    bool mIsReplaceable;
-    bool mIsNeverBuildable;
-    const MaterialColor* mColor;
-    bool mIsAlwaysDestroyable;
-    PushReaction mPushReaction;
-    bool mIsDestroyedByHand;
+    bool m_isFlammable;
+    bool m_isReplaceable;
+    bool m_isNeverBuildable;
+    const MaterialColor* m_color;
+    bool m_isAlwaysDestroyable;
+    PushReaction m_pushReaction;
+    bool m_isDestroyedByHand;
 };
 
 // To avoid clangd warning about unused includes in other files, we include them here.

@@ -9,9 +9,9 @@ std::shared_ptr<Packet> ClientboundContainerSetDataPacket::create() {
 }
 
 ClientboundContainerSetDataPacket::ClientboundContainerSetDataPacket() {
-    containerId = 0;
-    value = 0;
-    id = -1;
+    m_containerId = 0;
+    m_value = 0;
+    m_id = -1;
 }
 
 int ClientboundContainerSetDataPacket::getEstimatedSize() {
@@ -23,15 +23,15 @@ EPacketType ClientboundContainerSetDataPacket::getPacketId() {
 }
 
 void ClientboundContainerSetDataPacket::read(DataInputStream* input) {
-    containerId = static_cast<int>(input->readUnsignedByte());
-    id = input->readShort();
-    value = input->readShort();
+    m_containerId = static_cast<int>(input->readUnsignedByte());
+    m_id = input->readShort();
+    m_value = input->readShort();
 }
 
 void ClientboundContainerSetDataPacket::write(DataOutputStream* output) {
-    output->writeByte(containerId);
-    output->writeShort(id);
-    output->writeShort(value);
+    output->writeByte(m_containerId);
+    output->writeShort(m_id);
+    output->writeShort(m_value);
 }
 
 void ClientboundContainerSetDataPacket::handle(PacketListener* listener) {
@@ -39,13 +39,13 @@ void ClientboundContainerSetDataPacket::handle(PacketListener* listener) {
 }
 
 int ClientboundContainerSetDataPacket::getContainerId() {
-    return containerId;
+    return m_containerId;
 }
 
 int ClientboundContainerSetDataPacket::getId() {
-    return id;
+    return m_id;
 }
 
 int ClientboundContainerSetDataPacket::getValue() {
-    return value;
+    return m_value;
 }

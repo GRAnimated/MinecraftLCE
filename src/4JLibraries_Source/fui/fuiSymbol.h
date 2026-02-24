@@ -3,7 +3,7 @@
 class FJ_FuiNodeStage;
 
 struct fuiSymbol {
-    char padding[0xf8];
+    char m_padding[0xf8];
     FJ_FuiNodeStage*
-        mStage;  // not sure if this is meant to be stage but fui::dispatchKeyboardEvent likes it sooo
+        m_stage;  // not sure if this is meant to be stage but fui::dispatchKeyboardEvent likes it sooo
 };

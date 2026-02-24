@@ -25,16 +25,16 @@ public:
     void getName() override;
     void SetDeleteOnExit(bool) override;
 
-    void* unknown2[6];
-    int mUnk;
-    int mProcessor;  // which core to use ig
-    void* unk;
-    bool mIsRunning;
-    bool mHasStarted;
-    long mStartTime;
-    void* unknown[2];
-    int mPriority;
-    int mUnk23;
-    nn::os::ThreadType* mThread;
+    void* m_unknown2[6];
+    int m_unk;
+    int m_processor;  // which core to use ig
+    void* m_unk1;
+    bool m_isRunning;
+    bool m_hasStarted;
+    long m_startTime;
+    void* m_unknown[2];
+    int m_priority;
+    int m_unk23;
+    nn::os::ThreadType* m_thread;
     // void* unknown[14];
 };

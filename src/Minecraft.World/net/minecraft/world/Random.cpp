@@ -55,8 +55,8 @@ int Random::nextInt() {
 }
 
 void Random::setSeed(long long seed) {
-    val = (seed & 0xFFFFFFFFFFFF) ^ 0x5DEECE66D;
-    field_8 = false;
+    m_val = (seed & 0xFFFFFFFFFFFF) ^ 0x5DEECE66D;
+    m_field8 = false;
 }
 
 long Random::nextLong() {
@@ -68,8 +68,8 @@ bool Random::nextBoolean() {
 }
 
 int Random::next(int bits) {
-    this->val = (0x5DEECE66DLL * this->val + 11) & 0xFFFFFFFFFFFFLL;
-    return this->val >> (48 - bits);
+    this->m_val = (0x5DEECE66DLL * this->m_val + 11) & 0xFFFFFFFFFFFFLL;
+    return this->m_val >> (48 - bits);
 }
 
 double Random::nextGaussian() {
@@ -77,9 +77,9 @@ double Random::nextGaussian() {
     double v6;  // d10
     double v7;  // d8
 
-    if (this->field_8) {
-        this->field_8 = false;
-        return this->seed3;
+    if (this->m_field8) {
+        this->m_field8 = false;
+        return this->m_seed3;
     }
 
     do {
@@ -94,8 +94,8 @@ double Random::nextGaussian() {
 
     const double v9 = sqrt(log(v7) * -2.0 / v7);
 
-    this->field_8 = true;
-    this->seed3 = v6 * v9;
+    this->m_field8 = true;
+    this->m_seed3 = v6 * v9;
 
     return v4 * v9;
 }

@@ -7,29 +7,29 @@
 #include "net/minecraft/world/level/storage/LevelData.h"
 
 Dimension::Dimension() {
-    field_28 = false;
-    mIsHasCeiling = false;
-    mBrightnessRamp = new float[16];
-    mGeneratorOptions = nullptr;
-    mLevel = nullptr;
-    mIsHasSkyLight = false;
+    m_field28 = false;
+    m_isHasCeiling = false;
+    m_brightnessRamp = new float[16];
+    m_generatorOptions = nullptr;
+    m_level = nullptr;
+    m_isHasSkyLight = false;
 }
 
 void Dimension::init(Level* level) {
-    mLevel = level;
+    m_level = level;
 
     updateLightRamp();
-    mLevelType = level->getLevelData()->getGeneratorType();
-    mGeneratorOptions = level->getLevelData()->getGeneratorOptions();
+    m_levelType = level->getLevelData()->getGeneratorType();
+    m_generatorOptions = level->getLevelData()->getGeneratorOptions();
 
     init();
-    mXZSize = level->getLevelData()->getXZSize();
+    m_xzSize = level->getLevelData()->getXZSize();
 }
 
 void Dimension::updateLightRamp() {
     for (int i = 0; i != 16; i++) {
         float f2 = 1.0f - (float)i / 15.0f;
-        mBrightnessRamp[i] = (1.0f - f2) / (f2 * 3.0f + 1.0f) * 1.0f + 0.0f;
+        m_brightnessRamp[i] = (1.0f - f2) / (f2 * 3.0f + 1.0f) * 1.0f + 0.0f;
     }
 }
 
@@ -50,7 +50,7 @@ void* Dimension::getSpawnPos() const {
 }
 
 int Dimension::getSpawnYPosition() {
-    return mLevelType == LevelType::FLAT ? 4 : 64;
+    return m_levelType == LevelType::FLAT ? 4 : 64;
 }
 
 bool Dimension::isFoggyAt(int x, int z) {
@@ -58,15 +58,15 @@ bool Dimension::isFoggyAt(int x, int z) {
 }
 
 BiomeSource* Dimension::getBiomeSource() {
-    return mBiomeSource;
+    return m_biomeSource;
 }
 
 bool Dimension::isHasCeiling() {
-    return mIsHasCeiling;
+    return m_isHasCeiling;
 }
 
 float* Dimension::getBrightnessRamp() {
-    return mBrightnessRamp;
+    return m_brightnessRamp;
 }
 
 WorldBorder* Dimension::createWorldBorder(Level* level) {
@@ -74,7 +74,7 @@ WorldBorder* Dimension::createWorldBorder(Level* level) {
 }
 
 int Dimension::getXZSize() {
-    return mXZSize;
+    return m_xzSize;
 }
 
 bool Dimension::canUnloadChunk(int x, int z) {

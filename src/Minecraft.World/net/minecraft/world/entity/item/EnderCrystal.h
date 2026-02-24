@@ -13,5 +13,5 @@ public:
     void readAdditionalSaveData(CompoundTag*) override;
     void addAdditonalSaveData(CompoundTag*) override;
 
-    void* fill;
+    void* m_fill;
 };

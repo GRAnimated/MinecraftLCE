@@ -18,6 +18,6 @@ public:
     int getPowerupTime();
 
 private:
-    int powerupID;
-    int powerupTime;
+    int m_powerupId;
+    int m_powerupTime;
 };

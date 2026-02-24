@@ -9,13 +9,13 @@ std::shared_ptr<Packet> PlayerReadyPacket::create() {
 }
 
 PlayerReadyPacket::PlayerReadyPacket() {
-    mPlayerId = 0;
-    mReady = false;
+    m_playerId = 0;
+    m_ready = false;
 }
 
 PlayerReadyPacket::PlayerReadyPacket(unsigned int playerId, bool ready) {
-    mPlayerId = playerId;
-    mReady = ready;
+    m_playerId = playerId;
+    m_ready = ready;
 }
 
 int PlayerReadyPacket::getEstimatedSize() {
@@ -27,13 +27,13 @@ EPacketType PlayerReadyPacket::getPacketId() {
 }
 
 void PlayerReadyPacket::read(DataInputStream* input) {
-    mPlayerId = input->readInt();
-    mReady = input->readBoolean();
+    m_playerId = input->readInt();
+    m_ready = input->readBoolean();
 }
 
 void PlayerReadyPacket::write(DataOutputStream* output) {
-    output->writeInt(mPlayerId);
-    output->writeBoolean(mReady);
+    output->writeInt(m_playerId);
+    output->writeBoolean(m_ready);
 }
 
 void PlayerReadyPacket::handle(PacketListener* listener) {

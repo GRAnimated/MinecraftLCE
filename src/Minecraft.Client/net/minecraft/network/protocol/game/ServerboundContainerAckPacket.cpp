@@ -11,9 +11,9 @@ std::shared_ptr<Packet> ServerboundContainerAckPacket::create() {
 ServerboundContainerAckPacket::ServerboundContainerAckPacket() {}
 
 ServerboundContainerAckPacket::ServerboundContainerAckPacket(int containerId, short uid, bool accepted) {
-    mContainerId = containerId;
-    mUid = uid;
-    mAccepted = accepted;
+    m_containerId = containerId;
+    m_uid = uid;
+    m_accepted = accepted;
 }
 
 EPacketType ServerboundContainerAckPacket::getPacketId() {
@@ -21,15 +21,15 @@ EPacketType ServerboundContainerAckPacket::getPacketId() {
 }
 
 void ServerboundContainerAckPacket::read(DataInputStream* input) {
-    mContainerId = static_cast<int>(input->readByte());
-    mUid = input->readShort();
-    mAccepted = input->readBoolean();
+    m_containerId = static_cast<int>(input->readByte());
+    m_uid = input->readShort();
+    m_accepted = input->readBoolean();
 }
 
 void ServerboundContainerAckPacket::write(DataOutputStream* output) {
-    output->writeByte(mContainerId);
-    output->writeShort(mUid);
-    output->writeBoolean(mAccepted);
+    output->writeByte(m_containerId);
+    output->writeShort(m_uid);
+    output->writeBoolean(m_accepted);
 }
 
 void ServerboundContainerAckPacket::handle(PacketListener* listener) {
@@ -37,9 +37,9 @@ void ServerboundContainerAckPacket::handle(PacketListener* listener) {
 }
 
 int ServerboundContainerAckPacket::getContainerId() {
-    return mContainerId;
+    return m_containerId;
 }
 
 short ServerboundContainerAckPacket::getUid() {
-    return mUid;
+    return m_uid;
 }

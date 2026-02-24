@@ -19,12 +19,12 @@ unsigned int CoalItem::getDescriptionId(not_null_ptr<ItemInstance> itemInstance)
 void CoalItem::registerIcons(IconRegister* iconRegister) {
     Item::registerIcons(iconRegister);
 
-    this->mCharcoalIcon = iconRegister->registerIcon(L"charcoal");
+    this->m_charcoalIcon = iconRegister->registerIcon(L"charcoal");
 }
 
 TextureAtlasSprite* CoalItem::getIcon(int auxValue) {
     if (auxValue == 1)
-        return this->mCharcoalIcon;
+        return this->m_charcoalIcon;
     else
         return Item::getIcon(auxValue);
 }

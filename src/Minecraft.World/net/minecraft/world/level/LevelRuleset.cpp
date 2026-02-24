@@ -1,5 +1,5 @@
 #include "net/minecraft/world/level/LevelRuleset.h"
 
 StringTable* LevelRuleset::getStringTable() {
-    return this->stringTable;
+    return this->m_stringTable;
 }

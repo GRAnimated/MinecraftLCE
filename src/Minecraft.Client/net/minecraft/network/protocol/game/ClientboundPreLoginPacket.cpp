@@ -11,31 +11,31 @@ std::shared_ptr<Packet> ClientboundPreLoginPacket::create() {
 // NON_MATCHING | Score: 1110 (lower is better)
 // Can't get it to emit memset over sturh spam
 ClientboundPreLoginPacket::ClientboundPreLoginPacket() {
-    this->mName = L"";
-    this->mPlayers = nullptr;
-    this->mPlayerCount = 0;
-    this->mUnk1 = 0;
-    this->mUnk2 = 0;
-    this->mMapName = 0;  // not to be confused with world name, which I don't think is written here
-    this->mUnk3 = 0;
-    this->mUnk4 = 0;
-    this->mUnk5 = 0;
-    this->mUnk6 = 0;
-    this->mUnk7 = 0;
-    this->mUnk8 = 0;
-    this->mUnk9 = 0;
-    this->mUnk10 = 0;
-    this->mUnk11 = 0;
-    this->mUnk12 = 0;
-    this->mUnk13 = 0;
-    this->mUnk14 = 0;
-    this->mUnk15 = 0;
-    this->mUnk16 = 0;
-    this->mUnk17 = 0;
-    this->mUnk18 = 0;
-    this->mProtocolVersion = 0;
-    this->mUnk19 = false;
-    this->mUnk20 = 15;
+    this->m_name = L"";
+    this->m_players = nullptr;
+    this->m_playerCount = 0;
+    this->m_unk1 = 0;
+    this->m_unk2 = 0;
+    this->m_mapName = 0;  // not to be confused with world name, which I don't think is written here
+    this->m_unk3 = 0;
+    this->m_unk4 = 0;
+    this->m_unk5 = 0;
+    this->m_unk6 = 0;
+    this->m_unk7 = 0;
+    this->m_unk8 = 0;
+    this->m_unk9 = 0;
+    this->m_unk10 = 0;
+    this->m_unk11 = 0;
+    this->m_unk12 = 0;
+    this->m_unk13 = 0;
+    this->m_unk14 = 0;
+    this->m_unk15 = 0;
+    this->m_unk16 = 0;
+    this->m_unk17 = 0;
+    this->m_unk18 = 0;
+    this->m_protocolVersion = 0;
+    this->m_unk19 = false;
+    this->m_unk20 = 15;
 }
 
 EPacketType ClientboundPreLoginPacket::getPacketId() {
@@ -45,72 +45,72 @@ EPacketType ClientboundPreLoginPacket::getPacketId() {
 // NON_MATCHING | Score: 1115 (lower is better)
 // Just a few mismatched instructions
 void ClientboundPreLoginPacket::read(DataInputStream* input) {
-    this->mProtocolVersion = input->readShort();
-    this->mName = ClientboundPreLoginPacket::readUtf(input, 0x20);
-    this->mUnk1 = input->readByte();
-    this->mUnk2 = input->readInt();
+    this->m_protocolVersion = input->readShort();
+    this->m_name = ClientboundPreLoginPacket::readUtf(input, 0x20);
+    this->m_unk1 = input->readByte();
+    this->m_unk2 = input->readInt();
 
-    this->mPlayerCount = input->readByte();
-    if (this->mPlayerCount) {
-        this->mPlayers = new PlayerUID[this->mPlayerCount];  // see note in PlayerUID
+    this->m_playerCount = input->readByte();
+    if (this->m_playerCount) {
+        this->m_players = new PlayerUID[this->m_playerCount];  // see note in PlayerUID
 
-        for (int i = 0; i < this->mPlayerCount; i++) {
-            this->mPlayers[i] = input->readPlayerUID();
+        for (int i = 0; i < this->m_playerCount; i++) {
+            this->m_players[i] = input->readPlayerUID();
         }
     }
 
-    this->mMapName = input->readByte();
-    this->mUnk3 = input->readByte();
-    this->mUnk4 = input->readByte();
-    this->mUnk5 = input->readByte();
-    this->mUnk6 = input->readByte();
-    this->mUnk7 = input->readByte();
-    this->mUnk8 = input->readByte();
-    this->mUnk9 = input->readByte();
-    this->mUnk10 = input->readByte();
-    this->mUnk11 = input->readByte();
-    this->mUnk12 = input->readByte();
-    this->mUnk13 = input->readByte();
-    this->mUnk14 = input->readByte();
-    this->mUnk15 = input->readByte();
-    this->mUnk16 = input->readInt();
-    this->mUnk17 = input->readByte();
-    this->mUnk18 = input->readInt();
-    this->mUnk19 = input->readBoolean();
-    this->mUnk20 = input->readInt();
-    CConsoleMinecraftApp::sInstance.SetUniqueMapName(&this->mMapName);
+    this->m_mapName = input->readByte();
+    this->m_unk3 = input->readByte();
+    this->m_unk4 = input->readByte();
+    this->m_unk5 = input->readByte();
+    this->m_unk6 = input->readByte();
+    this->m_unk7 = input->readByte();
+    this->m_unk8 = input->readByte();
+    this->m_unk9 = input->readByte();
+    this->m_unk10 = input->readByte();
+    this->m_unk11 = input->readByte();
+    this->m_unk12 = input->readByte();
+    this->m_unk13 = input->readByte();
+    this->m_unk14 = input->readByte();
+    this->m_unk15 = input->readByte();
+    this->m_unk16 = input->readInt();
+    this->m_unk17 = input->readByte();
+    this->m_unk18 = input->readInt();
+    this->m_unk19 = input->readBoolean();
+    this->m_unk20 = input->readInt();
+    CConsoleMinecraftApp::sInstance.SetUniqueMapName(&this->m_mapName);
 }
 
 // NON_MATCHING | Score: 1466 (lower is better)
 // Again just a few mismatched instructions
 void ClientboundPreLoginPacket::write(DataOutputStream* output) {
     output->writeShort(SharedConstants::NETWORK_PROTOCOL_VERSION);
-    this->writeUtf(this->mName, output);
-    output->writeByte(this->mUnk1);
-    output->writeInt(this->mUnk2);
+    this->writeUtf(this->m_name, output);
+    output->writeByte(this->m_unk1);
+    output->writeInt(this->m_unk2);
 
-    output->writeByte(this->mPlayerCount);
-    for (int i = 0; i < this->mPlayerCount; i++) {
-        output->writePlayerUID(this->mPlayers[i]);
+    output->writeByte(this->m_playerCount);
+    for (int i = 0; i < this->m_playerCount; i++) {
+        output->writePlayerUID(this->m_players[i]);
     }
 
-    output->writeByte(this->mMapName);
-    output->writeByte(this->mUnk3);
-    output->writeByte(this->mUnk4);
-    output->writeByte(this->mUnk5);
-    output->writeByte(this->mUnk6);
-    output->writeByte(this->mUnk7);
-    output->writeByte(this->mUnk8);
-    output->writeByte(this->mUnk9);
-    output->writeByte(this->mUnk10);
-    output->writeByte(this->mUnk11);
-    output->writeByte(this->mUnk12);
-    output->writeByte(this->mUnk13);
-    output->writeByte(this->mUnk14);
-    output->writeByte(this->mUnk15);
-    output->writeInt(this->mUnk16);
-    output->writeByte(this->mUnk17);
-    output->writeInt(this->mUnk18);
-    output->writeBoolean(this->mUnk19);
-    output->writeInt(this->mUnk20);
+    output->writeByte(this->m_mapName);
+    output->writeByte(this->m_unk3);
+    output->writeByte(this->m_unk4);
+    output->writeByte(this->m_unk5);
+    output->writeByte(this->m_unk6);
+    output->writeByte(this->m_unk7);
+    output->writeByte(this->m_unk8);
+    output->writeByte(this->m_unk9);
+    output->writeByte(this->m_unk10);
+    output->writeByte(this->m_unk11);
+    output->writeByte(this->m_unk12);
+    output->writeByte(this->m_unk13);
+    output->writeByte(this->m_unk14);
+    output->writeByte(this->m_unk15);
+    output->writeInt(this->m_unk16);
+    output->writeByte(this->m_unk17);
+    output->writeInt(this->m_unk18);
+    output->writeBoolean(this->m_unk19);
+    output->writeInt(this->m_unk20);
 }

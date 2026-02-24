@@ -7,29 +7,29 @@
 #include "net/minecraft/sounds/SoundEvents.h"
 
 Screen::Screen() {
-    mMinecraft = nullptr;
-    mWidth = 0;
-    mHeight = 0;
-    byte_38 = false;
-    mFont = nullptr;
-    mGuiParticles = nullptr;
-    mCurrentButton = nullptr;
+    m_minecraft = nullptr;
+    m_width = 0;
+    m_height = 0;
+    m_byte38 = false;
+    m_font = nullptr;
+    m_guiParticles = nullptr;
+    m_currentButton = nullptr;
 }
 
 void Screen::render(int x, int y, float) {
-    for (auto& button : mButtons) {
-        button->render(mMinecraft, x, y);
+    for (auto& button : m_buttons) {
+        button->render(m_minecraft, x, y);
     }
 }
 
 void Screen::mouseClicked(int x, int y, int key) {
     if (key == 0) {
-        auto end = mButtons.end();  // why is this before the loop??
-        for (auto it = mButtons.begin(); it != end; ++it) {
+        auto end = m_buttons.end();  // why is this before the loop??
+        for (auto it = m_buttons.begin(); it != end; ++it) {
             Button* button = *it;
-            if (button->clicked(mMinecraft, x, y)) {
-                mCurrentButton = button;
-                mMinecraft->mSoundEngine->playUI(SoundEvents::RANDOM_CLICK, 1.0f, 1.0f);
+            if (button->clicked(m_minecraft, x, y)) {
+                m_currentButton = button;
+                m_minecraft->m_soundEngine->playUI(SoundEvents::RANDOM_CLICK, 1.0f, 1.0f);
                 buttonClicked(button);
             }
         }
@@ -38,33 +38,33 @@ void Screen::mouseClicked(int x, int y, int key) {
 
 void Screen::keyPressed(wchar_t key, int id) {
     if (id == 28) {
-        mMinecraft->setScreen(0);
+        m_minecraft->setScreen(0);
     }
 }
 
 void Screen::mouseReleased(int x, int y, int key) {
-    if (mCurrentButton && key == 0) {
-        mCurrentButton->released(x, y);
-        mCurrentButton = nullptr;
+    if (m_currentButton && key == 0) {
+        m_currentButton->released(x, y);
+        m_currentButton = nullptr;
     }
 }
 
 void Screen::buttonClicked(Button* button) {}
 
 void Screen::init(Minecraft* minecraft, int width, int height) {
-    mGuiParticles = new GuiParticles(minecraft);
+    m_guiParticles = new GuiParticles(minecraft);
 
-    mMinecraft = minecraft;
-    mFont = minecraft->mFont;
-    mWidth = width;
-    mHeight = height;
-    mButtons.clear();
+    m_minecraft = minecraft;
+    m_font = minecraft->m_font;
+    m_width = width;
+    m_height = height;
+    m_buttons.clear();
     init();
 }
 
 void Screen::setSize(int width, int height) {
-    mWidth = width;
-    mHeight = height;
+    m_width = width;
+    m_height = height;
 }
 
 void Screen::init() {}
@@ -84,8 +84,8 @@ void Screen::renderBackground() {
 }
 
 void Screen::renderBackground(int unk) {
-    if (mMinecraft->mLevel) {
-        return fillGradient(0, 0, mWidth, mHeight, 0xC0101010, 0xD0101010);
+    if (m_minecraft->m_level) {
+        return fillGradient(0, 0, m_width, m_height, 0xC0101010, 0xD0101010);
     } else
         return renderDirtBackground(unk);
 }

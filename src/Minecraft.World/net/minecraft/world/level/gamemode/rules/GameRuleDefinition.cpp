@@ -84,12 +84,12 @@ const wchar_t* ruleNames[] = {L"",
                               L"ActiveViewArea"};
 
 GameRuleDefinition::GameRuleDefinition() {
-    mDescriptionName_ = L"";
-    mPromptName = L"";
-    mDataTag = 0;
-    addStringAttribute(ConsoleGameRules::EGameRuleAttr_descriptionName, &mDescriptionName_);
-    addStringAttribute(ConsoleGameRules::EGameRuleAttr_promptName, &mPromptName);
-    addIntAttribute(ConsoleGameRules::EGameRuleAttr_dataTag, &mDataTag);
+    m_descriptionName = L"";
+    m_promptName = L"";
+    m_dataTag = 0;
+    addStringAttribute(ConsoleGameRules::EGameRuleAttr_descriptionName, &m_descriptionName);
+    addStringAttribute(ConsoleGameRules::EGameRuleAttr_promptName, &m_promptName);
+    addIntAttribute(ConsoleGameRules::EGameRuleAttr_dataTag, &m_dataTag);
 }
 
 const AABB* GameRuleDefinition::getBoundingVolume() {
@@ -101,7 +101,7 @@ void GameRuleDefinition::moveBoundingVolume(int, int, int) {}
 void GameRuleDefinition::writeAttributes(GameRuleSaveInterface* interface, unsigned int unk) {
     unsigned int count = 0;
 
-    for (const auto& pair : mAttributeMap) {
+    for (const auto& pair : m_attributeMap) {
         IGameRuleAttribute* attribute = pair.second;
         if (!attribute->isOptional() || attribute->hasValue()) {
             ++count;
@@ -110,7 +110,7 @@ void GameRuleDefinition::writeAttributes(GameRuleSaveInterface* interface, unsig
 
     interface->startAttributes(count + unk);
 
-    for (const auto& pair : mAttributeMap) {
+    for (const auto& pair : m_attributeMap) {
         IGameRuleAttribute* attribute = pair.second;
         if (!attribute->isOptional() || attribute->hasValue()) {
             attribute->save(pair.first, interface);
@@ -129,8 +129,8 @@ GameRuleDefinition* GameRuleDefinition::addChild(ConsoleGameRules::EGameRuleType
 void GameRuleDefinition::addAttribute(const std::wstring& str1, const std::wstring& str2) {
     ConsoleGameRules::EGameRuleAttr attrId = IGameRuleAttribute::attributeIdFromName(str1);
     if ((int)attrId != -1 && (int)attrId <= 90) {
-        if (mAttributeMap.find(attrId) != mAttributeMap.end()) {
-            auto& attribute = mAttributeMap[attrId];
+        if (m_attributeMap.find(attrId) != m_attributeMap.end()) {
+            auto& attribute = m_attributeMap[attrId];
             attribute->setValue(str2);
         }
     }
@@ -141,7 +141,7 @@ void GameRuleDefinition::onAttributesAdded() {}
 void GameRuleDefinition::populateGameRule(GameRulesInstance::EGameRulesInstanceType instanceType,
                                           GameRule* gameRule) {
     GameRule::_ValueType valueType;
-    valueType.field_8 = false;
+    valueType.m_field8 = false;
     gameRule->setParameter(L"bComplete", valueType);
 }
 
@@ -193,7 +193,7 @@ void GameRuleDefinition::WriteAttributesAsXML(std::string& str) {
 }
 
 void GameRuleDefinition::WriteAllAttributesAsXML(std::string& str) {
-    for (const auto& pair : mAttributeMap) {
+    for (const auto& pair : m_attributeMap) {
         IGameRuleAttribute* attribute = pair.second;
         if (!attribute->isOptional() || attribute->hasValue()) {
             attribute->writeAsXml(pair.first, str);

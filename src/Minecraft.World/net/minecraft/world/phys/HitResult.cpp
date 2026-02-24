@@ -3,5 +3,5 @@
 #include "net/minecraft/core/BlockPos.h"
 
 const BlockPos& HitResult::getBlockPos() const {
-    return this->mBlockPos;
+    return this->m_blockPos;
 }

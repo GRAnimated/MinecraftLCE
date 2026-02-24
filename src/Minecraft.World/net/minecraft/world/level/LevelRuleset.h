@@ -16,8 +16,8 @@ class GameRuleDefinition;
 
 class LevelRuleset {
 protected:
-    unsigned char padding[343];
-    StringTable* stringTable;
+    unsigned char m_padding[343];
+    StringTable* m_stringTable;
 
 public:
     void getNamedAreas(int type, std::vector<AABB*>* out);

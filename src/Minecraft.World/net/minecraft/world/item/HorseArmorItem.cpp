@@ -10,35 +10,35 @@ std::wstring sBaseTierName = L"leather_horse_armor_base";
 std::wstring sColorTagName = L"customColor";
 
 HorseArmorItem::HorseArmorItem(int tier, int protection, int textureId, const wchar_t* hashName)
-    : mTier(tier) {
-    mProtection = protection;
-    mTextureIds.push_back(textureId);
+    : m_tier(tier) {
+    m_protection = protection;
+    m_textureIds.push_back(textureId);
 
-    mHashName = hashName;
-    mDefaultIcon = nullptr;
-    mBaseTierIcon = nullptr;
+    m_hashName = hashName;
+    m_defaultIcon = nullptr;
+    m_baseTierIcon = nullptr;
 }
 
 HorseArmorItem::HorseArmorItem(int tier, int protection, const int* textureIds, int textureIdCount,
                                const wchar_t* hashName)
-    : mTier(tier) {
-    mProtection = protection;
+    : m_tier(tier) {
+    m_protection = protection;
     for (int i = 0; i < textureIdCount; i++) {
-        mTextureIds.push_back(textureIds[i]);
+        m_textureIds.push_back(textureIds[i]);
     }
 
-    mHashName = hashName;
-    mDefaultIcon = nullptr;
-    mBaseTierIcon = nullptr;
+    m_hashName = hashName;
+    m_defaultIcon = nullptr;
+    m_baseTierIcon = nullptr;
 }
 
-HorseArmorItem::HorseArmorItem(int tier, int protection) : mTier(tier) {
-    mProtection = protection;
-    mTextureIds.push_back(-1);
+HorseArmorItem::HorseArmorItem(int tier, int protection) : m_tier(tier) {
+    m_protection = protection;
+    m_textureIds.push_back(-1);
 
-    mHashName = L"";
-    mDefaultIcon = nullptr;
-    mBaseTierIcon = nullptr;
+    m_hashName = L"";
+    m_defaultIcon = nullptr;
+    m_baseTierIcon = nullptr;
 }
 
 int HorseArmorItem::getColor(not_null_ptr<ItemInstance> itemInstance, int auxValue) {
@@ -49,9 +49,9 @@ int HorseArmorItem::getColor(not_null_ptr<ItemInstance> itemInstance, int auxVal
 }
 
 void HorseArmorItem::registerIcons(IconRegister* iconRegister) {
-    mDefaultIcon = iconRegister->registerIcon(getIconName());
+    m_defaultIcon = iconRegister->registerIcon(getIconName());
     if (getTier() == 1)
-        mBaseTierIcon = iconRegister->registerIcon(sBaseTierName);
+        m_baseTierIcon = iconRegister->registerIcon(sBaseTierName);
 }
 
 bool HorseArmorItem::hasMultipleSpriteLayers() {
@@ -65,26 +65,26 @@ TextureAtlasSprite* HorseArmorItem::getLayerIcon(int auxValue, int layer) {
     if (layer != 0 || tier != 1)
         return Item::getLayerIcon(auxValue, auxValue);
 
-    return mBaseTierIcon;
+    return m_baseTierIcon;
 }
 
 TextureAtlasSprite* HorseArmorItem::getIcon(int auxValue) {
-    return mDefaultIcon;
+    return m_defaultIcon;
 }
 
 size_t HorseArmorItem::getTextureCount() const {
-    return mTextureIds.end() - mTextureIds.begin();
+    return m_textureIds.end() - m_textureIds.begin();
 }
 
 int HorseArmorItem::getTexture(int textureId) const {
-    return mTextureIds.at(textureId);
+    return m_textureIds.at(textureId);
 }
 std::wstring HorseArmorItem::getHash() const {
-    return mHashName;
+    return m_hashName;
 }
 
 int HorseArmorItem::getTier() const {
-    return mTier;
+    return m_tier;
 }
 
 int HorseArmorItem::getDyedColor(not_null_ptr<ItemInstance> itemInstance) const {

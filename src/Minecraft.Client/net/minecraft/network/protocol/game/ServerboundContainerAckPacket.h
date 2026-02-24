@@ -19,7 +19,7 @@ public:
     short getUid();
 
 private:
-    int mContainerId;
-    short mUid;
-    bool mAccepted;
+    int m_containerId;
+    short m_uid;
+    bool m_accepted;
 };

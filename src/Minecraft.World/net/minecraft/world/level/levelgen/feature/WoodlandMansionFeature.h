@@ -10,7 +10,7 @@ public:
 
     static void staticCtor();
 
-    char filler[0x40];
+    char m_filler[0x40];
 };
 
 ASSERT_SIZEOF(WoodlandMansionFeature, 0xA8)

@@ -2,13 +2,13 @@
 #include "cstring"
 
 BufferedReader::BufferedReader(Reader* reader) {
-    this->mUnk2 = nullptr;
-    this->mReader = reader;
+    this->m_unk2 = nullptr;
+    this->m_reader = reader;
 
-    this->mUnk4 = 64;
+    this->m_unk4 = 64;
 
-    this->mBuffer = new char[0x100];
-    memset(this->mBuffer, 0, static_cast<size_t>(this->mUnk4) * 4);  // uhhh should this be casted???
+    this->m_buffer = new char[0x100];
+    memset(this->m_buffer, 0, static_cast<size_t>(this->m_unk4) * 4);  // uhhh should this be casted???
 
     bufferMore();
 }

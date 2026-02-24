@@ -28,8 +28,8 @@ class WoodlandMansionFeature;
 class OverworldLevelSource : public ChunkGenerator, public GenericOverworldLevelSource {
 public:
     struct MoatCheck {
-        bool enabled;
-        int limit;
+        bool m_enabled;
+        int m_limit;
     };
 
     OverworldLevelSource(Level* level, long long seed, bool generateStructures,
@@ -50,32 +50,32 @@ public:
     float getHeightFalloff(int x, int z, int* height);
     static int distanceToEdge(float, int, int x, int z, int size);  // made up name
 
-    Random mRandom;
-    Random mRandom2;
-    PerlinNoise* mMinLimitPerlinNoise;
-    PerlinNoise* mMaxLimitPerlinNoise;
-    PerlinNoise* mMainNoise;
-    PerlinSimplexNoise* mSurfaceNoise;
-    PerlinNoise* mScaleNoise;
-    PerlinNoise* mDepthNoise;
-    PerlinNoise* qword_78;  // unknown type
-    PerlinNoise* qword_80;  // unknown type
-    PerlinNoise* field_88;
-    Level* mLevel;
-    bool mShouldGenerateStructures;
-    LevelType* mGeneratorType;
-    float mBiomeWeights[25];
-    CustomizableSourceSettings* mSourceSettings;
-    const BlockState* mOceanBlock;
-    arrayWithLength<float> qword_120;
-    LargeCaveFeature* mCaveFeature;
-    StrongholdFeature* mStrongholdFeature;
-    VillageFeature* mVillageFeature;
-    MineShaftFeature* mMineshaftFeature;
-    RandomScatteredLargeFeature* mRandomScatteredLargeFeature;
-    CanyonFeature* mCanyonFeature;
-    OceanMonumentFeature* mOceanMonumentFeature;
-    WoodlandMansionFeature* mWoodlandMansionFeature;
+    Random m_random;
+    Random m_random2;
+    PerlinNoise* m_minLimitPerlinNoise;
+    PerlinNoise* m_maxLimitPerlinNoise;
+    PerlinNoise* m_mainNoise;
+    PerlinSimplexNoise* m_surfaceNoise;
+    PerlinNoise* m_scaleNoise;
+    PerlinNoise* m_depthNoise;
+    PerlinNoise* m_qword78;  // unknown type
+    PerlinNoise* m_qword80;  // unknown type
+    PerlinNoise* m_field88;
+    Level* m_level;
+    bool m_shouldGenerateStructures;
+    LevelType* m_generatorType;
+    float m_biomeWeights[25];
+    CustomizableSourceSettings* m_sourceSettings;
+    const BlockState* m_oceanBlock;
+    arrayWithLength<float> m_qword120;
+    LargeCaveFeature* m_caveFeature;
+    StrongholdFeature* m_strongholdFeature;
+    VillageFeature* m_villageFeature;
+    MineShaftFeature* m_mineshaftFeature;
+    RandomScatteredLargeFeature* m_randomScatteredLargeFeature;
+    CanyonFeature* m_canyonFeature;
+    OceanMonumentFeature* m_oceanMonumentFeature;
+    WoodlandMansionFeature* m_woodlandMansionFeature;
 };
 
 ASSERT_SIZEOF(OverworldLevelSource, 0x170)

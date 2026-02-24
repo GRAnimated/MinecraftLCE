@@ -29,5 +29,5 @@ public:
     void recreateLogicStructuresForChunk(LevelChunk*, int, int) override;
 
 private:
-    char size[0x110 - sizeof(ChunkSource)];
+    char m_size[0x110 - sizeof(ChunkSource)];
 };

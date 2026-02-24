@@ -19,9 +19,9 @@ std::wstring PlanksBlock::variantTextureNames[6]
 PlanksBlock::PlanksBlock() : Block(Material::WOOD) {
     this->DerivedInit();
 
-    const BlockState* state = this->mBlockStateDefinition->any()->setValue(VARIANT, Variant::OAK);
+    const BlockState* state = this->m_blockStateDefinition->any()->setValue(VARIANT, Variant::OAK);
     this->registerDefaultState(state);
-    memset(this->mVariantsTextures, 0, sizeof(this->mVariantsTextures));
+    memset(this->m_variantsTextures, 0, sizeof(this->m_variantsTextures));
 }
 
 void PlanksBlock::blockStaticCtor() {
@@ -61,13 +61,13 @@ int PlanksBlock::getSpawnResourcesAuxValue(const BlockState* state) {
 
 void PlanksBlock::registerIcons(IconRegister* iconReg) {
     for (int i = 0; i < 6; i++) {
-        this->mVariantsTextures[i]
+        this->m_variantsTextures[i]
             = iconReg->registerIcon(this->getIconName() + L"_" + variantTextureNames[i]);
     }
 }
 
 TextureAtlasSprite* PlanksBlock::getTexture(const Direction* direction, const BlockState* state) {
-    return this->mVariantsTextures[state->getValue<Variant*>(VARIANT)->getData()];
+    return this->m_variantsTextures[state->getValue<Variant*>(VARIANT)->getData()];
 }
 
 unsigned int planks_block_desc_ids[6]

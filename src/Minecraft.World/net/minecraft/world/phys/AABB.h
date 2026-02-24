@@ -7,20 +7,20 @@ class HitResult;
 
 class AABB {
 public:
-    double minX;
-    double minY;
-    double minZ;
-    double maxX;
-    double maxY;
-    double maxZ;
+    double m_inX;
+    double m_inY;
+    double m_inZ;
+    double m_axX;
+    double m_axY;
+    double m_axZ;
 
     class ThreadStorage {
     public:
         ThreadStorage();
         ~ThreadStorage();
 
-        AABB* mStorage;
-        unsigned int mUnk;
+        AABB* m_storage;
+        unsigned int m_unk;
     };
     static ThreadStorage* sDefaultThreadStorage;
     static int sThreadStorageIndex;

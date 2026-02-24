@@ -26,22 +26,22 @@ public:
         }
 
         Variant(int data, const std::wstring& name, unsigned int loc_id, const MaterialColor* materialColor) {
-            this->mMaterialColor = materialColor;
-            this->mData = data;
-            this->mName = name;
-            this->mName_id = loc_id;
+            this->m_materialColor = materialColor;
+            this->m_data = data;
+            this->m_name = name;
+            this->m_nameId = loc_id;
         }
 
-        int getData() { return this->mData; }
-        const MaterialColor* getMaterialColor() { return this->mMaterialColor; }
+        int getData() { return this->m_data; }
+        const MaterialColor* getMaterialColor() { return this->m_materialColor; }
 
-        std::wstring toString() const override { return this->mName; }
-        std::wstring getSerializedName() const override { return this->mName; }
+        std::wstring toString() const override { return this->m_name; }
+        std::wstring getSerializedName() const override { return this->m_name; }
 
-        int mData;  // I would have named it id but they use data over and over again
-        std::wstring mName;
-        unsigned int mName_id;
-        const MaterialColor* mMaterialColor;
+        int m_data;  // I would have named it id but they use data over and over again
+        std::wstring m_name;
+        unsigned int m_nameId;
+        const MaterialColor* m_materialColor;
     };
 
     PlanksBlock();
@@ -63,5 +63,5 @@ public:
     BlockStateDefinition* createBlockStateDefinition() override;
     unsigned int getDescriptionId(int) override;
 
-    TextureAtlasSprite* mVariantsTextures[6];
+    TextureAtlasSprite* m_variantsTextures[6];
 };

@@ -5,7 +5,7 @@
 #include "net/minecraft/world/level/newbiome/layer/IntCache.h"
 
 VoronoiZoom::VoronoiZoom(long long seed, std::shared_ptr<Layer> parent) : Layer(seed) {
-    mParent = parent;
+    m_parent = parent;
 }
 
 // NON_MATCHING | Score: 652 (Lower is better)
@@ -17,7 +17,7 @@ arrayWithLength<int> VoronoiZoom::getArea(int x, int y, int width, int height) {
     int n = y >> 2;
     int o = (width >> 2) + 2;
     int p = (height >> 2) + 2;
-    arrayWithLength<int> parentArea = mParent->getArea(m, n, o, p);
+    arrayWithLength<int> parentArea = m_parent->getArea(m, n, o, p);
     PIXBeginNamedEvent(0.0, "VoronoiZoom::getArea");
     int q = (o - 1) << 2;
     int r = (p - 1) << 2;

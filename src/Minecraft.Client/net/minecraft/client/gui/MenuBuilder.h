@@ -18,7 +18,7 @@ public:
     static std::vector<UIScene_CreativeMenu::ItemBuilder> ITEM_BUILDERS[15];
 
     void setCategory(UIScene_CreativeMenu::ECreative_Inventory_Groups category) {
-        this->mContent = &ITEM_BUILDERS[category];
+        this->m_content = &ITEM_BUILDERS[category];
     }
 
     void ADD(const not_null_ptr<ItemInstance>& itemInstance);
@@ -37,5 +37,5 @@ public:
         this->ITEM_BLOCK(state->getBlock(), state->getBlock()->convertBlockStateToLegacyData(state));
     }
 
-    std::vector<UIScene_CreativeMenu::ItemBuilder>* mContent;
+    std::vector<UIScene_CreativeMenu::ItemBuilder>* m_content;
 };

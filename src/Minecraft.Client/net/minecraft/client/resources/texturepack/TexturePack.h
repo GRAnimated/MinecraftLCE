@@ -26,5 +26,5 @@ public:
     virtual void loadColourTable();
     virtual void loadStructureManager();
 
-    bool mHasAudio;
+    bool m_hasAudio;
 };

@@ -5,19 +5,19 @@
 
 IntTag::IntTag() {}
 
-IntTag::IntTag(int data) : mData(data) {}
+IntTag::IntTag(int data) : m_data(data) {}
 
 void IntTag::write(DataOutput* outputStream) {
-    outputStream->writeInt(mData);
+    outputStream->writeInt(m_data);
 }
 
 void IntTag::load(DataInput* inputStream, int) {
-    mData = inputStream->readInt();
+    m_data = inputStream->readInt();
 }
 
 std::wstring IntTag::toString() {
     static wchar_t buffer[32];
-    swprintf(buffer, 32, L"%d", mData);
+    swprintf(buffer, 32, L"%d", m_data);
     return buffer;
 }
 
@@ -27,33 +27,33 @@ u8 IntTag::getId() {
 
 bool IntTag::equals(Tag* other) {
     IntTag* otherCasted = (IntTag*)other;
-    return Tag::equals(other) && mData == otherCasted->mData;
+    return Tag::equals(other) && m_data == otherCasted->m_data;
 }
 
 long IntTag::getAsLong() {
-    return mData;
+    return m_data;
 }
 
 int IntTag::getAsInt() {
-    return mData;
+    return m_data;
 }
 
 short IntTag::getAsShort() {
-    return mData;
+    return m_data;
 }
 
 u8 IntTag::getAsByte() {
-    return mData;
+    return m_data;
 }
 
 double IntTag::getAsDouble() {
-    return mData;
+    return m_data;
 }
 
 float IntTag::getAsFloat() {
-    return mData;
+    return m_data;
 }
 
 Tag* IntTag::copy() {
-    return new IntTag(mData);
+    return new IntTag(m_data);
 }

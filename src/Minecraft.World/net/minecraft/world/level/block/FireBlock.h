@@ -59,7 +59,7 @@ public:
     TextureAtlasSprite* getTextureLayer(int);
 
 private:
-    std::unordered_map<Block*, int> mFlameOdds;
-    std::unordered_map<Block*, int> mBurnOdds;
-    TextureAtlasSprite* mTexture[2];
+    std::unordered_map<Block*, int> m_flameOdds;
+    std::unordered_map<Block*, int> m_burnOdds;
+    TextureAtlasSprite* m_texture[2];
 };

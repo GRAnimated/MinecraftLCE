@@ -32,54 +32,54 @@ MultiPlayerLevel::MultiPlayerLevel(ClientPacketListener* packetListener, LevelSe
 
 void MultiPlayerLevel::MultiPlayerLevelInit(ClientPacketListener* packetListener,
                                             LevelSettings* levelSettings, const Difficulty* difficulty) {
-    mMinecraft = Minecraft::GetInstance();
-    mDimension->init(this);
-    mChunkSource = createChunkSource();
-    mChunkCache = mChunkSource->getCache();
-    mXZSize = mChunkSource->mXZSize;
-    if (!mLevelData->isInitialized()) {
+    m_minecraft = Minecraft::GetInstance();
+    m_dimension->init(this);
+    m_chunkSource = createChunkSource();
+    m_chunkCache = m_chunkSource->getCache();
+    m_xzSize = m_chunkSource->m_xzSize;
+    if (!m_levelData->isInitialized()) {
         initializeLevel(levelSettings);
-        mLevelData->setInitialized(true);
+        m_levelData->setInitialized(true);
     }
 
     delete levelSettings;
 
     if (packetListener)
-        mPacketListeners.push_back(packetListener);
+        m_packetListeners.push_back(packetListener);
 
     getLevelData()->setDifficulty(difficulty);
 
-    delete mSavedDataStorage;
+    delete m_savedDataStorage;
 
-    mSavedDataStorage = nullptr;
+    m_savedDataStorage = nullptr;
 
-    dword_2cc = 0;
-    dword_2d0 = 0;
-    dword_2d4 = 0;
-    dword_2d8 = 0;
-    byte_2c8 = true;
-    mClientScoreboard = new ClientScoreboard();
+    m_dword2cc = 0;
+    m_dword2d0 = 0;
+    m_dword2d4 = 0;
+    m_dword2d8 = 0;
+    m_byte2c8 = true;
+    m_clientScoreboard = new ClientScoreboard();
 
     updateSkyBrightness();
     prepareWeather();
 
-    field_3b0 = mRandom->nextInt(12000);
+    m_field3b0 = m_random->nextInt(12000);
 }
 
 MultiPlayerLevel::~MultiPlayerLevel() {
-    mSavedDataStorage = nullptr;
-    delete mClientScoreboard;
+    m_savedDataStorage = nullptr;
+    delete m_clientScoreboard;
 }
 
 ChunkSource* MultiPlayerLevel::createChunkSource() {
     if (Minecraft::InMiniGame(NORMAL_WORLD, true) && !CGameNetworkManager::sInstance.IsHost()) {
-        ChunkStorage* storage = mLevelStorage->createChunkStorage(mDimension);
-        mCache = new ClientChunkCache(this, storage);
+        ChunkStorage* storage = m_levelStorage->createChunkStorage(m_dimension);
+        m_cache = new ClientChunkCache(this, storage);
     } else {
-        mCache = new ClientChunkCache(this);
+        m_cache = new ClientChunkCache(this);
     }
 
-    return mCache;
+    return m_cache;
 }
 
 ChunkSource* MultiPlayerLevel::getChunkSource() {
@@ -128,7 +128,7 @@ void MultiPlayerLevel::playSound(std::shared_ptr<Player> player, double a3, doub
 void MultiPlayerLevel::tickWeather(bool) {}
 
 int MultiPlayerLevel::getChunkPollRange() {
-    return mMinecraft->mOptions->mViewDistance;
+    return m_minecraft->m_options->m_viewDistance;
 }
 
 void MultiPlayerLevel::sendPacketToServer(std::shared_ptr<Packet>) {}

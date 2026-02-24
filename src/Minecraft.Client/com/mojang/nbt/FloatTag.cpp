@@ -4,21 +4,21 @@
 #include "java/io/DataOutput.h"
 #include "net/minecraft/util/Mth.h"
 
-FloatTag::FloatTag() : mData(0.0f) {}
+FloatTag::FloatTag() : m_data(0.0f) {}
 
-FloatTag::FloatTag(float data) : mData(data) {}
+FloatTag::FloatTag(float data) : m_data(data) {}
 
 void FloatTag::write(DataOutput* outputStream) {
-    outputStream->writeFloat(mData);
+    outputStream->writeFloat(m_data);
 }
 
 void FloatTag::load(DataInput* inputStream, int) {
-    mData = inputStream->readFloat();
+    m_data = inputStream->readFloat();
 }
 
 std::wstring FloatTag::toString() {
     static wchar_t buffer[32];
-    swprintf(buffer, 32, L"%f", mData);
+    swprintf(buffer, 32, L"%f", m_data);
     return buffer;
 }
 
@@ -28,33 +28,33 @@ u8 FloatTag::getId() {
 
 bool FloatTag::equals(Tag* other) {
     FloatTag* otherCasted = (FloatTag*)other;
-    return Tag::equals(other) && mData == otherCasted->mData;
+    return Tag::equals(other) && m_data == otherCasted->m_data;
 }
 
 long FloatTag::getAsLong() {
-    return mData;
+    return m_data;
 }
 
 int FloatTag::getAsInt() {
-    return Mth::floor(mData);
+    return Mth::floor(m_data);
 }
 
 short FloatTag::getAsShort() {
-    return Mth::floor(mData);
+    return Mth::floor(m_data);
 }
 
 u8 FloatTag::getAsByte() {
-    return Mth::floor(mData);
+    return Mth::floor(m_data);
 }
 
 double FloatTag::getAsDouble() {
-    return mData;
+    return m_data;
 }
 
 float FloatTag::getAsFloat() {
-    return mData;
+    return m_data;
 }
 
 Tag* FloatTag::copy() {
-    return new FloatTag(mData);
+    return new FloatTag(m_data);
 }

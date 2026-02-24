@@ -6,8 +6,8 @@
 
 class ModelPartsSkinned {
 public:
-    int dword0;
-    bool byte4;
-    std::vector<ModelPartSkin*> mModelParts;
-    void* qword20;
+    int m_dword0;
+    bool m_byte4;
+    std::vector<ModelPartSkin*> m_modelParts;
+    void* m_qword20;
 };

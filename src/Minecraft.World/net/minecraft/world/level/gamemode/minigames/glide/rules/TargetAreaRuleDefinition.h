@@ -11,7 +11,7 @@ public:
     virtual void getPointValue();
     virtual GlideRingGenerator::eGlideRingSize getSize();
 
-    bool isPrimary() { return mPrimary; }
+    bool isPrimary() { return m_primary; }
 
-    bool mPrimary;
+    bool m_primary;
 };

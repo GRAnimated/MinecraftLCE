@@ -32,16 +32,16 @@ public:
     bool isProjectile() const;
 
 protected:
-    bool mBypassArmour;
-    bool mBypassInvul;
-    bool field_0xa;
-    float mExhaustion;
-    bool mIsFireSource;
-    bool mIsExplosion;
-    bool mScalesWithDifficulty;
-    bool mIsMagic;
-    bool mIsProjectile;
-    bool field_0x15;
-    ClientboundChatPacket::EChatPacketMessage field_0x18;
-    ClientboundChatPacket::EChatPacketMessage field_0x1c;
+    bool m_bypassArmour;
+    bool m_bypassInvul;
+    bool m_field0xa;
+    float m_exhaustion;
+    bool m_isFireSource;
+    bool m_isExplosion;
+    bool m_scalesWithDifficulty;
+    bool m_isMagic;
+    bool m_isProjectile;
+    bool m_field0x15;
+    ClientboundChatPacket::EChatPacketMessage m_field0x18;
+    ClientboundChatPacket::EChatPacketMessage m_field0x1c;
 };

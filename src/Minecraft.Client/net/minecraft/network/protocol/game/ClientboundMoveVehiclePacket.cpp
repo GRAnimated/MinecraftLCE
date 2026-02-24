@@ -11,11 +11,11 @@ std::shared_ptr<Packet> ClientboundMoveVehiclePacket::create() {
 ClientboundMoveVehiclePacket::ClientboundMoveVehiclePacket() {}
 
 ClientboundMoveVehiclePacket::ClientboundMoveVehiclePacket(std::shared_ptr<Entity> entity) {
-    x = entity->mX;
-    y = entity->mY;
-    z = entity->mZ;
-    yRot = entity->mYRot;
-    xRot = entity->mXRot;
+    m_x = entity->m_x;
+    m_y = entity->m_y;
+    m_z = entity->m_z;
+    m_yRot = entity->m_yRot;
+    m_xRot = entity->m_xRot;
 }
 
 EPacketType ClientboundMoveVehiclePacket::getPacketId() {
@@ -23,19 +23,19 @@ EPacketType ClientboundMoveVehiclePacket::getPacketId() {
 }
 
 void ClientboundMoveVehiclePacket::read(DataInputStream* input) {
-    x = input->readDouble();
-    y = input->readDouble();
-    z = input->readDouble();
-    yRot = input->readFloat();
-    xRot = input->readFloat();
+    m_x = input->readDouble();
+    m_y = input->readDouble();
+    m_z = input->readDouble();
+    m_yRot = input->readFloat();
+    m_xRot = input->readFloat();
 }
 
 void ClientboundMoveVehiclePacket::write(DataOutputStream* output) {
-    output->writeDouble(x);
-    output->writeDouble(y);
-    output->writeDouble(z);
-    output->writeFloat(yRot);
-    output->writeFloat(xRot);
+    output->writeDouble(m_x);
+    output->writeDouble(m_y);
+    output->writeDouble(m_z);
+    output->writeFloat(m_yRot);
+    output->writeFloat(m_xRot);
 }
 
 void ClientboundMoveVehiclePacket::handle(PacketListener* listener) {
@@ -43,21 +43,21 @@ void ClientboundMoveVehiclePacket::handle(PacketListener* listener) {
 }
 
 double ClientboundMoveVehiclePacket::getX() {
-    return x;
+    return m_x;
 }
 
 double ClientboundMoveVehiclePacket::getY() {
-    return y;
+    return m_y;
 }
 
 double ClientboundMoveVehiclePacket::getZ() {
-    return z;
+    return m_z;
 }
 
 float ClientboundMoveVehiclePacket::getYRot() {
-    return yRot;
+    return m_yRot;
 }
 
 float ClientboundMoveVehiclePacket::getXRot() {
-    return xRot;
+    return m_xRot;
 }

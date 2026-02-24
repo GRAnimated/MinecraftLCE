@@ -10,11 +10,11 @@ class FoodData {
 public:
     FoodData();
 
-    int mFoodLevel;
-    float mSaturationLevel;
-    float mExhaustionLevel;
-    int mTickTimer;
-    int mLastFoodLevel;
+    int m_foodLevel;
+    float m_saturationLevel;
+    float m_exhaustionLevel;
+    int m_tickTimer;
+    int m_lastFoodLevel;
 
     void eat(int, float);
     void eat(FoodItem*, const not_null_ptr<ItemInstance>&);

@@ -14,9 +14,9 @@ public:
 
     arrayWithLength<int> getArea(int x, int y, int width, int height) override;
 
-    arrayWithLength<Biome*> mWarmBiomes;
-    arrayWithLength<Biome*> mMediumBiomes;
-    arrayWithLength<Biome*> mColdBiomes;
-    arrayWithLength<Biome*> mIceBiomes;
-    CustomizableSourceSettings* mSettings;
+    arrayWithLength<Biome*> m_warmBiomes;
+    arrayWithLength<Biome*> m_mediumBiomes;
+    arrayWithLength<Biome*> m_coldBiomes;
+    arrayWithLength<Biome*> m_iceBiomes;
+    CustomizableSourceSettings* m_settings;
 };

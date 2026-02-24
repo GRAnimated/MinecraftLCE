@@ -27,20 +27,20 @@ public:
         }
 
         Variant(int data, const std::wstring& name, int translationKey) {
-            this->mData = data;
-            this->mName = name;
-            this->mTranslationKey = translationKey;
+            this->m_data = data;
+            this->m_name = name;
+            this->m_translationKey = translationKey;
         }
 
-        int getData() { return this->mData; }
-        int getTranslationKey() { return this->mTranslationKey; }
+        int getData() { return this->m_data; }
+        int getTranslationKey() { return this->m_translationKey; }
 
-        std::wstring toString() const override { return this->mName; }
-        std::wstring getSerializedName() const override { return this->mName; }
+        std::wstring toString() const override { return this->m_name; }
+        std::wstring getSerializedName() const override { return this->m_name; }
 
-        int mData;
-        std::wstring mName;
-        int mTranslationKey;
+        int m_data;
+        std::wstring m_name;
+        int m_translationKey;
     };
 
     static inline EnumProperty<Variant*>* VARIANT;

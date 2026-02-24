@@ -6,12 +6,12 @@ class GameRule {
 public:
     struct _ValueType {
         _ValueType() {
-            field_8 = false;
-            field_0 = 0;
+            m_field8 = false;
+            m_field0 = 0;
         }
 
-        bool field_8;
-        long field_0;
+        bool m_field8;
+        long m_field0;
     };
 
     void setParameter(const std::wstring&, GameRule::_ValueType);

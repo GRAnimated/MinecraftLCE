@@ -21,6 +21,6 @@ public:
     bool hasValue();
     static ConsoleGameRules::EGameRuleAttr attributeIdFromName(const std::wstring&);
 
-    bool mIsOptional = false;
-    bool mHasValue = false;
+    bool m_isOptional = false;
+    bool m_hasValue = false;
 };

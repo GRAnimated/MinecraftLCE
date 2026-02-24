@@ -3,38 +3,38 @@
 #include "net/minecraft/world/level/block/state/BlockState.h"
 
 BlockSourceImpl::BlockSourceImpl(Level* level, const BlockPos& pos) {
-    mLevel = level;
-    mPos = pos;
+    m_level = level;
+    m_pos = pos;
 }
 
 double BlockSourceImpl::getX() {
-    return mPos.getX() + 0.5;
+    return m_pos.getX() + 0.5;
 }
 
 double BlockSourceImpl::getY() {
-    return mPos.getY() + 0.5;
+    return m_pos.getY() + 0.5;
 }
 
 double BlockSourceImpl::getZ() {
-    return mPos.getZ() + 0.5;
+    return m_pos.getZ() + 0.5;
 }
 
 BlockPos BlockSourceImpl::getPos() {
-    return mPos;
+    return m_pos;
 }
 
 const BlockState* BlockSourceImpl::getBlockState() {
-    return mLevel->getBlockState(mPos);
+    return m_level->getBlockState(m_pos);
 }
 
 Material* BlockSourceImpl::getMaterial() {
-    return mLevel->getBlockState(mPos)->getMaterial();
+    return m_level->getBlockState(m_pos)->getMaterial();
 }
 
 std::shared_ptr<BlockEntity> BlockSourceImpl::getEntity() {
-    return mLevel->getBlockEntity(mPos);
+    return m_level->getBlockEntity(m_pos);
 }
 
 Level* BlockSourceImpl::getWorld() {
-    return mLevel;
+    return m_level;
 }

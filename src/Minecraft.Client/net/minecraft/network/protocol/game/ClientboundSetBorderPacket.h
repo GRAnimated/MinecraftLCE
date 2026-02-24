@@ -16,13 +16,13 @@ public:
     void handle(PacketListener* listener) override;
 
 private:
-    int dword_28;
-    int dword_2c;
-    double double_30;
-    double double_38;
-    double double_40;
-    double double_48;
-    long qword_50;
-    int dword_58;
-    int dword_5c;
+    int m_dword28;
+    int m_dword2c;
+    double m_double30;
+    double m_double38;
+    double m_double40;
+    double m_double48;
+    long m_qword50;
+    int m_dword58;
+    int m_dword5c;
 };

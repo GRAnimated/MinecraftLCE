@@ -17,6 +17,6 @@ public:
     void handle(PacketListener* listener) override;
 
 private:
-    Difficulty* difficulty;
-    void* unused;
+    Difficulty* m_difficulty;
+    void* m_unused;
 };

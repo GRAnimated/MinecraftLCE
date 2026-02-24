@@ -556,6 +556,6 @@ public:
     int calculateRGBColor(int) const;
     static MaterialColor* getDyeMaterial(const DyeColor*);
 
-    eMinecraftColour mColor;
-    int mID;
+    eMinecraftColour m_color;
+    int m_id;
 };

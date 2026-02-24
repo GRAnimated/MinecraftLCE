@@ -12,7 +12,7 @@
 
 StoneBlock::StoneBlock() : Block(Material::STONE) {
     Block::DerivedInit();
-    this->registerDefaultState(this->mBlockStateDefinition->any()->setValue(VARIANT, Variant::STONE));
+    this->registerDefaultState(this->m_blockStateDefinition->any()->setValue(VARIANT, Variant::STONE));
 }
 
 void StoneBlock::blockStaticCtor() {

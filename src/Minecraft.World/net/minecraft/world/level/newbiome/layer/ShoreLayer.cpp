@@ -6,7 +6,7 @@
 #include "net/minecraft/world/level/newbiome/layer/IntCache.h"
 
 ShoreLayer::ShoreLayer(long long seed, std::shared_ptr<Layer> parent) : Layer(seed) {
-    mParent = parent;
+    m_parent = parent;
 }
 
 // NON_MATCHING | Score: 1146 (Lower is better)
@@ -31,9 +31,9 @@ bool ShoreLayer::isJungleCompatible(int biomeId) {
     if (Biome::getBiome(biomeId) != nullptr && Biome::getBiome(biomeId)->getBaseClass() == Biome::_JUNGLE) {
         return true;
     } else {
-        return biomeId == Biome::JUNGLE_EDGE->mBiomeID || biomeId == Biome::JUNGLE->mBiomeID
-               || biomeId == Biome::JUNGLE_HILLS->mBiomeID || biomeId == Biome::FOREST->mBiomeID
-               || biomeId == Biome::TAIGA->mBiomeID || isOcean(biomeId);
+        return biomeId == Biome::JUNGLE_EDGE->m_biomeId || biomeId == Biome::JUNGLE->m_biomeId
+               || biomeId == Biome::JUNGLE_HILLS->m_biomeId || biomeId == Biome::FOREST->m_biomeId
+               || biomeId == Biome::TAIGA->m_biomeId || isOcean(biomeId);
     }
 }
 
@@ -43,7 +43,7 @@ bool ShoreLayer::isMesa(int biomeId) {
 
 // NON_MATCHING | Score: 1945 (Lower is better)
 arrayWithLength<int> ShoreLayer::getArea(int x, int y, int width, int height) {
-    arrayWithLength<int> parentArea = mParent->getArea(x - 1, y - 1, width + 2, height + 2);
+    arrayWithLength<int> parentArea = m_parent->getArea(x - 1, y - 1, width + 2, height + 2);
     PIXBeginNamedEvent(0.0, "ShoreLayer::getArea");
     arrayWithLength<int> area = IntCache::allocate(width * height);
 
@@ -52,16 +52,16 @@ arrayWithLength<int> ShoreLayer::getArea(int x, int y, int width, int height) {
             initRandom(n + x, m + y);
             int o = parentArea[n + 1 + (m + 1) * (width + 2)];
             Biome* biome = Biome::getBiome(o);
-            if (o == Biome::MUSHROOM_ISLAND->mBiomeID) {
+            if (o == Biome::MUSHROOM_ISLAND->m_biomeId) {
                 int p = parentArea[n + 1 + (m + 1 - 1) * (width + 2)];
                 int q = parentArea[n + 1 + 1 + (m + 1) * (width + 2)];
                 int r = parentArea[n + 1 - 1 + (m + 1) * (width + 2)];
                 int s = parentArea[n + 1 + (m + 1 + 1) * (width + 2)];
-                if (p != Biome::OCEAN->mBiomeID && q != Biome::OCEAN->mBiomeID && r != Biome::OCEAN->mBiomeID
-                    && s != Biome::OCEAN->mBiomeID) {
+                if (p != Biome::OCEAN->m_biomeId && q != Biome::OCEAN->m_biomeId
+                    && r != Biome::OCEAN->m_biomeId && s != Biome::OCEAN->m_biomeId) {
                     area[n + m * width] = o;
                 } else {
-                    area[n + m * width] = Biome::MUSHROOM_ISLAND_SHORE->mBiomeID;
+                    area[n + m * width] = Biome::MUSHROOM_ISLAND_SHORE->m_biomeId;
                 }
             } else if (biome != nullptr && biome->getBaseClass() == Biome::_JUNGLE) {
                 int p = parentArea[n + 1 + (m + 1 - 1) * (width + 2)];
@@ -73,18 +73,18 @@ arrayWithLength<int> ShoreLayer::getArea(int x, int y, int width, int height) {
                     if (!isOcean(p) && !isOcean(q) && !isOcean(r) && !isOcean(s)) {
                         area[n + m * width] = o;
                     } else {
-                        area[n + m * width] = Biome::BEACH->mBiomeID;
+                        area[n + m * width] = Biome::BEACH->m_biomeId;
                     }
                 } else {
-                    area[n + m * width] = Biome::JUNGLE_EDGE->mBiomeID;
+                    area[n + m * width] = Biome::JUNGLE_EDGE->m_biomeId;
                 }
-            } else if (o != Biome::EXTREME_HILLS->mBiomeID && o != Biome::EXTREME_HILLS_PLUS->mBiomeID
-                       && o != Biome::EXTREME_HILLS_EDGE->mBiomeID) {
+            } else if (o != Biome::EXTREME_HILLS->m_biomeId && o != Biome::EXTREME_HILLS_PLUS->m_biomeId
+                       && o != Biome::EXTREME_HILLS_EDGE->m_biomeId) {
                 if (biome != nullptr && biome->isSnowCovered()) {
-                    replaceIfNeighborOcean(parentArea, area, n, m, width, o, Biome::COLD_BEACH->mBiomeID);
-                } else if (o != Biome::MESA->mBiomeID && o != Biome::MESA_PLATEAU_F->mBiomeID) {
-                    if (o != Biome::OCEAN->mBiomeID && o != Biome::DEEP_OCEAN->mBiomeID
-                        && o != Biome::RIVER->mBiomeID && o != Biome::SWAMP->mBiomeID) {
+                    replaceIfNeighborOcean(parentArea, area, n, m, width, o, Biome::COLD_BEACH->m_biomeId);
+                } else if (o != Biome::MESA->m_biomeId && o != Biome::MESA_PLATEAU_F->m_biomeId) {
+                    if (o != Biome::OCEAN->m_biomeId && o != Biome::DEEP_OCEAN->m_biomeId
+                        && o != Biome::RIVER->m_biomeId && o != Biome::SWAMP->m_biomeId) {
                         int p = parentArea[n + 1 + (m + 1 - 1) * (width + 2)];
                         int q = parentArea[n + 1 + 1 + (m + 1) * (width + 2)];
                         int r = parentArea[n + 1 - 1 + (m + 1) * (width + 2)];
@@ -92,7 +92,7 @@ arrayWithLength<int> ShoreLayer::getArea(int x, int y, int width, int height) {
                         if (!isOcean(p) && !isOcean(q) && !isOcean(r) && !isOcean(s)) {
                             area[n + m * width] = o;
                         } else {
-                            area[n + m * width] = Biome::BEACH->mBiomeID;
+                            area[n + m * width] = Biome::BEACH->m_biomeId;
                         }
                     } else {
                         area[n + m * width] = o;
@@ -106,14 +106,14 @@ arrayWithLength<int> ShoreLayer::getArea(int x, int y, int width, int height) {
                         if (isMesa(p) && isMesa(q) && isMesa(r) && isMesa(s)) {
                             area[n + m * width] = o;
                         } else {
-                            area[n + m * width] = Biome::DESERT->mBiomeID;
+                            area[n + m * width] = Biome::DESERT->m_biomeId;
                         }
                     } else {
                         area[n + m * width] = o;
                     }
                 }
             } else {
-                replaceIfNeighborOcean(parentArea, area, n, m, width, o, Biome::STONE_BEACH->mBiomeID);
+                replaceIfNeighborOcean(parentArea, area, n, m, width, o, Biome::STONE_BEACH->m_biomeId);
             }
         }
     }

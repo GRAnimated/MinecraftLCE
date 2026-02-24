@@ -47,5 +47,5 @@ public:
 
     static std::wstring BOW_ICON_NAMES[3];
 
-    TextureAtlasSprite* mBowIcons[3];
+    TextureAtlasSprite* m_bowIcons[3];
 };

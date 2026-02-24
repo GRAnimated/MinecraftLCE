@@ -10,19 +10,19 @@ std::shared_ptr<Packet> ClientboundAddGlobalEntityPacket::create() {
 }
 
 ClientboundAddGlobalEntityPacket::ClientboundAddGlobalEntityPacket() {
-    id = -1;
-    y = 0;
-    z = 0;
-    x = 0;
-    type = 0;
+    m_id = -1;
+    m_y = 0;
+    m_z = 0;
+    m_x = 0;
+    m_type = 0;
 }
 
 ClientboundAddGlobalEntityPacket::ClientboundAddGlobalEntityPacket(std::shared_ptr<Entity> entity) {
-    id = entity->getId();
-    x = Mth::floor(entity->mX * 32.0);
-    y = Mth::floor(entity->mY * 32.0);
-    z = Mth::floor(entity->mZ * 32.0);
-    type = (entity->isType(eLightningBolt));
+    m_id = entity->getId();
+    m_x = Mth::floor(entity->m_x * 32.0);
+    m_y = Mth::floor(entity->m_y * 32.0);
+    m_z = Mth::floor(entity->m_z * 32.0);
+    m_type = (entity->isType(eLightningBolt));
 }
 
 int ClientboundAddGlobalEntityPacket::getEstimatedSize() {
@@ -34,19 +34,19 @@ EPacketType ClientboundAddGlobalEntityPacket::getPacketId() {
 }
 
 void ClientboundAddGlobalEntityPacket::read(DataInputStream* input) {
-    id = input->readInt();
-    type = input->readByte();
-    x = input->readInt();
-    y = input->readInt();
-    z = input->readInt();
+    m_id = input->readInt();
+    m_type = input->readByte();
+    m_x = input->readInt();
+    m_y = input->readInt();
+    m_z = input->readInt();
 }
 
 void ClientboundAddGlobalEntityPacket::write(DataOutputStream* output) {
-    output->writeInt(id);
-    output->writeByte(type);
-    output->writeInt(x);
-    output->writeInt(y);
-    output->writeInt(z);
+    output->writeInt(m_id);
+    output->writeByte(m_type);
+    output->writeInt(m_x);
+    output->writeInt(m_y);
+    output->writeInt(m_z);
 }
 
 void ClientboundAddGlobalEntityPacket::handle(PacketListener* listener) {
@@ -54,21 +54,21 @@ void ClientboundAddGlobalEntityPacket::handle(PacketListener* listener) {
 }
 
 int ClientboundAddGlobalEntityPacket::getId() {
-    return id;
+    return m_id;
 }
 
 int ClientboundAddGlobalEntityPacket::getX() {
-    return x;
+    return m_x;
 }
 
 int ClientboundAddGlobalEntityPacket::getY() {
-    return y;
+    return m_y;
 }
 
 int ClientboundAddGlobalEntityPacket::getZ() {
-    return z;
+    return m_z;
 }
 
 int ClientboundAddGlobalEntityPacket::getType() {
-    return type;
+    return m_type;
 }

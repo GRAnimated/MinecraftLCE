@@ -15,69 +15,69 @@ EPacketType ClientboundSetBorderPacket::getPacketId() {
 }
 
 void ClientboundSetBorderPacket::read(DataInputStream* input) {
-    dword_28 = input->readInt();
-    switch (dword_28) {
+    m_dword28 = input->readInt();
+    switch (m_dword28) {
     case 0:
-        double_40 = input->readDouble();
+        m_double40 = input->readDouble();
         break;
     case 1:
-        double_48 = input->readDouble();
-        double_40 = input->readDouble();
-        qword_50 = input->readVarLong();
+        m_double48 = input->readDouble();
+        m_double40 = input->readDouble();
+        m_qword50 = input->readVarLong();
         break;
     case 2:
-        double_30 = input->readDouble();
-        double_38 = input->readDouble();
+        m_double30 = input->readDouble();
+        m_double38 = input->readDouble();
         break;
     case 3:
-        double_30 = input->readDouble();
-        double_38 = input->readDouble();
-        double_48 = input->readDouble();
-        double_40 = input->readDouble();
-        qword_50 = input->readVarLong();
-        dword_2c = input->readVarInt();
-        dword_5c = input->readVarInt();
-        dword_58 = input->readVarInt();
+        m_double30 = input->readDouble();
+        m_double38 = input->readDouble();
+        m_double48 = input->readDouble();
+        m_double40 = input->readDouble();
+        m_qword50 = input->readVarLong();
+        m_dword2c = input->readVarInt();
+        m_dword5c = input->readVarInt();
+        m_dword58 = input->readVarInt();
         break;
     case 4:
-        dword_58 = input->readVarInt();
+        m_dword58 = input->readVarInt();
         break;
     case 5:
-        dword_5c = input->readVarInt();
+        m_dword5c = input->readVarInt();
         break;
     }
 }
 
 void ClientboundSetBorderPacket::write(DataOutputStream* output) {
-    output->writeInt(dword_28);
-    switch (dword_28) {
+    output->writeInt(m_dword28);
+    switch (m_dword28) {
     case 0:
-        output->writeDouble(double_40);
+        output->writeDouble(m_double40);
         break;
     case 1:
-        output->writeDouble(double_48);
-        output->writeDouble(double_40);
-        output->writeVarLong(qword_50);
+        output->writeDouble(m_double48);
+        output->writeDouble(m_double40);
+        output->writeVarLong(m_qword50);
         break;
     case 2:
-        output->writeDouble(double_30);
-        output->writeDouble(double_38);
+        output->writeDouble(m_double30);
+        output->writeDouble(m_double38);
         break;
     case 3:
-        output->writeDouble(double_30);
-        output->writeDouble(double_38);
-        output->writeDouble(double_48);
-        output->writeDouble(double_40);
-        output->writeVarLong(qword_50);
-        output->writeVarInt(dword_2c);
-        output->writeVarInt(dword_5c);
-        output->writeVarInt(dword_58);
+        output->writeDouble(m_double30);
+        output->writeDouble(m_double38);
+        output->writeDouble(m_double48);
+        output->writeDouble(m_double40);
+        output->writeVarLong(m_qword50);
+        output->writeVarInt(m_dword2c);
+        output->writeVarInt(m_dword5c);
+        output->writeVarInt(m_dword58);
         break;
     case 4:
-        output->writeVarInt(dword_58);
+        output->writeVarInt(m_dword58);
         break;
     case 5:
-        output->writeVarInt(dword_5c);
+        output->writeVarInt(m_dword5c);
         break;
     }
 }

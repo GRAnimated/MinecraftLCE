@@ -10,8 +10,8 @@ public:
 
     bool DoesOverrideModel() const;
 
-    bool mOverrideModel;
-    int dword4;
-    int dword8;
-    std::unordered_map<std::wstring, ModelPartDefinition> mPartsDef;
+    bool m_overrideModel;
+    int m_dword4;
+    int m_dword8;
+    std::unordered_map<std::wstring, ModelPartDefinition> m_partsDef;
 };

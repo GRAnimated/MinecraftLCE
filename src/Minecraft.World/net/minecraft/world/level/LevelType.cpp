@@ -18,35 +18,35 @@ LevelType::LevelType(int id, const std::wstring& name) {
 }
 
 void LevelType::_init(int id, const std::wstring& name, int version) {
-    this->mId = id;
-    this->mHasHelpText = false;
-    this->mName = name;
-    this->mVersion = version;
-    this->mSelectableByUser = true;
+    this->m_id = id;
+    this->m_hasHelpText = false;
+    this->m_name = name;
+    this->m_version = version;
+    this->m_selectableByUser = true;
 
     LevelType::TYPES[id] = this;
 }
 
 std::wstring LevelType::getGeneratorName() {
-    return this->mName;
+    return this->m_name;
 }
 
 int LevelType::getVersion() {
-    return this->mVersion;
+    return this->m_version;
 }
 
 LevelType* LevelType::setHasReplacement() {
-    this->mHasReplacement = true;
+    this->m_hasReplacement = true;
     return this;
 }
 
 LevelType* LevelType::setHasHelpText() {
-    this->mHasHelpText = true;
+    this->m_hasHelpText = true;
     return this;
 }
 
 LevelType* LevelType::setSelectableByUser(bool state) {
-    this->mSelectableByUser = state;
+    this->m_selectableByUser = state;
     return this;
 }
 

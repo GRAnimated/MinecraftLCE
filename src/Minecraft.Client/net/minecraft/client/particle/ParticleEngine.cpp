@@ -11,60 +11,60 @@
 #include <cstdio>
 
 ParticleEngine::ParticleList::ParticleList() {
-    mParticles = new Particle*[0x4000];
-    mSize = 0;
+    m_particles = new Particle*[0x4000];
+    m_size = 0;
 }
 
 void ParticleEngine::ParticleList::ClearParticles() {
-    for (int i = 0; i < mSize; ++i)
-        delete mParticles[i];
-    mSize = 0;
+    for (int i = 0; i < m_size; ++i)
+        delete m_particles[i];
+    m_size = 0;
 }
 
 void ParticleEngine::ParticleList::push_back(Particle* particle) {
-    mParticles[mSize++] = particle;
+    m_particles[m_size++] = particle;
 }
 
 void ParticleEngine::ParticleList::RemoveParticle(unsigned int idx) {
-    mParticles[idx] = mParticles[--mSize];
+    m_particles[idx] = m_particles[--m_size];
 }
 
 Particle* ParticleEngine::ParticleList::at(int idx) {
-    return mParticles[idx];
+    return m_particles[idx];
 }
 
 int ParticleEngine::ParticleList::size() {
-    return mSize;
+    return m_size;
 }
 
 bool ParticleEngine::ParticleList::empty() {
-    return mSize == 0;
+    return m_size == 0;
 }
 
 ParticleEngine::ParticleEngine(Level* level, Textures* textures) {
-    mTickingList = false;
-    field_0x249 = false;
-    mLevel = level;
-    mTextures = textures;
+    m_tickingList = false;
+    m_field0x249 = false;
+    m_level = level;
+    m_textures = textures;
     registerProviders();
-    field_0x24c = 0;
+    m_field0x24c = 0;
 }
 
 void ParticleEngine::registerParticle(ePARTICLE_TYPE type, ParticleProvider* provider) {
-    mProviderMap[type] = provider;
+    m_providerMap[type] = provider;
 }
 
 // NON_MATCHING incomplete
 void ParticleEngine::setLevel(Level* newLevel) {
-    mLevel = newLevel;
+    m_level = newLevel;
     if (!newLevel) {
         for (int i = 0; i < 30; i++)
-            mLists[i].ClearParticles();
+            m_lists[i].ClearParticles();
     }
 }
 
 void ParticleEngine::tickParticleList(ParticleEngine::ParticleList* list) {
-    mTickingList = true;
+    m_tickingList = true;
 
     int sz = 0;  // this is weird, idk why it's like this and if it was originally like this, tho it matches
     if (!list->empty() && (sz = list->size()); sz > 0) {
@@ -79,7 +79,7 @@ void ParticleEngine::tickParticleList(ParticleEngine::ParticleList* list) {
             if (!p->isAlive()) {
                 p = list->at(idx);
                 if (p->getType() == 0x80221)
-                    field_0x24c--;
+                    m_field0x24c--;
 
                 if (p != nullptr)
                     delete p;
@@ -90,12 +90,12 @@ void ParticleEngine::tickParticleList(ParticleEngine::ParticleList* list) {
         }
     }
 
-    mTickingList = false;
+    m_tickingList = false;
 }
 
 void ParticleEngine::moveParticlesBetweenLists(ParticleEngine::ParticleList* list1,
                                                ParticleEngine::ParticleList* list2) {
-    mTickingList = true;
+    m_tickingList = true;
     if (!list1->empty() && list1->size() > 0) {
         for (int i = 0; i < list1->size(); i++) {
             Particle* p = list1->at(i);
@@ -115,7 +115,7 @@ void ParticleEngine::moveParticlesBetweenLists(ParticleEngine::ParticleList* lis
             }
         }
     }
-    mTickingList = false;
+    m_tickingList = false;
 }
 
 void ParticleEngine::tickParticle(Particle* part) {
@@ -131,11 +131,11 @@ void ParticleEngine::add(Particle* part) {
     float alpha = part->getAlpha();
     int typeId = part->getType();
 
-    DimensionType* dimType = part->getLevel()->mDimension->getType();
+    DimensionType* dimType = part->getLevel()->m_dimension->getType();
     if (dimType == DimensionType::OVERWORLD) {
         dimIndex = 0;
     } else {
-        dimType = part->getLevel()->mDimension->getType();
+        dimType = part->getLevel()->m_dimension->getType();
         dimIndex = 1;
         if (dimType != DimensionType::NETHER) {
             dimIndex = 2;
@@ -146,20 +146,20 @@ void ParticleEngine::add(Particle* part) {
     if (typeId == 0x8021e)
         maxCount = 1000;
     else if (typeId == 0x80221) {
-        if (field_0x24c > 1999) {
+        if (m_field0x24c > 1999) {
             delete part;
             return;
         }
-        field_0x24c++;
+        m_field0x24c++;
     }
 
     bool transparent = part->isTransparent();
-    ParticleList* list = (mLists + dimIndex * 10 + partTex * 2 + (alpha == 1.0) + !transparent);
+    ParticleList* list = (m_lists + dimIndex * 10 + partTex * 2 + (alpha == 1.0) + !transparent);
 
     if (list->size() >= maxCount) {
         Particle* old = list->at(0);
         if (old->getType() == 0x80221)
-            field_0x24c--;
+            m_field0x24c--;
         delete old;
         list->RemoveParticle(0);
     }
@@ -168,40 +168,40 @@ void ParticleEngine::add(Particle* part) {
 }
 
 void ParticleEngine::createTrackingEmitter(std::shared_ptr<Entity> entity, const ParticleType* type) {
-    mPartVec.push_back(new TrackingEmitter(mLevel, entity, type, 3));
+    m_partVec.push_back(new TrackingEmitter(m_level, entity, type, 3));
 }
 
 void ParticleEngine::createTrackingEmitter(std::shared_ptr<Entity> entity, const ParticleType* type,
                                            int maxAge) {
-    mPartVec.push_back(new TrackingEmitter(mLevel, entity, type, maxAge));
+    m_partVec.push_back(new TrackingEmitter(m_level, entity, type, maxAge));
 }
 
 // NON_MATCHING incomplete
 void ParticleEngine::render(std::shared_ptr<Entity> entity, float partialTicks, int) {
-    if (field_0x249) {
+    if (m_field0x249) {
         return;
     }
 
-    double entityXOld = entity->mXOld;
+    double entityXOld = entity->m_xOld;
     float rotX = Camera::getRotationX();
     float rotZ = Camera::getRotationZ();
     float rotYZ = Camera::getRotationYZ();
     float rotXY = Camera::getRotationXY();
     float rotXZ = Camera::getRotationXZ();
 
-    Particle::setXOffset(entity->mXOld + partialTicks * (entity->mX - entity->mXOld));
-    Particle::setYOffset(entity->mYOld + partialTicks * (entity->mY - entity->mYOld));
-    Particle::setZOffset(entity->mZOld + partialTicks * (entity->mZ - entity->mZOld));
+    Particle::setXOffset(entity->m_xOld + partialTicks * (entity->m_x - entity->m_xOld));
+    Particle::setYOffset(entity->m_yOld + partialTicks * (entity->m_y - entity->m_yOld));
+    Particle::setZOffset(entity->m_zOld + partialTicks * (entity->m_z - entity->m_zOld));
 
     Vec3* view = entity->getViewVector(partialTicks);
     Particle::setCamerViewDirection(view);
 
     int dimIndex;
-    DimensionType* dimType = mLevel->mDimension->getType();
+    DimensionType* dimType = m_level->m_dimension->getType();
     if (dimType == DimensionType::OVERWORLD) {
         dimIndex = 0;
     } else {
-        dimType = mLevel->mDimension->getType();
+        dimType = m_level->m_dimension->getType();
         dimIndex = 1;
         if (dimType != DimensionType::NETHER) {
             dimIndex = 2;
@@ -214,15 +214,15 @@ void ParticleEngine::tick() {
         tickTextureType(i);
     }
 
-    auto it = mPartVec.begin();
-    while (it != mPartVec.end()) {
+    auto it = m_partVec.begin();
+    while (it != m_partVec.end()) {
         Particle* p = *it;
 
         p->tick();
         if (p->isAlive()) {
             ++it;
         } else {
-            it = mPartVec.erase(it);
+            it = m_partVec.erase(it);
             if (p)
                 delete p;
         }
@@ -233,8 +233,8 @@ void ParticleEngine::tickTextureType(int idx) {
     int base = idx * 2;
 
     for (int off = 0; off <= 20; off += 10) {
-        tickParticleList(mLists + base + off);
-        tickParticleList(mLists + base + off + 1);
-        moveParticlesBetweenLists(mLists + base + off, mLists + base + off + 1);
+        tickParticleList(m_lists + base + off);
+        tickParticleList(m_lists + base + off + 1);
+        moveParticlesBetweenLists(m_lists + base + off, m_lists + base + off + 1);
     }
 }

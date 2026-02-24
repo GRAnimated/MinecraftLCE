@@ -19,6 +19,6 @@ public:
     int getButtonId();
 
 private:
-    int containerId;
-    int buttonId;
+    int m_containerId;
+    int m_buttonId;
 };

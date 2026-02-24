@@ -7,5 +7,5 @@ public:
     int getRGB();
 
 private:
-    int mColor;
+    int m_color;
 };

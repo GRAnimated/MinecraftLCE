@@ -32,10 +32,10 @@ const MapDecoration::Type PLAYER_YELLOW_OFF_LIMITS = MapDecoration::Type(26, 0, 
 const MapDecoration::Type PLAYER_CYAN_OFF_LIMITS = MapDecoration::Type(27, 0, 1, -1);
 
 MapDecoration::Type::Type(int icon, bool renderOnFrame, bool player, int color) {
-    this->mIcon = icon;
-    this->mRenderOnFrame = renderOnFrame;
-    this->mPlayer = player;
-    this->mColor = color;
+    this->m_icon = icon;
+    this->m_renderOnFrame = renderOnFrame;
+    this->m_player = player;
+    this->m_color = color;
 }
 
 // could be that types above are not defined one by one and instead are in array but
@@ -45,64 +45,64 @@ const MapDecoration::Type* MapDecoration::Type::byIcon(unsigned char icon) {
 }
 
 unsigned char MapDecoration::Type::getIcon() const {
-    return this->mIcon;
+    return this->m_icon;
 }
 
 bool MapDecoration::Type::isRenderedOnFrame() const {
-    return this->mRenderOnFrame;
+    return this->m_renderOnFrame;
 }
 
 bool MapDecoration::Type::isPlayer() const {
-    return this->mPlayer;
+    return this->m_player;
 }
 
 bool MapDecoration::Type::hasMapColor() const {
-    return this->mColor >= 0;
+    return this->m_color >= 0;
 }
 
 int MapDecoration::Type::getMapColor() const {
-    return this->mColor;
+    return this->m_color;
 }
 
 MapDecoration::MapDecoration() {}
 
 MapDecoration::MapDecoration(const MapDecoration::Type* type, char x, char y, char rot, int icon, bool idk) {
-    this->mX = x;
-    this->mY = y;
-    this->mType = type;
-    this->mRot = rot;
-    this->mIcon = icon;
-    this->mIdk = idk;
+    this->m_x = x;
+    this->m_y = y;
+    this->m_type = type;
+    this->m_rot = rot;
+    this->m_icon = icon;
+    this->m_idk = idk;
 }
 
 unsigned char MapDecoration::getImg() const {
-    return this->mType->getIcon();
+    return this->m_type->getIcon();
 }
 
 bool MapDecoration::renderOnFrame() const {
-    return this->mType->isRenderedOnFrame();
+    return this->m_type->isRenderedOnFrame();
 }
 
 char MapDecoration::getX() const {
-    return this->mX;
+    return this->m_x;
 }
 
 char MapDecoration::getY() const {
-    return this->mY;
+    return this->m_y;
 }
 
 const MapDecoration::Type* MapDecoration::getType() const {
-    return this->mType;
+    return this->m_type;
 }
 
 int MapDecoration::hashCode() const {
-    int ret = this->mType->getIcon();
-    ret = 31 * ret + this->mX;
-    ret = 31 * ret + this->mY;
-    ret = 31 * ret + this->mRot;
+    int ret = this->m_type->getIcon();
+    ret = 31 * ret + this->m_x;
+    ret = 31 * ret + this->m_y;
+    ret = 31 * ret + this->m_rot;
     return ret;
 }
 
 char MapDecoration::getRot() const {
-    return this->mRot;
+    return this->m_rot;
 }

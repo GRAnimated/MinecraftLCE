@@ -77,5 +77,5 @@ public:
     void startFallFlying();
 
     // void* fill;
-    std::shared_ptr<ServerGamePacketListenerImpl> mConnection;
+    std::shared_ptr<ServerGamePacketListenerImpl> m_connection;
 };

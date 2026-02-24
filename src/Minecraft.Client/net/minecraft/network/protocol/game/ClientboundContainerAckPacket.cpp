@@ -9,15 +9,15 @@ std::shared_ptr<Packet> ClientboundContainerAckPacket::create() {
 }
 
 ClientboundContainerAckPacket::ClientboundContainerAckPacket() {
-    mContainerId = 0;
-    mUid = 0;
-    mAccepted = false;
+    m_containerId = 0;
+    m_uid = 0;
+    m_accepted = false;
 }
 
 ClientboundContainerAckPacket::ClientboundContainerAckPacket(int containerId, short uid, bool accepted) {
-    mContainerId = containerId;
-    mUid = uid;
-    mAccepted = accepted;
+    m_containerId = containerId;
+    m_uid = uid;
+    m_accepted = accepted;
 }
 
 int ClientboundContainerAckPacket::getEstimatedSize() {
@@ -29,15 +29,15 @@ EPacketType ClientboundContainerAckPacket::getPacketId() {
 }
 
 void ClientboundContainerAckPacket::read(DataInputStream* input) {
-    mContainerId = static_cast<int>(input->readByte());
-    mUid = input->readShort();
-    mAccepted = input->readByte() != 0;
+    m_containerId = static_cast<int>(input->readByte());
+    m_uid = input->readShort();
+    m_accepted = input->readByte() != 0;
 }
 
 void ClientboundContainerAckPacket::write(DataOutputStream* output) {
-    output->writeByte(mContainerId);
-    output->writeShort(mUid);
-    output->writeByte(static_cast<unsigned char>(mAccepted));
+    output->writeByte(m_containerId);
+    output->writeShort(m_uid);
+    output->writeByte(static_cast<unsigned char>(m_accepted));
 }
 
 void ClientboundContainerAckPacket::handle(PacketListener* listener) {
@@ -45,13 +45,13 @@ void ClientboundContainerAckPacket::handle(PacketListener* listener) {
 }
 
 int ClientboundContainerAckPacket::getContainerId() {
-    return mContainerId;
+    return m_containerId;
 }
 
 short ClientboundContainerAckPacket::getUid() {
-    return mUid;
+    return m_uid;
 }
 
 bool ClientboundContainerAckPacket::isAccepted() {
-    return mAccepted;
+    return m_accepted;
 }

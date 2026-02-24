@@ -39,15 +39,15 @@ int dword_71011078D8[30]{0,    1,    2,    3,    4,    5,    6,    7,    8,    9
 UIScene_HowToPlayMenu::UIScene_HowToPlayMenu(int padID, void* unk_unused, UILayer* uiLayer)
     : UIScene(padID, uiLayer) {
     this->initialiseMovie();
-    this->uicontrol_list110.init(0);
+    this->m_uicontrolList110.init(0);
 
     for (int i = 0LL; i != 30; ++i) {
         const wchar_t* v7 = L10N::GetString(dword_7101107860[i]);
-        this->uicontrol_list110.addItem(v7, i);
+        this->m_uicontrolList110.addItem(v7, i);
     }
 
     this->doHorizontalResizeCheck();
-    this->dword200 = 0;
+    this->m_dword200 = 0;
     gConsoleUIController.TouchBoxRebuild(this);
 }
 
@@ -59,36 +59,36 @@ std::wstring UIScene_HowToPlayMenu::getMoviePath() {
 }
 
 void UIScene_HowToPlayMenu::updateTooltips() {
-    gConsoleUIController.SetTooltips(this->mPadID, StringIDs::Select, StringIDs::Back_1, -1, -1, -1, -1, -1,
+    gConsoleUIController.SetTooltips(this->m_padId, StringIDs::Select, StringIDs::Back_1, -1, -1, -1, -1, -1,
                                      -1, -1, -1, -1, -1, -1, -1, -1, -1, 0, 0);
 }
 
 void UIScene_HowToPlayMenu::updateComponents() {
-    if (!Minecraft::GetInstance()->mLevel) {
-        this->mUILayer->showComponent(this->mPadID, EUIScene::EUIComponent_Panorama, true);
-        this->mUILayer->showComponent(this->mPadID, EUIScene::EUIComponent_Logo, true);
+    if (!Minecraft::GetInstance()->m_level) {
+        this->m_uiLayer->showComponent(this->m_padId, EUIScene::EUIComponent_Panorama, true);
+        this->m_uiLayer->showComponent(this->m_padId, EUIScene::EUIComponent_Logo, true);
     } else {
-        this->mUILayer->showComponent(this->mPadID, EUIScene::EUIComponent_Panorama, false);
+        this->m_uiLayer->showComponent(this->m_padId, EUIScene::EUIComponent_Panorama, false);
         if (CConsoleMinecraftApp::sInstance.GetLocalPlayerCount() == 1)
-            this->mUILayer->showComponent(this->mPadID, EUIScene::EUIComponent_Logo, true);
+            this->m_uiLayer->showComponent(this->m_padId, EUIScene::EUIComponent_Logo, true);
         else
-            this->mUILayer->showComponent(this->mPadID, EUIScene::EUIComponent_Logo, false);
+            this->m_uiLayer->showComponent(this->m_padId, EUIScene::EUIComponent_Logo, false);
     }
 }
 
 void UIScene_HowToPlayMenu::handleReload() {
     for (int index = 0; index < 30; ++index) {
         const wchar_t* str = L10N::GetString(dword_7101107860[index]);
-        this->uicontrol_list110.addItem(str, index);
+        this->m_uicontrolList110.addItem(str, index);
     }
 
-    this->uicontrol_list110.setCurrentSelection(this->dword200, false, true);
+    this->m_uicontrolList110.setCurrentSelection(this->m_dword200, false, true);
     this->doHorizontalResizeCheck();
     gConsoleUIController.TouchBoxRebuild(this);
 }
 
 void UIScene_HowToPlayMenu::handleInput(int a2, int key, bool a4, bool a5, bool a6, bool& a7) {
-    gConsoleUIController.AnimateKeyPress(this->mPadID, key, a4, a5, a6);
+    gConsoleUIController.AnimateKeyPress(this->m_padId, key, a4, a5, a6);
 
     if (key == 4 || key == 5 || key == 8 || key == 9) {
         this->sendInputToMovie(key, false, a5, false);
@@ -108,20 +108,20 @@ void UIScene_HowToPlayMenu::handleInput(int a2, int key, bool a4, bool a5, bool 
 
 void UIScene_HowToPlayMenu::handlePress(int a2, int a3) {
     if (!a2) {
-        this->dword200 = a3;
+        this->m_dword200 = a3;
         gConsoleUIController.PlayUISFX(SoundEvent::UI_PRESS);
         gConsoleUIController.NavigateToScene(
-            this->mPadID, EUIScene::EUIScene_HowToPlay,
+            this->m_padId, EUIScene::EUIScene_HowToPlay,
             reinterpret_cast<unsigned int*>(static_cast<uintptr_t>(
-                0x80000000 | ((dword_71011078D8[a3] << 16) | static_cast<int16_t>(this->mPadID)))),
+                0x80000000 | ((dword_71011078D8[a3] << 16) | static_cast<int16_t>(this->m_padId)))),
             (EUILayer)6, (EUIGroup)6);
     }
 }
 
 bool UIScene_HowToPlayMenu::mapElementsAndNames() {
     fuiRenderNode* node = this->getFuiFile()->getRootNode();
-    this->uicontrol_list110.setupControl(this, node, "HowToList");
-    this->mUIControls.push_back(&this->uicontrol_list110);
+    this->m_uicontrolList110.setupControl(this, node, "HowToList");
+    this->m_uiControls.push_back(&this->m_uicontrolList110);
     return true;
 }
 

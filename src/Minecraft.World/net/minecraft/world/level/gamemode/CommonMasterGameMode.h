@@ -52,46 +52,46 @@ public:
 
     static const MiniGameDef* GetMiniGame();
 
-    std::vector<int>* GetPossibleVotes() { return &this->mPossibleVotes; }
+    std::vector<int>* GetPossibleVotes() { return &this->m_possibleVotes; }
 
-    LevelGenerationOptions* mGenerationOptions;
-    void* qword10;
-    void* qword18;
-    void* qword20;
-    void* qword28;
-    void* qword30;
-    void* qword38;
-    void* qword40;
-    void* qword48;
-    void* qword50;
-    void* qword58;
-    void* qword60;
-    long long mMapGeneratorSeed;
-    float mGenUnkFloat;
-    MapGenerator* mMapGenerator;
-    nn::os::MutexType mMapGeneratorMutex;
-    void* qwordA0;
-    void* qwordA8;
-    void* qwordB0;
-    std::vector<int> mPossibleVotes;
-    void* qwordD0;
-    Voteables* mVoteables;
-    void* qwordE0;
-    void* qwordE8;
-    void* qwordF0;
-    void* qwordF8;
-    void* qword100;
-    void* qword108;
-    std::vector<AABB*> mGlideTargets;
-    std::vector<CheckpointRuleDefinition*> mGlideCheckpoints;
-    void* qword140;
-    void* qword148;
-    void* qword150;
-    void* qword158;
-    void* qword160;
-    void* qword168;
-    void* qword170;
-    void* qword178;
+    LevelGenerationOptions* m_generationOptions;
+    void* m_qword10;
+    void* m_qword18;
+    void* m_qword20;
+    void* m_qword28;
+    void* m_qword30;
+    void* m_qword38;
+    void* m_qword40;
+    void* m_qword48;
+    void* m_qword50;
+    void* m_qword58;
+    void* m_qword60;
+    long long m_mapGeneratorSeed;
+    float m_genUnkFloat;
+    MapGenerator* m_mapGenerator;
+    nn::os::MutexType m_mapGeneratorMutex;
+    void* m_qwordA0;
+    void* m_qwordA8;
+    void* m_qwordB0;
+    std::vector<int> m_possibleVotes;
+    void* m_qwordD0;
+    Voteables* m_voteables;
+    void* m_qwordE0;
+    void* m_qwordE8;
+    void* m_qwordF0;
+    void* m_qwordF8;
+    void* m_qword100;
+    void* m_qword108;
+    std::vector<AABB*> m_glideTargets;
+    std::vector<CheckpointRuleDefinition*> m_glideCheckpoints;
+    void* m_qword140;
+    void* m_qword148;
+    void* m_qword150;
+    void* m_qword158;
+    void* m_qword160;
+    void* m_qword168;
+    void* m_qword170;
+    void* m_qword178;
 };
 
 ASSERT_SIZEOF(CommonMasterGameMode, 0x180)

@@ -14,5 +14,5 @@ public:
     EPacketType getPacketId() override;
     void handle(PacketListener* listener) override;
 
-    int mId;
+    int m_id;
 };

@@ -8,13 +8,13 @@ std::shared_ptr<Packet> ServerboundPreLoginPacket::create() {
 }
 
 ServerboundPreLoginPacket::ServerboundPreLoginPacket(const std::wstring& name) {
-    this->mName = name;
-    this->mProtocolVersion = 0;
+    this->m_name = name;
+    this->m_protocolVersion = 0;
 }
 
 ServerboundPreLoginPacket::ServerboundPreLoginPacket() {
-    this->mName = L"";
-    this->mProtocolVersion = 0;
+    this->m_name = L"";
+    this->m_protocolVersion = 0;
 }
 
 EPacketType ServerboundPreLoginPacket::getPacketId() {
@@ -22,13 +22,13 @@ EPacketType ServerboundPreLoginPacket::getPacketId() {
 }
 
 void ServerboundPreLoginPacket::read(DataInputStream* input) {
-    this->mProtocolVersion = input->readShort();
-    this->mName = this->readUtf(input, 0x20);
+    this->m_protocolVersion = input->readShort();
+    this->m_name = this->readUtf(input, 0x20);
 }
 
 void ServerboundPreLoginPacket::write(DataOutputStream* output) {
     output->writeShort(SharedConstants::NETWORK_PROTOCOL_VERSION);
-    this->writeUtf(this->mName, output);
+    this->writeUtf(this->m_name, output);
 }
 
 void ServerboundPreLoginPacket::handle(PacketListener* listener) {

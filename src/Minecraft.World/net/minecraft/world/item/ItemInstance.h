@@ -130,20 +130,20 @@ public:
     bool operator=(const ItemInstance&);
 
 private:
-    void* qword_0 = nullptr;
-    void* qword_8 = nullptr;
-    int mCount;
-    int dword_14;
-    Item* mItem;
-    CompoundTag* mTag;
-    bool mIsEmpty;
-    int mDamage;
-    bool byte_30;
-    void* qword_38 = nullptr;
-    void* qword_40 = nullptr;
-    std::shared_ptr<CensoredString*> mCensoredString;
-    void* qword_58;
-    bool byte_60;
-    void* qword_68;
-    void* qword_70;
+    void* m_qword0 = nullptr;
+    void* m_qword8 = nullptr;
+    int m_count;
+    int m_dword14;
+    Item* m_item;
+    CompoundTag* m_tag;
+    bool m_isEmpty;
+    int m_damage;
+    bool m_byte30;
+    void* m_qword38 = nullptr;
+    void* m_qword40 = nullptr;
+    std::shared_ptr<CensoredString*> m_censoredString;
+    void* m_qword58;
+    bool m_byte60;
+    void* m_qword68;
+    void* m_qword70;
 };

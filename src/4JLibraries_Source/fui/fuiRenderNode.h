@@ -23,7 +23,7 @@ constexpr uint32_t FLAG_NODE_VISIBLE = 0x8;
 constexpr const char* DEFAULT_PATH = "?";
 
 struct fuiRenderNodeColor {  // made up struct
-    float r, g, b, a;
+    float m_r, m_g, m_b, m_a;
 };
 
 class fuiRenderNode {
@@ -72,30 +72,30 @@ public:
     float getScaleX();
     float getScaleY();
 
-    fuiRenderNode* getStage() { return mStage; }
+    fuiRenderNode* getStage() { return m_stage; }
 
     fuiRenderNodeTimeline* asTimeline();
 
-    int mFlags;
-    char byte_c;
-    char byte_d;
-    unsigned int dword_10;
-    int dword_14;
-    fuiObject* mFuiObject;
-    eFuiObjectType mFuiObjectType;
-    fuiMatrix mMatrix;
-    fuiMatrix mMatrix2;
-    int unk;
-    fuiFile* mFuiFile;
-    fuiRenderNodeColor mRenderColor2;
-    fuiRenderNodeColor mRenderColor;
-    fuiRect mRect;
-    char mPath[64];
-    void* qword_d0;
-    void* qword_d8;
-    int mColor;
-    char byte_e4;
-    fuiRenderNode* mStage;
-    fuiRenderNodeTimeline* mTimeline;
-    FJ_FuiNodeStage* mFuiNodeStage;
+    int m_flags;
+    char m_byteC;
+    char m_byteD;
+    unsigned int m_dword10;
+    int m_dword14;
+    fuiObject* m_fuiObject;
+    eFuiObjectType m_fuiObjectType;
+    fuiMatrix m_matrix;
+    fuiMatrix m_matrix2;
+    int m_unk;
+    fuiFile* m_fuiFile;
+    fuiRenderNodeColor m_renderColor2;
+    fuiRenderNodeColor m_renderColor;
+    fuiRect m_rect;
+    char m_path[64];
+    void* m_qwordD0;
+    void* m_qwordD8;
+    int m_color;
+    char m_byteE4;
+    fuiRenderNode* m_stage;
+    fuiRenderNodeTimeline* m_timeline;
+    FJ_FuiNodeStage* m_fuiNodeStage;
 };

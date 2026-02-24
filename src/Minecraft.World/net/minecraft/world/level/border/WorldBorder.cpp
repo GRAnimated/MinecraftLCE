@@ -7,40 +7,40 @@ WorldBorder::WorldBorder(Level* level) {}
 double WorldBorder::getMinX() {
     double max = getCenterX() + getSize() * -0.5;
 
-    if (max < (double)-mWorldSize)
-        max = -mWorldSize;
+    if (max < (double)-m_worldSize)
+        max = -m_worldSize;
     return max;
 }
 
 double WorldBorder::getMaxX() {
     double max = getCenterX() + getSize() * 0.5;
 
-    if (max > (double)mWorldSize)
-        max = mWorldSize;
+    if (max > (double)m_worldSize)
+        max = m_worldSize;
     return max;
 }
 
 double WorldBorder::getMinZ() {
     double max = getCenterZ() + getSize() * -0.5;
 
-    if (max < (double)-mWorldSize)
-        max = -mWorldSize;
+    if (max < (double)-m_worldSize)
+        max = -m_worldSize;
     return max;
 }
 
 double WorldBorder::getMaxZ() {
     double max = getCenterZ() + getSize() * 0.5;
 
-    if (max > (double)mWorldSize)
-        max = mWorldSize;
+    if (max > (double)m_worldSize)
+        max = m_worldSize;
     return max;
 }
 
 BorderStatus* WorldBorder::getStatus() {
-    if (mNextSize < mCurrentSize)
+    if (m_nextSize < m_currentSize)
         return gBorderStatusShrinking;
 
-    if (mNextSize > mCurrentSize)
+    if (m_nextSize > m_currentSize)
         return gBorderStatusGrowing;
 
     return gBorderStatusStationary;
@@ -48,32 +48,32 @@ BorderStatus* WorldBorder::getStatus() {
 
 double WorldBorder::getSize() {
     if (getStatus() != gBorderStatusStationary) {
-        double time = (float)(System::processTimeInMilliSecs() - mTime2) / (float)(mTime1 - mTime2);
+        double time = (float)(System::processTimeInMilliSecs() - m_time2) / (float)(m_time1 - m_time2);
 
         if (!(time >= 1.0f))
-            return mCurrentSize + (time * (mNextSize - mCurrentSize));
+            return m_currentSize + (time * (m_nextSize - m_currentSize));
 
-        setSize(mNextSize);
+        setSize(m_nextSize);
     }
-    return mCurrentSize;
+    return m_currentSize;
 }
 
 double WorldBorder::getCenterX() {
-    return mCenterX;
+    return m_centerX;
 }
 
 double WorldBorder::getCenterZ() {
-    return mCenterZ;
+    return m_centerZ;
 }
 
 std::vector<BorderChangeListener*>* WorldBorder::getListeners() {
-    return &mListeners;
+    return &m_listeners;
 }
 
 double WorldBorder::getDamageSafeZone() {
-    return mDamageSafeZone;
+    return m_damageSafeZone;
 }
 
 double WorldBorder::getDamagePerBlock() {
-    return mDamageAmount;
+    return m_damageAmount;
 }

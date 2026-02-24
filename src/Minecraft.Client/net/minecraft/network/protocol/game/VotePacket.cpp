@@ -15,17 +15,17 @@ EPacketType VotePacket::getPacketId() {
 }
 
 void VotePacket::read(DataInputStream* input) {
-    field_28 = input->readInt();
-    field_2C = input->readByte();
-    field_30 = input->readInt();
-    field_34 = input->readInt();
+    m_field28 = input->readInt();
+    m_field2C = input->readByte();
+    m_field30 = input->readInt();
+    m_field34 = input->readInt();
 }
 
 void VotePacket::write(DataOutputStream* output) {
-    output->writeInt(field_28);
-    output->writeByte(field_2C);
-    output->writeInt(field_30);
-    output->writeInt(field_34);
+    output->writeInt(m_field28);
+    output->writeByte(m_field2C);
+    output->writeInt(m_field30);
+    output->writeInt(m_field34);
 }
 
 void VotePacket::handle(PacketListener* listener) {

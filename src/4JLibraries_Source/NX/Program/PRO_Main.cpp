@@ -297,14 +297,14 @@ extern "C" void nnMain() {
         = CConsoleMinecraftApp::sInstance.getArchiveFile(L"DefaultSaveThumbnail64x64.png", false);
 
     CStorage::sInstance->SetDefaultImages(
-        img1.data, img1.length, img2.data, img2.length, saveThumbnail.data,
-        saveThumbnail.length);  // TODO: the last 0 is meant to be something else... dunno what
+        img1.m_data, img1.m_length, img2.m_data, img2.m_length, saveThumbnail.m_data,
+        saveThumbnail.m_length);  // TODO: the last 0 is meant to be something else... dunno what
     CStorage::sInstance->SetIncompleteSaveCallback(CConsoleMinecraftApp::Callback_SaveGameIncomplete,
                                                    &CConsoleMinecraftApp::sInstance);
 
-    delete img1.data;
-    delete img2.data;
-    delete saveThumbnail.data;
+    delete img1.m_data;
+    delete img2.m_data;
+    delete saveThumbnail.m_data;
 
     CStorage::sInstance->SetSaveTitle(L"Default Save");
     CStorage::sInstance->SetOpenDirFn(OpenDir);
@@ -366,13 +366,13 @@ extern "C" void nnMain() {
     } else {
         Renderer::sInstance->SetClearColour(new float[2]);
         Renderer::sInstance->Clear(2);
-        Minecraft::GetInstance()->mSoundEngine->tick(nullptr, 0);
-        Minecraft::GetInstance()->mTextures->tick(true, false, false);
+        Minecraft::GetInstance()->m_soundEngine->tick(nullptr, 0);
+        Minecraft::GetInstance()->m_textures->tick(true, false, false);
         IntCache::Reset();
         if (CConsoleMinecraftApp::sInstance.GetReallyChangingSessionType())
             Minecraft::sInstance->tickAllConnections();
     }
-    Minecraft::sInstance->mSoundEngine->playMusicTick();
+    Minecraft::sInstance->m_soundEngine->playMusicTick();
     CConsoleMinecraftApp::sInstance.GetCommerceInstance()->tick();
     InfoBarManager::StartTimingCategory(InfoBarManager::eTimingCagegory::ConsoleUIControllerTick);
     gConsoleUIController.tick();
@@ -394,29 +394,29 @@ extern "C" void nnMain() {
             void* padData = CStorage::sInstance->GetGameDefinedProfileData(0);
             GameSettings::ClearGameSettingsChangedFlag(0);
             GameSettings::ApplyGameSettingsChanged(0);
-            Minecraft::GetInstance()->mStatsCounters[0]->clear();
-            Minecraft::GetInstance()->mStatsCounters[0]->parse(padData);
+            Minecraft::GetInstance()->m_statsCounters[0]->clear();
+            Minecraft::GetInstance()->m_statsCounters[0]->parse(padData);
         }
         if (CInput::sControllers & 2) {
             void* padData = CStorage::sInstance->GetGameDefinedProfileData(1);
             GameSettings::ClearGameSettingsChangedFlag(1);
             GameSettings::ApplyGameSettingsChanged(1);
-            Minecraft::GetInstance()->mStatsCounters[1]->clear();
-            Minecraft::GetInstance()->mStatsCounters[1]->parse(padData);
+            Minecraft::GetInstance()->m_statsCounters[1]->clear();
+            Minecraft::GetInstance()->m_statsCounters[1]->parse(padData);
         }
         if (CInput::sControllers & 4) {
             void* padData = CStorage::sInstance->GetGameDefinedProfileData(2);
             GameSettings::ClearGameSettingsChangedFlag(2);
             GameSettings::ApplyGameSettingsChanged(2);
-            Minecraft::GetInstance()->mStatsCounters[2]->clear();
-            Minecraft::GetInstance()->mStatsCounters[2]->parse(padData);
+            Minecraft::GetInstance()->m_statsCounters[2]->clear();
+            Minecraft::GetInstance()->m_statsCounters[2]->parse(padData);
         }
         if (CInput::sControllers & 8) {
             void* padData = CStorage::sInstance->GetGameDefinedProfileData(3);
             GameSettings::ClearGameSettingsChangedFlag(3);
             GameSettings::ApplyGameSettingsChanged(3);
-            Minecraft::GetInstance()->mStatsCounters[3]->clear();
-            Minecraft::GetInstance()->mStatsCounters[3]->parse(padData);
+            Minecraft::GetInstance()->m_statsCounters[3]->clear();
+            Minecraft::GetInstance()->m_statsCounters[3]->parse(padData);
         }
     }
     PIXEndNamedEvent();

@@ -14,37 +14,37 @@ TextureAtlas::~TextureAtlas() {}
 // NON_MATCHING: I don't have a damn clue
 TextureAtlasSprite* TextureAtlas::registerIcon(const std::wstring& name) {
     if (!name.empty()) {
-        if (auto sprite = this->mTextureAtlasSprites.find(name); sprite != this->mTextureAtlasSprites.end())
+        if (auto sprite = this->m_textureAtlasSprites.find(name); sprite != this->m_textureAtlasSprites.end())
             return sprite->second;
     }
 
-    return this->mMissingAtlasSprite;
+    return this->m_missingAtlasSprite;
 }
 
 int TextureAtlas::getIconType() {
-    return this->mIconType;
+    return this->m_iconType;
 }
 
 void TextureAtlas::addIcon(bool terrain, int y, int x, const std::wstring& id) {
     float final_ratio = terrain ? TERRAIN_RATIO : ITEM_RATIO;
-    this->mTextureAtlasSprites[id]
+    this->m_textureAtlasSprites[id]
         = new TextureAtlasSprite(id, id, x * RATIO, final_ratio * y, (x + 1) * RATIO, final_ratio * (y + 1));
 }
 
 void TextureAtlas::addIconWithName(bool terrain, int y, int x, const std::wstring& id,
                                    const std::wstring& name) {
     float final_ratio = terrain ? TERRAIN_RATIO : ITEM_RATIO;
-    this->mTextureAtlasSprites[id] = new TextureAtlasSprite(id, name, x * RATIO, final_ratio * y,
-                                                            (x + 1) * RATIO, final_ratio * (y + 1));
+    this->m_textureAtlasSprites[id] = new TextureAtlasSprite(id, name, x * RATIO, final_ratio * y,
+                                                             (x + 1) * RATIO, final_ratio * (y + 1));
 }
 
 void TextureAtlas::loadUVs() {
-    if (this->mTextureAtlasSprites.empty()) {
-        for (auto& pair : this->mTextureAtlasSprites) {
+    if (this->m_textureAtlasSprites.empty()) {
+        for (auto& pair : this->m_textureAtlasSprites) {
             delete pair.second;
         }
-        this->mTextureAtlasSprites.clear();
-        if (this->mIconType) {
+        this->m_textureAtlasSprites.clear();
+        if (this->m_iconType) {
             this->addIcon(false, 0, 0, L"helmetCloth");
             this->addIcon(false, 0, 1, L"helmetChain");
             this->addIcon(false, 0, 2, L"helmetIron");
@@ -304,39 +304,39 @@ void TextureAtlas::loadUVs() {
             ClockAtlasSprite* newClockAtlasSprite;
 
             ClockAtlasSprite* baseClockAtlas = new ClockAtlasSprite();
-            oldClockIcon = this->mTextureAtlasSprites[L"clock"];
+            oldClockIcon = this->m_textureAtlasSprites[L"clock"];
             baseClockAtlas->initUVs(oldClockIcon->getU0(false), oldClockIcon->getV0(false),
                                     oldClockIcon->getU1(false), oldClockIcon->getV1(false));
             delete oldClockIcon;
-            this->mTextureAtlasSprites[L"clock"] = baseClockAtlas;
+            this->m_textureAtlasSprites[L"clock"] = baseClockAtlas;
 
             newClockAtlasSprite = new ClockAtlasSprite(0, baseClockAtlas);
-            oldClockIcon = this->mTextureAtlasSprites[L"clockP0"];
+            oldClockIcon = this->m_textureAtlasSprites[L"clockP0"];
             newClockAtlasSprite->initUVs(oldClockIcon->getU0(false), oldClockIcon->getV0(false),
                                          oldClockIcon->getU1(false), oldClockIcon->getV1(false));
             delete oldClockIcon;
-            this->mTextureAtlasSprites[L"clockP0"] = newClockAtlasSprite;
+            this->m_textureAtlasSprites[L"clockP0"] = newClockAtlasSprite;
 
             newClockAtlasSprite = new ClockAtlasSprite(1, baseClockAtlas);
-            oldClockIcon = this->mTextureAtlasSprites[L"clockP1"];
+            oldClockIcon = this->m_textureAtlasSprites[L"clockP1"];
             newClockAtlasSprite->initUVs(oldClockIcon->getU0(false), oldClockIcon->getV0(false),
                                          oldClockIcon->getU1(false), oldClockIcon->getV1(false));
             delete oldClockIcon;
-            this->mTextureAtlasSprites[L"clockP1"] = newClockAtlasSprite;
+            this->m_textureAtlasSprites[L"clockP1"] = newClockAtlasSprite;
 
             newClockAtlasSprite = new ClockAtlasSprite(2, baseClockAtlas);
-            oldClockIcon = this->mTextureAtlasSprites[L"clockP2"];
+            oldClockIcon = this->m_textureAtlasSprites[L"clockP2"];
             newClockAtlasSprite->initUVs(oldClockIcon->getU0(false), oldClockIcon->getV0(false),
                                          oldClockIcon->getU1(false), oldClockIcon->getV1(false));
             delete oldClockIcon;
-            this->mTextureAtlasSprites[L"clockP2"] = newClockAtlasSprite;
+            this->m_textureAtlasSprites[L"clockP2"] = newClockAtlasSprite;
 
             newClockAtlasSprite = new ClockAtlasSprite(3, baseClockAtlas);
-            oldClockIcon = this->mTextureAtlasSprites[L"clockP3"];
+            oldClockIcon = this->m_textureAtlasSprites[L"clockP3"];
             newClockAtlasSprite->initUVs(oldClockIcon->getU0(false), oldClockIcon->getV0(false),
                                          oldClockIcon->getU1(false), oldClockIcon->getV1(false));
             delete oldClockIcon;
-            this->mTextureAtlasSprites[L"clockP3"] = newClockAtlasSprite;
+            this->m_textureAtlasSprites[L"clockP3"] = newClockAtlasSprite;
 
             //
 
@@ -344,46 +344,46 @@ void TextureAtlas::loadUVs() {
             CompassAtlasSprite* newCompassAtlasSprite;
 
             CompassAtlasSprite* baseCompassAtlas = new CompassAtlasSprite();
-            oldCompassIcon = this->mTextureAtlasSprites[L"compass"];
+            oldCompassIcon = this->m_textureAtlasSprites[L"compass"];
             baseCompassAtlas->initUVs(oldCompassIcon->getU0(false), oldCompassIcon->getV0(false),
                                       oldCompassIcon->getU1(false), oldCompassIcon->getV1(false));
             delete oldCompassIcon;
-            this->mTextureAtlasSprites[L"compass"] = baseCompassAtlas;
+            this->m_textureAtlasSprites[L"compass"] = baseCompassAtlas;
 
             newCompassAtlasSprite = new CompassAtlasSprite(0, baseCompassAtlas);
-            oldCompassIcon = this->mTextureAtlasSprites[L"compassP0"];
+            oldCompassIcon = this->m_textureAtlasSprites[L"compassP0"];
             newCompassAtlasSprite->initUVs(oldCompassIcon->getU0(false), oldCompassIcon->getV0(false),
                                            oldCompassIcon->getU1(false), oldCompassIcon->getV1(false));
             delete oldCompassIcon;
-            this->mTextureAtlasSprites[L"compassP0"] = newCompassAtlasSprite;
+            this->m_textureAtlasSprites[L"compassP0"] = newCompassAtlasSprite;
 
             newCompassAtlasSprite = new CompassAtlasSprite(1, baseCompassAtlas);
-            oldCompassIcon = this->mTextureAtlasSprites[L"compassP1"];
+            oldCompassIcon = this->m_textureAtlasSprites[L"compassP1"];
             newCompassAtlasSprite->initUVs(oldCompassIcon->getU0(false), oldCompassIcon->getV0(false),
                                            oldCompassIcon->getU1(false), oldCompassIcon->getV1(false));
             delete oldCompassIcon;
-            this->mTextureAtlasSprites[L"compassP1"] = newCompassAtlasSprite;
+            this->m_textureAtlasSprites[L"compassP1"] = newCompassAtlasSprite;
 
             newCompassAtlasSprite = new CompassAtlasSprite(2, baseCompassAtlas);
-            oldCompassIcon = this->mTextureAtlasSprites[L"compassP2"];
+            oldCompassIcon = this->m_textureAtlasSprites[L"compassP2"];
             newCompassAtlasSprite->initUVs(oldCompassIcon->getU0(false), oldCompassIcon->getV0(false),
                                            oldCompassIcon->getU1(false), oldCompassIcon->getV1(false));
             delete oldCompassIcon;
-            this->mTextureAtlasSprites[L"compassP2"] = newCompassAtlasSprite;
+            this->m_textureAtlasSprites[L"compassP2"] = newCompassAtlasSprite;
 
             newCompassAtlasSprite = new CompassAtlasSprite(3, baseCompassAtlas);
-            oldCompassIcon = this->mTextureAtlasSprites[L"compassP3"];
+            oldCompassIcon = this->m_textureAtlasSprites[L"compassP3"];
             newCompassAtlasSprite->initUVs(oldCompassIcon->getU0(false), oldCompassIcon->getV0(false),
                                            oldCompassIcon->getU1(false), oldCompassIcon->getV1(false));
             delete oldCompassIcon;
-            this->mTextureAtlasSprites[L"compassP3"] = newCompassAtlasSprite;
+            this->m_textureAtlasSprites[L"compassP3"] = newCompassAtlasSprite;
         } else {
             this->addIcon(true, 0, 0, L"grass_top");
-            this->mTextureAtlasSprites[L"grass_top"]->setFlags(2);
+            this->m_textureAtlasSprites[L"grass_top"]->setFlags(2);
             this->addIcon(true, 0, 1, L"stone");
             this->addIcon(true, 0, 2, L"dirt");
             this->addIcon(true, 0, 3, L"grass_side");
-            this->mTextureAtlasSprites[L"grass_side"]->setFlags(1);
+            this->m_textureAtlasSprites[L"grass_side"]->setFlags(1);
             this->addIcon(true, 0, 4, L"planks_oak");
             this->addIcon(true, 0, 5, L"stoneslab_side");
             this->addIcon(true, 0, 6, L"stoneslab_top");
@@ -861,5 +861,5 @@ void TextureAtlas::loadUVs() {
 }
 
 Texture* TextureAtlas::getStitchedTexture() {
-    return this->mStitchedTexture;
+    return this->m_stitchedTexture;
 }

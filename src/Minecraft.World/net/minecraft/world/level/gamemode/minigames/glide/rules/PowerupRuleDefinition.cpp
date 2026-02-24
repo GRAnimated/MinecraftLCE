@@ -13,7 +13,7 @@ ConsoleGameRules::EGameRuleType PowerupRuleDefinition::getActionType() {
 }
 
 void PowerupRuleDefinition::getChildren(std::vector<GameRuleDefinition*>* out) {
-    for (auto it = this->mAddItemRules.begin(); it != this->mAddItemRules.end(); it++) {
+    for (auto it = this->m_addItemRules.begin(); it != this->m_addItemRules.end(); it++) {
         out->push_back((GameRuleDefinition*)*it);
     }
 }
@@ -23,6 +23,6 @@ GameRuleDefinition* PowerupRuleDefinition::addChild(ConsoleGameRules::EGameRuleT
         return nullptr;
 
     GameRuleDefinition* childRule = new AddItemRuleDefinition();
-    this->mAddItemRules.push_back((AddItemRuleDefinition*)childRule);
+    this->m_addItemRules.push_back((AddItemRuleDefinition*)childRule);
     return childRule;
 }

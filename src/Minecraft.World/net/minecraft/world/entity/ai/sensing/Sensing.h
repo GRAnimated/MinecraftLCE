@@ -13,7 +13,7 @@ public:
     void tick();
     bool canSee(std::shared_ptr<Entity>);
 
-    Mob* mMob;
-    std::vector<std::weak_ptr<Entity>> mSeen;
-    std::vector<std::weak_ptr<Entity>> mUnseen;
+    Mob* m_mob;
+    std::vector<std::weak_ptr<Entity>> m_seen;
+    std::vector<std::weak_ptr<Entity>> m_unseen;
 };

@@ -10,12 +10,12 @@ public:
                            float);
 
     static TextureUVCoordinateSet* fromOldSystem(int);
-    float field_0x0;
-    float mU0;
-    float mV0;
-    float mU1;
-    float mV1;
-    unsigned short mWidth;
-    unsigned short mHeight;
-    ResourceLocation mTexture;
+    float m_field0x0;
+    float m_u0;
+    float m_v0;
+    float m_u1;
+    float m_v1;
+    unsigned short m_width;
+    unsigned short m_height;
+    ResourceLocation m_texture;
 };

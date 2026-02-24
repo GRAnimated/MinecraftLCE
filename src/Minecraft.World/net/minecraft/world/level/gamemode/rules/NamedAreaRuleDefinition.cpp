@@ -6,34 +6,34 @@
 #include "net/minecraft/world/phys/AABB.h"
 
 NamedAreaRuleDefinition::NamedAreaRuleDefinition() {
-    mName = L"";
-    mAABB = AABB::newPermanent(0.0, 0.0, 0.0, 0.0, 0.0, 0.0);
+    m_name = L"";
+    m_aabb = AABB::newPermanent(0.0, 0.0, 0.0, 0.0, 0.0, 0.0);
     addStringAttribute(
 
-        ConsoleGameRules::EGameRuleAttr_name, &mName);
+        ConsoleGameRules::EGameRuleAttr_name, &m_name);
     addDoubleAttribute(
 
-        ConsoleGameRules::EGameRuleAttr_x0, &mAABB->minX);
+        ConsoleGameRules::EGameRuleAttr_x0, &m_aabb->m_inX);
     addDoubleAttribute(
 
-        ConsoleGameRules::EGameRuleAttr_y0, &mAABB->minY);
+        ConsoleGameRules::EGameRuleAttr_y0, &m_aabb->m_inY);
     addDoubleAttribute(
 
-        ConsoleGameRules::EGameRuleAttr_z0, &mAABB->minZ);
+        ConsoleGameRules::EGameRuleAttr_z0, &m_aabb->m_inZ);
     addDoubleAttribute(
 
-        ConsoleGameRules::EGameRuleAttr_x1, &mAABB->maxX);
+        ConsoleGameRules::EGameRuleAttr_x1, &m_aabb->m_axX);
     addDoubleAttribute(
 
-        ConsoleGameRules::EGameRuleAttr_y1, &mAABB->maxY);
+        ConsoleGameRules::EGameRuleAttr_y1, &m_aabb->m_axY);
     addDoubleAttribute(
 
-        ConsoleGameRules::EGameRuleAttr_z1, &mAABB->maxZ);
-    addHexAttribute(ConsoleGameRules::EGameRuleAttr_dataTag, &mDataTag);
+        ConsoleGameRules::EGameRuleAttr_z1, &m_aabb->m_axZ);
+    addHexAttribute(ConsoleGameRules::EGameRuleAttr_dataTag, &m_dataTag);
 }
 
 NamedAreaRuleDefinition::~NamedAreaRuleDefinition() {
-    delete mAABB;
+    delete m_aabb;
 }
 
 ConsoleGameRules::EGameRuleType NamedAreaRuleDefinition::getActionType() {
@@ -45,15 +45,15 @@ const AABB* NamedAreaRuleDefinition::getBoundingVolume() {
 }
 
 AABB* NamedAreaRuleDefinition::getArea() {
-    return mAABB;
+    return m_aabb;
 }
 
 void NamedAreaRuleDefinition::onAttributesAdded() {
-    mAABB->correctMinMax();
+    m_aabb->correctMinMax();
 }
 
 void NamedAreaRuleDefinition::WriteAttributesAsXML(std::string& xml) {
-    if (!mName.empty())
+    if (!m_name.empty())
         WriteAttributeAsXML(ConsoleGameRules::EGameRuleAttr_name, xml);
     WriteAttributeAsXML(ConsoleGameRules::EGameRuleAttr_x0, xml);
     WriteAttributeAsXML(ConsoleGameRules::EGameRuleAttr_y0, xml);
@@ -61,12 +61,12 @@ void NamedAreaRuleDefinition::WriteAttributesAsXML(std::string& xml) {
     WriteAttributeAsXML(ConsoleGameRules::EGameRuleAttr_x1, xml);
     WriteAttributeAsXML(ConsoleGameRules::EGameRuleAttr_y1, xml);
     WriteAttributeAsXML(ConsoleGameRules::EGameRuleAttr_z1, xml);
-    if (mDataTag)
+    if (m_dataTag)
         WriteAttributeAsXML(ConsoleGameRules::EGameRuleAttr_dataTag, xml);
 }
 
 bool NamedAreaRuleDefinition::containsBlock(int i, const BlockPos& blockPos) {
-    return (mAABB->minX <= blockPos.getX() && blockPos.getX() <= mAABB->maxX && mAABB->minY <= blockPos.getY()
-            && blockPos.getY() <= mAABB->maxY && mAABB->minZ <= blockPos.getZ()
-            && blockPos.getZ() <= mAABB->maxZ);
+    return (m_aabb->m_inX <= blockPos.getX() && blockPos.getX() <= m_aabb->m_axX
+            && m_aabb->m_inY <= blockPos.getY() && blockPos.getY() <= m_aabb->m_axY
+            && m_aabb->m_inZ <= blockPos.getZ() && blockPos.getZ() <= m_aabb->m_axZ);
 }

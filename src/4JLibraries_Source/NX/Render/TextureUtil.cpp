@@ -117,10 +117,10 @@ int TextureUtil::LoadTextureData(unsigned char* data, unsigned int len, int* x, 
 int StbiFile::read(void* user, char* data, int size) {
     unsigned int dataRead = 0;
     StbiFile* file = StbiFile::fromUser(user);
-    if ((ReadFile(file->mFileHandle, data, size, &dataRead, nullptr) & 0x80000000) != 0) {
+    if ((ReadFile(file->m_fileHandle, data, size, &dataRead, nullptr) & 0x80000000) != 0) {
         return -1;
     }
-    file->mDataRead += dataRead;
+    file->m_dataRead += dataRead;
     return dataRead;
 }
 
@@ -129,5 +129,5 @@ int StbiFile::read(void* user, char* data, int size) {
 
 // NON_MATCHING: some weird stuff is going on here, but logic should be the same though
 int StbiFile::eof(void* user) {
-    return StbiFile::fromUser(user)->mFileSize <= StbiFile::fromUser(user)->mDataRead;
+    return StbiFile::fromUser(user)->m_fileSize <= StbiFile::fromUser(user)->m_dataRead;
 }

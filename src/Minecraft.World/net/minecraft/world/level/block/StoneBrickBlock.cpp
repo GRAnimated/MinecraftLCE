@@ -29,8 +29,8 @@ StoneBrickBlock::Variant* StoneBrickBlock::Variant::VARIANTS[4]
 
 StoneBrickBlock::StoneBrickBlock() : Block(Material::STONE) {
     this->DerivedInit();
-    this->registerDefaultState(this->mBlockStateDefinition->any()->setValue(VARIANT, Variant::DEFAULT));
-    memset(this->mVariantsTextures, 0, sizeof(this->mVariantsTextures));
+    this->registerDefaultState(this->m_blockStateDefinition->any()->setValue(VARIANT, Variant::DEFAULT));
+    memset(this->m_variantsTextures, 0, sizeof(this->m_variantsTextures));
 }
 
 void StoneBrickBlock::blockStaticCtor() {
@@ -59,19 +59,19 @@ unsigned int StoneBrickBlock::getDescriptionId(int data) {
 }
 
 void StoneBrickBlock::registerIcons(IconRegister* iconReg) {
-    for (int i = 0; i < sizeof(mVariantsTextures) / sizeof(TextureAtlasSprite*); ++i) {
+    for (int i = 0; i < sizeof(m_variantsTextures) / sizeof(TextureAtlasSprite*); ++i) {
         std::wstring texName = this->getIconName();
 
         if (!TEXTURE_NAMES[i].empty()) {
             texName += L"_" + TEXTURE_NAMES[i];
         }
 
-        this->mVariantsTextures[i] = iconReg->registerIcon(texName);
+        this->m_variantsTextures[i] = iconReg->registerIcon(texName);
     }
 }
 
 TextureAtlasSprite* StoneBrickBlock::getTexture(const Direction*, const BlockState* state) {
-    return this->mVariantsTextures[state->getValue<Variant*>(VARIANT)->getData()];
+    return this->m_variantsTextures[state->getValue<Variant*>(VARIANT)->getData()];
 }
 
 // NON_MATCHING: static array handling is generated differently

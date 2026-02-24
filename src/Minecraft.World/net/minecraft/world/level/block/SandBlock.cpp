@@ -8,8 +8,8 @@
 
 SandBlock::SandBlock() : FallingBlock() {
     Block::DerivedInit();
-    this->registerDefaultState(this->mBlockStateDefinition->any()->setValue(VARIANT, Variant::DEFAULT));
-    memset(this->mVariantsTextures, 0, sizeof(this->mVariantsTextures));
+    this->registerDefaultState(this->m_blockStateDefinition->any()->setValue(VARIANT, Variant::DEFAULT));
+    memset(this->m_variantsTextures, 0, sizeof(this->m_variantsTextures));
 }
 
 void SandBlock::blockStaticCtor() {
@@ -43,12 +43,12 @@ int SandBlock::getSpawnResourcesAuxValue(const BlockState* state) {
 }
 
 void SandBlock::registerIcons(IconRegister* iconReg) {
-    this->mVariantsTextures[0] = iconReg->registerIcon(Variant::VARIANTS[0]->getName());
-    this->mVariantsTextures[1] = iconReg->registerIcon(Variant::VARIANTS[1]->getName());
+    this->m_variantsTextures[0] = iconReg->registerIcon(Variant::VARIANTS[0]->getName());
+    this->m_variantsTextures[1] = iconReg->registerIcon(Variant::VARIANTS[1]->getName());
 }
 
 TextureAtlasSprite* SandBlock::getTexture(const Direction*, const BlockState* state) {
-    return this->mVariantsTextures[state->getValue<Variant*>(VARIANT)->getData()];
+    return this->m_variantsTextures[state->getValue<Variant*>(VARIANT)->getData()];
 }
 
 // NON_MATCHING: static initalizer is different than target

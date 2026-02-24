@@ -12,9 +12,9 @@ public:
     void setZ(int);
 
     MutableBlockPos* set(int x, int y, int z) {
-        this->x = x;
-        this->y = y;
-        this->z = z;
+        this->m_x = x;
+        this->m_y = y;
+        this->m_z = z;
         return this;
     }
 

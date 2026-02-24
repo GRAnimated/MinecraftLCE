@@ -67,6 +67,6 @@ public:
     bool isCreative();
 
 private:
-    Minecraft* mMinecraft;
-    GameType* mGameType;
+    Minecraft* m_minecraft;
+    GameType* m_gameType;
 };

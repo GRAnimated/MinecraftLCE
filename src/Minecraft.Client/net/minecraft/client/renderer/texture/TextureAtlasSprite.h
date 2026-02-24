@@ -33,5 +33,5 @@ public:
     void adjustUV(float&, float&);
     void initUVs(float u0, float v0, float u1, float v1);
 
-    char filler[0x90 - 8];
+    char m_filler[0x90 - 8];
 };

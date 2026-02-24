@@ -14,5 +14,5 @@ public:
     virtual void setBlock(Level* level, const BlockPos& pos, const BlockState* blockState);
 
 private:
-    bool mIsUpdate;
+    bool m_isUpdate;
 };

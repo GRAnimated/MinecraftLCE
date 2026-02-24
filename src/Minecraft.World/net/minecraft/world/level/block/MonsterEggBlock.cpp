@@ -57,7 +57,7 @@ int MonsterEggBlock::getResourceCount(Random* random) {
 
 void MonsterEggBlock::spawnResources(Level* level, const BlockPos& pos, const BlockState* state, float chance,
                                      int fortune) {
-    if (!level->mIsLocal) {
+    if (!level->m_isLocal) {
         if (!level->getGameRules()->getBoolean(5)
             || level->countInstanceOf(eMonster, false, nullptr, nullptr) >= 70
             || level->countInstanceOf(eSilverfish, true, nullptr, nullptr) >= 15) {

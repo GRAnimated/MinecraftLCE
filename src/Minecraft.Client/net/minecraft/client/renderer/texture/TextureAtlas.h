@@ -26,14 +26,14 @@ public:
 
     Texture* getStitchedTexture();
 
-    int mIconType;
-    std::wstring mFileName;
-    std::wstring mPath;
-    std::wstring string40;
-    bool idk;
-    std::unordered_map<std::wstring, TextureAtlasSprite*> mTextureAtlasSprites;
-    BufferedImage* mBufferedImage;
-    TextureAtlasSprite* mMissingAtlasSprite;
-    Texture* mStitchedTexture;
-    std::vector<TextureAtlasSprite*> mAtlasSprites;
+    int m_iconType;
+    std::wstring m_fileName;
+    std::wstring m_path;
+    std::wstring m_string40;
+    bool m_idk;
+    std::unordered_map<std::wstring, TextureAtlasSprite*> m_textureAtlasSprites;
+    BufferedImage* m_bufferedImage;
+    TextureAtlasSprite* m_missingAtlasSprite;
+    Texture* m_stitchedTexture;
+    std::vector<TextureAtlasSprite*> m_atlasSprites;
 };

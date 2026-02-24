@@ -9,11 +9,11 @@ std::shared_ptr<Packet> KickPlayerPacket::create() {
 }
 
 KickPlayerPacket::KickPlayerPacket() {
-    byte18 = 0;
+    m_byte18 = 0;
 }
 
 KickPlayerPacket::KickPlayerPacket(unsigned char unk1) {
-    byte18 = unk1;
+    m_byte18 = unk1;
 }
 
 int KickPlayerPacket::getEstimatedSize() {
@@ -25,11 +25,11 @@ EPacketType KickPlayerPacket::getPacketId() {
 }
 
 void KickPlayerPacket::read(DataInputStream* input) {
-    byte18 = input->readByte();
+    m_byte18 = input->readByte();
 }
 
 void KickPlayerPacket::write(DataOutputStream* output) {
-    output->writeByte(byte18);
+    output->writeByte(m_byte18);
 }
 
 void KickPlayerPacket::handle(PacketListener* listener) {

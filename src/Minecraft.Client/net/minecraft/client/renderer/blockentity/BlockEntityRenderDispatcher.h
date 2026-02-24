@@ -13,6 +13,6 @@ public:
 
     bool hasRenderer(std::shared_ptr<BlockEntity>);
 
-    void* padding[6];
-    Textures* mTextures;
+    void* m_padding[6];
+    Textures* m_textures;
 };

@@ -9,7 +9,7 @@ std::shared_ptr<Packet> ClientboundKeepAlivePacket::create() {
 }
 
 ClientboundKeepAlivePacket::ClientboundKeepAlivePacket() : Packet() {
-    mId = 0;
+    m_id = 0;
 }
 
 void ClientboundKeepAlivePacket::handle(PacketListener* listener) {
@@ -17,11 +17,11 @@ void ClientboundKeepAlivePacket::handle(PacketListener* listener) {
 }
 
 void ClientboundKeepAlivePacket::read(DataInputStream* input) {
-    mId = input->readInt();
+    m_id = input->readInt();
 }
 
 void ClientboundKeepAlivePacket::write(DataOutputStream* output) {
-    output->writeInt(mId);
+    output->writeInt(m_id);
 }
 
 EPacketType ClientboundKeepAlivePacket::getPacketId() {

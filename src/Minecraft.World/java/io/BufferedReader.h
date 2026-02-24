@@ -16,8 +16,8 @@ public:
     void bufferMore();
 
 public:
-    Reader* mReader;
-    char* mBuffer;
-    void* mUnk2;
-    unsigned int mUnk4;
+    Reader* m_reader;
+    char* m_buffer;
+    void* m_unk2;
+    unsigned int m_unk4;
 };

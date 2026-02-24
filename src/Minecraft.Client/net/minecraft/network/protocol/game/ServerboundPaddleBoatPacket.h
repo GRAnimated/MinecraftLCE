@@ -18,6 +18,6 @@ public:
     bool getRight();
 
 private:
-    bool left;
-    bool right;
+    bool m_left;
+    bool m_right;
 };

@@ -17,6 +17,6 @@ public:
     std::shared_ptr<BlockEntity> getEntity() override;
     Level* getWorld() override;
 
-    Level* mLevel;
-    BlockPos mPos;
+    Level* m_level;
+    BlockPos m_pos;
 };

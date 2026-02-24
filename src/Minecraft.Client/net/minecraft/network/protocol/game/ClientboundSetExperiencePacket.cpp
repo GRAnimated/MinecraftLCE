@@ -9,9 +9,9 @@ std::shared_ptr<Packet> ClientboundSetExperiencePacket::create() {
 }
 
 ClientboundSetExperiencePacket::ClientboundSetExperiencePacket() {
-    experienceProgress = 0.0;
-    experienceLevel = 0;
-    totalExperience = 0;
+    m_experienceProgress = 0.0;
+    m_experienceLevel = 0;
+    m_totalExperience = 0;
 }
 
 EPacketType ClientboundSetExperiencePacket::getPacketId() {
@@ -19,15 +19,15 @@ EPacketType ClientboundSetExperiencePacket::getPacketId() {
 }
 
 void ClientboundSetExperiencePacket::read(DataInputStream* input) {
-    experienceProgress = input->readFloat();
-    totalExperience = input->readVarInt();
-    experienceLevel = input->readVarInt();
+    m_experienceProgress = input->readFloat();
+    m_totalExperience = input->readVarInt();
+    m_experienceLevel = input->readVarInt();
 }
 
 void ClientboundSetExperiencePacket::write(DataOutputStream* output) {
-    output->writeFloat(experienceProgress);
-    output->writeVarInt(totalExperience);
-    output->writeVarInt(experienceLevel);
+    output->writeFloat(m_experienceProgress);
+    output->writeVarInt(m_totalExperience);
+    output->writeVarInt(m_experienceLevel);
 }
 
 void ClientboundSetExperiencePacket::handle(PacketListener* listener) {
@@ -43,13 +43,13 @@ bool ClientboundSetExperiencePacket::isInvalidatedBy(std::shared_ptr<Packet> pac
 }
 
 float ClientboundSetExperiencePacket::getExperienceProgress() {
-    return experienceProgress;
+    return m_experienceProgress;
 }
 
 int ClientboundSetExperiencePacket::getTotalExperience() {
-    return totalExperience;
+    return m_totalExperience;
 }
 
 int ClientboundSetExperiencePacket::getExperienceLevel() {
-    return experienceLevel;
+    return m_experienceLevel;
 }

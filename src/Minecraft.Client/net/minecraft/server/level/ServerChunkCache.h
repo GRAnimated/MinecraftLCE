@@ -54,21 +54,21 @@ public:
     void updatePostProcessFlags(int chunkX, int chunkZ);
     LevelChunk* getChunkIfLoadedOrInvalid(int chunkX, int chunkZ);
 
-    LevelChunk* mEmptyChunk;
-    ChunkGenerator* mChunkGenerator;
-    ChunkStorage* mChunkStorage;
-    bool byte_28;
-    LevelChunk** mChunks;
-    std::vector<LevelChunk*> mChunkList;
-    ServerLevel* mLevel;
-    Dimension* mDimension;
-    std::deque<LevelChunk*> mDeque;
-    LevelChunk** mUnloadedChunks;
-    nn::os::MutexType mMutex;
-    int dword_b8;
-    int dword_bc;
-    bool (*mContainsChunkFunc)(Dimension*, int, int);
-    Dimension* qword_c8;
+    LevelChunk* m_emptyChunk;
+    ChunkGenerator* m_chunkGenerator;
+    ChunkStorage* m_chunkStorage;
+    bool m_byte28;
+    LevelChunk** m_chunks;
+    std::vector<LevelChunk*> m_chunkList;
+    ServerLevel* m_level;
+    Dimension* m_dimension;
+    std::deque<LevelChunk*> m_deque;
+    LevelChunk** m_unloadedChunks;
+    nn::os::MutexType m_mutex;
+    int m_dwordB8;
+    int m_dwordBc;
+    bool (*m_containsChunkFunc)(Dimension*, int, int);
+    Dimension* m_qwordC8;
 };
 
 ASSERT_SIZEOF(ServerChunkCache, 0xD0)

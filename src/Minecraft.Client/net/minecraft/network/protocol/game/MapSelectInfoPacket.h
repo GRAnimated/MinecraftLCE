@@ -14,5 +14,5 @@ public:
     void write(DataOutputStream* output) override;
     void handle(PacketListener* listener) override;
 
-    char fill[0x18];
+    char m_fill[0x18];
 };

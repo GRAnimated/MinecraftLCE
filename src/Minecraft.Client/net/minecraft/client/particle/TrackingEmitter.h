@@ -15,6 +15,6 @@ public:
     int getParticleTexture() override;
     void render(BufferBuilder*, std::shared_ptr<Entity>&, float, float, float, float, float, float) override;
 
-    std::shared_ptr<Entity> mTarget;
-    const ParticleType* mType;
+    std::shared_ptr<Entity> m_target;
+    const ParticleType* m_type;
 };

@@ -41,14 +41,14 @@ public:
         : AbstractProperty<T>(name, typeInfo) {
         for (auto it = values.begin(); it != values.end(); ++it) {
             std::wstring name((*it)->getSerializedName());
-            this->mValues.find(name);  // what
-            this->mValues[name] = *it;
-            this->mAllowedValues.push_back(new TypedBoxed<T>((T*)&(*it)));
+            this->m_values.find(name);  // what
+            this->m_values[name] = *it;
+            this->m_allowedValues.push_back(new TypedBoxed<T>((T*)&(*it)));
         }
         this->updateCachedHashCode();
     }
 
-    const std::vector<Boxed*>& getPossibleValues() const override { return this->mAllowedValues; }
+    const std::vector<Boxed*>& getPossibleValues() const override { return this->m_allowedValues; }
     // NON_MATCHING: logic should be the same :)
     bool equals(const Property* other) const override {
         if (this == other)
@@ -57,27 +57,28 @@ public:
         const EnumProperty<T>* otherCasted = dynamic_cast<const EnumProperty<T>*>(other);
 
         if (otherCasted && AbstractProperty<T>::equals(otherCasted)) {
-            if (this->mAllowedValues == otherCasted->mAllowedValues) {
-                return this->mValues == otherCasted->mValues;
+            if (this->m_allowedValues == otherCasted->m_allowedValues) {
+                return this->m_values == otherCasted->m_values;
             }
         }
 
         return false;
     }
     int hashCode() const override {
-        return 31 * AbstractProperty<T>::hashCode() + AbstractProperty<T>::hashBoxedSet(this->mAllowedValues);
+        return 31 * AbstractProperty<T>::hashCode()
+               + AbstractProperty<T>::hashBoxedSet(this->m_allowedValues);
     }
-    int getValueCount() const override { return this->mAllowedValues.size(); }
-    Boxed* getValueAtIndex(unsigned int index) const override { return this->mAllowedValues.at(index); }
+    int getValueCount() const override { return this->m_allowedValues.size(); }
+    Boxed* getValueAtIndex(unsigned int index) const override { return this->m_allowedValues.at(index); }
     // this function looks realllllllly bad, and it's mostly unlikely that's how it looked
     unsigned int getIndexForValue(Boxed* value) const override {
         Boxed& valueUn = *value;
-        auto it = this->mAllowedValues.begin();
-        if (it == this->mAllowedValues.end())
+        auto it = this->m_allowedValues.begin();
+        if (it == this->m_allowedValues.end())
             return 0;
 
         int count = 0;
-        for (it; it != this->mAllowedValues.end(); it++) {
+        for (it; it != this->m_allowedValues.end(); it++) {
             if (valueUn != (const Boxed*)*it) {
                 return count;
             } else {
@@ -87,18 +88,18 @@ public:
         return 0;
     }
     T getUnboxedValue(const std::wstring& key) const override {
-        auto it = this->mValues.find(key);
-        if (it != this->mValues.end())
+        auto it = this->m_values.find(key);
+        if (it != this->m_values.end())
             return it->second;
         return nullptr;
     }
     std::wstring getName(const T& val) const override { return val->getSerializedName(); }
     virtual ~EnumProperty() {
-        for (auto it = mAllowedValues.begin(); it != mAllowedValues.end(); it++) {
+        for (auto it = m_allowedValues.begin(); it != m_allowedValues.end(); it++) {
             delete *it;
         }
     }
 
-    std::vector<Boxed*> mAllowedValues;
-    std::unordered_map<std::wstring, T> mValues;
+    std::vector<Boxed*> m_allowedValues;
+    std::unordered_map<std::wstring, T> m_values;
 };

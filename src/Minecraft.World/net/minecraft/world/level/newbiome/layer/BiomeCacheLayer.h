@@ -9,8 +9,8 @@ public:
 
     arrayWithLength<int> getArea(int x, int y, int width, int height) override;
 
-    int mXScale;
-    int mYScale;
-    int mWorldSize;
-    arrayWithLength<unsigned char> mParentArea;
+    int m_xScale;
+    int m_yScale;
+    int m_worldSize;
+    arrayWithLength<unsigned char> m_parentArea;
 };

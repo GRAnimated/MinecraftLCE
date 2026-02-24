@@ -42,7 +42,7 @@ public:
     template <typename T>
     static void arraycopy(arrayWithLength<T> src, unsigned int srcOff, arrayWithLength<T>* dest,
                           unsigned int destOff, unsigned int size) {
-        memcpy((*dest).data + destOff, src.data + srcOff, (uint64_t)size << 2);
+        memcpy((*dest).m_data + destOff, src.m_data + srcOff, (uint64_t)size << 2);
     }
 
     /** Reverses an in-place Short value */

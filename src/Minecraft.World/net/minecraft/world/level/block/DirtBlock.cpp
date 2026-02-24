@@ -19,7 +19,7 @@ static DirtBlock::Variant* VARIANTS[3];
 DirtBlock::DirtBlock() : Block(Material::DIRT) {
     this->DerivedInit();
     this->registerDefaultState(
-        this->mBlockStateDefinition->any()->setValue(VARIANT, Variant::DIRT)->setValue(SNOWY, false));
+        this->m_blockStateDefinition->any()->setValue(VARIANT, Variant::DIRT)->setValue(SNOWY, false));
 }
 
 void DirtBlock::blockStaticCtor() {
@@ -40,9 +40,9 @@ void DirtBlock::blockStaticCtor() {
 }
 
 int DirtBlock::GetInteractTooltip(const BlockTooltipDataHolder& dataHolder) {
-    if (dataHolder.mItemInstance->getItem()->getId() - 290 > 4
-        || dataHolder.mInteractionResult != InteractionResult::SUCCESS || !dataHolder.mBelowBuildHeight
-        || dataHolder.mBlockState->getValue<Variant*>(VARIANT) == Variant::PODZOL) {
+    if (dataHolder.m_itemInstance->getItem()->getId() - 290 > 4
+        || dataHolder.m_interactionResult != InteractionResult::SUCCESS || !dataHolder.m_belowBuildHeight
+        || dataHolder.m_blockState->getValue<Variant*>(VARIANT) == Variant::PODZOL) {
         return Block::GetInteractTooltip(dataHolder);
     } else {
         return StringIDs::Till;

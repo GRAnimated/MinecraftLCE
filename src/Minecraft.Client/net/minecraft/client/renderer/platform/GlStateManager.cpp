@@ -25,22 +25,22 @@ int GlStateManager::sActiveTexture;
 int GlStateManager::sShadeModel;
 
 GlStateManager::Color::Color(float r, float g, float b, float a) {
-    this->r = r;
-    this->g = g;
-    this->b = b;
-    this->a = a;
+    this->m_r = r;
+    this->m_g = g;
+    this->m_b = b;
+    this->m_a = a;
 }
 
 GlStateManager::Color::Color() {
-    this->r = 1.0f;
-    this->g = 1.0f;
-    this->b = 1.0f;
-    this->a = 1.0f;
+    this->m_r = 1.0f;
+    this->m_g = 1.0f;
+    this->m_b = 1.0f;
+    this->m_a = 1.0f;
 }
 
 GlStateManager::BooleanState::BooleanState(int state) {
-    this->enabled = false;
-    this->state = state;
+    this->m_enabled = false;
+    this->m_state = state;
 }
 
 void GlStateManager::BooleanState::disable() {
@@ -52,76 +52,76 @@ void GlStateManager::BooleanState::enable() {
 }
 
 void GlStateManager::BooleanState::setEnabled(bool enabled) {
-    this->enabled = enabled;
+    this->m_enabled = enabled;
     if (enabled)
-        GlStateManager::enableState(this->state);
+        GlStateManager::enableState(this->m_state);
     else
-        GlStateManager::disableState(this->state);
+        GlStateManager::disableState(this->m_state);
 }
 
 GlStateManager::TexGenCoord::TexGenCoord(int coord, int state) {
-    this->coord = coord;
-    this->enabled = new BooleanState(state);
-    this->mode = -1;
+    this->m_coord = coord;
+    this->m_enabled = new BooleanState(state);
+    this->m_ode = -1;
 }
 
 GlStateManager::TexGenState::TexGenState() {
-    this->s = new TexGenCoord(0, 0);
-    this->t = new TexGenCoord(1, 1);
-    this->r = new TexGenCoord(2, 3);
-    this->q = new TexGenCoord(3, 2);
+    this->m_s = new TexGenCoord(0, 0);
+    this->m_t = new TexGenCoord(1, 1);
+    this->m_r = new TexGenCoord(2, 3);
+    this->m_q = new TexGenCoord(3, 2);
 }
 
 GlStateManager::TextureState::TextureState() {
-    this->enabled = new BooleanState(1);
-    this->texture = 0;
+    this->m_enabled = new BooleanState(1);
+    this->m_texture = 0;
 }
 
 GlStateManager::ClearState::ClearState() {
-    this->depth = 1.0;
-    this->color = new Color(0.0f, 0.0f, 0.0f, 0.0f);
-    this->stencil = 0;
+    this->m_depth = 1.0;
+    this->m_color = new Color(0.0f, 0.0f, 0.0f, 0.0f);
+    this->m_stencil = 0;
 }
 
 GlStateManager::ColorMask::ColorMask() {}
 
 GlStateManager::DepthState::DepthState() {
-    this->mode = new BooleanState(5);
-    this->mask = true;
-    this->func = 4;
+    this->m_ode = new BooleanState(5);
+    this->m_ask = true;
+    this->m_func = 4;
 }
 
 GlStateManager::CullState::CullState() {
-    this->enabled = new BooleanState(3);
-    this->mode = 1;
+    this->m_enabled = new BooleanState(3);
+    this->m_ode = 1;
 }
 
 GlStateManager::FogState::FogState() {
-    this->enabled = new BooleanState(6);
-    this->mode = 2;
-    this->intenisty = 1.0f;
-    this->start = 0.0f;
-    this->end = 1.0f;
+    this->m_enabled = new BooleanState(6);
+    this->m_ode = 2;
+    this->m_intenisty = 1.0f;
+    this->m_start = 0.0f;
+    this->m_end = 1.0f;
 }
 
 GlStateManager::AlphaState::AlphaState() {
-    this->mode = new BooleanState(4);
-    this->func = 8;
-    this->reference = -1.0f;
+    this->m_ode = new BooleanState(4);
+    this->m_func = 8;
+    this->m_reference = -1.0f;
 }
 
 GlStateManager::BlendState::BlendState() {
-    this->mode = new BooleanState(2);
-    this->srcRgb = 2;
-    this->dstRgb = 1;
-    this->srcAlpha = 2;
-    this->dstAlpha = 1;
+    this->m_ode = new BooleanState(2);
+    this->m_srcRgb = 2;
+    this->m_dstRgb = 1;
+    this->m_srcAlpha = 2;
+    this->m_dstAlpha = 1;
 }
 
 GlStateManager::ColorMaterialState::ColorMaterialState() {
-    this->enabled = new BooleanState(0);
-    this->face = 2;
-    this->mode = 0;
+    this->m_enabled = new BooleanState(0);
+    this->m_face = 2;
+    this->m_ode = 0;
 }
 
 void GlStateManager::staticCtor() {
@@ -145,10 +145,10 @@ void GlStateManager::scalef(float x, float y, float z) {
 }
 
 void GlStateManager::color4f(float r, float g, float b, float a) {
-    GlStateManager::COLOR->r = r;
-    GlStateManager::COLOR->g = g;
-    GlStateManager::COLOR->b = b;
-    GlStateManager::COLOR->a = a;
+    GlStateManager::COLOR->m_r = r;
+    GlStateManager::COLOR->m_g = g;
+    GlStateManager::COLOR->m_b = b;
+    GlStateManager::COLOR->m_a = a;
     Renderer::sInstance->StateSetColour(r, g, b, a);
 }
 
@@ -173,11 +173,11 @@ void GlStateManager::enableRescaleNormal() {
 }
 
 void GlStateManager::disableColorMaterial() {
-    GlStateManager::COLOR_MATERIAL->enabled->disable();
+    GlStateManager::COLOR_MATERIAL->m_enabled->disable();
 }
 
 void GlStateManager::enableColorMaterial() {
-    GlStateManager::COLOR_MATERIAL->enabled->enable();
+    GlStateManager::COLOR_MATERIAL->m_enabled->enable();
 }
 
 void GlStateManager::shadeModel(int shadeModel) {
@@ -186,25 +186,25 @@ void GlStateManager::shadeModel(int shadeModel) {
 }
 
 void GlStateManager::disableBlend() {
-    GlStateManager::BLEND->mode->disable();
+    GlStateManager::BLEND->m_ode->disable();
 }
 
 void GlStateManager::enableBlend() {
-    GlStateManager::BLEND->mode->enable();
+    GlStateManager::BLEND->m_ode->enable();
 }
 
 void GlStateManager::blendFunc(int sfactor, int dfactor) {
-    GlStateManager::BLEND->srcRgb = sfactor;
-    GlStateManager::BLEND->dstRgb = dfactor;
+    GlStateManager::BLEND->m_srcRgb = sfactor;
+    GlStateManager::BLEND->m_dstRgb = dfactor;
     Renderer::sInstance->StateSetBlendFunc(sfactor, dfactor);
 }
 
 void GlStateManager::disableTexture() {
-    GlStateManager::TEXTURES[sActiveTexture]->enabled->disable();
+    GlStateManager::TEXTURES[sActiveTexture]->m_enabled->disable();
 }
 
 void GlStateManager::enableTexture() {
-    GlStateManager::TEXTURES[sActiveTexture]->enabled->enable();
+    GlStateManager::TEXTURES[sActiveTexture]->m_enabled->enable();
 }
 
 void GlStateManager::disableLighting() {
@@ -216,21 +216,21 @@ void GlStateManager::enableLighting() {
 }
 
 void GlStateManager::disableAlphaTest() {
-    GlStateManager::ALPHA->mode->disable();
+    GlStateManager::ALPHA->m_ode->disable();
 }
 
 void GlStateManager::enableAlphaTest() {
-    GlStateManager::ALPHA->mode->enable();
+    GlStateManager::ALPHA->m_ode->enable();
 }
 
 void GlStateManager::alphaFunc(int func, float reference) {
-    GlStateManager::ALPHA->func = func;
-    GlStateManager::ALPHA->reference = reference;
+    GlStateManager::ALPHA->m_func = func;
+    GlStateManager::ALPHA->m_reference = reference;
     Renderer::sInstance->StateSetAlphaFunc(func, reference);
 }
 
 void GlStateManager::bindTexture(int texture) {
-    GlStateManager::TEXTURES[sActiveTexture]->texture = texture;
+    GlStateManager::TEXTURES[sActiveTexture]->m_texture = texture;
     Renderer::sInstance->TextureBind(texture);
 }
 
@@ -246,27 +246,27 @@ void GlStateManager::clear(int mask) {
 }
 
 void GlStateManager::disableFog() {
-    GlStateManager::FOG->enabled->disable();
+    GlStateManager::FOG->m_enabled->disable();
 }
 
 void GlStateManager::enableFog() {
-    GlStateManager::FOG->enabled->enable();
+    GlStateManager::FOG->m_enabled->enable();
 }
 
 void GlStateManager::disableCull() {
-    GlStateManager::CULL->enabled->disable();
+    GlStateManager::CULL->m_enabled->disable();
 }
 
 void GlStateManager::cullFace(int mode) {
-    GlStateManager::CULL->mode = mode;
+    GlStateManager::CULL->m_ode = mode;
     Renderer::sInstance->StateSetFaceCullCW(mode == 1);
 }
 
 void GlStateManager::colorMask(bool r, bool g, bool b, bool a) {
-    GlStateManager::COLOR_MASK->red = r;
-    GlStateManager::COLOR_MASK->green = g;
-    GlStateManager::COLOR_MASK->blue = b;
-    GlStateManager::COLOR_MASK->alpha = a;
+    GlStateManager::COLOR_MASK->m_red = r;
+    GlStateManager::COLOR_MASK->m_green = g;
+    GlStateManager::COLOR_MASK->m_blue = b;
+    GlStateManager::COLOR_MASK->m_alpha = a;
     Renderer::sInstance->StateSetWriteEnable(r, g, b, a);
 }
 
@@ -275,25 +275,25 @@ void GlStateManager::ortho(double b, double t, double l, double r, double n, dou
 }
 
 void GlStateManager::disableDepthTest() {
-    GlStateManager::DEPTH->mode->disable();
+    GlStateManager::DEPTH->m_ode->disable();
 }
 
 void GlStateManager::enableDepthTest() {
-    GlStateManager::DEPTH->mode->enable();
+    GlStateManager::DEPTH->m_ode->enable();
 }
 
 void GlStateManager::depthMask(bool flag) {
-    GlStateManager::DEPTH->mask = flag;
+    GlStateManager::DEPTH->m_ask = flag;
     Renderer::sInstance->StateSetDepthMask(flag);
 }
 
 void GlStateManager::depthFunc(int func) {
-    GlStateManager::DEPTH->func = func;
+    GlStateManager::DEPTH->m_func = func;
     Renderer::sInstance->StateSetDepthFunc(func);
 }
 
 void GlStateManager::clearDepth(double depth) {
-    GlStateManager::CLEAR->depth = depth;
+    GlStateManager::CLEAR->m_depth = depth;
 }
 
 void GlStateManager::disableLight(int light) {
@@ -301,17 +301,17 @@ void GlStateManager::disableLight(int light) {
 }
 
 void GlStateManager::enableTexGen(GlStateManager::TexGen coord) {
-    GlStateManager::getTexGen(coord)->enabled->enable();
+    GlStateManager::getTexGen(coord)->m_enabled->enable();
 }
 
 void GlStateManager::disableTexGen(GlStateManager::TexGen coord) {
-    GlStateManager::getTexGen(coord)->enabled->disable();
+    GlStateManager::getTexGen(coord)->m_enabled->disable();
 }
 
 void GlStateManager::texGenMode(GlStateManager::TexGen coord, int mode) {
     GlStateManager::TexGenCoord* texGenCoord = GlStateManager::getTexGen(coord);
-    if (mode != texGenCoord->mode)
-        texGenCoord->mode = mode;
+    if (mode != texGenCoord->m_ode)
+        texGenCoord->m_ode = mode;
 }
 
 // Requires more lmfao
@@ -399,14 +399,14 @@ void GlStateManager::disableState(int state) {
 GlStateManager::TexGenCoord* GlStateManager::getTexGen(GlStateManager::TexGen coord) {
     switch (coord) {
     case S:  // why??? it doesn't match without this case
-        return GlStateManager::TEX_GEN->s;
+        return GlStateManager::TEX_GEN->m_s;
     case T:
-        return GlStateManager::TEX_GEN->t;
+        return GlStateManager::TEX_GEN->m_t;
     case R:
-        return GlStateManager::TEX_GEN->r;
+        return GlStateManager::TEX_GEN->m_r;
     case Q:
-        return GlStateManager::TEX_GEN->q;
+        return GlStateManager::TEX_GEN->m_q;
     default:
-        return GlStateManager::TEX_GEN->s;
+        return GlStateManager::TEX_GEN->m_s;
     }
 }

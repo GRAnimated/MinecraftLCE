@@ -4,11 +4,11 @@
 #include "net/minecraft/world/level/newbiome/layer/IntCache.h"
 
 RiverInitLayer::RiverInitLayer(long long seed, std::shared_ptr<Layer> parent) : Layer(seed) {
-    mParent = parent;
+    m_parent = parent;
 }
 
 arrayWithLength<int> RiverInitLayer::getArea(int x, int y, int width, int height) {
-    arrayWithLength<int> parentArea = mParent->getArea(x, y, width, height);
+    arrayWithLength<int> parentArea = m_parent->getArea(x, y, width, height);
     PIXBeginNamedEvent(0.0, "RiverInitLayer::getArea");
     arrayWithLength<int> area = IntCache::allocate(width * height);
 

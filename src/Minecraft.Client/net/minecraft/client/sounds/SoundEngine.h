@@ -23,7 +23,7 @@ public:
     virtual void playMusicTick();
 
 private:
-    unsigned char size[0x330];
+    unsigned char m_size[0x330];
 };
 
 ASSERT_SIZEOF(SoundEngine, 0x338)

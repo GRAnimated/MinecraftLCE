@@ -21,10 +21,10 @@ public:
     void* getObjListParent();
     int getId();
 
-    char padding[0x60];
-    int mId;
-    char padding3[0x5b];
-    bool mLabelTooWide;
-    char padding2[0x34];
-    void* mObjListParent;
+    char m_padding[0x60];
+    int m_id;
+    char m_padding3[0x5b];
+    bool m_labelTooWide;
+    char m_padding2[0x34];
+    void* m_objListParent;
 };

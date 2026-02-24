@@ -17,12 +17,12 @@
 #include <vector>
 
 long long CommonMasterGameMode::RestartMapGenerator() {
-    EnterCriticalSection(&this->mMapGeneratorMutex);
+    EnterCriticalSection(&this->m_mapGeneratorMutex);
 
     LevelRuleset* rules = CConsoleMinecraftApp::sInstance.getLevelGenerationOptions()->getRequiredGameRules();
 
-    long long oldSeed = this->mMapGeneratorSeed;
-    this->mMapGeneratorSeed = -1;
+    long long oldSeed = this->m_mapGeneratorSeed;
+    this->m_mapGeneratorSeed = -1;
     Random random(oldSeed);
 
     EMiniGameId minigameId = CommonMasterGameMode::GetMiniGame()->GetId();
@@ -32,15 +32,15 @@ long long CommonMasterGameMode::RestartMapGenerator() {
 
         const AABB* levelGenArea = rules->getNamedArea(L"LevelGeneration");
 
-        delete this->mMapGenerator;
+        delete this->m_mapGenerator;
 
         Random layerRandom(oldSeed);
         std::vector<LayerGenerator*>* layers = layerGenRule->CreateLayers(
             layerRandom, levelGenArea, CommonMasterGameMode::GetMiniGame()->GetLayerCount(),
-            this->mGenUnkFloat);
+            this->m_genUnkFloat);
 
-        this->mMapGenerator = (MapGenerator*)new TumbleGenerator(layerRandom, *layers);
-        this->mMapGenerator->StartGeneration((Level*)this->GeneratorTargetLevel());
+        this->m_mapGenerator = (MapGenerator*)new TumbleGenerator(layerRandom, *layers);
+        this->m_mapGenerator->StartGeneration((Level*)this->GeneratorTargetLevel());
 
         delete layers;
     } else if (minigameId == BUILD_OFF) {
@@ -50,13 +50,13 @@ long long CommonMasterGameMode::RestartMapGenerator() {
         std::vector<AABB*> walls2;
         rules->getNamedAreas(65280, &walls2);
 
-        delete this->mMapGenerator;
+        delete this->m_mapGenerator;
 
-        this->mMapGenerator = (MapGenerator*)new WallGenerator(random, &walls1, &walls2);
-        this->mMapGenerator->StartGeneration((Level*)this->GeneratorTargetLevel());
+        this->m_mapGenerator = (MapGenerator*)new WallGenerator(random, &walls1, &walls2);
+        this->m_mapGenerator->StartGeneration((Level*)this->GeneratorTargetLevel());
     }
 
-    LeaveCriticalSection(&this->mMapGeneratorMutex);
+    LeaveCriticalSection(&this->m_mapGeneratorMutex);
     return oldSeed;
 }
 

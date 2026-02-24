@@ -9,8 +9,9 @@ public:
     int getX() const;
     int getY() const;
     int getZ() const;
+    double distSqr(const Vec3i&) const;
 
-    int x;
-    int y;
-    int z;
+    int m_x;
+    int m_y;
+    int m_z;
 };

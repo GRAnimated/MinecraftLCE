@@ -76,13 +76,13 @@ void DefaultDispenseItemBehavior::spawnItem(Level* level, not_null_ptr<ItemInsta
     not_null_ptr<ItemEntity> itemEntity
         = not_null_ptr<ItemEntity>(new ItemEntity(level, x, y, z, itemInstance));
 
-    double randomFactor = level->mRandom->nextDouble() * 0.1 + 0.2;
-    itemEntity->mDeltaMovementX = direction->getX() * randomFactor;
-    itemEntity->mDeltaMovementY = 0.2f;
-    itemEntity->mDeltaMovementZ = randomFactor * direction->getZ();
-    itemEntity->mDeltaMovementX += level->mRandom->nextGaussian() * 0.0075f * count;
-    itemEntity->mDeltaMovementY += level->mRandom->nextGaussian() * 0.0075f * count;
-    itemEntity->mDeltaMovementZ += level->mRandom->nextGaussian() * 0.0075f * count;
+    double randomFactor = level->m_random->nextDouble() * 0.1 + 0.2;
+    itemEntity->m_deltaMovementX = direction->getX() * randomFactor;
+    itemEntity->m_deltaMovementY = 0.2f;
+    itemEntity->m_deltaMovementZ = randomFactor * direction->getZ();
+    itemEntity->m_deltaMovementX += level->m_random->nextGaussian() * 0.0075f * count;
+    itemEntity->m_deltaMovementY += level->m_random->nextGaussian() * 0.0075f * count;
+    itemEntity->m_deltaMovementZ += level->m_random->nextGaussian() * 0.0075f * count;
 
     level->addEntity(itemEntity);
 }

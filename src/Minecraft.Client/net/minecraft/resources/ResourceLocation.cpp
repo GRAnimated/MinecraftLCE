@@ -13,13 +13,13 @@ bool ResourceLocation::operator==(const ResourceLocation& other) const {
 }
 
 std::wstring ResourceLocation::toString() const {
-    return this->mNamespace + L':' + this->mPath;
+    return this->m_namespace + L':' + this->m_path;
 }
 
 const std::wstring& ResourceLocation::getNamespace() const {
-    return this->mNamespace;
+    return this->m_namespace;
 }
 
 const std::wstring& ResourceLocation::getPath() const {
-    return this->mPath;
+    return this->m_path;
 }

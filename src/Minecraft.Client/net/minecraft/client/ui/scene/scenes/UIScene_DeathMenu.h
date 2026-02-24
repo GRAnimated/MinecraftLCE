@@ -19,9 +19,9 @@ public:
     void handleInput(int, int, bool, bool, bool, bool&) override;
     void handlePress(int, int) override;
 
-    UIControl_Button mRespawnButton;
-    UIControl_Button mExitGameButton;
-    UIControl_Label mTitleLabel;
-    UIControl_Label mDeathMessageLabel;
-    UIControl_Label mExtraMessageLabel;
+    UIControl_Button m_respawnButton;
+    UIControl_Button m_exitGameButton;
+    UIControl_Label m_titleLabel;
+    UIControl_Label m_deathMessageLabel;
+    UIControl_Label m_extraMessageLabel;
 };

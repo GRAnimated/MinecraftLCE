@@ -8,11 +8,11 @@ public:
 
     FileEntry(wchar_t*, unsigned int, unsigned int);
 
-    wchar_t mFilename[0x20];
-    unsigned int mOffset;
-    unsigned int mLength;
-    long mTimestamp;
-    std::wstring mWFilename;
-    int mLength2;
-    bool field_ac;
+    wchar_t m_filename[0x20];
+    unsigned int m_offset;
+    unsigned int m_length;
+    long m_timestamp;
+    std::wstring m_wFilename;
+    int m_length2;
+    bool m_fieldAc;
 };
