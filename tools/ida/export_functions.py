@@ -3,23 +3,33 @@ import ida_kernwin
 import idc
 import os
 
-output_file_path = ida_kernwin.ask_file(1, "*.csv", "Select the CSV file to update, checked functions will be preserved")
+common = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "common"))
+sys.path.append(common)
+
+from util import config
+
+output = config.get_data_csv_path()
+if not output:
+	output = ida_kernwin.ask_file(1, "*.csv", "Choose a path to write the CSV file to")
+
+print(f"[OUTPUT] {output}")
 
 def is_valid_name(name: str) -> bool:
     return not name.startswith(("sub_", "nullsub_", "j_"))
 
-# Load the existing csv if it exists
+
+fieldnames = ['Address', 'Quality', 'Size', 'Name']
 existing_data = {}
-if output_file_path and os.path.exists(output_file_path):
-    with open(output_file_path, 'r', newline='') as csvfile:
+if output and os.path.exists(output):
+    with open(output, 'r', newline='') as csvfile:
+		
         reader = csv.DictReader(csvfile)
         for row in reader:
             address = row['Address']
             existing_data[address] = row
 
-if output_file_path:
-    with open(output_file_path, 'w', newline='') as csvfile:
-        fieldnames = ['Address', 'Quality', 'Size', 'Name']
+if output:
+    with open(output, 'w', newline='') as csvfile:        
         csvwriter = csv.DictWriter(csvfile, fieldnames=fieldnames)
         csvwriter.writeheader()
 
@@ -37,6 +47,6 @@ if output_file_path:
                 'Name': func_name if is_valid_name(func_name) else ''
             })
 
-    print(f"CSV file '{output_file_path}' has been updated.")
+    print("[EXPORT_FUNCTIONS] Done!")
 else:
-    print("Operation cancelled by the user.")
+    print("[EXPORT_FUNCTIONS] Cancelled.")

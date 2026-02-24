@@ -5,8 +5,10 @@ import csv
 import idc
 import ida_funcs
 import ida_range
+import ida_auto
 import idautils
 import idaapi
+import ida_hexrays
 import os
 import sys
 
@@ -59,24 +61,29 @@ with open(csv_path, "r") as f:
 
     for fn in reader:
         addr = int(fn[0], 16)
+        progress = fn[1]
         size = int(fn[2])
         name = fn[3]
 
         func = ida_funcs.get_func(addr)
 
         if func is None:
-            print(f"Creating function at {hex(addr)} with name {name}")
+            print(f"[CREATE] -> {hex(addr)}: {name}")
             ida_funcs.add_func(addr)
             ida_funcs.set_func_end(addr, addr + size)
         elif func.start_ea != addr:
-            print(f"Fixing function at {hex(addr)} with name {name}")
+            print(f"[FIX] -> {hex(addr)}: {name}")
             ida_funcs.set_func_end(prev_addr, prev_addr + prev_size)
             ida_funcs.add_func(addr)
             ida_funcs.set_func_end(addr, addr + size)
 
         if can_overwrite_name(addr, name):
             idc.set_name(addr, name, idc.SN_CHECK | idc.SN_NOWARN)
+
+        if progress == "O":
+            idc.set_color(addr, idc.CIC_FUNC, 0x276e20)
+
         prev_addr = addr
         prev_size = size
 
-print("Renaming from functions completed.")
+print("[RENAME_FUNCTIONS] Done!")
