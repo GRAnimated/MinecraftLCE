@@ -244,7 +244,7 @@ public:
                            int (*)(void*, int, C4JStorage::EMessageResult), void*, wchar_t*, unsigned, bool,
                            bool) override;
 
-    fuiFile *loadSkin(const std::wstring &filename, const std::wstring &fallback, int isHd);
+    fuiFile *loadSkin(const std::wstring &filename, const std::wstring &fallback, int skinType);
     void loadSkins();
 
     void* m_qword8;

@@ -130,12 +130,15 @@ struct fuiData {
 };
 
 struct fuiFile {
+    static constexpr int SKIN_TYPE_SD = 0;
+    static constexpr int SKIN_TYPE_HD = 1;
+
     fuiFile();
     ~fuiFile();
     // NOTE: HAD TO CHANGE THE SIGNATURE BECAUSE OF THE METHOD BEING DIFFERENT
     // ORIG HAD A CALLBACK METHOD INSTEAD OF DATA
     static uint64_t addDataRegion(uint a1, uint a2, uchar** ptr, uint64_t* callbackData);
-    void load(arrayWithLength<uchar>, int);
+    void load(arrayWithLength<uchar> data, int skinType);
     bool resolveReferences(fuiFile*);
     void dumpUnresolvedReferences();
     void initialiseRenderTexture(fuiBitmap*, bool);

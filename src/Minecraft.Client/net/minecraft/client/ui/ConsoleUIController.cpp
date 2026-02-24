@@ -1,10 +1,12 @@
 #include "net/minecraft/client/ui/ConsoleUIController.h"
 
 #include "fui/fui.h"
+#include "fui/fuiFile.h"
 #include "net/minecraft/client/CMinecraftApp.h"
 #include "net/minecraft/core/System.h"
 #include "net/minecraft/world/ArrayWithLength.h"
 #include "types.h"
+
 #include <string>
 
 // NON_MATCHING: TODO: finish this shit
@@ -140,12 +142,12 @@ void ConsoleUIController::ShowOtherPlayersBaseScene(unsigned, bool) {}
 void ConsoleUIController::ShowAutosaveCountdownTimer(bool shown) {}
 void ConsoleUIController::UpdateAutosaveCountdownTimer(unsigned) {}
 
-fuiFile *ConsoleUIController::loadSkin(const std::wstring &filename, const std::wstring &fallback, int isHd) {
+fuiFile *ConsoleUIController::loadSkin(const std::wstring &filename, const std::wstring &fallback, int skinType) {
     if (filename.empty() || !CConsoleMinecraftApp::sInstance.hasArchiveFile(filename, false))
         return nullptr;
 
     arrayWithLength<uchar> file = CConsoleMinecraftApp::sInstance.getArchiveFile(filename, false);
-    fuiFile *f = fui::sInstance->load(file, false, isHd);
+    fuiFile *f = fui::sInstance->load(file, false, skinType);
 
     delete file.m_data;
 
@@ -158,25 +160,25 @@ void ConsoleUIController::loadSkins() {
     std::wstring platformSkin = L"";
 
     platformSkin = L"skinNX.fui";
-    this->m_fuiFilePlatformSkin = this->loadSkin(platformSkin, L"platformskin.fui", 0);
+    this->m_fuiFilePlatformSkin = this->loadSkin(platformSkin, L"platformskin.fui", fuiFile::SKIN_TYPE_SD);
 
     platformSkin = L"skinHDNX.fui";
-    this->m_fuiFilePlatformSkinHd = this->loadSkin( platformSkin, L"platformskinHD.fui", 1);
+    this->m_fuiFilePlatformSkinHd = this->loadSkin( platformSkin, L"platformskinHD.fui", fuiFile::SKIN_TYPE_HD);
 
-    this->m_fuiFileSkinGraphics = this->loadSkin(L"skinGraphics.fui", L"skinGraphics.fui", 0);
-    this->m_fuiFileSkinGraphicsHud = this->loadSkin(L"skinGraphicsHud.fui", L"skinGraphicsHud.fui", 0);
-    this->m_fuiFileSkinGraphicsInGame = this->loadSkin(L"skinGraphicsInGame.fui", L"skinGraphicsInGame.fui", 0);
-    this->m_fuiFileSkinGraphicsLabels = this->loadSkin(L"skinGraphicsLabels.fui", L"skinGraphicsLabels.fui", 0);
-    this->m_fuiFileSkinLabels = this->loadSkin(L"skinLabels.fui", L"skinLabels.fui", 0);
-    this->m_fuiFileSkinInGame = this->loadSkin(L"skinInGame.fui", L"skinInGame.fui", 0);
-    this->m_fuiFileSkinHud = this->loadSkin(L"skinHud.fui", L"skinHud.fui", 0);
-    this->m_fuiFileSkin = this->loadSkin(L"skin.fui", L"skin.fui", 0);
-    this->m_fuiFileSkinHdGraphics = this->loadSkin(L"skinHDGraphics.fui", L"skinHDGraphics.fui", 1);
-    this->m_fuiFileSkinHdGraphicsHud = this->loadSkin(L"skinHDGraphicsHud.fui", L"skinHDGraphicsHud.fui", 1);
-    this->m_fuiFileSkinHdGraphicsInGame = this->loadSkin(L"skinHDGraphicsInGame.fui", L"skinHDGraphicsInGame.fui", 1);
-    this->m_fuiFileSkinHdGraphicsLabels = this->loadSkin(L"skinHDGraphicsLabels.fui", L"skinHDGraphicsLabels.fui", 1);
-    this->m_fuiFileSkinHdLabels = this->loadSkin(L"skinHDLabels.fui", L"skinHDLabels.fui", 1);
-    this->m_fuiFileSkinHdInGame = this->loadSkin(L"skinHDInGame.fui", L"skinHDInGame.fui", 1);
-    this->m_fuiFileSkinHdHud = this->loadSkin(L"skinHDHud.fui", L"skinHDHud.fui", 1);
-    this->m_fuiFileSkinHd = this->loadSkin(L"skinHD.fui", L"skinHD.fui", 1);
+    this->m_fuiFileSkinGraphics = this->loadSkin(L"skinGraphics.fui", L"skinGraphics.fui", fuiFile::SKIN_TYPE_SD);
+    this->m_fuiFileSkinGraphicsHud = this->loadSkin(L"skinGraphicsHud.fui", L"skinGraphicsHud.fui", fuiFile::SKIN_TYPE_SD);
+    this->m_fuiFileSkinGraphicsInGame = this->loadSkin(L"skinGraphicsInGame.fui", L"skinGraphicsInGame.fui", fuiFile::SKIN_TYPE_SD);
+    this->m_fuiFileSkinGraphicsLabels = this->loadSkin(L"skinGraphicsLabels.fui", L"skinGraphicsLabels.fui", fuiFile::SKIN_TYPE_SD);
+    this->m_fuiFileSkinLabels = this->loadSkin(L"skinLabels.fui", L"skinLabels.fui", fuiFile::SKIN_TYPE_SD);
+    this->m_fuiFileSkinInGame = this->loadSkin(L"skinInGame.fui", L"skinInGame.fui", fuiFile::SKIN_TYPE_SD);
+    this->m_fuiFileSkinHud = this->loadSkin(L"skinHud.fui", L"skinHud.fui", fuiFile::SKIN_TYPE_SD);
+    this->m_fuiFileSkin = this->loadSkin(L"skin.fui", L"skin.fui", fuiFile::SKIN_TYPE_SD);
+    this->m_fuiFileSkinHdGraphics = this->loadSkin(L"skinHDGraphics.fui", L"skinHDGraphics.fui", fuiFile::SKIN_TYPE_HD);
+    this->m_fuiFileSkinHdGraphicsHud = this->loadSkin(L"skinHDGraphicsHud.fui", L"skinHDGraphicsHud.fui", fuiFile::SKIN_TYPE_HD);
+    this->m_fuiFileSkinHdGraphicsInGame = this->loadSkin(L"skinHDGraphicsInGame.fui", L"skinHDGraphicsInGame.fui", fuiFile::SKIN_TYPE_HD);
+    this->m_fuiFileSkinHdGraphicsLabels = this->loadSkin(L"skinHDGraphicsLabels.fui", L"skinHDGraphicsLabels.fui", fuiFile::SKIN_TYPE_HD);
+    this->m_fuiFileSkinHdLabels = this->loadSkin(L"skinHDLabels.fui", L"skinHDLabels.fui", fuiFile::SKIN_TYPE_HD);
+    this->m_fuiFileSkinHdInGame = this->loadSkin(L"skinHDInGame.fui", L"skinHDInGame.fui", fuiFile::SKIN_TYPE_HD);
+    this->m_fuiFileSkinHdHud = this->loadSkin(L"skinHDHud.fui", L"skinHDHud.fui", fuiFile::SKIN_TYPE_HD);
+    this->m_fuiFileSkinHd = this->loadSkin(L"skinHD.fui", L"skinHD.fui", fuiFile::SKIN_TYPE_HD);
 }
