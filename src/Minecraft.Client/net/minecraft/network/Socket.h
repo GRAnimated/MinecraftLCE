@@ -58,6 +58,6 @@ public:
 
     bool sub_71000EA668();
 
-    char fill[208];
-    C4JEventImpl* mEvent;
+    char m_fill[208];
+    C4JEventImpl* m_mEvent;
 };

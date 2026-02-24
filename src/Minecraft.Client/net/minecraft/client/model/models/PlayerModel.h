@@ -13,5 +13,5 @@ public:
     void setAllVisible(bool) override;
     void translateToHandItem(float, const HumanoidArm*) override;
 
-    char fill[0x1E0 - 336];
+    char m_fill[0x1E0 - 336];
 };

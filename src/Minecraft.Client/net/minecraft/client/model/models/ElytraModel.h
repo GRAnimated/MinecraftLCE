@@ -10,6 +10,6 @@ public:
     void setupAnim(float, float, float, float, float, float, std::shared_ptr<Entity>,
                    _SkinAdjustments) override;
 
-    ModelPartSkin* mRightWing;
-    ModelPartSkin* mLeftWing;
+    ModelPartSkin* m_mRightWing;
+    ModelPartSkin* m_mLeftWing;
 };

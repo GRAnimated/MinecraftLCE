@@ -5,27 +5,27 @@
 #include <string>
 
 NetworkPlayerNintendo::NetworkPlayerNintendo(NQRNetworkPlayer* netPlayer) : INetworkPlayer() {
-    this->mSocket = nullptr;
-    this->mLastChunkPacket_ms = 0;
-    this->mQNetPlayer = netPlayer;
+    this->m_mSocket = nullptr;
+    this->m_mLastChunkPacketMs = 0;
+    this->m_mQNetPlayer = netPlayer;
 }
 
 int NetworkPlayerNintendo::GetSmallId() {
-    return this->mQNetPlayer->GetSmallId();
+    return this->m_mQNetPlayer->GetSmallId();
 }
 
 void NetworkPlayerNintendo::SendData(INetworkPlayer* player, const void* data, int size, bool reliable,
                                      bool ordered) {
-    this->mQNetPlayer->SendData(((NetworkPlayerNintendo*)player)->mQNetPlayer, data, size, ordered);
+    this->m_mQNetPlayer->SendData(((NetworkPlayerNintendo*)player)->m_mQNetPlayer, data, size, ordered);
 }
 
 bool NetworkPlayerNintendo::IsSameSystem(INetworkPlayer* player) {
     // it's either that member variables are part of interface, or they are casting it like i'm doing rn
-    return this->mQNetPlayer->IsSameSystem(((NetworkPlayerNintendo*)player)->mQNetPlayer);
+    return this->m_mQNetPlayer->IsSameSystem(((NetworkPlayerNintendo*)player)->m_mQNetPlayer);
 }
 
 int NetworkPlayerNintendo::GetOutstandingAckCount() {
-    return this->mQNetPlayer->GetOutstandingAckCount();
+    return this->m_mQNetPlayer->GetOutstandingAckCount();
 }
 
 int NetworkPlayerNintendo::GetSinglePlayerOutstandingAckCount() {
@@ -35,11 +35,11 @@ int NetworkPlayerNintendo::GetSinglePlayerOutstandingAckCount() {
 void NetworkPlayerNintendo::DecrementAcksOutstanding() {}
 
 int NetworkPlayerNintendo::GetSendQueueSizeBytes(INetworkPlayer* player, bool includeOverhead) {
-    return this->mQNetPlayer->GetSendQueueSizeBytes();
+    return this->m_mQNetPlayer->GetSendQueueSizeBytes();
 }
 
 int NetworkPlayerNintendo::GetSendQueueSizeMessages(INetworkPlayer* player, bool includeOverhead) {
-    return this->mQNetPlayer->GetSendQueueSizeMessages();
+    return this->m_mQNetPlayer->GetSendQueueSizeMessages();
 }
 
 int NetworkPlayerNintendo::GetCurrentRtt() {
@@ -47,32 +47,32 @@ int NetworkPlayerNintendo::GetCurrentRtt() {
 }
 
 bool NetworkPlayerNintendo::IsHost() {
-    return this->mQNetPlayer->IsHost();
+    return this->m_mQNetPlayer->IsHost();
 }
 
 // NON_MATCHING: correct PlayerUID struct
 bool NetworkPlayerNintendo::IsGuest() {
-    return (this->mQNetPlayer->GetUID().gap_0 & 2) >> 1;
+    return (this->m_mQNetPlayer->GetUID().m_gap0 & 2) >> 1;
 }
 
 bool NetworkPlayerNintendo::IsLocal() {
-    return this->mQNetPlayer->IsLocal();
+    return this->m_mQNetPlayer->IsLocal();
 }
 
 int NetworkPlayerNintendo::GetSessionIndex() {
-    return this->mQNetPlayer->GetSessionIndex();
+    return this->m_mQNetPlayer->GetSessionIndex();
 }
 
 bool NetworkPlayerNintendo::IsTalking() {
-    return this->mQNetPlayer->IsTalking();
+    return this->m_mQNetPlayer->IsTalking();
 }
 
 bool NetworkPlayerNintendo::IsMutedByLocalUser(int userIndex) {
-    return this->mQNetPlayer->IsMutedByLocalUser(userIndex);
+    return this->m_mQNetPlayer->IsMutedByLocalUser(userIndex);
 }
 
 bool NetworkPlayerNintendo::HasVoice() {
-    return this->mQNetPlayer->HasVoice();
+    return this->m_mQNetPlayer->HasVoice();
 }
 
 bool NetworkPlayerNintendo::HasCamera() {
@@ -80,19 +80,19 @@ bool NetworkPlayerNintendo::HasCamera() {
 }
 
 int NetworkPlayerNintendo::GetUserIndex() {
-    return this->mQNetPlayer->GetLocalPlayerIndex();
+    return this->m_mQNetPlayer->GetLocalPlayerIndex();
 }
 
 void NetworkPlayerNintendo::SetSocket(Socket* socket) {
-    this->mSocket = socket;
+    this->m_mSocket = socket;
 }
 
 Socket* NetworkPlayerNintendo::GetSocket() {
-    return this->mSocket;
+    return this->m_mSocket;
 }
 
 std::wstring NetworkPlayerNintendo::GetOnlineName() {
-    return this->mQNetPlayer->GetNetworkNameW();
+    return this->m_mQNetPlayer->GetNetworkNameW();
 }
 
 std::wstring NetworkPlayerNintendo::GetDisplayName() {
@@ -103,20 +103,20 @@ std::wstring NetworkPlayerNintendo::GetDisplayName() {
 }
 
 PlayerUID NetworkPlayerNintendo::GetUID() {
-    return this->mQNetPlayer->GetUID();
+    return this->m_mQNetPlayer->GetUID();
 }
 
 void NetworkPlayerNintendo::SetUID(PlayerUID uid) {
-    this->mQNetPlayer->SetUID(uid);
+    this->m_mQNetPlayer->SetUID(uid);
 }
 
 void NetworkPlayerNintendo::SentChunkPacket() {
-    this->mLastChunkPacket_ms = System::processTimeInMilliSecs();
+    this->m_mLastChunkPacketMs = System::processTimeInMilliSecs();
 }
 
 int NetworkPlayerNintendo::GetTimeSinceLastChunkPacket_ms() {
-    if (this->mLastChunkPacket_ms)
-        return System::processTimeInMilliSecs() - this->mLastChunkPacket_ms;
+    if (this->m_mLastChunkPacketMs)
+        return System::processTimeInMilliSecs() - this->m_mLastChunkPacketMs;
     else
         return 0x7fffffff;
 }
@@ -126,5 +126,5 @@ bool NetworkPlayerNintendo::isFake() {
 }
 
 NQRNetworkPlayer* NetworkPlayerNintendo::GetQNetPlayer() {
-    return this->mQNetPlayer;
+    return this->m_mQNetPlayer;
 }

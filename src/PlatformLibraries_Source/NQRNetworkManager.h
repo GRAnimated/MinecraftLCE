@@ -10,13 +10,13 @@ class FriendPresence;
 }
 
 struct CMatchMakeSearchParam {
-    unsigned int params[14];
+    unsigned int m_params[14];
 };
 
 class NQRNetworkManager {
 public:
     struct SessionSearchResult {
-        char fill[84];
+        char m_fill[84];
     };
     class PresenceSyncInfo;
 

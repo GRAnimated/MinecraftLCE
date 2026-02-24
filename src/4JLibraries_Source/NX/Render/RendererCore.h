@@ -276,7 +276,8 @@ public:
     NVNprogram* m_shaders12;
     NVNprogram* m_shaders13;
     NVNprogram* m_shaders14;
-    char m_gap2960[48];
+    NVNprogram* m_shaders15;
+    char m_gap2960[40];
     int m_textureId1;
     unsigned short m_gammaIntensity;
     int m_dword2998;

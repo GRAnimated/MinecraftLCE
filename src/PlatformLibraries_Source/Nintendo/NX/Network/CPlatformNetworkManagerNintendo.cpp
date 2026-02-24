@@ -48,11 +48,11 @@
 }*/
 
 void CPlatformNetworkManagerNintendo::Terminate() {
-    this->mNQRNetworkManager->Terminate();
+    this->m_mNqrNetworkManager->Terminate();
 }
 
 int CPlatformNetworkManagerNintendo::GetJoiningReadyPercentage() {
-    return this->mNQRNetworkManager->GetJoiningReadyPercentage();
+    return this->m_mNqrNetworkManager->GetJoiningReadyPercentage();
 }
 
 int CPlatformNetworkManagerNintendo::CorrectErrorIDS(int errorIDS) {
@@ -62,28 +62,28 @@ int CPlatformNetworkManagerNintendo::CorrectErrorIDS(int errorIDS) {
 void CPlatformNetworkManagerNintendo::DoWork() {
     this->TickSearch();
 
-    if (this->mRequestLeaveRoom) {
-        this->mNQRNetworkManager->LeaveRoom(this->byte54);
-        this->mRequestLeaveRoom = false;
+    if (this->m_mRequestLeaveRoom) {
+        this->m_mNqrNetworkManager->LeaveRoom(this->m_byte54);
+        this->m_mRequestLeaveRoom = false;
     }
-    this->mNQRNetworkManager->Tick();
-    if (this->mRequestEnableAdhoc) {
+    this->m_mNqrNetworkManager->Tick();
+    if (this->m_mRequestEnableAdhoc) {
         this->setAdhocMode(true);
-    } else if (this->mRequestDisableAdhoc) {
+    } else if (this->m_mRequestDisableAdhoc) {
         this->setAdhocMode(false);
-    } else if (this->mRequestSignIn) {
+    } else if (this->m_mRequestSignIn) {
         this->setLanMode(true);
-    } else if (this->mRequestSignout) {
+    } else if (this->m_mRequestSignout) {
         this->setLanMode(false);
     }
 }
 
 int CPlatformNetworkManagerNintendo::GetPlayerCount() {
-    return this->mNQRNetworkManager->GetPlayerCount();
+    return this->m_mNqrNetworkManager->GetPlayerCount();
 }
 
 int CPlatformNetworkManagerNintendo::GetOnlinePlayerCount() {
-    return this->mNQRNetworkManager->GetOnlinePlayerCount();
+    return this->m_mNqrNetworkManager->GetOnlinePlayerCount();
 }
 
 int CPlatformNetworkManagerNintendo::GetLocalPlayerMask(int mask) {
@@ -91,12 +91,12 @@ int CPlatformNetworkManagerNintendo::GetLocalPlayerMask(int mask) {
 }
 
 void CPlatformNetworkManagerNintendo::AddLocalPlayerByUserIndex(int index) {
-    this->mNQRNetworkManager->AddLocalPlayerByUserIndex(index);
+    this->m_mNqrNetworkManager->AddLocalPlayerByUserIndex(index);
 }
 
 // NON_MATCHING: something is getting pushed on stack???
 void CPlatformNetworkManagerNintendo::RemoveLocalPlayerByUserIndex(int index) {
-    INetworkPlayer* netPlayer = getNetworkPlayer(this->mNQRNetworkManager->GetLocalPlayerByUserIndex(index));
+    INetworkPlayer* netPlayer = getNetworkPlayer(this->m_mNqrNetworkManager->GetLocalPlayerByUserIndex(index));
     if (netPlayer) {
         if (netPlayer->GetSocket()) {
             C4JThreadImpl* thr = new C4JThreadImpl(RemovePlayerOnSocketClosedThreadProc, netPlayer,
@@ -104,7 +104,7 @@ void CPlatformNetworkManagerNintendo::RemoveLocalPlayerByUserIndex(int index) {
             thr->SetProcessor(2);
             thr->Run();
         } else {
-            this->mNQRNetworkManager->RemoveLocalPlayerByUserIndex(index);
+            this->m_mNqrNetworkManager->RemoveLocalPlayerByUserIndex(index);
         }
     }
 }
@@ -114,19 +114,19 @@ int CPlatformNetworkManagerNintendo::AddLocalPlayerByPlayerUID(PlayerUID) {
 }
 
 INetworkPlayer* CPlatformNetworkManagerNintendo::GetLocalPlayerByUserIndex(int index) {
-    return getNetworkPlayer(this->mNQRNetworkManager->GetLocalPlayerByUserIndex(index));
+    return getNetworkPlayer(this->m_mNqrNetworkManager->GetLocalPlayerByUserIndex(index));
 }
 
 INetworkPlayer* CPlatformNetworkManagerNintendo::GetPlayerByIndex(int index) {
-    return getNetworkPlayer(this->mNQRNetworkManager->GetPlayerByIndex(index));
+    return getNetworkPlayer(this->m_mNqrNetworkManager->GetPlayerByIndex(index));
 }
 
 INetworkPlayer* CPlatformNetworkManagerNintendo::GetPlayerByXuid(PlayerUID uid) {
-    return getNetworkPlayer(this->mNQRNetworkManager->GetPlayerByXuid(uid));
+    return getNetworkPlayer(this->m_mNqrNetworkManager->GetPlayerByXuid(uid));
 }
 
 INetworkPlayer* CPlatformNetworkManagerNintendo::GetPlayerBySmallId(unsigned char id) {
-    return getNetworkPlayer(this->mNQRNetworkManager->GetPlayerBySmallId(id));
+    return getNetworkPlayer(this->m_mNqrNetworkManager->GetPlayerBySmallId(id));
 }
 
 bool CPlatformNetworkManagerNintendo::ShouldMessageForFullSession() {
@@ -134,41 +134,41 @@ bool CPlatformNetworkManagerNintendo::ShouldMessageForFullSession() {
 }
 
 INetworkPlayer* CPlatformNetworkManagerNintendo::GetHostPlayer() {
-    return getNetworkPlayer(this->mNQRNetworkManager->GetHostPlayer());
+    return getNetworkPlayer(this->m_mNqrNetworkManager->GetHostPlayer());
 }
 
 bool CPlatformNetworkManagerNintendo::IsHost() {
-    if (this->mNQRNetworkManager->IsHost())
-        return !this->byte53;
+    if (this->m_mNqrNetworkManager->IsHost())
+        return !this->m_byte53;
 
     return false;
 }
 
 void CPlatformNetworkManagerNintendo::JoinGameFromInviteInfo(int, int a3,
                                                              const nn::friends::FriendPresence* a4) {
-    this->mNQRNetworkManager->JoinRoom(a3, a4);
+    this->m_mNqrNetworkManager->JoinRoom(a3, a4);
 }
 
 bool CPlatformNetworkManagerNintendo::LeaveGame(bool a2) {
-    if (this->mLeavingGame)
+    if (this->m_mLeavingGame)
         return true;
-    this->mLeavingGame = true;
+    this->m_mLeavingGame = true;
     INetworkPlayer* netPlayer = getNetworkPlayer(
-        this->mNQRNetworkManager->GetLocalPlayerByUserIndex(CGameNetworkManager::sInstance.GetPrimaryPad()));
+        this->m_mNqrNetworkManager->GetLocalPlayerByUserIndex(CGameNetworkManager::sInstance.GetPrimaryPad()));
     if (netPlayer) {
         Socket* socket = netPlayer->GetSocket();
         if (socket) {
-            socket->mEvent->WaitForSignal(-1);
+            socket->m_mEvent->WaitForSignal(-1);
             if (this->IsInSession()) {
-                getNetworkPlayer(this->mNQRNetworkManager->GetLocalPlayerByUserIndex(
+                getNetworkPlayer(this->m_mNqrNetworkManager->GetLocalPlayerByUserIndex(
                                      CGameNetworkManager::sInstance.GetPrimaryPad()))
                     ->SetSocket(nullptr);
             }
             delete socket;
         }
     }
-    if (this->mNQRNetworkManager->IsHost() && CGameNetworkManager::sInstance.ServerStoppedValid()) {
-        this->mNQRNetworkManager->EndGame();
+    if (this->m_mNqrNetworkManager->IsHost() && CGameNetworkManager::sInstance.ServerStoppedValid()) {
+        this->m_mNqrNetworkManager->EndGame();
         CGameNetworkManager::sInstance.ServerStoppedWait();
         CGameNetworkManager::sInstance.ServerStoppedDestroy();
     }
@@ -176,15 +176,15 @@ bool CPlatformNetworkManagerNintendo::LeaveGame(bool a2) {
 }
 
 bool CPlatformNetworkManagerNintendo::IsInSession() {
-    return this->mNQRNetworkManager->IsInSession();
+    return this->m_mNqrNetworkManager->IsInSession();
 }
 
 bool CPlatformNetworkManagerNintendo::IsInGameplay() {
-    return this->mNQRNetworkManager->GetState() == NQRNetworkManager::IN_GAMEPLAY;
+    return this->m_mNqrNetworkManager->GetState() == NQRNetworkManager::IN_GAMEPLAY;
 }
 
 bool CPlatformNetworkManagerNintendo::IsReadyToPlayOrIdle() {
-    return this->mNQRNetworkManager->IsReadyToPlayOrIdle();
+    return this->m_mNqrNetworkManager->IsReadyToPlayOrIdle();
 }
 
 bool CPlatformNetworkManagerNintendo::IsInStatsEnabledSession() {
@@ -192,15 +192,15 @@ bool CPlatformNetworkManagerNintendo::IsInStatsEnabledSession() {
 }
 
 bool CPlatformNetworkManagerNintendo::IsMatchmakingEnabled() {
-    return this->mNQRNetworkManager->IsMatchmakingEnabled();
+    return this->m_mNqrNetworkManager->IsMatchmakingEnabled();
 }
 
 bool CPlatformNetworkManagerNintendo::IsHandlingBootInvite() {
-    return this->mNQRNetworkManager->IsHandlingBootInvite();
+    return this->m_mNqrNetworkManager->IsHandlingBootInvite();
 }
 
 bool CPlatformNetworkManagerNintendo::SessionHasSpace(unsigned int sessionId) {
-    return this->mNQRNetworkManager->SessionHasSpace(sessionId);
+    return this->m_mNqrNetworkManager->SessionHasSpace(sessionId);
 }
 
 /*bool CPlatformNetworkManagerNintendo::SessionHasMii(int sessionId) {
@@ -208,7 +208,7 @@ bool CPlatformNetworkManagerNintendo::SessionHasSpace(unsigned int sessionId) {
 }*/
 
 void CPlatformNetworkManagerNintendo::SendInviteGUI(int) {
-    this->mNQRNetworkManager->SendInviteGUI();
+    this->m_mNqrNetworkManager->SendInviteGUI();
 }
 
 bool CPlatformNetworkManagerNintendo::IsAddingPlayer() {
@@ -220,7 +220,7 @@ void CPlatformNetworkManagerNintendo::HostGame(int a2, bool onlineGame, bool pri
     this->SetLocalGame(!onlineGame);
     this->SetPrivateGame(privateGame);
     this->sub_71007C2578();
-    this->bool5C = a7 != 0;
+    this->m_bool5C = a7 != 0;
     int playerMask = this->GetLocalPlayerMask(CGameNetworkManager::sInstance.GetPrimaryPad()) | a2;
     this->_HostGame(playerMask, a5, miniGameId, a7, a8);
 }
@@ -230,10 +230,10 @@ int CPlatformNetworkManagerNintendo::JoinGame(FriendSessionInfo* info, int joini
     for (int i = 0; i < 4; i++) {
         joiningCount += ((joiningPlayers >> i) & 1);
     }
-    joiningCount += info->mCurrentPlayerCount;
+    joiningCount += info->m_mCurrentPlayerCount;
 
-    if (joiningCount <= CGameNetworkManager::sInstance.GetMaxPlayers(&info->mGameSessionData)) {
-        int ret = this->mNQRNetworkManager->JoinRoom(&info->mSearchResult, joiningPlayers);
+    if (joiningCount <= CGameNetworkManager::sInstance.GetMaxPlayers(&info->m_mGameSessionData)) {
+        int ret = this->m_mNqrNetworkManager->JoinRoom(&info->m_mSearchResult, joiningPlayers);
         return (ret & 1) == 0;
     }
 
@@ -245,53 +245,53 @@ bool CPlatformNetworkManagerNintendo::FindAndJoinGame(int joiningPlayers, int a3
                                                       unsigned int a5, unsigned int* a6, unsigned int* a7) {
     CMatchMakeSearchParam searchParams;
 
-    searchParams.params[0] = 0;
-    searchParams.params[1] = (miniGameId << 24) | 0x30780;
-    searchParams.params[2] = 0;
-    searchParams.params[3] = 1;
+    searchParams.m_params[0] = 0;
+    searchParams.m_params[1] = (miniGameId << 24) | 0x30780;
+    searchParams.m_params[2] = 0;
+    searchParams.m_params[3] = 1;
     int joiningCount = 0;
     for (int i = 0; i < 4; i++) {
         joiningCount += ((joiningPlayers >> i) & 1);
     }
-    searchParams.params[4] = joiningCount;
-    searchParams.params[5] = 5;
+    searchParams.m_params[4] = joiningCount;
+    searchParams.m_params[5] = 5;
 
     int paramIndex = 6;
     for (unsigned int i = 0; i < a5; ++i) {
-        searchParams.params[paramIndex] = a6[i];
-        searchParams.params[paramIndex + 1] = a7[i] + 2;
+        searchParams.m_params[paramIndex] = a6[i];
+        searchParams.m_params[paramIndex + 1] = a7[i] + 2;
 
         paramIndex += 3;
     }
-    return !this->mNQRNetworkManager->FindAndJoinRoom(joiningPlayers, (a5 + 2), &searchParams, miniGameId);
+    return !this->m_mNqrNetworkManager->FindAndJoinRoom(joiningPlayers, (a5 + 2), &searchParams, miniGameId);
 }
 
 void CPlatformNetworkManagerNintendo::CancelJoinGame() {}
 
 bool CPlatformNetworkManagerNintendo::SetLocalGame(bool localGame) {
-    if (this->mNQRNetworkManager->GetState() == 2)
-        this->mLocalGame = localGame;
+    if (this->m_mNqrNetworkManager->GetState() == 2)
+        this->m_mLocalGame = localGame;
     return true;
 }
 
 bool CPlatformNetworkManagerNintendo::IsLocalGame() {
-    return this->mLocalGame;
+    return this->m_mLocalGame;
 }
 
 bool CPlatformNetworkManagerNintendo::SetPrivateGame(bool privateGame) {
-    return this->mPrivateGame = privateGame;
+    return this->m_mPrivateGame = privateGame;
 }
 
 bool CPlatformNetworkManagerNintendo::IsPrivateGame() {
-    return this->mPrivateGame;
+    return this->m_mPrivateGame;
 }
 
 bool CPlatformNetworkManagerNintendo::IsLeavingGame() {
-    return this->mLeavingGame;
+    return this->m_mLeavingGame;
 }
 
 void CPlatformNetworkManagerNintendo::ResetLeavingGame() {
-    this->mLeavingGame = false;
+    this->m_mLeavingGame = false;
 }
 
 void CPlatformNetworkManagerNintendo::RegisterPlayerChangedCallback(int playerId,

@@ -10,25 +10,25 @@
 #include <memory>
 
 ElytraModel::ElytraModel(const ModelDefinition&) : Model() {
-    this->byte89 = false;
-    this->mLeftWing = new ModelPartSkin(this, 22, 0);
-    this->mLeftWing->addBox(-10.0f, 0.0f, 0.0f, 10, 20, 2, 1.0f);
+    this->m_byte89 = false;
+    this->m_mLeftWing = new ModelPartSkin(this, 22, 0);
+    this->m_mLeftWing->addBox(-10.0f, 0.0f, 0.0f, 10, 20, 2, 1.0f);
 
-    this->mRightWing = new ModelPartSkin(this, 22, 0);
-    this->mRightWing->mMirror = true;
-    this->mRightWing->addBox(0.0f, 0.0f, 0.0f, 10, 20, 2, 1.0f);
+    this->m_mRightWing = new ModelPartSkin(this, 22, 0);
+    this->m_mRightWing->m_mirror = true;
+    this->m_mRightWing->addBox(0.0f, 0.0f, 0.0f, 10, 20, 2, 1.0f);
 
-    this->mLeftWing->mXPos = 5.0f;
-    this->mLeftWing->mXRot = Mth::RAD * 15.0f;
-    this->mLeftWing->mYPos = 0.0f;
-    this->mLeftWing->mYRot = 0.0f;
-    this->mLeftWing->mZRot = Mth::RAD * -15.0f;
+    this->m_mLeftWing->m_xPos = 5.0f;
+    this->m_mLeftWing->m_xRot = Mth::RAD * 15.0f;
+    this->m_mLeftWing->m_yPos = 0.0f;
+    this->m_mLeftWing->m_yRot = 0.0f;
+    this->m_mLeftWing->m_zRot = Mth::RAD * -15.0f;
 
-    this->mRightWing->mXPos = -this->mLeftWing->mXPos;
-    this->mRightWing->mXRot = this->mLeftWing->mXRot;
-    this->mRightWing->mYPos = this->mLeftWing->mYPos;
-    this->mRightWing->mYRot = -this->mLeftWing->mYRot;
-    this->mRightWing->mZRot = -this->mLeftWing->mZRot;
+    this->m_mRightWing->m_xPos = -this->m_mLeftWing->m_xPos;
+    this->m_mRightWing->m_xRot = this->m_mLeftWing->m_xRot;
+    this->m_mRightWing->m_yPos = this->m_mLeftWing->m_yPos;
+    this->m_mRightWing->m_yRot = -this->m_mLeftWing->m_yRot;
+    this->m_mRightWing->m_zRot = -this->m_mLeftWing->m_zRot;
 
     this->compileSkinnedDrawlist();
 }
@@ -42,12 +42,12 @@ void ElytraModel::render(std::shared_ptr<Entity>& entity, float, float, float, f
         GlStateManager::pushMatrix();
         GlStateManager::scalef(0.5F, 0.5F, 0.5F);
         GlStateManager::translatef(0.0F, 1.5F, -0.1F);
-        this->mLeftWing->render(scale, callList, false);
-        this->mRightWing->render(scale, callList, false);
+        this->m_mLeftWing->render(scale, callList, false);
+        this->m_mRightWing->render(scale, callList, false);
         GlStateManager::popMatrix();
     } else {
-        this->mLeftWing->render(scale, callList, false);
-        this->mRightWing->render(scale, callList, false);
+        this->m_mLeftWing->render(scale, callList, false);
+        this->m_mRightWing->render(scale, callList, false);
     }
     this->callSkinnedDrawlist();
 }

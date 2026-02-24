@@ -11,13 +11,13 @@ class FriendPresence;
 }
 class CGameNetworkManager;
 class GameSessionData {
-    char filuniek[346];
+    char m_filuniek[346];
 };
 struct FriendSessionInfo {
-    void* qword0;
-    NQRNetworkManager::SessionSearchResult mSearchResult;
-    GameSessionData mGameSessionData;
-    uint8_t mCurrentPlayerCount;
+    void* m_qword0;
+    NQRNetworkManager::SessionSearchResult m_mSearchResult;
+    GameSessionData m_mGameSessionData;
+    uint8_t m_mCurrentPlayerCount;
 };
 class INetworkPlayer;
 class NQRNetworkPlayer;

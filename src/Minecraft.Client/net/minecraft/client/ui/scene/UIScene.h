@@ -216,7 +216,7 @@ public:
     std::vector<UIScene::_CachedSlotDrawData*> m_cachedSlotDrawData;
     int m_fill;  // 8
     union {
-        int m_FocusedSection;
+        int m_focusedSection;
         union {
             bool m_byte10C;
             bool m_bool10D;

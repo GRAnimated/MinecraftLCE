@@ -38,7 +38,7 @@ public:
     bool isFake() override;
     NQRNetworkPlayer* GetQNetPlayer() override;
 
-    NQRNetworkPlayer* mQNetPlayer;
-    Socket* mSocket;
-    long mLastChunkPacket_ms;
+    NQRNetworkPlayer* m_mQNetPlayer;
+    Socket* m_mSocket;
+    long m_mLastChunkPacketMs;
 };

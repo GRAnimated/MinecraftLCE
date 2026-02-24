@@ -20,23 +20,23 @@ public:
     virtual void setArmPose(const HumanoidArm*, HumanoidModel::eArmPose);
     virtual void setArmPose(std::shared_ptr<Entity>, HumanoidModel::eArmPose, bool);
 
-    ModelPart* mHeadPart;
-    ModelPart* mHatPart;
-    ModelPart* mBodyPart;
-    ModelPart* mRightArmPart;
-    ModelPart* mLeftArmPart;
-    ModelPart* mRightLegPart;
-    ModelPart* mLeftLegPart;
-    ModelPart* mRightItemPart;
-    ModelPart* mLeftItemPart;
-    char gapD8[8];
-    bool flag1;
-    bool flag2;
-    bool flag3;
-    int dwordE4;
-    int dwordE8;
-    _SkinAdjustments mSkinAdjustments;
-    float float13C;
-    bool mSlim;
-    EquipmentSlot* mEquipSlot;  // Equipment slot of what?
+    ModelPart* m_mHeadPart;
+    ModelPart* m_mHatPart;
+    ModelPart* m_mBodyPart;
+    ModelPart* m_mRightArmPart;
+    ModelPart* m_mLeftArmPart;
+    ModelPart* m_mRightLegPart;
+    ModelPart* m_mLeftLegPart;
+    ModelPart* m_mRightItemPart;
+    ModelPart* m_mLeftItemPart;
+    char m_gapD8[8];
+    bool m_flag1;
+    bool m_flag2;
+    bool m_flag3;
+    int m_dwordE4;
+    int m_dwordE8;
+    _SkinAdjustments m_mSkinAdjustments;
+    float m_float13C;
+    bool m_mSlim;
+    EquipmentSlot* m_mEquipSlot;  // Equipment slot of what?
 };

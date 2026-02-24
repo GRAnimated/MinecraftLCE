@@ -37,39 +37,39 @@ void Renderer::GammaCorrect() {
     NVNpolygonState _polygon;
     NVNcolorState _color;
 
-    nvnCommandBufferBindProgram(&this->mNVNcommandBuffer, this->shaders8, 1);
-    nvnCommandBufferBindProgram(&this->mNVNcommandBuffer, this->shaders15, 2);
+    nvnCommandBufferBindProgram(&this->m_nvNcommandBuffer, this->m_shaders8, 1);
+    nvnCommandBufferBindProgram(&this->m_nvNcommandBuffer, this->m_shaders15, 2);
 
     nvnDepthStencilStateSetDefaults(&_depthStencil);
-    nvnCommandBufferBindDepthStencilState(&this->mNVNcommandBuffer, &_depthStencil);
+    nvnCommandBufferBindDepthStencilState(&this->m_nvNcommandBuffer, &_depthStencil);
 
     nvnPolygonStateSetDefaults(&_polygon);
-    nvnCommandBufferBindPolygonState(&this->mNVNcommandBuffer, &_polygon);
+    nvnCommandBufferBindPolygonState(&this->m_nvNcommandBuffer, &_polygon);
 
     nvnColorStateSetDefaults(&_color);
-    nvnCommandBufferBindColorState(&this->mNVNcommandBuffer, &_color);
+    nvnCommandBufferBindColorState(&this->m_nvNcommandBuffer, &_color);
 
     float buf[4] = {0.0f, 0.0f, 1.0f, 1.0f};
     this->BindShaderUniformData(NVN_SHADER_STAGE_VERTEX, 9, buf, sizeof(buf));
 
-    float buf2[4] = {1.0f / (mGammaIntensity * 1.5f + 0.5f), 0.0f, 0.0f, 0.0f};
+    float buf2[4] = {1.0f / (this->m_gammaIntensity * 1.5f + 0.5f), 0.0f, 0.0f, 0.0f};
     this->BindShaderUniformData(NVN_SHADER_STAGE_FRAGMENT, 5, buf2, sizeof(buf2));
 
     // those functions aren't called directly, they instead call some function that isn't defined by
     // nnheaders, would have to dig through games with symbols that also call that function to grab
     // signature... blahblah
-    nvnCommandBufferSetViewport(&this->mNVNcommandBuffer, 0, 0, textureWidths[this->dword28E8],
-                                textureHeights[this->dword28E8]);
-    nvnCommandBufferSetScissor(&this->mNVNcommandBuffer, 0, 0, textureWidths[this->dword28E8],
-                               textureHeights[this->dword28E8]);
-    nvnCommandBufferBindTexture(&this->mNVNcommandBuffer, NVN_SHADER_STAGE_FRAGMENT, 0,
-                                this->gap2858[8 * this->dword28E8]);
-    nvnCommandBufferBarrier(&this->mNVNcommandBuffer, 18);
+    nvnCommandBufferSetViewport(&this->m_nvNcommandBuffer, 0, 0, textureWidths[this->m_dword28E8],
+                                textureHeights[this->m_dword28E8]);
+    nvnCommandBufferSetScissor(&this->m_nvNcommandBuffer, 0, 0, textureWidths[this->m_dword28E8],
+                               textureHeights[this->m_dword28E8]);
+    nvnCommandBufferBindTexture(&this->m_nvNcommandBuffer, NVN_SHADER_STAGE_FRAGMENT, 0,
+                                this->m_gap2858[8 * this->m_dword28E8]);
+    nvnCommandBufferBarrier(&this->m_nvNcommandBuffer, 18);
 
     // this is poorly *decompiled* as I didn't care later as I got sidetracked
     /* nvnCommandBufferSetRenderTargets(&this->mNVNcommandBuffer, 1, this->qword26E0 +
      *(int*)&this->gap2708[24], nullptr, nullptr, nullptr);*/
-    nvnCommandBufferDrawArrays(&this->mNVNcommandBuffer, NVN_DRAW_PRIMITIVE_TRIANGLE_STRIP, 0, 4);
+    nvnCommandBufferDrawArrays(&this->m_nvNcommandBuffer, NVN_DRAW_PRIMITIVE_TRIANGLE_STRIP, 0, 4);
 }
 
 // NON_MATCHING: inline the tls offset getter, could be some compiler flag

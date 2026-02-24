@@ -45,10 +45,10 @@ public:
     virtual void getModelName();
     virtual void createModel(const ModelDefinition&);
 
-    EntityRenderDispatcher* mDispatcher;
-    int field_10;
-    float field_14;
-    void* field_18;
-    void* field_20;
-    void* field_28;
+    EntityRenderDispatcher* m_mDispatcher;
+    int m_field10;
+    float m_field14;
+    void* m_field18;
+    void* m_field20;
+    void* m_field28;
 };

@@ -8,5 +8,5 @@ public:
     void tick() override;
     void ReInit() override;
 
-    std::wstring mTextureName;
+    std::wstring m_mTextureName;
 };
