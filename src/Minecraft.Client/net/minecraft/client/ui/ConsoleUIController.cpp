@@ -25,28 +25,29 @@ ConsoleUIController::ConsoleUIController() {
     this->m_screenHeight = 720.0f;
     this->m_byte41A = 0;
     this->m_preInited = 0;
-    this->m_qword13420 = 0LL;
-    this->m_qword13428 = 0LL;
-    this->m_qword13430 = 0LL;
-    this->m_qword13438 = 0LL;
-    this->m_qword13440 = 0LL;
-    this->m_qword13448 = 0LL;
-    this->m_qword13450 = 0LL;
-    this->m_qword13458 = 0LL;
-    this->m_qword13460 = 0LL;
-    this->m_qword13468 = 0LL;
-    this->m_qword13470 = 0LL;
-    this->m_qword13478 = 0LL;
-    this->m_qword13480 = 0LL;
-    this->m_qword13488 = 0LL;
-    this->m_qword13490 = 0LL;
-    this->m_qword13498 = 0LL;
-    this->m_qword134A0 = 0LL;
-    this->m_qword134A8 = 0LL;
-    this->m_qword134B0 = 0LL;
-    this->m_qword134B8 = 0LL;
-    this->m_qword134C0 = 0LL;
-    this->m_qword134C8 = 0LL;
+
+    this->m_fuiFilePlatformSkin = nullptr;
+    this->m_fuiFileSkinGraphics = nullptr;
+    this->m_fuiFileSkinGraphicsHud = nullptr;
+    this->m_fuiFileSkinGraphicsInGame = nullptr;
+    this->m_qword13440 = nullptr;
+    this->m_fuiFileSkinGraphicsLabels = nullptr;
+    this->m_fuiFileSkinLabels = nullptr;
+    this->m_fuiFileSkinInGame = nullptr;
+    this->m_fuiFileSkinHud = nullptr;
+    this->m_qword13468 = nullptr;
+    this->m_fuiFileSkin = nullptr;
+    this->m_fuiFilePlatformSkinHd = nullptr;
+    this->m_fuiFileSkinHdGraphics = nullptr;
+    this->m_fuiFileSkinHdGraphicsHud = nullptr;
+    this->m_fuiFileSkinHdGraphicsInGame = nullptr;
+    this->m_qword13498 = nullptr;
+    this->m_fuiFileSkinHdGraphicsLabels = nullptr;
+    this->m_fuiFileSkinHdLabels = nullptr;
+    this->m_fuiFileSkinHdInGame = nullptr;
+    this->m_fuiFileSkinHdHud = nullptr;
+    this->m_qword134C0 = nullptr;
+    this->m_fuiFileSkinHd = nullptr;
 
     this->m_byte134E8 = 0;
     this->m_byte134E9 = 0;
@@ -55,7 +56,7 @@ ConsoleUIController::ConsoleUIController() {
     this->m_byte134Ec = 0;
     this->m_dword134F0 = 0;
     this->m_dword134F8 = 0;
-    this->m_byte134Fc = 0;
+    this->m_hasSetupRenderPosition = 0;
     this->m_cipa = 0;
     this->m_dword1359C = 0;
     this->m_qword135A0 = 0LL;
@@ -98,6 +99,14 @@ arrayWithLength<uchar> ConsoleUIController::getMovieData(const std::wstring& nam
     }
 }
 
+void ConsoleUIController::setupRenderPosition(int x, int y) {
+    this->m_hasSetupRenderPosition = true;
+    this->m_renderPositionX = x;
+    this->m_renderPositionY = y;
+
+    fui::sInstance->setOrigin(x, y);
+}
+
 void ConsoleUIController::clearResolutionChangeDisableFlag(eRESOLUTION_DISABLE_FLAG flag) {
     this->m_flags &= ~(1 << flag);
 }
@@ -130,3 +139,44 @@ void ConsoleUIController::SetEmptyQuadrantLogo(int) {}
 void ConsoleUIController::ShowOtherPlayersBaseScene(unsigned, bool) {}
 void ConsoleUIController::ShowAutosaveCountdownTimer(bool shown) {}
 void ConsoleUIController::UpdateAutosaveCountdownTimer(unsigned) {}
+
+fuiFile *ConsoleUIController::loadSkin(const std::wstring &filename, const std::wstring &fallback, int isHd) {
+    if (filename.empty() || !CConsoleMinecraftApp::sInstance.hasArchiveFile(filename, false))
+        return nullptr;
+
+    arrayWithLength<uchar> file = CConsoleMinecraftApp::sInstance.getArchiveFile(filename, false);
+    fuiFile *f = fui::sInstance->load(file, false, isHd);
+
+    delete file.m_data;
+
+    return f;
+}
+
+void ConsoleUIController::loadSkins() {
+    // I am so confused at why it was done in this way, but it only matches when I do this, so idk.
+    // Maybe it was some jank ifdef spam here
+    std::wstring platformSkin = L"";
+
+    platformSkin = L"skinNX.fui";
+    this->m_fuiFilePlatformSkin = this->loadSkin(platformSkin, L"platformskin.fui", 0);
+
+    platformSkin = L"skinHDNX.fui";
+    this->m_fuiFilePlatformSkinHd = this->loadSkin( platformSkin, L"platformskinHD.fui", 1);
+
+    this->m_fuiFileSkinGraphics = this->loadSkin(L"skinGraphics.fui", L"skinGraphics.fui", 0);
+    this->m_fuiFileSkinGraphicsHud = this->loadSkin(L"skinGraphicsHud.fui", L"skinGraphicsHud.fui", 0);
+    this->m_fuiFileSkinGraphicsInGame = this->loadSkin(L"skinGraphicsInGame.fui", L"skinGraphicsInGame.fui", 0);
+    this->m_fuiFileSkinGraphicsLabels = this->loadSkin(L"skinGraphicsLabels.fui", L"skinGraphicsLabels.fui", 0);
+    this->m_fuiFileSkinLabels = this->loadSkin(L"skinLabels.fui", L"skinLabels.fui", 0);
+    this->m_fuiFileSkinInGame = this->loadSkin(L"skinInGame.fui", L"skinInGame.fui", 0);
+    this->m_fuiFileSkinHud = this->loadSkin(L"skinHud.fui", L"skinHud.fui", 0);
+    this->m_fuiFileSkin = this->loadSkin(L"skin.fui", L"skin.fui", 0);
+    this->m_fuiFileSkinHdGraphics = this->loadSkin(L"skinHDGraphics.fui", L"skinHDGraphics.fui", 1);
+    this->m_fuiFileSkinHdGraphicsHud = this->loadSkin(L"skinHDGraphicsHud.fui", L"skinHDGraphicsHud.fui", 1);
+    this->m_fuiFileSkinHdGraphicsInGame = this->loadSkin(L"skinHDGraphicsInGame.fui", L"skinHDGraphicsInGame.fui", 1);
+    this->m_fuiFileSkinHdGraphicsLabels = this->loadSkin(L"skinHDGraphicsLabels.fui", L"skinHDGraphicsLabels.fui", 1);
+    this->m_fuiFileSkinHdLabels = this->loadSkin(L"skinHDLabels.fui", L"skinHDLabels.fui", 1);
+    this->m_fuiFileSkinHdInGame = this->loadSkin(L"skinHDInGame.fui", L"skinHDInGame.fui", 1);
+    this->m_fuiFileSkinHdHud = this->loadSkin(L"skinHDHud.fui", L"skinHDHud.fui", 1);
+    this->m_fuiFileSkinHd = this->loadSkin(L"skinHD.fui", L"skinHD.fui", 1);
+}

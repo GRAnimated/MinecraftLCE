@@ -13,4 +13,5 @@ public:
     static std::string sName;
 
     static FJ_FuiNode* Create(fuiRenderNode*);
+    int GetCurrentFrame();
 };

@@ -48,7 +48,7 @@ UIScene_HowToPlayMenu::UIScene_HowToPlayMenu(int padID, void* unk_unused, UILaye
 
     this->doHorizontalResizeCheck();
     this->m_dword200 = 0;
-    gConsoleUIController.TouchBoxRebuild(this);
+    g_consoleUIController.TouchBoxRebuild(this);
 }
 
 std::wstring UIScene_HowToPlayMenu::getMoviePath() {
@@ -59,7 +59,7 @@ std::wstring UIScene_HowToPlayMenu::getMoviePath() {
 }
 
 void UIScene_HowToPlayMenu::updateTooltips() {
-    gConsoleUIController.SetTooltips(this->m_padId, StringIDs::Select, StringIDs::Back_1, -1, -1, -1, -1, -1,
+    g_consoleUIController.SetTooltips(this->m_padId, StringIDs::Select, StringIDs::Back_1, -1, -1, -1, -1, -1,
                                      -1, -1, -1, -1, -1, -1, -1, -1, -1, 0, 0);
 }
 
@@ -84,11 +84,11 @@ void UIScene_HowToPlayMenu::handleReload() {
 
     this->m_uicontrolList110.setCurrentSelection(this->m_dword200, false, true);
     this->doHorizontalResizeCheck();
-    gConsoleUIController.TouchBoxRebuild(this);
+    g_consoleUIController.TouchBoxRebuild(this);
 }
 
 void UIScene_HowToPlayMenu::handleInput(int a2, int key, bool a4, bool a5, bool a6, bool& a7) {
-    gConsoleUIController.AnimateKeyPress(this->m_padId, key, a4, a5, a6);
+    g_consoleUIController.AnimateKeyPress(this->m_padId, key, a4, a5, a6);
 
     if (key == 4 || key == 5 || key == 8 || key == 9) {
         this->sendInputToMovie(key, false, a5, false);
@@ -109,8 +109,8 @@ void UIScene_HowToPlayMenu::handleInput(int a2, int key, bool a4, bool a5, bool 
 void UIScene_HowToPlayMenu::handlePress(int a2, int a3) {
     if (!a2) {
         this->m_dword200 = a3;
-        gConsoleUIController.PlayUISFX(SoundEvent::UI_PRESS);
-        gConsoleUIController.NavigateToScene(
+        g_consoleUIController.PlayUISFX(SoundEvent::UI_PRESS);
+        g_consoleUIController.NavigateToScene(
             this->m_padId, EUIScene::EUIScene_HowToPlay,
             reinterpret_cast<unsigned int*>(static_cast<uintptr_t>(
                 0x80000000 | ((dword_71011078D8[a3] << 16) | static_cast<int16_t>(this->m_padId)))),
