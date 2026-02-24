@@ -214,4 +214,13 @@ public:
     bool m_byteEb;
     int m_dwordF8;
     std::vector<UIScene::_CachedSlotDrawData*> m_cachedSlotDrawData;
+    int m_fill;  // 8
+    union {
+        int m_focusedSection;
+        union {
+            bool m_byte10C;
+            bool m_bool10D;
+            bool m_bool10E;
+        };
+    };
 };

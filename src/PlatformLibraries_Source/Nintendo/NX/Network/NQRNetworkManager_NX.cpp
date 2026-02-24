@@ -1,0 +1,1 @@
+#include "PlatformLibraries_Source/Nintendo/NX/Network/NQRNetworkManager_NX.h"
