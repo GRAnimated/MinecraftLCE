@@ -83,10 +83,10 @@ void fui::render(fuiFile* file, float a1, float a2, float a3, float a4, float a5
 
     renderer->MatrixMode(0);
     renderer->MatrixSetIdentity();
-    renderer->MatrixTranslate(this->m_unk5 - a1, this->m_unk6 - a2, -2000.0f);
+    renderer->MatrixTranslate(this->m_originX - a1, this->m_originY - a2, -2000.0f);
     renderer->MatrixScale(a5, a6, 1);
 
-    renderer->StateSetScissorRect(this->m_unk5, this->m_unk6, this->m_unk5 + a3, this->m_unk6 + a4);
+    renderer->StateSetScissorRect(this->m_originX, this->m_originY, this->m_originX + a3, this->m_originY + a4);
 
     file->m_renderNodeStage->gather(this->m_boolIdk);
 
@@ -143,4 +143,9 @@ void fui::removeEventListenerForNode(FJ_FuiNode* node) {
 
 void fui::removeManagedTexture(fuiFile* file, fuiBitmap* texture) {
     this->m_textureManager->removeManagedTexture(file, texture);
+}
+
+void fui::setOrigin(float x, float y) {
+    this->m_originX = x;
+    this->m_originY = y;
 }
