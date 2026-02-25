@@ -13,8 +13,8 @@ ClientboundRotateHeadPacket::ClientboundRotateHeadPacket() {}
 
 ClientboundRotateHeadPacket::ClientboundRotateHeadPacket(std::shared_ptr<Entity> entity,
                                                          unsigned char yHeadRot) {
-    entityId = entity->getId();
-    mYHeadRot = yHeadRot;
+    m_entityId = entity->getId();
+    m_yHeadRot = yHeadRot;
 }
 
 int ClientboundRotateHeadPacket::getEstimatedSize() {
@@ -26,13 +26,13 @@ EPacketType ClientboundRotateHeadPacket::getPacketId() {
 }
 
 void ClientboundRotateHeadPacket::read(DataInputStream* input) {
-    entityId = input->readVarInt();
-    mYHeadRot = input->readByte();
+    m_entityId = input->readVarInt();
+    m_yHeadRot = input->readByte();
 }
 
 void ClientboundRotateHeadPacket::write(DataOutputStream* output) {
-    output->writeVarInt(entityId);
-    output->writeByte(mYHeadRot);
+    output->writeVarInt(m_entityId);
+    output->writeByte(m_yHeadRot);
 }
 
 void ClientboundRotateHeadPacket::handle(PacketListener* listener) {
@@ -48,7 +48,7 @@ bool ClientboundRotateHeadPacket::isInvalidatedBy(std::shared_ptr<Packet> packet
     if (!otherPacket) {
         return false;
     }
-    return entityId == otherPacket->entityId;
+    return m_entityId == otherPacket->m_entityId;
 }
 
 bool ClientboundRotateHeadPacket::isAync() {
@@ -56,9 +56,9 @@ bool ClientboundRotateHeadPacket::isAync() {
 }
 
 int ClientboundRotateHeadPacket::getEntityId() {
-    return entityId;
+    return m_entityId;
 }
 
 unsigned char ClientboundRotateHeadPacket::getYHeadRot() {
-    return mYHeadRot;
+    return m_yHeadRot;
 }

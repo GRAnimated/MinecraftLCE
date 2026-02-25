@@ -98,9 +98,9 @@ BlockStateDefinition* RotatedPillarBlock::createBlockStateDefinition() {
 }
 
 TextureAtlasSprite* RotatedPillarBlock::getTypeTexture(const BlockState*) {
-    return this->mTexture;
+    return this->m_texture;
 }
 
 TextureAtlasSprite* RotatedPillarBlock::getTopTexture(const BlockState*) {
-    return this->mTopTexture;
+    return this->m_topTexture;
 }

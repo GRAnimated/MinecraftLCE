@@ -11,9 +11,9 @@ public:
 
     ePARTICLE_TYPE getId() const;
 
-    std::string mName;
-    ePARTICLE_TYPE mId;
-    bool mUnk1;
-    char idk[3];
-    int mUnk2;
+    std::string m_name;
+    ePARTICLE_TYPE m_id;
+    bool m_unk1;
+    char m_idk[3];
+    int m_unk2;
 };

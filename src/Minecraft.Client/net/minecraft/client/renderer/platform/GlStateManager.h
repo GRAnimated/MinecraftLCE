@@ -9,10 +9,10 @@ public:
         Color(float r, float g, float b, float a);
         Color();
 
-        float r;
-        float g;
-        float b;
-        float a;
+        float m_r;
+        float m_g;
+        float m_b;
+        float m_a;
     };
     class BooleanState {
     public:
@@ -22,8 +22,8 @@ public:
         void enable();
         void setEnabled(bool enabled);
 
-        int state;
-        bool enabled;
+        int m_state;
+        bool m_enabled;
     };
 
     // See https://docs.gl/gl2/glTexGen
@@ -32,101 +32,101 @@ public:
     public:
         TexGenCoord(int coord, int state);
 
-        BooleanState* enabled;
-        int coord;
-        int mode;
+        BooleanState* m_enabled;
+        int m_coord;
+        int m_ode;
     };
     class TexGenState {
     public:
         TexGenState();
 
-        TexGenCoord* s;
-        TexGenCoord* t;
-        TexGenCoord* r;
-        TexGenCoord* q;
+        TexGenCoord* m_s;
+        TexGenCoord* m_t;
+        TexGenCoord* m_r;
+        TexGenCoord* m_q;
     };
 
     class TextureState {
     public:
         TextureState();
 
-        BooleanState* enabled;
-        int texture;
+        BooleanState* m_enabled;
+        int m_texture;
     };
     class ClearState {
     public:
         ClearState();
 
-        double depth;
-        Color* color;
-        int stencil;
+        double m_depth;
+        Color* m_color;
+        int m_stencil;
     };
 
     class ColorMask {
     public:
         ColorMask();
 
-        bool red = true;
-        bool green = true;
-        bool blue = true;
-        bool alpha = true;
+        bool m_red = true;
+        bool m_green = true;
+        bool m_blue = true;
+        bool m_alpha = true;
     };
 
     class DepthState {
     public:
         DepthState();
 
-        BooleanState* mode;
-        bool mask;
-        int func;
+        BooleanState* m_ode;
+        bool m_ask;
+        int m_func;
     };
 
     class CullState {
     public:
         CullState();
 
-        BooleanState* enabled;
-        int mode;
+        BooleanState* m_enabled;
+        int m_ode;
     };
 
     class FogState {
     public:
         FogState();
 
-        BooleanState* enabled;
-        int mode;
-        float intenisty;
-        float start;
-        float end;
+        BooleanState* m_enabled;
+        int m_ode;
+        float m_intenisty;
+        float m_start;
+        float m_end;
     };
 
     class AlphaState {
     public:
         AlphaState();
 
-        BooleanState* mode;
-        int func;
-        float reference;
+        BooleanState* m_ode;
+        int m_func;
+        float m_reference;
     };
 
     class BlendState {
     public:
         BlendState();
 
-        BooleanState* mode;
-        int srcRgb;
-        int dstRgb;
-        int srcAlpha;
-        int dstAlpha;
+        BooleanState* m_ode;
+        int m_srcRgb;
+        int m_dstRgb;
+        int m_srcAlpha;
+        int m_dstAlpha;
     };
 
     class ColorMaterialState {
     public:
         ColorMaterialState();
 
-        BooleanState* enabled;
-        int face;
-        int mode;
+        BooleanState* m_enabled;
+        int m_face;
+        int m_ode;
     };
 
     static TexGenState* TEX_GEN;

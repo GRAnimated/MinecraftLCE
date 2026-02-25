@@ -15,6 +15,6 @@ public:
     void end();
 
 private:
-    BufferBuilder* builder;
-    void* padding;  // to match class size, may be an int
+    BufferBuilder* m_builder;
+    void* m_padding;  // to match class size, may be an int
 };

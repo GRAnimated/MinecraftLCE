@@ -4,7 +4,7 @@
 
 class CanyonFeature : public LargeFeature {
 public:
-    char filler[0x1000];
+    char m_filler[0x1000];
 };
 
 ASSERT_SIZEOF(CanyonFeature, 0x1030)

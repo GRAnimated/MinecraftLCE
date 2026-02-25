@@ -24,8 +24,8 @@ public:
         void flush() override;
         virtual void writeWithFlags(arrayWithLength<unsigned char>, unsigned int, unsigned int, int);
 
-        int field_8;
-        int field_C;
+        int m_field8;
+        int m_fieldC;
     };
 
     class SocketOutputStreamNetwork : public OutputStream {
@@ -39,9 +39,9 @@ public:
         void flush() override;
         virtual void writeWithFlags(arrayWithLength<unsigned char>, unsigned int, unsigned int, int);
 
-        int field_8;
-        int field_C;
-        Socket* mSocket;
+        int m_field8;
+        int m_fieldC;
+        Socket* m_socket;
     };
 
     long getRemoteSocketAddress();

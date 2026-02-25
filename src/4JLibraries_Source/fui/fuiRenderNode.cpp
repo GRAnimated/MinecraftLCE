@@ -10,48 +10,48 @@ fuiRenderNodeColor fuiRenderNode::DEFAULT_COLORS[2] = {{1.0f, 1.0f, 1.0f, 1.0f},
 fuiRenderNode::fuiRenderNode(fuiRenderNode* stage, fuiRenderNode* timeline, fuiObject* fuiObject,
                              unsigned int a5, eFuiObjectType fuiObjectType, unsigned char a7, fuiRGBA* color,
                              unsigned char a9, bool a10, fuiFile* fuiFile) {
-    this->mStage = stage;
-    this->mTimeline = (fuiRenderNodeTimeline*)timeline;
-    this->mFuiObject = fuiObject;
-    this->mFuiObjectType = fuiObjectType;
-    this->dword_10 = a5;
-    this->mFuiFile = fuiFile;
-    this->mMatrix = GLOBAL_MATRIX;
+    this->m_stage = stage;
+    this->m_timeline = (fuiRenderNodeTimeline*)timeline;
+    this->m_fuiObject = fuiObject;
+    this->m_fuiObjectType = fuiObjectType;
+    this->m_dword10 = a5;
+    this->m_fuiFile = fuiFile;
+    this->m_matrix = GLOBAL_MATRIX;
     this->generateGlobalMatrix();
-    this->mRenderColor = DEFAULT_COLORS[1];
-    this->mRenderColor2 = DEFAULT_COLORS[0];
-    this->mFlags = 75;
+    this->m_renderColor = DEFAULT_COLORS[1];
+    this->m_renderColor2 = DEFAULT_COLORS[0];
+    this->m_flags = 75;
 
-    this->byte_c = a7 & 3;
+    this->m_byteC = a7 & 3;
 
     if (color) {
-        this->mColor = color->color;
+        this->m_color = color->m_color;
 #ifdef MATCHING_HACK
         asm("");
 #endif
     } else {
-        this->mColor = 0;
+        this->m_color = 0;
     }
 
-    this->byte_e4 = a9 ? a9 : 1;
+    this->m_byteE4 = a9 ? a9 : 1;
 
     if (a10)
-        this->mFlags = 0x14B;
+        this->m_flags = 0x14B;
 
-    this->mPath[0] = '\0';  // null termination, I don't like that
-    this->mFuiNodeStage = nullptr;
-    this->byte_d = a7 & 0xF0;
-    this->dword_14 = 0;
-    this->mRect = {0.0f, 0.0f, 0.0f, 0.0f};
-    this->qword_d0 = nullptr;
-    this->qword_d8 = nullptr;
+    this->m_path[0] = '\0';  // null termination, I don't like that
+    this->m_fuiNodeStage = nullptr;
+    this->m_byteD = a7 & 0xF0;
+    this->m_dword14 = 0;
+    this->m_rect = {0.0f, 0.0f, 0.0f, 0.0f};
+    this->m_qwordD0 = nullptr;
+    this->m_qwordD8 = nullptr;
 }
 
 void fuiRenderNode::setScaleX(float sX) {
     float scaleX = sX / this->getScaleX();
 
-    this->mMatrix.mScaleX = this->mMatrix.mScaleX * scaleX;
-    this->mMatrix.mRotSkewX = scaleX * this->mMatrix.mRotSkewX;
+    this->m_matrix.m_scaleX = this->m_matrix.m_scaleX * scaleX;
+    this->m_matrix.m_rotSkewX = scaleX * this->m_matrix.m_rotSkewX;
 
     this->generateGlobalMatrix();
     this->progogateBounds();
@@ -60,8 +60,8 @@ void fuiRenderNode::setScaleX(float sX) {
 void fuiRenderNode::setScaleY(float sY) {
     float scaleY = sY / this->getScaleY();
 
-    this->mMatrix.mScaleY = this->mMatrix.mScaleY * scaleY;
-    this->mMatrix.mRotSkewY = scaleY * this->mMatrix.mRotSkewY;
+    this->m_matrix.m_scaleY = this->m_matrix.m_scaleY * scaleY;
+    this->m_matrix.m_rotSkewY = scaleY * this->m_matrix.m_rotSkewY;
 
     this->generateGlobalMatrix();
     this->progogateBounds();
@@ -86,38 +86,38 @@ void fuiRenderNode::setHeight(float h) {
 }
 
 float fuiRenderNode::getScaleY() {
-    return sqrtf((this->mMatrix.mScaleY * this->mMatrix.mScaleY)
-                 + (this->mMatrix.mRotSkewY * this->mMatrix.mRotSkewY));
+    return sqrtf((this->m_matrix.m_scaleY * this->m_matrix.m_scaleY)
+                 + (this->m_matrix.m_rotSkewY * this->m_matrix.m_rotSkewY));
 }
 
 fuiRenderNodeTimeline* fuiRenderNode::asTimeline() {
-    if (this->mFuiObjectType != eFuiObjectType_Timeline)
+    if (this->m_fuiObjectType != eFuiObjectType_Timeline)
         return nullptr;
 
     return reinterpret_cast<fuiRenderNodeTimeline*>(this);
 }
 
 float fuiRenderNode::getScaleX() {
-    return sqrtf((this->mMatrix.mScaleX * this->mMatrix.mScaleX)
-                 + (this->mMatrix.mRotSkewX * this->mMatrix.mRotSkewX));
+    return sqrtf((this->m_matrix.m_scaleX * this->m_matrix.m_scaleX)
+                 + (this->m_matrix.m_rotSkewX * this->m_matrix.m_rotSkewX));
 }
 
 float fuiRenderNode::getX() {
-    return this->mMatrix.mPosX;
+    return this->m_matrix.m_posX;
 }
 
 void fuiRenderNode::setX(float x) {
-    this->mMatrix.mPosX = x;
+    this->m_matrix.m_posX = x;
     this->generateGlobalMatrix();
     this->progogateBounds();
 }
 
 float fuiRenderNode::getY() {
-    return this->mMatrix.mPosY;
+    return this->m_matrix.m_posY;
 }
 
 void fuiRenderNode::setY(float y) {
-    this->mMatrix.mPosY = y;
+    this->m_matrix.m_posY = y;
     this->generateGlobalMatrix();
     this->progogateBounds();
 }
@@ -125,32 +125,32 @@ void fuiRenderNode::setY(float y) {
 void fuiRenderNode::shutdown() {};
 
 void fuiRenderNode::disableCtor() {
-    this->mFlags &= ~FLAG_CTOR_ENABLED;
+    this->m_flags &= ~FLAG_CTOR_ENABLED;
 }
 
 void fuiRenderNode::setAlpha(float a) {
-    this->mRenderColor.a = a;
+    this->m_renderColor.m_a = a;
 }
 
 void fuiRenderNode::setVisibility(bool visible) {
     if (visible)
-        this->mFlags |= FLAG_NODE_VISIBLE;
+        this->m_flags |= FLAG_NODE_VISIBLE;
     else
-        this->mFlags &= ~FLAG_NODE_VISIBLE;
+        this->m_flags &= ~FLAG_NODE_VISIBLE;
 }
 
 bool fuiRenderNode::isVisible() {
-    return this->mFlags & FLAG_NODE_VISIBLE;
+    return this->m_flags & FLAG_NODE_VISIBLE;
 }
 
 void fuiRenderNode::handleAddedToStage() {
-    if (this->mFuiNodeStage) {
-        this->mFuiNodeStage->dispatchEvent(new FJ_Event(eFJEventType::ADDED_TO_STAGE, false, false));
+    if (this->m_fuiNodeStage) {
+        this->m_fuiNodeStage->dispatchEvent(new FJ_Event(eFJEventType::ADDED_TO_STAGE, false, false));
     }
 }
 
 fuiRenderNode* fuiRenderNode::getNodeFromPath(const char* path) {
-    bool diff = strcmp(this->mPath, path) == 0 || strcmp(path, DEFAULT_PATH) == 0;
+    bool diff = strcmp(this->m_path, path) == 0 || strcmp(path, DEFAULT_PATH) == 0;
     return diff ? this : nullptr;
 }
 
@@ -163,7 +163,7 @@ fuiRenderNode* fuiRenderNode::findNode(const char* name) {
 
 void fuiRenderNode::progogateBounds() {
     // get timeline
-    if (fuiRenderNode* tl = this->mTimeline) {
+    if (fuiRenderNode* tl = this->m_timeline) {
         // make sure it's a timeline(???)
         if (fuiRenderNodeTimeline* tl2 = tl->asTimeline())
             tl2->progogateBoundsFromChild();
@@ -183,19 +183,19 @@ float fuiRenderNode::getHeight() {
 }
 
 void fuiRenderNode::getParentSpaceBounds(fuiRect* rect) {
-    rect->minX = this->mRect.minX * this->mMatrix.mScaleX + this->mMatrix.mPosX;
-    rect->maxX = this->mRect.maxX * this->mMatrix.mScaleX + this->mMatrix.mPosX;
-    rect->minY = this->mRect.minY * this->mMatrix.mRotSkewY + this->mMatrix.mPosY;
-    rect->maxY = this->mRect.maxY * this->mMatrix.mRotSkewY + this->mMatrix.mPosY;
+    rect->m_inX = this->m_rect.m_inX * this->m_matrix.m_scaleX + this->m_matrix.m_posX;
+    rect->m_axX = this->m_rect.m_axX * this->m_matrix.m_scaleX + this->m_matrix.m_posX;
+    rect->m_inY = this->m_rect.m_inY * this->m_matrix.m_rotSkewY + this->m_matrix.m_posY;
+    rect->m_axY = this->m_rect.m_axY * this->m_matrix.m_rotSkewY + this->m_matrix.m_posY;
 }
 
 void fuiRenderNode::generateGlobalMatrix() {
-    const fuiRenderNode* tl = this->mTimeline;
+    const fuiRenderNode* tl = this->m_timeline;
 
     if (tl) {
-        this->mMatrix2 = this->mMatrix * tl->mMatrix2;
+        this->m_matrix2 = this->m_matrix * tl->m_matrix2;
     } else {
-        this->mMatrix2 = this->mMatrix;
+        this->m_matrix2 = this->m_matrix;
     }
 }
 FJ_FuiNode* fuiRenderNode::Create(fuiRenderNode* node) {

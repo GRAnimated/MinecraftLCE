@@ -10,8 +10,8 @@ std::shared_ptr<Packet> ClientboundCooldownPacket::create() {
 }
 
 ClientboundCooldownPacket::ClientboundCooldownPacket() {
-    item = nullptr;
-    cooldown = 0;
+    m_item = nullptr;
+    m_cooldown = 0;
 }
 
 EPacketType ClientboundCooldownPacket::getPacketId() {
@@ -19,13 +19,13 @@ EPacketType ClientboundCooldownPacket::getPacketId() {
 }
 
 void ClientboundCooldownPacket::read(DataInputStream* input) {
-    item = Item::byId(input->readVarInt());
-    cooldown = input->readVarInt();
+    m_item = Item::byId(input->readVarInt());
+    m_cooldown = input->readVarInt();
 }
 
 void ClientboundCooldownPacket::write(DataOutputStream* output) {
-    output->writeVarInt(item->getId());
-    output->writeVarInt(cooldown);
+    output->writeVarInt(m_item->getId());
+    output->writeVarInt(m_cooldown);
 }
 
 // WHY does this one use a static pointer cast???

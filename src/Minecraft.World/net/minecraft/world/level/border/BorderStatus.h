@@ -4,7 +4,7 @@ class BorderStatus {
 public:
     BorderStatus(int color);
 
-    int mColor;
+    int m_color;
 };
 
 extern BorderStatus* gBorderStatusGrowing;

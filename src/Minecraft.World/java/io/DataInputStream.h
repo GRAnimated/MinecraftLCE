@@ -45,5 +45,5 @@ public:
     not_null_ptr<ItemInstance> readItem();
     CompoundTag* readNbt();
 
-    InputStream* mInputStream;
+    InputStream* m_inputStream;
 };

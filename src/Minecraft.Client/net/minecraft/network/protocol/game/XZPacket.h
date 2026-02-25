@@ -18,9 +18,9 @@ public:
     int getEstimatedSize() override;
 
 private:
-    char field_28 = 0;
-    int mX = 0;
-    int mZ = 0;
+    char m_field28 = 0;
+    int m_x = 0;
+    int m_z = 0;
 };
 
 ASSERT_SIZEOF(XZPacket, 0x38)

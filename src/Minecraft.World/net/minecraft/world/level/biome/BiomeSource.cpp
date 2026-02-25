@@ -18,58 +18,58 @@
 // NON_MATCHING | Score: 535 (lower is better)
 // Idk wtf is going on with this one - Azalea
 BiomeSource::LayerOverrideSettings::LayerOverrideSettings() {
-    field_38 = 0;
-    mGenScale = static_cast<eBiomeGenerationScale>(-1);
+    m_field38 = 0;
+    m_genScale = static_cast<eBiomeGenerationScale>(-1);
 
-    mRandom = new Random(System::processTimeInNanoSecs());
+    m_random = new Random(System::processTimeInNanoSecs());
 
-    long seed = mRandom->nextLong();
-    field_40 = 6;
-    mBiomeScale = 0;
-    mSeed = seed;
-    mXZSize = 54;
-    mImageWidth = 864;
-    mZoomLevel = 0;
-    mZoomX = 0;
-    mZoomZ = 0;
-    mCentreXChunk = 0;
-    mCentreZChunk = 0;
-    field_18 = 432;
-    field_1C = 12;
-    mBiomeSectionWidth = 72;
-    field_24 = 36;
+    long seed = m_random->nextLong();
+    m_field40 = 6;
+    m_biomeScale = 0;
+    m_seed = seed;
+    m_xzSize = 54;
+    m_imageWidth = 864;
+    m_zoomLevel = 0;
+    m_zoomX = 0;
+    m_zoomZ = 0;
+    m_centreXChunk = 0;
+    m_centreZChunk = 0;
+    m_field18 = 432;
+    m_field1C = 12;
+    m_biomeSectionWidth = 72;
+    m_field24 = 36;
 
-    InitializeCriticalSection(&mMutexType);
-    EnterCriticalSection(&mMutexType);
+    InitializeCriticalSection(&m_mutexType);
+    EnterCriticalSection(&m_mutexType);
 
-    mBiomes = {static_cast<unsigned int>(mImageWidth * mImageWidth), true};
+    m_biomes = {static_cast<unsigned int>(m_imageWidth * m_imageWidth), true};
 
-    LeaveCriticalSection(&mMutexType);
+    LeaveCriticalSection(&m_mutexType);
 }
 
 void BiomeSource::LayerOverrideSettings::SetGenerationScale(BiomeSource::eBiomeGenerationScale scale) {
-    mBiomeScale = scale;
+    m_biomeScale = scale;
 }
 
 bool BiomeSource::LayerOverrideSettings::isZoomed() {
-    return mZoomLevel != 0;
+    return m_zoomLevel != 0;
 }
 
 unsigned char BiomeSource::LayerOverrideSettings::GetZoomLevel() {
-    return mZoomLevel;
+    return m_zoomLevel;
 }
 
 // NON_MATCHING | Score: 560 (lower is better)
 // If I knew assembly, I bet I could figure this one out.
 // Dw tho, I'll learn assembly soon - Azalea
 bool BiomeSource::LayerOverrideSettings::ZoomIn() {
-    if (mZoomLevel != 0)
+    if (m_zoomLevel != 0)
         return false;
 
     int zoomCentreX = GetZoomedCentreX();
     int zoomCentreZ = GetZoomedCentreZ();
 
-    mZoomLevel++;
+    m_zoomLevel++;
 
     SetZoomedDisplay(zoomCentreX, zoomCentreZ);
     return true;
@@ -79,33 +79,33 @@ int BiomeSource::LayerOverrideSettings::GetZoomedCentreX() {
     if (!isZoomed())
         return 0;
 
-    int level = (int)std::pow(2.0, mZoomLevel + 1.0);
-    return field_18 * mZoomX / level;
+    int level = (int)std::pow(2.0, m_zoomLevel + 1.0);
+    return m_field18 * m_zoomX / level;
 }
 
 int BiomeSource::LayerOverrideSettings::GetZoomedCentreZ() {
     if (!isZoomed())
         return 0;
 
-    int level = (int)std::pow(2.0, mZoomLevel + 1.0);
-    return field_18 * mZoomZ / level;
+    int level = (int)std::pow(2.0, m_zoomLevel + 1.0);
+    return m_field18 * m_zoomZ / level;
 }
 
 bool BiomeSource::LayerOverrideSettings::ZoomOut() {
-    if (mZoomLevel == 0)
+    if (m_zoomLevel == 0)
         return false;
 
     int zoomCentreX = GetZoomedCentreX();
     int zoomCentreZ = GetZoomedCentreZ();
 
-    mZoomLevel--;
+    m_zoomLevel--;
 
     SetZoomedDisplay(zoomCentreX, zoomCentreZ);
     return true;
 }
 
 int BiomeSource::LayerOverrideSettings::getBiomeIndex(int x, int z) {
-    return x + mImageWidth * z;
+    return x + m_imageWidth * z;
 }
 
 // NON_MATCHING | Score: 300 (lower is better)
@@ -113,25 +113,25 @@ int BiomeSource::LayerOverrideSettings::getBiomeIndex(int x, int z) {
 void BiomeSource::LayerOverrideSettings::NullBiomeSection(int x, int z, int width, int depth) {
     unsigned long len = z;
     for (int i = width; i < depth + width; i++) {
-        Biome* biome = mBiomes[x + mImageWidth * i];
+        Biome* biome = m_biomes[x + m_imageWidth * i];
         memset((void*)biome, 0, len);
     }
 }
 
 int BiomeSource::LayerOverrideSettings::GetBiomeSectionWidth() {
-    return mBiomeSectionWidth;
+    return m_biomeSectionWidth;
 }
 
 BlockPos BiomeSource::LayerOverrideSettings::GetCursorBlockPos(float x, float z) {
-    int zoomLevel = (int)std::pow(2.0, mZoomLevel);
-    int v6 = field_18 / zoomLevel;
+    int zoomLevel = (int)std::pow(2.0, m_zoomLevel);
+    int v6 = m_field18 / zoomLevel;
 
     int centreX = 0;
     int centreZ = 0;
     if (isZoomed()) {
-        int level = (int)std::pow(2.0, mZoomLevel + 1.0);
-        centreX = field_18 * mZoomX / level;
-        centreZ = field_18 * mZoomZ / level;
+        int level = (int)std::pow(2.0, m_zoomLevel + 1.0);
+        centreX = m_field18 * m_zoomX / level;
+        centreZ = m_field18 * m_zoomZ / level;
     }
 
     double borderNX = (centreX - v6);
@@ -146,87 +146,87 @@ BlockPos BiomeSource::LayerOverrideSettings::GetCursorBlockPos(float x, float z)
 }
 
 long long BiomeSource::LayerOverrideSettings::GetSeed() {
-    return mSeed;
+    return m_seed;
 }
 
 int BiomeSource::LayerOverrideSettings::GetImageWidth() {
-    return mImageWidth;
+    return m_imageWidth;
 }
 
 BiomeSource::eBiomeGenerationScale BiomeSource::LayerOverrideSettings::GetGenerationScale() {
-    return static_cast<eBiomeGenerationScale>(mBiomeScale);
+    return static_cast<eBiomeGenerationScale>(m_biomeScale);
 }
 
 unsigned char BiomeSource::LayerOverrideSettings::GetBiomeScale() {
-    return mBiomeScale;
+    return m_biomeScale;
 }
 
 int BiomeSource::LayerOverrideSettings::GetZoomedCentreXPercent() {
     if (!isZoomed())
         return 0;
 
-    int level = (int)std::pow(2.0, mZoomLevel + 1.0);
-    return mZoomX * 100 / level;
+    int level = (int)std::pow(2.0, m_zoomLevel + 1.0);
+    return m_zoomX * 100 / level;
 }
 
 int BiomeSource::LayerOverrideSettings::GetZoomedCentreZPercent() {
     if (!isZoomed())
         return 0;
 
-    int level = (int)std::pow(2.0, mZoomLevel + 1.0);
-    return mZoomZ * 100 / level;
+    int level = (int)std::pow(2.0, m_zoomLevel + 1.0);
+    return m_zoomZ * 100 / level;
 }
 
 int BiomeSource::LayerOverrideSettings::GetCentreXChunk() {
-    return mCentreXChunk;
+    return m_centreXChunk;
 }
 
 int BiomeSource::LayerOverrideSettings::GetCentreZChunk() {
-    return mCentreZChunk;
+    return m_centreZChunk;
 }
 
 // NON_MATCHING | Score: 540 (lower is better)
 Biome* BiomeSource::LayerOverrideSettings::GetBiomeAt(float x, float z) {
     BlockPos pos = GetCursorBlockPos(x, z);
 
-    int xPos = field_18 + pos.getX();
-    if (xPos < mImageWidth - 1)
-        xPos = mImageWidth - 1;
+    int xPos = m_field18 + pos.getX();
+    if (xPos < m_imageWidth - 1)
+        xPos = m_imageWidth - 1;
 
-    int zPos = field_18 + pos.getZ();
-    if (zPos >= mImageWidth - 1)
-        zPos = mImageWidth - 1;
+    int zPos = m_field18 + pos.getZ();
+    if (zPos >= m_imageWidth - 1)
+        zPos = m_imageWidth - 1;
 
     unsigned int index = getBiomeIndex(xPos, zPos);
-    return mBiomes[index];
+    return m_biomes[index];
 }
 
 // NON_MATCHING | Score: 1425 (lower is better)
 // Something I did messed this up. I'll have to check again later - Azalea
 BiomeSource::CouldSpawnCache::CouldSpawnCache(BiomeSource* biomeSource,
                                               const FjFeatureBiomeRequirements* featureBiomeRequirements) {
-    mChunkPositions = {};
-    mBiomeSource = biomeSource;
-    mFeatureBiomeRequirements = featureBiomeRequirements;
+    m_chunkPositions = {};
+    m_biomeSource = biomeSource;
+    m_featureBiomeRequirements = featureBiomeRequirements;
 }
 
 bool BiomeSource::CouldSpawnCache::couldSpawn(int x, int z) {
     ChunkPos chunkPos(x, z);
 
-    auto it = mChunkPositions.find(chunkPos);
-    if (it == mChunkPositions.end()) {
+    auto it = m_chunkPositions.find(chunkPos);
+    if (it == m_chunkPositions.end()) {
         int blockX = x * 16 + 8;
         int blockZ = z * 16 + 8;
 
-        bool ret = mBiomeSource->containsOnly(blockX, blockZ, mFeatureBiomeRequirements->field_8,
-                                              *mFeatureBiomeRequirements->mBiomes0);
+        bool ret = m_biomeSource->containsOnly(blockX, blockZ, m_featureBiomeRequirements->m_field8,
+                                               *m_featureBiomeRequirements->m_biomes0);
         if (ret) {
-            if (mFeatureBiomeRequirements->mBiomes1 != nullptr)
-                ret = mBiomeSource->containsOnly(blockX, blockZ, mFeatureBiomeRequirements->field_1A,
-                                                 *mFeatureBiomeRequirements->mBiomes1);
+            if (m_featureBiomeRequirements->m_biomes1 != nullptr)
+                ret = m_biomeSource->containsOnly(blockX, blockZ, m_featureBiomeRequirements->m_field1A,
+                                                  *m_featureBiomeRequirements->m_biomes1);
         }
 
-        mChunkPositions.at(chunkPos) = ret;
+        m_chunkPositions.at(chunkPos) = ret;
         return ret;
     }
 
@@ -248,20 +248,20 @@ BiomeSource::BiomeSource(LevelData* levelData) {
 }
 
 void BiomeSource::init() {
-    InitializeCriticalSection(&mMutexType);
+    InitializeCriticalSection(&m_mutexType);
 
-    mNoiseBiomeLayer = nullptr;
-    mBlockBiomeLayer = nullptr;
+    m_noiseBiomeLayer = nullptr;
+    m_blockBiomeLayer = nullptr;
 
-    mBiomeCache = new BiomeCache(this);
+    m_biomeCache = new BiomeCache(this);
 
-    mPossibleBiomes.push_back(Biome::FOREST);
-    mPossibleBiomes.push_back(Biome::PLAINS);
-    mPossibleBiomes.push_back(Biome::TAIGA);
-    mPossibleBiomes.push_back(Biome::TAIGA_HILLS);
-    mPossibleBiomes.push_back(Biome::FOREST_HILLS);
-    mPossibleBiomes.push_back(Biome::JUNGLE);
-    mPossibleBiomes.push_back(Biome::JUNGLE_HILLS);
+    m_possibleBiomes.push_back(Biome::FOREST);
+    m_possibleBiomes.push_back(Biome::PLAINS);
+    m_possibleBiomes.push_back(Biome::TAIGA);
+    m_possibleBiomes.push_back(Biome::TAIGA_HILLS);
+    m_possibleBiomes.push_back(Biome::FOREST_HILLS);
+    m_possibleBiomes.push_back(Biome::JUNGLE);
+    m_possibleBiomes.push_back(Biome::JUNGLE_HILLS);
 }
 
 void BiomeSource::init(long long seed, LevelType* levelType, SuperflatConfig* superflatConfig,
@@ -270,36 +270,36 @@ void BiomeSource::init(long long seed, LevelType* levelType, SuperflatConfig* su
 
     arrayWithLength<std::shared_ptr<Layer>> layers
         = Layer::getDefaultLayers(seed, levelType, superflatConfig, levelData, settings);
-    mNoiseBiomeLayer = layers[0];
-    mBlockBiomeLayer = layers[1];
+    m_noiseBiomeLayer = layers[0];
+    m_blockBiomeLayer = layers[1];
 
-    delete[] layers.data;
+    delete[] layers.m_data;
 }
 
 void BiomeSource::update() {
-    mBiomeCache->update();
+    m_biomeCache->update();
 }
 
 bool BiomeSource::fjCouldSpawn(const FjFeatureBiomeRequirements* biomeRequirements, int x, int z) {
-    for (CouldSpawnCache& couldSpawnCache : mCouldSpawnCaches) {
-        if (couldSpawnCache.mFeatureBiomeRequirements == biomeRequirements) {
-            EnterCriticalSection(&mMutexType);
+    for (CouldSpawnCache& couldSpawnCache : m_couldSpawnCaches) {
+        if (couldSpawnCache.m_featureBiomeRequirements == biomeRequirements) {
+            EnterCriticalSection(&m_mutexType);
             bool ret = couldSpawnCache.couldSpawn(x, z);
-            LeaveCriticalSection(&mMutexType);
+            LeaveCriticalSection(&m_mutexType);
 
             return ret;
         }
     }
 
-    mCouldSpawnCaches.emplace_back(CouldSpawnCache(this, biomeRequirements));
+    m_couldSpawnCaches.emplace_back(CouldSpawnCache(this, biomeRequirements));
 
     return fjCouldSpawn(biomeRequirements, x, z);
 }
 
 BiomeSource::~BiomeSource() {
-    nn::os::FinalizeMutex(&mMutexType);
+    nn::os::FinalizeMutex(&m_mutexType);
 
-    delete mBiomeCache;
+    delete m_biomeCache;
 }
 
 Biome* BiomeSource::getBiome(const BlockPos& pos) {
@@ -307,7 +307,7 @@ Biome* BiomeSource::getBiome(const BlockPos& pos) {
 }
 
 Biome* BiomeSource::getBiome(const BlockPos& pos, Biome* biome) {
-    return mBiomeCache->getBiome(pos.getX(), pos.getZ(), biome);
+    return m_biomeCache->getBiome(pos.getX(), pos.getZ(), biome);
 }
 
 void BiomeSource::getRawBiomeBlock(arrayWithLength<Biome*>& biomes, int x, int z, int width,
@@ -320,7 +320,7 @@ void BiomeSource::getRawBiomeBlock(arrayWithLength<Biome*>& biomes, int x, int z
     PIXEndNamedEvent();
 
     PIXBeginNamedEvent(0.0, "Getting area");
-    arrayWithLength<int> area = mNoiseBiomeLayer->getArea(x, z, width, depth);
+    arrayWithLength<int> area = m_noiseBiomeLayer->getArea(x, z, width, depth);
     PIXEndNamedEvent();
 
     PIXBeginNamedEvent(0.0, "Copying values");
@@ -333,7 +333,7 @@ void BiomeSource::getRawBiomeBlock(arrayWithLength<Biome*>& biomes, int x, int z
 void BiomeSource::getRawBiomeIndices(arrayWithLength<int>& biomes, int x, int z, int width, int depth) const {
     IntCache::releaseAll();
 
-    arrayWithLength<int> area = mNoiseBiomeLayer->getArea(x, z, width, depth);
+    arrayWithLength<int> area = m_noiseBiomeLayer->getArea(x, z, width, depth);
 
     for (int i = 0; i < width * depth; i++) {
         biomes[i] = area[i];
@@ -352,15 +352,15 @@ void BiomeSource::getBiomeBlock(arrayWithLength<Biome*>& biomes, int x, int z, i
     if (bl && width == 16 && depth == 16 && (x & 15) == 0 && (z & 15) == 0) {
         PIXBeginNamedEvent(0.0, "Copying cache");
 
-        arrayWithLength<Biome*> biomeBlock = mBiomeCache->getBiomeBlockAt(x, z);
+        arrayWithLength<Biome*> biomeBlock = m_biomeCache->getBiomeBlockAt(x, z);
         System::arraycopy(biomeBlock, 0, &biomes, 0, width * depth);
 
-        delete biomeBlock.data;
+        delete biomeBlock.m_data;
 
         PIXEndNamedEvent();
     } else {
         PIXBeginNamedEvent(0.0, "Getting area");
-        arrayWithLength<int> area = mBlockBiomeLayer->getArea(x, z, width, depth);
+        arrayWithLength<int> area = m_blockBiomeLayer->getArea(x, z, width, depth);
         PIXEndNamedEvent();
 
         PIXBeginNamedEvent(0.0, "Copying values");
@@ -373,7 +373,7 @@ void BiomeSource::getBiomeBlock(arrayWithLength<Biome*>& biomes, int x, int z, i
 
 arrayWithLength<unsigned char> BiomeSource::getBiomeIndexBlock(int x, int z, int width, int depth) const {
     if (width == 16 && depth == 16 && (x & 15) == 0 && (z & 15) == 0) {
-        return mBiomeCache->getBiomeIndexBlockAt(x, z);
+        return m_biomeCache->getBiomeIndexBlockAt(x, z);
     }
 
     arrayWithLength<unsigned char> biomes;
@@ -389,12 +389,12 @@ void BiomeSource::getBiomeIndexBlock(arrayWithLength<unsigned char>& biomes, int
 
     if (bl && width == 16 && depth == 16 && (x & 15) == 0 && (z & 15) == 0) {
         PIXBeginNamedEvent(0.0, "Copying cached block");
-        arrayWithLength<unsigned char> biomeBlock = mBiomeCache->getBiomeIndexBlockAt(x, z);
+        arrayWithLength<unsigned char> biomeBlock = m_biomeCache->getBiomeIndexBlockAt(x, z);
         System::arraycopy(biomeBlock, 0, &biomes, 0, width * depth);
         PIXEndNamedEvent();
     } else {
         PIXBeginNamedEvent(0.0, "Getting area");
-        arrayWithLength<int> area = mBlockBiomeLayer->getArea(x, z, width, depth);
+        arrayWithLength<int> area = m_blockBiomeLayer->getArea(x, z, width, depth);
         PIXEndNamedEvent();
 
         PIXBeginNamedEvent(0.0, "Copying values");
@@ -415,7 +415,7 @@ bool BiomeSource::containsOnly(int x, int z, int radius, const std::vector<Biome
     int width = n - xPos + 1;
     int depth = o - zPos + 1;
 
-    arrayWithLength<int> area = mNoiseBiomeLayer->getArea(xPos, zPos, width, depth);
+    arrayWithLength<int> area = m_noiseBiomeLayer->getArea(xPos, zPos, width, depth);
 
     for (int i = 0; i < width * depth; i++) {
         Biome* biome = Biome::getBiome(area[i]);
@@ -438,7 +438,7 @@ BlockPos* BiomeSource::findBiome(int x, int z, int radius, std::vector<Biome*> b
     int depth = o - zPos + 1;
 
     MemSect(50);
-    arrayWithLength<int> area = mNoiseBiomeLayer->getArea(xPos, zPos, width, depth);
+    arrayWithLength<int> area = m_noiseBiomeLayer->getArea(xPos, zPos, width, depth);
     BlockPos* blockPos = nullptr;
 
     int i = 0;

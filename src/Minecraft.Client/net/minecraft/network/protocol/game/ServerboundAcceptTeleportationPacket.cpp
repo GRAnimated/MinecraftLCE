@@ -11,7 +11,7 @@ std::shared_ptr<Packet> ServerboundAcceptTeleportationPacket::create() {
 ServerboundAcceptTeleportationPacket::ServerboundAcceptTeleportationPacket() {}
 
 ServerboundAcceptTeleportationPacket::ServerboundAcceptTeleportationPacket(int id) {
-    mId = id;
+    m_id = id;
 }
 
 EPacketType ServerboundAcceptTeleportationPacket::getPacketId() {
@@ -19,11 +19,11 @@ EPacketType ServerboundAcceptTeleportationPacket::getPacketId() {
 }
 
 void ServerboundAcceptTeleportationPacket::read(DataInputStream* input) {
-    mId = input->readVarInt();
+    m_id = input->readVarInt();
 }
 
 void ServerboundAcceptTeleportationPacket::write(DataOutputStream* output) {
-    output->writeVarInt(mId);
+    output->writeVarInt(m_id);
 }
 
 void ServerboundAcceptTeleportationPacket::handle(PacketListener* listener) {
@@ -31,5 +31,5 @@ void ServerboundAcceptTeleportationPacket::handle(PacketListener* listener) {
 }
 
 int ServerboundAcceptTeleportationPacket::getId() {
-    return mId;
+    return m_id;
 }

@@ -17,5 +17,5 @@ public:
     int getUnboxedValue(const std::wstring& key) const override;
     ~IntegerProperty();
 
-    std::vector<Boxed*> mAllowedValues;
+    std::vector<Boxed*> m_allowedValues;
 };

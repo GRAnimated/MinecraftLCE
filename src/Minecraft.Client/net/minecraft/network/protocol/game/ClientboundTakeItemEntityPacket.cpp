@@ -9,9 +9,9 @@ std::shared_ptr<Packet> ClientboundTakeItemEntityPacket::create() {
 }
 
 ClientboundTakeItemEntityPacket::ClientboundTakeItemEntityPacket() {
-    playerId = -1;
-    itemId = -1;
-    amount = -1;
+    m_playerId = -1;
+    m_itemId = -1;
+    m_amount = -1;
 }
 
 EPacketType ClientboundTakeItemEntityPacket::getPacketId() {
@@ -19,15 +19,15 @@ EPacketType ClientboundTakeItemEntityPacket::getPacketId() {
 }
 
 void ClientboundTakeItemEntityPacket::read(DataInputStream* input) {
-    itemId = input->readVarInt();
-    playerId = input->readVarInt();
-    amount = input->readVarInt();
+    m_itemId = input->readVarInt();
+    m_playerId = input->readVarInt();
+    m_amount = input->readVarInt();
 }
 
 void ClientboundTakeItemEntityPacket::write(DataOutputStream* output) {
-    output->writeVarInt(itemId);
-    output->writeVarInt(playerId);
-    output->writeVarInt(amount);
+    output->writeVarInt(m_itemId);
+    output->writeVarInt(m_playerId);
+    output->writeVarInt(m_amount);
 }
 
 void ClientboundTakeItemEntityPacket::handle(PacketListener* listener) {
@@ -35,13 +35,13 @@ void ClientboundTakeItemEntityPacket::handle(PacketListener* listener) {
 }
 
 int ClientboundTakeItemEntityPacket::getItemId() {
-    return itemId;
+    return m_itemId;
 }
 
 int ClientboundTakeItemEntityPacket::getPlayerId() {
-    return playerId;
+    return m_playerId;
 }
 
 int ClientboundTakeItemEntityPacket::getAmount() {
-    return amount;
+    return m_amount;
 }

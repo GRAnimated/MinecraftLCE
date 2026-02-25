@@ -12,5 +12,5 @@ class CoalItem : public Item {
     void registerIcons(IconRegister* iconRegister) override;
     TextureAtlasSprite* getIcon(int auxValue) override;
 
-    TextureAtlasSprite* mCharcoalIcon;
+    TextureAtlasSprite* m_charcoalIcon;
 };

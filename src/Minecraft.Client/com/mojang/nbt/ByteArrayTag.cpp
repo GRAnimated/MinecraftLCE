@@ -6,40 +6,40 @@
 #include "net/minecraft/core/System.h"
 
 ByteArrayTag::ByteArrayTag() {
-    unknown = false;
+    m_unknown = false;
 }
 
 ByteArrayTag::ByteArrayTag(arrayWithLength<u8> data, bool unk) {
-    mData = data;
-    unknown = unk;
+    m_data = data;
+    m_unknown = unk;
 }
 
 ByteArrayTag::~ByteArrayTag() {
-    if (unknown)
-        delete mData.data;
+    if (m_unknown)
+        delete m_data.m_data;
 }
 
 void ByteArrayTag::write(DataOutput* outputStream) {
-    outputStream->writeInt(mData.length);
-    outputStream->write(mData);
+    outputStream->writeInt(m_data.m_length);
+    outputStream->write(m_data);
 }
 
 void ByteArrayTag::load(DataInput* inputStream, int) {
     int len = inputStream->readInt();
 
-    if (unknown) {
-        delete[] mData.data;
+    if (m_unknown) {
+        delete[] m_data.m_data;
     } else {
-        unknown = true;
+        m_unknown = true;
     }
 
-    mData = arrayWithLength<u8>(len, true);
-    inputStream->readFully(mData);
+    m_data = arrayWithLength<u8>(len, true);
+    inputStream->readFully(m_data);
 }
 
 std::wstring ByteArrayTag::toString() {
     static wchar_t buffer[32];
-    swprintf(buffer, 32, L"[%d bytes]", mData.length);
+    swprintf(buffer, 32, L"[%d bytes]", m_data.m_length);
     return buffer;
 }
 
@@ -52,24 +52,24 @@ bool ByteArrayTag::equals(Tag* other) {
         return false;
 
     ByteArrayTag* otherCasted = (ByteArrayTag*)other;
-    arrayWithLength<u8> data = this->mData;
-    if (!data.data) {
-        return otherCasted->mData.data == nullptr;
+    arrayWithLength<u8> data = this->m_data;
+    if (!data.m_data) {
+        return otherCasted->m_data.m_data == nullptr;
     }
 
-    unsigned int len = mData.length;
+    unsigned int len = m_data.m_length;
 
-    if (len == otherCasted->mData.length) {
-        return memcmp(data.data, otherCasted->mData.data, len) == 0;
+    if (len == otherCasted->m_data.m_length) {
+        return memcmp(data.m_data, otherCasted->m_data.m_data, len) == 0;
     }
 
     return false;
 }
 
 Tag* ByteArrayTag::copy() {
-    arrayWithLength<u8> copy(mData.length, true);
+    arrayWithLength<u8> copy(m_data.m_length, true);
 
-    System::arraycopy(mData, 0, &copy, 0, mData.length);
+    System::arraycopy(m_data, 0, &copy, 0, m_data.m_length);
 
     return new ByteArrayTag(copy, true);
 }

@@ -97,5 +97,5 @@ public:
     void field_298() override;
 
     static CStorage* sInstance;  // apparently there are 2 of these????
-    char padding[0x18C8];
+    char m_padding[0x18C8];
 };

@@ -2,42 +2,42 @@
 #include "net/minecraft/core/System.h"
 
 void C4JThreadImpl::Run() {
-    this->mStartTime = System::processTimeInMilliSecs();
-    this->mHasStarted = true;
-    this->mIsRunning = true;
-    nn::os::StartThread(mThread);
+    this->m_startTime = System::processTimeInMilliSecs();
+    this->m_hasStarted = true;
+    this->m_isRunning = true;
+    nn::os::StartThread(m_thread);
 }
 
 bool C4JThreadImpl::isRunning() {
-    return this->mIsRunning;
+    return this->m_isRunning;
 }
 
 bool C4JThreadImpl::hasStarted() {
-    return this->mHasStarted;
+    return this->m_hasStarted;
 }
 
 // NON_MATCHING | Score: 10 (lower is better)
 // there's uxtw instead of original sxtw
 void C4JThreadImpl::SetProcessor(int core) {
-    this->mProcessor = core;
+    this->m_processor = core;
 
-    const unsigned int idx = this->mProcessor % 3;
+    const unsigned int idx = this->m_processor % 3;
 
     sMask = (idx < 3) ? sCores[idx] : 1;
-    nn::os::SetThreadCoreMask(this->mThread, idx, sMask);
+    nn::os::SetThreadCoreMask(this->m_thread, idx, sMask);
 }
 
 int C4JThreadImpl::GetProcessor() {
-    return this->mProcessor;
+    return this->m_processor;
 }
 
 void C4JThreadImpl::SetPriority(int priority) {
     unsigned p = priority - 14;
 
-    mPriority = 16;
+    m_priority = 16;
     if (p < 5)
-        mPriority = priority;
-    nn::os::ChangeThreadPriority(this->mThread, mPriority);
+        m_priority = priority;
+    nn::os::ChangeThreadPriority(this->m_thread, m_priority);
 }
 
 // NON_MATCHING

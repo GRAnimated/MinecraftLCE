@@ -21,7 +21,7 @@ public:
     int getAmount();
 
 private:
-    int itemId;
-    int playerId;
-    int amount;
+    int m_itemId;
+    int m_playerId;
+    int m_amount;
 };

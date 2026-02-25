@@ -18,6 +18,6 @@ public:
 
     AABB* getArea();
 
-    std::wstring mName;
-    AABB* mAABB;
+    std::wstring m_name;
+    AABB* m_aabb;
 };

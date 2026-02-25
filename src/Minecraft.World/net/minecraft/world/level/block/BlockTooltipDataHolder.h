@@ -15,14 +15,14 @@ public:
                            InteractionResult::EInteractionResult interactionResult, bool allowedToUse,
                            bool itemInstanceEmpty, bool allowedToMine, bool belowBuildHeight);
 
-    std::shared_ptr<MultiplayerLocalPlayer> mPlayer;
-    MultiPlayerLevel* mLevel;
-    not_null_ptr<ItemInstance> mItemInstance;
-    const BlockState* mBlockState;
-    BlockPos mPos;
-    InteractionResult::EInteractionResult mInteractionResult;
-    bool mPlayerAllowedToUse;
-    bool mPlayerAllowedToMine;
-    bool mItemInstanceEmpty;
-    bool mBelowBuildHeight;
+    std::shared_ptr<MultiplayerLocalPlayer> m_player;
+    MultiPlayerLevel* m_level;
+    not_null_ptr<ItemInstance> m_itemInstance;
+    const BlockState* m_blockState;
+    BlockPos m_pos;
+    InteractionResult::EInteractionResult m_interactionResult;
+    bool m_playerAllowedToUse;
+    bool m_playerAllowedToMine;
+    bool m_itemInstanceEmpty;
+    bool m_belowBuildHeight;
 };

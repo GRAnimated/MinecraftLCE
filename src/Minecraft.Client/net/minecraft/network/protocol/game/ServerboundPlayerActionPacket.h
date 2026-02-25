@@ -32,8 +32,8 @@ public:
     int getUseTime();
 
 private:
-    BlockPos pos;
-    const Direction* direction;
-    int action;
-    int useTime;
+    BlockPos m_pos;
+    const Direction* m_direction;
+    int m_action;
+    int m_useTime;
 };

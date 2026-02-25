@@ -53,8 +53,8 @@ public:
     static void map(int, bool, bool, bool, bool, const std::type_info&, std::shared_ptr<Packet> (*)(),
                     std::wstring);
 
-    long long mCreatedTime;  // seems to be longlong judging by class size on wii u
-    bool mShouldDelay;
+    long long m_createdTime;  // seems to be longlong judging by class size on wii u
+    bool m_shouldDelay;
 };
 
 ASSERT_SIZEOF(Packet, 0x18)

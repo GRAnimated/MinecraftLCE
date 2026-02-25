@@ -26,9 +26,9 @@ SandStoneBlock::Variant* SandStoneBlock::Variant::VARIANTS[3]
 SandStoneBlock::SandStoneBlock() : Block(Material::STONE) {
     this->DerivedInit();
 
-    const BlockState* state = this->mBlockStateDefinition->any()->setValue(TYPE, Variant::DEFAULT);
+    const BlockState* state = this->m_blockStateDefinition->any()->setValue(TYPE, Variant::DEFAULT);
     this->registerDefaultState(state);
-    memset(this->mVariantsTextures, 0, sizeof(this->mVariantsTextures));
+    memset(this->m_variantsTextures, 0, sizeof(this->m_variantsTextures));
 }
 
 void SandStoneBlock::blockStaticCtor() {
@@ -59,24 +59,24 @@ std::wstring SandStoneBlock::SANDSTONE_TOP = L"sandstone_top";
 std::wstring SandStoneBlock::SANDSTONE_BOTTOM = L"sandstone_bottom";
 
 void SandStoneBlock::registerIcons(IconRegister* iconReg) {
-    this->mVariantsTextures[0] = iconReg->registerIcon(VARIANT_TEXTURE_NAMES[0]);
-    this->mVariantsTextures[1] = iconReg->registerIcon(VARIANT_TEXTURE_NAMES[1]);
-    this->mVariantsTextures[2] = iconReg->registerIcon(VARIANT_TEXTURE_NAMES[2]);
+    this->m_variantsTextures[0] = iconReg->registerIcon(VARIANT_TEXTURE_NAMES[0]);
+    this->m_variantsTextures[1] = iconReg->registerIcon(VARIANT_TEXTURE_NAMES[1]);
+    this->m_variantsTextures[2] = iconReg->registerIcon(VARIANT_TEXTURE_NAMES[2]);
 
-    this->mTopTexture = iconReg->registerIcon(SANDSTONE_TOP);
-    this->mBottomTexture = iconReg->registerIcon(SANDSTONE_BOTTOM);
+    this->m_topTexture = iconReg->registerIcon(SANDSTONE_TOP);
+    this->m_bottomTexture = iconReg->registerIcon(SANDSTONE_BOTTOM);
 }
 
 TextureAtlasSprite* SandStoneBlock::getTexture(const Direction* direction, const BlockState* state) {
     Variant* variant = state->getValue<Variant*>(TYPE);
     if (direction == Direction::UP)
-        return this->mTopTexture;
+        return this->m_topTexture;
     if (direction != Direction::DOWN)
-        return this->mVariantsTextures[variant->getData()];
+        return this->m_variantsTextures[variant->getData()];
     if (variant != Variant::CHISELED && variant != Variant::SMOOTH)
-        return this->mBottomTexture;
+        return this->m_bottomTexture;
 
-    return this->mTopTexture;
+    return this->m_topTexture;
 }
 
 // NON_MATCHING: see comment below

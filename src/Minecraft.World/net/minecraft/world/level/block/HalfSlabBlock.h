@@ -20,12 +20,12 @@ public:
             return VARIANTS[data > (sizeof(VARIANTS) / sizeof(Half*)) - 1 ? 0 : data];
         }
 
-        Half(const std::wstring& name) { this->mName = name; }
+        Half(const std::wstring& name) { this->m_name = name; }
 
-        std::wstring toString() const override { return this->mName; }
-        std::wstring getSerializedName() const override { return this->mName; }
+        std::wstring toString() const override { return this->m_name; }
+        std::wstring getSerializedName() const override { return this->m_name; }
 
-        std::wstring mName;
+        std::wstring m_name;
     };
 
     static inline EnumProperty<Half*>* VARIANT;

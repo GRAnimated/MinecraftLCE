@@ -29,12 +29,12 @@ unsigned char EntityDataSerializers::BYTE_EntityDataSerializer::copy(unsigned ch
 }
 
 EntityDataAccessor_Base* EntityDataSerializers::BYTE_EntityDataSerializer::getOrCreateStoredAccessor(int id) {
-    auto it = mAccessors.find(id);
-    if (it != mAccessors.end())
+    auto it = m_accessors.find(id);
+    if (it != m_accessors.end())
         return it->second;
 
     auto accessor = new EntityDataAccessor<unsigned char>(id, this);
-    mAccessors[id] = accessor;
+    m_accessors[id] = accessor;
     return accessor;
 }
 
@@ -59,12 +59,12 @@ int EntityDataSerializers::INT_EntityDataSerializer::copy(int value) const {
 }
 
 EntityDataAccessor_Base* EntityDataSerializers::INT_EntityDataSerializer::getOrCreateStoredAccessor(int id) {
-    auto it = mAccessors.find(id);
-    if (it != mAccessors.end())
+    auto it = m_accessors.find(id);
+    if (it != m_accessors.end())
         return it->second;
 
     auto accessor = new EntityDataAccessor<int>(id, this);
-    mAccessors[id] = accessor;
+    m_accessors[id] = accessor;
     return accessor;
 }
 
@@ -91,12 +91,12 @@ float EntityDataSerializers::FLOAT_EntityDataSerializer::copy(float value) const
 
 EntityDataAccessor_Base*
 EntityDataSerializers::FLOAT_EntityDataSerializer::getOrCreateStoredAccessor(int id) {
-    auto it = mAccessors.find(id);
-    if (it != mAccessors.end())
+    auto it = m_accessors.find(id);
+    if (it != m_accessors.end())
         return it->second;
 
     auto accessor = new EntityDataAccessor<float>(id, this);
-    mAccessors[id] = accessor;
+    m_accessors[id] = accessor;
     return accessor;
 }
 
@@ -123,12 +123,12 @@ std::wstring EntityDataSerializers::STRING_EntityDataSerializer::copy(std::wstri
 
 EntityDataAccessor_Base*
 EntityDataSerializers::STRING_EntityDataSerializer::getOrCreateStoredAccessor(int id) {
-    auto it = mAccessors.find(id);
-    if (it != mAccessors.end())
+    auto it = m_accessors.find(id);
+    if (it != m_accessors.end())
         return it->second;
 
     auto accessor = new EntityDataAccessor<std::wstring>(id, this);
-    mAccessors[id] = accessor;
+    m_accessors[id] = accessor;
     return accessor;
 }
 
@@ -157,12 +157,12 @@ EntityDataSerializers::ITEM_INSTANCE_EntityDataSerializer::copy(not_null_ptr<Ite
 
 EntityDataAccessor_Base*
 EntityDataSerializers::ITEM_INSTANCE_EntityDataSerializer::getOrCreateStoredAccessor(int id) {
-    auto it = mAccessors.find(id);
-    if (it != mAccessors.end())
+    auto it = m_accessors.find(id);
+    if (it != m_accessors.end())
         return it->second;
 
     auto accessor = new EntityDataAccessor<not_null_ptr<ItemInstance>>(id, this);
-    mAccessors[id] = accessor;
+    m_accessors[id] = accessor;
     return accessor;
 }
 
@@ -197,12 +197,12 @@ EntityDataSerializers::BLOCK_STATE_EntityDataSerializer::copy(const BlockState* 
 
 EntityDataAccessor_Base*
 EntityDataSerializers::BLOCK_STATE_EntityDataSerializer::getOrCreateStoredAccessor(int id) {
-    auto it = mAccessors.find(id);
-    if (it != mAccessors.end())
+    auto it = m_accessors.find(id);
+    if (it != m_accessors.end())
         return it->second;
 
     auto accessor = new EntityDataAccessor<const BlockState*>(id, this);
-    mAccessors[id] = accessor;
+    m_accessors[id] = accessor;
     return accessor;
 }
 
@@ -229,12 +229,12 @@ bool EntityDataSerializers::BOOLEAN_EntityDataSerializer::copy(bool value) const
 
 EntityDataAccessor_Base*
 EntityDataSerializers::BOOLEAN_EntityDataSerializer::getOrCreateStoredAccessor(int id) {
-    auto it = mAccessors.find(id);
-    if (it != mAccessors.end())
+    auto it = m_accessors.find(id);
+    if (it != m_accessors.end())
         return it->second;
 
     auto accessor = new EntityDataAccessor<bool>(id, this);
-    mAccessors[id] = accessor;
+    m_accessors[id] = accessor;
     return accessor;
 }
 
@@ -266,12 +266,12 @@ const Rotations* EntityDataSerializers::ROTATIONS_EntitySerializer::copy(const R
 
 EntityDataAccessor_Base*
 EntityDataSerializers::ROTATIONS_EntitySerializer::getOrCreateStoredAccessor(int id) {
-    auto it = mAccessors.find(id);
-    if (it != mAccessors.end())
+    auto it = m_accessors.find(id);
+    if (it != m_accessors.end())
         return it->second;
 
     auto accessor = new EntityDataAccessor<const Rotations*>(id, this);
-    mAccessors[id] = accessor;
+    m_accessors[id] = accessor;
     return accessor;
 }
 
@@ -298,12 +298,12 @@ BlockPos EntityDataSerializers::BLOCK_POS_EntityDataSerializer::copy(BlockPos va
 
 EntityDataAccessor_Base*
 EntityDataSerializers::BLOCK_POS_EntityDataSerializer::getOrCreateStoredAccessor(int id) {
-    auto it = mAccessors.find(id);
-    if (it != mAccessors.end())
+    auto it = m_accessors.find(id);
+    if (it != m_accessors.end())
         return it->second;
 
     auto accessor = new EntityDataAccessor<BlockPos>(id, this);
-    mAccessors[id] = accessor;
+    m_accessors[id] = accessor;
     return accessor;
 }
 
@@ -338,12 +338,12 @@ BlockPos* EntityDataSerializers::OPTIONAL_BLOCK_POS_EntityDataSerializer::copy(B
 
 EntityDataAccessor_Base*
 EntityDataSerializers::OPTIONAL_BLOCK_POS_EntityDataSerializer::getOrCreateStoredAccessor(int id) {
-    auto it = mAccessors.find(id);
-    if (it != mAccessors.end())
+    auto it = m_accessors.find(id);
+    if (it != m_accessors.end())
         return it->second;
 
     auto accessor = new EntityDataAccessor<BlockPos*>(id, this);
-    mAccessors[id] = accessor;
+    m_accessors[id] = accessor;
     return accessor;
 }
 
@@ -371,12 +371,12 @@ const Direction* EntityDataSerializers::DIRECTION_EntityDataSerializer::copy(con
 
 EntityDataAccessor_Base*
 EntityDataSerializers::DIRECTION_EntityDataSerializer::getOrCreateStoredAccessor(int id) {
-    auto it = mAccessors.find(id);
-    if (it != mAccessors.end())
+    auto it = m_accessors.find(id);
+    if (it != m_accessors.end())
         return it->second;
 
     auto accessor = new EntityDataAccessor<const Direction*>(id, this);
-    mAccessors[id] = accessor;
+    m_accessors[id] = accessor;
     return accessor;
 }
 
@@ -404,11 +404,11 @@ CompoundTag* EntityDataSerializers::COMPOUND_TAG_EntityDataSerializer::copy(Comp
 
 EntityDataAccessor_Base*
 EntityDataSerializers::COMPOUND_TAG_EntityDataSerializer::getOrCreateStoredAccessor(int id) {
-    auto it = mAccessors.find(id);
-    if (it != mAccessors.end())
+    auto it = m_accessors.find(id);
+    if (it != m_accessors.end())
         return it->second;
 
     auto accessor = new EntityDataAccessor<CompoundTag*>(id, this);
-    mAccessors[id] = accessor;
+    m_accessors[id] = accessor;
     return accessor;
 }

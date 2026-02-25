@@ -45,5 +45,5 @@ public:
     template <typename T>
     T get(const EntityDataAccessor<T>*);
 
-    void* padding[0x101];
+    void* m_padding[0x101];
 };

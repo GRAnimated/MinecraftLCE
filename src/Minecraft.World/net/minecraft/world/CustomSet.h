@@ -4,8 +4,8 @@ class CustomSet {
 public:
     CustomSet();
 
-    void* qword_0;
-    void* qword_8;
-    int dword_10;
-    void* field_18;
+    void* m_qword0;
+    void* m_qword8;
+    int m_dword10;
+    void* m_field18;
 };

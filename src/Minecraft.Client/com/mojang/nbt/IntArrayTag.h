@@ -16,5 +16,5 @@ public:
     bool equals(Tag*) override;
     Tag* copy() override;
 
-    arrayWithLength<int> mData;
+    arrayWithLength<int> m_data;
 };

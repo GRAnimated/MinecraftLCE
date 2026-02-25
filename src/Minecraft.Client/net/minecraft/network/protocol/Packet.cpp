@@ -127,8 +127,8 @@
 #include <sstream>
 
 Packet::Packet() {
-    mCreatedTime = System::processTimeInMilliSecs();
-    mShouldDelay = false;
+    m_createdTime = System::processTimeInMilliSecs();
+    m_shouldDelay = false;
 }
 
 void Packet::handle(PacketListener* listener) {}

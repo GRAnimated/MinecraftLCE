@@ -15,11 +15,11 @@ EPacketType ServerboundContainerClosePacket::getPacketId() {
 }
 
 void ServerboundContainerClosePacket::read(DataInputStream* input) {
-    containerId = input->readByte();
+    m_containerId = input->readByte();
 }
 
 void ServerboundContainerClosePacket::write(DataOutputStream* output) {
-    output->writeByte(containerId);
+    output->writeByte(m_containerId);
 }
 
 void ServerboundContainerClosePacket::handle(PacketListener* listener) {

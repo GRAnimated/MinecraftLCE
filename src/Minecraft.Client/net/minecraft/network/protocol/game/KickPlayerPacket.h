@@ -15,5 +15,5 @@ public:
     void handle(PacketListener* listener) override;
 
 private:
-    unsigned char byte18;
+    unsigned char m_byte18;
 };

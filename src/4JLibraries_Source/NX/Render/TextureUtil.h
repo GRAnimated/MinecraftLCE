@@ -40,23 +40,23 @@ public:
 
     // those 4 names are completly made-up; I don't even know if they should be part of StbiFile
     void CreateFile(const char* fileName) {
-        this->mDataRead = 0;
-        this->mFileHandle = CreateFileA(fileName, 0x80000000, 0, nullptr, 3, 0x80, 0);
+        this->m_dataRead = 0;
+        this->m_fileHandle = CreateFileA(fileName, 0x80000000, 0, nullptr, 3, 0x80, 0);
 
-        this->mFileSize
-            = this->mFileHandle == (nn::fs::FileHandle*)-1 ? 0 : GetFileSize(this->mFileHandle, nullptr);
+        this->m_fileSize
+            = this->m_fileHandle == (nn::fs::FileHandle*)-1 ? 0 : GetFileSize(this->m_fileHandle, nullptr);
     }
 
     void CloseFile() {
-        if (this->mFileHandle != (nn::fs::FileHandle*)-1)
-            CloseHandle(this->mFileHandle);
+        if (this->m_fileHandle != (nn::fs::FileHandle*)-1)
+            CloseHandle(this->m_fileHandle);
     }
 
-    bool IsValidFile() { return this->mFileHandle != (nn::fs::FileHandle*)-1; }
+    bool IsValidFile() { return this->m_fileHandle != (nn::fs::FileHandle*)-1; }
 
     StbiFile* Get() { return this; }
 
-    nn::fs::FileHandle* mFileHandle;
-    int mFileSize;
-    int mDataRead;
+    nn::fs::FileHandle* m_fileHandle;
+    int m_fileSize;
+    int m_dataRead;
 };

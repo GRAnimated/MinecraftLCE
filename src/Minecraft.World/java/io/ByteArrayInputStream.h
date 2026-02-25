@@ -15,8 +15,8 @@ public:
     void close() override;
     long long skip(long long) override;
 
-    arrayWithLength<unsigned char> mBuffer;
-    unsigned int mLength;
-    unsigned int mCurrentPos;
-    unsigned int mNextPos;
+    arrayWithLength<unsigned char> m_buffer;
+    unsigned int m_length;
+    unsigned int m_currentPos;
+    unsigned int m_nextPos;
 };

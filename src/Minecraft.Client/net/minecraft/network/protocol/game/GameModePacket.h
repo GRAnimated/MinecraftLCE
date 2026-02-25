@@ -29,12 +29,12 @@ public:
         void ReadPacket(std::shared_ptr<GameModePacket>) override;
         void WritePacket(std::shared_ptr<GameModePacket>) const override;
 
-        int mMinX;
-        int mMinY;
-        int mMinZ;
-        int mMaxX;
-        int mMaxY;
-        int mMaxZ;
+        int m_minX;
+        int m_minY;
+        int m_minZ;
+        int m_maxX;
+        int m_maxY;
+        int m_maxZ;
     };
 
     class LockPlayerLocation : public Data {
@@ -44,7 +44,7 @@ public:
         void ReadPacket(std::shared_ptr<GameModePacket>) override;
         void WritePacket(std::shared_ptr<GameModePacket>) const override;
 
-        bool mLock;
+        bool m_lock;
     };
 
     static std::shared_ptr<Packet> create();

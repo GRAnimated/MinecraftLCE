@@ -7,5 +7,5 @@ class EntityRenderDispatcher {
 public:
     EntityRenderDispatcher(Textures* textures, ItemRenderer* renderer);
 
-    unsigned char padding[0xE0];
+    unsigned char m_padding[0xE0];
 };

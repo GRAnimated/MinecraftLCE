@@ -24,10 +24,10 @@ public:
 
     static int getExperienceValue(int);
 
-    int mTickCount;
-    int mAge;
-    int mThrowTime;
-    int mValue;
-    std::shared_ptr<Player> mFollowingPlayer;
-    int mFollowingTime;
+    int m_tickCount;
+    int m_age;
+    int m_throwTime;
+    int m_value;
+    std::shared_ptr<Player> m_followingPlayer;
+    int m_followingTime;
 };

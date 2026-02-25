@@ -10,26 +10,26 @@ std::shared_ptr<Packet> ClientboundPlayerAbilitiesPacket::create() {
 }
 
 ClientboundPlayerAbilitiesPacket::ClientboundPlayerAbilitiesPacket() : Packet() {
-    mIsInvulnerable = false;
-    mIsFlying = false;
-    mIsEnableFly = false;
-    mIsInstabuild = false;
-    mFlyingSpeed = 0.0f;
-    mWalkingSpeed = 0.0f;
-    mIsEnableBuild = true;
-    mPlayerId = 0;
+    m_isInvulnerable = false;
+    m_isFlying = false;
+    m_isEnableFly = false;
+    m_isInstabuild = false;
+    m_flyingSpeed = 0.0f;
+    m_walkingSpeed = 0.0f;
+    m_isEnableBuild = true;
+    m_playerId = 0;
 }
 
 ClientboundPlayerAbilitiesPacket::ClientboundPlayerAbilitiesPacket(Abilities* abilities, int playerId)
     : Packet() {
-    setInvulnerable(abilities->mIsInvulnerable);
-    setFlying(abilities->mIsFlying);
-    setCanFly(abilities->mIsEnableFly);
-    setInstabuild(abilities->mIsInstabuild);
+    setInvulnerable(abilities->m_isInvulnerable);
+    setFlying(abilities->m_isFlying);
+    setCanFly(abilities->m_isEnableFly);
+    setInstabuild(abilities->m_isInstabuild);
     setFlyingSpeed(abilities->getFlyingSpeed());
     setWalkingSpeed(abilities->getWalkingSpeed());
-    setCanBuild(abilities->mIsEnableBuild);
-    mPlayerId = playerId;
+    setCanBuild(abilities->m_isEnableBuild);
+    m_playerId = playerId;
 }
 
 EPacketType ClientboundPlayerAbilitiesPacket::getPacketId() {
@@ -45,7 +45,7 @@ void ClientboundPlayerAbilitiesPacket::read(DataInputStream* input) {
     setCanBuild(flags & 0x10);
     setFlyingSpeed(input->readFloat());
     setWalkingSpeed(input->readFloat());
-    mPlayerId = input->readInt();
+    m_playerId = input->readInt();
 }
 
 void ClientboundPlayerAbilitiesPacket::write(DataOutputStream* output) {
@@ -61,9 +61,9 @@ void ClientboundPlayerAbilitiesPacket::write(DataOutputStream* output) {
     if (canBuild())
         flags |= 0x10;
     output->writeByte(flags);
-    output->writeFloat(mFlyingSpeed);
-    output->writeFloat(mWalkingSpeed);
-    output->writeInt(mPlayerId);
+    output->writeFloat(m_flyingSpeed);
+    output->writeFloat(m_walkingSpeed);
+    output->writeInt(m_playerId);
 }
 
 void ClientboundPlayerAbilitiesPacket::handle(PacketListener* listener) {
@@ -83,61 +83,61 @@ bool ClientboundPlayerAbilitiesPacket::isInvalidatedBy(std::shared_ptr<Packet> p
 }
 
 void ClientboundPlayerAbilitiesPacket::setInvulnerable(bool invulnerable) {
-    mIsInvulnerable = invulnerable;
+    m_isInvulnerable = invulnerable;
 }
 
 void ClientboundPlayerAbilitiesPacket::setFlying(bool flying) {
-    mIsFlying = flying;
+    m_isFlying = flying;
 }
 
 void ClientboundPlayerAbilitiesPacket::setCanFly(bool canFly) {
-    mIsEnableFly = canFly;
+    m_isEnableFly = canFly;
 }
 
 void ClientboundPlayerAbilitiesPacket::setInstabuild(bool instabuild) {
-    mIsInstabuild = instabuild;
+    m_isInstabuild = instabuild;
 }
 
 void ClientboundPlayerAbilitiesPacket::setFlyingSpeed(float flyingSpeed) {
-    mFlyingSpeed = flyingSpeed;
+    m_flyingSpeed = flyingSpeed;
 }
 
 void ClientboundPlayerAbilitiesPacket::setWalkingSpeed(float walkingSpeed) {
-    mWalkingSpeed = walkingSpeed;
+    m_walkingSpeed = walkingSpeed;
 }
 
 void ClientboundPlayerAbilitiesPacket::setCanBuild(bool canBuild) {
-    mIsEnableBuild = canBuild;
+    m_isEnableBuild = canBuild;
 }
 
 bool ClientboundPlayerAbilitiesPacket::isInvulnerable() {
-    return mIsInvulnerable;
+    return m_isInvulnerable;
 }
 
 bool ClientboundPlayerAbilitiesPacket::isFlying() {
-    return mIsFlying;
+    return m_isFlying;
 }
 
 bool ClientboundPlayerAbilitiesPacket::canFly() {
-    return mIsEnableFly;
+    return m_isEnableFly;
 }
 
 bool ClientboundPlayerAbilitiesPacket::canInstabuild() {
-    return mIsInstabuild;
+    return m_isInstabuild;
 }
 
 bool ClientboundPlayerAbilitiesPacket::canBuild() {
-    return mIsEnableBuild;
+    return m_isEnableBuild;
 }
 
 float ClientboundPlayerAbilitiesPacket::getFlyingSpeed() {
-    return mFlyingSpeed;
+    return m_flyingSpeed;
 }
 
 float ClientboundPlayerAbilitiesPacket::getWalkingSpeed() {
-    return mWalkingSpeed;
+    return m_walkingSpeed;
 }
 
 int ClientboundPlayerAbilitiesPacket::getPlayerId() {
-    return mPlayerId;
+    return m_playerId;
 }

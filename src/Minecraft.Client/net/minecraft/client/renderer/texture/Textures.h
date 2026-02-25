@@ -35,8 +35,8 @@ public:
     static bool IsTUImage(_TEXTURE_NAME name, const std::wstring&);
     static bool IsOriginalImage(_TEXTURE_NAME name, const std::wstring&);
 
-    unsigned char padding[256];
-    TextureAtlas* atlas;
-    TextureAtlas* atlas2;
-    void* padding2;
+    unsigned char m_padding[256];
+    TextureAtlas* m_atlas;
+    TextureAtlas* m_atlas2;
+    void* m_padding2;
 };

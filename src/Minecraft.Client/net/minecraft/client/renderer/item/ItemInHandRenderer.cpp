@@ -22,7 +22,7 @@ void ItemInHandRenderer::applyItemArmTransform(const HumanoidArm* arm, float equ
 // NON_MATCHING: most random shit just to match other
 void ItemInHandRenderer::renderItem(std::shared_ptr<LivingEntity> ent, not_null_ptr<ItemInstance> item,
                                     int a4, bool a5, int a6, bool a7) {
-    this->mOffHandItem->setCount(1);
+    this->m_offHandItem->setCount(1);
     ent->setArrowCount(a4);
     item->setCount(a5);
     ent->setArrowCount(a7);
@@ -48,10 +48,10 @@ void ItemInHandRenderer::renderArmWithItem(std::shared_ptr<LocalPlayer> player, 
     bool smth = false;
 
     if (player) {
-        if (player->mItemRendererThingy == 1 || player->mItemRendererThingy == 2) {
+        if (player->m_itemRendererThingy == 1 || player->m_itemRendererThingy == 2) {
             y = 0.08f;
             smth = true;
-        } else if (player->mItemRendererThingy == 3 || player->mItemRendererThingy == 4
+        } else if (player->m_itemRendererThingy == 3 || player->m_itemRendererThingy == 4
                    || !Renderer::sInstance->IsWidescreen()) {
             x = xTranslates[arm == HumanoidArm::LEFT];
         }
@@ -66,7 +66,7 @@ void ItemInHandRenderer::renderArmWithItem(std::shared_ptr<LocalPlayer> player, 
     } else if (item->getItem() == Items::FILLED_MAP) {
         if (smth)
             GlStateManager::translatef(0.0f, 0.0f, -0.3f);
-        if (hand != InteractionHand::MAIN_HAND || !mOffHandItem->isEmpty()) {
+        if (hand != InteractionHand::MAIN_HAND || !m_offHandItem->isEmpty()) {
             GlStateManager::translatef(x, y, 0.0f);
             this->renderOneHandedMap(equippedProgress, arm, swingProgress, item);
         } else {
@@ -109,7 +109,7 @@ void ItemInHandRenderer::renderArmWithItem(std::shared_ptr<LocalPlayer> player, 
                 GlStateManager::rotatef(i * -9.785f, 0.0f, 0.0f, 1.0f);
                 float a
                     = item->getUseDuration()
-                      - (this->mMinecraft->mLocalPlayer->getUseItemRemainingTicks() - partialTicks + 1.0f);
+                      - (this->m_minecraft->m_localPlayer->getUseItemRemainingTicks() - partialTicks + 1.0f);
                 float b = a / BowItem::GetMaxBowDuration();
                 b = (b * b + b * 2.0f) / 3.0f;
 

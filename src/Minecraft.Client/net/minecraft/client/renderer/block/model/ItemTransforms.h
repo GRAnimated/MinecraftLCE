@@ -50,12 +50,12 @@ public:
                               float scaleZ);
 
 private:
-    ItemTransform* thirdperson_lefthand;
-    ItemTransform* thirdperson_righthand;
-    ItemTransform* firstperson_lefthand;
-    ItemTransform* firstperson_righthand;
-    ItemTransform* head;
-    ItemTransform* gui;
-    ItemTransform* ground;
-    ItemTransform* fixed;
+    ItemTransform* m_thirdpersonLefthand;
+    ItemTransform* m_thirdpersonRighthand;
+    ItemTransform* m_firstpersonLefthand;
+    ItemTransform* m_firstpersonRighthand;
+    ItemTransform* m_head;
+    ItemTransform* m_gui;
+    ItemTransform* m_ground;
+    ItemTransform* m_fixed;
 };

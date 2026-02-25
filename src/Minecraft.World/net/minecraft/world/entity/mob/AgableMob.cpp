@@ -22,23 +22,23 @@ void AgableMob::staticCtor() {
 }
 
 AgableMob::AgableMob(Level* level) : PathfinderMob(level) {
-    this->mHeightRatio = 0;
-    this->mForcedAgeTimer = 0;
-    this->mWidthRatio = -1.0f;
-    this->mAge = 0;
-    this->mForcedAge = 0;
+    this->m_heightRatio = 0;
+    this->m_forcedAgeTimer = 0;
+    this->m_widthRatio = -1.0f;
+    this->m_age = 0;
+    this->m_forcedAge = 0;
 }
 
 void AgableMob::defineSynchedData() {
     Mob::defineSynchedData();
-    this->mEntityData->createDateItem(AgableMob::BABY, false);
-    this->mEntityData->createDateItem(AgableMob::ADULT, false);
+    this->m_entityData->createDateItem(AgableMob::BABY, false);
+    this->m_entityData->createDateItem(AgableMob::ADULT, false);
 }
 
 void AgableMob::setSize(float width, float height) {
-    bool e = this->mWidthRatio > 0.0f;
-    this->mWidthRatio = width;
-    this->mHeightRatio = height;
+    bool e = this->m_widthRatio > 0.0f;
+    this->m_widthRatio = width;
+    this->m_heightRatio = height;
     if (!e)
         this->internalSetSize(1.0);
 }
@@ -46,13 +46,13 @@ void AgableMob::setSize(float width, float height) {
 void AgableMob::readAdditionalSaveData(CompoundTag* tag) {
     Mob::readAdditionalSaveData(tag);
     this->setAge(tag->getInt(L"Age"));
-    this->mForcedAge = tag->getInt(L"ForcedAge");
+    this->m_forcedAge = tag->getInt(L"ForcedAge");
 }
 
 void AgableMob::addAdditonalSaveData(CompoundTag* tag) {
     Mob::addAdditonalSaveData(tag);
     tag->putInt(L"Age", this->getAge());
-    tag->putInt(L"ForcedAge", this->mForcedAge);
+    tag->putInt(L"ForcedAge", this->m_forcedAge);
 }
 
 void AgableMob::onSyncedDataUpdated(const EntityDataAccessor_Base* accessor) {
@@ -67,18 +67,18 @@ bool AgableMob::isBaby() {
 
 void AgableMob::aiStep() {
     Mob::aiStep();
-    if (this->mLevel->mIsLocal) {
-        if (this->mForcedAgeTimer > 0) {
-            if (this->mForcedAgeTimer % 4 == 0) {
-                this->mLevel->addParticle(
+    if (this->m_level->m_isLocal) {
+        if (this->m_forcedAgeTimer > 0) {
+            if (this->m_forcedAgeTimer % 4 == 0) {
+                this->m_level->addParticle(
                     ParticleTypes::HAPPY_VILLAGER,
-                    this->mX + (this->mRand->nextFloat() * this->mWidth * 2.0F) - this->mWidth,
-                    this->mY + 0.5 + (this->mRand->nextFloat() * this->mHeight),
-                    this->mZ + (this->mRand->nextFloat() * this->mWidth * 2.0F) - this->mWidth, 0.0, 0.0, 0.0,
-                    arrayWithLength<int>());
+                    this->m_x + (this->m_rand->nextFloat() * this->m_width * 2.0F) - this->m_width,
+                    this->m_y + 0.5 + (this->m_rand->nextFloat() * this->m_height),
+                    this->m_z + (this->m_rand->nextFloat() * this->m_width * 2.0F) - this->m_width, 0.0, 0.0,
+                    0.0, arrayWithLength<int>());
             }
 
-            --this->mForcedAgeTimer;
+            --this->m_forcedAgeTimer;
         }
     } else {
         int age = this->getAge();
@@ -108,15 +108,15 @@ bool AgableMob::mobInteract(const std::shared_ptr<Player>& player, InteractionHa
 */
 
 int AgableMob::getAge() {
-    if (this->mLevel && !this->mLevel->mIsLocal) {
-        return this->mAge;
+    if (this->m_level && !this->m_level->m_isLocal) {
+        return this->m_age;
     }
 
-    if (this->mEntityData->get(ADULT)) {
+    if (this->m_entityData->get(ADULT)) {
         return 1;
     }
 
-    return this->mEntityData->get(BABY) ? -1 : 0;
+    return this->m_entityData->get(BABY) ? -1 : 0;
 }
 
 void AgableMob::ageUp(int seconds, bool forced) {
@@ -133,14 +133,14 @@ void AgableMob::ageUp(int seconds, bool forced) {
     this->setAge(age);
 
     if (forced) {
-        this->mForcedAge += age - oldAge;
-        if (this->mForcedAgeTimer == 0) {
-            this->mForcedAgeTimer = 40;
+        this->m_forcedAge += age - oldAge;
+        if (this->m_forcedAgeTimer == 0) {
+            this->m_forcedAgeTimer = 40;
         }
     }
 
     if (this->getAge() == 0) {
-        this->setAge(this->mForcedAge);
+        this->setAge(this->m_forcedAge);
     }
 }
 
@@ -149,12 +149,12 @@ void AgableMob::ageUp(int seconds) {
 }
 
 void AgableMob::setAge(int age) {
-    if (!this->mLevel || !this->mLevel->mIsLocal) {
-        this->mEntityData->set(BABY, age < 0, true);
-        this->mEntityData->set(ADULT, age > 0, true);
+    if (!this->m_level || !this->m_level->m_isLocal) {
+        this->m_entityData->set(BABY, age < 0, true);
+        this->m_entityData->set(ADULT, age > 0, true);
     }
 
-    this->mAge = age;
+    this->m_age = age;
     this->updateSize(this->isBaby());
 }
 
@@ -165,5 +165,5 @@ void AgableMob::updateSize(bool baby) {
 }
 
 void AgableMob::internalSetSize(float scale) {
-    Entity::setSize(this->mWidthRatio * scale, this->mHeightRatio * scale);
+    Entity::setSize(this->m_widthRatio * scale, this->m_heightRatio * scale);
 }

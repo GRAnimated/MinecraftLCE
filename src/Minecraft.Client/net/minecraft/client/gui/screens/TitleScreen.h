@@ -12,5 +12,5 @@ public:
     void setSize(int width, int height) override;
     void tick() override;
 
-    unsigned char size[0x28];
+    unsigned char m_size[0x28];
 };

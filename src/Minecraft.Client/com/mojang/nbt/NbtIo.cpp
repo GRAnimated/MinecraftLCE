@@ -86,7 +86,7 @@ arrayWithLength<unsigned char> NbtIo::compress(CompoundTag* tag) {
     NbtIo::write(tag, &dataOutputStream);
 
     arrayWithLength<unsigned char> compressedData(byteArrayOutputStream.size(), true);
-    System::arraycopy(byteArrayOutputStream.mBuffer, 0, &compressedData, 0, byteArrayOutputStream.size());
+    System::arraycopy(byteArrayOutputStream.m_buffer, 0, &compressedData, 0, byteArrayOutputStream.size());
 
     dataOutputStream.close();
 

@@ -23,28 +23,28 @@ public:
 
         Variant(int data, const std::wstring& name, int name_id, int desc_id,
                 const MaterialColor* materialColor, int dustColor) {
-            this->mData = data;
-            this->mName = name;
-            this->mMaterialColor = materialColor;
-            this->mName_id = name_id;
-            this->mDesc_id = desc_id;
-            this->mDustColor = dustColor;
+            this->m_data = data;
+            this->m_name = name;
+            this->m_materialColor = materialColor;
+            this->m_nameId = name_id;
+            this->m_descId = desc_id;
+            this->m_dustColor = dustColor;
         }
 
-        int getData() { return this->mData; }
-        std::wstring getName() { return this->mName; }
-        const MaterialColor* getMaterialColor() { return this->mMaterialColor; }
-        int getDustColor() { return this->mDustColor; }
+        int getData() { return this->m_data; }
+        std::wstring getName() { return this->m_name; }
+        const MaterialColor* getMaterialColor() { return this->m_materialColor; }
+        int getDustColor() { return this->m_dustColor; }
 
-        std::wstring toString() const override { return this->mName; }
-        std::wstring getSerializedName() const override { return this->mName; }
+        std::wstring toString() const override { return this->m_name; }
+        std::wstring getSerializedName() const override { return this->m_name; }
 
-        int mData;
-        std::wstring mName;
-        const MaterialColor* mMaterialColor;
-        int mName_id;
-        int mDesc_id;
-        int mDustColor;
+        int m_data;
+        std::wstring m_name;
+        const MaterialColor* m_materialColor;
+        int m_nameId;
+        int m_descId;
+        int m_dustColor;
     };
 
     SandBlock();
@@ -66,5 +66,5 @@ public:
     BlockStateDefinition* createBlockStateDefinition() override;
     int getDustColor(const BlockState*) override;
 
-    TextureAtlasSprite* mVariantsTextures[2];
+    TextureAtlasSprite* m_variantsTextures[2];
 };

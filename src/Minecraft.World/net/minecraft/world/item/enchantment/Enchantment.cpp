@@ -41,9 +41,9 @@
 
 Enchantment::Enchantment(const Rarity* rarity, const EnchantmentCategory* category,
                          arrayWithLength<const EquipmentSlot*> array)
-    : mEnchantmentCategory(category) {
-    this->mRarity = rarity;
-    this->mSlots = array;
+    : m_enchantmentCategory(category) {
+    this->m_rarity = rarity;
+    this->m_slots = array;
 }
 
 extern MappedRegistry<ResourceLocation, Enchantment*>* sEnchantmentRegistry;
@@ -169,7 +169,7 @@ void Enchantment::staticCtor() {
 }
 
 const Rarity* Enchantment::getRarity() {
-    return this->mRarity;
+    return this->m_rarity;
 }
 
 void Enchantment::getSlotItems(const std::shared_ptr<LivingEntity>&) {}
@@ -203,15 +203,15 @@ bool Enchantment::checkCompatibility(const Enchantment* a2) {
 }
 
 void Enchantment::setDescriptionId(int a2) {
-    this->mDescriptionId = a2;
+    this->m_descriptionId = a2;
 }
 
 int Enchantment::getDescriptionId() {
-    return this->mDescriptionId;
+    return this->m_descriptionId;
 }
 
 bool Enchantment::canEnchant(const not_null_ptr<ItemInstance>& item) {
-    return this->mEnchantmentCategory->canEnchant(item->getItem());
+    return this->m_enchantmentCategory->canEnchant(item->getItem());
 }
 
 void Enchantment::doPostAttack(const std::shared_ptr<LivingEntity>&, const std::shared_ptr<Entity>&, int) {}

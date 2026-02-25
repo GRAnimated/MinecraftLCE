@@ -84,10 +84,10 @@ void MasterGameMode::SetLockPlayerPositions(bool lock) {
 
 void MasterGameMode::SelectNewGameRules() {
     this->ChooseNextGameRules(false);
-    if (this->mGenerationOptions) {
-        mGenerationOptions->loadBaseSaveData();
+    if (this->m_generationOptions) {
+        m_generationOptions->loadBaseSaveData();
         const MiniGameDef& miniGame = MiniGameDef::GetCustomGameModeById(
-            this->mGenerationOptions->getRequiredGameRules()->getRuleType(), false);
+            this->m_generationOptions->getRequiredGameRules()->getRuleType(), false);
         miniGame.SetLootSet(this->ChooseItemSet(miniGame, true));
 
         this->SetupMiniGameInstance(miniGame, 0);
@@ -95,7 +95,7 @@ void MasterGameMode::SelectNewGameRules() {
 
         if (miniGame.GetId() == BUILD_OFF) {
             int votes = 0;  // I think this is votes number on specific build
-            int bestBuild = this->mVoteables->getVoteable(3)->getWinningVote(votes);
+            int bestBuild = this->m_voteables->getVoteable(3)->getWinningVote(votes);
             if (bestBuild == -1) {
                 bestBuild
                     = this->GetPossibleVotes()->at(Random().nextInt(this->GetPossibleVotes()->size() - 1));
@@ -109,7 +109,7 @@ void MasterGameMode::SelectNewGameRules() {
 
             PlayerList* playerList = MinecraftServer::getInstance()->tryGetPlayers();
             playerList->broadcastAll(
-                std::shared_ptr<Packet>(new MapSelectInfoPacket(this->mArrayWithLength, 0)));
+                std::shared_ptr<Packet>(new MapSelectInfoPacket(this->m_arrayWithLength, 0)));
         }
     }
 }
@@ -133,9 +133,9 @@ void MasterGameMode::OnGameStart(MasterGameMode* _this, void*) {
                 std::vector<std::shared_ptr<Entity>>* entities
                     = level->getEntitiesOfClass(typeid(EnderCrystal), rule->getArea());
                 if (entities->end() == entities->begin()) {
-                    std::shared_ptr<EnderCrystal> crystal = std::shared_ptr<EnderCrystal>(
-                        new EnderCrystal(level, rule->getArea()->getCenter()->x,
-                                         rule->getArea()->getCenter()->y, rule->getArea()->getCenter()->z));
+                    std::shared_ptr<EnderCrystal> crystal = std::shared_ptr<EnderCrystal>(new EnderCrystal(
+                        level, rule->getArea()->getCenter()->m_x, rule->getArea()->getCenter()->m_y,
+                        rule->getArea()->getCenter()->m_z));
                     crystal->setShowBottom(false);
                     level->addEntity(crystal);
                 }
@@ -157,17 +157,17 @@ void MasterGameMode::OnGameStart(MasterGameMode* _this, void*) {
         }
 
         _this->setCheckpoints(*rules->getCheckpoints());
-        for (auto it = _this->mGlideCheckpoints.begin(); it != _this->mGlideCheckpoints.end(); it++) {
+        for (auto it = _this->m_glideCheckpoints.begin(); it != _this->m_glideCheckpoints.end(); it++) {
             (*it)->processBeacons(level);
         }
 
-        _this->mGlideTargets.clear();
+        _this->m_glideTargets.clear();
 
         std::vector<TargetAreaRuleDefinition*> targetAreas;
         rules->getTargetAreas(&targetAreas);
         for (auto it = targetAreas.begin(); it != targetAreas.end(); it++) {
             if ((*it)->isPrimary()) {
-                _this->mGlideTargets.push_back((*it)->getArea());
+                _this->m_glideTargets.push_back((*it)->getArea());
             }
         }
     }
@@ -183,7 +183,7 @@ void MasterGameMode::OnGameStart(MasterGameMode* _this, void*) {
         for (auto it = players->begin(); it != players->end(); it++) {
             std::shared_ptr<ServerPlayer>& player = *it;
             const GameModePacket::EmptyData emptyData;
-            player->mConnection->send(GameModePacket::Create((GameModePacket::EMessage)0xF, emptyData));
+            player->m_connection->send(GameModePacket::Create((GameModePacket::EMessage)0xF, emptyData));
 
             Team* team = player->getTeam();
             if (minigame->GetId() == EMiniGameId::BUILD_OFF && team) {
@@ -191,9 +191,10 @@ void MasterGameMode::OnGameStart(MasterGameMode* _this, void*) {
                 if (teamArea) {
                     teamArea = teamArea->grow(0, 1, 0);
                     const GameModePacket::AddAreaBoundsData areaBoundsData
-                        = GameModePacket::AddAreaBoundsData(teamArea->minX, teamArea->minY, teamArea->minZ,
-                                                            teamArea->maxX, teamArea->maxY, teamArea->maxZ);
-                    player->mConnection->send(
+                        = GameModePacket::AddAreaBoundsData(teamArea->m_inX, teamArea->m_inY, teamArea->m_inZ,
+                                                            teamArea->m_axX, teamArea->m_axY,
+                                                            teamArea->m_axZ);
+                    player->m_connection->send(
                         GameModePacket::Create((GameModePacket::EMessage)0xD, areaBoundsData));
                 }
 
@@ -201,10 +202,10 @@ void MasterGameMode::OnGameStart(MasterGameMode* _this, void*) {
                 for (auto it = playerBounds.begin(); it != playerBounds.end(); it++) {
                     const AABB* area = (*it)->getArea();
                     const GameModePacket::AddAreaBoundsData areaBoundsData
-                        = GameModePacket::AddAreaBoundsData(area->minX, area->minY, area->minZ, area->maxX,
-                                                            area->maxY, area->maxZ);
+                        = GameModePacket::AddAreaBoundsData(area->m_inX, area->m_inY, area->m_inZ,
+                                                            area->m_axX, area->m_axY, area->m_axZ);
 
-                    player->mConnection->send(
+                    player->m_connection->send(
                         GameModePacket::Create((GameModePacket::EMessage)0xD, areaBoundsData));
                 }
             }
@@ -216,8 +217,8 @@ void MasterGameMode::OnGameStart(MasterGameMode* _this, void*) {
 
     if (minigame->GetId() == EMiniGameId::BATTLE) {
         CountdownInfo* chestRefilTimer = new CountdownInfo();
-        chestRefilTimer->mInt_0 = 0;
-        chestRefilTimer->mOnTimerFunc1 = MasterGameMode::OnRefillChestTimer;
+        chestRefilTimer->m_int0 = 0;
+        chestRefilTimer->m_onTimerFunc1 = MasterGameMode::OnRefillChestTimer;
 
         _this->AddTimer(MasterGameMode::ChestRefill, OnTimerCountdown, chestRefilTimer, -1, 30000, -1, -1);
     }
@@ -228,14 +229,14 @@ void MasterGameMode::OnGameStart(MasterGameMode* _this, void*) {
             = (DegradationSequenceRuleDefinition*)gameRules->getRuleByType(
                 ConsoleGameRules::EGameRuleType_DegradationSequence);
         if (degradeRule) {
-            _this->mDegradeRoutine
+            _this->m_degradeRoutine
                 = new BlockDegradeRoutine(MinecraftServer::getInstance()->getLevel(0), degradeRule);
         }
     }
 
     CountdownInfo* gracePeriod = new CountdownInfo();
-    gracePeriod->mInt_0 = 123;
-    gracePeriod->mOnTimerFunc = MasterGameMode::OnGracePeriodEnd;
+    gracePeriod->m_int0 = 123;
+    gracePeriod->m_onTimerFunc = MasterGameMode::OnGracePeriodEnd;
     if (_this->StartTimer(MasterGameMode::GracePeriod, gracePeriod)) {
         if (_this->GetTimerRemainingTime(MasterGameMode::GracePeriod) >= 1) {
             _this->sendTutorialUpdate((eTutorial_GameMode)2);

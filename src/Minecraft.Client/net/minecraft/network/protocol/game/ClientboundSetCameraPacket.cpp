@@ -9,7 +9,7 @@ std::shared_ptr<Packet> ClientboundSetCameraPacket::create() {
 }
 
 ClientboundSetCameraPacket::ClientboundSetCameraPacket() {
-    cameraId = 0;
+    m_cameraId = 0;
 }
 
 EPacketType ClientboundSetCameraPacket::getPacketId() {
@@ -17,11 +17,11 @@ EPacketType ClientboundSetCameraPacket::getPacketId() {
 }
 
 void ClientboundSetCameraPacket::read(DataInputStream* input) {
-    cameraId = input->readVarInt();
+    m_cameraId = input->readVarInt();
 }
 
 void ClientboundSetCameraPacket::write(DataOutputStream* output) {
-    output->writeVarInt(cameraId);
+    output->writeVarInt(m_cameraId);
 }
 
 void ClientboundSetCameraPacket::handle(PacketListener* listener) {
@@ -29,5 +29,5 @@ void ClientboundSetCameraPacket::handle(PacketListener* listener) {
 }
 
 int ClientboundSetCameraPacket::getCameraId() {
-    return cameraId;
+    return m_cameraId;
 }

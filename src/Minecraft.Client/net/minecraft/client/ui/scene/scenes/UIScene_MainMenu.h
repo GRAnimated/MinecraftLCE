@@ -22,19 +22,19 @@ public:
 
     static int MustSignInReturned(void*, int, C4JStorage::EMessageResult);
 
-    void* unk2;
-    UIControl_Button mButtons[8];
-    UIControl mTimer;
-    bool _4e8;
-    bool mShowUnlockFullGame;
-    bool _4ea;
-    bool _4eb;
-    bool _4ec;
-    float mWidth;
-    float mHeight;
-    float mScaledWidth;
-    float mScaledHeight;
-    std::vector<std::wstring> mSplashes;
-    std::wstring mSplashText;
-    int _530;
+    void* m_unk2;
+    UIControl_Button m_buttons[8];
+    UIControl m_timer;
+    bool m_4e8;
+    bool m_showUnlockFullGame;
+    bool m_4ea;
+    bool m_4eb;
+    bool m_4ec;
+    float m_width;
+    float m_height;
+    float m_scaledWidth;
+    float m_scaledHeight;
+    std::vector<std::wstring> m_splashes;
+    std::wstring m_splashText;
+    int m_530;
 };

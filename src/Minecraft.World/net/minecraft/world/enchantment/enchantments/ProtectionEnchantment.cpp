@@ -18,7 +18,7 @@ const ProtectionEnchantment::Type* PROJECTILE
     = new ProtectionEnchantment::Type(StringIDs::ProjectileProtection, 3, 6, 15);
 
 ProtectionEnchantment::Type::Type(int nameId, int minCost, int levelCost, int idk)
-    : mNameId(nameId), mMinCost(minCost), mLevelCost(levelCost), dwordC(idk) {}
+    : m_nameId(nameId), m_minCost(minCost), m_levelCost(levelCost), m_dwordC(idk) {}
 
 ProtectionEnchantment::ProtectionEnchantment(const Rarity* rarity, const Type* type,
                                              arrayWithLength<const EquipmentSlot*> array)
@@ -27,41 +27,41 @@ ProtectionEnchantment::ProtectionEnchantment(const Rarity* rarity, const Type* t
                   type == FALL ? (const EnchantmentCategory*)FeetArmorCategory::sFeetArmorCategory :
                                  (const EnchantmentCategory*)ArmorCategory::sArmorCategory,
                   array) {
-    this->mType = type;
+    this->m_type = type;
 }
 
 int ProtectionEnchantment::getMaxLevel() {
     return 4;
 }
 int ProtectionEnchantment::getMinCost(int a2) {
-    const Type* type = this->mType;
+    const Type* type = this->m_type;
     return type->getMinCost() + (a2 - 1) * type->getLevelCost();
 }
 int ProtectionEnchantment::getMaxCost(int a2) {
-    return this->getMinCost(a2) + this->mType->getLevelCost();
+    return this->getMinCost(a2) + this->m_type->getLevelCost();
 }
 int ProtectionEnchantment::getDamageProtection(int level, const DamageSource* source) {
     if (source->isBypassInvul()) {
         return 0;
-    } else if (this->mType == ALL) {
+    } else if (this->m_type == ALL) {
         return level;
-    } else if (this->mType == FIRE && source->isFire()) {
+    } else if (this->m_type == FIRE && source->isFire()) {
         return level * 2;
-    } else if (this->mType == FALL && source == DamageSource::BYPASS_ARMOUR) {
+    } else if (this->m_type == FALL && source == DamageSource::BYPASS_ARMOUR) {
         return level * 3;
-    } else if (this->mType == PROJECTILE && source->isProjectile()) {
+    } else if (this->m_type == PROJECTILE && source->isProjectile()) {
         return level * 2;
     } else {
-        return this->mType == EXPLOSION && source->isExplosion() ? level * 2 : 0;
+        return this->m_type == EXPLOSION && source->isExplosion() ? level * 2 : 0;
     }
 }
 bool ProtectionEnchantment::checkCompatibility(const Enchantment* other) {
     const ProtectionEnchantment* otherCasted = dynamic_cast<const ProtectionEnchantment*>(other);
     if (otherCasted) {
-        return otherCasted->mType != this->mType && (this->mType == FALL || otherCasted->mType == FALL);
+        return otherCasted->m_type != this->m_type && (this->m_type == FALL || otherCasted->m_type == FALL);
     }
     return Enchantment::checkCompatibility(other);
 }
 int ProtectionEnchantment::getDescriptionId() {
-    return this->mType->getName();
+    return this->m_type->getName();
 }

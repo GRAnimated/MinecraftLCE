@@ -17,6 +17,6 @@ public:
     void write(DataOutputStream* output) override;
     void handle(PacketListener* listener) override;
 
-    short mProtocolVersion;
-    std::wstring mName;
+    short m_protocolVersion;
+    std::wstring m_name;
 };

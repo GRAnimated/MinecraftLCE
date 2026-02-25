@@ -7,5 +7,5 @@ public:
     ClockAtlasSprite();
     ClockAtlasSprite(int, ClockAtlasSprite*);
 
-    char filler[0x20];
+    char m_filler[0x20];
 };

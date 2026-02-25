@@ -9,7 +9,7 @@ public:
 
     Vec2() {}
 
-    float x;
-    float y;
+    float m_x;
+    float m_y;
 };
 }  // namespace phys

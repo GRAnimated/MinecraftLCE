@@ -19,13 +19,13 @@ public:
     void handleInput(int, int, bool, bool, bool, bool&) override;
     void handlePress(int, int) override;
 
-    char gap108[4];
-    bool byte10C;
-    bool bool10D;
-    bool bool10E;
-    UIControl_Button mRespawnButton;
-    UIControl_Button mExitGameButton;
-    UIControl_Label mTitleLabel;
-    UIControl_Label mDeathMessageLabel;
-    UIControl_Label mExtraMessageLabel;
+    char m_gap108[4];
+    bool m_byte10C;
+    bool m_bool10D;
+    bool m_bool10E;
+    UIControl_Button m_respawnButton;
+    UIControl_Button m_exitGameButton;
+    UIControl_Label m_titleLabel;
+    UIControl_Label m_deathMessageLabel;
+    UIControl_Label m_extraMessageLabel;
 };

@@ -21,5 +21,5 @@ public:
     double getAsDouble() override;
     float getAsFloat() override;
 
-    int mData;
+    int m_data;
 };

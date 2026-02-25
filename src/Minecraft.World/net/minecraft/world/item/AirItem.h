@@ -12,5 +12,5 @@ public:
                          void* htmlString, bool) override;
 
 private:
-    Block* mBlock;
+    Block* m_block;
 };

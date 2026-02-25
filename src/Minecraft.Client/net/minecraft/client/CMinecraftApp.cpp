@@ -107,9 +107,9 @@ int CMinecraftApp::GetGameHostOption(unsigned int unk, eGameHostOption option) {
 }
 
 bool CMinecraftApp::GetChangingSessionType() {
-    return this->mChangingSessionType;
+    return this->m_changingSessionType;
 }
 
 bool CMinecraftApp::GetGameStarted() {
-    return this->mGameStarted;
+    return this->m_gameStarted;
 }

@@ -27,10 +27,10 @@ public:
 
     static void staticCtor();
 
-    int mId;
-    std::wstring mName;
-    int mVersion;
-    bool mSelectableByUser;
-    bool mHasReplacement;
-    bool mHasHelpText;
+    int m_id;
+    std::wstring m_name;
+    int m_version;
+    bool m_selectableByUser;
+    bool m_hasReplacement;
+    bool m_hasHelpText;
 };

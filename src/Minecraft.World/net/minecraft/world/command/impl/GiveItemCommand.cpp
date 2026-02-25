@@ -46,13 +46,14 @@ void GiveItemCommand::execute(std::shared_ptr<CommandSender> sender, arrayWithLe
         return;
 
     not_null_ptr<ItemInstance> item = new ItemInstance(Item::byId(id), count, aux);
-    bool added = player->mInventory->add(item);
+    bool added = player->m_inventory->add(item);
     if (added) {
-        player->mLevel->playSound(
-            nullptr, player->mX, player->mY, player->mZ, SoundEvent::ITEM_PICKUP, SoundSource::PLAYERS, 0.2f,
+        player->m_level->playSound(
+            nullptr, player->m_x, player->m_y, player->m_z, SoundEvent::ITEM_PICKUP, SoundSource::PLAYERS,
+            0.2f,
             ((player->getRandom()->nextFloat() - player->getRandom()->nextFloat()) * 0.7f + 1.0f) * 2.0f,
             16.0f);
-        player->mInventoryMenu->broadcastChanges();
+        player->m_inventoryMenu->broadcastChanges();
     }
 
     if (added && item->getCount() >= 1) {

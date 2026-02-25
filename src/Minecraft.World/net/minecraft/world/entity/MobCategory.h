@@ -22,5 +22,5 @@ public:
 
     static void staticCtor();
 
-    void* size[3];
+    void* m_size[3];
 };

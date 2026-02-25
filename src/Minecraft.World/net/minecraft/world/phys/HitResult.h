@@ -14,8 +14,8 @@ public:
 
     const BlockPos& getBlockPos() const;
 
-    BlockPos mBlockPos;
-    const Direction* mDirection;
-    Vec3* mHitVector;
-    std::shared_ptr<Entity> mEntity;
+    BlockPos m_blockPos;
+    const Direction* m_direction;
+    Vec3* m_hitVector;
+    std::shared_ptr<Entity> m_entity;
 };

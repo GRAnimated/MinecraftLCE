@@ -7,21 +7,21 @@
 #include <cstring>
 
 IntArrayTag::IntArrayTag() {
-    mData = arrayWithLength<int>();  // it's already initialized in the header...
+    m_data = arrayWithLength<int>();  // it's already initialized in the header...
 }
 
 IntArrayTag::IntArrayTag(arrayWithLength<int> data) {
-    mData = data;
+    m_data = data;
 }
 
 IntArrayTag::~IntArrayTag() {
-    delete mData.data;
+    delete m_data.m_data;
 }
 
 void IntArrayTag::write(DataOutput* outputStream) {
-    outputStream->writeInt(mData.length);
-    for (unsigned int i = 0; i < mData.length; i++) {
-        outputStream->writeInt(mData[i]);
+    outputStream->writeInt(m_data.m_length);
+    for (unsigned int i = 0; i < m_data.m_length; i++) {
+        outputStream->writeInt(m_data[i]);
     }
 }
 
@@ -29,20 +29,20 @@ void IntArrayTag::load(DataInput* inputStream, int) {
     int size = inputStream->readInt();
 
     // create a copy of the data
-    int* data = mData.data;
+    int* data = m_data.m_data;
     if (data)
         delete data;
 
-    mData = arrayWithLength<int>(size, true);
+    m_data = arrayWithLength<int>(size, true);
 
     for (int i = 0; i < size; i++) {
-        mData[i] = inputStream->readInt();
+        m_data[i] = inputStream->readInt();
     }
 }
 
 std::wstring IntArrayTag::toString() {
     static wchar_t buffer[32];
-    swprintf(buffer, 32, L"[%d bytes]", mData.length);
+    swprintf(buffer, 32, L"[%d bytes]", m_data.m_length);
     return buffer;
 }
 
@@ -55,20 +55,20 @@ bool IntArrayTag::equals(Tag* other) {
         return false;
 
     IntArrayTag* otherCasted = (IntArrayTag*)other;
-    int* data = mData.data;
+    int* data = m_data.m_data;
 
     if (!data)
-        return otherCasted->mData.data == nullptr;
+        return otherCasted->m_data.m_data == nullptr;
 
-    unsigned int length = mData.length;
-    if (length == otherCasted->mData.length)
-        return memcmp(data, otherCasted->mData.data, sizeof(int) * length) == 0;
+    unsigned int length = m_data.m_length;
+    if (length == otherCasted->m_data.m_length)
+        return memcmp(data, otherCasted->m_data.m_data, sizeof(int) * length) == 0;
 
     return false;
 }
 
 Tag* IntArrayTag::copy() {
-    arrayWithLength<int> data = arrayWithLength<int>(mData.length, true);  // copy
-    System::arraycopy(mData, 0, &data, 0, mData.length);
+    arrayWithLength<int> data = arrayWithLength<int>(m_data.m_length, true);  // copy
+    System::arraycopy(m_data, 0, &data, 0, m_data.m_length);
     return new IntArrayTag(data);
 }

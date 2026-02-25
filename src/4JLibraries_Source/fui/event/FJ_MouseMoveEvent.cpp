@@ -2,6 +2,6 @@
 
 FJ_MouseMoveEvent::FJ_MouseMoveEvent(float x, float y, bool a1, bool a2)
     : FJ_Event(eFJEventType::MOUSE_MOVE, a1, a2) {
-    this->mX = x;
-    this->mY = y;
+    this->m_x = x;
+    this->m_y = y;
 }

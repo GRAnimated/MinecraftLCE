@@ -17,9 +17,9 @@ public:
     void handle(PacketListener* listener) override;
 
 private:
-    int event;
-    int playerId;
-    int killerId;
-    int duration;
-    std::wstring message;
+    int m_event;
+    int m_playerId;
+    int m_killerId;
+    int m_duration;
+    std::wstring m_essage;
 };

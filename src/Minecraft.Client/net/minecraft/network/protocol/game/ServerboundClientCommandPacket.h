@@ -15,5 +15,5 @@ public:
     void handle(PacketListener* listener) override;
 
 private:
-    int commandId;
+    int m_commandId;
 };

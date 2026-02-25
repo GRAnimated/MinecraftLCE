@@ -23,6 +23,6 @@ public:
     BlockPos getPos();
 
 private:
-    int mPlayerId;
-    BlockPos mPos;
+    int m_playerId;
+    BlockPos m_pos;
 };

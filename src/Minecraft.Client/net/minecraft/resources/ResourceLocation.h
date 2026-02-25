@@ -25,10 +25,10 @@ public:
 
     virtual std::wstring toString() const;
 
-    char gap8[16];
-    std::wstring mPath;
-    std::wstring mNamespace;
-    char byte48;
+    char m_gap8[16];
+    std::wstring m_path;
+    std::wstring m_namespace;
+    char m_byte48;
 };
 
 // this is actually ResourceLocation::hashCode

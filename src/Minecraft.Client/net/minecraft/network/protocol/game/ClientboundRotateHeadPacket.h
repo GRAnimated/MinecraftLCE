@@ -23,6 +23,6 @@ public:
     unsigned char getYHeadRot();
 
 private:
-    int entityId;
-    unsigned char mYHeadRot;
+    int m_entityId;
+    unsigned char m_yHeadRot;
 };

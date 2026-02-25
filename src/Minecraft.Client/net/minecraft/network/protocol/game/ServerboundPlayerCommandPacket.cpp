@@ -9,9 +9,9 @@ std::shared_ptr<Packet> ServerboundPlayerCommandPacket::create() {
 }
 
 ServerboundPlayerCommandPacket::ServerboundPlayerCommandPacket() {
-    action = 0;
-    data = 0;
-    id = -1;
+    m_action = 0;
+    m_data = 0;
+    m_id = -1;
 }
 
 int ServerboundPlayerCommandPacket::getEstimatedSize() {
@@ -23,15 +23,15 @@ EPacketType ServerboundPlayerCommandPacket::getPacketId() {
 }
 
 void ServerboundPlayerCommandPacket::read(DataInputStream* input) {
-    id = input->readVarInt();
-    action = input->readInt();
-    data = input->readVarInt();
+    m_id = input->readVarInt();
+    m_action = input->readInt();
+    m_data = input->readVarInt();
 }
 
 void ServerboundPlayerCommandPacket::write(DataOutputStream* output) {
-    output->writeVarInt(id);
-    output->writeInt(action);
-    output->writeVarInt(data);
+    output->writeVarInt(m_id);
+    output->writeInt(m_action);
+    output->writeVarInt(m_data);
 }
 
 void ServerboundPlayerCommandPacket::handle(PacketListener* listener) {
@@ -39,9 +39,9 @@ void ServerboundPlayerCommandPacket::handle(PacketListener* listener) {
 }
 
 int ServerboundPlayerCommandPacket::getAction() {
-    return action;
+    return m_action;
 }
 
 int ServerboundPlayerCommandPacket::getData() {
-    return data;
+    return m_data;
 }

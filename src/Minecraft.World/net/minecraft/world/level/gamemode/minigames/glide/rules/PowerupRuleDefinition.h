@@ -14,6 +14,6 @@ public:
     void getChildren(std::vector<GameRuleDefinition*>*) override;
     GameRuleDefinition* addChild(ConsoleGameRules::EGameRuleType) override;
 
-    std::vector<AddItemRuleDefinition*> mAddItemRules;
-    Random mRandom = Random();
+    std::vector<AddItemRuleDefinition*> m_addItemRules;
+    Random m_random = Random();
 };

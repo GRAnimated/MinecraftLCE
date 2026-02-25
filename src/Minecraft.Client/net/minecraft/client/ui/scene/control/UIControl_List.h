@@ -20,10 +20,10 @@ public:
     void init(int);
     void setCurrentSelection(int, bool, bool);
 
-    std::vector<UIControl_List::GenericPendingUpdate*> mGenericPendingUpdates;
-    std::vector<int> mUIControlIDs;
-    int dword98 = 0;
-    int mListSize = 0;
-    std::unordered_map<unsigned int, eUIControlType> mUIControlsTypes;
-    std::unordered_map<unsigned int, bool> mUIControlsStates;
+    std::vector<UIControl_List::GenericPendingUpdate*> m_genericPendingUpdates;
+    std::vector<int> m_uiControlIDs;
+    int m_dword98 = 0;
+    int m_listSize = 0;
+    std::unordered_map<unsigned int, eUIControlType> m_uiControlsTypes;
+    std::unordered_map<unsigned int, bool> m_uiControlsStates;
 };

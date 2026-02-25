@@ -1,5 +1,5 @@
 #include "InputStreamReader.h"
 
 InputStreamReader::InputStreamReader(InputStream* stream) {
-    this->mStream = new DataInputStream(stream);
+    this->m_stream = new DataInputStream(stream);
 }

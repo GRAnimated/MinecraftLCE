@@ -12,12 +12,12 @@ public:
     virtual void setWantedPosition(double, double, double, double);
     virtual void tick();
 
-    Mob* mMob;
-    double mWantedX = 0.0;
-    double mWantedY = 0.0;
-    double mWantedZ = 0.0;
-    double mSpeedModifier = 0.0;
-    float mStrafeForwards = 0.0f;
-    float mStrafeRight = 0.0f;
-    int mOperation = 0;
+    Mob* m_mob;
+    double m_wantedX = 0.0;
+    double m_wantedY = 0.0;
+    double m_wantedZ = 0.0;
+    double m_speedModifier = 0.0;
+    float m_strafeForwards = 0.0f;
+    float m_strafeRight = 0.0f;
+    int m_operation = 0;
 };

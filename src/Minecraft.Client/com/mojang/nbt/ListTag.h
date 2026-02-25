@@ -22,6 +22,6 @@ public:
     void add(Tag* tag);
 
 private:
-    std::vector<Tag*> mData;
-    u8 mTagId;
+    std::vector<Tag*> m_data;
+    u8 m_tagId;
 };

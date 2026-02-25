@@ -28,8 +28,8 @@ public:
         int size();
         bool empty();
 
-        Particle** mParticles;
-        int mSize;
+        Particle** m_particles;
+        int m_size;
     };
 
     ParticleEngine(Level* level, Textures* textures);
@@ -49,19 +49,19 @@ public:
     void tick();
     void tickTextureType(int);
 
-    Level* mLevel;
-    ParticleList mLists[30];
-    std::vector<Particle*> mPartVec;
-    Textures* mTextures;
-    Random mRandom;
-    std::unordered_map<ePARTICLE_TYPE, ParticleProvider*> mProviderMap;
-    bool mTickingList;  // not sure about this name
-    bool field_0x249;
-    short field_0x24a;
-    int field_0x24c;
+    Level* m_level;
+    ParticleList m_lists[30];
+    std::vector<Particle*> m_partVec;
+    Textures* m_textures;
+    Random m_random;
+    std::unordered_map<ePARTICLE_TYPE, ParticleProvider*> m_providerMap;
+    bool m_tickingList;  // not sure about this name
+    bool m_field0x249;
+    short m_field0x24a;
+    int m_field0x24c;
 };
 
-static_assert(offsetof(ParticleEngine, mTickingList) == 0x248);
+static_assert(offsetof(ParticleEngine, m_tickingList) == 0x248);
 
 ASSERT_SIZEOF(ParticleEngine, 0x250)
 ASSERT_SIZEOF(ParticleEngine::ParticleList, 0x10)

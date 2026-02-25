@@ -24,5 +24,5 @@ public:
     bool isAync() override;
 
 private:
-    BlockPos mPos;
+    BlockPos m_pos;
 };

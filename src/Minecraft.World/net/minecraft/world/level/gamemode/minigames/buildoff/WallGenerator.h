@@ -9,9 +9,9 @@ public:
         Wall(AABB* boundaries, bool, bool);
         ~Wall();
 
-        AABB* mBoundaries;
-        bool mUnk_8;
-        bool mUnk_9;
+        AABB* m_boundaries;
+        bool m_unk8;
+        bool m_unk9;
     };
 
     WallGenerator(Random random, std::vector<AABB*>*, std::vector<AABB*>*);
@@ -24,7 +24,7 @@ public:
     unsigned int GetNumberOfLayers() override;
     void GetLayerExtents(unsigned int, float*, float*) override;
 
-    std::vector<AABB*> mWallsAreas;
-    std::vector<Wall*> mWalls;
-    AABB* mUnkAABB;
+    std::vector<AABB*> m_wallsAreas;
+    std::vector<Wall*> m_walls;
+    AABB* m_unkAabb;
 };

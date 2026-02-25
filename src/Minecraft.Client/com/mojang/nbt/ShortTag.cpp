@@ -5,19 +5,19 @@
 
 ShortTag::ShortTag() {}
 
-ShortTag::ShortTag(int data) : mData(data) {}
+ShortTag::ShortTag(int data) : m_data(data) {}
 
 void ShortTag::write(DataOutput* outputStream) {
-    outputStream->writeShort(mData);
+    outputStream->writeShort(m_data);
 }
 
 void ShortTag::load(DataInput* inputStream, int) {
-    mData = inputStream->readShort();
+    m_data = inputStream->readShort();
 }
 
 std::wstring ShortTag::toString() {
     static wchar_t buffer[32];
-    swprintf(buffer, 32, L"%d", mData);
+    swprintf(buffer, 32, L"%d", m_data);
     return buffer;
 }
 
@@ -27,33 +27,33 @@ u8 ShortTag::getId() {
 
 bool ShortTag::equals(Tag* other) {
     ShortTag* otherCasted = (ShortTag*)other;
-    return Tag::equals(other) && mData == otherCasted->mData;
+    return Tag::equals(other) && m_data == otherCasted->m_data;
 }
 
 long ShortTag::getAsLong() {
-    return mData;
+    return m_data;
 }
 
 int ShortTag::getAsInt() {
-    return mData;
+    return m_data;
 }
 
 short ShortTag::getAsShort() {
-    return mData;
+    return m_data;
 }
 
 u8 ShortTag::getAsByte() {
-    return mData;
+    return m_data;
 }
 
 double ShortTag::getAsDouble() {
-    return mData;
+    return m_data;
 }
 
 float ShortTag::getAsFloat() {
-    return mData;
+    return m_data;
 }
 
 Tag* ShortTag::copy() {
-    return new ShortTag(mData);
+    return new ShortTag(m_data);
 }

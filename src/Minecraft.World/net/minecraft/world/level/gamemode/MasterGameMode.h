@@ -16,11 +16,11 @@ public:
     public:
         CountdownInfo();
 
-        int mInt_0;
-        std::vector<int> mVector;
-        void* fill[1];
-        void (*mOnTimerFunc)(MasterGameMode*, void*);
-        void (*mOnTimerFunc1)(MasterGameMode*, void*);
+        int m_int0;
+        std::vector<int> m_vector;
+        void* m_fill[1];
+        void (*m_onTimerFunc)(MasterGameMode*, void*);
+        void (*m_onTimerFunc1)(MasterGameMode*, void*);
     };
 
     enum EInternalGameModeState {};
@@ -62,13 +62,13 @@ public:
     static void OnRefillChestTimer(MasterGameMode*, void*);
     static void OnGracePeriodEnd(MasterGameMode*, void*);
 
-    char fill49[49];
-    bool mPlayersInvulnerable;
-    char fill624[198];
-    arrayWithLength<unsigned char> mArrayWithLength;
-    char fill371[360];
-    BlockDegradeRoutine* mDegradeRoutine;
-    char fill120[120];
+    char m_fill49[49];
+    bool m_playersInvulnerable;
+    char m_fill624[198];
+    arrayWithLength<unsigned char> m_arrayWithLength;
+    char m_fill371[360];
+    BlockDegradeRoutine* m_degradeRoutine;
+    char m_fill120[120];
 };
 
 ASSERT_SIZEOF(MasterGameMode, 0x470)

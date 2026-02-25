@@ -21,10 +21,10 @@ public:
     float getSaturation();
 
 private:
-    int dword_28;
-    int dword_2C;
-    int dword_30;
-    float health;
-    int food;
-    float saturation;
+    int m_dword28;
+    int m_dword2C;
+    int m_dword30;
+    float m_health;
+    int m_food;
+    float m_saturation;
 };

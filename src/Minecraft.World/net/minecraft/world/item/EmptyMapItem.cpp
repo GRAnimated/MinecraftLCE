@@ -14,14 +14,14 @@ EmptyMapItem::EmptyMapItem() : ComplexItem() {}
 InteractionResultHolder EmptyMapItem::use(Level* level, std::shared_ptr<Player> user,
                                           InteractionHand::EInteractionHand hand) {
     not_null_ptr<ItemInstance> currMapItem = user->getItemInHand(hand);
-    not_null_ptr<ItemInstance> mapItem = MapItem::setupNewMap(user->getPlayerUID(), level, user->mDimensionId,
-                                                              user->mX, user->mZ, 3, true, false);
+    not_null_ptr<ItemInstance> mapItem = MapItem::setupNewMap(
+        user->getPlayerUID(), level, user->m_dimensionId, user->m_x, user->m_z, 3, true, false);
 
     currMapItem->shrink(1);
     if (currMapItem->isEmpty()) {
         return InteractionResultHolder(InteractionResult::SUCCESS, mapItem);
     } else {
-        if (!user->mInventory->add(mapItem->copy()))
+        if (!user->m_inventory->add(mapItem->copy()))
             user->drop(mapItem, false);
 
         user->awardStat(GenericStats::getItemsUsedStat(this),

@@ -21,7 +21,7 @@ public:
     bool isAllDirections();
 
 private:
-    float x;
-    float z;
-    bool allDirections;
+    float m_x;
+    float m_z;
+    bool m_allDirections;
 };

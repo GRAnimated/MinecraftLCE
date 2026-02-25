@@ -33,7 +33,7 @@ public:
 
     bool IsRoundRestarting();
 
-    unsigned char size[0x2E0 - 8];
+    unsigned char m_size[0x2E0 - 8];
 };
 
 // yeah perfect time for random assert!

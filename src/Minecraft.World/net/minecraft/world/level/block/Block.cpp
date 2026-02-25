@@ -218,43 +218,43 @@ Block::Block(Material* material, const MaterialColor* color) {
 Block::~Block() {}
 
 const BlockState* Block::defaultBlockState() {
-    return mBlockState;
+    return m_blockState;
 }
 
 void Block::registerDefaultState(const BlockState* state) {
-    mBlockState = state;
+    m_blockState = state;
 }
 
 void Block::init(Material* material, const MaterialColor* color) {
-    field_A0 = 0;
-    mExplosionResistance = 0.0f;
-    mCollectStatistics = true;
+    m_fieldA0 = 0;
+    m_explosionResistance = 0.0f;
+    m_collectStatistics = true;
 
-    mSoundType = SoundType::STONE;
+    m_soundType = SoundType::STONE;
 
-    mDestroyTime = 0.0f;
-    mTicking = false;
-    mSilkTouchable = false;
-    field_60 = 1.0f;
-    mFriction = 0.6f;
-    mMaterial = material;
-    mMapColor = color;
-    mLightEmission = 0;
+    m_destroyTime = 0.0f;
+    m_ticking = false;
+    m_silkTouchable = false;
+    m_field60 = 1.0f;
+    m_friction = 0.6f;
+    m_material = material;
+    m_mapColor = color;
+    m_lightEmission = 0;
 
     bool isEnableLight = material->blocksLight();
 
-    mMipmapEnabled = true;
-    mSemiTransparent = false;
-    field_3C = false;
-    mMaterialType = 0;
-    mBaseItemType = 0;
+    m_mipmapEnabled = true;
+    m_semiTransparent = false;
+    m_field3C = false;
+    m_materialType = 0;
+    m_baseItemType = 0;
 
-    isBlocksLight = !isEnableLight;
+    m_isBlocksLight = !isEnableLight;
 
-    mTexture = nullptr;
-    isInited = false;
-    field_8 = 0;
-    field_C = false;
+    m_texture = nullptr;
+    m_isInited = false;
+    m_field8 = 0;
+    m_fieldC = false;
 }
 
 bool Block::isTopSolidBlocking(const BlockState* state) {
@@ -272,12 +272,12 @@ bool Block::ParticlesSurviveWithin() {
 // NON_MATCHING: play with ifs in cases (so they are not optimised, the ifs) logic should be the same (unless
 // I broke something while trying to match)
 int Block::GetInteractTooltip(const BlockTooltipDataHolder& data) {
-    int blockId = data.mItemInstance->getItem()->getId();
+    int blockId = data.m_itemInstance->getItem()->getId();
     // int returnValue = 0xFFFFFFFF;
     switch (blockId) {
     case 0:
     case 126:
-        if (data.mInteractionResult != InteractionResult::FAIL && data.mBelowBuildHeight)
+        if (data.m_interactionResult != InteractionResult::FAIL && data.m_belowBuildHeight)
             return StringIDs::Ignite;
         return 0xFFFFFFFF;
     case 36:
@@ -288,54 +288,54 @@ int Block::GetInteractTooltip(const BlockTooltipDataHolder& data) {
     case 132:
     case 133:
     case 176:
-        if (data.mInteractionResult != InteractionResult::FAIL)
+        if (data.m_interactionResult != InteractionResult::FAIL)
             return StringIDs::Plant;
-        if (!data.mBelowBuildHeight)
+        if (!data.m_belowBuildHeight)
             return 0xFFFFFFFF;
         return StringIDs::Plant;
     case 62:
     case 130:
-        if (data.mInteractionResult != InteractionResult::SUCCESS)
+        if (data.m_interactionResult != InteractionResult::SUCCESS)
             return StringIDs::Hang;
         return 0xFFFFFFFF;
     case 66:
         return 0xFFFFFFFF;
     case 67:
     case 68:
-        if (!data.mInteractionResult && data.mBelowBuildHeight)
+        if (!data.m_interactionResult && data.m_belowBuildHeight)
             return StringIDs::Empty;
         return 0xFFFFFFFF;
     case 92:
-        if (data.mInteractionResult != InteractionResult::FAIL
-            && DyeColor::byItemData(data.mItemInstance->getAuxValue())->getBlockData() == 12)
+        if (data.m_interactionResult != InteractionResult::FAIL
+            && DyeColor::byItemData(data.m_itemInstance->getAuxValue())->getBlockData() == 12)
             return StringIDs::Plant;
         return 0xFFFFFFFF;
     case 142:
-        if (data.mInteractionResult != InteractionResult::FAIL && data.mBelowBuildHeight)
+        if (data.m_interactionResult != InteractionResult::FAIL && data.m_belowBuildHeight)
             return StringIDs::Launch;
         return 0xFFFFFFFF;
     case 161:
-        if (!data.mInteractionResult && data.mBelowBuildHeight) {
-            if (LeadItem::bindPlayerMobsTest((std::shared_ptr<Player>)data.mPlayer, (Level*)data.mLevel,
-                                             BlockPos((std::shared_ptr<Entity>)data.mPlayer))) {
+        if (!data.m_interactionResult && data.m_belowBuildHeight) {
+            if (LeadItem::bindPlayerMobsTest((std::shared_ptr<Player>)data.m_player, (Level*)data.m_level,
+                                             BlockPos((std::shared_ptr<Entity>)data.m_player))) {
                 return StringIDs::Attach;
             }
         }
         return 0xFFFFFFFF;
     default:
-        if (!data.mInteractionResult && data.mBelowBuildHeight)
+        if (!data.m_interactionResult && data.m_belowBuildHeight)
             return StringIDs::Place;
         return 0xFFFFFFFF;
     }
 }
 
 int Block::GetHitTooltip(const BlockTooltipDataHolder& data) {
-    if (!data.mPlayerAllowedToMine)
+    if (!data.m_playerAllowedToMine)
         return 0xFFFFFFFF;
 
-    if (data.mBlockState->getBlock()->getId() == 7
-        && (!data.mPlayer->GetGameMode()->isCreative()
-            || !data.mLevel->mDimension->inPlayerConstraints(data.mPos))) {
+    if (data.m_blockState->getBlock()->getId() == 7
+        && (!data.m_player->GetGameMode()->isCreative()
+            || !data.m_level->m_dimension->inPlayerConstraints(data.m_pos))) {
         return 0xFFFFFFFF;
     }
 
@@ -344,7 +344,7 @@ int Block::GetHitTooltip(const BlockTooltipDataHolder& data) {
 
 const MaterialColor* Block::getMapColor(const BlockState* state, LevelSource* levelSource,
                                         const BlockPos& pos) {
-    return this->mMapColor;
+    return this->m_mapColor;
 }
 
 const BlockState* Block::getBlockState(int) {
@@ -370,51 +370,51 @@ const BlockState* Block::mirror(const BlockState* state, Mirror*) {
 }
 
 void Block::DerivedInit() {
-    isInited = true;
+    m_isInited = true;
 
-    mBlockStateDefinition = createBlockStateDefinition();
-    registerDefaultState(mBlockStateDefinition->any());
+    m_blockStateDefinition = createBlockStateDefinition();
+    registerDefaultState(m_blockStateDefinition->any());
 
     bool isSolidRender = defaultBlockState()->isSolidRender();
-    field_28 = isSolidRender;
-    mLightBlock = isSolidRender ? 255 : 0;
+    m_field28 = isSolidRender;
+    m_lightBlock = isSolidRender ? 255 : 0;
 }
 
 Block* Block::sendBlockData(uchar sendBlockData) {
-    this->mSendBlockData = sendBlockData;
+    this->m_sendBlockData = sendBlockData;
     return this;
 }
 
 Block* Block::setSoundType(const SoundType* soundType) {
-    this->mSoundType = soundType;
+    this->m_soundType = soundType;
     return this;
 }
 
 Block* Block::setLightBlock(int light) {
-    this->mLightBlock = light;
+    this->m_lightBlock = light;
     return this;
 }
 
 Block* Block::setLightEmission(float emission) {
-    this->mLightEmission = emission * 15.0f;
+    this->m_lightEmission = emission * 15.0f;
     return this;
 }
 
 Block* Block::setExplodeable(float explodePower) {
-    this->mExplosionResistance = explodePower * 3.0f;
+    this->m_explosionResistance = explodePower * 3.0f;
     return this;
 }
 
 bool Block::isSolidBlockingCube(const BlockState* state) {
-    return this->mMaterial->blocksMotion() && state->isCubeShaped();
+    return this->m_material->blocksMotion() && state->isCubeShaped();
 }
 
 bool Block::isSolidBlockingCubeAndNotSignalSource(const BlockState* state) {
-    return this->mMaterial->isSolidBlocking() && state->isCubeShaped() && !state->isSignalSource();
+    return this->m_material->isSolidBlocking() && state->isCubeShaped() && !state->isSignalSource();
 }
 
 bool Block::isViewBlocking(const BlockState* state) {
-    return this->mMaterial->blocksMotion() && this->defaultBlockState()->isCubeShaped();
+    return this->m_material->blocksMotion() && this->defaultBlockState()->isCubeShaped();
 }
 
 bool Block::isCubeShaped(const BlockState* state) {
@@ -426,7 +426,7 @@ bool Block::hasCustomBreakingProgress(const BlockState* state) {
 }
 
 bool Block::isPathfindable(LevelSource* levelSource, const BlockPos& pos) {
-    return !this->mMaterial->blocksMotion();
+    return !this->m_material->blocksMotion();
 }
 
 RenderShape Block::getRenderShape(const BlockState* state) {
@@ -442,9 +442,9 @@ bool Block::mayReplaceWithPlace(LevelSource* levelSource, const BlockPos& pos) {
 }
 
 Block* Block::setDestroyTime(float time) {
-    this->mDestroyTime = time;
-    if (this->mExplosionResistance < time * 5.0f)
-        this->mExplosionResistance = time * 5.0f;
+    this->m_destroyTime = time;
+    if (this->m_explosionResistance < time * 5.0f)
+        this->m_explosionResistance = time * 5.0f;
     return this;
 }
 
@@ -454,29 +454,29 @@ Block* Block::setIndestructible() {
 }
 
 bool Block::isIndestructible() {
-    return this->mDestroyTime == FLT_MAX;
+    return this->m_destroyTime == FLT_MAX;
 }
 
 float Block::getDestroySpeed(const BlockState* state, Level* level, const BlockPos& pos) {
-    return this->mDestroyTime;
+    return this->m_destroyTime;
 }
 
 void Block::setTicking(bool ticking) {
-    this->mTicking = ticking;
+    this->m_ticking = ticking;
 }
 
 Block* Block::disableMipmap() {
-    this->mMipmapEnabled = false;
+    this->m_mipmapEnabled = false;
     return this;
 }
 
 Block* Block::setSemiTransparent() {
-    this->mSemiTransparent = true;
+    this->m_semiTransparent = true;
     return this;
 }
 
 bool Block::isTicking() {
-    return this->mTicking;
+    return this->m_ticking;
 }
 
 const AABB* Block::getShape(const BlockState* state, LevelSource* levelSource, const BlockPos& pos) {
@@ -509,10 +509,10 @@ bool Block::shouldRenderFace(const BlockState* state, LevelSource* levelSource, 
 arrayWithLength<const AABB*>* Block::getShapes(const BlockState* state, LevelSource* levelSource,
                                                const BlockPos& pos) {
     ThreadStorage* threadStorage = (ThreadStorage*)TlsGetValue(sThreadStorageIndex);
-    threadStorage->mAABBs[0] = this->getShape(state, levelSource, pos);
-    threadStorage->mAABBs[1] = nullptr;
-    threadStorage->mAABBs[2] = nullptr;
-    return &threadStorage->mAABBs;
+    threadStorage->m_aabBs[0] = this->getShape(state, levelSource, pos);
+    threadStorage->m_aabBs[1] = nullptr;
+    threadStorage->m_aabBs[2] = nullptr;
+    return &threadStorage->m_aabBs;
 }
 
 bool Block::isSolidFace(LevelSource* levelSource, const BlockPos& pos, const Direction* direction) {
@@ -607,13 +607,13 @@ void Block::spawnResources(Level* level, const BlockPos& pos, const BlockState* 
 
 void Block::spawnResources(Level* level, const BlockPos& pos, const BlockState* state, float chance,
                            int fortuneLevel) {
-    if (!level->mIsLocal) {
-        int resourceCount = this->getResourceCountForLootBonus(fortuneLevel, level->mRandom);
+    if (!level->m_isLocal) {
+        int resourceCount = this->getResourceCountForLootBonus(fortuneLevel, level->m_random);
         for (int i = 0; i < resourceCount; i++) {
-            if (level->mRandom->nextFloat() > chance)
+            if (level->m_random->nextFloat() > chance)
                 continue;
 
-            if (Item* item = this->getResource(state, level->mRandom, fortuneLevel); item != Items::AIR) {
+            if (Item* item = this->getResource(state, level->m_random, fortuneLevel); item != Items::AIR) {
                 Block::popResource(level, pos,
                                    new ItemInstance(item, 1, this->getSpawnResourcesAuxValue(state)));
             }
@@ -622,7 +622,7 @@ void Block::spawnResources(Level* level, const BlockPos& pos, const BlockState* 
 }
 
 void Block::popExperience(Level* level, const BlockPos& pos, int amount) {
-    if (!level->mIsLocal && level->getGameRules()->getBoolean(5)) {
+    if (!level->m_isLocal && level->getGameRules()->getBoolean(5)) {
         while (amount > 0) {
             int dropAmount = ExperienceOrb::getExperienceValue(amount);
             amount -= dropAmount;
@@ -637,7 +637,7 @@ int Block::getSpawnResourcesAuxValue(const BlockState* state) {
 }
 
 float Block::getExplosionResistance(std::shared_ptr<Entity>) {
-    return this->mExplosionResistance / 5.0;
+    return this->m_explosionResistance / 5.0;
 }
 
 HitResult* Block::clip(const BlockState* state, Level* level, const BlockPos& pos, Vec3* begin, Vec3* end) {
@@ -651,14 +651,14 @@ HitResult* Block::clip(const BlockPos& pos, Vec3* begin, Vec3* end, AABB const* 
     if (!tempResult)
         return nullptr;
 
-    HitResult* finalResult = new HitResult(tempResult->mHitVector->add(pos.getX(), pos.getY(), pos.getZ()),
-                                           tempResult->mDirection, pos);
+    HitResult* finalResult = new HitResult(tempResult->m_hitVector->add(pos.getX(), pos.getY(), pos.getZ()),
+                                           tempResult->m_direction, pos);
     delete tempResult;
     return finalResult;
 }
 
 void Block::wasExploded(Level* level, const BlockPos& pos, Explosion* explosion) {
-    if (!level->mIsLocal) {
+    if (!level->m_isLocal) {
         if (Minecraft::InMiniGame(EMiniGameId::NORMAL_WORLD, true) && explosion) {
             std::shared_ptr<Entity> directSrc = explosion->getDirectSource();
             if (directSrc && directSrc->isType(eFireworksRocketEntity)) {
@@ -683,7 +683,7 @@ bool Block::mayPlace(Level* level, const BlockPos& pos, const Direction* directi
 }
 
 bool Block::mayPlace(Level* level, const BlockPos& pos) {
-    return level->getBlockState(pos)->getBlock()->mMaterial->isReplaceable();
+    return level->getBlockState(pos)->getBlock()->m_material->isReplaceable();
 }
 
 bool Block::TestUse() {
@@ -758,7 +758,7 @@ int Block::getDirectSignal(const BlockState* state, LevelSource* levelSource, co
 //                          {}
 
 bool Block::isSilkTouchable() {
-    return this->defaultBlockState()->isCubeShaped() && !this->mSilkTouchable;
+    return this->defaultBlockState()->isCubeShaped() && !this->m_silkTouchable;
 }
 
 not_null_ptr<ItemInstance> Block::getSilkTouchItemInstance(const BlockState* state) {
@@ -775,13 +775,13 @@ void Block::setPlacedBy(Level* level, const BlockPos& pos, const BlockState* sta
                         std::shared_ptr<LivingEntity>, not_null_ptr<ItemInstance>) {}
 
 Block* Block::setNameAndDescriptionId(int name, int desc) {
-    this->mDescriptionId = name;
-    this->mUseDescriptionId = desc;
+    this->m_descriptionId = name;
+    this->m_useDescriptionId = desc;
     return this;
 }
 
 bool Block::isPossibleToRespawnInThis() {
-    return !this->mMaterial->isSolid() && !this->mMaterial->isLiquid();
+    return !this->m_material->isSolid() && !this->m_material->isLiquid();
 }
 
 std::wstring Block::getName() {
@@ -789,11 +789,11 @@ std::wstring Block::getName() {
 }
 
 unsigned int Block::getDescriptionId(int) {
-    return this->mDescriptionId;
+    return this->m_descriptionId;
 }
 
 unsigned int Block::getUseDescriptionId() {
-    return this->mUseDescriptionId;
+    return this->m_useDescriptionId;
 }
 
 bool Block::triggerEvent(const BlockState* state, Level* level, const BlockPos& pos, int, int) {
@@ -801,7 +801,7 @@ bool Block::triggerEvent(const BlockState* state, Level* level, const BlockPos& 
 }
 
 bool Block::isCollectStatistics() {
-    return this->mCollectStatistics;
+    return this->m_collectStatistics;
 }
 
 bool Block::shouldBlockTick(Level* level, const BlockPos& pos, const BlockState* state) {
@@ -809,12 +809,12 @@ bool Block::shouldBlockTick(Level* level, const BlockPos& pos, const BlockState*
 }
 
 Block* Block::setNotCollectStatistics() {
-    this->mCollectStatistics = false;
+    this->m_collectStatistics = false;
     return this;
 }
 
 int Block::getPistonPushReaction(const BlockState* state) {
-    return this->mMaterial->getPushReaction();
+    return this->m_material->getPushReaction();
 }
 
 float Block::getShadeBrightness(const BlockState* state) {
@@ -826,7 +826,7 @@ void Block::fallOn(Level* level, const BlockPos& pos, std::shared_ptr<Entity> fa
 }
 
 void Block::updateEntityAfterFallOn(Level* level, std::shared_ptr<Entity> faller) {
-    faller->mDeltaMovementY = 0.0f;
+    faller->m_deltaMovementY = 0.0f;
 }
 
 not_null_ptr<ItemInstance> Block::getCloneItemInstance(Level* level, const BlockPos& pos,
@@ -860,18 +860,18 @@ int Block::getAnalogOutputSignal(const BlockState* state, Level* level, const Bl
 }
 
 Block* Block::setIconName(const std::wstring& icon) {
-    this->mIconName = icon;
+    this->m_iconName = icon;
     return this;
 }
 
 std::wstring Block::getIconName() {
-    return this->mIconName.empty() ? L"MISSING_ICON_TILE_" + std::to_wstring(this->getId()) + L"_"
-                                         + std::to_wstring(this->mDescriptionId) :
-                                     this->mIconName;
+    return this->m_iconName.empty() ? L"MISSING_ICON_TILE_" + std::to_wstring(this->getId()) + L"_"
+                                          + std::to_wstring(this->m_descriptionId) :
+                                      this->m_iconName;
 }
 
 void Block::registerIcons(IconRegister* iconReg) {
-    this->mTexture = iconReg->registerIcon(this->getIconName());
+    this->m_texture = iconReg->registerIcon(this->getIconName());
 }
 
 std::wstring Block::getTileItemIconName() {
@@ -916,7 +916,7 @@ TextureAtlasSprite* Block::getTexture(LevelSource* levelSource, const BlockPos& 
 }
 
 TextureAtlasSprite* Block::getTexture(const Direction* direction, const BlockState* state) {
-    return this->mTexture;
+    return this->m_texture;
 }
 
 TextureAtlasSprite* Block::getTexture(const Direction* direction) {
@@ -932,7 +932,7 @@ BlockStateDefinition* Block::createBlockStateDefinition() {
 }
 
 BlockStateDefinition* Block::getBlockStateDefinition() {
-    return this->mBlockStateDefinition;
+    return this->m_blockStateDefinition;
 }
 
 int Block::getOffsetType() {
@@ -953,7 +953,7 @@ Vec3* Block::getOffset(const BlockState* state, LevelSource* levelSource, const 
 }
 
 const SoundType* Block::getSoundType() {
-    return this->mSoundType;
+    return this->m_soundType;
 }
 
 std::wstring Block::toString() {
@@ -3597,15 +3597,15 @@ void Block::staticCtor() {
     std::unordered_map<ResourceLocation, Block*>* blocks = Blocks::Registry->keySet();
     for (auto& entry : *blocks) {
         Block* block = entry.second;
-        if (block->mMaterial == Material::AIR) {
-            block->field_3C = 0;
+        if (block->m_material == Material::AIR) {
+            block->m_field3C = 0;
         } else {
             StairBlock* s = dynamic_cast<StairBlock*>(block);
             HalfSlabBlock* b = dynamic_cast<HalfSlabBlock*>(block);
             if (block == farmBlock || block == grassPathBlock || !s || b)
-                block->field_3C = block->mLightEmission == 0 || block->isBlocksLight;
+                block->m_field3C = block->m_lightEmission == 0 || block->m_isBlocksLight;
             else
-                block->field_3C = 1;
+                block->m_field3C = 1;
 
             for (int i = 0; i < 16; i++)
                 block->getBlockState(i);
@@ -3616,7 +3616,7 @@ void Block::staticCtor() {
         Block* block = entry.second;
         arrayWithLength<const BlockState*> blockStates
             = *(block->getBlockStateDefinition()->getPossibleBlockStates());
-        for (int i = 0; i < blockStates.length; i++) {
+        for (int i = 0; i < blockStates.m_length; i++) {
             const BlockState* state = blockStates[i];
             if (state) {
                 int id = Blocks::Registry->getId(block);

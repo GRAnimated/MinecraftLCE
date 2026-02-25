@@ -20,8 +20,8 @@ public:
         Flower(FlowerBlock::FlowerCategory*, int, const std::wstring&, int, int, const std::wstring&,
                FlowerBlock::Flower::EFlower);
 
-        void* field_0;
-        int field_8;
+        void* m_field0;
+        int m_field8;
     };
 
     virtual FlowerBlock::FlowerCategory* getFlowerCategory() = 0;

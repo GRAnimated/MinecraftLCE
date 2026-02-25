@@ -9,9 +9,9 @@ std::shared_ptr<Packet> ClientboundDamageIndicatorPacket::create() {
 }
 
 ClientboundDamageIndicatorPacket::ClientboundDamageIndicatorPacket() {
-    x = 0.0;
-    z = 0.0;
-    allDirections = true;
+    m_x = 0.0;
+    m_z = 0.0;
+    m_allDirections = true;
 }
 
 int ClientboundDamageIndicatorPacket::getEstimatedSize() {
@@ -23,15 +23,15 @@ EPacketType ClientboundDamageIndicatorPacket::getPacketId() {
 }
 
 void ClientboundDamageIndicatorPacket::read(DataInputStream* input) {
-    x = input->readFloat();
-    z = input->readFloat();
-    allDirections = input->readBoolean();
+    m_x = input->readFloat();
+    m_z = input->readFloat();
+    m_allDirections = input->readBoolean();
 }
 
 void ClientboundDamageIndicatorPacket::write(DataOutputStream* output) {
-    output->writeFloat(x);
-    output->writeFloat(z);
-    output->writeBoolean(allDirections);
+    output->writeFloat(m_x);
+    output->writeFloat(m_z);
+    output->writeBoolean(m_allDirections);
 }
 
 void ClientboundDamageIndicatorPacket::handle(PacketListener* listener) {
@@ -39,13 +39,13 @@ void ClientboundDamageIndicatorPacket::handle(PacketListener* listener) {
 }
 
 float ClientboundDamageIndicatorPacket::getX() {
-    return x;
+    return m_x;
 }
 
 float ClientboundDamageIndicatorPacket::getZ() {
-    return z;
+    return m_z;
 }
 
 bool ClientboundDamageIndicatorPacket::isAllDirections() {
-    return allDirections;
+    return m_allDirections;
 }

@@ -14,5 +14,5 @@ public:
 
     arrayWithLength<int> getArea(int x, int y, int width, int height) override;
 
-    Mode mMode;
+    Mode m_mode;
 };

@@ -9,11 +9,11 @@ std::shared_ptr<Packet> ClientboundAddExperienceOrbPacket::create() {
 }
 
 ClientboundAddExperienceOrbPacket::ClientboundAddExperienceOrbPacket() {
-    x = 0;
-    z = 0;
-    value = 0;
-    y = 0;
-    id = 0;
+    m_x = 0;
+    m_z = 0;
+    m_value = 0;
+    m_y = 0;
+    m_id = 0;
 }
 
 int ClientboundAddExperienceOrbPacket::getEstimatedSize() {
@@ -25,19 +25,19 @@ EPacketType ClientboundAddExperienceOrbPacket::getPacketId() {
 }
 
 void ClientboundAddExperienceOrbPacket::read(DataInputStream* input) {
-    id = input->readInt();
-    x = input->readInt();
-    y = input->readInt();
-    z = input->readInt();
-    value = input->readShort();
+    m_id = input->readInt();
+    m_x = input->readInt();
+    m_y = input->readInt();
+    m_z = input->readInt();
+    m_value = input->readShort();
 }
 
 void ClientboundAddExperienceOrbPacket::write(DataOutputStream* output) {
-    output->writeInt(id);
-    output->writeInt(x);
-    output->writeInt(y);
-    output->writeInt(z);
-    output->writeShort(value);
+    output->writeInt(m_id);
+    output->writeInt(m_x);
+    output->writeInt(m_y);
+    output->writeInt(m_z);
+    output->writeShort(m_value);
 }
 
 void ClientboundAddExperienceOrbPacket::handle(PacketListener* listener) {
@@ -45,21 +45,21 @@ void ClientboundAddExperienceOrbPacket::handle(PacketListener* listener) {
 }
 
 int ClientboundAddExperienceOrbPacket::getId() {
-    return id;
+    return m_id;
 }
 
 int ClientboundAddExperienceOrbPacket::getX() {
-    return x;
+    return m_x;
 }
 
 int ClientboundAddExperienceOrbPacket::getY() {
-    return y;
+    return m_y;
 }
 
 int ClientboundAddExperienceOrbPacket::getZ() {
-    return z;
+    return m_z;
 }
 
 int ClientboundAddExperienceOrbPacket::getValue() {
-    return value;
+    return m_value;
 }

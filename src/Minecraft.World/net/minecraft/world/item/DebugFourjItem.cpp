@@ -10,7 +10,7 @@ DebugFourjItem::DebugFourjItem() {}
 bool DebugFourjItem::interactEnemy(not_null_ptr<ItemInstance> item, std::shared_ptr<Player> player,
                                    std::shared_ptr<LivingEntity> enemy,
                                    InteractionHand::EInteractionHand hand) {
-    if (player->mLevel->mIsLocal)
+    if (player->m_level->m_isLocal)
         return false;
 
     if (!enemy->isType(eMob))

@@ -15,8 +15,8 @@ public:
     void doSomething() {}
     T* Pop();
 
-    std::vector<T> mVector;
-    nn::os::MutexType mMutex;
+    std::vector<T> m_vector;
+    nn::os::MutexType m_mutex;
 };
 
 ASSERT_SIZEOF(XLockFreeStack<unsigned char>, 0x38)

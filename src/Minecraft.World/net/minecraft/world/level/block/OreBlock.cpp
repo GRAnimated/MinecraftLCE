@@ -38,18 +38,18 @@ Item* OreBlock::getResource(const BlockState* blockState, Random*, int) {
 void OreBlock::spawnResources(Level* level, const BlockPos& pos, const BlockState* blockState, float chance,
                               int fortuneLevel) {
     Block::spawnResources(level, pos, blockState, chance, fortuneLevel);
-    if (this->getResource(blockState, level->mRandom, fortuneLevel) != Item::byBlock(this)) {
+    if (this->getResource(blockState, level->m_random, fortuneLevel) != Item::byBlock(this)) {
         int v13 = 0;
         if (this == Blocks::COAL_ORE) {
-            v13 = Mth::nextInt(level->mRandom, 0, 2);
+            v13 = Mth::nextInt(level->m_random, 0, 2);
         } else if (this == Blocks::DIAMOND_ORE) {
-            v13 = Mth::nextInt(level->mRandom, 3, 7);
+            v13 = Mth::nextInt(level->m_random, 3, 7);
         } else if (this == Blocks::EMERALD_ORE) {
-            v13 = Mth::nextInt(level->mRandom, 3, 7);
+            v13 = Mth::nextInt(level->m_random, 3, 7);
         } else if (this == Blocks::LAPIS_ORE) {
-            v13 = Mth::nextInt(level->mRandom, 2, 5);
+            v13 = Mth::nextInt(level->m_random, 2, 5);
         } else if (this == Blocks::QUARTZ_ORE) {
-            v13 = Mth::nextInt(level->mRandom, 2, 5);
+            v13 = Mth::nextInt(level->m_random, 2, 5);
         }
 
         this->popExperience(level, pos, v13);

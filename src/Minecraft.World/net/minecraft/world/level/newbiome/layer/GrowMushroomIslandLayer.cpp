@@ -6,7 +6,7 @@
 
 GrowMushroomIslandLayer::GrowMushroomIslandLayer(long long seed, std::shared_ptr<Layer> parent)
     : Layer(seed) {
-    mParent = parent;
+    m_parent = parent;
 }
 
 arrayWithLength<int> GrowMushroomIslandLayer::getArea(int x, int y, int width, int height) {
@@ -14,7 +14,7 @@ arrayWithLength<int> GrowMushroomIslandLayer::getArea(int x, int y, int width, i
     int n = y - 1;
     int o = width + 2;
     int p = height + 2;
-    arrayWithLength<int> parentArea = mParent->getArea(m, n, o, p);
+    arrayWithLength<int> parentArea = m_parent->getArea(m, n, o, p);
     PIXBeginNamedEvent(0.0, "GrowMushroomIslandLayer::getArea");
     arrayWithLength<int> area = IntCache::allocate(width * height);
 

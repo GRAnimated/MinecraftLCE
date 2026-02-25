@@ -10,7 +10,7 @@ std::shared_ptr<Packet> ServerboundClientCommandPacket::create() {
 }
 
 ServerboundClientCommandPacket::ServerboundClientCommandPacket() {
-    commandId = 0;
+    m_commandId = 0;
 }
 
 int ServerboundClientCommandPacket::getEstimatedSize() {
@@ -22,11 +22,11 @@ EPacketType ServerboundClientCommandPacket::getPacketId() {
 }
 
 void ServerboundClientCommandPacket::read(DataInputStream* input) {
-    commandId = input->readInt();
+    m_commandId = input->readInt();
 }
 
 void ServerboundClientCommandPacket::write(DataOutputStream* output) {
-    output->writeInt(commandId);
+    output->writeInt(m_commandId);
 }
 
 // why does this one make a dynamic cast?

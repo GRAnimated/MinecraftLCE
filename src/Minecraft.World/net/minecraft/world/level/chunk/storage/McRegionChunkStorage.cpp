@@ -10,10 +10,10 @@ void McRegionChunkStorage::save(Level* level, LevelChunk* chunk) {
     MemSect(30);
     PIXBeginNamedEvent(0.0, "Getting output stream\n");
     DataOutputStream* chunkOutputStream = RegionFileCache::getChunkDataOutputStream(
-        this->mSaveFile, this->unk2, chunk->mXPos, chunk->mZPos, false);
+        this->m_saveFile, this->m_unk2, chunk->m_xPos, chunk->m_zPos, false);
     PIXEndNamedEvent();
 
-    if (this->mSaveFile->getOriginalSaveVersion() > 7) {
+    if (this->m_saveFile->getOriginalSaveVersion() > 7) {
         PIXBeginNamedEvent(0.0, "Writing chunk data");
         OldChunkStorage::save(chunk, level, chunkOutputStream);
         PIXEndNamedEvent();
@@ -58,5 +58,5 @@ void McRegionChunkStorage::save(Level* level, LevelChunk* chunk) {
     }
 
     MemSect(0);
-    level->getLevelData()->setSizeOnDisk(this->mSaveFile->getSizeOnDisk());
+    level->getLevelData()->setSizeOnDisk(this->m_saveFile->getSizeOnDisk());
 }

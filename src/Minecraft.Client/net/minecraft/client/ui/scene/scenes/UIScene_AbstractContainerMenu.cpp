@@ -30,42 +30,42 @@
 
 UIScene_AbstractContainerMenu::UIScene_AbstractContainerMenu(int padID, UILayer* layer)
     : UIScene(padID, layer) {
-    this->mFocusedSection = ESceneSection_NONE;
-    gConsoleUIController.OverrideSFX(this->mPadID, 0, 1);
-    gConsoleUIController.OverrideSFX(this->mPadID, 20, 1);
-    gConsoleUIController.OverrideSFX(this->mPadID, 2, 1);
-    gConsoleUIController.OverrideSFX(this->mPadID, 3, 1);
-    gConsoleUIController.OverrideSFX(this->mPadID, 11, 1);
-    gConsoleUIController.OverrideSFX(this->mPadID, 10, 1);
-    gConsoleUIController.OverrideSFX(this->mPadID, 7, 1);
-    gConsoleUIController.OverrideSFX(this->mPadID, 6, 1);
-    gConsoleUIController.OverrideSFX(this->mPadID, 4, 1);
-    gConsoleUIController.OverrideSFX(this->mPadID, 5, 1);
-    this->byte110 = false;
+    this->m_focusedSection = ESceneSection_NONE;
+    gConsoleUIController.OverrideSFX(this->m_padId, 0, 1);
+    gConsoleUIController.OverrideSFX(this->m_padId, 20, 1);
+    gConsoleUIController.OverrideSFX(this->m_padId, 2, 1);
+    gConsoleUIController.OverrideSFX(this->m_padId, 3, 1);
+    gConsoleUIController.OverrideSFX(this->m_padId, 11, 1);
+    gConsoleUIController.OverrideSFX(this->m_padId, 10, 1);
+    gConsoleUIController.OverrideSFX(this->m_padId, 7, 1);
+    gConsoleUIController.OverrideSFX(this->m_padId, 6, 1);
+    gConsoleUIController.OverrideSFX(this->m_padId, 4, 1);
+    gConsoleUIController.OverrideSFX(this->m_padId, 5, 1);
+    this->m_byte110 = false;
 }
 
 bool UIScene_AbstractContainerMenu::mapElementsAndNames() {
     fuiRenderNode* node = this->getFuiFile()->getRootNode();
 
-    this->mMainPanel.setupControl(this, node, "MainPanel");
-    this->mUIControls.push_back(&this->mMainPanel);
+    this->m_mainPanel.setupControl(this, node, "MainPanel");
+    this->m_uiControls.push_back(&this->m_mainPanel);
 
-    fuiRenderNode* mainPanelNode = this->mMainPanel.getFuiRenderNode();
+    fuiRenderNode* mainPanelNode = this->m_mainPanel.getFuiRenderNode();
 
-    this->mBackgroundPanel.setupControl(this, mainPanelNode, "BackgroundPanel");
-    this->mUIControls.push_back(&this->mBackgroundPanel);
+    this->m_backgroundPanel.setupControl(this, mainPanelNode, "BackgroundPanel");
+    this->m_uiControls.push_back(&this->m_backgroundPanel);
 
-    this->mHotbarList.setupControl(this, mainPanelNode, "hotbarList");
-    this->mUIControls.push_back(&this->mHotbarList);
+    this->m_hotbarList.setupControl(this, mainPanelNode, "hotbarList");
+    this->m_uiControls.push_back(&this->m_hotbarList);
 
-    this->mInventoryList.setupControl(this, mainPanelNode, "inventoryList");
-    this->mUIControls.push_back(&this->mInventoryList);
+    this->m_inventoryList.setupControl(this, mainPanelNode, "inventoryList");
+    this->m_uiControls.push_back(&this->m_inventoryList);
 
-    this->mCursor.setupControl(this, mainPanelNode, "cursor");
-    this->mUIControls.push_back(&this->mCursor);
+    this->m_cursor.setupControl(this, mainPanelNode, "cursor");
+    this->m_uiControls.push_back(&this->m_cursor);
 
-    this->mInventoryLabel.setupControl(this, mainPanelNode, "inventoryLabel");
-    this->mUIControls.push_back(&this->mInventoryLabel);
+    this->m_inventoryLabel.setupControl(this, mainPanelNode, "inventoryLabel");
+    this->m_uiControls.push_back(&this->m_inventoryLabel);
 
     return true;
 }
@@ -75,14 +75,14 @@ void UIScene_AbstractContainerMenu::tick() {
     this->onMouseTick();
 
     int width, height;
-    this->mUILayer->getRenderDimension(width, height);
+    this->m_uiLayer->getRenderDimension(width, height);
     if (width == 1280 && height == 480) {
         width = 640;
     }
 
-    int ww = this->mScreenSize.x * ((float)width / this->mStageWidth);
-    int hh = this->mScreenSize.y * ((float)height / this->mStageHeight);
-    fui::sInstance->dispatchMouseMoveEvent(this->mFuiFile, ww, hh);
+    int ww = this->m_screenSize.m_x * ((float)width / this->m_stageWidth);
+    int hh = this->m_screenSize.m_y * ((float)height / this->m_stageHeight);
+    fui::sInstance->dispatchMouseMoveEvent(this->m_fuiFile, ww, hh);
 }
 
 void UIScene_AbstractContainerMenu::updateTooltips() {
@@ -91,78 +91,78 @@ void UIScene_AbstractContainerMenu::updateTooltips() {
 
 // NON_MATCHING: logic should be the same
 void UIScene_AbstractContainerMenu::render(int a, int b, C4JRender::eViewportType viewportType) {
-    this->byte_e9 = true;
+    this->m_byteE9 = true;
 
-    this->byte_ea = this->byte_ea || this->mContainerMenu->someValue;
+    this->m_byteEa = this->m_byteEa || this->m_containerMenu->m_someValue;
 
-    if (this->byte_ea) {
-        this->dwordF8 = this->GetBaseSlotCount();
-        int slotsCount = this->mContainerMenu->getSlotsCount();
+    if (this->m_byteEa) {
+        this->m_dwordF8 = this->GetBaseSlotCount();
+        int slotsCount = this->m_containerMenu->getSlotsCount();
         for (int i = 0; i != slotsCount; i++) {
-            if (this->mContainerMenu->getSlot(i)->hasItem()) {
-                this->dwordF8++;
+            if (this->m_containerMenu->getSlot(i)->hasItem()) {
+                this->m_dwordF8++;
             }
         }
     }
 
     UIScene::render(a, b, viewportType);
-    this->byte_ea = false;
+    this->m_byteEa = false;
 }
 
 void UIScene_AbstractContainerMenu::customDraw(const char* renderNodeName, fuiRect* rect) {
     Minecraft* mc = Minecraft::GetInstance();
-    if (!mc->mLocalPlayers[this->mPadID] || !mc->mGameModes[this->mPadID])
+    if (!mc->m_localPlayers[this->m_padId] || !mc->m_gameModes[this->m_padId])
         return;
 
     not_null_ptr<ItemInstance> item = ItemInstance::EMPTY;
     int slotId = -1;
 
     if (strcmp(renderNodeName, "pointerIcon") == 0) {
-        this->byte_e9 = 0;
+        this->m_byteE9 = 0;
         Renderer::sInstance->Clear(1);
-        item = this->mContainerMenu->GetQuickCraftItem(this->mPadID, -1);
+        item = this->m_containerMenu->GetQuickCraftItem(this->m_padId, -1);
         if (item->isEmpty()) {
-            item = mc->mLocalPlayers[this->mPadID]->mInventory->getCarried();
+            item = mc->m_localPlayers[this->m_padId]->m_inventory->getCarried();
         }
     } else {
         sscanf(renderNodeName, "slot_%d", &slotId);
 
         if (slotId != -1) {
             int baseSlotCount = this->GetBaseSlotCount();
-            int slotCount = this->mContainerMenu->getSlotsCount();
+            int slotCount = this->m_containerMenu->getSlotsCount();
 
             for (int i = 0; i != slotCount; i++) {
-                Slot* slot = this->mContainerMenu->getSlot(i);
+                Slot* slot = this->m_containerMenu->getSlot(i);
                 slot->hasItem();  // wtf is that loop
             }
 
-            Slot* slot = this->mContainerMenu->getSlot(slotId);
-            item = this->mContainerMenu->GetQuickCraftItem(this->mPadID, slot->mIndex);
+            Slot* slot = this->m_containerMenu->getSlot(slotId);
+            item = this->m_containerMenu->GetQuickCraftItem(this->m_padId, slot->m_index);
             if (item->isEmpty()) {
-                this->byte_e9 = true;
+                this->m_byteE9 = true;
                 item = slot->getItem();
             } else {
                 // Why temp bool?
                 bool elo = IUIScene_AbstractContainerMenu::IsSameItemAs(
-                    slot->getItem(), mc->mLocalPlayers[this->mPadID]->mInventory->getCarried());
-                this->byte_e9 = elo;
+                    slot->getItem(), mc->m_localPlayers[this->m_padId]->m_inventory->getCarried());
+                this->m_byteE9 = elo;
             }
         }
     }
 
     if (!item->isEmpty()) {
         this->customDrawSlotControlFui(rect, 0, item,
-                                       this->mContainerMenu->isValidIngredient(item, slotId) ? 1.0f : 0.5f,
+                                       this->m_containerMenu->isValidIngredient(item, slotId) ? 1.0f : 0.5f,
                                        item->getItem()->isFoil(item), true, false);
     }
 }
 
 void UIScene_AbstractContainerMenu::handleInput(int a2, int a3, bool a4, bool a5, bool a6, bool& wasHandled) {
-    if (!this->byte110) {
-        gConsoleUIController.AnimateKeyPress(this->mPadID, a3, a4, a5, a6);
+    if (!this->m_byte110) {
+        gConsoleUIController.AnimateKeyPress(this->m_padId, a3, a4, a5, a6);
 
         if (a5) {
-            wasHandled = this->handleKeyDown(this->mPadID, a3, a4);
+            wasHandled = this->handleKeyDown(this->m_padId, a3, a4);
         }
     }
 }
@@ -171,96 +171,97 @@ void UIScene_AbstractContainerMenu::handleDestroy() {
     // someone went really crazy with 10 ifs for the same thing
     // someone went really crazy with making temp Minecraft var to just not use it later
     Minecraft* mc = Minecraft::GetInstance();
-    if (mc->mGameModes[this->mPadID]) {
-        MultiPlayerGameMode* mode = Minecraft::GetInstance()->mGameModes[this->mPadID];
+    if (mc->m_gameModes[this->m_padId]) {
+        MultiPlayerGameMode* mode = Minecraft::GetInstance()->m_gameModes[this->m_padId];
         if (mode) {
             Tutorial* tut = mode->getTutorial();
             if (tut) {
-                tut->changeTutorialState(this->mTutorialState, nullptr);
+                tut->changeTutorialState(this->m_tutorialState, nullptr);
             }
         }
     }
 
-    Player* player = mc->mLocalPlayers[this->mPadID].get();
-    if (player && player->mContainerMenu->someValue == this->mContainerMenu->someValue) {
+    Player* player = (Player*)mc->m_localPlayers[this->m_padId].get();
+    if (player && player->m_containerMenu->m_someValue == this->m_containerMenu->m_someValue) {
         player->closeContainer();
     }
 
-    gConsoleUIController.OverrideSFX(this->mPadID, 0, 0);
-    gConsoleUIController.OverrideSFX(this->mPadID, 20, 0);
-    gConsoleUIController.OverrideSFX(this->mPadID, 2, 0);
-    gConsoleUIController.OverrideSFX(this->mPadID, 3, 0);
-    gConsoleUIController.OverrideSFX(this->mPadID, 11, 0);
-    gConsoleUIController.OverrideSFX(this->mPadID, 10, 0);
-    gConsoleUIController.OverrideSFX(this->mPadID, 7, 0);
-    gConsoleUIController.OverrideSFX(this->mPadID, 6, 0);
-    gConsoleUIController.OverrideSFX(this->mPadID, 4, 0);
-    gConsoleUIController.OverrideSFX(this->mPadID, 5, 0);
+    gConsoleUIController.OverrideSFX(this->m_padId, 0, 0);
+    gConsoleUIController.OverrideSFX(this->m_padId, 20, 0);
+    gConsoleUIController.OverrideSFX(this->m_padId, 2, 0);
+    gConsoleUIController.OverrideSFX(this->m_padId, 3, 0);
+    gConsoleUIController.OverrideSFX(this->m_padId, 11, 0);
+    gConsoleUIController.OverrideSFX(this->m_padId, 10, 0);
+    gConsoleUIController.OverrideSFX(this->m_padId, 7, 0);
+    gConsoleUIController.OverrideSFX(this->m_padId, 6, 0);
+    gConsoleUIController.OverrideSFX(this->m_padId, 4, 0);
+    gConsoleUIController.OverrideSFX(this->m_padId, 5, 0);
 }
 
 int UIScene_AbstractContainerMenu::getPad() {
-    return this->mPadID;
+    return this->m_padId;
 }
 
 void UIScene_AbstractContainerMenu::PlatformInitialize(bool a2, int a3, int flags) {
-    this->mInventoryLabel.init(L10N::GetString(StringIDs::Inventory_2));
-    if (this->mControlsNeedUpdate) {
-        ((FJ_AbstractContainerDocument*)this->mFuiFile->getRootNode()->mFuiNodeStage)->HideInventory();
-        this->mHotbarList.UpdateControl();
-        this->mBackgroundPanel.UpdateControl();
+    this->m_inventoryLabel.init(L10N::GetString(StringIDs::Inventory_2));
+    if (this->m_controlsNeedUpdate) {
+        ((FJ_AbstractContainerDocument*)this->m_fuiFile->getRootNode()->m_fuiNodeStage)->HideInventory();
+        this->m_hotbarList.UpdateControl();
+        this->m_backgroundPanel.UpdateControl();
     }
 
     if ((flags & 0x80000000) == 0) {
-        if (!this->mControlsNeedUpdate) {
-            this->mInventoryList.addSlots(flags, 27);
+        if (!this->m_controlsNeedUpdate) {
+            this->m_inventoryList.addSlots(flags, 27);
         }
-        this->mHotbarList.addSlots(flags + 27, 9);
+        this->m_hotbarList.addSlots(flags + 27, 9);
     }
 
     // grabbing background panel values as that's what defines split screen shit
-    float screenWidth = this->mBackgroundPanel.getWidth();
-    float screenHeight = this->mBackgroundPanel.getHeight();
-    float XPos = this->mBackgroundPanel.getXPos();
-    float YPos = this->mBackgroundPanel.getYPos();
-    this->dword20 = 0.0f;
-    this->dword24 = 0.0f;
-    this->mScreenPosX = XPos;
-    this->mScreenPosXEnd = XPos + screenWidth;
-    this->mScreenPosY = YPos;
-    this->mScreenPosYEnd = YPos + screenHeight;
+    float screenWidth = this->m_backgroundPanel.getWidth();
+    float screenHeight = this->m_backgroundPanel.getHeight();
+    float XPos = this->m_backgroundPanel.getXPos();
+    float YPos = this->m_backgroundPanel.getYPos();
+    this->m_dword20 = 0.0f;
+    this->m_dword24 = 0.0f;
+    this->m_screenPosX = XPos;
+    this->m_screenPosXEnd = XPos + screenWidth;
+    this->m_screenPosY = YPos;
+    this->m_screenPosYEnd = YPos + screenHeight;
 
-    this->dword30 = CConsoleMinecraftApp::sInstance.GetLocalPlayerCount() >= 2 ? floorf(25.0f) : YPos - 50.0f;
-    this->dword28 = XPos - 50.0f;
-    this->dword2C = this->mScreenPosXEnd + 50.0f;
-    this->dword34 = this->mScreenPosYEnd + 25.0f;
+    this->m_dword30
+        = CConsoleMinecraftApp::sInstance.GetLocalPlayerCount() >= 2 ? floorf(25.0f) : YPos - 50.0f;
+    this->m_dword28 = XPos - 50.0f;
+    this->m_dword2C = this->m_screenPosXEnd + 50.0f;
+    this->m_dword34 = this->m_screenPosYEnd + 25.0f;
     _UIVec2D a, b, sectionPos;
-    this->GetItemScreenData(this->mSceneSection, 0, &a, &b);
-    this->GetPositionOfSection(this->mSceneSection, &sectionPos);
+    this->GetItemScreenData(this->m_sceneSection, 0, &a, &b);
+    this->GetPositionOfSection(this->m_sceneSection, &sectionPos);
     _UIVec2D final(sectionPos);
     final += a;
-    final.x += b.x / 2;
-    final.y += b.y / 2;
-    final.x -= this->dword20;
-    final.y -= this->dword24;
+    final.m_x += b.m_x / 2;
+    final.m_y += b.m_y / 2;
+    final.m_x -= this->m_dword20;
+    final.m_y -= this->m_dword24;
 
     if (a2) {
-        this->mScreenSize.x = this->mScreenSize.x * this->mStageWidth / this->dword114;
-        this->mScreenSize.y = this->mScreenSize.y * this->mStageHeight / this->dword118;
+        this->m_screenSize.m_x = this->m_screenSize.m_x * this->m_stageWidth / this->m_dword114;
+        this->m_screenSize.m_y = this->m_screenSize.m_y * this->m_stageHeight / this->m_dword118;
     } else {
-        this->mScreenSize = final;
+        this->m_screenSize = final;
     }
-    this->dword114 = this->mStageWidth;
-    this->dword118 = this->mStageHeight;
+    this->m_dword114 = this->m_stageWidth;
+    this->m_dword118 = this->m_stageHeight;
 
     int width, height;
-    this->mUILayer->getRenderDimension(width, height);
+    this->m_uiLayer->getRenderDimension(width, height);
     if (width == 1280 && height == 480) {
         width = 640;
     }
 
-    int ww = this->mScreenSize.x * ((float)width / this->mStageWidth);
-    int hh = this->mScreenSize.y * ((float)height / this->mStageHeight);
-    fui::sInstance->dispatchMouseMoveEvent(this->mFuiFile, ww, hh);
+    int ww = this->m_screenSize.m_x * ((float)width / this->m_stageWidth);
+    int hh = this->m_screenSize.m_y * ((float)height / this->m_stageHeight);
+    fui::sInstance->dispatchMouseMoveEvent(this->m_fuiFile, ww, hh);
 }
 
 void UIScene_AbstractContainerMenu::InitDataAssociations(int, AbstractContainerMenu*, int) {}
@@ -279,33 +280,33 @@ void UIScene_AbstractContainerMenu::setSectionFocus(IUIScene_AbstractContainerMe
     if (sectionBefore)
         sectionBefore->setFocus(true);
 
-    if (this->mFocusedSection != ESceneSection_NONE) {
-        UIControl_SlotList* sectionAfter = this->getSection(this->mFocusedSection);
+    if (this->m_focusedSection != ESceneSection_NONE) {
+        UIControl_SlotList* sectionAfter = this->getSection(this->m_focusedSection);
         if (sectionAfter != sectionBefore && sectionAfter != nullptr)
             sectionAfter->setFocus(false);
     }
 
-    this->mFocusedSection = section;
+    this->m_focusedSection = section;
 }
 
 void UIScene_AbstractContainerMenu::setFocusToPointer(int) {
-    if (this->mFocusedSection != ESceneSection_NONE) {
-        UIControl_SlotList* section = this->getSection(this->mFocusedSection);
+    if (this->m_focusedSection != ESceneSection_NONE) {
+        UIControl_SlotList* section = this->getSection(this->m_focusedSection);
         if (section) {
             section->setFocus(false);
         }
     }
-    this->mFocusedSection = ESceneSection_NONE;
+    this->m_focusedSection = ESceneSection_NONE;
 }
 
 void UIScene_AbstractContainerMenu::SetPointerText(std::vector<HtmlString>* text, bool a3) {
-    this->mCursor.setLabel(HtmlString::Compose(text), false, a3);
+    this->m_cursor.setLabel(HtmlString::Compose(text), false, a3);
 }
 
 not_null_ptr<ItemInstance>
 UIScene_AbstractContainerMenu::getSlotItem(IUIScene_AbstractContainerMenu::ESceneSection section,
                                            int slotId) {
-    Slot* slot = this->mContainerMenu->getSlot(this->getSectionStartOffset(section) + slotId);
+    Slot* slot = this->m_containerMenu->getSlot(this->getSectionStartOffset(section) + slotId);
 
     if (!slot)
         return ItemInstance::EMPTY;
@@ -315,12 +316,12 @@ UIScene_AbstractContainerMenu::getSlotItem(IUIScene_AbstractContainerMenu::EScen
 
 Slot* UIScene_AbstractContainerMenu::getSlot(IUIScene_AbstractContainerMenu::ESceneSection section,
                                              int slotId) {
-    return this->mContainerMenu->getSlot(this->getSectionStartOffset(section) + slotId);
+    return this->m_containerMenu->getSlot(this->getSectionStartOffset(section) + slotId);
 }
 
 bool UIScene_AbstractContainerMenu::isSlotEmpty(IUIScene_AbstractContainerMenu::ESceneSection section,
                                                 int slotId) {
-    Slot* slot = this->mContainerMenu->getSlot(this->getSectionStartOffset(section) + slotId);
+    Slot* slot = this->m_containerMenu->getSlot(this->getSectionStartOffset(section) + slotId);
 
     return slot && !slot->hasItem();
 }

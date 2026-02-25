@@ -15,11 +15,11 @@ EPacketType ServerboundUseItemPacket::getPacketId() {
 }
 
 void ServerboundUseItemPacket::read(DataInputStream* input) {
-    mHand = (InteractionHand::EInteractionHand)input->readByte();
+    m_hand = (InteractionHand::EInteractionHand)input->readByte();
 }
 
 void ServerboundUseItemPacket::write(DataOutputStream* output) {
-    output->writeByte(mHand);
+    output->writeByte(m_hand);
 }
 
 void ServerboundUseItemPacket::handle(PacketListener* listener) {

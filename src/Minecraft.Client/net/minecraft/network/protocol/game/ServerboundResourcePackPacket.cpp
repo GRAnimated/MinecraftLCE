@@ -15,11 +15,11 @@ EPacketType ServerboundResourcePackPacket::getPacketId() {
 }
 
 void ServerboundResourcePackPacket::read(DataInputStream* input) {
-    resourcePackId = input->readInt();
+    m_resourcePackId = input->readInt();
 }
 
 void ServerboundResourcePackPacket::write(DataOutputStream* output) {
-    output->writeInt(resourcePackId);
+    output->writeInt(m_resourcePackId);
 }
 
 void ServerboundResourcePackPacket::handle(PacketListener* listener) {

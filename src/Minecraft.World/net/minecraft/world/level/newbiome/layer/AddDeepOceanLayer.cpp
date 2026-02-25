@@ -5,7 +5,7 @@
 #include "net/minecraft/world/level/newbiome/layer/IntCache.h"
 
 AddDeepOceanLayer::AddDeepOceanLayer(long long seed, std::shared_ptr<Layer> parent) : Layer(seed) {
-    mParent = parent;
+    m_parent = parent;
 }
 
 arrayWithLength<int> AddDeepOceanLayer::getArea(int x, int y, int width, int height) {
@@ -13,7 +13,7 @@ arrayWithLength<int> AddDeepOceanLayer::getArea(int x, int y, int width, int hei
     int n = y - 1;
     int o = width + 2;
     int p = height + 2;
-    arrayWithLength<int> parentArea = mParent->getArea(m, n, o, p);
+    arrayWithLength<int> parentArea = m_parent->getArea(m, n, o, p);
     PIXBeginNamedEvent(0.0, "AddDeepOceanLayer::getArea");
     arrayWithLength<int> area = IntCache::allocate(width * height);
 
@@ -42,7 +42,7 @@ arrayWithLength<int> AddDeepOceanLayer::getArea(int x, int y, int width, int hei
             }
 
             if (w == 0 && x1 > 3) {
-                area[r + q * width] = Biome::DEEP_OCEAN->mBiomeID;
+                area[r + q * width] = Biome::DEEP_OCEAN->m_biomeId;
             } else {
                 area[r + q * width] = w;
             }

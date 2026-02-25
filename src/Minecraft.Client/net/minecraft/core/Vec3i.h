@@ -11,8 +11,7 @@ public:
     int getZ() const;
     double distSqr(const Vec3i&) const;
 
-protected:
-    int x;
-    int y;
-    int z;
+    int m_x;
+    int m_y;
+    int m_z;
 };

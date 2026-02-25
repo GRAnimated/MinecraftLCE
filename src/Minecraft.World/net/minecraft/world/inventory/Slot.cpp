@@ -7,7 +7,7 @@
 #include "net/minecraft/world/item/ItemInstance.h"
 
 Slot::Slot(std::shared_ptr<Container> container, int index, int x, int y)
-    : mSlot(index), mContainer(container), mX(x), mY(y) {}
+    : m_slot(index), m_container(container), m_x(x), m_y(y) {}
 
 Slot::~Slot() {}
 
@@ -34,7 +34,7 @@ bool Slot::mayPlace(not_null_ptr<ItemInstance> item) {
 }
 
 not_null_ptr<ItemInstance> Slot::getItem() {
-    return mContainer->getItem(mSlot);
+    return m_container->getItem(m_slot);
 }
 
 bool Slot::hasItem() {
@@ -42,16 +42,16 @@ bool Slot::hasItem() {
 }
 
 void Slot::set(not_null_ptr<ItemInstance> item) {
-    mContainer->setItem(mSlot, item);
+    m_container->setItem(m_slot, item);
     setChanged();
 }
 
 void Slot::setChanged() {
-    mContainer->setChanged();
+    m_container->setChanged();
 }
 
 int Slot::getMaxStackSize() {
-    return mContainer->getMaxStackSize();
+    return m_container->getMaxStackSize();
 }
 
 int Slot::getMaxStackSize(not_null_ptr<ItemInstance> item) {
@@ -63,11 +63,11 @@ std::wstring Slot::getNoItemIcon() {
 }
 
 not_null_ptr<ItemInstance> Slot::remove(int count) {
-    return mContainer->removeItem(mSlot, count);
+    return m_container->removeItem(m_slot, count);
 }
 
 bool Slot::isAt(std::shared_ptr<Container> container, int index) {
-    return container.get() == mContainer.get() && mSlot == index;
+    return container.get() == m_container.get() && m_slot == index;
 }
 
 bool Slot::mayPickup(std::shared_ptr<Player> player) {

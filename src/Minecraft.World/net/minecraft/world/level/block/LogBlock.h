@@ -28,7 +28,7 @@ public:
             }
         }
 
-        LogAxis(const std::wstring& name) { this->mName = name; }
+        LogAxis(const std::wstring& name) { this->m_name = name; }
 
         int getId() {
             if (this == VALUES[0])
@@ -41,10 +41,10 @@ public:
                 return 3;
         }
 
-        std::wstring toString() const override { return this->mName; }
-        std::wstring getSerializedName() const override { return this->mName; }
+        std::wstring toString() const override { return this->m_name; }
+        std::wstring getSerializedName() const override { return this->m_name; }
 
-        std::wstring mName;
+        std::wstring m_name;
     };
 
     LogBlock();
@@ -70,6 +70,6 @@ public:
     Direction::Axis* getAxis(const BlockState* state) override;
     virtual int getWoodType(const BlockState* state) = 0;
 
-    TextureAtlasSprite* type_textures[6];
-    TextureAtlasSprite* top_textures[6];
+    TextureAtlasSprite* m_typeTextures[6];
+    TextureAtlasSprite* m_topTextures[6];
 };

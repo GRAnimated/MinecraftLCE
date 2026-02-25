@@ -4,19 +4,19 @@ UIControl_List::UIControl_List() : UIControl_Base() {}
 
 // NON_MATCHING: idk, the for loop is constructed weirdly
 UIControl_List::~UIControl_List() {
-    for (GenericPendingUpdate* update : mGenericPendingUpdates) {
+    for (GenericPendingUpdate* update : m_genericPendingUpdates) {
         delete update;
     }
 }
 
 void UIControl_List::addElement(eUIControlType type, int id) {
     if (id < 0)
-        id = this->mListSize;
+        id = this->m_listSize;
 
-    this->mListSize += 1;
+    this->m_listSize += 1;
 
-    this->mUIControlsTypes[id] = type;
-    this->mUIControlsStates[id] = true;
+    this->m_uiControlsTypes[id] = type;
+    this->m_uiControlsStates[id] = true;
 
-    this->mUIControlIDs.push_back(id);
+    this->m_uiControlIDs.push_back(id);
 }

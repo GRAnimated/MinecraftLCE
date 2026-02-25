@@ -141,38 +141,38 @@ public:
     int getBlockId(int, int, int);
     int getData(int, int, int);
 
-    char padding_0[24];
-    CompressedBlockStorage* mBlockDataLower;  // Y0-Y127
-    CompressedBlockStorage* mBlockDataUpper;  // Y128-Y255
+    char m_padding0[24];
+    CompressedBlockStorage* m_blockDataLower;  // Y0-Y127
+    CompressedBlockStorage* m_blockDataUpper;  // Y128-Y255
 
-    char unk[391];
+    char m_unk[391];
     Level* m_level;
 
-    SparseDataStorage* mDataDataLower;         // Y0-Y127
-    SparseDataStorage* mDataDataUpper;         // Y128-Y255
-    SparseLightStorage* mSkyLightDataLower;    // Y0-Y127
-    SparseLightStorage* mSkyLightDataUpper;    // Y128-Y255
-    SparseLightStorage* mBlockLightDataLower;  // Y0-Y127
-    SparseLightStorage* mBlockLightDataUpper;  // Y128-Y255
-    char padding_480[24];
-    int mXPos;
-    int mZPos;
+    SparseDataStorage* m_dataDataLower;         // Y0-Y127
+    SparseDataStorage* m_dataDataUpper;         // Y128-Y255
+    SparseLightStorage* m_skyLightDataLower;    // Y0-Y127
+    SparseLightStorage* m_skyLightDataUpper;    // Y128-Y255
+    SparseLightStorage* m_blockLightDataLower;  // Y0-Y127
+    SparseLightStorage* m_blockLightDataUpper;  // Y128-Y255
+    char m_padding480[24];
+    int m_xPos;
+    int m_zPos;
     bool m_tickSkylight;  // guessed, could be skylightDirty maybe?
-    char unk2[13];
-    std::unordered_map<BlockPos, std::shared_ptr<BlockEntity>>* mBlockEntities;
-    char unk3[32];
+    char m_unk2[13];
+    std::unordered_map<BlockPos, std::shared_ptr<BlockEntity>>* m_blockEntities;
+    char m_unk3[32];
     short m_populatedFlags;
-    char unk4[13];
-    bool unk9;
+    char m_unk4[13];
+    bool m_unk9;
     bool m_hasPostProcessed;
-    bool unk11;
-    bool unk12;
-    bool unk6;
-    char unk7[25];
-    long mInhabitedTime;
-    bool unk8;
+    bool m_unk11;
+    bool m_unk12;
+    bool m_unk6;
+    char m_unk7[25];
+    long m_inhabitedTime;
+    bool m_unk8;
     // char unk5[85]; // 728 with 85
-    char unk5[30];
+    char m_unk5[30];
     std::deque<BlockPos> m_blockEntityPosTickQueue;
-    char unk13[8];
+    char m_unk13[8];
 };

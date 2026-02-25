@@ -47,8 +47,8 @@ void LevelChunk::postProcess() {
 }
 
 void LevelChunk::writeCompressedDataData(DataOutputStream* out) {
-    mDataDataLower->write(out);
-    mDataDataUpper->write(out);
+    m_dataDataLower->write(out);
+    m_dataDataUpper->write(out);
 }
 
 bool LevelChunk::DECOMP_getUnknownField() {
@@ -56,22 +56,22 @@ bool LevelChunk::DECOMP_getUnknownField() {
 }
 
 void LevelChunk::writeCompressedBlockData(DataOutputStream* out) {
-    mBlockDataLower->write(out);
-    mBlockDataUpper->write(out);
+    m_blockDataLower->write(out);
+    m_blockDataUpper->write(out);
 }
 
 void LevelChunk::writeCompressedSkyLightData(DataOutputStream* out) {
-    mSkyLightDataLower->write(out);
-    mSkyLightDataUpper->write(out);
+    m_skyLightDataLower->write(out);
+    m_skyLightDataUpper->write(out);
 }
 
 void LevelChunk::writeCompressedBlockLightData(DataOutputStream* out) {
-    mBlockLightDataLower->write(out);
-    mBlockLightDataUpper->write(out);
+    m_blockLightDataLower->write(out);
+    m_blockLightDataUpper->write(out);
 }
 
 ChunkPos LevelChunk::getPos() {
-    return ChunkPos(this->mXPos, this->mZPos);
+    return ChunkPos(this->m_xPos, this->m_zPos);
 }
 
 bool LevelChunk::isTerrainPopulated() {

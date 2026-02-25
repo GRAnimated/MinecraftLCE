@@ -98,9 +98,9 @@ public:
     class _CachedSlotDrawData;
     class _TimerInfo {
     public:
-        int mTimeDelay;
-        int mNextTickTime;
-        bool mEnabled;
+        int m_timeDelay;
+        int m_nextTickTime;
+        bool m_enabled;
     };
 
     UIScene(int, UILayer*);
@@ -124,7 +124,7 @@ public:
 
     void removeControl(UIControl_Base* control, bool);
 
-    fuiFile* getFuiFile() { return this->mFuiFile; }
+    fuiFile* getFuiFile() { return this->m_fuiFile; }
 
     virtual void reloadMovie(bool);
     virtual bool needsReloaded();
@@ -181,37 +181,37 @@ public:
 
     static void customDrawFui(void*, const char*, fuiRect*);
 
-    std::wstring wstring_8;
-    fuiFile* mFuiFile;
-    bool bool_28;
-    char gap_29[3];
-    void* qword30;
-    std::unordered_map<std::wstring, bool> map1;
-    std::unordered_map<int, UIScene::_TimerInfo> mTimersMap;
-    int mControlFocused;
-    int mControlChildFocus;
-    float mOpacity;
-    bool mIsInitializedMovie;
-    bool mVisible;
-    bool byte_96;
-    bool bool_97;
-    UIScene* mBackScene;
-    void* mCallbackUniqueId;
-    int mResType;  // 0 - 1080p | 1 - 720p
-    bool mHidden;
-    bool bool_ad;
-    int mStageWidth;
-    int mStageHeight;
-    int mStageWidth2;
-    int mStageHeight2;
-    std::vector<UIControl*> mUIControls;
-    UILayer* mUILayer;
-    bool mFocusRelated;
-    int mPadID;
-    bool mHideLowerScenes;
-    bool byte_e9;
-    bool byte_ea;
-    bool byte_eb;
-    int dwordF8;
-    std::vector<UIScene::_CachedSlotDrawData*> mCachedSlotDrawData;
+    std::wstring m_wstring8;
+    fuiFile* m_fuiFile;
+    bool m_bool28;
+    char m_gap29[3];
+    void* m_qword30;
+    std::unordered_map<std::wstring, bool> m_ap1;
+    std::unordered_map<int, UIScene::_TimerInfo> m_timersMap;
+    int m_controlFocused;
+    int m_controlChildFocus;
+    float m_opacity;
+    bool m_isInitializedMovie;
+    bool m_visible;
+    bool m_byte96;
+    bool m_bool97;
+    UIScene* m_backScene;
+    void* m_callbackUniqueId;
+    int m_resType;  // 0 - 1080p | 1 - 720p
+    bool m_hidden;
+    bool m_boolAd;
+    int m_stageWidth;
+    int m_stageHeight;
+    int m_stageWidth2;
+    int m_stageHeight2;
+    std::vector<UIControl*> m_uiControls;
+    UILayer* m_uiLayer;
+    bool m_focusRelated;
+    int m_padId;
+    bool m_hideLowerScenes;
+    bool m_byteE9;
+    bool m_byteEa;
+    bool m_byteEb;
+    int m_dwordF8;
+    std::vector<UIScene::_CachedSlotDrawData*> m_cachedSlotDrawData;
 };

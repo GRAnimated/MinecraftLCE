@@ -4,41 +4,41 @@
 
 ByteArrayInputStream::ByteArrayInputStream(arrayWithLength<unsigned char> array, unsigned int start,
                                            unsigned int length) {
-    mLength = std::min(start + length, array.length);
-    mCurrentPos = start;
-    mNextPos = start;
-    mBuffer = array;
+    m_length = std::min(start + length, array.m_length);
+    m_currentPos = start;
+    m_nextPos = start;
+    m_buffer = array;
 }
 
 ByteArrayInputStream::ByteArrayInputStream(arrayWithLength<unsigned char> array) {
-    mLength = array.length;
-    mCurrentPos = 0;
-    mNextPos = 0;
-    mBuffer = array;
+    m_length = array.m_length;
+    m_currentPos = 0;
+    m_nextPos = 0;
+    m_buffer = array;
 }
 
 ByteArrayInputStream::~ByteArrayInputStream() {
-    delete[] mBuffer.data;
+    delete[] m_buffer.m_data;
 }
 
 int ByteArrayInputStream::read() {
-    if (mNextPos < mLength)
-        return mBuffer[mNextPos++];
+    if (m_nextPos < m_length)
+        return m_buffer[m_nextPos++];
     return -1;
 }
 
 int ByteArrayInputStream::read(arrayWithLength<unsigned char> array) {
-    return read(array, 0, array.length);
+    return read(array, 0, array.m_length);
 }
 
 int ByteArrayInputStream::read(arrayWithLength<unsigned char> array, unsigned int start,
                                unsigned int length) {
-    if (mNextPos == mLength)
+    if (m_nextPos == m_length)
         return -1;
 
-    int amount = std::min(length, mLength - mNextPos);
-    XMemCpy(&array[start], &mBuffer[mNextPos], amount);
-    mNextPos += amount;
+    int amount = std::min(length, m_length - m_nextPos);
+    XMemCpy(&array[start], &m_buffer[m_nextPos], amount);
+    m_nextPos += amount;
 
     return amount;
 }
@@ -46,13 +46,13 @@ int ByteArrayInputStream::read(arrayWithLength<unsigned char> array, unsigned in
 void ByteArrayInputStream::close() {}
 
 long long ByteArrayInputStream::skip(long long amount) {
-    int newPos = mNextPos + amount;
+    int newPos = m_nextPos + amount;
 
-    if (newPos > mLength)
-        newPos = mLength;
+    if (newPos > m_length)
+        newPos = m_length;
 
-    int difference = newPos - mNextPos;
-    mNextPos = newPos;
+    int difference = newPos - m_nextPos;
+    m_nextPos = newPos;
 
     return difference;
 }

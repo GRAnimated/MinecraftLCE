@@ -9,9 +9,9 @@ std::shared_ptr<Packet> ClientboundLevelEventPacket::create() {
 }
 
 ClientboundLevelEventPacket::ClientboundLevelEventPacket() {
-    type = 0;
-    data = 0;
-    pos = BlockPos::BlockPos();
+    m_type = 0;
+    m_data = 0;
+    m_pos = BlockPos::BlockPos();
 }
 
 int ClientboundLevelEventPacket::getEstimatedSize() {
@@ -23,17 +23,17 @@ EPacketType ClientboundLevelEventPacket::getPacketId() {
 }
 
 void ClientboundLevelEventPacket::read(DataInputStream* input) {
-    type = input->readInt();
-    pos = input->readBlockPos();
-    data = input->readInt();
-    globalEvent = input->readBoolean();
+    m_type = input->readInt();
+    m_pos = input->readBlockPos();
+    m_data = input->readInt();
+    m_globalEvent = input->readBoolean();
 }
 
 void ClientboundLevelEventPacket::write(DataOutputStream* output) {
-    output->writeInt(type);
-    output->writeBlockPos(pos);
-    output->writeInt(data);
-    output->writeBoolean(globalEvent);
+    output->writeInt(m_type);
+    output->writeBlockPos(m_pos);
+    output->writeInt(m_data);
+    output->writeBoolean(m_globalEvent);
 }
 
 void ClientboundLevelEventPacket::handle(PacketListener* listener) {
@@ -41,17 +41,17 @@ void ClientboundLevelEventPacket::handle(PacketListener* listener) {
 }
 
 int ClientboundLevelEventPacket::getType() {
-    return type;
+    return m_type;
 }
 
 int ClientboundLevelEventPacket::getData() {
-    return data;
+    return m_data;
 }
 
 BlockPos ClientboundLevelEventPacket::getPos() {
-    return pos;
+    return m_pos;
 }
 
 bool ClientboundLevelEventPacket::isGlobalEvent() {
-    return globalEvent;
+    return m_globalEvent;
 }

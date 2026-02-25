@@ -9,16 +9,16 @@ std::shared_ptr<Packet> ClientboundBlockDestructionPacket::create() {
 }
 
 ClientboundBlockDestructionPacket::ClientboundBlockDestructionPacket() {
-    mId = 0;
-    mPos = BlockPos();
-    mProgress = 0;
+    m_id = 0;
+    m_pos = BlockPos();
+    m_progress = 0;
 }
 
 ClientboundBlockDestructionPacket::ClientboundBlockDestructionPacket(int id, const BlockPos& pos,
                                                                      int progress) {
-    mId = id;
-    mPos = pos;
-    mProgress = progress;
+    m_id = id;
+    m_pos = pos;
+    m_progress = progress;
 }
 
 int ClientboundBlockDestructionPacket::getEstimatedSize() {
@@ -30,15 +30,15 @@ EPacketType ClientboundBlockDestructionPacket::getPacketId() {
 }
 
 void ClientboundBlockDestructionPacket::read(DataInputStream* input) {
-    mId = input->readInt();
-    mPos = input->readBlockPos();
-    mProgress = input->readUnsignedByte() & 0xFF;
+    m_id = input->readInt();
+    m_pos = input->readBlockPos();
+    m_progress = input->readUnsignedByte() & 0xFF;
 }
 
 void ClientboundBlockDestructionPacket::write(DataOutputStream* output) {
-    output->writeInt(mId);
-    output->writeBlockPos(mPos);
-    output->writeByte(mProgress);
+    output->writeInt(m_id);
+    output->writeBlockPos(m_pos);
+    output->writeByte(m_progress);
 }
 
 void ClientboundBlockDestructionPacket::handle(PacketListener* listener) {
@@ -46,13 +46,13 @@ void ClientboundBlockDestructionPacket::handle(PacketListener* listener) {
 }
 
 int ClientboundBlockDestructionPacket::getId() {
-    return mId;
+    return m_id;
 }
 
 BlockPos ClientboundBlockDestructionPacket::getPos() {
-    return mPos;
+    return m_pos;
 }
 
 int ClientboundBlockDestructionPacket::getProgress() {
-    return mProgress;
+    return m_progress;
 }

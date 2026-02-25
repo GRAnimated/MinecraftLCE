@@ -25,10 +25,10 @@ public:
     float getClickZ();
 
 private:
-    BlockPos pos;
-    const Direction* face;
-    InteractionHand::EInteractionHand hand;
-    float clickX;
-    float clickY;
-    float clickZ;
+    BlockPos m_pos;
+    const Direction* m_face;
+    InteractionHand::EInteractionHand m_hand;
+    float m_clickX;
+    float m_clickY;
+    float m_clickZ;
 };

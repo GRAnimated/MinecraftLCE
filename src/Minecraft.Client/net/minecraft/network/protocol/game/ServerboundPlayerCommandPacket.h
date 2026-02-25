@@ -31,7 +31,7 @@ public:
     int getData();
 
 private:
-    int id;
-    int action;
-    int data;
+    int m_id;
+    int m_action;
+    int m_data;
 };

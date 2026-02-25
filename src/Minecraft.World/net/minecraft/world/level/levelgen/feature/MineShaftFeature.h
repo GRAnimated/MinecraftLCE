@@ -6,7 +6,7 @@ class MineShaftFeature : public StructureFeature {
 public:
     MineShaftFeature();
 
-    char filler[0x8];
+    char m_filler[0x8];
 };
 
 ASSERT_SIZEOF(MineShaftFeature, 0x70)

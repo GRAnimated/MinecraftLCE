@@ -15,31 +15,31 @@ public:
     void write(DataOutputStream* output) override;
     void handle(PacketListener* listener) override;
 
-    PlayerUID* mPlayers;
-    int mPlayerCount;
-    char mUnk1;
-    int mUnk2;
-    char mMapName;  // not to be confused with world name, which I don't think is written here
-    char mUnk3;
-    char mUnk4;
-    char mUnk5;
-    char mUnk6;
-    char mUnk7;
-    char mUnk8;
-    char mUnk9;
-    char mUnk10;
-    char mUnk11;
-    char mUnk12;
-    char mUnk13;
-    char mUnk14;
-    char mUnk15;
-    int mUnk16;
-    char mUnk17;
-    int mUnk18;
-    short mProtocolVersion;
-    bool mUnk19;
-    int mUnk20;
-    std::wstring mName;
+    PlayerUID* m_players;
+    int m_playerCount;
+    char m_unk1;
+    int m_unk2;
+    char m_mapName;  // not to be confused with world name, which I don't think is written here
+    char m_unk3;
+    char m_unk4;
+    char m_unk5;
+    char m_unk6;
+    char m_unk7;
+    char m_unk8;
+    char m_unk9;
+    char m_unk10;
+    char m_unk11;
+    char m_unk12;
+    char m_unk13;
+    char m_unk14;
+    char m_unk15;
+    int m_unk16;
+    char m_unk17;
+    int m_unk18;
+    short m_protocolVersion;
+    bool m_unk19;
+    int m_unk20;
+    std::wstring m_name;
 };
 
 ASSERT_SIZEOF(ClientboundPreLoginPacket, 0x78)

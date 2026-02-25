@@ -19,13 +19,13 @@ EPacketType ServerboundContainerButtonClickPacket::getPacketId() {
 }
 
 void ServerboundContainerButtonClickPacket::read(DataInputStream* input) {
-    containerId = static_cast<int>(input->readByte());
-    buttonId = static_cast<int>(input->readByte());
+    m_containerId = static_cast<int>(input->readByte());
+    m_buttonId = static_cast<int>(input->readByte());
 }
 
 void ServerboundContainerButtonClickPacket::write(DataOutputStream* output) {
-    output->writeByte(containerId);
-    output->writeByte(buttonId);
+    output->writeByte(m_containerId);
+    output->writeByte(m_buttonId);
 }
 
 void ServerboundContainerButtonClickPacket::handle(PacketListener* listener) {
@@ -33,9 +33,9 @@ void ServerboundContainerButtonClickPacket::handle(PacketListener* listener) {
 }
 
 int ServerboundContainerButtonClickPacket::getContainerId() {
-    return containerId;
+    return m_containerId;
 }
 
 int ServerboundContainerButtonClickPacket::getButtonId() {
-    return buttonId;
+    return m_buttonId;
 }

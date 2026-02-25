@@ -5,18 +5,18 @@
 template <typename T>
 class arrayWithLength {
 public:
-    T* data;
-    unsigned int length;
+    T* m_data;
+    unsigned int m_length;
 
     arrayWithLength() {
-        this->data = nullptr;
-        this->length = 0;
+        this->m_data = nullptr;
+        this->m_length = 0;
     }
     // ~arrayWithLength() { delete data; }
     arrayWithLength(std::vector<T> initialData, int length);
     arrayWithLength(T* initialData, int length) {
-        this->data = initialData;
-        this->length = length;
+        this->m_data = initialData;
+        this->m_length = length;
     }
     arrayWithLength(unsigned int size, bool a3) {
         T* temp;
@@ -24,31 +24,31 @@ public:
             temp = createDataBuffer(size);
         else
             temp = (T*)operator new[](sizeof(T) * size);
-        this->data = temp;
-        this->length = size;
+        this->m_data = temp;
+        this->m_length = size;
     }
 
-    T& operator[](unsigned int i) { return data[i]; }
-    T& get(unsigned int i) { return data[i]; }
+    T& operator[](unsigned int i) { return m_data[i]; }
+    T& get(unsigned int i) { return m_data[i]; }
 
     void resize(unsigned int newSize) {
-        if (length == newSize) {
+        if (m_length == newSize) {
             return;
         }
         T* dataBuffer = createDataBuffer(newSize);
-        if (data) {
+        if (m_data) {
             int len;
-            if (length >= newSize)
+            if (m_length >= newSize)
                 len = newSize;
             else
-                len = length;
-            copy(dataBuffer, data, len);
+                len = m_length;
+            copy(dataBuffer, m_data, len);
 
-            delete[] data;
+            delete[] m_data;
         }
 
-        data = dataBuffer;
-        length = newSize;
+        m_data = dataBuffer;
+        m_length = newSize;
     }
 
     // NON_MATCHING
@@ -78,8 +78,8 @@ public:
 
     // maybe this should be a constructor?
     static arrayWithLength<T> createFromOther(arrayWithLength<T> other) {
-        arrayWithLength<unsigned char> out(other.length, true);
-        out.copy(out.data, other.data, other.length);
+        arrayWithLength<unsigned char> out(other.m_length, true);
+        out.copy(out.m_data, other.m_data, other.m_length);
         return out;
     }
 
@@ -96,14 +96,14 @@ private:
 template <typename T>
 class array2DWithLength {
 public:
-    array2DWithLength() : lengthX(0), lengthY(0) {}
+    array2DWithLength() : m_lengthX(0), m_lengthY(0) {}
     array2DWithLength(unsigned int lenX, unsigned int lenY);
 
-    T& get(unsigned int index) { return (*data)[index]; }
+    T& get(unsigned int index) { return (*m_data)[index]; }
 
-    explicit operator bool() const { return !data->empty(); }
+    explicit operator bool() const { return !m_data->empty(); }
 
-    std::vector<T>* data = nullptr;
-    unsigned int lengthX = 0;
-    unsigned int lengthY = 0;
+    std::vector<T>* m_data = nullptr;
+    unsigned int m_lengthX = 0;
+    unsigned int m_lengthY = 0;
 };

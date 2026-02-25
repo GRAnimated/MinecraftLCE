@@ -14,7 +14,7 @@ public:
 
     static void staticCtor();
 
-    char filler[0x20];
+    char m_filler[0x20];
 };
 
 ASSERT_SIZEOF(RandomScatteredLargeFeature, 0x88)

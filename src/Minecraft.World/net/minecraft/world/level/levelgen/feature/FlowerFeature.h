@@ -10,6 +10,6 @@ public:
     ~FlowerFeature() override;
     bool place(Level* level, Random& random, const BlockPos& pos) override;
 
-    void* field_10;
-    void* field_18;
+    void* m_field10;
+    void* m_field18;
 };

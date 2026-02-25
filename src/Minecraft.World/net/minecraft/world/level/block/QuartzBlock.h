@@ -26,20 +26,20 @@ public:
         }
 
         Variant(int data, const std::wstring& name, const std::wstring& textureName) {
-            this->mData = data;
-            this->mName = name;
-            this->mTextureName = textureName;
+            this->m_data = data;
+            this->m_name = name;
+            this->m_textureName = textureName;
         }
 
-        int getData() { return this->mData; }
-        std::wstring getName() { return this->mName; }
+        int getData() { return this->m_data; }
+        std::wstring getName() { return this->m_name; }
 
-        std::wstring toString() const override { return this->mTextureName; }
-        std::wstring getSerializedName() const override { return this->mName; }
+        std::wstring toString() const override { return this->m_textureName; }
+        std::wstring getSerializedName() const override { return this->m_name; }
 
-        int mData;
-        std::wstring mName;
-        std::wstring mTextureName;
+        int m_data;
+        std::wstring m_name;
+        std::wstring m_textureName;
     };
 
     static std::wstring TEXTURE_NAME_TOP;           // L"top"
@@ -71,9 +71,9 @@ public:
     const BlockState* getStateForPlacement(Level* level, const BlockPos& pos, const Direction* direction,
                                            float, float, float, int, std::shared_ptr<LivingEntity>) override;
 
-    TextureAtlasSprite* mTextures[5];
-    TextureAtlasSprite* mTextureChiseledTop;
-    TextureAtlasSprite* mTextureLinesTop;
-    TextureAtlasSprite* mTextureTop;
-    TextureAtlasSprite* mTextureBottom;
+    TextureAtlasSprite* m_textures[5];
+    TextureAtlasSprite* m_textureChiseledTop;
+    TextureAtlasSprite* m_textureLinesTop;
+    TextureAtlasSprite* m_textureTop;
+    TextureAtlasSprite* m_textureBottom;
 };

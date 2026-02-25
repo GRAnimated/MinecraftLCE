@@ -20,29 +20,29 @@ void fui::setScreenSize(float width, float height) {
     if (width == 1280 && height == 480)
         width = 640;
 
-    this->mScreenWidth = width;
-    this->mScreenHeight = height;
+    this->m_screenWidth = width;
+    this->m_screenHeight = height;
 }
 
 void fui::unloadScene(fuiFile* file) {
     if (!file)
         return;
 
-    EnterCriticalSection(this->mScenesMutex);
+    EnterCriticalSection(this->m_scenesMutex);
     delete file;
 
-    for (auto it = this->mScenes.begin(); it != this->mScenes.end(); ++it) {
+    for (auto it = this->m_scenes.begin(); it != this->m_scenes.end(); ++it) {
         if (*it == file) {
-            mScenes.erase(it);
+            m_scenes.erase(it);
             break;
         }
     }
 
-    LeaveCriticalSection(this->mScenesMutex);
+    LeaveCriticalSection(this->m_scenesMutex);
 }
 
 void fui::setResolution(int res) {
-    this->mResolution = res;
+    this->m_resolution = res;
     if (res) {
         this->setScreenSize(1920, 1080);
     } else {
@@ -51,7 +51,7 @@ void fui::setResolution(int res) {
 }
 
 int fui::getResolution() {
-    return this->mResolution;
+    return this->m_resolution;
 }
 
 void fui::render(fuiFile* file, float a1, float a2, float a3, float a4) {
@@ -59,11 +59,11 @@ void fui::render(fuiFile* file, float a1, float a2, float a3, float a4) {
 }
 
 void fui::render(fuiFile* file, float a1, float a2, float a3, float a4, float a5, float a6) {
-    std::memset(this->matrix, 0, sizeof(mat4x4));
-    this->matrix[0][0] = 1.0f;
-    this->matrix[1][1] = 1.0f;
-    this->matrix[2][2] = 1.0f;
-    this->matrix[3][3] = 1.0f;
+    std::memset(this->m_atrix, 0, sizeof(mat4x4));
+    this->m_atrix[0][0] = 1.0f;
+    this->m_atrix[1][1] = 1.0f;
+    this->m_atrix[2][2] = 1.0f;
+    this->m_atrix[3][3] = 1.0f;
 
     Renderer* renderer = Renderer::sInstance;
 
@@ -79,24 +79,24 @@ void fui::render(fuiFile* file, float a1, float a2, float a3, float a4, float a5
 
     renderer->MatrixMode(1);
     renderer->MatrixSetIdentity();
-    renderer->MatrixOrthogonal(0.0f, this->mScreenWidth, this->mScreenHeight, 0.0f, 1000.0f, 3000.0f);
+    renderer->MatrixOrthogonal(0.0f, this->m_screenWidth, this->m_screenHeight, 0.0f, 1000.0f, 3000.0f);
 
     renderer->MatrixMode(0);
     renderer->MatrixSetIdentity();
-    renderer->MatrixTranslate(this->mUnk5 - a1, this->mUnk6 - a2, -2000.0f);
+    renderer->MatrixTranslate(this->m_unk5 - a1, this->m_unk6 - a2, -2000.0f);
     renderer->MatrixScale(a5, a6, 1);
 
-    renderer->StateSetScissorRect(this->mUnk5, this->mUnk6, this->mUnk5 + a3, this->mUnk6 + a4);
+    renderer->StateSetScissorRect(this->m_unk5, this->m_unk6, this->m_unk5 + a3, this->m_unk6 + a4);
 
-    file->mRenderNodeStage->gather(this->mBoolIdk);
+    file->m_renderNodeStage->gather(this->m_boolIdk);
 
     this->preRender(file);
 
-    file->mRenderNodeStage->render(nullptr, nullptr);
+    file->m_renderNodeStage->render(nullptr, nullptr);
 }
 
 void fui::dispatchKeyboardEvent(fuiFile* file, bool state, int c) {
-    FJ_FuiNode* node = file->mData.fuiSymbol->mStage;  // ???
+    FJ_FuiNode* node = file->m_data.m_fuiSymbol->m_stage;  // ???
 
     if (FJ_FuiNode* focus = static_cast<FJ_FuiNodeStage*>(node)->getFocus())
         node = focus;
@@ -106,7 +106,7 @@ void fui::dispatchKeyboardEvent(fuiFile* file, bool state, int c) {
 
 // param names guessed
 void fui::dispatchMouseMoveEvent(fuiFile* file, float x, float y) {
-    FJ_FuiNode* node = file->mData.fuiSymbol->mStage;
+    FJ_FuiNode* node = file->m_data.m_fuiSymbol->m_stage;
 
     if (FJ_FuiNode* focus = static_cast<FJ_FuiNodeStage*>(node)->getFocus())
         node = focus;
@@ -116,30 +116,31 @@ void fui::dispatchMouseMoveEvent(fuiFile* file, float x, float y) {
 
 void fui::addDirectEventListener(const FJ_EventListener& listener) {
     this->removeDirectEventListener(listener);
-    this->mEventListeners.push_back(listener);
+    this->m_eventListeners.push_back(listener);
 }
 
 void fui::removeDirectEventListener(const FJ_EventListener& listener) {
-    for (auto it = this->mEventListeners.begin(); it != this->mEventListeners.end(); ++it) {
-        if (it->unk1 != listener.unk1 || it->unk3 != listener.unk3 || it->mTarget != listener.mTarget)
+    for (auto it = this->m_eventListeners.begin(); it != this->m_eventListeners.end(); ++it) {
+        if (it->m_unk1 != listener.m_unk1 || it->m_unk3 != listener.m_unk3
+            || it->m_target != listener.m_target)
             continue;
 
-        this->mEventListeners.erase(it);
+        this->m_eventListeners.erase(it);
         break;
     }
 }
 
 void fui::removeEventListenerForNode(FJ_FuiNode* node) {
-    for (auto it = this->mEventListeners.begin(); it != this->mEventListeners.end();) {
-        if (it->mTarget != node) {
+    for (auto it = this->m_eventListeners.begin(); it != this->m_eventListeners.end();) {
+        if (it->m_target != node) {
             ++it;
             continue;
         }
 
-        it = this->mEventListeners.erase(it);
+        it = this->m_eventListeners.erase(it);
     }
 }
 
 void fui::removeManagedTexture(fuiFile* file, fuiBitmap* texture) {
-    this->mTextureManager->removeManagedTexture(file, texture);
+    this->m_textureManager->removeManagedTexture(file, texture);
 }

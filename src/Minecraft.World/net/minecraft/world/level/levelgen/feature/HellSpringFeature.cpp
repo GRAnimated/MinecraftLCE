@@ -7,7 +7,7 @@
 #include "net/minecraft/world/level/material/Material.h"
 
 HellSpringFeature::HellSpringFeature(Block* block, bool forcePlacement)
-    : Feature(false), mBlock(block), mIsForcePlacement(forcePlacement) {}
+    : Feature(false), m_block(block), m_isForcePlacement(forcePlacement) {}
 
 bool HellSpringFeature::place(Level* level, Random& random, const BlockPos& pos) {
     if (level->getBlockState(pos.above())->getBlock() == Blocks::NETHERRACK
@@ -49,8 +49,8 @@ bool HellSpringFeature::place(Level* level, Random& random, const BlockPos& pos)
             airCount++;
         }
 
-        if ((!mIsForcePlacement && netherrackCount == 4 && airCount == 1) || netherrackCount == 5) {
-            const BlockState* lava = mBlock->defaultBlockState();
+        if ((!m_isForcePlacement && netherrackCount == 4 && airCount == 1) || netherrackCount == 5) {
+            const BlockState* lava = m_block->defaultBlockState();
             level->setBlock(pos, lava, 2, false);
             level->instaTick(pos, lava, random);
         }

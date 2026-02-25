@@ -15,12 +15,12 @@ public:
     virtual void released(int, int);
     virtual bool clicked(Minecraft*, int, int);
 
-    int mWidth;
-    int mHeight;
-    int mX;
-    int mY;
-    std::wstring mButtonText;
-    int mId;
-    bool mIsActive;
-    bool mIsVisible;
+    int m_width;
+    int m_height;
+    int m_x;
+    int m_y;
+    std::wstring m_buttonText;
+    int m_id;
+    bool m_isActive;
+    bool m_isVisible;
 };

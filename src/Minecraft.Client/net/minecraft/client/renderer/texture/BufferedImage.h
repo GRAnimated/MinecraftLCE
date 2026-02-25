@@ -5,5 +5,5 @@ public:
     BufferedImage(int width, int height, int);
     ~BufferedImage();
 
-    void* fill[96 / 8];
+    void* m_fill[96 / 8];
 };
