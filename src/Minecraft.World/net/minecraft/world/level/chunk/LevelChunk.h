@@ -1,5 +1,7 @@
 #pragma once
 
+#include "deque"
+#include "net/minecraft/core/BlockPos.h"
 #include "net/minecraft/core/System.h"
 #include "net/minecraft/world/ArrayWithLength.h"
 #include "net/minecraft/world/level/LightLayer.h"
@@ -32,11 +34,25 @@ class LevelChunk {
 public:
     static bool touchedSky;  // Name from b1.2_02
 
+    // TODO put this somewhere better, maybe CompressedBlockStorage if used there
+#define INDEX_BLOCK_ARRAY(x, y, z) y | (x << 11) | (z << 7)
+
+    class BlockChange {};
+
+    enum DECOMP_HELPER PopulationFlags : int { FLAG_TERRAIN_POPULATED = 0x400 };
+
     LevelChunk(Level*, ChunkPrimer*, int, int);
+    LevelChunk(Level*, int, int);
 
     enum EntityCreationType {};
 
     static void staticCtor();
+
+    void tick(bool);
+    void recheckGaps(bool local);
+    void postProcess();
+
+    std::shared_ptr<BlockEntity> createBlockEntity(const BlockPos& pos);
 
     static nn::os::MutexType mMutex_710178c150;
     static nn::os::MutexType mMutex_710178c170;
@@ -67,9 +83,9 @@ public:
     virtual Block* getBlock(const BlockPos&);
     virtual const BlockState* getBlockState(const BlockPos&);
     virtual void getData(const BlockPos&);
-    virtual void setData(int, int, int, int, int, bool*);
-    virtual void setBlock(const BlockPos&, const BlockState*);
-    virtual void setBlockAndData(int, int, int, int, int, bool);
+    virtual bool setData(int, int, int, int, int, bool*);
+    virtual const BlockState* setBlock(const BlockPos&, const BlockState*);
+    virtual bool setBlockAndData(int, int, int, int, int, bool);
     virtual int getBrightness(LightLayer::variety, const BlockPos&);
     virtual void getNeighbourBrightnesses(int*, LightLayer::variety, int, int, int);
     virtual void setBrightness(LightLayer::variety, const BlockPos&, int);
@@ -78,25 +94,26 @@ public:
     virtual void removeEntity(std::shared_ptr<Entity>);
     virtual void removeEntity(std::shared_ptr<Entity>, int);
     virtual bool isSkyLit(const BlockPos&);
-    virtual void getBlockEntity(const BlockPos&, LevelChunk::EntityCreationType);
+    virtual std::shared_ptr<BlockEntity> getBlockEntity(const BlockPos&, LevelChunk::EntityCreationType);
     virtual void addBlockEntity(std::shared_ptr<BlockEntity>);
     virtual void setBlockEntity(const BlockPos&, std::shared_ptr<BlockEntity>);
     virtual void removeBlockEntity(const BlockPos&);
     virtual void load(bool);
     virtual void unload(bool, bool);
-    virtual void containsPlayer();
-    virtual void field_160();
+    virtual bool containsPlayer();
+    virtual bool
+    DECOMP_getUnknownField();  // NAME NOT KNOWN, don't want it to appear like it is in IDA either
     virtual void markUnsaved();
     virtual void getEntities(std::shared_ptr<Entity>, AABB const*, std::vector<std::shared_ptr<Entity>>&,
                              const Predicate<std::shared_ptr<Entity>>*);
     virtual void getEntitiesOfClass(const std::type_info&, AABB const*, std::vector<std::shared_ptr<Entity>>&,
                                     const Predicate<std::shared_ptr<Entity>>*, bool);
-    virtual void countEntities();
+    virtual int countEntities();
     virtual bool shouldSave(bool);
     virtual void getBlocksAndData(arrayWithLength<unsigned char>*, int, int, int, int, int, int, int, bool);
     virtual void setBlocksAndData(arrayWithLength<unsigned char>, int, int, int, int, int, int, int, bool);
-    virtual void testSetBlocksAndData(arrayWithLength<unsigned char>, int, int, int, int, int, int, int);
-    virtual void getRandom(long long);
+    virtual bool testSetBlocksAndData(arrayWithLength<unsigned char>, int, int, int, int, int, int, int);
+    virtual Random* getRandom(long long);
     virtual bool isEmpty();
     virtual Biome* getBiome(const BlockPos&, BiomeSource*);
     virtual void compressLighting();
@@ -128,7 +145,8 @@ public:
     CompressedBlockStorage* m_blockDataLower;  // Y0-Y127
     CompressedBlockStorage* m_blockDataUpper;  // Y128-Y255
 
-    char m_unk[400];
+    char m_unk[391];
+    Level* m_level;
 
     SparseDataStorage* m_dataDataLower;         // Y0-Y127
     SparseDataStorage* m_dataDataUpper;         // Y128-Y255
@@ -139,11 +157,22 @@ public:
     char m_padding480[24];
     int m_xPos;
     int m_zPos;
-    char m_unk2[14];
+    bool m_tickSkylight;  // guessed, could be skylightDirty maybe?
+    char m_unk2[13];
     std::unordered_map<BlockPos, std::shared_ptr<BlockEntity>>* m_blockEntities;
     char m_unk3[32];
     short m_populatedFlags;
-    char m_unk4[42];
+    char m_unk4[13];
+    bool m_unk9;
+    bool m_hasPostProcessed;
+    bool m_unk11;
+    bool m_unk12;
+    bool m_unk6;
+    char m_unk7[25];
     long m_inhabitedTime;
-    char m_unk5[86];
+    bool m_unk8;
+    // char unk5[85]; // 728 with 85
+    char m_unk5[30];
+    std::deque<BlockPos> m_blockEntityPosTickQueue;
+    char m_unk13[8];
 };
