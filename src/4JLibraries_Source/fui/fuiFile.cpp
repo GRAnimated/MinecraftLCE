@@ -16,10 +16,10 @@ void fuiMatrix::mul(const fuiMatrix& lhs, const fuiMatrix& rhs, fuiMatrix& out) 
 
 fuiFile::fuiFile() {
     this->m_header.m_index = 0;
-    this->m_data.m_fuiSymbol = nullptr;
-    this->m_data.m_fuiImportAsset = nullptr;
     this->m_renderNodeStage = nullptr;
-    this->m_callbackData = nullptr;
+    this->m_renderNodeTimeline = nullptr;
+    this->m_callbackFunc = nullptr;
+    this->m_field138 = nullptr;
 }
 
 // NON_MATCHING | Score: 10 (lower is better)
