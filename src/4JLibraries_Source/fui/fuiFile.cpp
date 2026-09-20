@@ -37,9 +37,6 @@ fuiRenderNode* fuiFile::getRootNode() {
     return (fuiRenderNode*)this->m_renderNodeTimeline;  // ??? (I think our structs are fucked)
 }
 
-// NON_MATCHING | score: 10 (lower is better)
-// can also get it to match by swapping the params and using mRootNode in place of mCallbackData, but that's
-// not correct surely
 void fuiFile::setCustomDrawCallback(void (*callback)(void*, const char*, fuiRect*), void* data) {
     this->m_callbackData = data;
     this->m_callbackFunc = callback;
