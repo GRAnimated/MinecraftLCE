@@ -35,7 +35,5 @@ public:
     virtual bool isLocalEndianDifferent(ESavePlatform platform);
     virtual bool fjHasRegionFile(const File& regionFile);  // return type guessed
 
-    ESavePlatform getPlatform() { return this->m_header.m_platform; }
-
     FileHeader m_header;
 };
