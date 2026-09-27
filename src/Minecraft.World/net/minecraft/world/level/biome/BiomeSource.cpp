@@ -59,20 +59,20 @@ unsigned char BiomeSource::LayerOverrideSettings::GetZoomLevel() {
     return m_zoomLevel;
 }
 
-// NON_MATCHING | Score: 560 (lower is better)
-// If I knew assembly, I bet I could figure this one out.
-// Dw tho, I'll learn assembly soon - Azalea
 bool BiomeSource::LayerOverrideSettings::ZoomIn() {
-    if (m_zoomLevel != 0)
-        return false;
+    bool zoomed = false;
 
-    int zoomCentreX = GetZoomedCentreX();
-    int zoomCentreZ = GetZoomedCentreZ();
+    if (m_zoomLevel <= 1) {
+        int zoomCentreX = GetZoomedCentreX();
+        int zoomCentreZ = GetZoomedCentreZ();
 
-    m_zoomLevel++;
+        m_zoomLevel++;
 
-    SetZoomedDisplay(zoomCentreX, zoomCentreZ);
-    return true;
+        SetZoomedDisplay(zoomCentreX, zoomCentreZ);
+        zoomed = true;
+    }
+
+    return zoomed;
 }
 
 int BiomeSource::LayerOverrideSettings::GetZoomedCentreX() {
@@ -108,13 +108,11 @@ int BiomeSource::LayerOverrideSettings::getBiomeIndex(int x, int z) {
     return x + m_imageWidth * z;
 }
 
-// NON_MATCHING | Score: 300 (lower is better)
-// Another one that knowing assembly would be good for - Azalea
 void BiomeSource::LayerOverrideSettings::NullBiomeSection(int x, int z, int width, int depth) {
-    unsigned long len = z;
-    for (int i = width; i < depth + width; i++) {
-        Biome* biome = m_biomes[x + m_imageWidth * i];
-        memset((void*)biome, 0, len);
+    int end = depth + width;
+    unsigned long len = z * sizeof(Biome*);
+    for (int i = width; i < end; i++) {
+        memset((void*)&m_biomes[x + m_imageWidth * i], 0, len);
     }
 }
 
@@ -185,27 +183,25 @@ int BiomeSource::LayerOverrideSettings::GetCentreZChunk() {
     return m_centreZChunk;
 }
 
-// NON_MATCHING | Score: 540 (lower is better)
 Biome* BiomeSource::LayerOverrideSettings::GetBiomeAt(float x, float z) {
     BlockPos pos = GetCursorBlockPos(x, z);
 
-    int xPos = m_field18 + pos.getX();
-    if (xPos < m_imageWidth - 1)
-        xPos = m_imageWidth - 1;
+    int threshold = m_imageWidth - 1;
+    int xPos = pos.getX() + m_field18;
+    if (xPos >= threshold)
+        xPos = threshold;
 
-    int zPos = m_field18 + pos.getZ();
-    if (zPos >= m_imageWidth - 1)
-        zPos = m_imageWidth - 1;
+    int zThreshold = m_imageWidth - 1;
+    int zPos = pos.getZ() + m_field18;
+    if (zPos >= zThreshold)
+        zPos = zThreshold;
 
     unsigned int index = getBiomeIndex(xPos, zPos);
     return m_biomes[index];
 }
 
-// NON_MATCHING | Score: 1425 (lower is better)
-// Something I did messed this up. I'll have to check again later - Azalea
 BiomeSource::CouldSpawnCache::CouldSpawnCache(BiomeSource* biomeSource,
                                               const FjFeatureBiomeRequirements* featureBiomeRequirements) {
-    m_chunkPositions = {};
     m_biomeSource = biomeSource;
     m_featureBiomeRequirements = featureBiomeRequirements;
 }
@@ -419,7 +415,7 @@ bool BiomeSource::containsOnly(int x, int z, int radius, const std::vector<Biome
 
     for (int i = 0; i < width * depth; i++) {
         Biome* biome = Biome::getBiome(area[i]);
-        if (biomes[i] == biome) {
+        if (std::find(biomes.begin(), biomes.end(), biome) == biomes.end()) {
             return false;
         }
     }
@@ -434,7 +430,7 @@ BlockPos* BiomeSource::findBiome(int x, int z, int radius, std::vector<Biome*> b
     int zPos = (z - radius) >> 2;
     int n = (x + radius) >> 2;
     int o = (z + radius) >> 2;
-    int width = n - xPos + 1;
+    unsigned int width = n - xPos + 1;
     int depth = o - zPos + 1;
 
     MemSect(50);
@@ -447,7 +443,8 @@ BlockPos* BiomeSource::findBiome(int x, int z, int radius, std::vector<Biome*> b
         int blockZ = (zPos + j / width) << 2;
         Biome* biome = Biome::getBiome(area[j]);
 
-        if (biomes[i] == biome && (blockPos == nullptr || random->nextInt(i + 1) == 0)) {
+        if (std::find(biomes.begin(), biomes.end(), biome) != biomes.end()
+            && (blockPos == nullptr || random->nextInt(i + 1) == 0)) {
             delete blockPos;
             blockPos = new BlockPos(blockX, 0, blockZ);
             i++;
