@@ -39,7 +39,6 @@ Layer::Layer(long long seed) {
 
 Layer::~Layer() {}
 
-// NON_MATCHING | Score: 995 (Lower is better)
 arrayWithLength<std::shared_ptr<Layer>>
 // NON_MATCHING: down to 2 spots, a bool from a vtable call and one
 // reused register further down. Comes down to how strictly the compiler

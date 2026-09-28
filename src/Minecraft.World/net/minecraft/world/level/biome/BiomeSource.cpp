@@ -1,4 +1,5 @@
 #include "net/minecraft/world/level/biome/BiomeSource.h"
+#include <algorithm>
 
 #include "NX/Platform.h"
 #include "net/minecraft/client/Minecraft.h"
@@ -401,7 +402,6 @@ void BiomeSource::getBiomeIndexBlock(arrayWithLength<unsigned char>& biomes, int
     }
 }
 
-// NON_MATCHING | Score: 1065 (lower is better)
 bool BiomeSource::containsOnly(int x, int z, int radius, const std::vector<Biome*>& biomes) {
     IntCache::releaseAll();
     int xPos = (x - radius) >> 2;
@@ -423,7 +423,6 @@ bool BiomeSource::containsOnly(int x, int z, int radius, const std::vector<Biome
     return true;
 }
 
-// NON_MATCHING | Score: 1915 (lower is better)
 BlockPos* BiomeSource::findBiome(int x, int z, int radius, std::vector<Biome*> biomes, Random* random) {
     IntCache::releaseAll();
     int xPos = (x - radius) >> 2;
