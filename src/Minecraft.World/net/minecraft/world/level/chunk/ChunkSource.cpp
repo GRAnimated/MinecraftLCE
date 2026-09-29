@@ -20,7 +20,7 @@ bool ChunkSource::saveAllEntities() {
     return false;
 }
 
-ChunkSource* ChunkSource::getCache() {
+LevelChunk** ChunkSource::getCache() {
     return nullptr;
 }
 
