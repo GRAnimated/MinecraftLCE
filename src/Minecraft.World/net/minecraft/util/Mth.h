@@ -8,6 +8,7 @@ class Random;
 class Mth {
 public:
     static constexpr float PI = 3.1415927;
+    static inline float RAD = PI / 180.0f;  // radian
 
     static float* SIN;
 

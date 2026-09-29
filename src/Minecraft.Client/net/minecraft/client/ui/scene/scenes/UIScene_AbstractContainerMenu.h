@@ -38,9 +38,7 @@ public:
     virtual UIControl_SlotList* getSection(IUIScene_AbstractContainerMenu::ESceneSection);
     virtual int GetBaseSlotCount();
 
-    int m_fill;                      // 8
-    ESceneSection m_focusedSection;  // 12
-    bool m_byte110;                  // 17
+    bool m_byte110;  // 17
     int m_dword114;
     int m_dword118;
     UIControl m_mainPanel;  // 288

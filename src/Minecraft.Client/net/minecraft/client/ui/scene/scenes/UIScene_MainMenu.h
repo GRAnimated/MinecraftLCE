@@ -22,7 +22,6 @@ public:
 
     static int MustSignInReturned(void*, int, C4JStorage::EMessageResult);
 
-    void* m_unk2;
     UIControl_Button m_buttons[8];
     UIControl m_timer;
     bool m_4e8;

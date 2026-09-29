@@ -31,6 +31,8 @@ public:
     void bindTexture(const ResourceLocation*);
     int loadTexture(_TEXTURE_NAME, const std::wstring&);
     void loadIndexedTextures();
+    int loadMemTexture(const std::wstring&, int);
+    int loadMemTexture(const std::wstring&, const std::wstring&);
 
     static bool IsTUImage(_TEXTURE_NAME name, const std::wstring&);
     static bool IsOriginalImage(_TEXTURE_NAME name, const std::wstring&);

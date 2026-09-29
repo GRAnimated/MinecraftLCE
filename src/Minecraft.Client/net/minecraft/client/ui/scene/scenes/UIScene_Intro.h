@@ -20,8 +20,5 @@ public:
 
     void setIntroPlatform();
 
-    int m_padding;
-    bool m_unk;
-    bool m_skippable;
     UIControl_Touch* m_touchToSkip;
 };

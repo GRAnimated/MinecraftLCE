@@ -7,8 +7,8 @@
 // NON_MATCHING | Score: 935 (lower is better)
 UIScene_Intro::UIScene_Intro(int a1, void* a2, UILayer* layer) : UIScene(a1, layer) {
     this->initialiseMovie();
-    this->m_unk = false;
-    this->m_skippable = false;
+    this->m_byte10C = false;
+    this->m_bool10D = false;
     this->setIntroPlatform();
     this->m_touchToSkip->init(0);
 }
@@ -36,7 +36,7 @@ bool UIScene_Intro::hasFocus(int i) {
 }
 
 void UIScene_Intro::handleGainFocus(bool focused) {
-    if (this->m_skippable)
+    if (this->m_byte10C)
         gConsoleUIController.NavigateToScene(0, EUIScene_MainMenu, nullptr, static_cast<EUILayer>(6),
                                              static_cast<EUIGroup>(6));
 }

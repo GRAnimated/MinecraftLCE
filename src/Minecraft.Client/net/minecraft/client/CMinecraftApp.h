@@ -1,5 +1,7 @@
 #pragma once
 
+#include "net/minecraft/client/model/geom/ModelPart.h"
+#include "net/minecraft/world/entity/SkinAdjustments.h"
 #include "types.h"
 
 #include "NX/Commerce/cCommerceNintendo.h"
@@ -54,7 +56,6 @@ public:
     int GetGameHostOption(eGameHostOption option);
     bool GetChangingSessionType();
     bool GetGameStarted();
-    static unsigned int getSkinIdFromPath(const std::wstring& path);
     bool isXuidNotch(PlayerUID* id);
     static void StaticCtor();
     void loadDefaultGameRules();  // is this virtual?
@@ -72,6 +73,8 @@ public:
     void SetAction(int, eXuiAction, void*);
     void setLevelGenerationOptions(LevelGenerationOptions* options);
     void SetGameHostOption(eGameHostOption option, unsigned int value);
+    std::vector<ModelPart*>* GetAdditionalModelParts(unsigned int);
+    _SkinAdjustments GetSkinAdjustments(unsigned int);
 
     void UpdateTrialPausedTimer();
     void UpdateTime();
@@ -82,6 +85,7 @@ public:
     static void SignInChangeCallback(void*, bool, unsigned int);
     static void ProfileReadErrorCallback(void*);
     static void UpsellReturnedCallback(void*, eUpsellType, eUpsellResponse, int);
+    static unsigned int getSkinIdFromPath(const std::wstring& path);
 
     bool getSomething();  // dunno
 
