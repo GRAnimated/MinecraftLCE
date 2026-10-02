@@ -39,11 +39,13 @@ struct fui {
     void removeManagedTexture(fuiFile*, fuiBitmap*);
     void setFontIndirection(const char*, const char*);
 
+    void setOrigin(float x, float y);
+
     mat4x4 m_atrix;
     char m_fPad4[16];
     char m_padding[568];
-    float m_unk5;
-    float m_unk6;
+    float m_originX;
+    float m_originY;
     char m_padding3[0x4];
     float m_screenWidth;
     float m_screenHeight;

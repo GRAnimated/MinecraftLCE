@@ -60,16 +60,15 @@ void UIScene::loadMovie() {
 
     fui* fui = fui::sInstance;
 
-    int v3;
     if (fui->getResolution()) {
         moviePath.append(L"1080.fui");
-        v3 = 0;
+        this->m_resType = 0;
     } else {
         moviePath.append(L"720.fui");
-        v3 = 1;
+        this->m_resType = 1;
     }
-    this->m_resType = v3;
-    arrayWithLength<uchar> movieData = gConsoleUIController.getMovieData(moviePath.c_str());
+
+    arrayWithLength<uchar> movieData = g_consoleUIController.getMovieData(moviePath.c_str());
     this->m_fuiFile = fui->load(movieData, true, fui->getResolution());
 
     this->m_fuiFile->getRootNode()->m_fuiNodeStage->setCallbackScene(this);
@@ -84,8 +83,8 @@ void UIScene::loadMovie() {
 }
 
 void UIScene::navigateBack() {
-    gConsoleUIController.PlayUISFX(SoundEvents::BACK);
-    gConsoleUIController.NavigateBack(this->m_padId, false, EUIScene_DefaultMAYBE, (EUILayer)8);
+    g_consoleUIController.PlayUISFX(SoundEvents::BACK);
+    g_consoleUIController.NavigateBack(this->m_padId, false, EUIScene_DefaultMAYBE, (EUILayer)8);
 }
 
 void UIScene::sendInputToMovie(int key, bool a3, bool a4, bool a5) {
@@ -121,7 +120,7 @@ bool UIScene::hasTimer(int id) {
 void* UIScene::GetCallbackUniqueId() {
     void* ret = this->m_callbackUniqueId;
     if (!ret) {
-        ret = gConsoleUIController.RegisterForCallbackId(this);
+        ret = g_consoleUIController.RegisterForCallbackId(this);
         this->m_callbackUniqueId = ret;
     }
     return ret;
@@ -204,7 +203,7 @@ void UIScene::updateSafeZone() {
 
 void UIScene::updateViewportTouchOffset() {
     C4JRender::eViewportType viewPortType = this->m_uiLayer->getViewPort();
-    gConsoleUIController.updateViewportTouchOffset(viewPortType);
+    g_consoleUIController.updateViewportTouchOffset(viewPortType);
 }
 
 bool UIScene::mapElementsAndNames() {
@@ -244,8 +243,8 @@ bool UIScene::hasFocus(int padID) {
 }
 
 void UIScene::updateTooltips() {
-    if (!gConsoleUIController.IsReloadingSkin()) {
-        gConsoleUIController.SetTooltips(this->m_padId, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
+    if (!g_consoleUIController.IsReloadingSkin()) {
+        g_consoleUIController.SetTooltips(this->m_padId, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
                                          -1, -1, -1, 0, 0);
     }
 }
@@ -269,7 +268,7 @@ void* UIScene::GetMainPanel() {
 void UIScene::render(int a2, int a3, C4JRender::eViewportType viewPortType) {
     if (!this->m_hidden && this->m_hideLowerScenes) {
         if (this->m_fuiFile) {
-            gConsoleUIController.setupRenderPosition(viewPortType);
+            g_consoleUIController.setupRenderPosition(viewPortType);
             fui::sInstance->render(this->m_fuiFile, 0.0f, 0.0f, a2, a3);
         }
     }

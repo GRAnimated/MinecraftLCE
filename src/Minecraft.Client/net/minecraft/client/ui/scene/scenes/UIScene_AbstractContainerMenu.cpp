@@ -31,16 +31,16 @@
 UIScene_AbstractContainerMenu::UIScene_AbstractContainerMenu(int padID, UILayer* layer)
     : UIScene(padID, layer) {
     this->m_focusedSection = ESceneSection_NONE;
-    gConsoleUIController.OverrideSFX(this->m_padId, 0, 1);
-    gConsoleUIController.OverrideSFX(this->m_padId, 20, 1);
-    gConsoleUIController.OverrideSFX(this->m_padId, 2, 1);
-    gConsoleUIController.OverrideSFX(this->m_padId, 3, 1);
-    gConsoleUIController.OverrideSFX(this->m_padId, 11, 1);
-    gConsoleUIController.OverrideSFX(this->m_padId, 10, 1);
-    gConsoleUIController.OverrideSFX(this->m_padId, 7, 1);
-    gConsoleUIController.OverrideSFX(this->m_padId, 6, 1);
-    gConsoleUIController.OverrideSFX(this->m_padId, 4, 1);
-    gConsoleUIController.OverrideSFX(this->m_padId, 5, 1);
+    g_consoleUIController.OverrideSFX(this->m_padId, 0, 1);
+    g_consoleUIController.OverrideSFX(this->m_padId, 20, 1);
+    g_consoleUIController.OverrideSFX(this->m_padId, 2, 1);
+    g_consoleUIController.OverrideSFX(this->m_padId, 3, 1);
+    g_consoleUIController.OverrideSFX(this->m_padId, 11, 1);
+    g_consoleUIController.OverrideSFX(this->m_padId, 10, 1);
+    g_consoleUIController.OverrideSFX(this->m_padId, 7, 1);
+    g_consoleUIController.OverrideSFX(this->m_padId, 6, 1);
+    g_consoleUIController.OverrideSFX(this->m_padId, 4, 1);
+    g_consoleUIController.OverrideSFX(this->m_padId, 5, 1);
     this->m_byte110 = false;
 }
 
@@ -159,7 +159,7 @@ void UIScene_AbstractContainerMenu::customDraw(const char* renderNodeName, fuiRe
 
 void UIScene_AbstractContainerMenu::handleInput(int a2, int a3, bool a4, bool a5, bool a6, bool& wasHandled) {
     if (!this->m_byte110) {
-        gConsoleUIController.AnimateKeyPress(this->m_padId, a3, a4, a5, a6);
+        g_consoleUIController.AnimateKeyPress(this->m_padId, a3, a4, a5, a6);
 
         if (a5) {
             wasHandled = this->handleKeyDown(this->m_padId, a3, a4);
@@ -186,16 +186,16 @@ void UIScene_AbstractContainerMenu::handleDestroy() {
         player->closeContainer();
     }
 
-    gConsoleUIController.OverrideSFX(this->m_padId, 0, 0);
-    gConsoleUIController.OverrideSFX(this->m_padId, 20, 0);
-    gConsoleUIController.OverrideSFX(this->m_padId, 2, 0);
-    gConsoleUIController.OverrideSFX(this->m_padId, 3, 0);
-    gConsoleUIController.OverrideSFX(this->m_padId, 11, 0);
-    gConsoleUIController.OverrideSFX(this->m_padId, 10, 0);
-    gConsoleUIController.OverrideSFX(this->m_padId, 7, 0);
-    gConsoleUIController.OverrideSFX(this->m_padId, 6, 0);
-    gConsoleUIController.OverrideSFX(this->m_padId, 4, 0);
-    gConsoleUIController.OverrideSFX(this->m_padId, 5, 0);
+    g_consoleUIController.OverrideSFX(this->m_padId, 0, 0);
+    g_consoleUIController.OverrideSFX(this->m_padId, 20, 0);
+    g_consoleUIController.OverrideSFX(this->m_padId, 2, 0);
+    g_consoleUIController.OverrideSFX(this->m_padId, 3, 0);
+    g_consoleUIController.OverrideSFX(this->m_padId, 11, 0);
+    g_consoleUIController.OverrideSFX(this->m_padId, 10, 0);
+    g_consoleUIController.OverrideSFX(this->m_padId, 7, 0);
+    g_consoleUIController.OverrideSFX(this->m_padId, 6, 0);
+    g_consoleUIController.OverrideSFX(this->m_padId, 4, 0);
+    g_consoleUIController.OverrideSFX(this->m_padId, 5, 0);
 }
 
 int UIScene_AbstractContainerMenu::getPad() {

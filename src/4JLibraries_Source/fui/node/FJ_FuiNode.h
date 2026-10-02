@@ -43,6 +43,11 @@ public:
     float getWidth();
     float getHeight();
 
+    fuiRenderNode *getChildByName(const std::string &name);
+    fuiRenderNode *getChildAt(int idx);
+
+    int currentFrame();
+
     void setWidth(float width);
 
     int getTabIndex();

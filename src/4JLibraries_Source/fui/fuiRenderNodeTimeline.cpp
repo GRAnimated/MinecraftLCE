@@ -14,3 +14,7 @@ void fuiRenderNodeTimeline::progogateBoundsFromChild() {
         cur = tl->asTimeline();
     } while (cur);
 }
+
+int fuiRenderNodeTimeline::currentFrame() {
+    return this->m_currentFrame + 1;
+}

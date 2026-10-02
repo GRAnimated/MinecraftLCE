@@ -24,7 +24,7 @@
 
 UIScene_MainMenu::UIScene_MainMenu(int a1, void* a2, UILayer* layer) : UIScene(a1, layer) {
     Entity::fjDebugCheckSmallIdLeaks();
-    gConsoleUIController.clearResolutionChangeDisableFlag(IUIController::FLAG_0);
+    g_consoleUIController.clearResolutionChangeDisableFlag(IUIController::FLAG_0);
     this->initialiseMovie();
     layer->addComponent(a1, EUIComponent_Panorama, nullptr);
     layer->addComponent(a1, EUIComponent_Logo, nullptr);
@@ -81,8 +81,8 @@ UIScene_MainMenu::UIScene_MainMenu(int a1, void* a2, UILayer* layer) : UIScene(a
     Minecraft::GetInstance()->SetupMiniGameInstance(MiniGameDef::GetCustomGameModeById(NORMAL_WORLD, true),
                                                     0);
     CGameNetworkManager::sInstance.ResetLeavingGame();
-    gConsoleUIController.TouchBoxRebuild(this);
-    gConsoleUIController.ResetSelectedItem();
+    g_consoleUIController.TouchBoxRebuild(this);
+    g_consoleUIController.ResetSelectedItem();
 }
 
 bool UIScene_MainMenu::mapElementsAndNames() {
@@ -152,7 +152,7 @@ void UIScene_MainMenu::tick() {
             void* inWorldMenu = (void*)(ConsoleUIController::sCurrentScene == EUIScene_LoadCreateJoinMenu
                                         && this->m_4eb);  // ????
 
-            gConsoleUIController.NavigateToScene(lockedProfile, ConsoleUIController::sCurrentScene,
+            g_consoleUIController.NavigateToScene(lockedProfile, ConsoleUIController::sCurrentScene,
                                                  inWorldMenu, static_cast<EUILayer>(6),
                                                  static_cast<EUIGroup>(6));
 
