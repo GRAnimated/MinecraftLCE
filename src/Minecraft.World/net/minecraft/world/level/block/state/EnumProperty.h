@@ -49,14 +49,13 @@ public:
     }
 
     const std::vector<Boxed*>& getPossibleValues() const override { return this->m_allowedValues; }
-    // NON_MATCHING: logic should be the same :)
     bool equals(const Property* other) const override {
         if (this == other)
             return true;
 
         const EnumProperty<T>* otherCasted = dynamic_cast<const EnumProperty<T>*>(other);
 
-        if (otherCasted && AbstractProperty<T>::equals(otherCasted)) {
+        if (otherCasted && AbstractProperty<T>::equals(other)) {
             if (this->m_allowedValues == otherCasted->m_allowedValues) {
                 return this->m_values == otherCasted->m_values;
             }

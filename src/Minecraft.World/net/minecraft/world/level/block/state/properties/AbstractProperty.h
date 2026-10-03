@@ -88,13 +88,10 @@ public:
 
     std::wstring getName() const override { return this->m_name; }
     const std::type_info* getValueClass() const override { return this->m_typeInfo; }
-    // NON_MATCHING: I'm dumb, impossible to match :), fix the structure
     Boxed* getValue(const std::wstring& name) const override {
-        // they just get ptr to whatever getUnboxedValue returns, I'm 95% sure that getUnboxedValue returns
-        // just T type, not reference, so yyou can't just get ptr of it directly so you have to create that
-        // temp obj
-        T retVal = this->getUnboxedValue(name);
-        return new TypedBoxed<T>(&retVal);
+        // The call sits inside the new expression, so the allocation comes first.
+        T retVal;
+        return new TypedBoxed<T>(&(retVal = this->getUnboxedValue(name)));
     }
     std::wstring getName(const Boxed* boxedValue) const override {
         return this->getName(*const_cast<TypedBoxed<T>*>(boxedValue->tryGetType<T>())->getValue());
