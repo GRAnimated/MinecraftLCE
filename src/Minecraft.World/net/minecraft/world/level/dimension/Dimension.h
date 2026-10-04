@@ -42,7 +42,7 @@ public:
     virtual int getXZSize();
     virtual AABB* getPlayerConstraints(const BlockPos&);
     virtual bool inPlayerConstraints(const BlockPos&);
-    virtual bool containsChunk(int, int);
+    virtual bool containsChunk(int x, int z);
     virtual void getBlockLightColour();
 
     BiomeSource* getBiomeSource();

@@ -28,8 +28,8 @@ ServerChunkCache::ServerChunkCache(ServerLevel* level, ChunkStorage* storage, Ch
     m_chunkGenerator = generator;
     m_chunkStorage = storage;
 
-    m_chunks = new LevelChunk*[m_dwordB8 * m_dwordB8];
-    memset(m_chunks, 0, m_dwordB8 * m_dwordB8 * sizeof(LevelChunk*));
+    m_cache = new LevelChunk*[dword_b8 * dword_b8];
+    memset(m_cache, 0, dword_b8 * dword_b8 * sizeof(LevelChunk*));
 
     m_unloadedChunks = new LevelChunk*[m_dwordB8 * m_dwordB8];
     memset(m_unloadedChunks, 0, m_dwordB8 * m_dwordB8 * sizeof(LevelChunk*));
@@ -45,7 +45,7 @@ ServerChunkCache::~ServerChunkCache() {
 
     delete m_chunkStorage;
     delete m_emptyChunk;
-    delete m_chunks;
+    delete m_cache;
     delete m_chunkGenerator;
 
     for (int i = 0; i < m_dwordB8 * m_dwordB8; ++i) {
@@ -64,7 +64,7 @@ ServerChunkCache::~ServerChunkCache() {
 LevelChunk* ServerChunkCache::getChunkIfLoaded(int chunkX, int chunkZ) {
     if (inBounds(chunkX, chunkZ)) {
         int idx = computeIdx(chunkX, chunkZ);
-        return m_chunks[idx];
+        return m_cache[idx];
     }
     return m_emptyChunk;
 }
@@ -84,7 +84,7 @@ int ServerChunkCache::computeIdx(int chunkX, int chunkZ) {
 LevelChunk* ServerChunkCache::getChunkIfLoadedOrInvalid(int chunkX, int chunkZ) {
     if (inBounds(chunkX, chunkZ)) {
         int idx = computeIdx(chunkX, chunkZ);
-        return m_chunks[idx];
+        return m_cache[idx];
     }
 
     return m_emptyChunk;
@@ -95,7 +95,7 @@ LevelChunk* ServerChunkCache::getChunkIfGenerated(int chunkX, int chunkZ, bool u
         return m_emptyChunk;
 
     int idx = computeIdx(chunkX, chunkZ);
-    LevelChunk* chunk = m_chunks[idx];
+    LevelChunk* chunk = m_cache[idx];
     LevelChunk* loadedOrInvalid = getChunkIfLoadedOrInvalid(chunkX, chunkZ);
 
     if (loadedOrInvalid && loadedOrInvalid != m_emptyChunk && !loadedOrInvalid->IsInvalid())
@@ -154,7 +154,7 @@ LevelChunk* ServerChunkCache::updateCacheAndPostProcess(int chunkX, int chunkZ, 
 
     int idx = computeIdx(chunkX, chunkZ);
 
-    if (InterlockedCompareExchangeRelease((volatile long*)&m_chunks[idx], (long)newChunk, (long)oldChunk)
+    if (InterlockedCompareExchangeRelease((volatile long*)&m_cache[idx], (long)newChunk, (long)oldChunk)
         == (long)oldChunk) {
         EnterCriticalSection(&m_mutex);
 
@@ -225,7 +225,7 @@ LevelChunk* ServerChunkCache::updateCacheAndPostProcess(int chunkX, int chunkZ, 
             newChunk->unload(true, true);
             delete newChunk;
         }
-        return m_chunks[idx];
+        return m_cache[idx];
     }
     return newChunk;
 }
@@ -235,7 +235,7 @@ LevelChunk* ServerChunkCache::getOrCreateChunk(int chunkX, int chunkZ, bool unk)
         return m_emptyChunk;
 
     int idx = computeIdx(chunkX, chunkZ);
-    LevelChunk* chunk = m_chunks[idx];
+    LevelChunk* chunk = m_cache[idx];
     LevelChunk* generatedChunk = getChunkIfGenerated(chunkX, chunkZ, unk);
     if (generatedChunk)
         return generatedChunk;
@@ -258,7 +258,7 @@ bool ServerChunkCache::hasChunk(int chunkX, int chunkZ) {
         return true;
 
     int idx = computeIdx(chunkX, chunkZ);
-    LevelChunk* chunk = m_chunks[idx];
+    LevelChunk* chunk = m_cache[idx];
     if (chunk == nullptr || chunk->IsInvalid())
         return false;
 
@@ -266,7 +266,7 @@ bool ServerChunkCache::hasChunk(int chunkX, int chunkZ) {
 }
 
 bool ServerChunkCache::isChunkGeneratedAt(int chunkX, int chunkZ) {
-    LevelChunk* chunk = m_chunks[computeIdx(chunkX, chunkZ)];
+    LevelChunk* chunk = m_cache[computeIdx(chunkX, chunkZ)];
 
     if (!inBounds(chunkX, chunkZ)) {
         return false;
@@ -292,7 +292,7 @@ LevelChunk* ServerChunkCache::create(int chunkX, int chunkZ, bool unk) {
         return m_emptyChunk;
 
     int idx = computeIdx(chunkX, chunkZ);
-    LevelChunk* chunk = m_chunks[idx];
+    LevelChunk* chunk = m_cache[idx];
 
     if (chunk && chunk->m_xPos == chunkX && chunk->m_zPos == chunkZ && !chunk->IsInvalid()) {
         return chunk;
@@ -355,7 +355,7 @@ LevelChunk* ServerChunkCache::getChunk(int chunkX, int chunkZ) {
         return m_emptyChunk;
 
     int idx = computeIdx(chunkX, chunkZ);
-    LevelChunk* chunk = m_chunks[idx];
+    LevelChunk* chunk = m_cache[idx];
 
     if (chunk && !chunk->IsInvalid())
         return chunk;
@@ -371,7 +371,7 @@ LevelChunk* ServerChunkCache::getChunkLoadedOrUnloaded(int chunkX, int chunkZ) {
         return m_emptyChunk;
 
     int idx = computeIdx(chunkX, chunkZ);
-    LevelChunk* chunk = m_chunks[idx];
+    LevelChunk* chunk = m_cache[idx];
 
     if (!chunk) {
         chunk = m_unloadedChunks[idx];
@@ -460,7 +460,6 @@ int ServerChunkCache::getLoadedChunks() {
     return list->size();
 }
 
-ChunkSource* ServerChunkCache::getCache() {
-    // likely wrong, but other classes require this function to return ChunkSource*
-    return (ChunkSource*)m_chunks;
+LevelChunk** ServerChunkCache::getCache() {
+    return m_cache;
 }
