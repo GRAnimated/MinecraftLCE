@@ -5,7 +5,9 @@
 
 class CameraController {
 public:
-    class SplineNode {};
+    class SplineNode {
+        int m_data[6];
+    };
 
     CameraController(int);
 

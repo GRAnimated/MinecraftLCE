@@ -1,4 +1,6 @@
 #include "net/minecraft/resources/ResourceLocation.h"
+
+#include "net/minecraft/core/System.h"
 #include <string>
 
 bool ResourceLocation::operator==(const ResourceLocation* other) const {
@@ -8,8 +10,8 @@ bool ResourceLocation::operator==(const ResourceLocation* other) const {
     return !this->getNamespace().compare(other->getNamespace()) && !this->getPath().compare(other->getPath());
 }
 
-bool ResourceLocation::operator==(const ResourceLocation& other) const {
-    return !this->getNamespace().compare(other.getNamespace()) && !this->getPath().compare(other.getPath());
+std::size_t ResourceLocation::hashCode() const {
+    return 31 * (int)javaStringHashCode(this->getNamespace()) + (int)javaStringHashCode(this->getPath());
 }
 
 std::wstring ResourceLocation::toString() const {
