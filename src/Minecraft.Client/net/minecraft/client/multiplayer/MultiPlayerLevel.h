@@ -11,7 +11,9 @@ class ClientScoreboard;
 
 class MultiPlayerLevel : public Level {
 public:
-    struct ResetInfo {};
+    struct ResetInfo {
+        int m_data[6];
+    };
 
     MultiPlayerLevel(std::shared_ptr<LevelStorage>, ClientPacketListener*, LevelSettings*, int,
                      const Difficulty*);
