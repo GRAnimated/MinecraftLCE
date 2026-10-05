@@ -15,7 +15,6 @@ class UIScene_HowToPlayMenu : public UIScene {
     bool mapElementsAndNames() override;
     EUIScene getSceneType() override;
 
-    void* m_qword108;
     UIControl_ButtonList m_uicontrolList110;
     int m_dword200;
 };

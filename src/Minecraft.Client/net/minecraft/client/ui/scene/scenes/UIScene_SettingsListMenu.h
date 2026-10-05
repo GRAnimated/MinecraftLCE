@@ -7,7 +7,6 @@
 
 class UIScene_SettingsListMenu : public UIScene {
 public:
-    char gap108[8];
     UIControl_MultiList mSettingsList;
     char gap200[112];
     int mSettingsTab;

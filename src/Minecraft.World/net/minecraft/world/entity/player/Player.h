@@ -1,11 +1,13 @@
 #pragma once
 
+#include "net/minecraft/client/model/models/PlayerModel.h"
 #include "net/minecraft/sounds/SoundSource.h"
 #include "net/minecraft/world/ArrayWithLength.h"
 #include "net/minecraft/world/PlayerUID.h"
 #include "net/minecraft/world/eINSTANCEOF.h"
 #include "net/minecraft/world/entity/Entity.h"
 #include "net/minecraft/world/entity/LivingEntity.h"
+#include "net/minecraft/world/entity/SkinAdjustments.h"
 #include "net/minecraft/world/entity/player/Abilities.h"
 #include "net/minecraft/world/entity/player/StatsUID.h"
 #include "net/minecraft/world/food/FoodData.h"
@@ -200,6 +202,10 @@ public:
     float getDestroySpeed(const BlockState*);
     const StatsUID getSUID();
     PlayerUID getPlayerUID() { return this->m_playerUiD1; }  // guessed name
+
+    static _SkinAdjustments getSkinAdjustmentsById(int id);
+    static EPlayerModelType GetModelTypeFromAnimBitmask(int anim);
+    static EPlayerModelType GetModelTypeFromTextureId(int textureId);
 
     static std::vector<unsigned int> sSkins;
 
