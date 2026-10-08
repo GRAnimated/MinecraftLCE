@@ -132,10 +132,10 @@ void UIScene_DeathMenu::tick() {
 
 void UIScene_DeathMenu::updateTooltips() {
     if (CConsoleMinecraftApp::sInstance.GetGameHostOption((eGameHostOption)0x1F)) {
-        gConsoleUIController.SetTooltips(this->m_padId, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
+        g_consoleUIController.SetTooltips(this->m_padId, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
                                          -1, -1, -1, 0, 0);
     } else {
-        gConsoleUIController.SetTooltips(this->m_padId, StringIDs::Select, -1, -1, -1, -1, -1, -1, -1, -1, -1,
+        g_consoleUIController.SetTooltips(this->m_padId, StringIDs::Select, -1, -1, -1, -1, -1, -1, -1, -1, -1,
                                          -1, -1, -1, -1, -1, -1, 0, 0);
     }
 }
@@ -156,7 +156,7 @@ void UIScene_DeathMenu::handleInput(int a2, int a3, bool a4, bool a5, bool a6, b
     if (this->m_byte10C)
         return;
 
-    gConsoleUIController.AnimateKeyPress(this->m_padId, a3, a4, a5, a6);
+    g_consoleUIController.AnimateKeyPress(this->m_padId, a3, a4, a5, a6);
     if (a3 == 21) {
         wasHandled = true;
     }

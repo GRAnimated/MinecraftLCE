@@ -8,6 +8,7 @@
 #include "document/FJ_Document.h"
 #include "fui/fui.h"
 #include "fui/fuiRenderNode.h"
+#include "fui/fuiRenderNodeTimeline.h"
 #include "fui/node/FJ_Base.h"
 #include "fui/node/FJ_FuiNodeStage.h"
 
@@ -61,6 +62,26 @@ float FJ_FuiNode::getWidth() {
 
 float FJ_FuiNode::getHeight() {
     return this->m_renderNode->getHeight();
+}
+
+fuiRenderNode* FJ_FuiNode::getChildByName(const std::string &name) {
+    if (m_renderNode->m_fuiObjectType != eFuiObjectType_Timeline) {
+        return nullptr;
+    }
+
+    fuiRenderNode *node = m_renderNode->findNode(name.c_str());
+    if (node) {
+        return reinterpret_cast<fuiRenderNode*>(node->m_fuiNodeStage);
+    }
+
+    return node;
+}
+
+int FJ_FuiNode::currentFrame() {
+    if (this->m_renderNode->m_fuiObjectType != eFuiObjectType_Timeline)
+        return 1;
+
+    return static_cast<fuiRenderNodeTimeline*>(this->m_renderNode)->currentFrame();
 }
 
 void FJ_FuiNode::setWidth(float width) {

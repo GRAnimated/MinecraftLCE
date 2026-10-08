@@ -37,7 +37,7 @@ bool UIScene_Intro::hasFocus(int i) {
 
 void UIScene_Intro::handleGainFocus(bool focused) {
     if (this->m_skippable)
-        gConsoleUIController.NavigateToScene(0, EUIScene_MainMenu, nullptr, static_cast<EUILayer>(6),
+        g_consoleUIController.NavigateToScene(0, EUIScene_MainMenu, nullptr, static_cast<EUILayer>(6),
                                              static_cast<EUIGroup>(6));
 }
 

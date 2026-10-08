@@ -1,3 +1,3 @@
 #include "net/minecraft/client/ui/ConsoleUIController.h"
 
-ConsoleUIController gConsoleUIController = ConsoleUIController();
+ConsoleUIController g_consoleUIController = ConsoleUIController();

@@ -151,6 +151,7 @@ public:
     void NavigateToScene(int, EUIScene, void*, EUILayer, EUIGroup) override;
     arrayWithLength<uchar> getMovieData(const std::wstring&);
     void setupRenderPosition(C4JRender::eViewportType);
+    void setupRenderPosition(int x, int y);
     void NavigateBack(int, bool, EUIScene, EUILayer) override;
     void* RegisterForCallbackId(UIScene*);
     void ResetSelectedItem() override;
@@ -164,7 +165,10 @@ public:
 
     void RequestErrorMessage(int, int, int*, unsigned int, unsigned int,
                              int (*)(void*, int, C4JStorage::EMessageResult), void*, wchar_t*, bool) override;
+
     float getScreenWidth() { return this->m_screenWidth; }
+    float getScreenHeight() { return this->m_screenHeight; }
+
     bool IsPauseMenuDisplayed(int pad) override;
     void UpdateTrialTimer(unsigned int pad) override;
     void ShowTrialTimer(bool) override;
@@ -240,6 +244,9 @@ public:
                            int (*)(void*, int, C4JStorage::EMessageResult), void*, wchar_t*, unsigned, bool,
                            bool) override;
 
+    fuiFile *loadSkin(const std::wstring &filename, const std::wstring &fallback, int skinType);
+    void loadSkins();
+
     void* m_qword8;
     void* m_qword10;
     nn::os::MutexType m_mutex1;
@@ -249,7 +256,9 @@ public:
     float m_screenWidth;
     float m_screenHeight;
     bool m_preInited;
-    char m_gap3E1[15];
+    char m_gap3E1[3];
+    int m_renderPositionX;
+    int m_renderPositionY;
     nn::os::MutexType m_mutex4;
     void* m_qword410;
     char m_byte418;
@@ -266,28 +275,28 @@ public:
     char m_byte1340C;
     void* m_qword13410;
     char m_byte13418;
-    void* m_qword13420;
-    void* m_qword13428;
-    void* m_qword13430;
-    void* m_qword13438;
-    void* m_qword13440;
-    void* m_qword13448;
-    void* m_qword13450;
-    void* m_qword13458;
-    void* m_qword13460;
-    void* m_qword13468;
-    void* m_qword13470;
-    void* m_qword13478;
-    void* m_qword13480;
-    void* m_qword13488;
-    void* m_qword13490;
-    void* m_qword13498;
-    void* m_qword134A0;
-    void* m_qword134A8;
-    void* m_qword134B0;
-    void* m_qword134B8;
-    void* m_qword134C0;
-    void* m_qword134C8;
+    fuiFile *m_fuiFilePlatformSkin;
+    fuiFile *m_fuiFileSkinGraphics;
+    fuiFile *m_fuiFileSkinGraphicsHud;
+    fuiFile *m_fuiFileSkinGraphicsInGame;
+    void *m_qword13440;
+    fuiFile *m_fuiFileSkinGraphicsLabels;
+    fuiFile *m_fuiFileSkinLabels;
+    fuiFile *m_fuiFileSkinInGame;
+    fuiFile *m_fuiFileSkinHud;
+    void *m_qword13468;
+    fuiFile *m_fuiFileSkin;
+    fuiFile *m_fuiFilePlatformSkinHd;
+    fuiFile *m_fuiFileSkinHdGraphics;
+    fuiFile *m_fuiFileSkinHdGraphicsHud;
+    fuiFile *m_fuiFileSkinHdGraphicsInGame;
+    void *m_qword13498;
+    fuiFile *m_fuiFileSkinHdGraphicsLabels;
+    fuiFile *m_fuiFileSkinHdLabels;
+    fuiFile *m_fuiFileSkinHdInGame;
+    fuiFile *m_fuiFileSkinHdHud;
+    void *m_qword134C0;
+    fuiFile *m_fuiFileSkinHd;
     char m_gap134D0[24];
     char m_byte134E8;
     char m_byte134E9;
@@ -296,7 +305,7 @@ public:
     char m_byte134Ec;
     int m_dword134F0;
     __attribute__((aligned(8))) int m_dword134F8;
-    char m_byte134Fc;
+    bool m_hasSetupRenderPosition;
     std::unordered_map<std::wstring, TextureDetail> m_textureDetails;
     std::unordered_map<std::wstring, _CachedMovieData> m_cachedMovieDatas;
     std::vector<_QueuedMessageBoxData> m_queuedMessageBoxDatas;
@@ -314,4 +323,4 @@ public:
     int m_viewportTouchOffset2;
 };
 
-extern ConsoleUIController gConsoleUIController;
+extern ConsoleUIController g_consoleUIController;

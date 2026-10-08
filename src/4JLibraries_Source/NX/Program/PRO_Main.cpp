@@ -196,7 +196,7 @@ void DefineActions() {
 }
 
 void PopupToast() {
-    gConsoleUIController.SetAchievementUnlocked();
+    g_consoleUIController.SetAchievementUnlocked();
 }
 
 bool unk() {
@@ -251,7 +251,7 @@ extern "C" void nnMain() {
     CInput::sInstance->SetCircleCrossSwapped(true);
     int screenType = 1;  // TODO: shove function that gets screenType, haven't done it so far because i'm
                          // unsure on how to name that func
-    gConsoleUIController.setResolutionChangeDisableFlag(IUIController::eRESOLUTION_DISABLE_FLAG::FLAG_0);
+    g_consoleUIController.setResolutionChangeDisableFlag(IUIController::eRESOLUTION_DISABLE_FLAG::FLAG_0);
 
     int screenWidth, screenHeight;
     if (screenType == 1) {
@@ -262,7 +262,7 @@ extern "C" void nnMain() {
         screenHeight = 720;
     }
 
-    gConsoleUIController.init(screenWidth, screenHeight);
+    g_consoleUIController.init(screenWidth, screenHeight);
     CConsoleMinecraftApp::sInstance.CommerceInit();
     CConsoleMinecraftApp::sInstance.initTime();
     // funny thing is that all args seems to be unused
@@ -358,7 +358,7 @@ extern "C" void nnMain() {
         if (CGameNetworkManager::sInstance.IsLocalGame()
             && CGameNetworkManager::sInstance.GetPlayerCount() == 1) {
             primaryPad = CProfile::sInstance->GetPrimaryPad();
-            isPaused = gConsoleUIController.IsPauseMenuDisplayed(primaryPad);
+            isPaused = g_consoleUIController.IsPauseMenuDisplayed(primaryPad);
         } else {
             isPaused = false;
         }
@@ -375,18 +375,18 @@ extern "C" void nnMain() {
     Minecraft::sInstance->m_soundEngine->playMusicTick();
     CConsoleMinecraftApp::sInstance.GetCommerceInstance()->tick();
     InfoBarManager::StartTimingCategory(InfoBarManager::eTimingCagegory::ConsoleUIControllerTick);
-    gConsoleUIController.tick();
+    g_consoleUIController.tick();
     InfoBarManager::EndTimingCategory(InfoBarManager::eTimingCagegory::ConsoleUIControllerTick);
     Renderer::sInstance->vtbl_7101130608_func_17();
     InfoBarManager::StartTimingCategory(InfoBarManager::eTimingCagegory::ConsoleUIControllerRender);
-    gConsoleUIController.render();
+    g_consoleUIController.render();
     InfoBarManager::EndTimingCategory(InfoBarManager::eTimingCagegory::ConsoleUIControllerRender);
     InfoBarManager::EndTimingCategory(InfoBarManager::eTimingCagegory::InitTicking);
     PIXBeginNamedEvent(0.0, "Frame present");
     Renderer::sInstance->Present();
     PIXEndNamedEvent();
     Renderer::sInstance->Set_matrixDirty();
-    gConsoleUIController.CheckMenuDisplayed();
+    g_consoleUIController.CheckMenuDisplayed();
 
     PIXBeginNamedEvent(0.0, "Profile load check");
     if (CInput::sControllers) {
@@ -428,7 +428,7 @@ extern "C" void nnMain() {
     CConsoleMinecraftApp::sInstance.HandleXuiActions();
     if (CProfile::sInstance->IsFullVersion()) {
         if (!CConsoleMinecraftApp::sHideTrialTimer) {
-            gConsoleUIController.ShowTrialTimer(false);
+            g_consoleUIController.ShowTrialTimer(false);
             CConsoleMinecraftApp::sHideTrialTimer = true;
         }
         Vec3::resetPool();
@@ -438,7 +438,7 @@ extern "C" void nnMain() {
         if (CConsoleMinecraftApp::sInstance.IsAppPaused())
             CConsoleMinecraftApp::sInstance.UpdateTrialPausedTimer();
         primaryPad = CProfile::sInstance->GetPrimaryPad();
-        gConsoleUIController.UpdateTrialTimer(primaryPad);
+        g_consoleUIController.UpdateTrialTimer(primaryPad);
         Vec3::resetPool();
     }
 }
