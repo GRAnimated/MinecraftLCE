@@ -1,5 +1,7 @@
 #include "com/mojang/nbt/ByteArrayTag.h"
+
 #include "net/minecraft/world/ArrayWithLength.h"
+#include <cstring>
 
 #include "java/io/DataInput.h"
 #include "java/io/DataOutput.h"
@@ -15,8 +17,9 @@ ByteArrayTag::ByteArrayTag(arrayWithLength<u8> data, bool unk) {
 }
 
 ByteArrayTag::~ByteArrayTag() {
-    if (m_unknown)
+    if (m_unknown) {
         delete m_data.m_data;
+    }
 }
 
 void ByteArrayTag::write(DataOutput* outputStream) {

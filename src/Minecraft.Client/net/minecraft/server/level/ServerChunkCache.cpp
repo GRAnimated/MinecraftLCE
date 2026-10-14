@@ -1,5 +1,7 @@
 #include "net/minecraft/server/level/ServerChunkCache.h"
 
+#include <cstdint>
+
 #include "NX/Platform.h"
 
 #include "net/minecraft/core/BlockPos.h"
@@ -58,7 +60,7 @@ ServerChunkCache::~ServerChunkCache() {
         delete *it;
     }
 
-    nn::os::FinalizeMutex(&m_mutex);
+    DeleteCriticalSection(&m_mutex);
 }
 
 LevelChunk* ServerChunkCache::getChunkIfLoaded(int chunkX, int chunkZ) {
@@ -154,8 +156,9 @@ LevelChunk* ServerChunkCache::updateCacheAndPostProcess(int chunkX, int chunkZ, 
 
     int idx = computeIdx(chunkX, chunkZ);
 
-    if (InterlockedCompareExchangeRelease((volatile long*)&m_chunks[idx], (long)newChunk, (long)oldChunk)
-        == (long)oldChunk) {
+    if (InterlockedCompareExchangeRelease((volatile intptr_t*)&m_chunks[idx], (intptr_t)newChunk,
+                                          (intptr_t)oldChunk)
+        == (intptr_t)oldChunk) {
         EnterCriticalSection(&m_mutex);
 
         PIXBeginNamedEvent(0.0, "Lighting chunk");

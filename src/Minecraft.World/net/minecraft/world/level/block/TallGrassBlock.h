@@ -4,6 +4,11 @@
 
 class TallGrassBlock : public Block {
 public:
+    class Variant {
+    public:
+        static Variant* GRASS;
+    };
+
     TallGrassBlock();
 
     static void blockStaticCtor();

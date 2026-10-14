@@ -1,6 +1,7 @@
 #include "net/minecraft/core/Direction.h"
 
 #include "net/minecraft/core/Vec3i.h"
+#include "net/minecraft/util/Mth.h"
 
 #include <string>
 
@@ -49,7 +50,15 @@ Direction::Direction(int dirX, int dirY, int dirZ, const std::wstring& name,
 }
 
 const Direction* Direction::from3DDataValue(int value) {
-    return Direction::BY_3D_DATA[std::abs(value % 6)];
+    return Direction::BY_3D_DATA[Mth::abs(value % 6)];
+}
+
+const Direction* Direction::from2DDataValue(int value) {
+    return Direction::BY_2D_DATA[Mth::abs(value % 4)];
+}
+
+const Direction* Direction::getOpposite() const {
+    return from3DDataValue(m_dirY);
 }
 
 unsigned int Direction::get3DDataValue() const {
@@ -62,6 +71,18 @@ int Direction::get2DDataValue() const {
 
 Direction::Axis* Direction::getAxis() const {
     return m_axis;
+}
+
+Direction::AxisDirection* Direction::getAxisDirection() const {
+    return m_axisDirection;
+}
+
+bool Direction::Axis::isHorizontal() {
+    return m_plane == Plane::HORIZONTAL;
+}
+
+int Direction::Axis::getId() {
+    return m_id;
 }
 
 std::wstring Direction::getName() const {

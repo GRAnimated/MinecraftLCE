@@ -1,6 +1,6 @@
 #include "net/minecraft/core/System.h"
+
 #include "nn/os/os_Mutex.h"
-#include <nn/time.h>
 
 void InitializeCriticalSection(nn::os::MutexType* mutex) {
     nn::os::InitializeMutex(mutex, 1, 0);
@@ -10,28 +10,6 @@ void InitializeCriticalSection(nn::os::MutexType* mutex) {
 
 void InitializeCriticalSectionAndSpinCount(nn::os::MutexType* mutexType, unsigned long spinCount) {
     InitializeCriticalSection(mutexType);
-}
-
-long System::currentRealTimeMillis() {
-    nn::time::PosixTime t;
-    nn::time::StandardUserSystemClock::GetCurrentTime(&t);
-    return t.time;
-}
-
-long System::currentUnixEpochTimeSeconds() {
-    return currentRealTimeMillis() / 1000;
-}
-
-long System::processTimeInSeconds() {
-    return processTime(MILLISECONDS) / 1000;
-}
-
-long System::processTimeInMilliSecs() {
-    return processTime(MILLISECONDS);
-}
-
-long System::processTimeInNanoSecs() {
-    return processTime(NANOSECONDS);
 }
 
 void System::ReverseSHORT(short* shart) {

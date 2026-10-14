@@ -14,7 +14,7 @@ public:
     bool equals(Tag*) override;
     Tag* copy() override;
 
-    long getAsLong() override;
+    JavaLong getAsLong() override;
     int getAsInt() override;
     short getAsShort() override;
     u8 getAsByte() override;

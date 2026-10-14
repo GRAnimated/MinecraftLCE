@@ -17,6 +17,7 @@ public:
     static const std::wstring VILLAGE_NAME;
     static const std::wstring MINESHAFT_NAME;
     static const std::wstring TEMPLE_NAME;
+    static const std::wstring END_CITY_NAME;
 
     ChunkGenerator() {}
     virtual ~ChunkGenerator();

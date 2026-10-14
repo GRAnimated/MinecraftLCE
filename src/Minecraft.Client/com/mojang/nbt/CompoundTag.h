@@ -5,6 +5,9 @@
 #include "nn/types.h"
 #include "types.h"
 #include <unordered_map>
+#include <vector>
+
+class ListTag;
 
 class CompoundTag : public Tag {
 public:
@@ -21,6 +24,8 @@ public:
     void stripEmptyChildren() override;
     bool isEmpty() const override;
     void remove(const std::wstring&);
+    // Caller owns the returned vector; entries are copies of child names.
+    std::vector<std::wstring>* getAllKeys();
 
     /** Gets a child `Compound Tag`
      *
@@ -64,27 +69,25 @@ public:
      */
     float getFloat(const std::wstring& name);
 
-    /** Gets a child `List Tag` (but returns void???)
+    /** Gets a child `List Tag`
      *
      *  @param name The name of the child tag
-     *  @param length The length of the list (unconfirmed)
+     *  @param length The element tag type
      */
-    void getList(const std::wstring& name, int length);
+    ListTag* getList(const std::wstring& name, int length);
 
     /** Gets a child `Tag` with the provided name
      *
      * @param name The name of the tag that you want to get.
      */
-    CompoundTag* get(const std::wstring& name);
+    Tag* get(const std::wstring& name);
 
-    /** Gets a child `List Tag` (Safe)
-     *
-     *  Why does this return void
+    /** Gets a child `List Tag` without allocating
      *
      *  @param name The name of the child tag
-     *  @param length The length of the list (unconfirmed)
+     *  @param length The element tag type
      */
-    void fjSafeGetListTag(const std::wstring& name, int length);
+    const ListTag* fjSafeGetListTag(const std::wstring& name, int type) const;
 
     /** Checks if a child with the provided name exists
      *
@@ -98,6 +101,7 @@ public:
      *  @param type Type of the child tag
      */
     bool contains(const std::wstring& name, int type);
+    u8 getTagType(const std::wstring& name) const;
 
     /** Adds a `Tag`
      *

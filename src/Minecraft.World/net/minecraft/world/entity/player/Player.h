@@ -193,6 +193,13 @@ public:
     void setBool7FC(bool);
     bool isAllowedToAttackPlayers();
     bool hasInvisiblePrivilege();
+    bool isAllowedToFly();
+    bool hasInvulnerablePrivilege();
+    // Inferred names for the unnamed entries at 0x71002d0d68 and 0x71002d0e10.
+    bool usesLegacyFoodHealing();
+    bool isHurt();
+    void causeFoodExhaustion(float);
+    FoodData* getFoodData();
     int getPlayerGamePrivilege(EPlayerGamePrivileges);
     bool CheckPowerup(PowerupItems::eGlide_Timed_Powerup_ID);
     std::shared_ptr<ItemEntity> drop(not_null_ptr<ItemInstance>, bool);

@@ -13,3 +13,5 @@ public:
 private:
     Block* mBlock;
 };
+
+static_assert(sizeof(SpringFeature) == 0x18, "SpringFeature layout must match the Switch object");

@@ -11,5 +11,5 @@ public:
     void populateGameRule(GameRulesInstance::EGameRulesInstanceType, GameRule*) override;
     bool onUseBlock(GameRule*, int, int, int, int) override;
     bool onCollectItem(GameRule*, not_null_ptr<ItemInstance>) override;
-    void postProcessPlayer(std::__1::shared_ptr<Player>) override;
+    void postProcessPlayer(std::shared_ptr<Player>) override;
 };

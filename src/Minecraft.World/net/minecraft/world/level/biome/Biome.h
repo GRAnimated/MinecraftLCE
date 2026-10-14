@@ -19,6 +19,7 @@ class PerlinSimplexNoise;
 
 class Biome {
 public:
+    static int getId(Biome*);
     static Biome* BIOMES[256];
 
     static Biome* OCEAN;
@@ -227,7 +228,7 @@ public:
 
     virtual ~Biome();
     virtual Feature* getTreeFeature(Random&);
-    virtual void getGrassFeature(Random&);
+    virtual Feature* getGrassFeature(Random&);
     virtual Block* getRandomFlower(Random&, const BlockPos*);
     virtual unsigned int getSkyColor(float);
     virtual bool hasSnow();

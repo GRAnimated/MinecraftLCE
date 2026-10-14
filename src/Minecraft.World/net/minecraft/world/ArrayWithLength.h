@@ -18,6 +18,11 @@ public:
         this->m_data = initialData;
         this->m_length = length;
     }
+    template <std::size_t N>
+    arrayWithLength(T (&initialData)[N]) {
+        this->m_data = initialData;
+        this->m_length = N;
+    }
     arrayWithLength(unsigned int size, bool a3) {
         T* temp;
         if (a3)
@@ -29,6 +34,7 @@ public:
     }
 
     T& operator[](unsigned int i) { return m_data[i]; }
+    const T& operator[](unsigned int i) const { return m_data[i]; }
     T& get(unsigned int i) { return m_data[i]; }
 
     void resize(unsigned int newSize) {

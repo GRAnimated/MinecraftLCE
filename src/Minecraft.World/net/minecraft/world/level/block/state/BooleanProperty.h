@@ -1,6 +1,7 @@
 #pragma once
 
 #include "net/minecraft/world/level/block/state/properties/AbstractProperty.h"
+#include <unordered_map>
 
 class BooleanProperty : public AbstractProperty<bool> {
 public:
@@ -15,4 +16,7 @@ public:
     bool getUnboxedValue(const std::wstring&) const override;
     std::wstring getName(const bool&) const override;
     ~BooleanProperty();
+
+    std::vector<Boxed*> m_allowedValues;
+    std::unordered_map<std::wstring, bool> m_values;
 };

@@ -1,11 +1,13 @@
 #pragma once
 
+#include <string>
+
 class Nameable {
 public:
     Nameable();
 
-    virtual void getName() = 0;
-    virtual void getCustomName() = 0;
-    virtual void hasCustomName() = 0;
-    virtual void getDisplayName() = 0;
+    virtual std::wstring getName() = 0;
+    virtual std::wstring getCustomName() = 0;
+    virtual bool hasCustomName() = 0;
+    virtual std::wstring getDisplayName() = 0;
 };

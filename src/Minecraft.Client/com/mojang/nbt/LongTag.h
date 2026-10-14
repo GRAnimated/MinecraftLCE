@@ -5,14 +5,14 @@
 class LongTag : public NumericTag {
 public:
     LongTag();
-    LongTag(long data);
+    LongTag(JavaLong data);
 
     void write(DataOutput*) override;
     void load(DataInput*, int) override;
     std::wstring toString() override;
     u8 getId() override;
     bool equals(Tag*) override;
-    long getAsLong() override;
+    JavaLong getAsLong() override;
     int getAsInt() override;
     short getAsShort() override;
     u8 getAsByte() override;
@@ -20,5 +20,5 @@ public:
     float getAsFloat() override;
     Tag* copy() override;
 
-    long m_data;
+    JavaLong m_data;
 };

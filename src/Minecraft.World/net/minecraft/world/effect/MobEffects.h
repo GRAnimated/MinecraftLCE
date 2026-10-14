@@ -1,5 +1,7 @@
 #pragma once
 
+#include <string>
+
 class MobEffect;
 
 class MobEffects {
@@ -33,4 +35,5 @@ public:
     static MobEffect* UNLUCK;
 
     static void staticCtor();
+    static MobEffect* get(const std::wstring& name);
 };

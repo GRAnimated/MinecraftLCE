@@ -12,7 +12,10 @@
 #include "com/mojang/nbt/LongTag.h"
 #include "com/mojang/nbt/ShortTag.h"
 #include "com/mojang/nbt/StringTag.h"
+#include "java/io/DataInput.h"
 #include <ostream>
+
+Tag::Tag() = default;
 
 void Tag::print(const std::wstring& name, char* prefix, std::wostream& output) {
     output << prefix;

@@ -35,8 +35,8 @@ Compression::~Compression() {
     XMemDestroyCompressionContext(this->m_xMemCompressionContext);
     XMemDestroyDecompressionContext(this->m_xMemDecompressionContext);
 
-    nn::os::FinalizeMutex(&this->m_cMutex);
-    nn::os::FinalizeMutex(&this->m_dcMutex);
+    DeleteCriticalSection(&this->m_cMutex);
+    DeleteCriticalSection(&this->m_dcMutex);
 
     if (this->m_dcData) {
         delete this->m_dcData;

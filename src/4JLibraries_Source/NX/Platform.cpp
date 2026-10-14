@@ -18,9 +18,9 @@ void XPhysicalFree(void* ptr) {
     free(ptr);
 }
 
+#ifndef _WIN32
 void __debugbreak() {}  // I assume this just calls compiler intrinsic on x86
-
-void MemSect(int) {}
+#endif
 
 void PIXBeginNamedEvent(float, const char*, ...) {}
 void PIXEndNamedEvent() {}

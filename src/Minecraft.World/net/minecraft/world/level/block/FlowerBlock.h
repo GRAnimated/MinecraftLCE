@@ -14,6 +14,7 @@ public:
         static Flower* RED_FLOWER;
         static Flower* RED_MUSHROOM;
         static Flower* BROWN_MUSHROOM;
+        static Flower* OXEYE_DAISY;
 
         enum EFlower {};
 
@@ -21,9 +22,17 @@ public:
                FlowerBlock::Flower::EFlower);
 
         void* m_field0;
+        int getData();
+        int getNameId();
+        int getDescriptionId();
+
         int m_field8;
+        int m_field12;
+        int m_data;
     };
 
     virtual FlowerBlock::FlowerCategory* getFlowerCategory() = 0;
-    virtual void getFlowerProperty();
+    virtual Property* getFlowerProperty();
+
+    Property* m_flowerProperty;
 };

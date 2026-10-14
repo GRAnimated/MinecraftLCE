@@ -5,7 +5,7 @@
 
 LongTag::LongTag() : m_data(0) {}
 
-LongTag::LongTag(long data) : m_data(data) {}
+LongTag::LongTag(JavaLong data) : m_data(data) {}
 
 void LongTag::write(DataOutput* outputStream) {
     outputStream->writeLong(m_data);
@@ -30,7 +30,7 @@ bool LongTag::equals(Tag* other) {
     return Tag::equals(other) && m_data == otherCasted->m_data;
 }
 
-long LongTag::getAsLong() {
+JavaLong LongTag::getAsLong() {
     return m_data;
 }
 

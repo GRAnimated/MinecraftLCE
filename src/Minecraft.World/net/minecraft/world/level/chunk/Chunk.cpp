@@ -1,5 +1,7 @@
 #include "net/minecraft/world/level/chunk/Chunk.h"
 
+#include <algorithm>
+
 #include "NX/Platform.h"
 #include "NX/Render/RendererCore.h"
 #include "net/minecraft/client/CMinecraftApp.h"
