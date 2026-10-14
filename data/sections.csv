@@ -1,0 +1,24 @@
+Name,Start Address,End Address,Real Address,O,R,W,X,V,A
+.shstrtab,0x0000007100000000,0x0000007100000088,0x00000000000006a8,False,True,False,False,False,False
+.init,0x0000007100000088,0x0000007100000160,0x0000000000000730,False,True,False,True,False,False
+.fini,0x0000007100000160,0x0000007100000194,0x0000000000000808,False,True,False,True,False,False
+.text,0x0000007100000194,0x00000071009c9a18,0x000000000000083c,False,True,False,True,False,False
+.plt,0x00000071009c9a18,0x00000071009cbc28,0x00000000009ca0c0,False,True,False,True,False,False
+.rodata,0x00000071009cc000,0x00000071009cc090,0x00000000009cc2d0,False,True,False,False,False,False
+.rela.dyn,0x00000071009cc090,0x0000007100d5a950,0x00000000009cc360,False,True,False,False,False,False
+.rela.plt,0x0000007100d5a950,0x0000007100d5dc38,0x0000000000d5ac20,False,True,False,False,False,False
+.hash,0x0000007100d5dc38,0x0000007100d5eefc,0x0000000000d5df08,False,True,False,False,False,False
+.rodata,0x0000007100d5eefc,0x0000007100d62e90,0x0000000000d5f1cc,False,True,False,False,False,False
+.dynstr,0x0000007100d62e90,0x0000007100d695a4,0x0000000000d63160,False,True,False,False,False,False
+.rodata,0x0000007100d695a4,0x0000007101016af4,0x0000000000d69874,False,True,False,False,False,False
+.note,0x0000007101016af4,0x0000007101016b14,0x0000000001016dc4,False,True,False,False,False,False
+.rodata,0x0000007101016b14,0x0000007101016cbf,0x0000000001016de4,False,True,False,False,False,False
+.data,0x0000007101017000,0x0000007101769a40,0x0000000001016f8f,False,True,True,False,False,False
+.got.plt,0x0000007101769a40,0x000000710176ab50,0x00000000017699cf,False,True,True,False,False,False
+.got,0x000000710176ab50,0x0000007101781780,0x000000000176aadf,False,True,True,False,False,False
+.data,0x0000007101781780,0x00000071017817b8,0x000000000178170f,False,True,True,False,False,False
+.init_array,0x00000071017817b8,0x0000007101781b00,0x0000000001781747,False,True,True,False,False,False
+.bss,0x0000007101781b00,0x00000071023fd000,,False,True,True,False,False,False
+.prgend,0x00000071023fd000,0x00000071023fd001,,False,False,False,False,False,False
+extern,0x00000071023fd008,0x00000071023fe4b8,,False,False,False,False,False,False
+abs,0x00000071023fe4b8,0x00000071023fe4c0,,False,False,False,False,False,False

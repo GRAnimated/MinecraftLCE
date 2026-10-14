@@ -1,49 +1,54 @@
 import csv
+import os
+import sys
+
+# gotta do this otherwise it won't find the util folder
+common = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "common"))
+sys.path.append(common)
+
+from util import config
+
+input = config.get_data_csv_path()
+print(f"[INPUT] {input}")
+
 import ida_kernwin
 import idc
 import idautils
 
-input_file_path = ida_kernwin.ask_file(0, "*.csv", "Select CSV file")
+with open(input, 'r', newline='') as f:
+	reader = csv.DictReader(f)
 
-if input_file_path:
-    with open(input_file_path, 'r', newline='') as csvfile:
-        csvreader = csv.reader(csvfile)
+	for row in reader:
+		# print(row)
+		
+		if len(row) < 2:
+			continue
 
-        print(csvfile)
+		addr, name = row["Address"], row["Name"]
 
-        for row in csvreader:
-            if len(row) < 2:
-                continue
+		if not addr or not name:
+			continue
 
-            address_str, name = row[0], row[1]
+		try:
+			address = int(addr, 16)
+		except ValueError:
+			print(f"[ERR] Invalid address str: {addr}", flush=True) # in what world would this ever happen???????
+			continue
 
-            if not address_str or not name:
-                continue
+		seg = idc.get_segm_name(address)
+		if seg != '.bss':
+			continue
 
-            try:
-                address = int(address_str, 16)
-            except ValueError:
-                print(f"Invalid address format: {address_str}", flush=True)
-                continue
+		cur_name = idc.get_name(address)
+		if not cur_name:
+			if idc.set_name(address, name, idc.SN_CHECK):
+				print(f"[CREATE] -> {addr}: '{name}'", flush=True)
+			else:
+				print(f"[ERR] Failed to set name '{name}' at {addr}", flush=True)
+		elif cur_name != name:
+			if idc.set_name(address, name, idc.SN_CHECK):
+				print(f"[RENAME] -> {addr}: '{cur_name}' -> '{name}'", flush=True)
+			else:
+				print(f"[ERR] Failed to rename '{cur_name}' at {addr} to '{name}'", flush=True)
 
-            seg = idc.get_segm_name(address)
-            if seg != '.bss':
-                print(f"Address {address_str} not in .bss, skipping.", flush=True)
-                continue
-
-            # Attempt to rename
-            current_name = idc.get_name(address)
-            if not current_name:
-                if idc.set_name(address, name, idc.SN_CHECK):
-                    print(f"Added new name '{name}' at {address_str}", flush=True)
-                else:
-                    print(f"Failed to add name '{name}' at {address_str}", flush=True)
-            elif current_name != name:
-                if idc.set_name(address, name, idc.SN_CHECK):
-                    print(f"Renamed '{current_name}' to '{name}' at {address_str}", flush=True)
-                else:
-                    print(f"Failed to rename '{current_name}' at {address_str} to '{name}'", flush=True)
-
-    print("Renaming from CSV completed.", flush=True)
-else:
-    print("Operation cancelled by the user.", flush=True)
+print("[RENAME_DATA] Done!", flush=True)
