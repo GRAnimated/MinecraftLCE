@@ -105,10 +105,10 @@ void TreeFeature::placeCocoa(Level* level, int age, const BlockPos& pos, const D
                  ->setValue<const Direction*>(HorizontalDirectionalBlock::FACING, direction));
 }
 
-// NON_MATCHING: leaf/vine scans keep the original ordering and random draws.
+// Keep the original leaf/vine scan ordering and random draws.
 bool TreeFeature::place(Level* level, Random& random, const BlockPos& pos) {
     PIXBeginNamedEvent(0.0f, "TreeFeature::place");
-    int height = m_minHeight + random.nextInt(3);
+    int height = random.nextInt(3) + m_minHeight;
     if (!prepareSpawn(level, pos, height)) {
         PIXEndNamedEvent();
         return false;
@@ -117,7 +117,7 @@ bool TreeFeature::place(Level* level, Random& random, const BlockPos& pos) {
         PIXBeginNamedEvent(0.0f, "Placing TreeFeature leaves");
         MutableBlockPos current(0, 0, 0);
         for (int y = pos.getY() + height; y >= pos.getY() + height - 3; --y) {
-            int topOffset = y - height - pos.getY();
+            int topOffset = y - (pos.getY() + height);
             int radius = 1 - topOffset / 2;
             for (int x = pos.getX() - radius; x <= pos.getX() + radius; ++x) {
                 int dx = x - pos.getX();
@@ -137,7 +137,7 @@ bool TreeFeature::place(Level* level, Random& random, const BlockPos& pos) {
             PIXBeginNamedEvent(0.0f, "TreeFeature adding vines");
             MutableBlockPos vinePos(0, 0, 0);
             for (int y = pos.getY() + height - 3; y <= pos.getY() + height; ++y) {
-                int radius = 2 - (y - height - pos.getY()) / 2;
+                int radius = 2 - (y - (pos.getY() + height)) / 2;
                 for (int x = pos.getX() - radius; x <= pos.getX() + radius; ++x) {
                     for (int z = pos.getZ() - radius; z <= pos.getZ() + radius; ++z) {
                         vinePos.set(x, y, z);
@@ -166,24 +166,28 @@ bool TreeFeature::place(Level* level, Random& random, const BlockPos& pos) {
             int cocoa = random.nextInt(5);
             if (height > 5 && cocoa == 0) {
                 PIXBeginNamedEvent(0.0f, "TreeFeature adding cocoa");
-                auto directions = Direction::Plane::HORIZONTAL->iterator();
-                for (unsigned int i = 0; i < directions.m_length; ++i) {
-                    const Direction* direction = directions[i];
-                    if (random.nextInt(4) == 0) {
-                        const Direction* opposite = direction->getOpposite();
-                        int age = random.nextInt(3);
-                        placeCocoa(level, age, pos.offset(opposite->getX(), height - 5, opposite->getZ()),
-                                   direction);
+                {
+                    auto directions = Direction::Plane::HORIZONTAL->iterator();
+                    for (unsigned int i = 0; i < directions.m_length; ++i) {
+                        const Direction* direction = directions[i];
+                        if (random.nextInt(4) == 0) {
+                            const Direction* opposite = direction->getOpposite();
+                            int age = random.nextInt(3);
+                            placeCocoa(level, age, pos.offset(opposite->getX(), height - 5, opposite->getZ()),
+                                       direction);
+                        }
                     }
                 }
-                directions = Direction::Plane::HORIZONTAL->iterator();
-                for (unsigned int i = 0; i < directions.m_length; ++i) {
-                    const Direction* direction = directions[i];
-                    if (random.nextInt(3) == 0) {
-                        const Direction* opposite = direction->getOpposite();
-                        int age = random.nextInt(3);
-                        placeCocoa(level, age, pos.offset(opposite->getX(), height - 4, opposite->getZ()),
-                                   direction);
+                {
+                    auto directions = Direction::Plane::HORIZONTAL->iterator();
+                    for (unsigned int i = 0; i < directions.m_length; ++i) {
+                        const Direction* direction = directions[i];
+                        if (random.nextInt(3) == 0) {
+                            const Direction* opposite = direction->getOpposite();
+                            int age = random.nextInt(3);
+                            placeCocoa(level, age, pos.offset(opposite->getX(), height - 4, opposite->getZ()),
+                                       direction);
+                        }
                     }
                 }
                 PIXEndNamedEvent();

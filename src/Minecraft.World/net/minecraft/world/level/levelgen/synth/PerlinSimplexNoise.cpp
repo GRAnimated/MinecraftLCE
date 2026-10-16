@@ -41,6 +41,8 @@ arrayWithLength<double> PerlinSimplexNoise::getRegion(arrayWithLength<double> ou
 arrayWithLength<double> PerlinSimplexNoise::getRegion(arrayWithLength<double> output, double x, double y,
                                                       int width, int height, double scaleX, double scaleY,
                                                       double octaveScale, double persistence) {
+    scaleX /= 1.5;
+    scaleY /= 1.5;
     if (output.m_data && static_cast<int>(output.m_length) >= width * height) {
         for (unsigned int i = 0; i < output.m_length; ++i)
             output[i] = 0.0;
@@ -48,11 +50,11 @@ arrayWithLength<double> PerlinSimplexNoise::getRegion(arrayWithLength<double> ou
         delete[] output.m_data;
         output = arrayWithLength<double>(width * height, true);
     }
-    double frequency = 1.0;
     double amplitudeScale = 1.0;
+    double frequency = 1.0;
     for (int i = 0; i < m_maxOctaves; ++i) {
-        m_noiseLevels[i]->add(output, x, y, width, height, (scaleX / 1.5) * frequency,
-                              (scaleY / 1.5) * frequency, 0.55 / amplitudeScale);
+        m_noiseLevels[i]->add(output, x, y, width, height, scaleX * frequency, scaleY * frequency,
+                              0.55 / amplitudeScale);
         frequency *= octaveScale;
         amplitudeScale *= persistence;
     }

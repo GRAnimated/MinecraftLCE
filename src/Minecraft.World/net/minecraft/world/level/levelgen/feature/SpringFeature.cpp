@@ -5,7 +5,7 @@
 #include "net/minecraft/world/level/Level.h"
 #include "net/minecraft/world/level/block/Block.h"
 
-SpringFeature::SpringFeature(Block* block, bool) : Feature(false), mBlock(block) {}
+SpringFeature::SpringFeature(Block* block) : Feature(false), mBlock(block) {}
 
 bool SpringFeature::place(Level* level, Random& random, const BlockPos& pos) {
     if (CConsoleMinecraftApp::sInstance.getLevelGenerationOptions()) {

@@ -1,4 +1,5 @@
 #include "net/minecraft/core/Vec3i.h"
+
 #include "net/minecraft/util/Mth.h"
 
 Vec3i::Vec3i(int x, int y, int z) {
@@ -23,4 +24,15 @@ int Vec3i::getY() const {
 
 int Vec3i::getZ() const {
     return m_z;
+}
+
+double Vec3i::distSqr(double x, double y, double z) const {
+    double dx = getX() - x;
+    double dy = getY() - y;
+    double dz = getZ() - z;
+    return dx * dx + dy * dy + dz * dz;
+}
+
+double Vec3i::distSqr(const Vec3i& other) const {
+    return distSqr(other.getX(), other.getY(), other.getZ());
 }

@@ -2,5 +2,9 @@
 
 #include "net/minecraft/world/level/levelgen/feature/AbstractTreeFeature.h"
 
-// STUB
-class MegaTreeFeature : public AbstractTreeFeature {};
+class MegaTreeFeature : public AbstractTreeFeature {
+protected:
+    int m_heightRange;
+};
+
+ASSERT_SIZEOF(MegaTreeFeature, 0x30)

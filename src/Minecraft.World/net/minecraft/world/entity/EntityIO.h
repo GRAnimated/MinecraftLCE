@@ -32,6 +32,7 @@ public:
     };
 
     static void bootStrap();
+    static ResourceLocation getKey(eINSTANCEOF);
     static void registerEntity(Factory, int, const std::wstring&, eINSTANCEOF, const std::wstring&);
     static SpawnEggInfo registerEgg(std::uint32_t, const std::wstring, int, int);
 

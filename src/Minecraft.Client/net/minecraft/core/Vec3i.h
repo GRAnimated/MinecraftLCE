@@ -11,6 +11,7 @@ public:
     int getZ() const;
     Vec3i multiply(int) const;
     double distSqr(const Vec3i&) const;
+    double distSqr(double x, double y, double z) const;
 
     int m_x;
     int m_y;

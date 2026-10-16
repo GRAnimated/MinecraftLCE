@@ -7,7 +7,7 @@
 class TallgrassFeature : public Feature {
 public:
     TallgrassFeature(TallGrassBlock::Variant*);
-    ~TallgrassFeature() override;
+    ~TallgrassFeature() override = default;
     bool place(Level*, Random&, const BlockPos&) override;
 
 private:

@@ -18,3 +18,11 @@ bool BlockPos::equals(const BlockPos& pos) const {
 bool BlockPos::equals(const BlockPos* pos) const {
     return equals(*pos);
 }
+
+bool BlockPos::operator!=(const BlockPos& pos) const {
+    return !equals(pos);
+}
+
+BlockPos BlockPos::offset(double x, double y, double z) const {
+    return BlockPos(getX() + x, getY() + y, getZ() + z);
+}
