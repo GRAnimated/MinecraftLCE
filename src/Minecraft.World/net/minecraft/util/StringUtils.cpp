@@ -9,3 +9,17 @@ std::wstring replaceAll(const std::wstring& input, const std::wstring& from, con
     }
     return result;
 }
+
+std::vector<std::wstring>& split(const std::wstring& text, wchar_t delimiter,
+                                 std::vector<std::wstring>& output) {
+    std::wstringstream stream(text);
+    std::wstring token;
+    while (std::getline(stream, token, delimiter))
+        output.push_back(token);
+    return output;
+}
+
+std::vector<std::wstring> split(const std::wstring& text, wchar_t delimiter) {
+    std::vector<std::wstring> output;
+    return split(text, delimiter, output);
+}

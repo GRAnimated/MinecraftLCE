@@ -317,7 +317,8 @@ void TheEndLevelSource::postProcess(int x, int z) {
 bool TheEndLevelSource::postProcessLoadedChunk(LevelChunk*, int, int) {
     return false;
 }
-std::vector<Biome::MobSpawnerData>* TheEndLevelSource::getMobsAt(MobCategory* category, const BlockPos& pos) {
+std::vector<Biome::MobSpawnerData*>* TheEndLevelSource::getMobsAt(MobCategory* category,
+                                                                  const BlockPos& pos) {
     return m_level->getBiome(pos)->getMobs(category);
 }
 BlockPos* TheEndLevelSource::findNearestMapFeature(Level* level, const std::wstring& name,

@@ -19,6 +19,7 @@ public:
     static float cos(float);
     static int floor(double);
     static int floor(float);
+    static int ceil(float);
     static float sqrt(float v);
     static float sqrt(double v);
     static double clamp(double, double, double);
@@ -34,6 +35,7 @@ public:
     static int cached_atan_index(int, int);
     static void init();
     static MthLong lfloor(double);
+    static MthLong round(double);
     static double clampedLerp(double, double, double);
     static double frac(double);
     static int hsvToRgb(float, float, float);

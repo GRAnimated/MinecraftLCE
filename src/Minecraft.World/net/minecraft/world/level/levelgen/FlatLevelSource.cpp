@@ -188,7 +188,7 @@ bool FlatLevelSource::postProcessLoadedChunk(LevelChunk*, int, int) {
     return false;
 }
 
-std::vector<Biome::MobSpawnerData>* FlatLevelSource::getMobsAt(MobCategory* category, const BlockPos& pos) {
+std::vector<Biome::MobSpawnerData*>* FlatLevelSource::getMobsAt(MobCategory* category, const BlockPos& pos) {
     Biome* biome = m_level->getBiome(pos);
     if (m_monument && category == MobCategory::GUARDIAN && m_monument->isInsideBoundingFeature(m_level, pos))
         return m_monument->getEnemies();

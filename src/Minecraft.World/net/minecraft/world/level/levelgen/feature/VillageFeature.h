@@ -7,6 +7,11 @@ class Biome;
 
 class VillageFeature : public StructureFeature {
 public:
+    std::wstring getFeatureName() override;
+    BlockPos* getNearestGeneratedFeature(Level*, const BlockPos&, bool) override;
+    bool isFeatureChunk(int, int, bool) override;
+    StructureStart* createStructureStart(int, int) override;
+
     VillageFeature(int);
 
     static void staticCtor();

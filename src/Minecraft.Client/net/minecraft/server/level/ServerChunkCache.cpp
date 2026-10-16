@@ -443,7 +443,7 @@ std::wstring ServerChunkCache::gatherStats() {
     return L"ServerChunkCache: ";
 }
 
-std::vector<Biome::MobSpawnerData>* ServerChunkCache::getMobsAt(MobCategory* category, const BlockPos& pos) {
+std::vector<Biome::MobSpawnerData*>* ServerChunkCache::getMobsAt(MobCategory* category, const BlockPos& pos) {
     return m_chunkGenerator->getMobsAt(category, pos);
 }
 

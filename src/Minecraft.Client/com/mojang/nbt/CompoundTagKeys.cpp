@@ -6,3 +6,7 @@ std::vector<std::wstring>* CompoundTag::getAllKeys() {
         keys->push_back(child.first);
     return keys;
 }
+
+std::unordered_map<std::wstring, Tag*>* CompoundTag::getAllTags() {
+    return &m_childTags;
+}

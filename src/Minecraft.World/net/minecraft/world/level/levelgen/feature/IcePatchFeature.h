@@ -6,6 +6,7 @@ class Block;
 class IcePatchFeature : public Feature {
 public:
     IcePatchFeature(int radius);
+    ~IcePatchFeature() override;
     bool place(Level*, Random&, const BlockPos&) override;
 
 private:

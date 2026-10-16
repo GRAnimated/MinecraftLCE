@@ -271,9 +271,10 @@ public:
 
     Biome* setNameAndDescription(int name, int desc);
     Biome* setPreviewColor(eMinecraftColour color);
+    eMinecraftColour getPreviewColor();
     Biome* setWaterSkyColor(eMinecraftColour water, eMinecraftColour sky);
 
-    std::vector<Biome::MobSpawnerData>* getMobs(MobCategory*);
+    std::vector<Biome::MobSpawnerData*>* getMobs(MobCategory*);
 
     std::wstring getName(bool);
     std::wstring getDescription();

@@ -202,6 +202,7 @@ public:
     bool hasChunksAt(const BlockPos&, const BlockPos&);
     int getAuxValueForMap(PlayerUID, int, int, int, int);
     std::shared_ptr<SavedData> getSavedData(const std::type_info&, const std::wstring&);
+    LevelStorage* getLevelStorage();
     void setSavedData(const std::wstring&, std::shared_ptr<SavedData>);
     std::vector<std::shared_ptr<Entity>>* getEntitiesOfClass(const std::type_info&, AABB const*);
     bool shouldFreezeIgnoreNeighbors(const BlockPos&);

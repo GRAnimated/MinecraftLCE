@@ -6,8 +6,6 @@
 #include "net/minecraft/world/level/block/Blocks.h"
 #include "net/minecraft/world/level/block/state/BlockState.h"
 
-HellFireFeature::HellFireFeature() : Feature(false) {}
-
 bool HellFireFeature::place(Level* level, Random& random, const BlockPos& pos) {
     for (int i = 0; i < 64; i++) {
         BlockPos pos2

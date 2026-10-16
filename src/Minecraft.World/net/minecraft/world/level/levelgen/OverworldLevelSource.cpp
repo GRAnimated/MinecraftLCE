@@ -651,8 +651,8 @@ void OverworldLevelSource::prepareHeights(int chunkX, int chunkZ, ChunkPrimer* p
     delete[] biomes.m_data;
 }
 
-std::vector<Biome::MobSpawnerData>* OverworldLevelSource::getMobsAt(MobCategory* category,
-                                                                    const BlockPos& pos) {
+std::vector<Biome::MobSpawnerData*>* OverworldLevelSource::getMobsAt(MobCategory* category,
+                                                                     const BlockPos& pos) {
     Biome* biome = m_level->getBiome(pos);
 
     if (m_shouldGenerateStructures) {

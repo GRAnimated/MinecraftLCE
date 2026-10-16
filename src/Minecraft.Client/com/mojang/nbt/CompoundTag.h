@@ -26,6 +26,7 @@ public:
     void remove(const std::wstring&);
     // Caller owns the returned vector; entries are copies of child names.
     std::vector<std::wstring>* getAllKeys();
+    std::unordered_map<std::wstring, Tag*>* getAllTags();
 
     /** Gets a child `Compound Tag`
      *
