@@ -4,6 +4,7 @@
 
 class TorchBlock : public Block {
 public:
+    static Property* FACING;
     TorchBlock();
 
     static void blockStaticCtor();

@@ -1,5 +1,9 @@
 #pragma once
 
+#include "java/io/JavaLong.h"
+#include <cstdint>
+#include <cstring>
+
 #include "net/minecraft/world/ArrayWithLength.h"
 #include "net/minecraft/world/level/biome/Biome.h"
 #include "nn/os/os_MutexTypes.h"
@@ -12,7 +16,8 @@ class Node;
 // TODO: Find locations
 void InitializeCriticalSection(nn::os::MutexType* mutexType);
 void InitializeCriticalSectionAndSpinCount(nn::os::MutexType* mutexType, unsigned long spinCount);
-long InterlockedCompareExchangeRelease(volatile long*, long, long);
+void DeleteCriticalSection(nn::os::MutexType* mutexType);
+std::intptr_t InterlockedCompareExchangeRelease(volatile std::intptr_t*, std::intptr_t, std::intptr_t);
 template <typename T>
 const std::wstring _toString(T type) {
     std::wstringstream ss;
@@ -30,14 +35,14 @@ class System {
 public:
     enum ETimeGranularity { MILLISECONDS, MICROSECONDS, NANOSECONDS };
 
-    static long currentRealTimeMillis();
-    static long currentUnixEpochTimeSeconds();
+    static JavaLong currentRealTimeMillis();
+    static JavaLong currentUnixEpochTimeSeconds();
 
-    static long processTimeInSeconds();
-    static long processTimeInMilliSecs();
-    static long processTimeInNanoSecs();
-    static long processTimeInMicroSecs();
-    static long processTime(System::ETimeGranularity);
+    static JavaLong processTimeInSeconds();
+    static JavaLong processTimeInMilliSecs();
+    static JavaLong processTimeInNanoSecs();
+    static JavaLong processTimeInMicroSecs();
+    static JavaLong processTime(System::ETimeGranularity);
 
     template <typename T>
     static void arraycopy(arrayWithLength<T> src, unsigned int srcOff, arrayWithLength<T>* dest,

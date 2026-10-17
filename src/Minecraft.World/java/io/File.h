@@ -20,15 +20,15 @@ public:
     File& operator=(const File& rhs);
 
     std::wstring getPath() const;
-    void _delete();
+    bool _delete();
     bool mkdir() const;
     bool exists() const;
     bool isDirectory() const;
     bool isFile() const;
-    bool renameTo(const File& dest);
-    std::vector<File> listFiles() const;
+    bool renameTo(File dest);
+    std::vector<File*>* listFiles() const;
     std::vector<File> listFiles(FileFilter* filter) const;  // unused in switch edition
-    long length() const;
+    long length();
     std::wstring getName() const;
     std::wstring ext() const;
 
@@ -42,18 +42,20 @@ std::wstring char16towstring(wchar_t*);
 const char* wstringtofilename(const std::wstring&, char (&)[256]);
 std::string formatstr(const char* format, ...);
 std::wstring formatwstr(const wchar_t* format, ...);
-bool CreateDirectoryA(const char*, void*);
-bool GetFileAttributesA(const char*);
-bool MoveFileA(const char*, const char*);
+int CreateDirectoryA(const char*, void*);
+int GetFileAttributesA(const char*);
+int MoveFileA(const char*, const char*);
 int GetLastError();
 
 bool isDirectory(const std::wstring&);
 bool FindFirstFileA(const char*, _WIN32_FIND_DATAA*);
 std::wstring filenametowstring(const char*);
 bool FindNextFileA(int, _WIN32_FIND_DATAA*);
-bool CloseHandle(nn::fs::FileHandle*);
+bool CloseHandle(nn::fs::FileHandle*) asm("_Z11CloseHandlei");
 // NOTE: this function declaration may be wrong as it seems that last argument differs with WiiU declaration
 nn::fs::FileHandle* CreateFileA(const char*, unsigned int, unsigned int, void*, unsigned int, unsigned int,
                                 void*);
 int GetFileSize(nn::fs::FileHandle*, unsigned int*);
-int ReadFile(nn::fs::FileHandle*, void*, unsigned int, unsigned int*, _OVERLAPPED*);
+int ReadFile(nn::fs::FileHandle*, void*, unsigned int, unsigned int*,
+             _OVERLAPPED*) asm("_Z8ReadFileiPvjPjP11_OVERLAPPED");
+unsigned int SetFilePointer(nn::fs::FileHandle*, int, int*, unsigned int);

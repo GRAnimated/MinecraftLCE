@@ -1,5 +1,7 @@
 #pragma once
 
+#include <string>
+
 #include "net/minecraft/client/resources/MappedRegistry.h"
 #include <functional>
 

@@ -1,11 +1,13 @@
 #pragma once
 
+#include "net/minecraft/core/BlockPos.h"
+
 class Level;
 class Random;
 class Biome;
-class BlockPos;
 class Feature;
-class ClayFeature;
+class FlowerFeature;
+class CustomizableSourceSettings;
 
 class BiomeDecorator {
 public:
@@ -15,40 +17,47 @@ public:
     virtual void decorate(Biome*, Level*, Random&);
     virtual void decorateOres(Level*, Random&);
 
-private:
-    char byte_8;
-    void* qword_c;
-    void* qword_18;
-    ClayFeature* field_20;
-    void* qword_28;
-    void* qword_30;
-    void* qword_38;
-    void* qword_40;
-    void* qword_48;
-    void* qword_50;
-    void* qword_58;
-    void* qword_60;
-    void* qword_68;
-    void* qword_70;
-    void* qword_78;
-    void* qword_80;
-    void* qword_88;
-    Feature* field_90;
-    void* field_98;
-    void* field_a0;
-    void* field_a8;
-    void* field_b0;
-    void* field_b8;
-    void* qword_c0;
-    void* qword_c8;
-    int dword_d0;
-    int dword_d4;
-    void* qword_d8;
-    void* qword_e0;
-    int dword_e8;
-    int dword_ec;
-    int dword_f0;
-    int dword_f4;
-    int dword_f8;
-    char byte_fc;
+    void decorateDepthSpan(Level*, Random&, int count, Feature*, int minHeight, int maxHeight);
+    void decorateDepthAverage(Level*, Random&, int count, Feature*, int centerHeight, int spread);
+
+    bool m_decorating;
+    BlockPos m_origin;
+    CustomizableSourceSettings* m_settings;
+    Feature* m_clay;
+    Feature* m_sand;
+    Feature* m_gravelPatch;
+    Feature* m_dirt;
+    Feature* m_gravel;
+    Feature* m_granite;
+    Feature* m_diorite;
+    Feature* m_andesite;
+    Feature* m_coal;
+    Feature* m_iron;
+    Feature* m_gold;
+    Feature* m_redstone;
+    Feature* m_diamond;
+    Feature* m_lapis;
+    FlowerFeature* m_flowers;
+    Feature* m_brownMushrooms;
+    Feature* m_redMushrooms;
+    Feature* m_hugeMushrooms;
+    Feature* m_reeds;
+    Feature* m_cactus;
+    Feature* m_waterlilies;
+    int m_waterlilyCount;
+    int m_treeCount;
+    float m_extraTreeChance;
+    int m_flowerCount;
+    int m_grassCount;
+    int m_deadBushCount;
+    int m_mushroomCount;
+    int m_reedCount;
+    int m_cactusCount;
+    int m_gravelPatchCount;
+    int m_sandCount;
+    int m_clayCount;
+    int m_hugeMushroomCount;
+    bool m_generateLiquids;
 };
+
+static_assert(sizeof(BiomeDecorator) == 0x100, "Switch biome decorator layout");

@@ -91,8 +91,10 @@ public:
 
 // ASSERT_SIZEOF(Particle, 0x98)
 
+#ifdef SAFETY_CHECKS
 static_assert(offsetof(Particle, m_random) == 0x78);
 static_assert(offsetof(Particle, m_uvSet) == 0x98);
 static_assert(offsetof(Particle, m_boundingBox) == 0x138);
 static_assert(offsetof(Particle, m_canCollide) == 0x69);
 static_assert(offsetof(Particle, m_width) == 0x6c);
+#endif

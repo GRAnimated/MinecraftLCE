@@ -32,6 +32,8 @@ public:
         }
 
         int getData() { return this->m_data; }
+        int getNameId() { return this->m_nameId; }
+        int getDescriptionId() { return this->m_descId; }
         std::wstring getName() { return this->m_name; }
         const MaterialColor* getMaterialColor() { return this->m_materialColor; }
         int getDustColor() { return this->m_dustColor; }

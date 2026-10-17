@@ -145,10 +145,10 @@ Biome* Biome::getBiome(int id, Biome* biome) {
     return biome;
 }
 
-Block* Biome::getRandomFlower(Random& random, const BlockPos* pos) {
+FlowerBlock::Flower* Biome::getRandomFlower(Random& random, const BlockPos* pos) {
     if (random.nextInt(3) > 0)
-        return (Block*)FlowerBlock::Flower::YELLOW_FLOWER;
-    return (Block*)FlowerBlock::Flower::RED_FLOWER;
+        return FlowerBlock::Flower::YELLOW_FLOWER;
+    return FlowerBlock::Flower::RED_FLOWER;
 }
 
 unsigned int Biome::getSkyColor(float timeOfDay) {

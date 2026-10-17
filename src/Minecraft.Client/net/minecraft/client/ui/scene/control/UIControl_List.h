@@ -16,6 +16,11 @@ public:
     UIControl_List();
     ~UIControl_List();
 
+    bool setupControl(UIScene*, fuiRenderNode*, const std::string&) override;
+    void UpdateControl() override;
+    void tick() override;
+    void ReInit() override;
+
     void addElement(eUIControlType, int);
     void init(int);
     void setCurrentSelection(int, bool, bool);

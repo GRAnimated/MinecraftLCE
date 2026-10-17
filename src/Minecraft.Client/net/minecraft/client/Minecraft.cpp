@@ -325,7 +325,7 @@ int Minecraft::getAverageFps() {
 }
 
 bool Minecraft::isUsingDefaultSkin() {
-    return GetInstance()->m_texturePackRepository->getSelected();
+    return GetInstance()->m_texturePackRepository->isUsingDefault();
 }
 
 bool Minecraft::isTutorial() {

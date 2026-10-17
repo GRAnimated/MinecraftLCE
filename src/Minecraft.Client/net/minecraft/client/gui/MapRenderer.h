@@ -1,5 +1,7 @@
 #pragma once
 
+#include <memory>
+
 #include "net/minecraft/world/ArrayWithLength.h"
 #include <string>
 #include <unordered_map>

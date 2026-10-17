@@ -11,7 +11,7 @@ std::shared_ptr<Packet> ClientboundLevelEventPacket::create() {
 ClientboundLevelEventPacket::ClientboundLevelEventPacket() {
     m_type = 0;
     m_data = 0;
-    m_pos = BlockPos::BlockPos();
+    m_pos = BlockPos();
 }
 
 int ClientboundLevelEventPacket::getEstimatedSize() {
