@@ -4,6 +4,7 @@
 
 #include "net/minecraft/core/BlockPos.h"
 #include "net/minecraft/core/System.h"
+#include "net/minecraft/util/datafix/DataFixerUpper.h"
 #include "net/minecraft/world/Difficulty.h"
 #include "net/minecraft/world/level/LevelType.h"
 
@@ -68,7 +69,7 @@ CompoundTag* LevelData::createTag(std::vector<std::shared_ptr<Player>>*) {
 }
 
 void LevelData::setTagData(CompoundTag* out) {
-    out->putInt(sLevelDataVersionString, 922);  // why is DataVersion it's own static shit wtf
+    out->putInt(DataFixerUpper::DATA_VERSION_KEY, 922);
     out->putLong(L"RandomSeed", this->m_seed);
     out->putString(L"generatorName", this->m_levelType->getGeneratorName());
     out->putInt(L"generatorVersion", this->m_levelType->getVersion());

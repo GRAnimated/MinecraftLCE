@@ -1,5 +1,14 @@
 #include "net/minecraft/world/stats/GenericStats.h"
 
+#include "net/minecraft/world/item/ItemInstance.h"
+
+arrayWithLength<unsigned char> GenericStats::param_itemsUsed(std::shared_ptr<Player> player,
+                                                             not_null_ptr<ItemInstance> item) {
+    if (!player || item->isEmpty())
+        return sInstance->getParam_noArgs();
+    return sInstance->getParam_itemsUsed(player, item);
+}
+
 Stat* GenericStats::get_achievement(eAward) {
     return nullptr;
 }
@@ -192,7 +201,7 @@ arrayWithLength<unsigned char> GenericStats::getParam_climbOneM(int) {
     return getParam_noArgs();
 }
 
-arrayWithLength<unsigned char> GenericStats::getParam_inecartOneM(int) {
+arrayWithLength<unsigned char> GenericStats::getParam_minecartOneM(int) {
     return getParam_noArgs();
 }
 
@@ -237,8 +246,8 @@ arrayWithLength<unsigned char> GenericStats::getParam_itemsBought(int, int, int)
     return getParam_noArgs();
 }
 
-arrayWithLength<unsigned char> GenericStats::getParam_obKill(std::shared_ptr<Player>, std::shared_ptr<Mob>,
-                                                             DamageSource*) {
+arrayWithLength<unsigned char> GenericStats::getParam_mobKill(std::shared_ptr<Player>, std::shared_ptr<Mob>,
+                                                              DamageSource*) {
     return getParam_noArgs();
 }
 
@@ -294,7 +303,7 @@ arrayWithLength<unsigned char> GenericStats::getParam_chestfulOfCobblestone(int)
     return getParam_achievement(eAward_CHESTFUL_OF_COBBLESTONE);
 }
 
-arrayWithLength<unsigned char> GenericStats::getParam_usicToMyEars(int) {
+arrayWithLength<unsigned char> GenericStats::getParam_musicToMyEars(int) {
     return getParam_achievement(eAward_MUSIC_TO_MY_EARS);
 }
 
@@ -366,7 +375,7 @@ arrayWithLength<unsigned char> GenericStats::getParam_youWontLikeMeWhenImHungry(
     return getParam_achievement(eAward_YOU_WONT_LIKE_ME_WHEN_IM_HUNGRY);
 }
 
-arrayWithLength<unsigned char> GenericStats::getParam_ine() {
+arrayWithLength<unsigned char> GenericStats::getParam_mine() {
     return getParam_achievement(eAward_MINE);
 }
 
@@ -382,7 +391,7 @@ arrayWithLength<unsigned char> GenericStats::getParam_beamMeUp(int) {
     return getParam_achievement(eAward_BEAM_ME_UP);
 }
 
-arrayWithLength<unsigned char> GenericStats::getParam_apRoom(int) {
+arrayWithLength<unsigned char> GenericStats::getParam_mapRoom(int) {
     return getParam_achievement(eAward_MAP_ROOM);
 }
 
@@ -738,7 +747,7 @@ arrayWithLength<unsigned char> GenericStats::param_buildHoe() {
     return sInstance->getParam_achievement(eAward_BUILD_HOE);
 }
 
-arrayWithLength<unsigned char> GenericStats::param_akeBread() {
+arrayWithLength<unsigned char> GenericStats::param_makeBread() {
     return sInstance->getParam_achievement(eAward_MAKE_BREAD);
 }
 
@@ -830,7 +839,7 @@ arrayWithLength<unsigned char> GenericStats::param_deadshot() {
     return sInstance->getParam_achievement(eAward_DEADSHOT);
 }
 
-arrayWithLength<unsigned char> GenericStats::param_ountainTop() {
+arrayWithLength<unsigned char> GenericStats::param_mountainTop() {
     return sInstance->getParam_achievement(eAward_MOUNTAIN_TOP);
 }
 

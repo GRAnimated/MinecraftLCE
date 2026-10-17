@@ -59,6 +59,7 @@ public:
     static int sEntityAmount;
     static int sTlsIndex;
     static double sViewScale;
+    static const float sDegreesToRadians;
 
     static void staticCtor();
     static int getSmallId();
@@ -294,6 +295,9 @@ public:
 
     Vec3* getPos(float);
     bool isType(eINSTANCEOF);
+    void setRot(float, float);
+    void interpolateTurn(float, float);
+    bool getSharedFlag(int);
     void setSharedFlag(int, bool);
     Vec3* calculateViewVector(float, float);
     int getId();

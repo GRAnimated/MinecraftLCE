@@ -5,6 +5,7 @@
 #include "net/minecraft/core/BlockPos.h"
 #include "net/minecraft/core/BlockPosIterator.h"
 #include "net/minecraft/core/Direction.h"
+#include "net/minecraft/world/item/ItemResolvers.h"
 #include "net/minecraft/world/level/Level.h"
 #include "net/minecraft/world/level/block/LeafBlock.h"
 #include "net/minecraft/world/level/block/Rotation.h"
@@ -75,7 +76,7 @@ const BlockState* LogBlock::getStateForPlacement(Level*, const BlockPos&, const 
 
 unsigned int LogBlock::getDescriptionId(int data) {
     const BlockState* state = data == -1 ? this->defaultBlockState() : this->getBlockState(data);
-    return LogBlock::DESCRIPTION_IDS[this->getWoodType(state)];
+    return ItemResolvers::LOG_NAMES[this->getWoodType(state)];
 }
 
 void LogBlock::registerIcons(IconRegister* iconReg) {

@@ -32,7 +32,7 @@ int Random::nextInt(int a1) {
     // ghidra gave 10x better decompilation
     // except for the return statement here
     if ((a1 & -a1) == a1)
-        return (static_cast<long>(this->next(31)) * a1) >> 31;
+        return (static_cast<RandomLong>(this->next(31)) * a1) >> 31;
 
     do {
         v5 = this->next(31);
@@ -43,11 +43,11 @@ int Random::nextInt(int a1) {
 }
 
 float Random::nextFloat() {
-    return this->next(24) * (float)0x33800000;
+    return this->next(24) * 5.960464477539063e-8f;
 }
 
 double Random::nextDouble() {
-    return ((static_cast<long>(this->next(26)) << 27) + this->next(27)) * 1.11022302e-16;
+    return ((static_cast<RandomLong>(this->next(26)) << 27) + this->next(27)) * 1.1102230246251565e-16;
 }
 
 int Random::nextInt() {
@@ -59,8 +59,8 @@ void Random::setSeed(long long seed) {
     m_field8 = false;
 }
 
-long Random::nextLong() {
-    return (static_cast<long>(this->next(32)) << 32) + this->next(32);
+RandomLong Random::nextLong() {
+    return (static_cast<RandomLong>(this->next(32)) << 32) + this->next(32);
 }
 
 bool Random::nextBoolean() {

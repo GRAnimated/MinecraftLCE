@@ -27,6 +27,7 @@ public:
         }
 
         int getData() { return this->m_data; }
+        int getNameId() { return this->m_nameId; }
 
         std::wstring toString() const override { return this->m_name; }
         std::wstring getSerializedName() const override { return this->m_name; }

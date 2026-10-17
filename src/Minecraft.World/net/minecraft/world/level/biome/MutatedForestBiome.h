@@ -1,10 +1,10 @@
 #pragma once
 
-#include "net/minecraft/world/level/biome/Biome.h"
+#include "net/minecraft/world/level/biome/ForestBiome.h"
 
-class MutatedForestBiome : public Biome {
+class MutatedForestBiome : public ForestBiome {
 public:
     MutatedForestBiome(EBiomeIDs id, BiomeProperties* properties);
 
-    int getBaseClass() override;
+    Feature* getTreeFeature(Random&) override;
 };

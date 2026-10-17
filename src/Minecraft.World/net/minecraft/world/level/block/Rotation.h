@@ -9,6 +9,9 @@ class Rotation {
 public:
     enum eTYPE { ROTATE_0, ROTATE_90, ROTATE_180, ROTATE_270 };
 
+    static Rotation* NONE;
+    static Rotation* CLOCKWISE_90;
+
     Rotation(const std::wstring& name, eTYPE type);
 
     Rotation* getRotated(Rotation* rot);

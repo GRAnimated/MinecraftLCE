@@ -6,6 +6,7 @@
 #include "types.h"
 
 class CoalItem : public Item {
+public:
     CoalItem();
 
     unsigned int getDescriptionId(not_null_ptr<ItemInstance> itemInstance) override;

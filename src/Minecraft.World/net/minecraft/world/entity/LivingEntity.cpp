@@ -34,6 +34,71 @@
 eINSTANCEOF LivingEntity::GetType() {
     return eLivingEntity;
 }
+
+int LivingEntity::getUseItemRemainingTicks() {
+    return m_useItemRemaining;
+}
+
+void LivingEntity::jumpInWater() {
+    m_deltaMovementY += 0.04f;
+}
+
+void LivingEntity::jumpInLava() {
+    m_deltaMovementY += 0.04f;
+}
+
+float LivingEntity::getWaterSlowDown() {
+    return 0.8f;
+}
+
+float LivingEntity::getSpeed() {
+    return m_speed;
+}
+
+void LivingEntity::setSpeed(float speed) {
+    m_speed = speed;
+}
+
+void LivingEntity::setJumping(bool jumping) {
+    m_isJumping = jumping;
+}
+
+void LivingEntity::lerpTo(double x, double y, double z, float yRot, float xRot, int steps, bool) {
+    m_lerpX = x;
+    m_lerpY = y;
+    m_lerpZ = z;
+    m_lerpYRot = yRot;
+    m_lerpXRot = xRot;
+    m_lerpSteps = steps;
+}
+
+Vec3* LivingEntity::getViewVector(float partialTicks) {
+    if (partialTicks == 1.0f)
+        return calculateViewVector(m_xRot, m_yHeadRot);
+    return calculateViewVector(m_xRotO + (m_xRot - m_xRotO) * partialTicks,
+                               m_yHeadRotO + (m_yHeadRot - m_yHeadRotO) * partialTicks);
+}
+
+bool LivingEntity::isEffectiveAi() {
+    return !m_level->m_isLocal;
+}
+
+void LivingEntity::setYHeadRot(float yRot) {
+    m_yHeadRot = yRot;
+}
+
+void LivingEntity::setYBodyRot(float yRot) {
+    m_yBodyRot = yRot;
+}
+
+void LivingEntity::stopCurrentLerp() {
+    Entity::stopCurrentLerp();
+    m_yBodyRotO = m_yBodyRot;
+    m_animationSpeedOld = 0.0f;
+    m_animationSpeed = 0.0f;
+    m_yHeadRotO = m_yHeadRot;
+}
+
 void LivingEntity::setBoundingBox(AABB* box) {
     const int newMinX = Mth::floor(box->m_inX);
     const int newMaxX = Mth::floor(box->m_axX);
