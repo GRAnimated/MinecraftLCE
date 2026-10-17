@@ -31,7 +31,7 @@ bool FloatTag::equals(Tag* other) {
     return Tag::equals(other) && m_data == otherCasted->m_data;
 }
 
-long FloatTag::getAsLong() {
+JavaLong FloatTag::getAsLong() {
     return m_data;
 }
 

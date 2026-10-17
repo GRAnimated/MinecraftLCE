@@ -1,10 +1,4 @@
 #pragma once
 
-class IntCache {
-public:
-    static void CreateNewThreadStorage();
-
-    class ThreadStorage {};
-
-    static void Reset();
-};
+// Both historical include paths refer to the biome-layer cache.
+#include "net/minecraft/world/level/newbiome/layer/IntCache.h"

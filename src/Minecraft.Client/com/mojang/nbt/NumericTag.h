@@ -1,12 +1,13 @@
 #pragma once
 
 #include "com/mojang/nbt/Tag.h"
+#include "java/io/JavaLong.h"
 
 class NumericTag : public Tag {
 public:
     NumericTag();
 
-    virtual long getAsLong() = 0;
+    virtual JavaLong getAsLong() = 0;
     virtual int getAsInt() = 0;
     virtual short getAsShort() = 0;
     virtual u8 getAsByte() = 0;

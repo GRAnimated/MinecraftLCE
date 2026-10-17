@@ -1,6 +1,7 @@
 #pragma once
 
 #include "net/minecraft/core/StringRepresentable.h"
+#include "net/minecraft/world/ArrayWithLength.h"
 #include "net/minecraft/world/level/block/state/properties/AbstractProperty.h"
 #include <string>
 #include <unordered_map>
@@ -20,6 +21,7 @@ public:
         bool apply(const Direction*) const override;
 
         const Direction* getRandomDirection(Random&);
+        arrayWithLength<const Direction*> iterator();
     };
     class AxisDirection {
     public:
@@ -44,6 +46,11 @@ public:
 
         std::wstring toString() const override;
         std::wstring getSerializedName() const override;
+
+    private:
+        std::wstring m_name;
+        Plane* m_plane;
+        int m_id;
     };
 
     static const Direction* DOWN;
@@ -62,6 +69,7 @@ public:
     static void staticCtor();
 
     static const Direction* from3DDataValue(int value);
+    static const Direction* from2DDataValue(int value);
 
     Direction(int, int, int, const std::wstring&, Direction::AxisDirection*, Direction::Axis*, Vec3i*,
               unsigned char);
@@ -75,6 +83,8 @@ public:
     int get2DDataValue() const;
 
     Axis* getAxis() const;
+    Vec3i getNormal() const;
+    AxisDirection* getAxisDirection() const;
 
     std::wstring getName() const;
 
@@ -93,3 +103,6 @@ private:
     int m_y;
     int m_z;
 };
+
+static_assert(sizeof(Direction::Axis) == 0x38, "Direction::Axis Switch layout");
+static_assert(sizeof(Direction) == 0x58, "Direction Switch layout");

@@ -1,13 +1,58 @@
 #include "com/mojang/nbt/ListTag.h"
 
+#include "com/mojang/nbt/CompoundTag.h"
+
 #include "java/io/DataInput.h"
 #include "java/io/DataOutput.h"
 
 #include <ostream>
 
-ListTag::ListTag() {}
+ListTag::ListTag() : m_tagId(TAG_End) {}
 
 ListTag::ListTag(int id) : m_tagId(id) {}
+
+ListTag::~ListTag() {
+    for (Tag* tag : m_data)
+        delete tag;
+}
+
+void ListTag::add(Tag* tag) {
+    if (tag->getId() == TAG_End)
+        return;
+    u8 id = tag->getId();
+    if (m_tagId != TAG_End && m_tagId != id) {
+        if (!m_data.empty())
+            return;
+        id = tag->getId();
+    }
+    m_tagId = id;
+    m_data.push_back(tag);
+}
+
+size_t ListTag::size() const {
+    return m_data.size();
+}
+
+CompoundTag* ListTag::getCompound(int index) const {
+    if (index >= 0 && static_cast<size_t>(index) < m_data.size() && m_data[index]->getId() == TAG_Compound)
+        return static_cast<CompoundTag*>(m_data[index]);
+    return new CompoundTag();
+}
+
+bool ListTag::isEmpty() const {
+    return m_data.empty();
+}
+
+void ListTag::stripEmptyChildren() {
+    for (auto it = m_data.begin(); it != m_data.end();) {
+        if ((*it)->isEmpty()) {
+            delete *it;
+            it = m_data.erase(it);
+        } else {
+            ++it;
+        }
+    }
+}
 
 void ListTag::write(DataOutput* outputStream) {
     if (m_data.empty()) {

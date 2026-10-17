@@ -13,6 +13,7 @@ public:
     ResourceLocation();
     ResourceLocation(const std::wstring&);
     ResourceLocation(const ResourceLocation&);
+    ResourceLocation& operator=(const ResourceLocation&);
     ~ResourceLocation();
 
     bool operator==(const ResourceLocation* other) const;
@@ -22,6 +23,7 @@ public:
 
     const std::wstring& getNamespace() const;
     const std::wstring& getPath() const;
+    std::int64_t hashCode() const;
 
     virtual std::wstring toString() const;
 
@@ -31,10 +33,15 @@ public:
     char m_byte48;
 };
 
-// this is actually ResourceLocation::hashCode
+template <>
+struct std::equal_to<ResourceLocation> {
+    bool operator()(const ResourceLocation& lhs, const ResourceLocation& rhs) const {
+        return lhs.operator==(&rhs);
+    }
+};
+
+// Uses the original LCE resource-key hash.
 template <>
 struct std::hash<ResourceLocation> {
-    std::size_t operator()(const ResourceLocation& rl) const {
-        return std::hash<std::wstring>()(rl.getPath()) ^ (std::hash<std::wstring>()(rl.getNamespace()) << 1);
-    }
+    std::size_t operator()(const ResourceLocation& rl) const { return rl.hashCode(); }
 };

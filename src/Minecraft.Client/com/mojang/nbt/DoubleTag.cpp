@@ -32,7 +32,7 @@ bool DoubleTag::equals(Tag* other) {
     return Tag::equals(other) && m_data == otherCasted->m_data;
 }
 
-long DoubleTag::getAsLong() {
+JavaLong DoubleTag::getAsLong() {
     return floor(m_data);
 }
 

@@ -96,7 +96,7 @@ void fui::render(fuiFile* file, float a1, float a2, float a3, float a4, float a5
 }
 
 void fui::dispatchKeyboardEvent(fuiFile* file, bool state, int c) {
-    FJ_FuiNode* node = file->m_data.m_fuiSymbol->m_stage;  // ???
+    FJ_FuiNode* node = file->m_renderNodeStage->m_fuiNodeStage;
 
     if (FJ_FuiNode* focus = static_cast<FJ_FuiNodeStage*>(node)->getFocus())
         node = focus;
@@ -106,7 +106,7 @@ void fui::dispatchKeyboardEvent(fuiFile* file, bool state, int c) {
 
 // param names guessed
 void fui::dispatchMouseMoveEvent(fuiFile* file, float x, float y) {
-    FJ_FuiNode* node = file->m_data.m_fuiSymbol->m_stage;
+    FJ_FuiNode* node = file->m_renderNodeStage->m_fuiNodeStage;
 
     if (FJ_FuiNode* focus = static_cast<FJ_FuiNodeStage*>(node)->getFocus())
         node = focus;

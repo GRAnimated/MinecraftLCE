@@ -30,7 +30,7 @@ bool IntTag::equals(Tag* other) {
     return Tag::equals(other) && m_data == otherCasted->m_data;
 }
 
-long IntTag::getAsLong() {
+JavaLong IntTag::getAsLong() {
     return m_data;
 }
 
