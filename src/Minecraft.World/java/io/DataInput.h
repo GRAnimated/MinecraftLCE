@@ -1,5 +1,7 @@
 #pragma once
 
+#include "java/io/JavaLong.h"
+
 #include "net/minecraft/world/ArrayWithLength.h"
 #include "net/minecraft/world/PlayerUID.h"
 
@@ -12,13 +14,13 @@ public:
     virtual int readUnsignedShort() = 0;
     virtual wchar_t readChar() = 0;
     // is this correct? i swapped the two readFully methods for a match in ByteArrayTag::load
-    virtual void readFully(arrayWithLength<char>) = 0;
-    virtual void readFully(arrayWithLength<unsigned char>) = 0;
-    virtual void readBytes(arrayWithLength<unsigned char>) = 0;
+    virtual bool readFully(arrayWithLength<char>) = 0;
+    virtual bool readFully(arrayWithLength<unsigned char>) = 0;
+    virtual bool readBytes(arrayWithLength<unsigned char>) = 0;
     virtual double readDouble() = 0;
     virtual float readFloat() = 0;
     virtual int readInt() = 0;
-    virtual long readLong() = 0;
+    virtual JavaLong readLong() = 0;
     virtual short readShort() = 0;
     virtual std::wstring readUTF() = 0;
     virtual int readUTFChar() = 0;

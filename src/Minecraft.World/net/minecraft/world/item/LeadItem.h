@@ -4,5 +4,7 @@
 
 class LeadItem : public Item {
 public:
+    LeadItem();
+    ~LeadItem() override;
     static bool bindPlayerMobsTest(std::shared_ptr<Player> player, Level* level, const BlockPos& pos);
 };

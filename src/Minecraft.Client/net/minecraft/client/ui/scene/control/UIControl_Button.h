@@ -20,3 +20,5 @@ public:
     bool m_couldBeEnabled = 0;
     bool m_enabled;
 };
+
+static_assert(sizeof(UIControl_Button) == 0x70, "UIControl_Button Switch layout");

@@ -6,7 +6,10 @@
 
 class FlowerBlock : public Bush, public BonemealableBlock {
 public:
-    class FlowerCategory;
+    class FlowerCategory {
+    public:
+        FlowerBlock* getBlock();
+    };
     class FlowerCategoryPredicate;
     class Flower {
     public:
@@ -14,6 +17,14 @@ public:
         static Flower* RED_FLOWER;
         static Flower* RED_MUSHROOM;
         static Flower* BROWN_MUSHROOM;
+        static Flower* OXEYE_DAISY;
+        static Flower* BLUE_ORCHID;
+        static Flower* HOUSTONIA;
+        static Flower* RED_TULIP;
+        static Flower* ORANGE_TULIP;
+        static Flower* WHITE_TULIP;
+        static Flower* PINK_TULIP;
+        static Flower* FLOWERS[10];
 
         enum EFlower {};
 
@@ -21,9 +32,18 @@ public:
                FlowerBlock::Flower::EFlower);
 
         void* m_field0;
+        FlowerCategory* getCategory() const;
+        int getData();
+        int getNameId();
+        int getDescriptionId();
+
         int m_field8;
+        int m_field12;
+        int m_data;
     };
 
     virtual FlowerBlock::FlowerCategory* getFlowerCategory() = 0;
-    virtual void getFlowerProperty();
+    virtual Property* getFlowerProperty();
+
+    Property* m_flowerProperty;
 };

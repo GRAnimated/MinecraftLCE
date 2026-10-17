@@ -8,5 +8,5 @@ public:
     UIControl_ButtonList();
 
     void addItem(const std::wstring&, int);
-    bool setupControl(UIScene*, fuiRenderNode*, const std::string&);
+    bool setupControl(UIScene*, fuiRenderNode*, const std::string&) override;
 };

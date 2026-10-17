@@ -1,6 +1,7 @@
 #include "net/minecraft/client/ui/scene/control/UIControl.h"
 
 #include "fui/fuiRenderNode.h"
+#include "fui/node/FJ_FuiNodeStage.h"
 
 UIControl::UIControl() {
     this->m_parentUiScene = nullptr;
@@ -11,6 +12,8 @@ UIControl::UIControl() {
     this->m_settedUp = 0;
     this->m_fuiRenderNode = nullptr;
 }
+
+UIControl::~UIControl() {}
 
 bool UIControl::setupControl(UIScene* parentUIScene, fuiRenderNode* renderNode, const std::string& name) {
     this->m_parentUiScene = parentUIScene;
@@ -49,4 +52,53 @@ void UIControl::setFocus(bool) {}
 
 bool UIControl::hasFocus() {
     return false;
+}
+
+fuiRenderNode* UIControl::getFuiRenderNode() {
+    return m_fuiRenderNode;
+}
+
+float UIControl::getXPos() {
+    return m_posX;
+}
+
+float UIControl::getYPos() {
+    return m_posY;
+}
+
+float UIControl::getWidth() {
+    return m_width;
+}
+
+float UIControl::getHeight() {
+    return m_height;
+}
+
+void UIControl::setWidth(float width) {
+    if (m_fuiRenderNode) {
+        m_fuiRenderNode->setWidth(width);
+        m_width = width;
+    }
+}
+
+void UIControl::setVisible(bool visible) {
+    if (m_fuiRenderNode) {
+        if (m_fuiRenderNode->m_fuiNodeStage)
+            m_fuiRenderNode->m_fuiNodeStage->setVisible(visible);
+        else
+            m_fuiRenderNode->setVisibility(visible);
+        m_visible = visible;
+    }
+}
+
+bool UIControl::getVisible() {
+    bool visible = false;
+    if (m_fuiRenderNode)
+        visible = m_fuiRenderNode->isVisible();
+    m_visible = visible;
+    return visible;
+}
+
+void UIControl::removeUINodeRef() {
+    m_fuiRenderNode = nullptr;
 }

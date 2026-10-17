@@ -4,5 +4,9 @@
 
 class UIControl_Cursor : public UIControl_Base {
 public:
-    bool setupControl(UIScene*, fuiRenderNode*, const std::string&);
+    UIControl_Cursor();
+
+    bool setupControl(UIScene*, fuiRenderNode*, const std::string&) override;
 };
+
+static_assert(sizeof(UIControl_Cursor) == 0x68, "UIControl_Cursor Switch layout");

@@ -8,10 +8,17 @@ class UIScene_MainMenu : public UIScene {
 public:
     UIScene_MainMenu(int a1, void* a2, UILayer* layer);
 
+    ~UIScene_MainMenu() override;
+    std::wstring getMoviePath() override;
+    EUIScene getSceneType() override;
+
     bool mapElementsAndNames() override;
     void handleUnlockFullVersion() override;
     void customDraw(const char*, fuiRect*) override;
     void handleInput(int, int, bool, bool, bool, bool&) override;
+    void handlePress(int, int) override;
+    void handleGainFocus(bool) override;
+    void updateTooltips() override;
     bool hasFocus(int) override;
     void handleReload() override;
     void updateComponents() override;

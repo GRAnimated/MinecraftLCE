@@ -33,3 +33,13 @@ void UIControl_Button::setFocus(bool focus) {
         this->m_fuiRenderNode->m_fuiNodeStage->asFJ_Button()->ChangeState(focus ? 1 : 2);
     }
 }
+
+void UIControl_Button::setEnable(bool enabled, bool updateNow) {
+    if (enabled != m_enabled) {
+        m_enabled = enabled;
+        if (updateNow)
+            m_fuiRenderNode->m_fuiNodeStage->asFJ_Button()->EnableButton(enabled);
+        else
+            m_couldBeEnabled = true;
+    }
+}

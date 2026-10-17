@@ -10,6 +10,9 @@ public:
     void init(UIString);
 
     bool setupControl(UIScene*, fuiRenderNode*, const std::string&) override;
+    void ReInit() override;
 
     bool m_byte68;
 };
+
+static_assert(sizeof(UIControl_Label) == 0x70, "UIControl_Label Switch layout");

@@ -13,6 +13,7 @@ public:
     int read(arrayWithLength<unsigned char>) override;
     int read(arrayWithLength<unsigned char>, unsigned int, unsigned int) override;
     void close() override;
+    void reset();
     long long skip(long long) override;
 
     arrayWithLength<unsigned char> m_buffer;

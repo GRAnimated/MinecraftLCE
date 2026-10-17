@@ -1,5 +1,7 @@
 #pragma once
 
+#include <vector>
+
 enum eTutorial_GameMode {};
 enum eTutorial_State {};
 
@@ -8,6 +10,7 @@ class UIScene;
 class Tutorial {
 public:
     static void staticCtor();
+    static std::vector<int> STATE_ORDER;
 
     void showTutorialPopup(bool);
 

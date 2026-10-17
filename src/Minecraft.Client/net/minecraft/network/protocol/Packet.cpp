@@ -122,37 +122,7 @@
 #import "game/VotePacket.h"
 #import "game/XZPacket.h"
 
-#include "net/minecraft/core/System.h"
-
 #include <sstream>
-
-Packet::Packet() {
-    m_createdTime = System::processTimeInMilliSecs();
-    m_shouldDelay = false;
-}
-
-void Packet::handle(PacketListener* listener) {}
-
-int Packet::getEstimatedSize() {
-    return 8;
-}
-
-bool Packet::canBeInvalidated() {
-    return false;
-}
-
-bool Packet::isInvalidatedBy(std::shared_ptr<Packet> packet) {
-    return false;
-}
-
-// amazing
-bool Packet::isAync() {
-    return false;
-}
-
-bool Packet::tryReplaceDuplicatePacket(std::deque<std::shared_ptr<Packet>>* duplicatePacket) {
-    return false;
-}
 
 std::wstring Packet::readUtf(DataInputStream* in, int maxLength) {
     short length = in->readShort();

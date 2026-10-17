@@ -4,5 +4,6 @@
 
 class ChorusFlowerBlock : public Block {
 public:
+    static void generatePlant(Level*, BlockPos, Random*, int);
     ChorusFlowerBlock();
 };

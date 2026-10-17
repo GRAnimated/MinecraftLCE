@@ -124,8 +124,11 @@ int StbiFile::read(void* user, char* data, int size) {
     return dataRead;
 }
 
-// this one requires nn sdk symbol which I wont't bother to get
-// void StbiFile::skip(void* user, int n) {}
+void StbiFile::skip(void* user, int n) {
+    StbiFile* file = StbiFile::fromUser(user);
+    SetFilePointer(file->m_fileHandle, n, nullptr, 1);
+    StbiFile::fromUser(user)->m_dataRead += n;
+}
 
 // NON_MATCHING: some weird stuff is going on here, but logic should be the same though
 int StbiFile::eof(void* user) {

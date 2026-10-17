@@ -9,4 +9,5 @@ public:
     void getRenderDimension(int& width, int& height);
     void showComponent(int, EUIScene, bool);
     void addComponent(int, EUIScene, void*);
+    void removeComponent(EUIScene);
 };

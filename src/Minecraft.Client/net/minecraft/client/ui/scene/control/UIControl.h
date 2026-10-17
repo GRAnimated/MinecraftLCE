@@ -27,8 +27,11 @@ public:
     fuiRenderNode* getFuiRenderNode();
     void setSettedUp(int val) { this->m_settedUp = val; }
     void setVisible(bool);
+    bool getVisible();
+    void removeUINodeRef();
     float getWidth();
     float getHeight();
+    void setWidth(float);
     float getXPos();
     float getYPos();
 
@@ -47,3 +50,5 @@ public:
     bool m_visible;
     bool m_boolIdk2;
 };
+
+static_assert(sizeof(UIControl) == 0x58, "UIControl Switch layout");

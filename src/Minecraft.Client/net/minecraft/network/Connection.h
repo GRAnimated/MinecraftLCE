@@ -32,7 +32,7 @@ public:
     static int runWrite(void*);
     void setListener(PacketListener*);
     void send(std::shared_ptr<Packet>);
-    void queueSend(std::__1::shared_ptr<Packet>);
+    void queueSend(std::shared_ptr<Packet>);
     bool writeTick();
     void flush();
     bool readTick();
