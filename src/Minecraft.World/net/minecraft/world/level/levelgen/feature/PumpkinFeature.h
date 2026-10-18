@@ -4,7 +4,7 @@
 
 class PumpkinFeature : public Feature {
 public:
-    PumpkinFeature();
+    PumpkinFeature() = default;
 
     bool place(Level* level, Random& random, const BlockPos& pos) override;
 };

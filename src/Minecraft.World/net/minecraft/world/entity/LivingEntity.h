@@ -93,7 +93,7 @@ public:
     virtual void onEffectUpdated(MobEffectInstance*, bool);
     virtual void onEffectRemoved(MobEffectInstance*);
     virtual void heal(float);
-    virtual void getHealth();
+    virtual float getHealth();
     virtual void setHealth(float);
     virtual void getLastDamageSource();
     virtual void blockUsingShield(const std::shared_ptr<LivingEntity>&);
@@ -119,7 +119,7 @@ public:
     virtual void actuallyHurt(DamageSource, float);
     virtual void getCombatTracker();
     virtual void getKillCredit();
-    virtual void getMaxHealth();
+    virtual float getMaxHealth();
     virtual void getArrowCount();
     virtual void setArrowCount(int);
     virtual void swing(InteractionHand::EInteractionHand);

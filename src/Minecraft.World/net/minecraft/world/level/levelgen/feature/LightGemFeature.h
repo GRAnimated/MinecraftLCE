@@ -6,7 +6,7 @@ class Block;
 
 class LightGemFeature : public Feature {
 public:
-    LightGemFeature();
+    LightGemFeature() = default;
 
     bool place(Level* level, Random& random, const BlockPos& pos) override;
 };

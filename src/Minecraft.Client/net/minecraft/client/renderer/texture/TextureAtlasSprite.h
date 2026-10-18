@@ -33,5 +33,16 @@ public:
     void adjustUV(float&, float&);
     void initUVs(float u0, float v0, float u1, float v1);
 
-    char m_filler[0x90 - 8];
+    char m_filler[0x60 - 8];
+    int m_x;
+    int m_y;
+    int m_width;
+    int m_height;
+    float m_u0;
+    float m_u1;
+    float m_v0;
+    float m_v1;
+    char m_gap80[0x10];
 };
+
+static_assert(sizeof(TextureAtlasSprite) == 0x90, "TextureAtlasSprite size");
