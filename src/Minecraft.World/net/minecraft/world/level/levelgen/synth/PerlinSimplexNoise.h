@@ -3,7 +3,7 @@
 #include "net/minecraft/world/ArrayWithLength.h"
 #include "net/minecraft/world/level/levelgen/synth/Synth.h"
 
-class ImprovedNoise;
+class SimplexNoise;
 class Random;
 
 class PerlinSimplexNoise : public Synth {
@@ -14,7 +14,9 @@ public:
     void init(Random*, int);
     arrayWithLength<double> getRegion(arrayWithLength<double>, double, double, int, int, double, double,
                                       double);
+    arrayWithLength<double> getRegion(arrayWithLength<double>, double, double, int, int, double, double,
+                                      double, double);
 
-    ImprovedNoise** m_noiseLevels;
+    SimplexNoise** m_noiseLevels;
     int m_maxOctaves;
 };

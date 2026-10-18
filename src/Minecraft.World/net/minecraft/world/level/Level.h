@@ -149,6 +149,7 @@ public:
     ChunkSource* getChunkSource();
     long long getSeed();
     int getSeaLevel();
+    bool setBlockAndData(int x, int y, int z, int id, int data, int flags);
     void setSeaLevel(int);
     static void enableLightingCache();
     void setSpawnPos(const BlockPos&);
@@ -173,6 +174,7 @@ public:
     int getRawBrightness(const BlockPos&, bool);
     int getHeightmapHeight(int, int);
     int getHeightmap(int, int);
+    bool isSolidBlockingBlockInLoadedChunk(const BlockPos&, bool defaultValue);
     bool isWithinLevelBounds(int, int);
     int getBrightnessPropagate(LightLayer::variety, const BlockPos&);
     long getGameTime();
@@ -200,9 +202,13 @@ public:
     bool hasChunksAt(const BlockPos&, const BlockPos&);
     int getAuxValueForMap(PlayerUID, int, int, int, int);
     std::shared_ptr<SavedData> getSavedData(const std::type_info&, const std::wstring&);
+    LevelStorage* getLevelStorage();
     void setSavedData(const std::wstring&, std::shared_ptr<SavedData>);
     std::vector<std::shared_ptr<Entity>>* getEntitiesOfClass(const std::type_info&, AABB const*);
     bool shouldFreezeIgnoreNeighbors(const BlockPos&);
+    bool shouldFreeze(const BlockPos&, bool checkNeighbors);
+    bool shouldFreezeWithNeighbors(const BlockPos&);
+    bool isWaterAt(const BlockPos&);
     bool shouldSnow(const BlockPos&, bool);
     bool isFindingSpawn();
     unsigned int countInstanceOf(eINSTANCEOF, bool, unsigned int*, unsigned int*);

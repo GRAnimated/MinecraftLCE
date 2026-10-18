@@ -12,41 +12,41 @@ BiomeInitLayer::BiomeInitLayer(long long seed, std::shared_ptr<Layer> parent, Le
     m_parent = parent;
     if (levelType == LevelType::NORMAL_1_1) {
         m_warmBiomes = {6, true};
-        m_warmBiomes[0] = Biome::DESERT;
-        m_warmBiomes[1] = Biome::FOREST;
-        m_warmBiomes[2] = Biome::EXTREME_HILLS;
-        m_warmBiomes[3] = Biome::SWAMP;
-        m_warmBiomes[4] = Biome::PLAINS;
-        m_warmBiomes[5] = Biome::TAIGA;
+        m_warmBiomes.get(0) = Biome::DESERT;
+        m_warmBiomes.get(1) = Biome::FOREST;
+        m_warmBiomes.get(2) = Biome::EXTREME_HILLS;
+        m_warmBiomes.get(3) = Biome::SWAMP;
+        m_warmBiomes.get(4) = Biome::PLAINS;
+        m_warmBiomes.get(5) = Biome::TAIGA;
     } else {
         m_warmBiomes = {6, true};
-        m_warmBiomes[0] = Biome::DESERT;
-        m_warmBiomes[1] = Biome::DESERT;
-        m_warmBiomes[2] = Biome::DESERT;
-        m_warmBiomes[3] = Biome::SAVANNA;
-        m_warmBiomes[4] = Biome::SAVANNA;
-        m_warmBiomes[5] = Biome::PLAINS;
+        m_warmBiomes.get(0) = Biome::DESERT;
+        m_warmBiomes.get(1) = Biome::DESERT;
+        m_warmBiomes.get(2) = Biome::DESERT;
+        m_warmBiomes.get(3) = Biome::SAVANNA;
+        m_warmBiomes.get(4) = Biome::SAVANNA;
+        m_warmBiomes.get(5) = Biome::PLAINS;
     }
 
     m_mediumBiomes = {6, true};
-    m_mediumBiomes[0] = Biome::FOREST;
-    m_mediumBiomes[1] = Biome::ROOFED_FOREST;
-    m_mediumBiomes[2] = Biome::EXTREME_HILLS;
-    m_mediumBiomes[3] = Biome::PLAINS;
-    m_mediumBiomes[4] = Biome::BIRCH_FOREST;
-    m_mediumBiomes[5] = Biome::SWAMP;
+    m_mediumBiomes.get(0) = Biome::FOREST;
+    m_mediumBiomes.get(1) = Biome::ROOFED_FOREST;
+    m_mediumBiomes.get(2) = Biome::EXTREME_HILLS;
+    m_mediumBiomes.get(3) = Biome::PLAINS;
+    m_mediumBiomes.get(4) = Biome::BIRCH_FOREST;
+    m_mediumBiomes.get(5) = Biome::SWAMP;
 
     m_coldBiomes = {4, true};
-    m_coldBiomes[0] = Biome::FOREST;
-    m_coldBiomes[1] = Biome::EXTREME_HILLS;
-    m_coldBiomes[2] = Biome::TAIGA;
-    m_coldBiomes[3] = Biome::PLAINS;
+    m_coldBiomes.get(0) = Biome::FOREST;
+    m_coldBiomes.get(1) = Biome::EXTREME_HILLS;
+    m_coldBiomes.get(2) = Biome::TAIGA;
+    m_coldBiomes.get(3) = Biome::PLAINS;
 
     m_iceBiomes = {4, true};
-    m_iceBiomes[0] = Biome::ICE_PLAINS;
-    m_iceBiomes[1] = Biome::ICE_PLAINS;
-    m_iceBiomes[2] = Biome::ICE_PLAINS;
-    m_iceBiomes[3] = Biome::COLD_TAIGA;
+    m_iceBiomes.get(0) = Biome::ICE_PLAINS;
+    m_iceBiomes.get(1) = Biome::ICE_PLAINS;
+    m_iceBiomes.get(2) = Biome::ICE_PLAINS;
+    m_iceBiomes.get(3) = Biome::COLD_TAIGA;
 
     CustomizableSourceSettings* settings = nullptr;
     if (levelType != LevelType::NORMAL_1_1 && levelType == LevelType::CUSTOMIZED) {
@@ -83,22 +83,22 @@ arrayWithLength<int> BiomeInitLayer::getArea(int x, int y, int width, int height
                         area[n + m * width] = Biome::MESA_PLATEAU->m_biomeId;
                     }
                 } else {
-                    area[n + m * width] = m_warmBiomes[nextRandom(m_warmBiomes.m_length)]->m_biomeId;
+                    area[n + m * width] = m_warmBiomes.get(nextRandom(m_warmBiomes.m_length))->m_biomeId;
                 }
             } else if (o == 2) {
                 if (p > 0) {
                     area[n + m * width] = Biome::JUNGLE->m_biomeId;
                 } else {
-                    area[n + m * width] = m_mediumBiomes[nextRandom(m_mediumBiomes.m_length)]->m_biomeId;
+                    area[n + m * width] = m_mediumBiomes.get(nextRandom(m_mediumBiomes.m_length))->m_biomeId;
                 }
             } else if (o == 3) {
                 if (p > 0) {
                     area[n + m * width] = Biome::MEGA_TAIGA->m_biomeId;
                 } else {
-                    area[n + m * width] = m_coldBiomes[nextRandom(m_coldBiomes.m_length)]->m_biomeId;
+                    area[n + m * width] = m_coldBiomes.get(nextRandom(m_coldBiomes.m_length))->m_biomeId;
                 }
             } else if (o == 4) {
-                area[n + m * width] = m_iceBiomes[nextRandom(m_iceBiomes.m_length)]->m_biomeId;
+                area[n + m * width] = m_iceBiomes.get(nextRandom(m_iceBiomes.m_length))->m_biomeId;
             } else {
                 area[n + m * width] = Biome::MUSHROOM_ISLAND->m_biomeId;
             }

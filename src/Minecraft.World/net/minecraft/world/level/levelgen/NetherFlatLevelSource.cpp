@@ -172,8 +172,8 @@ bool NetherFlatLevelSource::postProcessLoadedChunk(LevelChunk* chunk, int x, int
     return false;
 }
 
-std::vector<Biome::MobSpawnerData>* NetherFlatLevelSource::getMobsAt(MobCategory* category,
-                                                                     const BlockPos& pos) {
+std::vector<Biome::MobSpawnerData*>* NetherFlatLevelSource::getMobsAt(MobCategory* category,
+                                                                      const BlockPos& pos) {
     Biome* biome = m_level->getBiome(pos);
     if (biome)
         return biome->getMobs(category);

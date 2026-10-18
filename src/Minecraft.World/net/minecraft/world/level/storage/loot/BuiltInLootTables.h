@@ -4,7 +4,7 @@ class ResourceLocation;
 
 class BuiltInLootTables {
 public:
-    static ResourceLocation* SPAWN_BONUS_CHEST;
+    static ResourceLocation SPAWN_BONUS_CHEST;
     static ResourceLocation* ABANDONED_MINESHAFT;
     static ResourceLocation* DESERT_PYRAMID;
     static ResourceLocation* DISPENSER_TRAP;
@@ -14,7 +14,7 @@ public:
     static ResourceLocation* JUNGLE_TEMPLE_DISPENSER;
     static ResourceLocation* MONSTER_ROOM;
     static ResourceLocation* NETHER_BRIDGE;
-    static ResourceLocation* SIMPLE_DUNGEON;
+    static ResourceLocation SIMPLE_DUNGEON;
     static ResourceLocation* STRONGHOLD_CORRIDOR;
     static ResourceLocation* STRONGHOLD_CROSSING;
     static ResourceLocation* STRONGHOLD_LIBRARY;

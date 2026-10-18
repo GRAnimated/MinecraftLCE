@@ -4,6 +4,7 @@
 #include <vector>
 
 #include "net/minecraft/world/WeighedRandomItem.h"
+#include "net/minecraft/world/level/block/FlowerBlock.h"
 #include "net/minecraft/world/level/material/MaterialColor.h"
 #include "net/minecraft/world/phys/Vec3.h"
 
@@ -16,9 +17,11 @@ class MobCategory;
 class BiomeDecorator;
 class Feature;
 class PerlinSimplexNoise;
+class DoublePlantFeature;
 
 class Biome {
 public:
+    static int getId(Biome*);
     static Biome* BIOMES[256];
 
     static Biome* OCEAN;
@@ -86,6 +89,8 @@ public:
     static Biome* DEFAULT;  // anything that gets a biome will fall back to this once nullptr is hit
 
     static PerlinSimplexNoise* TEMPERATURE_NOISE;
+    static PerlinSimplexNoise* BIOME_INFO_NOISE;
+    static DoublePlantFeature* DOUBLE_PLANT_FEATURE;
 
     enum EBiomeIDs : int {
         BiomeID_OCEAN = 0,
@@ -198,6 +203,9 @@ public:
     };
 
     class MobSpawnerData : public WeighedRandomItem {
+        friend class DesertBiome;
+        friend class IceBiome;
+
     public:
         MobSpawnerData(int instanceType, int weight, int unk, int unk2) : WeighedRandomItem(weight) {
             m_instanceType = instanceType;
@@ -217,6 +225,15 @@ public:
         int m_data = 0;
     };
 
+    static LegacyBlockData STONE;
+    static LegacyBlockData AIR;
+    static LegacyBlockData BEDROCK;
+    static LegacyBlockData GRAVEL;
+    static LegacyBlockData RED_SANDSTONE;
+    static LegacyBlockData SANDSTONE;
+    static LegacyBlockData ICE;
+    static LegacyBlockData WATER;
+
     Biome(Biome::EBiomeIDs, Biome::BiomeProperties*);
     static Biome** getBiomes();
     static Biome* getBiome(int);
@@ -227,8 +244,8 @@ public:
 
     virtual ~Biome();
     virtual Feature* getTreeFeature(Random&);
-    virtual void getGrassFeature(Random&);
-    virtual Block* getRandomFlower(Random&, const BlockPos*);
+    virtual Feature* getGrassFeature(Random&);
+    virtual FlowerBlock::Flower* getRandomFlower(Random&, const BlockPos*);
     virtual unsigned int getSkyColor(float);
     virtual bool hasSnow();
     virtual bool hasRain();
@@ -254,9 +271,10 @@ public:
 
     Biome* setNameAndDescription(int name, int desc);
     Biome* setPreviewColor(eMinecraftColour color);
+    eMinecraftColour getPreviewColor();
     Biome* setWaterSkyColor(eMinecraftColour water, eMinecraftColour sky);
 
-    std::vector<Biome::MobSpawnerData>* getMobs(MobCategory*);
+    std::vector<Biome::MobSpawnerData*>* getMobs(MobCategory*);
 
     std::wstring getName(bool);
     std::wstring getDescription();
