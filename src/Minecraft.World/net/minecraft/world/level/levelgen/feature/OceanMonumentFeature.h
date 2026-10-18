@@ -7,11 +7,16 @@
 
 class OceanMonumentFeature : public StructureFeature {
 public:
-    static std::vector<Biome::MobSpawnerData> MOB_SPAWNERS;
+    std::wstring getFeatureName() override;
+    BlockPos* getNearestGeneratedFeature(Level*, const BlockPos&, bool) override;
+    bool isFeatureChunk(int, int, bool) override;
+    StructureStart* createStructureStart(int, int) override;
+
+    static std::vector<Biome::MobSpawnerData*> MOB_SPAWNERS;
 
     OceanMonumentFeature();
 
-    std::vector<Biome::MobSpawnerData>* getEnemies();
+    std::vector<Biome::MobSpawnerData*>* getEnemies();
 
     static void staticCtor();
 

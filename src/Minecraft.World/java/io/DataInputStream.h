@@ -25,13 +25,13 @@ public:
     int readUnsignedShort() override;
     wchar_t readChar() override;
     // todo: wrong order likely, need to maintain matching tho
-    void readBytes(arrayWithLength<unsigned char>) override;
-    void readFully(arrayWithLength<unsigned char>) override;
-    void readFully(arrayWithLength<char>) override;
+    bool readBytes(arrayWithLength<unsigned char>) override;
+    bool readFully(arrayWithLength<unsigned char>) override;
+    bool readFully(arrayWithLength<char>) override;
     double readDouble() override;
     float readFloat() override;
     int readInt() override;
-    long readLong() override;
+    JavaLong readLong() override;
     short readShort() override;
     std::wstring readUTF() override;
     int readUTFChar() override;
@@ -39,11 +39,13 @@ public:
     void skipBytes(long long) override;
 
     int readVarInt();
-    long readVarLong();
+    JavaLong readVarLong();
     BlockPos readBlockPos();
     BlockPos* readBlockPosPointer();
     not_null_ptr<ItemInstance> readItem();
     CompoundTag* readNbt();
+    CompoundTag* readCompressedNbt();
+    void deleteChildStream();
 
     InputStream* m_inputStream;
 };

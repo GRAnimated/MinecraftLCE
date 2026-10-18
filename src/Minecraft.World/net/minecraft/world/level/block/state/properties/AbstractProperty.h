@@ -20,6 +20,7 @@ public:
 template <typename T>
 class Predicates {
 public:
+    static Predicate<T>* equalTo(T value) { return new EqualToValuePredicate(value); }
     // TODO: impl those, and check if those below are correctly declared
     class ConnectivePredicate : public Predicate<T> {
         bool apply(T) const override;
@@ -46,7 +47,13 @@ public:
         bool m_constValue;  // I guess it's bool, could be union; if you find possiblity of it, do it
     };
     class EqualToValuePredicate : public Predicate<T> {
-        bool apply(T) const override;
+    public:
+        EqualToValuePredicate(T value) : m_value(value) {}
+
+        bool apply(T value) const override { return m_value == value; }
+
+    private:
+        T m_value;
     };
 };
 
@@ -110,7 +117,10 @@ public:
         return this->m_name == otherCasted->m_name;
     }
     // TODO: this is wrong as hell btw !!!!!
-    int hashCode() const override { return 31 * (size_t)this->m_typeInfo + javaStringHashCode(this->m_name); }
+    int hashCode() const override {
+        return 31 * static_cast<unsigned int>(reinterpret_cast<size_t>(this->m_typeInfo))
+               + static_cast<unsigned int>(javaStringHashCode(this->m_name));
+    }
     virtual T getUnboxedValue(const std::wstring&) const = 0;
     virtual std::wstring getName(const T&) const = 0;
 

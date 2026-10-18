@@ -7,4 +7,5 @@ public:
     DesertBiome(EBiomeIDs id, BiomeProperties* properties);
 
     int getBaseClass() override;
+    void decorate(Level*, Random&, const BlockPos&) override;
 };

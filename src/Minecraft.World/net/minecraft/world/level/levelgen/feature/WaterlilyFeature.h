@@ -4,7 +4,7 @@
 
 class WaterlilyFeature : public Feature {
 public:
-    WaterlilyFeature();
+    WaterlilyFeature() = default;
 
     bool place(Level* level, Random& random, const BlockPos& pos) override;
 };
