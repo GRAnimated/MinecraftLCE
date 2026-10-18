@@ -15,6 +15,6 @@ public:
     void getFolder() override;
     ConsoleSavePath getDataFile(const std::wstring&) override;
     void getLevelId() override;
-    void getStructureManager() override;
+    StructureManager* getStructureManager() override;
     ConsoleSaveFile* getSaveFile() override;
 };

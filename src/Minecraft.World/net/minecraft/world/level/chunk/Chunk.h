@@ -1,5 +1,9 @@
 #pragma once
 
+#include <memory>
+
+#include <vector>
+
 #include <unordered_map>
 
 #include "nn/os/os_MutexTypes.h"

@@ -1,10 +1,11 @@
 #pragma once
 
-#include "net/minecraft/world/level/biome/Biome.h"
+#include "net/minecraft/world/level/biome/SavannaBiome.h"
 
-class MutatedSavannaBiome : public Biome {
+class MutatedSavannaBiome : public SavannaBiome {
 public:
     MutatedSavannaBiome(EBiomeIDs id, BiomeProperties* properties);
 
-    int getBaseClass() override;
+    void buildSurfaceAt(Level*, Random&, ChunkPrimer*, int, int, double) override;
+    void decorate(Level*, Random&, const BlockPos&) override;
 };
