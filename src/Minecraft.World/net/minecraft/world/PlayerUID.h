@@ -1,7 +1,9 @@
 #pragma once
 
+#include "java/io/JavaLong.h"
 #include "types.h"
 #include <cstdint>
+#include <string>
 
 class PlayerUID {
 public:
@@ -16,8 +18,8 @@ public:
     const std::wstring UuidString() const;
     const std::wstring toString() const;
 
-    long m_gap0;
-    long m_mostSigBits;  // grabbed from JDK, doubt those are correct but yeah, pure guess
-    long m_leastSigBits;
+    JavaLong m_gap0;
+    JavaLong m_mostSigBits;  // grabbed from JDK, doubt those are correct but yeah, pure guess
+    JavaLong m_leastSigBits;
     char m_byte18;
 };

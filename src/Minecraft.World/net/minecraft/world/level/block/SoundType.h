@@ -22,11 +22,16 @@ public:
     SoundType(float volume, float pitch, const SoundEvent* dig, const SoundEvent* step,
               const SoundEvent* place, const SoundEvent* hit, const SoundEvent* fall);
 
+    const SoundEvent* getBreakSound();
+    const SoundEvent* getStepSound();
+    const SoundEvent* getHitSound();
+    const SoundEvent* getFallSound();
+
     float m_volume;
     float m_pitch;
-    SoundEvent* m_digSound;
-    SoundEvent* m_stepSound;
-    SoundEvent* m_placeSound;
-    SoundEvent* m_hitSound;
-    SoundEvent* m_fallSound;
+    const SoundEvent* m_digSound;
+    const SoundEvent* m_stepSound;
+    const SoundEvent* m_placeSound;
+    const SoundEvent* m_hitSound;
+    const SoundEvent* m_fallSound;
 };
