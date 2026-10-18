@@ -7,10 +7,15 @@ class BlockPos;
 
 class RandomScatteredLargeFeature : public StructureFeature {
 public:
+    std::wstring getFeatureName() override;
+    BlockPos* getNearestGeneratedFeature(Level*, const BlockPos&, bool) override;
+    bool isFeatureChunk(int, int, bool) override;
+    StructureStart* createStructureStart(int, int) override;
+
     RandomScatteredLargeFeature();
 
     bool isSwamphut(const BlockPos&);
-    std::vector<Biome::MobSpawnerData>* getSwamphutEnemies();
+    std::vector<Biome::MobSpawnerData*>* getSwamphutEnemies();
 
     static void staticCtor();
 

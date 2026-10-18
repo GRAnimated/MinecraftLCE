@@ -1,5 +1,7 @@
 #include "net/minecraft/world/level/block/Block.h"
 
+#include "net/minecraft/world/level/block/BlockBootstrapAllocation.h"
+
 #include "net/minecraft/client/resources/IdMapper.h"
 #include "net/minecraft/core/Direction.h"
 #include "net/minecraft/stats/Stats.h"
@@ -944,7 +946,7 @@ const Vec3* ZERO = new Vec3(0, 0, 0);
 Vec3* Block::getOffset(const BlockState* state, LevelSource* levelSource, const BlockPos& pos) {
     int offsetType = this->getOffsetType();
     if (!offsetType)
-        return Vec3::newTemp(ZERO);
+        return Vec3::newTemp(Vec3::ZERO);
 
     int64_t seed = Mth::getSeed(pos.getX(), 0, pos.getZ());
     return Vec3::newTemp((((seed >> 16 & 0xF) / 15.0f) - 0.5) * 0.5,
@@ -979,20 +981,10 @@ bool Block::isExceptionBlockForAttachingPlusPiston(Block* block) {
     return Block::isExceptionBlockForAttaching(block);
 }
 
-// NON_MATCHING | Score: 333111 (lower is better)
-// This is the second-largest method in the entire executable
-// I (Dexrn) automated the block registry code, but I'm not sure how well it worked
-// Also, there's stuff missing at both the header and the footer... so it won't match until that's done.
-// Additionally, it seems that setBaseItemTypeAndMaterial is sometimes called outside of the chain...
-// e.g:
-// Block *someBlock = new SomeBlock()
-//                      ->setDestroyTime(0)
-//                      ->setExplodeable(10.0);
-// someBlock->setBaseItemTypeAndMaterial(14, 2);
-// Block::registerBlock(1, L"some_block", someBlock);
-//
-// The size given in the comments above every block was from the `operator new` call to allocate space for the
-// block This gives us the class size of every block that is registered.
+// NON_MATCHING: the registration phase now agrees with original ARM64 call
+// traces, but the complete initializer still differs in its instructions.
+// The original new sizes also cover fields absent from partial block headers;
+// BlockBootstrapAllocation preserves those allocations without inventing layouts.
 void Block::staticCtor() {
     DEFAULT_FACING = DirectionProperty::create(L"facing");
     HORIZONTAL_FACING = DirectionProperty::create(L"facing", Direction::Plane::HORIZONTAL);
@@ -1080,7 +1072,7 @@ void Block::staticCtor() {
     // Size: 0xC8u
     Block::registerBlock(
         2, L"grass",
-        (new GrassBlock())
+        (new (BlockBootstrapAllocation<0xc8>{}) GrassBlock())
             ->setDestroyTime(0.6)
             ->setSoundType(SoundType::GRASS)
             ->setIconName(L"grass")
@@ -1119,15 +1111,15 @@ void Block::staticCtor() {
 
     Block::registerBlock(5, L"planks", planksBlock);
 
-    Block* saplingBlock
-        = (new SaplingBlock())
-              ->setDestroyTime(0.0)
-              ->setSoundType(SoundType::GRASS)
-              ->setIconName(L"sapling")
-              ->sendBlockData(15)
-              ->setNameAndDescriptionId(StringIDs::Sapling, StringIDs::CanBePlantedAndWillEventuallyGrowInto)
-              ->disableMipmap();
-    Block::registerBlock(6, L"sapling", saplingBlock);
+    Block::registerBlock(
+        6, L"sapling",
+        (new (BlockBootstrapAllocation<0xe0>{}) SaplingBlock())
+            ->setDestroyTime(0.0)
+            ->setSoundType(SoundType::GRASS)
+            ->setIconName(L"sapling")
+            ->sendBlockData(15)
+            ->setNameAndDescriptionId(StringIDs::Sapling, StringIDs::CanBePlantedAndWillEventuallyGrowInto)
+            ->disableMipmap());
 
     Block::registerBlock(7, L"bedrock",
                          (new BlockImpl(Material::STONE))
@@ -1141,7 +1133,7 @@ void Block::staticCtor() {
     // Size: 0xF0u
     Block::registerBlock(
         8, L"flowing_water",
-        (new DynamicLiquidBlock(Material::WATER))
+        (new (BlockBootstrapAllocation<0xf0>{}) DynamicLiquidBlock(Material::WATER))
             ->setDestroyTime(100.0)
             ->setLightBlock(3)
             ->setIconName(L"water_flow")
@@ -1152,7 +1144,7 @@ void Block::staticCtor() {
     // Size: 0xB8u
     Block::registerBlock(
         9, L"water",
-        (new StaticLiquidBlock(Material::WATER))
+        (new (BlockBootstrapAllocation<0xb8>{}) StaticLiquidBlock(Material::WATER))
             ->setDestroyTime(100.0)
             ->setLightBlock(3)
             ->setIconName(L"water_still")
@@ -1163,7 +1155,7 @@ void Block::staticCtor() {
     // Size: 0xF0u
     Block::registerBlock(
         10, L"flowing_lava",
-        (new DynamicLiquidBlock(Material::LAVA))
+        (new (BlockBootstrapAllocation<0xf0>{}) DynamicLiquidBlock(Material::LAVA))
             ->setDestroyTime(100.0)
             ->setLightEmission(1.0)
             ->setIconName(L"lava_flow")
@@ -1175,7 +1167,7 @@ void Block::staticCtor() {
     // Size: 0xB8u
     Block::registerBlock(
         11, L"lava",
-        (new StaticLiquidBlock(Material::LAVA))
+        (new (BlockBootstrapAllocation<0xb8>{}) StaticLiquidBlock(Material::LAVA))
             ->setDestroyTime(100.0)
             ->setLightEmission(1.0)
             ->setIconName(L"lava_still")
@@ -1244,7 +1236,7 @@ void Block::staticCtor() {
 
     // Size: 0x110u
     Block::registerBlock(18, L"leaves",
-                         (new OldLeafBlock())
+                         (new (BlockBootstrapAllocation<0x110>{}) OldLeafBlock())
                              ->setIconName(L"leaves")
                              ->sendBlockData(3)
                              ->setNameAndDescriptionId(StringIDs::Leaves,
@@ -1253,7 +1245,7 @@ void Block::staticCtor() {
     // Size: 0xB0u
     Block::registerBlock(
         19, L"sponge",
-        (new SpongeBlock())
+        (new (BlockBootstrapAllocation<0xb0>{}) SpongeBlock())
             ->setDestroyTime(0.6)
             ->setSoundType(SoundType::GRASS)
             ->setIconName(L"sponge")
@@ -1294,7 +1286,7 @@ void Block::staticCtor() {
     // Size: 0xE0u
     Block::registerBlock(
         23, L"dispenser",
-        (new DispenserBlock())
+        (new (BlockBootstrapAllocation<0xe0>{}) DispenserBlock())
             ->setDestroyTime(3.5)
             ->setSoundType(SoundType::STONE)
             ->setIconName(L"dispenser")
@@ -1316,7 +1308,7 @@ void Block::staticCtor() {
 
     // Size: 0xB0u
     Block::registerBlock(25, L"noteblock",
-                         (new NoteBlock())
+                         (new (BlockBootstrapAllocation<0xb0>{}) NoteBlock())
                              ->setSoundType(SoundType::WOOD)
                              ->setDestroyTime(0.8)
                              ->setIconName(L"noteblock")
@@ -1327,7 +1319,7 @@ void Block::staticCtor() {
     // Size: 0xE0u
     Block::registerBlock(
         26, L"bed",
-        (new BedBlock())
+        (new (BlockBootstrapAllocation<0xe0>{}) BedBlock())
             ->setSoundType(SoundType::WOOD)
             ->setDestroyTime(0.2)
             ->setIconName(L"bed")
@@ -1338,7 +1330,7 @@ void Block::staticCtor() {
     // Size: 0xB0u
     Block::registerBlock(
         27, L"golden_rail",
-        (new PoweredRailBlock())
+        (new (BlockBootstrapAllocation<0xb0>{}) PoweredRailBlock())
             ->setDestroyTime(0.7)
             ->setSoundType(SoundType::METAL)
             ->setIconName(L"rail_golden")
@@ -1350,7 +1342,7 @@ void Block::staticCtor() {
 
     // Size: 0xB8u
     Block::registerBlock(28, L"detector_rail",
-                         (new DetectorRailBlock())
+                         (new (BlockBootstrapAllocation<0xb8>{}) DetectorRailBlock())
                              ->setDestroyTime(0.7)
                              ->setSoundType(SoundType::METAL)
                              ->setIconName(L"rail_detector")
@@ -1363,7 +1355,7 @@ void Block::staticCtor() {
     // Size: 0xC0u
     Block::registerBlock(
         29, L"sticky_piston",
-        (new PistonBaseBlock(true))
+        (new (BlockBootstrapAllocation<0xc0>{}) PistonBaseBlock(true))
             ->sendBlockData(15)
             ->setNameAndDescriptionId(StringIDs::StickyPiston,
                                       StringIDs::WhenPoweredUsingAButtonALeverARetractsPullsBackBlockTouching)
@@ -1383,7 +1375,7 @@ void Block::staticCtor() {
     // Size: 0xC8u
     Block::registerBlock(
         31, L"tallgrass",
-        (new TallGrassBlock())
+        (new (BlockBootstrapAllocation<0xc8>{}) TallGrassBlock())
             ->setDestroyTime(0.0)
             ->setSoundType(SoundType::GRASS)
             ->setIconName(L"tallgrass")
@@ -1402,7 +1394,7 @@ void Block::staticCtor() {
     // Size: 0xC0u
     Block::registerBlock(
         33, L"piston",
-        (new PistonBaseBlock(false))
+        (new (BlockBootstrapAllocation<0xc0>{}) PistonBaseBlock(false))
             ->sendBlockData(15)
             ->setNameAndDescriptionId(StringIDs::Piston, StringIDs::WhenPoweredUsingAButtonALeverA)
             ->setBaseItemTypeAndMaterial(27, 28)
@@ -1411,13 +1403,13 @@ void Block::staticCtor() {
     // Size: 0xB0u
     Block::registerBlock(
         34, L"piston_head",
-        (new PistonHeadBlock())
+        (new (BlockBootstrapAllocation<0xb0>{}) PistonHeadBlock())
             ->setNameAndDescriptionId(StringIDs::Piston, StringIDs::WhenPoweredUsingAButtonALeverA)
             ->sendBlockData(15));
 
     // Size: 0x128u
     Block::registerBlock(35, L"wool",
-                         (new ColoredBlock(Material::WOOL))
+                         (new (BlockBootstrapAllocation<0x128>{}) ColoredBlock(Material::WOOL))
                              ->setDestroyTime(0.8)
                              ->setSoundType(SoundType::WOOL)
                              ->setIconName(L"wool_colored")
@@ -1427,7 +1419,7 @@ void Block::staticCtor() {
 
     // Size: 0xB0u
     Block::registerBlock(36, L"piston_extension",
-                         (new PistonMagicBlock())
+                         (new (BlockBootstrapAllocation<0xb0>{}) PistonMagicBlock())
                              ->setIconName(L"pistonBase")
                              ->setNameAndDescriptionId(StringIDs::Piston, 0xFFFFFFFF));
 
@@ -1494,7 +1486,7 @@ void Block::staticCtor() {
 
     // Size: 0xB0u
     Block::registerBlock(43, L"double_stone_slab",
-                         (new FullStoneSlabBlock())
+                         (new (BlockBootstrapAllocation<0xb0>{}) FullStoneSlabBlock())
                              ->setDestroyTime(2.0)
                              ->setExplodeable(10.0)
                              ->setSoundType(SoundType::STONE)
@@ -1505,7 +1497,7 @@ void Block::staticCtor() {
 
     // Size: 0xB0u
     Block::registerBlock(44, L"stone_slab",
-                         (new HalfStoneSlabBlock())
+                         (new (BlockBootstrapAllocation<0xb0>{}) HalfStoneSlabBlock())
                              ->setDestroyTime(2.0)
                              ->setExplodeable(10.0)
                              ->setSoundType(SoundType::STONE)
@@ -1526,7 +1518,7 @@ void Block::staticCtor() {
 
     // Size: 0xB8u
     Block::registerBlock(46, L"tnt",
-                         (new TntBlock())
+                         (new (BlockBootstrapAllocation<0xb8>{}) TntBlock())
                              ->setDestroyTime(0.0)
                              ->setSoundType(SoundType::GRASS)
                              ->setIconName(L"tnt")
@@ -1593,7 +1585,7 @@ void Block::staticCtor() {
 
     // Size: 0xB0u
     Block::registerBlock(52, L"mob_spawner",
-                         (new MobSpawnerBlock())
+                         (new (BlockBootstrapAllocation<0xb0>{}) MobSpawnerBlock())
                              ->setDestroyTime(5.0)
                              ->setSoundType(SoundType::METAL)
                              ->setIconName(L"mob_spawner")
@@ -1601,20 +1593,20 @@ void Block::staticCtor() {
                              ->setNameAndDescriptionId(StringIDs::MonsterSpawner, 0x4330c9));
 
     // Size: 0xC0u
-    const BlockState* stairBlockVariant = planksBlock->defaultBlockState()->setValue<PlanksBlock::Variant*>(
-        PlanksBlock::VARIANT, PlanksBlock::Variant::OAK);
-    Block* stairBlock
-        = (new StairBlock(stairBlockVariant))
-              ->setIconName(L"stairsWood")
-              ->sendBlockData(15)
-              ->setNameAndDescriptionId(StringIDs::OakWoodStairs, StringIDs::UsedForCompactStaircases_1)
-              ->setBaseItemTypeAndMaterial(16, 1);
-    Block::registerBlock(53, L"oak_stairs", stairBlock);
+    Block::registerBlock(
+        53, L"oak_stairs",
+        (new (BlockBootstrapAllocation<0xc0>{})
+             StairBlock(planksBlock->defaultBlockState()->setValue<PlanksBlock::Variant*>(
+                 PlanksBlock::VARIANT, PlanksBlock::Variant::OAK)))
+            ->setIconName(L"stairsWood")
+            ->sendBlockData(15)
+            ->setNameAndDescriptionId(StringIDs::OakWoodStairs, StringIDs::UsedForCompactStaircases_1)
+            ->setBaseItemTypeAndMaterial(16, 1));
 
     // Size: 0xB8u
     Block::registerBlock(
         54, L"chest",
-        (new ChestBlock(0))
+        (new (BlockBootstrapAllocation<0xb8>{}) ChestBlock(0))
             ->setDestroyTime(2.5)
             ->setSoundType(SoundType::WOOD)
             ->setIconName(L"chest")
@@ -1625,7 +1617,7 @@ void Block::staticCtor() {
     // Size: 0xF8u
     Block::registerBlock(
         55, L"redstone_wire",
-        (new RedStoneWireBlock())
+        (new (BlockBootstrapAllocation<0xf8>{}) RedStoneWireBlock())
             ->setDestroyTime(0.0)
             ->setSoundType(SoundType::STONE)
             ->setIconName(L"redstone_dust")
@@ -1657,7 +1649,7 @@ void Block::staticCtor() {
 
     // Size: 0xB8u
     Block::registerBlock(58, L"crafting_table",
-                         (new CraftingTableBlock())
+                         (new (BlockBootstrapAllocation<0xb8>{}) CraftingTableBlock())
                              ->setDestroyTime(2.5)
                              ->setSoundType(SoundType::WOOD)
                              ->setIconName(L"crafting_table")
@@ -1668,7 +1660,7 @@ void Block::staticCtor() {
     // Size: 0xF0u
     Block::registerBlock(
         59, L"wheat",
-        (new CropBlock(false))
+        (new (BlockBootstrapAllocation<0xf0>{}) CropBlock(false))
             ->setIconName(L"wheat")
             ->setNotCollectStatistics()
             ->sendBlockData(15)
@@ -1676,7 +1668,7 @@ void Block::staticCtor() {
             ->disableMipmap());
 
     // Size: 0xB8u
-    Block* farmBlock = (new FarmBlock())
+    Block* farmBlock = (new (BlockBootstrapAllocation<0xb8>{}) FarmBlock())
                            ->setDestroyTime(0.6)
                            ->setSoundType(SoundType::DIRT)
                            ->setIconName(L"farmland")
@@ -1688,7 +1680,7 @@ void Block::staticCtor() {
     // Size: 0xC8u
     Block::registerBlock(
         61, L"furnace",
-        (new FurnaceBlock(false))
+        (new (BlockBootstrapAllocation<0xc8>{}) FurnaceBlock(false))
             ->setDestroyTime(3.5)
             ->setSoundType(SoundType::STONE)
             ->setIconName(L"furnace")
@@ -1699,7 +1691,7 @@ void Block::staticCtor() {
     // Size: 0xC8u
     Block::registerBlock(
         62, L"lit_furnace",
-        (new FurnaceBlock(true))
+        (new (BlockBootstrapAllocation<0xc8>{}) FurnaceBlock(true))
             ->setDestroyTime(3.5)
             ->setSoundType(SoundType::STONE)
             ->setIconName(L"furnace")
@@ -1710,7 +1702,7 @@ void Block::staticCtor() {
     // Size: 0xB0u
     Block::registerBlock(
         63, L"standing_sign",
-        (new StandingSignBlock())
+        (new (BlockBootstrapAllocation<0xb0>{}) StandingSignBlock())
             ->setDestroyTime(1.0)
             ->setSoundType(SoundType::WOOD)
             ->setIconName(L"sign")
@@ -1720,7 +1712,7 @@ void Block::staticCtor() {
 
     // Size: 0xC8u
     Block::registerBlock(64, L"wooden_door",
-                         (new DoorBlock(Material::WOOD))
+                         (new (BlockBootstrapAllocation<0xc8>{}) DoorBlock(Material::WOOD))
                              ->setDestroyTime(3.0)
                              ->setSoundType(SoundType::WOOD)
                              ->setIconName(L"door_wood")
@@ -1742,7 +1734,7 @@ void Block::staticCtor() {
 
     // Size: 0xB0u
     Block::registerBlock(66, L"rail",
-                         (new RailBlock())
+                         (new (BlockBootstrapAllocation<0xb0>{}) RailBlock())
                              ->setDestroyTime(0.7)
                              ->setSoundType(SoundType::METAL)
                              ->setIconName(L"rail_normal")
@@ -1754,7 +1746,7 @@ void Block::staticCtor() {
     // Size: 0xC0u
     Block::registerBlock(
         67, L"stone_stairs",
-        (new StairBlock(cobblestoneBlock->defaultBlockState()))
+        (new (BlockBootstrapAllocation<0xc0>{}) StairBlock(cobblestoneBlock->defaultBlockState()))
             ->setIconName(L"stairsStone")
             ->sendBlockData(15)
             ->setNameAndDescriptionId(StringIDs::CobblestoneStairs, StringIDs::UsedForCompactStaircases_1)
@@ -1763,7 +1755,7 @@ void Block::staticCtor() {
     // Size: 0xB0u
     Block::registerBlock(
         68, L"wall_sign",
-        (new WallSignBlock())
+        (new (BlockBootstrapAllocation<0xb0>{}) WallSignBlock())
             ->setDestroyTime(1.0)
             ->setSoundType(SoundType::WOOD)
             ->setIconName(L"sign")
@@ -1784,20 +1776,20 @@ void Block::staticCtor() {
             ->setBaseItemTypeAndMaterial(45, 1));
 
     // Size: 0xC8u
-    Block::registerBlock(
-        70, L"stone_pressure_plate",
-        (new PressurePlateBlock(L"stone", Material::STONE, PressurePlateBlock::Sensitivity::STONE))
-            ->setDestroyTime(0.5)
-            ->setSoundType(SoundType::STONE)
-            ->sendBlockData(15)
-            ->setNameAndDescriptionId(StringIDs::StonePressurePlate,
-                                      StringIDs::APressureSensitivePadThatWillActivateWhen)
-            ->setBaseItemTypeAndMaterial(15, 2));
+    Block::registerBlock(70, L"stone_pressure_plate",
+                         (new (BlockBootstrapAllocation<0xc8>{}) PressurePlateBlock(
+                              L"stone", Material::STONE, PressurePlateBlock::Sensitivity::STONE))
+                             ->setDestroyTime(0.5)
+                             ->setSoundType(SoundType::STONE)
+                             ->sendBlockData(15)
+                             ->setNameAndDescriptionId(StringIDs::StonePressurePlate,
+                                                       StringIDs::APressureSensitivePadThatWillActivateWhen)
+                             ->setBaseItemTypeAndMaterial(15, 2));
 
     // Size: 0xC8u
     Block::registerBlock(
         71, L"iron_door",
-        (new DoorBlock(Material::METAL))
+        (new (BlockBootstrapAllocation<0xc8>{}) DoorBlock(Material::METAL))
             ->setIconName(L"door_iron")
             ->setDestroyTime(5.0)
             ->setSoundType(SoundType::METAL)
@@ -1808,7 +1800,8 @@ void Block::staticCtor() {
     // Size: 0xC8u
     Block::registerBlock(
         72, L"wooden_pressure_plate",
-        (new PressurePlateBlock(L"planks_oak", Material::WOOD, PressurePlateBlock::Sensitivity::WOOD))
+        (new (BlockBootstrapAllocation<0xc8>{})
+             PressurePlateBlock(L"planks_oak", Material::WOOD, PressurePlateBlock::Sensitivity::WOOD))
             ->setDestroyTime(0.5)
             ->setSoundType(SoundType::WOOD)
             ->sendBlockData(15)
@@ -1910,7 +1903,7 @@ void Block::staticCtor() {
     // Size: 0xB8u
     Block::registerBlock(
         81, L"cactus",
-        (new CactusBlock())
+        (new (BlockBootstrapAllocation<0xb8>{}) CactusBlock())
             ->setIconName(L"cactus")
             ->setDestroyTime(0.4)
             ->setSoundType(SoundType::WOOL)
@@ -1940,7 +1933,7 @@ void Block::staticCtor() {
 
     // Size: 0xB8u
     Block::registerBlock(84, L"jukebox",
-                         (new JukeboxBlock())
+                         (new (BlockBootstrapAllocation<0xb8>{}) JukeboxBlock())
                              ->setIconName(L"jukebox")
                              ->setDestroyTime(2.0)
                              ->setExplodeable(10.0)
@@ -1952,7 +1945,8 @@ void Block::staticCtor() {
     // Size: 0xC0u
     Block::registerBlock(
         85, L"fence",
-        (new FenceBlock(L"planks_oak", Material::WOOD, PlanksBlock::Variant::OAK->getMaterialColor()))
+        (new (BlockBootstrapAllocation<0xc0>{})
+             FenceBlock(L"planks_oak", Material::WOOD, PlanksBlock::Variant::OAK->getMaterialColor()))
             ->setDestroyTime(2.0)
             ->setExplodeable(5.0)
             ->setSoundType(SoundType::WOOD)
@@ -1961,7 +1955,7 @@ void Block::staticCtor() {
 
     // Size: 0xD8u
     Block* pumpkinBlock
-        = (new PumpkinBlock())
+        = (new (BlockBootstrapAllocation<0xd8>{}) PumpkinBlock())
               ->setIconName(L"pumpkin")
               ->setDestroyTime(1.0)
               ->setSoundType(SoundType::WOOD)
@@ -2010,7 +2004,7 @@ void Block::staticCtor() {
 
     // Size: 0xD8u
     Block::registerBlock(91, L"lit_pumpkin",
-                         (new PumpkinBlock())
+                         (new (BlockBootstrapAllocation<0xd8>{}) PumpkinBlock())
                              ->setIconName(L"pumpkin")
                              ->setDestroyTime(1.0)
                              ->setSoundType(SoundType::WOOD)
@@ -2022,7 +2016,7 @@ void Block::staticCtor() {
     // Size: 0xC0u
     Block::registerBlock(
         92, L"cake",
-        (new CakeBlock())
+        (new (BlockBootstrapAllocation<0xc0>{}) CakeBlock())
             ->setIconName(L"cake")
             ->setDestroyTime(0.5)
             ->setSoundType(SoundType::WOOL)
@@ -2059,7 +2053,7 @@ void Block::staticCtor() {
     // Size: 0xC0u
     Block::registerBlock(
         95, L"stained_glass",
-        (new StainedGlassBlock(Material::GLASS))
+        (new (BlockBootstrapAllocation<0xc0>{}) StainedGlassBlock(Material::GLASS))
             ->setIconName(L"glass")
             ->setDestroyTime(0.3)
             ->setSoundType(SoundType::GLASS)
@@ -2103,7 +2097,8 @@ void Block::staticCtor() {
     // Size: 0xD8u
     Block::registerBlock(
         99, L"brown_mushroom_block",
-        (new HugeMushroomBlock(Material::WOOD, MaterialColor::DIRT, brownMushroomBlock))
+        (new (BlockBootstrapAllocation<0xd8>{})
+             HugeMushroomBlock(Material::WOOD, MaterialColor::DIRT, brownMushroomBlock))
             ->setIconName(L"mushroom_block")
             ->setDestroyTime(0.2)
             ->setSoundType(SoundType::WOOD)
@@ -2113,7 +2108,8 @@ void Block::staticCtor() {
     // Size: 0xD8u
     Block::registerBlock(
         100, L"red_mushroom_block",
-        (new HugeMushroomBlock(Material::WOOD, MaterialColor::COLOR_RED, redMushroomBlock))
+        (new (BlockBootstrapAllocation<0xd8>{})
+             HugeMushroomBlock(Material::WOOD, MaterialColor::COLOR_RED, redMushroomBlock))
             ->setIconName(L"mushroom_block")
             ->setDestroyTime(0.2)
             ->setSoundType(SoundType::WOOD)
@@ -2123,7 +2119,8 @@ void Block::staticCtor() {
     // Size: 0xE0u
     Block::registerBlock(
         101, L"iron_bars",
-        (new ThinFenceBlock(L"iron_bars", L"iron_bars", Material::METAL, true))
+        (new (BlockBootstrapAllocation<0xe0>{})
+             ThinFenceBlock(L"iron_bars", L"iron_bars", Material::METAL, true))
             ->setDestroyTime(5.0)
             ->setExplodeable(10.0)
             ->setSoundType(SoundType::METAL)
@@ -2133,7 +2130,8 @@ void Block::staticCtor() {
     // Size: 0xE0u
     Block::registerBlock(
         102, L"glass_pane",
-        (new ThinFenceBlock(L"glass", L"glass_pane_top", Material::GLASS, false))
+        (new (BlockBootstrapAllocation<0xe0>{})
+             ThinFenceBlock(L"glass", L"glass_pane_top", Material::GLASS, false))
             ->setDestroyTime(0.3)
             ->setSoundType(SoundType::GLASS)
             ->setNameAndDescriptionId(StringIDs::GlassPane, StringIDs::TransparentBlocksThatCanBeUsedAsAn)
@@ -2141,7 +2139,7 @@ void Block::staticCtor() {
 
     // Size: 0xB0u
     Block* melonBlock
-        = (new MelonBlock())
+        = (new (BlockBootstrapAllocation<0xb0>{}) MelonBlock())
               ->setIconName(L"melon")
               ->setDestroyTime(1.0)
               ->setSoundType(SoundType::WOOD)
@@ -2150,7 +2148,7 @@ void Block::staticCtor() {
 
     // Size: 0xC0u
     Block::registerBlock(104, L"pumpkin_stem",
-                         (new StemBlock(pumpkinBlock))
+                         (new (BlockBootstrapAllocation<0xc0>{}) StemBlock(pumpkinBlock))
                              ->setIconName(L"pumpkin_stem")
                              ->setDestroyTime(0.0)
                              ->setSoundType(SoundType::WOOD)
@@ -2160,7 +2158,7 @@ void Block::staticCtor() {
 
     // Size: 0xC0u
     Block::registerBlock(105, L"melon_stem",
-                         (new StemBlock(melonBlock))
+                         (new (BlockBootstrapAllocation<0xc0>{}) StemBlock(melonBlock))
                              ->setIconName(L"melon_stem")
                              ->setDestroyTime(0.0)
                              ->setSoundType(SoundType::WOOD)
@@ -2180,33 +2178,33 @@ void Block::staticCtor() {
             ->disableMipmap());
 
     // Size: 0xC0u
-    Block::registerBlock(107, L"fence_gate",
-                         (new FenceGateBlock(L"planks_oak", PlanksBlock::Variant::OAK))
-                             ->setIconName(L"fenceGate")
-                             ->setDestroyTime(2.0)
-                             ->setExplodeable(5.0)
-                             ->setSoundType(SoundType::WOOD)
-                             ->sendBlockData(15)
-                             ->setNameAndDescriptionId(StringIDs::OakFenceGate,
-                                                       StringIDs::SimilarToADoorButUsedPrimarilyWithFences)
-                             ->setBaseItemTypeAndMaterial(47, 1));
+    Block::registerBlock(
+        107, L"fence_gate",
+        (new (BlockBootstrapAllocation<0xc0>{}) FenceGateBlock(L"planks_oak", PlanksBlock::Variant::OAK))
+            ->setIconName(L"fenceGate")
+            ->setDestroyTime(2.0)
+            ->setExplodeable(5.0)
+            ->setSoundType(SoundType::WOOD)
+            ->sendBlockData(15)
+            ->setNameAndDescriptionId(StringIDs::OakFenceGate,
+                                      StringIDs::SimilarToADoorButUsedPrimarilyWithFences)
+            ->setBaseItemTypeAndMaterial(47, 1));
 
     // Size: 0xC0u
     Block::registerBlock(
         108, L"brick_stairs",
-        (new StairBlock(brickBlock->defaultBlockState()))
+        (new (BlockBootstrapAllocation<0xc0>{}) StairBlock(brickBlock->defaultBlockState()))
             ->setIconName(L"stairsBrick")
             ->sendBlockData(15)
             ->setNameAndDescriptionId(StringIDs::BrickStairs, StringIDs::UsedForCompactStaircases_1)
             ->setBaseItemTypeAndMaterial(16, 14));
 
     // Size: 0xC0u
-    const BlockState* stoneBrickStairBlockVariant
-        = stoneBrickBlock->defaultBlockState()->setValue<StoneBrickBlock::Variant*>(
-            StoneBrickBlock::VARIANT, StoneBrickBlock::Variant::DEFAULT);
     Block::registerBlock(
         109, L"stone_brick_stairs",
-        (new StairBlock(stoneBrickStairBlockVariant))
+        (new (BlockBootstrapAllocation<0xc0>{})
+             StairBlock(stoneBrickBlock->defaultBlockState()->setValue<StoneBrickBlock::Variant*>(
+                 StoneBrickBlock::VARIANT, StoneBrickBlock::Variant::DEFAULT)))
             ->setIconName(L"stairsStoneBrickSmooth")
             ->sendBlockData(15)
             ->setNameAndDescriptionId(StringIDs::StoneBrickStairs, StringIDs::UsedForCompactStaircases_1)
@@ -2215,7 +2213,7 @@ void Block::staticCtor() {
     // Size: 0xB8u
     Block::registerBlock(
         110, L"mycelium",
-        (new MyceliumBlock())
+        (new (BlockBootstrapAllocation<0xb8>{}) MyceliumBlock())
             ->setIconName(L"mycelium")
             ->setDestroyTime(0.6)
             ->setSoundType(SoundType::GRASS)
@@ -2246,7 +2244,8 @@ void Block::staticCtor() {
     // Size: 0xC0u
     Block::registerBlock(
         113, L"nether_brick_fence",
-        (new FenceBlock(L"nether_brick", Material::STONE, MaterialColor::NETHER))
+        (new (BlockBootstrapAllocation<0xc0>{})
+             FenceBlock(L"nether_brick", Material::STONE, MaterialColor::NETHER))
             ->setDestroyTime(2.0)
             ->setExplodeable(10.0)
             ->setSoundType(SoundType::STONE)
@@ -2256,7 +2255,7 @@ void Block::staticCtor() {
     // Size: 0xC0u
     Block::registerBlock(
         114, L"nether_brick_stairs",
-        (new StairBlock(netherBrickBlock->defaultBlockState()))
+        (new (BlockBootstrapAllocation<0xc0>{}) StairBlock(netherBrickBlock->defaultBlockState()))
             ->setIconName(L"stairsNetherBrick")
             ->sendBlockData(15)
             ->setNameAndDescriptionId(StringIDs::NetherBrickStairs, StringIDs::UsedForCompactStaircases_1)
@@ -2264,7 +2263,7 @@ void Block::staticCtor() {
 
     // Size: 0xC0u
     Block::registerBlock(115, L"nether_wart",
-                         (new NetherWartBlock())
+                         (new (BlockBootstrapAllocation<0xc0>{}) NetherWartBlock())
                              ->setIconName(L"nether_wart")
                              ->sendBlockData(15)
                              ->setNameAndDescriptionId(StringIDs::NetherWart_1,
@@ -2274,7 +2273,7 @@ void Block::staticCtor() {
     // Size: 0xC0u
     Block::registerBlock(
         116, L"enchanting_table",
-        (new EnchantmentTableBlock())
+        (new (BlockBootstrapAllocation<0xc0>{}) EnchantmentTableBlock())
             ->setIconName(L"enchanting_table")
             ->setDestroyTime(5.0)
             ->setExplodeable(2000.0)
@@ -2284,7 +2283,7 @@ void Block::staticCtor() {
 
     // Size: 0xB8u
     Block::registerBlock(117, L"brewing_stand",
-                         (new BrewingStandBlock())
+                         (new (BlockBootstrapAllocation<0xb8>{}) BrewingStandBlock())
                              ->setIconName(L"brewing_stand")
                              ->setDestroyTime(0.5)
                              ->setLightEmission(0.125)
@@ -2296,7 +2295,7 @@ void Block::staticCtor() {
     // Size: 0xD0u
     Block::registerBlock(
         118, L"cauldron",
-        (new CauldronBlock())
+        (new (BlockBootstrapAllocation<0xd0>{}) CauldronBlock())
             ->setIconName(L"cauldron")
             ->setDestroyTime(2.0)
             ->sendBlockData(15)
@@ -2305,19 +2304,19 @@ void Block::staticCtor() {
     // Size: 0xB0u
     Block::registerBlock(
         119, L"end_portal",
-        (new EndPortalBlock(Material::PORTAL))
-            ->setDestroyTime(3.4028e38)
+        (new (BlockBootstrapAllocation<0xb0>{}) EndPortalBlock(Material::PORTAL))
+            ->setDestroyTime(3.4028234663852886e38f)
             ->setExplodeable(6000000.0)
             ->setNameAndDescriptionId(StringIDs::EndPortal, StringIDs::ThisCanBeActivatedUsingTwelveEyeOf));
 
     // Size: 0xB8u
     Block::registerBlock(
         120, L"end_portal_frame",
-        (new EndPortalFrameBlock())
+        (new (BlockBootstrapAllocation<0xb8>{}) EndPortalFrameBlock())
             ->setIconName(L"endframe")
             ->setSoundType(SoundType::GLASS)
             ->setLightEmission(0.125)
-            ->setDestroyTime(3.4028e38)
+            ->setDestroyTime(3.4028234663852886e38f)
             ->sendBlockData(15)
             ->setExplodeable(6000000.0)
             ->setNameAndDescriptionId(StringIDs::EndPortalFrame, StringIDs::UsedToFormAnEndPortal));
@@ -2388,7 +2387,7 @@ void Block::staticCtor() {
     // Size: 0xC8u
     Block::registerBlock(
         127, L"cocoa",
-        (new CocoaBlock())
+        (new (BlockBootstrapAllocation<0xc8>{}) CocoaBlock())
             ->setIconName(L"cocoa")
             ->setDestroyTime(0.2)
             ->setExplodeable(5.0)
@@ -2397,16 +2396,15 @@ void Block::staticCtor() {
             ->setNameAndDescriptionId(StringIDs::Cocoa, StringIDs::CanBeFarmedToCollectCocoaBeans));
 
     // Size: 0xC0u
-    const BlockState* sandStoneStairBlockVariant
-        = sandStoneBlock->defaultBlockState()->setValue<SandStoneBlock::Variant*>(
-            SandStoneBlock::TYPE, SandStoneBlock::Variant::DEFAULT);
-    Block* sandStoneStairBlock
-        = (new StairBlock(sandStoneStairBlockVariant))
-              ->setIconName(L"stairsSandstone")
-              ->sendBlockData(15)
-              ->setNameAndDescriptionId(StringIDs::SandstoneStairs, StringIDs::UsedForCompactStaircases_1)
-              ->setBaseItemTypeAndMaterial(16, 13);
-    Block::registerBlock(128, L"sandstone_stairs", sandStoneStairBlock);
+    Block::registerBlock(
+        128, L"sandstone_stairs",
+        (new (BlockBootstrapAllocation<0xc0>{})
+             StairBlock(sandStoneBlock->defaultBlockState()->setValue<SandStoneBlock::Variant*>(
+                 SandStoneBlock::TYPE, SandStoneBlock::Variant::DEFAULT)))
+            ->setIconName(L"stairsSandstone")
+            ->sendBlockData(15)
+            ->setNameAndDescriptionId(StringIDs::SandstoneStairs, StringIDs::UsedForCompactStaircases_1)
+            ->setBaseItemTypeAndMaterial(16, 13));
 
     // Size: 0xA8u
     Block::registerBlock(
@@ -2421,7 +2419,7 @@ void Block::staticCtor() {
     // Size: 0xB0u
     Block::registerBlock(
         130, L"ender_chest",
-        (new EnderChestBlock())
+        (new (BlockBootstrapAllocation<0xb0>{}) EnderChestBlock())
             ->setDestroyTime(22.5)
             ->setIconName(L"enderChest")
             ->setExplodeable(1000.0)
@@ -2461,45 +2459,42 @@ void Block::staticCtor() {
             ->setBaseItemTypeAndMaterial(32, 44));
 
     // Size: 0xC0u
-    const BlockState* spruceStairBlockVariant
-        = planksBlock->defaultBlockState()->setValue<PlanksBlock::Variant*>(PlanksBlock::VARIANT,
-                                                                            PlanksBlock::Variant::SPRUCE);
-    Block* spruceStairBlock
-        = (new StairBlock(spruceStairBlockVariant))
-              ->setIconName(L"stairsWoodSpruce")
-              ->sendBlockData(15)
-              ->setNameAndDescriptionId(StringIDs::SpruceWoodStairs, StringIDs::UsedForCompactStaircases_1)
-              ->setBaseItemTypeAndMaterial(16, 39);
-    Block::registerBlock(134, L"spruce_stairs", stairBlock);
+    Block::registerBlock(
+        134, L"spruce_stairs",
+        (new (BlockBootstrapAllocation<0xc0>{})
+             StairBlock(planksBlock->defaultBlockState()->setValue<PlanksBlock::Variant*>(
+                 PlanksBlock::VARIANT, PlanksBlock::Variant::SPRUCE)))
+            ->setIconName(L"stairsWoodSpruce")
+            ->sendBlockData(15)
+            ->setNameAndDescriptionId(StringIDs::SpruceWoodStairs, StringIDs::UsedForCompactStaircases_1)
+            ->setBaseItemTypeAndMaterial(16, 39));
 
     // Size: 0xC0u
-    const BlockState* birchStairBlockVariant
-        = planksBlock->defaultBlockState()->setValue<PlanksBlock::Variant*>(PlanksBlock::VARIANT,
-                                                                            PlanksBlock::Variant::BIRCH);
-    Block* birchStairBlock
-        = (new StairBlock(birchStairBlockVariant))
-              ->setIconName(L"stairsWoodBirch")
-              ->sendBlockData(15)
-              ->setNameAndDescriptionId(StringIDs::BirchWoodStairs, StringIDs::UsedForCompactStaircases_1)
-              ->setBaseItemTypeAndMaterial(16, 40);
-    Block::registerBlock(135, L"birch_stairs", birchStairBlock);
+    Block::registerBlock(
+        135, L"birch_stairs",
+        (new (BlockBootstrapAllocation<0xc0>{})
+             StairBlock(planksBlock->defaultBlockState()->setValue<PlanksBlock::Variant*>(
+                 PlanksBlock::VARIANT, PlanksBlock::Variant::BIRCH)))
+            ->setIconName(L"stairsWoodBirch")
+            ->sendBlockData(15)
+            ->setNameAndDescriptionId(StringIDs::BirchWoodStairs, StringIDs::UsedForCompactStaircases_1)
+            ->setBaseItemTypeAndMaterial(16, 40));
 
     // Size: 0xC0u
-    const BlockState* jungleStairBlockVariant
-        = planksBlock->defaultBlockState()->setValue<PlanksBlock::Variant*>(PlanksBlock::VARIANT,
-                                                                            PlanksBlock::Variant::JUNGLE);
-    Block* jungleStairBlock
-        = (new StairBlock(jungleStairBlockVariant))
-              ->setIconName(L"stairsWoodJungle")
-              ->sendBlockData(15)
-              ->setNameAndDescriptionId(StringIDs::JungleWoodStairs, StringIDs::UsedForCompactStaircases_1)
-              ->setBaseItemTypeAndMaterial(16, 41);
-    Block::registerBlock(136, L"jungle_stairs", jungleStairBlock);
+    Block::registerBlock(
+        136, L"jungle_stairs",
+        (new (BlockBootstrapAllocation<0xc0>{})
+             StairBlock(planksBlock->defaultBlockState()->setValue<PlanksBlock::Variant*>(
+                 PlanksBlock::VARIANT, PlanksBlock::Variant::JUNGLE)))
+            ->setIconName(L"stairsWoodJungle")
+            ->sendBlockData(15)
+            ->setNameAndDescriptionId(StringIDs::JungleWoodStairs, StringIDs::UsedForCompactStaircases_1)
+            ->setBaseItemTypeAndMaterial(16, 41));
 
     // Size: 0xB0u
     Block::registerBlock(
         138, L"beacon",
-        (new BeaconBlock())
+        (new (BlockBootstrapAllocation<0xb0>{}) BeaconBlock())
             ->setIconName(L"beacon")
             ->setLightEmission(1.0)
             ->setSoundType(SoundType::GLASS)
@@ -2515,7 +2510,7 @@ void Block::staticCtor() {
 
     // Size: 0xB0u
     Block::registerBlock(140, L"flower_pot",
-                         (new FlowerPotBlock())
+                         (new (BlockBootstrapAllocation<0xb0>{}) FlowerPotBlock())
                              ->setDestroyTime(0.0)
                              ->setIconName(L"flower_pot")
                              ->setSoundType(SoundType::STONE)
@@ -2525,7 +2520,7 @@ void Block::staticCtor() {
     // Size: 0x110u
     Block::registerBlock(
         141, L"carrots",
-        (new CarrotBlock())
+        (new (BlockBootstrapAllocation<0x110>{}) CarrotBlock())
             ->setIconName(L"carrots")
             ->setNameAndDescriptionId(StringIDs::Carrots, StringIDs::Restores15IconShank01AndCan)
             ->disableMipmap());
@@ -2533,7 +2528,7 @@ void Block::staticCtor() {
     // Size: 0x110u
     Block::registerBlock(
         142, L"potatoes",
-        (new PotatoBlock())
+        (new (BlockBootstrapAllocation<0x110>{}) PotatoBlock())
             ->setIconName(L"potatoes")
             ->setNameAndDescriptionId(StringIDs::Potatoes, StringIDs::Restores05IconShank01OrCan)
             ->disableMipmap());
@@ -2552,7 +2547,7 @@ void Block::staticCtor() {
     // Size: 0xC0u
     Block::registerBlock(
         144, L"skull",
-        (new SkullBlock())
+        (new (BlockBootstrapAllocation<0xc0>{}) SkullBlock())
             ->setIconName(L"")
             ->setDestroyTime(1.0)
             ->setSoundType(SoundType::STONE)
@@ -2561,7 +2556,7 @@ void Block::staticCtor() {
     // Size: 0xC0u
     Block::registerBlock(
         145, L"anvil",
-        (new AnvilBlock())
+        (new (BlockBootstrapAllocation<0xc0>{}) AnvilBlock())
             ->setIconName(L"anvil")
             ->setBaseItemTypeAndMaterial(30, 3)
             ->setDestroyTime(5.0)
@@ -2573,7 +2568,7 @@ void Block::staticCtor() {
     // Size: 0xB8u
     Block::registerBlock(
         146, L"trapped_chest",
-        (new ChestBlock(true))
+        (new (BlockBootstrapAllocation<0xb8>{}) ChestBlock(true))
             ->setBaseItemTypeAndMaterial(36, 25)
             ->setDestroyTime(2.5)
             ->setSoundType(SoundType::WOOD)
@@ -2582,18 +2577,19 @@ void Block::staticCtor() {
                 StringIDs::StoresBlocksAndItemsInsidePlaceTwoChestsATrappedAlsoCreatesRedstone));
 
     // Size: 0xC8u
-    Block::registerBlock(
-        147, L"light_weighted_pressure_plate",
-        (new WeightedPressurePlateBlock(L"gold_block", Material::METAL, 15, MaterialColor::GOLD))
-            ->setBaseItemTypeAndMaterial(15, 4)
-            ->setDestroyTime(0.5)
-            ->setSoundType(SoundType::WOOD)
-            ->setNameAndDescriptionId(StringIDs::WeightedPressurePlateLight,
-                                      StringIDs::ProvidesARedstoneChargeTheChargeWillBe_1));
+    Block::registerBlock(147, L"light_weighted_pressure_plate",
+                         (new (BlockBootstrapAllocation<0xc8>{}) WeightedPressurePlateBlock(
+                              L"gold_block", Material::METAL, 15, MaterialColor::GOLD))
+                             ->setBaseItemTypeAndMaterial(15, 4)
+                             ->setDestroyTime(0.5)
+                             ->setSoundType(SoundType::WOOD)
+                             ->setNameAndDescriptionId(StringIDs::WeightedPressurePlateLight,
+                                                       StringIDs::ProvidesARedstoneChargeTheChargeWillBe_1));
 
     // Size: 0xC8u
     Block::registerBlock(148, L"heavy_weighted_pressure_plate",
-                         (new WeightedPressurePlateBlock(L"iron_block", Material::METAL, 150, 0))
+                         (new (BlockBootstrapAllocation<0xc8>{})
+                              WeightedPressurePlateBlock(L"iron_block", Material::METAL, 150, 0))
                              ->setBaseItemTypeAndMaterial(15, 3)
                              ->setDestroyTime(0.5)
                              ->setSoundType(SoundType::WOOD)
@@ -2602,7 +2598,7 @@ void Block::staticCtor() {
 
     // Size: 0xB0u
     Block::registerBlock(149, L"unpowered_comparator",
-                         (new ComparatorBlock(false))
+                         (new (BlockBootstrapAllocation<0xb0>{}) ComparatorBlock(false))
                              ->setIconName(L"comparator_off")
                              ->setDestroyTime(0.0)
                              ->setSoundType(SoundType::WOOD)
@@ -2613,7 +2609,7 @@ void Block::staticCtor() {
 
     // Size: 0xB0u
     Block::registerBlock(150, L"powered_comparator",
-                         (new ComparatorBlock(true))
+                         (new (BlockBootstrapAllocation<0xb0>{}) ComparatorBlock(true))
                              ->setIconName(L"comparator_on")
                              ->setDestroyTime(0.0)
                              ->setLightEmission(0.625)
@@ -2625,7 +2621,7 @@ void Block::staticCtor() {
 
     // Size: 0xD0u
     Block::registerBlock(151, L"daylight_detector",
-                         (new DaylightDetectorBlock(false))
+                         (new (BlockBootstrapAllocation<0xd0>{}) DaylightDetectorBlock(false))
                              ->setIconName(L"daylight_detector")
                              ->setNameAndDescriptionId(StringIDs::DaylightSensor,
                                                        StringIDs::ABlockThatOutputsARedstoneSignalBased));
@@ -2654,7 +2650,7 @@ void Block::staticCtor() {
     // Size: 0xC8u
     Block::registerBlock(
         154, L"hopper",
-        (new HopperBlock())
+        (new (BlockBootstrapAllocation<0xc8>{}) HopperBlock())
             ->setIconName(L"hopper")
             ->setDestroyTime(3.0)
             ->setExplodeable(8.0)
@@ -2672,18 +2668,18 @@ void Block::staticCtor() {
     Block::registerBlock(155, L"quartz_block", quartzBlock);
 
     // Size: 0xC0u
-    const BlockState* variant = quartzBlock->defaultBlockState()->setValue<QuartzBlock::Variant*>(
-        QuartzBlock::VARIANT, QuartzBlock::Variant::DEFAULT);
-    Block* quartzStairsBlock
-        = (new StairBlock(variant))
-              ->setIconName(L"stairsQuartz")
-              ->setNameAndDescriptionId(StringIDs::QuartzStairs, StringIDs::UsedForCompactStaircases_1)
-              ->setBaseItemTypeAndMaterial(16, 45);
-    Block::registerBlock(156, L"quartz_stairs", quartzStairsBlock);
+    Block::registerBlock(
+        156, L"quartz_stairs",
+        (new (BlockBootstrapAllocation<0xc0>{})
+             StairBlock(quartzBlock->defaultBlockState()->setValue<QuartzBlock::Variant*>(
+                 QuartzBlock::VARIANT, QuartzBlock::Variant::DEFAULT)))
+            ->setIconName(L"stairsQuartz")
+            ->setNameAndDescriptionId(StringIDs::QuartzStairs, StringIDs::UsedForCompactStaircases_1)
+            ->setBaseItemTypeAndMaterial(16, 45));
 
     // Size: 0xB0u
     Block::registerBlock(157, L"activator_rail",
-                         (new PoweredRailBlock())
+                         (new (BlockBootstrapAllocation<0xb0>{}) PoweredRailBlock())
                              ->setIconName(L"rail_activator")
                              ->setDestroyTime(0.7)
                              ->setSoundType(SoundType::METAL)
@@ -2693,7 +2689,7 @@ void Block::staticCtor() {
     // Size: 0xE8u
     Block::registerBlock(
         158, L"dropper",
-        (new DropperBlock())
+        (new (BlockBootstrapAllocation<0xe8>{}) DropperBlock())
             ->setIconName(L"dropper")
             ->setDestroyTime(3.5)
             ->setSoundType(SoundType::STONE)
@@ -2702,7 +2698,7 @@ void Block::staticCtor() {
 
     // Size: 0x128u
     Block::registerBlock(159, L"stained_hardened_clay",
-                         (new StainedHardenedClayBlock())
+                         (new (BlockBootstrapAllocation<0x128>{}) StainedHardenedClayBlock())
                              ->setIconName(L"hardened_clay_stained")
                              ->setDestroyTime(1.25)
                              ->setExplodeable(7.0)
@@ -2714,7 +2710,7 @@ void Block::staticCtor() {
     // Size: 0xE0u
     Block::registerBlock(
         160, L"stained_glass_pane",
-        (new StainedGlassPaneBlock())
+        (new (BlockBootstrapAllocation<0xe0>{}) StainedGlassPaneBlock())
             ->setIconName(L"glass")
             ->setDestroyTime(0.3)
             ->setSoundType(SoundType::GLASS)
@@ -2724,7 +2720,7 @@ void Block::staticCtor() {
 
     // Size: 0x110u
     Block::registerBlock(161, L"leaves2",
-                         (new NewLeafBlock())
+                         (new (BlockBootstrapAllocation<0x110>{}) NewLeafBlock())
                              ->setIconName(L"leaves")
                              ->sendBlockData(3)
                              ->setNameAndDescriptionId(StringIDs::Leaves,
@@ -2739,28 +2735,26 @@ void Block::staticCtor() {
             ->setNameAndDescriptionId(StringIDs::Wood, StringIDs::ChoppedUsingAnAxeAndCanBeCrafted));
 
     // Size: 0xC0u
-    const BlockState* acaciaStairsBlockVariant
-        = planksBlock->defaultBlockState()->setValue<PlanksBlock::Variant*>(PlanksBlock::VARIANT,
-                                                                            PlanksBlock::Variant::ACACIA);
-    Block* acaciaStairsBlock
-        = (new StairBlock(acaciaStairsBlockVariant))
-              ->setIconName(L"stairsWoodAcacia")
-              ->sendBlockData(15)
-              ->setNameAndDescriptionId(StringIDs::AcaciaWoodStairs, StringIDs::UsedForCompactStaircases_1)
-              ->setBaseItemTypeAndMaterial(16, 42);
-    Block::registerBlock(163, L"acacia_stairs", acaciaStairsBlock);
+    Block::registerBlock(
+        163, L"acacia_stairs",
+        (new (BlockBootstrapAllocation<0xc0>{})
+             StairBlock(planksBlock->defaultBlockState()->setValue<PlanksBlock::Variant*>(
+                 PlanksBlock::VARIANT, PlanksBlock::Variant::ACACIA)))
+            ->setIconName(L"stairsWoodAcacia")
+            ->sendBlockData(15)
+            ->setNameAndDescriptionId(StringIDs::AcaciaWoodStairs, StringIDs::UsedForCompactStaircases_1)
+            ->setBaseItemTypeAndMaterial(16, 42));
 
     // Size: 0xC0u
-    const BlockState* darkOakStairsBlockVariant
-        = planksBlock->defaultBlockState()->setValue<PlanksBlock::Variant*>(PlanksBlock::VARIANT,
-                                                                            PlanksBlock::Variant::DARK_OAK);
-    Block* darkOakStairsBlock
-        = (new StairBlock(darkOakStairsBlockVariant))
-              ->setIconName(L"stairsWoodDarkOak")
-              ->sendBlockData(15)
-              ->setNameAndDescriptionId(StringIDs::DarkOakWoodStairs, StringIDs::UsedForCompactStaircases_1)
-              ->setBaseItemTypeAndMaterial(16, 43);
-    Block::registerBlock(164, L"dark_oak_stairs", darkOakStairsBlock);
+    Block::registerBlock(
+        164, L"dark_oak_stairs",
+        (new (BlockBootstrapAllocation<0xc0>{})
+             StairBlock(planksBlock->defaultBlockState()->setValue<PlanksBlock::Variant*>(
+                 PlanksBlock::VARIANT, PlanksBlock::Variant::DARK_OAK)))
+            ->setIconName(L"stairsWoodDarkOak")
+            ->sendBlockData(15)
+            ->setNameAndDescriptionId(StringIDs::DarkOakWoodStairs, StringIDs::UsedForCompactStaircases_1)
+            ->setBaseItemTypeAndMaterial(16, 43));
 
     // Size: 0xC0u
     Block::registerBlock(165, L"slime",
@@ -2863,14 +2857,14 @@ void Block::staticCtor() {
 
     // Size: 0xB0u
     Block::registerBlock(175, L"double_plant",
-                         (new DoublePlantBlock())
+                         (new (BlockBootstrapAllocation<0xb0>{}) DoublePlantBlock())
                              ->setNameAndDescriptionId(StringIDs::DoublePlantBlock, StringIDs::ALargePlant)
                              ->disableMipmap());
 
     // Size: 0xB0u
     Block::registerBlock(
         176, L"standing_banner",
-        (new StandingBannerBlock())
+        (new (BlockBootstrapAllocation<0xb0>{}) StandingBannerBlock())
             ->setIconName(L"planks_oak")
             ->setDestroyTime(1.0)
             ->setSoundType(SoundType::WOOD)
@@ -2881,7 +2875,7 @@ void Block::staticCtor() {
     // Size: 0xB0u
     Block::registerBlock(
         177, L"wall_banner",
-        (new WallBannerBlock())
+        (new (BlockBootstrapAllocation<0xb0>{}) WallBannerBlock())
             ->setIconName(L"planks_oak")
             ->setDestroyTime(1.0)
             ->setSoundType(SoundType::WOOD)
@@ -2891,7 +2885,7 @@ void Block::staticCtor() {
 
     // Size: 0xD0u
     Block::registerBlock(178, L"daylight_detector_inverted",
-                         (new DaylightDetectorBlock(true))
+                         (new (BlockBootstrapAllocation<0xd0>{}) DaylightDetectorBlock(true))
                              ->setIconName(L"daylight_detector")
                              ->setNameAndDescriptionId(StringIDs::DaylightSensor,
                                                        StringIDs::ABlockThatOutputsARedstoneSignalBased));
@@ -2908,19 +2902,18 @@ void Block::staticCtor() {
     Block::registerBlock(179, L"red_sandstone", redSandStoneBlock);
 
     // Size: 0xC0u
-    const BlockState* redSandstoneStairsBlockVariant
-        = redSandStoneBlock->defaultBlockState()->setValue<RedSandStoneBlock::Variant*>(
-            RedSandStoneBlock::TYPE, RedSandStoneBlock::Variant::DEFAULT);
-    Block* redSandstoneStairsBlock
-        = (new StairBlock(redSandstoneStairsBlockVariant))
-              ->setIconName(L"red_sandstone")
-              ->setNameAndDescriptionId(StringIDs::RedSandstoneStairs, StringIDs::UsedForCompactStaircases_2)
-              ->setBaseItemTypeAndMaterial(16, 48);
-    Block::registerBlock(180, L"red_sandstone_stairs", redSandstoneStairsBlock);
+    Block::registerBlock(
+        180, L"red_sandstone_stairs",
+        (new (BlockBootstrapAllocation<0xc0>{})
+             StairBlock(redSandStoneBlock->defaultBlockState()->setValue<RedSandStoneBlock::Variant*>(
+                 RedSandStoneBlock::TYPE, RedSandStoneBlock::Variant::DEFAULT)))
+            ->setIconName(L"red_sandstone")
+            ->setNameAndDescriptionId(StringIDs::RedSandstoneStairs, StringIDs::UsedForCompactStaircases_2)
+            ->setBaseItemTypeAndMaterial(16, 48));
 
     // Size: 0xB0u
     Block::registerBlock(181, L"double_stone_slab2",
-                         (new FullNewStoneSlabBlock())
+                         (new (BlockBootstrapAllocation<0xb0>{}) FullNewStoneSlabBlock())
                              ->setIconName(L"double_stone_slab2")
                              ->setDestroyTime(2.0)
                              ->setExplodeable(10.0)
@@ -2931,7 +2924,7 @@ void Block::staticCtor() {
 
     // Size: 0xB0u
     Block::registerBlock(182, L"stone_slab2",
-                         (new HalfNewStoneSlabBlock())
+                         (new (BlockBootstrapAllocation<0xb0>{}) HalfNewStoneSlabBlock())
                              ->setIconName(L"stone_slab2")
                              ->setDestroyTime(2.0)
                              ->setExplodeable(10.0)
@@ -2942,7 +2935,8 @@ void Block::staticCtor() {
 
     // Size: 0xC0u
     Block::registerBlock(183, L"spruce_fence_gate",
-                         (new FenceGateBlock(L"planks_spruce", PlanksBlock::Variant::SPRUCE))
+                         (new (BlockBootstrapAllocation<0xc0>{})
+                              FenceGateBlock(L"planks_spruce", PlanksBlock::Variant::SPRUCE))
                              ->setIconName(L"fenceGate")
                              ->setDestroyTime(2.0)
                              ->setExplodeable(5.0)
@@ -2953,20 +2947,22 @@ void Block::staticCtor() {
                              ->setBaseItemTypeAndMaterial(47, 39));
 
     // Size: 0xC0u
-    Block::registerBlock(184, L"birch_fence_gate",
-                         (new FenceGateBlock(L"planks_birch", PlanksBlock::Variant::BIRCH))
-                             ->setIconName(L"fenceGate")
-                             ->setDestroyTime(2.0)
-                             ->setExplodeable(5.0)
-                             ->setSoundType(SoundType::WOOD)
-                             ->sendBlockData(15)
-                             ->setNameAndDescriptionId(StringIDs::BirchFenceGate,
-                                                       StringIDs::SimilarToADoorButUsedPrimarilyWithFences)
-                             ->setBaseItemTypeAndMaterial(47, 40));
+    Block::registerBlock(
+        184, L"birch_fence_gate",
+        (new (BlockBootstrapAllocation<0xc0>{}) FenceGateBlock(L"planks_birch", PlanksBlock::Variant::BIRCH))
+            ->setIconName(L"fenceGate")
+            ->setDestroyTime(2.0)
+            ->setExplodeable(5.0)
+            ->setSoundType(SoundType::WOOD)
+            ->sendBlockData(15)
+            ->setNameAndDescriptionId(StringIDs::BirchFenceGate,
+                                      StringIDs::SimilarToADoorButUsedPrimarilyWithFences)
+            ->setBaseItemTypeAndMaterial(47, 40));
 
     // Size: 0xC0u
     Block::registerBlock(185, L"jungle_fence_gate",
-                         (new FenceGateBlock(L"planks_jungle", PlanksBlock::Variant::JUNGLE))
+                         (new (BlockBootstrapAllocation<0xc0>{})
+                              FenceGateBlock(L"planks_jungle", PlanksBlock::Variant::JUNGLE))
                              ->setIconName(L"fenceGate")
                              ->setDestroyTime(2.0)
                              ->setExplodeable(5.0)
@@ -2978,7 +2974,8 @@ void Block::staticCtor() {
 
     // Size: 0xC0u
     Block::registerBlock(186, L"dark_oak_fence_gate",
-                         (new FenceGateBlock(L"planks_big_oak", PlanksBlock::Variant::DARK_OAK))
+                         (new (BlockBootstrapAllocation<0xc0>{})
+                              FenceGateBlock(L"planks_big_oak", PlanksBlock::Variant::DARK_OAK))
                              ->setIconName(L"fenceGate")
                              ->setDestroyTime(2.0)
                              ->setExplodeable(5.0)
@@ -2990,7 +2987,8 @@ void Block::staticCtor() {
 
     // Size: 0xC0u
     Block::registerBlock(187, L"acacia_fence_gate",
-                         (new FenceGateBlock(L"planks_acacia", PlanksBlock::Variant::ACACIA))
+                         (new (BlockBootstrapAllocation<0xc0>{})
+                              FenceGateBlock(L"planks_acacia", PlanksBlock::Variant::ACACIA))
                              ->setIconName(L"fenceGate")
                              ->setDestroyTime(2.0)
                              ->setExplodeable(5.0)
@@ -3003,7 +3001,8 @@ void Block::staticCtor() {
     // Size: 0xC0u
     Block::registerBlock(
         188, L"spruce_fence",
-        (new FenceBlock(L"planks_spruce", Material::WOOD, PlanksBlock::Variant::SPRUCE->getMaterialColor()))
+        (new (BlockBootstrapAllocation<0xc0>{})
+             FenceBlock(L"planks_spruce", Material::WOOD, PlanksBlock::Variant::SPRUCE->getMaterialColor()))
             ->setDestroyTime(2.0)
             ->setExplodeable(5.0)
             ->setSoundType(SoundType::WOOD)
@@ -3013,7 +3012,8 @@ void Block::staticCtor() {
     // Size: 0xC0u
     Block::registerBlock(
         189, L"birch_fence",
-        (new FenceBlock(L"planks_birch", Material::WOOD, PlanksBlock::Variant::BIRCH->getMaterialColor()))
+        (new (BlockBootstrapAllocation<0xc0>{})
+             FenceBlock(L"planks_birch", Material::WOOD, PlanksBlock::Variant::BIRCH->getMaterialColor()))
             ->setDestroyTime(2.0)
             ->setExplodeable(5.0)
             ->setSoundType(SoundType::WOOD)
@@ -3023,7 +3023,8 @@ void Block::staticCtor() {
     // Size: 0xC0u
     Block::registerBlock(
         190, L"jungle_fence",
-        (new FenceBlock(L"planks_jungle", Material::WOOD, PlanksBlock::Variant::JUNGLE->getMaterialColor()))
+        (new (BlockBootstrapAllocation<0xc0>{})
+             FenceBlock(L"planks_jungle", Material::WOOD, PlanksBlock::Variant::JUNGLE->getMaterialColor()))
             ->setDestroyTime(2.0)
             ->setExplodeable(5.0)
             ->setSoundType(SoundType::WOOD)
@@ -3033,8 +3034,8 @@ void Block::staticCtor() {
     // Size: 0xC0u
     Block::registerBlock(
         191, L"dark_oak_fence",
-        (new FenceBlock(L"planks_big_oak", Material::WOOD,
-                        PlanksBlock::Variant::DARK_OAK->getMaterialColor()))
+        (new (BlockBootstrapAllocation<0xc0>{}) FenceBlock(
+             L"planks_big_oak", Material::WOOD, PlanksBlock::Variant::DARK_OAK->getMaterialColor()))
             ->setDestroyTime(2.0)
             ->setExplodeable(5.0)
             ->setSoundType(SoundType::WOOD)
@@ -3044,7 +3045,8 @@ void Block::staticCtor() {
     // Size: 0xC0u
     Block::registerBlock(
         192, L"acacia_fence",
-        (new FenceBlock(L"planks_acacia", Material::WOOD, PlanksBlock::Variant::ACACIA->getMaterialColor()))
+        (new (BlockBootstrapAllocation<0xc0>{})
+             FenceBlock(L"planks_acacia", Material::WOOD, PlanksBlock::Variant::ACACIA->getMaterialColor()))
             ->setDestroyTime(2.0)
             ->setExplodeable(5.0)
             ->setSoundType(SoundType::WOOD)
@@ -3053,7 +3055,7 @@ void Block::staticCtor() {
 
     // Size: 0xC8u
     Block::registerBlock(193, L"spruce_door",
-                         (new DoorBlock(Material::WOOD))
+                         (new (BlockBootstrapAllocation<0xc8>{}) DoorBlock(Material::WOOD))
                              ->setIconName(L"door_spruce")
                              ->setDestroyTime(3.0)
                              ->setSoundType(SoundType::WOOD)
@@ -3064,7 +3066,7 @@ void Block::staticCtor() {
 
     // Size: 0xC8u
     Block::registerBlock(194, L"birch_door",
-                         (new DoorBlock(Material::WOOD))
+                         (new (BlockBootstrapAllocation<0xc8>{}) DoorBlock(Material::WOOD))
                              ->setIconName(L"door_birch")
                              ->setDestroyTime(3.0)
                              ->setSoundType(SoundType::WOOD)
@@ -3075,7 +3077,7 @@ void Block::staticCtor() {
 
     // Size: 0xC8u
     Block::registerBlock(195, L"jungle_door",
-                         (new DoorBlock(Material::WOOD))
+                         (new (BlockBootstrapAllocation<0xc8>{}) DoorBlock(Material::WOOD))
                              ->setIconName(L"door_jungle")
                              ->setDestroyTime(3.0)
                              ->setSoundType(SoundType::WOOD)
@@ -3086,7 +3088,7 @@ void Block::staticCtor() {
 
     // Size: 0xC8u
     Block::registerBlock(196, L"acacia_door",
-                         (new DoorBlock(Material::WOOD))
+                         (new (BlockBootstrapAllocation<0xc8>{}) DoorBlock(Material::WOOD))
                              ->setIconName(L"door_acacia")
                              ->setDestroyTime(3.0)
                              ->setSoundType(SoundType::WOOD)
@@ -3097,7 +3099,7 @@ void Block::staticCtor() {
 
     // Size: 0xC8u
     Block::registerBlock(197, L"dark_oak_door",
-                         (new DoorBlock(Material::WOOD))
+                         (new (BlockBootstrapAllocation<0xc8>{}) DoorBlock(Material::WOOD))
                              ->setIconName(L"door_dark_oak")
                              ->setDestroyTime(3.0)
                              ->setSoundType(SoundType::WOOD)
@@ -3129,7 +3131,7 @@ void Block::staticCtor() {
     // Size: 0xC0u
     Block::registerBlock(
         200, L"chorus_flower",
-        (new ChorusFlowerBlock())
+        (new (BlockBootstrapAllocation<0xc0>{}) ChorusFlowerBlock())
             ->setIconName(L"chorus_flower")
             ->setDestroyTime(0.4)
             ->setSoundType(SoundType::WOOD)
@@ -3149,7 +3151,8 @@ void Block::staticCtor() {
     // Size: 0xC8u
     Block::registerBlock(
         202, L"purpur_pillar",
-        (new RotatedPillarBlockImpl(Material::STONE, MaterialColor::COLOR_MAGENTA))
+        (new (BlockBootstrapAllocation<0xc8>{})
+             RotatedPillarBlockImpl(Material::STONE, MaterialColor::COLOR_MAGENTA))
             ->setIconTopName(L"purpur_pillar_top")  // TODO
             ->setIconName(L"purpur_pillar")
             ->setDestroyTime(1.5)
@@ -3160,7 +3163,7 @@ void Block::staticCtor() {
 
     // Size: 0xC0u
     Block::registerBlock(203, L"purpur_stairs",
-                         (new StairBlock(purpurBlock->defaultBlockState()))
+                         (new (BlockBootstrapAllocation<0xc0>{}) StairBlock(purpurBlock->defaultBlockState()))
                              ->setNameAndDescriptionId(StringIDs::PurpurStairs, 0xdda0c93)
                              ->setBaseItemTypeAndMaterial(16, 62));
 
@@ -3199,7 +3202,7 @@ void Block::staticCtor() {
     // Size: 0x110u
     Block::registerBlock(
         207, L"beetroots",
-        (new BeetrootBlock())
+        (new (BlockBootstrapAllocation<0x110>{}) BeetrootBlock())
             ->setIconName(L"beetroots")
             ->disableMipmap()
             ->setNameAndDescriptionId(StringIDs::Beetroots,
@@ -3207,7 +3210,7 @@ void Block::staticCtor() {
 
     // Size: 0xB0u
     Block* grassPathBlock
-        = (new GrassPathBlock())
+        = (new (BlockBootstrapAllocation<0xb0>{}) GrassPathBlock())
               ->setDestroyTime(0.65)
               ->setSoundType(SoundType::GRASS)
               ->setIconName(L"grass_path")
@@ -3218,9 +3221,9 @@ void Block::staticCtor() {
     // Size: 0xB0u
     Block::registerBlock(
         209, L"end_gateway",
-        (new EndGatewayBlock(Material::PORTAL))
+        (new (BlockBootstrapAllocation<0xb0>{}) EndGatewayBlock(Material::PORTAL))
             ->setIconName(L"stone")
-            ->setDestroyTime(3.4028e38)
+            ->setDestroyTime(3.4028234663852886e38f)
             ->setExplodeable(6000000.0)
             ->setNameAndDescriptionId(StringIDs::EndGateway,
                                       StringIDs::GeneratedWhenEnderDragonIsKilledThrowingAn));
@@ -3228,7 +3231,7 @@ void Block::staticCtor() {
     // Size: 0xD8u
     Block::registerBlock(
         212, L"frosted_ice",
-        (new FrostedIceBlock())
+        (new (BlockBootstrapAllocation<0xd8>{}) FrostedIceBlock())
             ->setDestroyTime(0.5)
             ->setLightBlock(3)
             ->setSoundType(SoundType::GLASS)
@@ -3281,14 +3284,14 @@ void Block::staticCtor() {
 
     // Size: 0xD0u
     Block::registerBlock(218, L"observer",
-                         (new ObserverBlock())
+                         (new (BlockBootstrapAllocation<0xd0>{}) ObserverBlock())
                              ->setDestroyTime(3.0)
                              ->setNameAndDescriptionId(StringIDs::Observer,
                                                        StringIDs::EmitsARedstoneSignalWhenAdjacentBlocksAre));
 
     // Size: 0xB8u
     Block::registerBlock(219, L"white_shulker_box",
-                         (new ShulkerBoxBlock(DyeColor::WHITE))
+                         (new (BlockBootstrapAllocation<0xb8>{}) ShulkerBoxBlock(DyeColor::WHITE))
                              ->setIconName(L"shulker_top")
                              ->setDestroyTime(2.0)
                              ->setSoundType(SoundType::STONE)
@@ -3298,7 +3301,7 @@ void Block::staticCtor() {
 
     // Size: 0xB8u
     Block::registerBlock(220, L"orange_shulker_box",
-                         (new ShulkerBoxBlock(DyeColor::ORANGE))
+                         (new (BlockBootstrapAllocation<0xb8>{}) ShulkerBoxBlock(DyeColor::ORANGE))
                              ->setIconName(L"shulker_top")
                              ->setDestroyTime(2.0)
                              ->setSoundType(SoundType::STONE)
@@ -3308,7 +3311,7 @@ void Block::staticCtor() {
 
     // Size: 0xB8u
     Block::registerBlock(221, L"magenta_shulker_box",
-                         (new ShulkerBoxBlock(DyeColor::MAGENTA))
+                         (new (BlockBootstrapAllocation<0xb8>{}) ShulkerBoxBlock(DyeColor::MAGENTA))
                              ->setIconName(L"shulker_top")
                              ->setDestroyTime(2.0)
                              ->setSoundType(SoundType::STONE)
@@ -3318,7 +3321,7 @@ void Block::staticCtor() {
 
     // Size: 0xB8u
     Block::registerBlock(222, L"light_blue_shulker_box",
-                         (new ShulkerBoxBlock(DyeColor::LIGHT_BLUE))
+                         (new (BlockBootstrapAllocation<0xb8>{}) ShulkerBoxBlock(DyeColor::LIGHT_BLUE))
                              ->setIconName(L"shulker_top")
                              ->setDestroyTime(2.0)
                              ->setSoundType(SoundType::STONE)
@@ -3328,7 +3331,7 @@ void Block::staticCtor() {
 
     // Size: 0xB8u
     Block::registerBlock(223, L"yellow_shulker_box",
-                         (new ShulkerBoxBlock(DyeColor::YELLOW))
+                         (new (BlockBootstrapAllocation<0xb8>{}) ShulkerBoxBlock(DyeColor::YELLOW))
                              ->setIconName(L"shulker_top")
                              ->setDestroyTime(2.0)
                              ->setSoundType(SoundType::STONE)
@@ -3339,7 +3342,7 @@ void Block::staticCtor() {
     // Size: 0xB8u
     Block::registerBlock(
         224, L"lime_shulker_box",
-        (new ShulkerBoxBlock(DyeColor::LIME))
+        (new (BlockBootstrapAllocation<0xb8>{}) ShulkerBoxBlock(DyeColor::LIME))
             ->setIconName(L"shulker_top")
             ->setDestroyTime(2.0)
             ->setSoundType(SoundType::STONE)
@@ -3349,7 +3352,7 @@ void Block::staticCtor() {
     // Size: 0xB8u
     Block::registerBlock(
         225, L"pink_shulker_box",
-        (new ShulkerBoxBlock(DyeColor::PINK))
+        (new (BlockBootstrapAllocation<0xb8>{}) ShulkerBoxBlock(DyeColor::PINK))
             ->setIconName(L"shulker_top")
             ->setDestroyTime(2.0)
             ->setSoundType(SoundType::STONE)
@@ -3359,7 +3362,7 @@ void Block::staticCtor() {
     // Size: 0xB8u
     Block::registerBlock(
         226, L"gray_shulker_box",
-        (new ShulkerBoxBlock(DyeColor::GRAY))
+        (new (BlockBootstrapAllocation<0xb8>{}) ShulkerBoxBlock(DyeColor::GRAY))
             ->setIconName(L"shulker_top")
             ->setDestroyTime(2.0)
             ->setSoundType(SoundType::STONE)
@@ -3368,7 +3371,7 @@ void Block::staticCtor() {
 
     // Size: 0xB8u
     Block::registerBlock(227, L"silver_shulker_box",
-                         (new ShulkerBoxBlock(DyeColor::SILVER))
+                         (new (BlockBootstrapAllocation<0xb8>{}) ShulkerBoxBlock(DyeColor::SILVER))
                              ->setIconName(L"shulker_top")
                              ->setDestroyTime(2.0)
                              ->setSoundType(SoundType::STONE)
@@ -3379,7 +3382,7 @@ void Block::staticCtor() {
     // Size: 0xB8u
     Block::registerBlock(
         228, L"cyan_shulker_box",
-        (new ShulkerBoxBlock(DyeColor::CYAN))
+        (new (BlockBootstrapAllocation<0xb8>{}) ShulkerBoxBlock(DyeColor::CYAN))
             ->setIconName(L"shulker_top")
             ->setDestroyTime(2.0)
             ->setSoundType(SoundType::STONE)
@@ -3388,7 +3391,7 @@ void Block::staticCtor() {
 
     // Size: 0xB8u
     Block::registerBlock(229, L"purple_shulker_box",
-                         (new ShulkerBoxBlock(DyeColor::PURPLE))
+                         (new (BlockBootstrapAllocation<0xb8>{}) ShulkerBoxBlock(DyeColor::PURPLE))
                              ->setIconName(L"shulker_top")
                              ->setDestroyTime(2.0)
                              ->setSoundType(SoundType::STONE)
@@ -3399,7 +3402,7 @@ void Block::staticCtor() {
     // Size: 0xB8u
     Block::registerBlock(
         230, L"blue_shulker_box",
-        (new ShulkerBoxBlock(DyeColor::BLUE))
+        (new (BlockBootstrapAllocation<0xb8>{}) ShulkerBoxBlock(DyeColor::BLUE))
             ->setIconName(L"shulker_top")
             ->setDestroyTime(2.0)
             ->setSoundType(SoundType::STONE)
@@ -3408,7 +3411,7 @@ void Block::staticCtor() {
 
     // Size: 0xB8u
     Block::registerBlock(231, L"brown_shulker_box",
-                         (new ShulkerBoxBlock(DyeColor::BROWN))
+                         (new (BlockBootstrapAllocation<0xb8>{}) ShulkerBoxBlock(DyeColor::BROWN))
                              ->setIconName(L"shulker_top")
                              ->setDestroyTime(2.0)
                              ->setSoundType(SoundType::STONE)
@@ -3418,7 +3421,7 @@ void Block::staticCtor() {
 
     // Size: 0xB8u
     Block::registerBlock(232, L"green_shulker_box",
-                         (new ShulkerBoxBlock(DyeColor::GREEN))
+                         (new (BlockBootstrapAllocation<0xb8>{}) ShulkerBoxBlock(DyeColor::GREEN))
                              ->setIconName(L"shulker_top")
                              ->setDestroyTime(2.0)
                              ->setSoundType(SoundType::STONE)
@@ -3429,7 +3432,7 @@ void Block::staticCtor() {
     // Size: 0xB8u
     Block::registerBlock(
         233, L"red_shulker_box",
-        (new ShulkerBoxBlock(DyeColor::RED))
+        (new (BlockBootstrapAllocation<0xb8>{}) ShulkerBoxBlock(DyeColor::RED))
             ->setIconName(L"shulker_top")
             ->setDestroyTime(2.0)
             ->setSoundType(SoundType::STONE)
@@ -3439,7 +3442,7 @@ void Block::staticCtor() {
     // Size: 0xB8u
     Block::registerBlock(
         234, L"black_shulker_box",
-        (new ShulkerBoxBlock(DyeColor::BLACK))
+        (new (BlockBootstrapAllocation<0xb8>{}) ShulkerBoxBlock(DyeColor::BLACK))
             ->setIconName(L"shulker_top")
             ->setDestroyTime(2.0)
             ->setSoundType(SoundType::STONE)
@@ -3570,7 +3573,7 @@ void Block::staticCtor() {
     // Size: 0x128u
     Block::registerBlock(
         251, L"concrete",
-        (new ColoredBlock(Material::STONE))
+        (new (BlockBootstrapAllocation<0x128>{}) ColoredBlock(Material::STONE))
             ->setDestroyTime(1.8)
             ->setSoundType(SoundType::STONE)
             ->setIconName(L"concrete")
@@ -3578,7 +3581,7 @@ void Block::staticCtor() {
 
     // Size: 0x128u
     Block::registerBlock(252, L"concrete_powder",
-                         (new ConcretePowderBlock())
+                         (new (BlockBootstrapAllocation<0x128>{}) ConcretePowderBlock())
                              ->setDestroyTime(0.5)
                              ->setSoundType(SoundType::SAND)
                              ->setIconName(L"concrete_powder")
@@ -3602,8 +3605,9 @@ void Block::staticCtor() {
         } else {
             StairBlock* s = dynamic_cast<StairBlock*>(block);
             HalfSlabBlock* b = dynamic_cast<HalfSlabBlock*>(block);
-            if (block == farmBlock || block == grassPathBlock || !s || b)
-                block->m_field3C = block->m_lightEmission == 0 || block->m_isBlocksLight;
+            // The original uses opacity here; emission is a separate field.
+            if (block != farmBlock && block != grassPathBlock && !s && !b)
+                block->m_field3C = block->m_lightBlock == 0 || block->m_isBlocksLight;
             else
                 block->m_field3C = 1;
 

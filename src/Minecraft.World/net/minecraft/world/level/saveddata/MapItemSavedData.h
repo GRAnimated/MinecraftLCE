@@ -37,7 +37,7 @@ public:
 
     ~MapItemSavedData() override;
     void load(CompoundTag*) override;
-    void save(CompoundTag*) override;
+    CompoundTag* save(CompoundTag*) override;
 
     void tickCarriedBy(std::shared_ptr<Player> player, not_null_ptr<ItemInstance> item);
     void mergeInMapData(std::shared_ptr<MapItemSavedData> mapData);

@@ -57,6 +57,7 @@ public:
     virtual void mirror(Mirror*);
 
     CompoundTag* saveMetadata(CompoundTag*);
+    bool isType(eINSTANCEOF);
 
     void setRenderRemoveStage(unsigned char);
     bool shouldRemoveForRender() const { return m_renderFlag == 2; }

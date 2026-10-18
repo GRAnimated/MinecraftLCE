@@ -1,5 +1,7 @@
 #pragma once
 
+#include <vector>
+
 #include <memory>
 
 class Dimension;
@@ -10,6 +12,7 @@ class ChunkStorage;
 class PlayerIO;
 class ConsoleSavePath;
 class ConsoleSaveFile;
+class StructureManager;
 
 class LevelStorage {
 public:
@@ -26,7 +29,7 @@ public:
     virtual void getFolder() = 0;
     virtual ConsoleSavePath getDataFile(const std::wstring&) = 0;
     virtual void getLevelId() = 0;
-    virtual void getStructureManager() = 0;
+    virtual StructureManager* getStructureManager() = 0;
     virtual ConsoleSaveFile* getSaveFile();
     virtual void flushSaveFile(bool);
     virtual int getAuxValueForMap(PlayerUID, int, int, int, int);

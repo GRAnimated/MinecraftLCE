@@ -217,6 +217,7 @@ public:
 
     Material* getMaterial();
     int getId();
+    static int getId(Block*);
     bool neighbourVisibleThroughShapes(const arrayWithLength<AABB const*>*, LevelSource*, const BlockPos&,
                                        const Direction*);
 
