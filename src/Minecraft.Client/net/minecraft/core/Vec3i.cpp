@@ -1,4 +1,8 @@
 #include "net/minecraft/core/Vec3i.h"
+
+#include "net/minecraft/core/Direction.h"
+#include "net/minecraft/core/MutableBlockPos.h"
+
 #include "net/minecraft/util/Mth.h"
 
 Vec3i::Vec3i(int x, int y, int z) {
@@ -23,4 +27,22 @@ int Vec3i::getY() const {
 
 int Vec3i::getZ() const {
     return m_z;
+}
+
+// name guessed
+double Vec3i::distSqr(double x, double y, double z) const {
+    double dx = getX() - x;
+    double dy = getY() - y;
+    double dz = getZ() - z;
+    return dx * dx + dy * dy + dz * dz;
+}
+
+// name guessed
+double Vec3i::distSqr(const Vec3i& other) const {
+    return distSqr(other.getX(), other.getY(), other.getZ());
+}
+
+// name guessed
+Vec3i Vec3i::multiply(int amount) const {
+    return Vec3i(getX() * amount, getY() * amount, getZ() * amount);
 }

@@ -1,4 +1,5 @@
 #include "com/mojang/nbt/IntArrayTag.h"
+
 #include "net/minecraft/world/ArrayWithLength.h"
 
 #include "java/io/DataInput.h"
@@ -30,8 +31,9 @@ void IntArrayTag::load(DataInput* inputStream, int) {
 
     // create a copy of the data
     int* data = m_data.m_data;
-    if (data)
+    if (data) {
         delete data;
+    }
 
     m_data = arrayWithLength<int>(size, true);
 

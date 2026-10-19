@@ -1,6 +1,9 @@
 #include "net/minecraft/core/Direction.h"
 
+#include "net/minecraft/core/MutableBlockPos.h"
+
 #include "net/minecraft/core/Vec3i.h"
+#include "net/minecraft/util/Mth.h"
 
 #include <string>
 
@@ -48,14 +51,24 @@ Direction::Direction(int dirX, int dirY, int dirZ, const std::wstring& name,
     m_z = pos->getZ();
 }
 
+// name guessed
 const Direction* Direction::from3DDataValue(int value) {
-    return Direction::BY_3D_DATA[std::abs(value % 6)];
+    return Direction::BY_3D_DATA[Mth::abs(value % 6)];
+}
+
+const Direction* Direction::from2DDataValue(int value) {
+    return Direction::BY_2D_DATA[Mth::abs(value % 4)];
+}
+
+const Direction* Direction::getOpposite() const {
+    return from3DDataValue(m_dirY);
 }
 
 unsigned int Direction::get3DDataValue() const {
     return m_dirX;
 }
 
+// name guessed
 int Direction::get2DDataValue() const {
     return m_dirZ;
 }
@@ -64,6 +77,24 @@ Direction::Axis* Direction::getAxis() const {
     return m_axis;
 }
 
+// name guessed
+Direction::AxisDirection* Direction::getAxisDirection() const {
+    return m_axisDirection;
+}
+
+bool Direction::Axis::isHorizontal() {
+    return m_plane == Plane::HORIZONTAL;
+}
+
+int Direction::Axis::getId() {
+    return m_id;
+}
+
 std::wstring Direction::getName() const {
     return m_name;
+}
+
+// name guessed
+Vec3i Direction::getNormal() const {
+    return *m_pos;
 }

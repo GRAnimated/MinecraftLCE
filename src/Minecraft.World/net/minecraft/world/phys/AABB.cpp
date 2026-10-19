@@ -6,7 +6,98 @@
 #include "net/minecraft/world/phys/Vec3.h"
 #include <algorithm>
 
+#include "net/minecraft/core/Direction.h"
+#include "net/minecraft/world/phys/HitResult.h"
+
+HitResult* AABB::clip(Vec3* start, Vec3* end) const {
+    Vec3* closest = collideWithXPlane(m_inX, start, end);
+    const Direction* face = Direction::WEST;
+    Vec3* candidate = collideWithXPlane(m_axX, start, end);
+    if (candidate && isClosest(start, closest, candidate)) {
+        closest = candidate;
+        face = Direction::EAST;
+    }
+    candidate = collideWithYPlane(m_inY, start, end);
+    if (candidate && isClosest(start, closest, candidate)) {
+        closest = candidate;
+        face = Direction::DOWN;
+    }
+    candidate = collideWithYPlane(m_axY, start, end);
+    if (candidate && isClosest(start, closest, candidate)) {
+        closest = candidate;
+        face = Direction::UP;
+    }
+    candidate = collideWithZPlane(m_inZ, start, end);
+    if (candidate && isClosest(start, closest, candidate)) {
+        closest = candidate;
+        face = Direction::NORTH;
+    }
+    candidate = collideWithZPlane(m_axZ, start, end);
+    if (candidate && isClosest(start, closest, candidate)) {
+        closest = candidate;
+        face = Direction::SOUTH;
+    }
+    // Strict distance comparison preserves the earlier face at edges and corners.
+    return closest ? new HitResult(closest, face) : nullptr;
+}
+
 DEFINE_THREAD_STORAGE(AABB, 1024)
+
+// name guessed
+Vec3* AABB::collideWithXPlane(double x, Vec3* start, Vec3* end) const {
+    Vec3* hit = start->getIntermediateWithXValue(end, x);
+    return hit && containsYZ(hit) ? hit : nullptr;
+}
+
+// name guessed
+Vec3* AABB::collideWithYPlane(double y, Vec3* start, Vec3* end) const {
+    Vec3* hit = start->getIntermediateWithYValue(end, y);
+    return hit && containsXZ(hit) ? hit : nullptr;
+}
+
+// name guessed
+Vec3* AABB::collideWithZPlane(double z, Vec3* start, Vec3* end) const {
+    Vec3* hit = start->getIntermediateWithZValue(end, z);
+    return hit && containsXY(hit) ? hit : nullptr;
+}
+
+// name guessed
+bool AABB::isClosest(Vec3* start, Vec3* closest, Vec3* candidate) const {
+    return !closest || start->distanceToSqr(candidate) < start->distanceToSqr(closest);
+}
+
+// name guessed
+bool AABB::containsYZ(Vec3* hit) const {
+    // Ordered bounds checks reject NaNs, as do the original b.ge/b.ls branches.
+    if (!hit || !(hit->m_y >= m_inY) || !(hit->m_y <= m_axY) || !(hit->m_z >= m_inZ))
+        return false;
+    return hit->m_z <= m_axZ;
+}
+
+// name guessed
+bool AABB::containsXZ(Vec3* hit) const {
+    if (!hit || !(hit->m_x >= m_inX) || !(hit->m_x <= m_axX) || !(hit->m_z >= m_inZ))
+        return false;
+    return hit->m_z <= m_axZ;
+}
+
+// name guessed
+bool AABB::containsXY(Vec3* hit) const {
+    if (!hit || !(hit->m_x >= m_inX) || !(hit->m_x <= m_axX) || !(hit->m_y >= m_inY))
+        return false;
+    return hit->m_y <= m_axY;
+}
+
+// NON_MATCHING | score: 495 (lower is better)
+AABB* AABB::divideInternalsBy(double divisor) {
+    m_inX /= divisor;
+    m_inY /= divisor;
+    m_inZ /= divisor;
+    m_axX /= divisor;
+    m_axY /= divisor;
+    m_axZ /= divisor;
+    return this;
+}
 
 AABB::AABB(double x1, double y1, double z1, double x2, double y2, double z2) {
     m_inX = std::min(x1, x2);
@@ -19,6 +110,16 @@ AABB::AABB(double x1, double y1, double z1, double x2, double y2, double z2) {
 
 AABB* AABB::newPermanent(double x1, double y1, double z1, double x2, double y2, double z2) {
     return new AABB(x1, y1, z1, x2, y2, z2);
+}
+
+AABB* AABB::newPermanent(const BlockPos& pos) {
+    return newPermanent(pos.getX(), pos.getY(), pos.getZ(), pos.getX() + 1, pos.getY() + 1, pos.getZ() + 1);
+}
+
+// name guessed
+AABB* AABB::newPermanent(const BlockPos& first, const BlockPos& second) {
+    return newPermanent(first.getX(), first.getY(), first.getZ(), second.getX(), second.getY(),
+                        second.getZ());
 }
 
 AABB* AABB::newPermanent(const AABB* other) {
@@ -34,6 +135,20 @@ AABB* AABB::newTemp(double x1, double y1, double z1, double x2, double y2, doubl
     ts->m_unk++;
     ts->m_unk &= 0x3ff;
     return temp;
+}
+
+AABB* AABB::newTemp(const BlockPos& pos) {
+    return newTemp(pos.getX(), pos.getY(), pos.getZ(), pos.getX() + 1, pos.getY() + 1, pos.getZ() + 1);
+}
+
+// name guessed
+AABB* AABB::newTemp(const BlockPos& first, const BlockPos& second) {
+    return newTemp(first.getX(), first.getY(), first.getZ(), second.getX(), second.getY(), second.getZ());
+}
+
+// name guessed
+AABB* AABB::newTemp(const AABB* other) {
+    return newTemp(other->m_inX, other->m_inY, other->m_inZ, other->m_axX, other->m_axY, other->m_axZ);
 }
 
 AABB* AABB::set(double x1, double y1, double z1, double x2, double y2, double z2) {
@@ -85,6 +200,14 @@ AABB* AABB::grow(double x, double y, double z) const {
     return this->newTemp(x0, y0, z0, x1, y1, z1);
 }
 
+AABB* AABB::shrink(double multiplier) const {
+    return grow(-multiplier);
+}
+
+AABB* AABB::shrink(double x, double y, double z) const {
+    return grow(-x, -y, -z);
+}
+
 AABB* AABB::expand(double dx, double dy, double dz) const {
     double x1 = this->m_inX;
     double y1 = this->m_inY;
@@ -111,6 +234,70 @@ AABB* AABB::expand(double dx, double dy, double dz) const {
     return newTemp(tx1, ty1, tz1, tx2, ty2, tz2);
 }
 
+// name guessed
+bool AABB::equals(const AABB* other) const {
+    if (!other)
+        return false;
+    if (other->m_inX != m_inX)
+        return false;
+    if (other->m_inY != m_inY)
+        return false;
+    if (other->m_inZ != m_inZ)
+        return false;
+    if (other->m_axX != m_axX)
+        return false;
+    if (other->m_axY != m_axY)
+        return false;
+    return other->m_axZ == m_axZ;
+}
+
+AABB* AABB::contract(double x, double y, double z) {
+    double x0 = m_inX;
+    double y0 = m_inY;
+    double z0 = m_inZ;
+    double x1 = m_axX;
+    double y1 = m_axY;
+    double z1 = m_axZ;
+    if (x < 0.0)
+        x0 -= x;
+    else if (x > 0.0)
+        x1 -= x;
+    if (y < 0.0)
+        y0 -= y;
+    else if (y > 0.0)
+        y1 -= y;
+    if (z < 0.0)
+        z0 -= z;
+    else if (z > 0.0)
+        z1 -= z;
+    return newTemp(x0, y0, z0, x1, y1, z1);
+}
+
+bool AABB::contains(const BlockPos& pos) const {
+    // The original delegates to the non-const vector overload, which only reads this box.
+    return const_cast<AABB*>(this)->contains(Vec3::newTemp(pos.getX(), pos.getY(), pos.getZ()));
+}
+
+// name guessed
+void AABB::correctMinMax() {
+    // Copy all endpoints before writing through the references returned by minmax.
+    const auto x = std::minmax(m_inX, m_axX);
+    const double x0 = x.first;
+    const auto y = std::minmax(m_inY, m_axY);
+    const double y0 = y.first;
+    const auto z = std::minmax(m_inZ, m_axZ);
+    const double x1 = x.second;
+    const double y1 = y.second;
+    const double z0 = z.first;
+    const double z1 = z.second;
+    m_inX = x0;
+    m_inY = y0;
+    m_inZ = z0;
+    m_axX = x1;
+    m_axY = y1;
+    m_axZ = z1;
+}
+
 bool AABB::contains(Vec3* vec) {
     if (vec->m_x <= this->m_inX || vec->m_x >= this->m_axX)
         return false;
@@ -124,18 +311,37 @@ bool AABB::contains(Vec3* vec) {
     return true;
 }
 
+bool AABB::containsIncludingLowerBound(Vec3* vec) const {
+    if (vec->m_x < this->m_inX || vec->m_x >= this->m_axX)
+        return false;
+
+    if (vec->m_y < this->m_inY || vec->m_y >= this->m_axY)
+        return false;
+
+    if (vec->m_z < this->m_inZ || vec->m_z >= this->m_axZ)
+        return false;
+
+    return true;
+}
+
 bool AABB::intersects(const AABB* rhs) const {
     return intersects(rhs->m_inX, rhs->m_inY, rhs->m_inZ, rhs->m_axX, rhs->m_axY, rhs->m_axZ);
 }
 
-// NON_MATCHING SCORE: 1005, i have no idea, it's only the conditional branches
 bool AABB::intersects(double oMinX, double oMinY, double oMinZ, double oMaxX, double oMaxY,
                       double oMaxZ) const {
-    if (oMaxX <= m_inX || oMinX >= m_axX)
+    // Ordered comparisons reject NaNs, as do the original ARM64 branches.
+    if (!(m_inX < oMaxX))
         return false;
-    if (oMaxY <= m_inY || oMinY >= m_axY)
+    if (!(m_axX > oMinX))
         return false;
-    return (!(oMaxZ <= m_inZ)) && (!(oMinZ >= m_axZ));
+    if (!(m_inY < oMaxY))
+        return false;
+    if (!(m_axY > oMinY))
+        return false;
+    if (!(m_inZ < oMaxZ))
+        return false;
+    return m_axZ > oMinZ;
 }
 
 void AABB::resetPool() {};

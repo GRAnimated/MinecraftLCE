@@ -7,7 +7,7 @@ class BlockState;
 
 class Feature {
 public:
-    Feature(bool isUpdate);
+    Feature(bool isUpdate = false);
     virtual ~Feature();
     virtual bool place(Level* level, Random& random, const BlockPos& pos) = 0;
     virtual void init();

@@ -1,5 +1,7 @@
 #include "com/mojang/nbt/EndTag.h"
 
+EndTag::EndTag() = default;
+
 void EndTag::write(DataOutput*) {}
 
 void EndTag::load(DataInput*, int) {}

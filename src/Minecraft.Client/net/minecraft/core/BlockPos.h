@@ -23,9 +23,12 @@ public:
     static BlockPosIterator* between(const BlockPos&, const BlockPos&);
 
     bool equals(const BlockPos& pos) const;
+    bool operator!=(const BlockPos& pos) const;
     bool equals(const BlockPos* pos) const;
 
     BlockPos offset(int x, int y, int z) const;
+    BlockPos offset(double x, double y, double z) const;
+    BlockPos offset(const Vec3i&) const;
 
     BlockPos relative(const Direction*) const;
     BlockPos relative(const Direction*, int) const;
@@ -44,7 +47,7 @@ public:
     BlockPos east(int) const;
 
     long long compressBlockPos() const;
-    void decompressBlockPos(long long);
+    static BlockPos decompressBlockPos(long long);
 };
 
 ASSERT_SIZEOF(BlockPos, 0xC)

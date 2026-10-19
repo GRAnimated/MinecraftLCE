@@ -1,6 +1,9 @@
 #include "java/io/ByteArrayInputStream.h"
 
 #include "NX/Platform.h"
+#include <algorithm>
+
+ByteArrayInputStream::ByteArrayInputStream() : m_buffer(), m_length(0), m_currentPos(0), m_nextPos(0) {}
 
 ByteArrayInputStream::ByteArrayInputStream(arrayWithLength<unsigned char> array, unsigned int start,
                                            unsigned int length) {
@@ -44,6 +47,15 @@ int ByteArrayInputStream::read(arrayWithLength<unsigned char> array, unsigned in
 }
 
 void ByteArrayInputStream::close() {}
+
+// name guessed
+void ByteArrayInputStream::reset() {
+    arrayWithLength<unsigned char> empty;
+    m_buffer = empty;
+    m_length = 0;
+    m_currentPos = 0;
+    m_nextPos = 0;
+}
 
 long long ByteArrayInputStream::skip(long long amount) {
     int newPos = m_nextPos + amount;

@@ -1,6 +1,7 @@
 #include "java/io/ByteArrayOutputStream.h"
 
 #include "NX/Platform.h"
+#include <algorithm>
 
 ByteArrayOutputStream::ByteArrayOutputStream() {
     m_size = 0;
@@ -32,7 +33,6 @@ void ByteArrayOutputStream::write(arrayWithLength<unsigned char> array, unsigned
                                   unsigned int length) {
     if (m_size + length >= m_buffer.m_length)
         m_buffer.resize(std::max(m_size + length + 1, m_buffer.m_length * 2));
-
     XMemCpy(&m_buffer[m_size], &array[start], length);
 
     m_size += length;
@@ -42,4 +42,12 @@ void ByteArrayOutputStream::close() {}
 
 arrayWithLength<unsigned char> ByteArrayOutputStream::toByteArray() {
     return arrayWithLength<unsigned char>::createFromOther(m_buffer);
+}
+
+void ByteArrayOutputStream::flush() {}
+unsigned int ByteArrayOutputStream::size() {
+    return m_size;
+}
+void ByteArrayOutputStream::clear() {
+    m_size = 0;
 }

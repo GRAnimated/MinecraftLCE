@@ -73,7 +73,7 @@ public:
     unsigned int getId();
     bool canBeDepleted();
     std::wstring getIconName();
-    void setIconName(const std::wstring&);
+    Item* setIconName(const std::wstring&);
     void setMaxDamage(int);
     int getMaxDamage();
     void setStackedByData(bool);
@@ -151,6 +151,17 @@ public:
     virtual int GetOverrideCount();
     virtual int GetOverrideCountColour();
     virtual TextureAtlasSprite* GetOverrideCountIcon(not_null_ptr<ItemInstance> itemInstance);
+
+    static unsigned int StoneBlockNameResolver(not_null_ptr<ItemInstance>);
+    static unsigned int StoneBlockDescResolver(not_null_ptr<ItemInstance>);
+    Item* setBaseItemTypeAndMaterial(int, int);
+    Item* setDescriptionId(int);
+    Item* setDescriptionId(int, int);
+    Item* setUseDescriptionId(int);
+    Item* setCraftingRemainingItem(Item*);
+    Item* setMaxStackSize(int);
+    Item* setHandEquipped();
+    Item* setFlag78(bool);
 
     static void staticCtor();
     static void staticInit();

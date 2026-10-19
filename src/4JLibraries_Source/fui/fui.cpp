@@ -24,6 +24,7 @@ void fui::setScreenSize(float width, float height) {
     this->m_screenHeight = height;
 }
 
+// NON_MATCHING | score: 3004 (lower is better)
 void fui::unloadScene(fuiFile* file) {
     if (!file)
         return;
@@ -95,8 +96,9 @@ void fui::render(fuiFile* file, float a1, float a2, float a3, float a4, float a5
     file->m_renderNodeStage->render(nullptr, nullptr);
 }
 
+// NON_MATCHING | score: 5 (lower is better)
 void fui::dispatchKeyboardEvent(fuiFile* file, bool state, int c) {
-    FJ_FuiNode* node = file->m_data.m_fuiSymbol->m_stage;  // ???
+    FJ_FuiNode* node = file->m_renderNodeStage->m_fuiNodeStage;
 
     if (FJ_FuiNode* focus = static_cast<FJ_FuiNodeStage*>(node)->getFocus())
         node = focus;
@@ -105,8 +107,9 @@ void fui::dispatchKeyboardEvent(fuiFile* file, bool state, int c) {
 }
 
 // param names guessed
+// NON_MATCHING | score: 5 (lower is better)
 void fui::dispatchMouseMoveEvent(fuiFile* file, float x, float y) {
-    FJ_FuiNode* node = file->m_data.m_fuiSymbol->m_stage;
+    FJ_FuiNode* node = file->m_renderNodeStage->m_fuiNodeStage;
 
     if (FJ_FuiNode* focus = static_cast<FJ_FuiNodeStage*>(node)->getFocus())
         node = focus;

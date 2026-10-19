@@ -9,6 +9,8 @@ public:
 
     Vec2() {}
 
+    static Vec2* newTemp(float x, float y);
+
     float m_x;
     float m_y;
 };
