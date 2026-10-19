@@ -9,8 +9,6 @@
 #include "net/minecraft/world/level/block/state/BlockState.h"
 #include "net/minecraft/world/level/levelgen/feature/Feature.h"
 
-PumpkinFeature::PumpkinFeature() : Feature(false) {}
-
 bool PumpkinFeature::place(Level* level, Random& rand, const BlockPos& pos) {
     for (int i = 0; i < 64; ++i) {
         BlockPos temp = pos.offset(rand.nextInt(8) - rand.nextInt(8), rand.nextInt(4) - rand.nextInt(4),

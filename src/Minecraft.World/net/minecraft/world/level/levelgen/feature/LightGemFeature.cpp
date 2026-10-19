@@ -8,8 +8,6 @@
 #include "net/minecraft/world/level/block/state/BlockState.h"
 #include "net/minecraft/world/level/material/Material.h"
 
-LightGemFeature::LightGemFeature() : Feature(false) {}
-
 bool LightGemFeature::place(Level* level, Random& random, const BlockPos& pos) {
     if (!level->isEmptyBlock(pos)) {
         return false;

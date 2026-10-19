@@ -5,6 +5,8 @@
 class OceanBiome : public Biome {
 public:
     OceanBiome(EBiomeIDs id, BiomeProperties* properties);
+    ~OceanBiome() override = default;
 
     int getBaseClass() override;
+    int getTemperatureCategory() override;
 };

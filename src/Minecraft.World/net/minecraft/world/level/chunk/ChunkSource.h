@@ -32,7 +32,7 @@ public:
     virtual bool shouldSave() = 0;
     virtual ChunkSource* getCache();
     virtual void dataReceived(int, int);
-    virtual std::vector<Biome::MobSpawnerData>* getMobsAt(MobCategory*, const BlockPos&) = 0;
+    virtual std::vector<Biome::MobSpawnerData*>* getMobsAt(MobCategory*, const BlockPos&) = 0;
     virtual void findNearestMapFeature(Level*, const std::wstring&, const BlockPos&, bool) = 0;
     virtual int getLoadedChunks() = 0;
     virtual void recreateLogicStructuresForChunk(LevelChunk*, int, int) = 0;

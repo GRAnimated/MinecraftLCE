@@ -5,4 +5,5 @@
 class CactusBlock : public Block {
 public:
     CactusBlock();
+    virtual bool canSurvive(Level*, const BlockPos&);
 };

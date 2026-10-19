@@ -4,7 +4,8 @@
 
 class HellFireFeature : public Feature {
 public:
-    HellFireFeature();
+    // name guessed
+    HellFireFeature() = default;
 
     bool place(Level* level, Random& random, const BlockPos& pos) override;
 };

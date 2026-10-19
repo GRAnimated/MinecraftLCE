@@ -1,5 +1,7 @@
 #include "net/minecraft/world/level/levelgen/OverworldLevelSource.h"
 
+#include <cmath>
+
 #include "NX/Platform.h"
 #include "net/minecraft/util/Mth.h"
 #include "net/minecraft/world/entity/MobCategory.h"
@@ -128,7 +130,6 @@ float OverworldLevelSource::getHeightFalloff(int chunkX, int chunkZ, int* distan
     return result;
 }
 
-// NON_MATCHING | Score: 1630 (lower is better)
 int OverworldLevelSource::distanceToEdge(float a, int, int x, int z, int size) {
     int halfSize = size / 2;
 
@@ -150,18 +151,19 @@ int OverworldLevelSource::distanceToEdge(float a, int, int x, int z, int size) {
 
     if (inLeftBand || inRightBand) {
         Vec3* p = Vec3::newTemp(x, 0.0f, z);
-        Vec3* edgeStart = (x < 1) ? topLeft : topRight;
-        Vec3* edgeEnd = (x < 1) ? bottomLeft : bottomRight;
-
-        distance = p->distanceToSegment(edgeStart, edgeEnd);
+        if (x >= 1)
+            distance = p->distanceToSegment(topRight, bottomRight);
+        else
+            distance = p->distanceToSegment(topLeft, bottomLeft);
     }
 
     if (((z > leftBound) && (z < rightBound)) || ((z > (maxCoord - a)) && (z < (maxCoord + a)))) {
         Vec3* p = Vec3::newTemp(x, 0.0f, z);
-        Vec3* edgeStart = (z < 1) ? topLeft : topRight;
-        Vec3* edgeEnd = (z < 1) ? bottomLeft : bottomRight;
-
-        float verticalDistance = p->distanceToSegment(edgeStart, edgeEnd);
+        float verticalDistance;
+        if (z >= 1)
+            verticalDistance = p->distanceToSegment(bottomLeft, bottomRight);
+        else
+            verticalDistance = p->distanceToSegment(topLeft, topRight);
 
         if (verticalDistance < distance) {
             distance = verticalDistance;
@@ -184,7 +186,7 @@ void OverworldLevelSource::buildSurfaces(int chunkX, int chunkZ, ChunkPrimer* pr
 
     for (int x = 0; x < 16; x++) {
         for (int z = 0; z < 16; z++) {
-            Biome* biome = biomes[z + x * 16];
+            Biome* biome = biomes.get(z + x * 16);
             {
                 std::wstring biomeName = biome->getName(false);
                 PIXBeginNamedEvent(0.0, "Building surface for biome %ls", biomeName.c_str());
@@ -322,11 +324,11 @@ void OverworldLevelSource::getHeights(int posX, int posY, int posZ, arrayWithLen
             float weightedScale = 0.0f;
             float weightedDepth = 0.0f;
             float totalWeight = 0.0f;
-            Biome* b = biomes[x + 2 + (z + 2) * 10];
+            Biome* b = biomes.get(x + 2 + (z + 2) * 10);
 
             for (int xo = -2; xo <= 2; ++xo) {
                 for (int zo = -2; zo <= 2; ++zo) {
-                    Biome* b2 = biomes[x + xo + 2 + (z + zo + 2) * 10];
+                    Biome* b2 = biomes.get(x + xo + 2 + (z + zo + 2) * 10);
 
                     float depth = m_sourceSettings->m_biomeDepthOffset
                                   + (b2->getDepth() * m_sourceSettings->m_biomeDepthWeight);
@@ -540,7 +542,7 @@ bool OverworldLevelSource::postProcessLoadedChunk(LevelChunk*, int, int) {
     return false;
 }
 
-// NON_MATCHING | Score: 5336 (lower is better)
+// NON_MATCHING | score: 346 (lower is better)
 void OverworldLevelSource::prepareHeights(int chunkX, int chunkZ, ChunkPrimer* primer) {
     // These variables are made into constants by the compiler
     int width = 4;   // every 4th block is sampled in the chunk
@@ -563,19 +565,25 @@ void OverworldLevelSource::prepareHeights(int chunkX, int chunkZ, ChunkPrimer* p
 
     PIXBeginNamedEvent(0.0, "Generating");
     for (int subX = 0; subX < width; subX++) {
+        int leftColumn = subX * xSize;
+        int rightColumn = (subX + 1) * xSize;
         for (int subZ = 0; subZ < width; subZ++) {
+            int n00 = (subZ + leftColumn) * ySize;
+            int n10 = n00 + ySize;
+            int n01 = (subZ + rightColumn) * ySize;
+            int n11 = n01 + ySize;
             for (int subY = 0; subY < 16; subY++) {
                 // + 0 is for padding so these look nicer
-                double h00 = heights[((subX + 0) * xSize + (subZ + 0)) * ySize + subY];
-                double h10 = heights[((subX + 0) * xSize + (subZ + 1)) * ySize + subY];
-                double h01 = heights[((subX + 1) * xSize + (subZ + 0)) * ySize + subY];
-                double h11 = heights[((subX + 1) * xSize + (subZ + 1)) * ySize + subY];
+                double h00 = heights[n00 + subY];
+                double h10 = heights[n10 + subY];
+                double h01 = heights[n01 + subY];
+                double h11 = heights[n11 + subY];
 
                 // interpolation steps
-                double iy00 = (heights[((subX + 0) * xSize + (subZ + 0)) * ySize + subY + 1] - h00) * 0.125;
-                double iy10 = (heights[((subX + 0) * xSize + (subZ + 1)) * ySize + subY + 1] - h10) * 0.125;
-                double iy01 = (heights[((subX + 1) * xSize + (subZ + 0)) * ySize + subY + 1] - h01) * 0.125;
-                double iy11 = (heights[((subX + 1) * xSize + (subZ + 1)) * ySize + subY + 1] - h11) * 0.125;
+                double iy00 = (heights[n00 + subY + 1] - h00) * 0.125;
+                double iy10 = (heights[n10 + subY + 1] - h10) * 0.125;
+                double iy01 = (heights[n01 + subY + 1] - h01) * 0.125;
+                double iy11 = (heights[n11 + subY + 1] - h11) * 0.125;
 
                 for (int ym = 0; ym < 8; ym++) {
                     double heightAtXZ0 = h00;
@@ -591,19 +599,20 @@ void OverworldLevelSource::prepareHeights(int chunkX, int chunkZ, ChunkPrimer* p
 
                         int defaultId = (subY * height + ym < seaLevel) ? 9 : 0;
 
-                        double _h = h00;
+                        double _h = heightAtXZ0;
                         double _hStep = (heightAtXZ1 - heightAtXZ0) * 0.25;
                         _h -= _hStep;
 
                         for (int zm = 0; zm < 4; zm++) {
-                            int x = subX * width + xm;
+                            int x = chunkX * 16 + subX * width + xm;
                             int y = subY * height + ym;
-                            int z = subZ * width + zm;
+                            int z = chunkZ * 16 + subZ * width + zm;
                             int blockId;
                             int distance;
 
                             // Falloff at the edge of the world, does not exist in Java Edition
-                            if (getHeightFalloff(x, z, &distance) > (_h += _hStep)) {
+                            float falloff = getHeightFalloff(x, z, &distance);
+                            if ((_h += _hStep) > falloff) {
                                 blockId = 1;
                             } else {
                                 blockId = defaultId;
@@ -642,8 +651,8 @@ void OverworldLevelSource::prepareHeights(int chunkX, int chunkZ, ChunkPrimer* p
     delete[] biomes.m_data;
 }
 
-std::vector<Biome::MobSpawnerData>* OverworldLevelSource::getMobsAt(MobCategory* category,
-                                                                    const BlockPos& pos) {
+std::vector<Biome::MobSpawnerData*>* OverworldLevelSource::getMobsAt(MobCategory* category,
+                                                                     const BlockPos& pos) {
     Biome* biome = m_level->getBiome(pos);
 
     if (m_shouldGenerateStructures) {
@@ -687,30 +696,29 @@ void OverworldLevelSource::recreateLogicStructuresForChunk(LevelChunk* chunk, in
     }
 }
 
-// NON_MATCHING | Score: 860- (lower is better)
 bool OverworldLevelSource::isPosInFeature(Level* level, const std::wstring& featureName,
                                           const BlockPos& pos) {
     if (!m_shouldGenerateStructures) {
         return false;
     }
 
-    if (ChunkGenerator::STRONGHOLD_NAME.compare(featureName) == 0) {
-        return m_strongholdFeature && m_strongholdFeature->isInsideFeature(pos);
+    if (ChunkGenerator::STRONGHOLD_NAME.compare(featureName) == 0 && m_strongholdFeature) {
+        return m_strongholdFeature->isInsideFeature(pos);
     }
-    if (ChunkGenerator::MANSION_NAME.compare(featureName) == 0) {
-        return m_woodlandMansionFeature && m_woodlandMansionFeature->isInsideFeature(pos);
+    if (ChunkGenerator::MANSION_NAME.compare(featureName) == 0 && m_woodlandMansionFeature) {
+        return m_woodlandMansionFeature->isInsideFeature(pos);
     }
-    if (ChunkGenerator::MONUMENT_NAME.compare(featureName) == 0) {
-        return m_oceanMonumentFeature && m_oceanMonumentFeature->isInsideFeature(pos);
+    if (ChunkGenerator::MONUMENT_NAME.compare(featureName) == 0 && m_oceanMonumentFeature) {
+        return m_oceanMonumentFeature->isInsideFeature(pos);
     }
-    if (ChunkGenerator::VILLAGE_NAME.compare(featureName) == 0) {
-        return m_villageFeature && m_villageFeature->isInsideFeature(pos);
+    if (ChunkGenerator::VILLAGE_NAME.compare(featureName) == 0 && m_villageFeature) {
+        return m_villageFeature->isInsideFeature(pos);
     }
-    if (ChunkGenerator::MINESHAFT_NAME.compare(featureName) == 0) {
-        return m_mineshaftFeature && m_mineshaftFeature->isInsideFeature(pos);
+    if (ChunkGenerator::MINESHAFT_NAME.compare(featureName) == 0 && m_mineshaftFeature) {
+        return m_mineshaftFeature->isInsideFeature(pos);
     }
-    if (ChunkGenerator::TEMPLE_NAME.compare(featureName) == 0) {
-        return m_randomScatteredLargeFeature && m_randomScatteredLargeFeature->isInsideFeature(pos);
+    if (ChunkGenerator::TEMPLE_NAME.compare(featureName) == 0 && m_randomScatteredLargeFeature) {
+        return m_randomScatteredLargeFeature->isInsideFeature(pos);
     }
 
     return false;

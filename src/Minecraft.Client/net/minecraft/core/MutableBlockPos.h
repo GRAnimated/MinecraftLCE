@@ -4,6 +4,7 @@
 
 class MutableBlockPos : public BlockPos {
 public:
+    MutableBlockPos();
     MutableBlockPos(int, int, int);
     MutableBlockPos(const BlockPos&);
 
@@ -19,4 +20,6 @@ public:
     }
 
     void set(const BlockPos&);
+    MutableBlockPos* set(const Vec3i&);
+    MutableBlockPos* move(const Direction*, int amount);
 };
