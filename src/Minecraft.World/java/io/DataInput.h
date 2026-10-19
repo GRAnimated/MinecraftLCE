@@ -12,9 +12,9 @@ public:
     virtual int readUnsignedShort() = 0;
     virtual wchar_t readChar() = 0;
     // is this correct? i swapped the two readFully methods for a match in ByteArrayTag::load
-    virtual void readFully(arrayWithLength<char>) = 0;
-    virtual void readFully(arrayWithLength<unsigned char>) = 0;
-    virtual void readBytes(arrayWithLength<unsigned char>) = 0;
+    virtual bool readFully(arrayWithLength<char>) = 0;
+    virtual bool readFully(arrayWithLength<unsigned char>) = 0;
+    virtual bool readBytes(arrayWithLength<unsigned char>) = 0;
     virtual double readDouble() = 0;
     virtual float readFloat() = 0;
     virtual int readInt() = 0;

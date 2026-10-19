@@ -1,3 +1,5 @@
+#include <type_traits>
+
 #include "NX/Render/RendererCore.h"
 #include "UIScene_MainMenu.h"
 #include "fui/fuiFile.h"
@@ -140,9 +142,7 @@ void UIScene_MainMenu::updateComponents() {
     this->m_uiLayer->showComponent(this->m_padId, EUIComponent_Logo, true);
 }
 
-// NON_MATCHING | Score: 4720 (lower is better)
-// Dunno what inWorldMenu is, and it's missing the atomic bullshit that comes at the bottom which isn't even
-// present on Wii U
+// NON_MATCHING | score: 4720 (lower is better)
 void UIScene_MainMenu::tick() {
     UIScene::tick();
     if (ConsoleUIController::sCurrentScene != EUIScene_HowToPlay
@@ -212,3 +212,24 @@ void UIScene_MainMenu::customDrawSplash(fuiRect* rect) {
 bool UIScene_MainMenu::hasFocus(int i) {
     return this->m_focusRelated;
 }
+
+// 0x71005d9034: remove both components before destroying controls and UIScene.
+UIScene_MainMenu::~UIScene_MainMenu() {
+    m_uiLayer->removeComponent(EUIComponent_Panorama);
+    m_uiLayer->removeComponent(EUIComponent_Logo);
+}
+
+// 0x71005d9574, virtual slot 7 of the original main-menu vtable.
+// name guessed
+std::wstring UIScene_MainMenu::getMoviePath() {
+    return L"MainMenu";
+}
+
+// 0x71006655e8, virtual slot 11 of the original main-menu vtable.
+// name guessed
+EUIScene UIScene_MainMenu::getSceneType() {
+    return EUIScene_MainMenu;
+}
+
+static_assert(!std::is_abstract<UIScene_MainMenu>::value,
+              "The original main-menu scene must be instantiable");

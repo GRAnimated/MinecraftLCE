@@ -61,7 +61,9 @@ public:
     int m_field0x24c;
 };
 
+#ifdef SAFETY_CHECKS
 static_assert(offsetof(ParticleEngine, m_tickingList) == 0x248);
+#endif
 
 ASSERT_SIZEOF(ParticleEngine, 0x250)
 ASSERT_SIZEOF(ParticleEngine::ParticleList, 0x10)

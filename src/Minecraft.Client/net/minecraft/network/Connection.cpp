@@ -52,16 +52,16 @@ void Connection::_init() {
 Connection::~Connection() {
     m_isRunning = false;
 
-    nn::os::FinalizeMutex(&m_isRunningMutex);
+    DeleteCriticalSection(&m_isRunningMutex);
 
     if (m_dataInputStream)
         m_dataInputStream->close();
     m_runReadThread->WaitForCompletion(0xFFFFFFFF);
     m_runWriteThread->WaitForCompletion(0xFFFFFFFF);
 
-    nn::os::FinalizeMutex(&m_outgoingMutex);
-    nn::os::FinalizeMutex(&m_countMutex);
-    nn::os::FinalizeMutex(&m_incomingMutex);
+    DeleteCriticalSection(&m_outgoingMutex);
+    DeleteCriticalSection(&m_countMutex);
+    DeleteCriticalSection(&m_incomingMutex);
 
     delete m_c4JEventImpl1;
     delete m_c4JEventImpl2;
@@ -155,8 +155,7 @@ int Connection::runRead(void* conn) {
     return 0;
 }
 
-// NON_MATCHING: i've improved match within PULL_URL, it could be that it's just illusional improvement (as
-// those are if and while hell)
+// NON_MATCHING | score: 570 (lower is better)
 int Connection::runWrite(void* conn) {
     Connection* connection = (Connection*)conn;
     ShutdownManager::HasStarted(ShutdownManager::EThreadId::_9);

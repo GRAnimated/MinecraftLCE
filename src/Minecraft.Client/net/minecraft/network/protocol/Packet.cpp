@@ -1,5 +1,7 @@
 #include "net/minecraft/network/protocol/Packet.h"
 
+#include "net/minecraft/core/System.h"
+
 #import "game/BlockRegionUpdatePacket.h"
 #import "game/ChunkVisibilityAreaPacket.h"
 #import "game/ChunkVisibilityPacket.h"
@@ -122,38 +124,9 @@
 #import "game/VotePacket.h"
 #import "game/XZPacket.h"
 
-#include "net/minecraft/core/System.h"
-
 #include <sstream>
 
-Packet::Packet() {
-    m_createdTime = System::processTimeInMilliSecs();
-    m_shouldDelay = false;
-}
-
-void Packet::handle(PacketListener* listener) {}
-
-int Packet::getEstimatedSize() {
-    return 8;
-}
-
-bool Packet::canBeInvalidated() {
-    return false;
-}
-
-bool Packet::isInvalidatedBy(std::shared_ptr<Packet> packet) {
-    return false;
-}
-
-// amazing
-bool Packet::isAync() {
-    return false;
-}
-
-bool Packet::tryReplaceDuplicatePacket(std::deque<std::shared_ptr<Packet>>* duplicatePacket) {
-    return false;
-}
-
+// NON_MATCHING | score: 1070 (lower is better)
 std::wstring Packet::readUtf(DataInputStream* in, int maxLength) {
     short length = in->readShort();
 
@@ -428,4 +401,34 @@ void Packet::staticCtor() {
         ClientboundChangeDifficultyPacket::create, L"ChangeDifficulty");
     map(254, false, true, false, false, typeid(GetInfoPacket), GetInfoPacket::create, L"GetInfo");
     map(255, true, true, true, false, typeid(DisconnectPacket), DisconnectPacket::create, L"Disconnect");
+}
+
+Packet::Packet() {
+    m_createdTime = System::processTimeInMilliSecs();
+    m_shouldDelay = false;
+}
+
+// NON_MATCHING | score: 805 (lower is better)
+Packet::~Packet() = default;
+
+void Packet::handle(PacketListener* listener) {}
+
+int Packet::getEstimatedSize() {
+    return 8;
+}
+
+bool Packet::canBeInvalidated() {
+    return false;
+}
+
+bool Packet::isInvalidatedBy(std::shared_ptr<Packet> packet) {
+    return false;
+}
+
+bool Packet::isAync() {
+    return false;
+}
+
+bool Packet::tryReplaceDuplicatePacket(std::deque<std::shared_ptr<Packet>>* duplicatePacket) {
+    return false;
 }

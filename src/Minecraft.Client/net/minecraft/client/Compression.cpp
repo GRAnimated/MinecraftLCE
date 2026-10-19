@@ -35,8 +35,8 @@ Compression::~Compression() {
     XMemDestroyCompressionContext(this->m_xMemCompressionContext);
     XMemDestroyDecompressionContext(this->m_xMemDecompressionContext);
 
-    nn::os::FinalizeMutex(&this->m_cMutex);
-    nn::os::FinalizeMutex(&this->m_dcMutex);
+    DeleteCriticalSection(&this->m_cMutex);
+    DeleteCriticalSection(&this->m_dcMutex);
 
     if (this->m_dcData) {
         delete this->m_dcData;
@@ -281,4 +281,40 @@ bool Compression::internalDecompressRle(void* dst, unsigned int* dstSize, void* 
     // thanks 4J for making this specific decompression function return bool, also it always returns false...
     // why?
     return false;
+}
+
+// NON_MATCHING | score: 5762 (lower is better)
+int Compression::internalCompressRle(void* dst, uint* dstSize, void* src, uint srcSize) {
+    unsigned char* output = static_cast<unsigned char*>(dst);
+    unsigned char* const begin = output;
+    unsigned char* input = static_cast<unsigned char*>(src);
+    const uint capacity = *dstSize;
+    PIXBeginNamedEvent(0.0f, "RLE compression");
+    unsigned char* const end = input + srcSize;
+    for (;;) {
+        const unsigned char value = *input;
+        uint count = 1;
+        while (input + count != end && count < 256 && input[count] == value)
+            ++count;
+        input += count;
+        if (count >= 4) {
+            *output++ = 0xff;
+            *output++ = static_cast<unsigned char>(count - 1);
+            *output++ = value;
+        } else if (value == 0xff) {
+            *output++ = 0xff;
+            *output++ = static_cast<unsigned char>(count - 1);
+        } else {
+            for (uint i = 0; i < count; ++i)
+                *output++ = value;
+        }
+        const bool more = input != end;
+        const uint written = static_cast<uint>(output - begin);
+        const bool full = output >= begin + capacity - 3;
+        if (!more || full) {
+            PIXEndNamedEvent();
+            *dstSize = written;
+            return more ? static_cast<int>(0x80cc0001u) : 0;
+        }
+    }
 }

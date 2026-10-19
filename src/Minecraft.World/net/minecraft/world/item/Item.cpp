@@ -59,8 +59,10 @@ bool Item::canBeDepleted() {
     return this->m_maxDamage > 0 && (!this->m_stackedByData || this->m_maxStackSize == 1);
 }
 
-void Item::setIconName(const std::wstring& iconName) {
+// NON_MATCHING | score: 0 (lower is better)
+Item* Item::setIconName(const std::wstring& iconName) {
     this->m_iconName = iconName;
+    return this;
 }
 
 not_null_ptr<ItemInstance> Item::getDefaultInstance() {
@@ -100,6 +102,14 @@ not_null_ptr<ItemInstance> Item::finishUsingItem(not_null_ptr<ItemInstance> item
 
 int Item::getMaxStackSize() {
     return this->m_maxStackSize;
+}
+
+int Item::getMaxDamage() {
+    return m_maxDamage;
+}
+
+bool Item::isStackedByData() {
+    return m_stackedByData;
 }
 
 int Item::getLevelDataForAuxValue(int) {

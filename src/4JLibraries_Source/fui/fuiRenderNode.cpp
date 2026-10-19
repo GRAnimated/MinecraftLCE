@@ -1,11 +1,14 @@
 #include "fui/fuiRenderNode.h"
 
+#include <cstring>
+
 #include "fui/fuiRenderNodeTimeline.h"
 #include "fui/node/FJ_FuiNodeStage.h"
 #include <cmath>
 
 fuiMatrix fuiRenderNode::GLOBAL_MATRIX = {1.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f};
-fuiRenderNodeColor fuiRenderNode::DEFAULT_COLORS[2] = {{1.0f, 1.0f, 1.0f, 1.0f}, {0.0f, 0.0f, 0.0f, 0.0f}};
+// Original 0x71010ed6a8: additive zero followed by multiplicative identity.
+fuiRenderNodeColor fuiRenderNode::DEFAULT_COLORS[2] = {{0.0f, 0.0f, 0.0f, 0.0f}, {1.0f, 1.0f, 1.0f, 1.0f}};
 
 fuiRenderNode::fuiRenderNode(fuiRenderNode* stage, fuiRenderNode* timeline, fuiObject* fuiObject,
                              unsigned int a5, eFuiObjectType fuiObjectType, unsigned char a7, fuiRGBA* color,
@@ -200,4 +203,10 @@ void fuiRenderNode::generateGlobalMatrix() {
 }
 FJ_FuiNode* fuiRenderNode::Create(fuiRenderNode* node) {
     return new FJ_FuiNode(node);
+}
+
+// 0x710048a3dc: the wrapper belongs to the render node.
+fuiRenderNode::~fuiRenderNode() {
+    delete m_fuiNodeStage;
+    m_fuiNodeStage = nullptr;
 }

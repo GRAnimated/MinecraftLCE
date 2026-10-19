@@ -1,5 +1,9 @@
 #include "net/minecraft/client/CMinecraftApp.h"
 
+#include "net/minecraft/client/ArchiveFile.h"
+#include "net/minecraft/client/Minecraft.h"
+#include "net/minecraft/client/resources/TexturePackRepository.h"
+
 #include "net/minecraft/world/level/gamemode/GameType.h"
 
 bool CMinecraftApp::isXuidNotch(PlayerUID* id) {
@@ -113,3 +117,41 @@ bool CMinecraftApp::GetChangingSessionType() {
 bool CMinecraftApp::GetGameStarted() {
     return this->m_gameStarted;
 }
+
+/** Custom access to the archive field beyond the partial CMinecraftApp layout. */
+#define MEDIA_ARCHIVE(app) (*reinterpret_cast<ArchiveFile**>(reinterpret_cast<unsigned char*>(app) + 0x210))
+
+void CMinecraftApp::loadMediaArchive() {
+    std::wstring path(L"");
+    path.assign(L"Common\\Media\\MediaNX.arc");
+    if (!path.empty())
+        MEDIA_ARCHIVE(this) = new ArchiveFile(File(path));
+}
+
+// NON_MATCHING | score: 305 (lower is better)
+bool CMinecraftApp::hasArchiveFile(const std::wstring& name, bool baseOnly) {
+    Minecraft* minecraft = Minecraft::GetInstance();
+    if (minecraft && minecraft->m_texturePackRepository) {
+        TexturePack* pack = minecraft->m_texturePackRepository->getSelected();
+        if (pack && (baseOnly ^ true) && pack->unk1() && pack->getArchive()) {
+            if (pack->getArchive()->hasFile(name))
+                return true;
+        }
+    }
+    return MEDIA_ARCHIVE(this)->hasFile(name);
+}
+
+// NON_MATCHING | score: 305 (lower is better)
+arrayWithLength<unsigned char> CMinecraftApp::getArchiveFile(const std::wstring& name, bool baseOnly) {
+    Minecraft* minecraft = Minecraft::GetInstance();
+    if (minecraft && minecraft->m_texturePackRepository) {
+        TexturePack* pack = minecraft->m_texturePackRepository->getSelected();
+        if (pack && (baseOnly ^ true) && pack->unk1() && pack->getArchive()) {
+            if (pack->getArchive()->hasFile(name))
+                return pack->getArchive()->getFile(name);
+        }
+    }
+    return MEDIA_ARCHIVE(this)->getFile(name);
+}
+
+#undef MEDIA_ARCHIVE

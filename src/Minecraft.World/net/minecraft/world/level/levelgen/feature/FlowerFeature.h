@@ -7,9 +7,9 @@ class FlowerFeature : public Feature {
 public:
     FlowerFeature(FlowerBlock*, FlowerBlock::Flower*);
 
-    ~FlowerFeature() override;
     bool place(Level* level, Random& random, const BlockPos& pos) override;
+    void setFlower(FlowerBlock*, FlowerBlock::Flower*);
 
-    void* m_field10;
-    void* m_field18;
+    FlowerBlock* m_flower;
+    const BlockState* m_state;
 };

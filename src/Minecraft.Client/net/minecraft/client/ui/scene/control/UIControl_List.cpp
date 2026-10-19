@@ -2,7 +2,12 @@
 
 UIControl_List::UIControl_List() : UIControl_Base() {}
 
-// NON_MATCHING: idk, the for loop is constructed weirdly
+// name guessed
+bool UIControl_List::setupControl(UIScene* scene, fuiRenderNode* node, const std::string& name) {
+    return UIControl_Base::setupControl(scene, node, name);
+}
+
+// NON_MATCHING | score: 1185 (lower is better)
 UIControl_List::~UIControl_List() {
     for (GenericPendingUpdate* update : m_genericPendingUpdates) {
         delete update;

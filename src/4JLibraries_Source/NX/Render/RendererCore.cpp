@@ -15,12 +15,67 @@
 #include <cstring>
 
 __thread Renderer::Context* sContext;
+static __thread MatrixStruct sMatrixResult;
+
+// NON_MATCHING | score: 800 (lower is better)
+extern "C" Renderer::Context* Renderer__getContext() {
+    return sContext;
+}
+
+static const MatrixStruct identityMatrix = {
+    {{1.0f, 0.0f, 0.0f, 0.0f}, {0.0f, 1.0f, 0.0f, 0.0f}, {0.0f, 0.0f, 1.0f, 0.0f}, {0.0f, 0.0f, 0.0f, 1.0f}}};
 unsigned int textureWidths[6] = {1920, 1280, 512, 256, 128, 64};
 unsigned int textureHeights[6] = {1080, 720, 512, 256, 128, 64};
 nn::os::MutexType someRendererMutex;
 
-Renderer::Context::Context(Renderer*, bool a2) {
-    this->m_filler[0] = a2;
+// NON_MATCHING | score: 5575 (lower is better)
+Renderer::Context::Context(Renderer*, bool creationFlag) {
+    m_ptr1DE0 = nullptr;
+    m_ptr1DE8 = nullptr;
+    m_ptr1DF0 = nullptr;
+    m_creationFlag = creationFlag;
+    // Only the base entries are initialized; stack storage and matrix-dirty flags are preserved.
+    m_matrixDepth[0] = 0;
+    m_matrixStacks[0][0] = identityMatrix;
+    m_matrixDepth[1] = 0;
+    m_matrixDepth[2] = 0;
+    m_matrixDepth[3] = 0;
+    m_matrixMode = 0;
+    m_matrixStacks[1][0] = identityMatrix;
+    m_matrixStacks[2][0] = identityMatrix;
+    m_matrixStacks[3][0] = identityMatrix;
+    m_byte1040 = false;
+    m_float1044 = 1.0f;
+    m_lightingEnabled = false;
+    for (int i = 0; i < 4; i++) {
+        m_textureBindings[i] = 0;
+        m_textureBindingDirty[i] = false;
+        m_textureFlags[i] = false;
+    }
+    m_fogEnabled = false;
+    m_byte1DD8 = false;
+    m_commandBuffer = nullptr;
+    m_dword1CE0 = -1;
+    memset(m_data1CE8, 0, sizeof(m_data1CE8));
+    m_byte1CDC = false;
+    m_byte1D38 = false;
+    m_fogDirty = false;
+    m_byte1CE4 = false;
+    m_textureScaleUI[0] = 1.0f;
+    m_textureScaleUI[1] = 1.0f;
+    m_textureScaleUI[2] = 0.0f;
+    m_textureScaleUI[3] = 0.0f;
+    nvnBlendStateSetDefaults(&m_blendState);
+    nvnDepthStencilStateSetDefaults(&m_depthStencilState);
+    nvnDepthStencilStateSetDepthTestEnable(&m_depthStencilState, true);
+    nvnDepthStencilStateSetDepthFunc(&m_depthStencilState, NVN_DEPTH_FUNC_LEQUAL);
+    nvnColorStateSetDefaults(&m_colorState);
+    nvnPolygonStateSetDefaults(&m_polygonState);
+    nvnChannelMaskStateSetDefaults(&m_channelMaskState);
+    m_depthFunc = NVN_DEPTH_FUNC_LEQUAL;
+    for (int i = 0; i < 6; i++)
+        m_stateDirty[i] = true;
+    m_dword1CC0 = 0;
 }
 
 Renderer::Renderer() : C4JRender() {
@@ -31,7 +86,7 @@ Renderer::Renderer() : C4JRender() {
     Renderer::sInstance = this;
 }
 
-// NON_MATCHING: inline the tls offset getter, could be some compiler flag
+// NON_MATCHING | score: 800 (lower is better)
 void Renderer::InitialiseContext(bool idk) {
     sContext = new Renderer::Context(this, idk);
 }
@@ -428,4 +483,121 @@ float32x4_t Renderer::MatrixMult(float* matrix) {
 
 void Renderer::UpdateGamma(unsigned short gamma) {
     this->m_gammaIntensity = gamma;
+}
+
+void Renderer::MatrixMode(int mode) {
+    Renderer__getContext()->m_matrixMode = mode;
+}
+
+void Renderer::MatrixSetIdentity() {
+    Context* context = Renderer__getContext();
+    int mode = context->m_matrixMode;
+    MatrixStruct& top = context->m_matrixStacks[mode][context->m_matrixDepth[mode]];
+    top.m__[0] = identityMatrix.m__[0];
+    top.m__[1] = identityMatrix.m__[1];
+    top.m__[2] = identityMatrix.m__[2];
+    top.m__[3] = identityMatrix.m__[3];
+    context->m_matrixDirty[context->m_matrixMode] = true;
+}
+
+// name guessed
+// NON_MATCHING | score: 1940 (lower is better)
+float32x4_t Renderer::MultWithStack(MatrixStruct input) {
+    Context* context = Renderer__getContext();
+    int mode = context->m_matrixMode;
+    MatrixStruct& top = context->m_matrixStacks[mode][context->m_matrixDepth[mode]];
+    float32x4_t a = top.m__[0];
+    float32x4_t b = top.m__[1];
+    float32x4_t c = top.m__[2];
+    float32x4_t d = top.m__[3];
+    float32x4_t result;
+    for (int i = 0; i < 4; i++) {
+        float32x4_t column = vmulq_laneq_f32(a, input.m__[i], 0);
+        column = vfmaq_laneq_f32(column, b, input.m__[i], 1);
+        column = vfmaq_laneq_f32(column, c, input.m__[i], 2);
+        result = vfmaq_laneq_f32(column, d, input.m__[i], 3);
+        top.m__[i] = result;
+    }
+    context->m_matrixDirty[context->m_matrixMode] = true;
+    return result;
+}
+
+void Renderer::MatrixTranslate(float x, float y, float z) {
+    MatrixStruct matrix = identityMatrix;
+    matrix.m__[3] = (float32x4_t){x, y, z, 1.0f};
+    MultWithStack(matrix);
+}
+
+// NON_MATCHING | score: 1445 (lower is better)
+void Renderer::MatrixScale(float x, float y, float z) {
+    MatrixStruct matrix
+        = {{{x, 0.0f, 0.0f, 0.0f}, {0.0f, y, 0.0f, 0.0f}, {0.0f, 0.0f, z, 0.0f}, {0.0f, 0.0f, 0.0f, 1.0f}}};
+    MultWithStack(matrix);
+}
+
+// NON_MATCHING | score: 700 (lower is better)
+void Renderer::MatrixOrthogonal(float left, float right, float bottom, float top, float near, float far) {
+    float x = 1.0f / (right - left);
+    float y = 1.0f / (top - bottom);
+    float z = -1.0f / (far - near);
+    MatrixStruct matrix = {{{x + x, 0.0f, 0.0f, 0.0f},
+                            {0.0f, y + y, 0.0f, 0.0f},
+                            {0.0f, 0.0f, z, 0.0f},
+                            {-(left + right) * x, -(bottom + top) * y, z * near, 1.0f}}};
+    MultWithStack(matrix);
+}
+
+void Renderer::MatrixPush() {
+    Context* context = Renderer__getContext();
+    int mode = context->m_matrixMode;
+    MatrixStruct* top = &context->m_matrixStacks[mode][context->m_matrixDepth[mode]];
+    memcpy(top + 1, top, sizeof(MatrixStruct));
+    context->m_matrixDepth[context->m_matrixMode]++;
+}
+
+void Renderer::MatrixPop() {
+    Context* context = Renderer__getContext();
+    context->m_matrixDepth[context->m_matrixMode]--;
+    context->m_matrixDirty[context->m_matrixMode] = true;
+}
+
+// NON_MATCHING | score: 800 (lower is better)
+float* Renderer::MatrixGet(int mode) {
+    Context* context = Renderer__getContext();
+    MatrixStruct& top = context->m_matrixStacks[mode][context->m_matrixDepth[mode]];
+    float32x4_t a = top.m__[0];
+    float32x4_t b = top.m__[1];
+    float32x4_t c = top.m__[2];
+    float32x4_t d = top.m__[3];
+    sMatrixResult.m__[0] = a;
+    sMatrixResult.m__[1] = b;
+    sMatrixResult.m__[2] = c;
+    sMatrixResult.m__[3] = d;
+    return reinterpret_cast<float*>(&sMatrixResult);
+}
+
+void Renderer::Set_matrixDirty() {
+    Context* context = Renderer__getContext();
+    context->m_matrixStacks[0][0].m__[0] = identityMatrix.m__[0];
+    context->m_matrixStacks[0][0].m__[1] = identityMatrix.m__[1];
+    context->m_matrixStacks[0][0].m__[2] = identityMatrix.m__[2];
+    context->m_matrixStacks[0][0].m__[3] = identityMatrix.m__[3];
+    context->m_matrixStacks[1][0].m__[0] = identityMatrix.m__[0];
+    context->m_matrixStacks[1][0].m__[1] = identityMatrix.m__[1];
+    context->m_matrixStacks[1][0].m__[2] = identityMatrix.m__[2];
+    context->m_matrixStacks[1][0].m__[3] = identityMatrix.m__[3];
+    context->m_matrixStacks[3][0].m__[0] = identityMatrix.m__[0];
+    context->m_matrixStacks[3][0].m__[1] = identityMatrix.m__[1];
+    context->m_matrixStacks[3][0].m__[2] = identityMatrix.m__[2];
+    context->m_matrixStacks[3][0].m__[3] = identityMatrix.m__[3];
+    context->m_matrixStacks[2][0].m__[0] = identityMatrix.m__[0];
+    context->m_matrixStacks[2][0].m__[1] = identityMatrix.m__[1];
+    context->m_matrixStacks[2][0].m__[2] = identityMatrix.m__[2];
+    context->m_matrixStacks[2][0].m__[3] = identityMatrix.m__[3];
+    context->m_matrixDirty[0] = true;
+    context->m_matrixDirty[1] = true;
+    context->m_matrixDirty[3] = true;
+    context->m_matrixDirty[2] = true;
+    m_dword29C0 = -1;
+    m_dword29C4 = -1;
 }
