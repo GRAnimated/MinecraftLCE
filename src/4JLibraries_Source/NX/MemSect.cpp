@@ -1,4 +1,4 @@
 #include "NX/Platform.h"
 
-// The Switch implementation at 0x7100609ed0 is also a no-op.
+/** No operation on Switch (0x7100609ed0). */
 void MemSect(int) {}

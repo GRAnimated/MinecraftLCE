@@ -1,4 +1,5 @@
-// Indexed names agree with the original colour-name table.
+/** Indexed names agree with the original colour-name table.
+ */
 L"NOTSET",
 L"Foliage_Evergreen",
 L"Foliage_Birch",

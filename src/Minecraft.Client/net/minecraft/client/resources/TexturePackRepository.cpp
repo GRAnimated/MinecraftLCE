@@ -2,7 +2,7 @@
 
 #include <unordered_map>
 
-TexturePack* TexturePackRepository::sDefaultTexturePack;
+TexturePack* TexturePackRepository::sDefaultTexturePack;  // name guessed
 
 TexturePackRepository::TexturePackRepository(File file, Minecraft* mc) {
     if (!sDefaultTexturePack) {
@@ -24,4 +24,15 @@ TexturePackRepository::TexturePackRepository(File file, Minecraft* mc) {
     this->m_unk1 = nullptr;
     this->m_unk2 = nullptr;
     this->m_unk12 = nullptr;
+}
+
+TexturePack* TexturePackRepository::getSelected() {
+    if (m_selectedTexturePack && m_selectedTexturePack->unk1() && m_selectedTexturePack->unk2())
+        return m_selectedTexturePack;
+    return sDefaultTexturePack;
+}
+
+// name guessed
+bool TexturePackRepository::isUsingDefault() {
+    return getSelected() == sDefaultTexturePack;
 }

@@ -17,6 +17,7 @@
 __thread Renderer::Context* sContext;
 static __thread MatrixStruct sMatrixResult;
 
+// NON_MATCHING | score: 800 (lower is better)
 extern "C" Renderer::Context* Renderer__getContext() {
     return sContext;
 }
@@ -27,7 +28,7 @@ unsigned int textureWidths[6] = {1920, 1280, 512, 256, 128, 64};
 unsigned int textureHeights[6] = {1080, 720, 512, 256, 128, 64};
 nn::os::MutexType someRendererMutex;
 
-// NON_MATCHING: the original also creates an unused temporary state object.
+// NON_MATCHING | score: 5575 (lower is better)
 Renderer::Context::Context(Renderer*, bool creationFlag) {
     m_ptr1DE0 = nullptr;
     m_ptr1DE8 = nullptr;
@@ -85,7 +86,7 @@ Renderer::Renderer() : C4JRender() {
     Renderer::sInstance = this;
 }
 
-// NON_MATCHING: inline the tls offset getter, could be some compiler flag
+// NON_MATCHING | score: 800 (lower is better)
 void Renderer::InitialiseContext(bool idk) {
     sContext = new Renderer::Context(this, idk);
 }
@@ -499,6 +500,8 @@ void Renderer::MatrixSetIdentity() {
     context->m_matrixDirty[context->m_matrixMode] = true;
 }
 
+// name guessed
+// NON_MATCHING | score: 1940 (lower is better)
 float32x4_t Renderer::MultWithStack(MatrixStruct input) {
     Context* context = Renderer__getContext();
     int mode = context->m_matrixMode;
@@ -525,12 +528,14 @@ void Renderer::MatrixTranslate(float x, float y, float z) {
     MultWithStack(matrix);
 }
 
+// NON_MATCHING | score: 1445 (lower is better)
 void Renderer::MatrixScale(float x, float y, float z) {
     MatrixStruct matrix
         = {{{x, 0.0f, 0.0f, 0.0f}, {0.0f, y, 0.0f, 0.0f}, {0.0f, 0.0f, z, 0.0f}, {0.0f, 0.0f, 0.0f, 1.0f}}};
     MultWithStack(matrix);
 }
 
+// NON_MATCHING | score: 700 (lower is better)
 void Renderer::MatrixOrthogonal(float left, float right, float bottom, float top, float near, float far) {
     float x = 1.0f / (right - left);
     float y = 1.0f / (top - bottom);
@@ -556,6 +561,7 @@ void Renderer::MatrixPop() {
     context->m_matrixDirty[context->m_matrixMode] = true;
 }
 
+// NON_MATCHING | score: 800 (lower is better)
 float* Renderer::MatrixGet(int mode) {
     Context* context = Renderer__getContext();
     MatrixStruct& top = context->m_matrixStacks[mode][context->m_matrixDepth[mode]];

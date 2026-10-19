@@ -100,7 +100,8 @@ public:
 
     virtual void Tick();
     virtual void UpdateGamma(unsigned short gamma);
-    // NX maintains four independently selected matrix stacks, each with sixteen entries.
+    /** NX maintains four independently selected matrix stacks, each with sixteen entries.
+     */
     virtual void MatrixMode(int);
     virtual void MatrixSetIdentity();
     virtual void MatrixTranslate(float, float, float);

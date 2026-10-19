@@ -1,12 +1,13 @@
 #include "net/minecraft/sounds/SoundEvent.h"
 
 const SoundEvent* SoundEvent::UI_PRESS;
-const SoundEvent* SoundEvent::ITEM_PICKUP;
+const SoundEvent* SoundEvent::ITEM_PICKUP;  // name guessed
 const SoundEvent* SoundEvent::ENTER_THERMAL;
 const SoundEvent* SoundEvent::ENTER_BOOST;
-MappedRegistry<ResourceLocation, const SoundEvent*> SoundEvent::Registry;
+MappedRegistry<ResourceLocation, const SoundEvent*> SoundEvent::Registry;  // name guessed
 int SoundEvent::NEXT_ID;
 
+// name guessed
 SoundEvent::SoundEvent(std::wstring name, float range) {
     m_id = -1;
     m_flags = 0;
@@ -14,6 +15,8 @@ SoundEvent::SoundEvent(std::wstring name, float range) {
     m_range = range;
 }
 
+// name guessed
+// NON_MATCHING | score: 20 (lower is better)
 SoundEvent::SoundEvent(std::wstring name, float range, int flags) {
     m_id = -1;
     m_name = name;
@@ -21,19 +24,24 @@ SoundEvent::SoundEvent(std::wstring name, float range, int flags) {
     m_range = range;
 }
 
+// name guessed
 std::wstring SoundEvent::getName() {
     return m_name;
 }
+// name guessed
 float SoundEvent::getRange() {
     return m_range;
 }
+// name guessed
 bool SoundEvent::isUISound() {
     return m_flags == 1;
 }
+// name guessed
 void SoundEvent::setId(int id) {
     m_id = id;
 }
 
+// name guessed
 SoundEvent* SoundEvent::registerEvent(SoundEvent* event) {
     event->setId(NEXT_ID);
     ResourceLocation location(event->getName());

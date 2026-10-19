@@ -53,6 +53,7 @@ float TextureAtlasSprite::getV(double pixel) const {
     return (float)pixel * 0.0625f * span + base;
 }
 
+// name guessed
 void TextureAtlasSprite::adjustUV(float& start, float& end) {
     float* lower = &start;
     float* upper = &end;

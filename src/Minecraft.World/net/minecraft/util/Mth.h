@@ -5,8 +5,6 @@
 
 class Random;
 
-using MthLong = long;
-
 // Meth
 class Mth {
 public:
@@ -34,8 +32,8 @@ public:
     static double wrapDegrees(double);
     static int cached_atan_index(int, int);
     static void init();
-    static MthLong lfloor(double);
-    static MthLong round(double);
+    static long lfloor(double);
+    static long round(double);
     static double clampedLerp(double, double, double);
     static double frac(double);
     static int hsvToRgb(float, float, float);

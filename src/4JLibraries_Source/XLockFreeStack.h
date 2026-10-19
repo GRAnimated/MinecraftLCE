@@ -6,13 +6,15 @@
 
 #include <vector>
 
-// The original implementation serializes a pointer vector with a mutex.
+/** The original implementation serializes a pointer vector with a mutex.
+ */
 template <typename T>
 class XLockFreeStack {
 public:
     XLockFreeStack();
     ~XLockFreeStack();
 
+    // name guessed
     void doSomething() {}
     void Push(T*);
     T* Pop();

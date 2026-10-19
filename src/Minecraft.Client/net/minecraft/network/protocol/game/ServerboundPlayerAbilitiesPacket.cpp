@@ -18,6 +18,7 @@ ServerboundPlayerAbilitiesPacket::ServerboundPlayerAbilitiesPacket() : Packet() 
     m_walkingSpeed = 0.0f;
 }
 
+// name guessed
 ServerboundPlayerAbilitiesPacket::ServerboundPlayerAbilitiesPacket(Abilities* abilities) : Packet() {
     setInvulnerable(abilities->m_isInvulnerable);
     setFlying(abilities->m_isFlying);
@@ -60,42 +61,52 @@ void ServerboundPlayerAbilitiesPacket::handle(PacketListener* listener) {
     listener->handlePlayerAbilities(shared_from_this());
 }
 
+// name guessed
 void ServerboundPlayerAbilitiesPacket::setInvulnerable(bool value) {
     m_isInvulnerable = value;
 }
 
+// name guessed
 void ServerboundPlayerAbilitiesPacket::setFlying(bool value) {
     m_isFlying = value;
 }
 
+// name guessed
 void ServerboundPlayerAbilitiesPacket::setCanFly(bool value) {
     m_isEnableFly = value;
 }
 
+// name guessed
 void ServerboundPlayerAbilitiesPacket::setInstabuild(bool value) {
     m_isInstabuild = value;
 }
 
+// name guessed
 void ServerboundPlayerAbilitiesPacket::setFlyingSpeed(float value) {
     m_flyingSpeed = value;
 }
 
+// name guessed
 void ServerboundPlayerAbilitiesPacket::setWalkingSpeed(float value) {
     m_walkingSpeed = value;
 }
 
+// name guessed
 bool ServerboundPlayerAbilitiesPacket::isInvulnerable() {
     return m_isInvulnerable;
 }
 
+// name guessed
 bool ServerboundPlayerAbilitiesPacket::isFlying() {
     return m_isFlying;
 }
 
+// name guessed
 bool ServerboundPlayerAbilitiesPacket::canFly() {
     return m_isEnableFly;
 }
 
+// name guessed
 bool ServerboundPlayerAbilitiesPacket::canInstabuild() {
     return m_isInstabuild;
 }

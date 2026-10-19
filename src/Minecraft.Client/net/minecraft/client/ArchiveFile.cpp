@@ -9,6 +9,7 @@
 [[noreturn]] void archiveLoadError(void*, const wchar_t*,
                                    ...) asm("_ZN20CConsoleMinecraftApp14FatalLoadErrorEPKwz");
 
+// NON_MATCHING | score: 1440 (lower is better)
 ArchiveFile::ArchiveFile(File file) : File(), m_data(nullptr), m_inMemory(false) {
     File::operator=(file);
     if (!file.exists())
@@ -32,6 +33,7 @@ ArchiveFile::~ArchiveFile() {
         delete item.second;
 }
 
+// NON_MATCHING | score: 565 (lower is better)
 void ArchiveFile::readHeader(DataInputStream* input) {
     const int count = input->readInt();
     for (int i = 0; i < count; ++i) {
@@ -51,6 +53,7 @@ bool ArchiveFile::hasFile(const std::wstring& name) {
     return m_entries.find(name) != m_entries.end();
 }
 
+// NON_MATCHING | score: 9920 (lower is better)
 arrayWithLength<unsigned char> ArchiveFile::getFile(const std::wstring& name) {
     const auto found = m_entries.find(name);
     if (found == m_entries.end()) {

@@ -24,6 +24,7 @@ void BlockRenderer::clearLightOverride() {
     m_lightOverride = -1;
 }
 
+// name guessed
 bool BlockRenderer::hasLightOverride() {
     return m_lightOverride != -1;
 }
@@ -41,6 +42,7 @@ void BlockRenderer::setShape(const AABB* shape) {
     }
 }
 
+// name guessed
 void BlockRenderer::renderNorth(const BlockState* blockState, double x, double y, double z,
                                 TextureAtlasSprite* sprite) {
     if (hasFixedTexture())
@@ -55,6 +57,7 @@ void BlockRenderer::renderNorth(const BlockState* blockState, double x, double y
     renderNorth(blockState, x, y, z, sprite, u0, v0, u1, v1);
 }
 
+// name guessed
 void BlockRenderer::renderSouth(const BlockState* blockState, double x, double y, double z,
                                 TextureAtlasSprite* sprite) {
     if (hasFixedTexture())
@@ -69,6 +72,7 @@ void BlockRenderer::renderSouth(const BlockState* blockState, double x, double y
     renderSouth(blockState, x, y, z, sprite, u0, v0, u1, v1);
 }
 
+// name guessed
 void BlockRenderer::renderWest(const BlockState* blockState, double x, double y, double z,
                                TextureAtlasSprite* sprite) {
     if (hasFixedTexture())
@@ -83,6 +87,7 @@ void BlockRenderer::renderWest(const BlockState* blockState, double x, double y,
     renderWest(blockState, x, y, z, sprite, u0, v0, u1, v1);
 }
 
+// name guessed
 void BlockRenderer::renderEast(const BlockState* blockState, double x, double y, double z,
                                TextureAtlasSprite* sprite) {
     if (hasFixedTexture())
@@ -97,6 +102,7 @@ void BlockRenderer::renderEast(const BlockState* blockState, double x, double y,
     renderEast(blockState, x, y, z, sprite, u0, v0, u1, v1);
 }
 
+// name guessed
 void BlockRenderer::renderFaceUp(const BlockState* blockState, double x, double y, double z,
                                  TextureAtlasSprite* sprite) {
     if (hasFixedTexture())
@@ -111,6 +117,7 @@ void BlockRenderer::renderFaceUp(const BlockState* blockState, double x, double 
     renderFaceUp(blockState, x, y, z, sprite, u0, v0, u1, v1);
 }
 
+// name guessed
 void BlockRenderer::renderFaceDown(const BlockState* blockState, double x, double y, double z,
                                    TextureAtlasSprite* sprite) {
     if (hasFixedTexture())
@@ -125,7 +132,7 @@ void BlockRenderer::renderFaceDown(const BlockState* blockState, double x, doubl
     renderFaceDown(blockState, x, y, z, sprite, u0, v0, u1, v1);
 }
 
-// NON_MATCHING: reconstructed from the original face tessellator.
+// NON_MATCHING | score: 7588 (lower is better)
 void BlockRenderer::renderFaceUp(const BlockState* blockState, double x, double y, double z,
                                  TextureAtlasSprite* sprite, float u, float v, float u2, float v2) {
     float u0 = u;
@@ -250,7 +257,7 @@ void BlockRenderer::renderFaceUp(const BlockState* blockState, double x, double 
     }
 }
 
-// NON_MATCHING: reconstructed from the original face tessellator.
+// NON_MATCHING | score: 7193 (lower is better)
 void BlockRenderer::renderFaceDown(const BlockState* blockState, double x, double y, double z,
                                    TextureAtlasSprite* sprite, float u, float v, float u2, float v2) {
     float u0 = u;
@@ -375,7 +382,7 @@ void BlockRenderer::renderFaceDown(const BlockState* blockState, double x, doubl
     }
 }
 
-// NON_MATCHING: reconstructed from the original face tessellator.
+// NON_MATCHING | score: 9521 (lower is better)
 void BlockRenderer::renderNorth(const BlockState* blockState, double x, double y, double z,
                                 TextureAtlasSprite* sprite, float u, float v, float u2, float v2) {
     float u0 = u;
@@ -504,7 +511,7 @@ void BlockRenderer::renderNorth(const BlockState* blockState, double x, double y
     }
 }
 
-// NON_MATCHING: reconstructed from the original face tessellator.
+// NON_MATCHING | score: 7162 (lower is better)
 void BlockRenderer::renderSouth(const BlockState* blockState, double x, double y, double z,
                                 TextureAtlasSprite* sprite, float u, float v, float u2, float v2) {
     float u0 = u;
@@ -633,7 +640,7 @@ void BlockRenderer::renderSouth(const BlockState* blockState, double x, double y
     }
 }
 
-// NON_MATCHING: reconstructed from the original face tessellator.
+// NON_MATCHING | score: 9151 (lower is better)
 void BlockRenderer::renderEast(const BlockState* blockState, double x, double y, double z,
                                TextureAtlasSprite* sprite, float u, float v, float u2, float v2) {
     float u0 = u;
@@ -762,7 +769,7 @@ void BlockRenderer::renderEast(const BlockState* blockState, double x, double y,
     }
 }
 
-// NON_MATCHING: reconstructed from the original face tessellator.
+// NON_MATCHING | score: 8182 (lower is better)
 void BlockRenderer::renderWest(const BlockState* blockState, double x, double y, double z,
                                TextureAtlasSprite* sprite, float u, float v, float u2, float v2) {
     float u0 = u;

@@ -54,6 +54,7 @@ bool UIControl::hasFocus() {
     return false;
 }
 
+// name guessed
 fuiRenderNode* UIControl::getFuiRenderNode() {
     return m_fuiRenderNode;
 }
@@ -66,14 +67,17 @@ float UIControl::getYPos() {
     return m_posY;
 }
 
+// name guessed
 float UIControl::getWidth() {
     return m_width;
 }
 
+// name guessed
 float UIControl::getHeight() {
     return m_height;
 }
 
+// name guessed
 void UIControl::setWidth(float width) {
     if (m_fuiRenderNode) {
         m_fuiRenderNode->setWidth(width);
@@ -91,6 +95,8 @@ void UIControl::setVisible(bool visible) {
     }
 }
 
+// name guessed
+// NON_MATCHING | score: 5 (lower is better)
 bool UIControl::getVisible() {
     bool visible = false;
     if (m_fuiRenderNode)

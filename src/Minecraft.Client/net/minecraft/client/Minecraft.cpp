@@ -160,6 +160,7 @@ void Minecraft::init() {
     Renderer::sInstance->CBuffLockStaticCreations();
 }
 
+// NON_MATCHING | score: 2160 (lower is better)
 void Minecraft::main() {
     std::wstring playerName;
     std::wstring session;
@@ -199,6 +200,7 @@ void Minecraft::start(const std::wstring& str1, const std::wstring& str2) {
     startAndConnectTo(str1, str2, L"");
 }
 
+// NON_MATCHING | score: 5 (lower is better)
 Minecraft::Minecraft(Component* component, Canvas* canvas, MinecraftApplet* minecraftApplet, int width,
                      int height, bool fullscreen) {
     m_fixerUpper = DataFixers::createFixerUpper();

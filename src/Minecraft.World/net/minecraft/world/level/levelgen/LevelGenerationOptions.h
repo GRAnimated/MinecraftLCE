@@ -10,6 +10,7 @@ public:
     LevelRuleset* getRequiredGameRules();
     void loadBaseSaveData();
     bool intersects(const BlockPos& lower, const BlockPos& upper);
-    // LegacyBlockData is the reconstruction's existing name for original BlockPair.
+    /** LegacyBlockData is the reconstruction's existing name for original BlockPair.
+     */
     void getBiomeOverride(int biomeId, Biome::LegacyBlockData* filler, Biome::LegacyBlockData* surface);
 };

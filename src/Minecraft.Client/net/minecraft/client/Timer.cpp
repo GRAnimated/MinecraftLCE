@@ -16,6 +16,7 @@ Timer::Timer(float tps) {
     m_lastSyncMillis = System::processTimeInMilliSecs();
 }
 
+// NON_MATCHING | score: 150 (lower is better)
 void Timer::advanceTime() {
     long long clockMillis = System::processTimeInMilliSecs();
     long long clockDelta = clockMillis - m_lastClockMillis;

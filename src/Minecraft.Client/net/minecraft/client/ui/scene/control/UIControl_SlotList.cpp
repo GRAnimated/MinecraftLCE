@@ -4,6 +4,7 @@ UIControl_SlotList::UIControl_SlotList() {
     m_dword68 = -1;
 }
 
+// name guessed
 bool UIControl_SlotList::setupControl(UIScene* scene, fuiRenderNode* node, const std::string& name) {
     setSettedUp(16);
     bool found = UIControl_Base::setupControl(scene, node, name);
@@ -11,6 +12,7 @@ bool UIControl_SlotList::setupControl(UIScene* scene, fuiRenderNode* node, const
     return found;
 }
 
+// name guessed
 void UIControl_SlotList::ReInit() {
     UIControl::ReInit();
     m_dword68 = -1;

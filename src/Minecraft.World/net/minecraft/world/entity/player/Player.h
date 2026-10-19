@@ -195,7 +195,7 @@ public:
     bool hasInvisiblePrivilege();
     bool isAllowedToFly();
     bool hasInvulnerablePrivilege();
-    // Inferred names for the unnamed entries at 0x71002d0d68 and 0x71002d0e10.
+    // name guessed: the unnamed entries at 0x71002d0d68 and 0x71002d0e10.
     bool usesLegacyFoodHealing();
     bool isHurt();
     void causeFoodExhaustion(float);

@@ -21,7 +21,7 @@ void TextureUtil::decodeJpeg(void* buffer, int len, int* x, int* y) {
     }
 }
 
-// NON_MATCHING: I don't understand the graphic shit too much so this is shitty impl
+// NON_MATCHING | score: 3930 (lower is better)
 void TextureUtil::insertZlibAlphaChannelData(void* data, int width, int height, void* sourceData,
                                              int sourceLen) {
     unsigned long decompressedSize = width * height;
@@ -130,7 +130,7 @@ void StbiFile::skip(void* user, int n) {
     StbiFile::fromUser(user)->m_dataRead += n;
 }
 
-// NON_MATCHING: some weird stuff is going on here, but logic should be the same though
+// NON_MATCHING | score: 115 (lower is better)
 int StbiFile::eof(void* user) {
     return StbiFile::fromUser(user)->m_fileSize <= StbiFile::fromUser(user)->m_dataRead;
 }

@@ -204,3 +204,9 @@ void fuiRenderNode::generateGlobalMatrix() {
 FJ_FuiNode* fuiRenderNode::Create(fuiRenderNode* node) {
     return new FJ_FuiNode(node);
 }
+
+// 0x710048a3dc: the wrapper belongs to the render node.
+fuiRenderNode::~fuiRenderNode() {
+    delete m_fuiNodeStage;
+    m_fuiNodeStage = nullptr;
+}

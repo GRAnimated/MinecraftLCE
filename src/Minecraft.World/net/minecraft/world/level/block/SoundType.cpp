@@ -4,16 +4,16 @@
 #include "net/minecraft/sounds/SoundEvents.h"
 
 const SoundType* SoundType::WOOD;
-const SoundType* SoundType::DIRT;
+const SoundType* SoundType::DIRT;  // name guessed
 const SoundType* SoundType::GRASS;
 const SoundType* SoundType::STONE;
-const SoundType* SoundType::METAL;
+const SoundType* SoundType::METAL;  // name guessed
 const SoundType* SoundType::GLASS;
 const SoundType* SoundType::WOOL;
-const SoundType* SoundType::SAND;
+const SoundType* SoundType::SAND;  // name guessed
 const SoundType* SoundType::SNOW;
 const SoundType* SoundType::LADDER;
-const SoundType* SoundType::ANVIL;
+const SoundType* SoundType::ANVIL;  // name guessed
 const SoundType* SoundType::SLIME_BLOCK;
 
 SoundType::SoundType(float volume, float pitch, const SoundEvent* dig, const SoundEvent* step,
@@ -21,19 +21,24 @@ SoundType::SoundType(float volume, float pitch, const SoundEvent* dig, const Sou
     : m_volume(volume), m_pitch(pitch), m_digSound(dig), m_stepSound(step), m_placeSound(place),
       m_hitSound(hit), m_fallSound(fall) {}
 
+// name guessed
 const SoundEvent* SoundType::getBreakSound() {
     return m_digSound;
 }
+// name guessed
 const SoundEvent* SoundType::getStepSound() {
     return m_stepSound;
 }
+// name guessed
 const SoundEvent* SoundType::getHitSound() {
     return m_hitSound;
 }
+// name guessed
 const SoundEvent* SoundType::getFallSound() {
     return m_fallSound;
 }
 
+// name guessed
 void SoundType::staticCtor() {
     WOOD = new SoundType(1.0f, 1.0f, SoundEvents::DIG_WOOD_4, SoundEvents::STEP_WOOD_3,
                          SoundEvents::DIG_WOOD_5, SoundEvents::STEP_WOOD_2, SoundEvents::STEP_WOOD);

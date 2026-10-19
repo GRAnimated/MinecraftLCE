@@ -32,7 +32,8 @@ public:
     virtual void unk17() = 0;
     virtual void loadColourTable() = 0;
     virtual void loadStructureManager() = 0;
-    // Retain recovered slots while their full signatures remain unresolved.
+    /** Retain recovered slots while their full signatures remain unresolved.
+     */
     virtual void unk18() = 0;
     virtual void unk19() = 0;
     virtual void unk20() = 0;

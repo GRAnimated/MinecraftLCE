@@ -3,22 +3,25 @@
 #include "net/minecraft/core/System.h"
 #include "nn/os/os_Mutex.h"
 
-// Inferred name for the original mutex-finalization wrapper at 0x710060855c.
+// name guessed: the original mutex-finalization wrapper at 0x710060855c.
 void DeleteCriticalSection(nn::os::MutexType* mutex) {
     nn::os::FinalizeMutex(mutex);
 }
 
 template <typename T>
+// name guessed
 XLockFreeStack<T>::XLockFreeStack() {
     InitializeCriticalSectionAndSpinCount(&m_mutex, 0x1400);
 }
 
 template <typename T>
+// name guessed
 XLockFreeStack<T>::~XLockFreeStack() {
     DeleteCriticalSection(&m_mutex);
 }
 
 template <typename T>
+// name guessed
 void XLockFreeStack<T>::Push(T* value) {
     EnterCriticalSection(&m_mutex);
     m_vector.push_back(value);

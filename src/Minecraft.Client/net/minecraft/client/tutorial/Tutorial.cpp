@@ -1,8 +1,8 @@
 #include "net/minecraft/client/tutorial/Tutorial.h"
 
-std::vector<int> Tutorial::STATE_ORDER;
+std::vector<int> Tutorial::STATE_ORDER;  // name guessed
 
-// Preserve the original sequence, omissions and append behavior.
+/** Appends the tutorial items in the order stored in the Switch executable. */
 void Tutorial::staticCtor() {
     STATE_ORDER.push_back(1);
     STATE_ORDER.push_back(2);

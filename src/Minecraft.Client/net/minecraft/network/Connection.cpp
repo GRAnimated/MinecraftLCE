@@ -155,8 +155,7 @@ int Connection::runRead(void* conn) {
     return 0;
 }
 
-// NON_MATCHING: i've improved match within PULL_URL, it could be that it's just illusional improvement (as
-// those are if and while hell)
+// NON_MATCHING | score: 570 (lower is better)
 int Connection::runWrite(void* conn) {
     Connection* connection = (Connection*)conn;
     ShutdownManager::HasStarted(ShutdownManager::EThreadId::_9);
