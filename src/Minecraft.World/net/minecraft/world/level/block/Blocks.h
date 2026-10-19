@@ -20,6 +20,7 @@ public:
 
     static void staticInit();
     static Block* get(const std::wstring&);
+    static Block* byString(const std::wstring&);
 
     static inline Block* AIR;
     static inline Block* STONE;

@@ -5,6 +5,7 @@
 
 #include <memory>
 #include <string>
+#include <vector>
 
 class Block;
 class BlockState;
@@ -23,7 +24,7 @@ class Random;
 class Tag;
 class CensoredString;
 
-class ItemInstance {
+class ItemInstance : public std::enable_shared_from_this<ItemInstance> {
 public:
     static not_null_ptr<ItemInstance> EMPTY;
 
@@ -53,7 +54,7 @@ public:
     void use(Level*, std::shared_ptr<Player>, InteractionHand::EInteractionHand);
     void finishUsingItem(Level*, std::shared_ptr<Player>);
     CompoundTag* save(CompoundTag*);
-    void getMaxStackSize();
+    int getMaxStackSize();
     bool hasTag();
     CompoundTag* getTag();
     bool isDamageableItem();
@@ -130,8 +131,6 @@ public:
     bool operator=(const ItemInstance&);
 
 private:
-    void* m_qword0 = nullptr;
-    void* m_qword8 = nullptr;
     int m_count;
     int m_dword14;
     Item* m_item;
@@ -139,11 +138,12 @@ private:
     bool m_isEmpty;
     int m_damage;
     bool m_byte30;
-    void* m_qword38 = nullptr;
-    void* m_qword40 = nullptr;
-    std::shared_ptr<CensoredString*> m_censoredString;
+    std::weak_ptr<ItemFrame> m_frame;
+    std::shared_ptr<CensoredString> m_censoredString;
     void* m_qword58;
     bool m_byte60;
     void* m_qword68;
     void* m_qword70;
 };
+
+ASSERT_SIZEOF(ItemInstance, 0x78)

@@ -1,5 +1,7 @@
 #include "net/minecraft/server/level/ServerChunkCache.h"
 
+#include <cstdint>
+
 #include "NX/Platform.h"
 
 #include "net/minecraft/core/BlockPos.h"
@@ -58,7 +60,7 @@ ServerChunkCache::~ServerChunkCache() {
         delete *it;
     }
 
-    nn::os::FinalizeMutex(&m_mutex);
+    DeleteCriticalSection(&m_mutex);
 }
 
 LevelChunk* ServerChunkCache::getChunkIfLoaded(int chunkX, int chunkZ) {
@@ -116,7 +118,7 @@ LevelChunk* ServerChunkCache::getChunkIfGenerated(int chunkX, int chunkZ, bool u
     return loadedChunk;
 }
 
-// NON_MATCHING: Regswap
+// NON_MATCHING | score: 290 (lower is better)
 LevelChunk* ServerChunkCache::load(int chunkX, int chunkZ, LevelChunk* chunk) {
     LevelChunk* active = chunk;
     if (!m_chunkStorage)
@@ -145,7 +147,7 @@ LevelChunk* ServerChunkCache::load(int chunkX, int chunkZ, LevelChunk* chunk) {
     return active;
 }
 
-// NON_MATCHING: A couple instructions placed in the wrong positions
+// NON_MATCHING | score: 860 (lower is better)
 LevelChunk* ServerChunkCache::updateCacheAndPostProcess(int chunkX, int chunkZ, LevelChunk* newChunk,
                                                         LevelChunk* oldChunk, bool unk) {
     if (!inBounds(chunkX, chunkZ)) {
@@ -154,8 +156,9 @@ LevelChunk* ServerChunkCache::updateCacheAndPostProcess(int chunkX, int chunkZ, 
 
     int idx = computeIdx(chunkX, chunkZ);
 
-    if (InterlockedCompareExchangeRelease((volatile long*)&m_chunks[idx], (long)newChunk, (long)oldChunk)
-        == (long)oldChunk) {
+    if (InterlockedCompareExchangeRelease((volatile intptr_t*)&m_chunks[idx], (intptr_t)newChunk,
+                                          (intptr_t)oldChunk)
+        == (intptr_t)oldChunk) {
         EnterCriticalSection(&m_mutex);
 
         PIXBeginNamedEvent(0.0, "Lighting chunk");
@@ -440,7 +443,7 @@ std::wstring ServerChunkCache::gatherStats() {
     return L"ServerChunkCache: ";
 }
 
-std::vector<Biome::MobSpawnerData>* ServerChunkCache::getMobsAt(MobCategory* category, const BlockPos& pos) {
+std::vector<Biome::MobSpawnerData*>* ServerChunkCache::getMobsAt(MobCategory* category, const BlockPos& pos) {
     return m_chunkGenerator->getMobsAt(category, pos);
 }
 

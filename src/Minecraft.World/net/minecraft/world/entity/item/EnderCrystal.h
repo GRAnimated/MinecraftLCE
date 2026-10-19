@@ -4,9 +4,11 @@
 
 class EnderCrystal : public Entity {
 public:
+    EnderCrystal(Level* level);
     EnderCrystal(Level* level, double x, double y, double z);
 
     void setShowBottom(bool show);
+    void setBeamTarget(BlockPos*);
 
     eINSTANCEOF GetType() override;
     void defineSynchedData() override;

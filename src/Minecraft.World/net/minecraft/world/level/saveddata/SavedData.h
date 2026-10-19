@@ -10,7 +10,7 @@ public:
     SavedData(const std::wstring&);
     virtual ~SavedData();
     virtual void load(CompoundTag*) = 0;
-    virtual void save(CompoundTag*) = 0;
+    virtual CompoundTag* save(CompoundTag*) = 0;
 
     void setDirty(bool);
     void setDirty();
