@@ -5,7 +5,8 @@
 
 class KeyedDataWalker : public DataWalker {
 public:
-    // Entity/block-entity registry key selection is not reconstructed here.
+    /** Entity/block-entity registry key selection is not reconstructed here.
+     */
     explicit KeyedDataWalker(eINSTANCEOF);
     ~KeyedDataWalker() override;
     CompoundTag* walk(DataFixer*, CompoundTag*, int version) override;

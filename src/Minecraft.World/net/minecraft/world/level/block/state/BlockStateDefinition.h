@@ -77,7 +77,8 @@ public:
     const std::vector<const Property*>& getProperties() const;
     bool hasProperty(const Property*) const;
     Boxed* getPropertyValue(const Property*, unsigned short state) const;
-    // Property must belong to this definition's encoded state table.
+    /** Property must belong to this definition's encoded state table.
+     */
     const BlockState* getNeighbour(const Property*, Boxed*, unsigned short state) const;
     const BlockState* any();
     const arrayWithLength<const BlockState*>* getPossibleBlockStates() const;

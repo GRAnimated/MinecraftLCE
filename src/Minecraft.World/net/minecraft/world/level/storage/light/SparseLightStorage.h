@@ -42,7 +42,8 @@ private:
     static int sRetirementSlot;
     static XLockFreeStack<unsigned char> sRetired[3];
 
-    // Low 48 bits: buffer pointer; high 16 bits: number of explicit 128-byte slabs.
+    /** Low 48 bits: buffer pointer; high 16 bits: number of explicit 128-byte slabs.
+     */
     unsigned long long m_packed;
 };
 

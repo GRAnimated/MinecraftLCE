@@ -1,7 +1,5 @@
 #pragma once
 
-#include "java/io/JavaLong.h"
-
 #include "net/minecraft/world/ArrayWithLength.h"
 #include "net/minecraft/world/PlayerUID.h"
 
@@ -20,7 +18,7 @@ public:
     virtual double readDouble() = 0;
     virtual float readFloat() = 0;
     virtual int readInt() = 0;
-    virtual JavaLong readLong() = 0;
+    virtual long readLong() = 0;
     virtual short readShort() = 0;
     virtual std::wstring readUTF() = 0;
     virtual int readUTFChar() = 0;

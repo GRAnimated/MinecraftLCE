@@ -30,7 +30,7 @@ bool ShortTag::equals(Tag* other) {
     return Tag::equals(other) && m_data == otherCasted->m_data;
 }
 
-JavaLong ShortTag::getAsLong() {
+long ShortTag::getAsLong() {
     return m_data;
 }
 

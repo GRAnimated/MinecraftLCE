@@ -6,8 +6,9 @@
 
 DEFINE_THREAD_STORAGE(Vec3, 1024)
 
-Vec3* Vec3::ZERO;
+Vec3* Vec3::ZERO;  // name guessed
 
+// name guessed
 void Vec3::staticCtor() {
     ZERO = new Vec3(0.0, 0.0, 0.0);
 }
@@ -16,6 +17,7 @@ Vec3* Vec3::newPermanent(double x, double y, double z) {
     return new Vec3(x, y, z);
 }
 
+// name guessed
 Vec3* Vec3::newPermanent(const Vec3* other) {
     return new Vec3(other->m_x, other->m_y, other->m_z);
 }
@@ -28,10 +30,12 @@ Vec3* Vec3::newTemp(double x, double y, double z) {
     return temp;
 }
 
+// name guessed
 Vec3* Vec3::newTemp(const Vec3* other) {
     return newTemp(other->m_x, other->m_y, other->m_z);
 }
 
+// name guessed
 Vec3* Vec3::newTemp(const Vec3i& other) {
     return newTemp(other.getX(), other.getY(), other.getZ());
 }
@@ -43,24 +47,29 @@ Vec3* Vec3::normalize() {
     return newTemp(m_x / magnitude, m_y / magnitude, m_z / magnitude);
 }
 
+// name guessed
 Vec3* Vec3::lerp(Vec3* other, double weight) {
     return newTemp(m_x + (other->m_x - m_x) * weight, m_y + (other->m_y - m_y) * weight,
                    m_z + (other->m_z - m_z) * weight);
 }
 
+// name guessed
 Vec3* Vec3::vectorTo(Vec3* other) {
     return newTemp(other->m_x - m_x, other->m_y - m_y, other->m_z - m_z);
 }
 
+// name guessed
 Vec3* Vec3::cross(Vec3* other) {
     return newTemp(m_y * other->m_z - m_z * other->m_y, m_z * other->m_x - other->m_z * m_x,
                    other->m_y * m_x - m_y * other->m_x);
 }
 
+// name guessed
 Vec3* Vec3::add(Vec3* other) {
     return add(other->m_x, other->m_y, other->m_z);
 }
 
+// name guessed
 double Vec3::distanceTo(Vec3* other) {
     double dx = other->m_x - m_x;
     double dy = other->m_y - m_y;
@@ -68,14 +77,17 @@ double Vec3::distanceTo(Vec3* other) {
     return sqrt(dx * dx + dy * dy + dz * dz);
 }
 
+// name guessed
 Vec3* Vec3::scale(double multiplier) {
     return newTemp(m_x * multiplier, m_y * multiplier, m_z * multiplier);
 }
 
+// name guessed
 double Vec3::lengthSqr() {
     return m_x * m_x + m_y * m_y + m_z * m_z;
 }
 
+// name guessed
 Vec3* Vec3::getIntermediateWithXValue(Vec3* other, double x) {
     double dx = other->m_x - m_x;
     double dy = other->m_y - m_y;
@@ -89,6 +101,7 @@ Vec3* Vec3::getIntermediateWithXValue(Vec3* other, double x) {
     return newTemp(m_x + dx * weight, m_y + weight * dy, m_z + weight * dz);
 }
 
+// name guessed
 Vec3* Vec3::getIntermediateWithYValue(Vec3* other, double y) {
     double dx = other->m_x - m_x;
     double dy = other->m_y - m_y;
@@ -101,6 +114,7 @@ Vec3* Vec3::getIntermediateWithYValue(Vec3* other, double y) {
     return newTemp(m_x + dx * weight, m_y + dy * weight, m_z + weight * dz);
 }
 
+// name guessed
 Vec3* Vec3::getIntermediateWithZValue(Vec3* other, double z) {
     double dx = other->m_x - m_x;
     double dy = other->m_y - m_y;
@@ -113,6 +127,7 @@ Vec3* Vec3::getIntermediateWithZValue(Vec3* other, double z) {
     return newTemp(m_x + dx * weight, m_y + dy * weight, m_z + dz * weight);
 }
 
+// name guessed
 bool Vec3::equals(Vec3* other) {
     if (other->m_x != m_x)
         return false;
@@ -133,6 +148,7 @@ Vec3* Vec3::yRot(float angle) {
     return newTemp(cosine * m_x + sine * m_z, m_y, cosine * m_z - m_x * sine);
 }
 
+// name guessed
 Vec3* Vec3::zRot(float angle) {
     double cosine = cosf(angle);
     double sine = sinf(angle);

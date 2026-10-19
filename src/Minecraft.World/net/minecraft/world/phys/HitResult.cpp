@@ -4,6 +4,7 @@
 #include "net/minecraft/world/entity/Entity.h"
 #include "net/minecraft/world/phys/Vec3.h"
 
+// name guessed
 HitResult::HitResult(Vec3* hit, const Direction* direction) {
     m_type = 1;
     m_blockPos = BlockPos::zero;

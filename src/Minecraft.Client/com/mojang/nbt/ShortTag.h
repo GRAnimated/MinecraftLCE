@@ -12,7 +12,7 @@ public:
     std::wstring toString() override;
     u8 getId() override;
     bool equals(Tag*) override;
-    JavaLong getAsLong() override;
+    long getAsLong() override;
     int getAsInt() override;
     short getAsShort() override;
     u8 getAsByte() override;

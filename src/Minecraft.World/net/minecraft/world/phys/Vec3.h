@@ -9,6 +9,7 @@ class Vec3 {
 public:
     DECLARE_THREAD_STORAGE(Vec3)
 
+    // name guessed
     Vec3(double x, double y, double z) {
         if (x == -0.0)
             x = 0.0;

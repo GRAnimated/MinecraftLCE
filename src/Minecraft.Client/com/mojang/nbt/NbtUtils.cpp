@@ -4,6 +4,7 @@
 #include "net/minecraft/world/level/block/Blocks.h"
 #include "net/minecraft/world/level/block/state/BlockStateDefinition.h"
 
+// name guessed
 const BlockState* NbtUtils::readBlockState(CompoundTag* tag) {
     if (!tag->contains(L"Name", Tag::TAG_String))
         return Blocks::AIR->defaultBlockState();
@@ -13,8 +14,7 @@ const BlockState* NbtUtils::readBlockState(CompoundTag* tag) {
     if (tag->contains(L"Properties", Tag::TAG_Compound)) {
         CompoundTag* propertyTag = tag->getCompound(L"Properties");
         BlockStateDefinition* definition = block->getBlockStateDefinition();
-        using KeyList = std::vector<std::wstring>;
-        KeyList* keys = propertyTag->getAllKeys();
+        std::vector<std::wstring>* keys = propertyTag->getAllKeys();
         auto properties = definition->getProperties();
         for (auto keyIt = keys->begin(); keyIt != keys->end(); ++keyIt) {
             auto key = *keyIt;
@@ -27,8 +27,8 @@ const BlockState* NbtUtils::readBlockState(CompoundTag* tag) {
                 }
             }
         }
-        // getAllKeys always allocates this vector; retire it as in the original.
-        keys->~KeyList();
+        // getAllKeys transfers ownership of the vector to the caller.
+        keys->~vector();
         ::operator delete(keys);
     }
     return state;

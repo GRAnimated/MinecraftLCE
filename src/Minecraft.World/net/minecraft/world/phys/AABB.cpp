@@ -6,31 +6,67 @@
 #include "net/minecraft/world/phys/Vec3.h"
 #include <algorithm>
 
-// Keep the ray clip in the original matching translation unit. Host builds
-// compile it separately so core subsystem linking needs no game dependencies.
-#include "net/minecraft/world/phys/AABBClip.inl"
+#include "net/minecraft/core/Direction.h"
+#include "net/minecraft/world/phys/HitResult.h"
+
+HitResult* AABB::clip(Vec3* start, Vec3* end) const {
+    Vec3* closest = collideWithXPlane(m_inX, start, end);
+    const Direction* face = Direction::WEST;
+    Vec3* candidate = collideWithXPlane(m_axX, start, end);
+    if (candidate && isClosest(start, closest, candidate)) {
+        closest = candidate;
+        face = Direction::EAST;
+    }
+    candidate = collideWithYPlane(m_inY, start, end);
+    if (candidate && isClosest(start, closest, candidate)) {
+        closest = candidate;
+        face = Direction::DOWN;
+    }
+    candidate = collideWithYPlane(m_axY, start, end);
+    if (candidate && isClosest(start, closest, candidate)) {
+        closest = candidate;
+        face = Direction::UP;
+    }
+    candidate = collideWithZPlane(m_inZ, start, end);
+    if (candidate && isClosest(start, closest, candidate)) {
+        closest = candidate;
+        face = Direction::NORTH;
+    }
+    candidate = collideWithZPlane(m_axZ, start, end);
+    if (candidate && isClosest(start, closest, candidate)) {
+        closest = candidate;
+        face = Direction::SOUTH;
+    }
+    // Strict distance comparison preserves the earlier face at edges and corners.
+    return closest ? new HitResult(closest, face) : nullptr;
+}
 
 DEFINE_THREAD_STORAGE(AABB, 1024)
 
+// name guessed
 Vec3* AABB::collideWithXPlane(double x, Vec3* start, Vec3* end) const {
     Vec3* hit = start->getIntermediateWithXValue(end, x);
     return hit && containsYZ(hit) ? hit : nullptr;
 }
 
+// name guessed
 Vec3* AABB::collideWithYPlane(double y, Vec3* start, Vec3* end) const {
     Vec3* hit = start->getIntermediateWithYValue(end, y);
     return hit && containsXZ(hit) ? hit : nullptr;
 }
 
+// name guessed
 Vec3* AABB::collideWithZPlane(double z, Vec3* start, Vec3* end) const {
     Vec3* hit = start->getIntermediateWithZValue(end, z);
     return hit && containsXY(hit) ? hit : nullptr;
 }
 
+// name guessed
 bool AABB::isClosest(Vec3* start, Vec3* closest, Vec3* candidate) const {
     return !closest || start->distanceToSqr(candidate) < start->distanceToSqr(closest);
 }
 
+// name guessed
 bool AABB::containsYZ(Vec3* hit) const {
     // Ordered bounds checks reject NaNs, as do the original b.ge/b.ls branches.
     if (!hit || !(hit->m_y >= m_inY) || !(hit->m_y <= m_axY) || !(hit->m_z >= m_inZ))
@@ -38,20 +74,22 @@ bool AABB::containsYZ(Vec3* hit) const {
     return hit->m_z <= m_axZ;
 }
 
+// name guessed
 bool AABB::containsXZ(Vec3* hit) const {
     if (!hit || !(hit->m_x >= m_inX) || !(hit->m_x <= m_axX) || !(hit->m_z >= m_inZ))
         return false;
     return hit->m_z <= m_axZ;
 }
 
+// name guessed
 bool AABB::containsXY(Vec3* hit) const {
     if (!hit || !(hit->m_x >= m_inX) || !(hit->m_x <= m_axX) || !(hit->m_y >= m_inY))
         return false;
     return hit->m_y <= m_axY;
 }
 
+// NON_MATCHING | score: 495 (lower is better)
 AABB* AABB::divideInternalsBy(double divisor) {
-    // NON_MATCHING: the reference schedules the divisions and stores differently.
     m_inX /= divisor;
     m_inY /= divisor;
     m_inZ /= divisor;
@@ -78,6 +116,7 @@ AABB* AABB::newPermanent(const BlockPos& pos) {
     return newPermanent(pos.getX(), pos.getY(), pos.getZ(), pos.getX() + 1, pos.getY() + 1, pos.getZ() + 1);
 }
 
+// name guessed
 AABB* AABB::newPermanent(const BlockPos& first, const BlockPos& second) {
     return newPermanent(first.getX(), first.getY(), first.getZ(), second.getX(), second.getY(),
                         second.getZ());
@@ -102,10 +141,12 @@ AABB* AABB::newTemp(const BlockPos& pos) {
     return newTemp(pos.getX(), pos.getY(), pos.getZ(), pos.getX() + 1, pos.getY() + 1, pos.getZ() + 1);
 }
 
+// name guessed
 AABB* AABB::newTemp(const BlockPos& first, const BlockPos& second) {
     return newTemp(first.getX(), first.getY(), first.getZ(), second.getX(), second.getY(), second.getZ());
 }
 
+// name guessed
 AABB* AABB::newTemp(const AABB* other) {
     return newTemp(other->m_inX, other->m_inY, other->m_inZ, other->m_axX, other->m_axY, other->m_axZ);
 }
@@ -193,6 +234,7 @@ AABB* AABB::expand(double dx, double dy, double dz) const {
     return newTemp(tx1, ty1, tz1, tx2, ty2, tz2);
 }
 
+// name guessed
 bool AABB::equals(const AABB* other) const {
     if (!other)
         return false;
@@ -236,6 +278,7 @@ bool AABB::contains(const BlockPos& pos) const {
     return const_cast<AABB*>(this)->contains(Vec3::newTemp(pos.getX(), pos.getY(), pos.getZ()));
 }
 
+// name guessed
 void AABB::correctMinMax() {
     // Copy all endpoints before writing through the references returned by minmax.
     const auto x = std::minmax(m_inX, m_axX);

@@ -15,6 +15,7 @@
 #include "java/io/DataInput.h"
 #include <ostream>
 
+// name guessed
 Tag::Tag() = default;
 
 void Tag::print(const std::wstring& name, char* prefix, std::wostream& output) {
@@ -81,7 +82,7 @@ Tag* Tag::newTag(u8 id) {
     return nullptr;
 }
 
-// NON_MATCHING: Our switch case doesn't get optimized
+// NON_MATCHING | score: 4710 (lower is better)
 const wchar_t* Tag::getTagTypeName(u8 id) {
     switch (id) {
     case TAG_End:

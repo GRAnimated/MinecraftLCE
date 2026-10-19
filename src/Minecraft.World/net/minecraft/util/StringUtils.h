@@ -4,7 +4,8 @@
 #include <string>
 #include <vector>
 
-// Additional formatting overload supplied by the Switch runtime.
+/** Additional formatting overload supplied by the Switch runtime.
+ */
 namespace std {
 inline namespace __1 {
 wstring to_wstring(bool);

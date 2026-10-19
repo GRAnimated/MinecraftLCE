@@ -5,7 +5,8 @@
 
 class ItemDataWalker : public KeyedDataWalker {
 public:
-    // Registry key selection in this constructor is not yet reconstructed.
+    /** Registry key selection in this constructor is not yet reconstructed.
+     */
     ItemDataWalker(eINSTANCEOF, const std::wstring&);
     ~ItemDataWalker() override;
     CompoundTag* doWalk(DataFixer*, CompoundTag*, int version) override;

@@ -2,11 +2,13 @@
 
 #include "java/io/File.h"
 
-// The target supplies no usable app object at these call sites. Keep its
-// argument registers and ABI symbol without constructing a host app singleton.
+/** The target supplies no usable app object at these call sites. Keep its
+ * argument registers and ABI symbol without constructing a host app singleton.
+ */
 [[noreturn]] void fileLoadError(nn::fs::FileHandle*, const wchar_t*,
                                 ...) asm("_ZN20CConsoleMinecraftApp14FatalLoadErrorEPKwz");
 
+// NON_MATCHING | score: 1554 (lower is better)
 FileInputStream::FileInputStream(const File& file) {
     m_eof = false;
     char buffer[256];
@@ -21,6 +23,8 @@ FileInputStream::~FileInputStream() {
         CloseHandle(m_file);
 }
 
+// name guessed
+// NON_MATCHING | score: 750 (lower is better)
 int FileInputStream::read() {
     if (m_eof)
         return -1;
@@ -34,6 +38,7 @@ int FileInputStream::read() {
     return -1;
 }
 
+// NON_MATCHING | score: 1145 (lower is better)
 int FileInputStream::read(arrayWithLength<unsigned char> bytes) {
     if (m_eof)
         return -1;
@@ -47,6 +52,8 @@ int FileInputStream::read(arrayWithLength<unsigned char> bytes) {
     return -1;
 }
 
+// name guessed
+// NON_MATCHING | score: 1260 (lower is better)
 int FileInputStream::read(arrayWithLength<unsigned char> bytes, unsigned int offset, unsigned int length) {
     if (m_eof)
         return -1;
@@ -70,6 +77,7 @@ void FileInputStream::close() {
     }
 }
 
+// name guessed
 long long FileInputStream::skip(long long amount) {
     return 0;
 }

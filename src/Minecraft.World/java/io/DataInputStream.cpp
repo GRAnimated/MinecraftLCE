@@ -1,5 +1,12 @@
 #include "java/io/DataInputStream.h"
 
+#include "net/minecraft/core/BlockPos.h"
+#include "net/minecraft/world/item/Item.h"
+#include "net/minecraft/world/item/ItemInstance.h"
+
+#include "com/mojang/nbt/NbtIo.h"
+#include "net/minecraft/client/Compression.h"
+
 #include <cstdint>
 #include <cstring>
 
@@ -8,8 +15,9 @@
 DataInputStream::DataInputStream(InputStream* stream) : m_inputStream(stream) {}
 DataInputStream::~DataInputStream() = default;
 
-// Destruction of the wrapper does not destroy its child. The binary exposes
-// this explicit operation for callers that transferred ownership.
+/** Destruction of the wrapper does not destroy its child. The binary exposes
+ * this explicit operation for callers that transferred ownership.
+ */
 void DataInputStream::deleteChildStream() {
     delete m_inputStream;
 }
@@ -57,6 +65,7 @@ bool DataInputStream::readFully(arrayWithLength<unsigned char> array) {
     }
     return true;
 }
+// NON_MATCHING | score: 1615 (lower is better)
 bool DataInputStream::readFully(arrayWithLength<char> array) {
     return readFully(
         arrayWithLength<unsigned char>(reinterpret_cast<unsigned char*>(array.m_data), array.m_length));
@@ -78,7 +87,7 @@ int DataInputStream::readInt() {
     const std::uint32_t b3 = READ_PRIMITIVE_BYTE();
     return (b0 << 24) | ((b1 & 0xff) << 16) | ((b2 & 0xff) << 8) | (b3 & 0xff);
 }
-JavaLong DataInputStream::readLong() {
+long DataInputStream::readLong() {
     const std::uint64_t b0 = READ_PRIMITIVE_BYTE();
     const std::uint32_t b1 = READ_PRIMITIVE_BYTE();
     const std::uint32_t b2 = READ_PRIMITIVE_BYTE();
@@ -101,12 +110,14 @@ int DataInputStream::readUnsignedShort() {
     const std::uint32_t low = READ_PRIMITIVE_BYTE();
     return (high << 8) | (low & 0xff);
 }
+// NON_MATCHING | score: 1210 (lower is better)
 double DataInputStream::readDouble() {
-    const JavaLong bits = readLong();
+    const long bits = readLong();
     double result;
     std::memcpy(&result, &bits, sizeof(result));
     return result;
 }
+// NON_MATCHING | score: 1210 (lower is better)
 float DataInputStream::readFloat() {
     const int bits = readInt();
     float result;
@@ -114,6 +125,7 @@ float DataInputStream::readFloat() {
     return result;
 }
 
+// NON_MATCHING | score: 3810 (lower is better)
 std::wstring DataInputStream::readUTF() {
     std::wstring result;
     auto invalid = [&result]() -> std::wstring { return result; };
@@ -150,6 +162,7 @@ std::wstring DataInputStream::readUTF() {
     }
     return result;
 }
+// NON_MATCHING | score: 470 (lower is better)
 int DataInputStream::readUTFChar() {
     const int first = m_inputStream->read();
     if (first == -1 || (first & 0xc0) == 0x80 || (first & 0xf0) == 0xf0)
@@ -181,6 +194,7 @@ PlayerUID DataInputStream::readPlayerUID() {
         bytes[i] = readByte();
     return result;
 }
+// NON_MATCHING | score: 585 (lower is better)
 int DataInputStream::readVarInt() {
     std::uint32_t result = 0;
     unsigned int shift = 0;
@@ -195,10 +209,11 @@ int DataInputStream::readVarInt() {
     } while (byte & 0x80);
     return result;
 }
-JavaLong DataInputStream::readVarLong() {
+// NON_MATCHING | score: 585 (lower is better)
+long DataInputStream::readVarLong() {
     std::uint64_t result = 0;
     unsigned int shift = 0;
-    JavaLong count = -1;
+    long count = -1;
     unsigned char byte;
     do {
         byte = readByte();
@@ -207,5 +222,60 @@ JavaLong DataInputStream::readVarLong() {
         result |= std::uint64_t(byte & 0x7f) << shift;
         shift += 7;
     } while (byte & 0x80);
+    return result;
+}
+
+// NON_MATCHING | score: 5 (lower is better)
+CompoundTag* DataInputStream::readCompressedNbt() {
+    const short length = readShort();
+    if (length < 0)
+        return nullptr;
+    const short compressedLength = readShort();
+    if (compressedLength < 0)
+        return nullptr;
+    arrayWithLength<unsigned char> compressed(compressedLength, true);
+    readFully(compressed);
+    arrayWithLength<unsigned char> bytes(length, true);
+    unsigned int actualLength = length;
+    Compression::getCompression()->Decompress(bytes.m_data, &actualLength, compressed.m_data,
+                                              compressed.m_length);
+    CompoundTag* result = NbtIo::decompress(bytes);
+    delete[] bytes.m_data;
+    delete[] compressed.m_data;
+    return result;
+}
+
+// NON_MATCHING | score: 5 (lower is better)
+CompoundTag* DataInputStream::readNbt() {
+    const short length = readShort();
+    if (length < 0)
+        return nullptr;
+    arrayWithLength<unsigned char> bytes(length, true);
+    readFully(bytes);
+    CompoundTag* result = NbtIo::decompress(bytes);
+    delete[] bytes.m_data;
+    return result;
+}
+
+BlockPos DataInputStream::readBlockPos() {
+    return BlockPos::decompressBlockPos(readLong());
+}
+
+// NON_MATCHING | score: 3036 (lower is better)
+BlockPos* DataInputStream::readBlockPosPointer() {
+    const BlockPos pos = BlockPos::decompressBlockPos(readLong());
+    return new BlockPos(pos.getX(), pos.getY(), pos.getZ());
+}
+
+// NON_MATCHING | score: 810 (lower is better)
+not_null_ptr<ItemInstance> DataInputStream::readItem() {
+    not_null_ptr<ItemInstance> result = ItemInstance::EMPTY;
+    const short id = readShort();
+    if (id >= 0) {
+        const unsigned char count = readByte();
+        const short auxiliary = readShort();
+        result = not_null_ptr<ItemInstance>(new ItemInstance(Item::byId(id), count, auxiliary));
+        result->setTag(readNbt());
+    }
     return result;
 }

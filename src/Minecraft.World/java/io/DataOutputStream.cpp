@@ -1,3 +1,11 @@
+#include "java/io/DataOutputStream.h"
+
+#include "net/minecraft/core/BlockPos.h"
+#include "net/minecraft/world/item/Item.h"
+#include "net/minecraft/world/item/ItemInstance.h"
+
+#include "com/mojang/nbt/NbtIo.h"
+
 #include "DataOutputStream.h"
 #include "net/minecraft/world/PlayerUID.h"
 #include <cstring>
@@ -98,6 +106,7 @@ void DataOutputStream::writeChar(wchar_t value) {
     m_size += 2;
 }
 
+// NON_MATCHING | score: 400 (lower is better)
 void DataOutputStream::writeVarInt(int value) {
     unsigned int bits;
     std::memcpy(&bits, &value, sizeof(bits));
@@ -108,7 +117,8 @@ void DataOutputStream::writeVarInt(int value) {
     writeByte(static_cast<unsigned char>(bits));
 }
 
-void DataOutputStream::writeVarLong(JavaLong value) {
+// NON_MATCHING | score: 400 (lower is better)
+void DataOutputStream::writeVarLong(long value) {
     std::uint64_t bits;
     std::memcpy(&bits, &value, sizeof(bits));
     while (bits > 0x7f) {
@@ -150,4 +160,30 @@ void DataOutputStream::writeUTF(const std::wstring& value) {
     }
     write(bytes, 0, length + 2);
     delete[] bytes.m_data;
+}
+
+void DataOutputStream::writeNbt(CompoundTag* tag) {
+    if (!tag) {
+        writeShort(-1);
+        return;
+    }
+    arrayWithLength<unsigned char> bytes = NbtIo::compress(tag);
+    writeShort(bytes.m_length);
+    write(bytes);
+    delete[] bytes.m_data;
+}
+
+void DataOutputStream::writeBlockPos(const BlockPos& pos) {
+    writeLong(pos.compressBlockPos());
+}
+
+void DataOutputStream::writeItem(not_null_ptr<ItemInstance> item) {
+    if (item->isEmpty()) {
+        writeShort(-1);
+        return;
+    }
+    writeShort(Item::VALIDgetId(item->getItem()));
+    writeByte(item->getCount());
+    writeShort(item->getAuxValue());
+    writeNbt(item->getTag());
 }

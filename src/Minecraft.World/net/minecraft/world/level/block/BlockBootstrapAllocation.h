@@ -3,10 +3,7 @@
 #include <cstddef>
 #include <new>
 
-// Several block declarations still expose only their reconstructed prefix.
-// Keep the original initializer's allocation size without inventing fields or
-// changing those partial class layouts. Placement-new retains allocation before
-// constructor argument evaluation, as in the original new expression.
+/** Custom allocation tag for partial block layouts; preserves allocation before argument evaluation. */
 template <std::size_t OriginalSize>
 struct BlockBootstrapAllocation {};
 

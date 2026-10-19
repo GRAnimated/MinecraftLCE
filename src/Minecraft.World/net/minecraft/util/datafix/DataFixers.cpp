@@ -1,8 +1,10 @@
+#include "net/minecraft/util/datafix/DataFixers.h"
+
 #include "com/mojang/nbt/CompoundTag.h"
 #include "com/mojang/nbt/ListTag.h"
 #include "net/minecraft/util/datafix/DataFixer.h"
-#include "net/minecraft/util/datafix/DataFixers.h"
 
+// name guessed
 CompoundTag* DataFixers::updateItem(DataFixer* fixer, CompoundTag* tag, int version,
                                     const std::wstring& key) {
     if (tag->contains(key, Tag::TAG_Compound)) {
@@ -11,6 +13,7 @@ CompoundTag* DataFixers::updateItem(DataFixer* fixer, CompoundTag* tag, int vers
     return tag;
 }
 
+// name guessed
 CompoundTag* DataFixers::updateItems(DataFixer* fixer, CompoundTag* tag, int version,
                                      const std::wstring& key) {
     if (tag->contains(key, Tag::TAG_List)) {

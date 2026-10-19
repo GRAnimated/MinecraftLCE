@@ -24,7 +24,8 @@ public:
     void stripEmptyChildren() override;
     bool isEmpty() const override;
     void remove(const std::wstring&);
-    // Caller owns the returned vector; entries are copies of child names.
+    /** Caller owns the returned vector; entries are copies of child names.
+     */
     std::vector<std::wstring>* getAllKeys();
     std::unordered_map<std::wstring, Tag*>* getAllTags();
 

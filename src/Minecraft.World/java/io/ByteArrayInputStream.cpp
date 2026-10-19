@@ -48,6 +48,7 @@ int ByteArrayInputStream::read(arrayWithLength<unsigned char> array, unsigned in
 
 void ByteArrayInputStream::close() {}
 
+// name guessed
 void ByteArrayInputStream::reset() {
     arrayWithLength<unsigned char> empty;
     m_buffer = empty;

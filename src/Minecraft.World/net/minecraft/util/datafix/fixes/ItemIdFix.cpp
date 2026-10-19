@@ -1,6 +1,6 @@
 #include "net/minecraft/util/datafix/fixes/ItemIdFix.h"
 
-std::unordered_map<int, std::wstring> ItemIdFix::ID_TO_NAME;
+std::unordered_map<int, std::wstring> ItemIdFix::ID_TO_NAME;  // name guessed
 
 void ItemIdFix::staticCtor() {
     ID_TO_NAME[1] = L"minecraft:stone";

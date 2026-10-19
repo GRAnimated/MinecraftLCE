@@ -5,7 +5,8 @@
 
 class ItemListDataWalker : public KeyedDataWalker {
 public:
-    // Registry key selection in these constructors is not yet reconstructed.
+    /** Registry key selection in these constructors is not yet reconstructed.
+     */
     ItemListDataWalker(eINSTANCEOF, const std::wstring&);
     ItemListDataWalker(eINSTANCEOF, const std::vector<std::wstring>&);
     ~ItemListDataWalker() override;

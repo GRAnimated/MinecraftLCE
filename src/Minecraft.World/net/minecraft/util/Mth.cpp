@@ -1,9 +1,11 @@
 #include "net/minecraft/util/Mth.h"
 
+#include <cmath>
+
 #include "cmath"
 #include "net/minecraft/world/Random.h"
 
-float* Mth::SIN = nullptr;
+float* Mth::SIN = nullptr;  // name guessed
 float* Mth::ATAN = nullptr;
 
 int Mth::cached_atan_index(int x, int y) {
@@ -81,8 +83,8 @@ double Mth::abs(double i) {
     return (i >= 0.0) ? i : -i;
 }
 
-MthLong Mth::lfloor(double value) {
-    return static_cast<MthLong>(value) - (static_cast<MthLong>(value) > value);
+long Mth::lfloor(double value) {
+    return static_cast<long>(value) - (static_cast<long>(value) > value);
 }
 
 double Mth::clampedLerp(double i, double j, double k) {
@@ -181,23 +183,26 @@ int Mth::nextInt(Random* random, int i, int j) {
     return i;
 }
 
+// name guessed
 float Mth::nextFloat(Random* random, float lower, float upper) {
     if (lower >= upper)
         return lower;
     return random->nextFloat() * (upper - lower) + lower;
 }
 
+// name guessed
 double Mth::nextDouble(Random* random, double lower, double upper) {
     if (lower >= upper)
         return lower;
     return random->nextDouble() * (upper - lower) + lower;
 }
 
+// NON_MATCHING | score: 35 (lower is better)
 std::wstring Mth::createInsecureUUID(Random* random) {
     wchar_t text[33];
     text[32] = L'\0';
-    MthLong high = (random->nextLong() & INT64_C(0xffffffffffff0fff)) | INT64_C(0x4000);
-    MthLong low = (random->nextLong() & INT64_C(0x3fffffffffffffff)) | INT64_MIN;
+    long high = (random->nextLong() & INT64_C(0xffffffffffff0fff)) | INT64_C(0x4000);
+    long low = (random->nextLong() & INT64_C(0x3fffffffffffffff)) | INT64_MIN;
     for (int i = 15; i != -1; --i) {
         unsigned int a = high & 15;
         unsigned int b = low & 15;
@@ -209,4 +214,23 @@ std::wstring Mth::createInsecureUUID(Random* random) {
         low >>= 4;
     }
     return std::wstring(text);
+}
+
+// name guessed
+int Mth::ceil(float value) {
+    int truncated = static_cast<int>(value);
+    return truncated + (truncated < value);
+}
+
+int Mth::floor(double value) {
+    return (int)value - ((int)value > value);
+}
+
+int Mth::floor(float value) {
+    return (int)value - ((int)value > value);
+}
+
+// name guessed
+long Mth::round(double value) {
+    return static_cast<long>(std::floor(value + 0.5));
 }

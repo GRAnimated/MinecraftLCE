@@ -30,7 +30,7 @@ bool ByteTag::equals(Tag* other) {
     return Tag::equals(other) && m_data == otherCasted->m_data;
 }
 
-JavaLong ByteTag::getAsLong() {
+long ByteTag::getAsLong() {
     return m_data;
 }
 

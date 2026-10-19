@@ -18,17 +18,21 @@ FileOutputStream::~FileOutputStream() {
         CloseHandle(m_file);
 }
 
+// name guessed
+// NON_MATCHING | score: 600 (lower is better)
 void FileOutputStream::write(unsigned int value) {
     const unsigned char byte = static_cast<unsigned char>(value);
     unsigned int count;
     WriteFile(m_file, &byte, 1, &count, nullptr);
 }
 
+// name guessed
 void FileOutputStream::write(arrayWithLength<unsigned char> bytes) {
     unsigned int count;
     WriteFile(m_file, bytes.m_data, bytes.m_length, &count, nullptr);
 }
 
+// name guessed
 void FileOutputStream::write(arrayWithLength<unsigned char> bytes, unsigned int offset, unsigned int length) {
     unsigned int count;
     WriteFile(m_file, &bytes[offset], length, &count, nullptr);
