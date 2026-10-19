@@ -3,7 +3,8 @@
 class Entity;
 class Level;
 
-// Recovered factory entry points; implementations remain to be reconstructed.
+/** Factory entry points referenced by EntityIO::bootStrap; definitions remain external. */
+// name guessed: callback names describe their returned entity types.
 namespace EntityIOFactories {
 Entity* createItem(Level*);
 Entity* createXpOrb(Level*);

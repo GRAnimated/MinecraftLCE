@@ -3,10 +3,10 @@
 #include "net/minecraft/core/BlockPos.h"
 #include "net/minecraft/world/phys/AABB.h"
 
-TextureAtlasSprite* GlideRingGenerator::sIcons[3];
+TextureAtlasSprite* GlideRingGenerator::sIcons[3];  // name guessed
 const int GlideRingGenerator::sCornerCounts[3] = {0, 1, 3};
 const int GlideRingGenerator::sRadii[3] = {2, 3, 4};
-const int GlideRingGenerator::sStraightOffsets[3] = {-1, 0, 1};
+const int GlideRingGenerator::sStraightOffsets[3] = {-1, 0, 1};  // name guessed
 const int GlideRingGenerator::sCornerRadii[3] = {0, 2, 3};
 const int GlideRingGenerator::sCornerOffsets[3] = {-2, -3, 2};
 
@@ -35,6 +35,7 @@ void GlideRingGenerator::BuildRing(std::vector<BlockPos>& blocks, const AABB* bo
     appendSegment(blocks, center, size, 7, plane);
 }
 
+// name guessed
 void GlideRingGenerator::appendSegment(std::vector<BlockPos>& blocks, const BlockPos& center,
                                        eGlideRingSize size, unsigned int segment, int plane) {
     int count = 3;
@@ -57,6 +58,7 @@ TextureAtlasSprite* GlideRingGenerator::getIcon(eGlideRingSize size) {
     return sIcons[static_cast<unsigned int>(size)];
 }
 
+// name guessed
 BlockPos GlideRingGenerator::orientOffset(const BlockPos& center, int plane, int horizontal, int vertical) {
     if (plane == 2) {
         return BlockPos(center.getX() + horizontal, center.getY(), center.getZ() + vertical);
@@ -69,6 +71,7 @@ BlockPos GlideRingGenerator::orientOffset(const BlockPos& center, int plane, int
     }
 }
 
+// name guessed
 int GlideRingGenerator::horizontalOffset(eGlideRingSize size, unsigned int segment, int index) {
     switch (segment) {
     case 0:
@@ -91,6 +94,7 @@ int GlideRingGenerator::horizontalOffset(eGlideRingSize size, unsigned int segme
     }
 }
 
+// name guessed
 int GlideRingGenerator::verticalOffset(eGlideRingSize size, unsigned int segment, int index) {
     switch (segment) {
     case 0:

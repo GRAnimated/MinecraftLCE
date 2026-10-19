@@ -14,6 +14,7 @@ public:
 
     virtual bool apply(T) const = 0;
     virtual Predicate<T>* copy() const { return nullptr; }
+    // name guessed
     virtual ~Predicate() {}
 };
 

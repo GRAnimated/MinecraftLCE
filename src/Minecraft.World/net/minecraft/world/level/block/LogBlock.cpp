@@ -76,7 +76,7 @@ const BlockState* LogBlock::getStateForPlacement(Level*, const BlockPos&, const 
 
 unsigned int LogBlock::getDescriptionId(int data) {
     const BlockState* state = data == -1 ? this->defaultBlockState() : this->getBlockState(data);
-    return ItemResolvers::LOG_NAMES[this->getWoodType(state)];
+    return ItemResolvers::LOG_NAMES[this->getWoodType(state)];  // name guessed
 }
 
 void LogBlock::registerIcons(IconRegister* iconReg) {
@@ -95,7 +95,7 @@ TextureAtlasSprite* LogBlock::getTopTexture(const BlockState* state) {
     return m_topTextures[this->getWoodType(state)];
 }
 
-// NON_MATCHING
+// NON_MATCHING | score: 400 (lower is better)
 Direction::Axis* LogBlock::getAxis(const BlockState* state) {
     switch (state->getValue<LogAxis*>(LOG_AXIS)->getId()) {
     case 0:

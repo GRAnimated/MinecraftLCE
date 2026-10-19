@@ -7,7 +7,8 @@
 class Attribute;
 enum class eMODIFIER_ID : unsigned int;
 
-// Slot order follows the Switch AttributeInstance and ModifiableAttributeInstance tables.
+/** Slot order follows the Switch AttributeInstance and ModifiableAttributeInstance tables.
+ */
 class AttributeInstance {
 public:
     AttributeInstance();

@@ -7,8 +7,11 @@ class NonNullList : arrayWithLength<T> {
 public:
     NonNullList() = default;
 
-    // Copies are views of the same array. The owner must delete the backing data;
-    // destroying a view only releases its default value, as in the executable.
+    /** Copies are views of the same array. The owner must delete the backing data;
+     * destroying a view only releases its default value, as in the executable.
+     */
+    // name guessed
+    // NON_MATCHING | score: 5197 (lower is better)
     static NonNullList<T> withSize(int size, const T& defaultValue) {
         NonNullList<T> list;
         if (size > 0) {

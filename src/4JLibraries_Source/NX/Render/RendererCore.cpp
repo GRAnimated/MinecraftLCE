@@ -27,7 +27,7 @@ unsigned int textureWidths[6] = {1920, 1280, 512, 256, 128, 64};
 unsigned int textureHeights[6] = {1080, 720, 512, 256, 128, 64};
 nn::os::MutexType someRendererMutex;
 
-// NON_MATCHING: the original also creates an unused temporary state object.
+// NON_MATCHING | score: 5575 (lower is better)
 Renderer::Context::Context(Renderer*, bool creationFlag) {
     m_ptr1DE0 = nullptr;
     m_ptr1DE8 = nullptr;
@@ -85,7 +85,7 @@ Renderer::Renderer() : C4JRender() {
     Renderer::sInstance = this;
 }
 
-// NON_MATCHING: inline the tls offset getter, could be some compiler flag
+// NON_MATCHING | score: 800 (lower is better)
 void Renderer::InitialiseContext(bool idk) {
     sContext = new Renderer::Context(this, idk);
 }

@@ -269,16 +269,7 @@ void Biome::generateColoursDebugOutput() {
     return;
 }
 
-// NON_MATCHING | Score: 5785 (lower is better)
-// literally took me so many hours to get it finally partially completed (all registered, down to 99k score)
-// but then I realized I had to make the last property of the BiomeProperties be set separately instead of
-// chained
-// ...or did I? Nope, just a waste of time...
-// so then I figured out that I had to merge the BiomeProperties constructors directly into the Biome
-// constructors... This got me down to like 70k iirc, which was closer but not close enough. then I saw that
-// the wstring that gets assigned to the BiomeProperties constructor gets deleted after the var has been
-// created but before the static Biome* has been set so that means I had to separate out the Biome's setters
-// from the constructor init... and here I am, at 5785 score. -Dexrn
+// NON_MATCHING | score: 5785 (lower is better)
 void Biome::staticCtor() {
     Biome::OCEAN = new OceanBiome(BiomeID_OCEAN, (new BiomeProperties(L"Ocean"))->depth(-1.0)->scale(0.1));
 

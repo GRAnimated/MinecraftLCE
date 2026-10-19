@@ -4,7 +4,7 @@
 #include "net/minecraft/world/entity/EntityIOFactories.h"
 #include "net/minecraft/world/entity/mob/MinecartType.h"
 
-std::unordered_map<ResourceLocation, EntityIO::SpawnEggInfo*> EntityIO::SPAWN_EGGS;
+std::unordered_map<ResourceLocation, EntityIO::SpawnEggInfo*> EntityIO::SPAWN_EGGS;  // name guessed
 ResourceLocation EntityIO::DEFAULT_TYPE(L"LightningBolt");
 std::unordered_set<ResourceLocation> EntityIO::KNOWN_TYPES;
 
@@ -209,4 +209,12 @@ void EntityIO::bootStrap() {
     registerEgg(StringIDs::ZombiePigman, L"zombie_pigman", 293, 294);
     registerEgg(StringIDs::ZombieVillager, L"zombie_villager", 361, 362);
     KNOWN_TYPES.insert(DEFAULT_TYPE);
+}
+
+// name guessed
+EntityIO::SpawnEggInfo EntityIO::registerEgg(std::uint32_t hash, const std::wstring name, int primaryColor,
+                                             int secondaryColor) {
+    ResourceLocation key(name);
+    SPAWN_EGGS[key] = new SpawnEggInfo(hash, key, primaryColor, secondaryColor);
+    return *SPAWN_EGGS[key];
 }

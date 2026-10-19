@@ -14,8 +14,9 @@ public:
     static int NEXT_ID;
     static SoundEvent* registerEvent(SoundEvent*);
 
-    // The default overload takes its string by value: registerSound copies the
-    // caller's string before entering the original constructor.
+    /** The default overload takes its string by value: registerSound copies the
+     * caller's string before entering the original constructor.
+     */
     SoundEvent(std::wstring name, float range);
     SoundEvent(std::wstring name, float range, int flags);
     std::wstring getName();

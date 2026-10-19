@@ -8,7 +8,8 @@ class Block;
 class BlockState;
 class BlockStateDefinition;
 
-// Property predicates are borrowed; destroying this object releases only the map storage.
+/** Property predicates are borrowed; destroying this object releases only the map storage.
+ */
 class BlockStatePredicate : public Predicate<const BlockState*> {
 public:
     BlockStatePredicate(BlockStateDefinition*);

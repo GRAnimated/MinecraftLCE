@@ -2,7 +2,8 @@
 
 #include "net/minecraft/world/item/Item.h"
 
-// Subtype callbacks used by Item::staticCtor. Names for anonymous callbacks are inferred.
+/** Subtype callbacks referenced by Item::staticCtor. */
+// name guessed: callback names describe their returned subtypes.
 namespace ItemResolvers {
 extern const unsigned int LOG_NAMES[6];
 unsigned int DirtBlockName(not_null_ptr<ItemInstance>);

@@ -4,6 +4,7 @@
 #include <memory>
 
 class EntityDamageSource;
+// name guessed
 class DamageSource {
 public:
     static DamageSource* BYPASS_ARMOUR;  // this name is wrong

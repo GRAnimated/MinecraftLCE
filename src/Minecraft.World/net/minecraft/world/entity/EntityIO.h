@@ -11,8 +11,6 @@ class Level;
 
 class EntityIO {
 public:
-    using Factory = Entity* (*)(Level*);
-
     struct SpawnEggInfo {
         SpawnEggInfo(std::uint32_t, const ResourceLocation&, int, int);
         SpawnEggInfo(const SpawnEggInfo&);
@@ -33,7 +31,8 @@ public:
 
     static void bootStrap();
     static ResourceLocation getKey(eINSTANCEOF);
-    static void registerEntity(Factory, int, const std::wstring&, eINSTANCEOF, const std::wstring&);
+    static void registerEntity(Entity* (*)(Level*), int, const std::wstring&, eINSTANCEOF,
+                               const std::wstring&);
     static SpawnEggInfo registerEgg(std::uint32_t, const std::wstring, int, int);
 
     static std::unordered_map<ResourceLocation, SpawnEggInfo*> SPAWN_EGGS;

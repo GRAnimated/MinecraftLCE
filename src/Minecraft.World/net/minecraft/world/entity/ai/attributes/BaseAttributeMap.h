@@ -6,7 +6,8 @@
 class Attribute;
 class AttributeInstance;
 
-// Recovered virtual prefix for pointer dispatch; the object's storage is still unreconstructed.
+/** Recovered virtual prefix for pointer dispatch; the object's storage is still unreconstructed.
+ */
 class BaseAttributeMap {
 public:
     virtual ~BaseAttributeMap();

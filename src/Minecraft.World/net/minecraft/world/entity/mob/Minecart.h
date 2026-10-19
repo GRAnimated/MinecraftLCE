@@ -2,7 +2,8 @@
 
 #include "net/minecraft/world/entity/Entity.h"
 
-// Partial reconstruction. New virtuals follow the original Switch vtable order.
+/** Partial reconstruction. New virtuals follow the original Switch vtable order.
+ */
 class Minecart : public Entity {
 public:
     static void staticCtor();

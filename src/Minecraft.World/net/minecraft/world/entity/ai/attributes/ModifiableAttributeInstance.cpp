@@ -3,26 +3,33 @@
 #include "net/minecraft/world/entity/ai/attributes/Attribute.h"
 #include "net/minecraft/world/entity/ai/attributes/BaseAttributeMap.h"
 
+// name guessed
 AttributeInstance::AttributeInstance() = default;
 
+// name guessed
+// NON_MATCHING | score: 1540 (lower is better)
 ModifiableAttributeInstance::ModifiableAttributeInstance(BaseAttributeMap* parent, Attribute* attribute)
     : m_parent(parent), m_attribute(attribute), m_dirty(true), m_cachedValue(0) {
     m_baseValue = attribute->getDefaultValue();
 }
 
+// name guessed
 Attribute* ModifiableAttributeInstance::getAttribute() {
     return m_attribute;
 }
 
+// name guessed
 double ModifiableAttributeInstance::getBaseValue() {
     return m_baseValue;
 }
 
+// name guessed
 void ModifiableAttributeInstance::setDirty() {
     m_dirty = true;
     m_parent->onAttributeModified(this);
 }
 
+// name guessed
 void ModifiableAttributeInstance::setBaseValue(double value) {
     if (getBaseValue() == value)
         return;
@@ -30,10 +37,12 @@ void ModifiableAttributeInstance::setBaseValue(double value) {
     setDirty();
 }
 
+// name guessed
 std::unordered_set<AttributeModifier*>* ModifiableAttributeInstance::getModifiers(int operation) {
     return &m_modifiers[operation];
 }
 
+// name guessed
 void ModifiableAttributeInstance::getModifiers(std::unordered_set<AttributeModifier*>& result) {
     for (int operation = 0; operation < 3; ++operation) {
         for (const auto& modifier : m_modifiers[operation])
@@ -41,20 +50,25 @@ void ModifiableAttributeInstance::getModifiers(std::unordered_set<AttributeModif
     }
 }
 
+// name guessed
 AttributeModifier* ModifiableAttributeInstance::getModifier(eMODIFIER_ID id) {
     auto found = m_modifiersById.find(id);
     return found == m_modifiersById.end() ? nullptr : found->second;
 }
 
+// name guessed
 bool ModifiableAttributeInstance::hasModifier(AttributeModifier* modifier) {
     return m_modifiersById.find(static_cast<eMODIFIER_ID>(modifier->getId())) != m_modifiersById.end();
 }
 
+// name guessed
+// NON_MATCHING | score: 90 (lower is better)
 void ModifiableAttributeInstance::addModifiers(std::unordered_set<AttributeModifier*>* modifiers) {
     for (AttributeModifier* modifier : *modifiers)
         addModifier(modifier);
 }
 
+// name guessed
 double ModifiableAttributeInstance::getValue() {
     if (m_dirty) {
         m_cachedValue = calculateValue();
@@ -63,6 +77,7 @@ double ModifiableAttributeInstance::getValue() {
     return m_cachedValue;
 }
 
+// name guessed
 void ModifiableAttributeInstance::getAppliedModifiers(int operation,
                                                       std::unordered_set<AttributeModifier*>& result) {
     result.clear();
@@ -78,6 +93,7 @@ void ModifiableAttributeInstance::getAppliedModifiers(int operation,
     }
 }
 
+// name guessed
 double ModifiableAttributeInstance::calculateValue() {
     double base = getBaseValue();
     std::unordered_set<AttributeModifier*> modifiers;

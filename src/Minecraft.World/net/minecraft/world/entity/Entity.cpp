@@ -80,7 +80,7 @@ void Entity::staticCtor() {
                                                    EntityDataSerializers::sBOOLEAN_EntityDataSerializer);
 }
 
-// NON_MATCHING: a couple things need to be moved around to move instructions into the right place
+// NON_MATCHING | score: 330 (lower is better)
 void Entity::_init(bool synched, Level* level) {
     if (synched && TlsGetValue(sTlsIndex)) {
         m_id = getSmallId();
@@ -418,10 +418,16 @@ void Entity::markHurt() {
 }
 
 Vec3* Entity::calculateViewVector(float xRot, float yRot) {
-    float yCos = Mth::cos(-Mth::PI - sDegreesToRadians * yRot);
-    float ySin = Mth::sin(-Mth::PI - sDegreesToRadians * yRot);
-    float xCos = -Mth::cos(-sDegreesToRadians * xRot);
-    float xSin = Mth::sin(-sDegreesToRadians * xRot);
+    const float* degreesToRadiansAddress = &sDegreesToRadians;
+#ifdef MATCHING_HACK
+    // Prevent constant folding of the original global load after TU consolidation.
+    asm("" : "+r"(degreesToRadiansAddress));
+#endif
+    const float degreesToRadians = *degreesToRadiansAddress;
+    float yCos = Mth::cos(-Mth::PI - degreesToRadians * yRot);
+    float ySin = Mth::sin(-Mth::PI - degreesToRadians * yRot);
+    float xCos = -Mth::cos(-degreesToRadians * xRot);
+    float xSin = Mth::sin(-degreesToRadians * xRot);
     return Vec3::newTemp(ySin * xCos, xSin, yCos * xCos);
 }
 
@@ -532,3 +538,7 @@ void Entity::SetLiftForceModifier(double) {}
 void Entity::onLoadedFromSave() {}
 void Entity::setUsingItemFlag(bool) {}
 void Entity::fjDebugCheckSmallIdLeaks() {}
+
+// name guessed: radians-per-degree constant at 0x7100e093d8.
+
+const float Entity::sDegreesToRadians = 0.017453292f;

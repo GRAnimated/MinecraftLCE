@@ -7,10 +7,12 @@ static_assert(offsetof(MinecartFurnace, m_fuel) == 0x308, "Furnace fuel layout")
 static_assert(offsetof(MinecartFurnace, m_pushX) == 0x310, "Furnace propulsion layout");
 #endif
 
+// name guessed
 double MinecartFurnace::getMaxSpeed() {
     return 0.2;
 }
 
+// name guessed
 void MinecartFurnace::moveAlongTrack(const BlockPos& pos, const BlockState* state) {
     Minecart::moveAlongTrack(pos, state);
     double pushLengthSqr = m_pushX * m_pushX + m_pushZ * m_pushZ;
@@ -30,6 +32,7 @@ void MinecartFurnace::moveAlongTrack(const BlockPos& pos, const BlockState* stat
     }
 }
 
+// name guessed
 void MinecartFurnace::applyNaturalSlowdown() {
     double pushLengthSqr = m_pushX * m_pushX + m_pushZ * m_pushZ;
     if (pushLengthSqr > 0.0001) {

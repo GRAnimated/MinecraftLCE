@@ -8,13 +8,13 @@ class TextureAtlasSprite;
 
 class GlideRingGenerator {
 public:
-    // Ordinal names are inferred; the three entries are present in the executable tables.
+    // name guessed: ordinal labels for the three entries in the executable tables.
     enum eGlideRingSize { Size0 = 0, Size1 = 1, Size2 = 2 };
 
     static void BuildRing(std::vector<BlockPos>&, const AABB*, eGlideRingSize);
     static TextureAtlasSprite* getIcon(eGlideRingSize);
 
-    // Names for these data tables and internal helpers are inferred from their use.
+    // name guessed: data tables and internal helpers identified by their uses.
     static TextureAtlasSprite* sIcons[3];
     static const int sCornerCounts[3];
     static const int sRadii[3];

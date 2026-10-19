@@ -44,6 +44,7 @@ DamageSource* DamageSource::setMagic() {
     return this;
 }
 
+// name guessed
 DamageSource* DamageSource::setFire() {
     m_isFireSource = true;
     return this;
@@ -55,44 +56,53 @@ DamageSource* DamageSource::bypassArmour() {
     return this;
 }
 
+// name guessed
 DamageSource* DamageSource::bypassMagic() {
     m_bypassMagic = true;
     m_exhaustion = 0.0f;
     return this;
 }
 
+// name guessed
 DamageSource* DamageSource::bypassInvul() {
     m_bypassInvul = true;
     return this;
 }
 
+// name guessed
 DamageSource* DamageSource::setProjectile() {
     m_isProjectile = true;
     return this;
 }
 
+// name guessed
 DamageSource* DamageSource::setExplosion() {
     m_isExplosion = true;
     return this;
 }
 
+// name guessed
 DamageSource* DamageSource::setScalesWithDifficulty() {
     m_scalesWithDifficulty = true;
     return this;
 }
 
+// name guessed
 bool DamageSource::isBypassArmour() const {
     return m_bypassArmour;
 }
 
+// name guessed
 bool DamageSource::isBypassMagic() const {
     return m_bypassMagic;
 }
 
+// name guessed
 bool DamageSource::isMagic() const {
     return m_isMagic;
 }
 
+// name guessed
 float DamageSource::getExhaustion() const {
     return m_exhaustion;
 }
@@ -108,6 +118,7 @@ bool DamageSource::isBypassInvul() const {
     return this->m_bypassInvul;
 }
 
+// name guessed
 bool DamageSource::isFire() const {
     return this->m_isFireSource;
 }
@@ -116,6 +127,7 @@ bool DamageSource::isProjectile() const {
     return this->m_isProjectile;
 }
 
+// name guessed
 bool DamageSource::isExplosion() const {
     return this->m_isExplosion;
 }

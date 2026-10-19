@@ -8,7 +8,9 @@ public:
     class Variant : public StringRepresentable {
     public:
         static inline Variant* VARIANTS[2];
+        // name guessed
         static Variant* byData(int data) { return VARIANTS[static_cast<unsigned int>(data) > 1 ? 0 : data]; }
+        // name guessed
         int getNameId() { return m_nameId; }
 
         int m_data;

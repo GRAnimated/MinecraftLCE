@@ -2,34 +2,35 @@
 
 #include "net/minecraft/world/effect/MobEffect.h"
 
-MobEffect* MobEffects::SPEED;
+MobEffect* MobEffects::SPEED;  // name guessed
 MobEffect* MobEffects::SLOWNESS;
 MobEffect* MobEffects::HASTE;
-MobEffect* MobEffects::MINING_FATIGUE;
+MobEffect* MobEffects::MINING_FATIGUE;  // name guessed
 MobEffect* MobEffects::STRENGTH;
 MobEffect* MobEffects::INSTANT_HEALTH;
-MobEffect* MobEffects::INSTANT_DAMAGE;
+MobEffect* MobEffects::INSTANT_DAMAGE;  // name guessed
 MobEffect* MobEffects::JUMP_BOOST;
 MobEffect* MobEffects::NAUSEA;
-MobEffect* MobEffects::REGENERATION;
+MobEffect* MobEffects::REGENERATION;  // name guessed
 MobEffect* MobEffects::RESISTANCE;
 MobEffect* MobEffects::FIRE_RESISTANCE;
-MobEffect* MobEffects::WATER_BREATHING;
+MobEffect* MobEffects::WATER_BREATHING;  // name guessed
 MobEffect* MobEffects::INVISIBILITY;
 MobEffect* MobEffects::BLINDNESS;
-MobEffect* MobEffects::NIGHT_VISION;
+MobEffect* MobEffects::NIGHT_VISION;  // name guessed
 MobEffect* MobEffects::HUNGER;
 MobEffect* MobEffects::WEAKNESS;
-MobEffect* MobEffects::POISON;
+MobEffect* MobEffects::POISON;  // name guessed
 MobEffect* MobEffects::WITHER;
 MobEffect* MobEffects::HEALTH_BOOST;
-MobEffect* MobEffects::ABSORPTION;
+MobEffect* MobEffects::ABSORPTION;  // name guessed
 MobEffect* MobEffects::SATURATION;
 MobEffect* MobEffects::GLOWING;
 MobEffect* MobEffects::LEVITATION;
-MobEffect* MobEffects::LUCK;
+MobEffect* MobEffects::LUCK;  // name guessed
 MobEffect* MobEffects::UNLUCK;
 
+// name guessed
 MobEffect* MobEffects::get(const std::wstring& name) {
     return MobEffect::REGISTRY->get(ResourceLocation(name));
 }

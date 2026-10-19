@@ -3,107 +3,108 @@
 #include "net/minecraft/world/level/block/Blocks.h"
 #include "net/minecraft/world/stats/Achievement.h"
 
-std::vector<Achievement*>* Achievements::ALL = new std::vector<Achievement*>;
+std::vector<Achievement*>* Achievements::ALL = new std::vector<Achievement*>;  // name guessed
 Achievement* Achievements::OPEN_INVENTORY;
 Achievement* Achievements::MINE_WOOD;
-Achievement* Achievements::BUILD_WORK_BENCH;
+Achievement* Achievements::BUILD_WORK_BENCH;  // name guessed
 Achievement* Achievements::BUILD_PICKAXE;
 Achievement* Achievements::BUILD_FURNACE;
-Achievement* Achievements::ACQUIRE_IRON;
+Achievement* Achievements::ACQUIRE_IRON;  // name guessed
 Achievement* Achievements::BUILD_HOE;
 Achievement* Achievements::MAKE_BREAD;
-Achievement* Achievements::BAKE_CAKE;
+Achievement* Achievements::BAKE_CAKE;  // name guessed
 Achievement* Achievements::BUILD_BETTER_PICKAXE;
 Achievement* Achievements::COOK_FISH;
-Achievement* Achievements::ON_ARAIL;
+Achievement* Achievements::ON_ARAIL;  // name guessed
 Achievement* Achievements::BUILD_SWORD;
 Achievement* Achievements::KILL_ENEMY;
-Achievement* Achievements::KILL_COW;
+Achievement* Achievements::KILL_COW;  // name guessed
 Achievement* Achievements::FLY_PIG;
 Achievement* Achievements::LEADER_OF_THE_PACK;
-Achievement* Achievements::MOARTOOLS;
+Achievement* Achievements::MOARTOOLS;  // name guessed
 Achievement* Achievements::DISPENSE_WITH_THIS;
 Achievement* Achievements::IN_TO_THE_NETHER;
-Achievement* Achievements::MINE100_BLOCKS;
+Achievement* Achievements::MINE100_BLOCKS;  // name guessed
 Achievement* Achievements::KILL10_CREEPERS;
 Achievement* Achievements::EAT_PORK_CHOP;
-Achievement* Achievements::PLAY100_DAYS;
+Achievement* Achievements::PLAY100_DAYS;  // name guessed
 Achievement* Achievements::ARROW_KILL_CREEPER;
 Achievement* Achievements::SOCIAL_POST;
-Achievement* Achievements::SNIPE_SKELETON;
+Achievement* Achievements::SNIPE_SKELETON;  // name guessed
 Achievement* Achievements::DIAMONDS;
 Achievement* Achievements::GHAST;
-Achievement* Achievements::BLAZE_ROD;
+Achievement* Achievements::BLAZE_ROD;  // name guessed
 Achievement* Achievements::POTION;
 Achievement* Achievements::THE_END;
-Achievement* Achievements::THE_END2;
+Achievement* Achievements::THE_END2;  // name guessed
 Achievement* Achievements::ENCHANTMENTS;
 Achievement* Achievements::OVERKILL;
-Achievement* Achievements::BOOKCASE;
+Achievement* Achievements::BOOKCASE;  // name guessed
 Achievement* Achievements::ADVENTURING_TIME;
 Achievement* Achievements::REPOPULATION;
-Achievement* Achievements::DIAMONDS_TO_YOU;
+Achievement* Achievements::DIAMONDS_TO_YOU;  // name guessed
 Achievement* Achievements::THE_HAGGLER;
 Achievement* Achievements::POT_PLANTER;
-Achievement* Achievements::ITS_ASIGN;
+Achievement* Achievements::ITS_ASIGN;  // name guessed
 Achievement* Achievements::IRON_BELLY;
 Achievement* Achievements::HAVE_ASHEARFUL_DAY;
-Achievement* Achievements::RAINBOW_COLLECTION;
+Achievement* Achievements::RAINBOW_COLLECTION;  // name guessed
 Achievement* Achievements::STAYING_FROSTY;
 Achievement* Achievements::CHESTFUL_OF_COBBLESTONE;
-Achievement* Achievements::RENEWABLE_ENERGY;
+Achievement* Achievements::RENEWABLE_ENERGY;  // name guessed
 Achievement* Achievements::MUSIC_TO_MY_EARS;
 Achievement* Achievements::BODY_GUARD;
-Achievement* Achievements::IRON_MAN;
+Achievement* Achievements::IRON_MAN;  // name guessed
 Achievement* Achievements::ZOMBIE_DOCTOR;
 Achievement* Achievements::LION_TAMER;
-Achievement* Achievements::SPAWN_WITHER;
+Achievement* Achievements::SPAWN_WITHER;  // name guessed
 Achievement* Achievements::KILL_WITHER;
 Achievement* Achievements::FULL_BEACON;
-Achievement* Achievements::OVERPOWERED;
+Achievement* Achievements::OVERPOWERED;  // name guessed
 Achievement* Achievements::THE_DYE_OUTFIT;
 Achievement* Achievements::TRAMPOLINE;
-Achievement* Achievements::THE_STUDENT;
+Achievement* Achievements::THE_STUDENT;  // name guessed
 Achievement* Achievements::HAS_BECOME_THE_MASTER;
 Achievement* Achievements::TIS_BUT_ASCRATCH;
-Achievement* Achievements::CUPID;
+Achievement* Achievements::CUPID;  // name guessed
 Achievement* Achievements::YOU_WONT_LIKE_ME_WHEN_IM_HUNGRY;
 Achievement* Achievements::MINE;
-Achievement* Achievements::THE_END_AGAIN;
+Achievement* Achievements::THE_END_AGAIN;  // name guessed
 Achievement* Achievements::YOU_NEED_AMINT;
 Achievement* Achievements::SUPER_SONIC;
-Achievement* Achievements::DRY_SPELL;
+Achievement* Achievements::DRY_SPELL;  // name guessed
 Achievement* Achievements::FREE_DIVER;
 Achievement* Achievements::SUPER_FUEL;
-Achievement* Achievements::SADDLE_UP;
+Achievement* Achievements::SADDLE_UP;  // name guessed
 Achievement* Achievements::TASTE_OF_YOUR_OWN_MEDICINE;
 Achievement* Achievements::BEAM_ME_UP;
-Achievement* Achievements::MAP_ROOM;
+Achievement* Achievements::MAP_ROOM;  // name guessed
 Achievement* Achievements::CAMOUFLAGE;
 Achievement* Achievements::BACK_FROM_THE_DEAD;
-Achievement* Achievements::EQUIP_YOUR_FISTS;
+Achievement* Achievements::EQUIP_YOUR_FISTS;  // name guessed
 Achievement* Achievements::TENACIOUS_BALL;
 Achievement* Achievements::DEADSHOT;
-Achievement* Achievements::SUCK_MY_SNOWBALLS;
+Achievement* Achievements::SUCK_MY_SNOWBALLS;  // name guessed
 Achievement* Achievements::MOUNTAIN_TOP;
 Achievement* Achievements::WILL_LIKE_NO_OTHER;
-Achievement* Achievements::THE_DEEP_END;
+Achievement* Achievements::THE_DEEP_END;  // name guessed
 Achievement* Achievements::GREAT_VIEW_FROM_UP_HERE;
 Achievement* Achievements::CHANGE_OF_SHEETS;
-Achievement* Achievements::CHEATING_DEATH;
+Achievement* Achievements::CHEATING_DEATH;  // name guessed
 Achievement* Achievements::SO_IGOT_THAT_GOING_FOR_ME;
 Achievement* Achievements::LET_IT_GO;
-Achievement* Achievements::FEELING_ILL;
+Achievement* Achievements::FEELING_ILL;  // name guessed
 Achievement* Achievements::RABBIT_SEASON;
 Achievement* Achievements::ORGANIZATIONAL_WIZARD;
-Achievement* Achievements::GLIDER;
+Achievement* Achievements::GLIDER;  // name guessed
 Achievement* Achievements::PILOT;
 Achievement* Achievements::GO_GREEN;
-Achievement* Achievements::GO_YELLOW;
+Achievement* Achievements::GO_YELLOW;  // name guessed
 Achievement* Achievements::GO_BLUE;
 Achievement* Achievements::REPOPULATION_ALIAS;
-Achievement* Achievements::ADVENTURING_TIME_ALIAS;
+Achievement* Achievements::ADVENTURING_TIME_ALIAS;  // name guessed
 
+// name guessed
 void Achievements::staticCtor() {
     OPEN_INVENTORY
         = (new Achievement(0, L"openInventory", 0, 0, Items::BOOK, nullptr))->setFlag()->registerStat(true);

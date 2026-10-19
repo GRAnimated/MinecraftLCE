@@ -5,46 +5,46 @@
 #include "net/minecraft/world/level/block/Blocks.h"
 #include "net/minecraft/world/level/block/FlowerBlock.h"
 
-std::vector<BannerPattern*> BannerPattern::VALUES;
+std::vector<BannerPattern*> BannerPattern::VALUES;  // name guessed
 BannerPattern* BannerPattern::BASE;
 BannerPattern* BannerPattern::BORDER;
-BannerPattern* BannerPattern::BRICKS;
+BannerPattern* BannerPattern::BRICKS;  // name guessed
 BannerPattern* BannerPattern::CIRCLE;
 BannerPattern* BannerPattern::CREEPER;
-BannerPattern* BannerPattern::CROSS;
+BannerPattern* BannerPattern::CROSS;  // name guessed
 BannerPattern* BannerPattern::CURLY_BORDER;
 BannerPattern* BannerPattern::DIAGONAL_LEFT;
-BannerPattern* BannerPattern::DIAGONAL_RIGHT_MIRROR;
+BannerPattern* BannerPattern::DIAGONAL_RIGHT_MIRROR;  // name guessed
 BannerPattern* BannerPattern::DIAGONAL_LEFT_MIRROR;
 BannerPattern* BannerPattern::DIAGONAL_RIGHT;
-BannerPattern* BannerPattern::FLOWER;
+BannerPattern* BannerPattern::FLOWER;  // name guessed
 BannerPattern* BannerPattern::GRADIENT;
 BannerPattern* BannerPattern::GRADIENT_UP;
-BannerPattern* BannerPattern::HALF_HORIZONTAL;
+BannerPattern* BannerPattern::HALF_HORIZONTAL;  // name guessed
 BannerPattern* BannerPattern::HALF_HORIZONTAL_MIRROR;
 BannerPattern* BannerPattern::HALF_VERTICAL;
-BannerPattern* BannerPattern::HALF_VERTICAL_MIRROR;
+BannerPattern* BannerPattern::HALF_VERTICAL_MIRROR;  // name guessed
 BannerPattern* BannerPattern::MOJANG;
 BannerPattern* BannerPattern::RHOMBUS;
-BannerPattern* BannerPattern::SKULL;
+BannerPattern* BannerPattern::SKULL;  // name guessed
 BannerPattern* BannerPattern::SMALL_STRIPES;
 BannerPattern* BannerPattern::SQUARE_BOTTOM_LEFT;
-BannerPattern* BannerPattern::SQUARE_BOTTOM_RIGHT;
+BannerPattern* BannerPattern::SQUARE_BOTTOM_RIGHT;  // name guessed
 BannerPattern* BannerPattern::SQUARE_TOP_LEFT;
 BannerPattern* BannerPattern::SQUARE_TOP_RIGHT;
-BannerPattern* BannerPattern::STRAIGHT_CROSS;
+BannerPattern* BannerPattern::STRAIGHT_CROSS;  // name guessed
 BannerPattern* BannerPattern::STRIPE_BOTTOM;
 BannerPattern* BannerPattern::STRIPE_CENTER;
-BannerPattern* BannerPattern::STRIPE_DOWNLEFT;
+BannerPattern* BannerPattern::STRIPE_DOWNLEFT;  // name guessed
 BannerPattern* BannerPattern::STRIPE_DOWNRIGHT;
 BannerPattern* BannerPattern::STRIPE_LEFT;
-BannerPattern* BannerPattern::STRIPE_MIDDLE;
+BannerPattern* BannerPattern::STRIPE_MIDDLE;  // name guessed
 BannerPattern* BannerPattern::STRIPE_RIGHT;
 BannerPattern* BannerPattern::STRIPE_TOP;
-BannerPattern* BannerPattern::TRIANGLE_BOTTOM;
+BannerPattern* BannerPattern::TRIANGLE_BOTTOM;  // name guessed
 BannerPattern* BannerPattern::TRIANGLE_TOP;
 BannerPattern* BannerPattern::TRIANGLES_BOTTOM;
-BannerPattern* BannerPattern::TRIANGLES_TOP;
+BannerPattern* BannerPattern::TRIANGLES_TOP;  // name guessed
 
 static const unsigned char bannerKeys[39][64] = {
     {
@@ -327,6 +327,7 @@ void BannerPattern::staticCtor() {
     TRIANGLES_TOP = new BannerPattern(38, L"tts", L" # ", L"#*#", L"   ", bannerKeys[38], 51);
 }
 
+// name guessed
 void BannerPattern::init(int id, const std::wstring& name, const unsigned char* key, int description) {
     m_id = id;
     m_shortName = name;
@@ -336,16 +337,19 @@ void BannerPattern::init(int id, const std::wstring& name, const unsigned char* 
     VALUES.push_back(this);
 }
 
+// name guessed
 BannerPattern::BannerPattern(int id, const std::wstring& name, const unsigned char* key, int description) {
     init(id, name, key, description);
 }
 
+// name guessed
 BannerPattern::BannerPattern(int id, const std::wstring& name, ItemInstance* item, const unsigned char* key,
                              int description) {
     init(id, name, key, description);
     m_item = item;
 }
 
+// name guessed
 BannerPattern::BannerPattern(int id, const std::wstring& name, const std::wstring& first,
                              const std::wstring& second, const std::wstring& third, const unsigned char* key,
                              int description) {
@@ -355,22 +359,29 @@ BannerPattern::BannerPattern(int id, const std::wstring& name, const std::wstrin
     m_rows[2] = third;
 }
 
+// name guessed
 BannerPattern::PatternGrid BannerPattern::getPatternGrid() {
     return PatternGrid(m_rows);
 }
+// name guessed
 BannerPattern::PatternGrid::PatternGrid(std::wstring* rows) : data(rows), length(3) {}
+// name guessed
 bool BannerPattern::hasPattern() {
     return m_item != nullptr || !m_rows[0].empty();
 }
+// name guessed
 bool BannerPattern::hasItem() {
     return m_item != nullptr;
 }
+// name guessed
 ItemInstance* BannerPattern::getItem() {
     return m_item;
 }
+// name guessed
 int BannerPattern::getId() {
     return m_id;
 }
+// name guessed
 int BannerPattern::getDescriptionId() {
     return m_description;
 }

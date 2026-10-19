@@ -1,9 +1,10 @@
 #pragma once
 
-// Constructor declarations and storage recovered from Item::staticCtor.
-// Opaque fields do not supply the still-unreconstructed item behavior.
-// Out-of-line destructor declarations retain original external vtable dependencies
-// for reconstructed constructors while subclass virtual behavior remains missing.
+/** Constructor declarations and storage recovered from Item::staticCtor.
+ * Opaque fields do not supply the still-unreconstructed item behavior.
+ * Out-of-line destructor declarations retain original external vtable dependencies
+ * for reconstructed constructors while subclass virtual behavior remains missing.
+ */
 #include "net/minecraft/world/ArrayWithLength.h"
 #include "net/minecraft/world/eINSTANCEOF.h"
 #include "net/minecraft/world/entity/mob/MinecartType.h"

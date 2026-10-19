@@ -14,8 +14,11 @@ public:
         static Variant* ROSE;
         static Variant* PAEONIA;
         static inline Variant* VARIANTS[6];
+        // name guessed
         static Variant* byData(int data) { return VARIANTS[static_cast<unsigned int>(data) > 5 ? 0 : data]; }
+        // name guessed
         int getNameId() { return m_nameId; }
+        // name guessed
         int getDescriptionId() { return m_descriptionId; }
 
         int m_data;

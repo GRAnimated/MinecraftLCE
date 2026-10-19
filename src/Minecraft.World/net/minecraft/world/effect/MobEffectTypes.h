@@ -2,8 +2,9 @@
 
 #include "net/minecraft/world/effect/MobEffect.h"
 
-// Preserve the original subclass vtables as external dependencies while their
-// destructors await reconstruction.
+/** Preserve the original subclass vtables as external dependencies while their
+ * destructors await reconstruction.
+ */
 class AbsoptionMobEffect : public MobEffect {
 public:
     AbsoptionMobEffect(bool harmful, eMinecraftColour color);

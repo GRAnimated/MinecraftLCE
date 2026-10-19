@@ -9,12 +9,15 @@ static_assert(offsetof(Minecart, m_lerpSteps) == 0x2C4, "Minecart interpolation 
 static_assert(offsetof(Minecart, m_lerpDeltaX) == 0x2F0, "Minecart velocity layout");
 #endif
 
+// name guessed
 double Minecart::getMaxSpeed() {
     return 0.4;
 }
 
+// name guessed
 void Minecart::activateMinecart(int, int, int, bool) {}
 
+// name guessed
 void Minecart::moveOffTrack() {
     double maxSpeed = getMaxSpeed();
     double movementX = Mth::clamp(m_deltaMovementX, -maxSpeed, maxSpeed);
@@ -32,6 +35,7 @@ void Minecart::moveOffTrack() {
     }
 }
 
+// name guessed
 void Minecart::applyNaturalSlowdown() {
     double drag = isVehicle() ? static_cast<double>(0.997f) : static_cast<double>(0.96f);
     m_deltaMovementX *= drag;
@@ -39,6 +43,7 @@ void Minecart::applyNaturalSlowdown() {
     m_deltaMovementZ *= drag;
 }
 
+// name guessed
 void Minecart::setPos(double x, double y, double z) {
     m_x = x;
     m_y = y;
@@ -48,6 +53,7 @@ void Minecart::setPos(double x, double y, double z) {
         AABB::newTemp(x - halfWidth, y, z - halfWidth, x + halfWidth, y + m_height, z + halfWidth));
 }
 
+// name guessed
 void Minecart::lerpMotion(double x, double y, double z) {
     m_deltaMovementX = x;
     m_deltaMovementY = y;

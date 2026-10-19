@@ -25,6 +25,7 @@ void ItemInstance::init(Item* item, int count, int aux) {
     updateEmptyCacheFlag();
 }
 
+// name guessed
 ItemInstance::~ItemInstance() {
     if (m_tag)
         delete m_tag;
@@ -107,6 +108,7 @@ void ItemInstance::setCount(int count) {
     updateEmptyCacheFlag();
 }
 
+// name guessed
 void ItemInstance::grow(int count) {
     setCount(m_count + count);
 }
@@ -115,10 +117,12 @@ void ItemInstance::shrink(int count) {
     grow(-count);
 }
 
+// name guessed
 int ItemInstance::getMaxStackSize() {
     return getItem()->getMaxStackSize();
 }
 
+// name guessed
 bool ItemInstance::isStackable() {
     return getMaxStackSize() > 1 && (!isDamageableItem() || !isDamaged());
 }
@@ -131,6 +135,7 @@ bool ItemInstance::isDamaged() {
     return isDamageableItem() && m_damage > 0;
 }
 
+// NON_MATCHING | score: 1101 (lower is better)
 bool ItemInstance::isDamageableItem() {
     return !m_isEmpty && m_item->getMaxDamage() > 0 && (!hasTag() || !getTag()->getBoolean(L"Unbreakable"));
 }
@@ -157,6 +162,7 @@ void ItemInstance::setTag(CompoundTag* tag) {
     m_tag = tag;
 }
 
+// NON_MATCHING | score: 1690 (lower is better)
 bool ItemInstance::tagMatches(const not_null_ptr<ItemInstance>& first,
                               const not_null_ptr<ItemInstance>& second) {
     if (first->isEmpty() && second->isEmpty())
@@ -173,6 +179,7 @@ not_null_ptr<ItemInstance> ItemInstance::copy() const {
     return result;
 }
 
+// name guessed
 not_null_ptr<ItemInstance> ItemInstance::split(int count) {
     int amount = std::min(count, m_count);
     auto result = copy();
@@ -183,6 +190,7 @@ not_null_ptr<ItemInstance> ItemInstance::split(int count) {
     return result;
 }
 
+// name guessed
 void ItemInstance::setPopTime(int ticks) {
     m_dword14 = ticks;
 }

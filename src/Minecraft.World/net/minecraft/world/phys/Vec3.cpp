@@ -6,7 +6,7 @@
 
 DEFINE_THREAD_STORAGE(Vec3, 1024)
 
-Vec3* Vec3::ZERO;
+Vec3* Vec3::ZERO;  // name guessed
 
 void Vec3::staticCtor() {
     ZERO = new Vec3(0.0, 0.0, 0.0);

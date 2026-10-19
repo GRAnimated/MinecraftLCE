@@ -27,6 +27,7 @@ public:
         }
 
         int getData() { return this->m_data; }
+        // name guessed
         int getNameId() { return this->m_nameId; }
 
         std::wstring toString() const override { return this->m_name; }

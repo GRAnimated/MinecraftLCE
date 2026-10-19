@@ -71,7 +71,7 @@ public:
     bool IsAppPaused();
     void SetAction(int, eXuiAction, void*);
     void setLevelGenerationOptions(LevelGenerationOptions* options);
-    // Inferred name: records a unique (type, x, z) generation marker.
+    // name guessed: records a unique (type, x, z) generation marker.
     void addGeneratedFeature(int type, int x, int z);
     void SetGameHostOption(eGameHostOption option, unsigned int value);
 

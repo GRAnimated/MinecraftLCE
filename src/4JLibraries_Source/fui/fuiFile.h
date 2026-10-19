@@ -37,6 +37,7 @@ struct fuiMatrix {
 
     // spent an hour trying to figure out what this was
     // finally thought of it being a built in C++ operator... which looks good to me.
+    // NON_MATCHING | score: 205 (lower is better)
     fuiMatrix operator*(const fuiMatrix& rhs) const {
         fuiMatrix out = {};
         mul(*this, rhs, out);
@@ -192,8 +193,9 @@ struct fuiData {
 struct fuiFile {
     fuiFile();
     ~fuiFile();
-    // Retain the recovered symbol's ABI; its third argument is a byte stride,
-    // despite the old unsigned-char** declaration in the symbol map.
+    /** Retain the recovered symbol's ABI; its third argument is a byte stride,
+     * despite the old unsigned-char** declaration in the symbol map.
+     */
     static uint64_t addDataRegion(uint a1, uint a2, uchar** ptr, uint64_t* callbackData);
     bool load(arrayWithLength<uchar>, int);
     bool resolveReferences(fuiFile*);

@@ -31,10 +31,12 @@ void FoodData::eat(FoodItem* food, const not_null_ptr<ItemInstance>& item) {
         food->getSaturationModifier(not_null_ptr<ItemInstance>(item)));
 }
 
+// name guessed
 void FoodData::addExhaustion(float exhaustion) {
     m_exhaustionLevel = std::min(m_exhaustionLevel + exhaustion, FoodConstants::MaxSaturation() * 2.0f);
 }
 
+// name guessed
 void FoodData::tick(const std::shared_ptr<Player>& player) {
     const Difficulty* difficulty = player->m_level->getDifficulty();
     m_lastFoodLevel = m_foodLevel;
@@ -117,6 +119,7 @@ int FoodData::getLastFoodLevel() {
     return m_lastFoodLevel;
 }
 
+// name guessed
 bool FoodData::needsFood() {
     return m_foodLevel < FoodConstants::MaxFood();
 }
@@ -125,6 +128,7 @@ bool FoodData::isStarving() {
     return m_foodLevel <= FoodConstants::StarveLevel();
 }
 
+// name guessed
 float FoodData::getSaturationLevel() {
     return m_saturationLevel;
 }

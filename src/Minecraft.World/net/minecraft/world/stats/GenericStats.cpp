@@ -149,6 +149,7 @@ Stat* GenericStats::get_itemsBought(int) {
     return nullptr;
 }
 
+// name guessed
 Stat* GenericStats::get_armourDyed(int) {
     return nullptr;
 }

@@ -4,14 +4,17 @@
 #include "net/minecraft/world/level/block/state/BlockStateDefinition.h"
 #include <algorithm>
 
+// name guessed
 BlockStatePredicate::BlockStatePredicate(BlockStateDefinition* definition) : m_definition(definition) {}
 
 BlockStatePredicate::~BlockStatePredicate() = default;
 
+// name guessed
 BlockStatePredicate* BlockStatePredicate::forBlock(Block* block) {
     return new BlockStatePredicate(block->getBlockStateDefinition());
 }
 
+// name guessed
 bool BlockStatePredicate::apply(const BlockState* state) const {
     if (!state || state->getBlock() != m_definition->getBlock())
         return false;
@@ -26,6 +29,7 @@ bool BlockStatePredicate::apply(const BlockState* state) const {
     return true;
 }
 
+// name guessed
 BlockStatePredicate* BlockStatePredicate::where(Property* property, const Predicate<Boxed*>* predicate) {
     const auto& properties = m_definition->getProperties();
     // The original performs this scan but still registers an absent property.

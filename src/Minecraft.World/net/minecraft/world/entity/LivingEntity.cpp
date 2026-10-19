@@ -133,7 +133,7 @@ void LivingEntity::dropDeathLoot(bool, int) {}
 void LivingEntity::hurtArmor(float) {}
 void LivingEntity::hurtCurrentlyUsedShield(float) {}
 
-// NON_MATCHING: a lot of stuff
+// NON_MATCHING | score: 17402 (lower is better)
 void LivingEntity::travel(float x, float y, float z) {
     Player* player = this->isType(ePlayer) ? (Player*)this : nullptr;
     if (this->PositionLocked()) {
@@ -359,7 +359,7 @@ not_null_ptr<ItemInstance> LivingEntity::getUseItem() {
     return this->m_useItem;
 }
 
-// NON_MATCHING: Various issues, https://decomp.me/scratch/bm1rV
+// NON_MATCHING | score: 7043 (lower is better)
 void LivingEntity::CheckThermalAreas() {
     SetLiftForceModifier(1.0);
 

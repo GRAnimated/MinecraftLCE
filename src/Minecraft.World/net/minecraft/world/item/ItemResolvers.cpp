@@ -22,7 +22,7 @@
 #include "net/minecraft/world/level/block/state/BlockState.h"
 #include "net/minecraft/world/level/block/state/BooleanProperty.h"
 
-BooleanProperty* SpongeBlock::WET;
+BooleanProperty* SpongeBlock::WET;  // name guessed
 
 namespace ItemResolvers {
 extern const unsigned int LOG_NAMES[6] = {
@@ -107,118 +107,145 @@ unsigned int Item::StoneBlockDescResolver(not_null_ptr<ItemInstance> item) {
     return StoneBlock::Variant::byData(item->getAuxValue())->getDescriptionId();
 }
 
+// name guessed
 unsigned int ItemResolvers::DirtBlockName(not_null_ptr<ItemInstance> item) {
     return DirtBlock::Variant::byData(item->getAuxValue())->getNameId();
 }
 
+// name guessed
 unsigned int ItemResolvers::DirtBlockDesc(not_null_ptr<ItemInstance> item) {
     return DirtBlock::Variant::byData(item->getAuxValue())->getDescriptionId();
 }
 
+// name guessed
 unsigned int ItemResolvers::PlanksBlockName(not_null_ptr<ItemInstance> item) {
     return PlanksBlock::Variant::byData(item->getAuxValue())->getNameId();
 }
 
+// name guessed
 unsigned int ItemResolvers::SandBlockName(not_null_ptr<ItemInstance> item) {
     return SandBlock::Variant::byData(item->getAuxValue())->getNameId();
 }
 
+// name guessed
 unsigned int ItemResolvers::SandBlockDesc(not_null_ptr<ItemInstance> item) {
     return SandBlock::Variant::byData(item->getAuxValue())->getDescriptionId();
 }
 
+// name guessed
 unsigned int ItemResolvers::SandStoneBlockName(not_null_ptr<ItemInstance> item) {
     return SandStoneBlock::Variant::byData(item->getAuxValue())->getNameId();
 }
 
+// name guessed
 unsigned int ItemResolvers::MonsterEggBlockName(not_null_ptr<ItemInstance> item) {
     return MonsterEggBlock::Variant::byData(item->getAuxValue())->getTranslationKey();
 }
 
+// name guessed
 unsigned int ItemResolvers::StoneBrickBlockName(not_null_ptr<ItemInstance> item) {
     return StoneBrickBlock::Variant::byData(item->getAuxValue())->getTranslationKey();
 }
 
+// name guessed
 unsigned int ItemResolvers::WallBlockName(not_null_ptr<ItemInstance> item) {
     return WallBlock::Variant::byData(item->getAuxValue())->getNameId();
 }
 
+// name guessed
 unsigned int ItemResolvers::DoublePlantBlockName(not_null_ptr<ItemInstance> item) {
     return DoublePlantBlock::Variant::byData(item->getAuxValue())->getNameId();
 }
 
+// name guessed
 unsigned int ItemResolvers::DoublePlantBlockDesc(not_null_ptr<ItemInstance> item) {
     return DoublePlantBlock::Variant::byData(item->getAuxValue())->getDescriptionId();
 }
 
+// name guessed
 unsigned int ItemResolvers::PrismarineBlockName(not_null_ptr<ItemInstance> item) {
     return PrismarineBlock::Variant::byData(item->getAuxValue())->getNameId();
 }
 
+// name guessed
 unsigned int ItemResolvers::PrismarineBlockDesc(not_null_ptr<ItemInstance> item) {
     return PrismarineBlock::Variant::byData(item->getAuxValue())->getDescriptionId();
 }
 
+// name guessed
 unsigned int ItemResolvers::RedSandStoneBlockName(not_null_ptr<ItemInstance> item) {
     return RedSandStoneBlock::Variant::byData(item->getAuxValue())->getNameId();
 }
 
+// name guessed
 unsigned int ItemResolvers::WoolName(not_null_ptr<ItemInstance> item) {
     return WOOL_NAMES[DyeColor::byItemData(item->getAuxValue())->getBlockData()];
 }
 
+// name guessed
 unsigned int ItemResolvers::StainedClayName(not_null_ptr<ItemInstance> item) {
     return STAINEDCLAY_NAMES[DyeColor::byItemData(item->getAuxValue())->getBlockData()];
 }
 
+// name guessed
 unsigned int ItemResolvers::StainedGlassPaneName(not_null_ptr<ItemInstance> item) {
     return STAINEDGLASSPANE_NAMES[DyeColor::byItemData(item->getAuxValue())->getBlockData()];
 }
 
+// name guessed
 unsigned int ItemResolvers::CarpetName(not_null_ptr<ItemInstance> item) {
     return CARPET_NAMES[DyeColor::byItemData(item->getAuxValue())->getBlockData()];
 }
 
+// name guessed
 unsigned int ItemResolvers::StainedGlassName(not_null_ptr<ItemInstance> item) {
     return STAINEDGLASS_NAMES[DyeColor::byItemData(item->getAuxValue())->getBlockData()];
 }
 
+// name guessed
 unsigned int ItemResolvers::ConcreteName(not_null_ptr<ItemInstance> item) {
     return CONCRETE_NAMES[DyeColor::byItemData(item->getAuxValue())->getBlockData()];
 }
 
+// name guessed
 unsigned int ItemResolvers::ConcretePowderName(not_null_ptr<ItemInstance> item) {
     return CONCRETEPOWDER_NAMES[DyeColor::byItemData(item->getAuxValue())->getBlockData()];
 }
 
+// name guessed
 unsigned int ItemResolvers::SaplingName(not_null_ptr<ItemInstance> item) {
     return Blocks::SAPLING->getDescriptionId(item->getAuxValue());
 }
 
+// name guessed
 unsigned int ItemResolvers::LogName(not_null_ptr<ItemInstance> item) {
     return LOG_NAMES[Blocks::LOG->getBlockState(item->getAuxValue())
                          ->getValue<PlanksBlock::Variant*>(OldLogBlock::VARIANT)
                          ->getData()];
 }
 
+// name guessed
 unsigned int ItemResolvers::Log2Name(not_null_ptr<ItemInstance> item) {
     return LOG_NAMES[Blocks::LOG2->getBlockState(item->getAuxValue())
                          ->getValue<PlanksBlock::Variant*>(NewLogBlock::VARIANT)
                          ->getData()];
 }
 
+// name guessed
 unsigned int ItemResolvers::SpongeName(not_null_ptr<ItemInstance> item) {
     return Blocks::SPONGE->getBlockState(item->getAuxValue())->getValue<bool>(SpongeBlock::WET) ?
                StringIDs::WetSponge :
                StringIDs::Sponge;
 }
 
+// name guessed
 unsigned int ItemResolvers::SpongeDesc(not_null_ptr<ItemInstance> item) {
     return Blocks::SPONGE->getBlockState(item->getAuxValue())->getValue<bool>(SpongeBlock::WET) ?
                StringIDs::CanBeDriedInAFurnaceAllowingSponge :
                StringIDs::CanAbsorbWaterNearbyTurningIntoAWet;
 }
 
+// name guessed
 unsigned int ItemResolvers::FlowerName(not_null_ptr<ItemInstance> item) {
     FlowerBlock* block = static_cast<FlowerBlock*>(Block::byId(item->getItem()->getId()));
     return block->getBlockState(item->getAuxValue())
@@ -226,6 +253,7 @@ unsigned int ItemResolvers::FlowerName(not_null_ptr<ItemInstance> item) {
         ->getNameId();
 }
 
+// name guessed
 unsigned int ItemResolvers::FlowerDesc(not_null_ptr<ItemInstance> item) {
     FlowerBlock* block = static_cast<FlowerBlock*>(Block::byId(item->getItem()->getId()));
     return block->getBlockState(item->getAuxValue())
@@ -233,6 +261,7 @@ unsigned int ItemResolvers::FlowerDesc(not_null_ptr<ItemInstance> item) {
         ->getDescriptionId();
 }
 
+// name guessed
 unsigned int ItemResolvers::AnvilName(not_null_ptr<ItemInstance> item) {
     int aux = item->getAuxValue();
     return ANVIL_NAMES[static_cast<unsigned int>(aux) > 2 ? 0 : aux];

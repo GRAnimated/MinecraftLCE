@@ -25,20 +25,25 @@ Inventory::Inventory(Player* player) : m_lastSelected(ItemInstance::EMPTY), m_ca
     m_player = player;
 }
 
+// NON_MATCHING | score: 4320 (lower is better)
 Inventory::~Inventory() {
     m_items.deleteData();
     m_armor.deleteData();
     m_offhand.deleteData();
 }
 
+// name guessed
 const not_null_ptr<ItemInstance>& Inventory::getSelected() {
     return isHotbarSlot(m_selected) ? m_items[m_selected] : ItemInstance::EMPTY;
 }
 
+// name guessed
+// NON_MATCHING | score: 315 (lower is better)
 bool Inventory::isHotbarSlot(int slot) {
     return slot >= 0 && slot < 9;
 }
 
+// name guessed
 int Inventory::getSelectionSize() {
     return 9;
 }
@@ -55,7 +60,10 @@ void Inventory::swapPaint(int direction) {
         m_selected -= 9;
 }
 
-// Nonmatching: minigame-specific slot restrictions remain to be reconstructed.
+/** Nonmatching: minigame-specific slot restrictions remain to be reconstructed.
+ */
+// name guessed
+// NON_MATCHING | score: 1995 (lower is better)
 int Inventory::getFreeSlot() {
     for (unsigned int i = 0; i < m_items.size(); ++i) {
         if (m_items[i]->isEmpty())
@@ -64,6 +72,7 @@ int Inventory::getFreeSlot() {
     return -1;
 }
 
+// name guessed
 bool Inventory::isSameItem(not_null_ptr<ItemInstance> first, not_null_ptr<ItemInstance> second,
                            bool ignoreTags) {
     return first->getItem() == second->getItem()
@@ -71,12 +80,15 @@ bool Inventory::isSameItem(not_null_ptr<ItemInstance> first, not_null_ptr<ItemIn
            && (ignoreTags || ItemInstance::tagMatches(first, second));
 }
 
+// name guessed
+// NON_MATCHING | score: 315 (lower is better)
 bool Inventory::hasRemainingSpaceForItem(not_null_ptr<ItemInstance> slot, not_null_ptr<ItemInstance> item,
                                          bool ignoreTags) {
     return !slot->isEmpty() && isSameItem(slot, item, ignoreTags) && slot->isStackable()
            && slot->getCount() < slot->getMaxStackSize() && slot->getCount() < getMaxStackSize();
 }
 
+// name guessed
 int Inventory::getSlotWithRemainingSpace(not_null_ptr<ItemInstance> item) {
     if (hasRemainingSpaceForItem(getItem(m_selected), item, false))
         return m_selected;
@@ -89,6 +101,7 @@ int Inventory::getSlotWithRemainingSpace(not_null_ptr<ItemInstance> item) {
     return -1;
 }
 
+// name guessed
 int Inventory::addResource(not_null_ptr<ItemInstance> item) {
     if (GameMode* mode = m_player->GetGameMode())
         mode->RecordItem(item);
@@ -100,6 +113,8 @@ int Inventory::addResource(not_null_ptr<ItemInstance> item) {
     return addResource(slot, item);
 }
 
+// name guessed
+// NON_MATCHING | score: 7969 (lower is better)
 int Inventory::addResource(int slot, not_null_ptr<ItemInstance> item) {
     if (slot < 0 || slot >= getContainerSize())
         return item->getCount();
@@ -132,7 +147,10 @@ bool Inventory::add(not_null_ptr<ItemInstance> item) {
     return add(-1, item);
 }
 
-// Nonmatching: item-collection statistics and achievements remain to be reconstructed.
+/** Nonmatching: item-collection statistics and achievements remain to be reconstructed.
+ */
+// name guessed
+// NON_MATCHING | score: 15193 (lower is better)
 bool Inventory::add(int slot, not_null_ptr<ItemInstance> item) {
     if (item->isEmpty() || slot < -1 || slot >= getContainerSize())
         return false;
@@ -186,10 +204,13 @@ NonNullList<not_null_ptr<ItemInstance>> Inventory::getSlotList(unsigned int& ind
     return {};
 }
 
+// name guessed
 int Inventory::getContainerSize() {
     return m_items.size() + m_armor.size() + m_offhand.size();
 }
 
+// name guessed
+// NON_MATCHING | score: 7826 (lower is better)
 bool Inventory::isEmpty() {
     for (auto list : {m_items, m_armor, m_offhand}) {
         for (unsigned int i = 0; i < list.size(); ++i) {
@@ -201,11 +222,15 @@ bool Inventory::isEmpty() {
     return true;
 }
 
+// name guessed
+// NON_MATCHING | score: 3924 (lower is better)
 not_null_ptr<ItemInstance> Inventory::getItem(unsigned int index) {
     auto list = getSlotList(index);
     return list.size() == 0 ? ItemInstance::EMPTY : list[index];
 }
 
+// name guessed
+// NON_MATCHING | score: 4222 (lower is better)
 not_null_ptr<ItemInstance> Inventory::removeItem(unsigned int index, int count) {
     auto list = getSlotList(index);
     if (list.size() == 0 || count <= 0 || list[index]->isEmpty())
@@ -216,6 +241,8 @@ not_null_ptr<ItemInstance> Inventory::removeItem(unsigned int index, int count) 
     return result;
 }
 
+// name guessed
+// NON_MATCHING | score: 4526 (lower is better)
 not_null_ptr<ItemInstance> Inventory::removeItemNoUpdate(int slot) {
     unsigned int index = slot;
     auto list = getSlotList(index);
@@ -226,6 +253,7 @@ not_null_ptr<ItemInstance> Inventory::removeItemNoUpdate(int slot) {
     return item;
 }
 
+// NON_MATCHING | score: 5905 (lower is better)
 void Inventory::removeItem(not_null_ptr<ItemInstance> item) {
     for (auto list : {m_itemsView, m_armorView, m_offhandView}) {
         for (unsigned int i = 0; i < list.size(); ++i) {
@@ -237,6 +265,8 @@ void Inventory::removeItem(not_null_ptr<ItemInstance> item) {
     }
 }
 
+// name guessed
+// NON_MATCHING | score: 6252 (lower is better)
 void Inventory::setItem(unsigned int index, not_null_ptr<ItemInstance> item) {
     bool empty = item->isEmpty();
     unsigned int slot = index;
@@ -250,18 +280,22 @@ void Inventory::setItem(unsigned int index, not_null_ptr<ItemInstance> item) {
     m_player->handleCollectItem(item);
 }
 
+// name guessed
 int Inventory::getMaxStackSize() {
     return 64;
 }
 
+// name guessed
 void Inventory::setChanged() {
     ++m_timesChanged;
 }
 
+// name guessed
 not_null_ptr<ItemInstance> Inventory::getArmor(int index) {
     return m_armor[index];
 }
 
+// name guessed
 void Inventory::setCarried(not_null_ptr<ItemInstance> item) {
     m_carried = item;
     m_player->handleCollectItem(item);
@@ -271,6 +305,7 @@ not_null_ptr<ItemInstance> Inventory::getCarried() {
     return m_carried;
 }
 
+// name guessed
 ListTag* Inventory::save(ListTag* tags) {
     for (unsigned int i = 0; i < m_items.size(); ++i) {
         if (!m_items[i]->isEmpty()) {
@@ -318,22 +353,28 @@ void Inventory::load(ListTag* tags) {
     }
 }
 
+// name guessed
 std::wstring Inventory::getName() {
     return L10N::GetString(StringIDs::Inventory_2);
 }
 
+// name guessed
 std::wstring Inventory::getCustomName() {
     return L"";
 }
 
+// name guessed
 bool Inventory::hasCustomName() {
     return false;
 }
 
+// name guessed
 std::wstring Inventory::getDisplayName() {
     return hasCustomName() ? getCustomName() : getName();
 }
 
+// name guessed
+// NON_MATCHING | score: 3771 (lower is better)
 bool Inventory::stillValid(std::shared_ptr<Player> player) {
     if (m_player->m_isRemoved)
         return false;
@@ -344,24 +385,31 @@ bool Inventory::stillValid(std::shared_ptr<Player> player) {
     return center->distanceToSqr(box->getCenter()) - radius * radius <= 30.25;
 }
 
+// name guessed
 void Inventory::startOpen(std::shared_ptr<Player>) {}
 
+// name guessed
 void Inventory::stopOpen(std::shared_ptr<Player>) {}
 
+// name guessed
 bool Inventory::canPlaceItem(int, not_null_ptr<ItemInstance>) {
     return true;
 }
 
+// name guessed
 int Inventory::getContainerData(int) {
     return 0;
 }
 
+// name guessed
 void Inventory::setContainerData(int, int) {}
 
+// name guessed
 int Inventory::getContainerDataCount() {
     return 0;
 }
 
+// name guessed
 void Inventory::clearContent() {
     m_itemsView.clear();
     m_armorView.clear();

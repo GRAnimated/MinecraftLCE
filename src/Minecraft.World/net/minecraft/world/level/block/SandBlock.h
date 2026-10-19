@@ -32,7 +32,9 @@ public:
         }
 
         int getData() { return this->m_data; }
+        // name guessed
         int getNameId() { return this->m_nameId; }
+        // name guessed
         int getDescriptionId() { return this->m_descId; }
         std::wstring getName() { return this->m_name; }
         const MaterialColor* getMaterialColor() { return this->m_materialColor; }
