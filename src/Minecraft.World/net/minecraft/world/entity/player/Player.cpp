@@ -100,6 +100,7 @@ bool Player::canHarmPlayer(std::wstring) {
     return this->isAllowedToAttackPlayers();
 }
 
+// NON_MATCHING | score: 3805 (lower is better)
 float Player::getArmorCoverPercentage() {
     return 0.0f;
 }
@@ -117,7 +118,7 @@ void Player::setGameMode(const GameType*) {}
 void Player::onCrafted(not_null_ptr<ItemInstance>) {}
 void Player::handleCollectItem(not_null_ptr<ItemInstance>) {}
 
-// NON_MATCHING
+// NON_MATCHING | score: 5175 (lower is better)
 void Player::staticCtor() {
     // 4 counts of defineIdInternal
     // also SynchedEntityData :abyss:
@@ -156,6 +157,7 @@ void Player::OnEquipArmor(not_null_ptr<ItemInstance>) {}
 void Player::OnTakeFromAnvil(not_null_ptr<ItemInstance>) {}
 
 // NON-MATCHING: some crap, logic should be the same though
+// NON_MATCHING | score: 795 (lower is better)
 void Player::updatePlayerSize() {
     float newWidth, newHeight;
 
@@ -200,4 +202,45 @@ bool Player::isAllowedToAttackPlayers() {
     }
 
     return false;
+}
+
+// name guessed
+bool Player::isAllowedToFly() {
+    return CConsoleMinecraftApp::sInstance.GetGameHostOption(static_cast<eGameHostOption>(16))
+           && getPlayerGamePrivilege(static_cast<EPlayerGamePrivileges>(5));
+}
+
+// name guessed
+bool Player::hasInvulnerablePrivilege() {
+    return CConsoleMinecraftApp::sInstance.GetGameHostOption(static_cast<eGameHostOption>(18))
+           && getPlayerGamePrivilege(static_cast<EPlayerGamePrivileges>(8));
+}
+
+// name guessed
+void Player::causeFoodExhaustion(float exhaustion) {
+    if (usesLegacyFoodHealing() || (isAllowedToFly() && m_abilities.m_isFlying)
+        || m_abilities.m_isInvulnerable || hasInvulnerablePrivilege()) {
+        return;
+    }
+    if ((CConsoleMinecraftApp::sInstance.GetGameHostOption(static_cast<eGameHostOption>(12))
+         || !getPlayerGamePrivilege(static_cast<EPlayerGamePrivileges>(1)))
+        && !m_level->m_isLocal) {
+        m_foodData.addExhaustion(exhaustion);
+    }
+}
+
+// name guessed
+FoodData* Player::getFoodData() {
+    return &m_foodData;
+}
+
+// name guessed
+bool Player::usesLegacyFoodHealing() {
+    return CConsoleMinecraftApp::sInstance.GetGameHostOption(static_cast<eGameHostOption>(17))
+           && getPlayerGamePrivilege(static_cast<EPlayerGamePrivileges>(6));
+}
+
+// name guessed
+bool Player::isHurt() {
+    return getHealth() > 0.0f && getHealth() < getMaxHealth();
 }

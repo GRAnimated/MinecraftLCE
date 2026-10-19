@@ -2,4 +2,7 @@
 
 #include "net/minecraft/world/item/Item.h"
 
-class SkullItem : public Item {};
+class SkullItem : public Item {
+public:
+    SkullItem();
+};

@@ -5,6 +5,7 @@
 
 class CocoaBlock : public HorizontalDirectionalBlock, public BonemealableBlock {
 public:
+    static Property* AGE;
     CocoaBlock();
 
     bool isValidBonemealTarget(Level*, const BlockPos&, const BlockState*, bool) override;

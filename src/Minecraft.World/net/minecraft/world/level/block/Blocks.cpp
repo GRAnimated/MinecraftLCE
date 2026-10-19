@@ -1,5 +1,7 @@
 #include "net/minecraft/world/level/block/Blocks.h"
 
+#include <cwchar>
+
 #include "net/minecraft/resources/ResourceLocation.h"
 #include "net/minecraft/world/level/block/FireBlock.h"
 #include "net/minecraft/world/level/block/LeafBlock.h"
@@ -266,4 +268,21 @@ void Blocks::staticInit() {
     CONCRETE_POWDER = get(L"concrete_powder");
     STRUCTURE_BLOCK = get(L"structure_block");
     FireBlock::staticCtor();
+}
+
+class Integer {
+public:
+    static int parseInt(const std::wstring&, int base);
+};
+
+// name guessed
+int Integer::parseInt(const std::wstring& value, int base) {
+    return static_cast<int>(std::wcstol(value.c_str(), nullptr, base));
+}
+
+Block* Blocks::byString(const std::wstring& name) {
+    ResourceLocation location(name);
+    if (Registry->containsKey(location))
+        return Registry->get(location);
+    return Registry->byId(Integer::parseInt(name, 10));
 }

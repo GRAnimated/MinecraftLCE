@@ -1,5 +1,6 @@
 #pragma once
 
+#include "net/minecraft/resources/ResourceLocation.h"
 #include "net/minecraft/world/entity/Entity.h"
 #include "net/minecraft/world/entity/LivingEntity.h"
 #include "net/minecraft/world/level/material/MaterialColor.h"
@@ -9,7 +10,7 @@ class Attribute;
 class AttributeModifier;
 class BaseAttributeMap;
 
-enum class eMODIFIER_ID { Unknown = 0 };
+enum class eMODIFIER_ID : unsigned int { Unknown = 0 };
 
 class MobEffect {
 public:
@@ -42,22 +43,28 @@ public:
     };
 
     virtual void applyEffectTick(const std::shared_ptr<LivingEntity>&, int);
-    virtual void applyInstantenousEffect(std::shared_ptr<Entity>, std::shared_ptr<LivingEntity>, int, double);
+    virtual void applyInstantenousEffect(const std::shared_ptr<Entity>& source,
+                                         const std::shared_ptr<Entity>& indirectSource,
+                                         const std::shared_ptr<LivingEntity>& target, int amplifier,
+                                         double proximity);
     virtual bool isDurationEffectTick(int, int);
     virtual bool isInstantenous();
     virtual double getDurationModifier() const;
     virtual void setBeneficial();
     virtual bool isBeneficial() const;
     virtual eMinecraftColour getColor() const;
-    virtual void addAttributeModifier(Attribute*, eMODIFIER_ID, double, int);
-    virtual void getAttributeModifiers();
-    virtual void removeAttributeModifiers(std::shared_ptr<LivingEntity>, BaseAttributeMap*, int);
-    virtual void addAttributeModifiers(std::shared_ptr<LivingEntity>, BaseAttributeMap*, int);
-    virtual void getAttributeModifierValue(int, AttributeModifier*);
+    virtual MobEffect* addAttributeModifier(Attribute*, eMODIFIER_ID, double, int);
+    virtual std::unordered_map<Attribute*, AttributeModifier*>& getAttributeModifiers();
+    virtual void removeAttributeModifiers(const std::shared_ptr<LivingEntity>&, BaseAttributeMap*, int);
+    virtual void addAttributeModifiers(const std::shared_ptr<LivingEntity>&, BaseAttributeMap*, int);
+    virtual double getAttributeModifierValue(int, AttributeModifier*);
     virtual ~MobEffect();
 
     static int getId(MobEffect*);
     static MobEffect* byId(int id);
+    static int GetEffectCount();
+    static MappedRegistry<ResourceLocation, MobEffect*>* REGISTRY;
+    static int EFFECT_COUNT;
 
     MobEffect(bool harmful, eMinecraftColour color);
     void setIcon(EMobEffectIcon icon);

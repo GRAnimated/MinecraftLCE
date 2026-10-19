@@ -3,6 +3,7 @@
 class CensoredString {
 public:
     CensoredString();
+    CensoredString(int, int);
     void* m_qword0;
     void* m_qword8;
     char m_byte10;

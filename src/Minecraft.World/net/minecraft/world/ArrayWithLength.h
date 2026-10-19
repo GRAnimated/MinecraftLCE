@@ -18,6 +18,13 @@ public:
         this->m_data = initialData;
         this->m_length = length;
     }
+    template <std::size_t N>
+    // name guessed
+    arrayWithLength(T (&initialData)[N]) {
+        this->m_data = initialData;
+        this->m_length = N;
+    }
+    // NON_MATCHING | score: 3114 (lower is better)
     arrayWithLength(unsigned int size, bool a3) {
         T* temp;
         if (a3)
@@ -28,7 +35,10 @@ public:
         this->m_length = size;
     }
 
+    // name guessed
     T& operator[](unsigned int i) { return m_data[i]; }
+    // name guessed
+    const T& operator[](unsigned int i) const { return m_data[i]; }
     T& get(unsigned int i) { return m_data[i]; }
 
     void resize(unsigned int newSize) {
@@ -51,7 +61,7 @@ public:
         m_length = newSize;
     }
 
-    // NON_MATCHING
+    // NON_MATCHING | score: 3195 (lower is better)
     static void copy(T* dest, T* src, unsigned int size) {
         if (size) {
             unsigned int i = 0;

@@ -37,7 +37,7 @@ public:
     void save(bool, ProgressListener*) override;
     bool shouldSave() override;
     ChunkSource* getCache() override;
-    std::vector<Biome::MobSpawnerData>* getMobsAt(MobCategory* category, const BlockPos& pos) override;
+    std::vector<Biome::MobSpawnerData*>* getMobsAt(MobCategory* category, const BlockPos& pos) override;
     void findNearestMapFeature(Level* level, const std::wstring& name, const BlockPos& pos,
                                bool unk) override;
     int getLoadedChunks() override;

@@ -4,6 +4,7 @@
 #include "types.h"
 
 class DebugFourjItem : public Item {
+public:
     DebugFourjItem();
 
     ~DebugFourjItem() override {}

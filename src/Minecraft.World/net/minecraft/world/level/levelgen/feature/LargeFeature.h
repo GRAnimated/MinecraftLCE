@@ -7,11 +7,12 @@ class Level;
 
 class LargeFeature {
 public:
+    LargeFeature();
     virtual ~LargeFeature();
     virtual void apply(Level*, int, int, ChunkPrimer*);
     virtual void addFeature(Level*, int, int, int, int, ChunkPrimer*);
 
     int m_radius;
     Random m_random;
-    void* m_unused;
+    Level* m_level;
 };

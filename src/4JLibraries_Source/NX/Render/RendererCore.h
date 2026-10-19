@@ -34,7 +34,49 @@ public:
     public:
         Context(Renderer*, bool);
 
-        char m_filler[0x1F30];
+        char m_gap0[0x10];
+        MatrixStruct m_matrixStacks[4][16];
+        bool m_matrixDirty[4];
+        int m_matrixDepth[4];
+        int m_matrixMode;
+        int m_textureBindings[4];
+        bool m_textureBindingDirty[4];
+        bool m_textureFlags[4];
+        bool m_byte1040;
+        float m_float1044;
+        NVNblendState m_blendState;
+        NVNdepthStencilState m_depthStencilState;
+        NVNcolorState m_colorState;
+        NVNpolygonState m_polygonState;
+        NVNchannelMaskState m_channelMaskState;
+        int m_depthFunc;
+        bool m_stateDirty[6];
+        char m_gap106E[0xC52];
+        int m_dword1CC0;
+        bool m_fogEnabled;
+        char m_gap1CC5[0x13];
+        bool m_fogDirty;
+        bool m_lightingEnabled;
+        char m_gap1CDA[2];
+        bool m_byte1CDC;
+        char m_gap1CDD[3];
+        int m_dword1CE0;
+        bool m_byte1CE4;
+        bool m_creationFlag;
+        char m_gap1CE6[2];
+        char m_data1CE8[0x50];
+        bool m_byte1D38;
+        char m_gap1D39[0x87];
+        void* m_commandBuffer;
+        char m_gap1DC8[0x10];
+        bool m_byte1DD8;
+        char m_gap1DD9[7];
+        void* m_ptr1DE0;
+        void* m_ptr1DE8;
+        void* m_ptr1DF0;
+        char m_gap1DF8[0x28];
+        float m_textureScaleUI[4];
+        char m_gap1E30[0x100];
     };
 
     Renderer();
@@ -58,8 +100,8 @@ public:
 
     virtual void Tick();
     virtual void UpdateGamma(unsigned short gamma);
-    // see OpenGL for more info (modes starts from 0 and ends in 2, they are in the same order as they are in
-    // OpenGL)
+    /** NX maintains four independently selected matrix stacks, each with sixteen entries.
+     */
     virtual void MatrixMode(int);
     virtual void MatrixSetIdentity();
     virtual void MatrixTranslate(float, float, float);
@@ -70,7 +112,7 @@ public:
     virtual void MatrixPop();
     virtual void MatrixPush();
     virtual float32x4_t MatrixMult(float* matrix);
-    virtual void MatrixGet(int);
+    virtual float* MatrixGet(int);
     virtual void Set_matrixDirty();
     // unused params were probably used in Xbox One
     virtual void Initialise();
@@ -343,3 +385,13 @@ public:
     int m_elo;
     int m_elo22;
 };
+
+static_assert(sizeof(MatrixStruct) == 0x40, "Matrix size");
+static_assert(alignof(MatrixStruct) == 0x10, "Matrix alignment");
+static_assert(sizeof(Renderer::Context) == 0x1F30, "Renderer context size");
+static_assert(offsetof(Renderer::Context, m_matrixStacks) == 0x10, "Matrix stack offset");
+static_assert(offsetof(Renderer::Context, m_matrixDirty) == 0x1010, "Matrix dirty offset");
+static_assert(offsetof(Renderer::Context, m_matrixMode) == 0x1024, "Matrix mode offset");
+static_assert(offsetof(Renderer::Context, m_blendState) == 0x1048, "Blend state offset");
+static_assert(offsetof(Renderer::Context, m_creationFlag) == 0x1CE5, "Context flag offset");
+static_assert(offsetof(Renderer::Context, m_textureScaleUI) == 0x1E20, "UI texture scale offset");
