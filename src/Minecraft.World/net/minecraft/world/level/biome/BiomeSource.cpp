@@ -1,5 +1,7 @@
 #include "net/minecraft/world/level/biome/BiomeSource.h"
+
 #include <algorithm>
+#include <cmath>
 
 #include "NX/Platform.h"
 #include "net/minecraft/client/Minecraft.h"
@@ -16,8 +18,7 @@
 #include "net/minecraft/world/level/newbiome/layer/Layer.h"
 #include "net/minecraft/world/level/storage/LevelData.h"
 
-// NON_MATCHING | Score: 535 (lower is better)
-// Idk wtf is going on with this one - Azalea
+// NON_MATCHING | score: 535 (lower is better)
 BiomeSource::LayerOverrideSettings::LayerOverrideSettings() {
     m_field38 = 0;
     m_genScale = static_cast<eBiomeGenerationScale>(-1);
@@ -113,7 +114,7 @@ void BiomeSource::LayerOverrideSettings::NullBiomeSection(int x, int z, int widt
     int end = depth + width;
     unsigned long len = z * sizeof(Biome*);
     for (int i = width; i < end; i++) {
-        memset((void*)&m_biomes[x + m_imageWidth * i], 0, len);
+        memset((void*)&m_biomes.get(x + m_imageWidth * i), 0, len);
     }
 }
 
@@ -198,7 +199,7 @@ Biome* BiomeSource::LayerOverrideSettings::GetBiomeAt(float x, float z) {
         zPos = zThreshold;
 
     unsigned int index = getBiomeIndex(xPos, zPos);
-    return m_biomes[index];
+    return m_biomes.get(index);
 }
 
 BiomeSource::CouldSpawnCache::CouldSpawnCache(BiomeSource* biomeSource,
@@ -294,7 +295,7 @@ bool BiomeSource::fjCouldSpawn(const FjFeatureBiomeRequirements* biomeRequiremen
 }
 
 BiomeSource::~BiomeSource() {
-    nn::os::FinalizeMutex(&m_mutexType);
+    DeleteCriticalSection(&m_mutexType);
 
     delete m_biomeCache;
 }
@@ -322,7 +323,7 @@ void BiomeSource::getRawBiomeBlock(arrayWithLength<Biome*>& biomes, int x, int z
 
     PIXBeginNamedEvent(0.0, "Copying values");
     for (int i = 0; i < width * depth; i++) {
-        biomes[i] = Biome::getBiome(area[i], Biome::DEFAULT);
+        biomes.get(i) = Biome::getBiome(area[i], Biome::DEFAULT);
     }
     PIXEndNamedEvent();
 }
@@ -362,7 +363,7 @@ void BiomeSource::getBiomeBlock(arrayWithLength<Biome*>& biomes, int x, int z, i
 
         PIXBeginNamedEvent(0.0, "Copying values");
         for (int i = 0; i < width * depth; i++) {
-            biomes[i] = Biome::getBiome(area[i], Biome::DEFAULT);
+            biomes.get(i) = Biome::getBiome(area[i], Biome::DEFAULT);
         }
         PIXEndNamedEvent();
     }

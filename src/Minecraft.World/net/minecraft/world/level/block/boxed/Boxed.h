@@ -1,5 +1,7 @@
 #pragma once
 
+#include <typeinfo>
+
 #include <string>
 
 template <typename T>

@@ -1,5 +1,6 @@
 #pragma once
 
+#include "java/io/DataInput.h"
 #include "nn/types.h"
 #include <string>
 #include <vector>
@@ -23,11 +24,18 @@ public:
     virtual bool isEmpty() const;
     virtual std::wstring getAsString();
 
+    /** The exported DataInput vtable is still incomplete on Switch. Host NBT uses
+     * the one-byte reader explicitly; readChar reads two bytes in Java streams.
+     */
+    static u8 readType(DataInput* input) { return input->readChar(); }
     static Tag* newTag(u8 id);
     static const wchar_t* getTagTypeName(u8 id);
 
     template <class T>
-    static void deleteElements(const std::vector<T>&);
+    static void deleteElements(const std::vector<T>& data) {
+        for (T tag : data)
+            delete tag;
+    }
 
     static const u8 TAG_End = 0;
     static const u8 TAG_Byte = 1;

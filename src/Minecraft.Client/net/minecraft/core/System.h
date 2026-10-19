@@ -1,5 +1,8 @@
 #pragma once
 
+#include <cstdint>
+#include <cstring>
+
 #include "net/minecraft/world/ArrayWithLength.h"
 #include "net/minecraft/world/level/biome/Biome.h"
 #include "nn/os/os_MutexTypes.h"
@@ -12,7 +15,8 @@ class Node;
 // TODO: Find locations
 void InitializeCriticalSection(nn::os::MutexType* mutexType);
 void InitializeCriticalSectionAndSpinCount(nn::os::MutexType* mutexType, unsigned long spinCount);
-long InterlockedCompareExchangeRelease(volatile long*, long, long);
+void DeleteCriticalSection(nn::os::MutexType* mutexType);
+std::intptr_t InterlockedCompareExchangeRelease(volatile std::intptr_t*, std::intptr_t, std::intptr_t);
 template <typename T>
 const std::wstring _toString(T type) {
     std::wstringstream ss;

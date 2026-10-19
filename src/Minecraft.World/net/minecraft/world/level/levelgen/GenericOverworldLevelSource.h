@@ -7,5 +7,5 @@ public:
     GenericOverworldLevelSource() {}
 
     virtual void prepareHeights(int, int, ChunkPrimer*);
-    // missing a second unknown virtual function
+    virtual bool isFlat();
 };

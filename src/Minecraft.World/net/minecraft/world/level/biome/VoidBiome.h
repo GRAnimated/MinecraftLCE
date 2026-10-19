@@ -7,4 +7,5 @@ public:
     VoidBiome(EBiomeIDs id, BiomeProperties* properties);
 
     int getBaseClass() override;
+    bool isAlwaysValidSpawn() override;
 };

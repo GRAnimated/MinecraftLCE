@@ -29,6 +29,35 @@ void Entity::setId(int id) {
     m_id = id;
 }
 
+void Entity::setRot(float yRot, float xRot) {
+    float wrappedYRot = Mth::wrapDegrees(yRot);
+    float wrappedXRot = Mth::wrapDegrees(xRot);
+    m_yRot = wrappedYRot;
+    m_xRot = wrappedXRot;
+}
+
+void Entity::interpolateTurn(float yRot, float xRot) {
+    m_yRot += yRot * 0.15f;
+    m_xRot -= xRot * 0.15f;
+    m_xRot = Mth::clamp(m_xRot, -90.0f, 90.0f);
+}
+
+bool Entity::getSharedFlag(int flag) {
+    if (!m_entityData)
+        return false;
+    return (m_entityData->get(qword_7101789FA0) & (1 << flag)) != 0;
+}
+
+void Entity::setSharedFlag(int flag, bool value) {
+    if (m_entityData) {
+        int flags = m_entityData->get(qword_7101789FA0);
+        if (value)
+            m_entityData->set(qword_7101789FA0, flags | (1 << flag), true);
+        else
+            m_entityData->set(qword_7101789FA0, flags & ~(1 << flag), true);
+    }
+}
+
 void Entity::staticCtor() {
     // TODO: Find names for these based on the places they are used
     qword_7101789FA0 = SynchedEntityData::defineId(eSerializer, eSerializer,
@@ -51,7 +80,7 @@ void Entity::staticCtor() {
                                                    EntityDataSerializers::sBOOLEAN_EntityDataSerializer);
 }
 
-// NON_MATCHING: a couple things need to be moved around to move instructions into the right place
+// NON_MATCHING | score: 330 (lower is better)
 void Entity::_init(bool synched, Level* level) {
     if (synched && TlsGetValue(sTlsIndex)) {
         m_id = getSmallId();
@@ -329,12 +358,21 @@ void Entity::playSound(const SoundEvent* sound, float volume, float pitch) {
     }
 }
 
-/* SynchedEntityData crap
-bool Entity::isSilent() {}
-void Entity::setSilent(bool) {}
-void Entity::isNoGravity() {}
-void Entity::setNoGravity(bool) {}
-*/
+bool Entity::isSilent() {
+    return m_entityData->get(qword_7101789FC0);
+}
+
+void Entity::setSilent(bool value) {
+    m_entityData->set(qword_7101789FC0, value, true);
+}
+
+bool Entity::isNoGravity() {
+    return m_entityData->get(qword_7101789FC8);
+}
+
+void Entity::setNoGravity(bool value) {
+    m_entityData->set(qword_7101789FC8, value, true);
+}
 
 bool Entity::makeStepSound() {
     return true;
@@ -364,6 +402,35 @@ void Entity::burn(int howMuch) {
         this->hurt(DamageSource::IN_FIRE, howMuch);
 }
 
+bool Entity::isInWater() {
+    return m_wasInWater;
+}
+
+void Entity::push(double x, double y, double z) {
+    m_deltaMovementX += x;
+    m_deltaMovementY += y;
+    m_deltaMovementZ += z;
+    m_hasImpulse = true;
+}
+
+void Entity::markHurt() {
+    m_isHurtMarked = true;
+}
+
+Vec3* Entity::calculateViewVector(float xRot, float yRot) {
+    const float* degreesToRadiansAddress = &sDegreesToRadians;
+#ifdef MATCHING_HACK
+    // Prevent constant folding of the original global load after TU consolidation.
+    asm("" : "+r"(degreesToRadiansAddress));
+#endif
+    const float degreesToRadians = *degreesToRadiansAddress;
+    float yCos = Mth::cos(-Mth::PI - degreesToRadians * yRot);
+    float ySin = Mth::sin(-Mth::PI - degreesToRadians * yRot);
+    float xCos = -Mth::cos(-degreesToRadians * xRot);
+    float xSin = Mth::sin(-degreesToRadians * xRot);
+    return Vec3::newTemp(ySin * xCos, xSin, yCos * xCos);
+}
+
 Vec3* Entity::getViewVector(float partialTicks) {
     if (partialTicks == 1.0f) {
         return this->calculateViewVector(this->m_xRot, this->m_yRot);
@@ -372,6 +439,98 @@ Vec3* Entity::getViewVector(float partialTicks) {
                                          this->m_yRotO + ((this->m_yRot - this->m_yRotO) * partialTicks));
     }
 }
+
+bool Entity::isAlive() {
+    return !m_isRemoved;
+}
+
+void Entity::lerpTo(double x, double y, double z, float yRot, float xRot, int, bool) {
+    setPos(x, y, z);
+    setRot(yRot, xRot);
+}
+
+void Entity::lerpMotion(double x, double y, double z) {
+    m_deltaMovementX = x;
+    m_deltaMovementY = y;
+    m_deltaMovementZ = z;
+}
+
+bool Entity::isOnFire() {
+    bool isServer = !m_level || !m_level->m_isLocal;
+    return !m_isImmuneToFire && (m_remainingFireTicks > 0 || (!isServer && getSharedFlag(0)));
+}
+
+bool Entity::isPassenger() {
+    return m_vehicle != nullptr;
+}
+
+bool Entity::isSneaking() {
+    return getSharedFlag(1);
+}
+
+void Entity::setSneaking(bool value) {
+    setSharedFlag(1, value);
+}
+
+bool Entity::isIdle() {
+    return getSharedFlag(6);
+}
+
+void Entity::setIsIdle(bool value) {
+    setSharedFlag(6, value);
+}
+
+bool Entity::isSprinting() {
+    return getSharedFlag(3);
+}
+
+void Entity::setSprinting(bool value) {
+    setSharedFlag(3, value);
+}
+
+bool Entity::isGlowing() {
+    return m_isGlowing || (m_level->m_isLocal && getSharedFlag(8));
+}
+
+void Entity::setGlowing(bool value) {
+    m_isGlowing = value;
+    if (!m_level->m_isLocal)
+        setSharedFlag(8, value);
+}
+
+bool Entity::isInvisible() {
+    return getSharedFlag(5);
+}
+
+void Entity::setInvisible(bool value) {
+    setSharedFlag(5, value);
+}
+
+Vec3* Entity::getPos(float partialTicks) {
+    if (partialTicks >= 1.0f)
+        return Vec3::newTemp(m_x, m_y, m_z);
+    return Vec3::newTemp(m_xo + (m_x - m_xo) * partialTicks, m_yo + (m_y - m_yo) * partialTicks,
+                         m_zo + (m_z - m_zo) * partialTicks);
+}
+
+void Entity::makeStuckInWeb() {
+    m_isInWeb = true;
+    m_fallDistance = 0.0f;
+    m_fallTicks = 0;
+    ++m_hardLandingsCount;
+}
+
+void Entity::stopCurrentLerp() {
+    m_xOld = m_x;
+    m_yOld = m_y;
+    m_zOld = m_z;
+    m_xo = m_x;
+    m_yo = m_y;
+    m_zo = m_z;
+    m_yRotO = m_yRot;
+    m_xRotO = m_xRot;
+}
+
 void Entity::readAdditionContructionTag(CompoundTag*) {}
 void Entity::SetPositionLocked(bool) {}
 void Entity::SetGlideCollisionDamage(bool) {}
@@ -379,3 +538,7 @@ void Entity::SetLiftForceModifier(double) {}
 void Entity::onLoadedFromSave() {}
 void Entity::setUsingItemFlag(bool) {}
 void Entity::fjDebugCheckSmallIdLeaks() {}
+
+// name guessed: radians-per-degree constant at 0x7100e093d8.
+
+const float Entity::sDegreesToRadians = 0.017453292f;

@@ -9,4 +9,5 @@ public:
     static void blockStaticCtor();
 
     static EnumProperty<Direction::Axis*>* AXIS;
+    static Property* FACING;
 };

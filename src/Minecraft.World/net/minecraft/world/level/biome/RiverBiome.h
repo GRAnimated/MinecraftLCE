@@ -5,6 +5,7 @@
 class RiverBiome : public Biome {
 public:
     RiverBiome(EBiomeIDs id, BiomeProperties* properties);
+    ~RiverBiome() override = default;
 
     int getBaseClass() override;
 };

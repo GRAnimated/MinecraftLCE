@@ -4,6 +4,7 @@
 
 class ColoredBlock : public Block {
 public:
+    static Property* COLOR;
     ColoredBlock(Material*);
 
     static void blockStaticCtor();
