@@ -159,6 +159,7 @@ void BiomeDecorator::decorateOres(Level* level, Random& random) {
     Level::setInstaTick(false);
 }
 
+// name guessed
 void BiomeDecorator::decorateDepthSpan(Level* level, Random& random, int count, Feature* feature,
                                        int minHeight, int maxHeight) {
     if (maxHeight < minHeight) {
@@ -183,6 +184,7 @@ void BiomeDecorator::decorateDepthSpan(Level* level, Random& random, int count, 
     }
 }
 
+// name guessed
 void BiomeDecorator::decorateDepthAverage(Level* level, Random& random, int count, Feature* feature,
                                           int center, int spread) {
     int x = m_origin.getX();

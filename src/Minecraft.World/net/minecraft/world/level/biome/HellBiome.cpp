@@ -7,13 +7,16 @@
 
 class HellBiomeDecorator : public BiomeDecorator {
 public:
+    // name guessed
     HellBiomeDecorator() = default;
     ~HellBiomeDecorator() override = default;
     void decorate(Level*, Random&, Biome*, const BlockPos&) override;
 };
 
+// name guessed
 void HellBiomeDecorator::decorate(Level*, Random&, Biome*, const BlockPos&) {}
 
+// name guessed
 HellBiome::HellBiome(EBiomeIDs id, BiomeProperties* properties) : Biome(id, properties) {
     m_hostileMobs.clear();
     m_passiveMobs.clear();
@@ -30,19 +33,24 @@ HellBiome::HellBiome(EBiomeIDs id, BiomeProperties* properties) : Biome(id, prop
     m_biomeDecorator = new HellBiomeDecorator();
 }
 
+// name guessed
 int HellBiome::getBaseClass() {
     return _HELL;
 }
+// name guessed
 unsigned int HellBiome::getSkyColor(float) {
     return 0;
 }
+// name guessed
 bool HellBiome::isFoggy() {
     return true;
 }
+// name guessed
 bool HellBiome::isNatural() {
     return false;
 }
 
+// name guessed
 Vec3* HellBiome::getFogColor(float, float) const {
     unsigned int color = Minecraft::GetInstance()->getColourTable()->getColour(Nether_Fog_Colour);
     unsigned int red = color >> 16 & 255;

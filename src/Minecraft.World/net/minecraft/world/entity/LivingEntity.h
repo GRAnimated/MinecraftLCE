@@ -18,6 +18,7 @@ class CombatTracker;
 class ThermalAreaRuleDefinition;
 class HumanoidArm;
 
+// NON_MATCHING | score: 4326 (lower is better)
 class LivingEntity : public Entity {
 public:
     LivingEntity(Level* level);

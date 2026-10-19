@@ -15,6 +15,7 @@
 #include "net/minecraft/world/level/levelgen/feature/SpruceFeature.h"
 #include "net/minecraft/world/level/levelgen/feature/TallgrassFeature.h"
 
+// name guessed
 TaigaBiome::TaigaBiome(EBiomeIDs id, EType type, BiomeProperties* properties)
     : Biome(id, properties), m_type(type) {
     m_fieldD8.push_back(new MobSpawnerData(eWolf, 8, 4, 4));
@@ -30,10 +31,12 @@ TaigaBiome::TaigaBiome(EBiomeIDs id, EType type, BiomeProperties* properties)
     }
 }
 
+// name guessed
 int TaigaBiome::getBaseClass() {
     return _TAIGA;
 }
 
+// name guessed
 Feature* TaigaBiome::getTreeFeature(Random& random) {
     if ((m_type == MEGA || m_type == MEGA_SPRUCE) && random.nextInt(3) == 0) {
         if (m_type == MEGA_SPRUCE || random.nextInt(13) == 0)
@@ -45,12 +48,14 @@ Feature* TaigaBiome::getTreeFeature(Random& random) {
     return new SpruceFeature(false);
 }
 
+// name guessed
 Feature* TaigaBiome::getGrassFeature(Random& random) {
     if (random.nextInt(5) > 0)
         return new TallgrassFeature(TallGrassBlock::Variant::FERN);
     return new TallgrassFeature(TallGrassBlock::Variant::GRASS);
 }
 
+// name guessed
 void TaigaBiome::decorate(Level* level, Random& random, const BlockPos& pos) {
     if (m_type == MEGA || m_type == MEGA_SPRUCE) {
         int count = random.nextInt(3);
@@ -74,6 +79,7 @@ void TaigaBiome::decorate(Level* level, Random& random, const BlockPos& pos) {
     Biome::decorate(level, random, pos);
 }
 
+// name guessed
 void TaigaBiome::buildSurfaceAt(Level* level, Random& random, ChunkPrimer* primer, int x, int z,
                                 double noise) {
     PIXBeginNamedEvent(0.0f, "TaigaBiome::buildSurfaceAtDefault");

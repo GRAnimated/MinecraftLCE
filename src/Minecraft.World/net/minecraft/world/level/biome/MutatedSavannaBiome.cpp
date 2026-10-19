@@ -4,6 +4,7 @@
 #include "net/minecraft/world/level/block/Blocks.h"
 #include "net/minecraft/world/level/block/DirtBlock.h"
 
+// name guessed
 MutatedSavannaBiome::MutatedSavannaBiome(EBiomeIDs id, BiomeProperties* properties)
     : SavannaBiome(id, properties) {
     m_biomeDecorator->m_treeCount = 2;
@@ -11,6 +12,7 @@ MutatedSavannaBiome::MutatedSavannaBiome(EBiomeIDs id, BiomeProperties* properti
     m_biomeDecorator->m_grassCount = 5;
 }
 
+// name guessed
 void MutatedSavannaBiome::buildSurfaceAt(Level* level, Random& random, ChunkPrimer* primer, int x, int z,
                                          double noise) {
     m_grass = LegacyBlockData(2, 0);
@@ -26,6 +28,7 @@ void MutatedSavannaBiome::buildSurfaceAt(Level* level, Random& random, ChunkPrim
     buildSurfaceAtDefault(level, random, primer, x, z, noise);
 }
 
+// name guessed
 void MutatedSavannaBiome::decorate(Level* level, Random& random, const BlockPos& pos) {
     m_biomeDecorator->decorate(level, random, this, pos);
 }

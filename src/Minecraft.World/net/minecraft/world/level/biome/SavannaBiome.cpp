@@ -9,6 +9,7 @@
 #include "net/minecraft/world/level/levelgen/feature/SavannaTreeFeature.h"
 #include "net/minecraft/world/level/levelgen/feature/TreeFeature.h"
 
+// name guessed
 SavannaBiome::SavannaBiome(EBiomeIDs id, BiomeProperties* properties) : Biome(id, properties) {
     m_passiveMobs.push_back(new MobSpawnerData(eHorse, 1, 2, 6));
     m_passiveMobs.push_back(new MobSpawnerData(eDonkey, 1, 1, 1));
@@ -19,16 +20,19 @@ SavannaBiome::SavannaBiome(EBiomeIDs id, BiomeProperties* properties) : Biome(id
     m_biomeDecorator->m_grassCount = 20;
 }
 
+// name guessed
 int SavannaBiome::getBaseClass() {
     return _SAVANNA;
 }
 
+// name guessed
 Feature* SavannaBiome::getTreeFeature(Random& random) {
     if (random.nextInt(5) > 0)
         return new SavannaTreeFeature(false);
     return new TreeFeature(false);
 }
 
+// name guessed
 void SavannaBiome::decorate(Level* level, Random& random, const BlockPos& pos) {
     DOUBLE_PLANT_FEATURE->setNextPlantType(DoublePlantBlock::Variant::GRASS);
     for (int i = 0; i < 7; ++i) {

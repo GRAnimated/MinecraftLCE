@@ -4,7 +4,8 @@
 
 class TheEndLevelSource;
 
-// Constructor and specialized virtual methods remain unreconstructed.
+/** Constructor and specialized virtual methods remain unreconstructed.
+ */
 class EndCityFeature : public StructureFeature {
 public:
     std::wstring getFeatureName() override;

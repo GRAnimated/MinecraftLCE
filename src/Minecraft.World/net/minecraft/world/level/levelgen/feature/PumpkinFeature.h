@@ -4,6 +4,7 @@
 
 class PumpkinFeature : public Feature {
 public:
+    // name guessed
     PumpkinFeature() = default;
 
     bool place(Level* level, Random& random, const BlockPos& pos) override;

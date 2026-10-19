@@ -4,7 +4,8 @@
 
 class Random;
 
-// The binary's octave objects have no vtable; the permutation pointer is at 0.
+/** The binary's octave objects have no vtable; the permutation pointer is at 0.
+ */
 class SimplexNoise {
 public:
     explicit SimplexNoise(Random*);

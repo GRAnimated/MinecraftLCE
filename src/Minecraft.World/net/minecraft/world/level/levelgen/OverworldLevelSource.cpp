@@ -542,7 +542,7 @@ bool OverworldLevelSource::postProcessLoadedChunk(LevelChunk*, int, int) {
     return false;
 }
 
-// NON_MATCHING | Score: 5336 (lower is better)
+// NON_MATCHING | score: 346 (lower is better)
 void OverworldLevelSource::prepareHeights(int chunkX, int chunkZ, ChunkPrimer* primer) {
     // These variables are made into constants by the compiler
     int width = 4;   // every 4th block is sampled in the chunk

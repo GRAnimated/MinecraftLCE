@@ -8,10 +8,12 @@
 
 class VoidBiomeDecorator : public BiomeDecorator {
 public:
+    // name guessed
     VoidBiomeDecorator() = default;
     void decorate(Level*, Random&, Biome*, const BlockPos&) override;
 };
 
+// name guessed
 VoidBiome::VoidBiome(EBiomeIDs id, BiomeProperties* properties) : Biome(id, properties) {
     m_hostileMobs.clear();
     m_neutralMobs.clear();
@@ -23,13 +25,16 @@ VoidBiome::VoidBiome(EBiomeIDs id, BiomeProperties* properties) : Biome(id, prop
     m_biomeDecorator = new VoidBiomeDecorator();
 }
 
+// name guessed
 int VoidBiome::getBaseClass() {
     return _VOID;
 }
+// name guessed
 bool VoidBiome::isAlwaysValidSpawn() {
     return true;
 }
 
+// name guessed
 void VoidBiomeDecorator::decorate(Level* level, Random&, Biome*, const BlockPos& pos) {
     BlockPos spawn = level->getSharedSpawnPos();
     if (spawn.distSqr(pos.offset(8, spawn.getY(), 8)) > 1024.0)

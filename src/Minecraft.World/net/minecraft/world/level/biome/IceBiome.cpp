@@ -9,6 +9,7 @@
 #include "net/minecraft/world/level/levelgen/feature/IceSpikeFeature.h"
 #include "net/minecraft/world/level/levelgen/feature/SpruceFeature.h"
 
+// name guessed
 IceBiome::IceBiome(EBiomeIDs id, bool spikes, BiomeProperties* properties) : Biome(id, properties) {
     m_spikeFeature = new IceSpikeFeature();
     m_patchFeature = new IcePatchFeature(4);
@@ -29,16 +30,20 @@ IceBiome::IceBiome(EBiomeIDs id, bool spikes, BiomeProperties* properties) : Bio
     m_hostileMobs.push_back(new MobSpawnerData(eStray, 80, 4, 4));
 }
 
+// name guessed
 int IceBiome::getBaseClass() {
     return _ICE;
 }
+// name guessed
 float IceBiome::getCreatureProbability() {
     return 0.07f;
 }
+// name guessed
 Feature* IceBiome::getTreeFeature(Random&) {
     return new SpruceFeature(false);
 }
 
+// name guessed
 void IceBiome::decorate(Level* level, Random& random, const BlockPos& pos) {
     if (m_spikes) {
         for (int i = 0; i < 3; ++i) {

@@ -4,6 +4,7 @@
 
 class IceSpikeFeature : public Feature {
 public:
+    // name guessed
     IceSpikeFeature() = default;
     bool place(Level*, Random&, const BlockPos&) override;
 };

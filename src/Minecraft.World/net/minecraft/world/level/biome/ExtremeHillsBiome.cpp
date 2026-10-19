@@ -10,6 +10,7 @@
 #include "net/minecraft/world/level/levelgen/feature/OreFeature.h"
 #include "net/minecraft/world/level/levelgen/feature/SpruceFeature.h"
 
+// name guessed
 ExtremeHillsBiome::ExtremeHillsBiome(EBiomeIDs id, EType type, BiomeProperties* properties)
     : Biome(id, properties) {
     if (type == EDGE)
@@ -25,16 +26,19 @@ ExtremeHillsBiome::~ExtremeHillsBiome() {
     delete m_oreFeature;
 }
 
+// name guessed
 int ExtremeHillsBiome::getBaseClass() {
     return _EXTREME_HILLS;
 }
 
+// name guessed
 Feature* ExtremeHillsBiome::getTreeFeature(Random& random) {
     if (random.nextInt(3) > 0)
         return new SpruceFeature(false);
     return Biome::getTreeFeature(random);
 }
 
+// name guessed
 void ExtremeHillsBiome::decorate(Level* level, Random& random, const BlockPos& pos) {
     Biome::decorate(level, random, pos);
     int count = random.nextInt(6) + 3;
@@ -54,6 +58,7 @@ void ExtremeHillsBiome::decorate(Level* level, Random& random, const BlockPos& p
     }
 }
 
+// name guessed
 void ExtremeHillsBiome::buildSurfaceAt(Level* level, Random& random, ChunkPrimer* primer, int x, int z,
                                        double noise) {
     PIXBeginNamedEvent(0.0f, "ExtremeHillsBiome::buildSurfaceAtDefault");

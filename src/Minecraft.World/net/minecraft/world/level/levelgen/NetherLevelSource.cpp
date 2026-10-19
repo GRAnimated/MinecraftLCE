@@ -29,12 +29,16 @@ public:
     ~FjNetherrackBlockPred() override;
 };
 
+// name guessed
+// NON_MATCHING | score: 1525 (lower is better)
 bool FjNetherrackBlockPred::apply(const Biome::LegacyBlockData& block) const {
     static int id = Block::getId(Blocks::NETHERRACK);
     return block.m_id == id;
 }
+// name guessed
+// NON_MATCHING | score: 200 (lower is better)
 FjNetherrackBlockPred::~FjNetherrackBlockPred() {}
-const std::wstring NetherLevelSource::FORTRESS_NAME = L"Fortress";
+const std::wstring NetherLevelSource::FORTRESS_NAME = L"Fortress";  // name guessed
 const FjNetherrackBlockPred NetherLevelSource::NETHERRACK_PREDICATE;
 
 NetherLevelSource::NetherLevelSource(Level* level, bool generateStructures, long long seed) {
@@ -87,6 +91,7 @@ NetherLevelSource::~NetherLevelSource() {
     delete m_caves;
 }
 
+// name guessed
 arrayWithLength<double> NetherLevelSource::getHeights(arrayWithLength<double> output, int x, int y, int z,
                                                       int sizeX, int sizeY, int sizeZ) {
     if (!output.m_data)
@@ -144,6 +149,7 @@ arrayWithLength<double> NetherLevelSource::getHeights(arrayWithLength<double> ou
     return output;
 }
 
+// NON_MATCHING | score: 4375 (lower is better)
 void NetherLevelSource::prepareHeights(int chunkX, int chunkZ, ChunkPrimer* primer) {
     int lavaHeight = m_level->getSeaLevel() / 2;
     arrayWithLength<double> density;
@@ -190,6 +196,7 @@ void NetherLevelSource::prepareHeights(int chunkX, int chunkZ, ChunkPrimer* prim
     delete[] density.m_data;
 }
 
+// NON_MATCHING | score: 2790 (lower is better)
 void NetherLevelSource::buildSurfaces(int chunkX, int chunkZ, ChunkPrimer* primer) {
     int seaLevel = m_level->getSeaLevel();
     arrayWithLength<double> soul(256, true), gravel(256, true), thickness(256, true);
@@ -299,6 +306,7 @@ void NetherLevelSource::lightChunk(LevelChunk* chunk) {
     chunk->recalcHeightmap();
 }
 
+// NON_MATCHING | score: 9195 (lower is better)
 void NetherLevelSource::postProcess(int x, int z) {
     inPostProcessStep = true;
     BlockPos origin(x * 16, 0, z * 16);

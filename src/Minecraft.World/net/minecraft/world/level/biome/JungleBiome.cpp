@@ -15,7 +15,7 @@
 #include "net/minecraft/world/level/levelgen/feature/TallgrassFeature.h"
 #include "net/minecraft/world/level/levelgen/feature/VinesFeature.h"
 
-const BlockState* JungleBiome::TRUNK;
+const BlockState* JungleBiome::TRUNK;  // name guessed
 const BlockState* JungleBiome::LEAVES;
 const BlockState* JungleBiome::BUSH_LEAVES;
 
@@ -29,6 +29,7 @@ void JungleBiome::staticCtor() {
                       ->setValue(LeafBlock::CHECK_DECAY, false);
 }
 
+// name guessed
 JungleBiome::JungleBiome(EBiomeIDs id, bool edge, BiomeProperties* properties)
     : Biome(id, properties), m_edge(edge) {
     if (edge)
@@ -43,10 +44,12 @@ JungleBiome::JungleBiome(EBiomeIDs id, bool edge, BiomeProperties* properties)
     m_passiveMobs.push_back(new MobSpawnerData(eChicken, 10, 4, 4));
 }
 
+// name guessed
 int JungleBiome::getBaseClass() {
     return _JUNGLE;
 }
 
+// name guessed
 Feature* JungleBiome::getTreeFeature(Random& random) {
     if (random.nextInt(10) == 0)
         return new BigTreeFeature(false);
@@ -57,12 +60,14 @@ Feature* JungleBiome::getTreeFeature(Random& random) {
     return new TreeFeature(false, 4 + random.nextInt(7), TRUNK, LEAVES, true);
 }
 
+// name guessed
 Feature* JungleBiome::getGrassFeature(Random& random) {
     if (random.nextInt(4) == 0)
         return new TallgrassFeature(TallGrassBlock::Variant::FERN);
     return new TallgrassFeature(TallGrassBlock::Variant::GRASS);
 }
 
+// name guessed
 void JungleBiome::decorate(Level* level, Random& random, const BlockPos& pos) {
     Biome::decorate(level, random, pos);
     int x = random.nextInt(16) + 8;

@@ -41,7 +41,7 @@ void NetherFlatLevelSource::prepareHeights(int x, int z, ChunkPrimer* primer) {
     }
 }
 
-// NON_MATCHING
+// NON_MATCHING | score: 8474 (lower is better)
 void NetherFlatLevelSource::buildSurfaces(int x, int z, ChunkPrimer* primer) {
     const BlockState* bedrock = Blocks::BEDROCK->defaultBlockState();
 
@@ -115,7 +115,7 @@ LevelChunk* NetherFlatLevelSource::createChunk(int x, int z) {
     return chunk;
 }
 
-// NON_MATCHING
+// NON_MATCHING | score: 3523 (lower is better)
 void NetherFlatLevelSource::postProcess(int x, int z) {
     inPostProcessStep = true;
 

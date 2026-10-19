@@ -17,19 +17,21 @@
 #include <cmath>
 #include <cstdlib>
 
-// The names of these shared End constants are inferred; their Switch addresses are retained in the plan.
+// name guessed: shared End constants identified by their Switch addresses and uses.
 extern int endIslandCenters[5][2];
 extern BlockPos endTerrainSpawn;
 extern const std::wstring endCityFeatureName;
 extern int endBiomeId(Biome*);
 extern void endGenerateChorusPlant(Level*, BlockPos, Random*, int);
 
+// name guessed
 int endIslandDistance(int x, int z, const int* center) {
     int dx = std::abs(x - center[0]);
     int dz = std::abs(z - center[1]);
     return dx < dz ? dz : dx;
 }
 
+// name guessed
 const int* endNearestIsland(int x, int z) {
     const int* nearest = endIslandCenters[0];
     unsigned distance = endIslandDistance(x, z, nearest);
@@ -43,6 +45,7 @@ const int* endNearestIsland(int x, int z) {
     return nearest;
 }
 
+// name guessed
 double endDistanceToSpawn(const Vec3i* pos, int x, int y, int z) {
     double dx = pos->getX() - x;
     double dy = pos->getY() - y;
@@ -50,6 +53,7 @@ double endDistanceToSpawn(const Vec3i* pos, int x, int y, int z) {
     return std::sqrt(dx * dx + dy * dy + dz * dz);
 }
 
+// NON_MATCHING | score: 100 (lower is better)
 TheEndLevelSource::TheEndLevelSource(Level* level, bool generateStructures, long long seed,
                                      const BlockPos& spawn) {
     m_size = 268;
@@ -85,6 +89,7 @@ bool TheEndLevelSource::fjIslandCheck(int x, int z) {
     return fjIslandProximity(x, z) < 3.0;
 }
 
+// name guessed
 double TheEndLevelSource::fjIslandProximity(int x, int z) {
     const int* island = endNearestIsland(x, z);
     if (island == endIslandCenters[0])
@@ -96,6 +101,7 @@ double TheEndLevelSource::fjIslandProximity(int x, int z) {
     return dx < dz ? dz : dx;
 }
 
+// NON_MATCHING | score: 2358 (lower is better)
 float TheEndLevelSource::getIslandHeightValue(int x, int z, int offsetX, int offsetZ) {
     const int* island = endNearestIsland(x, z);
     if (island == endIslandCenters[0]) {
@@ -131,6 +137,8 @@ float TheEndLevelSource::getIslandHeightValue(int x, int z, int offsetX, int off
     return height;
 }
 
+// name guessed
+// NON_MATCHING | score: 3513 (lower is better)
 arrayWithLength<double> TheEndLevelSource::getHeights(arrayWithLength<double> result, int x, int y, int z,
                                                       int width, int height, int depth) {
     if (!result.m_data)
@@ -188,6 +196,8 @@ arrayWithLength<double> TheEndLevelSource::getHeights(arrayWithLength<double> re
     return result;
 }
 
+// name guessed
+// NON_MATCHING | score: 6095 (lower is better)
 void TheEndLevelSource::prepareHeights(int x, int z, ChunkPrimer* primer) {
     arrayWithLength<double> heights;
     heights = getHeights(heights, x * 2, 0, z * 2, 3, 33, 3);
@@ -229,6 +239,7 @@ void TheEndLevelSource::prepareHeights(int x, int z, ChunkPrimer* primer) {
     delete[] heights.m_data;
 }
 
+// name guessed
 void TheEndLevelSource::buildSurfaces(ChunkPrimer* primer) {
     for (int x = 0; x < 16; ++x) {
         for (int z = 0; z < 16; ++z) {
@@ -253,6 +264,7 @@ void TheEndLevelSource::buildSurfaces(ChunkPrimer* primer) {
     }
 }
 
+// NON_MATCHING | score: 498 (lower is better)
 LevelChunk* TheEndLevelSource::createChunk(int x, int z) {
     m_random->setSeed((long long)x * 341873128712LL + (long long)z * 132897987541LL);
     arrayWithLength<unsigned char> ids(65536, true), data(32768, true);
@@ -270,6 +282,7 @@ LevelChunk* TheEndLevelSource::createChunk(int x, int z) {
     return chunk;
 }
 
+// NON_MATCHING | score: 3335 (lower is better)
 void TheEndLevelSource::postProcess(int x, int z) {
     inPostProcessStep = true;
     BlockPos origin(x << 4, 0, z << 4);

@@ -23,6 +23,7 @@
 #include <algorithm>
 #include <cstring>
 
+// NON_MATCHING | score: 6910 (lower is better)
 FlatLevelSource::FlatLevelSource(Level* level, long long seed, bool structures, SuperflatConfig* config) {
     m_monument = nullptr;
     m_size = level->getLevelData()->getXZSize();
@@ -101,11 +102,13 @@ FlatLevelSource::~FlatLevelSource() {
     delete[] m_blockData.m_data;
 }
 
+// name guessed
 void FlatLevelSource::prepareHeights(int, int, ChunkPrimer* primer) {
     memcpy(primer->getBlockIds().m_data, m_blockIds.m_data, m_blockIds.m_length);
     memcpy(primer->getBlockData().m_data, m_blockData.m_data, m_blockData.m_length);
 }
 
+// name guessed
 bool FlatLevelSource::isFlat() {
     return true;
 }
@@ -138,6 +141,7 @@ LevelChunk* FlatLevelSource::createChunk(int x, int z) {
     return chunk;
 }
 
+// NON_MATCHING | score: 1725 (lower is better)
 void FlatLevelSource::postProcess(int x, int z) {
     BlockPos origin(x * 16, 0, z * 16);
     Biome* biome = m_level->getBiome(BlockPos(x * 16 + 16, 0, z * 16 + 16));
@@ -195,6 +199,7 @@ std::vector<Biome::MobSpawnerData*>* FlatLevelSource::getMobsAt(MobCategory* cat
     return biome->getMobs(category);
 }
 
+// NON_MATCHING | score: 590 (lower is better)
 BlockPos* FlatLevelSource::findNearestMapFeature(Level* level, const std::wstring& name, const BlockPos& pos,
                                                  bool unexplored) {
     if (STRONGHOLD_NAME.compare(name) == 0 && m_structures.find(name) != m_structures.end())

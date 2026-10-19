@@ -38,12 +38,14 @@ private:
 
 inline TheEndBiomeDecorator::~TheEndBiomeDecorator() = default;
 
+// name guessed
 TheEndBiomeDecorator::TheEndBiomeDecorator() {
     m_spike = new SpikeFeature;
     m_podium = new EndPodiumFeature(false);
 }
 
-// Chunk origins, centers, radii, height offsets and guarded flags from the Switch table.
+/** Chunk origins, centers, radii, height offsets and guarded flags from the Switch table.
+ */
 const int TheEndBiomeDecorator::SPIKES[8][7]
     = {{32, -16, 40, 0, 2, 12, 0},   {16, 16, 28, 28, 2, 15, 0},   {-16, 32, 0, 40, 2, 18, 0},
        {-32, 16, -28, 28, 3, 21, 0}, {-48, -16, -40, 0, 3, 24, 0}, {-32, -32, -28, -28, 3, 27, 0},
@@ -51,6 +53,7 @@ const int TheEndBiomeDecorator::SPIKES[8][7]
 
 extern BlockPos endTerrainSpawn;
 
+// name guessed
 void TheEndBiomeDecorator::decorate(Biome*, Level* level, Random& random) {
     decorateOres(level, random);
     for (unsigned long i = 0; i < 8; ++i) {
@@ -67,6 +70,7 @@ void TheEndBiomeDecorator::decorate(Biome*, Level* level, Random& random) {
     }
 }
 
+// name guessed
 TheEndBiome::TheEndBiome(EBiomeIDs id, BiomeProperties* properties) : Biome(id, properties) {
     m_hostileMobs.clear();
     m_passiveMobs.clear();
@@ -82,17 +86,21 @@ TheEndBiome::TheEndBiome(EBiomeIDs id, BiomeProperties* properties) : Biome(id, 
     m_biomeDecorator = new TheEndBiomeDecorator;
 }
 
+// name guessed
 int TheEndBiome::getBaseClass() {
     return _THE_END;
 }
+// name guessed
 bool TheEndBiome::isNatural() {
     return false;
 }
 
+// name guessed
 unsigned int TheEndBiome::getSkyColor(float) {
     return Minecraft::GetInstance()->getColourTable()->getColour(Sky_Sky);
 }
 
+// name guessed
 Vec3* TheEndBiome::getFogColor(float timeOfDay, float) const {
     int color = Minecraft::GetInstance()->getColourTable()->getColour(End_Fog_Colour);
     float cosine = Mth::cos(timeOfDay * 3.1415927f * 2.0f);

@@ -15,7 +15,8 @@ public:
     std::vector<Biome::MobSpawnerData*>* getSpawnList();
 
 private:
-    // Structure-owned spawn data and trailing state are still external reconstruction work.
+    /** Structure-owned spawn data and trailing state are still external reconstruction work.
+     */
     char m_unknown68[0x28];
 };
 

@@ -42,7 +42,8 @@ void ImprovedNoise::init(Random* random) {
     }
 }
 
-// NON_MATCHING
+// name guessed
+// NON_MATCHING | score: 8895 (lower is better)
 double ImprovedNoise::getValue(double x, double y, double z) {
     x += m_x;
     y += m_y;
@@ -88,10 +89,12 @@ double ImprovedNoise::getValue(double x, double y, double z) {
                           grad(m_permutations[bb + 1], x - 1.0, y - 1.0, z - 1.0))));
 }
 
+// name guessed
 double ImprovedNoise::lerp(double weight, double a, double b) {
     return a + weight * (b - a);
 }
 
+// name guessed
 double ImprovedNoise::grad(int hash, double x, double y, double z) {
     int index = hash & 15;
     return GRAD_X[index] * x + GRAD_Y[index] * y + GRAD_Z[index] * z;
@@ -101,7 +104,7 @@ double ImprovedNoise::getValue(double x, double y) {
     return getValue(x, y, 0.0);
 }
 
-// NON_MATCHING
+// NON_MATCHING | score: 37870 (lower is better)
 void ImprovedNoise::add(arrayWithLength<double> noise, double posX, double posY, double posZ, int width,
                         int depth, int length, double scaleX, double scaleY, double scaleZ,
                         double amplitude) {
@@ -182,7 +185,7 @@ void ImprovedNoise::add(arrayWithLength<double> noise, double posX, double posY,
                     cellY = samples[iy].cell;
                 }
 
-                // Preserve the binary's reuse of gradients within a Y lattice cell.
+                // Reuse the gradients within each Y lattice cell.
                 if (iy == 0 || cellY != lastCellY) {
                     int a = m_permutations[cellX] + cellY;
                     int aa = m_permutations[a] + cellZ;
@@ -214,6 +217,7 @@ void ImprovedNoise::add(arrayWithLength<double> noise, double posX, double posY,
     }
 }
 
+// name guessed
 double ImprovedNoise::grad(int hash, double x, double z) {
     int index = hash & 15;
     return GRAD_2D_X[index] * x + GRAD_2D_Z[index] * z;

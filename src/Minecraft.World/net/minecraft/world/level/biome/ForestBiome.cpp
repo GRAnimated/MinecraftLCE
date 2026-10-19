@@ -16,6 +16,8 @@
 #include "net/minecraft/world/level/levelgen/feature/TreeFeature.h"
 #include "net/minecraft/world/level/levelgen/synth/PerlinSimplexNoise.h"
 
+// name guessed
+// NON_MATCHING | score: 1900 (lower is better)
 ForestBiome::ForestBiome(EBiomeIDs id, EType type, BiomeProperties* properties)
     : Biome(id, properties), m_type(type) {
     m_biomeDecorator->m_treeCount = 10;
@@ -34,10 +36,12 @@ ForestBiome::ForestBiome(EBiomeIDs id, EType type, BiomeProperties* properties)
     }
 }
 
+// name guessed
 int ForestBiome::getBaseClass() {
     return _FOREST;
 }
 
+// name guessed
 Feature* ForestBiome::getTreeFeature(Random& random) {
     if (m_type == ROOFED && random.nextInt(3) > 0)
         return new RoofTreeFeature(false);
@@ -48,6 +52,7 @@ Feature* ForestBiome::getTreeFeature(Random& random) {
     return new TreeFeature(false);
 }
 
+// name guessed
 FlowerBlock::Flower* ForestBiome::getRandomFlower(Random& random, const BlockPos* pos) {
     if (m_type == FLOWER) {
         double noise = BIOME_INFO_NOISE->getValue(pos->getX() / 48.0, pos->getZ() / 48.0);
@@ -58,6 +63,7 @@ FlowerBlock::Flower* ForestBiome::getRandomFlower(Random& random, const BlockPos
     return Biome::getRandomFlower(random, pos);
 }
 
+// name guessed
 unsigned int ForestBiome::getGrassColor(const BlockPos* pos) {
     unsigned int color = Biome::getGrassColor(pos);
     if (m_type == ROOFED) {
@@ -69,6 +75,7 @@ unsigned int ForestBiome::getGrassColor(const BlockPos* pos) {
     return color;
 }
 
+// name guessed
 void ForestBiome::decorate(Level* level, Random& random, const BlockPos& pos) {
     if (m_type == ROOFED)
         addMushrooms(level, random, pos);
@@ -79,6 +86,7 @@ void ForestBiome::decorate(Level* level, Random& random, const BlockPos& pos) {
     Biome::decorate(level, random, pos);
 }
 
+// name guessed
 void ForestBiome::addMushrooms(Level* level, Random& random, const BlockPos& pos) {
     for (int x = 0; x < 4; ++x) {
         for (int z = 0; z < 4; ++z) {
@@ -100,6 +108,8 @@ void ForestBiome::addMushrooms(Level* level, Random& random, const BlockPos& pos
     }
 }
 
+// name guessed
+// NON_MATCHING | score: 1786 (lower is better)
 void ForestBiome::addDoublePlants(Level* level, Random& random, const BlockPos& pos, int count) {
     for (int i = 0; i < count; ++i) {
         int type = random.nextInt(3);

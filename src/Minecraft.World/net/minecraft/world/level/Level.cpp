@@ -1,5 +1,9 @@
 #include "net/minecraft/world/level/Level.h"
 
+#include "net/minecraft/core/BlockPos.h"
+#include "net/minecraft/world/level/biome/Biome.h"
+#include "net/minecraft/world/level/block/state/properties/BlockStateProperties.h"
+
 #include "NX/Platform.h"
 #include "net/minecraft/core/System.h"
 #include "net/minecraft/world/entity/Entity.h"
@@ -32,7 +36,7 @@ Level::Level(std::shared_ptr<LevelStorage> levelStorage, LevelData* levelData, D
         m_seaLevel = 64;
 }
 
-// NON_MATCHING
+// NON_MATCHING | score: 1507 (lower is better)
 void Level::_init() {
     m_cloudColor = 0xFFFFFF;
     m_skyDarken = 0;
@@ -528,6 +532,7 @@ long Level::getDayTime() {
     return m_levelData->getDayTime();
 }
 
+// NON_MATCHING | score: 200 (lower is better)
 BlockPos Level::getSharedSpawnPos() {
     BlockPos spawnPos = {m_levelData->getXSpawn(), m_levelData->getYSpawn(), m_levelData->getZSpawn()};
     if (!getWorldBorder()->isWithinBounds(spawnPos)) {
@@ -610,3 +615,44 @@ bool Level::newFallingBlockAllowed() {
 bool Level::explodeNextEnderCrystal() {
     return true;
 }
+
+// name guessed: the shared read-only 0.15f threshold at 0x7100e134b8.
+extern const float gFreezingTemperature;
+
+bool Level::shouldFreezeIgnoreNeighbors(const BlockPos& pos) {
+    return shouldFreeze(pos, false);
+}
+
+// name guessed
+bool Level::shouldFreezeWithNeighbors(const BlockPos& pos) {
+    return shouldFreeze(pos, true);
+}
+
+// name guessed
+bool Level::isWaterAt(const BlockPos& pos) {
+    return getBlockState(pos)->getMaterial() == Material::WATER;
+}
+
+// name guessed
+// NON_MATCHING | score: 315 (lower is better)
+bool Level::shouldFreeze(const BlockPos& pos, bool checkNeighbors) {
+    // The original b.gt allows an unordered temperature to continue.
+    if (getBiome(pos)->getTemperature(&pos) > gFreezingTemperature)
+        return false;
+    if (pos.getY() >= 0 && pos.getY() < 256 && getBrightness(LightLayer::BLOCK, pos) < 10) {
+        const BlockState* state = getBlockState(pos);
+        Block* block = state->getBlock();
+        if ((block == Blocks::WATER || block == Blocks::FLOWING_WATER)
+            && state->getValue<int>(BlockStateProperties::WATER_LEVEL) == 0) {
+            if (!checkNeighbors)
+                return true;
+            if (!isWaterAt(pos.west()) || !isWaterAt(pos.east()) || !isWaterAt(pos.north())
+                || !isWaterAt(pos.south()))
+                return true;
+        }
+    }
+    return false;
+}
+
+/** Freezing threshold shared by the temperature checks. */
+extern const float gFreezingTemperature = 0.15f;

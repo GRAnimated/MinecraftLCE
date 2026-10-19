@@ -3,7 +3,6 @@
 #include <string>
 
 #include "java/io/DataOutput.h"
-#include "java/io/JavaLong.h"
 #include "java/io/OutputStream.h"
 #include "java/io/types/Double.h"
 #include "java/io/types/Float.h"
@@ -39,7 +38,7 @@ public:
     void writePlayerUID(PlayerUID) override;
 
     void writeVarInt(int);
-    void writeVarLong(JavaLong);
+    void writeVarLong(long);
     void writeBlockPos(const BlockPos&);
     void writeItem(not_null_ptr<ItemInstance>);
     void writeNbt(CompoundTag*);

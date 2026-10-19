@@ -1,5 +1,22 @@
 #include "net/minecraft/world/level/biome/Biome.h"
 
+#include "net/minecraft/client/CMinecraftApp.h"
+#include "net/minecraft/core/MutableBlockPos.h"
+#include "net/minecraft/world/level/block/SandBlock.h"
+#include "net/minecraft/world/level/levelgen/ChunkPrimer.h"
+
+#include "net/minecraft/client/resources/L10N.h"
+#include "net/minecraft/world/entity/MobCategory.h"
+
+#include "net/minecraft/world/level/biome/BiomeDecorator.h"
+#include "net/minecraft/world/level/levelgen/feature/BigTreeFeature.h"
+#include "net/minecraft/world/level/levelgen/feature/TallgrassFeature.h"
+#include "net/minecraft/world/level/levelgen/feature/TreeFeature.h"
+
+#include "NX/Platform.h"
+#include "net/minecraft/world/level/biome/BiomeSource.h"
+#include <cmath>
+
 #include "net/minecraft/client/Minecraft.h"
 #include "net/minecraft/client/color/ColourTable.h"
 #include "net/minecraft/client/ui/StringIDs.h"
@@ -269,16 +286,7 @@ void Biome::generateColoursDebugOutput() {
     return;
 }
 
-// NON_MATCHING | Score: 5785 (lower is better)
-// literally took me so many hours to get it finally partially completed (all registered, down to 99k score)
-// but then I realized I had to make the last property of the BiomeProperties be set separately instead of
-// chained
-// ...or did I? Nope, just a waste of time...
-// so then I figured out that I had to merge the BiomeProperties constructors directly into the Biome
-// constructors... This got me down to like 70k iirc, which was closer but not close enough. then I saw that
-// the wstring that gets assigned to the BiomeProperties constructor gets deleted after the var has been
-// created but before the static Biome* has been set so that means I had to separate out the Biome's setters
-// from the constructor init... and here I am, at 5785 score. -Dexrn
+// NON_MATCHING | score: 5785 (lower is better)
 void Biome::staticCtor() {
     Biome::OCEAN = new OceanBiome(BiomeID_OCEAN, (new BiomeProperties(L"Ocean"))->depth(-1.0)->scale(0.1));
 
@@ -899,4 +907,216 @@ void Biome::staticCtor() {
         ->setWaterSkyColor(Water_MesaPlateau, Sky_MesaPlateau);
 
     Biome::DEFAULT = Biome::OCEAN;
+}
+
+// name guessed
+eMinecraftColour Biome::getPreviewColor() {
+    return m_previewColor;
+}
+
+// NON_MATCHING | score: 4320 (lower is better)
+void BiomeSource::LayerOverrideSettings::UpdateBiomeMapPixelsInRegion(unsigned int* pixels, unsigned int x,
+                                                                      unsigned int z, unsigned int width,
+                                                                      unsigned int depth, bool& missing,
+                                                                      bool unzoomed) {
+    unsigned int scale = 1;
+    int offsetX = 0;
+    int offsetZ = 0;
+    if (!unzoomed) {
+        scale = static_cast<unsigned int>(std::pow(2.0, m_zoomLevel));
+        if (isZoomed()) {
+            int divisor = static_cast<int>(std::pow(2.0, m_zoomLevel + 1.0));
+            offsetX = m_zoomX * m_field18 / divisor;
+            offsetZ = m_zoomZ * m_field18 / divisor;
+        }
+    }
+    int border = m_field18 - m_field18 / static_cast<int>(scale);
+    int startZ = border + offsetZ + z / scale;
+    unsigned int rows = depth / scale;
+    ColourTable* colours = Minecraft::GetInstance()->getColourTable();
+    int startX = border + offsetX + x / scale;
+    unsigned int columns = width / scale;
+    for (int row = startZ; row < static_cast<int>(startZ + rows); ++row) {
+        for (unsigned int subRow = 0; subRow < scale; ++subRow) {
+            unsigned int* target = pixels + x + m_imageWidth * (z + (row - startZ) * scale + subRow);
+            for (int column = startX; column < static_cast<int>(startX + columns); ++column) {
+                unsigned int index = getBiomeIndex(column, row);
+                if (index < m_biomes.m_length) {
+                    EnterCriticalSection(&m_mutexType);
+                    unsigned int colour;
+                    if (m_biomes.get(index) == nullptr) {
+                        colour = 0;
+                        missing = true;
+                    } else {
+                        colour = colours->getColour(m_biomes.get(index)->getPreviewColor());
+                    }
+                    LeaveCriticalSection(&m_mutexType);
+                    colour |= 0xff000000;
+                    for (unsigned int i = 0; i < scale; ++i)
+                        *target++ = colour;
+                }
+            }
+        }
+    }
+}
+
+BiomeDecorator* Biome::createDecorator() {
+    return new BiomeDecorator();
+}
+
+Feature* Biome::getTreeFeature(Random& random) {
+    if (random.nextInt(10) == 0)
+        return new BigTreeFeature(false);
+    return new TreeFeature(false);
+}
+
+Feature* Biome::getGrassFeature(Random&) {
+    return new TallgrassFeature(TallGrassBlock::Variant::GRASS);
+}
+
+void Biome::decorate(Level* level, Random& random, const BlockPos& pos) {
+    m_biomeDecorator->decorate(level, random, this, pos);
+}
+
+Biome::~Biome() {
+    delete m_biomeDecorator;
+}
+
+Biome* Biome::setPreviewColor(eMinecraftColour color) {
+    m_previewColor = color;
+    return this;
+}
+
+Biome* Biome::setWaterSkyColor(eMinecraftColour water, eMinecraftColour sky) {
+    m_waterColor = water;
+    m_skyColor = sky;
+    return this;
+}
+
+std::wstring Biome::getName(bool) {
+    if (m_nameId == -1)
+        return L"";
+    return L10N::GetString(m_nameId);
+}
+
+std::wstring Biome::getDescription() {
+    std::wstring description = L"";
+    if (m_descriptionId != -1)
+        description = L10N::GetString(m_descriptionId);
+    return description;
+}
+
+std::vector<Biome::MobSpawnerData*>* Biome::getMobs(MobCategory* category) {
+    if (category == MobCategory::MONSTER)
+        return &m_hostileMobs;
+    if (category == MobCategory::CREATURE)
+        return &m_passiveMobs;
+    if (category == MobCategory::WATER_CREATURE)
+        return &m_aquaticMobs;
+    if (category == MobCategory::CHICKEN)
+        return &m_chickens;
+    if (category == MobCategory::WOLF)
+        return &m_fieldD8;
+    if (category == MobCategory::MUSHROOM_COW)
+        return &m_fieldF0;
+    if (category == MobCategory::SLIME)
+        return &m_neutralMobs;
+    if (category == MobCategory::AMBIENT)
+        return &m_ambientMobs;
+    return nullptr;
+}
+
+float Biome::getDownfall() {
+    return m_downfall;
+}
+float Biome::getTemperature() {
+    return m_temperature;
+}
+float Biome::getDepth() {
+    return m_depth;
+}
+float Biome::getScale() {
+    return m_scale;
+}
+
+extern const float gFreezingTemperature;
+
+Biome::LegacyBlockData Biome::STONE(1, 0);
+Biome::LegacyBlockData Biome::AIR(0, 0);
+Biome::LegacyBlockData Biome::BEDROCK(7, 0);
+Biome::LegacyBlockData Biome::GRAVEL(13, 0);
+Biome::LegacyBlockData Biome::RED_SANDSTONE(179, 0);
+Biome::LegacyBlockData Biome::SANDSTONE(24, 0);
+Biome::LegacyBlockData Biome::ICE(79, 0);
+Biome::LegacyBlockData Biome::WATER(9, 0);
+
+void Biome::buildSurfaceAt(Level* level, Random& random, ChunkPrimer* primer, int x, int z, double noise) {
+    buildSurfaceAtDefault(level, random, primer, x, z, noise);
+}
+
+/** Surface data uses the original lower 128-layer primer indexing and sea level 63.
+ */
+void Biome::buildSurfaceAtDefault(Level*, Random& random, ChunkPrimer* primer, int x, int z, double noise) {
+    PIXBeginNamedEvent(0.0f, "Biome::buildSurfaceAtDefault");
+    LegacyBlockData surface = m_grass;
+    LegacyBlockData filler = m_dirt;
+    LevelGenerationOptions* options = CConsoleMinecraftApp::sInstance.getLevelGenerationOptions();
+    if (options)
+        options->getBiomeOverride(m_biomeId, &filler, &surface);
+    int depth = static_cast<int>(noise / 3.0 + 3.0 + random.nextDouble() * 0.25);
+    MutableBlockPos pos(0, 0, 0);
+    int remaining = -1;
+    for (int y = 127; y >= 0; --y) {
+        int index = ((x & 15) << 7) | ((z & 15) << 11) | y;
+        if (y <= random.nextInt(2) + 1) {
+            primer->setBlockAndData(index, BEDROCK.m_id, BEDROCK.m_data);
+            continue;
+        }
+        int block = primer->getBlockId(index);
+        if (block == 0) {
+            remaining = -1;
+        } else if (block == 1) {
+            if (remaining == -1) {
+                if (depth <= 0) {
+                    surface = AIR;
+                    filler = STONE;
+                } else if (y >= 59 && y <= 64) {
+                    surface = m_grass;
+                    filler = m_dirt;
+                    if (options)
+                        options->getBiomeOverride(m_biomeId, &filler, &surface);
+                }
+                if (y < 63 && surface.m_id == 0) {
+                    pos.set(x, y, z);
+                    if (getTemperature(&pos) < gFreezingTemperature)
+                        surface = ICE;
+                    else
+                        surface = WATER;
+                }
+                if (y >= 62) {
+                    primer->setBlockAndData(index, surface.m_id, surface.m_data);
+                } else if (y < 56 - depth) {
+                    surface = AIR;
+                    filler = STONE;
+                    primer->setBlockAndData(index, GRAVEL.m_id, GRAVEL.m_data);
+                } else {
+                    primer->setBlockAndData(index, filler.m_id, filler.m_data);
+                }
+                remaining = depth;
+            } else if (remaining > 0) {
+                primer->setBlockAndData(index, filler.m_id, filler.m_data);
+                --remaining;
+                if (remaining == 0) {
+                    // The branch state is constant zero in the Switch executable.
+                    remaining = 0;
+                    if (depth > 1 && filler.m_id == 12) {
+                        remaining = random.nextInt(4) + (y - 63 < 0 ? 0 : y - 63);
+                        filler
+                            = filler.m_data == SandBlock::Variant::RED->getData() ? RED_SANDSTONE : SANDSTONE;
+                    }
+                }
+            }
+        }
+    }
+    PIXEndNamedEvent();
 }

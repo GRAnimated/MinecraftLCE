@@ -38,6 +38,7 @@ arrayWithLength<double> PerlinSimplexNoise::getRegion(arrayWithLength<double> ou
     return getRegion(output, x, y, width, height, scaleX, scaleY, octaveScale, 0.5);
 }
 
+// name guessed
 arrayWithLength<double> PerlinSimplexNoise::getRegion(arrayWithLength<double> output, double x, double y,
                                                       int width, int height, double scaleX, double scaleY,
                                                       double octaveScale, double persistence) {

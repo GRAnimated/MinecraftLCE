@@ -5,6 +5,7 @@
 
 class FossilFeature : public Feature {
 public:
+    // name guessed
     FossilFeature() = default;
     ~FossilFeature() override = default;
     bool place(Level*, Random&, const BlockPos&) override;

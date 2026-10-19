@@ -6,28 +6,36 @@
 #include "net/minecraft/world/level/biome/Biome.h"
 #include <algorithm>
 
-// Shared fill routines retain their original array-by-value calling convention.
+/** Shared fill routines retain their original array-by-value calling convention.
+ */
+// name guessed
 void fillFixedBiomePointers(arrayWithLength<Biome*> array, unsigned int from, unsigned int to, Biome* value) {
     std::fill(array.m_data + from, array.m_data + to, value);
 }
 
+// name guessed
 void fillFixedBiomeIndices(arrayWithLength<unsigned char> array, unsigned int from, unsigned int to,
                            int value) {
     std::fill(array.m_data + from, array.m_data + to, static_cast<unsigned char>(value));
 }
 
+// name guessed
 FixedBiomeSource::FixedBiomeSource(Biome* biome) : m_biome(biome) {}
 
+// name guessed
 Biome* FixedBiomeSource::getBiome(const BlockPos&) {
     return m_biome;
 }
+// name guessed
 bool FixedBiomeSource::isFixedBiome() {
     return true;
 }
+// name guessed
 Biome* FixedBiomeSource::getFixedBiome() {
     return m_biome;
 }
 
+// name guessed
 void FixedBiomeSource::getBiomeBlock(arrayWithLength<Biome*>& biomes, int, int, int width, int depth,
                                      bool) const {
     MemSect(36);
@@ -36,6 +44,7 @@ void FixedBiomeSource::getBiomeBlock(arrayWithLength<Biome*>& biomes, int, int, 
     fillFixedBiomePointers(biomes, 0, width * depth, m_biome);
 }
 
+// name guessed
 void FixedBiomeSource::getRawBiomeBlock(arrayWithLength<Biome*>& biomes, int, int, int width,
                                         int depth) const {
     MemSect(36);
@@ -44,6 +53,7 @@ void FixedBiomeSource::getRawBiomeBlock(arrayWithLength<Biome*>& biomes, int, in
     fillFixedBiomePointers(biomes, 0, width * depth, m_biome);
 }
 
+// name guessed
 void FixedBiomeSource::getBiomeIndexBlock(arrayWithLength<unsigned char>& biomes, int, int, int width,
                                           int depth, bool) const {
     MemSect(36);
@@ -53,10 +63,12 @@ void FixedBiomeSource::getBiomeIndexBlock(arrayWithLength<unsigned char>& biomes
     fillFixedBiomeIndices(biomes, 0, width * depth, biomeId);
 }
 
+// name guessed
 bool FixedBiomeSource::containsOnly(int, int, int, const std::vector<Biome*>& biomes) {
     return std::find(biomes.begin(), biomes.end(), m_biome) != biomes.end();
 }
 
+// name guessed
 BlockPos* FixedBiomeSource::findBiome(int x, int z, int radius, std::vector<Biome*> biomes, Random* random) {
     if (std::find(biomes.begin(), biomes.end(), m_biome) == biomes.end())
         return nullptr;

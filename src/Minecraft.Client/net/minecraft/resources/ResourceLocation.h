@@ -35,13 +35,17 @@ public:
 
 template <>
 struct std::equal_to<ResourceLocation> {
+    // name guessed
+    // NON_MATCHING | score: 5 (lower is better)
     bool operator()(const ResourceLocation& lhs, const ResourceLocation& rhs) const {
         return lhs.operator==(&rhs);
     }
 };
 
-// Uses the original LCE resource-key hash.
+/** Uses the original LCE resource-key hash.
+ */
 template <>
 struct std::hash<ResourceLocation> {
+    // NON_MATCHING | score: 5 (lower is better)
     std::size_t operator()(const ResourceLocation& rl) const { return rl.hashCode(); }
 };

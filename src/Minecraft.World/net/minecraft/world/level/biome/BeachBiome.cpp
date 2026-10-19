@@ -4,6 +4,7 @@
 #include "net/minecraft/world/level/block/Block.h"
 #include "net/minecraft/world/level/block/Blocks.h"
 
+// name guessed
 BeachBiome::BeachBiome(EBiomeIDs id, BiomeProperties* properties) : Biome(id, properties) {
     m_passiveMobs.clear();
     m_chickens.clear();
@@ -17,6 +18,7 @@ BeachBiome::BeachBiome(EBiomeIDs id, BiomeProperties* properties) : Biome(id, pr
     m_biomeDecorator->m_cactusCount = 0;
 }
 
+// name guessed
 int BeachBiome::getBaseClass() {
     return _BEACH;
 }

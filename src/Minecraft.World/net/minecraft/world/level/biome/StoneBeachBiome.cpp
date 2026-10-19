@@ -4,6 +4,7 @@
 #include "net/minecraft/world/level/block/Block.h"
 #include "net/minecraft/world/level/block/Blocks.h"
 
+// name guessed
 StoneBeachBiome::StoneBeachBiome(EBiomeIDs id, BiomeProperties* properties) : Biome(id, properties) {
     m_passiveMobs.clear();
     m_grass = LegacyBlockData(
@@ -16,6 +17,7 @@ StoneBeachBiome::StoneBeachBiome(EBiomeIDs id, BiomeProperties* properties) : Bi
     m_biomeDecorator->m_cactusCount = 0;
 }
 
+// name guessed
 int StoneBeachBiome::getBaseClass() {
     return _STONE_BEACH;
 }

@@ -4,6 +4,7 @@
 
 class LargeHellCaveFeature : public LargeFeature {
 public:
+    // name guessed
     LargeHellCaveFeature() = default;
     void addRoom(long long, int, int, ChunkPrimer*, double, double, double);
     void addTunnel(long long, int, int, ChunkPrimer*, double, double, double, float, float, float, int, int,

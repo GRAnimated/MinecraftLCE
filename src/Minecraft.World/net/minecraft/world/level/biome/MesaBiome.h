@@ -8,6 +8,7 @@ class MesaBiome : public Biome {
 public:
     class MesaDecorator : public BiomeDecorator {
     public:
+        // name guessed
         MesaDecorator() = default;
         void decorateOres(Level*, Random&) override;
     };

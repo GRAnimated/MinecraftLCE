@@ -15,6 +15,7 @@
 #include "net/minecraft/world/level/levelgen/synth/PerlinSimplexNoise.h"
 #include "net/minecraft/world/level/material/Material.h"
 
+// name guessed
 SwampBiome::SwampBiome(EBiomeIDs id, BiomeProperties* properties) : Biome(id, properties) {
     m_biomeDecorator->m_treeCount = 2;
     m_biomeDecorator->m_flowerCount = 1;
@@ -29,27 +30,33 @@ SwampBiome::SwampBiome(EBiomeIDs id, BiomeProperties* properties) : Biome(id, pr
     m_neutralMobs.push_back(new MobSpawnerData(eSlime, 1, 1, 1));
 }
 
+// name guessed
 int SwampBiome::getBaseClass() {
     return _SWAMP;
 }
 
+// name guessed
 Feature* SwampBiome::getTreeFeature(Random&) {
     return new SwampTreeFeature();
 }
 
+// name guessed
 FlowerBlock::Flower* SwampBiome::getRandomFlower(Random&, const BlockPos*) {
     return FlowerBlock::Flower::BLUE_ORCHID;
 }
 
+// name guessed
 unsigned int SwampBiome::getGrassColor(const BlockPos* pos) {
     double noise = BIOME_INFO_NOISE->getValue(pos->getX() * 0.0225, pos->getZ() * 0.0225);
     return Minecraft::GetInstance()->getColourTable()->getColour(noise < -0.1 ? Grass_Swamp1 : Grass_Swamp2);
 }
 
+// name guessed
 unsigned int SwampBiome::getFoliageColor(const BlockPos*) {
     return Minecraft::GetInstance()->getColourTable()->getColour(Foliage_Swampland);
 }
 
+// name guessed
 void SwampBiome::decorate(Level* level, Random& random, const BlockPos& pos) {
     Biome::decorate(level, random, pos);
     if (random.nextInt(64) == 0) {
@@ -58,6 +65,8 @@ void SwampBiome::decorate(Level* level, Random& random, const BlockPos& pos) {
     }
 }
 
+// name guessed
+// NON_MATCHING | score: 455 (lower is better)
 void SwampBiome::buildSurfaceAt(Level* level, Random& random, ChunkPrimer* primer, int x, int z,
                                 double noise) {
     PIXBeginNamedEvent(0.0f, "SwampBiome::buildSurfaceAtDefault");

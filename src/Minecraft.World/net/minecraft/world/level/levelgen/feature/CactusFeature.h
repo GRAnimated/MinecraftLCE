@@ -5,6 +5,7 @@
 
 class CactusFeature : public Feature {
 public:
+    // name guessed
     CactusFeature() = default;
     ~CactusFeature() override = default;
     bool place(Level*, Random&, const BlockPos&) override;

@@ -24,8 +24,11 @@ void trimOne(std::vector<arrayWithLength<int>>& arrays) {
 }
 }  // namespace
 
+// name guessed
 IntCache::ThreadStorage::ThreadStorage() = default;
 
+// name guessed
+// NON_MATCHING | score: 7924 (lower is better)
 IntCache::ThreadStorage::~ThreadStorage() {
     freeArrays(m_freeSmall);
     freeArrays(m_activeSmall);
@@ -34,17 +37,20 @@ IntCache::ThreadStorage::~ThreadStorage() {
     freeArrays(m_retiredLarge);
 }
 
+// NON_MATCHING | score: 410 (lower is better)
 void IntCache::CreateNewThreadStorage() {
     auto* current = new ThreadStorage();
     TlsSetValue(sThreadStorageIndex, current);
     current->m_maxSize = 256;
 }
 
+// name guessed
 void IntCache::ReleaseThreadStorage() {
     auto* current = static_cast<ThreadStorage*>(TlsGetValue(sThreadStorageIndex));
     delete current;
 }
 
+// NON_MATCHING | score: 10226 (lower is better)
 arrayWithLength<int> IntCache::allocate(int size) {
     ThreadStorage* current = storage();
     const bool small = size <= 256;
@@ -71,6 +77,8 @@ arrayWithLength<int> IntCache::allocate(int size) {
     return result;
 }
 
+// name guessed
+// NON_MATCHING | score: 4910 (lower is better)
 void IntCache::releaseAll() {
     ThreadStorage* current = storage();
     freeArrays(current->m_retiredLarge);
@@ -84,6 +92,7 @@ void IntCache::releaseAll() {
     current->m_activeSmall.clear();
 }
 
+// NON_MATCHING | score: 14248 (lower is better)
 void IntCache::Reset() {
     ThreadStorage* current = storage();
     current->m_maxSize = 256;

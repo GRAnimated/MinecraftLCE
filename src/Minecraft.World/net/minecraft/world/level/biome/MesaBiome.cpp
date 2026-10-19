@@ -17,10 +17,10 @@
 #include "net/minecraft/world/level/material/Material.h"
 #include <cmath>
 
-Biome::LegacyBlockData MesaBiome::COARSE_DIRT;
+Biome::LegacyBlockData MesaBiome::COARSE_DIRT;  // name guessed
 Biome::LegacyBlockData MesaBiome::GRASS;
 Biome::LegacyBlockData MesaBiome::HARDENED_CLAY;
-Biome::LegacyBlockData MesaBiome::STAINED_HARDENED_CLAY;
+Biome::LegacyBlockData MesaBiome::STAINED_HARDENED_CLAY;  // name guessed
 Biome::LegacyBlockData MesaBiome::ORANGE_CLAY;
 Biome::LegacyBlockData MesaBiome::RED_SAND;
 
@@ -42,6 +42,8 @@ void MesaBiome::staticCtor() {
                 Blocks::SAND->defaultBlockState()->setValue(SandBlock::VARIANT, SandBlock::Variant::RED)));
 }
 
+// name guessed
+// NON_MATCHING | score: 610 (lower is better)
 MesaBiome::MesaBiome(EBiomeIDs id, bool bryce, bool forest, BiomeProperties* properties)
     : Biome(id, properties) {
     m_bryce = bryce;
@@ -73,24 +75,31 @@ MesaBiome::~MesaBiome() {
     delete[] m_clayBands;
 }
 
+// name guessed
 int MesaBiome::getBaseClass() {
     return _MESA;
 }
+// name guessed
 Feature* MesaBiome::getTreeFeature(Random&) {
     return new TreeFeature(false);
 }
+// name guessed
 unsigned int MesaBiome::getGrassColor(const BlockPos*) {
     return Minecraft::GetInstance()->getColourTable()->getColour(Grass_Mesa);
 }
+// name guessed
 unsigned int MesaBiome::getFoliageColor(const BlockPos*) {
     return Minecraft::GetInstance()->getColourTable()->getColour(Foliage_Mesa);
 }
 
+// name guessed
 void MesaBiome::MesaDecorator::decorateOres(Level* level, Random& random) {
     BiomeDecorator::decorateOres(level, random);
     decorateDepthSpan(level, random, 20, m_gold, 32, 80);
 }
 
+// name guessed
+// NON_MATCHING | score: 6157 (lower is better)
 void MesaBiome::generateBands(long long seed) {
     delete[] m_clayBands;
     m_clayBands = new LegacyBlockData[64];
@@ -155,12 +164,15 @@ void MesaBiome::generateBands(long long seed) {
     }
 }
 
+// name guessed
 Biome::LegacyBlockData MesaBiome::getBand(int x, int y, int) {
     // The Switch implementation samples X for both noise coordinates.
     int offset = static_cast<int>(Mth::round(m_clayBandsOffsetNoise->getValue(x / 512.0, x / 512.0) * 2.0));
     return m_clayBands[(y + offset + 64) % 64];
 }
 
+// name guessed
+// NON_MATCHING | score: 18722 (lower is better)
 void MesaBiome::buildSurfaceAt(Level* level, Random& random, ChunkPrimer* primer, int x, int z,
                                double noise) {
     PIXBeginNamedEvent(0.0f, "MesaBiome::buildSurfaceAtDefault");

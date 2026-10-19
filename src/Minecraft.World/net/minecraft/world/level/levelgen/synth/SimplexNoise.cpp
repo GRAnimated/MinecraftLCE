@@ -7,13 +7,15 @@
 const int SimplexNoise::GRAD[12][3]
     = {{1, 1, 0},  {-1, 1, 0},  {1, -1, 0}, {-1, -1, 0}, {1, 0, 1},  {-1, 0, 1},
        {1, 0, -1}, {-1, 0, -1}, {0, 1, 1},  {0, -1, 1},  {0, 1, -1}, {0, -1, -1}};
-double SimplexNoise::F2 = (std::sqrt(3.0) - 1.0) * 0.5;
+double SimplexNoise::F2 = (std::sqrt(3.0) - 1.0) * 0.5;  // name guessed
 double SimplexNoise::G2 = (3.0 - std::sqrt(3.0)) / 6.0;
 
+// name guessed
 SimplexNoise::SimplexNoise(Random* random) {
     init(random);
 }
 
+// name guessed
 void SimplexNoise::init(Random* random) {
     m_permutations = new int[512];
     m_x = random->nextDouble() * 256.0;
@@ -30,21 +32,25 @@ void SimplexNoise::init(Random* random) {
     }
 }
 
+// name guessed
 SimplexNoise::~SimplexNoise() {
     if (m_permutations)
         delete[] m_permutations;
 }
 
+// name guessed
 int SimplexNoise::fastFloor(double value) {
     // 0x71003222f0 subtracts at zero and negative integers too.
     return static_cast<int>(value) - !(value > 0.0);
 }
 
+// name guessed
 double SimplexNoise::dot(const int* gradient, double x, double y) {
     return gradient[0] * x + gradient[1] * y;
 }
 
-// NON_MATCHING: verified separately by original/rebuilt ARM64 execution.
+// name guessed
+// NON_MATCHING | score: 5807 (lower is better)
 double SimplexNoise::getValue(double x, double y) {
     double n0 = 0.0;
     double n1 = 0.0;
@@ -85,8 +91,10 @@ double SimplexNoise::getValue(double x, double y) {
     return (n0 + n1 + n2) * 70.0;
 }
 
-// The Switch region routine contains its own sampler body. Keep that copy
-// here so the original floor/dot call sequence and floating-point order survive.
+/** The Switch region routine contains its own sampler body. Keep that copy
+ * here so the original floor/dot call sequence and floating-point order survive.
+ */
+// name guessed
 void SimplexNoise::add(arrayWithLength<double> output, double x, double y, int width, int height,
                        double scaleX, double scaleY, double amplitude) {
     int index = 0;

@@ -9,6 +9,7 @@
 #include "net/minecraft/world/level/levelgen/feature/DesertWellFeature.h"
 #include "net/minecraft/world/level/levelgen/feature/FossilFeature.h"
 
+// name guessed
 DesertBiome::DesertBiome(EBiomeIDs id, BiomeProperties* properties) : Biome(id, properties) {
     m_passiveMobs.clear();
     m_passiveMobs.push_back(new MobSpawnerData(eRabbit, 4, 2, 3));
@@ -35,10 +36,13 @@ DesertBiome::DesertBiome(EBiomeIDs id, BiomeProperties* properties) : Biome(id, 
     m_hostileMobs.push_back(new MobSpawnerData(eHusk, 80, 4, 4));
 }
 
+// name guessed
 int DesertBiome::getBaseClass() {
     return _DESERT;
 }
 
+// name guessed
+// NON_MATCHING | score: 100 (lower is better)
 void DesertBiome::decorate(Level* level, Random& random, const BlockPos& pos) {
     Biome::decorate(level, random, pos);
     if (random.nextInt(1000) == 0) {

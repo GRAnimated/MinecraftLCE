@@ -5,6 +5,7 @@
 #include "net/minecraft/world/level/block/Block.h"
 #include "net/minecraft/world/level/block/Blocks.h"
 
+// name guessed
 MushroomIslandBiome::MushroomIslandBiome(EBiomeIDs id, BiomeProperties* properties) : Biome(id, properties) {
     m_biomeDecorator->m_treeCount = -100;
     m_biomeDecorator->m_flowerCount = -100;
@@ -21,6 +22,7 @@ MushroomIslandBiome::MushroomIslandBiome(EBiomeIDs id, BiomeProperties* properti
     m_fieldF0.push_back(new MobSpawnerData(eMushroomCow, 8, 4, 8));
 }
 
+// name guessed
 int MushroomIslandBiome::getBaseClass() {
     return _MUSHROOM_ISLAND;
 }

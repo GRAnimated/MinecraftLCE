@@ -10,6 +10,7 @@
 #include "net/minecraft/world/level/levelgen/feature/TreeFeature.h"
 #include "net/minecraft/world/level/levelgen/synth/PerlinSimplexNoise.h"
 
+// name guessed
 PlainsBiome::PlainsBiome(EBiomeIDs id, bool sunflowers, BiomeProperties* properties)
     : Biome(id, properties), m_sunflowers(sunflowers) {
     m_passiveMobs.push_back(new MobSpawnerData(eHorse, 5, 2, 6));
@@ -20,26 +21,30 @@ PlainsBiome::PlainsBiome(EBiomeIDs id, bool sunflowers, BiomeProperties* propert
     m_biomeDecorator->m_grassCount = 10;
 }
 
+// name guessed
 int PlainsBiome::getBaseClass() {
     return _PLAINS;
 }
 
+// name guessed
 Feature* PlainsBiome::getTreeFeature(Random& random) {
     if (random.nextInt(3) == 0)
         return new BigTreeFeature(false);
     return new TreeFeature(false);
 }
 
+// name guessed
+// NON_MATCHING | score: 205 (lower is better)
 FlowerBlock::Flower* PlainsBiome::getRandomFlower(Random& random, const BlockPos* pos) {
     double noise = BIOME_INFO_NOISE->getValue(pos->getX() / 200.0, pos->getZ() / 200.0);
     if (noise < -0.8) {
         switch (random.nextInt(4)) {
         case 0:
-            return FlowerBlock::Flower::ORANGE_TULIP;
+            return FlowerBlock::Flower::ORANGE_TULIP;  // name guessed
         case 1:
             return FlowerBlock::Flower::RED_TULIP;
         case 2:
-            return FlowerBlock::Flower::PINK_TULIP;
+            return FlowerBlock::Flower::PINK_TULIP;  // name guessed
         default:
             return FlowerBlock::Flower::WHITE_TULIP;
         }
@@ -49,12 +54,13 @@ FlowerBlock::Flower* PlainsBiome::getRandomFlower(Random& random, const BlockPos
         if (type == 0)
             return FlowerBlock::Flower::RED_FLOWER;
         if (type == 1)
-            return FlowerBlock::Flower::HOUSTONIA;
+            return FlowerBlock::Flower::HOUSTONIA;  // name guessed
         return FlowerBlock::Flower::OXEYE_DAISY;
     }
     return FlowerBlock::Flower::YELLOW_FLOWER;
 }
 
+// name guessed
 void PlainsBiome::decorate(Level* level, Random& random, const BlockPos& pos) {
     double noise = BIOME_INFO_NOISE->getValue((pos.getX() + 8) / 200.0, (pos.getZ() + 8) / 200.0);
     if (noise < -0.8) {

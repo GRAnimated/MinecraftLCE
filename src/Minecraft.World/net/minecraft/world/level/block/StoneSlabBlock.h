@@ -6,7 +6,8 @@
 
 class StoneSlabBlock : public Block {
 public:
-    // Variant interface only; catalogue layout and construction remain unreconstructed.
+    /** Variant interface only; catalogue layout and construction remain unreconstructed.
+     */
     class Variant : public StringRepresentable {
     public:
         static Variant* SANDSTONE;
