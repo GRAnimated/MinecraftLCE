@@ -1,6 +1,5 @@
 #pragma once
 
-#include "java/io/JavaLong.h"
 #include <cstdint>
 #include <cstring>
 
@@ -35,14 +34,14 @@ class System {
 public:
     enum ETimeGranularity { MILLISECONDS, MICROSECONDS, NANOSECONDS };
 
-    static JavaLong currentRealTimeMillis();
-    static JavaLong currentUnixEpochTimeSeconds();
+    static long currentRealTimeMillis();
+    static long currentUnixEpochTimeSeconds();
 
-    static JavaLong processTimeInSeconds();
-    static JavaLong processTimeInMilliSecs();
-    static JavaLong processTimeInNanoSecs();
-    static JavaLong processTimeInMicroSecs();
-    static JavaLong processTime(System::ETimeGranularity);
+    static long processTimeInSeconds();
+    static long processTimeInMilliSecs();
+    static long processTimeInNanoSecs();
+    static long processTimeInMicroSecs();
+    static long processTime(System::ETimeGranularity);
 
     template <typename T>
     static void arraycopy(arrayWithLength<T> src, unsigned int srcOff, arrayWithLength<T>* dest,

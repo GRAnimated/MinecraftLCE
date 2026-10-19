@@ -11,7 +11,7 @@
 #include "net/minecraft/world/level/material/Material.h"
 #include <cstdlib>
 
-const BlockState* BirchFeature::TRUNK;
+const BlockState* BirchFeature::TRUNK;  // name guessed
 const BlockState* BirchFeature::LEAVES;
 
 void BirchFeature::staticCtor() {
@@ -21,9 +21,11 @@ void BirchFeature::staticCtor() {
                  ->setValue(LeafBlock::CHECK_DECAY, false);
 }
 
+// name guessed
 BirchFeature::BirchFeature(bool update, bool superBirch)
     : AbstractTreeFeature(update, 5, TRUNK, LEAVES, false), m_superBirch(superBirch) {}
 
+// name guessed
 bool BirchFeature::place(Level* level, Random& random, const BlockPos& pos) {
     PIXBeginNamedEvent(0, "BirchFeature::place");
     int height = random.nextInt(3) + m_minHeight;

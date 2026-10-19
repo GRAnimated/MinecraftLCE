@@ -7,8 +7,11 @@
 
 extern double endDistanceToSpawn(const Vec3i*, int, int, int);
 
+// name guessed
 EndPodiumFeature::EndPodiumFeature(bool active) : Feature(false), m_active(active) {}
 
+// name guessed
+// NON_MATCHING | score: 2441 (lower is better)
 bool EndPodiumFeature::place(Level* level, Random&, const BlockPos& pos) {
     BlockPos lower(pos.getX() - 4, pos.getY() - 1, pos.getZ() - 4);
     BlockPos upper(pos.getX() + 4, pos.getY() + 32, pos.getZ() + 4);

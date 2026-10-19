@@ -11,12 +11,15 @@
 #include "net/minecraft/world/level/block/state/BooleanProperty.h"
 #include "net/minecraft/world/level/material/Material.h"
 
+// name guessed
 AbstractTreeFeature::AbstractTreeFeature(bool update, int minHeight, const BlockState* trunk,
                                          const BlockState* leaves, bool vines)
     : Feature(update), m_minHeight(minHeight), m_vines(vines), m_trunk(trunk), m_leaves(leaves) {}
 
+// name guessed
 void AbstractTreeFeature::postPlaceTree(Level*, Random&, const BlockPos&) {}
 
+// name guessed
 bool AbstractTreeFeature::isFree(Block* block) {
     Material* material = block->defaultBlockState()->getMaterial();
     return material == Material::AIR || material == Material::LEAVES || block == Blocks::GRASS
@@ -24,17 +27,22 @@ bool AbstractTreeFeature::isFree(Block* block) {
            || block == Blocks::SAPLING || block == Blocks::VINE;
 }
 
+// name guessed
 void AbstractTreeFeature::setDirtAt(Level* level, const BlockPos& pos) {
     if (level->getBlockState(pos)->getBlock() != Blocks::DIRT)
         Feature::setBlock(level, pos, Blocks::DIRT->defaultBlockState());
 }
 
+// name guessed
 void AbstractTreeFeature::addVine(Level* level, const BlockPos& pos, const BooleanProperty* property) {
     setBlock(level, pos,
              Blocks::VINE->defaultBlockState()->setValue<bool>(const_cast<BooleanProperty*>(property), true));
 }
 
-// A fallen-tree attempt still leaves the one-block stump when its horizontal trunk is rejected.
+/** A fallen-tree attempt still leaves the one-block stump when its horizontal trunk is rejected.
+ */
+// name guessed
+// NON_MATCHING | score: 575 (lower is better)
 bool AbstractTreeFeature::placeTrunk(Level* level, const BlockPos& pos, Random& random, int height) {
     int fallen = random.nextInt(80);
     auto variant = m_trunk->getValue<PlanksBlock::Variant*>(OldLogBlock::VARIANT);
@@ -69,6 +77,8 @@ bool AbstractTreeFeature::placeTrunk(Level* level, const BlockPos& pos, Random& 
     return fallen != 0;
 }
 
+// name guessed
+// NON_MATCHING | score: 300 (lower is better)
 void AbstractTreeFeature::placeFallenTrunk(Level* level, const BlockPos& pos, Random& random, int height) {
     MutableBlockPos start(pos.getX(), pos.getY(), pos.getZ());
     const Direction* direction = Direction::Plane::HORIZONTAL->getRandomDirection(random);

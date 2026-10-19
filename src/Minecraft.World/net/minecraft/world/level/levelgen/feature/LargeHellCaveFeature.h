@@ -2,6 +2,7 @@
 
 #include "net/minecraft/world/level/levelgen/feature/LargeFeature.h"
 
+// NON_MATCHING | score: 805 (lower is better)
 class LargeHellCaveFeature : public LargeFeature {
 public:
     LargeHellCaveFeature() = default;

@@ -11,7 +11,7 @@
 #include "net/minecraft/world/level/material/Material.h"
 #include <cstdlib>
 
-const BlockState* SpruceFeature::TRUNK;
+const BlockState* SpruceFeature::TRUNK;  // name guessed
 const BlockState* SpruceFeature::LEAVES;
 
 void SpruceFeature::staticCtor() {
@@ -21,8 +21,10 @@ void SpruceFeature::staticCtor() {
                  ->setValue(LeafBlock::CHECK_DECAY, false);
 }
 
+// name guessed
 SpruceFeature::SpruceFeature(bool update) : AbstractTreeFeature(update, 6, TRUNK, LEAVES, false) {}
 
+// name guessed
 bool SpruceFeature::place(Level* level, Random& random, const BlockPos& pos) {
     int height = random.nextInt(4) + m_minHeight;
     int bareHeight = random.nextInt(2) + 1;

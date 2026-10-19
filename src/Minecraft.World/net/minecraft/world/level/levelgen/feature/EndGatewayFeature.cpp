@@ -5,8 +5,11 @@
 #include "net/minecraft/world/level/block/EndGatewayBlock.h"
 #include <cstdlib>
 
+// name guessed
 EndGatewayFeature::EndGatewayFeature(int portalNumber) : Feature(false), m_portalNumber(portalNumber) {}
 
+// name guessed
+// NON_MATCHING | score: 1145 (lower is better)
 bool EndGatewayFeature::place(Level* level, Random&, const BlockPos& pos) {
     MutableBlockPos current(0, 0, 0);
     for (int x = pos.getX() - 1; x <= pos.getX() + 1; ++x) {

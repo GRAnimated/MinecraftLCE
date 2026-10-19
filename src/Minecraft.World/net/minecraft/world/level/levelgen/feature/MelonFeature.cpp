@@ -5,9 +5,12 @@
 #include "net/minecraft/world/level/Level.h"
 #include "net/minecraft/world/level/block/Blocks.h"
 
+// name guessed
 MelonFeature::MelonFeature() : Feature(false) {}
+// name guessed
 MelonFeature::~MelonFeature() = default;
 
+// name guessed
 bool MelonFeature::place(Level* level, Random& random, const BlockPos& origin) {
     for (int i = 0; i < 64; ++i) {
         int x = random.nextInt(8) - random.nextInt(8);

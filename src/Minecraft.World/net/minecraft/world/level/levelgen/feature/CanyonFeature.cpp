@@ -10,7 +10,8 @@
 #include "net/minecraft/world/level/block/state/BlockState.h"
 #include "net/minecraft/world/level/levelgen/ChunkPrimer.h"
 
-// NON_MATCHING: geometry and block traversal are verified separately from instruction matching.
+// name guessed
+// NON_MATCHING | score: 31717 (lower is better)
 void CanyonFeature::addTunnel(long long seed, int chunkX, int chunkZ, ChunkPrimer* primer, double x, double y,
                               double z, float width, float yaw, float pitch, int startStep, int endStep,
                               double verticalScale) {
@@ -160,6 +161,7 @@ void CanyonFeature::addTunnel(long long seed, int chunkX, int chunkZ, ChunkPrime
     }
 }
 
+// name guessed
 void CanyonFeature::addFeature(Level*, int sourceX, int sourceZ, int chunkX, int chunkZ,
                                ChunkPrimer* primer) {
     if (m_random.nextInt(50) != 0)

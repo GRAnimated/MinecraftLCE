@@ -8,7 +8,8 @@ class Block;
 class BlockState;
 class BlockStateDefinition;
 
-// Property predicates are borrowed; destroying this object releases only the map storage.
+/** Property predicates are borrowed; destroying this object releases only the map storage.
+ */
 class BlockStatePredicate : public Predicate<const BlockState*> {
 public:
     BlockStatePredicate(BlockStateDefinition*);
@@ -21,8 +22,10 @@ public:
     template <typename T>
     class PredicateConversion : public Predicate<Boxed*> {
     public:
+        // name guessed
         PredicateConversion(const Predicate<T>* predicate) : m_predicate(predicate) {}
 
+        // name guessed
         bool apply(Boxed* value) const override {
             return m_predicate->apply(*const_cast<TypedBoxed<T>*>(value->tryGetType<T>())->getValue());
         }
@@ -32,6 +35,7 @@ public:
     };
 
     template <typename T>
+    // name guessed
     BlockStatePredicate* where(Property* property, Predicate<T>* predicate) {
         const Predicate<Boxed*>* conversion = new PredicateConversion<T>(predicate);
         return where(property, conversion);

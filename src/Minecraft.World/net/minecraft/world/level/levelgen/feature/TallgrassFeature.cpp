@@ -7,11 +7,14 @@
 #include "net/minecraft/world/level/block/state/BlockState.h"
 #include "net/minecraft/world/level/material/Material.h"
 
+// name guessed
 TallgrassFeature::TallgrassFeature(TallGrassBlock::Variant* variant)
     : Feature(false),
       m_state(Blocks::TALLGRASS->defaultBlockState()->setValue(TallGrassBlock::TYPE, variant)) {}
 
-// Descend through air and leaf materials before scattering exactly 128 attempts.
+/** Descend through air and leaf materials before scattering exactly 128 attempts.
+ */
+// name guessed
 bool TallgrassFeature::place(Level* level, Random& random, const BlockPos& origin) {
     BlockPos pos = origin;
     const BlockState* state = level->getBlockState(pos);

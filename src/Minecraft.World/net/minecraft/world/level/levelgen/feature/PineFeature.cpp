@@ -11,7 +11,7 @@
 #include "net/minecraft/world/level/material/Material.h"
 #include <cstdlib>
 
-const BlockState* PineFeature::TRUNK;
+const BlockState* PineFeature::TRUNK;  // name guessed
 const BlockState* PineFeature::LEAVES;
 
 void PineFeature::staticCtor() {
@@ -21,8 +21,10 @@ void PineFeature::staticCtor() {
                  ->setValue(LeafBlock::CHECK_DECAY, false);
 }
 
+// name guessed
 PineFeature::PineFeature() : AbstractTreeFeature(false, 7, TRUNK, LEAVES, false) {}
 
+// name guessed
 bool PineFeature::place(Level* level, Random& random, const BlockPos& pos) {
     PIXBeginNamedEvent(0, "PineFeature::place");
     int height = random.nextInt(5) + m_minHeight;

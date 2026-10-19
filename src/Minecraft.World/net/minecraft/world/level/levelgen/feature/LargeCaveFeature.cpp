@@ -9,7 +9,7 @@
 #include "net/minecraft/world/level/levelgen/ChunkPrimer.h"
 #include "net/minecraft/world/level/material/LiquidMaterial.h"
 
-// NON_MATCHING
+// NON_MATCHING | score: 26811 (lower is better)
 void LargeCaveFeature::addTunnel(long long seed, int chunkX, int chunkZ, ChunkPrimer* primer, double x,
                                  double y, double z, float width, float yaw, float pitch, int startStep,
                                  int endStep, double verticalScale) {
@@ -160,6 +160,8 @@ void LargeCaveFeature::addTunnel(long long seed, int chunkX, int chunkZ, ChunkPr
     }
 }
 
+// name guessed
+// NON_MATCHING | score: 325 (lower is better)
 bool LargeCaveFeature::canReplaceBlock(int id, int above) {
     switch (id) {
     case 1:    // Stone

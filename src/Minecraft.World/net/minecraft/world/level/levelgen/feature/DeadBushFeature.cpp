@@ -8,8 +8,10 @@
 #include "net/minecraft/world/level/block/state/BlockState.h"
 #include "net/minecraft/world/level/material/Material.h"
 
+// name guessed
 DeadBushFeature::DeadBushFeature(Block*) : Feature(false) {}
 
+// name guessed
 bool DeadBushFeature::place(Level* level, Random& random, const BlockPos& origin) {
     BlockPos pos = origin;
     const BlockState* state = level->getBlockState(pos);

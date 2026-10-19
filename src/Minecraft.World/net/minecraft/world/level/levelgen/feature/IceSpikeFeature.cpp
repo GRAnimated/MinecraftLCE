@@ -8,6 +8,7 @@
 #include "net/minecraft/world/level/material/Material.h"
 #include <cstdlib>
 
+// name guessed
 bool IceSpikeFeature::place(Level* level, Random& random, const BlockPos& origin) {
     BlockPos pos = origin;
     while (level->isEmptyBlock(pos) && pos.getY() > 2)

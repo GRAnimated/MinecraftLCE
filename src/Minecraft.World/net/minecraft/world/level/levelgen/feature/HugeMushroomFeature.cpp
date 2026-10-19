@@ -8,10 +8,12 @@
 #include "net/minecraft/world/level/block/state/BlockState.h"
 #include "net/minecraft/world/level/material/Material.h"
 
+// name guessed
 HugeMushroomFeature::HugeMushroomFeature(Block* type) : Feature(true), m_type(type) {}
 
 HugeMushroomFeature::HugeMushroomFeature() : Feature(false), m_type(nullptr) {}
 
+// name guessed
 bool HugeMushroomFeature::place(Level* level, Random& random, const BlockPos& pos) {
     Block* type = m_type;
     if (!type)

@@ -7,8 +7,10 @@
 #include "net/minecraft/world/level/block/Blocks.h"
 #include "net/minecraft/world/level/block/VineBlock.h"
 
+// name guessed
 VinesFeature::VinesFeature() : Feature(false) {}
 
+// name guessed
 bool VinesFeature::place(Level* level, Random& random, const BlockPos& origin) {
     BlockPos pos = origin;
     for (; pos.getY() < 128; pos = pos.above()) {

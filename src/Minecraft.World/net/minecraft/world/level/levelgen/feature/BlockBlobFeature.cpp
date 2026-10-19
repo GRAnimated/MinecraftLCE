@@ -6,12 +6,16 @@
 #include "net/minecraft/world/level/block/Blocks.h"
 #include "net/minecraft/world/level/block/state/BlockState.h"
 
+// name guessed
 BlockBlobFeature::BlockBlobFeature(Block* block, int radius)
     : Feature(false), m_block(block), m_radius(radius) {}
 
+// name guessed
 BlockBlobFeature::~BlockBlobFeature() = default;
 
-// Settle on natural ground, then overlap three independently sized stone blobs.
+/** Settle on natural ground, then overlap three independently sized stone blobs.
+ */
+// name guessed
 bool BlockBlobFeature::place(Level* level, Random& random, const BlockPos& origin) {
     BlockPos pos = origin;
     while (pos.getY() > 3) {

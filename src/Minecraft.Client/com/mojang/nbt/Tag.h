@@ -24,8 +24,9 @@ public:
     virtual bool isEmpty() const;
     virtual std::wstring getAsString();
 
-    // The exported DataInput vtable is still incomplete on Switch. Host NBT uses
-    // the one-byte reader explicitly; readChar reads two bytes in Java streams.
+    /** The exported DataInput vtable is still incomplete on Switch. Host NBT uses
+     * the one-byte reader explicitly; readChar reads two bytes in Java streams.
+     */
     static u8 readType(DataInput* input) { return input->readChar(); }
     static Tag* newTag(u8 id);
     static const wchar_t* getTagTypeName(u8 id);

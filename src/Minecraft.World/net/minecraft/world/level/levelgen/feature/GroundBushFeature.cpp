@@ -8,9 +8,11 @@
 #include "net/minecraft/world/level/material/Material.h"
 #include <cstdlib>
 
+// name guessed
 GroundBushFeature::GroundBushFeature(const BlockState* trunk, const BlockState* leaves)
     : TreeFeature(false), m_bushLeaves(leaves), m_bushTrunk(trunk) {}
 
+// name guessed
 bool GroundBushFeature::place(Level* level, Random& random, const BlockPos& origin) {
     PIXBeginNamedEvent(0.0f, "Placing GroundBushFeature");
     BlockPos pos = origin;

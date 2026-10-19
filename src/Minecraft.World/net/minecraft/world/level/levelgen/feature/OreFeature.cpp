@@ -12,20 +12,23 @@
 #include <algorithm>
 #include <cstring>
 
-// NON_MATCHING: local predicate construction differs from the original static object.
+// NON_MATCHING | score: 1679 (lower is better)
 OreFeature::OreFeature(const BlockState* state, int size) : Feature(false), m_ore(0, 0) {
     static const NaturalStonePredicate predicate;
     init(state, size, &predicate);
 }
 
+// name guessed
 OreFeature::OreFeature(const BlockState* state, int size,
                        const Predicate<const Biome::LegacyBlockData&>* predicate)
     : Feature(false), m_ore(0, 0) {
     init(state, size, predicate);
 }
 
+// NON_MATCHING | score: 5 (lower is better)
 OreFeature::NaturalStonePredicate::~NaturalStonePredicate() {}
 
+// name guessed
 void OreFeature::init(const BlockState* state, int size,
                       const Predicate<const Biome::LegacyBlockData&>* predicate) {
     int id = Block::getId(state->getBlock());
@@ -35,7 +38,8 @@ void OreFeature::init(const BlockState* state, int size,
     m_predicate = predicate;
 }
 
-// NON_MATCHING: guard and cached-ID addressing use a different instruction layout.
+// name guessed
+// NON_MATCHING | score: 340 (lower is better)
 bool OreFeature::NaturalStonePredicate::apply(const Biome::LegacyBlockData& block) const {
     static int stoneId = Block::getId(Blocks::STONE);
     if (block.m_id == stoneId)
@@ -43,7 +47,7 @@ bool OreFeature::NaturalStonePredicate::apply(const Biome::LegacyBlockData& bloc
     return false;
 }
 
-// NON_MATCHING: preserve the reference's fixed-point tests and visited-bit stepping.
+// NON_MATCHING | score: 14928 (lower is better)
 bool OreFeature::place(Level* level, Random& random, const BlockPos& pos) {
     PIXBeginNamedEvent(0.0f, "Place Ore Feature");
     PIXBeginNamedEvent(0.0f, "Prep");

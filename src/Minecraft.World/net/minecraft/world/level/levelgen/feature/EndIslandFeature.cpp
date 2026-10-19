@@ -6,9 +6,12 @@
 #include "net/minecraft/world/level/block/Blocks.h"
 #include <cmath>
 
+// name guessed
 EndIslandFeature::EndIslandFeature() : Feature(false) {}
 
-// Shrink each successive disk; preserve the original random calls and block-write order.
+/** Shrink each successive disk; preserve the original random calls and block-write order.
+ */
+// name guessed
 bool EndIslandFeature::place(Level* level, Random& random, const BlockPos& origin) {
     float radius = (float)random.nextInt(3) + 4.0f;
     for (int y = 0; radius > 0.5f; --y) {

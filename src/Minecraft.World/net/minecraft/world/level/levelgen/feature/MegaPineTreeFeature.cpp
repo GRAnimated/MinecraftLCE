@@ -12,7 +12,7 @@
 #include "net/minecraft/world/level/material/Material.h"
 #include <cstdlib>
 
-const BlockState* MegaPineTreeFeature::TRUNK;
+const BlockState* MegaPineTreeFeature::TRUNK;  // name guessed
 const BlockState* MegaPineTreeFeature::LEAVES;
 const BlockState* MegaPineTreeFeature::PODZOL;
 
@@ -23,10 +23,12 @@ void MegaPineTreeFeature::staticCtor() {
     PODZOL = Blocks::DIRT->defaultBlockState()->setValue(DirtBlock::VARIANT, DirtBlock::Variant::PODZOL);
 }
 
+// name guessed
 MegaPineTreeFeature::MegaPineTreeFeature(bool update, bool useBaseHeight)
     : MegaTreeFeature(update, 13, 15, TRUNK, LEAVES), m_useBaseHeight(useBaseHeight) {}
 MegaPineTreeFeature::~MegaPineTreeFeature() = default;
 
+// name guessed
 void MegaPineTreeFeature::createCrown(Level* level, int x, int z, int y, int radius, Random& random) {
     int depth = random.nextInt(5) + (m_useBaseHeight ? m_minHeight : 3);
     int previousRadius = 0;
@@ -40,6 +42,7 @@ void MegaPineTreeFeature::createCrown(Level* level, int x, int z, int y, int rad
     }
 }
 
+// name guessed
 bool MegaPineTreeFeature::place(Level* level, Random& random, const BlockPos& pos) {
     int height = calcTreeHeigth(random);
     if (!prepareTree(level, random, pos, height))
@@ -64,6 +67,7 @@ bool MegaPineTreeFeature::place(Level* level, Random& random, const BlockPos& po
     return true;
 }
 
+// name guessed
 void MegaPineTreeFeature::placePodzolAt(Level* level, const BlockPos& pos) {
     for (int y = 2; y >= -3; --y) {
         BlockPos candidate = pos.above(y);
@@ -78,6 +82,7 @@ void MegaPineTreeFeature::placePodzolAt(Level* level, const BlockPos& pos) {
     }
 }
 
+// name guessed
 void MegaPineTreeFeature::placePodzolCircle(Level* level, const BlockPos& pos) {
     for (int x = -2; x <= 2; ++x)
         for (int z = -2; z <= 2; ++z)
@@ -85,6 +90,7 @@ void MegaPineTreeFeature::placePodzolCircle(Level* level, const BlockPos& pos) {
                 placePodzolAt(level, pos.offset(x, 0, z));
 }
 
+// name guessed
 void MegaPineTreeFeature::postPlaceTree(Level* level, Random& random, const BlockPos& pos) {
     PIXBeginNamedEvent(0, "MegaPineTreeFeature::postPlaceTree");
     placePodzolCircle(level, pos.west().north());

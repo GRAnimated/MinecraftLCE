@@ -10,6 +10,7 @@ BushFeature::BushFeature(Bush* bush) : Feature(false), m_bush(bush) {}
 
 BushFeature::~BushFeature() {}
 
+// name guessed
 bool BushFeature::place(Level* level, Random& random, const BlockPos& pos) {
     for (int attempt = 0; attempt < 64; ++attempt) {
         BlockPos candidate

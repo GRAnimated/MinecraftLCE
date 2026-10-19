@@ -11,7 +11,7 @@
 #include "net/minecraft/world/level/material/Material.h"
 #include <cstdlib>
 
-const BlockState* RoofTreeFeature::TRUNK;
+const BlockState* RoofTreeFeature::TRUNK;  // name guessed
 const BlockState* RoofTreeFeature::LEAVES;
 
 void RoofTreeFeature::staticCtor() {
@@ -21,9 +21,11 @@ void RoofTreeFeature::staticCtor() {
                  ->setValue(LeafBlock::CHECK_DECAY, false);
 }
 
+// name guessed
 RoofTreeFeature::RoofTreeFeature(bool update) : AbstractTreeFeature(update, 6, TRUNK, LEAVES, false) {}
 RoofTreeFeature::~RoofTreeFeature() = default;
 
+// name guessed
 bool RoofTreeFeature::canPlaceTreeOfHeight(Level* level, const BlockPos& pos, int height) {
     int x = pos.getX();
     int y = pos.getY();
@@ -44,17 +46,21 @@ bool RoofTreeFeature::canPlaceTreeOfHeight(Level* level, const BlockPos& pos, in
     return true;
 }
 
+// name guessed
 void RoofTreeFeature::placeLogAt(Level* level, const BlockPos& pos) {
     if (isFree(level->getBlockState(pos)->getBlock()))
         setBlock(level, pos, m_trunk);
 }
 
+// name guessed
 void RoofTreeFeature::placeLeafAt(Level* level, int x, int y, int z) {
     BlockPos pos(x, y, z);
     if (level->getBlockState(pos)->getMaterial() == Material::AIR)
         setBlock(level, pos, m_leaves);
 }
 
+// name guessed
+// NON_MATCHING | score: 18451 (lower is better)
 bool RoofTreeFeature::place(Level* level, Random& random, const BlockPos& pos) {
     PIXBeginNamedEvent(0, "RoofTreeFeature::place");
     int height = random.nextInt(3) + random.nextInt(2) + m_minHeight;

@@ -59,6 +59,7 @@ bool Item::canBeDepleted() {
     return this->m_maxDamage > 0 && (!this->m_stackedByData || this->m_maxStackSize == 1);
 }
 
+// NON_MATCHING | score: 0 (lower is better)
 Item* Item::setIconName(const std::wstring& iconName) {
     this->m_iconName = iconName;
     return this;

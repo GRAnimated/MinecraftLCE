@@ -15,8 +15,10 @@
 #include "net/minecraft/world/level/material/Material.h"
 #include "net/minecraft/world/level/storage/loot/BuiltInLootTables.h"
 
+// name guessed
 MonsterRoomFeature::MonsterRoomFeature() : Feature(false) {}
 
+// NON_MATCHING | score: 8414 (lower is better)
 bool MonsterRoomFeature::place(Level* level, Random& random, const BlockPos& pos) {
     int radiusX = random.nextInt(2) + 2;
     int radiusZ = random.nextInt(2) + 2;
@@ -97,6 +99,8 @@ bool MonsterRoomFeature::place(Level* level, Random& random, const BlockPos& pos
     return true;
 }
 
+// name guessed
+// NON_MATCHING | score: 1142 (lower is better)
 std::wstring MonsterRoomFeature::randomEntityId(Random& random) {
     static std::wstring types[]
         = {EntityIO::getKey(eSkeleton).toString(), EntityIO::getKey(eZombie).toString(),

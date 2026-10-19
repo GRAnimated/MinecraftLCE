@@ -12,6 +12,7 @@
 
 LakeFeature::LakeFeature(Block* block) : Feature(false), m_block(block) {}
 
+// NON_MATCHING | score: 5010 (lower is better)
 bool LakeFeature::place(Level* level, Random& random, const BlockPos& pos) {
     BlockPos origin = pos.offset(-8, 0, -8);
     while (origin.getY() >= 6 && level->isEmptyBlock(origin))

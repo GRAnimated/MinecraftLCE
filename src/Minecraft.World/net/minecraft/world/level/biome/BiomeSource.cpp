@@ -18,8 +18,7 @@
 #include "net/minecraft/world/level/newbiome/layer/Layer.h"
 #include "net/minecraft/world/level/storage/LevelData.h"
 
-// NON_MATCHING | Score: 535 (lower is better)
-// Idk wtf is going on with this one - Azalea
+// NON_MATCHING | score: 535 (lower is better)
 BiomeSource::LayerOverrideSettings::LayerOverrideSettings() {
     m_field38 = 0;
     m_genScale = static_cast<eBiomeGenerationScale>(-1);

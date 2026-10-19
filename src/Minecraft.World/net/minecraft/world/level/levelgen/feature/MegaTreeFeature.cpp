@@ -6,10 +6,12 @@
 #include "net/minecraft/world/level/block/Blocks.h"
 #include "net/minecraft/world/level/material/Material.h"
 
+// name guessed
 MegaTreeFeature::MegaTreeFeature(bool update, int minHeight, int heightRange, const BlockState* trunk,
                                  const BlockState* leaves)
     : AbstractTreeFeature(update, minHeight, trunk, leaves, false), m_heightRange(heightRange) {}
 
+// name guessed
 int MegaTreeFeature::calcTreeHeigth(Random& random) {
     int height = random.nextInt(3) + m_minHeight;
     if (m_heightRange > 1)
@@ -17,6 +19,8 @@ int MegaTreeFeature::calcTreeHeigth(Random& random) {
     return height;
 }
 
+// name guessed
+// NON_MATCHING | score: 1640 (lower is better)
 bool MegaTreeFeature::checkIsFree(Level* level, const BlockPos& pos, int height) {
     if (pos.getY() < 1 || pos.getY() + height > 255)
         return false;
@@ -35,6 +39,7 @@ bool MegaTreeFeature::checkIsFree(Level* level, const BlockPos& pos, int height)
     return free;
 }
 
+// name guessed
 bool MegaTreeFeature::makeDirtFloor(const BlockPos& pos, Level* level) {
     BlockPos below = pos.below();
     Block* ground = level->getBlockState(below)->getBlock();
@@ -47,12 +52,15 @@ bool MegaTreeFeature::makeDirtFloor(const BlockPos& pos, Level* level) {
     return true;
 }
 
+// name guessed
 bool MegaTreeFeature::prepareTree(Level* level, Random&, const BlockPos& pos, int height) {
     if (checkIsFree(level, pos, height))
         return makeDirtFloor(pos, level);
     return false;
 }
 
+// name guessed
+// NON_MATCHING | score: 70 (lower is better)
 void MegaTreeFeature::placeDoubleTrunkLeaves(Level* level, const BlockPos& pos, int radius) {
     int squared = radius * radius;
     for (int x = -radius; x <= radius + 1; ++x) {
@@ -70,6 +78,7 @@ void MegaTreeFeature::placeDoubleTrunkLeaves(Level* level, const BlockPos& pos, 
     }
 }
 
+// name guessed
 void MegaTreeFeature::placeSingleTrunkLeaves(Level* level, const BlockPos& pos, int radius) {
     for (int x = -radius; x <= radius; ++x) {
         for (int z = -radius; z <= radius; ++z) {

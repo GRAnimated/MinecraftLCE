@@ -8,8 +8,10 @@
 #include "net/minecraft/world/level/block/state/BlockState.h"
 #include "net/minecraft/world/level/material/Material.h"
 
+// name guessed
 SandFeature::SandFeature(Block* block, int radius) : Feature(false), m_block(block), m_radius(radius) {}
 
+// name guessed
 bool SandFeature::place(Level* level, Random& random, const BlockPos& pos) {
     if (level->getBlockState(pos)->getMaterial() != Material::WATER)
         return false;

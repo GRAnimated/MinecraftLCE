@@ -130,6 +130,7 @@ float OverworldLevelSource::getHeightFalloff(int chunkX, int chunkZ, int* distan
     return result;
 }
 
+// NON_MATCHING | score: 0 (lower is better)
 int OverworldLevelSource::distanceToEdge(float a, int, int x, int z, int size) {
     int halfSize = size / 2;
 
@@ -542,7 +543,7 @@ bool OverworldLevelSource::postProcessLoadedChunk(LevelChunk*, int, int) {
     return false;
 }
 
-// NON_MATCHING | Score: 5336 (lower is better)
+// NON_MATCHING | score: 346 (lower is better)
 void OverworldLevelSource::prepareHeights(int chunkX, int chunkZ, ChunkPrimer* primer) {
     // These variables are made into constants by the compiler
     int width = 4;   // every 4th block is sampled in the chunk
@@ -696,6 +697,7 @@ void OverworldLevelSource::recreateLogicStructuresForChunk(LevelChunk* chunk, in
     }
 }
 
+// NON_MATCHING | score: 0 (lower is better)
 bool OverworldLevelSource::isPosInFeature(Level* level, const std::wstring& featureName,
                                           const BlockPos& pos) {
     if (!m_shouldGenerateStructures) {

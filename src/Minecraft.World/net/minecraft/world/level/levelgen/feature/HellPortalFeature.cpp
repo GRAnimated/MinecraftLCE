@@ -8,6 +8,7 @@
 #include "net/minecraft/world/level/block/state/BlockState.h"
 #include "net/minecraft/world/level/material/Material.h"
 
+// name guessed
 bool HellPortalFeature::place(Level* level, Random& random, const BlockPos& pos) {
     if (!level->isEmptyBlock(pos)) {
         return false;

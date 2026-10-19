@@ -31,7 +31,7 @@ public:
     double readDouble() override;
     float readFloat() override;
     int readInt() override;
-    JavaLong readLong() override;
+    long readLong() override;
     short readShort() override;
     std::wstring readUTF() override;
     int readUTFChar() override;
@@ -39,7 +39,7 @@ public:
     void skipBytes(long long) override;
 
     int readVarInt();
-    JavaLong readVarLong();
+    long readVarLong();
     BlockPos readBlockPos();
     BlockPos* readBlockPosPointer();
     not_null_ptr<ItemInstance> readItem();

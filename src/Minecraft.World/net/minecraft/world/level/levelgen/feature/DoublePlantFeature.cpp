@@ -6,14 +6,17 @@
 #include "net/minecraft/world/level/block/Blocks.h"
 #include "net/minecraft/world/level/dimension/Dimension.h"
 
+// name guessed
 DoublePlantFeature::DoublePlantFeature() : Feature(false) {}
 
 DoublePlantFeature::~DoublePlantFeature() = default;
 
+// name guessed
 void DoublePlantFeature::setNextPlantType(DoublePlantBlock::Variant* type) {
     m_type = type;
 }
 
+// name guessed
 bool DoublePlantFeature::place(Level* level, Random& random, const BlockPos& origin) {
     bool placed = false;
     for (int attempt = 0; attempt < 64; ++attempt) {

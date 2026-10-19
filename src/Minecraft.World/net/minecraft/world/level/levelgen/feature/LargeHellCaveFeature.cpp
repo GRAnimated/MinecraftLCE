@@ -5,12 +5,15 @@
 #include "net/minecraft/world/level/block/state/BlockState.h"
 #include "net/minecraft/world/level/levelgen/ChunkPrimer.h"
 
+// name guessed
 void LargeHellCaveFeature::addRoom(long long seed, int chunkX, int chunkZ, ChunkPrimer* primer, double x,
                                    double y, double z) {
     addTunnel(seed, chunkX, chunkZ, primer, x, y, z, m_random.nextFloat() * 6.0f + 1.0f, 0.0f, 0.0f, -1, -1,
               0.5);
 }
 
+// name guessed
+// NON_MATCHING | score: 20926 (lower is better)
 void LargeHellCaveFeature::addTunnel(long long seed, int chunkX, int chunkZ, ChunkPrimer* primer, double x,
                                      double y, double z, float width, float yaw, float pitch, int startStep,
                                      int endStep, double verticalScale) {
@@ -131,6 +134,8 @@ void LargeHellCaveFeature::addTunnel(long long seed, int chunkX, int chunkZ, Chu
     }
 }
 
+// name guessed
+// NON_MATCHING | score: 1810 (lower is better)
 void LargeHellCaveFeature::addFeature(Level*, int sourceX, int sourceZ, int chunkX, int chunkZ,
                                       ChunkPrimer* primer) {
     int count = m_random.nextInt(m_random.nextInt(m_random.nextInt(10) + 1) + 1);

@@ -5,10 +5,12 @@
 #include "net/minecraft/world/level/Level.h"
 #include "net/minecraft/world/level/block/Blocks.h"
 
+// name guessed
 IcePatchFeature::IcePatchFeature(int radius)
     : Feature(false), m_block(Blocks::PACKED_ICE), m_radius(radius) {}
 IcePatchFeature::~IcePatchFeature() = default;
 
+// name guessed
 bool IcePatchFeature::place(Level* level, Random& random, const BlockPos& origin) {
     BlockPos pos = origin;
     while (level->isEmptyBlock(pos) && pos.getY() > 2)

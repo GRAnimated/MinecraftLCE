@@ -11,7 +11,7 @@
 #include "net/minecraft/world/level/material/Material.h"
 #include <cstdlib>
 
-const BlockState* SavannaTreeFeature::TRUNK;
+const BlockState* SavannaTreeFeature::TRUNK;  // name guessed
 const BlockState* SavannaTreeFeature::LEAVES;
 
 void SavannaTreeFeature::staticCtor() {
@@ -21,19 +21,23 @@ void SavannaTreeFeature::staticCtor() {
                  ->setValue(LeafBlock::CHECK_DECAY, false);
 }
 
+// name guessed
 SavannaTreeFeature::SavannaTreeFeature(bool update) : AbstractTreeFeature(update, 5, TRUNK, LEAVES, false) {}
 SavannaTreeFeature::~SavannaTreeFeature() = default;
 
+// name guessed
 void SavannaTreeFeature::placeLogAt(Level* level, const BlockPos& pos) {
     setBlock(level, pos, m_trunk);
 }
 
+// name guessed
 void SavannaTreeFeature::placeLeafAt(Level* level, const BlockPos& pos) {
     Material* material = level->getBlockState(pos)->getMaterial();
     if (material == Material::AIR || material == Material::LEAVES)
         setBlock(level, pos, m_leaves);
 }
 
+// name guessed
 bool SavannaTreeFeature::place(Level* level, Random& random, const BlockPos& pos) {
     PIXBeginNamedEvent(0, "SavannaTreeFeature::place");
     int height = random.nextInt(3) + random.nextInt(3) + m_minHeight;

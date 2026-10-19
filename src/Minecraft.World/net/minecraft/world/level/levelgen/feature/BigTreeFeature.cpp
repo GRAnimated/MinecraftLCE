@@ -10,13 +10,17 @@
 #include <cmath>
 #include <cstdlib>
 
+// name guessed
 BigTreeFeature::FoliageCoords::FoliageCoords(const BlockPos& pos, int branchBase)
     : BlockPos(pos.getX(), pos.getY(), pos.getZ()), m_branchBase(branchBase) {}
 
+// name guessed
 int BigTreeFeature::FoliageCoords::getBranchBase() {
     return m_branchBase;
 }
 
+// name guessed
+// NON_MATCHING | score: 260 (lower is better)
 BigTreeFeature::BigTreeFeature(bool update)
     : AbstractTreeFeature(update, 5, Blocks::LOG->defaultBlockState(), Blocks::LEAVES->defaultBlockState(),
                           false),
@@ -33,10 +37,13 @@ BigTreeFeature::BigTreeFeature(bool update)
 
 BigTreeFeature::~BigTreeFeature() = default;
 
+// name guessed
 void BigTreeFeature::init() {
     m_foliageHeight = 5;
 }
 
+// name guessed
+// NON_MATCHING | score: 1120 (lower is better)
 void BigTreeFeature::prepare() {
     m_trunkHeight = static_cast<int>(m_height * m_heightAttenuation);
     if (m_trunkHeight >= m_height)
@@ -76,6 +83,7 @@ void BigTreeFeature::prepare() {
     }
 }
 
+// name guessed
 float BigTreeFeature::treeShape(int height) {
     if (height < m_height * 0.3f)
         return -1.0f;
@@ -90,6 +98,7 @@ float BigTreeFeature::treeShape(int height) {
     return radius * 0.5f;
 }
 
+// name guessed
 int BigTreeFeature::checkLine(const BlockPos& start, const BlockPos& end) {
     BlockPos delta = end.offset(-start.getX(), -start.getY(), -start.getZ());
     int steps = getSteps(delta);
@@ -110,6 +119,7 @@ int BigTreeFeature::checkLine(const BlockPos& start, const BlockPos& end) {
     return -1;
 }
 
+// name guessed
 void BigTreeFeature::crossection(const BlockPos& center, float radius, const BlockState* state) {
     int extent = static_cast<int>(radius + 0.618);
     for (int x = -extent; x <= extent; ++x) {
@@ -126,6 +136,8 @@ void BigTreeFeature::crossection(const BlockPos& center, float radius, const Blo
     }
 }
 
+// name guessed
+// NON_MATCHING | score: 185 (lower is better)
 float BigTreeFeature::foliageShape(int height) {
     if (height >= 0 && height < m_foliageHeight) {
         float radius = 2.0f;
@@ -136,6 +148,7 @@ float BigTreeFeature::foliageShape(int height) {
     return -1.0f;
 }
 
+// name guessed
 void BigTreeFeature::foliageCluster(const BlockPos& base) {
     for (int y = 0; y < m_foliageHeight; ++y) {
         BlockPos pos = base.above(y);
@@ -146,6 +159,7 @@ void BigTreeFeature::foliageCluster(const BlockPos& base) {
     }
 }
 
+// name guessed
 void BigTreeFeature::limb(const BlockPos& start, const BlockPos& end, Block* block) {
     BlockPos delta = end.offset(-start.getX(), -start.getY(), -start.getZ());
     int steps = getSteps(delta);
@@ -164,6 +178,7 @@ void BigTreeFeature::limb(const BlockPos& start, const BlockPos& end, Block* blo
     }
 }
 
+// name guessed
 int BigTreeFeature::getSteps(const BlockPos& delta) {
     int x = std::abs(delta.getX());
     int y = std::abs(delta.getY());
@@ -172,6 +187,7 @@ int BigTreeFeature::getSteps(const BlockPos& delta) {
     return z > x && z > y ? z : maximum;
 }
 
+// name guessed
 LogBlock::LogAxis* BigTreeFeature::getLogAxis(const BlockPos& start, const BlockPos& end) {
     LogBlock::LogAxis* axis = LogBlock::LogAxis::Y;
     int x = std::abs(end.getX() - start.getX());
@@ -185,15 +201,18 @@ LogBlock::LogAxis* BigTreeFeature::getLogAxis(const BlockPos& start, const Block
     return axis;
 }
 
+// name guessed
 void BigTreeFeature::makeFoliage() {
     for (auto it = m_foliage.begin(); it != m_foliage.end(); ++it)
         foliageCluster(*it);
 }
 
+// name guessed
 bool BigTreeFeature::trimBranches(int height) {
     return height >= m_height * 0.2;
 }
 
+// name guessed
 void BigTreeFeature::makeTrunk() {
     BlockPos top = m_origin.above(m_trunkHeight);
     Block* log = Blocks::LOG;
@@ -205,6 +224,7 @@ void BigTreeFeature::makeTrunk() {
     }
 }
 
+// name guessed
 void BigTreeFeature::makeBranches() {
     for (auto it = m_foliage.begin(); it != m_foliage.end(); ++it) {
         FoliageCoords& foliage = *it;
@@ -215,6 +235,7 @@ void BigTreeFeature::makeBranches() {
     }
 }
 
+// name guessed
 bool BigTreeFeature::checkLocation() {
     Block* ground = m_level->getBlockState(m_origin.below())->getBlock();
     if (ground != Blocks::DIRT && ground != Blocks::GRASS && ground != Blocks::FARMLAND)
@@ -228,6 +249,7 @@ bool BigTreeFeature::checkLocation() {
     return true;
 }
 
+// name guessed
 bool BigTreeFeature::place(Level* level, Random& random, const BlockPos& pos) {
     PIXBeginNamedEvent(0, "BigTreeFeature::place");
     m_level = level;

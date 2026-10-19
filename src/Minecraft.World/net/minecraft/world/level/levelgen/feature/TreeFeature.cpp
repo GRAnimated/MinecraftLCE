@@ -15,7 +15,7 @@
 #include "net/minecraft/world/level/material/Material.h"
 #include <cstdlib>
 
-const BlockState* TreeFeature::TRUNK;
+const BlockState* TreeFeature::TRUNK;  // name guessed
 const BlockState* TreeFeature::LEAVES;
 
 void TreeFeature::staticCtor() {
@@ -26,13 +26,17 @@ void TreeFeature::staticCtor() {
                  ->setValue<bool>(LeafBlock::CHECK_DECAY, false);
 }
 
+// name guessed
 TreeFeature::TreeFeature(bool update) : AbstractTreeFeature(update, 4, TRUNK, LEAVES, false) {}
 
+// name guessed
 TreeFeature::TreeFeature(bool update, int minHeight, const BlockState* trunk, const BlockState* leaves,
                          bool vines)
     : AbstractTreeFeature(update, minHeight, trunk, leaves, vines) {}
 
-// Preserve the original clearance scan and profiling/query order.
+/** Preserve the original clearance scan and profiling/query order.
+ */
+// name guessed
 bool TreeFeature::prepareSpawn(Level* level, const BlockPos& pos, int height) {
     PIXBeginNamedEvent(0.0f, "TreeFeature::prepareSpawn");
     bool free = false;
@@ -80,12 +84,14 @@ bool TreeFeature::prepareSpawn(Level* level, const BlockPos& pos, int height) {
     return false;
 }
 
+// name guessed
 void TreeFeature::placeLeaf(Level* level, const MutableBlockPos& pos) {
     Material* material = level->getBlockState(pos)->getMaterial();
     if (material == Material::AIR || material == Material::LEAVES || material == Material::MOSS)
         setBlock(level, pos, m_leaves);
 }
 
+// name guessed
 void TreeFeature::addHangingVine(Level* level, const BlockPos& pos, const BooleanProperty* property) {
     BlockPos current = pos;
     addVine(level, current, property);
@@ -98,6 +104,7 @@ void TreeFeature::addHangingVine(Level* level, const BlockPos& pos, const Boolea
     }
 }
 
+// name guessed
 void TreeFeature::placeCocoa(Level* level, int age, const BlockPos& pos, const Direction* direction) {
     setBlock(level, pos,
              Blocks::COCOA->defaultBlockState()
@@ -105,7 +112,9 @@ void TreeFeature::placeCocoa(Level* level, int age, const BlockPos& pos, const D
                  ->setValue<const Direction*>(HorizontalDirectionalBlock::FACING, direction));
 }
 
-// Keep the original leaf/vine scan ordering and random draws.
+/** Keep the original leaf/vine scan ordering and random draws.
+ */
+// name guessed
 bool TreeFeature::place(Level* level, Random& random, const BlockPos& pos) {
     PIXBeginNamedEvent(0.0f, "TreeFeature::place");
     int height = random.nextInt(3) + m_minHeight;

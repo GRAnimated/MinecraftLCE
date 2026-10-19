@@ -20,7 +20,8 @@ public:
         ThreadStorage();
         ~ThreadStorage();
 
-        // Arrays remain owned here; returned arrayWithLength values are views.
+        /** Arrays remain owned here; returned arrayWithLength values are views.
+         */
         int m_maxSize;
         std::vector<arrayWithLength<int>> m_freeSmall;
         std::vector<arrayWithLength<int>> m_activeSmall;

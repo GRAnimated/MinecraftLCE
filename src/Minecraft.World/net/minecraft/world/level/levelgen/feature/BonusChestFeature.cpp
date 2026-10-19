@@ -10,8 +10,10 @@
 #include "net/minecraft/world/level/material/Material.h"
 #include "net/minecraft/world/level/storage/loot/BuiltInLootTables.h"
 
+// name guessed
 BonusChestFeature::BonusChestFeature() : Feature(false) {}
 
+// name guessed
 bool BonusChestFeature::place(Level* level, Random& random, const BlockPos& pos) {
     return place(level, random, pos, false);
 }

@@ -9,55 +9,69 @@
 #include "net/minecraft/world/phys/AABB.h"
 #include <cstdlib>
 
+// name guessed
 SpikeFeature::EndSpike::EndSpike(int centerX, int centerZ, int radius, int height, bool guarded)
     : m_centerX(centerX), m_centerZ(centerZ), m_radius(radius), m_height(height), m_guarded(guarded) {
     m_bounds
         = AABB::newPermanent(centerX - radius, 0, centerZ - radius, centerX + radius, 256, centerZ + radius);
 }
 
+// name guessed
 void SpikeFeature::setSpike(EndSpike* spike) {
     m_spike = spike;
 }
 
+// name guessed
 SpikeFeature::EndSpike::~EndSpike() {
     delete m_bounds;
 }
 
+// name guessed
 int SpikeFeature::EndSpike::getCenterX() {
     return m_centerX;
 }
+// name guessed
 int SpikeFeature::EndSpike::getCenterZ() {
     return m_centerZ;
 }
+// name guessed
 int SpikeFeature::EndSpike::getRadius() {
     return m_radius;
 }
+// name guessed
 int SpikeFeature::EndSpike::getHeight() {
     return m_height;
 }
+// name guessed
 bool SpikeFeature::EndSpike::isGuarded() {
     return m_guarded;
 }
+// name guessed
 AABB* SpikeFeature::EndSpike::getTopBoundingBox() {
     return m_bounds;
 }
 
+// name guessed
 SpikeFeature::SpikeFeature()
     : Feature(false), m_crystalInvulnerable(false), m_spike(nullptr), m_beamTarget(nullptr) {}
 
+// name guessed
 SpikeFeature::~SpikeFeature() {
     delete m_beamTarget;
 }
 
+// name guessed
 void SpikeFeature::setCrystalInvulnerable(bool invulnerable) {
     m_crystalInvulnerable = invulnerable;
 }
 
+// name guessed
 void SpikeFeature::setCrystalBeamTarget(const BlockPos& target) {
     delete m_beamTarget;
     m_beamTarget = new BlockPos(target.getX(), target.getY(), target.getZ());
 }
 
+// name guessed
 bool SpikeFeature::place(Level* level, Random& random, const BlockPos& pos) {
     if (!m_spike)
         return false;

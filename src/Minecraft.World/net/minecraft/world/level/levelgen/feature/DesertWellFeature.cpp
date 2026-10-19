@@ -10,7 +10,7 @@
 #include "net/minecraft/world/level/block/state/BlockState.h"
 #include "net/minecraft/world/level/block/state/BlockStatePredicate.h"
 
-Predicate<const BlockState*>* DesertWellFeature::SAND_PREDICATE;
+Predicate<const BlockState*>* DesertWellFeature::SAND_PREDICATE;  // name guessed
 
 void DesertWellFeature::staticCtor() {
     BlockStatePredicate* predicate = BlockStatePredicate::forBlock(Blocks::SAND);
@@ -18,6 +18,7 @@ void DesertWellFeature::staticCtor() {
                                       Predicates<SandBlock::Variant*>::equalTo(SandBlock::Variant::DEFAULT));
 }
 
+// name guessed
 DesertWellFeature::DesertWellFeature() : Feature(false) {
     m_slab = Blocks::STONE_SLAB->defaultBlockState()
                  ->setValue(StoneSlabBlock::VARIANT, StoneSlabBlock::Variant::SANDSTONE)
@@ -26,7 +27,8 @@ DesertWellFeature::DesertWellFeature() : Feature(false) {
     m_water = Blocks::FLOWING_WATER->defaultBlockState();
 }
 
-// Keep the original query/write order, including writes later overwritten by slabs.
+/** Places the well, including the intermediate blocks later overwritten by slabs. */
+// name guessed
 bool DesertWellFeature::place(Level* level, Random&, const BlockPos& origin) {
     BlockPos pos = origin;
     while (level->isEmptyBlock(pos) && pos.getY() > 2)

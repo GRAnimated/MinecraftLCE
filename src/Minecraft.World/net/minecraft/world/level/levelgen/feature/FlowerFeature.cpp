@@ -11,7 +11,7 @@ FlowerFeature::FlowerFeature(FlowerBlock* block, FlowerBlock::Flower* flower) : 
     setFlower(block, flower);
 }
 
-// Inferred name for the setup routine at 0x71001843ac.
+// name guessed: the setup routine at 0x71001843ac.
 void FlowerFeature::setFlower(FlowerBlock* block, FlowerBlock::Flower* flower) {
     m_flower = block;
     const BlockState* state = block->defaultBlockState();

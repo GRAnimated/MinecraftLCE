@@ -8,16 +8,19 @@
 #include "net/minecraft/world/level/block/Blocks.h"
 #include "net/minecraft/world/level/block/VineBlock.h"
 
+// name guessed
 MegaJungleTreeFeature::MegaJungleTreeFeature(bool update, int minHeight, int heightRange,
                                              const BlockState* trunk, const BlockState* leaves)
     : MegaTreeFeature(update, minHeight, heightRange, trunk, leaves) {}
 MegaJungleTreeFeature::~MegaJungleTreeFeature() = default;
 
+// name guessed
 void MegaJungleTreeFeature::createCrown(Level* level, const BlockPos& pos, int radius) {
     for (int y = 0; y >= -2; --y)
         placeDoubleTrunkLeaves(level, pos.above(y), radius + 1 - y);
 }
 
+// name guessed
 void MegaJungleTreeFeature::placeVine(Level* level, Random& random, const BlockPos& pos,
                                       const BooleanProperty* property) {
     if (random.nextInt(3) > 0 && level->isEmptyBlock(pos))
@@ -25,6 +28,7 @@ void MegaJungleTreeFeature::placeVine(Level* level, Random& random, const BlockP
                  Blocks::VINE->defaultBlockState()->setValue(const_cast<BooleanProperty*>(property), true));
 }
 
+// name guessed
 bool MegaJungleTreeFeature::place(Level* level, Random& random, const BlockPos& pos) {
     PIXBeginNamedEvent(0, "MegaJungleTreeFeature::place");
     int height = calcTreeHeigth(random);

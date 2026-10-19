@@ -11,7 +11,7 @@
 #include "net/minecraft/world/level/material/Material.h"
 #include <cstdlib>
 
-const BlockState* SwampTreeFeature::TRUNK;
+const BlockState* SwampTreeFeature::TRUNK;  // name guessed
 const BlockState* SwampTreeFeature::LEAVES;
 
 void SwampTreeFeature::staticCtor() {
@@ -21,8 +21,10 @@ void SwampTreeFeature::staticCtor() {
                  ->setValue(LeafBlock::CHECK_DECAY, false);
 }
 
+// name guessed
 SwampTreeFeature::SwampTreeFeature() : AbstractTreeFeature(false, 5, TRUNK, LEAVES, false) {}
 
+// name guessed
 void SwampTreeFeature::addVine(Level* level, const BlockPos& pos, const BooleanProperty* property) {
     const BlockState* state
         = Blocks::VINE->defaultBlockState()->setValue(const_cast<BooleanProperty*>(property), true);
@@ -37,6 +39,8 @@ void SwampTreeFeature::addVine(Level* level, const BlockPos& pos, const BooleanP
     }
 }
 
+// name guessed
+// NON_MATCHING | score: 1410 (lower is better)
 bool SwampTreeFeature::place(Level* level, Random& random, const BlockPos& input) {
     PIXBeginNamedEvent(0, "SwampTreeFeature::place");
     BlockPos pos = input;

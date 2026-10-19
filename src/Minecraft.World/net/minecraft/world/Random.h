@@ -1,7 +1,5 @@
 #pragma once
 
-using RandomLong = long;
-
 class Random {
 public:
     Random();
@@ -12,12 +10,12 @@ public:
     double nextDouble();
     int nextInt();
     void setSeed(long long seed);
-    RandomLong nextLong();
+    long nextLong();
     bool nextBoolean();
     int next(int bits);
     double nextGaussian();
 
-    RandomLong m_val;
+    long m_val;
     bool m_field8;
     double m_seed3;
 };

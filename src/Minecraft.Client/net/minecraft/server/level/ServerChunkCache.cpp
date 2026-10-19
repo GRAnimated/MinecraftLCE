@@ -118,7 +118,7 @@ LevelChunk* ServerChunkCache::getChunkIfGenerated(int chunkX, int chunkZ, bool u
     return loadedChunk;
 }
 
-// NON_MATCHING: Regswap
+// NON_MATCHING | score: 290 (lower is better)
 LevelChunk* ServerChunkCache::load(int chunkX, int chunkZ, LevelChunk* chunk) {
     LevelChunk* active = chunk;
     if (!m_chunkStorage)
@@ -147,7 +147,7 @@ LevelChunk* ServerChunkCache::load(int chunkX, int chunkZ, LevelChunk* chunk) {
     return active;
 }
 
-// NON_MATCHING: A couple instructions placed in the wrong positions
+// NON_MATCHING | score: 860 (lower is better)
 LevelChunk* ServerChunkCache::updateCacheAndPostProcess(int chunkX, int chunkZ, LevelChunk* newChunk,
                                                         LevelChunk* oldChunk, bool unk) {
     if (!inBounds(chunkX, chunkZ)) {

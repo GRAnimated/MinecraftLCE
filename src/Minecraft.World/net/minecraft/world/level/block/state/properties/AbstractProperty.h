@@ -13,13 +13,16 @@ public:
     Predicate() {}
 
     virtual bool apply(T) const = 0;
+    // name guessed
     virtual Predicate<T>* copy() const { return nullptr; }
+    // name guessed
     virtual ~Predicate() {}
 };
 
 template <typename T>
 class Predicates {
 public:
+    // name guessed
     static Predicate<T>* equalTo(T value) { return new EqualToValuePredicate(value); }
     // TODO: impl those, and check if those below are correctly declared
     class ConnectivePredicate : public Predicate<T> {
@@ -48,8 +51,10 @@ public:
     };
     class EqualToValuePredicate : public Predicate<T> {
     public:
+        // name guessed
         EqualToValuePredicate(T value) : m_value(value) {}
 
+        // name guessed
         bool apply(T value) const override { return m_value == value; }
 
     private:
