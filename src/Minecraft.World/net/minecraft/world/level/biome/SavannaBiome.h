@@ -7,4 +7,6 @@ public:
     SavannaBiome(EBiomeIDs id, BiomeProperties* properties);
 
     int getBaseClass() override;
+    Feature* getTreeFeature(Random&) override;
+    void decorate(Level*, Random&, const BlockPos&) override;
 };

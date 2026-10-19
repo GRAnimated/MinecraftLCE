@@ -53,7 +53,7 @@ public:
     bool isSolidRender(const BlockState*) const override;
     int getResourceCount(Random*) override;
     const BlockState* getStateForPlacement(Level*, const BlockPos&, const Direction*, float, float, float,
-                                           int, std::__1::shared_ptr<LivingEntity>) override;
+                                           int, std::shared_ptr<LivingEntity>) override;
     bool isSilkTouchable() override;
     virtual std::wstring getAuxName(int aux) = 0;
     virtual bool isFullSize() const = 0;

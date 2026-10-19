@@ -1,22 +1,11 @@
 #include "net/minecraft/core/BlockPos.h"
+
+#include "net/minecraft/core/MutableBlockPos.h"
+
+#include <cstdint>
+
 #include "net/minecraft/core/Direction.h"
 #include "net/minecraft/world/phys/Vec3.h"
-
-BlockPos::BlockPos(int x, int y, int z) : Vec3i(x, y, z) {}
-
-BlockPos::BlockPos() : Vec3i(0, 0, 0) {}
-
-BlockPos::BlockPos(Vec3* vec) : Vec3i(vec->m_x, vec->m_y, vec->m_z) {}
-
-BlockPos::BlockPos(const Vec3i& vec) : Vec3i(vec.getX(), vec.getY(), vec.getZ()) {}
-
-bool BlockPos::equals(const BlockPos& pos) const {
-    return getX() == pos.getX() && getY() == pos.getY() && getZ() == pos.getZ();
-}
-
-bool BlockPos::equals(const BlockPos* pos) const {
-    return equals(*pos);
-}
 
 BlockPos BlockPos::offset(int x, int y, int z) const {
     return BlockPos(getX() + x, getY() + y, getZ() + z);
@@ -77,4 +66,56 @@ BlockPos BlockPos::east() const {
 
 BlockPos BlockPos::east(int amount) const {
     return relative(Direction::EAST, amount);
+}
+
+BlockPos::BlockPos(int x, int y, int z) : Vec3i(x, y, z) {}
+
+// name guessed
+BlockPos::BlockPos(double x, double y, double z) : Vec3i(x, y, z) {}
+
+BlockPos::BlockPos() : Vec3i(0, 0, 0) {}
+
+BlockPos::BlockPos(Vec3* vec) : Vec3i(vec->m_x, vec->m_y, vec->m_z) {}
+
+BlockPos::BlockPos(const Vec3i& vec) : Vec3i(vec.getX(), vec.getY(), vec.getZ()) {}
+
+bool BlockPos::equals(const BlockPos& pos) const {
+    return getX() == pos.getX() && getY() == pos.getY() && getZ() == pos.getZ();
+}
+
+bool BlockPos::equals(const BlockPos* pos) const {
+    return equals(*pos);
+}
+
+// name guessed
+bool BlockPos::operator!=(const BlockPos& pos) const {
+    return !equals(pos);
+}
+
+// name guessed
+BlockPos BlockPos::offset(double x, double y, double z) const {
+    return BlockPos(getX() + x, getY() + y, getZ() + z);
+}
+
+/** The original static initializers derive 26 X/Z bits from the 30,000,000
+ * world border, leaving 12 Y bits. Positions are packed X:Y:Z, high to low.
+ */
+// NON_MATCHING | score: 2615 (lower is better)
+long long BlockPos::compressBlockPos() const {
+    return (std::uint64_t(getX()) & 0x3ffffffULL) << 38 | (std::uint64_t(getY()) & 0xfffULL) << 26
+           | (std::uint64_t(getZ()) & 0x3ffffffULL);
+}
+
+// NON_MATCHING | score: 3010 (lower is better)
+BlockPos BlockPos::decompressBlockPos(long long value) {
+    const std::uint64_t bits = static_cast<std::uint64_t>(value);
+    const int x = static_cast<std::int64_t>(bits) >> 38;
+    const int y = static_cast<std::int64_t>(bits << 26) >> 52;
+    const int z = static_cast<std::int64_t>(bits << 38) >> 38;
+    return BlockPos(x, y, z);
+}
+
+// name guessed
+BlockPos BlockPos::offset(const Vec3i& delta) const {
+    return offset(delta.getX(), delta.getY(), delta.getZ());
 }

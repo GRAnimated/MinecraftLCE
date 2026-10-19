@@ -3,6 +3,7 @@
 #include "net/minecraft/world/ArrayWithLength.h"
 #include "net/minecraft/world/level/block/state/BlockState.h"
 #include "net/minecraft/world/level/block/state/properties/AbstractProperty.h"
+#include <cstdint>
 #include <vector>
 
 class Block;
@@ -72,14 +73,20 @@ public:
 
     void _init(Block* block, const Property** properties, unsigned int propertiesCount);
 
-    Block* getBlock();
+    Block* getBlock() const;
+    const std::vector<const Property*>& getProperties() const;
+    bool hasProperty(const Property*) const;
+    Boxed* getPropertyValue(const Property*, unsigned short state) const;
+    /** Property must belong to this definition's encoded state table.
+     */
+    const BlockState* getNeighbour(const Property*, Boxed*, unsigned short state) const;
     const BlockState* any();
-    arrayWithLength<const BlockState*>* getPossibleBlockStates() { return &this->m_states; }
+    const arrayWithLength<const BlockState*>* getPossibleBlockStates() const;
 
 private:
     Block* m_block;
     std::vector<const Property*> m_properties;
     arrayWithLength<const BlockState*> m_states;
-    void** m_propertiesArr;      // this is array
-    void** m_anotherProperties;  // this is also array
+    std::uint8_t* m_propertyBitOffsets;
+    std::uint16_t* m_propertyBitMasks;
 };

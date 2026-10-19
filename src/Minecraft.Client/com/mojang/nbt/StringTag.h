@@ -5,6 +5,7 @@
 class StringTag : public Tag {
 public:
     StringTag();
+    explicit StringTag(const std::wstring&);
 
     void write(DataOutput*) override;
     void load(DataInput*, int) override;

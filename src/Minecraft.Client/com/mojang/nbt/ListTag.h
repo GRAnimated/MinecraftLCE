@@ -3,6 +3,8 @@
 #include "com/mojang/nbt/Tag.h"
 #include <vector>
 
+class CompoundTag;
+
 class ListTag : public Tag {
 public:
     ListTag();
@@ -20,6 +22,16 @@ public:
     bool isEmpty() const override;
 
     void add(Tag* tag);
+    /** Replaces an accepted element and deletes its previous owner. Rejected
+     * replacements remain caller-owned; assigning the same pointer is a no-op.
+     */
+    void set(int index, Tag* tag);
+    size_t size() const;
+    // name guessed
+    int getElementType() const { return m_tagId; }
+    CompoundTag* getCompound(int) const;
+    int getInt(int) const;
+    double getDouble(int) const;
 
 private:
     std::vector<Tag*> m_data;

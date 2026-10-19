@@ -39,7 +39,7 @@ public:
 
     void writeVarInt(int);
     void writeVarLong(long);
-    void writeBlockPos(const BlockPos&) const;
+    void writeBlockPos(const BlockPos&);
     void writeItem(not_null_ptr<ItemInstance>);
     void writeNbt(CompoundTag*);
 

@@ -1,6 +1,7 @@
 #pragma once
 
 #include "java/io/OutputStream.h"
+#include "nn/fs/fs_types.h"
 
 class File;
 
@@ -15,5 +16,8 @@ public:
     void close() override;
     void flush() override;
 
-    void* m_field8;
+    FileOutputStream(const FileOutputStream&) = delete;
+    FileOutputStream& operator=(const FileOutputStream&) = delete;
+
+    nn::fs::FileHandle* m_file;
 };

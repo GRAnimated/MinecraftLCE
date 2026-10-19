@@ -2,6 +2,7 @@
 
 #include "types.h"
 #include <cstdint>
+#include <string>
 
 class PlayerUID {
 public:
@@ -17,7 +18,7 @@ public:
     const std::wstring toString() const;
 
     long m_gap0;
-    long m_mostSigBits;  // grabbed from JDK, doubt those are correct but yeah, pure guess
-    long m_leastSigBits;
+    long m_mostSigBits;   // name guessed: UUID high bits
+    long m_leastSigBits;  // name guessed: UUID low bits
     char m_byte18;
 };
