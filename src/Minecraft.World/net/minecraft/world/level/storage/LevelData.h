@@ -108,7 +108,7 @@ public:
     virtual int getHellScale();
     virtual void setModernEnd();
     virtual bool getModernEnd();
-    virtual bool getBiomeScale();
+    virtual unsigned char getBiomeScale();
     virtual int getBiomeCentreXChunk();
     virtual int getBiomeCentreZChunk();
 

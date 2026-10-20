@@ -40,9 +40,6 @@ Layer::Layer(long long seed) {
 Layer::~Layer() {}
 
 arrayWithLength<std::shared_ptr<Layer>>
-// NON_MATCHING: down to 2 spots, a bool from a vtable call and one
-// reused register further down. Comes down to how strictly the compiler
-// trusts return value extension across indirect calls, not the source.
 Layer::getDefaultLayers(long long seed, LevelType* levelType, SuperflatConfig* superflatConfig,
                         LevelData* levelData, BiomeSource::LayerOverrideSettings* layerOverrideSettings) {
     unsigned char useBiomeScale;
@@ -79,6 +76,7 @@ Layer::getDefaultLayers(long long seed, LevelType* levelType, SuperflatConfig* s
     layer = std::shared_ptr<Layer>(new ZoomLayer(2003, layer));
     layer = std::shared_ptr<Layer>(new AddIslandLayer(4, layer));
 
+    int zoomCount = useBiomeScale;
     if (useBiomeScale) {
         layer = std::shared_ptr<Layer>(new AddMushroomIslandLayer(5, layer));
     }
@@ -111,8 +109,8 @@ Layer::getDefaultLayers(long long seed, LevelType* levelType, SuperflatConfig* s
     river = std::shared_ptr<Layer>(new RiverInitLayer(100, river));
 
     std::shared_ptr<Layer> biome = layer;
-    biome = std::shared_ptr<Layer>(new BiomeInitLayer(200, layer, levelType, superflatConfig));
-    biome = ZoomLayer::zoom(1000, biome, useBiomeScale);
+    biome = std::shared_ptr<Layer>(new BiomeInitLayer(200, biome, levelType, superflatConfig));
+    biome = ZoomLayer::zoom(1000, biome, zoomCount);
     biome = std::shared_ptr<Layer>(new BiomeEdgeLayer(1000, biome));
 
     std::shared_ptr<Layer> zoom = river;
