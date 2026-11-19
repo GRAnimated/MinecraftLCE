@@ -368,7 +368,7 @@ void LevelData::setModernEnd() {
 bool LevelData::getModernEnd() {
     return m_isModernEnd;
 }
-bool LevelData::getBiomeScale() {
+unsigned char LevelData::getBiomeScale() {
     return m_isBiggerBiomes;
 }
 int LevelData::getBiomeCentreXChunk() {
